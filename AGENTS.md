@@ -49,18 +49,24 @@ status: draft | active | review | archived
 - 섹션 링크: `[[페이지명#섹션]]`
 
 ### 2.3 태그 체계
-| 접두사 | 용도 | 예시 |
-|--------|------|------|
-| `type/` | 페이지 유형 | `type/source`, `type/entity`, `type/concept`, `type/analysis` |
-| `domain/` | 주제 영역 | `domain/ai`, `domain/geopolitics`, `domain/economics` |
-| `status/` | 상태 | `status/draft`, `status/active`, `status/review` |
+| 접두사       | 용도     | 예시                                                                              |
+| --------- | ------ | ------------------------------------------------------------------------------- |
+| `type/`   | 페이지 유형 | `type/source`, `type/reference`, `type/entity`, `type/concept`, `type/analysis` |
+| `domain/` | 주제 영역  | `domain/ai`, `domain/geopolitics`, `domain/economics`                           |
+| `status/` | 상태     | `status/draft`, `status/active`, `status/review`                                |
 
 ### 2.4 작성 원칙
 - **한국어** 기본, 고유명사·전문용어는 원어 병기 (예: 대규모 언어 모델(Large Language Model, LLM))
 - 중립적·백과사전적 톤
-- 주장에는 `[[소스 페이지]]` 인용 표기
+- 일반 주장은 프론트매터 `sources`와 하단 `## 출처` 섹션으로 근거를 표시
+- 본문 중 반복적인 `[[소스 페이지]]` 인용은 피하고, 직접 인용·논쟁적 주장·모순·여러 소스 비교처럼 근거 위치가 특히 중요한 경우에만 짧은 각주 또는 `[[소스 페이지|출처]]` 표기를 사용
 - 모순이 발견되면 명시적으로 기록: `> [!WARNING] 모순 발견`
-- 각 페이지 하단에 `## 관련 항목` 섹션
+- 각 페이지 하단에는 `## 출처` 섹션과 `## 관련 항목` 섹션을 두되, `## 관련 항목`이 마지막에 오도록 배치
+- 깃 커밋 메세지는 영어로 작성하며, `ingest: number_title` 형식을 따름
+	- 예시 
+		- `ingest: 001_Claude Shannon's N-gram Model` 
+		- `ingest: 002_Alan Turing's Imitation Game`
+	- 정규 번호 소스가 아닌 참고 자료 보강은 `reference: short_title` 형식을 사용
 
 ## 3. 핵심 워크플로
 
@@ -68,7 +74,7 @@ status: draft | active | review | archived
 
 사용자가 새 소스를 `raw/`에 추가하고 처리를 요청하면:
 
-1. **소스 읽기** — 전체 내용을 정독
+1. **소스 읽기** — 첨부 문서와 `raw/` 원본은 UTF-8 인코딩으로 읽고, 전체 내용을 정독
 2. **사용자와 논의** — 핵심 인사이트 3-5개를 간략히 공유하고 사용자의 관심사 확인
 3. **소스 요약 페이지 작성** — `wiki/sources/` 에 생성
    - 프론트매터 포함
@@ -83,6 +89,21 @@ status: draft | active | review | archived
 5. **필요시 새 페이지 생성** — 새 개체/개념이 등장하면 페이지 생성
 6. **index.md 업데이트** — 새 페이지 추가, 기존 항목 요약 갱신
 7. **log.md 기록** — 작업 내용 추가
+
+### 3.1.1 참고 자료 보강 (Reference)
+
+사용자가 정규 번호 소스가 아닌 보충 참고 자료를 `raw/`에 추가하고 처리를 요청하면:
+
+1. **정규 Ingest와 분리** — `NNN_연도_인물_주제` 번호를 새로 만들지 않음
+2. **참고 요약 페이지 작성** — `wiki/sources/ref_slug.md` 형식으로 생성
+   - 프론트매터 `tags`에는 `type/reference` 포함
+   - `sources`에는 원본 raw 파일명을 그대로 기록
+   - 본문 하단 `## 출처`에는 raw 파일 경로를 표시
+3. **기존 페이지 보강 중심** — 새 지식이 주로 보충하는 기존 개체·개념·분석 페이지를 갱신
+4. **필요시 새 페이지 생성** — 참고 자료가 독립 개념을 충분히 제공할 때만 새 페이지 생성
+5. **index.md 업데이트** — 정규 `소스 (Sources)`와 별도로 `참고 자료 (References)` 섹션에 추가
+6. **overview.md 업데이트** — 정규 소스 수와 참고 자료 수를 구분해 표시
+7. **log.md 기록** — 작업유형은 `reference` 사용
 
 ### 3.2 질의 (Query)
 
@@ -117,6 +138,7 @@ status: draft | active | review | archived
 - 시간순 기록, 최신이 아래로
 - 형식: `## [YYYY-MM-DD] 작업유형 | 제목`
   - 작업유형: `ingest`, `query`, `lint`, `create`, `update`
+  - 참고 자료 보강은 `reference` 사용
 - 각 항목에 변경된 페이지 목록 포함
 
 ### 4.3 overview.md
