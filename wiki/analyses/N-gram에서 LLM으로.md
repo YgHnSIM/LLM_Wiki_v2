@@ -3,8 +3,8 @@ title: N-gram에서 LLM으로
 aliases: [n-gram to LLM, 언어 모델링 계보, 다음 토큰 예측의 역사]
 tags: [type/analysis, domain/ai, status/active]
 created: 2026-05-07
-updated: 2026-05-07
-sources: ["001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md", "001_Shannon's N-gram Model - The Foundation of Statistical Language Processing.commentary.md"]
+updated: 2026-05-08
+sources: ["001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md", "001_Shannon's N-gram Model - The Foundation of Statistical Language Processing.commentary.md", "002_The Turing Test.md"]
 status: active
 ---
 
@@ -28,11 +28,22 @@ N-gram 모델의 한계는 이후 연구 방향을 밀어냈다. [[데이터 희
 
 N-gram은 현대 LLM의 축소판이라기보다, 언어 모델링의 문제 설정을 선명하게 만든 초기 형식이다. 오늘날의 모델은 빈도표를 그대로 조회하지 않지만, 관찰된 문맥에서 가능한 이어짐의 확률을 추정한다는 점에서 [[클로드 섀넌]]의 정보 이론적 관점과 이어져 있다.
 
+## 평가 축과의 접점
+
+[[튜링 테스트]]는 같은 언어 AI 역사를 다른 질문으로 비춘다. 섀넌 계보가 언어를 예측 가능한 확률 과정으로 다루었다면, [[앨런 튜링]]의 계보는 언어 행동이 어느 정도 지능의 증거가 되는지를 묻는다. 현대 LLM은 두 흐름이 만나는 지점에 있다. 다음 토큰 예측으로 학습되지만, 실제 평가는 인간과 자연스럽게 대화하고 신뢰할 만한 답을 제공하는지까지 포함한다.
+
+## 출처
+
+- [[001_섀넌의 N-gram 모델]]
+- [[002_튜링 테스트]]
+
 ## 관련 항목
 
 - [[001_섀넌의 N-gram 모델]]
+- [[002_튜링 테스트]]
 - [[N-gram 모델]]
 - [[마르코프 가정]]
 - [[데이터 희소성]]
 - [[Smoothing]]
 - [[Perplexity]]
+- [[튜링 테스트와 LLM 평가]]
