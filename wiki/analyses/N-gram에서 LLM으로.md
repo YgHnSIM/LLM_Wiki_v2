@@ -4,7 +4,7 @@ aliases: [n-gram to LLM, 언어 모델링 계보, 다음 토큰 예측의 역사
 tags: [type/analysis, domain/ai, status/active]
 created: 2026-05-07
 updated: 2026-05-08
-sources: ["001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md", "001_Shannon's N-gram Model - The Foundation of Statistical Language Processing.commentary.md", "002_The Turing Test.md"]
+sources: ["001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md", "001_Shannon's N-gram Model - The Foundation of Statistical Language Processing.commentary.md", "002_The Turing Test.md", "003_Georgetown-IBM Machine.md"]
 status: active
 ---
 
@@ -32,10 +32,15 @@ N-gram은 현대 LLM의 축소판이라기보다, 언어 모델링의 문제 설
 
 [[튜링 테스트]]는 같은 언어 AI 역사를 다른 질문으로 비춘다. 섀넌 계보가 언어를 예측 가능한 확률 과정으로 다루었다면, [[앨런 튜링]]의 계보는 언어 행동이 어느 정도 지능의 증거가 되는지를 묻는다. 현대 LLM은 두 흐름이 만나는 지점에 있다. 다음 토큰 예측으로 학습되지만, 실제 평가는 인간과 자연스럽게 대화하고 신뢰할 만한 답을 제공하는지까지 포함한다.
 
+## 규칙 기반 NLP와의 대비
+
+[[003_Georgetown-IBM 기계 번역 시연]]은 n-gram 계보와 다른 초기 NLP 흐름을 보여준다. 여기서 언어 처리는 확률적 예측보다 사전 조회와 통사 규칙 적용에 가까웠다. 이 접근은 제한된 문장에서는 작동했지만, 확장 과정에서 [[지식 공학 병목]]과 실제 성능 평가 문제를 드러냈다. 현대 LLM은 통계적 예측, 대규모 학습, 다과업 생성 능력을 결합하면서 이 두 계보의 일부를 흡수한다.
+
 ## 출처
 
 - [[001_섀넌의 N-gram 모델]]
 - [[002_튜링 테스트]]
+- [[003_Georgetown-IBM 기계 번역 시연]]
 
 ## 관련 항목
 
@@ -47,3 +52,5 @@ N-gram은 현대 LLM의 축소판이라기보다, 언어 모델링의 문제 설
 - [[Smoothing]]
 - [[Perplexity]]
 - [[튜링 테스트와 LLM 평가]]
+- [[기계 번역]]
+- [[AI 시연과 실제 성능]]

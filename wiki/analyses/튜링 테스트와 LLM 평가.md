@@ -4,7 +4,7 @@ aliases: [Turing Test and LLM Evaluation, 튜링 테스트와 언어 모델 평�
 tags: [type/analysis, domain/ai, status/active]
 created: 2026-05-08
 updated: 2026-05-08
-sources: ["002_The Turing Test.md", "002_The Turing Test.commentary.md"]
+sources: ["002_The Turing Test.md", "002_The Turing Test.commentary.md", "003_Georgetown-IBM Machine.md"]
 status: active
 ---
 
@@ -24,6 +24,10 @@ status: active
 
 튜링 테스트는 인간 유사성을 평가하지만, 실제 AI 시스템에서는 인간처럼 보이는지보다 어떤 조건에서 믿고 사용할 수 있는지가 더 중요할 수 있다. 따라서 현대 LLM 평가는 대화 자연스러움뿐 아니라 정확성, 근거 제시, 일관성, 안전성, 특정 과업 성능, 도구 사용 능력 등을 함께 봐야 한다.
 
+## 데모 성능의 문제
+
+[[003_Georgetown-IBM 기계 번역 시연]]은 AI 평가에서 통제된 시연과 실제 성능을 구분해야 한다는 교훈을 더한다. 미리 선별된 60문장의 번역 성공은 기계 번역의 가능성을 보여주었지만, 일반 문서 번역 능력을 충분히 증명하지는 않았다. 현대 LLM 평가에서도 인상적인 데모와 실제 사용 조건의 신뢰성을 구분하는 일이 중요하다.
+
 ## 해석
 
 튜링 테스트는 폐기된 기준이라기보다 역사적 기준점에 가깝다. 이 테스트는 언어가 지능 평가에서 왜 중요한지를 선명하게 보여 주지만, 현대 LLM의 능력과 한계를 모두 설명하기에는 좁다. 오늘날의 핵심 질문은 "인간처럼 보이는가"에서 "어떤 과업과 조건에서 신뢰할 수 있는가"로 확장되고 있다.
@@ -31,6 +35,7 @@ status: active
 ## 출처
 
 - [[002_튜링 테스트]]
+- [[003_Georgetown-IBM 기계 번역 시연]]
 
 ## 관련 항목
 
@@ -39,3 +44,4 @@ status: active
 - [[행동주의적 지능 기준]]
 - [[대규모 언어 모델]]
 - [[N-gram에서 LLM으로]]
+- [[AI 시연과 실제 성능]]
