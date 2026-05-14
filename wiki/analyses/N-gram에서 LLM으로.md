@@ -3,8 +3,8 @@ title: N-gram에서 LLM으로
 aliases: [n-gram to LLM, 언어 모델링 계보, 다음 토큰 예측의 역사]
 tags: [type/analysis, domain/ai, status/active]
 created: 2026-05-07
-updated: 2026-05-08
-sources: ["001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md", "001_Shannon's N-gram Model - The Foundation of Statistical Language Processing.commentary.md", "002_The Turing Test.md", "003_Georgetown-IBM Machine.md"]
+updated: 2026-05-14
+sources: ["001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md", "001_Shannon's N-gram Model - The Foundation of Statistical Language Processing.commentary.md", "002_The Turing Test.md", "003_Georgetown-IBM Machine.md", "004_The Perceptron.md"]
 status: active
 ---
 
@@ -36,11 +36,16 @@ N-gram은 현대 LLM의 축소판이라기보다, 언어 모델링의 문제 설
 
 [[003_Georgetown-IBM 기계 번역 시연]]은 n-gram 계보와 다른 초기 NLP 흐름을 보여준다. 여기서 언어 처리는 확률적 예측보다 사전 조회와 통사 규칙 적용에 가까웠다. 이 접근은 제한된 문장에서는 작동했지만, 확장 과정에서 [[지식 공학 병목]]과 실제 성능 평가 문제를 드러냈다. 현대 LLM은 통계적 예측, 대규모 학습, 다과업 생성 능력을 결합하면서 이 두 계보의 일부를 흡수한다.
 
+## 신경망 학습 계보
+
+[[004_퍼셉트론]]은 현대 LLM으로 이어지는 또 다른 축을 추가한다. n-gram이 언어를 확률적 예측 문제로 만들었다면, 퍼셉트론은 예시에서 가중치를 조정해 패턴을 학습하는 방법을 보여주었다. 현대 LLM은 다음 토큰 예측이라는 문제 설정에서는 n-gram과 연결되고, 대규모 신경망 매개변수를 학습한다는 방법론에서는 [[퍼셉트론]] 이후의 신경망 계보와 연결된다.
+
 ## 출처
 
 - [[001_섀넌의 N-gram 모델]]
 - [[002_튜링 테스트]]
 - [[003_Georgetown-IBM 기계 번역 시연]]
+- [[004_퍼셉트론]]
 
 ## 관련 항목
 
@@ -54,3 +59,5 @@ N-gram은 현대 LLM의 축소판이라기보다, 언어 모델링의 문제 설
 - [[튜링 테스트와 LLM 평가]]
 - [[기계 번역]]
 - [[AI 시연과 실제 성능]]
+- [[퍼셉트론]]
+- [[규칙 기반 AI에서 데이터 기반 학습으로]]
