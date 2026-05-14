@@ -4,7 +4,7 @@ aliases: [rules to data-driven learning, 규칙에서 학습으로, 데이터 �
 tags: [type/analysis, domain/ai, status/active]
 created: 2026-05-14
 updated: 2026-05-14
-sources: ["003_Georgetown-IBM Machine.md", "004_The Perceptron.md", "004_The Perceptron.commentary.md"]
+sources: ["003_Georgetown-IBM Machine.md", "004_The Perceptron.md", "004_The Perceptron.commentary.md", "005_Chomsky's Syntactic Structures.md"]
 status: active
 ---
 
@@ -15,6 +15,8 @@ status: active
 ## 규칙 기반 접근의 장점과 병목
 
 Georgetown-IBM 시연은 사전 조회와 통사 규칙을 결합해 번역을 계산 절차로 만들었다. 이 방식은 제한된 문장과 좁은 영역에서는 설명 가능하고 구현 가능했지만, 언어쌍, 전문 영역, 관용 표현, 복잡한 구문이 늘어날수록 사람이 규칙과 사전을 계속 추가해야 했다. 이 문제가 [[지식 공학 병목]]이다.
+
+[[005_촘스키의 통사 구조]]는 규칙 기반 접근의 이론적 매력을 보여준다. 언어가 실제로 위계적 [[통사 구조]]와 [[재귀]]를 가진다면, 문법 규칙과 [[파싱]]으로 언어를 분석하려는 시도는 단순한 수작업 편의가 아니라 언어의 구조를 모델링하려는 시도였다.
 
 ## 퍼셉트론의 전환
 
@@ -36,6 +38,7 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 
 - [[003_Georgetown-IBM 기계 번역 시연]]
 - [[004_퍼셉트론]]
+- [[005_촘스키의 통사 구조]]
 
 ## 관련 항목
 
@@ -43,4 +46,5 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - [[지식 공학 병목]]
 - [[퍼셉트론]]
 - [[지도 학습]]
+- [[통사 구조]]
 - [[대규모 언어 모델]]

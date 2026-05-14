@@ -4,7 +4,7 @@ aliases: [n-gram to LLM, 언어 모델링 계보, 다음 토큰 예측의 역사
 tags: [type/analysis, domain/ai, status/active]
 created: 2026-05-07
 updated: 2026-05-14
-sources: ["001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md", "001_Shannon's N-gram Model - The Foundation of Statistical Language Processing.commentary.md", "002_The Turing Test.md", "003_Georgetown-IBM Machine.md", "004_The Perceptron.md"]
+sources: ["001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md", "001_Shannon's N-gram Model - The Foundation of Statistical Language Processing.commentary.md", "002_The Turing Test.md", "003_Georgetown-IBM Machine.md", "004_The Perceptron.md", "005_Chomsky's Syntactic Structures.md"]
 status: active
 ---
 
@@ -40,12 +40,17 @@ N-gram은 현대 LLM의 축소판이라기보다, 언어 모델링의 문제 설
 
 [[004_퍼셉트론]]은 현대 LLM으로 이어지는 또 다른 축을 추가한다. n-gram이 언어를 확률적 예측 문제로 만들었다면, 퍼셉트론은 예시에서 가중치를 조정해 패턴을 학습하는 방법을 보여주었다. 현대 LLM은 다음 토큰 예측이라는 문제 설정에서는 n-gram과 연결되고, 대규모 신경망 매개변수를 학습한다는 방법론에서는 [[퍼셉트론]] 이후의 신경망 계보와 연결된다.
 
+## 구조적 언어관과의 접점
+
+[[005_촘스키의 통사 구조]]는 n-gram 계보와 긴장 관계에 있는 구조적 언어관을 추가한다. n-gram은 제한된 표면 문맥의 확률로 언어를 모델링하지만, 촘스키는 자연어가 [[유한상태 모델]]보다 강한 형식 체계와 [[통사 구조]]를 요구한다고 보았다. 현대 LLM은 표면 확률 예측으로 학습되지만, 내부적으로 위계 구조를 어느 정도 학습하는지라는 질문에서 두 계보가 다시 만난다.
+
 ## 출처
 
 - [[001_섀넌의 N-gram 모델]]
 - [[002_튜링 테스트]]
 - [[003_Georgetown-IBM 기계 번역 시연]]
 - [[004_퍼셉트론]]
+- [[005_촘스키의 통사 구조]]
 
 ## 관련 항목
 
@@ -61,3 +66,5 @@ N-gram은 현대 LLM의 축소판이라기보다, 언어 모델링의 문제 설
 - [[AI 시연과 실제 성능]]
 - [[퍼셉트론]]
 - [[규칙 기반 AI에서 데이터 기반 학습으로]]
+- [[통사 구조]]
+- [[촘스키에서 LLM으로]]
