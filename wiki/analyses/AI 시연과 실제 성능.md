@@ -3,8 +3,8 @@ title: AI 시연과 실제 성능
 aliases: [AI demos and real-world performance, 데모와 실제 성능, 통제된 AI 시연]
 tags: [type/analysis, domain/ai, status/active]
 created: 2026-05-08
-updated: 2026-05-08
-sources: ["003_Georgetown-IBM Machine.md", "003_Georgetown-IBM Machine.commentary.md", "002_The Turing Test.md"]
+updated: 2026-07-14
+sources: ["003_Georgetown-IBM Machine.md", "003_Georgetown-IBM Machine.commentary.md", "002_The Turing Test.md", "006_1962_위드로-호프_MADALINE.md", "006_1962_위드로-호프_MADALINE_해설.md"]
 status: active
 ---
 
@@ -20,6 +20,10 @@ status: active
 
 [[튜링 테스트]] 역시 제한된 상호작용 조건에서 기계가 인간처럼 보일 수 있는지를 묻는다. 이 기준은 언어 행동의 중요성을 선명하게 보여주지만, 실제 AI 시스템의 신뢰성, 안전성, 과업 수행 능력을 모두 설명하지는 않는다. Georgetown-IBM 시연과 튜링 테스트는 모두 "보이는 성능"과 "일반화 가능한 능력"을 구분해야 한다는 문제를 남긴다.
 
+## MADALINE의 배치 사례
+
+[[006_위드로-호프의 MADALINE]]은 시연 이후의 다른 평가 축을 제시한다. 현재 소스는 [[MADALINE]]이 잡음 감소, 에코 제거, [[음성 활동 감지]]처럼 변화하는 통신 환경의 문제에 실제로 적용되었다고 설명한다. 이 사례에서 중요한 것은 한 번의 인상적인 출력보다 지속적인 적응, 하드웨어 구현, 운영 신뢰성이다. 다만 현재 `006` 자료의 명칭과 연도에는 내부 불일치가 있어 역사적 세부 사항은 검토 상태다.
+
 ## 현대 LLM 평가로의 확장
 
 현대 [[대규모 언어 모델]]도 인상적인 데모, 선별된 벤치마크, 실제 제품 사용 사이에서 성능 차이를 보일 수 있다. 따라서 평가에는 대표성 있는 테스트 세트, 실패 사례 분석, 장기 사용 조건, 도메인별 정확성, 인간 검토 절차가 함께 필요하다.
@@ -32,6 +36,7 @@ status: active
 
 - [[003_Georgetown-IBM 기계 번역 시연]]
 - [[002_튜링 테스트]]
+- [[006_위드로-호프의 MADALINE]]
 
 ## 관련 항목
 
@@ -39,4 +44,7 @@ status: active
 - [[규칙 기반 기계 번역]]
 - [[튜링 테스트]]
 - [[튜링 테스트와 LLM 평가]]
+- [[MADALINE]]
+- [[음성 활동 감지]]
+- [[퍼셉트론에서 MADALINE으로]]
 - [[대규모 언어 모델]]
