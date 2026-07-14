@@ -536,9 +536,9 @@ function layout({ title, description, current = '', body, pageClass = '' }) {
   </header>
   ${body}
   <footer class="site-footer">
-    <div>
+    <div class="footer-identity">
       <a class="footer-mark" href="${sitePath('/')}">LLM Wiki</a>
-      <p><strong>공개 콘텐츠 ${publishedDocuments.length}</strong> + <strong>안내 ${grouped.meta.length}</strong>로 구성한 LLM 역사 아카이브.</p>
+      <p><strong>공개 콘텐츠 ${publishedDocuments.length}개</strong> + <strong>안내 ${grouped.meta.length}개</strong>로 구성한 LLM 역사 아카이브.</p>
     </div>
     <nav class="footer-meta" aria-label="보조 메뉴">
       <span>최근 문서 갱신 ${escapeHtml(latestUpdate)}</span>
