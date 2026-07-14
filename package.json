@@ -1,0 +1,16 @@
+{
+  "name": "llm-wiki-v2",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Markdown 기반 LLM 역사 위키의 GitHub Pages 정적 사이트",
+  "scripts": {
+    "build": "node scripts/build-site.mjs && node scripts/check-site.mjs",
+    "check": "node scripts/check-site.mjs"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "katex": "^0.16.22",
+    "marked": "^15.0.12"
+  }
+}
