@@ -1,20 +1,75 @@
 ---
+schema_version: 2
+id: analysis.n-gram에서-llm으로
+page_type: analysis
 title: N-gram에서 LLM으로
-aliases: [n-gram to LLM, 언어 모델링 계보, 다음 토큰 예측의 역사]
-tags: [type/analysis, domain/ai, status/active]
-created: 2026-05-07
-updated: 2026-05-14
-sources: ["001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md", "001_Shannon's N-gram Model - The Foundation of Statistical Language Processing.commentary.md", "002_The Turing Test.md", "003_Georgetown-IBM Machine.md", "004_The Perceptron.md", "005_Chomsky's Syntactic Structures.md"]
-status: active
+aliases:
+  - n-gram to LLM
+  - 언어 모델링 계보
+  - 다음 토큰 예측의 역사
+tags:
+  - type/analysis
+  - domain/ai
+created: '2026-05-07'
+updated: '2026-07-15'
+lifecycle: active
+verification: partial
+artifacts:
+  - >-
+    raw/001_Shannon's N-gram Model - The Foundation of Statistical Language
+    Processing..md
+  - >-
+    raw/001_Shannon's N-gram Model - The Foundation of Statistical Language
+    Processing.commentary.md
+  - raw/002_The Turing Test.md
+  - raw/003_Georgetown-IBM Machine.md
+  - raw/004_The Perceptron.md
+  - raw/005_Chomsky's Syntactic Structures.md
+evidence:
+  - source_id: shannon-1948
+    locator: 'Part I, §§2–3 and §6'
+    relation: supports
+  - source_id: turing-1950
+    locator: 'pp. 433–460, §§1–7'
+    relation: supports
+  - source_id: macdonald-1963
+    locator: pp. 1–4
+    relation: supports
+  - source_id: rosenblatt-1958
+    locator: pp. 386–408
+    relation: supports
+  - source_id: chomsky-1957
+    locator: chapters 2–10
+    relation: supports
+  - source_id: gpt-2018
+    locator: §§2–3
+    relation: contextualizes
+  - source_id: bert-2019
+    locator: §3
+    relation: contextualizes
+related:
+  - source.001
+  - source.002
+  - concept.n-gram-모델
+  - concept.마르코프-가정
+  - concept.데이터-희소성
+  - concept.smoothing
+  - concept.perplexity
+  - analysis.튜링-테스트와-llm-평가
+  - concept.기계-번역
+  - analysis.ai-시연과-실제-성능
+  - concept.퍼셉트론
+  - analysis.규칙-기반-ai에서-데이터-기반-학습으로
+  - concept.통사-구조
+  - analysis.촘스키에서-llm으로
 ---
-
 # N-gram에서 LLM으로
 
-[[N-gram에서 LLM으로]] 이어지는 핵심 연속성은 "앞의 문맥이 주어졌을 때 다음 항목의 확률 분포를 예측한다"는 문제 설정이다. [[N-gram 모델]]은 이 문제를 짧은 표면 문맥의 빈도표로 풀었고, 현대 대규모 언어 모델(Large Language Model, LLM)은 긴 문맥과 신경망 표현을 통해 푼다.
+[[N-gram에서 LLM으로]]는 단선적인 발명 계보가 아니라 공통 문제와 중요한 단절을 비교하는 분석이다. [[N-gram 모델]]과 자기회귀 대규모 언어 모델(Large Language Model, LLM)은 앞의 문맥에서 다음 항목의 확률 분포를 예측하지만, 표현과 학습 방식은 크게 다르다.
 
 ## 같은 점
 
-두 접근 모두 언어를 예측 가능한 확률 과정으로 본다. n-gram은 [[조건부 확률]]을 명시적인 빈도표로 계산하고, LLM은 신경망 내부 상태를 통해 다음 토큰 분포를 산출한다. 소스는 오늘날 GPT 계열 모델에서도 n-gram적 사고의 흔적을 찾을 수 있다고 설명한다 [[001_섀넌의 N-gram 모델]].
+두 접근 모두 언어열에 [[조건부 확률]]을 부여할 수 있다. n-gram은 명시적인 빈도표를 사용하고, 자기회귀 LLM은 신경망 내부 상태로 다음 토큰 분포를 산출한다. 이 공통점은 과업 수준의 연속성이며 GPT가 n-gram 계산을 그대로 확장한다는 뜻은 아니다.
 
 ## 다른 점
 
@@ -22,11 +77,11 @@ N-gram 모델은 [[마르코프 가정]]에 따라 제한된 최근 문맥만 �
 
 ## 역사적 압력
 
-N-gram 모델의 한계는 이후 연구 방향을 밀어냈다. [[데이터 희소성]]은 [[Smoothing]] 연구를 낳았고, 의미 유사성을 표현하지 못하는 문제는 분산 표현과 word2vec, GloVe 같은 접근으로 이어졌다. 장거리 의존성을 포착하지 못하는 문제는 순환 신경망과 트랜스포머 연구의 배경이 되었다.
+N-gram의 [[데이터 희소성]]은 [[Smoothing]]과 back-off 연구의 직접 동기였다. 분산 표현, 순환 신경망과 트랜스포머는 장거리 문맥과 일반화 문제를 다른 방식으로 다뤘지만, 이 발전을 n-gram 한계가 각 기술을 직접 낳았다는 단일 인과 사슬로 표현하지 않는다.
 
 ## 해석
 
-N-gram은 현대 LLM의 축소판이라기보다, 언어 모델링의 문제 설정을 선명하게 만든 초기 형식이다. 오늘날의 모델은 빈도표를 그대로 조회하지 않지만, 관찰된 문맥에서 가능한 이어짐의 확률을 추정한다는 점에서 [[클로드 섀넌]]의 정보 이론적 관점과 이어져 있다.
+N-gram은 현대 LLM의 축소판이 아니다. Shannon의 1948년 논문은 확률적 통신원과 연속 근사를 다뤘고, 현대 n-gram 용어·smoothing·신경망 언어 모델은 후대에 각각 발전했다. 연결은 문제 설정과 수학적 어휘의 공유로 한정한다.
 
 ## 평가 축과의 접점
 
@@ -38,7 +93,7 @@ N-gram은 현대 LLM의 축소판이라기보다, 언어 모델링의 문제 설
 
 ## 신경망 학습 계보
 
-[[004_퍼셉트론]]은 현대 LLM으로 이어지는 또 다른 축을 추가한다. n-gram이 언어를 확률적 예측 문제로 만들었다면, 퍼셉트론은 예시에서 가중치를 조정해 패턴을 학습하는 방법을 보여주었다. 현대 LLM은 다음 토큰 예측이라는 문제 설정에서는 n-gram과 연결되고, 대규모 신경망 매개변수를 학습한다는 방법론에서는 [[퍼셉트론]] 이후의 신경망 계보와 연결된다.
+[[004_퍼셉트론]]은 오류 수정으로 선형 분류기의 가중치를 학습했다. 현대 LLM도 학습 가능한 가중치를 사용하지만 자기지도 사전학습과 미분 가능한 다층 구조를 이용한다. 두 모델을 동일한 지도학습 방식으로 묶지 않고 넓은 신경망 학습사 안의 서로 다른 지점으로 본다.
 
 ## 구조적 언어관과의 접점
 

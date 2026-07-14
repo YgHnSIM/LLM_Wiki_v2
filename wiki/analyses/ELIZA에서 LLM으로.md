@@ -1,20 +1,52 @@
 ---
+schema_version: 2
+id: analysis.eliza에서-llm으로
+page_type: analysis
 title: ELIZA에서 LLM으로
-aliases: [ELIZA to LLM, ELIZA와 대규모 언어 모델, 대화형 AI의 이해 문제]
-tags: [type/analysis, domain/ai, domain/nlp, domain/conversational-ai, status/active]
-created: 2026-07-14
-updated: 2026-07-14
-sources: ["002_The Turing Test.md", "002_The Turing Test.commentary.md", "007_ELIZA - The First Conversational AI Program.ko.md", "007_ELIZA - The First Conversational AI Program.commentary.ko.md"]
-status: active
+aliases:
+  - ELIZA to LLM
+  - ELIZA와 대규모 언어 모델
+  - 대화형 AI의 이해 문제
+tags:
+  - type/analysis
+  - domain/ai
+  - domain/nlp
+  - domain/conversational-ai
+created: '2026-07-14'
+updated: '2026-07-15'
+lifecycle: active
+verification: partial
+artifacts:
+  - raw/002_The Turing Test.md
+  - raw/002_The Turing Test.commentary.md
+  - raw/007_ELIZA - The First Conversational AI Program.ko.md
+  - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
+evidence:
+  - source_id: turing-1950
+    locator: 'pp. 433–460, §§1–7'
+    relation: supports
+  - source_id: weizenbaum-1966
+    locator: pp. 36–45
+    relation: supports
+  - source_id: mit-eliza-1965
+    locator: ELIZA source and DOCTOR script records
+    relation: supplements
+related:
+  - concept.eliza
+  - concept.eliza-효과
+  - concept.doctor-스크립트
+  - concept.튜링-테스트
+  - concept.행동-기반-지능-기준
+  - concept.대규모-언어-모델
+  - analysis.ai-시연과-실제-성능
 ---
-
 # ELIZA에서 LLM으로
 
 [[ELIZA]]와 현대 [[대규모 언어 모델]]은 모두 인간에게 자연스럽게 느껴지는 언어 상호작용을 만들지만, 그 작동 방식과 범위는 크게 다르다. 두 계보를 비교하면 유창성, 이해, 사용자 기대, 신뢰성을 별도로 평가해야 하는 이유가 선명해진다.
 
 ## 작동 방식의 차이
 
-ELIZA는 사람이 작성한 [[패턴 매칭]] 규칙과 [[템플릿 기반 응답 생성|응답 템플릿]]을 사용했다. 어떤 키워드를 중요하게 볼지, 어떤 질문을 돌려줄지, 실패 시 어떤 [[대화 복구|fallback]]을 쓸지 설계자가 직접 정했다. 현대 LLM은 대규모 데이터에서 토큰 간 패턴과 표현을 학습해 훨씬 넓은 주제와 문맥에서 새로운 문장을 생성한다.
+ELIZA는 대화 규칙을 실행하는 프레임워크였고 [[DOCTOR 스크립트]]는 그 위에서 치료사 역할을 구현했다. 어떤 키워드를 중요하게 볼지, 어떤 [[패턴 매칭]]과 응답 템플릿을 사용할지, 실패 시 어떤 [[대화 복구|fallback]]을 쓸지 설계자가 직접 정했다. 현대 LLM은 대규모 데이터에서 토큰 간 패턴과 표현을 학습해 훨씬 넓은 문맥에서 새 문장을 생성한다.
 
 ## 역할 설정의 연속성
 
@@ -22,7 +54,7 @@ ELIZA는 사람이 작성한 [[패턴 매칭]] 규칙과 [[템플릿 기반 응�
 
 ## 유창성과 이해
 
-ELIZA는 의미 모델 없이도 이해하는 듯 보일 수 있음을 극단적으로 보여주었다. LLM은 ELIZA보다 훨씬 복잡한 언어 능력을 보이지만, 자연스러운 출력만으로 이해·의식·신뢰 가능한 추론을 확정할 수 없다는 논리적 문제는 남아 있다. 이는 [[튜링 테스트와 LLM 평가]]가 인간 유사성 외에 정확성, 일관성, 안전성을 요구하는 이유다.
+ELIZA는 제한된 규칙만으로도 이해하는 듯 보일 수 있음을 보여주었다. LLM은 ELIZA보다 훨씬 복잡하므로 두 시스템을 기술적으로 동일시하면 안 된다. 그럼에도 자연스러운 출력만으로 이해·의식·신뢰 가능한 추론을 확정할 수 없다는 평가 문제는 남아 있다. ELIZA를 [[튜링 테스트]]의 최초 구현으로 보는 대신 후대의 비교 대상으로 다룬다.
 
 ## ELIZA 효과의 확장
 

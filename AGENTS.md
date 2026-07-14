@@ -1,166 +1,220 @@
-# LLM Wiki — Schema & Operating Instructions
+# LLM Wiki v2 — Schema & Operating Instructions
 
-이 문서는 LLM이 위키를 유지·관리할 때 따라야 할 규칙, 구조, 워크플로를 정의합니다.
-사용자가 소스를 추가하거나, 질문을 던지거나, 위키를 점검하라고 요청할 때 이 스키마를 참조합니다.
+이 문서는 현재 프로젝트의 위키를 유지·검증·배포할 때 따르는 규칙이다. `wiki/`의 정리된 문서가 공개 지식베이스의 기준이며, `raw/`는 수정하지 않는 보존 자료다.
 
----
+## 1. 디렉터리 구조
 
-## 1. 디렉토리 구조
-
+```text
+LLM_Wiki_v2/
+├── AGENTS.md
+├── raw/                         # 불변 보존 자료
+├── wiki/
+│   ├── index.md
+│   ├── log.md
+│   ├── overview.md
+│   ├── sources/
+│   ├── entities/
+│   ├── concepts/
+│   ├── analyses/
+│   └── meta/
+│       ├── page.schema.json     # frontmatter JSON Schema
+│       ├── tags.yml             # 허용 태그 사전
+│       ├── evidence.yml         # 외부 근거 레지스트리
+│       ├── raw-artifacts.yml    # raw 역할·출처 상태·해시
+│       └── red-links.yml        # 의도적으로 허용한 미작성 링크
+├── scripts/
+│   ├── lint-wiki.mjs
+│   ├── build-site.mjs
+│   └── check-site.mjs
+└── site/
 ```
-ObsidianWiki/
-├── AGENTS.md              # 이 파일 (스키마 & 운영 지침)
-├── raw/                   # 원본 소스 (불변, LLM이 수정하지 않음)
-│   ├── assets/            # 이미지, PDF 등 첨부파일
-│   └── ...                # 사용자가 추가하는 원본 문서들
-├── wiki/                  # LLM이 생성·관리하는 위키 페이지
-│   ├── index.md           # 전체 페이지 카탈로그
-│   ├── log.md             # 작업 시간순 기록
-│   ├── overview.md        # 위키 홈페이지 / 전체 개요
-│   ├── sources/           # 소스 요약 페이지
-│   ├── entities/          # 인물, 조직, 장소 등 개체 페이지
-│   ├── concepts/          # 개념, 이론, 프레임워크 페이지
-│   ├── analyses/          # 분석, 비교, 합성 페이지
-│   └── meta/              # 메타 페이지 (방법론, 용어집 등)
-└── .obsidian/             # 옵시디언 설정
-```
 
-## 2. 페이지 규칙
+## 2. 위키 페이지 스키마 v2
 
-### 2.1 YAML 프론트매터
-모든 위키 페이지는 YAML 프론트매터를 포함합니다:
+모든 `wiki/**/*.md` 문서는 다음 필드를 가진다. 기계 판독 규격은 `wiki/meta/page.schema.json`이 기준이다.
 
 ```yaml
 ---
-title: 페이지 제목
-aliases: [대안 이름, 약어]
-tags: [카테고리태그]
-created: YYYY-MM-DD
-updated: YYYY-MM-DD
-sources: [관련 소스 파일명]
-status: draft | active | review | archived
+schema_version: 2
+id: concept.madaline
+page_type: concept
+title: MADALINE
+aliases: [many ADALINEs]
+tags: [type/concept, domain/ai, domain/machine-learning]
+created: 2026-07-14
+updated: 2026-07-15
+lifecycle: active
+verification: verified
+artifacts:
+  - raw/006_1962_위드로-호프_MADALINE.md
+evidence:
+  - source_id: widrow-lehr-1990
+    locator: pp. 1415–1419
+    relation: supports
+related:
+  - concept.adaline
 ---
 ```
 
-### 2.2 내부 링크
-- 옵시디언 `[[위키링크]]` 형식 사용
-- 처음 언급될 때 링크, 이후 반복은 링크 없이
-- 아직 페이지가 없는 개념도 `[[미래 페이지]]`로 링크 (빨간 링크)
-- 섹션 링크: `[[페이지명#섹션]]`
+### 2.1 필드 의미
 
-### 2.3 태그 체계
-| 접두사       | 용도     | 예시                                                                              |
-| --------- | ------ | ------------------------------------------------------------------------------- |
-| `type/`   | 페이지 유형 | `type/source`, `type/reference`, `type/entity`, `type/concept`, `type/analysis` |
-| `domain/` | 주제 영역  | `domain/ai`, `domain/geopolitics`, `domain/economics`                           |
-| `status/` | 상태     | `status/draft`, `status/active`, `status/review`                                |
+| 필드 | 규칙 |
+| --- | --- |
+| `schema_version` | 현재 값은 `2` |
+| `id` | 페이지명과 분리된 영구 식별자, 전체 위키에서 유일해야 함 |
+| `page_type` | `source`, `reference`, `entity`, `concept`, `analysis`, `meta` |
+| `title` | 본문의 첫 H1과 정확히 일치 |
+| `aliases` | 검색용 대체 이름. 다른 페이지의 `id` 역할을 대신하지 않음 |
+| `tags` | `wiki/meta/tags.yml`에 등록된 값만 사용 |
+| `created`, `updated` | `YYYY-MM-DD`, `created <= updated` |
+| `lifecycle` | 편집 수명주기: `draft`, `active`, `archived` |
+| `verification` | 근거 상태: `unverified`, `partial`, `verified`, `disputed` |
+| `artifacts` | 프로젝트 안의 물리적 `raw/` 보존 파일 경로 |
+| `evidence` | 주장 근거 ID, 문헌 내 위치, 관계 |
+| `related` | 큐레이션된 방향성 관계의 대상 페이지 ID |
 
-### 2.4 작성 원칙
-- **한국어** 기본, 고유명사·전문용어는 원어 병기 (예: 대규모 언어 모델(Large Language Model, LLM))
-- 중립적·백과사전적 톤
-- 일반 주장은 프론트매터 `sources`와 하단 `## 출처` 섹션으로 근거를 표시
-- 본문 중 반복적인 `[[소스 페이지]]` 인용은 피하고, 직접 인용·논쟁적 주장·모순·여러 소스 비교처럼 근거 위치가 특히 중요한 경우에만 짧은 각주 또는 `[[소스 페이지|출처]]` 표기를 사용
-- 모순이 발견되면 명시적으로 기록: `> [!WARNING] 모순 발견`
-- 각 페이지 하단에는 `## 출처` 섹션과 `## 관련 항목` 섹션을 두되, `## 관련 항목`이 마지막에 오도록 배치
-- 깃 커밋 메세지는 영어로 작성하며, `ingest: number_title` 형식을 따름
-	- 예시 
-		- `ingest: 001_Claude Shannon's N-gram Model` 
-		- `ingest: 002_Alan Turing's Imitation Game`
-	- 정규 번호 소스가 아닌 참고 자료 보강은 `reference: short_title` 형식을 사용
+`status`와 `status/*` 태그는 사용하지 않는다. 편집 상태와 사실 검증 상태를 하나의 값으로 합치지 않는다.
 
-## 3. 핵심 워크플로
+### 2.2 폴더와 유형
 
-### 3.1 소스 수집 (Ingest)
+- `wiki/sources/` → `source` 또는 `reference`
+- `wiki/entities/` → `entity`
+- `wiki/concepts/` → `concept`
+- `wiki/analyses/` → `analysis`
+- `wiki/index.md`, `wiki/log.md`, `wiki/overview.md` → `meta`
 
-사용자가 새 소스를 `raw/`에 추가하고 처리를 요청하면:
+각 문서는 `type/<page_type>` 태그를 정확히 하나 가진다. 메타 문서는 `type/meta`를 사용한다.
 
-1. **소스 읽기** — 첨부 문서와 `raw/` 원본은 UTF-8 인코딩으로 읽고, 전체 내용을 정독
-2. **사용자와 논의** — 핵심 인사이트 3-5개를 간략히 공유하고 사용자의 관심사 확인
-3. **소스 요약 페이지 작성** — `wiki/sources/` 에 생성
-   - 프론트매터 포함
-   - 핵심 요약 (3-5 문단)
-   - 주요 인사이트 (불릿 포인트)
-   - 인용할 만한 구절
-   - 관련 위키 페이지 링크
-4. **기존 페이지 업데이트** — 새 소스와 관련된 개체·개념·분석 페이지를 갱신
-   - 새 정보 통합
-   - 기존 주장과 모순되면 경고 표시
-   - 교차 참조 추가
-5. **필요시 새 페이지 생성** — 새 개체/개념이 등장하면 페이지 생성
-6. **index.md 업데이트** — 새 페이지 추가, 기존 항목 요약 갱신
-7. **log.md 기록** — 작업 내용 추가
+### 2.3 수명주기와 검증 상태
 
-### 3.1.1 참고 자료 보강 (Reference)
+- `lifecycle: active`는 문서가 읽을 수 있는 완성 상태라는 뜻이다.
+- `verification: verified`는 현재 본문의 핵심 사실이 locator가 있는 근거로 확인됐다는 뜻이다.
+- `partial`은 해석적 분석이 포함되거나 일부 주장만 검증됐다는 뜻이다.
+- `disputed`는 신뢰할 만한 자료가 서로 충돌하거나 논쟁 자체가 문서의 핵심이라는 뜻이다.
+- 비메타 문서의 `evidence`는 비어 있을 수 없다.
+- `verified` 문서에는 해결되지 않은 사실 경고를 남길 수 없다.
+- 파생 문서는 검토되지 않은 raw의 주장만으로 `verified`가 될 수 없다. 외부 근거나 검증된 소스 노트를 사용한다.
 
-사용자가 정규 번호 소스가 아닌 보충 참고 자료를 `raw/`에 추가하고 처리를 요청하면:
+## 3. 근거와 보존 자료
 
-1. **정규 Ingest와 분리** — `NNN_연도_인물_주제` 번호를 새로 만들지 않음
-2. **참고 요약 페이지 작성** — `wiki/sources/ref_slug.md` 형식으로 생성
-   - 프론트매터 `tags`에는 `type/reference` 포함
-   - `sources`에는 원본 raw 파일명을 그대로 기록
-   - 본문 하단 `## 출처`에는 raw 파일 경로를 표시
-3. **기존 페이지 보강 중심** — 새 지식이 주로 보충하는 기존 개체·개념·분석 페이지를 갱신
-4. **필요시 새 페이지 생성** — 참고 자료가 독립 개념을 충분히 제공할 때만 새 페이지 생성
-5. **index.md 업데이트** — 정규 `소스 (Sources)`와 별도로 `참고 자료 (References)` 섹션에 추가
-6. **overview.md 업데이트** — 정규 소스 수와 참고 자료 수를 구분해 표시
-7. **log.md 기록** — 작업유형은 `reference` 사용
+### 3.1 `artifacts`와 `evidence` 분리
 
-### 3.2 질의 (Query)
+- `artifacts`는 어떤 파일을 보존·참고했는지 기록한다.
+- `evidence`는 어떤 문헌의 어느 위치가 현재 주장을 지지·보완·맥락화·반박하는지 기록한다.
+- raw 파일 자체가 존재한다는 사실은 그 내용이 정확하다는 뜻이 아니다.
+- `source_id`는 `wiki/meta/evidence.yml`에 있어야 한다.
+- `locator`에는 페이지, 절, 장, 표, 코드 기록처럼 주장을 재확인할 수 있는 위치를 적는다.
+- `relation`은 `supports`, `supplements`, `contextualizes`, `disputes` 중 하나다.
 
-사용자가 질문하면:
+### 3.2 raw 불변성과 정정
 
-1. **index.md 탐색** — 관련 페이지 식별
-2. **관련 페이지 읽기** — 필요한 페이지 정독
-3. **답변 합성** — 위키 내용 기반으로 답변, `[[페이지]]` 인용 포함
-4. **가치 있는 답변은 위키에 보존** — 분석적 답변이면 `wiki/analyses/`에 페이지로 저장
-5. **index.md & log.md 갱신**
+1. `raw/`의 수집 artifact는 수정하거나 삭제하지 않는다. 운영 설명서인 `raw/README.md`만 스키마 변경 때 갱신할 수 있다.
+2. 각 raw Markdown은 `wiki/meta/raw-artifacts.yml`에 역할, 출처 상태, SHA-256 해시를 기록한다.
+3. raw에 오류나 결손이 있으면 위키 본문에서 1차 자료로 교정하고, 필요하면 `검증 정정` 또는 `원문 상태` 절을 둔다.
+4. raw를 “사실의 source of truth”라고 부르지 않는다. raw는 수집 당시 상태를 보존한 artifact다.
+5. 원문·번역·해설을 서로 다른 `role`로 기록하고, 원문이 저장소에 없으면 명시한다.
 
-### 3.3 점검 (Lint)
+### 3.3 출처 절
 
-사용자가 점검을 요청하거나 주기적으로:
+- `source`, `reference`, `entity`, `concept`, `analysis` 문서는 `## 출처`를 정확히 한 번 포함한다.
+- `## 출처`에는 사람이 읽을 수 있는 문헌 제목·URL·locator 또는 검증된 소스 노트 링크를 적는다.
+- `meta` 문서는 `## 출처`와 비어 있지 않은 `evidence` 요구에서 제외된다.
+- `## 관련 항목`은 모든 Markdown 문서의 마지막 H2다.
 
-1. **모순 탐색** — 페이지 간 상충하는 주장 찾기
-2. **고아 페이지** — 들어오는 링크가 없는 페이지 찾기
-3. **빨간 링크** — `[[링크]]`는 있지만 페이지가 없는 것 찾기
-4. **오래된 정보** — 최근 소스로 대체된 주장 찾기
-5. **누락된 교차참조** — 관련되지만 연결되지 않은 페이지 찾기
-6. **제안** — 추가로 조사할 만한 질문이나 찾아볼 소스 제안
-7. **결과를 log.md에 기록**
+### 3.4 인용과 요약
 
-## 4. 특수 파일
+- 실제 인용은 원문, 번역, 저자·저작, 페이지 또는 절을 함께 기록한다.
+- raw 해설의 문장을 원저자의 인용처럼 따옴표와 인용 블록으로 표시하지 않는다.
+- 직접 인용이 아닌 문장은 `핵심 문장`, `요약`, `해석`으로 표시하고 따옴표를 사용하지 않는다.
+- 논쟁적 인과는 “직접 이어졌다”보다 확인 가능한 영향, 공통 문제, 수학적 유사성의 범위를 구체적으로 쓴다.
 
-### 4.1 index.md
-- 카테고리별로 모든 위키 페이지 나열
-- 각 항목: `- [[페이지명]] — 한 줄 요약 (소스 N개)`
-- 새 페이지 생성/삭제 시 반드시 갱신
+## 4. 링크와 관계
 
-### 4.2 log.md
-- 시간순 기록, 최신이 아래로
+- 본문 링크는 Obsidian `[[페이지]]` 또는 `[[페이지|표시명]]` 형식을 사용한다.
+- 본문 링크는 방향성을 가진다. 모든 링크에 상호 링크를 강제하지 않는다.
+- frontmatter `related`도 큐레이션된 방향성 관계이며 자동 상호화하지 않는다.
+- 사이트의 역링크가 반대 방향 탐색을 제공한다.
+- 의도적인 미작성 링크만 `wiki/meta/red-links.yml`에 등록한다. 그 밖의 빨간 링크는 lint 오류다.
+- 제목이나 alias가 겹쳐도 `id`는 겹칠 수 없다. 모호한 링크는 파일명 또는 명시적인 표시명을 사용한다.
+
+## 5. 태그
+
+- 허용 태그의 단일 기준은 `wiki/meta/tags.yml`이다.
+- `type/*`는 구조를, `domain/*`는 주제를 나타낸다.
+- 새 태그는 먼저 레지스트리에 설명과 함께 등록한다.
+- 검증 상태나 편집 상태를 태그에 중복하지 않는다.
+
+## 6. 핵심 워크플로
+
+### 6.1 소스 수집
+
+1. raw 파일과 원문 출처를 구분해 확인한다.
+2. raw 파일을 수정하지 않고 artifact 레지스트리에 추가한다.
+3. 외부 1차 자료를 evidence 레지스트리에 등록한다.
+4. `wiki/sources/`에 요약·검증 정정·핵심 문장·출처·관련 항목을 작성한다.
+5. 관련 entity·concept·analysis를 갱신한다.
+6. `index.md`, `overview.md`, `log.md`를 갱신한다.
+7. `npm run lint:wiki`와 `npm run build`를 실행한다.
+
+### 6.2 참고 자료 보강
+
+- 정규 번호 소스가 아니면 `page_type: reference`와 `type/reference`를 사용한다.
+- 기존 주장 보강이 목적이면 새 개념을 불필요하게 만들지 않는다.
+- 외부 근거는 evidence 레지스트리에, 물리 파일은 raw artifact 레지스트리에 각각 추가한다.
+
+### 6.3 점검
+
+`scripts/lint-wiki.mjs`는 다음을 실패 조건으로 검사한다.
+
+- 스키마 필드와 enum
+- 폴더·`page_type`·`type/*` 일치
+- ID 중복, H1·title 불일치
+- 허용되지 않은 태그
+- 존재하지 않거나 해시가 달라진 raw artifact
+- 존재하지 않는 evidence ID, 빈 locator
+- 비메타 문서의 `## 출처` 누락
+- 빨간 링크와 색인 누락
+- `## 관련 항목`의 위치
+- 검증된 문서의 해결되지 않은 경고
+- 출처 없는 인용문 형식
+
+## 7. 특수 문서
+
+### 7.1 index.md
+
+- 모든 source·reference·entity·concept·analysis를 유형별로 한 번씩 나열한다.
+- 항목에는 한 줄 설명과 근거 수를 표시한다.
+- 생성·삭제·제목 변경 시 반드시 갱신한다.
+
+### 7.2 overview.md
+
+- 현재 범위, 문서 수, 검증 상태와 주요 진입점을 설명한다.
+- 원문 결손과 이미 해결된 검증 문제를 현재 미해결 상태처럼 남기지 않는다.
+
+### 7.3 log.md
+
+- 최신 기록을 아래에 추가한다.
 - 형식: `## [YYYY-MM-DD] 작업유형 | 제목`
-  - 작업유형: `ingest`, `query`, `lint`, `create`, `update`
-  - 참고 자료 보강은 `reference` 사용
-- 각 항목에 변경된 페이지 목록 포함
+- 작업유형: `ingest`, `reference`, `content`, `fix`, `schema`, `lint`, `site`, `docs`.
+- 변경 문서, 검증 근거, 남은 제한을 기록한다.
 
-### 4.3 overview.md
-- 위키 홈페이지
-- 전체 지식 베이스의 요약과 현재 상태
-- 주요 주제 영역과 핵심 페이지로의 링크
-- 정기적으로 갱신
+## 8. 커밋 메시지
 
-## 5. 품질 기준
+영어로 작성하며 다음 접두사를 사용한다.
 
-- **정확성**: 모든 주장은 소스에 근거
-- **일관성**: 페이지 간 모순 없음 (있으면 명시)
-- **연결성**: 관련 페이지는 반드시 상호 링크
-- **최신성**: 새 소스 수집 시 관련 페이지 모두 갱신
-- **가독성**: 구조적이고 스캔 가능한 형식
+- `ingest: number_title`
+- `reference: short_title`
+- `content: short_title`
+- `fix: short_title`
+- `schema: short_title`
+- `lint: short_title`
+- `site: short_title`
+- `docs: short_title`
 
-## 6. LLM 행동 원칙
+## 9. 작업 원칙
 
-1. `raw/` 디렉토리의 파일은 **절대 수정하지 않는다**
-2. `wiki/` 디렉토리의 파일은 자유롭게 생성·수정·삭제한다
-3. 확실하지 않은 것은 사용자에게 물어본다
-4. 큰 변경을 하기 전에 무엇을 할지 먼저 설명한다
-5. 모든 작업은 log.md에 기록한다
-6. index.md는 항상 최신 상태를 유지한다
-7. 사용자의 관심사와 맥락을 기억하고 반영한다
+1. 현재 프로젝트 폴더 안에서만 위키·스키마·사이트를 수정한다.
+2. 원문 검증이 필요할 때 외부의 1차 자료를 읽을 수 있지만, 현재 프로젝트에 필요한 결과만 기록한다.
+3. `raw/`는 수정하지 않는다.
+4. 사실과 해석, 원문과 번역, 역사적 시기를 구분한다.
+5. 큰 변경은 `log.md`에 기록하고 lint·사이트 빌드로 검증한다.

@@ -1,50 +1,91 @@
 ---
+schema_version: 2
+id: source.006
+page_type: source
 title: 위드로-호프의 MADALINE
-aliases: [006_위드로-호프의 MADALINE, 1962 MADALINE, 위드로-호프 MADALINE]
-tags: [type/source, domain/ai, domain/machine-learning, domain/signal-processing, status/review]
-created: 2026-07-14
-updated: 2026-07-14
-sources: ["006_1962_위드로-호프_MADALINE.md", "006_1962_위드로-호프_MADALINE_해설.md"]
-status: review
+aliases:
+  - 006_위드로-호프의 MADALINE
+  - MADALINE I
+  - 위드로-호프 MADALINE
+tags:
+  - type/source
+  - domain/ai
+  - domain/machine-learning
+  - domain/signal-processing
+created: '2026-07-14'
+updated: '2026-07-15'
+lifecycle: active
+verification: verified
+artifacts:
+  - raw/006_1962_위드로-호프_MADALINE.md
+  - raw/006_1962_위드로-호프_MADALINE_해설.md
+evidence:
+  - source_id: widrow-hoff-1960
+    locator: Adaptive Switching Circuits
+    relation: supports
+  - source_id: widrow-winter-1988
+    locator: 'pp. 1-401–1-408, 특히 p. 1-403'
+    relation: supports
+  - source_id: widrow-lehr-1990
+    locator: pp. 1415–1419 and 1428–1432
+    relation: supports
+  - source_id: widrow-1975
+    locator: pp. 1692–1716
+    relation: contextualizes
+related:
+  - entity.버나드-위드로
+  - entity.마션-호프
+  - entity.스탠퍼드-대학교
+  - concept.adaline
+  - concept.madaline
+  - concept.lms-알고리즘
+  - concept.경사하강법
+  - concept.적응-필터
+  - concept.음성-활동-감지
+  - concept.특징-공학
+  - concept.퍼셉트론
+  - concept.선형-분류기
+  - analysis.퍼셉트론에서-madaline으로
+  - analysis.ai-시연과-실제-성능
+  - concept.대규모-언어-모델
 ---
-
 # 위드로-호프의 MADALINE
 
 ## 핵심 요약
 
-이 소스는 [[버나드 위드로]]와 [[마션 호프]]의 [[MADALINE]]을 초기 신경망이 실험실의 학습 시연에서 실제 공학 시스템으로 이동한 사례로 설명한다. 중심에는 임계값 적용 전의 연속 출력을 학습에 사용하는 [[ADALINE]]과, 평균 제곱 오차를 줄이도록 가중치를 조정하는 [[LMS 알고리즘]]이 있다.
+[[버나드 위드로]]와 [[마션 호프]]는 1960년에 [[ADALINE]]과 Widrow–Hoff [[LMS 알고리즘]]을 발표했다. 초기 문헌에서 ADALINE은 adaptive linear element 또는 adaptive linear neuron으로 불렸으며, 1988년 MADALINE Rule II 논문은 MADALINE을 “many ADALINEs”라고 명시한다. 프로젝트 raw의 “Multiple Adaptive Linear Neural Networks”와 “Multiple ADAptive LINear Elements”는 표준 풀이라는 근거가 없어 채택하지 않는다.
 
-MADALINE은 여러 ADALINE 유닛을 병렬로 배치하고 그 출력을 고정된 AND·OR 논리 게이트로 결합했다. 이 혼합 구조는 당시 하드웨어로 구현하기 쉬웠고 학습 과정도 통제할 수 있었지만, 논리층과 전체 구조는 엔지니어가 미리 설계해야 했다. 따라서 완전한 다층 학습이나 현대적 종단 간 표현 학습과는 구별된다.
+[[MADALINE]] I은 여러 ADALINE의 이진 출력을 OR·AND·다수결 같은 고정 논리 요소로 결합한 초기 다요소 신경망이다. Widrow와 Lehr의 회고는 이 구조가 1960년대 초 하드웨어로 만들어져 패턴 인식 연구에 쓰였다고 기록하며, 원래 Madaline I 규칙을 1962년의 오류 수정 규칙으로 분류한다. ADALINE/LMS의 1960년 발표와 MADALINE I 학습 규칙의 1962년을 구분해야 한다.
 
-소스가 제시하는 대표 응용은 전화 신호의 [[음성 활동 감지]]다. 엔지니어가 주파수 대역별 에너지 같은 입력 특징을 설계하고, 여러 ADALINE이 유성음·무성 자음·전체 신호 강도와 관련된 패턴을 학습한 뒤, 고정 논리가 최종적으로 음성과 잡음을 구분한다. 잡음 감소, 에코 제거, 음성 구간 검출 같은 응용은 [[적응 필터]]와 신경망이 실제 통신 시스템에서 작동할 수 있음을 보여주는 사례로 제시된다.
+ADALINE의 선형 결합기는 목표값과 임계값 이전의 선형 출력 차이로 평균제곱오차를 줄인다. 이 오차 표면은 가중치에 대한 볼록 이차 함수이며, 입력 상관행렬이 가역이라는 조건에서 하나의 전역 최솟값을 갖는다. 따라서 기본 선형 LMS가 여러 국소 최솟값에 갇힌다는 프로젝트 raw의 설명은 틀리다. 국소 최적점은 signum 오차나 비선형 다요소 네트워크의 오차 표면에서 생길 수 있다.
 
-수학적으로 ADALINE은 선형 출력과 제곱 오차를 사용한다. [[LMS 알고리즘]]은 현재 출력과 목표값의 차이, 입력 크기, 학습률을 이용해 가중치를 갱신하며, 이 오류 기반 조정은 [[경사하강법]] 계열 학습의 초기 공학적 형태로 설명된다.
+초기 ADALINE·MADALINE의 응용에는 음성·패턴 인식, 기상 예측, 적응 제어가 포함됐다. 이후 Stanford 연구는 다층 학습 규칙 개발의 어려움 때문에 [[적응 필터]]와 적응 신호 처리로 방향을 옮겼고, 잡음 제거·적응 등화·에코 제거가 이 별도의 계보에서 발전했다. [[음성 활동 감지]]를 MADALINE의 대표 배치 사례로 제시하거나, 후대 적응 필터의 성과를 MADALINE 자체의 성과로 합쳐서는 안 된다.
 
-동시에 소스는 MADALINE의 한계를 분명히 한다. 각 ADALINE은 선형 결합만 학습하고, 논리 게이트와 입력 [[특징 공학]]은 사람이 설계하며, 더 깊은 표현 계층을 자동으로 학습하지 못한다. 이 때문에 MADALINE은 현대 딥러닝의 직접적 등가물이 아니라, 학습 가능한 선형 유닛과 수작업 구조를 결합한 과도기적 시스템으로 보는 편이 정확하다.
+MADALINE은 여러 학습 요소를 결합했다는 점에서 역사적으로 중요하지만, 현대 딥러닝이나 LLM의 직접 선조라고 단정할 수는 없다. 고정 논리층과 불연속 signum을 사용한 초기 구조, 선형 LMS, 후대 역전파는 서로 연관되면서도 다른 학습 문제를 푼다.
 
-> [!WARNING] 모순 발견
-> 현재 프로젝트의 두 `006` 자료는 명칭과 연도에서 정리가 필요하다. 본문 첫 문장은 MADALINE을 “Multiple Adaptive Linear Neural Networks”의 약자로 적지만, 뒤에서는 “Multiple ADAptive LINear Elements”로 설명한다. 또한 본문은 1962년 개발로 서술하는 반면 해설은 1960년 논문을 ADALINE과 Widrow-Hoff 학습 규칙의 출발점으로 제시한다. 외부 자료를 사용하지 않는 이번 처리에서는 어느 표현이 최종적으로 맞는지 확정하지 않고 검토 상태로 남긴다.
+## 검증 정정
 
-## 주요 인사이트
+- MADALINE의 표기는 1차 문헌의 “many ADALINEs”를 따른다.
+- ADALINE/LMS의 1960년과 Madaline I 규칙의 1962년을 분리한다.
+- 선형 LMS의 평균제곱오차 표면에는 조건부로 유일한 전역 최솟값이 있다.
+- 잡음 제거·에코 제거는 후대 LMS 적응 필터 계보로 분리한다.
+- MADALINE 기반 VAD 사례는 확인되지 않아 본 위키의 역사적 사례에서 제외한다.
 
-- [[ADALINE]]은 학습 중 연속 선형 출력을 사용해 임계값 이후의 이진 출력만 보는 [[퍼셉트론]]과 다른 오류 신호를 제공한다.
-- [[LMS 알고리즘]]은 단순한 계산으로 제곱 오차를 줄이는 가중치 갱신을 구현했다.
-- [[MADALINE]]은 학습 가능한 유닛과 고정 논리층을 결합한 혼합 구조였다.
-- 통신 분야의 잡음 감소, 에코 제거, [[음성 활동 감지]]는 신경망의 실제 배치 가능성을 보여주는 사례로 제시된다.
-- 수동 [[특징 공학]]과 고정 논리층은 구현 가능성을 높였지만 일반화와 확장성을 제한했다.
-- 현대 [[대규모 언어 모델]]과의 연결은 직접적인 언어 이해보다 그래디언트 학습의 계보와 음성 입력 전처리에서 찾는 편이 적절하다.
+## 핵심 문장
 
-## 인용할 만한 구절
+- MADALINE은 many ADALINEs로 구성된 초기 다요소 신경망이다.
+- 선형 LMS의 볼록 오차 표면과 비선형 MADALINE 학습의 복잡한 오차 표면을 구분해야 한다.
+- 초기 MADALINE 응용과 후대 적응 필터의 상용 응용은 연결된 연구사이지만 같은 시스템의 성과는 아니다.
 
-> “MADALINE은 신경망 기술이 실험실 내부의 단순한 시연 수준을 넘어 실제 공학 현장에 배치된 온전한 시스템으로 도약한 역사적 순간을 상징한다.”
+## 출처
 
-> “ADALINE은 학습 과정 내내 연속적인 선형 출력을 유지했다.”
+- Bernard Widrow·Marcian E. Hoff, [Adaptive Switching Circuits](https://isl.stanford.edu/~widrow/papers/c1960adaptiveswitching.pdf), 1960.
+- Rodney Winter·Bernard Widrow, [MADALINE Rule II: A Training Algorithm for Neural Networks](https://isl.stanford.edu/~widrow/papers/c1988madalinerule.pdf), 1988, 특히 pp. 1-401–1-403.
+- Bernard Widrow·Michael A. Lehr, [30 Years of Adaptive Neural Networks: Perceptron, Madaline, and Backpropagation](https://isl.stanford.edu/people/widrow/papers/j199030years.pdf), 1990, pp. 1415–1419·1428–1432.
+- Bernard Widrow 외, [Adaptive Noise Cancelling: Principles and Applications](https://isl.stanford.edu/~widrow/papers/j1975adaptivenoise.pdf), 1975, pp. 1692–1716.
+- 프로젝트 보존 자료: `raw/006_1962_위드로-호프_MADALINE.md`, `raw/006_1962_위드로-호프_MADALINE_해설.md`.
 
-> “논리층은 학습되지 않았고, 엔지니어가 미리 설계해야 했다.”
-
-> “MADALINE을 딥러닝의 직접 선조로만 읽으면 중요한 차이를 놓친다.”
-
-## 관련 위키 페이지
+## 관련 항목
 
 - [[버나드 위드로]]
 - [[마션 호프]]
@@ -58,17 +99,6 @@ MADALINE은 여러 ADALINE 유닛을 병렬로 배치하고 그 출력을 고정
 - [[특징 공학]]
 - [[퍼셉트론]]
 - [[선형 분류기]]
-- [[지도 학습]]
 - [[퍼셉트론에서 MADALINE으로]]
-
-## 출처
-
-- `raw/006_1962_위드로-호프_MADALINE.md`
-- `raw/006_1962_위드로-호프_MADALINE_해설.md`
-
-## 관련 항목
-
-- [[004_퍼셉트론]]
-- [[규칙 기반 AI에서 데이터 기반 학습으로]]
 - [[AI 시연과 실제 성능]]
 - [[대규모 언어 모델]]

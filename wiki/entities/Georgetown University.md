@@ -1,13 +1,29 @@
 ---
+schema_version: 2
+id: entity.georgetown-university
+page_type: entity
 title: Georgetown University
-aliases: [조지타운 대학교, Georgetown]
-tags: [type/entity, domain/ai, status/active]
-created: 2026-05-08
-updated: 2026-05-08
-sources: ["003_Georgetown-IBM Machine.md"]
-status: active
+aliases:
+  - 조지타운 대학교
+  - Georgetown
+tags:
+  - type/entity
+  - domain/ai
+created: '2026-05-08'
+updated: '2026-07-15'
+lifecycle: active
+verification: verified
+artifacts:
+  - raw/003_Georgetown-IBM Machine.md
+evidence:
+  - source_id: macdonald-1963
+    locator: pp. 1–4
+    relation: supports
+related:
+  - entity.ibm
+  - concept.기계-번역
+  - concept.규칙-기반-기계-번역
 ---
-
 # Georgetown University
 
 [[Georgetown University]]는 1954년 [[IBM]]과 함께 Georgetown-IBM 기계 번역 시연을 수행한 대학이다. Georgetown 팀은 냉전기 러시아어 과학·기술 문서 번역 수요를 배경으로, 사전 조회와 통사 규칙을 결합한 초기 [[기계 번역]] 시스템을 개발했다.

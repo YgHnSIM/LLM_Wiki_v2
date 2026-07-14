@@ -1,0 +1,226 @@
+schema_version: 1
+sources:
+  shannon-1948:
+    title: A Mathematical Theory of Communication
+    authors: [Claude E. Shannon]
+    published: 1948
+    source_type: primary
+    kind: journal-article
+    doi: 10.1002/j.1538-7305.1948.tb01338.x
+    url: https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf
+    language: en
+  katz-1987:
+    title: Estimation of Probabilities from Sparse Data for the Language Model Component of a Speech Recognizer
+    authors: [Slava M. Katz]
+    published: 1987
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/TASSP.1987.1165125
+    url: https://doi.org/10.1109/TASSP.1987.1165125
+    language: en
+  chen-goodman-1998:
+    title: An Empirical Study of Smoothing Techniques for Language Modeling
+    authors: [Stanley F. Chen, Joshua Goodman]
+    published: 1998
+    source_type: primary
+    kind: technical-report
+    url: https://dash.harvard.edu/handle/1/25104739
+    language: en
+  turing-1950:
+    title: Computing Machinery and Intelligence
+    authors: [Alan M. Turing]
+    published: 1950
+    source_type: primary
+    kind: journal-article
+    doi: 10.1093/mind/LIX.236.433
+    url: https://academic.oup.com/mind/article/LIX/236/433/986238
+    language: en
+  jones-2026:
+    title: Large language models pass the Turing test
+    authors: [Cameron R. Jones, Benjamin K. Bergen]
+    published: 2026
+    source_type: primary
+    kind: journal-article
+    doi: 10.1073/pnas.2524472123
+    url: https://doi.org/10.1073/pnas.2524472123
+    language: en
+  macdonald-1963:
+    title: The Georgetown-IBM Experiment Demonstrated in January 1954
+    authors: [R. Ross Macdonald]
+    published: 1963
+    source_type: primary
+    kind: technical-report
+    url: https://aclanthology.org/www.mt-archive.info/50/Georgetown-1963-Macdonald.pdf
+    language: en
+  ibm-history-1954:
+    title: Machine-aided translation
+    authors: [IBM]
+    published: 2024
+    source_type: official-secondary
+    kind: institutional-history
+    url: https://www.ibm.com/history/machine-aided-translation
+    language: en
+  rosenblatt-1958:
+    title: "The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain"
+    authors: [Frank Rosenblatt]
+    published: 1958
+    source_type: primary
+    kind: journal-article
+    doi: 10.1037/h0042519
+    url: https://doi.org/10.1037/h0042519
+    language: en
+  novikoff-1963:
+    title: On Convergence Proofs on Perceptrons
+    authors: [Albert B. J. Novikoff]
+    published: 1963
+    source_type: primary
+    kind: conference-paper
+    url: https://web.engr.oregonstate.edu/~huanlian/teaching/ML/2020spring/extra/novikoff-1963.pdf
+    language: en
+  minsky-papert-1969:
+    title: Perceptrons
+    authors: [Marvin Minsky, Seymour Papert]
+    published: 1969
+    source_type: primary
+    kind: book
+    url: https://mitpress.mit.edu/9780262631112/perceptrons-expanded-edition/
+    language: en
+  gpt-2018:
+    title: Improving Language Understanding by Generative Pre-Training
+    authors: [Alec Radford, Karthik Narasimhan, Tim Salimans, Ilya Sutskever]
+    published: 2018
+    source_type: primary
+    kind: research-paper
+    url: https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf
+    language: en
+  bert-2019:
+    title: "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding"
+    authors: [Jacob Devlin, Ming-Wei Chang, Kenton Lee, Kristina Toutanova]
+    published: 2019
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/N19-1423
+    url: https://aclanthology.org/N19-1423/
+    language: en
+  chomsky-1956:
+    title: Three Models for the Description of Language
+    authors: [Noam Chomsky]
+    published: 1956
+    source_type: primary
+    kind: journal-article
+    doi: 10.1016/S0019-9958(56)90262-0
+    url: https://doi.org/10.1016/S0019-9958(56)90262-0
+    language: en
+  chomsky-1957:
+    title: Syntactic Structures
+    authors: [Noam Chomsky]
+    published: 1957
+    source_type: primary
+    kind: book
+    doi: 10.1515/9783112316009
+    url: https://doi.org/10.1515/9783112316009
+    language: en
+  chomsky-1959:
+    title: A Review of B. F. Skinner's Verbal Behavior
+    authors: [Noam Chomsky]
+    published: 1959
+    source_type: primary
+    kind: review-article
+    doi: 10.2307/411334
+    url: https://home.csulb.edu/~cwallis/382/readings/482/chomsky.review.verbal.1959.pdf
+    language: en
+  chomsky-1965:
+    title: Aspects of the Theory of Syntax
+    authors: [Noam Chomsky]
+    published: 1965
+    source_type: primary
+    kind: book
+    url: https://mitpress.mit.edu/9780262030113/aspects-of-the-theory-of-syntax/
+    language: en
+  chomsky-1981:
+    title: Lectures on Government and Binding
+    authors: [Noam Chomsky]
+    published: 1981
+    source_type: primary
+    kind: book
+    doi: 10.1515/9783110884166
+    url: https://doi.org/10.1515/9783110884166
+    language: en
+  earley-1970:
+    title: An Efficient Context-Free Parsing Algorithm
+    authors: [Jay Earley]
+    published: 1970
+    source_type: primary
+    kind: journal-article
+    doi: 10.1145/362007.362035
+    url: https://doi.org/10.1145/362007.362035
+    language: en
+  widrow-hoff-1960:
+    title: Adaptive Switching Circuits
+    authors: [Bernard Widrow, Marcian E. Hoff]
+    published: 1960
+    source_type: primary
+    kind: conference-paper
+    url: https://isl.stanford.edu/~widrow/papers/c1960adaptiveswitching.pdf
+    language: en
+  widrow-winter-1988:
+    title: "MADALINE Rule II: A Training Algorithm for Neural Networks"
+    authors: [Rodney Winter, Bernard Widrow]
+    published: 1988
+    source_type: primary
+    kind: conference-paper
+    url: https://isl.stanford.edu/~widrow/papers/c1988madalinerule.pdf
+    language: en
+  widrow-lehr-1990:
+    title: "30 Years of Adaptive Neural Networks: Perceptron, Madaline, and Backpropagation"
+    authors: [Bernard Widrow, Michael A. Lehr]
+    published: 1990
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/5.58323
+    url: https://isl.stanford.edu/people/widrow/papers/j199030years.pdf
+    language: en
+  widrow-1975:
+    title: "Adaptive Noise Cancelling: Principles and Applications"
+    authors: [Bernard Widrow, John R. Glover Jr., John M. McCool, John Kaunitz, Charles S. Williams, Robert H. Hearn, James R. Zeidler, Eugene Dong Jr., Robert C. Goodlin]
+    published: 1975
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/PROC.1975.10036
+    url: https://isl.stanford.edu/~widrow/papers/j1975adaptivenoise.pdf
+    language: en
+  sohn-1999:
+    title: A Statistical Model-Based Voice Activity Detection
+    authors: [J. Sohn, N. S. Kim, W. Sung]
+    published: 1999
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/89.736334
+    url: https://doi.org/10.1109/89.736334
+    language: en
+  weizenbaum-1966:
+    title: ELIZA—A Computer Program for the Study of Natural Language Communication Between Man and Machine
+    authors: [Joseph Weizenbaum]
+    published: 1966
+    source_type: primary
+    kind: journal-article
+    doi: 10.1145/365153.365168
+    url: https://doi.org/10.1145/365153.365168
+    language: en
+  mit-eliza-1965:
+    title: ELIZA source code and DOCTOR script records
+    authors: [Joseph Weizenbaum, MIT]
+    published: 1965
+    source_type: primary-archive
+    kind: software-archive
+    url: https://dome.mit.edu/handle/1721.3/201699?show=full
+    language: en
+  searle-1980:
+    title: Minds, Brains, and Programs
+    authors: [John R. Searle]
+    published: 1980
+    source_type: primary
+    kind: journal-article
+    doi: 10.1017/S0140525X00005756
+    url: https://doi.org/10.1017/S0140525X00005756
+    language: en

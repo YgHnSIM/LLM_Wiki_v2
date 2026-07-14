@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/YgHnSIM/LLM_Wiki_v2/wiki/meta/page.schema.json",
+  "title": "LLM Wiki page frontmatter v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "page_type",
+    "title",
+    "aliases",
+    "tags",
+    "created",
+    "updated",
+    "lifecycle",
+    "verification",
+    "artifacts",
+    "evidence",
+    "related"
+  ],
+  "properties": {
+    "schema_version": { "const": 2 },
+    "id": { "type": "string", "minLength": 3, "pattern": "^[a-z]+\\..+" },
+    "page_type": {
+      "enum": ["source", "reference", "entity", "concept", "analysis", "meta"]
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "created": { "type": "string", "format": "date" },
+    "updated": { "type": "string", "format": "date" },
+    "lifecycle": { "enum": ["draft", "active", "archived"] },
+    "verification": { "enum": ["unverified", "partial", "verified", "disputed"] },
+    "artifacts": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^raw/" },
+      "uniqueItems": true
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_id", "locator", "relation"],
+        "properties": {
+          "source_id": { "type": "string", "minLength": 1 },
+          "locator": { "type": "string", "minLength": 1 },
+          "relation": {
+            "enum": ["supports", "supplements", "contextualizes", "disputes"]
+          }
+        }
+      }
+    },
+    "related": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 3 },
+      "uniqueItems": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "page_type": { "const": "meta" } },
+        "required": ["page_type"]
+      },
+      "then": {},
+      "else": {
+        "properties": { "evidence": { "minItems": 1 } }
+      }
+    }
+  ]
+}

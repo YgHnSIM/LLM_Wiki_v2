@@ -1,13 +1,23 @@
 ---
-title: log
-aliases: [작업 로그, 변경 기록]
-tags: [type/meta, status/active]
-created: 2026-05-07
-updated: 2026-07-14
-sources: []
-status: active
+schema_version: 2
+id: meta.log
+page_type: meta
+title: Log
+aliases:
+  - 작업 로그
+  - 변경 기록
+tags:
+  - type/meta
+created: '2026-05-07'
+updated: '2026-07-15'
+lifecycle: active
+verification: verified
+artifacts: []
+evidence: []
+related:
+  - meta.index
+  - meta.overview
 ---
-
 # Log
 
 ## [2026-05-07] ingest | 섀넌의 N-gram 모델
@@ -225,6 +235,35 @@ status: active
 - 스킬의 충실 번역과 별도 문장 다듬기, commentary 12개 섹션, Obsidian Markdown 검증 기준을 적용했다.
 - 원문의 두 대화 예시 위치에는 `Loading component...`가 남아 있고 한 곳에는 단독 문자 `u`도 있다. 번역에서 내용을 추정하지 않고 결손을 명시했다.
 - 원문의 세 하이퍼링크는 URL을 그대로 보존했지만 일부 slug가 해당 문맥과 직접 대응하는지 불명확해 [[007_ELIZA]]를 `review` 상태로 두었다.
+
+## [2026-07-15] fix | 콘텐츠 검증 및 스키마 v2
+
+003~007의 핵심 역사·기술 주장을 1차 문헌으로 다시 검증하고, 001~002의 시기·평가 범위를 보완했다. raw 소스 artifact의 내용은 변경하지 않았으며, 잘못되거나 결손된 raw 서술은 위키의 검증 정정 계층에서 교정했다. 운영 설명서 `raw/README.md`는 raw를 사실의 source of truth가 아닌 보존 계층으로 설명하도록 갱신했다.
+
+주요 콘텐츠 정정:
+
+- [[003_Georgetown-IBM 기계 번역 시연]]에 약 250개 어휘와 6개 통사 연산이라는 실제 시연 범위를 반영했다.
+- [[004_퍼셉트론]]에서 오류 수정 규칙과 경사하강법을 구분하고, 수렴 정리의 귀속·XOR·GPT/BERT 학습 설명을 바로잡았다.
+- [[005_촘스키의 통사 구조]]에서 1956·1957·1959·1965·1980년대 이론을 시기별로 분리했다.
+- [[006_위드로-호프의 MADALINE]]에서 “many ADALINEs” 표기, 선형 LMS의 볼록 오차 표면, 초기 MADALINE과 후대 적응 필터 응용의 차이를 반영했다.
+- [[007_ELIZA]]에서 1964~1966년 개발 연표, ELIZA 프레임워크와 DOCTOR 스크립트, 튜링 테스트와의 비직접적 관계를 구분했다.
+- [[중국어 방 논증]]을 추가해 기존 빨간 링크를 해소했다.
+- 생성 해설 문장을 인용문처럼 표시한 `인용할 만한 구절` 절을 검증 가능한 `핵심 문장`으로 바꿨다.
+
+스키마 및 검증 변경:
+
+- 전체 81개 Markdown 문서를 `schema_version: 2`로 마이그레이션했다.
+- 영구 `id`, `page_type`, `lifecycle`, `verification`, `artifacts`, locator가 있는 `evidence`, 방향성 `related` 필드를 적용했다.
+- 26개 외부 근거를 `wiki/meta/evidence.yml`, 14개 raw artifact와 SHA-256을 `wiki/meta/raw-artifacts.yml`에 등록했다.
+- 태그 사전, 빨간 링크 allowlist, JSON Schema를 추가했다.
+- 스키마·근거·태그·링크·색인·raw 해시를 검사하는 `scripts/lint-wiki.mjs`를 빌드 전 필수 단계로 추가했다.
+- 정적 사이트 생성기가 편집 상태와 근거 상태를 분리해 표시하도록 갱신했다.
+
+검증 결과:
+
+- 위키 문서 81개 lint 통과
+- evidence 26개와 raw artifact 14개 무결성 통과
+- 미해결 위키 링크 0개
 
 ## 관련 항목
 

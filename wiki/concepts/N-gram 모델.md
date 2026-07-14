@@ -1,13 +1,35 @@
 ---
+schema_version: 2
+id: concept.n-gram-모델
+page_type: concept
 title: N-gram 모델
-aliases: [n-gram, N-gram language model, 엔그램 모델]
-tags: [type/concept, domain/ai, status/active]
-created: 2026-05-07
-updated: 2026-05-07
-sources: ["001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md"]
-status: active
+aliases:
+  - n-gram
+  - N-gram language model
+  - 엔그램 모델
+tags:
+  - type/concept
+  - domain/ai
+created: '2026-05-07'
+updated: '2026-07-15'
+lifecycle: active
+verification: verified
+artifacts:
+  - >-
+    raw/001_Shannon's N-gram Model - The Foundation of Statistical Language
+    Processing..md
+evidence:
+  - source_id: shannon-1948
+    locator: 'Part I, §§2–3 and §6'
+    relation: supports
+related:
+  - source.001
+  - concept.마르코프-가정
+  - concept.조건부-확률
+  - concept.데이터-희소성
+  - concept.smoothing
+  - concept.perplexity
 ---
-
 # N-gram 모델
 
 [[N-gram 모델]]은 텍스트에서 연속적으로 등장하는 n개의 언어 단위를 세고, 그 빈도를 바탕으로 다음 항목의 확률을 추정하는 언어 모델이다. 단위는 단어, 문자, 음절, 토큰이 될 수 있다. 단어 기준으로 unigram은 한 단어, bigram은 두 단어, trigram은 세 단어의 연속을 뜻한다.
@@ -34,7 +56,12 @@ N-gram 모델은 앞선 n-1개 항목을 문맥으로 삼아 다음 항목의 �
 
 ## 역사적 위치
 
-N-gram 모델은 현대 [[대규모 언어 모델]]의 직접적 기술 형태는 아니지만, "문맥이 주어졌을 때 다음 항목을 예측한다"는 문제 설정을 초기 형태로 제시했다. 이 점에서 [[N-gram에서 LLM으로]] 이어지는 언어 모델링 계보의 출발점이다.
+Shannon의 1948년 논문은 문자·단어 연속 근사와 조건부 확률을 통신원 모델 안에서 다뤘다. 오늘날 이를 n-gram 언어 모델의 선구적 형태로 읽을 수 있지만, 현대 n-gram 용어와 [[Smoothing]] 기법은 후대에 정립됐다. 현대 [[대규모 언어 모델]]과는 조건부 예측 과업을 공유할 뿐, 같은 기술의 단순한 규모 확장은 아니다.
+
+## 출처
+
+- [[001_섀넌의 N-gram 모델]]
+- Claude E. Shannon, [A Mathematical Theory of Communication](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf), 1948, Part I §§2–3·§6.
 
 ## 관련 항목
 

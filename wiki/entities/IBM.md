@@ -1,13 +1,29 @@
 ---
+schema_version: 2
+id: entity.ibm
+page_type: entity
 title: IBM
-aliases: [International Business Machines, IBM 701]
-tags: [type/entity, domain/ai, status/active]
-created: 2026-05-08
-updated: 2026-05-08
-sources: ["003_Georgetown-IBM Machine.md"]
-status: active
+aliases:
+  - International Business Machines
+  - IBM 701
+tags:
+  - type/entity
+  - domain/ai
+created: '2026-05-08'
+updated: '2026-07-15'
+lifecycle: active
+verification: verified
+artifacts:
+  - raw/003_Georgetown-IBM Machine.md
+evidence:
+  - source_id: macdonald-1963
+    locator: pp. 1–4
+    relation: supports
+related:
+  - entity.georgetown-university
+  - concept.기계-번역
+  - concept.규칙-기반-기계-번역
 ---
-
 # IBM
 
 [[IBM]]은 1954년 [[Georgetown University]]와 함께 Georgetown-IBM 기계 번역 시연을 수행한 컴퓨팅 기업이다. 이 시연에는 IBM 701 컴퓨터가 사용되었고, 러시아어 문장 60개를 영어로 자동 번역하는 공개 행사가 뉴욕 IBM Technical Computing Bureau에서 열렸다.

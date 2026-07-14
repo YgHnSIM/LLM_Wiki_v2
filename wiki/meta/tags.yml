@@ -1,0 +1,59 @@
+schema_version: 1
+tags:
+  type/source:
+    kind: type
+    description: 정규 번호 소스의 검증 요약
+  type/reference:
+    kind: type
+    description: 정규 번호 밖의 보충 참고 자료
+  type/entity:
+    kind: type
+    description: 인물·기관·조직
+  type/concept:
+    kind: type
+    description: 개념·모델·알고리즘·논증
+  type/analysis:
+    kind: type
+    description: 여러 근거를 연결한 해석과 비교
+  type/meta:
+    kind: type
+    description: 색인·개요·작업 기록
+  domain/academia:
+    kind: domain
+    description: 대학과 연구 제도
+  domain/ai:
+    kind: domain
+    description: 인공지능 일반
+  domain/cognitive-science:
+    kind: domain
+    description: 인지과학과 마음 이론
+  domain/computer-science:
+    kind: domain
+    description: 컴퓨터과학과 형식 계산
+  domain/conversational-ai:
+    kind: domain
+    description: 대화형 인공지능
+  domain/human-computer-interaction:
+    kind: domain
+    description: 인간-컴퓨터 상호작용
+  domain/linguistics:
+    kind: domain
+    description: 언어학과 문법 이론
+  domain/machine-learning:
+    kind: domain
+    description: 기계 학습
+  domain/nlp:
+    kind: domain
+    description: 자연어 처리
+  domain/optimization:
+    kind: domain
+    description: 수치 최적화
+  domain/psychology:
+    kind: domain
+    description: 심리학과 치료 이론
+  domain/signal-processing:
+    kind: domain
+    description: 신호 처리와 적응 필터
+  domain/speech-processing:
+    kind: domain
+    description: 음성 처리

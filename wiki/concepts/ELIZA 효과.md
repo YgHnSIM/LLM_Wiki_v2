@@ -1,16 +1,41 @@
 ---
+schema_version: 2
+id: concept.eliza-효과
+page_type: concept
 title: ELIZA 효과
-aliases: [ELIZA Effect, Eliza effect, 엘리자 효과]
-tags: [type/concept, domain/ai, domain/human-computer-interaction, status/active]
-created: 2026-07-14
-updated: 2026-07-14
-sources: ["007_ELIZA - The First Conversational AI Program.ko.md", "007_ELIZA - The First Conversational AI Program.commentary.ko.md"]
-status: active
+aliases:
+  - ELIZA Effect
+  - Eliza effect
+  - 엘리자 효과
+tags:
+  - type/concept
+  - domain/ai
+  - domain/human-computer-interaction
+created: '2026-07-14'
+updated: '2026-07-15'
+lifecycle: active
+verification: partial
+artifacts:
+  - raw/007_ELIZA - The First Conversational AI Program.ko.md
+  - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
+evidence:
+  - source_id: weizenbaum-1966
+    locator: pp. 36–45
+    relation: supports
+  - source_id: mit-eliza-1965
+    locator: ELIZA source and DOCTOR script records
+    relation: supplements
+related:
+  - concept.eliza
+  - concept.doctor-스크립트
+  - concept.튜링-테스트
+  - concept.행동-기반-지능-기준
+  - analysis.튜링-테스트와-llm-평가
+  - analysis.eliza에서-llm으로
 ---
-
 # ELIZA 효과
 
-[[ELIZA 효과]](ELIZA Effect)는 컴퓨터의 표면 행동에 인간과 같은 이해, 의도, 공감, 통찰을 귀속하는 경향이다. 사용자는 시스템이 기계적으로 작동한다는 사실을 알아도 모호한 응답에 자신의 맥락과 의미를 채워 넣을 수 있다.
+[[ELIZA 효과]](ELIZA Effect)는 컴퓨터의 표면 행동에 인간과 같은 이해, 의도, 공감, 통찰을 과도하게 귀속하는 경향을 가리키는 후대의 용어다. 1966년 Weizenbaum 논문은 사용자가 프로그램에 예상보다 강하게 관여한 현상을 기록했지만, 당시 관찰과 나중에 정착한 명칭을 구분해야 한다.
 
 ## ELIZA 사례
 
@@ -18,7 +43,7 @@ status: active
 
 ## 평가상의 의미
 
-ELIZA 효과는 자연스럽거나 인간다운 대화가 시스템의 실제 이해와 신뢰성을 자동으로 증명하지 않는다는 점을 보여준다. 이는 [[행동주의적 지능 기준]], [[튜링 테스트]], 현대 [[대규모 언어 모델]] 평가의 공통 문제다.
+ELIZA 효과는 자연스럽거나 인간다운 대화가 시스템의 실제 이해와 신뢰성을 자동으로 증명하지 않는다는 점을 보여준다. 이는 [[행동주의적 지능 기준|행동 기반 지능 기준]], [[튜링 테스트]], 현대 [[대규모 언어 모델]] 평가의 공통 문제다.
 
 ## 실용적 위험
 
@@ -27,6 +52,7 @@ ELIZA 효과는 자연스럽거나 인간다운 대화가 시스템의 실제 �
 ## 출처
 
 - [[007_ELIZA]]
+- Joseph Weizenbaum, [ELIZA](https://doi.org/10.1145/365153.365168), 1966, pp. 42–43.
 
 ## 관련 항목
 

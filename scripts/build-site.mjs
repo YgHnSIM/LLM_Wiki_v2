@@ -181,8 +181,10 @@ const documents = await Promise.all(markdownFiles.map(async (absolutePath) => {
     title,
     aliases: asArray(parsed.data.aliases),
     tags: asArray(parsed.data.tags),
-    sources: asArray(parsed.data.sources),
-    status: String(parsed.data.status ?? 'active'),
+    artifacts: asArray(parsed.data.artifacts),
+    evidence: asArray(parsed.data.evidence),
+    lifecycle: String(parsed.data.lifecycle ?? 'active'),
+    verification: String(parsed.data.verification ?? 'unverified'),
     created: formatDate(parsed.data.created),
     updated: formatDate(parsed.data.updated),
     body: parsed.content.trim(),
@@ -278,8 +280,17 @@ for (const list of Object.values(grouped)) {
 const publishedDocuments = ['sources', 'concepts', 'entities', 'analyses'].flatMap((key) => grouped[key]);
 const latestUpdate = documents.map((document) => document.updated).filter(Boolean).sort().at(-1) ?? '';
 
-function statusLabel(status) {
-  return status === 'review' ? '검토 중' : status === 'draft' ? '초안' : '정리됨';
+function lifecycleLabel(lifecycle) {
+  return lifecycle === 'draft' ? '초안' : lifecycle === 'archived' ? '보관됨' : '공개';
+}
+
+function verificationLabel(verification) {
+  return {
+    verified: '검증됨',
+    partial: '부분 검증',
+    disputed: '논쟁 중',
+    unverified: '미검증',
+  }[verification] ?? verification;
 }
 
 function tagLabel(tag) {
@@ -449,7 +460,7 @@ function sourceCard(document, index) {
   return `<article class="source-card source-card--${(index % 4) + 1}" data-card data-filter-value="${escapeHtml([document.title, ...document.aliases, ...document.tags, document.excerpt].join(' '))}">
     <a class="source-number" href="${sitePath(document.url)}" aria-label="${escapeHtml(document.title)}">${escapeHtml(document.sourceNumber)}</a>
     <div class="source-card-body">
-      <div class="card-meta"><span>${escapeHtml(statusLabel(document.status))}</span><span>연결 ${document.outgoing.length}</span></div>
+      <div class="card-meta"><span>${escapeHtml(verificationLabel(document.verification))}</span><span>연결 ${document.outgoing.length}</span></div>
       <h3><a href="${sitePath(document.url)}">${escapeHtml(document.title)}</a></h3>
       <p>${escapeHtml(document.excerpt)}</p>
       ${renderTags(document)}
@@ -592,8 +603,8 @@ function renderArticle(document) {
     ? document.backlinks.map((item) => `<li><a href="${sitePath(item.url)}"><span>${escapeHtml(categoryMeta[item.category].singular)}</span>${escapeHtml(item.title)}</a></li>`).join('')
     : '<li class="no-backlinks">아직 이 문서를 가리키는 글이 없습니다.</li>';
 
-  const reviewNote = document.status === 'review'
-    ? `<div class="review-banner"><strong>검토 중</strong><span>원문 품질이나 연결 근거를 추가로 확인하는 문서입니다.</span></div>`
+  const reviewNote = document.verification !== 'verified'
+    ? `<div class="review-banner"><strong>${escapeHtml(verificationLabel(document.verification))}</strong><span>사실, 해석 또는 논쟁 상태는 문서의 근거와 설명을 함께 확인하세요.</span></div>`
     : '';
 
   const body = `<main id="main-content" class="article-main">
@@ -606,7 +617,8 @@ function renderArticle(document) {
         ${renderTags(document)}
       </div>
       <dl class="article-facts">
-        <div><dt>상태</dt><dd>${escapeHtml(statusLabel(document.status))}</dd></div>
+        <div><dt>문서 상태</dt><dd>${escapeHtml(lifecycleLabel(document.lifecycle))}</dd></div>
+        <div><dt>근거 상태</dt><dd>${escapeHtml(verificationLabel(document.verification))}</dd></div>
         <div><dt>최근 갱신</dt><dd>${escapeHtml(document.updated || '기록 없음')}</dd></div>
         <div><dt>읽기</dt><dd>약 ${document.minutes}분</dd></div>
         <div><dt>연결</dt><dd>${document.outgoing.length}개 문서</dd></div>

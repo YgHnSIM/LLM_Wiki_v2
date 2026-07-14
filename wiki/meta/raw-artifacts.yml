@@ -1,0 +1,114 @@
+schema_version: 1
+artifacts:
+  - path: "raw/001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md"
+    role: translated-essay
+    order_prefix: "001"
+    language: ko
+    source_type: derivative
+    provenance: incomplete
+    original_in_repository: false
+    sha256: e25dbd3b4bdd1177531053cc085e2cdb5d6e05e80b6b4c4e97af5d33dcf5ef52
+  - path: "raw/001_Shannon's N-gram Model - The Foundation of Statistical Language Processing.commentary.md"
+    role: commentary
+    order_prefix: "001"
+    language: ko
+    source_type: derivative
+    provenance: incomplete
+    original_in_repository: false
+    sha256: c6735d2cd43287730a6a012ecf2ad22ddf33d90dae8f21338686eacf4330b2a2
+  - path: "raw/002_The Turing Test.md"
+    role: translated-essay
+    order_prefix: "002"
+    language: ko
+    source_type: derivative
+    provenance: incomplete
+    original_in_repository: false
+    sha256: 588aae150c58191b358625edd23d4cc24cfcfa87bc47b6bc161ddc867fe825fc
+  - path: "raw/002_The Turing Test.commentary.md"
+    role: commentary
+    order_prefix: "002"
+    language: ko
+    source_type: derivative
+    provenance: incomplete
+    original_in_repository: false
+    sha256: 37925e6a5682e97470ded84e8f1d03bb73677b6506a42120c35caaf314d7d4ee
+  - path: "raw/003_Georgetown-IBM Machine.md"
+    role: translated-essay
+    order_prefix: "003"
+    language: ko
+    source_type: derivative
+    provenance: incomplete
+    original_in_repository: false
+    sha256: edcbc580d7ee7c6baaa991153ff44fc8dcdcf13991b6c8e0595cf8103383b45a
+  - path: "raw/003_Georgetown-IBM Machine.commentary.md"
+    role: commentary
+    order_prefix: "003"
+    language: ko
+    source_type: derivative
+    provenance: incomplete
+    original_in_repository: false
+    sha256: 60e980f793e2551f107bcb9246e64d53c964e866263a6941190c2534f0b6234d
+  - path: "raw/004_The Perceptron.md"
+    role: translated-essay
+    order_prefix: "004"
+    language: ko
+    source_type: derivative
+    provenance: incomplete
+    original_in_repository: false
+    sha256: 7d7c19cbc1a440b30da0ac666eb60b609526544c3792a09b2f07b81ead1c345a
+  - path: "raw/004_The Perceptron.commentary.md"
+    role: commentary
+    order_prefix: "004"
+    language: ko
+    source_type: derivative
+    provenance: incomplete
+    original_in_repository: false
+    sha256: 8223f5e4eccf62bc48927d9ed04431418225262c09465ee2539fd9c4f8e3d4c8
+  - path: "raw/005_Chomsky's Syntactic Structures.md"
+    role: translated-essay
+    order_prefix: "005"
+    language: ko
+    source_type: derivative
+    provenance: incomplete
+    original_in_repository: false
+    sha256: 1a4e988b611a6b5bfd2b2953a7376cb12f003c5eeb075f9302e189576d926c06
+  - path: "raw/005_Chomsky's Syntactic Structures.commentary.md"
+    role: commentary
+    order_prefix: "005"
+    language: ko
+    source_type: derivative
+    provenance: incomplete
+    original_in_repository: false
+    sha256: e0a5b557d5fee254d93661b64e417209dc3f6d481ad9eae2e9ac34d440853107
+  - path: raw/006_1962_위드로-호프_MADALINE.md
+    role: source-essay
+    order_prefix: "006"
+    language: ko
+    source_type: derivative
+    provenance: incomplete
+    original_in_repository: false
+    sha256: 306d8ee73ed76be26b5ea1b9ca3bc94484bddcf6a682bb33a7eed4628c59491b
+  - path: raw/006_1962_위드로-호프_MADALINE_해설.md
+    role: commentary
+    order_prefix: "006"
+    language: ko
+    source_type: derivative
+    provenance: incomplete
+    original_in_repository: false
+    sha256: 0a8b2cebfa46be49dc10d089f8d43252b15f2ebc0ebb5642a01bf048a91e612b
+  - path: "raw/007_ELIZA - The First Conversational AI Program.ko.md"
+    role: translation
+    order_prefix: "007"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: c8da25ff5e43e803d23c0aad7df0db0dec22ee8b6905622bf3831a61cb65e68e
+  - path: "raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md"
+    role: commentary
+    order_prefix: "007"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 14542cc087bb4cf2b2f4dd876627215c734d56979898a0aeb20af81869189459

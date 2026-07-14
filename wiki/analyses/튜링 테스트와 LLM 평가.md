@@ -1,28 +1,66 @@
 ---
+schema_version: 2
+id: analysis.튜링-테스트와-llm-평가
+page_type: analysis
 title: 튜링 테스트와 LLM 평가
-aliases: [Turing Test and LLM Evaluation, 튜링 테스트와 언어 모델 평가]
-tags: [type/analysis, domain/ai, status/active]
-created: 2026-05-08
-updated: 2026-07-14
-sources: ["002_The Turing Test.md", "002_The Turing Test.commentary.md", "003_Georgetown-IBM Machine.md", "007_ELIZA - The First Conversational AI Program.ko.md", "007_ELIZA - The First Conversational AI Program.commentary.ko.md"]
-status: active
+aliases:
+  - Turing Test and LLM Evaluation
+  - 튜링 테스트와 언어 모델 평가
+tags:
+  - type/analysis
+  - domain/ai
+created: '2026-05-08'
+updated: '2026-07-15'
+lifecycle: active
+verification: partial
+artifacts:
+  - raw/002_The Turing Test.md
+  - raw/002_The Turing Test.commentary.md
+  - raw/003_Georgetown-IBM Machine.md
+  - raw/007_ELIZA - The First Conversational AI Program.ko.md
+  - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
+evidence:
+  - source_id: turing-1950
+    locator: 'pp. 433–460, §§1–7'
+    relation: supports
+  - source_id: macdonald-1963
+    locator: pp. 1–4
+    relation: supports
+  - source_id: weizenbaum-1966
+    locator: pp. 36–45
+    relation: supports
+  - source_id: jones-2026
+    locator: Methods and Results
+    relation: contextualizes
+related:
+  - concept.튜링-테스트
+  - concept.모방-게임
+  - concept.행동-기반-지능-기준
+  - concept.중국어-방-논증
+  - concept.대규모-언어-모델
+  - analysis.n-gram에서-llm으로
+  - analysis.ai-시연과-실제-성능
+  - concept.eliza
+  - concept.eliza-효과
+  - analysis.eliza에서-llm으로
 ---
-
 # 튜링 테스트와 LLM 평가
 
 [[튜링 테스트와 LLM 평가]]의 핵심 쟁점은 인간처럼 말하는 능력이 언어 AI의 중요한 성취이지만, 그것만으로 현대 모델의 이해, 신뢰성, 안전성을 충분히 평가할 수 없다는 데 있다.
 
 ## 역사적 연속성
 
-[[앨런 튜링]]은 지능을 언어 행동을 통해 평가할 수 있다고 보았다. 이 관점은 [[N-gram에서 LLM으로]] 이어지는 통계적 언어 모델링 계보와 다른 축을 이룬다. [[클로드 섀넌]]의 계보가 "언어를 어떻게 예측할 것인가"를 묻는다면, 튜링의 계보는 "언어 행동이 어느 정도 지능의 증거가 되는가"를 묻는다.
+[[앨런 튜링]]은 1950년 논문에서 성별 [[모방 게임]]을 소개하고 기계가 참가자의 자리를 맡는 변형을 물었다. 오늘날의 표준적인 인간 대 기계 텍스트 판별 시험은 후대의 단순화다. [[클로드 섀넌]]의 확률적 통신원 연구와는 목적이 다른 평가의 축을 이룬다.
 
 ## 현대 LLM이 만든 긴장
 
-현대 [[대규모 언어 모델]]은 긴 대화, 다영역 지식, 스타일 적응, 문제 풀이에서 인간과 매우 비슷한 언어 행동을 보일 수 있다. 이 점에서 LLM은 [[튜링 테스트]]의 일부 조건을 현실적인 문제로 만들었다. 그러나 동시에 LLM은 상식 추론의 빈틈, 환각, 장기적 믿음 유지의 어려움, 실제 세계 경험의 부재를 보일 수 있다.
+현대 [[대규모 언어 모델]]은 일부 시험에서 인간과 구별하기 어려운 언어 행동을 보였다. 그러나 결과는 모델, 시스템 프롬프트, 인간 비교군, 질문자, 대화 시간과 판정 절차에 달려 있다. 특정 프로토콜의 통과를 모든 형태의 튜링 테스트나 일반 지능의 판정으로 확대하지 않는다.
 
 ## ELIZA가 보여준 선례
 
 [[007_ELIZA]]는 자연스러운 대화의 인상과 실제 이해를 구분해야 하는 이유를 초기 시스템에서 보여준다. [[ELIZA]]는 키워드와 템플릿만으로도 사용자가 공감과 통찰을 느끼게 했다. [[ELIZA 효과]]는 평가자가 시스템의 표면 행동에 내부 능력을 과도하게 귀속할 수 있음을 보여주며, 인간 유사성만으로 지능을 평가할 때의 취약점을 구체화한다.
+
+[[중국어 방 논증]]은 적절한 기호 입출력이 의미 이해를 충분히 증명하는지 묻는다. 이 논증에 대한 시스템·로봇·두뇌 시뮬레이션 반론도 있으므로 “언어 모델은 이해하지 못한다는 증명”으로 사용하기보다 평가 대상의 층위를 구분하는 논쟁으로 다룬다.
 
 ## 평가 기준의 변화
 
@@ -41,12 +79,15 @@ status: active
 - [[002_튜링 테스트]]
 - [[003_Georgetown-IBM 기계 번역 시연]]
 - [[007_ELIZA]]
+- Alan M. Turing, [Computing Machinery and Intelligence](https://academic.oup.com/mind/article/LIX/236/433/986238), 1950.
+- Cameron R. Jones·Benjamin K. Bergen, [Large language models pass the Turing test](https://doi.org/10.1073/pnas.2524472123), 2026.
 
 ## 관련 항목
 
 - [[튜링 테스트]]
 - [[모방 게임]]
 - [[행동주의적 지능 기준]]
+- [[중국어 방 논증]]
 - [[대규모 언어 모델]]
 - [[N-gram에서 LLM으로]]
 - [[AI 시연과 실제 성능]]

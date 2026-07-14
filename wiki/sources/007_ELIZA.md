@@ -1,50 +1,87 @@
 ---
+schema_version: 2
+id: source.007
+page_type: source
 title: ELIZA
-aliases: [007_ELIZA, ELIZA - The First Conversational AI Program, 1966 ELIZA]
-tags: [type/source, domain/ai, domain/nlp, domain/conversational-ai, status/review]
-created: 2026-07-14
-updated: 2026-07-14
-sources: ["007_ELIZA - The First Conversational AI Program.ko.md", "007_ELIZA - The First Conversational AI Program.commentary.ko.md"]
-status: review
+aliases:
+  - 007_ELIZA
+  - ELIZA program
+  - Weizenbaum ELIZA
+tags:
+  - type/source
+  - domain/ai
+  - domain/nlp
+  - domain/conversational-ai
+created: '2026-07-14'
+updated: '2026-07-15'
+lifecycle: active
+verification: verified
+artifacts:
+  - raw/007_ELIZA - The First Conversational AI Program.ko.md
+  - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
+evidence:
+  - source_id: weizenbaum-1966
+    locator: pp. 36–45
+    relation: supports
+  - source_id: mit-eliza-1965
+    locator: ELIZA source and DOCTOR script records
+    relation: supports
+related:
+  - entity.조지프-바이젠바움
+  - entity.mit
+  - entity.칼-로저스
+  - concept.eliza
+  - concept.doctor-스크립트
+  - concept.패턴-매칭
+  - concept.템플릿-기반-응답-생성
+  - concept.대화-복구
+  - concept.로저스식-심리치료
+  - concept.eliza-효과
+  - concept.튜링-테스트
+  - concept.행동-기반-지능-기준
+  - analysis.eliza에서-llm으로
+  - analysis.ai-시연과-실제-성능
+  - concept.대규모-언어-모델
 ---
-
 # ELIZA
 
 ## 핵심 요약
 
-이 소스는 [[조지프 바이젠바움]]이 1966년 [[MIT]]에서 만든 [[ELIZA]]를 [[튜링 테스트]]의 이론적 질문을 실제 자연어 대화 프로그램으로 옮긴 초기 사례로 설명한다. ELIZA는 문장의 의미를 깊이 분석하거나 세계 지식 모델을 유지하지 않았다. 대신 키워드 우선순위, [[패턴 매칭]], 미리 작성한 [[템플릿 기반 응답 생성|응답 템플릿]], 대명사·동사 변환 규칙을 조합했다.
+[[조지프 바이젠바움]]은 1964~1966년 [[MIT]]에서 자연어 대화 프레임워크 [[ELIZA]]를 개발했고 1966년 논문으로 구조를 설명했다. MIT 기록에는 1965년 프로그램과 [[DOCTOR 스크립트]] 자료가 남아 있다. 따라서 “1966년에 처음 만들어졌다”보다 “1964~1966년 개발되고 1966년 발표됐다”는 연표가 정확하다.
 
-ELIZA의 대표 구현인 [[DOCTOR 스크립트]]는 [[칼 로저스]]의 비지시적 [[로저스식 심리치료]]를 모사했다. 사용자의 말을 질문으로 되비추고 더 설명하도록 유도하는 치료 방식은, 실질적인 조언이나 사실 지식을 제공하지 못하는 ELIZA의 한계를 오히려 전문적 중립성과 적극적 경청처럼 보이게 했다.
+ELIZA는 특정 대화 역할을 구현하는 스크립트와 이를 실행하는 처리 프레임워크를 구분했다. 키워드 우선순위, 분해 규칙, 재조립 규칙, 대명사 변환, 기억 규칙을 이용해 입력을 [[패턴 매칭]]하고 [[템플릿 기반 응답 생성|응답 템플릿]]을 선택했다. 프로그램 자체와 로저스식 치료사를 모사한 DOCTOR를 같은 이름으로 취급하면 구조가 흐려진다.
 
-처리할 수 없는 입력을 만나면 ELIZA는 “계속 말씀해 주세요” 같은 일반적인 응답과 이전 키워드 회상을 이용해 [[대화 복구]]를 시도했다. 이 전략은 실패를 명시하기보다 대화가 계속되도록 했고, 사용자가 다음 발화에서 인식 가능한 패턴을 제공할 가능성을 높였다.
+DOCTOR의 비지시적 질문 방식은 지식 부족을 드러내지 않고 사용자가 더 말하도록 유도했다. 이는 의미를 깊이 이해했다는 증거가 아니라 역할 설정, 대화 관습, 사용자의 해석이 함께 만든 상호작용 효과였다. 바이젠바움의 1966년 논문도 프로그램의 제한된 이해와 사용자가 부여하는 신뢰 사이의 간극을 관찰했다.
 
-소스의 핵심 결론은 사용자가 이해의 환상을 함께 만든다는 데 있다. 사람들은 기계적 반사에 공감을, 템플릿 선택에 통찰을 부여했다. 이 현상은 [[ELIZA 효과]], 즉 컴퓨터의 표면 행동에 인간과 같은 이해·의도·감정을 귀속하는 경향으로 정리된다.
+ELIZA를 [[튜링 테스트]]의 “최초 구현” 또는 튜링이 구상한 과제를 직접 수행하려고 만든 프로그램이라고 단정할 근거는 부족하다. 두 작업은 후대의 관점에서 언어 행동과 지능 평가라는 문제로 비교할 수 있지만, 개발 목적과 역사적 인과를 분리해야 한다.
 
-ELIZA는 현대 [[대규모 언어 모델]]과 기술적으로 같은 시스템이 아니다. 그러나 자연스러운 대화 행동과 실제 이해를 구분해야 한다는 문제, 역할 설정과 사용자 기대가 시스템 평가에 미치는 영향, 정서적 상황에서의 과신 위험은 현대 대화형 AI에도 이어진다.
+[[ELIZA 효과]]라는 명칭은 후대에 정착한 용어다. 1966년 논문에서 확인되는 사용자 반응과, 그 현상에 나중에 붙은 이름을 구분해야 한다. 현대 [[대규모 언어 모델]]과 ELIZA도 기술적으로는 크게 다르지만, 유창한 출력과 실제 이해·신뢰성을 구분해야 한다는 평가 문제는 공유한다.
 
-> [!WARNING] 소스 품질 검토 필요
-> 원문의 DOCTOR 대화 예시 두 곳에는 실제 대화 대신 `Loading component...`가 남아 있고 한 곳에는 단독 문자 `u`가 있다. 또한 패턴 매칭·응답 경로·대화 기록에 연결된 일부 URL의 slug가 해당 문맥과 직접 대응하는지 불분명하다. 번역은 URL을 보존하고 누락을 추정해 채우지 않았으며, 이 소스 페이지는 `review` 상태로 둔다.
+## 원문 상태
+
+프로젝트 raw 번역에는 두 대화 예시 자리에 `Loading component...`와 단독 문자 `u`가 남아 있다. 이 결손은 프로젝트 보존 자료의 품질 문제로 기록하되, 1966년 논문과 MIT 코드 아카이브로 ELIZA의 구조와 예시를 검증한다. 결손 부분을 추정해 복원하지 않는다.
 
 ## 주요 인사이트
 
-- 자연스러운 대화의 인상은 깊은 의미 이해 없이도 패턴, 템플릿, 역할 설정으로 일부 만들어질 수 있다.
-- 키워드 우선순위는 프로그램이 사용자의 정서적으로 중요한 주제를 알아차린 듯 보이게 한다.
-- 문법적 반사는 답변 생성의 부담을 사용자에게 돌리면서 적극적으로 듣는 인상을 만든다.
-- [[DOCTOR 스크립트]]의 성공은 기술과 대화 영역의 요구가 잘 맞아떨어진 결과다.
-- [[대화 복구]]는 시스템의 처리 실패를 관리하고 상호작용을 지속시키는 핵심 설계 요소다.
-- [[ELIZA 효과]]는 대화 유창성과 실제 이해·공감·신뢰성을 구분해야 하는 이유를 보여준다.
+- ELIZA 프레임워크와 DOCTOR 스크립트는 서로 다른 층위다.
+- 설득력은 의미 이해뿐 아니라 역할, 패턴, 템플릿, 사용자의 기대에서도 생길 수 있다.
+- ELIZA와 튜링 테스트의 관계는 후대의 비교이지 확인된 직접 개발 계보가 아니다.
+- 1966년의 사용자 반응과 후대 용어인 ELIZA 효과를 구분해야 한다.
+- 대화 유창성은 정확성·의도·공감·안전성을 자동으로 입증하지 않는다.
 
-## 인용할 만한 구절
+## 핵심 문장
 
-> “설득력 있는 대화에 반드시 진정한 이해가 필요한 것은 아니며, 언어의 표면 패턴을 영리하게 조작하는 것만으로도 그런 대화가 나타날 수 있다.”
+- ELIZA는 스크립트가 정의한 대화 규칙을 실행하는 범용 처리 프레임워크였다.
+- DOCTOR의 설득력은 제한된 기술과 비지시적 치료 역할이 잘 맞아떨어진 결과였다.
+- ELIZA의 역사적 의미는 이해를 달성했다는 데보다 이해처럼 보이는 행동의 평가 문제를 드러낸 데 있다.
 
-> “치료라는 틀은 ELIZA의 한계를 겉보기의 강점으로 바꾸었다.”
+## 출처
 
-> “사용자는 이해한다는 환상을 만드는 데 적극적으로 협력했다.”
+- Joseph Weizenbaum, [ELIZA—A Computer Program for the Study of Natural Language Communication Between Man and Machine](https://doi.org/10.1145/365153.365168), 1966, pp. 36–45.
+- MIT Libraries, [ELIZA source code and DOCTOR script records](https://dome.mit.edu/handle/1721.3/201699?show=full), 1965.
+- 프로젝트 보존 자료: `raw/007_ELIZA - The First Conversational AI Program.ko.md`, `raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md`.
 
-> “단순한 패턴 매칭에는 통찰을, 기계적 반사에는 공감을, 세심하게 설계된 템플릿에는 치료 기술을 부여했다.”
-
-## 관련 위키 페이지
+## 관련 항목
 
 - [[조지프 바이젠바움]]
 - [[MIT]]
@@ -59,16 +96,5 @@ ELIZA는 현대 [[대규모 언어 모델]]과 기술적으로 같은 시스템�
 - [[튜링 테스트]]
 - [[행동주의적 지능 기준]]
 - [[ELIZA에서 LLM으로]]
-
-## 출처
-
-- `raw/007_ELIZA - The First Conversational AI Program.ko.md`
-- `raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md`
-
-## 관련 항목
-
-- [[002_튜링 테스트]]
 - [[AI 시연과 실제 성능]]
-- [[튜링 테스트와 LLM 평가]]
-- [[규칙 기반 AI에서 데이터 기반 학습으로]]
 - [[대규모 언어 모델]]

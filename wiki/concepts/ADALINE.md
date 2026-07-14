@@ -1,20 +1,45 @@
 ---
+schema_version: 2
+id: concept.adaline
+page_type: concept
 title: ADALINE
-aliases: [ADAptive LINear Element, 적응형 선형 소자, 적응 선형 유닛]
-tags: [type/concept, domain/ai, domain/machine-learning, domain/signal-processing, status/active]
-created: 2026-07-14
-updated: 2026-07-14
-sources: ["006_1962_위드로-호프_MADALINE.md", "006_1962_위드로-호프_MADALINE_해설.md"]
-status: active
+aliases:
+  - ADAptive LINear Element
+  - 적응형 선형 소자
+  - 적응 선형 유닛
+tags:
+  - type/concept
+  - domain/ai
+  - domain/machine-learning
+  - domain/signal-processing
+created: '2026-07-14'
+updated: '2026-07-15'
+lifecycle: active
+verification: verified
+artifacts:
+  - raw/006_1962_위드로-호프_MADALINE.md
+  - raw/006_1962_위드로-호프_MADALINE_해설.md
+evidence:
+  - source_id: widrow-lehr-1990
+    locator: pp. 1415–1433
+    relation: supports
+  - source_id: widrow-hoff-1960
+    locator: Adaptive Switching Circuits
+    relation: supports
+related:
+  - concept.madaline
+  - concept.lms-알고리즘
+  - concept.퍼셉트론
+  - concept.선형-분류기
+  - concept.경사하강법
 ---
-
 # ADALINE
 
-[[ADALINE]](ADAptive LINear Element)은 입력의 가중합을 계산하는 적응형 선형 유닛이다. 최종 판단에서는 임계값을 적용할 수 있지만, 학습 과정에서는 임계값 이전의 연속 선형 출력을 사용한다.
+[[ADALINE]]은 입력의 가중합을 계산하는 적응형 선형 유닛이다. 초기 문헌은 이름을 adaptive linear element와 adaptive linear neuron 두 방식으로 풀어 썼다. 최종 판단에는 임계값을 적용할 수 있지만, [[LMS 알고리즘]]으로 학습할 때는 임계값 이전의 연속 선형 출력을 사용한다.
 
 ## 퍼셉트론과의 차이
 
-[[퍼셉트론]]은 임계값을 통과한 이진 결과를 기준으로 오분류를 수정한다. ADALINE은 목표값과 연속 출력 사이의 차이를 이용하므로, 출력이 목표에서 얼마나 벗어났는지를 더 세밀하게 반영할 수 있다. 현재 소스는 이 차이가 [[LMS 알고리즘]]의 안정적인 오류 갱신을 가능하게 했다고 설명한다.
+[[퍼셉트론]] 규칙은 임계값을 통과한 이진 결과의 오분류를 수정한다. ADALINE의 LMS 학습은 목표값과 연속 선형 출력 사이의 차이를 이용한다. 이 차이 덕분에 평균제곱오차를 가중치에 대해 미분할 수 있으며, 선형 결합기의 오차 표면은 볼록 이차 함수가 된다.
 
 ## 계산
 
@@ -33,6 +58,8 @@ ADALINE 하나가 학습하는 것은 입력의 선형 결합이다. 복잡한 �
 ## 출처
 
 - [[006_위드로-호프의 MADALINE]]
+- Bernard Widrow·Michael A. Lehr, [30 Years of Adaptive Neural Networks](https://isl.stanford.edu/people/widrow/papers/j199030years.pdf), 1990, pp. 1417·1428–1429.
+- Rodney Winter·Bernard Widrow, [MADALINE Rule II](https://isl.stanford.edu/~widrow/papers/c1988madalinerule.pdf), 1988, pp. 1-401–1-403.
 
 ## 관련 항목
 

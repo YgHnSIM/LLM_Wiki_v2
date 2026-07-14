@@ -1,13 +1,64 @@
 ---
+schema_version: 2
+id: analysis.규칙-기반-ai에서-데이터-기반-학습으로
+page_type: analysis
 title: 규칙 기반 AI에서 데이터 기반 학습으로
-aliases: [rules to data-driven learning, 규칙에서 학습으로, 데이터 기반 AI 전환]
-tags: [type/analysis, domain/ai, status/active]
-created: 2026-05-14
-updated: 2026-07-14
-sources: ["003_Georgetown-IBM Machine.md", "004_The Perceptron.md", "004_The Perceptron.commentary.md", "005_Chomsky's Syntactic Structures.md", "006_1962_위드로-호프_MADALINE.md", "006_1962_위드로-호프_MADALINE_해설.md", "007_ELIZA - The First Conversational AI Program.ko.md", "007_ELIZA - The First Conversational AI Program.commentary.ko.md"]
-status: active
+aliases:
+  - rules to data-driven learning
+  - 규칙에서 학습으로
+  - 데이터 기반 AI 전환
+tags:
+  - type/analysis
+  - domain/ai
+created: '2026-05-14'
+updated: '2026-07-15'
+lifecycle: active
+verification: partial
+artifacts:
+  - raw/003_Georgetown-IBM Machine.md
+  - raw/004_The Perceptron.md
+  - raw/004_The Perceptron.commentary.md
+  - raw/005_Chomsky's Syntactic Structures.md
+  - raw/006_1962_위드로-호프_MADALINE.md
+  - raw/006_1962_위드로-호프_MADALINE_해설.md
+  - raw/007_ELIZA - The First Conversational AI Program.ko.md
+  - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
+evidence:
+  - source_id: macdonald-1963
+    locator: pp. 1–4
+    relation: supports
+  - source_id: rosenblatt-1958
+    locator: pp. 386–408
+    relation: supports
+  - source_id: chomsky-1957
+    locator: chapters 2–10
+    relation: supports
+  - source_id: widrow-lehr-1990
+    locator: pp. 1415–1433
+    relation: supports
+  - source_id: weizenbaum-1966
+    locator: pp. 36–45
+    relation: supports
+  - source_id: gpt-2018
+    locator: §§2–3
+    relation: contextualizes
+  - source_id: bert-2019
+    locator: §3
+    relation: contextualizes
+related:
+  - concept.규칙-기반-기계-번역
+  - concept.지식-공학-병목
+  - concept.퍼셉트론
+  - concept.지도-학습
+  - concept.adaline
+  - concept.madaline
+  - concept.특징-공학
+  - concept.eliza
+  - concept.패턴-매칭
+  - concept.템플릿-기반-응답-생성
+  - concept.통사-구조
+  - concept.대규모-언어-모델
 ---
-
 # 규칙 기반 AI에서 데이터 기반 학습으로
 
 [[규칙 기반 AI에서 데이터 기반 학습으로]]의 전환은 AI 시스템을 사람이 직접 규칙으로 작성하는 방식에서, 데이터로부터 매개변수와 패턴을 학습하는 방식으로 옮긴 흐름을 가리킨다. [[003_Georgetown-IBM 기계 번역 시연]]과 [[004_퍼셉트론]]은 이 전환의 두 축을 보여준다.
@@ -24,7 +75,7 @@ Georgetown-IBM 시연은 사전 조회와 통사 규칙을 결합해 번역을 �
 
 ## 한계가 만든 다음 단계
 
-퍼셉트론은 [[선형 분리 가능성|선형 분리 가능]]한 문제에만 강했다. [[XOR 문제]]는 단층 모델이 비선형 구조를 학습하지 못한다는 사실을 드러냈다. 이 한계는 신경망 연구에 타격을 주었지만, 동시에 다층 구조, 비선형 활성화, 역전파가 왜 필요한지를 선명하게 했다.
+퍼셉트론은 [[선형 분리 가능성|선형 분리 가능]]한 문제만 표현했다. [[XOR 문제]]는 단층 모델이 비선형 경계를 표현하지 못한다는 간단한 사례다. Minsky와 Papert의 분석, 계산 자원, 다층 학습법의 부재, 연구비와 기대 변화가 함께 이후의 연구 흐름에 영향을 주었으므로 XOR 하나를 신경망 침체의 원인으로 만들지 않는다.
 
 ## MADALINE의 혼합 전략
 
@@ -36,7 +87,7 @@ Georgetown-IBM 시연은 사전 조회와 통사 규칙을 결합해 번역을 �
 
 ## 현대 LLM으로의 연결
 
-현대 [[대규모 언어 모델]]은 수작업 규칙 대신 대규모 텍스트 데이터에서 표현과 패턴을 학습한다. 이 점에서 LLM은 퍼셉트론이 보여준 데이터 기반 학습 패러다임의 먼 후손이다. 다만 규칙 기반 접근의 문제가 완전히 사라진 것은 아니다. 데이터 선택, 평가 기준, 안전 정책, 도구 사용 규칙, 도메인 지식 갱신은 여전히 사람이 설계해야 한다.
+현대 [[대규모 언어 모델]]은 대규모 텍스트에서 표현과 패턴을 학습하며 많은 수작업 언어 규칙을 대체한다. 퍼셉트론과는 학습 목표와 구조가 다르지만 학습 가능한 매개변수를 사용한다는 넓은 신경망 계보를 공유한다. 데이터 선택, 토큰화, 평가 기준, 안전 정책, 도구 사용 규칙과 지식 갱신은 여전히 사람이 설계한다.
 
 ## 해석
 

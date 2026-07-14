@@ -1,13 +1,53 @@
 ---
+schema_version: 2
+id: analysis.ai-시연과-실제-성능
+page_type: analysis
 title: AI 시연과 실제 성능
-aliases: [AI demos and real-world performance, 데모와 실제 성능, 통제된 AI 시연]
-tags: [type/analysis, domain/ai, status/active]
-created: 2026-05-08
-updated: 2026-07-14
-sources: ["003_Georgetown-IBM Machine.md", "003_Georgetown-IBM Machine.commentary.md", "002_The Turing Test.md", "006_1962_위드로-호프_MADALINE.md", "006_1962_위드로-호프_MADALINE_해설.md", "007_ELIZA - The First Conversational AI Program.ko.md", "007_ELIZA - The First Conversational AI Program.commentary.ko.md"]
-status: active
+aliases:
+  - AI demos and real-world performance
+  - 데모와 실제 성능
+  - 통제된 AI 시연
+tags:
+  - type/analysis
+  - domain/ai
+created: '2026-05-08'
+updated: '2026-07-15'
+lifecycle: active
+verification: partial
+artifacts:
+  - raw/003_Georgetown-IBM Machine.md
+  - raw/003_Georgetown-IBM Machine.commentary.md
+  - raw/002_The Turing Test.md
+  - raw/006_1962_위드로-호프_MADALINE.md
+  - raw/006_1962_위드로-호프_MADALINE_해설.md
+  - raw/007_ELIZA - The First Conversational AI Program.ko.md
+  - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
+evidence:
+  - source_id: macdonald-1963
+    locator: pp. 1–4
+    relation: supports
+  - source_id: turing-1950
+    locator: 'pp. 433–460, §§1–7'
+    relation: supports
+  - source_id: widrow-lehr-1990
+    locator: pp. 1415–1433
+    relation: supports
+  - source_id: weizenbaum-1966
+    locator: pp. 36–45
+    relation: supports
+related:
+  - concept.기계-번역
+  - concept.규칙-기반-기계-번역
+  - concept.튜링-테스트
+  - analysis.튜링-테스트와-llm-평가
+  - concept.madaline
+  - concept.적응-필터
+  - analysis.퍼셉트론에서-madaline으로
+  - concept.eliza
+  - concept.eliza-효과
+  - analysis.eliza에서-llm으로
+  - concept.대규모-언어-모델
 ---
-
 # AI 시연과 실제 성능
 
 [[AI 시연과 실제 성능]]의 핵심 쟁점은 통제된 조건에서 성공한 AI 시스템을 실제 환경에서도 같은 수준으로 작동한다고 해석할 수 있는가에 있다. [[003_Georgetown-IBM 기계 번역 시연]]은 이 문제가 NLP 초기 역사부터 존재했음을 보여준다.
@@ -20,9 +60,9 @@ status: active
 
 [[튜링 테스트]] 역시 제한된 상호작용 조건에서 기계가 인간처럼 보일 수 있는지를 묻는다. 이 기준은 언어 행동의 중요성을 선명하게 보여주지만, 실제 AI 시스템의 신뢰성, 안전성, 과업 수행 능력을 모두 설명하지는 않는다. Georgetown-IBM 시연과 튜링 테스트는 모두 "보이는 성능"과 "일반화 가능한 능력"을 구분해야 한다는 문제를 남긴다.
 
-## MADALINE의 배치 사례
+## MADALINE과 적응 필터의 구분
 
-[[006_위드로-호프의 MADALINE]]은 시연 이후의 다른 평가 축을 제시한다. 현재 소스는 [[MADALINE]]이 잡음 감소, 에코 제거, [[음성 활동 감지]]처럼 변화하는 통신 환경의 문제에 실제로 적용되었다고 설명한다. 이 사례에서 중요한 것은 한 번의 인상적인 출력보다 지속적인 적응, 하드웨어 구현, 운영 신뢰성이다. 다만 현재 `006` 자료의 명칭과 연도에는 내부 불일치가 있어 역사적 세부 사항은 검토 상태다.
+[[006_위드로-호프의 MADALINE]]은 하드웨어로 구현한 초기 다요소 신경망과 학습 규칙을 보여준다. 초기 응용에는 패턴·음성 인식, 기상 예측, 적응 제어가 포함됐다. 연구진은 이후 [[LMS 알고리즘]]을 [[적응 필터]]에 적용하는 방향으로 이동했고, 잡음 제거·적응 등화·에코 제거는 이 후속 계보에서 발전했다. 이를 MADALINE이나 [[음성 활동 감지]]의 직접 배치 사례로 합쳐 쓰지 않는 것이 평가 범위를 정확히 하는 방법이다.
 
 ## ELIZA와 대화의 인상
 
@@ -42,6 +82,7 @@ status: active
 - [[002_튜링 테스트]]
 - [[006_위드로-호프의 MADALINE]]
 - [[007_ELIZA]]
+- Bernard Widrow·Michael A. Lehr, [30 Years of Adaptive Neural Networks](https://isl.stanford.edu/people/widrow/papers/j199030years.pdf), 1990, pp. 1415–1416.
 
 ## 관련 항목
 
@@ -50,7 +91,7 @@ status: active
 - [[튜링 테스트]]
 - [[튜링 테스트와 LLM 평가]]
 - [[MADALINE]]
-- [[음성 활동 감지]]
+- [[적응 필터]]
 - [[퍼셉트론에서 MADALINE으로]]
 - [[ELIZA]]
 - [[ELIZA 효과]]

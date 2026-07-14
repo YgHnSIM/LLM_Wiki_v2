@@ -1,20 +1,46 @@
 ---
+schema_version: 2
+id: analysis.촘스키에서-llm으로
+page_type: analysis
 title: 촘스키에서 LLM으로
-aliases: [From Chomsky to LLMs, 촘스키와 LLM, 규칙과 통계의 언어 AI]
-tags: [type/analysis, domain/ai, domain/nlp, domain/linguistics, status/active]
-created: 2026-05-14
-updated: 2026-05-14
-sources: ["005_Chomsky's Syntactic Structures.md", "005_Chomsky's Syntactic Structures.commentary.md"]
-status: active
+aliases:
+  - From Chomsky to LLMs
+  - 촘스키와 LLM
+  - 규칙과 통계의 언어 AI
+tags:
+  - type/analysis
+  - domain/ai
+  - domain/nlp
+  - domain/linguistics
+created: '2026-05-14'
+updated: '2026-07-15'
+lifecycle: active
+verification: partial
+artifacts:
+  - raw/005_Chomsky's Syntactic Structures.md
+  - raw/005_Chomsky's Syntactic Structures.commentary.md
+evidence:
+  - source_id: chomsky-1957
+    locator: chapters 2–10
+    relation: supports
+  - source_id: chomsky-1965
+    locator: chapters 1–2
+    relation: supports
+related:
+  - concept.통사론
+  - concept.변형생성문법
+  - concept.문맥자유문법
+  - analysis.n-gram에서-llm으로
+  - analysis.규칙-기반-ai에서-데이터-기반-학습으로
+  - concept.대규모-언어-모델
 ---
-
 # 촘스키에서 LLM으로
 
-[[노엄 촘스키]]의 문제의식은 언어를 단어열이 아니라 구조화된 능력으로 보게 만들었다. [[통사론]], [[통사 구조]], [[재귀]], [[합성성]]은 언어가 단순한 빈도 목록이 아니라 위계적 관계를 가진 체계라는 점을 드러낸다.
+[[노엄 촘스키]]의 1950년대 연구는 문법을 문장을 생성하는 형식 체계로 분석하고, 표면 단어열만으로 설명하기 어려운 [[통사 구조]]를 강조했다. 이후의 [[심층 구조]], [[보편문법]], 원리와 매개변수는 서로 다른 시기의 이론이므로 “촘스키의 단일 이론”으로 합치지 않는다.
 
 ## 규칙과 구조의 흐름
 
-초기 자연어 처리와 계산언어학은 이 관점을 규칙과 [[파싱]]으로 구현하려 했다. [[문맥자유문법]]과 [[촘스키 위계]]는 문장을 분석 가능한 형식 구조로 만들었고, 규칙 기반 시스템은 통사 구조를 의미 표현, 질의응답, [[기계 번역]]에 연결하려 했다.
+형식언어 연구는 [[문맥자유문법]]과 [[촘스키 위계]]를 통해 문법의 생성력을 비교하는 틀을 제공했다. CYK와 Earley 같은 [[파싱]] 알고리즘은 이 틀을 처리한 후대의 독립적 계산 연구다. 촘스키의 1957년 책이 이 알고리즘들을 직접 구현했다고 설명하지 않는다.
 
 ## 확장성의 문제
 
@@ -26,7 +52,7 @@ status: active
 
 ## 해석
 
-현대 LLM은 촘스키식 문법 규칙을 명시적으로 내장하지 않아도 문법적으로 유창한 출력을 만든다. 이 점은 강한 규칙 기반 언어관에 도전하지만, 동시에 LLM이 내부적으로 위계 구조를 학습하는지, 구조적 일반화를 안정적으로 수행하는지라는 촘스키식 질문을 다시 불러온다.
+현대 LLM은 촘스키식 문법 규칙을 명시적으로 입력받지 않아도 문법적으로 유창한 출력을 만든다. 그러나 인간보다 훨씬 큰 텍스트와 다른 학습 목표를 사용하므로 이 결과만으로 [[보편문법]]이나 [[자극의 빈곤]] 논증을 바로 반박할 수는 없다. 비교 가능한 질문은 모델이 위계 구조와 구조적 일반화를 어떤 조건에서 학습하는가다.
 
 따라서 이 전환은 "규칙이 패배하고 통계가 승리했다"는 단순한 이야기로 정리하기 어렵다. 언어 AI의 역사는 구조를 명시적으로 설계하려는 흐름과, 데이터에서 구조를 학습하려는 흐름이 서로의 한계를 드러내며 결합해 온 과정이다.
 

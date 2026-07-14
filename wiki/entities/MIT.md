@@ -1,13 +1,32 @@
 ---
+schema_version: 2
+id: entity.mit
+page_type: entity
 title: MIT
-aliases: [Massachusetts Institute of Technology, 매사추세츠 공과대학교, 매사추세츠 공과대학]
-tags: [type/entity, domain/ai, domain/academia, status/active]
-created: 2026-07-14
-updated: 2026-07-14
-sources: ["007_ELIZA - The First Conversational AI Program.ko.md", "007_ELIZA - The First Conversational AI Program.commentary.ko.md"]
-status: active
+aliases:
+  - Massachusetts Institute of Technology
+  - 매사추세츠 공과대학교
+  - 매사추세츠 공과대학
+tags:
+  - type/entity
+  - domain/ai
+  - domain/academia
+created: '2026-07-14'
+updated: '2026-07-15'
+lifecycle: active
+verification: verified
+artifacts:
+  - raw/007_ELIZA - The First Conversational AI Program.ko.md
+  - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
+evidence:
+  - source_id: weizenbaum-1966
+    locator: pp. 36–45
+    relation: supports
+related:
+  - entity.조지프-바이젠바움
+  - concept.eliza
+  - concept.튜링-테스트
 ---
-
 # MIT
 
 [[MIT]](Massachusetts Institute of Technology)는 현재 `007` 소스에서 [[조지프 바이젠바움]]이 1966년 [[ELIZA]]를 개발한 기관으로 제시된다.
