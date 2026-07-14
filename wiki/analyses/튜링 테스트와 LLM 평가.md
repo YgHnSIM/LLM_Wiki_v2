@@ -3,8 +3,8 @@ title: 튜링 테스트와 LLM 평가
 aliases: [Turing Test and LLM Evaluation, 튜링 테스트와 언어 모델 평가]
 tags: [type/analysis, domain/ai, status/active]
 created: 2026-05-08
-updated: 2026-05-08
-sources: ["002_The Turing Test.md", "002_The Turing Test.commentary.md", "003_Georgetown-IBM Machine.md"]
+updated: 2026-07-14
+sources: ["002_The Turing Test.md", "002_The Turing Test.commentary.md", "003_Georgetown-IBM Machine.md", "007_ELIZA - The First Conversational AI Program.ko.md", "007_ELIZA - The First Conversational AI Program.commentary.ko.md"]
 status: active
 ---
 
@@ -19,6 +19,10 @@ status: active
 ## 현대 LLM이 만든 긴장
 
 현대 [[대규모 언어 모델]]은 긴 대화, 다영역 지식, 스타일 적응, 문제 풀이에서 인간과 매우 비슷한 언어 행동을 보일 수 있다. 이 점에서 LLM은 [[튜링 테스트]]의 일부 조건을 현실적인 문제로 만들었다. 그러나 동시에 LLM은 상식 추론의 빈틈, 환각, 장기적 믿음 유지의 어려움, 실제 세계 경험의 부재를 보일 수 있다.
+
+## ELIZA가 보여준 선례
+
+[[007_ELIZA]]는 자연스러운 대화의 인상과 실제 이해를 구분해야 하는 이유를 초기 시스템에서 보여준다. [[ELIZA]]는 키워드와 템플릿만으로도 사용자가 공감과 통찰을 느끼게 했다. [[ELIZA 효과]]는 평가자가 시스템의 표면 행동에 내부 능력을 과도하게 귀속할 수 있음을 보여주며, 인간 유사성만으로 지능을 평가할 때의 취약점을 구체화한다.
 
 ## 평가 기준의 변화
 
@@ -36,6 +40,7 @@ status: active
 
 - [[002_튜링 테스트]]
 - [[003_Georgetown-IBM 기계 번역 시연]]
+- [[007_ELIZA]]
 
 ## 관련 항목
 
@@ -45,3 +50,6 @@ status: active
 - [[대규모 언어 모델]]
 - [[N-gram에서 LLM으로]]
 - [[AI 시연과 실제 성능]]
+- [[ELIZA]]
+- [[ELIZA 효과]]
+- [[ELIZA에서 LLM으로]]

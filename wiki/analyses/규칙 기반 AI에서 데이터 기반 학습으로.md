@@ -4,7 +4,7 @@ aliases: [rules to data-driven learning, 규칙에서 학습으로, 데이터 �
 tags: [type/analysis, domain/ai, status/active]
 created: 2026-05-14
 updated: 2026-07-14
-sources: ["003_Georgetown-IBM Machine.md", "004_The Perceptron.md", "004_The Perceptron.commentary.md", "005_Chomsky's Syntactic Structures.md", "006_1962_위드로-호프_MADALINE.md", "006_1962_위드로-호프_MADALINE_해설.md"]
+sources: ["003_Georgetown-IBM Machine.md", "004_The Perceptron.md", "004_The Perceptron.commentary.md", "005_Chomsky's Syntactic Structures.md", "006_1962_위드로-호프_MADALINE.md", "006_1962_위드로-호프_MADALINE_해설.md", "007_ELIZA - The First Conversational AI Program.ko.md", "007_ELIZA - The First Conversational AI Program.commentary.ko.md"]
 status: active
 ---
 
@@ -30,6 +30,10 @@ Georgetown-IBM 시연은 사전 조회와 통사 규칙을 결합해 번역을 �
 
 [[006_위드로-호프의 MADALINE]]은 규칙과 학습이 공존하는 과도기적 해법을 보여준다. 여러 [[ADALINE]]은 [[LMS 알고리즘]]으로 데이터에서 가중치를 학습하지만, 입력 [[특징 공학]]과 최종 논리 게이트는 엔지니어가 설계한다. 이는 데이터 기반 학습으로의 전환이 한 번에 완성된 것이 아니라, 학습 가능한 부분을 점차 넓혀온 과정임을 보여준다.
 
+## ELIZA의 규칙 기반 대화
+
+[[007_ELIZA]]의 [[ELIZA]]는 사람이 키워드 우선순위, [[패턴 매칭]] 규칙, 응답 템플릿, 대명사 변환을 직접 작성한 시스템이다. 제한된 역할 안에서는 매우 설득력 있게 작동했지만, 새로운 영역으로 확장하려면 별도의 스크립트와 규칙이 필요했다. 이는 규칙 기반 접근의 통제 가능성과 [[지식 공학 병목]]을 동시에 보여준다.
+
 ## 현대 LLM으로의 연결
 
 현대 [[대규모 언어 모델]]은 수작업 규칙 대신 대규모 텍스트 데이터에서 표현과 패턴을 학습한다. 이 점에서 LLM은 퍼셉트론이 보여준 데이터 기반 학습 패러다임의 먼 후손이다. 다만 규칙 기반 접근의 문제가 완전히 사라진 것은 아니다. 데이터 선택, 평가 기준, 안전 정책, 도구 사용 규칙, 도메인 지식 갱신은 여전히 사람이 설계해야 한다.
@@ -44,6 +48,7 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - [[004_퍼셉트론]]
 - [[005_촘스키의 통사 구조]]
 - [[006_위드로-호프의 MADALINE]]
+- [[007_ELIZA]]
 
 ## 관련 항목
 
@@ -54,5 +59,8 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - [[ADALINE]]
 - [[MADALINE]]
 - [[특징 공학]]
+- [[ELIZA]]
+- [[패턴 매칭]]
+- [[템플릿 기반 응답 생성]]
 - [[통사 구조]]
 - [[대규모 언어 모델]]

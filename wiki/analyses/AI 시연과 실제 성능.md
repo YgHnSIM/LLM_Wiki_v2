@@ -4,7 +4,7 @@ aliases: [AI demos and real-world performance, 데모와 실제 성능, 통제�
 tags: [type/analysis, domain/ai, status/active]
 created: 2026-05-08
 updated: 2026-07-14
-sources: ["003_Georgetown-IBM Machine.md", "003_Georgetown-IBM Machine.commentary.md", "002_The Turing Test.md", "006_1962_위드로-호프_MADALINE.md", "006_1962_위드로-호프_MADALINE_해설.md"]
+sources: ["003_Georgetown-IBM Machine.md", "003_Georgetown-IBM Machine.commentary.md", "002_The Turing Test.md", "006_1962_위드로-호프_MADALINE.md", "006_1962_위드로-호프_MADALINE_해설.md", "007_ELIZA - The First Conversational AI Program.ko.md", "007_ELIZA - The First Conversational AI Program.commentary.ko.md"]
 status: active
 ---
 
@@ -24,6 +24,10 @@ status: active
 
 [[006_위드로-호프의 MADALINE]]은 시연 이후의 다른 평가 축을 제시한다. 현재 소스는 [[MADALINE]]이 잡음 감소, 에코 제거, [[음성 활동 감지]]처럼 변화하는 통신 환경의 문제에 실제로 적용되었다고 설명한다. 이 사례에서 중요한 것은 한 번의 인상적인 출력보다 지속적인 적응, 하드웨어 구현, 운영 신뢰성이다. 다만 현재 `006` 자료의 명칭과 연도에는 내부 불일치가 있어 역사적 세부 사항은 검토 상태다.
 
+## ELIZA와 대화의 인상
+
+[[007_ELIZA]]는 시연 효과가 대화 역할과 사용자 해석에서도 발생할 수 있음을 보여준다. [[DOCTOR 스크립트]]의 치료사 역할은 모호한 템플릿과 되묻기를 공감과 통찰처럼 보이게 했다. 따라서 대화형 AI는 사용자가 느끼는 자연스러움뿐 아니라 시스템이 실제로 무엇을 이해하고, 어떤 실패를 숨기며, 어떤 위험한 신뢰를 유발하는지도 평가해야 한다.
+
 ## 현대 LLM 평가로의 확장
 
 현대 [[대규모 언어 모델]]도 인상적인 데모, 선별된 벤치마크, 실제 제품 사용 사이에서 성능 차이를 보일 수 있다. 따라서 평가에는 대표성 있는 테스트 세트, 실패 사례 분석, 장기 사용 조건, 도메인별 정확성, 인간 검토 절차가 함께 필요하다.
@@ -37,6 +41,7 @@ status: active
 - [[003_Georgetown-IBM 기계 번역 시연]]
 - [[002_튜링 테스트]]
 - [[006_위드로-호프의 MADALINE]]
+- [[007_ELIZA]]
 
 ## 관련 항목
 
@@ -47,4 +52,7 @@ status: active
 - [[MADALINE]]
 - [[음성 활동 감지]]
 - [[퍼셉트론에서 MADALINE으로]]
+- [[ELIZA]]
+- [[ELIZA 효과]]
+- [[ELIZA에서 LLM으로]]
 - [[대규모 언어 모델]]
