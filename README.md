@@ -18,6 +18,15 @@ $env:BASE_PATH='/LLM_Wiki_v2'
 npm run build
 ```
 
+## 사이트 기능
+
+- 헤더 자동완성과 `/search/` 전체 검색에서 제목·별칭·본문을 찾고, 문서 유형·검증 상태·태그·정렬 조건으로 좁힐 수 있다.
+- 문서 상세 화면은 요약, 접이식 목차, 본문, 근거 장부, 관련 읽기, 역링크 순서로 구성한다.
+- 목록 화면은 텍스트·검증 상태 필터와 제목·갱신일·연결 수 정렬을 제공한다.
+- 헤더의 **본문 글꼴**에서 기본 글꼴, 리디바탕, D2Coding을 선택할 수 있다. 선택값은 브라우저에 저장되며 긴 글 본문과 설명 문장에 적용된다.
+
+웹폰트는 `site/assets/fonts/`에 자체 호스팅한다. D2Coding 1.3.2와 RIDIBatang 1.0.1은 SIL Open Font License 1.1을 따르며, 출처와 저작권 표시는 `site/assets/fonts/NOTICE.md`에 기록한다.
+
 ## GitHub Pages
 
 `main` 브랜치에 푸시하면 `.github/workflows/pages.yml`이 `dist/`를 빌드해 GitHub Pages에 배포한다. 저장소의 **Settings → Pages → Build and deployment**에서 Source를 **GitHub Actions**로 선택해야 한다.
