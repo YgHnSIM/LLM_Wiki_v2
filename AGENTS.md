@@ -148,23 +148,33 @@ related:
 
 ## 6. 핵심 워크플로
 
-### 6.1 소스 수집
+### 6.1 번역과 raw 보존
 
-1. raw 파일과 원문 출처를 구분해 확인한다.
-2. raw 파일을 수정하지 않고 artifact 레지스트리에 추가한다.
-3. 외부 1차 자료를 evidence 레지스트리에 등록한다.
-4. `wiki/sources/`에 요약·검증 정정·핵심 문장·출처·관련 항목을 작성한다.
-5. 관련 entity·concept·analysis를 갱신한다.
-6. `index.md`, `overview.md`, `log.md`를 갱신한다.
-7. `npm run verify`로 단위 테스트, wiki lint, 사이트 빌드와 산출물 검사를 실행한다.
+1. `/lt NNN`으로 `C:\Vault\ObsidianVault\Assets\LLM_sources`의 단일 원문을 새로 번역하고 해설을 작성한다.
+2. 번역과 해설은 `C:\Vault\ObsidianVault\LLM_ko`에 동일 stem의 `.ko.md`, `.commentary.ko.md` 쌍으로 저장하고 스킬 검사를 통과해야 한다.
+3. `npm run source:status -- NNN`으로 입력·출력·raw·공개 페이지 상태를 확인한다.
+4. `npm run source:copy -- NNN`으로 검증된 쌍을 `raw/`에 복사하고 `raw-artifacts.yml`에 SHA-256을 등록한다.
+5. raw 복사 단계에서는 커밋·푸시하지 않는다. 기존 raw와 내용이 다르면 덮어쓰지 않고 중단한다.
 
-### 6.2 참고 자료 보강
+### 6.2 공개 소스 처리
+
+1. raw artifact와 외부 원문 출처를 구분해 확인한다.
+2. 외부 1차 자료를 evidence 레지스트리에 등록한다.
+3. `wiki/sources/`에 요약·검증 정정·핵심 문장·출처·관련 항목을 작성한다.
+4. 관련 entity·concept·analysis를 갱신한다.
+5. `index.md`, `overview.md`, `log.md`를 갱신한다. log에는 raw 보존과 공개 처리 결과를 하나의 ingest 기록으로 남긴다.
+6. `npm run sync:index` 후 `npm run source:ready -- NNN`으로 단위 테스트, wiki lint, 사이트 빌드와 산출물 검사를 실행한다.
+7. 현재 브랜치가 `main`이고 변경 범위가 해당 소스에 한정됐는지 확인한 뒤 `ingest: number_title`로 한 번만 커밋하고 `origin/main`에 푸시한다. 브랜치를 새로 만들지 않는다.
+
+세부 절차와 실패 복구 규칙은 `docs/source-ingestion-workflow.md`를 따른다.
+
+### 6.3 참고 자료 보강
 
 - 정규 번호 소스가 아니면 `page_type: reference`와 `type/reference`를 사용한다.
 - 기존 주장 보강이 목적이면 새 개념을 불필요하게 만들지 않는다.
 - 외부 근거는 evidence 레지스트리에, 물리 파일은 raw artifact 레지스트리에 각각 추가한다.
 
-### 6.3 점검
+### 6.4 점검
 
 `scripts/lint-wiki.mjs`는 다음을 실패 조건으로 검사한다.
 
@@ -212,6 +222,8 @@ related:
 - `lint: short_title`
 - `site: short_title`
 - `docs: short_title`
+
+정규 번호 소스의 번역·raw 복사 단계에서는 커밋·푸시하지 않는다. 공개 소스 처리와 전체 검증을 마친 뒤 raw·레지스트리·wiki 변경을 하나의 `ingest` 커밋으로 묶어 `main`에 푸시한다.
 
 ## 9. 작업 원칙
 

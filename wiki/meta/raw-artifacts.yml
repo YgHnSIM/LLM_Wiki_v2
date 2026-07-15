@@ -144,3 +144,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: b0f45d85086b47d821497285eaeca059e0ae283698b531820b27930d661eb1ee
+  - path: "raw/010_Vector Space Model & TF-IDF Foundation of Modern Information Retrieval & Semantic Search.ko.md"
+    role: translation
+    order_prefix: "010"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 15414f582e2d5dae3b7923d5320e156047da0fb435b55aad15bb96eb934d7533
+  - path: "raw/010_Vector Space Model & TF-IDF Foundation of Modern Information Retrieval & Semantic Search.commentary.ko.md"
+    role: commentary
+    order_prefix: "010"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 2fd80ff5c0848ad32fe8c85e41494b13d3432471b28127fac723ee5cb596fb83

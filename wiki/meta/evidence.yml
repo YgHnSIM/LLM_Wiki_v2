@@ -312,3 +312,38 @@ sources:
     kind: technical-report
     url: https://www.mit.edu/~dxh/marvin/web.media.mit.edu/~minsky/papers/PR1971.html
     language: en
+  salton-1968:
+    title: Automatic Information Organization and Retrieval
+    authors: [Gerard Salton]
+    published: 1968
+    source_type: primary
+    kind: book
+    url: https://books.google.com/books?id=G6whAAAAMAAJ
+    language: en
+  sparck-jones-1972:
+    title: A Statistical Interpretation of Term Specificity and Its Application in Retrieval
+    authors: [Karen Spärck Jones]
+    published: 1972
+    source_type: primary
+    kind: journal-article
+    doi: 10.1108/eb026526
+    url: https://doi.org/10.1108/eb026526
+    language: en
+  salton-wong-yang-1975:
+    title: A Vector Space Model for Automatic Indexing
+    authors: [Gerard Salton, Anita Wong, Chung-Shu Yang]
+    published: 1975
+    source_type: primary
+    kind: journal-article
+    doi: 10.1145/361219.361220
+    url: https://doi.org/10.1145/361219.361220
+    language: en
+  salton-buckley-1988:
+    title: Term-Weighting Approaches in Automatic Text Retrieval
+    authors: [Gerard Salton, Christopher Buckley]
+    published: 1988
+    source_type: primary
+    kind: journal-article
+    doi: 10.1016/0306-4573(88)90021-0
+    url: https://doi.org/10.1016/0306-4573(88)90021-0
+    language: en

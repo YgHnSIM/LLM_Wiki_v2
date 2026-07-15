@@ -8,6 +8,9 @@
     "node": ">=22"
   },
   "scripts": {
+    "source:status": "node scripts/source-workflow.mjs status",
+    "source:copy": "node scripts/source-workflow.mjs copy",
+    "source:ready": "node scripts/source-workflow.mjs ready",
     "migrate:schema": "node scripts/migrate-schema-v2.mjs",
     "sync:index": "node scripts/sync-index.mjs",
     "lint:wiki": "node scripts/lint-wiki.mjs",

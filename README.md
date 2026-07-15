@@ -21,6 +21,22 @@ npm run build
 
 개별 단계는 `npm test`, `npm run lint:wiki`, `npm run build:site`, `npm run check:site`로 실행할 수 있다. `npm run check`는 오래된 `dist/`를 검사하지 않도록 전체 `verify` 파이프라인을 다시 실행한다.
 
+## 번역부터 소스 처리까지
+
+정규 번호 소스는 번역·해설 생성, raw 보존, 공개 위키 검증을 분리한다. 예를 들어 `010`은 다음 순서로 처리한다.
+
+```powershell
+# Codex 명령: /lt 010
+npm run source:status -- 010
+npm run source:copy -- 010
+
+# 외부 1차 자료로 wiki/sources·entities·concepts·analyses를 작성한 뒤
+npm run sync:index
+npm run source:ready -- 010
+```
+
+`source:copy`는 번역 쌍을 검사하고 `raw/`와 SHA-256 레지스트리만 갱신한다. 이 단계에서는 커밋·푸시하지 않는다. `source:ready`도 전체 검증만 수행하며 Git을 변경하지 않는다. 공개 소스 처리가 끝난 뒤 변경 범위를 검토해 `main`에서 한 번만 커밋·푸시한다. 자세한 절차와 실패 복구 규칙은 [소스 수집 워크플로](docs/source-ingestion-workflow.md)에 있다.
+
 ## 사이트 기능
 
 - 헤더 자동완성과 `/search/` 전체 검색에서 제목·별칭·본문을 찾고, 문서 유형·검증 상태·태그·정렬 조건으로 좁힐 수 있다.
@@ -45,6 +61,7 @@ npm run build
 - `wiki/meta/raw-artifacts.yml`: raw 역할·출처 상태·SHA-256 레지스트리
 - `wiki/meta/tags.yml`: 허용 태그 사전
 - `scripts/lint-wiki.mjs`: JSON Schema와 근거·링크·raw 무결성 검사
+- `scripts/source-workflow.mjs`: 번역 상태·raw 복사·공개 소스 처리 준비 상태 검사
 - `scripts/build-site.mjs`: 임시 디렉터리에서 완성한 뒤 `dist/`를 교체하는 정적 사이트 생성기
 - `scripts/lib`: 문서 로딩, 위키 링크, 출력 경로, 원자적 빌드 공통 모듈
 - `scripts/tests`: Node.js 내장 테스트 러너 기반 회귀 테스트
