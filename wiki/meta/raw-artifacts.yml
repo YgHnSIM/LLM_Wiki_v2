@@ -128,3 +128,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: e1b4ac987921c9b0987180fd8386a9a529c00e3caedc919b8f9a03428cdf3140
+  - path: "raw/009_SHRDLU - Understanding Language Through Action.ko.md"
+    role: translation
+    order_prefix: "009"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 6e4ac98163310f783f6d6db1483e1acf17f64e7f590a4cb4c02bf0fe9e948494
+  - path: "raw/009_SHRDLU - Understanding Language Through Action.commentary.ko.md"
+    role: commentary
+    order_prefix: "009"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: b0f45d85086b47d821497285eaeca059e0ae283698b531820b27930d661eb1ee

@@ -1,4 +1,4 @@
----
+﻿---
 schema_version: 2
 id: meta.log
 page_type: meta
@@ -342,7 +342,17 @@ Lo-Fi 인쇄물의 시각 방향은 유지하면서 검색과 본문을 먼저 �
 
 - 프로젝트에는 외부 영어 원문 파일을 복제하지 않았으며, raw에는 새 한국어 번역과 해설만 보존돼 있다.
 
+## [2026-07-16] ingest | 009 SHRDLU raw artifact
+
+새로 작성한 009 한국어 번역과 학습용 해설을 aw/ 보존 계층에 그대로 복사하고 artifact 레지스트리에 등록했다.
+
+- 번역:  09_SHRDLU - Understanding Language Through Action.ko.md`r
+- 해설:  09_SHRDLU - Understanding Language Through Action.commentary.ko.md`r
+- 두 파일 모두 external-original-used, original_in_repository: false로 기록하고 SHA-256을 검증했다.
+- 공개  09 위키 문서와 외부 근거 등록은 별도 작업으로 남겨 두었다.
+
 ## 관련 항목
 
 - [[index]]
 - [[overview]]
+
