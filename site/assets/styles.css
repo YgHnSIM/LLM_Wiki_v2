@@ -3433,6 +3433,24 @@ details.toc-card > nav > ol {
     width: min(calc(100% - 28px), var(--content));
   }
 
+  .listing-hero > div {
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(10px, 3vw, 16px);
+  }
+
+  .listing-hero h1 {
+    min-width: 0;
+    font-size: clamp(42px, 14vw, 58px);
+    letter-spacing: -0.055em;
+    white-space: nowrap;
+    word-break: keep-all;
+  }
+
+  .listing-count {
+    flex: 0 0 auto;
+  }
+
   .hero-copy h1,
   .listing-hero h1,
   .article-title-block h1,
