@@ -4,17 +4,28 @@
   "private": true,
   "type": "module",
   "description": "Markdown 기반 LLM 역사 위키의 GitHub Pages 정적 사이트",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "migrate:schema": "node scripts/migrate-schema-v2.mjs",
     "sync:index": "node scripts/sync-index.mjs",
     "lint:wiki": "node scripts/lint-wiki.mjs",
-    "build": "node scripts/lint-wiki.mjs && node scripts/build-site.mjs && node scripts/check-site.mjs",
-    "check": "node scripts/lint-wiki.mjs && node scripts/check-site.mjs"
+    "build:site": "node scripts/build-site.mjs",
+    "check:site": "node scripts/check-site.mjs",
+    "test": "node --test scripts/tests/*.test.mjs",
+    "build": "npm run lint:wiki && npm run build:site && npm run check:site",
+    "verify": "npm run test && npm run build",
+    "check": "npm run verify"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
     "js-yaml": "^3.15.0",
     "katex": "^0.16.22",
     "marked": "^15.0.12"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
   }
 }

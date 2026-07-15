@@ -1,19 +1,26 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import matter from 'gray-matter';
 import yaml from 'js-yaml';
 import katex from 'katex';
 import { marked } from 'marked';
+import { buildDirectoryAtomically } from './lib/atomic-directory.mjs';
+import { escapeHtml, firstParagraph, readingMinutes, stripMarkdown, truncate } from './lib/content-format.mjs';
+import { distDir, rootDir, siteDir, wikiDir } from './lib/project-paths.mjs';
+import { normalizeBasePath, outputFileForUrl, withBasePath } from './lib/site-paths.mjs';
+import {
+  asStringArray,
+  collator,
+  createWikiLookup,
+  extractWikiLinks,
+  formatDate,
+  loadMarkdownDocuments,
+  normalizeWikiName,
+  slugify,
+} from './lib/wiki-utils.mjs';
 
-const scriptDir = path.dirname(fileURLToPath(import.meta.url));
-const rootDir = path.resolve(scriptDir, '..');
-const wikiDir = path.join(rootDir, 'wiki');
-const siteDir = path.join(rootDir, 'site');
-const distDir = path.join(rootDir, 'dist');
 const repositoryUrl = 'https://github.com/YgHnSIM/LLM_Wiki_v2';
 const basePath = normalizeBasePath(process.env.BASE_PATH ?? '');
-const collator = new Intl.Collator('ko', { numeric: true, sensitivity: 'base' });
+const sitePath = (pathname = '/') => withBasePath(basePath, pathname);
 
 const categoryMeta = {
   sources: {
@@ -45,49 +52,6 @@ const categoryMeta = {
 
 marked.setOptions({ gfm: true, breaks: false });
 
-function normalizeBasePath(value) {
-  const cleaned = String(value).trim().replace(/^\/+|\/+$/g, '');
-  return cleaned ? `/${cleaned}` : '';
-}
-
-function sitePath(pathname = '/') {
-  const normalized = pathname.startsWith('/') ? pathname : `/${pathname}`;
-  return `${basePath}${normalized}`;
-}
-
-function escapeHtml(value = '') {
-  return String(value)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;');
-}
-
-function slugify(value = '') {
-  return String(value)
-    .normalize('NFKC')
-    .toLowerCase()
-    .replace(/[’']/g, '')
-    .replace(/[^\p{Letter}\p{Number}]+/gu, '-')
-    .replace(/^-+|-+$/g, '') || 'page';
-}
-
-function normalizeLookup(value = '') {
-  return String(value)
-    .replace(/\.md$/i, '')
-    .normalize('NFKC')
-    .trim()
-    .replace(/\s+/g, ' ')
-    .toLocaleLowerCase('ko');
-}
-
-function asArray(value) {
-  if (Array.isArray(value)) return value.map(String);
-  if (value === undefined || value === null || value === '') return [];
-  return [String(value)];
-}
-
 function asObjectArray(value) {
   if (!Array.isArray(value)) return [];
   return value
@@ -100,72 +64,6 @@ function asObjectArray(value) {
     .filter((item) => item.sourceId);
 }
 
-function formatDate(value) {
-  if (!value) return '';
-  if (value instanceof Date && !Number.isNaN(value.valueOf())) {
-    return value.toISOString().slice(0, 10);
-  }
-  return String(value).slice(0, 10);
-}
-
-function stripMarkdown(markdown = '') {
-  return String(markdown)
-    .replace(/```[\s\S]*?```|~~~[\s\S]*?~~~/g, ' ')
-    .replace(/\[\[([^\]]+)\]\]/g, (_match, inside) => {
-      const [target, label] = inside.split('|');
-      return label?.trim() || target.split('#')[0].trim();
-    })
-    .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
-    .replace(/`([^`]+)`/g, '$1')
-    .replace(/^\s*#{1,6}\s*/gm, '')
-    .replace(/^\s*>\s?/gm, '')
-    .replace(/^\s*[-*+]\s+/gm, '')
-    .replace(/^\s*\d+\.\s+/gm, '')
-    .replace(/_/g, ' ')
-    .replace(/(\d)~(?=\d)/g, '$1–')
-    .replace(/[~*]/g, '')
-    .replace(/\$+/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
-function firstParagraph(markdown = '') {
-  const blocks = String(markdown)
-    .replace(/^#\s+.*(?:\r?\n)+/, '')
-    .split(/\r?\n\s*\r?\n/)
-    .map((block) => block.trim())
-    .filter(Boolean);
-
-  const candidate = blocks.find((block) => {
-    const plain = stripMarkdown(block);
-    return !/^(#{1,6}|```|~~~|>|[-*+]\s|\d+\.\s)/.test(block) && plain.length >= 30;
-  });
-
-  return stripMarkdown(candidate ?? markdown);
-}
-
-function truncate(value, maxLength = 190) {
-  const text = String(value).trim();
-  if (text.length <= maxLength) return text;
-  const clipped = text.slice(0, maxLength + 1);
-  const boundary = Math.max(clipped.lastIndexOf(' '), clipped.lastIndexOf('.'), clipped.lastIndexOf('다.'));
-  return `${clipped.slice(0, boundary > maxLength * 0.65 ? boundary + 1 : maxLength).trim()}…`;
-}
-
-function readingMinutes(markdown = '') {
-  return Math.max(1, Math.ceil(stripMarkdown(markdown).length / 700));
-}
-
-async function walkMarkdown(directory) {
-  const entries = await fs.readdir(directory, { withFileTypes: true });
-  const files = await Promise.all(entries.map(async (entry) => {
-    const absolute = path.join(directory, entry.name);
-    if (entry.isDirectory()) return walkMarkdown(absolute);
-    return entry.isFile() && entry.name.endsWith('.md') ? [absolute] : [];
-  }));
-  return files.flat();
-}
 
 function routeFor(relativePath, category, filename) {
   const normalized = relativePath.replaceAll('\\', '/');
@@ -178,24 +76,21 @@ function routeFor(relativePath, category, filename) {
 const evidenceRegistryFile = path.join(wikiDir, 'meta', 'evidence.yml');
 const evidenceRegistryData = yaml.safeLoad(await fs.readFile(evidenceRegistryFile, 'utf8')) ?? {};
 const evidenceRegistry = new Map(Object.entries(evidenceRegistryData.sources ?? {}));
-const markdownFiles = await walkMarkdown(wikiDir);
-const documents = await Promise.all(markdownFiles.map(async (absolutePath) => {
-  const raw = await fs.readFile(absolutePath, 'utf8');
-  const parsed = matter(raw);
-  const relativePath = path.relative(wikiDir, absolutePath).replaceAll('\\', '/');
+const loadedDocuments = await loadMarkdownDocuments(wikiDir);
+const documents = loadedDocuments.map((loadedDocument) => {
+  const { absolutePath, relativePath, filename, content, data } = loadedDocument;
   const parts = relativePath.split('/');
-  const filename = path.basename(parts.at(-1), '.md');
   const category = parts.length > 1 && categoryMeta[parts[0]] ? parts[0] : 'meta';
-  const firstHeading = parsed.content.match(/^#\s+(.+)$/m)?.[1]?.trim();
-  const title = String(parsed.data.title ?? firstHeading ?? filename);
+  const firstHeading = content.match(/^#\s+(.+)$/m)?.[1]?.trim();
+  const title = String(data.title ?? firstHeading ?? filename);
 
   return {
-    id: String(parsed.data.id ?? relativePath.replace(/\.md$/i, '')),
+    id: String(data.id ?? relativePath.replace(/\.md$/i, '')),
     absolutePath,
     relativePath,
     filename,
     category,
-    pageType: String(parsed.data.page_type ?? ({
+    pageType: String(data.page_type ?? ({
       sources: 'source',
       concepts: 'concept',
       entities: 'entity',
@@ -203,20 +98,20 @@ const documents = await Promise.all(markdownFiles.map(async (absolutePath) => {
       meta: 'meta',
     }[category] ?? 'meta')),
     title,
-    aliases: asArray(parsed.data.aliases),
-    tags: asArray(parsed.data.tags),
-    artifacts: asArray(parsed.data.artifacts),
-    evidence: asObjectArray(parsed.data.evidence),
-    related: asArray(parsed.data.related),
-    lifecycle: String(parsed.data.lifecycle ?? 'active'),
-    verification: String(parsed.data.verification ?? 'unverified'),
-    created: formatDate(parsed.data.created),
-    updated: formatDate(parsed.data.updated),
-    body: parsed.content.trim(),
+    aliases: asStringArray(data.aliases),
+    tags: asStringArray(data.tags),
+    artifacts: asStringArray(data.artifacts),
+    evidence: asObjectArray(data.evidence),
+    related: asStringArray(data.related),
+    lifecycle: String(data.lifecycle ?? 'active'),
+    verification: String(data.verification ?? 'unverified'),
+    created: formatDate(data.created),
+    updated: formatDate(data.updated),
+    body: content.trim(),
     url: routeFor(relativePath, category, filename),
     sourceNumber: category === 'sources' ? filename.match(/^(\d{3})/)?.[1] ?? '' : '',
-    excerpt: truncate(firstParagraph(parsed.content), 210),
-    minutes: readingMinutes(parsed.content),
+    excerpt: truncate(firstParagraph(content), 210),
+    minutes: readingMinutes(content),
     outgoing: [],
     backlinks: [],
     relatedDocuments: [],
@@ -224,29 +119,15 @@ const documents = await Promise.all(markdownFiles.map(async (absolutePath) => {
     meaningfulOutgoing: [],
     meaningfulBacklinks: [],
   };
-}));
+});
 
 documents.sort((a, b) => collator.compare(a.relativePath, b.relativePath));
 
-const exactLookup = new Map();
-const namedLookup = new Map();
-const idLookup = new Map();
-
-function addNamedLookup(name, document) {
-  const key = normalizeLookup(name);
-  if (!key) return;
-  const existing = namedLookup.get(key) ?? [];
-  if (!existing.includes(document)) existing.push(document);
-  namedLookup.set(key, existing);
-}
-
-for (const document of documents) {
-  idLookup.set(normalizeLookup(document.id), document);
-  exactLookup.set(normalizeLookup(document.filename), document);
-  addNamedLookup(document.filename, document);
-  addNamedLookup(document.title, document);
-  for (const alias of document.aliases) addNamedLookup(alias, document);
-}
+const categoryRank = ['concepts', 'sources', 'analyses', 'entities', 'meta'];
+const wikiLookup = createWikiLookup(documents, {
+  rankOf: (document) => categoryRank.indexOf(document.category),
+});
+const resolveWikiTarget = (value) => wikiLookup.resolve(value);
 
 for (const document of documents) {
   document.evidence = document.evidence.map((entry) => ({
@@ -254,7 +135,7 @@ for (const document of documents) {
     source: evidenceRegistry.get(entry.sourceId) ?? null,
   }));
   document.relatedDocuments = document.related
-    .map((id) => idLookup.get(normalizeLookup(id)))
+    .map(wikiLookup.resolveId)
     .filter((item) => item && item !== document && item.category !== 'meta');
 }
 
@@ -262,28 +143,6 @@ for (const document of documents) {
   for (const relatedDocument of document.relatedDocuments) {
     relatedDocument.relatedBacklinks.push(document);
   }
-}
-
-const categoryRank = ['concepts', 'sources', 'analyses', 'entities', 'meta'];
-
-function resolveWikiTarget(value) {
-  const rawTarget = String(value).split('|')[0].trim();
-  const hashIndex = rawTarget.indexOf('#');
-  const targetWithPath = hashIndex >= 0 ? rawTarget.slice(0, hashIndex) : rawTarget;
-  const heading = hashIndex >= 0 ? rawTarget.slice(hashIndex + 1).trim() : '';
-  const basename = path.posix.basename(targetWithPath.replaceAll('\\', '/')).replace(/\.md$/i, '');
-  const key = normalizeLookup(basename);
-  const exact = exactLookup.get(key);
-  if (exact) return { document: exact, heading };
-
-  const candidates = [...(namedLookup.get(key) ?? [])].sort(
-    (a, b) => categoryRank.indexOf(a.category) - categoryRank.indexOf(b.category),
-  );
-  return { document: candidates[0] ?? null, heading };
-}
-
-function extractWikiLinks(markdown) {
-  return [...String(markdown).matchAll(/\[\[([^\]\n]+)\]\]/g)].map((match) => match[1]);
 }
 
 const unresolved = new Map();
@@ -785,7 +644,7 @@ function renderEvidenceLedger(document) {
   const entries = document.evidence.map((entry, index) => {
     const source = entry.source ?? {};
     const sourceTitle = source.title || entry.sourceId;
-    const authors = asArray(source.authors).join(', ');
+    const authors = asStringArray(source.authors).join(', ');
     const publication = [source.published, source.kind].filter(Boolean).join(' · ');
     const sourceLink = source.url
       ? externalLink(source.url, '출처 열기', 'evidence-link')
@@ -851,7 +710,7 @@ function renderArticle(document) {
   const position = siblings.indexOf(document);
   const previous = position > 0 ? siblings[position - 1] : null;
   const next = position >= 0 && position < siblings.length - 1 ? siblings[position + 1] : null;
-  const aliases = document.aliases.filter((alias) => normalizeLookup(alias) !== normalizeLookup(document.title));
+  const aliases = document.aliases.filter((alias) => normalizeWikiName(alias) !== normalizeWikiName(document.title));
 
   const reviewNote = document.verification !== 'verified'
     ? `<div class="review-banner">${verificationBadge(document)}<span>사실, 해석 또는 논쟁 상태는 문서의 근거와 설명을 함께 확인하세요.</span></div>`
@@ -920,33 +779,12 @@ function renderNotFound() {
   return layout({ title: '페이지를 찾을 수 없음', description: '요청한 LLM Wiki 문서를 찾을 수 없습니다.', body, pageClass: 'error-page' });
 }
 
-function outputPathForUrl(url) {
-  if (url === '/') return path.join(distDir, 'index.html');
-  return path.join(distDir, url.replace(/^\/+|\/+$/g, ''), 'index.html');
-}
-
-async function writeHtml(url, html) {
-  const outputPath = outputPathForUrl(url);
+async function writeHtml(outputDir, url, html) {
+  const outputPath = outputFileForUrl(url, { outputDir });
+  if (!outputPath) throw new Error(`Cannot map site URL to the build directory: ${url}`);
   await fs.mkdir(path.dirname(outputPath), { recursive: true });
   await fs.writeFile(outputPath, html, 'utf8');
 }
-
-await fs.rm(distDir, { recursive: true, force: true });
-await fs.mkdir(distDir, { recursive: true });
-await fs.cp(path.join(siteDir, 'assets'), path.join(distDir, 'assets'), { recursive: true });
-await fs.copyFile(path.join(rootDir, 'node_modules', 'katex', 'dist', 'katex.min.css'), path.join(distDir, 'assets', 'katex.min.css'));
-await fs.cp(path.join(rootDir, 'node_modules', 'katex', 'dist', 'fonts'), path.join(distDir, 'assets', 'fonts'), { recursive: true });
-
-await writeHtml('/', renderHome());
-for (const key of ['sources', 'concepts', 'entities', 'analyses']) {
-  await writeHtml(`/${key}/`, renderCategoryPage(key));
-}
-await writeHtml('/search/', renderSearchPage());
-for (const document of documents) {
-  if (document.url !== '/') await writeHtml(document.url, renderArticle(document));
-}
-await fs.writeFile(path.join(distDir, '404.html'), renderNotFound(), 'utf8');
-await fs.writeFile(path.join(distDir, '.nojekyll'), '', 'utf8');
 
 const searchIndex = documents
   .filter((document) => document.filename !== 'index')
@@ -976,7 +814,6 @@ const searchIndex = documents
     text: stripMarkdown(document.body).slice(0, 6000),
     url: sitePath(document.url),
   }));
-await fs.writeFile(path.join(distDir, 'search-index.json'), JSON.stringify(searchIndex), 'utf8');
 
 const buildReport = {
   generatedAt: new Date().toISOString(),
@@ -990,7 +827,29 @@ const buildReport = {
     .map((record) => ({ target: record.target, count: record.count, from: [...record.from].sort(collator.compare) }))
     .sort((a, b) => b.count - a.count || collator.compare(a.target, b.target)),
 };
-await fs.writeFile(path.join(distDir, 'build-report.json'), JSON.stringify(buildReport, null, 2), 'utf8');
+
+async function buildInto(outputDir) {
+  await fs.rm(outputDir, { recursive: true, force: true });
+  await fs.mkdir(outputDir, { recursive: true });
+  await fs.cp(path.join(siteDir, 'assets'), path.join(outputDir, 'assets'), { recursive: true });
+  await fs.copyFile(path.join(rootDir, 'node_modules', 'katex', 'dist', 'katex.min.css'), path.join(outputDir, 'assets', 'katex.min.css'));
+  await fs.cp(path.join(rootDir, 'node_modules', 'katex', 'dist', 'fonts'), path.join(outputDir, 'assets', 'fonts'), { recursive: true });
+
+  await writeHtml(outputDir, '/', renderHome());
+  for (const key of ['sources', 'concepts', 'entities', 'analyses']) {
+    await writeHtml(outputDir, `/${key}/`, renderCategoryPage(key));
+  }
+  await writeHtml(outputDir, '/search/', renderSearchPage());
+  for (const document of documents) {
+    if (document.url !== '/') await writeHtml(outputDir, document.url, renderArticle(document));
+  }
+  await fs.writeFile(path.join(outputDir, '404.html'), renderNotFound(), 'utf8');
+  await fs.writeFile(path.join(outputDir, '.nojekyll'), '', 'utf8');
+  await fs.writeFile(path.join(outputDir, 'search-index.json'), JSON.stringify(searchIndex), 'utf8');
+  await fs.writeFile(path.join(outputDir, 'build-report.json'), JSON.stringify(buildReport, null, 2), 'utf8');
+}
+
+await buildDirectoryAtomically(distDir, buildInto);
 
 console.log(`Built ${buildReport.pages} pages from ${documents.length} Markdown documents.`);
 console.log(`Resolved ${resolvedLinkCount} wiki links; ${buildReport.unresolvedLinks.length} unresolved target(s).`);

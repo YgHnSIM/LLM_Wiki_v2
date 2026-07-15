@@ -75,7 +75,7 @@
       },
       "then": {},
       "else": {
-        "properties": { "evidence": { "minItems": 1 } }
+        "properties": { "evidence": { "type": "array", "minItems": 1 } }
       }
     }
   ]

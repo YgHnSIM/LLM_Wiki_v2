@@ -4,10 +4,11 @@
 
 ## 로컬 빌드
 
+Node.js 22 이상이 필요하다. lockfile과 동일한 의존성을 설치한 뒤 테스트, 위키 lint, 사이트 빌드, 산출물 검사를 한 번에 실행한다.
+
 ```powershell
-npm install
-npm run lint:wiki
-npm run build
+npm ci
+npm run verify
 npx serve dist
 ```
 
@@ -17,6 +18,8 @@ npx serve dist
 $env:BASE_PATH='/LLM_Wiki_v2'
 npm run build
 ```
+
+개별 단계는 `npm test`, `npm run lint:wiki`, `npm run build:site`, `npm run check:site`로 실행할 수 있다. `npm run check`는 오래된 `dist/`를 검사하지 않도록 전체 `verify` 파이프라인을 다시 실행한다.
 
 ## 사이트 기능
 
@@ -41,8 +44,10 @@ npm run build
 - `wiki/meta/evidence.yml`: 외부 근거와 DOI·URL 레지스트리
 - `wiki/meta/raw-artifacts.yml`: raw 역할·출처 상태·SHA-256 레지스트리
 - `wiki/meta/tags.yml`: 허용 태그 사전
-- `scripts/lint-wiki.mjs`: 스키마·근거·링크·raw 무결성 검사
-- `scripts/build-site.mjs`: 정적 사이트 생성기
+- `scripts/lint-wiki.mjs`: JSON Schema와 근거·링크·raw 무결성 검사
+- `scripts/build-site.mjs`: 임시 디렉터리에서 완성한 뒤 `dist/`를 교체하는 정적 사이트 생성기
+- `scripts/lib`: 문서 로딩, 위키 링크, 출력 경로, 원자적 빌드 공통 모듈
+- `scripts/tests`: Node.js 내장 테스트 러너 기반 회귀 테스트
 - `site/assets`: 사이트 스타일과 브라우저 스크립트
 
 ## 문서 상태

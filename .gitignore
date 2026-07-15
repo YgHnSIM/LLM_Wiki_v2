@@ -1,5 +1,7 @@
 .obsidian/
 node_modules/
 dist/
+.dist-*/
+dist.backup-*/
 output/playwright/
 .playwright-cli/

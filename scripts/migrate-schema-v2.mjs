@@ -1,52 +1,21 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
+import { wikiDir } from './lib/project-paths.mjs';
+import {
+  asArray,
+  createWikiLookup,
+  loadMarkdownDocuments,
+  normalizeWikiName,
+  slugify,
+} from './lib/wiki-utils.mjs';
 
-const scriptDir = path.dirname(fileURLToPath(import.meta.url));
-const rootDir = path.resolve(scriptDir, '..');
-const wikiDir = path.join(rootDir, 'wiki');
 const today = '2026-07-15';
-const collator = new Intl.Collator('ko', { numeric: true, sensitivity: 'base' });
-
-async function walkMarkdown(directory) {
-  const entries = await fs.readdir(directory, { withFileTypes: true });
-  const files = await Promise.all(entries.map(async (entry) => {
-    const absolute = path.join(directory, entry.name);
-    if (entry.isDirectory()) return walkMarkdown(absolute);
-    return entry.isFile() && entry.name.endsWith('.md') ? [absolute] : [];
-  }));
-  return files.flat();
-}
-
-function asArray(value) {
-  if (Array.isArray(value)) return value;
-  if (value === undefined || value === null || value === '') return [];
-  return [value];
-}
 
 function normalizeDate(value, fallback) {
   if (value instanceof Date && !Number.isNaN(value.valueOf())) return value.toISOString().slice(0, 10);
   const text = String(value ?? '').slice(0, 10);
   return /^\d{4}-\d{2}-\d{2}$/.test(text) ? text : fallback;
-}
-
-function normalizeName(value = '') {
-  return String(value)
-    .replace(/\.md$/i, '')
-    .normalize('NFKC')
-    .trim()
-    .replace(/\s+/g, ' ')
-    .toLocaleLowerCase('ko');
-}
-
-function slugify(value = '') {
-  return String(value)
-    .normalize('NFKC')
-    .toLocaleLowerCase('ko')
-    .replace(/[’']/g, '')
-    .replace(/[^\p{Letter}\p{Number}]+/gu, '-')
-    .replace(/^-+|-+$/g, '') || 'page';
 }
 
 function pageTypeFor(relativePath, data = {}) {
@@ -174,54 +143,29 @@ function relatedLinks(body) {
   return [...section.matchAll(/\[\[([^\]\n]+)\]\]/g)].map((match) => match[1]);
 }
 
-const markdownFiles = (await walkMarkdown(wikiDir)).sort(collator.compare);
-const documents = await Promise.all(markdownFiles.map(async (absolutePath) => {
-  const raw = await fs.readFile(absolutePath, 'utf8');
-  const parsed = matter(raw);
-  const relativePath = path.relative(wikiDir, absolutePath).replaceAll('\\', '/');
-  const filename = path.basename(relativePath, '.md');
-  const firstHeading = parsed.content.match(/^#\s+(.+)$/m)?.[1]?.trim();
-  const title = String(parsed.data.title ?? firstHeading ?? filename);
-  const pageType = pageTypeFor(relativePath, parsed.data);
-  return { absolutePath, relativePath, filename, parsed, data: parsed.data, title, pageType };
-}));
+const documents = (await loadMarkdownDocuments(wikiDir)).map((document) => {
+  const firstHeading = document.content.match(/^#\s+(.+)$/m)?.[1]?.trim();
+  const title = String(document.data.title ?? firstHeading ?? document.filename);
+  const pageType = pageTypeFor(document.relativePath, document.data);
+  return { ...document, title, pageType };
+});
 
 for (const document of documents) document.id = idFor(document);
 
-const exactLookup = new Map();
-const namedLookup = new Map();
 const categoryRank = ['concept', 'source', 'reference', 'analysis', 'entity', 'meta'];
-
-function addLookup(name, document) {
-  const key = normalizeName(name);
-  if (!key) return;
-  const list = namedLookup.get(key) ?? [];
-  if (!list.includes(document)) list.push(document);
-  namedLookup.set(key, list);
-}
-
-for (const document of documents) {
-  exactLookup.set(normalizeName(document.filename), document);
-  addLookup(document.filename, document);
-  addLookup(document.title, document);
-  for (const alias of asArray(document.data.aliases)) addLookup(alias, document);
-}
+const lookup = createWikiLookup(documents, {
+  aliasesOf: (document) => document.data.aliases,
+  rankOf: (document) => categoryRank.indexOf(document.pageType),
+});
 
 function resolveLink(rawLink) {
-  const target = String(rawLink).split('|')[0].split('#')[0].trim();
-  const basename = path.posix.basename(target.replaceAll('\\', '/')).replace(/\.md$/i, '');
-  const key = normalizeName(basename);
-  if (exactLookup.has(key)) return exactLookup.get(key);
-  const candidates = [...(namedLookup.get(key) ?? [])].sort(
-    (a, b) => categoryRank.indexOf(a.pageType) - categoryRank.indexOf(b.pageType),
-  );
-  return candidates[0] ?? null;
+  return lookup.resolve(rawLink).document;
 }
 
 let changed = 0;
 for (const document of documents) {
   const aliases = [...new Set(asArray(document.data.aliases).map(String))]
-    .filter((alias) => normalizeName(alias) !== normalizeName(document.title));
+    .filter((alias) => normalizeWikiName(alias) !== normalizeWikiName(document.title));
   const rawTags = asArray(document.data.tags).map(String).filter((tag) => !tag.startsWith('status/'));
   const typeTag = `type/${document.pageType}`;
   const tags = [typeTag, ...rawTags.filter((tag) => !tag.startsWith('type/'))];

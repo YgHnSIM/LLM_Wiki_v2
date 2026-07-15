@@ -23,6 +23,8 @@ LLM_Wiki_v2/
 │       ├── raw-artifacts.yml    # raw 역할·출처 상태·해시
 │       └── red-links.yml        # 의도적으로 허용한 미작성 링크
 ├── scripts/
+│   ├── lib/                     # 문서·링크·경로·빌드 공통 모듈
+│   ├── tests/                   # Node.js 회귀 테스트
 │   ├── lint-wiki.mjs
 │   ├── build-site.mjs
 │   └── check-site.mjs
@@ -154,7 +156,7 @@ related:
 4. `wiki/sources/`에 요약·검증 정정·핵심 문장·출처·관련 항목을 작성한다.
 5. 관련 entity·concept·analysis를 갱신한다.
 6. `index.md`, `overview.md`, `log.md`를 갱신한다.
-7. `npm run lint:wiki`와 `npm run build`를 실행한다.
+7. `npm run verify`로 단위 테스트, wiki lint, 사이트 빌드와 산출물 검사를 실행한다.
 
 ### 6.2 참고 자료 보강
 
@@ -166,14 +168,14 @@ related:
 
 `scripts/lint-wiki.mjs`는 다음을 실패 조건으로 검사한다.
 
-- 스키마 필드와 enum
+- `wiki/meta/page.schema.json`에 대한 frontmatter 구조·타입·enum 검증
 - 폴더·`page_type`·`type/*` 일치
 - ID 중복, H1·title 불일치
 - 허용되지 않은 태그
 - 존재하지 않거나 해시가 달라진 raw artifact
 - 존재하지 않는 evidence ID, 빈 locator
 - 비메타 문서의 `## 출처` 누락
-- 빨간 링크와 색인 누락
+- 빨간 링크와 색인 누락·중복·근거 수 불일치
 - `## 관련 항목`의 위치
 - 검증된 문서의 해결되지 않은 경고
 - 출처 없는 인용문 형식

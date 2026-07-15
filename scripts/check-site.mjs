@@ -1,50 +1,13 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { distDir } from './lib/project-paths.mjs';
+import { outputFileForUrl, safeDecode } from './lib/site-paths.mjs';
+import { walkFiles } from './lib/wiki-utils.mjs';
 
-const scriptDir = path.dirname(fileURLToPath(import.meta.url));
-const rootDir = path.resolve(scriptDir, '..');
-const distDir = path.join(rootDir, 'dist');
 const report = JSON.parse(await fs.readFile(path.join(distDir, 'build-report.json'), 'utf8'));
 const basePath = report.basePath ?? '';
-
-async function walk(directory, extension = '') {
-  const entries = await fs.readdir(directory, { withFileTypes: true });
-  const files = await Promise.all(entries.map(async (entry) => {
-    const absolute = path.join(directory, entry.name);
-    if (entry.isDirectory()) return walk(absolute, extension);
-    if (!extension || entry.name.endsWith(extension)) return [absolute];
-    return [];
-  }));
-  return files.flat();
-}
-
-function withoutBasePath(urlPath) {
-  if (!basePath) return urlPath;
-  if (urlPath === basePath) return '/';
-  if (urlPath.startsWith(`${basePath}/`)) return urlPath.slice(basePath.length);
-  return null;
-}
-
-function safeDecode(value) {
-  try {
-    return decodeURIComponent(value);
-  } catch {
-    return value;
-  }
-}
-
-function fileForUrl(rawUrl) {
-  const [rawPath] = rawUrl.split(/[?#]/);
-  const stripped = withoutBasePath(rawPath);
-  if (stripped === null) return null;
-  const decoded = safeDecode(stripped || '/').replace(/^\/+/, '');
-  if (!decoded) return path.join(distDir, 'index.html');
-  if (path.posix.extname(decoded)) return path.join(distDir, ...decoded.split('/'));
-  return path.join(distDir, ...decoded.replace(/\/$/, '').split('/'), 'index.html');
-}
-
-const htmlFiles = await walk(distDir, '.html');
+const fileForUrl = (rawUrl) => outputFileForUrl(rawUrl, { outputDir: distDir, basePath });
+const htmlFiles = await walkFiles(distDir, '.html');
 const htmlCache = new Map();
 const errors = [];
 let checkedReferences = 0;
