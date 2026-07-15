@@ -11,7 +11,7 @@ tags:
   - type/analysis
   - domain/ai
 created: '2026-05-08'
-updated: '2026-07-15'
+updated: '2026-07-16'
 lifecycle: active
 verification: partial
 artifacts:
@@ -22,6 +22,8 @@ artifacts:
   - raw/006_1962_위드로-호프_MADALINE_해설.md
   - raw/007_ELIZA - The First Conversational AI Program.ko.md
   - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
+  - raw/009_SHRDLU - Understanding Language Through Action.ko.md
+  - raw/009_SHRDLU - Understanding Language Through Action.commentary.ko.md
 evidence:
   - source_id: macdonald-1963
     locator: pp. 1–4
@@ -35,6 +37,12 @@ evidence:
   - source_id: weizenbaum-1966
     locator: pp. 36–45
     relation: supports
+  - source_id: winograd-1971
+    locator: chapters 1–3, especially pp. 1–39
+    relation: supports
+  - source_id: winograd-1980
+    locator: pp. 212–218
+    relation: contextualizes
 related:
   - concept.기계-번역
   - concept.규칙-기반-기계-번역
@@ -46,6 +54,8 @@ related:
   - concept.eliza
   - concept.eliza-효과
   - analysis.eliza에서-llm으로
+  - concept.shrdlu
+  - concept.마이크로월드
   - concept.대규모-언어-모델
 ---
 # AI 시연과 실제 성능
@@ -68,6 +78,10 @@ related:
 
 [[007_ELIZA]]는 시연 효과가 대화 역할과 사용자 해석에서도 발생할 수 있음을 보여준다. [[DOCTOR 스크립트]]의 치료사 역할은 모호한 템플릿과 되묻기를 공감과 통찰처럼 보이게 했다. 따라서 대화형 AI는 사용자가 느끼는 자연스러움뿐 아니라 시스템이 실제로 무엇을 이해하고, 어떤 실패를 숨기며, 어떤 위험한 신뢰를 유발하는지도 평가해야 한다.
 
+## SHRDLU와 마이크로월드
+
+[[009_SHRDLU]]는 ELIZA보다 풍부한 통사 분석·세계 모델·추론·계획을 결합했다. 모호한 지시를 되묻고 복합 명령을 실행한 대화는 실제 기능을 반영한다. 다만 이 기능은 어휘·사물·관계가 닫힌 [[마이크로월드]]에서 작동했다. [[블록 세계]]의 통제 조건은 구성 요소를 통합해 시험하기에 유용했지만, 열린 현실에서 같은 범위를 보장하지 않는다.
+
 ## 현대 LLM 평가로의 확장
 
 현대 [[대규모 언어 모델]]도 인상적인 데모, 선별된 벤치마크, 실제 제품 사용 사이에서 성능 차이를 보일 수 있다. 따라서 평가에는 대표성 있는 테스트 세트, 실패 사례 분석, 장기 사용 조건, 도메인별 정확성, 인간 검토 절차가 함께 필요하다.
@@ -82,7 +96,9 @@ related:
 - [[002_튜링 테스트]]
 - [[006_위드로-호프의 MADALINE]]
 - [[007_ELIZA]]
+- [[009_SHRDLU]]
 - Bernard Widrow·Michael A. Lehr, [30 Years of Adaptive Neural Networks](https://isl.stanford.edu/people/widrow/papers/j199030years.pdf), 1990, pp. 1415–1416.
+- Terry Winograd, [What Does It Mean to Understand Language?](https://doi.org/10.1207/s15516709cog0403_1), 1980, pp. 212–218.
 
 ## 관련 항목
 
@@ -96,4 +112,6 @@ related:
 - [[ELIZA]]
 - [[ELIZA 효과]]
 - [[ELIZA에서 LLM으로]]
+- [[SHRDLU]]
+- [[마이크로월드]]
 - [[대규모 언어 모델]]

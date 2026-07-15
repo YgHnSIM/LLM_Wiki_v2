@@ -13,7 +13,7 @@ tags:
   - domain/nlp
   - domain/conversational-ai
 created: '2026-07-14'
-updated: '2026-07-15'
+updated: '2026-07-16'
 lifecycle: active
 verification: partial
 artifacts:
@@ -21,6 +21,8 @@ artifacts:
   - raw/002_The Turing Test.commentary.md
   - raw/007_ELIZA - The First Conversational AI Program.ko.md
   - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
+  - raw/009_SHRDLU - Understanding Language Through Action.ko.md
+  - raw/009_SHRDLU - Understanding Language Through Action.commentary.ko.md
 evidence:
   - source_id: turing-1950
     locator: 'pp. 433–460, §§1–7'
@@ -31,6 +33,12 @@ evidence:
   - source_id: mit-eliza-1965
     locator: ELIZA source and DOCTOR script records
     relation: supplements
+  - source_id: winograd-1971
+    locator: chapters 1–3, especially pp. 1–39
+    relation: supports
+  - source_id: winograd-1980
+    locator: pp. 212–218
+    relation: contextualizes
 related:
   - concept.eliza
   - concept.eliza-효과
@@ -38,6 +46,9 @@ related:
   - concept.튜링-테스트
   - concept.행동-기반-지능-기준
   - concept.대규모-언어-모델
+  - concept.shrdlu
+  - concept.블록-세계
+  - concept.마이크로월드
   - analysis.ai-시연과-실제-성능
 ---
 # ELIZA에서 LLM으로
@@ -48,6 +59,8 @@ related:
 
 ELIZA는 대화 규칙을 실행하는 프레임워크였고 [[DOCTOR 스크립트]]는 그 위에서 치료사 역할을 구현했다. 어떤 키워드를 중요하게 볼지, 어떤 [[패턴 매칭]]과 응답 템플릿을 사용할지, 실패 시 어떤 [[대화 복구|fallback]]을 쓸지 설계자가 직접 정했다. 현대 LLM은 대규모 데이터에서 토큰 간 패턴과 표현을 학습해 훨씬 넓은 문맥에서 새 문장을 생성한다.
 
+[[SHRDLU]]는 이 둘 사이의 단순한 중간 단계가 아니라 다른 설계 축을 보여준다. [[블록 세계]]의 구조화된 상태에 언어를 연결하고, 통사·의미·추론·계획을 통합했다. 자연어의 범위는 좁았지만 출력의 자연스러움만이 아니라 명령 실행과 상태 질의로 해석을 시험할 수 있었다.
+
 ## 역할 설정의 연속성
 
 작동 방식은 다르지만 대화 역할이 사용자 해석을 바꾼다는 점은 이어진다. [[DOCTOR 스크립트]]의 “심리치료사” 프레임은 모호한 응답을 공감과 절제로 보이게 했다. 현대 시스템에서도 역할과 지시가 응답의 어조와 사용자의 기대를 바꾼다. 따라서 모델 성능뿐 아니라 인터페이스가 어떤 능력을 암시하는지도 평가해야 한다.
@@ -55,6 +68,8 @@ ELIZA는 대화 규칙을 실행하는 프레임워크였고 [[DOCTOR 스크립�
 ## 유창성과 이해
 
 ELIZA는 제한된 규칙만으로도 이해하는 듯 보일 수 있음을 보여주었다. LLM은 ELIZA보다 훨씬 복잡하므로 두 시스템을 기술적으로 동일시하면 안 된다. 그럼에도 자연스러운 출력만으로 이해·의식·신뢰 가능한 추론을 확정할 수 없다는 평가 문제는 남아 있다. ELIZA를 [[튜링 테스트]]의 최초 구현으로 보는 대신 후대의 비교 대상으로 다룬다.
+
+SHRDLU 역시 폐쇄된 [[마이크로월드]] 안에서 기능적 이해를 보여줬지만, 그 성공을 열린 세계의 일반 이해로 확대할 수는 없었다. 세 시스템을 비교할 때는 규칙·학습 여부만 아니라 세계 상태와의 연결, 행동 검증, 영역 확장 비용을 함께 봐야 한다.
 
 ## ELIZA 효과의 확장
 
@@ -72,6 +87,7 @@ ELIZA는 제한된 규칙만으로도 이해하는 듯 보일 수 있음을 보�
 
 - [[002_튜링 테스트]]
 - [[007_ELIZA]]
+- [[009_SHRDLU]]
 
 ## 관련 항목
 
@@ -81,4 +97,7 @@ ELIZA는 제한된 규칙만으로도 이해하는 듯 보일 수 있음을 보�
 - [[튜링 테스트]]
 - [[행동주의적 지능 기준]]
 - [[대규모 언어 모델]]
+- [[SHRDLU]]
+- [[블록 세계]]
+- [[마이크로월드]]
 - [[AI 시연과 실제 성능]]

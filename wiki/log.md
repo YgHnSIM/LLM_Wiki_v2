@@ -1,4 +1,4 @@
-﻿---
+---
 schema_version: 2
 id: meta.log
 page_type: meta
@@ -344,15 +344,36 @@ Lo-Fi 인쇄물의 시각 방향은 유지하면서 검색과 본문을 먼저 �
 
 ## [2026-07-16] ingest | 009 SHRDLU raw artifact
 
-새로 작성한 009 한국어 번역과 학습용 해설을 aw/ 보존 계층에 그대로 복사하고 artifact 레지스트리에 등록했다.
+새로 작성한 009 한국어 번역과 학습용 해설을 `raw/` 보존 계층에 그대로 복사하고 artifact 레지스트리에 등록했다. 이 복사 단계에서는 공개 위키 문서를 만들지 않았다.
 
-- 번역:  09_SHRDLU - Understanding Language Through Action.ko.md`r
-- 해설:  09_SHRDLU - Understanding Language Through Action.commentary.ko.md`r
-- 두 파일 모두 external-original-used, original_in_repository: false로 기록하고 SHA-256을 검증했다.
-- 공개  09 위키 문서와 외부 근거 등록은 별도 작업으로 남겨 두었다.
+- 번역: `009_SHRDLU - Understanding Language Through Action.ko.md`
+- 해설: `009_SHRDLU - Understanding Language Through Action.commentary.ko.md`
+- 두 파일 모두 `external-original-used`, `original_in_repository: false`로 기록하고 SHA-256을 검증했다.
+
+## [2026-07-16] ingest | 009 SHRDLU
+
+보존한 번역·해설을 공개 지식의 근거로 직접 승격하지 않고, Winograd의 1971년 기술 보고서·1972년 논문·1980년 회고와 Minsky–Papert의 마이크로월드 논의를 검증해 `009` 소스를 정식 수록했다.
+
+변경 문서:
+
+- `wiki/sources/009_SHRDLU.md`
+- `wiki/entities/테리 위노그래드.md`, `MIT.md`
+- `wiki/concepts/SHRDLU.md`, `블록 세계.md`, `마이크로월드.md`, `지식 공학 병목.md`
+- `wiki/analyses/ELIZA에서 LLM으로.md`, `AI 시연과 실제 성능.md`
+- `wiki/meta/evidence.yml`, `wiki/index.md`, `wiki/overview.md`
+
+검증 근거와 정정:
+
+- 개발 시기 1968~1970년, 기술 보고서 1971년, 논문·책 출판 1972년을 구분했다.
+- 통사·의미·문맥·추론·계획의 통합과 실제 SHRDLU 대화 기록을 확인했다.
+- raw의 빈 대화 자리와 `SHRDLU ETAOIN` 순서를 교정하고, 시뮬레이션된 로봇 팔을 물리 로봇과 구분했다.
+- 폐쇄된 블록 세계의 기능적 성공과 일반 언어 이해·철학적 이해 주장을 구분했다.
+
+남은 제한:
+
+- 프로젝트에는 외부 영어 원문 파일을 복제하지 않았으며, raw에는 한국어 번역과 해설만 보존돼 있다.
 
 ## 관련 항목
 
 - [[index]]
 - [[overview]]
-

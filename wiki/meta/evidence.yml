@@ -278,3 +278,37 @@ sources:
     doi: 10.3115/974235.974260
     url: https://aclanthology.org/A88-1019/
     language: en
+  winograd-1971:
+    title: Procedures as a Representation for Data in a Computer Program for Understanding Natural Language
+    authors: [Terry Winograd]
+    published: 1971
+    source_type: primary
+    kind: technical-report
+    url: https://hdl.handle.net/1721.1/7095
+    language: en
+  winograd-1972:
+    title: Understanding Natural Language
+    authors: [Terry Winograd]
+    published: 1972
+    source_type: primary
+    kind: journal-article
+    doi: 10.1016/0010-0285(72)90002-3
+    url: https://doi.org/10.1016/0010-0285(72)90002-3
+    language: en
+  winograd-1980:
+    title: What Does It Mean to Understand Language?
+    authors: [Terry Winograd]
+    published: 1980
+    source_type: primary
+    kind: journal-article
+    doi: 10.1207/s15516709cog0403_1
+    url: https://doi.org/10.1207/s15516709cog0403_1
+    language: en
+  minsky-papert-1971:
+    title: Progress Report on Artificial Intelligence
+    authors: [Marvin Minsky, Seymour Papert]
+    published: 1971
+    source_type: primary
+    kind: technical-report
+    url: https://www.mit.edu/~dxh/marvin/web.media.mit.edu/~minsky/papers/PR1971.html
+    language: en
