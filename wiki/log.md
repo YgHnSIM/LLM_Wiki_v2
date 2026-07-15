@@ -9,7 +9,7 @@ aliases:
 tags:
   - type/meta
 created: '2026-05-07'
-updated: '2026-07-15'
+updated: '2026-07-16'
 lifecycle: active
 verification: verified
 artifacts: []
@@ -310,6 +310,37 @@ Lo-Fi 인쇄물의 시각 방향은 유지하면서 검색과 본문을 먼저 �
 남은 제한:
 
 - `tags.yml`, `evidence.yml`, `raw-artifacts.yml`, `red-links.yml`은 버전과 기존 도메인 규칙으로 검사하지만 아직 각각의 독립 JSON Schema는 없다.
+
+## [2026-07-16] ingest | 008 비터비 알고리즘 raw artifact
+
+외부 원문을 기준으로 새로 작성한 비터비 알고리즘 한국어 번역과 학습용 해설을 `raw/` 보존 계층에 추가했다. 기존 등록 artifact는 수정하지 않았다.
+
+- 번역: `008_Viterbi Algorithm - Dynamic Programming Foundation for Sequence Decoding in Speech Recognition and NLP.ko.md`
+- 해설: `008_Viterbi Algorithm - Dynamic Programming Foundation for Sequence Decoding in Speech Recognition and NLP.commentary.ko.md`
+- 두 파일 모두 `external-original-used`, `original_in_repository: false`로 등록하고 SHA-256을 기록했다.
+- 이번 작업은 raw artifact 보존과 등록만 수행했으며, 공개 `008` 소스 페이지와 외부 evidence 등록은 아직 만들지 않았다.
+
+## [2026-07-16] ingest | 008 비터비 알고리즘
+
+보존한 번역·해설을 공개 지식의 근거로 직접 승격하지 않고, 원 논문과 후대 적용 문헌을 별도로 검증해 `008` 소스를 정식 수록했다.
+
+변경 문서:
+
+- `wiki/sources/008_비터비 알고리즘.md`
+- `wiki/concepts/비터비 알고리즘.md`, `동적 계획법.md`, `은닉 마르코프 모델.md`
+- `wiki/entities/앤드루 비터비.md`
+- `wiki/meta/evidence.yml`, `wiki/index.md`, `wiki/overview.md`
+
+검증 근거와 정정:
+
+- Viterbi 1967·Forney 1973으로 통신 복호화의 출발점과 최고 경로 절차를 확인했다.
+- Baum–Petrie 1966과 Rabiner 1989로 HMM의 확률 모델·디코딩·음성 인식 적용을 확인했다.
+- Church 1988로 동적 계획법을 이용한 통계적 품사 태깅 사례를 확인했다.
+- raw의 $N=50$, $T=20$ 계산량은 20,000이 아니라 50,000이며, HMM의 정확한 동적 계획법과 Transformer 자기회귀 생성의 빔 탐색·병렬성을 구분했다.
+
+남은 제한:
+
+- 프로젝트에는 외부 영어 원문 파일을 복제하지 않았으며, raw에는 새 한국어 번역과 해설만 보존돼 있다.
 
 ## 관련 항목
 

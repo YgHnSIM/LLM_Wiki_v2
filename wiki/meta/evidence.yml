@@ -224,3 +224,57 @@ sources:
     doi: 10.1017/S0140525X00005756
     url: https://doi.org/10.1017/S0140525X00005756
     language: en
+  bellman-1954:
+    title: The Theory of Dynamic Programming
+    authors: [Richard Bellman]
+    published: 1954
+    source_type: primary
+    kind: journal-article
+    doi: 10.1090/S0002-9904-1954-09848-8
+    url: https://www.ams.org/bull/1954-60-06/S0002-9904-1954-09848-8/S0002-9904-1954-09848-8.pdf
+    language: en
+  baum-petrie-1966:
+    title: Statistical Inference for Probabilistic Functions of Finite State Markov Chains
+    authors: [Leonard E. Baum, Ted Petrie]
+    published: 1966
+    source_type: primary
+    kind: journal-article
+    doi: 10.1214/aoms/1177699147
+    url: https://projecteuclid.org/download/pdf_1/euclid.aoms/1177699147
+    language: en
+  viterbi-1967:
+    title: Error Bounds for Convolutional Codes and an Asymptotically Optimum Decoding Algorithm
+    authors: [Andrew J. Viterbi]
+    published: 1967
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/TIT.1967.1054010
+    url: https://doi.org/10.1109/TIT.1967.1054010
+    language: en
+  forney-1973:
+    title: The Viterbi Algorithm
+    authors: [G. David Forney Jr.]
+    published: 1973
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/PROC.1973.9030
+    url: https://doi.org/10.1109/PROC.1973.9030
+    language: en
+  rabiner-1989:
+    title: A Tutorial on Hidden Markov Models and Selected Applications in Speech Recognition
+    authors: [Lawrence R. Rabiner]
+    published: 1989
+    source_type: scholarly-secondary
+    kind: journal-article
+    doi: 10.1109/5.18626
+    url: https://doi.org/10.1109/5.18626
+    language: en
+  church-1988:
+    title: A Stochastic Parts Program and Noun Phrase Parser for Unrestricted Text
+    authors: [Kenneth Ward Church]
+    published: 1988
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/974235.974260
+    url: https://aclanthology.org/A88-1019/
+    language: en

@@ -112,3 +112,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 14542cc087bb4cf2b2f4dd876627215c734d56979898a0aeb20af81869189459
+  - path: "raw/008_Viterbi Algorithm - Dynamic Programming Foundation for Sequence Decoding in Speech Recognition and NLP.ko.md"
+    role: translation
+    order_prefix: "008"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: bcd382aac2c81ae34f6dee7c1dbcf6373ff170ba908770619bb7e147e240622c
+  - path: "raw/008_Viterbi Algorithm - Dynamic Programming Foundation for Sequence Decoding in Speech Recognition and NLP.commentary.ko.md"
+    role: commentary
+    order_prefix: "008"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: e1b4ac987921c9b0987180fd8386a9a529c00e3caedc919b8f9a03428cdf3140
