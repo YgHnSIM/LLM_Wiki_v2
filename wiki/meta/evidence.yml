@@ -654,3 +654,56 @@ sources:
     doi: 10.3115/981623.981627
     url: https://aclanthology.org/P89-1004/
     language: en
+  lesk-1986:
+    title: "Automatic Sense Disambiguation Using Machine Readable Dictionaries: How to Tell a Pine Cone from an Ice Cream Cone"
+    authors: [Michael E. Lesk]
+    published: 1986
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1145/318723.318728
+    url: https://doi.org/10.1145/318723.318728
+    language: en
+  banerjee-pedersen-2002-adapted-lesk:
+    title: An Adapted Lesk Algorithm for Word Sense Disambiguation Using WordNet
+    authors: [Satanjeev Banerjee, Ted Pedersen]
+    published: 2002
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1007/3-540-45715-1_11
+    url: https://doi.org/10.1007/3-540-45715-1_11
+    language: en
+  banerjee-pedersen-2003-extended-gloss-overlaps:
+    title: Extended Gloss Overlaps as a Measure of Semantic Relatedness
+    authors: [Satanjeev Banerjee, Ted Pedersen]
+    published: 2003
+    source_type: primary
+    kind: conference-paper
+    url: https://www.ijcai.org/Proceedings/03/Papers/116.pdf
+    language: en
+  raganato-et-al-2017-wsd:
+    title: "Word Sense Disambiguation: A Unified Evaluation Framework and Empirical Comparison"
+    authors: [Alessandro Raganato, Jose Camacho-Collados, Roberto Navigli]
+    published: 2017
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/E17-1010
+    url: https://aclanthology.org/E17-1010/
+    language: en
+  oele-van-noord-2018-embedding-wsd:
+    title: Simple Embedding-Based Word Sense Disambiguation
+    authors: [Dieke Oele, Gertjan van Noord]
+    published: 2018
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/2018.gwc-1.30
+    url: https://aclanthology.org/2018.gwc-1.30/
+    language: en
+  huang-et-al-2019-glossbert:
+    title: "GlossBERT: BERT for Word Sense Disambiguation with Gloss Knowledge"
+    authors: [Luyao Huang, Chi Sun, Xipeng Qiu, Xuanjing Huang]
+    published: 2019
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/D19-1355
+    url: https://aclanthology.org/D19-1355/
+    language: en

@@ -577,6 +577,35 @@ Lo-Fi 인쇄물의 시각 방향은 유지하면서 검색과 본문을 먼저 �
 - 프로그램 실행, 전체 시스템의 기능, 환경 접지, 지향성, 의식의 충분조건은 계속 논쟁 중이므로 `source.016`, [[강한 AI]], [[중국어 방 논증]]은 `disputed`로 두었다.
 - 현대 신경 LLM에 중국어 방을 적용하는 것은 후대의 철학적 확장이며, 1980년 문헌만으로 경험적 동일성이나 이해 여부를 판정하지 않는다.
 
+## [2026-07-16] ingest | 017 Lesk 알고리즘과 단어 의미 중의성 해소
+
+017 영어 원문을 기존 출력과 무관하게 새로 번역하고 12개 절의 학습용 해설을 작성했다. 검증된 쌍은 `raw/`에 그대로 보존하고 SHA-256을 등록했으며, 1986년 Lesk 논문과 2002·2003년 WordNet 확장, 2017년 통합 평가, 2018년 임베딩 WSD, 2019년 GlossBERT를 분리해 공개 소스를 수록했다.
+
+변경 문서:
+
+- `raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.ko.md`와 대응 해설
+- `wiki/sources/017_Lesk 알고리즘과 단어 의미 중의성 해소.md`
+- `wiki/entities/마이클 레스크.md`
+- `wiki/concepts/Lesk 알고리즘.md`, `단어 의미 중의성 해소.md`, `통계적 자연어 처리.md`
+- `wiki/analyses/규칙 기반 AI에서 데이터 기반 학습으로.md`
+- `wiki/meta/raw-artifacts.yml`, `wiki/meta/evidence.yml`, `wiki/index.md`, `wiki/overview.md`
+
+검증 근거와 정정:
+
+- SIGDOC 논문의 발표 연도와 DOI를 확인해 1983년 귀속을 1986년으로 교정하고, 저자 소속을 Bell Communications Research, Morristown으로 기록했다.
+- 실제 구현이 현재 단어의 후보 글로스를 주변 단어들의 모든 후보 글로스와 비교한 뒤 각 단어를 한 번 처리했음을 확인하고, 전역 의미 조합 탐색과 단순 선형 복잡도 설명을 모두 배제했다.
+- `pine cone`, `coal ash`, `Time flies`·`Fruit flies`와 p. 26의 오류 사례를 원 논문 예시로 구분하고, raw의 `bank`·`interest`·낚시 예시는 후대 튜토리얼 사례로 처리했다.
+- 사용 사전을 Oxford Advanced Learner’s, Webster’s Seventh New Collegiate, Collins로 확인해 OED 귀속을 교정했다.
+- 《Pride and Prejudice》의 짧은 표본과 AP 기사 하나에서 보고된 50–70%를 상세 설계가 없는 예비 점검으로 한정했다.
+- 2002년 `Adapted Lesk`와 2003년 `Extended Gloss Overlaps`를 분리하고, 임베딩 WSD와 GlossBERT는 Lesk와 비교 가능한 후속 방법이지 Word2Vec·BERT·Transformer·LLM 전체의 직접 계보가 아님을 기록했다.
+- Lesk를 학습된 통계 모델이 아닌 결정론적 지식 기반 WSD로 구분해 규칙 기반 AI에서 데이터 기반 학습으로의 전환을 단선적으로 설명하지 않았다.
+
+남은 제한:
+
+- 프로젝트에는 외부 영어 원문 파일을 복제하지 않았으며, raw에는 한국어 번역과 해설만 보존돼 있다.
+- 1986년 논문은 전처리 명세·점근 복잡도·실행 시간·상세 평가 설계를 제공하지 않아 공개 문서도 이를 추정하지 않았다.
+- raw가 열거한 광범위한 산업 응용과 현대 언어 모델 전체의 직접 영향은 개별 1차 문헌으로 검증하지 않아 공개 핵심 사실로 채택하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

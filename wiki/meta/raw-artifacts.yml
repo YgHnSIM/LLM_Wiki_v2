@@ -256,3 +256,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: c0d40f9a01c62d1896a5765b87c443e0c3014f6f3f05b1fbb0c60157ac0b80aa
+  - path: "raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.ko.md"
+    role: translation
+    order_prefix: "017"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 5e2e11571cb65258197e2e0128df1bdab811ffb524fe47ce3183a83e9d8e0d62
+  - path: "raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.commentary.ko.md"
+    role: commentary
+    order_prefix: "017"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 4c35b6f60bb510a43febd1650f0cac4dde23fca4e2272834a4c777da0a016703
