@@ -989,3 +989,46 @@ sources:
     doi: 10.48550/arXiv.1409.0473
     url: https://arxiv.org/abs/1409.0473
     language: en
+  penn-treebank-2-1995:
+    title: Treebank-2
+    authors: [Mitchell P. Marcus, Beatrice Santorini, Mary Ann Marcinkiewicz]
+    published: 1995
+    source_type: primary
+    kind: corpus-manual
+    doi: 10.35111/wf9p-g717
+    url: https://catalog.ldc.upenn.edu/LDC95T7
+    language: en
+  marcus-et-al-1994-penn-treebank:
+    title: "The Penn Treebank: Annotating Predicate Argument Structure"
+    authors: [Mitchell Marcus, Grace Kim, Mary Ann Marcinkiewicz, Robert MacIntyre, Ann Bies, Mark Ferguson, Karen Katz, Britta Schasberger]
+    published: 1994
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/H94-1020/
+    language: en
+  black-et-al-1991-parseval:
+    title: A Procedure for Quantitatively Comparing the Syntactic Coverage of English Grammars
+    authors: [E. Black, S. Abney, D. Flickenger, C. Gdaniec, R. Grishman, P. Harrison, D. Hindle, R. Ingria, F. Jelinek, J. Klavans, M. Liberman, M. Marcus, S. Roukos, B. Santorini, T. Strzalkowski]
+    published: 1991
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/H91-1060/
+    language: en
+  collins-1997-statistical-parsing:
+    title: Three Generative, Lexicalised Models for Statistical Parsing
+    authors: [Michael Collins]
+    published: 1997
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/976909.979620
+    url: https://aclanthology.org/P97-1003/
+    language: en
+  chiang-2005-hierarchical-phrase-based-mt:
+    title: A Hierarchical Phrase-Based Model for Statistical Machine Translation
+    authors: [David Chiang]
+    published: 2005
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/1219840.1219873
+    url: https://aclanthology.org/P05-1033/
+    language: en

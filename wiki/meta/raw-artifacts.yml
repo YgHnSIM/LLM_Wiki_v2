@@ -352,3 +352,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 2c2092c203b14c8b0972631f2f924862d190881c4b32af57b7004e3c55f702ea
+  - path: "raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.ko.md"
+    role: translation
+    order_prefix: "023"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 910c79d6a328710a170433f6d161447f83833c50f15266eda6fc95ff6afb32a0
+  - path: "raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.commentary.ko.md"
+    role: commentary
+    order_prefix: "023"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 24467a278b8caabfb8816e868d03fa2a8e1443a8e45c93a8cd52f82ae7a44b9c

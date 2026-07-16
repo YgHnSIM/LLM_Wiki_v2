@@ -835,6 +835,34 @@ Lo-Fi 인쇄물의 시각 방향은 유지하면서 검색과 본문을 먼저 �
 - 기준 경로가 없는 로컬 환경에서 `npm run verify`를 통과했다.
 - GitHub Actions와 같은 `BASE_PATH=/LLM_Wiki_v2` 환경에서도 `npm run verify`를 통과했다.
 
+## [2026-07-16] ingest | 023 Penn Treebank와 통계적 구문 분석
+
+023 영어 원문을 기존 번역과 무관하게 새로 번역하고 12절 해설을 작성한 뒤, 검증된 쌍을 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 1993년 단일 사건으로 묶인 원문 서사를 1989–1995년의 구축·예비 배포·주석 개편·LDC 배포로 나누고, 주석 인프라와 통계 구문 분석의 관계를 1차 문헌으로 검증했다.
+
+변경 문서:
+
+- `raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.ko.md`와 대응 해설
+- `wiki/sources/023_Penn Treebank와 통계적 구문 분석.md`
+- `wiki/concepts/말뭉치 기반 학습.md`, `파싱.md`, `통계적 자연어 처리.md`
+- `wiki/entities/케네스 처치.md`
+- `wiki/analyses/규칙 기반 AI에서 데이터 기반 학습으로.md`
+- `wiki/meta/raw-artifacts.yml`, `wiki/meta/evidence.yml`, `wiki/index.md`, `wiki/overview.md`
+
+검증 근거와 정정:
+
+- 1992년 11월 기준 품사 주석 4,885,798토큰과 골격 구문 주석 2,881,188토큰을 Treebank-2 WSJ 100만 단어와 분리했다.
+- 1992년 Preliminary Release, 1993년 구축 보고, 1994년 논항 구조 주석 개편, 1995년 LDC95T7 배포를 구분했다.
+- PARTS·Fidditch 자동 초안과 인간 교정, 품사 태그 36개와 기타 기호 12개, 첫 단계 빈 요소와 Treebank II의 공색인·기능 태그·gapping 대응 표기를 확인했다.
+- 완전 구조와 골격 구조의 주석 속도를 숙련 기간별로 나누고, “숙련자 시간당 300–400단어”라는 단일 수치를 교정했다.
+- PARSEVAL을 Black 외 1991의 별도 평가 절차로, Collins 1997 결과를 정밀도 88.1%·재현율 87.5%로 기록했다.
+- Brill 1992는 Brown Corpus 조건에서 약 94.9%였고, Chiang의 Hiero는 통사 정보 없이 병렬 말뭉치에서 학습했음을 확인했다.
+
+남은 제한:
+
+- 프로젝트에는 라이선스가 있는 WSJ 영어 원문을 복제하지 않았으며, raw에는 한국어 번역과 해설만 보존한다.
+- WSJ 중심 결과는 대화·웹·다른 언어로 일반화되지 않으며, 구성 성분 정답도 특정 주석 이론과 지침의 산물이다.
+- 원문의 기본 PCFG 70–75%, 인간 주석 F1 92–95%, 2016년 신경 파서 94%와 명시적 구문의 보편적 이득은 근거 조건이 부족해 공개 사실로 채택하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

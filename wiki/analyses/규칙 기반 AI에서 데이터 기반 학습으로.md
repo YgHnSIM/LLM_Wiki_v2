@@ -39,6 +39,8 @@ artifacts:
   - raw/021_Convolutional Neural Networks - Revolutionizing Feature Learning.commentary.ko.md
   - raw/022_IBM Statistical Machine Translation - From Rules to Data.ko.md
   - raw/022_IBM Statistical Machine Translation - From Rules to Data.commentary.ko.md
+  - raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.ko.md
+  - raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.commentary.ko.md
 evidence:
   - source_id: macdonald-1963
     locator: pp. 1–4
@@ -115,7 +117,11 @@ evidence:
   - source_id: lecun-et-al-1998-document-recognition
     locator: pp. 2278–2284 and 2316–2317
     relation: contextualizes
+  - source_id: marcus-et-al-1993
+    locator: pp. 313–327, 특히 §§1–5.1과 Tables 2–4
+    relation: supports
 related:
+  - source.023
   - source.022
   - concept.통계적-기계-번역
   - source.020
@@ -201,6 +207,8 @@ NLP에서는 규칙과 학습이 한 번에 교체되지 않았다. 섀넌의 19
 
 [[통계적 자연어 처리]]는 구조를 없앤 것이 아니다. HMM 태거는 품사를 상태로 사용하고, 확률 문법은 형식 문법의 규칙에 가중치를 둔다. Brill의 1992년 태거는 주석 [[말뭉치 기반 학습|말뭉치]]에서 사람이 읽을 수 있는 변환 규칙을 학습했다. 이 사례들은 상징 표현·수작업 설계·통계 추정이 하나의 시스템 안에 공존할 수 있음을 보여 준다.
 
+[[023_Penn Treebank와 통계적 구문 분석]]은 이 혼합을 연구 인프라 차원에서 보여 준다. 사람은 품사·구문 범주, 빈 요소, 기능 태그와 판정 지침을 정의했고, PARTS와 Fidditch가 만든 자동 초안을 다시 사람이 교정했다. 통계 파서는 이 상징 구조를 없애지 않고 예측 대상으로 삼았다. 규칙 작성의 일부가 주석 스키마·전처리·교정·분할·평가 설계로 이동한 것이다.
+
 IBM 번역 모형도 “규칙을 데이터로 완전히 대체한” 예외가 아니다. 연구진은 Hansard를 문장쌍으로 정렬·필터링하고, 언어 모델과 번역 모델의 분해, 정렬·생성도·왜곡의 구조, 디코더와 탐색 절차를 설계했다. EM은 관측되지 않은 정렬 하나를 정답으로 고정하는 대신 가능한 정렬의 기대 통계를 계산했고, 복잡한 모델에서는 그 합을 근사했다. 데이터 기반 전환은 인간 설계를 없애기보다 설계 대상의 경계를 옮긴 과정이다.
 
 ## HMM 음성 인식의 혼합 설계
@@ -231,6 +239,7 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 
 ## 출처
 
+- [[023_Penn Treebank와 통계적 구문 분석]]
 - [[003_Georgetown-IBM 기계 번역 시연]]
 - [[004_퍼셉트론]]
 - [[005_촘스키의 통사 구조]]
@@ -259,12 +268,14 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - Peter F. Brown 외, [The Mathematics of Statistical Machine Translation: Parameter Estimation](https://aclanthology.org/J93-2003/), 1993, pp. 263–311.
 - Eric Brill, [A Simple Rule-Based Part of Speech Tagger](https://aclanthology.org/A92-1021/), 1992, pp. 152–155.
 - Kenneth W. Church·Robert L. Mercer, [Introduction to the Special Issue on Computational Linguistics Using Large Corpora](https://aclanthology.org/J93-1001/), 1993, pp. 1–3, 15–16.
+- Mitchell P. Marcus·Beatrice Santorini·Mary Ann Marcinkiewicz, [Building a Large Annotated Corpus of English: The Penn Treebank](https://aclanthology.org/J93-2004/), 1993, pp. 313–330.
 - Alexander Waibel 외, [Phoneme Recognition Using Time-Delay Neural Networks](https://doi.org/10.1109/29.21701), 1989, pp. 328–334.
 - Yann LeCun 외, [Backpropagation Applied to Handwritten Zip Code Recognition](https://doi.org/10.1162/neco.1989.1.4.541), 1989, pp. 541–547.
 - Yann LeCun 외, [Gradient-Based Learning Applied to Document Recognition](https://doi.org/10.1109/5.726791), 1998, pp. 2278–2284, 2316–2317.
 
 ## 관련 항목
 
+- [[023_Penn Treebank와 통계적 구문 분석]]
 - [[022_IBM 통계적 기계 번역과 데이터 기반 전환]]
 - [[통계적 기계 번역]]
 - [[규칙 기반 기계 번역]]
