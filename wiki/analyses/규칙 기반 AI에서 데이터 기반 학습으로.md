@@ -27,6 +27,8 @@ artifacts:
   - raw/012_From Symbolic Rules to Statistical Learning - The Paradigm Shift in NLP.commentary.ko.md
   - raw/013_Hidden Markov Models - Statistical Speech Recognition.ko.md
   - raw/013_Hidden Markov Models - Statistical Speech Recognition.commentary.ko.md
+  - raw/014_Augmented Transition Networks - Procedural Parsing Formalism for Natural Language.ko.md
+  - raw/014_Augmented Transition Networks - Procedural Parsing Formalism for Natural Language.commentary.ko.md
 evidence:
   - source_id: macdonald-1963
     locator: pp. 1–4
@@ -73,6 +75,9 @@ evidence:
   - source_id: jelinek-bahl-mercer-1975
     locator: pp. 250–256
     relation: supports
+  - source_id: woods-1970-atn
+    locator: pp. 591–606
+    relation: contextualizes
 related:
   - source.013
   - concept.은닉-마르코프-모델
@@ -92,10 +97,12 @@ related:
   - source.012
   - concept.통계적-자연어-처리
   - concept.말뭉치-기반-학습
+  - source.014
+  - concept.증강-전이망
 ---
 # 규칙 기반 AI에서 데이터 기반 학습으로
 
-[[규칙 기반 AI에서 데이터 기반 학습으로]]의 전환은 AI 시스템을 사람이 직접 규칙으로 작성하는 방식에서, 데이터로부터 매개변수와 패턴을 학습하는 방식으로 무게가 옮겨 간 흐름을 가리킨다. [[003_Georgetown-IBM 기계 번역 시연]]과 [[004_퍼셉트론]]은 이 전환의 두 축을 보여 주고, [[012_상징 규칙에서 통계 학습으로]]와 [[013_은닉 마르코프 모델과 통계적 음성 인식]]은 자연어·음성 처리 내부의 과제별 시간표와 혼합 접근을 보완한다.
+[[규칙 기반 AI에서 데이터 기반 학습으로]]의 전환은 AI 시스템을 사람이 직접 규칙으로 작성하는 방식에서, 데이터로부터 매개변수와 패턴을 학습하는 방식으로 무게가 옮겨 간 흐름을 가리킨다. [[003_Georgetown-IBM 기계 번역 시연]]과 [[004_퍼셉트론]]은 이 전환의 두 축을 보여 주고, [[012_상징 규칙에서 통계 학습으로]], [[013_은닉 마르코프 모델과 통계적 음성 인식]], [[014_증강 전이망과 절차적 자연어 파싱]]은 자연어·음성 처리 내부의 과제별 시간표와 혼합 접근을 보완한다.
 
 ## 규칙 기반 접근의 장점과 병목
 
@@ -118,6 +125,12 @@ Georgetown-IBM 시연은 사전 조회와 통사 규칙을 결합해 번역을 �
 ## ELIZA의 규칙 기반 대화
 
 [[007_ELIZA]]의 [[ELIZA]]는 사람이 키워드 우선순위, [[패턴 매칭]] 규칙, 응답 템플릿, 대명사 변환을 직접 작성한 시스템이다. 제한된 역할 안에서는 매우 설득력 있게 작동했지만, 새로운 영역으로 확장하려면 별도의 스크립트와 규칙이 필요했다. 이는 규칙 기반 접근의 통제 가능성과 [[지식 공학 병목]]을 동시에 보여준다.
+
+## ATN의 절차적 문법 공학
+
+[[증강 전이망]]은 규칙 기반 접근을 단순한 문자열 치환보다 훨씬 풍부하게 만든 사례다. 설계자는 재귀 호출, 레지스터, 자질 검사, 구조 구축 동작을 사용해 통사 분석과 후속 의미 처리를 연결할 수 있었다. LUNAR는 이 절차적 파서를 월 지질학의 의미 해석과 데이터베이스 검색에 결합했다.
+
+이 유연성은 동시에 문법 공학 비용을 만들었다. 상태·호·검사·동작을 사람이 작성하고 디버깅해야 하며, 임의 절차를 허용할수록 문법의 형식적 검증과 실행 시간 경계가 어려워진다. 다만 이 병목을 “ATN은 언제나 지수 시간이라 실패했다”로 단순화하지 않는다. 우즈는 비증강 RTN과 제한된 ATN에 Earley식 $O(n^3)$ 파싱을 적용할 수 있음을 논의했다.
 
 ## NLP 통계적 전환의 실제 시간표
 
@@ -150,10 +163,12 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - [[007_ELIZA]]
 - [[012_상징 규칙에서 통계 학습으로]]
 - [[013_은닉 마르코프 모델과 통계적 음성 인식]]
+- [[014_증강 전이망과 절차적 자연어 파싱]]
 - Leonard E. Baum·Ted Petrie, [Statistical Inference for Probabilistic Functions of Finite State Markov Chains](https://doi.org/10.1214/aoms/1177699147), 1966, pp. 1554–1563.
 - James K. Baker, [The DRAGON System—An Overview](https://research.ibm.com/publications/the-dragon-system-an-overview), 1975, pp. 24–29.
 - Frederick Jelinek·Lalit R. Bahl·Robert L. Mercer, [Design of a Linguistic Statistical Decoder for the Recognition of Continuous Speech](https://research.ibm.com/publications/design-of-a-linguistic-statistical-decoder-for-the-recognition-of-continuous-speech), 1975, pp. 250–256.
 - Frederick Jelinek, [Continuous Speech Recognition by Statistical Methods](https://research.ibm.com/publications/continuous-speech-recognition-by-statistical-methods), 1976, pp. 532–556.
+- William A. Woods, [Transition Network Grammars for Natural Language Analysis](https://doi.org/10.1145/355598.362773), 1970, pp. 591–606.
 - Kenneth Ward Church, [A Stochastic Parts Program and Noun Phrase Parser for Unrestricted Text](https://aclanthology.org/A88-1019/), 1988, pp. 136–143.
 - Peter F. Brown 외, [A Statistical Approach to Machine Translation](https://aclanthology.org/J90-2002/), 1990, pp. 79–85.
 - Eric Brill, [A Simple Rule-Based Part of Speech Tagger](https://aclanthology.org/A92-1021/), 1992, pp. 152–155.
@@ -179,3 +194,5 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - [[012_상징 규칙에서 통계 학습으로]]
 - [[통계적 자연어 처리]]
 - [[말뭉치 기반 학습]]
+- [[014_증강 전이망과 절차적 자연어 파싱]]
+- [[증강 전이망]]

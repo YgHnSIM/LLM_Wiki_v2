@@ -533,3 +533,29 @@ sources:
     doi: 10.3115/981967.981984
     url: https://aclanthology.org/P92-1017/
     language: en
+  woods-1969-atn:
+    title: Augmented Transition Networks for Natural Language Analysis
+    authors: [William A. Woods]
+    published: 1969
+    source_type: primary
+    kind: technical-report
+    url: https://files.eric.ed.gov/fulltext/ED037733.pdf
+    language: en
+  woods-1970-atn:
+    title: Transition Network Grammars for Natural Language Analysis
+    authors: [William A. Woods]
+    published: 1970
+    source_type: primary
+    kind: journal-article
+    doi: 10.1145/355598.362773
+    url: https://doi.org/10.1145/355598.362773
+    language: en
+  woods-1973-lunar:
+    title: "Progress in Natural Language Understanding: An Application to Lunar Geology"
+    authors: [William A. Woods]
+    published: 1973
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1145/1499586.1499695
+    url: https://doi.org/10.1145/1499586.1499695
+    language: en

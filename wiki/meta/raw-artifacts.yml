@@ -208,3 +208,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: de15e36539054e332e0072e6ab5bb3e7ac310a1c1236762aa9b37d4927833a9a
+  - path: "raw/014_Augmented Transition Networks - Procedural Parsing Formalism for Natural Language.ko.md"
+    role: translation
+    order_prefix: "014"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 22679129202b484d609ded7fe4c4553b8069175a69b82169a106adbf17300223
+  - path: "raw/014_Augmented Transition Networks - Procedural Parsing Formalism for Natural Language.commentary.ko.md"
+    role: commentary
+    order_prefix: "014"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: d92baa9b5668ea18e309722b0a67f2a5cf2ae3508de65781eae60c867973f327
