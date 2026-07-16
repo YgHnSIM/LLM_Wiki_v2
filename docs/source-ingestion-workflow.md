@@ -12,6 +12,8 @@
   → source:ready (전체 검사, Git 작업 없음)
   → 변경 범위 검토
   → main에서 ingest 커밋 1회 + push 1회
+  → 완성 소스가 열 편째라면 비교 읽기 작성·검증
+  → main에서 content 커밋 1회 + push 1회
 ```
 
 원칙은 단순하다. raw 복사만 끝난 상태에서는 커밋하거나 푸시하지 않는다. 공개 `source.NNN`과 파생 문서, 색인·개요·로그, 외부 evidence까지 완성되고 전체 검증을 통과한 뒤에만 한 번 커밋한다.
@@ -129,6 +131,36 @@ git push origin main
 ```
 
 브랜치를 새로 만들거나 병합하지 않는다. raw 복사 커밋과 공개 처리 커밋을 나누지 않는다.
+
+## 8. 열 편마다 비교 읽기
+
+마지막 비교 읽기 이후 공개 처리와 `origin/main` 푸시까지 끝난 정규 번호 소스가 열 편이 되면 다음 소스의 raw 복사·공개 처리보다 비교 읽기를 먼저 완성한다. 접두사가 비어 있는 번호는 새 자료를 만들지 않고 건너뛰므로, 번호 구간의 길이가 아니라 실제 완성된 소스 수를 센다.
+
+`wiki/analyses/<첫 번호>–<마지막 번호> 비교 읽기 - <주제>.md`를 만들고 다음 축을 비교한다.
+
+- 각 자료가 직접 해결하려는 문제와 표현 단위
+- 사람이 정한 규칙·구조·어휘·특징
+- 데이터에서 학습하거나 추정한 값
+- 형식 증명, 시연, 실험, 시스템 평가, 철학적 논증 등 증거의 종류
+- 당시 문헌이 직접 보인 범위와 후대 기술에 대한 해석의 한계
+
+비교 문서는 `page_type: analysis`, `verification: partial`을 기본으로 한다. 대상 열 편의 검증된 source note, 외부 evidence locator와 기존 raw artifact를 사용하고, raw의 과장이나 오류를 새로운 사실로 재사용하지 않는다. 숫자 접두사에 결손이 있으면 범위와 실제 포함 소스를 본문에 명시한다.
+
+`wiki/index.md`, `wiki/overview.md`, `wiki/log.md`를 갱신한 뒤 실행한다.
+
+```powershell
+npm run sync:index
+npm run verify
+```
+
+검증이 끝나면 비교 문서와 메타 변경만 명시적으로 stage하고 다음 형식으로 별도 커밋·푸시한다.
+
+```powershell
+git commit -m "content: 010_019_comparative_reading"
+git push origin main
+```
+
+비교 읽기가 원격 `main`에 반영된 것을 확인한 다음에만 다음 번호의 raw 복사와 공개 소스 처리를 계속한다.
 
 ## 실패 복구
 

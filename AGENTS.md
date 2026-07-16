@@ -168,13 +168,22 @@ related:
 
 세부 절차와 실패 복구 규칙은 `docs/source-ingestion-workflow.md`를 따른다.
 
-### 6.3 참고 자료 보강
+### 6.3 열 개 단위 비교 읽기
+
+1. 마지막 비교 읽기 이후 `main`에 공개 처리·푸시까지 끝난 정규 번호 소스를 순서대로 센다. 숫자 접두사가 비어 있으면 자료를 만들지 않고 건너뛰며, 실제로 완성된 소스 열 개를 기준으로 한다.
+2. 열 번째 소스가 푸시되면 다음 소스의 raw 복사·공개 처리보다 먼저 `wiki/analyses/`에 `<첫 번호>–<마지막 번호> 비교 읽기: <주제>` 문서를 작성한다.
+3. 비교 읽기는 정확히 그 열 편의 검증된 공개 소스를 사용해 문제, 표현 단위, 사람이 설계한 부분, 데이터에서 학습·추정한 부분, 직접 증거와 한계를 나란히 비교한다. 후대 기술로 이어지는 단선적 인과는 만들지 않는다.
+4. 문서는 `page_type: analysis`, `verification: partial`을 기본으로 하며, 외부 evidence locator와 각 소스의 raw artifact를 연결한다. `## 출처`와 마지막 `## 관련 항목`에는 비교 대상 열 편을 빠짐없이 적는다.
+5. `index.md`, `overview.md`, `log.md`를 갱신하고 `npm run sync:index`와 `npm run verify`를 통과시킨다.
+6. 현재 브랜치가 `main`인지 확인한 뒤 `content: first_last_comparative_reading`으로 별도 커밋해 `origin/main`에 푸시한다. 이 비교 읽기가 원격에 반영된 뒤에만 다음 소스 공개 처리를 계속한다.
+
+### 6.4 참고 자료 보강
 
 - 정규 번호 소스가 아니면 `page_type: reference`와 `type/reference`를 사용한다.
 - 기존 주장 보강이 목적이면 새 개념을 불필요하게 만들지 않는다.
 - 외부 근거는 evidence 레지스트리에, 물리 파일은 raw artifact 레지스트리에 각각 추가한다.
 
-### 6.4 점검
+### 6.5 점검
 
 `scripts/lint-wiki.mjs`는 다음을 실패 조건으로 검사한다.
 
