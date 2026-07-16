@@ -19,6 +19,8 @@ verification: verified
 artifacts:
   - raw/010_Vector Space Model & TF-IDF Foundation of Modern Information Retrieval & Semantic Search.ko.md
   - raw/010_Vector Space Model & TF-IDF Foundation of Modern Information Retrieval & Semantic Search.commentary.ko.md
+  - raw/024_BM25 The Probabilistic Ranking Revolution in Information Retrieval.ko.md
+  - raw/024_BM25 The Probabilistic Ranking Revolution in Information Retrieval.commentary.ko.md
 evidence:
   - source_id: sparck-jones-1972
     locator: pp. 11–21
@@ -29,13 +31,18 @@ evidence:
   - source_id: salton-buckley-1988
     locator: pp. 513–523
     relation: supports
+  - source_id: robertson-zaragoza-2009-bm25
+    locator: §§3.1–3.4, pp. 347–360
+    relation: contextualizes
 related:
+  - source.024
   - source.010
   - entity.제라드-솔턴
   - entity.캐런-스파크-존스
   - concept.벡터-공간-모델
   - concept.코사인-유사도
   - concept.특징-공학
+  - concept.bm25
 ---
 # TF-IDF
 
@@ -63,12 +70,20 @@ $N$은 전체 문서 수, $\operatorname{df}(t)$는 용어 $t$를 포함하는 �
 
 TF-IDF는 용어의 구별력을 추정할 뿐 문맥적 의미를 직접 학습하지 않는다. 동의어, 다의어, 어순을 자체적으로 처리하지 못하며, 같은 문서라도 비교 대상 말뭉치가 달라지면 IDF가 바뀐다. 이런 성격 때문에 설명 가능한 희소 검색과 [[특징 공학]]에는 유용하지만 일반 언어 이해와 동일시할 수 없다.
 
+## BM25와의 관계
+
+[[BM25]]도 문서 집합에서 드문 질의어를 크게 가중한다는 점에서 TF-IDF와 직관을 공유한다. 다만 BM25는 확률적 관련성 프레임워크에서 나온 순위 함수로, 문서 안 용어 빈도의 포화와 평균 문서 길이에 대한 보정을 명시적으로 결합한다 [[024_BM25와 확률적 정보 검색]].
+
+그러므로 BM25를 단 하나의 고정된 “TF-IDF 공식”에 대한 교체로만 설명하면 두 계보를 모두 단순화한다. TF-IDF 자체가 로그 TF, 여러 IDF 정의, 문서 벡터 정규화를 조합하는 가중치 계열이며, BM25의 의의는 같은 희소 용어 직관을 다른 확률적 모형과 포화·길이 보정 구조 안에서 발전시켰다는 데 있다.
+
 ## 출처
 
 - [[010_벡터 공간 모델과 TF-IDF]]
 - Karen Spärck Jones, [A Statistical Interpretation of Term Specificity and Its Application in Retrieval](https://doi.org/10.1108/eb026526), 1972, pp. 11–21.
 - Gerard Salton, Anita Wong, Chung-Shu Yang, [A Vector Space Model for Automatic Indexing](https://doi.org/10.1145/361219.361220), 1975, pp. 613–620.
 - Gerard Salton, Christopher Buckley, [Term-Weighting Approaches in Automatic Text Retrieval](https://doi.org/10.1016/0306-4573(88)90021-0), 1988, pp. 513–523.
+- Stephen Robertson·Hugo Zaragoza, [The Probabilistic Relevance Framework: BM25 and Beyond](https://doi.org/10.1561/1500000019), 2009, §§3.1–3.4, pp. 347–360.
+- [[024_BM25와 확률적 정보 검색]]
 
 ## 관련 항목
 
@@ -78,3 +93,5 @@ TF-IDF는 용어의 구별력을 추정할 뿐 문맥적 의미를 직접 학습
 - [[벡터 공간 모델]]
 - [[코사인 유사도]]
 - [[특징 공학]]
+- [[BM25]]
+- [[024_BM25와 확률적 정보 검색]]

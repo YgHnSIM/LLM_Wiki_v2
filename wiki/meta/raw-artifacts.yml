@@ -368,3 +368,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 24467a278b8caabfb8816e868d03fa2a8e1443a8e45c93a8cd52f82ae7a44b9c
+  - path: "raw/024_BM25 The Probabilistic Ranking Revolution in Information Retrieval.ko.md"
+    role: translation
+    order_prefix: "024"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 9c9af95f25e3210c49577b24bbf59da4c9a6abcec70bcddd94a6669fac38cde0
+  - path: "raw/024_BM25 The Probabilistic Ranking Revolution in Information Retrieval.commentary.ko.md"
+    role: commentary
+    order_prefix: "024"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: d61c5df6274785a368fcd3c06e96107a90fbce6a788c30d3091ebb1b47a8a798

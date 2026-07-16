@@ -1032,3 +1032,64 @@ sources:
     doi: 10.3115/1219840.1219873
     url: https://aclanthology.org/P05-1033/
     language: en
+  robertson-sparck-jones-1976-relevance-weighting:
+    title: Relevance weighting of search terms
+    authors: [Stephen E. Robertson, Karen Spärck Jones]
+    published: 1976
+    source_type: primary
+    kind: journal-article
+    doi: 10.1002/asi.4630270302
+    url: https://doi.org/10.1002/asi.4630270302
+    language: en
+  robertson-walker-1994-2-poisson:
+    title: Some Simple Effective Approximations to the 2-Poisson Model for Probabilistic Weighted Retrieval
+    authors: [Stephen E. Robertson, Steve Walker]
+    published: 1994
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1007/978-1-4471-2099-5_24
+    url: https://doi.org/10.1007/978-1-4471-2099-5_24
+    language: en
+  robertson-et-al-1994-okapi-trec3:
+    title: Okapi at TREC-3
+    authors: [Stephen E. Robertson, Steve Walker, Susan Jones, Micheline Hancock-Beaulieu, Mike Gatford]
+    published: 1994
+    source_type: primary
+    kind: conference-paper
+    doi: 10.6028/NIST.SP.500-225.routing-city
+    url: https://pages.nist.gov/trec-browser/trec3/adhoc/proceedings/
+    language: en
+  robertson-zaragoza-2009-bm25:
+    title: "The Probabilistic Relevance Framework: BM25 and Beyond"
+    authors: [Stephen Robertson, Hugo Zaragoza]
+    published: 2009
+    source_type: scholarly-secondary
+    kind: journal-article
+    doi: 10.1561/1500000019
+    url: https://doi.org/10.1561/1500000019
+    language: en
+  city-2020-bm25-history:
+    title: Making search engines more relevant
+    authors: ["City, University of London"]
+    published: 2020
+    source_type: official-secondary
+    kind: institutional-history
+    url: https://www.citystgeorges.ac.uk/news-and-events/news/2020/06/making-search-engines-more-relevant
+    language: en
+  karpukhin-et-al-2020-dpr:
+    title: Dense Passage Retrieval for Open-Domain Question Answering
+    authors: [Vladimir Karpukhin, Barlas Oğuz, Sewon Min, Patrick Lewis, Ledell Wu, Sergey Edunov, Danqi Chen, Wen-tau Yih]
+    published: 2020
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/2020.emnlp-main.550
+    url: https://aclanthology.org/2020.emnlp-main.550/
+    language: en
+  lewis-et-al-2020-rag:
+    title: Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
+    authors: [Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin, Naman Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih, Tim Rocktäschel, Sebastian Riedel, Douwe Kiela]
+    published: 2020
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.neurips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html
+    language: en
