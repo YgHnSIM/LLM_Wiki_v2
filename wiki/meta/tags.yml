@@ -30,6 +30,9 @@ tags:
   domain/computer-science:
     kind: domain
     description: 컴퓨터과학과 형식 계산
+  domain/computer-vision:
+    kind: domain
+    description: 컴퓨터 비전과 시각 패턴 인식
   domain/conversational-ai:
     kind: domain
     description: 대화형 인공지능

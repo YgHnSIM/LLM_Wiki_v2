@@ -320,3 +320,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 9cc6f53a0af510ee9641bc999bb6e085c06055dd6bc32196d3fb35531eaebf8c
+  - path: "raw/021_Convolutional Neural Networks - Revolutionizing Feature Learning.ko.md"
+    role: translation
+    order_prefix: "021"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: a12173d28215641b0f4057dabe2c43c8f143f27f0e9c10da7f3f729d32731b0b
+  - path: "raw/021_Convolutional Neural Networks - Revolutionizing Feature Learning.commentary.ko.md"
+    role: commentary
+    order_prefix: "021"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 3a28fc0443b755c5522180dd80675222a6f383173acb46561a3d7a76bd555933

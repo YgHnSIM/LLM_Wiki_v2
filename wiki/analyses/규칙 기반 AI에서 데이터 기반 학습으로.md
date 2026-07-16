@@ -35,6 +35,8 @@ artifacts:
   - raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.commentary.ko.md
   - raw/020_Time Delay Neural Networks - Processing Sequential Data with Temporal Convolutions.ko.md
   - raw/020_Time Delay Neural Networks - Processing Sequential Data with Temporal Convolutions.commentary.ko.md
+  - raw/021_Convolutional Neural Networks - Revolutionizing Feature Learning.ko.md
+  - raw/021_Convolutional Neural Networks - Revolutionizing Feature Learning.commentary.ko.md
 evidence:
   - source_id: macdonald-1963
     locator: pp. 1–4
@@ -96,9 +98,17 @@ evidence:
   - source_id: waibel-et-al-1989-tdnn
     locator: 'pp. 328–334, especially §§II–IV and Table I'
     relation: supports
+  - source_id: lecun-et-al-1989-zip-code
+    locator: pp. 541–547
+    relation: supports
+  - source_id: lecun-et-al-1998-document-recognition
+    locator: pp. 2278–2284 and 2316–2317
+    relation: contextualizes
 related:
   - source.020
+  - source.021
   - concept.시간-지연-신경망
+  - concept.합성곱-신경망
   - source.015
   - concept.몬태규-의미론
   - concept.합성성
@@ -188,6 +198,12 @@ NLP에서는 규칙과 학습이 한 번에 교체되지 않았다. 섀넌의 19
 
 비교 HMM 역시 전이·관측 확률을 데이터에서 학습했으며, 저자들은 두 시스템의 입력 표현이 달라 모델링 전략과 전처리 표현의 기여를 분리할 수 없다고 한정했다. 따라서 TDNN은 학습 가능한 국소 시간 특징의 범위를 넓힌 사례이지, HMM과 특징 공학을 즉시 전면 대체한 원시 음성 종단 간 시스템은 아니다. 시간 위치별 계산은 병렬화할 수 있는 순방향 합성곱이므로 순환 상태나 Transformer 자기어텐션의 직접 기원으로도 합치지 않는다.
 
+## CNN의 구조적 귀납 편향과 특징 학습
+
+[[021_합성곱 신경망과 특징 학습]]의 [[합성곱 신경망]]은 영상의 모든 위치에 별도 규칙을 작성하는 대신 국소 연결과 공유 가중치를 구조로 정하고, 필터 값과 계층적 조합을 데이터에서 학습했다. LeCun 등의 1989년 우편번호 인식기는 특징 추출기와 분류기를 역전파로 공동 훈련했고, 1998년 LeNet-5는 합성곱·subsampling 계층을 이용한 문서 인식 시스템을 상세히 제시했다.
+
+이는 ‘규칙에서 데이터로’의 전환이 인간 설계를 제거한 사건이 아니라 설계 경계를 이동시킨 과정임을 다시 보여 준다. 숫자 분할·크기 정규화·입력 부호화, 국소성·가중치 공유·계층 깊이, 손실과 평가 기준은 사람이 정했다. 네트워크는 그 구조 안에서 유용한 내부 표현을 학습했다. 따라서 CNN의 성과를 특징 공학의 완전 폐기나 데이터만으로 구조까지 자동 결정한 사례로 기술하지 않는다.
+
 ## 현대 LLM으로의 연결
 
 현대 [[대규모 언어 모델]]은 대규모 텍스트에서 표현과 패턴을 학습하며 많은 수작업 언어 규칙을 대체한다. 퍼셉트론과는 학습 목표와 구조가 다르지만 학습 가능한 매개변수를 사용한다는 넓은 신경망 계보를 공유한다. 데이터 선택, 토큰화, 평가 기준, 안전 정책, 도구 사용 규칙과 지식 갱신은 여전히 사람이 설계한다.
@@ -209,6 +225,7 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - [[015_몬태규 의미론과 합성적 자연언어 해석]]
 - [[017_Lesk 알고리즘과 단어 의미 중의성 해소]]
 - [[020_시간 지연 신경망과 음소 인식]]
+- [[021_합성곱 신경망과 특징 학습]]
 - Michael Lesk, [Automatic Sense Disambiguation Using Machine Readable Dictionaries: How to Tell a Pine Cone from an Ice Cream Cone](https://doi.org/10.1145/318723.318728), 1986, pp. 24–26.
 - Leonard E. Baum·Ted Petrie, [Statistical Inference for Probabilistic Functions of Finite State Markov Chains](https://doi.org/10.1214/aoms/1177699147), 1966, pp. 1554–1563.
 - James K. Baker, [The DRAGON System—An Overview](https://research.ibm.com/publications/the-dragon-system-an-overview), 1975, pp. 24–29.
@@ -222,6 +239,8 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - Eric Brill, [A Simple Rule-Based Part of Speech Tagger](https://aclanthology.org/A92-1021/), 1992, pp. 152–155.
 - Kenneth W. Church·Robert L. Mercer, [Introduction to the Special Issue on Computational Linguistics Using Large Corpora](https://aclanthology.org/J93-1001/), 1993, pp. 1–3, 15–16.
 - Alexander Waibel 외, [Phoneme Recognition Using Time-Delay Neural Networks](https://doi.org/10.1109/29.21701), 1989, pp. 328–334.
+- Yann LeCun 외, [Backpropagation Applied to Handwritten Zip Code Recognition](https://doi.org/10.1162/neco.1989.1.4.541), 1989, pp. 541–547.
+- Yann LeCun 외, [Gradient-Based Learning Applied to Document Recognition](https://doi.org/10.1109/5.726791), 1998, pp. 2278–2284, 2316–2317.
 
 ## 관련 항목
 
@@ -253,3 +272,5 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - [[단어 의미 중의성 해소]]
 - [[시간 지연 신경망]]
 - [[020_시간 지연 신경망과 음소 인식]]
+- [[021_합성곱 신경망과 특징 학습]]
+- [[합성곱 신경망]]

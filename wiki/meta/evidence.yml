@@ -820,3 +820,122 @@ sources:
     kind: conference-paper
     url: https://proceedings.neurips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html
     language: en
+  hubel-wiesel-1962-visual-cortex:
+    title: Receptive Fields, Binocular Interaction and Functional Architecture in the Cat's Visual Cortex
+    authors: [David H. Hubel, Torsten N. Wiesel]
+    published: 1962
+    source_type: primary
+    kind: journal-article
+    doi: 10.1113/jphysiol.1962.sp006837
+    url: https://pmc.ncbi.nlm.nih.gov/articles/PMC1359523/
+    language: en
+  lecun-et-al-1998-document-recognition:
+    title: Gradient-Based Learning Applied to Document Recognition
+    authors: [Yann LeCun, Léon Bottou, Yoshua Bengio, Patrick Haffner]
+    published: 1998
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/5.726791
+    url: https://leon.bottou.org/papers/lecun-98h
+    language: en
+  krizhevsky-et-al-2012-imagenet-cnn:
+    title: ImageNet Classification with Deep Convolutional Neural Networks
+    authors: [Alex Krizhevsky, Ilya Sutskever, Geoffrey E. Hinton]
+    published: 2012
+    source_type: primary
+    kind: conference-paper
+    url: https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf
+    language: en
+  ioffe-szegedy-2015-batch-normalization:
+    title: 'Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift'
+    authors: [Sergey Ioffe, Christian Szegedy]
+    published: 2015
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.mlr.press/v37/ioffe15.html
+    language: en
+  he-et-al-2016-resnet:
+    title: Deep Residual Learning for Image Recognition
+    authors: [Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun]
+    published: 2016
+    source_type: primary
+    kind: conference-paper
+    url: https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html
+    language: en
+  zhang-2019-shift-invariance:
+    title: Making Convolutional Networks Shift-Invariant Again
+    authors: [Richard Zhang]
+    published: 2019
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.mlr.press/v97/zhang19a.html
+    language: en
+  ojala-et-al-1994-texture-measures:
+    title: Performance Evaluation of Texture Measures with Classification Based on Kullback Discrimination of Distributions
+    authors: [Timo Ojala, Matti Pietikäinen, David Harwood]
+    published: 1994
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1109/ICPR.1994.576366
+    url: https://doi.org/10.1109/ICPR.1994.576366
+    language: en
+  collobert-et-al-2011-nlp-from-scratch:
+    title: Natural Language Processing (Almost) from Scratch
+    authors: [Ronan Collobert, Jason Weston, Léon Bottou, Michael Karlen, Koray Kavukcuoglu, Pavel Kuksa]
+    published: 2011
+    source_type: primary
+    kind: journal-article
+    url: https://www.jmlr.org/papers/v12/collobert11a.html
+    language: en
+  kim-2014-sentence-cnn:
+    title: Convolutional Neural Networks for Sentence Classification
+    authors: [Yoon Kim]
+    published: 2014
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/v1/D14-1181
+    url: https://aclanthology.org/D14-1181/
+    language: en
+  zhang-zhao-lecun-2015-character-cnn:
+    title: Character-Level Convolutional Networks for Text Classification
+    authors: [Xiang Zhang, Junbo Zhao, Yann LeCun]
+    published: 2015
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.neurips.cc/paper/2015/hash/250cf8b51c773f3f8dc8b4be867a9a02-Abstract.html
+    language: en
+  mikolov-et-al-2013-word-representations:
+    title: Efficient Estimation of Word Representations in Vector Space
+    authors: [Tomas Mikolov, Kai Chen, Greg Corrado, Jeffrey Dean]
+    published: 2013
+    source_type: primary
+    kind: research-paper
+    doi: 10.48550/arXiv.1301.3781
+    url: https://arxiv.org/abs/1301.3781
+    language: en
+  pennington-et-al-2014-glove:
+    title: 'GloVe: Global Vectors for Word Representation'
+    authors: [Jeffrey Pennington, Richard Socher, Christopher Manning]
+    published: 2014
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/v1/D14-1162
+    url: https://aclanthology.org/D14-1162/
+    language: en
+  sutskever-vinyals-le-2014-seq2seq:
+    title: Sequence to Sequence Learning with Neural Networks
+    authors: [Ilya Sutskever, Oriol Vinyals, Quoc V. Le]
+    published: 2014
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.neurips.cc/paper_files/paper/2014/hash/a14ac55a4f27472c5d894ec1c3c743d2-Abstract.html
+    language: en
+  bahdanau-cho-bengio-2015-attention:
+    title: Neural Machine Translation by Jointly Learning to Align and Translate
+    authors: [Dzmitry Bahdanau, Kyunghyun Cho, Yoshua Bengio]
+    published: 2015
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.1409.0473
+    url: https://arxiv.org/abs/1409.0473
+    language: en
