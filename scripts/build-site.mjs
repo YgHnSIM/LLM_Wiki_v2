@@ -1,11 +1,19 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import matter from 'gray-matter';
 import yaml from 'js-yaml';
 import katex from 'katex';
-import { marked } from 'marked';
+import { marked, Renderer } from 'marked';
+import {
+  artifactRoleMetadata,
+  normalizeArtifactMarkdown,
+  normalizeArtifactPath,
+  resolveRawArtifactPath,
+  sourceOriginForArtifact,
+} from './lib/artifact-readers.mjs';
 import { buildDirectoryAtomically } from './lib/atomic-directory.mjs';
 import { escapeHtml, firstParagraph, readingMinutes, stripMarkdown, truncate } from './lib/content-format.mjs';
-import { distDir, rootDir, siteDir, wikiDir } from './lib/project-paths.mjs';
+import { distDir, rawDir, rootDir, siteDir, wikiDir } from './lib/project-paths.mjs';
 import { normalizeBasePath, outputFileForUrl, withBasePath } from './lib/site-paths.mjs';
 import {
   asStringArray,
@@ -52,6 +60,35 @@ const categoryMeta = {
 
 marked.setOptions({ gfm: true, breaks: false });
 
+function safeArtifactUrl(value, { image = false } = {}) {
+  const candidate = String(value ?? '').trim();
+  if (!candidate) return null;
+  if (!image && candidate.startsWith('#')) return candidate;
+  try {
+    const protocol = new URL(candidate).protocol;
+    const allowed = image ? ['http:', 'https:'] : ['http:', 'https:', 'mailto:', 'tel:'];
+    return allowed.includes(protocol) ? candidate : null;
+  } catch {
+    return null;
+  }
+}
+
+const artifactRenderer = new Renderer();
+artifactRenderer.link = function renderArtifactLink({ href, title, tokens }) {
+  const label = this.parser.parseInline(tokens);
+  const safeHref = safeArtifactUrl(href);
+  if (!safeHref) return `<span class="artifact-disabled-link">${label}</span>`;
+  const titleAttribute = title ? ` title="${escapeHtml(title)}"` : '';
+  return `<a href="${escapeHtml(safeHref)}"${titleAttribute}>${label}</a>`;
+};
+artifactRenderer.image = function renderArtifactImage({ href, title, text, tokens }) {
+  const safeHref = safeArtifactUrl(href, { image: true });
+  const alt = tokens ? this.parser.parseInline(tokens, this.parser.textRenderer) : String(text ?? '');
+  if (!safeHref) return escapeHtml(alt);
+  const titleAttribute = title ? ` title="${escapeHtml(title)}"` : '';
+  return `<img src="${escapeHtml(safeHref)}" alt="${escapeHtml(alt)}"${titleAttribute} loading="lazy">`;
+};
+
 function asObjectArray(value) {
   if (!Array.isArray(value)) return [];
   return value
@@ -76,6 +113,15 @@ function routeFor(relativePath, category, filename) {
 const evidenceRegistryFile = path.join(wikiDir, 'meta', 'evidence.yml');
 const evidenceRegistryData = yaml.safeLoad(await fs.readFile(evidenceRegistryFile, 'utf8')) ?? {};
 const evidenceRegistry = new Map(Object.entries(evidenceRegistryData.sources ?? {}));
+const rawArtifactRegistryFile = path.join(wikiDir, 'meta', 'raw-artifacts.yml');
+const rawArtifactRegistryData = yaml.safeLoad(await fs.readFile(rawArtifactRegistryFile, 'utf8')) ?? {};
+const rawArtifactRegistry = new Map();
+for (const record of rawArtifactRegistryData.artifacts ?? []) {
+  const artifactPath = normalizeArtifactPath(record?.path);
+  if (!artifactPath) continue;
+  if (rawArtifactRegistry.has(artifactPath)) throw new Error(`Duplicate raw artifact registry path: ${artifactPath}`);
+  rawArtifactRegistry.set(artifactPath, { ...record, path: artifactPath });
+}
 const loadedDocuments = await loadMarkdownDocuments(wikiDir);
 const documents = loadedDocuments.map((loadedDocument) => {
   const { absolutePath, relativePath, filename, content, data } = loadedDocument;
@@ -118,6 +164,7 @@ const documents = loadedDocuments.map((loadedDocument) => {
     relatedBacklinks: [],
     meaningfulOutgoing: [],
     meaningfulBacklinks: [],
+    artifactReaders: [],
   };
 });
 
@@ -193,6 +240,47 @@ for (const list of Object.values(grouped)) {
 
 const publishedDocuments = ['sources', 'concepts', 'entities', 'analyses'].flatMap((key) => grouped[key]);
 const latestUpdate = documents.map((document) => document.updated).filter(Boolean).sort().at(-1) ?? '';
+
+const artifactReaders = [];
+for (const document of grouped.sources) {
+  const routeRoles = new Set();
+  for (const declaredPath of document.artifacts) {
+    const artifactPath = normalizeArtifactPath(declaredPath);
+    const record = rawArtifactRegistry.get(artifactPath);
+    const role = artifactRoleMetadata(record?.role);
+    if (!record || !role) continue;
+    if (routeRoles.has(role.routeRole)) {
+      throw new Error(`Source ${document.id} declares more than one ${role.routeRole} artifact reader.`);
+    }
+
+    const absolutePath = resolveRawArtifactPath({ rootDir, rawDir, artifactPath });
+    const rawMarkdown = await fs.readFile(absolutePath, 'utf8');
+    const parsed = matter(rawMarkdown);
+    const body = normalizeArtifactMarkdown(parsed.content, {
+      sourceOrigin: sourceOriginForArtifact(parsed.content),
+    });
+    const reader = {
+      id: `${document.id}.${role.routeRole}`,
+      title: `${document.title} — ${role.label}`,
+      body,
+      excerpt: truncate(firstParagraph(body), 210),
+      minutes: readingMinutes(body),
+      url: `${document.url}${role.routeRole}/`,
+      sourceDocument: document,
+      sourceNumber: document.sourceNumber,
+      artifactPath,
+      registryRole: String(record.role),
+      routeRole: role.routeRole,
+      label: role.label,
+      description: role.description,
+      directory: role.directory,
+    };
+    routeRoles.add(role.routeRole);
+    document.artifactReaders.push(reader);
+    artifactReaders.push(reader);
+  }
+}
+const translationReaders = artifactReaders.filter((reader) => reader.directory);
 
 function lifecycleLabel(lifecycle) {
   return lifecycle === 'draft' ? '초안' : lifecycle === 'archived' ? '보관됨' : '공개';
@@ -293,7 +381,7 @@ function renderWikiLinks(markdown, currentDocument) {
   });
 }
 
-function renderMarkdown(document) {
+function renderMarkdown(document, { artifact = false } = {}) {
   const markdown = markdownWithoutTitle(document.body);
   const headings = headingPlan(markdown);
   const protectedFragments = [];
@@ -311,10 +399,11 @@ function renderMarkdown(document) {
   // Marked's GFM mode treats a single tilde as strikethrough. Preserve Korean
   // numeric ranges such as 1964~1966 without changing the source Markdown.
   prepared = prepared.replace(/(\d)~(?=\d)/g, '$1\\~');
+  if (artifact) prepared = prepared.replaceAll('<', '&lt;').replaceAll('>', '&gt;');
   prepared = renderWikiLinks(prepared, document);
   prepared = prepared.replace(/@@LLMWIKI_FRAGMENT_(\d+)@@/g, (_match, index) => protectedFragments[Number(index)]);
 
-  let html = marked.parse(prepared);
+  let html = marked.parse(prepared, artifact ? { renderer: artifactRenderer } : undefined);
   let headingIndex = 0;
   html = html.replace(/<h([2-4])>([\s\S]*?)<\/h\1>/g, (_match, depth, inner) => {
     const planned = headings[headingIndex] ?? { id: slugify(stripMarkdown(inner)), label: stripMarkdown(inner) };
@@ -402,6 +491,7 @@ function layout({ title, description, current = '', body, pageClass = '' }) {
     <nav class="footer-meta" aria-label="보조 메뉴">
       <span>최근 문서 갱신 ${escapeHtml(latestUpdate)}</span>
       <a href="${sitePath('/search/')}">전체 검색</a>
+      <a href="${sitePath('/translations/')}">번역본 모아보기</a>
       <a href="${sitePath('/about/')}">위키 안내</a>
       <a href="${sitePath('/log/')}">변경 기록</a>
       ${externalLink(repositoryUrl, 'GitHub 저장소')}
@@ -520,6 +610,7 @@ function renderCategoryPage(key) {
     <header class="listing-hero">
       <p class="eyebrow">${list.length}개 문서</p>
       <div><h1>${escapeHtml(meta.label)}</h1><span class="listing-count">${list.length}</span></div>
+      ${key === 'sources' && translationReaders.length ? `<a class="translation-directory-link" href="${sitePath('/translations/')}"><span>별도 읽기</span><strong>번역본 ${translationReaders.length}개 모아보기</strong><span aria-hidden="true">→</span></a>` : ''}
       <p>${escapeHtml(meta.description)}</p>
     </header>
     <section class="directory-tools" aria-label="목록 필터">
@@ -560,6 +651,33 @@ function renderCategoryPage(key) {
     current: `/${key}/`,
     body,
     pageClass: `listing-page listing-page--${key}`,
+  });
+}
+
+function renderTranslationsPage() {
+  const cards = translationReaders.map((reader) => `<li class="translation-card">
+    <a href="${sitePath(reader.url)}">
+      <span class="translation-number">${escapeHtml(reader.sourceNumber)}</span>
+      <span class="translation-card-copy"><small>${escapeHtml(reader.label)}</small><strong>${escapeHtml(reader.sourceDocument.title)}</strong></span>
+      <span class="translation-reading-time">${reader.minutes}분 읽기 <span aria-hidden="true">→</span></span>
+    </a>
+  </li>`).join('');
+  const body = `<main id="main-content" class="listing-main translations-main">
+    <header class="listing-hero translations-hero">
+      <p class="eyebrow">한국어 보존 자료</p>
+      <div><h1>번역본</h1><span class="listing-count">${translationReaders.length}</span></div>
+      <p>검증·정정을 반영한 원문 노트와 나란히 읽을 수 있도록, 수집 당시의 한국어 번역 자료를 별도 독서 화면으로 제공합니다.</p>
+    </header>
+    <div class="translation-directory-heading"><div><p class="eyebrow">번호순 읽기</p><h2>번역 자료 목록</h2></div><a class="text-link" href="${sitePath('/sources/')}">원문 노트로 돌아가기</a></div>
+    <ol class="translation-directory">${cards}</ol>
+  </main>`;
+
+  return layout({
+    title: '번역본',
+    description: 'LLM Wiki 원문 노트와 함께 읽는 한국어 번역 자료 모음',
+    current: '/sources/',
+    body,
+    pageClass: 'listing-page translations-page',
   });
 }
 
@@ -628,6 +746,11 @@ function githubFileUrl(document) {
   return `${repositoryUrl}/blob/main/${encodedPath}`;
 }
 
+function githubArtifactUrl(reader) {
+  const encodedPath = reader.artifactPath.split('/').map(encodeURIComponent).join('/');
+  return `${repositoryUrl}/blob/main/${encodedPath}`;
+}
+
 function breadcrumbFor(document) {
   const items = [`<li><a href="${sitePath('/')}">홈</a></li>`];
   if (document.category !== 'meta') {
@@ -635,6 +758,31 @@ function breadcrumbFor(document) {
   }
   items.push(`<li><span aria-current="page">${escapeHtml(document.title)}</span></li>`);
   return `<ol>${items.join('')}</ol>`;
+}
+
+function breadcrumbForArtifact(reader) {
+  const document = reader.sourceDocument;
+  return `<ol>
+    <li><a href="${sitePath('/')}">홈</a></li>
+    <li><a href="${sitePath('/sources/')}">${escapeHtml(categoryMeta.sources.label)}</a></li>
+    <li><a href="${sitePath(document.url)}">${escapeHtml(document.title)}</a></li>
+    <li><span aria-current="page">${escapeHtml(reader.label)}</span></li>
+  </ol>`;
+}
+
+function renderArtifactSwitcher(document, activeRole = 'note') {
+  if (!document.artifactReaders.length) return '';
+  const destinations = [
+    { routeRole: 'note', label: '원문 노트', url: document.url },
+    ...document.artifactReaders,
+  ];
+  return `<nav class="reading-switcher" aria-label="이 소스의 자료 보기">
+    <span class="reading-switcher-label">자료 보기</span>
+    <div class="reading-switcher-links">${destinations.map((destination, index) => {
+      const active = destination.routeRole === activeRole;
+      return `<a class="reading-switcher-link reading-switcher-link--${index + 1}" href="${sitePath(destination.url)}"${active ? ' aria-current="page"' : ''}><span>${String(index + 1).padStart(2, '0')}</span><strong>${escapeHtml(destination.label)}</strong></a>`;
+    }).join('')}</div>
+  </nav>`;
 }
 
 function renderToc(headings) {
@@ -737,6 +885,7 @@ function renderArticle(document) {
       </dl>
     </header>
     ${reviewNote}
+    ${document.pageType === 'source' ? renderArtifactSwitcher(document) : ''}
     <div class="article-layout">
       <aside class="article-sidebar">
         <details class="toc-card" data-toc-details open>
@@ -768,6 +917,57 @@ function renderArticle(document) {
     current: document.category === 'meta' ? '' : `/${document.category}/`,
     body,
     pageClass: `article-page article-page--${document.category}`,
+  });
+}
+
+function renderArtifactReader(reader) {
+  const document = reader.sourceDocument;
+  const rendered = renderMarkdown(reader, { artifact: true });
+  const body = `<main id="main-content" class="article-main artifact-main">
+    <nav class="breadcrumbs" aria-label="현재 위치">${breadcrumbForArtifact(reader)}</nav>
+    <header class="article-hero artifact-hero">
+      <div class="article-title-block">
+        <div class="article-kicker"><span>${escapeHtml(reader.label)}</span><span>No. ${escapeHtml(document.sourceNumber)}</span></div>
+        <h1 id="article-title">${escapeHtml(document.title)}</h1>
+        <p class="article-summary">${escapeHtml(reader.description)}</p>
+      </div>
+      <dl class="article-facts">
+        <div><dt>자료 유형</dt><dd>${escapeHtml(reader.label)}</dd></div>
+        <div><dt>보존 역할</dt><dd>${escapeHtml(reader.registryRole)}</dd></div>
+        <div><dt>읽기</dt><dd>약 ${reader.minutes}분</dd></div>
+        <div><dt>기준 문서</dt><dd>No. ${escapeHtml(document.sourceNumber)}</dd></div>
+      </dl>
+    </header>
+    ${renderArtifactSwitcher(document, reader.routeRole)}
+    <div class="artifact-preservation-banner"><strong>보존 자료</strong><span>수집 당시의 번역·해설을 그대로 보여 줍니다. 사실 검증과 정정은 원문 노트를 기준으로 확인하세요.</span></div>
+    <div class="article-layout artifact-layout">
+      <aside class="article-sidebar">
+        <details class="toc-card" data-toc-details open>
+          <summary>이 자료의 목차</summary>
+          <nav aria-label="자료 목차">${renderToc(rendered.headings)}</nav>
+        </details>
+      </aside>
+      <div class="article-reading">
+        <article class="article-body artifact-body" aria-labelledby="article-title">${rendered.html}</article>
+        <div class="source-note article-source-note artifact-source-note">
+          <span>보존 파일</span>
+          <code>${escapeHtml(reader.artifactPath)}</code>
+          ${externalLink(githubArtifactUrl(reader), 'GitHub에서 보기')}
+        </div>
+      </div>
+    </div>
+    <section class="artifact-return" aria-labelledby="artifact-return-heading">
+      <div><p class="eyebrow">검증된 설명</p><h2 id="artifact-return-heading">정정과 근거는 원문 노트에서</h2><p>번역본은 원문의 흐름을 읽기 위한 자료입니다. 역사적 사실, 과장된 계보와 후대 평가는 근거 장부가 있는 공개 노트에서 확인할 수 있습니다.</p></div>
+      <a class="button-link" href="${sitePath(document.url)}">원문 노트 읽기 <span aria-hidden="true">→</span></a>
+    </section>
+  </main>`;
+
+  return layout({
+    title: reader.title,
+    description: reader.description,
+    current: '/sources/',
+    body,
+    pageClass: `article-page artifact-page artifact-page--${reader.routeRole}`,
   });
 }
 
@@ -820,10 +1020,21 @@ const searchIndex = documents
 const buildReport = {
   generatedAt: new Date().toISOString(),
   basePath,
-  pages: documents.length + 6,
+  pages: documents.length + artifactReaders.length + 7,
   documents: documents.length,
   publishedDocuments: publishedDocuments.length,
   counts: Object.fromEntries(Object.keys(categoryMeta).map((key) => [key, grouped[key].length])),
+  artifactCounts: {
+    readers: artifactReaders.length,
+    translations: translationReaders.length,
+  },
+  artifactReaders: artifactReaders.map((reader) => ({
+    role: reader.routeRole,
+    label: reader.label,
+    url: reader.url,
+    sourceUrl: reader.sourceDocument.url,
+    listedAsTranslation: reader.directory,
+  })),
   resolvedLinks: resolvedLinkCount,
   unresolvedLinks: [...unresolved.values()]
     .map((record) => ({ target: record.target, count: record.count, from: [...record.from].sort(collator.compare) }))
@@ -841,9 +1052,13 @@ async function buildInto(outputDir) {
   for (const key of ['sources', 'concepts', 'entities', 'analyses']) {
     await writeHtml(outputDir, `/${key}/`, renderCategoryPage(key));
   }
+  await writeHtml(outputDir, '/translations/', renderTranslationsPage());
   await writeHtml(outputDir, '/search/', renderSearchPage());
   for (const document of documents) {
     if (document.url !== '/') await writeHtml(outputDir, document.url, renderArticle(document));
+  }
+  for (const reader of artifactReaders) {
+    await writeHtml(outputDir, reader.url, renderArtifactReader(reader));
   }
   await fs.writeFile(path.join(outputDir, '404.html'), renderNotFound(), 'utf8');
   await fs.writeFile(path.join(outputDir, '.nojekyll'), '', 'utf8');
@@ -853,5 +1068,5 @@ async function buildInto(outputDir) {
 
 await buildDirectoryAtomically(distDir, buildInto);
 
-console.log(`Built ${buildReport.pages} pages from ${documents.length} Markdown documents.`);
+console.log(`Built ${buildReport.pages} pages from ${documents.length} wiki documents and ${artifactReaders.length} artifact readers.`);
 console.log(`Resolved ${resolvedLinkCount} wiki links; ${buildReport.unresolvedLinks.length} unresolved target(s).`);

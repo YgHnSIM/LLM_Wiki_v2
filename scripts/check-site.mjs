@@ -15,6 +15,7 @@ let checkedReferences = 0;
 
 const requiredOutputFiles = [
   'search/index.html',
+  'translations/index.html',
   'assets/fonts/D2Coding.woff2',
   'assets/fonts/RIDIBatang.woff2',
   'assets/fonts/OFL-1.1.txt',
@@ -55,6 +56,22 @@ for (const htmlFile of htmlFiles) {
 
   if (/<del\b/i.test(html)) {
     errors.push(`${relativeHtmlPath} contains an unexpected strikethrough; check numeric ranges using "~".`);
+  }
+
+  if (/<body class="[^"]*\bartifact-page\b/i.test(html)) {
+    const artifactBody = html.match(/<article class="article-body artifact-body"[^>]*>([\s\S]*?)<\/article>/i)?.[1] ?? '';
+    if (/<(?:script|iframe|object|embed)\b/i.test(artifactBody)) {
+      errors.push(`${relativeHtmlPath} contains executable or embedded raw HTML on an artifact page.`);
+    }
+    if (/(?:href|src)="(?:javascript:|data:text\/html)/i.test(artifactBody)) {
+      errors.push(`${relativeHtmlPath} contains an unsafe artifact URL.`);
+    }
+    if (/&lt;!--\s*Obsidian note:/i.test(artifactBody)) {
+      errors.push(`${relativeHtmlPath} exposes an internal Obsidian note comment.`);
+    }
+    if (artifactBody.includes('href="/writing/') || artifactBody.includes(`href="${siteUrl('/writing/')}`)) {
+      errors.push(`${relativeHtmlPath} retains an upstream /writing/ link as a local site URL.`);
+    }
   }
 
   for (const link of html.matchAll(/<a\b[^>]*\btarget="_blank"[^>]*>/gi)) {
@@ -100,6 +117,10 @@ for (const htmlFile of htmlFiles) {
   }
 }
 
+if (htmlFiles.length !== report.pages) {
+  errors.push(`Build report declares ${report.pages} pages, but ${htmlFiles.length} HTML files were found.`);
+}
+
 const homeFile = fileForUrl(siteUrl('/'));
 const homeHtml = htmlCache.get(homeFile) ?? await fs.readFile(homeFile, 'utf8');
 const heroSourceItems = [...homeHtml.matchAll(/class="hero-source-item"/g)].length;
@@ -124,6 +145,43 @@ const expectedHeroSourceNumbers = searchIndex
   .map((entry) => String(entry.sourceNumber));
 if (JSON.stringify(heroSourceNumbers) !== JSON.stringify(expectedHeroSourceNumbers)) {
   errors.push(`Home hero source order must be newest first: expected ${expectedHeroSourceNumbers.join(', ')}, found ${heroSourceNumbers.join(', ')}.`);
+}
+
+const artifactReaders = Array.isArray(report.artifactReaders) ? report.artifactReaders : [];
+const translationsFile = fileForUrl(siteUrl('/translations/'));
+const translationsHtml = htmlCache.get(translationsFile) ?? await fs.readFile(translationsFile, 'utf8');
+const listedTranslationCount = [...translationsHtml.matchAll(/class="translation-card"/g)].length;
+const expectedTranslationCount = artifactReaders.filter((reader) => reader.listedAsTranslation).length;
+if (listedTranslationCount !== expectedTranslationCount) {
+  errors.push(`Translation directory must list ${expectedTranslationCount} reader(s), found ${listedTranslationCount}.`);
+}
+if (report.artifactCounts?.readers !== artifactReaders.length || report.artifactCounts?.translations !== expectedTranslationCount) {
+  errors.push('Build report artifact counts do not match the artifact reader ledger.');
+}
+
+for (const reader of artifactReaders) {
+  if (!reader.url || !reader.sourceUrl || !reader.role) {
+    errors.push(`Artifact reader metadata is incomplete: ${JSON.stringify(reader)}`);
+    continue;
+  }
+  const readerUrl = siteUrl(reader.url);
+  const sourceUrl = siteUrl(reader.sourceUrl);
+  const readerFile = fileForUrl(readerUrl);
+  const sourceFile = fileForUrl(sourceUrl);
+  const readerHtml = htmlCache.get(readerFile) ?? await fs.readFile(readerFile, 'utf8');
+  const sourceHtml = htmlCache.get(sourceFile) ?? await fs.readFile(sourceFile, 'utf8');
+  htmlCache.set(readerFile, readerHtml);
+  htmlCache.set(sourceFile, sourceHtml);
+
+  if (!sourceHtml.includes(`href="${readerUrl}"`)) {
+    errors.push(`Source page ${reader.sourceUrl} does not link to artifact reader ${reader.url}.`);
+  }
+  if (!readerHtml.includes('class="article-page artifact-page') || !readerHtml.includes(`href="${sourceUrl}"`)) {
+    errors.push(`Artifact reader ${reader.url} must render as an artifact page with a source-note link.`);
+  }
+  if (reader.listedAsTranslation && !translationsHtml.includes(`href="${readerUrl}"`)) {
+    errors.push(`Translation directory does not link to ${reader.url}.`);
+  }
 }
 
 const requiredSearchFields = [
