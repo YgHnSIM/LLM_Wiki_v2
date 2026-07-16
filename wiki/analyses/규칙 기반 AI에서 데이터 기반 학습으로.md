@@ -37,6 +37,8 @@ artifacts:
   - raw/020_Time Delay Neural Networks - Processing Sequential Data with Temporal Convolutions.commentary.ko.md
   - raw/021_Convolutional Neural Networks - Revolutionizing Feature Learning.ko.md
   - raw/021_Convolutional Neural Networks - Revolutionizing Feature Learning.commentary.ko.md
+  - raw/022_IBM Statistical Machine Translation - From Rules to Data.ko.md
+  - raw/022_IBM Statistical Machine Translation - From Rules to Data.commentary.ko.md
 evidence:
   - source_id: macdonald-1963
     locator: pp. 1–4
@@ -65,8 +67,17 @@ evidence:
   - source_id: church-1988
     locator: pp. 136–143
     relation: supports
+  - source_id: brown-et-al-1988
+    locator: pp. 71–76
+    relation: contextualizes
   - source_id: brown-et-al-1990
     locator: pp. 79–85
+    relation: supports
+  - source_id: brown-lai-mercer-1991-sentence-alignment
+    locator: pp. 169–176
+    relation: supports
+  - source_id: brown-et-al-1993-smt-parameter-estimation
+    locator: pp. 263–311
     relation: supports
   - source_id: church-mercer-1993
     locator: pp. 1–3 and 15–16
@@ -105,6 +116,8 @@ evidence:
     locator: pp. 2278–2284 and 2316–2317
     relation: contextualizes
 related:
+  - source.022
+  - concept.통계적-기계-번역
   - source.020
   - source.021
   - concept.시간-지연-신경망
@@ -178,6 +191,8 @@ Georgetown-IBM 시연은 사전 조회와 통사 규칙을 결합해 번역을 �
 
 NLP에서는 규칙과 학습이 한 번에 교체되지 않았다. 섀넌의 1948년 통계 언어 연구와 1964년 Brown Corpus가 앞섰고, Jelinek는 1976년에 연속 음성 인식의 확률 모델과 가설 탐색을 보고했다. 텍스트 처리에서는 Church의 1988년 확률적 품사 태거와 IBM 연구진의 1990년 통계 기계 번역이 구체적인 이정표다. Church와 Mercer가 1993년 이 흐름을 “1950년대식 경험적·통계적 방법의 부활”로 설명했으므로, 1980년대를 단일한 발명 시점으로 잡지 않는다.
 
+[[022_IBM 통계적 기계 번역과 데이터 기반 전환]]의 연표도 이 점을 구체화한다. IBM의 [[통계적 기계 번역]]은 1988년 연구 구상, 1990년 프랑스어→영어 예비 실험, 1991년 병렬 문장 정렬, 1993년 Models 1–5의 정식화로 전개됐다. 이를 1991년 한 번의 발명으로 합치면 서로 다른 논문의 기여와 실험 범위를 잃는다.
+
 이 시간표에는 수작업 규칙과 학습된 통계 모델만으로 나뉘지 않는 별도·중간 계열도 있다. [[017_Lesk 알고리즘과 단어 의미 중의성 해소]]의 [[Lesk 알고리즘]]은 1986년 기계 판독형 사전을 사용해 [[단어 의미 중의성 해소]]를 수행했다. 후보 의미의 정의와 문맥 단어들의 정의 사이에서 정확히 일치하는 어휘를 세어 최대 중첩을 고르는 결정론적 지식 기반 절차였으며, 자료에서 매개변수나 확률을 학습한 통계 모델은 아니었다.
 
 따라서 Lesk를 규칙 기반 NLP에서 현대 통계·신경 NLP로 곧장 이어지는 직접 조상으로 놓지 않는다. 이 사례는 사람이 편찬한 사전 자원을 새로운 계산 절차로 재활용하는 계열이 규칙 작성과 통계 학습 사이에 병존했음을 보여 준다.
@@ -185,6 +200,8 @@ NLP에서는 규칙과 학습이 한 번에 교체되지 않았다. 섀넌의 19
 [[은닉 마르코프 모델]]의 수학적 기반도 Baum·Petrie의 1966년 연구와 1970년 재추정 논문으로 거슬러 올라간다. 1975년 DRAGON과 IBM 통계 디코더, 1976년 Jelinek의 종합은 이 기반이 음성 인식에 적용된 별도 단계다. HMM을 1970년대에 발명된 단일 음성 기술로 묶지 않는다.
 
 [[통계적 자연어 처리]]는 구조를 없앤 것이 아니다. HMM 태거는 품사를 상태로 사용하고, 확률 문법은 형식 문법의 규칙에 가중치를 둔다. Brill의 1992년 태거는 주석 [[말뭉치 기반 학습|말뭉치]]에서 사람이 읽을 수 있는 변환 규칙을 학습했다. 이 사례들은 상징 표현·수작업 설계·통계 추정이 하나의 시스템 안에 공존할 수 있음을 보여 준다.
+
+IBM 번역 모형도 “규칙을 데이터로 완전히 대체한” 예외가 아니다. 연구진은 Hansard를 문장쌍으로 정렬·필터링하고, 언어 모델과 번역 모델의 분해, 정렬·생성도·왜곡의 구조, 디코더와 탐색 절차를 설계했다. EM은 관측되지 않은 정렬 하나를 정답으로 고정하는 대신 가능한 정렬의 기대 통계를 계산했고, 복잡한 모델에서는 그 합을 근사했다. 데이터 기반 전환은 인간 설계를 없애기보다 설계 대상의 경계를 옮긴 과정이다.
 
 ## HMM 음성 인식의 혼합 설계
 
@@ -226,6 +243,7 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - [[017_Lesk 알고리즘과 단어 의미 중의성 해소]]
 - [[020_시간 지연 신경망과 음소 인식]]
 - [[021_합성곱 신경망과 특징 학습]]
+- [[022_IBM 통계적 기계 번역과 데이터 기반 전환]]
 - Michael Lesk, [Automatic Sense Disambiguation Using Machine Readable Dictionaries: How to Tell a Pine Cone from an Ice Cream Cone](https://doi.org/10.1145/318723.318728), 1986, pp. 24–26.
 - Leonard E. Baum·Ted Petrie, [Statistical Inference for Probabilistic Functions of Finite State Markov Chains](https://doi.org/10.1214/aoms/1177699147), 1966, pp. 1554–1563.
 - James K. Baker, [The DRAGON System—An Overview](https://research.ibm.com/publications/the-dragon-system-an-overview), 1975, pp. 24–29.
@@ -235,7 +253,10 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - Richard Montague, [English as a Formal Language](https://lo2.org/pdf/math/montague.formal_philosophy.pdf), 1970, collected edition pp. 201–205, 217–221.
 - Richard Montague, [The Proper Treatment of Quantification in Ordinary English](https://lo2.org/pdf/math/montague.formal_philosophy.pdf), 1973, collected edition pp. 247–270.
 - Kenneth Ward Church, [A Stochastic Parts Program and Noun Phrase Parser for Unrestricted Text](https://aclanthology.org/A88-1019/), 1988, pp. 136–143.
+- Peter F. Brown 외, [A Statistical Approach to Language Translation](https://aclanthology.org/C88-1016/), 1988, pp. 71–76.
 - Peter F. Brown 외, [A Statistical Approach to Machine Translation](https://aclanthology.org/J90-2002/), 1990, pp. 79–85.
+- Peter F. Brown·Jennifer C. Lai·Robert L. Mercer, [Aligning Sentences in Parallel Corpora](https://aclanthology.org/P91-1022/), 1991, pp. 169–176.
+- Peter F. Brown 외, [The Mathematics of Statistical Machine Translation: Parameter Estimation](https://aclanthology.org/J93-2003/), 1993, pp. 263–311.
 - Eric Brill, [A Simple Rule-Based Part of Speech Tagger](https://aclanthology.org/A92-1021/), 1992, pp. 152–155.
 - Kenneth W. Church·Robert L. Mercer, [Introduction to the Special Issue on Computational Linguistics Using Large Corpora](https://aclanthology.org/J93-1001/), 1993, pp. 1–3, 15–16.
 - Alexander Waibel 외, [Phoneme Recognition Using Time-Delay Neural Networks](https://doi.org/10.1109/29.21701), 1989, pp. 328–334.
@@ -244,6 +265,8 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 
 ## 관련 항목
 
+- [[022_IBM 통계적 기계 번역과 데이터 기반 전환]]
+- [[통계적 기계 번역]]
 - [[규칙 기반 기계 번역]]
 - [[013_은닉 마르코프 모델과 통계적 음성 인식]]
 - [[은닉 마르코프 모델]]

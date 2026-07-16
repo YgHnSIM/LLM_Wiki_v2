@@ -535,6 +535,56 @@ sources:
     kind: journal-article
     url: https://aclanthology.org/J90-2002/
     language: en
+  brown-lai-mercer-1991-sentence-alignment:
+    title: Aligning Sentences in Parallel Corpora
+    authors: [Peter F. Brown, Jennifer C. Lai, Robert L. Mercer]
+    published: 1991
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/981344.981366
+    url: https://aclanthology.org/P91-1022/
+    language: en
+  brown-et-al-1993-smt-parameter-estimation:
+    title: "The Mathematics of Statistical Machine Translation: Parameter Estimation"
+    authors: [Peter F. Brown, Stephen A. Della Pietra, Vincent J. Della Pietra, Robert L. Mercer]
+    published: 1993
+    source_type: primary
+    kind: journal-article
+    url: https://aclanthology.org/J93-2003/
+    language: en
+  berger-et-al-1994-candide:
+    title: The Candide System for Machine Translation
+    authors: [Adam L. Berger, Peter F. Brown, Stephen A. Della Pietra, Vincent J. Della Pietra, John R. Gillett, John D. Lafferty, Robert L. Mercer, Harry Printz, Lubos Ures]
+    published: 1994
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/H94-1028/
+    language: en
+  papineni-et-al-2002-bleu:
+    title: "Bleu: a Method for Automatic Evaluation of Machine Translation"
+    authors: [Kishore Papineni, Salim Roukos, Todd Ward, Wei-Jing Zhu]
+    published: 2002
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/1073083.1073135
+    url: https://aclanthology.org/P02-1040/
+    language: en
+  koehn-och-marcu-2003-phrase-smt:
+    title: Statistical Phrase-Based Translation
+    authors: [Philipp Koehn, Franz J. Och, Daniel Marcu]
+    published: 2003
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/N03-1017/
+    language: en
+  koehn-et-al-2007-moses:
+    title: "Moses: Open Source Toolkit for Statistical Machine Translation"
+    authors: [Philipp Koehn, Hieu Hoang, Alexandra Birch, Chris Callison-Burch, Marcello Federico, Nicola Bertoldi, Brooke Cowan, Wade Shen, Christine Moran, Richard Zens, Chris Dyer, Ondřej Bojar, Alexandra Constantin, Evan Herbst]
+    published: 2007
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/P07-2045/
+    language: en
   church-mercer-1993:
     title: Introduction to the Special Issue on Computational Linguistics Using Large Corpora
     authors: [Kenneth W. Church, Robert L. Mercer]
@@ -928,7 +978,7 @@ sources:
     published: 2014
     source_type: primary
     kind: conference-paper
-    url: https://proceedings.neurips.cc/paper_files/paper/2014/hash/a14ac55a4f27472c5d894ec1c3c743d2-Abstract.html
+    url: https://proceedings.neurips.cc/paper_files/paper/2014/hash/5a18e133cbf9f257297f410bb7eca942-Abstract.html
     language: en
   bahdanau-cho-bengio-2015-attention:
     title: Neural Machine Translation by Jointly Learning to Align and Translate

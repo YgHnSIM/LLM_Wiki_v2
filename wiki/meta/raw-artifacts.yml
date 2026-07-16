@@ -336,3 +336,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 3a28fc0443b755c5522180dd80675222a6f383173acb46561a3d7a76bd555933
+  - path: "raw/022_IBM Statistical Machine Translation - From Rules to Data.ko.md"
+    role: translation
+    order_prefix: "022"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 9360d4e78a0d84d0e314f20efb4a6140b4fe777a8f7bed0c53ef57eb3e769710
+  - path: "raw/022_IBM Statistical Machine Translation - From Rules to Data.commentary.ko.md"
+    role: commentary
+    order_prefix: "022"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 2c2092c203b14c8b0972631f2f924862d190881c4b32af57b7004e3c55f702ea
