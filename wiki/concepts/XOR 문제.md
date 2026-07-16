@@ -12,12 +12,14 @@ tags:
   - domain/ai
   - domain/machine-learning
 created: '2026-05-14'
-updated: '2026-07-15'
+updated: '2026-07-16'
 lifecycle: active
 verification: verified
 artifacts:
   - raw/004_The Perceptron.md
   - raw/004_The Perceptron.commentary.md
+  - raw/018_Backpropagation - Training Deep Neural Networks.ko.md
+  - raw/018_Backpropagation - Training Deep Neural Networks.commentary.ko.md
 evidence:
   - source_id: rosenblatt-1958
     locator: pp. 386–408
@@ -25,11 +27,16 @@ evidence:
   - source_id: minsky-papert-1969
     locator: chapters 1 and 13
     relation: supports
+  - source_id: rumelhart-hinton-williams-1986-pdp
+    locator: p. 319 and pp. 331–333
+    relation: supports
 related:
   - concept.퍼셉트론
   - concept.선형-분리-가능성
   - concept.선형-분류기
   - concept.지도-학습
+  - concept.다층-퍼셉트론
+  - concept.역전파
 ---
 # XOR 문제
 
@@ -41,12 +48,16 @@ XOR의 네 입력 조합을 2차원 평면에 놓으면, 출력 1인 두 점과 
 
 ## 역사적 의미
 
-Marvin Minsky와 Seymour Papert의 1969년 *Perceptrons*는 단층 퍼셉트론이 표현할 수 없는 여러 성질을 체계적으로 분석했다. XOR은 그 한계를 설명하기 쉬운 교육 사례지만, 책의 논의를 XOR 하나로 축소하거나 이 책이 신경망 연구의 침체를 단독으로 일으켰다고 설명해서는 안 된다. 다층 비선형 네트워크는 XOR을 표현할 수 있지만, 당시에는 여러 층을 안정적으로 학습할 방법과 계산 자원이 충분하지 않았다.
+Marvin Minsky와 Seymour Papert의 1969년 *Perceptrons*는 단층 퍼셉트론이 표현할 수 없는 여러 성질을 체계적으로 분석했다. XOR은 그 한계를 설명하기 쉬운 교육 사례지만, 책의 논의를 XOR 하나로 축소하거나 이 책이 신경망 연구의 침체를 단독으로 일으켰다고 설명해서는 안 된다.
+
+[[다층 퍼셉트론]]은 비선형 은닉 유닛으로 입력을 다시 표현해 XOR을 계산할 수 있다. Rumelhart·Hinton·Williams의 1986년 장은 [[역전파]]로 이 내부 표현을 학습하는 작은 실험을 제시했다. 이는 은닉층 공동 학습의 중요한 시연이지만, 많은 층의 현대적 심층망이 곧바로 안정적으로 훈련됐다는 증거는 아니다.
 
 ## 출처
 
 - [[004_퍼셉트론]]
+- [[018_역전파와 다층 신경망 학습]]
 - Marvin Minsky·Seymour Papert, [Perceptrons](https://mitpress.mit.edu/9780262631112/perceptrons-expanded-edition/), 1969/1988, chapters 1·13.
+- David E. Rumelhart·Geoffrey E. Hinton·Ronald J. Williams, [Learning Internal Representations by Error Propagation](https://doi.org/10.7551/mitpress/5236.003.0012), 1986, p. 319과 pp. 331–333.
 
 ## 관련 항목
 
@@ -54,3 +65,5 @@ Marvin Minsky와 Seymour Papert의 1969년 *Perceptrons*는 단층 퍼셉트론�
 - [[선형 분리 가능성]]
 - [[선형 분류기]]
 - [[지도 학습]]
+- [[다층 퍼셉트론]]
+- [[역전파]]

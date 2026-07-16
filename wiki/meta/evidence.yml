@@ -707,3 +707,64 @@ sources:
     doi: 10.18653/v1/D19-1355
     url: https://aclanthology.org/D19-1355/
     language: en
+  linnainmaa-1970-reverse-ad:
+    title: Algoritmin kumulatiivinen pyöristysvirhe yksittäisten pyöristysvirheiden Taylor-kehitelmänä
+    authors: [Seppo Linnainmaa]
+    published: 1970
+    source_type: primary
+    kind: thesis
+    url: https://www.finna.fi/Record/helka.9933382303506253
+    language: fi
+  werbos-1982-nonlinear-sensitivity:
+    title: Applications of Advances in Nonlinear Sensitivity Analysis
+    authors: [Paul J. Werbos]
+    published: 1982
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1007/BFb0006203
+    url: https://link.springer.com/chapter/10.1007/BFb0006203
+    language: en
+  rumelhart-hinton-williams-1986-nature:
+    title: Learning representations by back-propagating errors
+    authors: [David E. Rumelhart, Geoffrey E. Hinton, Ronald J. Williams]
+    published: 1986
+    source_type: primary
+    kind: journal-article
+    doi: 10.1038/323533a0
+    url: https://www.nature.com/articles/323533a0
+    language: en
+  rumelhart-hinton-williams-1986-pdp:
+    title: Learning Internal Representations by Error Propagation
+    authors: [David E. Rumelhart, Geoffrey E. Hinton, Ronald J. Williams]
+    published: 1986
+    source_type: primary
+    kind: book-chapter
+    doi: 10.7551/mitpress/5236.003.0012
+    url: https://direct.mit.edu/books/monograph/4424/chapter/189417/Learning-Internal-Representations-by-Error
+    language: en
+  lecun-et-al-1989-zip-code:
+    title: Backpropagation Applied to Handwritten Zip Code Recognition
+    authors: [Yann LeCun, Bernhard Boser, John S. Denker, Donnie Henderson, Richard E. Howard, Wayne Hubbard, Lawrence D. Jackel]
+    published: 1989
+    source_type: primary
+    kind: journal-article
+    doi: 10.1162/neco.1989.1.4.541
+    url: https://direct.mit.edu/neco/article/1/4/541/5515/Backpropagation-Applied-to-Handwritten-Zip-Code
+    language: en
+  bengio-simard-frasconi-1994-long-term-dependencies:
+    title: Learning long-term dependencies with gradient descent is difficult
+    authors: [Yoshua Bengio, Patrice Simard, Paolo Frasconi]
+    published: 1994
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/72.279181
+    url: https://doi.org/10.1109/72.279181
+    language: en
+  glorot-bengio-2010-deep-feedforward:
+    title: Understanding the difficulty of training deep feedforward neural networks
+    authors: [Xavier Glorot, Yoshua Bengio]
+    published: 2010
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.mlr.press/v9/glorot10a.html
+    language: en

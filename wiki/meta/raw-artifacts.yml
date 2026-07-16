@@ -272,3 +272,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 4c35b6f60bb510a43febd1650f0cac4dde23fca4e2272834a4c777da0a016703
+  - path: "raw/018_Backpropagation - Training Deep Neural Networks.ko.md"
+    role: translation
+    order_prefix: "018"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: b2e997d93118a41587cbda57838196c87141b1ff5ff218d169490e71e2b7b51f
+  - path: "raw/018_Backpropagation - Training Deep Neural Networks.commentary.ko.md"
+    role: commentary
+    order_prefix: "018"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: f10e3d01990c0a1eb99bf89e03745f10f854c441250419b332b7b81f668ebc97

@@ -13,7 +13,7 @@ tags:
   - domain/machine-learning
   - domain/signal-processing
 created: '2026-07-14'
-updated: '2026-07-15'
+updated: '2026-07-16'
 lifecycle: active
 verification: partial
 artifacts:
@@ -21,6 +21,8 @@ artifacts:
   - raw/004_The Perceptron.commentary.md
   - raw/006_1962_위드로-호프_MADALINE.md
   - raw/006_1962_위드로-호프_MADALINE_해설.md
+  - raw/018_Backpropagation - Training Deep Neural Networks.ko.md
+  - raw/018_Backpropagation - Training Deep Neural Networks.commentary.ko.md
 evidence:
   - source_id: rosenblatt-1958
     locator: pp. 386–408
@@ -37,12 +39,20 @@ evidence:
   - source_id: widrow-winter-1988
     locator: pp. 1-401–1-408
     relation: supports
+  - source_id: rumelhart-hinton-williams-1986-nature
+    locator: pp. 533–536
+    relation: supplements
+  - source_id: rumelhart-hinton-williams-1986-pdp
+    locator: pp. 318–328
+    relation: supplements
 related:
   - concept.퍼셉트론
   - concept.adaline
   - concept.madaline
   - concept.lms-알고리즘
   - concept.경사하강법
+  - concept.역전파
+  - concept.다층-퍼셉트론
   - concept.특징-공학
   - analysis.규칙-기반-ai에서-데이터-기반-학습으로
   - analysis.ai-시연과-실제-성능
@@ -67,6 +77,10 @@ related:
 
 데이터에서 가중치를 학습한다고 해서 수작업 설계가 사라진 것은 아니다. MADALINE은 입력 [[특징 공학]], 유닛 수, 논리 게이트 연결을 전문가가 정해야 했다. 이는 [[지식 공학 병목]]이 규칙 작성에서 특징과 구조 설계의 문제로 형태를 바꾸어 남을 수 있음을 보여준다.
 
+## 역전파가 추가한 경계
+
+[[018_역전파와 다층 신경망 학습]]에서 검증한 [[역전파]]는 합성 함수의 각 학습 가능 매개변수에 대한 손실 그래디언트를 역방향으로 계산한다. 이로써 고정 논리층과 국소 규칙에 의존한 초기 혼합 구조와 달리, [[다층 퍼셉트론]]의 은닉층을 하나의 목적 함수에 맞춰 공동 학습할 수 있다. 다만 역전파는 그래디언트 계산이고 [[경사하강법]]은 그 값을 이용한 갱신이므로 두 알고리즘을 같은 것으로 쓰지 않는다.
+
 ## 현대적 해석
 
 현대 [[대규모 언어 모델]]은 미분 가능한 다층 네트워크에서 대량의 매개변수를 학습한다. 퍼셉트론의 오류 수정, 선형 LMS의 그래디언트 추정, Madaline I의 최소 교란 규칙, 역전파는 관련된 역사 안에 있지만 동일한 알고리즘은 아니다. 직접 선조라는 단선적 표현보다 차이와 재사용된 수학적 모티프를 함께 기록해야 한다.
@@ -75,6 +89,8 @@ related:
 
 - [[004_퍼셉트론]]
 - [[006_위드로-호프의 MADALINE]]
+- [[018_역전파와 다층 신경망 학습]]
+- David E. Rumelhart·Geoffrey E. Hinton·Ronald J. Williams, [Learning representations by back-propagating errors](https://doi.org/10.1038/323533a0), 1986, pp. 533–536.
 
 ## 관련 항목
 
@@ -83,6 +99,8 @@ related:
 - [[MADALINE]]
 - [[LMS 알고리즘]]
 - [[경사하강법]]
+- [[역전파]]
+- [[다층 퍼셉트론]]
 - [[특징 공학]]
 - [[규칙 기반 AI에서 데이터 기반 학습으로]]
 - [[AI 시연과 실제 성능]]
