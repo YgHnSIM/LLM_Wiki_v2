@@ -448,3 +448,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: a4f49e30cd7328f1e53c2d5f13f55c625460aca6c16aa1f2db376211ccc0e290
+  - path: "raw/029_Statistical Parsers From Rules to Probabilities - Revolution in Natural Language Parsing.ko.md"
+    role: translation
+    order_prefix: "029"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 911cfd12689727c137abe4410873362dd8bdeb5d000f9692cc0b854812a250fd
+  - path: "raw/029_Statistical Parsers From Rules to Probabilities - Revolution in Natural Language Parsing.commentary.ko.md"
+    role: commentary
+    order_prefix: "029"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 9ad560c80bf01be890ef74c5fd8162057c740710e6b80c737efb35024d831155

@@ -1042,6 +1042,40 @@ Lo-Fi 인쇄물의 시각 방향은 유지하면서 검색과 본문을 먼저 �
 - LSTM 성능은 셀 변형, 상태 크기, 초기화, BPTT 구간, 자료·손실·디코딩과 평가 조건에 의존하므로 모든 장기 의존성 과제의 보편적 해결을 주장하지 않는다.
 - 셀 상태와 게이트 활성의 관찰만으로 모델이 문법·의미를 인간처럼 이해하거나 이름 붙은 기억 슬롯을 형성했다고 결론 내리지 않는다.
 
+## [2026-07-16] ingest | 029 통계적 구문 분석과 어휘화 파서
+
+029 영어 원문을 기존 번역과 무관하게 새로 번역하고 12절 해설을 작성한 뒤, 검토된 쌍을 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 1973년 확률 문법부터 1997년 Collins의 세 생성적 어휘화 모델까지의 누적 과정을 복원하고, PCFG의 독립 가정·보간·UNKNOWN·CKY식 차트 상태·WSJ 평가와 후대 응용의 실제 범위를 1차 자료로 검증했다.
+
+변경 문서:
+
+- `raw/029_Statistical Parsers From Rules to Probabilities - Revolution in Natural Language Parsing.ko.md`와 대응 해설
+- `wiki/sources/029_통계적 구문 분석과 어휘화 파서.md`
+- `wiki/concepts/동적 계획법.md`, `wiki/concepts/파싱.md`
+- `wiki/sources/023_Penn Treebank와 통계적 구문 분석.md`
+- `wiki/meta/raw-artifacts.yml`, `wiki/meta/evidence.yml`, `wiki/index.md`, `wiki/overview.md`
+
+검증 근거와 정정:
+
+- 1997년을 통계 파싱의 단일 출발점으로 두지 않고 Booth–Thompson의 확률 문법, Pereira–Schabes의 부분 괄호 재추정, PARSEVAL, Magerman 1995와 Collins 1996의 선행 파서를 분리했다.
+- 기본 PCFG도 어휘 방출을 포함할 수 있으며, Collins 모델의 차이는 중심어와 더 풍부한 생성 이력이 상위 구조·수식어 선택을 조건화하는 데 있음을 기록했다.
+- Model 1의 좌우 수식어·STOP 생성, Model 2의 하위범주화 제약, Model 3의 wh-이동·gap 상태를 구분하고 보간이 문법 밖 모든 규칙을 허용한다는 설명을 교정했다.
+- Collins의 CKY식 동적 계획 차트가 중심어·완결 여부와 모델별 하위범주화·gap 상태를 보존하므로 표준 CNF PCFG의 단순한 CKY 표와 동일하지 않음을 확인했다.
+- WSJ Sections 02–21 약 4만 문장 학습, Section 23의 2,416문장 시험과 구성 성분 정밀도 88.1%·재현율 87.5%를 다른 분할·F1·인간 일치도와 구분했다.
+- NLU·정보 추출·통사 기반 기계 번역·질의응답의 과제별 후속 사용을 확인하되 분야 전체의 발전을 Collins 1997 한 논문에 귀속하지 않았다.
+- 2003년 비어휘화 파서와 2018년 self-attentive parser, 2019년 BERT 결합 파서를 별도 단계로 나누고, Transformer·BERT·GPT를 Collins 파서의 직접 후손으로 기록하지 않았다.
+
+검증:
+
+- 번역 스킬 검사에서 `valid_pairs: 1`, 오류 0을 확인했다.
+- `npm run source:ready -- 029`의 단위 테스트 26개, 위키 lint, 사이트 빌드와 산출물 검사를 통과했다.
+- 위키 149개, 외부 근거 179개, raw artifact 58개를 검증했고 214개 HTML·13,933개 로컬 참조와 2,726개 위키 링크에서 미해결 대상이 없었다. 검색 색인은 148개 항목이다.
+
+남은 제한:
+
+- 프로젝트에는 외부 영어 원문과 논문 PDF를 복제하지 않았으며, raw에는 한국어 번역과 해설만 보존한다.
+- 1997년 수치는 영어 WSJ와 당시 Penn Treebank·PARSEVAL 조건에 한정되며 다른 장르·언어·통사 이론의 성능을 보장하지 않는다.
+- BERT 표현에서 통사 구조를 복원하는 감독 프로브의 결과는 모델이 명시적 파서를 실행하거나 그 구조를 실제 예측에 인과적으로 사용한다는 증거와 구분한다.
+
 ## 관련 항목
 
 - [[index]]

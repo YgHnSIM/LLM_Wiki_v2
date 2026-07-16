@@ -1443,3 +1443,100 @@ sources:
     doi: 10.48550/arXiv.1609.08144
     url: https://arxiv.org/abs/1609.08144
     language: en
+  magerman-1995-statistical-parsing:
+    title: Statistical Decision-Tree Models for Parsing
+    authors: [David M. Magerman]
+    published: 1995
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/981658.981695
+    url: https://aclanthology.org/P95-1037/
+    language: en
+  collins-1996-bigram-parser:
+    title: A New Statistical Parser Based on Bigram Lexical Dependencies
+    authors: [Michael John Collins]
+    published: 1996
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/981863.981888
+    url: https://aclanthology.org/P96-1025/
+    language: en
+  johnson-1998-pcfg:
+    title: PCFG Models of Linguistic Tree Representations
+    authors: [Mark Johnson]
+    published: 1998
+    source_type: primary
+    kind: journal-article
+    url: https://aclanthology.org/J98-4004/
+    language: en
+  miller-et-al-1996-statistical-nli:
+    title: A Fully Statistical Approach to Natural Language Interfaces
+    authors: [Scott Miller, David Stallard, Robert Bobrow, Richard Schwartz]
+    published: 1996
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/981863.981871
+    url: https://aclanthology.org/P96-1008/
+    language: en
+  miller-et-al-2000-statistical-parsing-ie:
+    title: A Novel Use of Statistical Parsing to Extract Information from Text
+    authors: [Scott Miller, Heidi Fox, Lance Ramshaw, Ralph Weischedel]
+    published: 2000
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/A00-2030/
+    language: en
+  yamada-knight-2001-syntax-mt:
+    title: A Syntax-based Statistical Translation Model
+    authors: [Kenji Yamada, Kevin Knight]
+    published: 2001
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/1073012.1073079
+    url: https://aclanthology.org/P01-1067/
+    language: en
+  li-et-al-2002-qa-structural-links:
+    title: Extracting Exact Answers to Questions Based on Structural Links
+    authors: [Wei Li, Rohini K. Srihari, Xiaoge Li, M. Srikanth, Xiuhong Zhang, Cheng Niu]
+    published: 2002
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/1118845.1118850
+    url: https://aclanthology.org/W02-1905/
+    language: en
+  klein-manning-2003-unlexicalized-parsing:
+    title: Accurate Unlexicalized Parsing
+    authors: [Dan Klein, Christopher D. Manning]
+    published: 2003
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/1075096.1075150
+    url: https://aclanthology.org/P03-1054/
+    language: en
+  kitaev-klein-2018-self-attentive-parser:
+    title: Constituency Parsing with a Self-Attentive Encoder
+    authors: [Nikita Kitaev, Dan Klein]
+    published: 2018
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/P18-1249
+    url: https://aclanthology.org/P18-1249/
+    language: en
+  kitaev-et-al-2019-bert-parsing:
+    title: Multilingual Constituency Parsing with Self-Attention and Pre-Training
+    authors: [Nikita Kitaev, Steven Cao, Dan Klein]
+    published: 2019
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/P19-1340
+    url: https://aclanthology.org/P19-1340/
+    language: en
+  hewitt-manning-2019-structural-probe:
+    title: A Structural Probe for Finding Syntax in Word Representations
+    authors: [John Hewitt, Christopher D. Manning]
+    published: 2019
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/N19-1419
+    url: https://aclanthology.org/N19-1419/
+    language: en
