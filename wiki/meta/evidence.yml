@@ -768,3 +768,55 @@ sources:
     kind: conference-paper
     url: https://proceedings.mlr.press/v9/glorot10a.html
     language: en
+  waibel-et-al-1987-tdnn-tr:
+    title: Phoneme Recognition Using Time-Delay Neural Networks
+    authors: [Alexander Waibel, Toshiyuki Hanazawa, Geoffrey E. Hinton, Kiyohiro Shikano, Kevin J. Lang]
+    published: 1987
+    source_type: primary
+    kind: technical-report
+    url: https://isl.iar.kit.edu/downloads/phoneme-recognition-using-TDNN-1987.pdf
+    language: en
+  waibel-et-al-1989-tdnn:
+    title: Phoneme Recognition Using Time-Delay Neural Networks
+    authors: [Alexander Waibel, Toshiyuki Hanazawa, Geoffrey E. Hinton, Kiyohiro Shikano, Kevin J. Lang]
+    published: 1989
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/29.21701
+    url: https://doi.org/10.1109/29.21701
+    language: en
+  fukushima-1980-neocognitron:
+    title: 'Neocognitron: A Self-Organizing Neural Network Model for a Mechanism of Pattern Recognition Unaffected by Shift in Position'
+    authors: [Kunihiko Fukushima]
+    published: 1980
+    source_type: primary
+    kind: journal-article
+    doi: 10.1007/BF00344251
+    url: https://doi.org/10.1007/BF00344251
+    language: en
+  elman-1990-finding-structure-in-time:
+    title: Finding Structure in Time
+    authors: [Jeffrey L. Elman]
+    published: 1990
+    source_type: primary
+    kind: journal-article
+    doi: 10.1207/S15516709COG1402_1
+    url: https://doi.org/10.1207/S15516709COG1402_1
+    language: en
+  bai-kolter-koltun-2018-tcn:
+    title: An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling
+    authors: [Shaojie Bai, J. Zico Kolter, Vladlen Koltun]
+    published: 2018
+    source_type: primary
+    kind: research-paper
+    doi: 10.48550/arXiv.1803.01271
+    url: https://arxiv.org/abs/1803.01271
+    language: en
+  vaswani-et-al-2017-attention:
+    title: Attention Is All You Need
+    authors: [Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser, Illia Polosukhin]
+    published: 2017
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.neurips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html
+    language: en

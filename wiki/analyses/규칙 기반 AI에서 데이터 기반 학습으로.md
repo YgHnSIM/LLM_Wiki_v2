@@ -33,6 +33,8 @@ artifacts:
   - raw/015_Montague Semantics - The Formal Foundation of Compositional Language Understanding.commentary.ko.md
   - raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.ko.md
   - raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.commentary.ko.md
+  - raw/020_Time Delay Neural Networks - Processing Sequential Data with Temporal Convolutions.ko.md
+  - raw/020_Time Delay Neural Networks - Processing Sequential Data with Temporal Convolutions.commentary.ko.md
 evidence:
   - source_id: macdonald-1963
     locator: pp. 1–4
@@ -91,7 +93,12 @@ evidence:
   - source_id: lesk-1986
     locator: pp. 24–26
     relation: contextualizes
+  - source_id: waibel-et-al-1989-tdnn
+    locator: 'pp. 328–334, especially §§II–IV and Table I'
+    relation: supports
 related:
+  - source.020
+  - concept.시간-지연-신경망
   - source.015
   - concept.몬태규-의미론
   - concept.합성성
@@ -175,6 +182,12 @@ NLP에서는 규칙과 학습이 한 번에 교체되지 않았다. 섀넌의 19
 
 따라서 음성 인식의 변화는 “손으로 쓴 모든 규칙”에서 “데이터만 넣는 자동 시스템”으로의 완전 교체가 아니다. 명시적 지식과 확률 추정의 경계가 이동하고 학습 가능한 구성 요소가 늘어난 과정이다.
 
+## TDNN의 국소 시간 특징 학습
+
+[[020_시간 지연 신경망과 음소 인식]]의 [[시간 지연 신경망]]은 지연된 국소 입력과 시간축 공유 가중치를 결합해 음소 분류에 유용한 내부 특징을 역전파로 학습했다. 이는 사람이 위치별 검출기를 따로 설계하는 부담을 줄인 중요한 변화였다. 그러나 입력은 16개 정규화 멜 스케일 스펙트럼 계수와 수동으로 표시한 음소 경계에서 만든 고정 15프레임 토큰이었고, 네트워크도 화자마다 따로 학습됐다.
+
+비교 HMM 역시 전이·관측 확률을 데이터에서 학습했으며, 저자들은 두 시스템의 입력 표현이 달라 모델링 전략과 전처리 표현의 기여를 분리할 수 없다고 한정했다. 따라서 TDNN은 학습 가능한 국소 시간 특징의 범위를 넓힌 사례이지, HMM과 특징 공학을 즉시 전면 대체한 원시 음성 종단 간 시스템은 아니다. 시간 위치별 계산은 병렬화할 수 있는 순방향 합성곱이므로 순환 상태나 Transformer 자기어텐션의 직접 기원으로도 합치지 않는다.
+
 ## 현대 LLM으로의 연결
 
 현대 [[대규모 언어 모델]]은 대규모 텍스트에서 표현과 패턴을 학습하며 많은 수작업 언어 규칙을 대체한다. 퍼셉트론과는 학습 목표와 구조가 다르지만 학습 가능한 매개변수를 사용한다는 넓은 신경망 계보를 공유한다. 데이터 선택, 토큰화, 평가 기준, 안전 정책, 도구 사용 규칙과 지식 갱신은 여전히 사람이 설계한다.
@@ -195,6 +208,7 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - [[014_증강 전이망과 절차적 자연어 파싱]]
 - [[015_몬태규 의미론과 합성적 자연언어 해석]]
 - [[017_Lesk 알고리즘과 단어 의미 중의성 해소]]
+- [[020_시간 지연 신경망과 음소 인식]]
 - Michael Lesk, [Automatic Sense Disambiguation Using Machine Readable Dictionaries: How to Tell a Pine Cone from an Ice Cream Cone](https://doi.org/10.1145/318723.318728), 1986, pp. 24–26.
 - Leonard E. Baum·Ted Petrie, [Statistical Inference for Probabilistic Functions of Finite State Markov Chains](https://doi.org/10.1214/aoms/1177699147), 1966, pp. 1554–1563.
 - James K. Baker, [The DRAGON System—An Overview](https://research.ibm.com/publications/the-dragon-system-an-overview), 1975, pp. 24–29.
@@ -207,6 +221,7 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - Peter F. Brown 외, [A Statistical Approach to Machine Translation](https://aclanthology.org/J90-2002/), 1990, pp. 79–85.
 - Eric Brill, [A Simple Rule-Based Part of Speech Tagger](https://aclanthology.org/A92-1021/), 1992, pp. 152–155.
 - Kenneth W. Church·Robert L. Mercer, [Introduction to the Special Issue on Computational Linguistics Using Large Corpora](https://aclanthology.org/J93-1001/), 1993, pp. 1–3, 15–16.
+- Alexander Waibel 외, [Phoneme Recognition Using Time-Delay Neural Networks](https://doi.org/10.1109/29.21701), 1989, pp. 328–334.
 
 ## 관련 항목
 
@@ -236,3 +251,5 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - [[017_Lesk 알고리즘과 단어 의미 중의성 해소]]
 - [[Lesk 알고리즘]]
 - [[단어 의미 중의성 해소]]
+- [[시간 지연 신경망]]
+- [[020_시간 지연 신경망과 음소 인식]]

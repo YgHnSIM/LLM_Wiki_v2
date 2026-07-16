@@ -304,3 +304,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: f25f8db4037d3bc578ef3feb51bcf07c3ddabc49cd583d2ea5d0602daab084c9
+  - path: "raw/020_Time Delay Neural Networks - Processing Sequential Data with Temporal Convolutions.ko.md"
+    role: translation
+    order_prefix: "020"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 3313685ee44e485edb9acc489b091bb6840f9e9f66bf77e951de142722de3841
+  - path: "raw/020_Time Delay Neural Networks - Processing Sequential Data with Temporal Convolutions.commentary.ko.md"
+    role: commentary
+    order_prefix: "020"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 9cc6f53a0af510ee9641bc999bb6e085c06055dd6bc32196d3fb35531eaebf8c
