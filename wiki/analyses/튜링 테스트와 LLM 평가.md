@@ -10,7 +10,7 @@ tags:
   - type/analysis
   - domain/ai
 created: '2026-05-08'
-updated: '2026-07-15'
+updated: '2026-07-16'
 lifecycle: active
 verification: partial
 artifacts:
@@ -19,6 +19,8 @@ artifacts:
   - raw/003_Georgetown-IBM Machine.md
   - raw/007_ELIZA - The First Conversational AI Program.ko.md
   - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
+  - raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.ko.md
+  - raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.commentary.ko.md
 evidence:
   - source_id: turing-1950
     locator: 'pp. 433–460, §§1–7'
@@ -32,17 +34,32 @@ evidence:
   - source_id: jones-2026
     locator: Methods and Results
     relation: contextualizes
+  - source_id: searle-1980
+    locator: 'pp. 417–424, 특히 pp. 417–422'
+    relation: contextualizes
+  - source_id: searle-1980-response
+    locator: 'pp. 450–457, 특히 pp. 451–455'
+    relation: contextualizes
+  - source_id: harnad-1990-grounding
+    locator: 'pp. 335–346, 특히 §§2.1–2.3 및 §§3–5'
+    relation: contextualizes
+  - source_id: bender-koller-2020
+    locator: 'pp. 5185–5198, 특히 초록, §§1–2와 §3.1'
+    relation: contextualizes
 related:
   - concept.튜링-테스트
   - concept.모방-게임
   - concept.행동-기반-지능-기준
   - concept.중국어-방-논증
+  - concept.강한-ai
   - concept.대규모-언어-모델
   - analysis.n-gram에서-llm으로
   - analysis.ai-시연과-실제-성능
   - concept.eliza
   - concept.eliza-효과
   - analysis.eliza에서-llm으로
+  - source.016
+  - entity.존-설
 ---
 # 튜링 테스트와 LLM 평가
 
@@ -56,11 +73,27 @@ related:
 
 현대 [[대규모 언어 모델]]은 일부 시험에서 인간과 구별하기 어려운 언어 행동을 보였다. 그러나 결과는 모델, 시스템 프롬프트, 인간 비교군, 질문자, 대화 시간과 판정 절차에 달려 있다. 특정 프로토콜의 통과를 모든 형태의 튜링 테스트나 일반 지능의 판정으로 확대하지 않는다.
 
+Bender와 Koller의 2020년 입장 논문은 의미를 언어 표현과 세계에 접지된 의사소통 의도 사이의 관계로 정의하고, 언어 형식만으로 학습한 시스템은 그 관계를 학습할 수 없다고 주장한다. 이 문헌은 LLM의 언어 행동과 의미 이해를 구분하는 한 견해이지 현대 모델 전체에 대한 합의된 판결이 아니다. 모델이 사용하는 학습 목표, 분산 표현, 감각·행동 채널, 도구와 환경의 상호작용을 실제 시스템별로 따로 확인해야 한다.
+
 ## ELIZA가 보여준 선례
 
 [[007_ELIZA]]는 자연스러운 대화의 인상과 실제 이해를 구분해야 하는 이유를 초기 시스템에서 보여준다. [[ELIZA]]는 키워드와 템플릿만으로도 사용자가 공감과 통찰을 느끼게 했다. [[ELIZA 효과]]는 평가자가 시스템의 표면 행동에 내부 능력을 과도하게 귀속할 수 있음을 보여주며, 인간 유사성만으로 지능을 평가할 때의 취약점을 구체화한다.
 
-[[중국어 방 논증]]은 적절한 기호 입출력이 의미 이해를 충분히 증명하는지 묻는다. 이 논증에 대한 시스템·로봇·두뇌 시뮬레이션 반론도 있으므로 “언어 모델은 이해하지 못한다는 증명”으로 사용하기보다 평가 대상의 층위를 구분하는 논쟁으로 다룬다.
+[[016_중국어 방 논증과 강한 AI 논쟁]]에서 [[존 설]]이 직접 겨냥한 것은 프로그램 구현 자체가 이해와 지향성에 충분하다는 [[강한 AI]]의 주장이다. 중국어 방의 원어민과 구별되지 않는 출력은 사고실험의 가정이고, 방 안의 사람과 전체 체계 가운데 어디에 이해를 귀속할지는 체계 반론의 분쟁점이다. 따라서 이를 언어 모델이 이해하지 못한다는 증명으로 사용하지 않는다.
+
+## 중국어 방이 묻는 평가 층위
+
+[[튜링 테스트]]와 [[중국어 방 논증]]은 서로 모순되는 단일 판정 규칙이 아니다. 튜링의 모방 게임은 정해진 상호작용에서 관찰되는 언어 수행을 비교한다. 중국어 방은 그런 수행이 어떤 의미의 이해를 구성하거나 입증하는지에 추가 질문을 던진다. 행동 측정의 유용성과 마음에 관한 존재론적 결론을 분리할 수 있다.
+
+평가에서는 적어도 다음 층위를 구분한다.
+
+- 특정 프로토콜에서 인간과 유사한 언어 행동을 보이는가
+- 새로운 조건에서도 정확하고 일관된 과업 수행을 하는가
+- 내부 표현과 전체 시스템의 기능이 의미 있는 일반화를 지지하는가
+- 표현이 감각·행동·환경과 어떻게 연결되는가
+- 지향성이나 의식을 귀속할 근거가 무엇인가
+
+Harnad의 1990년 기호 접지 논문은 형식 기호의 해석을 감각적 도상 표상과 범주 표상에 연결하는 후보 구조를 제안했다. 이는 접지를 평가할 한 연구 방향이지만 이해나 의식의 충분조건이라는 증명은 아니다. 언어 행동, 접지, 지향성, 의식을 하나의 점수로 합치지 않는다.
 
 ## 평가 기준의 변화
 
@@ -79,8 +112,13 @@ related:
 - [[002_튜링 테스트]]
 - [[003_Georgetown-IBM 기계 번역 시연]]
 - [[007_ELIZA]]
+- [[016_중국어 방 논증과 강한 AI 논쟁]]
 - Alan M. Turing, [Computing Machinery and Intelligence](https://academic.oup.com/mind/article/LIX/236/433/986238), 1950.
 - Cameron R. Jones·Benjamin K. Bergen, [Large language models pass the Turing test](https://doi.org/10.1073/pnas.2524472123), 2026.
+- John R. Searle, [Minds, Brains, and Programs](https://doi.org/10.1017/S0140525X00005756), 1980, pp. 417–424.
+- John R. Searle, [Intrinsic Intentionality](https://doi.org/10.1017/S0140525X00006038), 1980, pp. 450–457.
+- Stevan Harnad, [The Symbol Grounding Problem](https://doi.org/10.1016/0167-2789(90)90087-6), 1990, pp. 335–346, 특히 §§2.1–2.3 및 §§3–5.
+- Emily M. Bender·Alexander Koller, [Climbing towards NLU](https://aclanthology.org/2020.acl-main.463/), 2020, pp. 5185–5198, 특히 초록, §§1–2와 §3.1.
 
 ## 관련 항목
 
@@ -88,9 +126,12 @@ related:
 - [[모방 게임]]
 - [[행동주의적 지능 기준]]
 - [[중국어 방 논증]]
+- [[강한 AI]]
 - [[대규모 언어 모델]]
 - [[N-gram에서 LLM으로]]
 - [[AI 시연과 실제 성능]]
 - [[ELIZA]]
 - [[ELIZA 효과]]
 - [[ELIZA에서 LLM으로]]
+- [[016_중국어 방 논증과 강한 AI 논쟁]]
+- [[존 설]]

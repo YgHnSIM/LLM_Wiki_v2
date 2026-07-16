@@ -224,6 +224,42 @@ sources:
     doi: 10.1017/S0140525X00005756
     url: https://doi.org/10.1017/S0140525X00005756
     language: en
+  searle-1980-response:
+    title: Intrinsic Intentionality
+    authors: [John R. Searle]
+    published: 1980
+    source_type: primary
+    kind: journal-article
+    doi: 10.1017/S0140525X00006038
+    url: https://doi.org/10.1017/S0140525X00006038
+    language: en
+  fodor-1980-searle:
+    title: Searle on What Only Brains Can Do
+    authors: [J. A. Fodor]
+    published: 1980
+    source_type: primary
+    kind: journal-article
+    doi: 10.1017/S0140525X00005823
+    url: https://doi.org/10.1017/S0140525X00005823
+    language: en
+  harnad-1990-grounding:
+    title: The Symbol Grounding Problem
+    authors: [Stevan Harnad]
+    published: 1990
+    source_type: primary
+    kind: journal-article
+    doi: 10.1016/0167-2789(90)90087-6
+    url: https://doi.org/10.1016/0167-2789(90)90087-6
+    language: en
+  bender-koller-2020:
+    title: "Climbing towards NLU: On Meaning, Form, and Understanding in the Age of Data"
+    authors: [Emily M. Bender, Alexander Koller]
+    published: 2020
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/2020.acl-main.463
+    url: https://aclanthology.org/2020.acl-main.463/
+    language: en
   bellman-1954:
     title: The Theory of Dynamic Programming
     authors: [Richard Bellman]

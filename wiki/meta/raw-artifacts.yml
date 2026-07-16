@@ -240,3 +240,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 7959d4693ac3bf8442663e87977de8a7272a709e3e59cfc50ec19c687bc096d7
+  - path: "raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.ko.md"
+    role: translation
+    order_prefix: "016"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 9ea9539f20d2bc654c07ef018f1b4bfecd3ece2ea4344214922dcae1036846d7
+  - path: "raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.commentary.ko.md"
+    role: commentary
+    order_prefix: "016"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: c0d40f9a01c62d1896a5765b87c443e0c3014f6f3f05b1fbb0c60157ac0b80aa
