@@ -99,7 +99,32 @@ for (const htmlFile of htmlFiles) {
   }
 }
 
+const homeFile = fileForUrl('/');
+const homeHtml = htmlCache.get(homeFile) ?? await fs.readFile(homeFile, 'utf8');
+const heroSourceItems = [...homeHtml.matchAll(/class="hero-source-item"/g)].length;
+const heroSourceNumbers = [...homeHtml.matchAll(/<li class="hero-source-item"><a href="[^"]+"><span>([^<]+)<\/span><strong>/g)]
+  .map((match) => match[1]);
+const expectedHeroSourceItems = Math.min(6, report.counts?.sources ?? 0);
+if (heroSourceItems !== expectedHeroSourceItems) {
+  errors.push(`Home hero must show ${expectedHeroSourceItems} recent source item(s), found ${heroSourceItems}.`);
+}
+
+const heroSourceAllLink = homeHtml.match(/<a class="hero-source-all" href="([^"]+)"/i)?.[1];
+if (!heroSourceAllLink || fileForUrl(heroSourceAllLink) !== fileForUrl('/sources/')) {
+  errors.push('Home hero must include an all-sources link to /sources/.');
+}
+
 const searchIndex = JSON.parse(await fs.readFile(path.join(distDir, 'search-index.json'), 'utf8'));
+const expectedHeroSourceNumbers = searchIndex
+  .filter((entry) => entry.sourceNumber)
+  .sort((a, b) => String(a.sourceNumber).localeCompare(String(b.sourceNumber)))
+  .slice(-6)
+  .reverse()
+  .map((entry) => String(entry.sourceNumber));
+if (JSON.stringify(heroSourceNumbers) !== JSON.stringify(expectedHeroSourceNumbers)) {
+  errors.push(`Home hero source order must be newest first: expected ${expectedHeroSourceNumbers.join(', ')}, found ${heroSourceNumbers.join(', ')}.`);
+}
+
 const requiredSearchFields = [
   'title',
   'url',
@@ -112,6 +137,7 @@ const requiredSearchFields = [
   'evidenceCount',
   'relatedCount',
   'connectionCount',
+  'sourceNumber',
 ];
 const indexedUrls = new Set();
 for (const entry of searchIndex) {

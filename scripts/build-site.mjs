@@ -448,6 +448,7 @@ function renderHome() {
   const overview = documents.find((document) => document.filename === 'overview');
   const intro = truncate(firstParagraph(overview?.body ?? ''), 130);
   const sourcePreview = grouped.sources.slice(0, 3);
+  const heroSourcePreview = grouped.sources.slice(-6).reverse();
   const analysisPreview = grouped.analyses.slice(0, 3);
   const topConcepts = [...grouped.concepts]
     .sort((a, b) => b.meaningfulBacklinks.length - a.meaningfulBacklinks.length || collator.compare(a.title, b.title))
@@ -461,9 +462,10 @@ function renderHome() {
         <p class="hero-intro">${escapeHtml(intro)}</p>
         ${renderSearch('hero-search', { large: true, label: '홈 주요 검색' })}
       </div>
-      <nav class="hero-collage hero-source-strip" aria-label="원문 노트 빠른 이동">
-        <p class="collage-label">원문 노트 ${grouped.sources.length}개</p>
-        <ol>${grouped.sources.map((document, index) => `<li><a href="${sitePath(document.url)}"><span>${escapeHtml(document.sourceNumber || String(index + 1).padStart(3, '0'))}</span><strong>${escapeHtml(document.title)}</strong></a></li>`).join('')}</ol>
+      <nav class="hero-collage hero-source-strip" aria-label="최근 원문 노트 빠른 이동">
+        <p class="collage-label">최근 원문 노트</p>
+        <ul class="hero-source-list">${heroSourcePreview.map((document) => `<li class="hero-source-item"><a href="${sitePath(document.url)}"><span>${escapeHtml(document.sourceNumber || String(grouped.sources.indexOf(document) + 1).padStart(3, '0'))}</span><strong>${escapeHtml(document.title)}</strong></a></li>`).join('')}</ul>
+        <a class="hero-source-all" href="${sitePath('/sources/')}"><strong>전체 원문 노트 ${grouped.sources.length}개 보기</strong><span aria-hidden="true">→</span></a>
       </nav>
     </section>
 

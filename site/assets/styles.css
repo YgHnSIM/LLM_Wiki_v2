@@ -1763,8 +1763,9 @@ a {
 
 .hero-source-strip {
   display: block;
+  align-self: center;
   overflow: hidden;
-  min-height: 390px;
+  min-height: 0;
   padding: 28px 24px 22px;
 }
 
@@ -1778,7 +1779,7 @@ a {
   margin: 0 0 12px -8px;
 }
 
-.hero-source-strip ol {
+.hero-source-list {
   position: relative;
   z-index: 1;
   display: grid;
@@ -1788,7 +1789,7 @@ a {
   list-style: none;
 }
 
-.hero-source-strip a {
+.hero-source-item a {
   display: grid;
   grid-template-columns: 44px minmax(0, 1fr);
   align-items: center;
@@ -1803,29 +1804,61 @@ a {
   transform: rotate(-0.25deg);
 }
 
-.hero-source-strip li:nth-child(even) a {
+.hero-source-item:nth-child(even) a {
   transform: rotate(0.25deg);
 }
 
-.hero-source-strip a:hover,
-.hero-source-strip a:focus-visible {
+.hero-source-item a:hover,
+.hero-source-item a:focus-visible {
   background: var(--cyan);
 }
 
-.hero-source-strip a span {
+.hero-source-item a span {
   color: var(--blue);
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 700;
 }
 
-.hero-source-strip a strong {
+.hero-source-item a strong {
   min-width: 0;
   overflow: hidden;
   font-family: var(--font-serif);
   font-size: 14px;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.hero-source-all {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  padding: 8px 12px;
+  margin: 14px 3px 0;
+  border: 2px solid var(--ink);
+  background: var(--yellow);
+  box-shadow: 4px 4px 0 var(--ink);
+  color: var(--ink);
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-decoration: none;
+  transform: rotate(0.4deg);
+}
+
+.hero-source-all span {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.hero-source-all:hover,
+.hero-source-all:focus-visible {
+  background: var(--cyan);
 }
 
 .hero-source-ledger::before,
@@ -3360,6 +3393,10 @@ details.toc-card > nav > ol {
     gap: 42px;
   }
 
+  .hero-source-item:nth-child(n + 5) {
+    display: none;
+  }
+
   .hero-source-ledger,
   .source-ledger--hero {
     width: min(100%, 540px);
@@ -3486,7 +3523,7 @@ details.toc-card > nav > ol {
   .hero-source-strip {
     display: block;
     width: 100%;
-    min-height: 166px;
+    min-height: 0;
     padding: 23px 18px 18px;
     box-shadow: 7px 7px 0 var(--ink);
     transform: rotate(0.5deg);
@@ -3496,27 +3533,26 @@ details.toc-card > nav > ol {
     margin-bottom: 9px;
   }
 
-  .hero-source-strip ol {
-    grid-auto-columns: minmax(190px, 78%);
-    grid-auto-flow: column;
-    overflow-x: auto;
-    padding: 3px 3px 10px;
-    gap: 10px;
-    scroll-padding-inline: 3px;
-    scroll-snap-type: x proximity;
+  .hero-source-list {
+    padding: 3px;
+    gap: 8px;
   }
 
-  .hero-source-strip li {
-    scroll-snap-align: start;
+  .hero-source-item:nth-child(n + 4) {
+    display: none;
   }
 
-  .hero-source-strip a {
-    min-height: 70px;
+  .hero-source-item a {
+    min-height: 52px;
     padding: 9px;
   }
 
-  .hero-source-strip a strong {
+  .hero-source-item a strong {
     white-space: normal;
+  }
+
+  .hero-source-all {
+    margin-top: 11px;
   }
 
   .hero-source-ledger,
