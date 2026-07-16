@@ -432,3 +432,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 8aa0fd72a6036a98d56cc4688f461a06e387be802f890016508f123981f6edb7
+  - path: "raw/028_Long Short-Term Memory - Solving the Memory Problem.ko.md"
+    role: translation
+    order_prefix: "028"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 8c4ce13c65a9d1894d1c0861dd386d9112f481e3179a5e7a16f425cf72ec24f0
+  - path: "raw/028_Long Short-Term Memory - Solving the Memory Problem.commentary.ko.md"
+    role: commentary
+    order_prefix: "028"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: a4f49e30cd7328f1e53c2d5f13f55c625460aca6c16aa1f2db376211ccc0e290

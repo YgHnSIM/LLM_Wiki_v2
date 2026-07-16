@@ -3,6 +3,7 @@ import test from 'node:test';
 import {
   escapeHtml,
   firstParagraph,
+  protectRenderedMath,
   readingMinutes,
   stripMarkdown,
   truncate,
@@ -14,6 +15,12 @@ test('HTML escaping covers text and attribute delimiters', () => {
 
 test('Markdown summaries retain wiki labels and numeric ranges', () => {
   assert.equal(stripMarkdown('**[[MADALINE|다중 ADALINE]]**은 1960~1962년에 등장했다.'), '다중 ADALINE은 1960–1962년에 등장했다.');
+});
+
+test('rendered math tildes survive the Markdown parser without becoming strikethrough', () => {
+  const rendered = protectRenderedMath('<math><mo>~</mo><annotation>\\tilde{C}_t</annotation></math>');
+  assert.equal(rendered, '<math><mo>&#126;</mo><annotation>\\tilde{C}_t</annotation></math>');
+  assert.doesNotMatch(rendered, /<del\b/i);
 });
 
 test('the first prose paragraph skips headings and callouts', () => {

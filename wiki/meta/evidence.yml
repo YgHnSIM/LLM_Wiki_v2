@@ -1382,3 +1382,64 @@ sources:
     doi: 10.1145/1015330.1015341
     url: https://doi.org/10.1145/1015330.1015341
     language: en
+  schuster-paliwal-1997-brnn:
+    title: Bidirectional Recurrent Neural Networks
+    authors: [Mike Schuster, Kuldip K. Paliwal]
+    published: 1997
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/78.650093
+    url: https://doi.org/10.1109/78.650093
+    language: en
+  gers-schraudolph-schmidhuber-2002-peephole:
+    title: Learning Precise Timing with LSTM Recurrent Networks
+    authors: [Felix A. Gers, Nicol N. Schraudolph, Jürgen Schmidhuber]
+    published: 2002
+    source_type: primary
+    kind: journal-article
+    url: https://www.jmlr.org/papers/v3/gers02a.html
+    language: en
+  graves-schmidhuber-2005-blstm-phoneme:
+    title: Framewise Phoneme Classification with Bidirectional LSTM and Other Neural Network Architectures
+    authors: [Alex Graves, Jürgen Schmidhuber]
+    published: 2005
+    source_type: primary
+    kind: journal-article
+    doi: 10.1016/j.neunet.2005.06.042
+    url: https://doi.org/10.1016/j.neunet.2005.06.042
+    language: en
+  sundermeyer-et-al-2012-lstm-lm:
+    title: LSTM Neural Networks for Language Modeling
+    authors: [Martin Sundermeyer, Ralf Schlüter, Hermann Ney]
+    published: 2012
+    source_type: primary
+    kind: conference-paper
+    doi: 10.21437/Interspeech.2012-65
+    url: https://www.isca-archive.org/interspeech_2012/sundermeyer12_interspeech.html
+    language: en
+  graves-jaitly-2014-speech:
+    title: Towards End-To-End Speech Recognition with Recurrent Neural Networks
+    authors: [Alex Graves, Navdeep Jaitly]
+    published: 2014
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.mlr.press/v32/graves14.html
+    language: en
+  linzen-dupoux-goldberg-2016-agreement:
+    title: Assessing the Ability of LSTMs to Learn Syntax-Sensitive Dependencies
+    authors: [Tal Linzen, Emmanuel Dupoux, Yoav Goldberg]
+    published: 2016
+    source_type: primary
+    kind: journal-article
+    doi: 10.1162/tacl_a_00115
+    url: https://aclanthology.org/Q16-1037/
+    language: en
+  wu-et-al-2016-gnmt:
+    title: "Google's Neural Machine Translation System: Bridging the Gap between Human and Machine Translation"
+    authors: [Yonghui Wu, Mike Schuster, Zhifeng Chen, Quoc V. Le, Mohammad Norouzi, Wolfgang Macherey, Maxim Krikun, Yuan Cao, Qin Gao, Klaus Macherey, Jeff Klingner, Apurva Shah, Melvin Johnson, Xiaobing Liu, Łukasz Kaiser, Stephan Gouws, Yoshikiyo Kato, Taku Kudo, Hideto Kazawa, Keith Stevens, George Kurian, Nishant Patil, Wei Wang, Cliff Young, Jason Smith, Jason Riesa, Alex Rudnick, Oriol Vinyals, Greg Corrado, Macduff Hughes, Jeffrey Dean]
+    published: 2016
+    source_type: primary
+    kind: research-paper
+    doi: 10.48550/arXiv.1609.08144
+    url: https://arxiv.org/abs/1609.08144
+    language: en

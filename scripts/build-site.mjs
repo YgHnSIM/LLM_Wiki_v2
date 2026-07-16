@@ -12,7 +12,7 @@ import {
   sourceOriginForArtifact,
 } from './lib/artifact-readers.mjs';
 import { buildDirectoryAtomically } from './lib/atomic-directory.mjs';
-import { escapeHtml, firstParagraph, readingMinutes, stripMarkdown, truncate } from './lib/content-format.mjs';
+import { escapeHtml, firstParagraph, protectRenderedMath, readingMinutes, stripMarkdown, truncate } from './lib/content-format.mjs';
 import { distDir, rawDir, rootDir, siteDir, wikiDir } from './lib/project-paths.mjs';
 import { normalizeBasePath, outputFileForUrl, withBasePath } from './lib/site-paths.mjs';
 import {
@@ -351,12 +351,12 @@ function headingPlan(markdown) {
 }
 
 function renderMath(expression, displayMode) {
-  const rendered = katex.renderToString(expression.trim(), {
+  const rendered = protectRenderedMath(katex.renderToString(expression.trim(), {
     displayMode,
     throwOnError: false,
     strict: false,
     output: 'htmlAndMathml',
-  });
+  }));
   return displayMode ? `<div class="math-display">${rendered}</div>` : `<span class="math-inline">${rendered}</span>`;
 }
 

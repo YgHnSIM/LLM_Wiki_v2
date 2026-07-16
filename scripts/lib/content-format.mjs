@@ -7,6 +7,13 @@ export function escapeHtml(value = '') {
     .replaceAll("'", '&#039;');
 }
 
+export function protectRenderedMath(html = '') {
+  // KaTeX emits an ASCII tilde inside MathML for accents such as \tilde{x}.
+  // Marked's single-tilde GFM extension can reinterpret two distant accents as
+  // strikethrough when rendered math is passed through the Markdown parser.
+  return String(html).replaceAll('~', '&#126;');
+}
+
 export function stripMarkdown(markdown = '') {
   return String(markdown)
     .replace(/```[\s\S]*?```|~~~[\s\S]*?~~~/g, ' ')
