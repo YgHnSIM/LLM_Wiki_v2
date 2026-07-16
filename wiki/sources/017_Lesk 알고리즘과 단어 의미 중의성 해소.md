@@ -41,6 +41,7 @@ related:
   - entity.마이클-레스크
   - concept.lesk-알고리즘
   - concept.단어-의미-중의성-해소
+  - concept.wordnet
   - concept.통계적-자연어-처리
   - analysis.규칙-기반-ai에서-데이터-기반-학습으로
 ---
@@ -85,7 +86,7 @@ p. 26의 평가는 저자가 매우 짧은 실험이라고 규정한 소규모 �
 
 ## Adapted Lesk와 Extended Gloss Overlaps
 
-Banerjee와 Pedersen의 2002년 「An Adapted Lesk Algorithm for Word Sense Disambiguation Using WordNet」은 WordNet의 관계를 따라 관련 개념의 글로스를 비교에 포함하고, 연속해서 겹치는 구절이 길수록 더 큰 점수를 주는 변형이다. 이 논문의 정식 명칭은 `Adapted Lesk`다.
+Banerjee와 Pedersen의 2002년 「An Adapted Lesk Algorithm for Word Sense Disambiguation Using WordNet」은 [[WordNet]]의 관계를 따라 관련 개념의 글로스를 비교에 포함하고, 연속해서 겹치는 구절이 길수록 더 큰 점수를 주는 변형이다. 이 논문의 정식 명칭은 `Adapted Lesk`다.
 
 같은 저자들의 2003년 「Extended Gloss Overlaps as a Measure of Semantic Relatedness」는 관련 synset의 글로스 중첩을 확장해 의미 관련도를 계산하고 이를 WSD에 적용한 별도 논문이다. `Adapted Lesk`와 `Extended Gloss Overlaps`를 하나의 2002년 논문명으로 합치지 않는다.
 
@@ -133,3 +134,4 @@ Oele와 van Noord의 2018년 방법은 Lesk에서 영감을 받았다고 명시�
 - [[단어 의미 중의성 해소]]
 - [[통계적 자연어 처리]]
 - [[규칙 기반 AI에서 데이터 기반 학습으로]]
+- [[WordNet]]

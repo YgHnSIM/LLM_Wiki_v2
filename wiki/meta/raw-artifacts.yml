@@ -384,3 +384,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: d61c5df6274785a368fcd3c06e96107a90fbce6a788c30d3091ebb1b47a8a798
+  - path: "raw/025_WordNet - A Semantic Network for Language Understanding.ko.md"
+    role: translation
+    order_prefix: "025"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: d04a299940260af34e852fef48be1bf593e3dbea8e9f9c891c7266997f38ff44
+  - path: "raw/025_WordNet - A Semantic Network for Language Understanding.commentary.ko.md"
+    role: commentary
+    order_prefix: "025"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 177ee65ba62adf6dc3559b00d72b858a95702f7326637f9be09a968407210b9f

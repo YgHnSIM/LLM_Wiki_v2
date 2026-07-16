@@ -909,6 +909,37 @@ Lo-Fi 인쇄물의 시각 방향은 유지하면서 검색과 본문을 먼저 �
 - BM25 성능은 말뭉치·질의·토큰화·길이 분포·매개변수와 평가 지표에 의존하므로 모든 검색 환경의 보편적 우위를 주장하지 않는다.
 - 실제 상용 검색 엔진의 비공개 순위 구조와 전 세계 채택 범위는 공개 자료만으로 확인할 수 없다.
 
+## [2026-07-16] ingest | 025 WordNet과 어휘 의미망
+
+025 영어 원문을 기존 번역과 무관하게 새로 번역하고 12절 해설을 작성한 뒤, 검증된 쌍을 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 WordNet을 1995년의 단일 공개 사건으로 묶은 서사를 1985년 착수, 1990년 논문군, 1992–1998년 버전 배포·출판으로 나누고, synset과 관계 포인터의 실제 구조 및 후대 기술과의 관계를 1차·공식 자료로 검증했다.
+
+변경 문서:
+
+- `raw/025_WordNet - A Semantic Network for Language Understanding.ko.md`와 대응 해설
+- `wiki/sources/025_WordNet과 어휘 의미망.md`
+- `wiki/concepts/WordNet.md`, `단어 의미 중의성 해소.md`, `Lesk 알고리즘.md`
+- `wiki/entities/조지 밀러.md`
+- `wiki/sources/017_Lesk 알고리즘과 단어 의미 중의성 해소.md`
+- `wiki/analyses/규칙 기반 AI에서 데이터 기반 학습으로.md`
+- `wiki/meta/raw-artifacts.yml`, `wiki/meta/evidence.yml`, `wiki/index.md`, `wiki/overview.md`
+
+검증 근거와 정정:
+
+- 1985년 프로젝트 시작, 1990년 IJL 특별호, 1992년 1.3, 1993년 1.4, 1995년 1.5·CACM 논문, 1998년 1.6·단행본을 서로 다른 단계로 구분했다.
+- word form과 synset, 특정 word form 사이의 어휘 관계와 synset 사이의 의미 관계를 분리했다.
+- 명사·동사·형용사·부사의 서로 다른 subnet 구조를 확인하고, 부사가 대개 파생된 형용사를 가리킨다는 WordNet 3.0 포인터 정의로 raw의 동사 연결 설명을 교정했다.
+- 1990년 명사의 25 unique beginners와 WordNet 3.0의 `entity` 단일 최상위를 버전 차이로 기록했다.
+- WordNet 3.0의 117,659개 synset, 206,941개 word-sense pair와 품사 중복 제거 문자열 147,278개를 집계 단위별로 구분했다.
+- 반의 관계를 논리 부정으로 확대하지 않고 `not hot`에서 `cold`를 바로 추론하는 예시를 배제했다.
+- WSD·검색 확장·의미 유사도에서 자원 사용과 성능 향상을 분리하고, 자동 질의 확장이 악화될 수 있는 조건도 확인했다.
+- WordNet의 이산 어휘망과 신경 분산 표상을 구분했으며 FrameNet·PropBank·일반 지식 그래프·Word2Vec·BERT·LLM의 직접 조상이라는 계보를 채택하지 않았다.
+
+남은 제한:
+
+- 프로젝트에는 외부 영어 원문과 WordNet 데이터베이스 자체를 복제하지 않았으며, raw에는 한국어 번역과 해설만 보존한다.
+- WordNet의 coverage, sense granularity와 관계 정확성은 버전·품사·도메인에 따라 달라질 수 있어 개별 응용의 성능을 보장하지 않는다.
+- 인간 lexical memory에서 영감을 받은 설계가 실제 인지 구조를 얼마나 재현하는지는 별도의 심리언어학적 검증이 필요하다.
+
 ## 관련 항목
 
 - [[index]]

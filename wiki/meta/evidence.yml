@@ -1093,3 +1093,106 @@ sources:
     kind: conference-paper
     url: https://proceedings.neurips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html
     language: en
+  miller-et-al-1990-introduction-wordnet:
+    title: "Introduction to WordNet: An On-line Lexical Database"
+    authors: [George A. Miller, Richard Beckwith, Christiane Fellbaum, Derek Gross, Katherine J. Miller]
+    published: 1990
+    source_type: primary
+    kind: journal-article
+    doi: 10.1093/ijl/3.4.235
+    url: https://wordnetcode.princeton.edu/5papers.pdf
+    language: en
+  miller-1990-nouns-wordnet:
+    title: "Nouns in WordNet: A Lexical Inheritance System"
+    authors: [George A. Miller]
+    published: 1990
+    source_type: primary
+    kind: journal-article
+    doi: 10.1093/ijl/3.4.245
+    url: https://doi.org/10.1093/ijl/3.4.245
+    language: en
+  miller-1993-wordnet-project:
+    title: "WordNet: A Lexical Database for English"
+    authors: [George A. Miller]
+    published: 1993
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/H93-1103/
+    language: en
+  miller-1994-wordnet-project:
+    title: "WordNet: A Lexical Database for English"
+    authors: [George A. Miller]
+    published: 1994
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/H94-1111/
+    language: en
+  princeton-wordnet-1995-release-1-5:
+    title: WordNet Version 1.5 Release Information
+    authors: [Princeton University WordNet Project]
+    published: 1995
+    source_type: primary-archive
+    kind: software-archive
+    url: https://wordnetcode.princeton.edu/1.5/README.release
+    language: en
+  miller-1995-wordnet:
+    title: "WordNet: A Lexical Database for English"
+    authors: [George A. Miller]
+    published: 1995
+    source_type: primary
+    kind: journal-article
+    doi: 10.1145/219717.219748
+    url: https://doi.org/10.1145/219717.219748
+    language: en
+  fellbaum-1998-wordnet:
+    title: "WordNet: An Electronic Lexical Database"
+    authors: [Christiane Fellbaum]
+    published: 1998
+    source_type: primary
+    kind: book
+    url: https://mitpress.mit.edu/9780262561167/wordnet/
+    language: en
+  princeton-wordnet-3-0-reference:
+    title: WordNet 3.0 Reference Manual
+    authors: [Princeton University WordNet Project]
+    published: 2006
+    source_type: primary-archive
+    kind: software-archive
+    url: https://wordnet.princeton.edu/documentation
+    language: en
+  voorhees-1994-wordnet-query-expansion:
+    title: Query Expansion Using Lexical-Semantic Relations
+    authors: [Ellen M. Voorhees]
+    published: 1994
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1007/978-1-4471-2099-5_7
+    url: https://doi.org/10.1007/978-1-4471-2099-5_7
+    language: en
+  faruqui-et-al-2015-retrofitting:
+    title: Retrofitting Word Vectors to Semantic Lexicons
+    authors: [Manaal Faruqui, Jesse Dodge, Sujay Kumar Jauhar, Chris Dyer, Eduard Hovy, Noah A. Smith]
+    published: 2015
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/v1/N15-1184
+    url: https://aclanthology.org/N15-1184/
+    language: en
+  baker-et-al-1998-framenet:
+    title: The Berkeley FrameNet Project
+    authors: [Collin F. Baker, Charles J. Fillmore, John B. Lowe]
+    published: 1998
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/980845.980860
+    url: https://aclanthology.org/P98-1013/
+    language: en
+  palmer-et-al-2005-propbank:
+    title: "The Proposition Bank: An Annotated Corpus of Semantic Roles"
+    authors: [Martha Palmer, Daniel Gildea, Paul Kingsbury]
+    published: 2005
+    source_type: primary
+    kind: journal-article
+    doi: 10.1162/0891201053630264
+    url: https://aclanthology.org/J05-1004/
+    language: en

@@ -38,6 +38,7 @@ related:
   - source.017
   - entity.마이클-레스크
   - concept.단어-의미-중의성-해소
+  - concept.wordnet
   - concept.통계적-자연어-처리
 ---
 # Lesk 알고리즘
@@ -56,7 +57,7 @@ related:
 
 ## 후속 변형
 
-2002년 `Adapted Lesk`는 WordNet의 의미 관계를 따라 관련 글로스를 추가하고 긴 연속 중첩에 더 큰 점수를 주었다. 2003년 `Extended Gloss Overlaps`는 관련 synset 글로스를 이용한 의미 관련도 척도와 WSD 적용을 별도로 제시했다.
+2002년 `Adapted Lesk`는 [[WordNet]]의 의미 관계를 따라 관련 글로스를 추가하고 긴 연속 중첩에 더 큰 점수를 주었다. 2003년 `Extended Gloss Overlaps`는 관련 synset 글로스를 이용한 의미 관련도 척도와 WSD 적용을 별도로 제시했다.
 
 2018년 Oele·van Noord는 Lesk에서 영감을 받은 지식 기반 방법으로 정확 중첩 대신 단어·의미 임베딩을 사용했다. 2019년 GlossBERT는 문맥–글로스 쌍을 BERT로 분류하는 지도 학습 방법이다. 이들은 글로스와 문맥의 적합도를 비교한다는 제한된 공통점이 있지만 원 알고리즘과 동일하지 않으며 현대 언어 모델 전체의 직접 계보도 아니다.
 
@@ -79,3 +80,4 @@ related:
 - [[마이클 레스크]]
 - [[단어 의미 중의성 해소]]
 - [[통계적 자연어 처리]]
+- [[WordNet]]

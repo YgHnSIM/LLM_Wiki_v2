@@ -41,6 +41,8 @@ artifacts:
   - raw/022_IBM Statistical Machine Translation - From Rules to Data.commentary.ko.md
   - raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.ko.md
   - raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.commentary.ko.md
+  - raw/025_WordNet - A Semantic Network for Language Understanding.ko.md
+  - raw/025_WordNet - A Semantic Network for Language Understanding.commentary.ko.md
 evidence:
   - source_id: macdonald-1963
     locator: pp. 1–4
@@ -108,6 +110,9 @@ evidence:
   - source_id: lesk-1986
     locator: pp. 24–26
     relation: contextualizes
+  - source_id: miller-et-al-1990-introduction-wordnet
+    locator: journal pp. 235–244; Princeton 공식 묶음 PDF의 Introduction pp. 2–9
+    relation: contextualizes
   - source_id: waibel-et-al-1989-tdnn
     locator: 'pp. 328–334, especially §§II–IV and Table I'
     relation: supports
@@ -154,6 +159,8 @@ related:
   - source.017
   - concept.lesk-알고리즘
   - concept.단어-의미-중의성-해소
+  - source.025
+  - concept.wordnet
 ---
 # 규칙 기반 AI에서 데이터 기반 학습으로
 
@@ -203,6 +210,8 @@ NLP에서는 규칙과 학습이 한 번에 교체되지 않았다. 섀넌의 19
 
 따라서 Lesk를 규칙 기반 NLP에서 현대 통계·신경 NLP로 곧장 이어지는 직접 조상으로 놓지 않는다. 이 사례는 사람이 편찬한 사전 자원을 새로운 계산 절차로 재활용하는 계열이 규칙 작성과 통계 학습 사이에 병존했음을 보여 준다.
 
+[[025_WordNet과 어휘 의미망]]의 [[WordNet]]은 이 중간 계열을 자원 구축의 층위에서 더 선명하게 보여 준다. 사람이 synset과 어휘·의미 관계를 편찬하고, 후속 알고리즘은 그 구조를 탐색하거나 점수화했다. 이는 과제별 규칙을 전부 코드로 쓰는 방식도, 말뭉치에서 표현을 자동 학습하는 방식도 아니며, 사람이 만든 표현 자원과 계산 절차를 결합한 접근이다.
+
 [[은닉 마르코프 모델]]의 수학적 기반도 Baum·Petrie의 1966년 연구와 1970년 재추정 논문으로 거슬러 올라간다. 1975년 DRAGON과 IBM 통계 디코더, 1976년 Jelinek의 종합은 이 기반이 음성 인식에 적용된 별도 단계다. HMM을 1970년대에 발명된 단일 음성 기술로 묶지 않는다.
 
 [[통계적 자연어 처리]]는 구조를 없앤 것이 아니다. HMM 태거는 품사를 상태로 사용하고, 확률 문법은 형식 문법의 규칙에 가중치를 둔다. Brill의 1992년 태거는 주석 [[말뭉치 기반 학습|말뭉치]]에서 사람이 읽을 수 있는 변환 규칙을 학습했다. 이 사례들은 상징 표현·수작업 설계·통계 추정이 하나의 시스템 안에 공존할 수 있음을 보여 준다.
@@ -250,10 +259,12 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - [[014_증강 전이망과 절차적 자연어 파싱]]
 - [[015_몬태규 의미론과 합성적 자연언어 해석]]
 - [[017_Lesk 알고리즘과 단어 의미 중의성 해소]]
+- [[025_WordNet과 어휘 의미망]]
 - [[020_시간 지연 신경망과 음소 인식]]
 - [[021_합성곱 신경망과 특징 학습]]
 - [[022_IBM 통계적 기계 번역과 데이터 기반 전환]]
 - Michael Lesk, [Automatic Sense Disambiguation Using Machine Readable Dictionaries: How to Tell a Pine Cone from an Ice Cream Cone](https://doi.org/10.1145/318723.318728), 1986, pp. 24–26.
+- George A. Miller·Richard Beckwith·Christiane Fellbaum·Derek Gross·Katherine J. Miller, [Introduction to WordNet: An On-line Lexical Database](https://doi.org/10.1093/ijl/3.4.235), 1990, pp. 235–244.
 - Leonard E. Baum·Ted Petrie, [Statistical Inference for Probabilistic Functions of Finite State Markov Chains](https://doi.org/10.1214/aoms/1177699147), 1966, pp. 1554–1563.
 - James K. Baker, [The DRAGON System—An Overview](https://research.ibm.com/publications/the-dragon-system-an-overview), 1975, pp. 24–29.
 - Frederick Jelinek·Lalit R. Bahl·Robert L. Mercer, [Design of a Linguistic Statistical Decoder for the Recognition of Continuous Speech](https://research.ibm.com/publications/design-of-a-linguistic-statistical-decoder-for-the-recognition-of-continuous-speech), 1975, pp. 250–256.
@@ -304,6 +315,8 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - [[017_Lesk 알고리즘과 단어 의미 중의성 해소]]
 - [[Lesk 알고리즘]]
 - [[단어 의미 중의성 해소]]
+- [[025_WordNet과 어휘 의미망]]
+- [[WordNet]]
 - [[시간 지연 신경망]]
 - [[020_시간 지연 신경망과 음소 인식]]
 - [[021_합성곱 신경망과 특징 학습]]
