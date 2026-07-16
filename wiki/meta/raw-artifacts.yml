@@ -224,3 +224,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: d92baa9b5668ea18e309722b0a67f2a5cf2ae3508de65781eae60c867973f327
+  - path: "raw/015_Montague Semantics - The Formal Foundation of Compositional Language Understanding.ko.md"
+    role: translation
+    order_prefix: "015"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 54335a29d9fd6c1edf97755ca820d55e20ed6a9e2184f84962d2e220cd8453d3
+  - path: "raw/015_Montague Semantics - The Formal Foundation of Compositional Language Understanding.commentary.ko.md"
+    role: commentary
+    order_prefix: "015"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 7959d4693ac3bf8442663e87977de8a7272a709e3e59cfc50ec19c687bc096d7

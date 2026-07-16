@@ -29,6 +29,8 @@ artifacts:
   - raw/013_Hidden Markov Models - Statistical Speech Recognition.commentary.ko.md
   - raw/014_Augmented Transition Networks - Procedural Parsing Formalism for Natural Language.ko.md
   - raw/014_Augmented Transition Networks - Procedural Parsing Formalism for Natural Language.commentary.ko.md
+  - raw/015_Montague Semantics - The Formal Foundation of Compositional Language Understanding.ko.md
+  - raw/015_Montague Semantics - The Formal Foundation of Compositional Language Understanding.commentary.ko.md
 evidence:
   - source_id: macdonald-1963
     locator: pp. 1–4
@@ -78,7 +80,16 @@ evidence:
   - source_id: woods-1970-atn
     locator: pp. 591–606
     relation: contextualizes
+  - source_id: montague-1970-efl
+    locator: collected ed., pp. 201–205 and 217–221
+    relation: contextualizes
+  - source_id: montague-1973-ptq
+    locator: collected ed., pp. 247–270
+    relation: contextualizes
 related:
+  - source.015
+  - concept.몬태규-의미론
+  - concept.합성성
   - source.013
   - concept.은닉-마르코프-모델
   - concept.baum-welch-알고리즘
@@ -102,7 +113,7 @@ related:
 ---
 # 규칙 기반 AI에서 데이터 기반 학습으로
 
-[[규칙 기반 AI에서 데이터 기반 학습으로]]의 전환은 AI 시스템을 사람이 직접 규칙으로 작성하는 방식에서, 데이터로부터 매개변수와 패턴을 학습하는 방식으로 무게가 옮겨 간 흐름을 가리킨다. [[003_Georgetown-IBM 기계 번역 시연]]과 [[004_퍼셉트론]]은 이 전환의 두 축을 보여 주고, [[012_상징 규칙에서 통계 학습으로]], [[013_은닉 마르코프 모델과 통계적 음성 인식]], [[014_증강 전이망과 절차적 자연어 파싱]]은 자연어·음성 처리 내부의 과제별 시간표와 혼합 접근을 보완한다.
+[[규칙 기반 AI에서 데이터 기반 학습으로]]의 전환은 AI 시스템을 사람이 직접 규칙으로 작성하는 방식에서, 데이터로부터 매개변수와 패턴을 학습하는 방식으로 무게가 옮겨 간 흐름을 가리킨다. [[003_Georgetown-IBM 기계 번역 시연]]과 [[004_퍼셉트론]]은 이 전환의 두 축을 보여 주고, [[012_상징 규칙에서 통계 학습으로]], [[013_은닉 마르코프 모델과 통계적 음성 인식]], [[014_증강 전이망과 절차적 자연어 파싱]], [[015_몬태규 의미론과 합성적 자연언어 해석]]은 자연어·음성 처리 내부의 과제별 시간표와 서로 다른 명시적 구조를 보완한다.
 
 ## 규칙 기반 접근의 장점과 병목
 
@@ -131,6 +142,12 @@ Georgetown-IBM 시연은 사전 조회와 통사 규칙을 결합해 번역을 �
 [[증강 전이망]]은 규칙 기반 접근을 단순한 문자열 치환보다 훨씬 풍부하게 만든 사례다. 설계자는 재귀 호출, 레지스터, 자질 검사, 구조 구축 동작을 사용해 통사 분석과 후속 의미 처리를 연결할 수 있었다. LUNAR는 이 절차적 파서를 월 지질학의 의미 해석과 데이터베이스 검색에 결합했다.
 
 이 유연성은 동시에 문법 공학 비용을 만들었다. 상태·호·검사·동작을 사람이 작성하고 디버깅해야 하며, 임의 절차를 허용할수록 문법의 형식적 검증과 실행 시간 경계가 어려워진다. 다만 이 병목을 “ATN은 언제나 지수 시간이라 실패했다”로 단순화하지 않는다. 우즈는 비증강 RTN과 제한된 ATN에 Earley식 $O(n^3)$ 파싱을 적용할 수 있음을 논의했다.
+
+## 몬태규 의미론의 명시적 조합
+
+[[몬태규 의미론]]은 절차적 파서와 다른 방식의 규칙 기반 정밀성을 보여 준다. 문법 규칙마다 유형이 있는 의미 연산을 대응시키고, 복합 표현의 논리 번역을 부분들의 번역으로부터 계산한다. 이 [[합성성]]은 통사 도출과 의미 해석의 인터페이스를 명시적으로 검사할 수 있게 하지만, 기본 어휘 의미·문법 단편·가능한 작용역·문맥 해소 규칙을 연구자가 정해야 한다.
+
+이 접근도 “명시적 규칙은 실패하고 신경망이 모두 대체했다”는 단선적 서사로 정리하지 않는다. Rosetta는 몬태규 문법을 명시적으로 채택했고, Core Language Engine은 Montague(1973)를 선구적 연구로 인용하면서 QLF·LF의 합성 규칙을 설명했다. 반대로 등록된 근거는 Transformer가 유형이 있는 논리 번역 규칙을 구현하거나 어텐션이 몬태규 문법에서 직접 파생됐음을 뒷받침하지 않는다.
 
 ## NLP 통계적 전환의 실제 시간표
 
@@ -164,11 +181,14 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - [[012_상징 규칙에서 통계 학습으로]]
 - [[013_은닉 마르코프 모델과 통계적 음성 인식]]
 - [[014_증강 전이망과 절차적 자연어 파싱]]
+- [[015_몬태규 의미론과 합성적 자연언어 해석]]
 - Leonard E. Baum·Ted Petrie, [Statistical Inference for Probabilistic Functions of Finite State Markov Chains](https://doi.org/10.1214/aoms/1177699147), 1966, pp. 1554–1563.
 - James K. Baker, [The DRAGON System—An Overview](https://research.ibm.com/publications/the-dragon-system-an-overview), 1975, pp. 24–29.
 - Frederick Jelinek·Lalit R. Bahl·Robert L. Mercer, [Design of a Linguistic Statistical Decoder for the Recognition of Continuous Speech](https://research.ibm.com/publications/design-of-a-linguistic-statistical-decoder-for-the-recognition-of-continuous-speech), 1975, pp. 250–256.
 - Frederick Jelinek, [Continuous Speech Recognition by Statistical Methods](https://research.ibm.com/publications/continuous-speech-recognition-by-statistical-methods), 1976, pp. 532–556.
 - William A. Woods, [Transition Network Grammars for Natural Language Analysis](https://doi.org/10.1145/355598.362773), 1970, pp. 591–606.
+- Richard Montague, [English as a Formal Language](https://lo2.org/pdf/math/montague.formal_philosophy.pdf), 1970, collected edition pp. 201–205, 217–221.
+- Richard Montague, [The Proper Treatment of Quantification in Ordinary English](https://lo2.org/pdf/math/montague.formal_philosophy.pdf), 1973, collected edition pp. 247–270.
 - Kenneth Ward Church, [A Stochastic Parts Program and Noun Phrase Parser for Unrestricted Text](https://aclanthology.org/A88-1019/), 1988, pp. 136–143.
 - Peter F. Brown 외, [A Statistical Approach to Machine Translation](https://aclanthology.org/J90-2002/), 1990, pp. 79–85.
 - Eric Brill, [A Simple Rule-Based Part of Speech Tagger](https://aclanthology.org/A92-1021/), 1992, pp. 152–155.
@@ -196,3 +216,6 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - [[말뭉치 기반 학습]]
 - [[014_증강 전이망과 절차적 자연어 파싱]]
 - [[증강 전이망]]
+- [[015_몬태규 의미론과 합성적 자연언어 해석]]
+- [[몬태규 의미론]]
+- [[합성성]]

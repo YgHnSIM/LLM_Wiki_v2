@@ -559,3 +559,62 @@ sources:
     doi: 10.1145/1499586.1499695
     url: https://doi.org/10.1145/1499586.1499695
     language: en
+  montague-1970-efl:
+    title: English as a Formal Language
+    authors: [Richard Montague]
+    published: 1970
+    source_type: primary
+    kind: book-chapter
+    url: https://lo2.org/pdf/math/montague.formal_philosophy.pdf
+    language: en
+  montague-1970-ug:
+    title: Universal Grammar
+    authors: [Richard Montague]
+    published: 1970
+    source_type: primary
+    kind: journal-article
+    doi: 10.1111/j.1755-2567.1970.tb00434.x
+    url: https://doi.org/10.1111/j.1755-2567.1970.tb00434.x
+    language: en
+  montague-1973-ptq:
+    title: The Proper Treatment of Quantification in Ordinary English
+    authors: [Richard Montague]
+    published: 1973
+    source_type: primary
+    kind: book-chapter
+    url: https://lo2.org/pdf/math/montague.formal_philosophy.pdf
+    language: en
+  barwise-cooper-1981:
+    title: Generalized Quantifiers and Natural Language
+    authors: [Jon Barwise, Robin Cooper]
+    published: 1981
+    source_type: primary
+    kind: journal-article
+    doi: 10.1007/BF00350139
+    url: https://doi.org/10.1007/BF00350139
+    language: en
+  woods-1978-question-answering:
+    title: Semantics and Quantification in Natural Language Question Answering
+    authors: [William A. Woods]
+    published: 1978
+    source_type: primary
+    kind: book-chapter
+    url: https://web.stanford.edu/class/linguist289/woods.pdf
+    language: en
+  landsbergen-1982-rosetta:
+    title: Machine Translation Based on Logically Isomorphic Montague Grammars
+    authors: [Jan Landsbergen]
+    published: 1982
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/C82-1028/
+    language: en
+  alshawi-van-eijck-1989-cle:
+    title: Logical Forms in the Core Language Engine
+    authors: [Hiyan Alshawi, Jan van Eijck]
+    published: 1989
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/981623.981627
+    url: https://aclanthology.org/P89-1004/
+    language: en
