@@ -1,11 +1,12 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { distDir } from './lib/project-paths.mjs';
-import { outputFileForUrl, safeDecode } from './lib/site-paths.mjs';
+import { outputFileForUrl, safeDecode, withBasePath } from './lib/site-paths.mjs';
 import { walkFiles } from './lib/wiki-utils.mjs';
 
 const report = JSON.parse(await fs.readFile(path.join(distDir, 'build-report.json'), 'utf8'));
 const basePath = report.basePath ?? '';
+const siteUrl = (pathname = '/') => withBasePath(basePath, pathname);
 const fileForUrl = (rawUrl) => outputFileForUrl(rawUrl, { outputDir: distDir, basePath });
 const htmlFiles = await walkFiles(distDir, '.html');
 const htmlCache = new Map();
@@ -99,7 +100,7 @@ for (const htmlFile of htmlFiles) {
   }
 }
 
-const homeFile = fileForUrl('/');
+const homeFile = fileForUrl(siteUrl('/'));
 const homeHtml = htmlCache.get(homeFile) ?? await fs.readFile(homeFile, 'utf8');
 const heroSourceItems = [...homeHtml.matchAll(/class="hero-source-item"/g)].length;
 const heroSourceNumbers = [...homeHtml.matchAll(/<li class="hero-source-item"><a href="[^"]+"><span>([^<]+)<\/span><strong>/g)]
@@ -110,7 +111,7 @@ if (heroSourceItems !== expectedHeroSourceItems) {
 }
 
 const heroSourceAllLink = homeHtml.match(/<a class="hero-source-all" href="([^"]+)"/i)?.[1];
-if (!heroSourceAllLink || fileForUrl(heroSourceAllLink) !== fileForUrl('/sources/')) {
+if (!heroSourceAllLink || fileForUrl(heroSourceAllLink) !== fileForUrl(siteUrl('/sources/'))) {
   errors.push('Home hero must include an all-sources link to /sources/.');
 }
 
