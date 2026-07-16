@@ -176,3 +176,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: ba73e109a182cb49038ff4b2f148d45d405089ecef962de7b26f365ece7443fe
+  - path: "raw/012_From Symbolic Rules to Statistical Learning - The Paradigm Shift in NLP.ko.md"
+    role: translation
+    order_prefix: "012"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 81b4fcf5603a7ecf639eb42ee2b0c3ddecf680763191adc30cd0d3ba02072adc
+  - path: "raw/012_From Symbolic Rules to Statistical Learning - The Paradigm Shift in NLP.commentary.ko.md"
+    role: commentary
+    order_prefix: "012"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 3582c477e39d7c8146df22e1cd23cb17b5f23ced5d20b6552b210a9301541bcf

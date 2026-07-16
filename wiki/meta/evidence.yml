@@ -108,8 +108,8 @@ sources:
     published: 1956
     source_type: primary
     kind: journal-article
-    doi: 10.1016/S0019-9958(56)90262-0
-    url: https://doi.org/10.1016/S0019-9958(56)90262-0
+    doi: 10.1109/TIT.1956.1056813
+    url: https://doi.org/10.1109/TIT.1956.1056813
     language: en
   chomsky-1957:
     title: Syntactic Structures
@@ -403,4 +403,88 @@ sources:
     source_type: primary
     kind: conference-paper
     url: https://aclanthology.org/W13-2322/
+    language: en
+  booth-thompson-1973:
+    title: Applying Probability Measures to Abstract Languages
+    authors: [Taylor L. Booth, Richard A. Thompson]
+    published: 1973
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/T-C.1973.223746
+    url: https://doi.org/10.1109/T-C.1973.223746
+    language: en
+  jelinek-1976:
+    title: Continuous Speech Recognition by Statistical Methods
+    authors: [Frederick Jelinek]
+    published: 1976
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/PROC.1976.10159
+    url: https://research.ibm.com/publications/continuous-speech-recognition-by-statistical-methods
+    language: en
+  francis-kucera-1964:
+    title: Manual of Information to Accompany A Standard Corpus of Present-Day Edited American English, for Use with Digital Computers
+    authors: [W. Nelson Francis, Henry Kučera]
+    published: 1964
+    source_type: primary
+    kind: corpus-manual
+    url: http://icame.uib.no/brown/bcm.html
+    language: en
+  derose-1988:
+    title: Grammatical Category Disambiguation by Statistical Optimization
+    authors: [Steven J. DeRose]
+    published: 1988
+    source_type: primary
+    kind: journal-article
+    url: https://aclanthology.org/J88-1003/
+    language: en
+  brown-et-al-1988:
+    title: A Statistical Approach to Language Translation
+    authors: [Peter F. Brown, John Cocke, Stephen A. Della Pietra, Vincent J. Della Pietra, Frederick Jelinek, Robert L. Mercer, Paul S. Roossin]
+    published: 1988
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/C88-1016/
+    language: en
+  brown-et-al-1990:
+    title: A Statistical Approach to Machine Translation
+    authors: [Peter F. Brown, John Cocke, Stephen A. Della Pietra, Vincent J. Della Pietra, Fredrick Jelinek, John D. Lafferty, Robert L. Mercer, Paul S. Roossin]
+    published: 1990
+    source_type: primary
+    kind: journal-article
+    url: https://aclanthology.org/J90-2002/
+    language: en
+  church-mercer-1993:
+    title: Introduction to the Special Issue on Computational Linguistics Using Large Corpora
+    authors: [Kenneth W. Church, Robert L. Mercer]
+    published: 1993
+    source_type: primary
+    kind: journal-article
+    url: https://aclanthology.org/J93-1001/
+    language: en
+  marcus-et-al-1993:
+    title: "Building a Large Annotated Corpus of English: The Penn Treebank"
+    authors: [Mitchell P. Marcus, Beatrice Santorini, Mary Ann Marcinkiewicz]
+    published: 1993
+    source_type: primary
+    kind: journal-article
+    url: https://aclanthology.org/J93-2004/
+    language: en
+  brill-1992:
+    title: A Simple Rule-Based Part of Speech Tagger
+    authors: [Eric Brill]
+    published: 1992
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/974499.974526
+    url: https://aclanthology.org/A92-1021/
+    language: en
+  pereira-schabes-1992:
+    title: Inside-Outside Reestimation From Partially Bracketed Corpora
+    authors: [Fernando Pereira, Yves Schabes]
+    published: 1992
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/981967.981984
+    url: https://aclanthology.org/P92-1017/
     language: en
