@@ -11,7 +11,7 @@ tags:
   - type/analysis
   - domain/ai
 created: '2026-05-07'
-updated: '2026-07-15'
+updated: '2026-07-16'
 lifecycle: active
 verification: partial
 artifacts:
@@ -25,6 +25,8 @@ artifacts:
   - raw/003_Georgetown-IBM Machine.md
   - raw/004_The Perceptron.md
   - raw/005_Chomsky's Syntactic Structures.md
+  - raw/019_Katz Back-off - Handling Sparse Data in Language Models.ko.md
+  - raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md
 evidence:
   - source_id: shannon-1948
     locator: 'Part I, §§2–3 and §6'
@@ -41,8 +43,14 @@ evidence:
   - source_id: chomsky-1957
     locator: chapters 2–10
     relation: supports
+  - source_id: katz-1987
+    locator: 'pp. 400–401, especially eqs. (13)–(23) and the final paragraph'
+    relation: supports
+  - source_id: chen-goodman-1998
+    locator: '§§2.3–2.4 and §5.2.4'
+    relation: supplements
   - source_id: gpt-2018
-    locator: §§2–3
+    locator: '§3.1, eqs. (1)–(2), and §4.1'
     relation: contextualizes
   - source_id: bert-2019
     locator: §3
@@ -50,6 +58,7 @@ evidence:
 related:
   - source.001
   - source.002
+  - source.019
   - concept.n-gram-모델
   - concept.마르코프-가정
   - concept.데이터-희소성
@@ -73,11 +82,11 @@ related:
 
 ## 다른 점
 
-N-gram 모델은 [[마르코프 가정]]에 따라 제한된 최근 문맥만 사용한다. 반면 LLM은 훨씬 긴 문맥 창과 attention 메커니즘을 통해 더 넓은 정보를 반영한다. 또한 n-gram은 단어를 표면 토큰으로 취급하지만, 신경망 모델은 단어와 토큰의 의미적 유사성을 벡터 표현에 담을 수 있다.
+N-gram 모델은 [[마르코프 가정]]에 따라 제한된 최근 문맥만 사용한다. 반면 LLM은 훨씬 긴 문맥 창과 attention 메커니즘을 통해 더 넓은 정보를 반영한다. 또한 n-gram은 단어를 표면 토큰으로 취급하지만, 신경망 모델은 단어와 토큰의 의미적 유사성을 벡터 표현에 담을 수 있다. Attention은 입력에 따라 표현을 결합하는 학습된 신경망 연산이지, 미관측 n-gram에서 한 단계 짧은 빈도표로 내려가는 Katz back-off가 아니다.
 
 ## 역사적 압력
 
-N-gram의 [[데이터 희소성]]은 [[Smoothing]]과 back-off 연구의 직접 동기였다. 분산 표현, 순환 신경망과 트랜스포머는 장거리 문맥과 일반화 문제를 다른 방식으로 다뤘지만, 이 발전을 n-gram 한계가 각 기술을 직접 낳았다는 단일 인과 사슬로 표현하지 않는다.
+N-gram의 [[데이터 희소성]]은 [[Smoothing]]과 [[019_Katz 백오프와 희소 데이터 확률 추정|back-off]] 연구의 직접 동기였다. Katz 방식은 관측된 저빈도 사건의 확률을 할인하고 미관측 조합에 남은 질량을 배분하지만, 신경망의 dropout과 가중치 감쇠는 학습 목적과 매개변수에 작용하는 별도 정규화다. 고정 어휘 안의 미관측 n-gram과 어휘 밖 단어를 하위 단위로 표현하는 토큰화 문제도 구분해야 한다. 분산 표현, 순환 신경망과 트랜스포머는 장거리 문맥과 일반화 문제를 다른 방식으로 다뤘지만, 이 발전을 n-gram 한계가 각 기술을 직접 낳았다는 단일 인과 사슬로 표현하지 않는다.
 
 ## 해석
 
@@ -85,7 +94,7 @@ N-gram은 현대 LLM의 축소판이 아니다. Shannon의 1948년 논문은 확
 
 ## 평가 축과의 접점
 
-[[튜링 테스트]]는 같은 언어 AI 역사를 다른 질문으로 비춘다. 섀넌 계보가 언어를 예측 가능한 확률 과정으로 다루었다면, [[앨런 튜링]]의 계보는 언어 행동이 어느 정도 지능의 증거가 되는지를 묻는다. 현대 LLM은 두 흐름이 만나는 지점에 있다. 다음 토큰 예측으로 학습되지만, 실제 평가는 인간과 자연스럽게 대화하고 신뢰할 만한 답을 제공하는지까지 포함한다.
+[[튜링 테스트]]는 같은 언어 AI 역사를 다른 질문으로 비춘다. 섀넌 계보가 언어를 예측 가능한 확률 과정으로 다루었다면, [[앨런 튜링]]의 계보는 언어 행동이 어느 정도 지능의 증거가 되는지를 묻는다. 현대 언어 모델 연구는 두 흐름이 만나는 지점에 있다. 자기회귀 LLM과 GPT 계열은 다음 토큰 예측으로 학습할 수 있지만 BERT 계열은 마스크드 언어 모델링 같은 다른 자기지도 목적을 사용한다. 어느 경우든 실제 평가는 인간과 자연스럽게 대화하고 신뢰할 만한 답을 제공하는지까지 포함한다.
 
 ## 규칙 기반 NLP와의 대비
 
@@ -106,11 +115,17 @@ N-gram은 현대 LLM의 축소판이 아니다. Shannon의 1948년 논문은 확
 - [[003_Georgetown-IBM 기계 번역 시연]]
 - [[004_퍼셉트론]]
 - [[005_촘스키의 통사 구조]]
+- [[019_Katz 백오프와 희소 데이터 확률 추정]]
+- Slava M. Katz, [Estimation of Probabilities from Sparse Data for the Language Model Component of a Speech Recognizer](https://doi.org/10.1109/TASSP.1987.1165125), 1987, pp. 400–401.
+- Stanley F. Chen·Joshua Goodman, [An Empirical Study of Smoothing Techniques for Language Modeling](https://dash.harvard.edu/handle/1/25104739), 1998, §§2.3–2.4·5.2.4.
+- Alec Radford 외, [Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf), 2018, §§3.1·4.1.
+- Jacob Devlin 외, [BERT](https://aclanthology.org/N19-1423/), 2019, §3.
 
 ## 관련 항목
 
 - [[001_섀넌의 N-gram 모델]]
 - [[002_튜링 테스트]]
+- [[019_Katz 백오프와 희소 데이터 확률 추정]]
 - [[N-gram 모델]]
 - [[마르코프 가정]]
 - [[데이터 희소성]]

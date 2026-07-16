@@ -288,3 +288,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: f10e3d01990c0a1eb99bf89e03745f10f854c441250419b332b7b81f668ebc97
+  - path: "raw/019_Katz Back-off - Handling Sparse Data in Language Models.ko.md"
+    role: translation
+    order_prefix: "019"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 715ee17010304fcba984319bb7c3d766c145787da3f5eb80c05c2dbf5e6679d4
+  - path: "raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md"
+    role: commentary
+    order_prefix: "019"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: f25f8db4037d3bc578ef3feb51bcf07c3ddabc49cd583d2ea5d0602daab084c9

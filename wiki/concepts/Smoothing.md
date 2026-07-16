@@ -11,24 +11,24 @@ tags:
   - type/concept
   - domain/ai
 created: '2026-05-07'
-updated: '2026-07-15'
+updated: '2026-07-16'
 lifecycle: active
 verification: verified
 artifacts:
   - >-
     raw/001_Shannon's N-gram Model - The Foundation of Statistical Language
     Processing..md
+  - raw/019_Katz Back-off - Handling Sparse Data in Language Models.ko.md
+  - raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md
 evidence:
-  - source_id: shannon-1948
-    locator: 'Part I, §§2–3 and §6'
-    relation: supports
   - source_id: katz-1987
-    locator: pp. 400–401
+    locator: 'p. 400, eqs. (1)–(7); pp. 400–401, eqs. (13)–(23)'
     relation: supports
   - source_id: chen-goodman-1998
-    locator: chapters 2–4
+    locator: '§§2.2–2.4 and §§5–6'
     relation: supplements
 related:
+  - source.019
   - concept.n-gram-모델
   - concept.데이터-희소성
   - entity.슬라바-카츠
@@ -40,9 +40,11 @@ related:
 
 ## 대표 기법
 
-Katz back-off는 관측된 빈도를 할인해 미관측 사건에 쓸 확률 질량을 남기고, 특정 n-gram을 신뢰성 있게 추정할 수 없을 때 더 짧은 문맥의 정규화된 분포로 후퇴한다. 이 접근은 [[슬라바 카츠]]가 1987년에 제안했다.
+[[019_Katz 백오프와 희소 데이터 확률 추정|Katz back-off]]는 관측된 빈도의 일부를 할인해 미관측 사건에 쓸 확률 질량을 남기고, 미관측 n-gram에만 더 짧은 문맥의 분포를 사용한다. 문맥을 `h`, 다음 단어를 `w`, 관측 횟수를 `r=c(hw)`라 하면 `r>k`에는 최대우도 추정치를, `1≤r≤k`에는 할인된 관측 확률을 쓴다. `r=0`이고 `c(h)>0`일 때 `α(h)P(w|h')`로 후퇴하며, 문맥 `h` 자체가 없으면 짧은 문맥 `h'`의 분포를 바로 쓴다. 따라서 낮은 빈도나 막연한 신뢰도 부족이 후퇴 분기를 작동시키는 것은 아니다.
 
-Good-Turing smoothing은 한 번 관찰된 사건의 정보를 이용해 한 번도 관찰되지 않은 사건의 확률을 추정한다. Kneser-Ney smoothing은 단어가 얼마나 자주 등장하는지뿐 아니라 얼마나 다양한 문맥에서 등장하는지도 고려한다.
+`α(h)`는 관측 사건을 할인하는 계수나 두 분포를 섞는 보간 가중치가 아니다. 관측 사건에서 남긴 확률 질량을 미관측 후속 단어들에 배분하도록 짧은 문맥 분포를 정규화하는 계수이므로 1보다 클 수도 있다. 반면 보간은 관측 여부와 관계없이 상위·하위 분포를 `λ∈[0,1]` 같은 가중치로 항상 결합한다. 이 접근은 [[슬라바 카츠]]가 1987년에 제안했다.
+
+Good–Turing 추정은 정확히 `r`번 관측된 유형의 수를 `n_r`라 할 때 조정 빈도 `r*=(r+1)n_{r+1}/n_r`를 사용하고, `n_1`을 통해 미관측 사건에 남길 전체 질량을 추정한다. Katz는 이 아이디어를 그대로 발명한 것이 아니라 낮은 양의 빈도에 맞게 수정해 재귀 백오프와 결합했다. Kneser–Ney smoothing은 단어가 얼마나 자주 등장하는지뿐 아니라 얼마나 다양한 문맥에서 등장하는지도 고려한다.
 
 ## 한계
 
@@ -50,9 +52,9 @@ Smoothing은 [[데이터 희소성]]을 완화하지만 [[마르코프 가정]]�
 
 ## 출처
 
-- [[001_섀넌의 N-gram 모델]]
+- [[019_Katz 백오프와 희소 데이터 확률 추정]]
 - Slava M. Katz, [Estimation of Probabilities from Sparse Data](https://doi.org/10.1109/TASSP.1987.1165125), 1987, pp. 400–401.
-- Stanley F. Chen·Joshua Goodman, [An Empirical Study of Smoothing Techniques for Language Modeling](https://dash.harvard.edu/handle/1/25104739), 1998, chapters 2–4.
+- Stanley F. Chen·Joshua Goodman, [An Empirical Study of Smoothing Techniques for Language Modeling](https://dash.harvard.edu/handle/1/25104739), 1998, §§2.2–2.4·5–6.
 
 ## 관련 항목
 
@@ -60,3 +62,4 @@ Smoothing은 [[데이터 희소성]]을 완화하지만 [[마르코프 가정]]�
 - [[데이터 희소성]]
 - [[슬라바 카츠]]
 - [[N-gram에서 LLM으로]]
+- [[019_Katz 백오프와 희소 데이터 확률 추정]]

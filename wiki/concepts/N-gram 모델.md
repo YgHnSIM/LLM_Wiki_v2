@@ -11,19 +11,28 @@ tags:
   - type/concept
   - domain/ai
 created: '2026-05-07'
-updated: '2026-07-15'
+updated: '2026-07-16'
 lifecycle: active
 verification: verified
 artifacts:
   - >-
     raw/001_Shannon's N-gram Model - The Foundation of Statistical Language
     Processing..md
+  - raw/019_Katz Back-off - Handling Sparse Data in Language Models.ko.md
+  - raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md
 evidence:
   - source_id: shannon-1948
     locator: 'Part I, §§2–3 and §6'
     relation: supports
+  - source_id: katz-1987
+    locator: 'p. 400; pp. 400–401, eqs. (13)–(23)'
+    relation: supports
+  - source_id: chen-goodman-1998
+    locator: '§§1.1 and 2.2–2.4'
+    relation: supplements
 related:
   - source.001
+  - source.019
   - concept.마르코프-가정
   - concept.조건부-확률
   - concept.데이터-희소성
@@ -39,6 +48,8 @@ related:
 ## 작동 방식
 
 N-gram 모델은 앞선 n-1개 항목을 문맥으로 삼아 다음 항목의 확률을 추정한다. trigram 모델이라면 앞의 두 단어를 보고 다음 단어 분포를 계산한다. 이때 사용되는 핵심 수학은 [[조건부 확률]]이며, 전체 과거 대신 제한된 최근 문맥만 본다는 점에서 [[마르코프 가정]]에 의존한다.
+
+평활화하지 않은 최대우도 추정은 학습 말뭉치에서 보지 못한 n-gram에 0 확률을 준다. [[019_Katz 백오프와 희소 데이터 확률 추정|Katz back-off]]는 관측된 낮은 빈도에는 할인된 상위 n-gram 확률을 사용하고, 관측 횟수가 0일 때만 더 짧은 문맥으로 후퇴해 확률을 배분한다. 이는 [[데이터 희소성]]을 완화하는 [[Smoothing]] 방법이지 n-gram의 제한된 문맥 가정을 없애는 방법은 아니다.
 
 ## 강점
 
@@ -61,11 +72,15 @@ Shannon의 1948년 논문은 문자·단어 연속 근사와 조건부 확률을
 ## 출처
 
 - [[001_섀넌의 N-gram 모델]]
+- [[019_Katz 백오프와 희소 데이터 확률 추정]]
 - Claude E. Shannon, [A Mathematical Theory of Communication](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf), 1948, Part I §§2–3·§6.
+- Slava M. Katz, [Estimation of Probabilities from Sparse Data for the Language Model Component of a Speech Recognizer](https://doi.org/10.1109/TASSP.1987.1165125), 1987, pp. 400–401.
+- Stanley F. Chen·Joshua Goodman, [An Empirical Study of Smoothing Techniques for Language Modeling](https://dash.harvard.edu/handle/1/25104739), 1998, §§1.1·2.2–2.4.
 
 ## 관련 항목
 
 - [[001_섀넌의 N-gram 모델]]
+- [[019_Katz 백오프와 희소 데이터 확률 추정]]
 - [[마르코프 가정]]
 - [[조건부 확률]]
 - [[데이터 희소성]]
