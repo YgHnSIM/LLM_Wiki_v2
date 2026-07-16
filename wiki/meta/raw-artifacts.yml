@@ -192,3 +192,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 3582c477e39d7c8146df22e1cd23cb17b5f23ced5d20b6552b210a9301541bcf
+  - path: "raw/013_Hidden Markov Models - Statistical Speech Recognition.ko.md"
+    role: translation
+    order_prefix: "013"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 60f9d769f14d433e691db470927dd2062313ab74ce11a084f72e7c405ed52c2f
+  - path: "raw/013_Hidden Markov Models - Statistical Speech Recognition.commentary.ko.md"
+    role: commentary
+    order_prefix: "013"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: de15e36539054e332e0072e6ab5bb3e7ac310a1c1236762aa9b37d4927833a9a

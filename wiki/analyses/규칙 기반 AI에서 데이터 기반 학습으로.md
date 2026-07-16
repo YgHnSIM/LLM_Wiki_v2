@@ -25,6 +25,8 @@ artifacts:
   - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
   - raw/012_From Symbolic Rules to Statistical Learning - The Paradigm Shift in NLP.ko.md
   - raw/012_From Symbolic Rules to Statistical Learning - The Paradigm Shift in NLP.commentary.ko.md
+  - raw/013_Hidden Markov Models - Statistical Speech Recognition.ko.md
+  - raw/013_Hidden Markov Models - Statistical Speech Recognition.commentary.ko.md
 evidence:
   - source_id: macdonald-1963
     locator: pp. 1–4
@@ -62,7 +64,19 @@ evidence:
   - source_id: brill-1992
     locator: pp. 152, 154–155
     relation: contextualizes
+  - source_id: baum-petrie-1966
+    locator: pp. 1554–1563
+    relation: contextualizes
+  - source_id: baker-1975-dragon
+    locator: pp. 24–29
+    relation: supports
+  - source_id: jelinek-bahl-mercer-1975
+    locator: pp. 250–256
+    relation: supports
 related:
+  - source.013
+  - concept.은닉-마르코프-모델
+  - concept.baum-welch-알고리즘
   - concept.규칙-기반-기계-번역
   - concept.지식-공학-병목
   - concept.퍼셉트론
@@ -81,7 +95,7 @@ related:
 ---
 # 규칙 기반 AI에서 데이터 기반 학습으로
 
-[[규칙 기반 AI에서 데이터 기반 학습으로]]의 전환은 AI 시스템을 사람이 직접 규칙으로 작성하는 방식에서, 데이터로부터 매개변수와 패턴을 학습하는 방식으로 무게가 옮겨 간 흐름을 가리킨다. [[003_Georgetown-IBM 기계 번역 시연]]과 [[004_퍼셉트론]]은 이 전환의 두 축을 보여 주고, [[012_상징 규칙에서 통계 학습으로]]는 자연어 처리 내부의 과제별 시간표와 혼합 접근을 보완한다.
+[[규칙 기반 AI에서 데이터 기반 학습으로]]의 전환은 AI 시스템을 사람이 직접 규칙으로 작성하는 방식에서, 데이터로부터 매개변수와 패턴을 학습하는 방식으로 무게가 옮겨 간 흐름을 가리킨다. [[003_Georgetown-IBM 기계 번역 시연]]과 [[004_퍼셉트론]]은 이 전환의 두 축을 보여 주고, [[012_상징 규칙에서 통계 학습으로]]와 [[013_은닉 마르코프 모델과 통계적 음성 인식]]은 자연어·음성 처리 내부의 과제별 시간표와 혼합 접근을 보완한다.
 
 ## 규칙 기반 접근의 장점과 병목
 
@@ -109,7 +123,15 @@ Georgetown-IBM 시연은 사전 조회와 통사 규칙을 결합해 번역을 �
 
 NLP에서는 규칙과 학습이 한 번에 교체되지 않았다. 섀넌의 1948년 통계 언어 연구와 1964년 Brown Corpus가 앞섰고, Jelinek는 1976년에 연속 음성 인식의 확률 모델과 가설 탐색을 보고했다. 텍스트 처리에서는 Church의 1988년 확률적 품사 태거와 IBM 연구진의 1990년 통계 기계 번역이 구체적인 이정표다. Church와 Mercer가 1993년 이 흐름을 “1950년대식 경험적·통계적 방법의 부활”로 설명했으므로, 1980년대를 단일한 발명 시점으로 잡지 않는다.
 
+[[은닉 마르코프 모델]]의 수학적 기반도 Baum·Petrie의 1966년 연구와 1970년 재추정 논문으로 거슬러 올라간다. 1975년 DRAGON과 IBM 통계 디코더, 1976년 Jelinek의 종합은 이 기반이 음성 인식에 적용된 별도 단계다. HMM을 1970년대에 발명된 단일 음성 기술로 묶지 않는다.
+
 [[통계적 자연어 처리]]는 구조를 없앤 것이 아니다. HMM 태거는 품사를 상태로 사용하고, 확률 문법은 형식 문법의 규칙에 가중치를 둔다. Brill의 1992년 태거는 주석 [[말뭉치 기반 학습|말뭉치]]에서 사람이 읽을 수 있는 변환 규칙을 학습했다. 이 사례들은 상징 표현·수작업 설계·통계 추정이 하나의 시스템 안에 공존할 수 있음을 보여 준다.
+
+## HMM 음성 인식의 혼합 설계
+
+1975년 Jelinek·Bahl·Mercer의 연속 음성 디코더는 통계 언어 모델뿐 아니라 음소 사전과 통계적 음운 규칙, 음성 정합 알고리즘, 단어 수준 탐색 제어를 함께 사용했다. Baker의 DRAGON도 여러 지식원을 마르코프 과정의 확률 함수로 표현했다. [[Baum–Welch 알고리즘]]처럼 매개변수를 데이터에서 재추정하는 절차가 도입됐어도 상태 구조·발음 단위·특징·탐색을 사람이 설계하는 일은 남았다.
+
+따라서 음성 인식의 변화는 “손으로 쓴 모든 규칙”에서 “데이터만 넣는 자동 시스템”으로의 완전 교체가 아니다. 명시적 지식과 확률 추정의 경계가 이동하고 학습 가능한 구성 요소가 늘어난 과정이다.
 
 ## 현대 LLM으로의 연결
 
@@ -127,6 +149,10 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 - [[006_위드로-호프의 MADALINE]]
 - [[007_ELIZA]]
 - [[012_상징 규칙에서 통계 학습으로]]
+- [[013_은닉 마르코프 모델과 통계적 음성 인식]]
+- Leonard E. Baum·Ted Petrie, [Statistical Inference for Probabilistic Functions of Finite State Markov Chains](https://doi.org/10.1214/aoms/1177699147), 1966, pp. 1554–1563.
+- James K. Baker, [The DRAGON System—An Overview](https://research.ibm.com/publications/the-dragon-system-an-overview), 1975, pp. 24–29.
+- Frederick Jelinek·Lalit R. Bahl·Robert L. Mercer, [Design of a Linguistic Statistical Decoder for the Recognition of Continuous Speech](https://research.ibm.com/publications/design-of-a-linguistic-statistical-decoder-for-the-recognition-of-continuous-speech), 1975, pp. 250–256.
 - Frederick Jelinek, [Continuous Speech Recognition by Statistical Methods](https://research.ibm.com/publications/continuous-speech-recognition-by-statistical-methods), 1976, pp. 532–556.
 - Kenneth Ward Church, [A Stochastic Parts Program and Noun Phrase Parser for Unrestricted Text](https://aclanthology.org/A88-1019/), 1988, pp. 136–143.
 - Peter F. Brown 외, [A Statistical Approach to Machine Translation](https://aclanthology.org/J90-2002/), 1990, pp. 79–85.
@@ -136,6 +162,9 @@ AI 역사는 규칙 기반 접근이 단순히 실패하고 데이터 기반 학
 ## 관련 항목
 
 - [[규칙 기반 기계 번역]]
+- [[013_은닉 마르코프 모델과 통계적 음성 인식]]
+- [[은닉 마르코프 모델]]
+- [[Baum–Welch 알고리즘]]
 - [[지식 공학 병목]]
 - [[퍼셉트론]]
 - [[지도 학습]]

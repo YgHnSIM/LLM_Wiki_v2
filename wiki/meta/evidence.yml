@@ -242,6 +242,15 @@ sources:
     doi: 10.1214/aoms/1177699147
     url: https://projecteuclid.org/download/pdf_1/euclid.aoms/1177699147
     language: en
+  baum-et-al-1970:
+    title: A Maximization Technique Occurring in the Statistical Analysis of Probabilistic Functions of Markov Chains
+    authors: [Leonard E. Baum, Ted Petrie, George Soules, Norman Weiss]
+    published: 1970
+    source_type: primary
+    kind: journal-article
+    doi: 10.1214/aoms/1177697196
+    url: https://projecteuclid.org/download/pdf_1/euclid.aoms/1177697196
+    language: en
   viterbi-1967:
     title: Error Bounds for Convolutional Codes and an Asymptotically Optimum Decoding Algorithm
     authors: [Andrew J. Viterbi]
@@ -260,6 +269,33 @@ sources:
     doi: 10.1109/PROC.1973.9030
     url: https://doi.org/10.1109/PROC.1973.9030
     language: en
+  baker-1975-dragon:
+    title: The DRAGON System—An Overview
+    authors: [James K. Baker]
+    published: 1975
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/TASSP.1975.1162650
+    url: https://research.ibm.com/publications/the-dragon-system-an-overview
+    language: en
+  jelinek-bahl-mercer-1975:
+    title: Design of a Linguistic Statistical Decoder for the Recognition of Continuous Speech
+    authors: [Frederick Jelinek, Lalit R. Bahl, Robert L. Mercer]
+    published: 1975
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/TIT.1975.1055384
+    url: https://research.ibm.com/publications/design-of-a-linguistic-statistical-decoder-for-the-recognition-of-continuous-speech
+    language: en
+  davis-mermelstein-1980:
+    title: Comparison of Parametric Representations for Monosyllabic Word Recognition in Continuously Spoken Sentences
+    authors: [Steven B. Davis, Paul Mermelstein]
+    published: 1980
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/TASSP.1980.1163420
+    url: https://doi.org/10.1109/TASSP.1980.1163420
+    language: en
   rabiner-1989:
     title: A Tutorial on Hidden Markov Models and Selected Applications in Speech Recognition
     authors: [Lawrence R. Rabiner]
@@ -268,6 +304,15 @@ sources:
     kind: journal-article
     doi: 10.1109/5.18626
     url: https://doi.org/10.1109/5.18626
+    language: en
+  vogel-et-al-1996:
+    title: HMM-Based Word Alignment in Statistical Translation
+    authors: [Stephan Vogel, Hermann Ney, Christoph Tillmann]
+    published: 1996
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/993268.993313
+    url: https://aclanthology.org/C96-2141/
     language: en
   church-1988:
     title: A Stochastic Parts Program and Noun Phrase Parser for Unrestricted Text
