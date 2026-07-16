@@ -416,3 +416,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 89fdef0e7f5fd3ecc54d64b15c8f0195b12aa24eb718e4c41a73dbc70c7093d4
+  - path: "raw/027_Maximum Entropy & Support Vector Machines in NLP Feature-Based Discriminative Learning.ko.md"
+    role: translation
+    order_prefix: "027"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 4409cacd2159d3c5ea918129856ef8b531d96c94b14f098258f835b240f07554
+  - path: "raw/027_Maximum Entropy & Support Vector Machines in NLP Feature-Based Discriminative Learning.commentary.ko.md"
+    role: commentary
+    order_prefix: "027"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 8aa0fd72a6036a98d56cc4688f461a06e387be802f890016508f123981f6edb7

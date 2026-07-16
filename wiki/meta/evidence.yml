@@ -1283,3 +1283,102 @@ sources:
     doi: 10.3115/v1/D14-1179
     url: https://aclanthology.org/D14-1179/
     language: en
+  lau-rosenfeld-roukos-1993-adaptive-maxent:
+    title: Adaptive Language Modeling Using the Maximum Entropy Principle
+    authors: [Raymond Lau, Ronald Rosenfeld, Salim Roukos]
+    published: 1993
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/H93-1021/
+    language: en
+  ratnaparkhi-reynar-roukos-1994-maxent-pp:
+    title: A Maximum Entropy Model for Prepositional Phrase Attachment
+    authors: [Adwait Ratnaparkhi, Jeff Reynar, Salim Roukos]
+    published: 1994
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/H94-1048/
+    language: en
+  berger-della-pietra-della-pietra-1996-maxent:
+    title: A Maximum Entropy Approach to Natural Language Processing
+    authors: [Adam L. Berger, Stephen A. Della Pietra, Vincent J. Della Pietra]
+    published: 1996
+    source_type: primary
+    kind: journal-article
+    url: https://aclanthology.org/J96-1002/
+    language: en
+  ratnaparkhi-1996-maxent-pos:
+    title: A Maximum Entropy Model for Part-Of-Speech Tagging
+    authors: [Adwait Ratnaparkhi]
+    published: 1996
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/W96-0213/
+    language: en
+  cortes-vapnik-1995-svm:
+    title: Support-Vector Networks
+    authors: [Corinna Cortes, Vladimir Vapnik]
+    published: 1995
+    source_type: primary
+    kind: journal-article
+    doi: 10.1007/BF00994018
+    url: https://doi.org/10.1007/BF00994018
+    language: en
+  joachims-1998-svm-text:
+    title: 'Text Categorization with Support Vector Machines: Learning with Many Relevant Features'
+    authors: [Thorsten Joachims]
+    published: 1998
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1007/BFb0026683
+    url: https://doi.org/10.1007/BFb0026683
+    language: en
+  borthwick-et-al-1998-maxent-ner:
+    title: Exploiting Diverse Knowledge Sources via Maximum Entropy in Named Entity Recognition
+    authors: [Andrew Borthwick, John Sterling, Eugene Agichtein, Ralph Grishman]
+    published: 1998
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/W98-1118/
+    language: en
+  mccallum-freitag-pereira-2000-memm:
+    title: Maximum Entropy Markov Models for Information Extraction and Segmentation
+    authors: [Andrew McCallum, Dayne Freitag, Fernando Pereira]
+    published: 2000
+    source_type: primary
+    kind: conference-paper
+    url: https://people.cs.umass.edu/~mccallum/papers/memm-icml2000.pdf
+    language: en
+  kudo-matsumoto-2001-svm-chunking:
+    title: Chunking with Support Vector Machines
+    authors: [Taku Kudo, Yuji Matsumoto]
+    published: 2001
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/N01-1025/
+    language: en
+  isozaki-kazawa-2002-svm-ner:
+    title: Efficient Support Vector Classifiers for Named Entity Recognition
+    authors: [Hideki Isozaki, Hideto Kazawa]
+    published: 2002
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/C02-1054/
+    language: en
+  lafferty-mccallum-pereira-2001-crf:
+    title: 'Conditional Random Fields: Probabilistic Models for Segmenting and Labeling Sequence Data'
+    authors: [John Lafferty, Andrew McCallum, Fernando Pereira]
+    published: 2001
+    source_type: primary
+    kind: conference-paper
+    url: https://repository.upenn.edu/cis_papers/159
+    language: en
+  tsochantaridis-et-al-2004-structured-svm:
+    title: Support Vector Machine Learning for Interdependent and Structured Output Spaces
+    authors: [Ioannis Tsochantaridis, Thomas Hofmann, Thorsten Joachims, Yasemin Altun]
+    published: 2004
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1145/1015330.1015341
+    url: https://doi.org/10.1145/1015330.1015341
+    language: en
