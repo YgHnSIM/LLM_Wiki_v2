@@ -400,3 +400,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 177ee65ba62adf6dc3559b00d72b858a95702f7326637f9be09a968407210b9f
+  - path: "raw/026_Recurrent Neural Networks - Machines That Remember.ko.md"
+    role: translation
+    order_prefix: "026"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: a9fbee49c932940ceaf2cb476ad9df288203028cdb68477a9da44c9c57c8cc77
+  - path: "raw/026_Recurrent Neural Networks - Machines That Remember.commentary.ko.md"
+    role: commentary
+    order_prefix: "026"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 89fdef0e7f5fd3ecc54d64b15c8f0195b12aa24eb718e4c41a73dbc70c7093d4

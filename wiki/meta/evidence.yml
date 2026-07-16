@@ -1196,3 +1196,90 @@ sources:
     doi: 10.1162/0891201053630264
     url: https://aclanthology.org/J05-1004/
     language: en
+  jordan-1986-attractor-dynamics:
+    title: Attractor Dynamics and Parallelism in a Connectionist Sequential Machine
+    authors: [Michael I. Jordan]
+    published: 1986
+    source_type: primary
+    kind: conference-paper
+    url: https://escholarship.org/uc/item/1fg2j76h
+    language: en
+  williams-zipser-1989-recurrent-learning:
+    title: A Learning Algorithm for Continually Running Fully Recurrent Neural Networks
+    authors: [Ronald J. Williams, David Zipser]
+    published: 1989
+    source_type: primary
+    kind: journal-article
+    doi: 10.1162/neco.1989.1.2.270
+    url: https://doi.org/10.1162/neco.1989.1.2.270
+    language: en
+  williams-peng-1990-online-bptt:
+    title: An Efficient Gradient-Based Algorithm for On-Line Training of Recurrent Network Trajectories
+    authors: [Ronald J. Williams, Jing Peng]
+    published: 1990
+    source_type: primary
+    kind: journal-article
+    doi: 10.1162/neco.1990.2.4.490
+    url: https://doi.org/10.1162/neco.1990.2.4.490
+    language: en
+  werbos-1990-bptt:
+    title: 'Backpropagation Through Time: What It Does and How to Do It'
+    authors: [Paul J. Werbos]
+    published: 1990
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/5.58337
+    url: https://doi.org/10.1109/5.58337
+    language: en
+  robinson-1994-phone-probability:
+    title: An Application of Recurrent Nets to Phone Probability Estimation
+    authors: [Anthony J. Robinson]
+    published: 1994
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/72.279192
+    url: https://doi.org/10.1109/72.279192
+    language: en
+  hochreiter-schmidhuber-1995-lstm-report:
+    title: Long Short Term Memory
+    authors: [Sepp Hochreiter, Jürgen Schmidhuber]
+    published: 1995
+    source_type: primary
+    kind: technical-report
+    url: https://people.idsia.ch/~juergen/FKI-207-95ocr.pdf
+    language: en
+  hochreiter-schmidhuber-1997-lstm:
+    title: Long Short-Term Memory
+    authors: [Sepp Hochreiter, Jürgen Schmidhuber]
+    published: 1997
+    source_type: primary
+    kind: journal-article
+    doi: 10.1162/neco.1997.9.8.1735
+    url: https://direct.mit.edu/neco/article/9/8/1735/6109/Long-Short-Term-Memory
+    language: en
+  gers-schmidhuber-cummins-2000-forget-gate:
+    title: 'Learning to Forget: Continual Prediction with LSTM'
+    authors: [Felix A. Gers, Jürgen Schmidhuber, Fred Cummins]
+    published: 2000
+    source_type: primary
+    kind: journal-article
+    doi: 10.1162/089976600300015015
+    url: https://direct.mit.edu/neco/article/12/10/2451/6415/Learning-to-Forget-Continual-Prediction-with-LSTM
+    language: en
+  pascanu-mikolov-bengio-2013-rnn-gradients:
+    title: On the difficulty of training recurrent neural networks
+    authors: [Razvan Pascanu, Tomas Mikolov, Yoshua Bengio]
+    published: 2013
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.mlr.press/v28/pascanu13.html
+    language: en
+  cho-et-al-2014-rnn-encoder-decoder:
+    title: Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation
+    authors: [Kyunghyun Cho, Bart van Merriënboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi Bougares, Holger Schwenk, Yoshua Bengio]
+    published: 2014
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/v1/D14-1179
+    url: https://aclanthology.org/D14-1179/
+    language: en
