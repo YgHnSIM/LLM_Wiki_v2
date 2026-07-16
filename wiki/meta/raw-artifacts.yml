@@ -160,3 +160,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 2fd80ff5c0848ad32fe8c85e41494b13d3432471b28127fac723ee5cb596fb83
+  - path: "raw/011_Conceptual Dependency - Canonical Meaning Representation for Natural Language Understanding.ko.md"
+    role: translation
+    order_prefix: "011"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: e0fedc93026b2093382a41555b7a14043d3618ec231616dd109d21aed20a4c5a
+  - path: "raw/011_Conceptual Dependency - Canonical Meaning Representation for Natural Language Understanding.commentary.ko.md"
+    role: commentary
+    order_prefix: "011"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: ba73e109a182cb49038ff4b2f148d45d405089ecef962de7b26f365ece7443fe

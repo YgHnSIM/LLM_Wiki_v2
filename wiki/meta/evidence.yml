@@ -347,3 +347,60 @@ sources:
     doi: 10.1016/0306-4573(88)90021-0
     url: https://doi.org/10.1016/0306-4573(88)90021-0
     language: en
+  schank-tesler-1969:
+    title: A Conceptual Dependency Parser for Natural Language
+    authors: [Roger C. Schank, Larry Tesler]
+    published: 1969
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/C69-0201/
+    language: en
+  schank-1972:
+    title: "Conceptual Dependency: A Theory of Natural Language Understanding"
+    authors: [Roger C. Schank]
+    published: 1972
+    source_type: primary
+    kind: journal-article
+    doi: 10.1016/0010-0285(72)90022-9
+    url: https://doi.org/10.1016/0010-0285(72)90022-9
+    language: en
+  schank-et-al-1973:
+    title: "MARGIE: Memory, Analysis, Response Generation, and Inference on English"
+    authors: [Roger C. Schank, Neil M. Goldman, Charles J. Rieger III, Chris Riesbeck]
+    published: 1973
+    source_type: primary
+    kind: conference-paper
+    url: https://www.ijcai.org/Proceedings/73/Papers/028.pdf
+    language: en
+  schank-1975-primitive:
+    title: The Primitive ACTs of Conceptual Dependency
+    authors: [Roger C. Schank]
+    published: 1975
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/T75-2008/
+    language: en
+  lehnert-1975-sam:
+    title: "What Makes SAM Run? Script Based Techniques for Question Answering"
+    authors: [Wendy Lehnert]
+    published: 1975
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/T75-1005/
+    language: en
+  wilensky-1977-pam:
+    title: PAM - A Program That Infers Intentions
+    authors: [Robert Wilensky]
+    published: 1977
+    source_type: primary
+    kind: conference-paper
+    url: https://www.ijcai.org/Proceedings/77-1/Papers/003A.pdf
+    language: en
+  banarescu-et-al-2013:
+    title: Abstract Meaning Representation for Sembanking
+    authors: [Laura Banarescu, Claire Bonial, Shu Cai, Madalina Georgescu, Kira Griffitt, Ulf Hermjakob, Kevin Knight, Philipp Koehn, Martha Palmer, Nathan Schneider]
+    published: 2013
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/W13-2322/
+    language: en
