@@ -608,3 +608,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: c11a7d7f88f10cd71b5df0d6de609889164e2f7c74270042eb935987e280afa6
+  - path: "raw/039_Freebase Collaborative Knowledge Graph for Structured Information.ko.md"
+    role: translation
+    order_prefix: "039"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: a970d259c29f20abcc06ab9b57ade431f164011f2ba1f4caa1af84c3cc30469f
+  - path: "raw/039_Freebase Collaborative Knowledge Graph for Structured Information.commentary.ko.md"
+    role: commentary
+    order_prefix: "039"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 274e45a517884f74ad593129be31d9d51c4d8cfaa342a6cb12dc91726778e0e6

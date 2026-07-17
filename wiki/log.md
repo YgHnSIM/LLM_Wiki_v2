@@ -1591,6 +1591,39 @@ raw 등록 해시:
 - NomBank·OntoNotes·다언어 PropBank·AMR과 현대 neural SRL·LLM probe의 정의와 성능은 각 1차 문헌으로 별도 검토해야 한다.
 - 030 FrameNet과 038 PropBank의 검증 문서 안에서 역할 일반화 단위의 비교가 충분히 설명돼 현재는 별도 비교 읽기를 만들지 않았다. 구문 트리 의존성이나 의미 스키마 간 매핑이 다른 자료와 만나 독립적인 질문으로 발전하면 소스 수와 무관하게 즉시 비교 읽기로 정리한다.
 
+## [2026-07-18] ingest | 039 Freebase와 협업형 지식 그래프
+
+039 영어 원문을 기존 출력과 무관하게 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 그대로 보존하고 SHA-256을 등록했다. 공개 문서는 Freebase의 실제 데이터 모델과 수명주기를 복원하고, 일반 지식 그래프 개념을 특정 제품 역사와 분리했다.
+
+변경 문서:
+
+- `raw/039_Freebase Collaborative Knowledge Graph for Structured Information.ko.md`와 대응 해설
+- `wiki/sources/039_Freebase와 협업형 지식 그래프.md`
+- `wiki/concepts/Freebase.md`, `wiki/concepts/지식 그래프.md`
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- Bollacker 등의 2008년 SIGMOD 논문으로 협업형 튜플 데이터베이스, MQL graph-query API와 당시 1억 2,500만 개 이상 튜플·4,000개 이상 타입·7,000개 이상 속성 규모를 확인했다.
+- Google의 Freebase 기본 개념 문서로 토픽의 다중 타입, 타입별 속성, 도메인, 기본 다중 값, CVT, MID를 확인했다. 공식 문서가 타입은 계층으로 배열되지 않는다고 명시하므로 네임스페이스 경로를 타입 상속으로 보는 raw 설명을 교정했다.
+- `schema-free`를 스키마 부재가 아니라 도메인·타입·속성이 같은 그래프 안에서 편집·진화하는 스키마 유연성으로 한정했다. 관계형 데이터베이스 전체를 새 사실마다 경직된 테이블 변경이 필요한 체계로 보는 대조도 채택하지 않았다.
+- MQL의 관계 경로·필터·교집합·집계를 그래프 패턴 질의로 설명하고, 온톨로지 공리나 규칙에서 새 사실을 도출하는 형식 추론과 구분했다. 역방향 조회와 반대 방향의 독립 사실 두 개 저장도 분리했다.
+- Freebase가 외부 데이터 적재와 공동체 편집을 결합했다는 점을 반영해 순수 크라우드소싱 자원으로 규정하지 않았다. 구조화된 값이 정확성·최신성·출처를 자동 보장하지 않는다는 한계도 남겼다.
+- Google의 2010년 인수 발표와 2012년 Knowledge Graph 발표를 분리했다. Google Knowledge Graph는 Freebase·Wikipedia·CIA World Factbook 등에 뿌리를 두고 더 큰 자료로 보강된 별도 시스템이지 Freebase의 단순한 이름 변경이 아니다.
+- 2016년 Freebase–Wikidata 이전 논문으로 종료 연표, 거의 5천만 개체·30억 개 이상 사실의 당시 규모, 스키마·개체·속성·CVT 매핑을 확인했다. 최종 공개 덤프의 약 19억 트리플과 같은 단위·시점으로 섞지 않았다.
+- WordNet의 synset, FrameNet의 frame, PropBank의 roleset, Freebase의 topic이 서로 다른 질문에 답한다는 연결을 명시했다. 그래프라는 형식적 유사성과 직접 계보를 구분했다.
+
+raw 등록 해시:
+
+- 번역: `a970d259c29f20abcc06ab9b57ade431f164011f2ba1f4caa1af84c3cc30469f`
+- 해설: `274e45a517884f74ad593129be31d9d51c4d8cfaa342a6cb12dc91726778e0e6`
+
+남은 제한:
+
+- 프로젝트에는 Freebase 전체 덤프, MQL 서버, Google Knowledge Graph 내부 자료나 Wikidata 이전 산출물을 복제하지 않았으며 raw에는 새 한국어 번역과 해설만 보존한다.
+- Freebase의 개별 데이터 원천·편집 권한·중복 해소 알고리즘, 제품별 개체 연결·질의응답 효과, 후대 지식 베이스 완성 벤치마크는 각 1차 자료로 별도 검토해야 한다.
+- WordNet·FrameNet·PropBank·Freebase를 함께 검증하면서 “구조화된 의미 자원은 무엇을 하나의 노드로 삼는가”라는 독립 질문이 성립했다. 039 ingest를 원격에 반영한 직후 소스 수와 무관하게 ‘비교 읽기’ 분석을 별도 content 커밋으로 작성한다.
+
 ## 관련 항목
 
 - [[index]]

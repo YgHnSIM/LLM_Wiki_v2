@@ -1711,3 +1711,53 @@ sources:
     kind: journal-article
     url: https://www.jmlr.org/papers/v3/blei03a.html
     language: en
+  bollacker-et-al-2008-freebase:
+    title: "Freebase: A Collaboratively Created Graph Database for Structuring Human Knowledge"
+    authors: [Kurt Bollacker, Colin Evans, Praveen Paritosh, Tim Sturge, Jamie Taylor]
+    published: 2008
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1145/1376616.1376746
+    url: https://research.google/pubs/freebase-a-collaboratively-created-graph-database-for-structuring-human-knowledge/
+    language: en
+  google-freebase-basic-concepts:
+    title: Freebase Documentation Archive — Basic Concepts
+    authors: [Google]
+    published: 2025
+    source_type: primary-archive
+    kind: software-archive
+    url: https://developers.google.com/freebase/guide/basic_concepts
+    language: en
+  google-2010-metaweb-acquisition:
+    title: Deeper understanding with Metaweb
+    authors: [Jack Menzel]
+    published: 2010
+    source_type: official-secondary
+    kind: institutional-history
+    url: https://googleblog.blogspot.com/2010/07/deeper-understanding-with-metaweb.html
+    language: en
+  google-2012-knowledge-graph:
+    title: Introducing the Knowledge Graph — Things, not strings
+    authors: [Amit Singhal]
+    published: 2012
+    source_type: official-secondary
+    kind: institutional-history
+    url: https://blog.google/products-and-platforms/products/search/introducing-knowledge-graph-things-not/
+    language: en
+  google-freebase-data-dumps:
+    title: Freebase Data Dumps
+    authors: [Google]
+    published: 2025
+    source_type: primary-release
+    kind: dataset-release
+    url: https://developers.google.com/freebase
+    language: en
+  pellissier-tanon-et-al-2016-freebase-wikidata:
+    title: From Freebase to Wikidata — The Great Migration
+    authors: [Thomas Pellissier Tanon, Denny Vrandečić, Sebastian Schaffert, Thomas Steiner, Lydia Pintscher]
+    published: 2016
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1145/2872427.2874809
+    url: https://thomas.pellissier-tanon.fr/papers/2016-WWW-freebase.pdf
+    language: en
