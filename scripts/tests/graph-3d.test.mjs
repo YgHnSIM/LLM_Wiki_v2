@@ -3,11 +3,15 @@ import test from 'node:test';
 import {
   CAMERA_LIMITS,
   DEFAULT_CAMERA,
+  cameraForWorldPoint,
   hitTestProjected,
+  neighborhoodWithinDepth,
   normalizeCamera,
   projectPoint,
   rotatePoint,
+  shortestPath,
   sortProjected,
+  zoomCameraAt,
 } from '../../site/assets/graph-3d-math.js';
 
 const EPSILON = 1e-9;
@@ -65,6 +69,40 @@ test('camera normalization clamps pitch and zoom to supported bounds', () => {
   assert.equal(camera.distance, DEFAULT_CAMERA.distance);
 });
 
+test('cursor-anchored zoom changes pan deterministically and respects zoom limits', () => {
+  const camera = {
+    ...DEFAULT_CAMERA,
+    zoom: 1,
+    panX: 12,
+    panY: -8,
+  };
+  const anchor = { x: 900, y: 600 };
+  const zoomed = zoomCameraAt(camera, anchor, viewport, 1.5);
+
+  assert.equal(zoomed.zoom, 1.5);
+  assert.equal(zoomed.panX, -132);
+  assert.equal(zoomed.panY, -122);
+  assert.deepEqual(zoomCameraAt(camera, anchor, viewport, 1.5), zoomed);
+
+  const maximum = zoomCameraAt(camera, anchor, viewport, 100);
+  assert.equal(maximum.zoom, CAMERA_LIMITS.maximumZoom);
+  assert.equal(zoomCameraAt(camera, anchor, viewport, -1).zoom, camera.zoom);
+});
+
+test('camera focus centers a world point at a deterministic target zoom', () => {
+  const point = { x: 2175, y: 410, z: 220 };
+  const camera = cameraForWorldPoint(point, DEFAULT_CAMERA, viewport, dimensions, 1.7);
+  const projected = projectPoint(point, camera, viewport, dimensions);
+
+  assert.equal(camera.zoom, 1.7);
+  near(projected.x, viewport.width / 2, 'focused x');
+  near(projected.y, viewport.height / 2, 'focused y');
+  assert.deepEqual(
+    cameraForWorldPoint(point, DEFAULT_CAMERA, viewport, dimensions, 1.7),
+    camera,
+  );
+});
+
 test('depth sorting and hit testing prefer the nearest visible node', () => {
   const nodes = [
     { id: 'far', radius: 8 },
@@ -81,4 +119,50 @@ test('depth sorting and hit testing prefer the nearest visible node', () => {
     visibleIds: new Set(['far', 'near']),
     minimumRadius: 4,
   }).id, 'near');
+  assert.equal(hitTestProjected(nodes, projections, { x: 118, y: 100 }, {
+    visibleIds: new Set(['near']),
+    minimumRadius: 4,
+    radiusScale: 2,
+  }).id, 'near');
+});
+
+test('neighborhood traversal is depth-bounded, undirected, and visibility-aware', () => {
+  const edges = [
+    { source: 'b', target: 'c' },
+    { source: 'd', target: 'e' },
+    { source: 'a', target: 'd' },
+    { source: 'c', target: 'f' },
+    { source: 'a', target: 'b' },
+    { source: 'c', target: 'a' },
+  ];
+  const ids = (set) => [...set].sort();
+
+  assert.deepEqual(ids(neighborhoodWithinDepth(edges, 'a', 0)), ['a']);
+  assert.deepEqual(ids(neighborhoodWithinDepth(edges, 'a', 1)), ['a', 'b', 'c', 'd']);
+  assert.deepEqual(ids(neighborhoodWithinDepth(edges, 'a', 2)), ['a', 'b', 'c', 'd', 'e', 'f']);
+  assert.deepEqual(
+    ids(neighborhoodWithinDepth(edges, 'a', 3, new Set(['a', 'b', 'c', 'd']))),
+    ['a', 'b', 'c', 'd'],
+  );
+  assert.deepEqual(ids(neighborhoodWithinDepth(edges, 'a', 2, new Set(['b', 'c']))), []);
+});
+
+test('shortest path uses deterministic lexical tie-breaking and honors visibility', () => {
+  const edges = [
+    { source: 'c', target: 'd' },
+    { source: 'a', target: 'c' },
+    { source: 'b', target: 'd' },
+    { source: 'a', target: 'b' },
+    { source: 'd', target: 'e' },
+  ];
+
+  assert.deepEqual(shortestPath(edges, 'a', 'd'), ['a', 'b', 'd']);
+  assert.deepEqual(shortestPath([...edges].reverse(), 'a', 'd'), ['a', 'b', 'd']);
+  assert.deepEqual(
+    shortestPath(edges, 'a', 'd', new Set(['a', 'c', 'd', 'e'])),
+    ['a', 'c', 'd'],
+  );
+  assert.deepEqual(shortestPath(edges, 'e', 'a'), ['e', 'd', 'b', 'a']);
+  assert.deepEqual(shortestPath(edges, 'a', 'a'), ['a']);
+  assert.deepEqual(shortestPath(edges, 'a', 'missing'), []);
 });

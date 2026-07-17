@@ -14,6 +14,32 @@ const htmlCache = new Map();
 const errors = [];
 let checkedReferences = 0;
 
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function attributeValue(tag, name) {
+  return tag.match(new RegExp(`\\b${escapeRegExp(name)}="([^"]*)"`, 'i'))?.[1] ?? null;
+}
+
+function elementMarkupForHook(html, hook) {
+  const startPattern = new RegExp(`<([a-z][\\w:-]*)\\b[^>]*\\b${escapeRegExp(hook)}(?=\\s|=|>)[^>]*>`, 'i');
+  const start = startPattern.exec(html);
+  if (!start) return '';
+  const tagName = start[1];
+  const tagPattern = new RegExp(`</?${escapeRegExp(tagName)}\\b[^>]*>`, 'gi');
+  tagPattern.lastIndex = start.index;
+  let depth = 0;
+  for (let match = tagPattern.exec(html); match; match = tagPattern.exec(html)) {
+    const closing = /^<\//.test(match[0]);
+    const selfClosing = /\/>$/.test(match[0]);
+    if (closing) depth -= 1;
+    else if (!selfClosing) depth += 1;
+    if (depth === 0) return html.slice(start.index, tagPattern.lastIndex);
+  }
+  return '';
+}
+
 const requiredOutputFiles = [
   'graph/index.html',
   'graph-data.json',
@@ -251,11 +277,41 @@ if (matchingGraphScripts.length !== 1) {
 }
 for (const hook of [
   'data-knowledge-graph',
+  'data-graph-fullscreen-root',
+  'data-graph-stage',
   'data-graph-canvas',
+  'data-graph-hud',
+  'data-graph-controls',
+  'data-graph-search',
   'data-graph-inspector',
+  'data-graph-inspector-content',
   'data-graph-status',
+  'data-graph-static-message',
   'data-graph-select',
+  'data-graph-reset',
+  'data-graph-settings',
+  'data-graph-settings-toggle',
+  'data-graph-fullscreen',
+  'data-graph-type',
+  'data-graph-verification',
+  'data-graph-relation',
   'data-graph-community',
+  'data-graph-density',
+  'data-graph-local-depth',
+  'data-graph-label-density',
+  'data-graph-node-scale',
+  'data-graph-edge-opacity',
+  'data-graph-edge-width',
+  'data-graph-height-scale',
+  'data-graph-show-arrows',
+  'data-graph-show-grid',
+  'data-graph-show-communities',
+  'data-graph-show-orphans',
+  'data-graph-auto-rotate',
+  'data-graph-camera-readout',
+  'data-graph-focus-selection',
+  'data-graph-minimap',
+  'data-graph-help',
   'data-graph-clear-selection',
   'data-graph-depth-legend',
   'data-graph-text-index',
@@ -264,11 +320,91 @@ for (const hook of [
     errors.push(`Knowledge graph page is missing the ${hook} hook.`);
   }
 }
+
+const fullscreenRootMarkup = elementMarkupForHook(graphPageHtml, 'data-graph-fullscreen-root');
+if (!fullscreenRootMarkup) {
+  errors.push('Knowledge graph fullscreen root is missing or has unbalanced markup.');
+} else {
+  for (const descendantHook of ['data-graph-canvas', 'data-graph-hud', 'data-graph-inspector']) {
+    if (!new RegExp(`<[^>]+\\b${descendantHook}(?=\\s|=|>)`, 'i').test(fullscreenRootMarkup)) {
+      errors.push(`Knowledge graph fullscreen root must contain ${descendantHook}.`);
+    }
+  }
+}
+
+const fullscreenRootTag = fullscreenRootMarkup.match(/^<[a-z][\w:-]*\b[^>]*>/i)?.[0] ?? '';
+const fullscreenRootId = attributeValue(fullscreenRootTag, 'id');
+const fullscreenButtons = [...graphPageHtml.matchAll(/<button\b[^>]*\bdata-graph-fullscreen(?=\s|=|>)[^>]*>/gi)]
+  .map((match) => match[0]);
+if (fullscreenButtons.length !== 1) {
+  errors.push(`Knowledge graph page must contain exactly one fullscreen button, found ${fullscreenButtons.length}.`);
+} else {
+  const fullscreenButton = fullscreenButtons[0];
+  if (attributeValue(fullscreenButton, 'type') !== 'button') {
+    errors.push('Knowledge graph fullscreen control must use type="button".');
+  }
+  if (attributeValue(fullscreenButton, 'aria-pressed') !== 'false') {
+    errors.push('Knowledge graph fullscreen control must expose its initial aria-pressed="false" state.');
+  }
+  const controlledId = attributeValue(fullscreenButton, 'aria-controls');
+  if (!controlledId || !fullscreenRootId || controlledId !== fullscreenRootId) {
+    errors.push('Knowledge graph fullscreen control must reference the fullscreen root ID with aria-controls.');
+  }
+}
+
+const rangeInputs = [...graphPageHtml.matchAll(/<input\b[^>]*>/gi)]
+  .map((match) => match[0])
+  .filter((tag) => attributeValue(tag, 'type')?.toLowerCase() === 'range');
+if (!rangeInputs.length) errors.push('Knowledge graph settings must include at least one range control.');
+for (const rangeInput of rangeInputs) {
+  const id = attributeValue(rangeInput, 'id');
+  const values = Object.fromEntries(['min', 'max', 'step', 'value'].map((name) => [name, attributeValue(rangeInput, name)]));
+  const missing = Object.entries(values).filter(([, value]) => value === null || value === '').map(([name]) => name);
+  if (!id) errors.push(`Knowledge graph range control is missing an ID: ${rangeInput}`);
+  if (missing.length) errors.push(`Knowledge graph range ${id ?? '(unknown)'} is missing: ${missing.join(', ')}.`);
+
+  const minimum = Number(values.min);
+  const maximum = Number(values.max);
+  const step = Number(values.step);
+  const value = Number(values.value);
+  if (!missing.length && ![minimum, maximum, step, value].every(Number.isFinite)) {
+    errors.push(`Knowledge graph range ${id ?? '(unknown)'} must use finite numeric min, max, step, and value attributes.`);
+  } else if (!missing.length && (minimum >= maximum || step <= 0 || value < minimum || value > maximum)) {
+    errors.push(`Knowledge graph range ${id ?? '(unknown)'} has inconsistent min, max, step, or value attributes.`);
+  }
+
+  if (id && !new RegExp(`<label\\b[^>]*\\bfor="${escapeRegExp(id)}"`, 'i').test(graphPageHtml)) {
+    errors.push(`Knowledge graph range ${id} must have a label connected with for="${id}".`);
+  }
+  if (fullscreenRootMarkup && !fullscreenRootMarkup.includes(rangeInput)) {
+    errors.push(`Knowledge graph range ${id ?? '(unknown)'} must remain inside the fullscreen root.`);
+  }
+}
+
+const graphStatusTags = [...graphPageHtml.matchAll(/<[a-z][\w:-]*\b[^>]*\bdata-graph-status(?=\s|=|>)[^>]*>/gi)]
+  .map((match) => match[0]);
+if (graphStatusTags.length !== 1) {
+  errors.push(`Knowledge graph page must contain exactly one live status region, found ${graphStatusTags.length}.`);
+} else {
+  const statusTag = graphStatusTags[0];
+  if (
+    attributeValue(statusTag, 'role') !== 'status'
+    || attributeValue(statusTag, 'aria-live') !== 'polite'
+    || attributeValue(statusTag, 'aria-atomic') !== 'true'
+  ) {
+    errors.push('Knowledge graph status must use role="status", aria-live="polite", and aria-atomic="true".');
+  }
+}
+
 for (const control of [
   'data-graph-orbit="left"',
   'data-graph-orbit="right"',
   'data-graph-orbit="higher"',
   'data-graph-orbit="lower"',
+  'data-graph-pan="left"',
+  'data-graph-pan="right"',
+  'data-graph-pan="up"',
+  'data-graph-pan="down"',
   'data-graph-zoom="in"',
   'data-graph-zoom="out"',
   'data-graph-view="flat"',
@@ -282,7 +418,8 @@ if (graphCanvases.length !== 1) {
 } else {
   const canvasTag = graphCanvases[0];
   if (!/\brole="img"/i.test(canvasTag)) errors.push('Knowledge graph canvas must use role="img".');
-  if (/\btabindex=/i.test(canvasTag)) errors.push('Knowledge graph canvas must not be a keyboard tab stop.');
+  if (!/\btabindex="0"/i.test(canvasTag)) errors.push('Knowledge graph canvas must be a keyboard tab stop with tabindex="0".');
+  if (!/\baria-label="[^"]+"/i.test(canvasTag)) errors.push('Knowledge graph canvas must have an accessible interaction label.');
   const describedBy = canvasTag.match(/\baria-describedby="([^"]+)"/i)?.[1];
   if (!describedBy || !new RegExp(`\\bid="${describedBy.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"`, 'i').test(graphPageHtml)) {
     errors.push('Knowledge graph canvas must reference an existing accessible description.');

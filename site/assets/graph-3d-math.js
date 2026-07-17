@@ -124,6 +124,7 @@ export function sortProjected(items, projectionById, idFor = (item) => item.id) 
 export function hitTestProjected(nodes, projectionById, point, {
   visibleIds,
   minimumRadius = 18,
+  radiusScale = 1,
 } = {}) {
   const candidates = sortProjected(
     nodes.filter((node) => !visibleIds || visibleIds.has(node.id)),
@@ -134,9 +135,108 @@ export function hitTestProjected(nodes, projectionById, point, {
     if (!projected) continue;
     const radius = Math.max(
       minimumRadius,
-      node.radius * Math.sqrt(Math.max(0.2, projected.scale)) * 0.92 + 5,
+      node.radius * Math.max(0.1, radiusScale) * Math.sqrt(Math.max(0.2, projected.scale)) * 0.92 + 5,
     );
     if (Math.hypot(point.x - projected.x, point.y - projected.y) <= radius) return node;
   }
   return null;
+}
+
+export function zoomCameraAt(cameraInput, anchor, viewport, factor) {
+  const camera = normalizeCamera(cameraInput);
+  const zoom = clamp(
+    CAMERA_LIMITS.minimumZoom,
+    CAMERA_LIMITS.maximumZoom,
+    camera.zoom * (Number.isFinite(factor) && factor > 0 ? factor : 1),
+  );
+  const ratio = zoom / camera.zoom;
+  const centerX = viewport.width / 2;
+  const centerY = viewport.height / 2;
+  return normalizeCamera({
+    ...camera,
+    zoom,
+    panX: anchor.x - centerX - (anchor.x - centerX - camera.panX) * ratio,
+    panY: anchor.y - centerY - (anchor.y - centerY - camera.panY) * ratio,
+  });
+}
+
+export function cameraForWorldPoint(point, cameraInput, viewport, dimensions, targetZoom) {
+  const camera = normalizeCamera({
+    ...cameraInput,
+    zoom: Number.isFinite(targetZoom) ? targetZoom : cameraInput?.zoom,
+    panX: 0,
+    panY: 0,
+  });
+  const projected = projectPoint(point, camera, viewport, dimensions);
+  if (!projected) return camera;
+  return normalizeCamera({
+    ...camera,
+    panX: viewport.width / 2 - projected.x,
+    panY: viewport.height / 2 - projected.y,
+  });
+}
+
+function adjacencyFor(edges, visibleIds) {
+  const adjacency = new Map();
+  const allowed = visibleIds ? new Set(visibleIds) : null;
+  const ensure = (id) => {
+    if (!adjacency.has(id)) adjacency.set(id, new Set());
+    return adjacency.get(id);
+  };
+  for (const edge of edges) {
+    if (allowed && (!allowed.has(edge.source) || !allowed.has(edge.target))) continue;
+    ensure(edge.source).add(edge.target);
+    ensure(edge.target).add(edge.source);
+  }
+  if (allowed) for (const id of allowed) ensure(id);
+  return adjacency;
+}
+
+export function neighborhoodWithinDepth(edges, startId, maximumDepth, visibleIds) {
+  const allowed = visibleIds ? new Set(visibleIds) : null;
+  if (!startId || (allowed && !allowed.has(startId))) return new Set();
+  const depthLimit = Math.max(0, Math.floor(Number(maximumDepth) || 0));
+  const adjacency = adjacencyFor(edges, allowed);
+  const visited = new Set([startId]);
+  let frontier = [startId];
+  for (let depth = 0; depth < depthLimit && frontier.length; depth += 1) {
+    const next = [];
+    for (const id of frontier) {
+      for (const neighbor of adjacency.get(id) ?? []) {
+        if (visited.has(neighbor)) continue;
+        visited.add(neighbor);
+        next.push(neighbor);
+      }
+    }
+    frontier = next;
+  }
+  return visited;
+}
+
+export function shortestPath(edges, startId, targetId, visibleIds) {
+  const allowed = visibleIds ? new Set(visibleIds) : null;
+  if (!startId || !targetId || (allowed && (!allowed.has(startId) || !allowed.has(targetId)))) return [];
+  if (startId === targetId) return [startId];
+  const adjacency = adjacencyFor(edges, allowed);
+  const queue = [startId];
+  const previous = new Map([[startId, null]]);
+  for (let index = 0; index < queue.length; index += 1) {
+    const current = queue[index];
+    const neighbors = [...(adjacency.get(current) ?? [])].sort((left, right) => String(left).localeCompare(String(right), 'ko'));
+    for (const neighbor of neighbors) {
+      if (previous.has(neighbor)) continue;
+      previous.set(neighbor, current);
+      if (neighbor === targetId) {
+        const path = [targetId];
+        let cursor = current;
+        while (cursor !== null) {
+          path.push(cursor);
+          cursor = previous.get(cursor) ?? null;
+        }
+        return path.reverse();
+      }
+      queue.push(neighbor);
+    }
+  }
+  return [];
 }

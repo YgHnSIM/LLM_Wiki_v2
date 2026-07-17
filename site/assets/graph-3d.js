@@ -1,11 +1,15 @@
 import {
   CAMERA_LIMITS,
   DEFAULT_CAMERA,
+  cameraForWorldPoint,
   clamp,
   hitTestProjected,
+  neighborhoodWithinDepth,
   normalizeCamera,
   projectPoint,
+  shortestPath,
   sortProjected,
+  zoomCameraAt,
 } from './graph-3d-math.js';
 
 (() => {
@@ -14,6 +18,7 @@ import {
 
   const canvas = root.querySelector('[data-graph-canvas]');
   const context = canvas?.getContext('2d');
+  const fullscreenRoot = root.querySelector('[data-graph-fullscreen-root]');
   const stage = root.querySelector('[data-graph-stage]');
   const controls = root.querySelector('[data-graph-controls]');
   const search = root.querySelector('[data-graph-search]');
@@ -21,11 +26,38 @@ import {
   const verificationFilter = root.querySelector('[data-graph-verification]');
   const relationFilter = root.querySelector('[data-graph-relation]');
   const communityFilter = root.querySelector('[data-graph-community]');
+  const densityFilter = root.querySelector('[data-graph-density]');
+  const localDepthFilter = root.querySelector('[data-graph-local-depth]');
+  const labelDensityInput = root.querySelector('[data-graph-label-density]');
+  const nodeScaleInput = root.querySelector('[data-graph-node-scale]');
+  const edgeOpacityInput = root.querySelector('[data-graph-edge-opacity]');
+  const edgeWidthInput = root.querySelector('[data-graph-edge-width]');
+  const heightScaleInput = root.querySelector('[data-graph-height-scale]');
+  const arrowsInput = root.querySelector('[data-graph-show-arrows]');
+  const gridInput = root.querySelector('[data-graph-show-grid]');
+  const communitiesInput = root.querySelector('[data-graph-show-communities]');
+  const orphansInput = root.querySelector('[data-graph-show-orphans]');
+  const autoRotateInput = root.querySelector('[data-graph-auto-rotate]');
   const inspector = root.querySelector('[data-graph-inspector]');
   const inspectorContent = root.querySelector('[data-graph-inspector-content]');
   const status = root.querySelector('[data-graph-status]');
   const staticMessage = root.querySelector('[data-graph-static-message]');
-  if (!canvas || !context || !stage || !inspectorContent || !status) return;
+  const minimap = root.querySelector('[data-graph-minimap]');
+  const minimapContext = minimap?.getContext('2d');
+  const hoverCard = root.querySelector('[data-graph-hover-card]');
+  const settingsPanel = root.querySelector('[data-graph-settings]');
+  const settingsToggle = root.querySelector('[data-graph-settings-toggle]');
+  const settingsClose = root.querySelector('[data-graph-settings-close]');
+  const helpDialog = root.querySelector('[data-graph-help]');
+  const fullscreenButton = root.querySelector('[data-graph-fullscreen]');
+  const cameraReadout = root.querySelector('[data-graph-camera-readout]');
+  const visibleCount = root.querySelector('[data-graph-visible-count]');
+  const historyLabel = root.querySelector('[data-graph-history-label]');
+  const bookmarkButton = root.querySelector('[data-graph-bookmarks]');
+  const travelTarget = root.querySelector('[data-graph-travel-target]');
+  const routeHud = root.querySelector('[data-graph-route-hud]');
+  const routeSummary = root.querySelector('[data-graph-route-summary]');
+  if (!canvas || !context || !fullscreenRoot || !stage || !inspectorContent || !status) return;
 
   const initialInspectorMarkup = inspectorContent.innerHTML;
   const graphUrl = root.dataset.graphUrl;
@@ -61,6 +93,32 @@ import {
     verification: '',
     relation: relationFilter?.value || 'related',
     community: '',
+    density: densityFilter?.value || 'backbone',
+    localDepth: 0,
+    labelDensity: 2,
+    nodeScale: 1,
+    edgeOpacity: 1,
+    edgeWidth: 1,
+    heightScale: 1,
+    showArrows: true,
+    showGrid: true,
+    showCommunities: true,
+    showOrphans: true,
+    autoRotate: false,
+    mode: 'orbit',
+    travelCandidate: '',
+    travelIndex: -1,
+    routeStart: '',
+    routePath: [],
+    routeNodeIds: new Set(),
+    routeEdgeIds: new Set(),
+    history: [],
+    historyIndex: -1,
+    bookmarks: new Set(),
+    fittingPending: true,
+    cameraAnimation: 0,
+    autoRotateFrame: 0,
+    fullscreenFallback: false,
     camera: { ...DEFAULT_CAMERA },
     model: null,
     viewport: { width: 1, height: 1, dpr: 1 },
@@ -90,6 +148,9 @@ import {
     const cyan = cssValue('--cyan', '#00ffcc');
     const blue = cssValue('--blue', '#2449ff');
     const yellow = cssValue('--yellow', '#f1e740');
+    const world = cssValue('--graph-world', '#171711');
+    const worldInk = cssValue('--graph-world-ink', '#f3ecd8');
+    const worldMuted = cssValue('--graph-world-muted', '#b9b18f');
     const communityColors = state.data.communities.map((community) => {
       const probe = document.createElement('span');
       probe.className = `graph-community-${community.colorIndex % 14}`;
@@ -108,6 +169,9 @@ import {
       cyan: highContrast ? ink : cyan,
       blue: highContrast ? ink : blue,
       yellow: highContrast ? paperLight : yellow,
+      world: highContrast ? paper : world,
+      worldInk: highContrast ? ink : worldInk,
+      worldMuted: highContrast ? ink : worldMuted,
       communities: highContrast ? communityColors.map(() => ink) : communityColors,
     };
   }
@@ -146,7 +210,7 @@ import {
       || collator.compare(left.id, right.id);
   }
 
-  function overviewBackbone(visibleNodes, visibleEdges) {
+  function overviewBackbone(visibleNodes, visibleEdges, perNode = 1) {
     const selectedIds = new Set();
     const incident = new Map([...visibleNodes].map((id) => [id, []]));
     for (const edge of visibleEdges) {
@@ -154,8 +218,10 @@ import {
       incident.get(edge.target)?.push(edge);
     }
     for (const [nodeId, edges] of incident) {
-      const best = [...edges].sort((left, right) => compareOverviewEdges(left, right, nodeId))[0];
-      if (best) selectedIds.add(best.id);
+      const best = [...edges]
+        .sort((left, right) => compareOverviewEdges(left, right, nodeId))
+        .slice(0, Math.max(1, perNode));
+      for (const edge of best) selectedIds.add(edge.id);
     }
 
     const crossByCommunityPair = new Map();
@@ -174,17 +240,37 @@ import {
   }
 
   function visibleModel() {
-    const visibleNodes = new Set(state.data.nodes.filter(nodeMatchesFilters).map((node) => node.id));
-    const visibleEdges = state.data.edges.filter((edge) => (
+    const filteredNodes = new Set(state.data.nodes.filter(nodeMatchesFilters).map((node) => node.id));
+    let visibleNodes = new Set(filteredNodes);
+    let visibleEdges = state.data.edges.filter((edge) => (
       visibleNodes.has(edge.source) && visibleNodes.has(edge.target) && relationMatches(edge)
     ));
+
+    if (!state.showOrphans) {
+      const connected = new Set();
+      for (const edge of visibleEdges) {
+        connected.add(edge.source);
+        connected.add(edge.target);
+      }
+      visibleNodes = new Set([...visibleNodes].filter((id) => connected.has(id)));
+      visibleEdges = visibleEdges.filter((edge) => visibleNodes.has(edge.source) && visibleNodes.has(edge.target));
+    }
+
+    const baseVisibleNodes = new Set(visibleNodes);
+
+    if (state.localDepth > 0 && state.selected && visibleNodes.has(state.selected)) {
+      visibleNodes = neighborhoodWithinDepth(visibleEdges, state.selected, state.localDepth, visibleNodes);
+      visibleEdges = visibleEdges.filter((edge) => visibleNodes.has(edge.source) && visibleNodes.has(edge.target));
+    }
+
     const adjacency = new Map([...visibleNodes].map((id) => [id, new Set()]));
     for (const edge of visibleEdges) {
       adjacency.get(edge.source).add(edge.target);
       adjacency.get(edge.target).add(edge.source);
     }
     const overviewEdges = overviewBackbone(visibleNodes, visibleEdges);
-    return { visibleNodes, visibleEdges, overviewEdges, adjacency };
+    const balancedEdges = overviewBackbone(visibleNodes, visibleEdges, 2);
+    return { filteredNodes, baseVisibleNodes, visibleNodes, visibleEdges, overviewEdges, balancedEdges, adjacency };
   }
 
   function scheduleDraw() {
@@ -197,12 +283,24 @@ import {
 
   function updateGraph() {
     if (!state.data) return;
-    const { visibleNodes, visibleEdges, overviewEdges, adjacency } = visibleModel();
+    const {
+      filteredNodes,
+      baseVisibleNodes,
+      visibleNodes,
+      visibleEdges,
+      overviewEdges,
+      balancedEdges,
+      adjacency,
+    } = visibleModel();
     if (state.selected && !visibleNodes.has(state.selected)) {
       state.selected = '';
       restoreInspector();
     }
     if (state.hovered && !visibleNodes.has(state.hovered)) state.hovered = '';
+    if (state.routeStart && (
+      !visibleNodes.has(state.routeStart)
+      || state.routePath.some((id) => !visibleNodes.has(id))
+    )) resetRouteState();
 
     const direct = state.selected ? adjacency.get(state.selected) ?? new Set() : new Set();
     const second = new Set();
@@ -215,12 +313,16 @@ import {
       .filter((node) => visibleNodes.has(node.id) && searchMatches(node))
       .map((node) => node.id));
     const overviewEdgeIds = new Set(overviewEdges.map((edge) => edge.id));
+    const baseEdges = state.density === 'all'
+      ? visibleEdges
+      : state.density === 'balanced' ? balancedEdges : overviewEdges;
+    const baseEdgeIds = new Set(baseEdges.map((edge) => edge.id));
 
-    const renderedEdges = state.selected
+    let renderedEdges = state.selected
       ? visibleEdges.filter((edge) => (
         edge.source === state.selected
         || edge.target === state.selected
-        || (overviewEdgeIds.has(edge.id) && (
+        || (baseEdgeIds.has(edge.id) && (
           (direct.has(edge.source) && (direct.has(edge.target) || second.has(edge.target)))
           || (direct.has(edge.target) && (direct.has(edge.source) || second.has(edge.source)))
         ))
@@ -229,21 +331,33 @@ import {
         ? visibleEdges.filter((edge) => (
           edge.source === state.hovered
           || edge.target === state.hovered
-          || overviewEdgeIds.has(edge.id)
+          || baseEdgeIds.has(edge.id)
         ))
         : state.query
           ? visibleEdges.filter((edge) => (
             queryMatches.has(edge.source)
             || queryMatches.has(edge.target)
-            || overviewEdgeIds.has(edge.id)
+            || baseEdgeIds.has(edge.id)
           ))
-          : overviewEdges;
+          : baseEdges;
+
+    if (state.routeEdgeIds.size) {
+      const renderedById = new Map(renderedEdges.map((edge) => [edge.id, edge]));
+      for (const edge of visibleEdges) {
+        if (state.routeEdgeIds.has(edge.id)) renderedById.set(edge.id, edge);
+      }
+      renderedEdges = [...renderedById.values()];
+    }
 
     state.model = {
       visibleNodes,
+      filteredNodes,
+      baseVisibleNodes,
       visibleEdges,
       overviewEdges,
+      balancedEdges,
       overviewEdgeIds,
+      baseEdgeIds,
       renderedEdges,
       adjacency,
       direct,
@@ -251,11 +365,14 @@ import {
       queryMatches,
     };
     const searchMessage = state.query ? `, 검색 일치 ${queryMatches.size}개` : '';
-    status.textContent = `문서 ${visibleNodes.size}개, 전체 관계 ${visibleEdges.length}개 중 구조선 ${renderedEdges.length}개 표시${searchMessage}.`;
+    const densityLabel = state.density === 'all' ? '전체' : state.density === 'balanced' ? '균형' : '핵심';
+    status.textContent = `문서 ${visibleNodes.size}개, 관계 ${visibleEdges.length}개 중 ${densityLabel} 연결 ${renderedEdges.length}개 표시${searchMessage}.`;
+    if (visibleCount) visibleCount.textContent = String(visibleNodes.size);
     if (state.selected) {
       const selectedNode = state.nodeById.get(state.selected);
       if (selectedNode && state.inspectorId !== selectedNode.id) renderInspector(selectedNode);
     }
+    updateHud();
     scheduleDraw();
   }
 
@@ -272,11 +389,23 @@ import {
       canvas.height = pixelHeight;
     }
     state.viewport = { width, height, dpr };
+    if (state.fittingPending && state.data && width > 100 && height > 100) {
+      state.fittingPending = false;
+      fitVisibleScene(false);
+    }
     scheduleDraw();
   }
 
   function projected(point) {
-    return projectPoint(point, state.camera, state.viewport, state.data.dimensions);
+    const dimensions = state.heightScale === 1
+      ? state.data.dimensions
+      : { ...state.data.dimensions, depth: state.data.dimensions.depth * state.heightScale };
+    return projectPoint(
+      point.z ? { ...point, z: point.z * state.heightScale } : point,
+      state.camera,
+      state.viewport,
+      dimensions,
+    );
   }
 
   function tracePolygon(points) {
@@ -300,18 +429,21 @@ import {
 
   function drawFloor() {
     context.save();
-    context.strokeStyle = state.palette.ink;
-    context.globalAlpha = forcedColors.matches ? 0.34 : 0.09;
-    context.lineWidth = 0.8;
-    context.setLineDash([2, 7]);
-    for (let x = 0; x <= state.data.dimensions.width; x += 200) {
-      drawWorldLine({ x, y: 0, z: 0 }, { x, y: state.data.dimensions.height, z: 0 });
-    }
-    for (let y = 0; y <= state.data.dimensions.height; y += 160) {
-      drawWorldLine({ x: 0, y, z: 0 }, { x: state.data.dimensions.width, y, z: 0 });
+    context.strokeStyle = state.palette.worldMuted;
+    if (state.showGrid) {
+      context.globalAlpha = forcedColors.matches ? 0.34 : 0.18;
+      context.lineWidth = 0.8;
+      context.setLineDash([2, 7]);
+      for (let x = 0; x <= state.data.dimensions.width; x += 200) {
+        drawWorldLine({ x, y: 0, z: 0 }, { x, y: state.data.dimensions.height, z: 0 });
+      }
+      for (let y = 0; y <= state.data.dimensions.height; y += 160) {
+        drawWorldLine({ x: 0, y, z: 0 }, { x: state.data.dimensions.width, y, z: 0 });
+      }
     }
     context.setLineDash([]);
-    context.globalAlpha = forcedColors.matches ? 0.7 : 0.32;
+    context.strokeStyle = state.palette.worldInk;
+    context.globalAlpha = forcedColors.matches ? 0.7 : 0.42;
     context.lineWidth = 1.3;
     const corners = [
       { x: 0, y: 0, z: 0 },
@@ -339,6 +471,7 @@ import {
 
   function drawCommunities() {
     const labelBoxes = [];
+    if (!state.showCommunities) return labelBoxes;
     const compact = state.viewport.width < 620;
     const visibleCommunities = state.data.communities.filter((community) => (
       state.data.nodes.some((node) => node.community === community.id && state.model.visibleNodes.has(node.id))
@@ -352,12 +485,14 @@ import {
       context.save();
       context.fillStyle = color;
       context.strokeStyle = color;
-      context.globalAlpha = forcedColors.matches ? 0.08 : 0.035;
+      context.globalAlpha = forcedColors.matches ? 0.08 : 0.085;
       tracePolygon(points);
       context.fill();
-      context.globalAlpha = forcedColors.matches ? 0.68 : 0.3;
-      context.lineWidth = 1;
+      context.globalAlpha = forcedColors.matches ? 0.68 : 0.58;
+      context.lineWidth = 1.25;
+      context.setLineDash([8, 7]);
       context.stroke();
+      context.setLineDash([]);
 
       const minimumX = Math.min(...points.map((point) => point.x));
       const minimumY = Math.min(...points.map((point) => point.y));
@@ -368,9 +503,15 @@ import {
       context.textAlign = 'left';
       context.textBaseline = 'alphabetic';
       context.font = compact
-        ? '600 16px "Helvetica Neue", Arial, sans-serif'
-        : '500 23px "Helvetica Neue", Arial, sans-serif';
-      context.fillStyle = state.palette.blue;
+        ? '700 16px "Courier New", "D2Coding", monospace'
+        : '700 23px "Courier New", "D2Coding", monospace';
+      context.fillStyle = state.palette.pink;
+      context.globalAlpha = 0.34;
+      context.fillText(atlasNumber, labelX + 2, labelY);
+      context.fillStyle = state.palette.cyan;
+      context.fillText(atlasNumber, labelX - 2, labelY);
+      context.globalAlpha = 1;
+      context.fillStyle = state.palette.worldInk;
       context.fillText(atlasNumber, labelX, labelY);
       const numberWidth = context.measureText(atlasNumber).width;
       if (compact) {
@@ -383,8 +524,8 @@ import {
         context.restore();
         continue;
       }
-      context.font = '500 11px "Helvetica Neue", Arial, sans-serif';
-      context.fillStyle = state.palette.ink;
+      context.font = '700 11px "Courier New", "D2Coding", monospace';
+      context.fillStyle = state.palette.worldInk;
       const labelText = `${community.label} · ${community.size}`;
       context.fillText(labelText, labelX + numberWidth + 8, labelY - 2);
       const labelWidth = context.measureText(labelText).width;
@@ -400,6 +541,7 @@ import {
   }
 
   function nodeOpacity(node) {
+    if (state.routeNodeIds.has(node.id) || node.id === state.travelCandidate) return 1;
     if (!state.selected) {
       if (state.query && !state.model.queryMatches.has(node.id)) return 0.12;
       return 0.92;
@@ -420,10 +562,10 @@ import {
       const color = state.palette.communities[node.community % state.palette.communities.length];
       const emphasis = node.id === state.selected || state.model.direct.has(node.id);
       context.save();
-      context.strokeStyle = emphasis ? state.palette.ink : color;
+      context.strokeStyle = emphasis ? state.palette.pink : color;
       context.fillStyle = color;
-      context.globalAlpha = emphasis ? 0.72 : Math.max(0.12, nodeOpacity(node) * 0.42);
-      context.lineWidth = emphasis ? 1.8 : 1;
+      context.globalAlpha = Math.min(1, (emphasis ? 0.72 : Math.max(0.12, nodeOpacity(node) * 0.42)) * state.edgeOpacity);
+      context.lineWidth = (emphasis ? 1.8 : 1) * state.edgeWidth;
       context.setLineDash([3, 4]);
       context.beginPath();
       context.moveTo(ground.x, ground.y);
@@ -449,8 +591,8 @@ import {
     const distance = Math.max(1, Math.hypot(dx, dy));
     const unitX = dx / distance;
     const unitY = dy / distance;
-    const sourceRadius = Math.max(3, sourceNode.radius * source.scale);
-    const targetRadius = Math.max(3, targetNode.radius * target.scale);
+    const sourceRadius = projectedRadius(sourceNode, source);
+    const targetRadius = projectedRadius(targetNode, target);
     const start = { x: source.x + unitX * (sourceRadius + 2), y: source.y + unitY * (sourceRadius + 2) };
     const end = { x: target.x - unitX * (targetRadius + 5), y: target.y - unitY * (targetRadius + 5) };
     const bend = edge.reciprocal ? Math.min(18, Math.max(6, distance * 0.055)) : 0;
@@ -475,6 +617,13 @@ import {
     context.restore();
   }
 
+  function traceEdgePath(edge, geometry) {
+    context.beginPath();
+    context.moveTo(geometry.start.x, geometry.start.y);
+    if (edge.reciprocal) context.quadraticCurveTo(geometry.control.x, geometry.control.y, geometry.end.x, geometry.end.y);
+    else context.lineTo(geometry.end.x, geometry.end.y);
+  }
+
   function drawEdges(nodeProjections) {
     const edgeRecords = state.model.renderedEdges.map((edge) => {
       const geometry = edgeGeometry(edge, nodeProjections);
@@ -482,16 +631,19 @@ import {
     }).filter(Boolean).sort((left, right) => {
       const leftDirect = Number(state.selected && (left.edge.source === state.selected || left.edge.target === state.selected));
       const rightDirect = Number(state.selected && (right.edge.source === state.selected || right.edge.target === state.selected));
-      return leftDirect - rightDirect || left.depth - right.depth || collator.compare(left.edge.id, right.edge.id);
+      const leftRoute = Number(state.routeEdgeIds.has(left.edge.id));
+      const rightRoute = Number(state.routeEdgeIds.has(right.edge.id));
+      return leftRoute - rightRoute || leftDirect - rightDirect || left.depth - right.depth || collator.compare(left.edge.id, right.edge.id);
     });
 
     for (const { edge, geometry } of edgeRecords) {
+      const route = state.routeEdgeIds.has(edge.id);
       const direct = Boolean(state.selected) && (edge.source === state.selected || edge.target === state.selected);
       const hoveredDirect = !state.selected && Boolean(state.hovered)
         && (edge.source === state.hovered || edge.target === state.hovered);
       const searchDirect = !state.selected && Boolean(state.query)
         && (state.model.queryMatches.has(edge.source) || state.model.queryMatches.has(edge.target));
-      const emphasized = direct || hoveredDirect || searchDirect;
+      const emphasized = direct || hoveredDirect || searchDirect || route;
       const second = Boolean(state.selected) && !direct && (
         (state.model.direct.has(edge.source) && (
           state.model.direct.has(edge.target) || state.model.second.has(edge.target)
@@ -501,30 +653,41 @@ import {
         ))
       );
       const distant = Boolean(state.selected) && !direct && !second;
-      let color = edge.crossCommunity ? state.palette.blue : state.palette.ink;
+      let color = edge.crossCommunity ? state.palette.cyan : state.palette.worldInk;
       if (edge.kind === 'body') color = state.palette.blue;
-      if (direct && edge.source === state.selected) color = state.palette.blue;
-      else if (direct && edge.target === state.selected) color = state.palette.blue;
-      let alpha = edge.kind === 'body' ? 0.12 : edge.kind === 'both' ? 0.1 : 0.07;
-      if (edge.crossCommunity) alpha += 0.06;
-      if (direct) alpha = 0.94;
+      if (direct && edge.source === state.selected) color = state.palette.pink;
+      else if (direct && edge.target === state.selected) color = state.palette.cyan;
+      if (route) color = state.palette.pink;
+      let alpha = edge.kind === 'body' ? 0.2 : edge.kind === 'both' ? 0.2 : 0.13;
+      if (edge.crossCommunity) alpha += 0.09;
+      if (direct) alpha = 0.96;
       else if (hoveredDirect || searchDirect) alpha = 0.66;
       else if (second) alpha = 0.28;
       else if (distant) alpha = 0.014;
+      if (route) alpha = 1;
+      alpha = clamp(0, 1, alpha * state.edgeOpacity);
 
       context.save();
+      if (route && !forcedColors.matches) {
+        context.strokeStyle = state.palette.cyan;
+        context.globalAlpha = 0.52;
+        context.lineWidth = 6 * state.edgeWidth;
+        context.lineCap = 'square';
+        traceEdgePath(edge, geometry);
+        context.stroke();
+      }
       context.strokeStyle = color;
       context.globalAlpha = forcedColors.matches ? Math.max(alpha, 0.25) : alpha;
-      context.lineWidth = emphasized ? 1.8 : Math.min(1.25, 0.38 + edge.weight * 0.16);
-      context.lineCap = 'round';
+      context.lineWidth = (route ? 3 : emphasized ? 1.9 : Math.min(1.35, 0.48 + edge.weight * 0.17)) * state.edgeWidth;
+      context.lineCap = route ? 'square' : 'round';
       context.setLineDash(edge.kind === 'body' ? [4, 5] : []);
-      context.beginPath();
-      context.moveTo(geometry.start.x, geometry.start.y);
-      if (edge.reciprocal) context.quadraticCurveTo(geometry.control.x, geometry.control.y, geometry.end.x, geometry.end.y);
-      else context.lineTo(geometry.end.x, geometry.end.y);
+      traceEdgePath(edge, geometry);
       context.stroke();
       context.restore();
-      if (direct) drawArrow(geometry.end, geometry.control, color);
+      if (state.showArrows && (emphasized || state.density === 'backbone')) {
+        drawArrow(geometry.end, geometry.control, color);
+        if (edge.reciprocal) drawArrow(geometry.start, geometry.control, color);
+      }
     }
   }
 
@@ -564,7 +727,125 @@ import {
   }
 
   function projectedRadius(node, point) {
-    return clamp(4.8, 24, node.radius * Math.sqrt(Math.max(0.2, point.scale)) * 0.92);
+    return clamp(4.2, 34, node.radius * Math.sqrt(Math.max(0.2, point.scale)) * 0.92 * state.nodeScale);
+  }
+
+  function traceScreenPolygon(points) {
+    if (!points.length) return;
+    context.beginPath();
+    context.moveTo(points[0].x, points[0].y);
+    for (const point of points.slice(1)) context.lineTo(point.x, point.y);
+    context.closePath();
+  }
+
+  function regularPolygonPoints(x, y, radius, sides, angle = -Math.PI / 2) {
+    return Array.from({ length: sides }, (_, index) => {
+      const current = angle + index * Math.PI * 2 / sides;
+      return { x: x + Math.cos(current) * radius, y: y + Math.sin(current) * radius };
+    });
+  }
+
+  function fillVolumeFace(points, color, tint = '', tintOpacity = 0) {
+    context.save();
+    traceScreenPolygon(points);
+    context.fillStyle = color;
+    context.fill();
+    if (tint && tintOpacity > 0) {
+      const opacity = context.globalAlpha;
+      context.globalAlpha = opacity * tintOpacity;
+      context.fillStyle = tint;
+      context.fill();
+    }
+    context.restore();
+  }
+
+  function drawVolumetricNode(node, point, radius, color) {
+    if (state.camera.flat || forcedColors.matches) {
+      context.fillStyle = forcedColors.matches ? state.palette.paperLight : color;
+      traceNodeShape(node, point.x, point.y, radius);
+      context.fill();
+      return;
+    }
+
+    context.save();
+    const baseOpacity = context.globalAlpha;
+    context.globalAlpha = baseOpacity * 0.36;
+    context.fillStyle = state.palette.world;
+    context.beginPath();
+    context.ellipse(point.x + radius * 0.18, point.y + radius * 0.82, radius * 1.05, radius * 0.32, -0.08, 0, Math.PI * 2);
+    context.fill();
+    context.globalAlpha = baseOpacity;
+
+    if (node.type === 'source' || node.type === 'reference') {
+      const halfWidth = radius;
+      const halfHeight = radius;
+      const offset = { x: -radius * 0.42, y: -radius * 0.48 };
+      const front = [
+        { x: point.x - halfWidth, y: point.y - halfHeight },
+        { x: point.x + halfWidth, y: point.y - halfHeight },
+        { x: point.x + halfWidth, y: point.y + halfHeight },
+        { x: point.x - halfWidth, y: point.y + halfHeight },
+      ];
+      const back = front.map((item) => ({ x: item.x + offset.x, y: item.y + offset.y }));
+      fillVolumeFace([back[0], back[1], front[1], front[0]], color, state.palette.paperLight, 0.34);
+      fillVolumeFace([back[0], front[0], front[3], back[3]], color, state.palette.world, 0.32);
+      const gradient = context.createLinearGradient(point.x - radius, point.y - radius, point.x + radius, point.y + radius);
+      gradient.addColorStop(0, state.palette.paperLight);
+      gradient.addColorStop(0.22, color);
+      gradient.addColorStop(1, color);
+      context.fillStyle = gradient;
+      traceScreenPolygon(front);
+      context.fill();
+    } else if (node.type === 'entity') {
+      const top = { x: point.x, y: point.y - radius * 1.22 };
+      const right = { x: point.x + radius, y: point.y };
+      const bottom = { x: point.x, y: point.y + radius * 1.22 };
+      const left = { x: point.x - radius, y: point.y };
+      const center = { x: point.x - radius * 0.06, y: point.y - radius * 0.04 };
+      fillVolumeFace([top, right, center], color, state.palette.paperLight, 0.5);
+      fillVolumeFace([right, bottom, center], color, state.palette.world, 0.28);
+      fillVolumeFace([bottom, left, center], color, state.palette.world, 0.48);
+      fillVolumeFace([left, top, center], color, state.palette.paperLight, 0.18);
+    } else if (node.type === 'analysis') {
+      const front = regularPolygonPoints(point.x, point.y, radius, 6);
+      const offset = { x: -radius * 0.3, y: -radius * 0.38 };
+      const back = front.map((item) => ({ x: item.x + offset.x, y: item.y + offset.y }));
+      for (let index = 0; index < 6; index += 1) {
+        const next = (index + 1) % 6;
+        if (index < 3) fillVolumeFace([back[index], back[next], front[next], front[index]], color, index === 0 ? state.palette.paperLight : state.palette.world, index === 0 ? 0.3 : 0.26);
+      }
+      const gradient = context.createLinearGradient(point.x - radius, point.y - radius, point.x + radius, point.y + radius);
+      gradient.addColorStop(0, state.palette.paperLight);
+      gradient.addColorStop(0.28, color);
+      gradient.addColorStop(1, color);
+      context.fillStyle = gradient;
+      traceScreenPolygon(front);
+      context.fill();
+    } else {
+      const gradient = context.createRadialGradient(
+        point.x - radius * 0.36,
+        point.y - radius * 0.42,
+        Math.max(0.8, radius * 0.06),
+        point.x,
+        point.y,
+        radius * 1.08,
+      );
+      gradient.addColorStop(0, state.palette.paperLight);
+      gradient.addColorStop(0.18, color);
+      gradient.addColorStop(0.72, color);
+      gradient.addColorStop(1, state.palette.world);
+      context.fillStyle = gradient;
+      context.beginPath();
+      context.arc(point.x, point.y, radius, 0, Math.PI * 2);
+      context.fill();
+      context.globalAlpha = baseOpacity * 0.42;
+      context.strokeStyle = state.palette.paperLight;
+      context.lineWidth = Math.max(0.7, radius * 0.08);
+      context.beginPath();
+      context.arc(point.x - radius * 0.1, point.y - radius * 0.06, radius * 0.64, Math.PI * 1.08, Math.PI * 1.68);
+      context.stroke();
+    }
+    context.restore();
   }
 
   function drawNodes(nodeProjections) {
@@ -578,29 +859,53 @@ import {
 
       context.save();
       context.globalAlpha = opacity;
-      context.fillStyle = forcedColors.matches ? state.palette.paperLight : color;
-      context.strokeStyle = state.palette.ink;
+      drawVolumetricNode(node, point, radius, color);
+      context.strokeStyle = state.palette.worldInk;
       context.lineWidth = 0.8 + Math.min(2.4, Math.log2(1 + node.evidenceCount) * 0.45);
       context.setLineDash(verificationDash(node));
       traceNodeShape(node, point.x, point.y, radius);
-      context.fill();
       context.stroke();
       context.setLineDash([]);
 
       if (state.model.direct.has(node.id)) {
         context.globalAlpha = 0.48;
-        context.strokeStyle = state.palette.blue;
+        context.strokeStyle = state.palette.cyan;
         context.lineWidth = 1.2;
         traceNodeShape(node, point.x, point.y, radius + 3);
         context.stroke();
       }
 
-      if (node.id === state.selected || node.id === state.hovered || state.model.queryMatches.has(node.id)) {
-        context.globalAlpha = node.id === state.selected ? 1 : 0.82;
-        context.strokeStyle = state.palette.blue;
-        context.lineWidth = 2;
+      if (state.routeNodeIds.has(node.id)) {
+        context.globalAlpha = 0.9;
+        context.strokeStyle = state.palette.pink;
+        context.lineWidth = 2.4;
         traceNodeShape(node, point.x, point.y, radius + 5);
         context.stroke();
+      }
+
+      if (state.bookmarks.has(node.id)) {
+        context.globalAlpha = 0.95;
+        context.strokeStyle = state.palette.yellow;
+        context.lineWidth = 2;
+        context.setLineDash([3, 3]);
+        traceNodeShape(node, point.x, point.y, radius + 8);
+        context.stroke();
+        context.setLineDash([]);
+      }
+
+      if (node.id === state.selected || node.id === state.hovered || state.model.queryMatches.has(node.id) || node.id === state.travelCandidate) {
+        context.globalAlpha = node.id === state.selected ? 1 : 0.82;
+        context.strokeStyle = node.id === state.travelCandidate ? state.palette.yellow : state.palette.cyan;
+        context.lineWidth = node.id === state.selected ? 3 : 2;
+        traceNodeShape(node, point.x, point.y, radius + 5);
+        context.stroke();
+        if (node.id === state.selected && !forcedColors.matches) {
+          context.globalAlpha = 0.7;
+          context.strokeStyle = state.palette.pink;
+          context.lineWidth = 1.8;
+          traceNodeShape(node, point.x + 3, point.y, radius + 8);
+          context.stroke();
+        }
       }
       context.restore();
     }
@@ -615,7 +920,9 @@ import {
 
   function labelPriority(node) {
     if (node.id === state.selected) return 100000;
+    if (node.id === state.travelCandidate) return 95000;
     if (node.id === state.hovered) return 90000;
+    if (state.routeNodeIds.has(node.id)) return 85000;
     if (state.model.queryMatches.has(node.id)) return 80000;
     if (state.model.direct.has(node.id)) return 60000 + node.bridgeConnections * 100 + node.degree;
     return node.bridgeConnections * 100 + node.degree;
@@ -623,19 +930,24 @@ import {
 
   function drawLabels(nodeProjections, reservedBoxes = []) {
     const visibleNodes = state.data.nodes.filter((node) => state.model.visibleNodes.has(node.id));
-    const budget = state.viewport.width < 620
-      ? 3
-      : clamp(6, 14, Math.floor(state.viewport.width * state.viewport.height / 70000));
+    const baseBudget = state.viewport.width < 620
+      ? [0, 2, 4, 8][state.labelDensity]
+      : [0, 5, 14, 28][state.labelDensity];
+    const budget = Math.max(0, baseBudget ?? 14);
     const mandatory = visibleNodes.filter((node) => (
       node.id === state.selected
+      || node.id === state.travelCandidate
       || node.id === state.hovered
+      || state.routeNodeIds.has(node.id)
       || state.model.queryMatches.has(node.id)
     ));
-    const contextual = state.selected
+    const contextual = budget === 0
+      ? []
+      : state.selected
       ? visibleNodes
         .filter((node) => state.model.direct.has(node.id))
         .sort((left, right) => labelPriority(right) - labelPriority(left) || collator.compare(left.title, right.title))
-        .slice(0, state.viewport.width < 620 ? 4 : 8)
+        .slice(0, Math.min(budget, state.viewport.width < 620 ? 4 : 10))
       : [...visibleNodes]
         .sort((left, right) => labelPriority(right) - labelPriority(left) || collator.compare(left.title, right.title))
         .slice(0, budget);
@@ -644,7 +956,7 @@ import {
     const placed = [...reservedBoxes];
 
     context.save();
-    context.font = '500 11px "Helvetica Neue", Arial, sans-serif';
+    context.font = '700 11px "Courier New", "D2Coding", monospace';
     context.textAlign = 'left';
     context.textBaseline = 'middle';
     for (const node of candidates) {
@@ -681,14 +993,87 @@ import {
       placed.push(placedBox);
 
       context.globalAlpha = node.id === state.selected ? 1 : 0.94;
-      context.fillStyle = state.palette.paperLight;
+      context.fillStyle = state.palette.world;
       context.fillRect(box.x, box.y, width, height);
-      context.fillStyle = state.palette.blue;
+      context.fillStyle = node.id === state.travelCandidate ? state.palette.yellow : state.palette.pink;
       context.fillRect(box.x, box.y, 2, height);
-      context.fillStyle = state.palette.ink;
+      context.fillStyle = state.palette.worldInk;
       context.fillText(node.title, box.x + 7, box.y + height / 2 + 0.5);
     }
     context.restore();
+  }
+
+  function drawMinimap() {
+    if (!minimap || !minimapContext || !state.data || !state.model) return;
+    const rectangle = minimap.getBoundingClientRect();
+    const width = Math.max(1, Math.round(rectangle.width));
+    const height = Math.max(1, Math.round(rectangle.height));
+    const dpr = Math.min(2, Math.max(1, window.devicePixelRatio || 1));
+    if (minimap.width !== Math.round(width * dpr) || minimap.height !== Math.round(height * dpr)) {
+      minimap.width = Math.round(width * dpr);
+      minimap.height = Math.round(height * dpr);
+    }
+    minimapContext.setTransform(dpr, 0, 0, dpr, 0, 0);
+    minimapContext.clearRect(0, 0, width, height);
+    minimapContext.fillStyle = state.palette.paperLight;
+    minimapContext.fillRect(0, 0, width, height);
+    const padding = 9;
+    const scaleX = (width - padding * 2) / state.data.dimensions.width;
+    const scaleY = (height - padding * 2) / state.data.dimensions.height;
+    const pointFor = (item) => ({ x: padding + item.x * scaleX, y: padding + item.y * scaleY });
+
+    for (const community of state.data.communities) {
+      const hasVisibleNode = state.data.nodes.some((node) => node.community === community.id && state.model.visibleNodes.has(node.id));
+      if (!hasVisibleNode) continue;
+      const point = pointFor(community);
+      const color = state.palette.communities[community.colorIndex % state.palette.communities.length];
+      minimapContext.strokeStyle = color;
+      minimapContext.globalAlpha = 0.4;
+      minimapContext.lineWidth = 1;
+      minimapContext.beginPath();
+      minimapContext.ellipse(point.x, point.y, community.radius * scaleX * 1.1, community.radius * scaleY * 0.82, 0, 0, Math.PI * 2);
+      minimapContext.stroke();
+    }
+
+    const drawPath = (ids, color, widthValue, alpha) => {
+      const points = ids.map((id) => state.nodeById.get(id)).filter(Boolean).map(pointFor);
+      if (points.length < 2) return;
+      minimapContext.strokeStyle = color;
+      minimapContext.globalAlpha = alpha;
+      minimapContext.lineWidth = widthValue;
+      minimapContext.beginPath();
+      minimapContext.moveTo(points[0].x, points[0].y);
+      for (const point of points.slice(1)) minimapContext.lineTo(point.x, point.y);
+      minimapContext.stroke();
+    };
+    drawPath(state.routePath, state.palette.pink, 3.5, 0.9);
+
+    for (const [index, id] of state.history.entries()) {
+      const visited = state.nodeById.get(id);
+      if (!visited || !state.model.visibleNodes.has(id)) continue;
+      const point = pointFor(visited);
+      const recent = index === state.historyIndex;
+      minimapContext.fillStyle = state.palette.cyan;
+      minimapContext.globalAlpha = recent ? 1 : 0.38;
+      minimapContext.fillRect(point.x - (recent ? 2.5 : 1.5), point.y - (recent ? 2.5 : 1.5), recent ? 5 : 3, recent ? 5 : 3);
+    }
+
+    for (const node of state.data.nodes) {
+      if (!state.model.visibleNodes.has(node.id)) continue;
+      const point = pointFor(node);
+      minimapContext.fillStyle = state.palette.communities[node.community % state.palette.communities.length];
+      minimapContext.globalAlpha = node.id === state.selected ? 1 : 0.72;
+      minimapContext.beginPath();
+      minimapContext.arc(point.x, point.y, node.id === state.selected ? 3.6 : 1.7, 0, Math.PI * 2);
+      minimapContext.fill();
+      if (state.bookmarks.has(node.id)) {
+        minimapContext.strokeStyle = state.palette.ink;
+        minimapContext.globalAlpha = 1;
+        minimapContext.lineWidth = 1.2;
+        minimapContext.strokeRect(point.x - 4, point.y - 4, 8, 8);
+      }
+    }
+    minimapContext.globalAlpha = 1;
   }
 
   function drawScene() {
@@ -713,6 +1098,7 @@ import {
     drawEdges(nodeProjections);
     drawNodes(nodeProjections);
     drawLabels(nodeProjections, reservedLabelBoxes);
+    drawMinimap();
   }
 
   function metadataRow(term, description) {
@@ -778,6 +1164,37 @@ import {
     documentLink.href = node.url;
     inspectorContent.append(documentLink);
 
+    const actions = element('div', 'graph-inspector-actions');
+    const focusButton = element('button', '', '이 문서로 이동');
+    focusButton.type = 'button';
+    focusButton.dataset.graphFocusNode = node.id;
+    const bookmark = element('button', '', state.bookmarks.has(node.id) ? '표식 지우기' : '표식 남기기');
+    bookmark.type = 'button';
+    bookmark.dataset.graphBookmark = node.id;
+    const route = element('button', '', state.routeStart === node.id
+      ? '경로 출발점 해제'
+      : state.routeStart ? '여기까지 경로 찾기' : '경로 출발점');
+    route.type = 'button';
+    route.dataset.graphRouteNode = node.id;
+    actions.append(focusButton, bookmark, route);
+    inspectorContent.append(actions);
+
+    if (state.routePath.length > 1) {
+      inspectorContent.append(element('h3', '', `현재 경로 ${state.routePath.length - 1}단계`));
+      const pathList = element('ol', 'graph-route-list');
+      for (const id of state.routePath) {
+        const pathNode = state.nodeById.get(id);
+        if (!pathNode) continue;
+        const item = element('li');
+        const button = element('button', '', pathNode.title);
+        button.type = 'button';
+        button.dataset.selectNode = pathNode.id;
+        item.append(button);
+        pathList.append(item);
+      }
+      inspectorContent.append(pathList);
+    }
+
     const ranked = [...relations.entries()]
       .map(([id, record]) => ({ node: state.nodeById.get(id), record }))
       .filter((item) => item.node)
@@ -803,28 +1220,257 @@ import {
     state.inspectorId = node.id;
   }
 
+  const BOOKMARK_STORAGE_KEY = 'llm-wiki:knowledge-world:bookmarks:v1';
+
+  function loadBookmarks() {
+    try {
+      const stored = JSON.parse(window.localStorage.getItem(BOOKMARK_STORAGE_KEY) || '[]');
+      state.bookmarks = new Set(Array.isArray(stored)
+        ? stored.filter((id) => state.nodeById.has(id))
+        : []);
+    } catch {
+      state.bookmarks = new Set();
+    }
+  }
+
+  function saveBookmarks() {
+    try {
+      window.localStorage.setItem(BOOKMARK_STORAGE_KEY, JSON.stringify([...state.bookmarks]));
+    } catch {
+      // Browsing remains fully usable when local storage is unavailable.
+    }
+  }
+
+  function recordHistory(id) {
+    if (!id || state.history[state.historyIndex] === id) return;
+    state.history = state.history.slice(0, state.historyIndex + 1);
+    state.history.push(id);
+    if (state.history.length > 50) state.history.shift();
+    state.historyIndex = state.history.length - 1;
+  }
+
+  function updateHud() {
+    const selectedNode = state.nodeById.get(state.selected);
+    const candidateNode = state.nodeById.get(state.travelCandidate);
+    if (cameraReadout) {
+      const mode = state.camera.flat ? '2D' : state.mode === 'travel' ? '연결 여행' : '궤도';
+      cameraReadout.textContent = `${mode} · 확대 ${Math.round(state.camera.zoom * 100)}% · 높이 ${Math.round(state.heightScale * 100)}%`;
+    }
+    const modeButtons = root.querySelectorAll('[data-graph-mode]');
+    for (const button of modeButtons) button.setAttribute('aria-pressed', String(button.dataset.graphMode === state.mode));
+    const historyBack = root.querySelector('[data-graph-history="back"]');
+    const historyForward = root.querySelector('[data-graph-history="forward"]');
+    if (historyBack) historyBack.disabled = state.historyIndex <= 0;
+    if (historyForward) historyForward.disabled = state.historyIndex < 0 || state.historyIndex >= state.history.length - 1;
+    if (historyLabel) historyLabel.textContent = state.historyIndex >= 0
+      ? `방문 ${state.historyIndex + 1}/${state.history.length}`
+      : '방문 기록 없음';
+    if (bookmarkButton) {
+      bookmarkButton.textContent = `표식 ${state.bookmarks.size}`;
+      bookmarkButton.disabled = state.bookmarks.size === 0;
+    }
+    if (travelTarget) {
+      travelTarget.textContent = state.mode === 'travel'
+        ? candidateNode ? `Enter로 이동 · ${candidateNode.title}` : selectedNode ? '연결된 이웃이 없습니다.' : '먼저 노드를 선택하세요.'
+        : selectedNode ? selectedNode.title : '노드를 선택해 탐험을 시작하세요.';
+    }
+    if (routeHud && routeSummary) {
+      const start = state.nodeById.get(state.routeStart);
+      routeHud.hidden = !start;
+      routeSummary.textContent = state.routePath.length > 1
+        ? `${start.title} → ${state.nodeById.get(state.routePath.at(-1))?.title ?? ''} · ${state.routePath.length - 1}단계 · 방향 무시`
+        : start ? `${start.title}에서 출발할 경로를 선택하세요.` : '';
+    }
+    const labelNames = ['선택만', '적게', '핵심', '많이'];
+    const labelOutput = root.querySelector('[data-graph-label-output]');
+    const nodeOutput = root.querySelector('[data-graph-node-output]');
+    const edgeOutput = root.querySelector('[data-graph-edge-output]');
+    const widthOutput = root.querySelector('[data-graph-width-output]');
+    const heightOutput = root.querySelector('[data-graph-height-output]');
+    if (labelOutput) labelOutput.textContent = labelNames[state.labelDensity] ?? '핵심';
+    if (nodeOutput) nodeOutput.textContent = `${Math.round(state.nodeScale * 100)}%`;
+    if (edgeOutput) edgeOutput.textContent = `${Math.round(state.edgeOpacity * 100)}%`;
+    if (widthOutput) widthOutput.textContent = `${Math.round(state.edgeWidth * 100)}%`;
+    if (heightOutput) heightOutput.textContent = `${Math.round(state.heightScale * 100)}%`;
+    updateFlatButton();
+  }
+
+  function toggleBookmark(id) {
+    if (!state.nodeById.has(id)) return;
+    if (state.bookmarks.has(id)) state.bookmarks.delete(id);
+    else state.bookmarks.add(id);
+    saveBookmarks();
+    state.inspectorId = '';
+    updateGraph();
+    status.textContent = `${state.nodeById.get(id).title} 표식을 ${state.bookmarks.has(id) ? '남겼습니다' : '지웠습니다'}.`;
+  }
+
+  function cycleBookmark() {
+    const nodes = [...state.bookmarks]
+      .map((id) => state.nodeById.get(id))
+      .filter((node) => node && state.model.visibleNodes.has(node.id))
+      .sort((left, right) => collator.compare(left.title, right.title));
+    if (!nodes.length) return;
+    const current = nodes.findIndex((node) => node.id === state.selected);
+    const next = nodes[(current + 1 + nodes.length) % nodes.length];
+    selectNode(next.id, { focus: true });
+  }
+
+  function resetRouteState({ keepStart = false } = {}) {
+    if (!keepStart) state.routeStart = '';
+    state.routePath = keepStart && state.routeStart ? [state.routeStart] : [];
+    state.routeNodeIds = new Set(state.routePath);
+    state.routeEdgeIds = new Set();
+    state.inspectorId = '';
+  }
+
+  function clearRoute({ keepStart = false } = {}) {
+    resetRouteState({ keepStart });
+    updateGraph();
+  }
+
+  function findRoute(targetId) {
+    if (
+      !state.routeStart
+      || !state.model.visibleNodes.has(state.routeStart)
+      || !state.model.visibleNodes.has(targetId)
+    ) {
+      status.textContent = '출발점과 목적지가 현재 표시된 세계 안에 있어야 합니다.';
+      return;
+    }
+    const path = shortestPath(state.model.visibleEdges, state.routeStart, targetId, state.model.visibleNodes);
+    if (!path.length) {
+      status.textContent = '현재 표시된 관계 안에서 연결 경로를 찾지 못했습니다.';
+      return;
+    }
+    const edgeIds = new Set();
+    for (let index = 0; index < path.length - 1; index += 1) {
+      const left = path[index];
+      const right = path[index + 1];
+      const edge = state.model.visibleEdges
+        .filter((item) => (item.source === left && item.target === right) || (item.source === right && item.target === left))
+        .sort((a, b) => compareOverviewEdges(a, b, left))[0];
+      if (edge) edgeIds.add(edge.id);
+    }
+    state.routePath = path;
+    state.routeNodeIds = new Set(path);
+    state.routeEdgeIds = edgeIds;
+    state.inspectorId = '';
+    updateGraph();
+    status.textContent = `방향을 무시한 현재 표시 관계 기준으로 ${state.nodeById.get(state.routeStart)?.title ?? '출발점'}에서 ${state.nodeById.get(targetId)?.title ?? '목적지'}까지 ${path.length - 1}단계 최단 연결을 표시했습니다.`;
+  }
+
+  function handleRouteNode(id) {
+    if (state.routeStart === id) {
+      clearRoute();
+      status.textContent = '경로 출발점을 해제했습니다.';
+      return;
+    }
+    if (!state.routeStart) {
+      state.routeStart = id;
+      state.routePath = [id];
+      state.routeNodeIds = new Set([id]);
+      state.routeEdgeIds = new Set();
+      state.inspectorId = '';
+      updateGraph();
+      status.textContent = `${state.nodeById.get(id)?.title ?? '문서'}를 경로 출발점으로 지정했습니다.`;
+      return;
+    }
+    findRoute(id);
+  }
+
+  function travelNeighbors() {
+    if (!state.selected || !state.model) return [];
+    return [...(state.model.adjacency.get(state.selected) ?? [])]
+      .map((id) => state.nodeById.get(id))
+      .filter(Boolean)
+      .sort((left, right) => right.bridgeConnections - left.bridgeConnections || right.degree - left.degree || collator.compare(left.title, right.title));
+  }
+
+  function refreshTravelCandidate(preferredIndex = 0) {
+    const neighbors = travelNeighbors();
+    if (!neighbors.length) {
+      state.travelCandidate = '';
+      state.travelIndex = -1;
+    } else {
+      state.travelIndex = ((preferredIndex % neighbors.length) + neighbors.length) % neighbors.length;
+      state.travelCandidate = neighbors[state.travelIndex].id;
+    }
+    updateHud();
+    scheduleDraw();
+  }
+
+  function setMode(mode) {
+    state.mode = mode === 'travel' ? 'travel' : 'orbit';
+    if (state.mode === 'travel') refreshTravelCandidate(0);
+    else {
+      state.travelCandidate = '';
+      state.travelIndex = -1;
+      updateHud();
+      scheduleDraw();
+    }
+    status.textContent = state.mode === 'travel'
+      ? '연결 여행 모드입니다. 방향키로 이웃을 고르고 Enter로 이동하세요.'
+      : '궤도 탐색 모드입니다. 회전, 이동, 확대를 사용할 수 있습니다.';
+  }
+
+  function stepTravel(delta) {
+    if (!state.selected) {
+      const first = state.data.nodes.find((node) => state.model.visibleNodes.has(node.id));
+      if (first) selectNode(first.id, { focus: true });
+      return;
+    }
+    refreshTravelCandidate(state.travelIndex + delta);
+  }
+
+  function commitTravel() {
+    if (state.travelCandidate) selectNode(state.travelCandidate, { focus: true });
+  }
+
+  function navigateHistory(delta) {
+    let nextIndex = state.historyIndex + delta;
+    while (nextIndex >= 0 && nextIndex < state.history.length) {
+      const id = state.history[nextIndex];
+      if (state.model.baseVisibleNodes.has(id)) {
+        state.historyIndex = nextIndex;
+        selectNode(id, { focus: true, record: false });
+        return;
+      }
+      nextIndex += delta;
+    }
+    status.textContent = '현재 필터에서 이동할 수 있는 방문 기록이 없습니다.';
+  }
+
   function restoreInspector() {
     inspectorContent.innerHTML = initialInspectorMarkup;
     state.inspectorId = '';
     root.classList.remove('has-selection');
   }
 
-  function selectNode(id) {
+  function selectNode(id, { focus = false, record = true } = {}) {
     const node = state.nodeById.get(id);
-    if (!node || !state.model.visibleNodes.has(id)) return;
+    if (!node || !state.model.baseVisibleNodes.has(id)) return false;
     state.selected = id;
+    state.travelCandidate = '';
+    state.travelIndex = -1;
+    if (record) recordHistory(id);
     root.classList.add('has-selection');
     updateGraph();
+    if (state.mode === 'travel') refreshTravelCandidate(0);
+    if (focus) focusNode(id);
     const relations = visibleRelations(node);
     const outsideNeighbors = [...relations.keys()].filter((neighborId) => (
       state.nodeById.get(neighborId)?.community !== node.community
     ));
     status.textContent = `${node.title} 선택. 표시 이웃 ${relations.size}개, 집단 밖 이웃 ${outsideNeighbors.length}개.`;
+    return true;
   }
 
   function clearSelection() {
     if (!state.selected) return;
     state.selected = '';
+    state.travelCandidate = '';
+    state.travelIndex = -1;
     restoreInspector();
     updateGraph();
   }
@@ -834,16 +1480,155 @@ import {
     button?.setAttribute('aria-pressed', String(Boolean(state.camera.flat)));
   }
 
-  function setCamera(patch) {
-    state.camera = normalizeCamera({ ...state.camera, ...patch });
-    updateFlatButton();
+  function cancelCameraAnimation() {
+    if (state.cameraAnimation) window.cancelAnimationFrame(state.cameraAnimation);
+    state.cameraAnimation = 0;
+  }
+
+  function applyCamera(camera) {
+    state.camera = normalizeCamera(camera);
+    updateHud();
     scheduleDraw();
   }
 
+  function setCamera(patch) {
+    cancelCameraAnimation();
+    if (state.autoRotate) setAutoRotate(false);
+    applyCamera({ ...state.camera, ...patch });
+  }
+
+  function animateCameraTo(targetCamera) {
+    const target = normalizeCamera(targetCamera);
+    cancelCameraAnimation();
+    if (state.autoRotate) setAutoRotate(false);
+    if (reduceMotion.matches) {
+      applyCamera(target);
+      return;
+    }
+    const start = { ...state.camera };
+    const startedAt = window.performance.now();
+    const duration = 420;
+    const tick = (now) => {
+      const progress = clamp(0, 1, (now - startedAt) / duration);
+      const eased = 1 - (1 - progress) ** 3;
+      state.camera = normalizeCamera({
+        ...start,
+        yaw: start.yaw + (target.yaw - start.yaw) * eased,
+        pitch: start.pitch + (target.pitch - start.pitch) * eased,
+        zoom: start.zoom + (target.zoom - start.zoom) * eased,
+        panX: start.panX + (target.panX - start.panX) * eased,
+        panY: start.panY + (target.panY - start.panY) * eased,
+        flat: progress < 1 ? start.flat : target.flat,
+      });
+      updateHud();
+      scheduleDraw();
+      if (progress < 1) state.cameraAnimation = window.requestAnimationFrame(tick);
+      else state.cameraAnimation = 0;
+    };
+    state.cameraAnimation = window.requestAnimationFrame(tick);
+  }
+
+  function displayDimensions() {
+    return state.heightScale === 1
+      ? state.data.dimensions
+      : { ...state.data.dimensions, depth: state.data.dimensions.depth * state.heightScale };
+  }
+
+  function displayPoint(node) {
+    return node.z ? { ...node, z: node.z * state.heightScale } : node;
+  }
+
+  function fitSafeArea() {
+    const canvasRectangle = canvas.getBoundingClientRect();
+    const headerRectangle = root.querySelector('[data-graph-hud]')?.getBoundingClientRect();
+    const travelRectangle = root.querySelector('.graph-travel-hud')?.getBoundingClientRect();
+    const inspectorRectangle = inspector?.getBoundingClientRect();
+    const compact = state.viewport.width < 720;
+    const top = headerRectangle
+      ? clamp(28, state.viewport.height * 0.38, headerRectangle.bottom - canvasRectangle.top + 18)
+      : 42;
+    const bottom = travelRectangle
+      ? clamp(32, state.viewport.height * 0.34, canvasRectangle.bottom - travelRectangle.top + 18)
+      : 54;
+    const left = compact ? 28 : 52;
+    const right = !compact && root.classList.contains('has-selection') && inspectorRectangle
+      ? clamp(52, state.viewport.width * 0.38, canvasRectangle.right - inspectorRectangle.left + 24)
+      : compact ? 28 : 52;
+    return { top, right, bottom, left };
+  }
+
+  function fitVisibleScene(animate = true, cameraBasis = state.camera) {
+    if (!state.data || !state.model || state.viewport.width <= 1 || state.viewport.height <= 1) return;
+    const camera = normalizeCamera({ ...cameraBasis, zoom: 1, panX: 0, panY: 0 });
+    const dimensions = displayDimensions();
+    const points = state.data.nodes
+      .filter((node) => state.model.visibleNodes.has(node.id))
+      .map((node) => projectPoint(displayPoint(node), camera, state.viewport, dimensions))
+      .filter(Boolean);
+    if (!points.length) return;
+    const minimumX = Math.min(...points.map((point) => point.x));
+    const maximumX = Math.max(...points.map((point) => point.x));
+    const minimumY = Math.min(...points.map((point) => point.y));
+    const maximumY = Math.max(...points.map((point) => point.y));
+    const safe = fitSafeArea();
+    const availableWidth = Math.max(160, state.viewport.width - safe.left - safe.right);
+    const availableHeight = Math.max(180, state.viewport.height - safe.top - safe.bottom);
+    const markerPadding = Math.max(24, 20 * state.nodeScale);
+    const zoom = clamp(
+      CAMERA_LIMITS.minimumZoom,
+      CAMERA_LIMITS.maximumZoom,
+      Math.min(
+        availableWidth / Math.max(1, maximumX - minimumX + markerPadding * 2),
+        availableHeight / Math.max(1, maximumY - minimumY + markerPadding * 2),
+      ),
+    );
+    const centerX = (minimumX + maximumX) / 2;
+    const centerY = (minimumY + maximumY) / 2;
+    const safeCenterX = safe.left + availableWidth / 2;
+    const safeCenterY = safe.top + availableHeight / 2;
+    const target = normalizeCamera({
+      ...camera,
+      zoom,
+      panX: safeCenterX - state.viewport.width / 2 - (centerX - state.viewport.width / 2) * zoom,
+      panY: safeCenterY - state.viewport.height / 2 - (centerY - state.viewport.height / 2) * zoom,
+    });
+    if (animate) animateCameraTo(target);
+    else {
+      cancelCameraAnimation();
+      if (state.autoRotate) setAutoRotate(false);
+      applyCamera(target);
+    }
+  }
+
+  function focusNode(id = state.selected) {
+    const node = state.nodeById.get(id);
+    if (!node || !state.model.visibleNodes.has(id)) {
+      status.textContent = '먼저 노드를 선택하세요.';
+      return;
+    }
+    const targetZoom = clamp(1.25, 2.35, Math.max(state.camera.zoom, 1.55));
+    const target = cameraForWorldPoint(
+      displayPoint(node),
+      { ...state.camera, flat: false },
+      state.viewport,
+      displayDimensions(),
+      targetZoom,
+    );
+    animateCameraTo(target);
+  }
+
+  function panCamera(deltaX, deltaY) {
+    setCamera({ panX: state.camera.panX + deltaX, panY: state.camera.panY + deltaY });
+  }
+
+  function zoomCamera(factor, anchor = { x: state.viewport.width / 2, y: state.viewport.height / 2 }) {
+    cancelCameraAnimation();
+    if (state.autoRotate) setAutoRotate(false);
+    applyCamera(zoomCameraAt(state.camera, anchor, state.viewport, factor));
+  }
+
   function resetCamera() {
-    state.camera = { ...DEFAULT_CAMERA };
-    updateFlatButton();
-    scheduleDraw();
+    fitVisibleScene(true, DEFAULT_CAMERA);
   }
 
   function canvasPoint(event) {
@@ -855,11 +1640,134 @@ import {
     return hitTestProjected(state.data.nodes, state.projectedNodes, canvasPoint(event), {
       visibleIds: state.model.visibleNodes,
       minimumRadius: 18,
+      radiusScale: state.nodeScale,
     });
   }
 
+  function isEditableTarget(target) {
+    return target instanceof HTMLElement && Boolean(target.closest('input, select, textarea, button, summary, a, dialog, [contenteditable="true"]'));
+  }
+
+  function setSettingsOpen(open) {
+    if (!settingsPanel || !settingsToggle) return;
+    settingsPanel.hidden = !open;
+    settingsToggle.setAttribute('aria-expanded', String(open));
+    root.classList.toggle('has-settings', open);
+  }
+
+  function updateFullscreenState() {
+    const active = document.fullscreenElement === fullscreenRoot || state.fullscreenFallback;
+    fullscreenRoot.classList.toggle('is-fullscreen', active);
+    fullscreenButton?.setAttribute('aria-pressed', String(active));
+    if (fullscreenButton) fullscreenButton.textContent = active ? '전체 화면 나가기' : '전체 화면';
+    window.requestAnimationFrame(() => {
+      resizeCanvas();
+      scheduleDraw();
+      if (active) canvas.focus({ preventScroll: true });
+    });
+  }
+
+  async function toggleFullscreen() {
+    try {
+      if (document.fullscreenElement === fullscreenRoot) {
+        await document.exitFullscreen();
+        return;
+      }
+      if (state.fullscreenFallback) {
+        state.fullscreenFallback = false;
+        document.body.classList.remove('graph-fallback-fullscreen');
+        updateFullscreenState();
+        return;
+      }
+      if (fullscreenRoot.requestFullscreen) await fullscreenRoot.requestFullscreen();
+      else throw new Error('Fullscreen API unavailable');
+    } catch {
+      if (!document.fullscreenElement) {
+        state.fullscreenFallback = !state.fullscreenFallback;
+        document.body.classList.toggle('graph-fallback-fullscreen', state.fullscreenFallback);
+        updateFullscreenState();
+      }
+    }
+  }
+
+  function setAutoRotate(enabled) {
+    state.autoRotate = Boolean(enabled) && !reduceMotion.matches;
+    if (autoRotateInput) autoRotateInput.checked = state.autoRotate;
+    if (state.autoRotateFrame) window.cancelAnimationFrame(state.autoRotateFrame);
+    state.autoRotateFrame = 0;
+    if (!state.autoRotate) return;
+    let previous = window.performance.now();
+    const tick = (now) => {
+      if (!state.autoRotate) {
+        state.autoRotateFrame = 0;
+        return;
+      }
+      const elapsed = Math.min(50, now - previous);
+      previous = now;
+      state.camera = normalizeCamera({ ...state.camera, yaw: state.camera.yaw + elapsed * 0.00008, flat: false });
+      updateHud();
+      scheduleDraw();
+      state.autoRotateFrame = window.requestAnimationFrame(tick);
+    };
+    state.autoRotateFrame = window.requestAnimationFrame(tick);
+  }
+
+  function updateHoverCard(event, node) {
+    if (!hoverCard) return;
+    if (!node) {
+      hoverCard.hidden = true;
+      return;
+    }
+    const community = state.data.communities.find((item) => item.id === node.community);
+    hoverCard.replaceChildren(
+      element('strong', '', node.title),
+      element('span', '', `${typeLabels[node.type] ?? node.type} · ${community?.label ?? '분류 없음'}`),
+    );
+    const rectangle = stage.getBoundingClientRect();
+    const left = clamp(12, rectangle.width - 270, event.clientX - rectangle.left + 18);
+    const top = clamp(96, rectangle.height - 90, event.clientY - rectangle.top + 18);
+    hoverCard.style.left = `${left}px`;
+    hoverCard.style.top = `${top}px`;
+    hoverCard.hidden = false;
+  }
+
+  function minimapNodeAtEvent(event) {
+    if (!minimap || !state.data || !state.model) return null;
+    const rectangle = minimap.getBoundingClientRect();
+    const padding = 9;
+    const worldX = (event.clientX - rectangle.left - padding) / Math.max(1, rectangle.width - padding * 2) * state.data.dimensions.width;
+    const worldY = (event.clientY - rectangle.top - padding) / Math.max(1, rectangle.height - padding * 2) * state.data.dimensions.height;
+    return state.data.nodes
+      .filter((node) => state.model.visibleNodes.has(node.id))
+      .map((node) => ({ node, distance: Math.hypot(node.x - worldX, node.y - worldY) }))
+      .sort((left, right) => left.distance - right.distance)[0]?.node ?? null;
+  }
+
   function bindInteractions() {
+    settingsToggle?.addEventListener('click', (event) => {
+      event.stopPropagation();
+      setSettingsOpen(settingsPanel?.hidden ?? true);
+    });
+    settingsClose?.addEventListener('click', (event) => {
+      event.stopPropagation();
+      setSettingsOpen(false);
+      settingsToggle?.focus();
+    });
+
     root.addEventListener('click', (event) => {
+      const target = event.target instanceof Element ? event.target : null;
+      if (!target) return;
+
+      if (target.closest('[data-graph-help-open]')) {
+        if (typeof helpDialog?.showModal === 'function') helpDialog.showModal();
+        else helpDialog?.setAttribute('open', '');
+        return;
+      }
+      if (target.closest('[data-graph-fullscreen]')) {
+        void toggleFullscreen();
+        return;
+      }
+
       const clearButton = event.target.closest('[data-graph-clear-selection]');
       if (clearButton) {
         clearSelection();
@@ -867,14 +1775,71 @@ import {
         return;
       }
 
-      const selectButton = event.target.closest('[data-select-node]');
-      if (selectButton) selectNode(selectButton.dataset.selectNode);
+      const selectButton = target.closest('[data-select-node]');
+      if (selectButton) {
+        selectNode(selectButton.dataset.selectNode, { focus: true });
+        return;
+      }
 
-      const zoomButton = event.target.closest('[data-graph-zoom]');
-      if (zoomButton?.dataset.graphZoom === 'in') setCamera({ zoom: state.camera.zoom * 1.25 });
-      else if (zoomButton?.dataset.graphZoom === 'out') setCamera({ zoom: state.camera.zoom / 1.25 });
+      const focusButton = target.closest('[data-graph-focus-selection], [data-graph-focus-node]');
+      if (focusButton) {
+        focusNode(focusButton.dataset.graphFocusNode || state.selected);
+        return;
+      }
 
-      const orbitButton = event.target.closest('[data-graph-orbit]');
+      const bookmark = target.closest('[data-graph-bookmark]');
+      if (bookmark) {
+        toggleBookmark(bookmark.dataset.graphBookmark);
+        return;
+      }
+
+      const routeNode = target.closest('[data-graph-route-node]');
+      if (routeNode) {
+        handleRouteNode(routeNode.dataset.graphRouteNode);
+        return;
+      }
+      if (target.closest('[data-graph-route-clear]')) {
+        clearRoute();
+        status.textContent = '연결 경로를 지웠습니다.';
+        return;
+      }
+
+      const modeButton = target.closest('[data-graph-mode]');
+      if (modeButton) {
+        setMode(modeButton.dataset.graphMode);
+        return;
+      }
+
+      const historyButton = target.closest('[data-graph-history]');
+      if (historyButton) {
+        navigateHistory(historyButton.dataset.graphHistory === 'back' ? -1 : 1);
+        return;
+      }
+      if (target.closest('[data-graph-bookmarks]')) {
+        cycleBookmark();
+        return;
+      }
+      if (target.closest('[data-graph-fit-visible]')) {
+        fitVisibleScene(true);
+        return;
+      }
+
+      const panButton = target.closest('[data-graph-pan]');
+      if (panButton) {
+        const amount = 72;
+        if (panButton.dataset.graphPan === 'left') panCamera(-amount, 0);
+        if (panButton.dataset.graphPan === 'right') panCamera(amount, 0);
+        if (panButton.dataset.graphPan === 'up') panCamera(0, -amount);
+        if (panButton.dataset.graphPan === 'down') panCamera(0, amount);
+        return;
+      }
+
+      const zoomButton = target.closest('[data-graph-zoom]');
+      if (zoomButton?.dataset.graphZoom === 'in') zoomCamera(1.25);
+      else if (zoomButton?.dataset.graphZoom === 'out') zoomCamera(1 / 1.25);
+      if (zoomButton) return;
+
+      const orbitButton = target.closest('[data-graph-orbit]');
       if (orbitButton) {
         const direction = orbitButton.dataset.graphOrbit;
         const patch = { flat: false };
@@ -883,9 +1848,10 @@ import {
         if (direction === 'higher') patch.pitch = state.camera.pitch - 0.12;
         if (direction === 'lower') patch.pitch = state.camera.pitch + 0.12;
         setCamera(patch);
+        return;
       }
 
-      const viewButton = event.target.closest('[data-graph-view]');
+      const viewButton = target.closest('[data-graph-view]');
       if (viewButton?.dataset.graphView === 'flat') setCamera({ flat: !state.camera.flat });
       else if (viewButton?.dataset.graphView === 'reset') resetCamera();
     });
@@ -897,15 +1863,63 @@ import {
     controls?.addEventListener('submit', (event) => {
       event.preventDefault();
       const matches = state.data.nodes
-        .filter((node) => nodeMatchesFilters(node) && searchMatches(node))
+        .filter((node) => state.model.baseVisibleNodes.has(node.id) && searchMatches(node))
         .sort((left, right) => collator.compare(left.title, right.title));
-      if (matches[0]) selectNode(matches[0].id);
+      if (matches[0]) selectNode(matches[0].id, { focus: true });
+      else {
+        const hiddenMatch = state.data.nodes.some((node) => nodeMatchesFilters(node) && searchMatches(node));
+        status.textContent = hiddenMatch
+          ? '일치하는 문서가 현재 고립 문서 설정 또는 관계 필터에 가려져 있습니다.'
+          : '일치하는 문서를 찾지 못했습니다.';
+      }
     });
-    typeFilter?.addEventListener('change', () => { state.type = typeFilter.value; updateGraph(); });
-    verificationFilter?.addEventListener('change', () => { state.verification = verificationFilter.value; updateGraph(); });
-    relationFilter?.addEventListener('change', () => { state.relation = relationFilter.value; updateGraph(); });
-    communityFilter?.addEventListener('change', () => { state.community = communityFilter.value; updateGraph(); });
+
+    const updateStructure = (patch, { fit = true } = {}) => {
+      Object.assign(state, patch);
+      resetRouteState();
+      updateGraph();
+      if (fit) window.requestAnimationFrame(() => fitVisibleScene(true));
+    };
+    typeFilter?.addEventListener('change', () => updateStructure({ type: typeFilter.value }));
+    verificationFilter?.addEventListener('change', () => updateStructure({ verification: verificationFilter.value }));
+    relationFilter?.addEventListener('change', () => updateStructure({ relation: relationFilter.value }, { fit: false }));
+    communityFilter?.addEventListener('change', () => updateStructure({ community: communityFilter.value }));
+    densityFilter?.addEventListener('change', () => {
+      state.density = densityFilter.value;
+      updateGraph();
+    });
+    localDepthFilter?.addEventListener('change', () => {
+      state.localDepth = Number(localDepthFilter.value) || 0;
+      resetRouteState();
+      updateGraph();
+      window.requestAnimationFrame(() => fitVisibleScene(true));
+    });
+
+    const bindRange = (input, key, { fit = false } = {}) => input?.addEventListener('input', () => {
+      state[key] = Number(input.value);
+      updateHud();
+      scheduleDraw();
+      if (fit) window.requestAnimationFrame(() => fitVisibleScene(false));
+    });
+    bindRange(labelDensityInput, 'labelDensity');
+    bindRange(nodeScaleInput, 'nodeScale');
+    bindRange(edgeOpacityInput, 'edgeOpacity');
+    bindRange(edgeWidthInput, 'edgeWidth');
+    bindRange(heightScaleInput, 'heightScale', { fit: true });
+
+    arrowsInput?.addEventListener('change', () => { state.showArrows = arrowsInput.checked; scheduleDraw(); });
+    gridInput?.addEventListener('change', () => { state.showGrid = gridInput.checked; scheduleDraw(); });
+    communitiesInput?.addEventListener('change', () => { state.showCommunities = communitiesInput.checked; scheduleDraw(); });
+    orphansInput?.addEventListener('change', () => {
+      state.showOrphans = orphansInput.checked;
+      resetRouteState();
+      updateGraph();
+      window.requestAnimationFrame(() => fitVisibleScene(true));
+    });
+    autoRotateInput?.addEventListener('change', () => setAutoRotate(autoRotateInput.checked));
+
     controls?.addEventListener('reset', () => window.requestAnimationFrame(() => {
+      setAutoRotate(false);
       state.selected = '';
       state.hovered = '';
       state.query = '';
@@ -913,65 +1927,160 @@ import {
       state.verification = '';
       state.relation = relationFilter?.value || 'related';
       state.community = '';
+      state.density = densityFilter?.value || 'backbone';
+      state.localDepth = Number(localDepthFilter?.value) || 0;
+      state.labelDensity = Number(labelDensityInput?.value) || 2;
+      state.nodeScale = Number(nodeScaleInput?.value) || 1;
+      state.edgeOpacity = Number(edgeOpacityInput?.value) || 1;
+      state.edgeWidth = Number(edgeWidthInput?.value) || 1;
+      state.heightScale = Number(heightScaleInput?.value) || 1;
+      state.showArrows = arrowsInput?.checked ?? true;
+      state.showGrid = gridInput?.checked ?? true;
+      state.showCommunities = communitiesInput?.checked ?? true;
+      state.showOrphans = orphansInput?.checked ?? true;
+      state.routeStart = '';
+      state.routePath = [];
+      state.routeNodeIds = new Set();
+      state.routeEdgeIds = new Set();
+      state.mode = 'orbit';
+      state.travelCandidate = '';
+      state.travelIndex = -1;
       restoreInspector();
-      resetCamera();
       updateGraph();
+      resetCamera();
+      status.textContent = '세계 설정과 카메라를 초기 상태로 되돌렸습니다.';
     }));
 
     canvas.addEventListener('wheel', (event) => {
-      if (!event.ctrlKey && !event.metaKey) return;
       event.preventDefault();
-      setCamera({ zoom: state.camera.zoom * (event.deltaY < 0 ? 1.12 : 1 / 1.12) });
+      setAutoRotate(false);
+      const intensity = event.ctrlKey ? 1.06 : 1.12;
+      zoomCamera(event.deltaY < 0 ? intensity : 1 / intensity, canvasPoint(event));
     }, { passive: false });
 
+    const activePointers = new Map();
     let drag = null;
+    let pinch = null;
+    let gestureMoved = false;
+    const pointerCentroid = (points) => ({
+      x: points.reduce((sum, point) => sum + point.x, 0) / points.length,
+      y: points.reduce((sum, point) => sum + point.y, 0) / points.length,
+    });
+    const dragSnapshot = (pointerId, point, moved = false) => ({
+      pointerId,
+      startX: point.x,
+      startY: point.y,
+      yaw: state.camera.yaw,
+      pitch: state.camera.pitch,
+      panX: state.camera.panX,
+      panY: state.camera.panY,
+      moved,
+      button: point.button,
+      mode: point.mode,
+    });
+
     canvas.addEventListener('pointerdown', (event) => {
-      if (event.button !== 0) return;
-      drag = {
-        pointerId: event.pointerId,
-        pointerType: event.pointerType,
-        startX: event.clientX,
-        startY: event.clientY,
-        yaw: state.camera.yaw,
-        pitch: state.camera.pitch,
-        moved: false,
-        orbiting: event.pointerType === 'mouse',
+      if (![0, 1, 2].includes(event.button)) return;
+      event.preventDefault();
+      canvas.focus({ preventScroll: true });
+      cancelCameraAnimation();
+      setAutoRotate(false);
+      state.hovered = '';
+      canvas.classList.remove('has-hover');
+      updateHoverCard(null, null);
+      const point = {
+        x: event.clientX,
+        y: event.clientY,
+        button: event.button,
+        mode: event.shiftKey || event.button === 1 || event.button === 2 ? 'pan' : 'orbit',
       };
-      if (drag.orbiting) canvas.setPointerCapture(event.pointerId);
+      activePointers.set(event.pointerId, point);
+      canvas.setPointerCapture(event.pointerId);
+      if (activePointers.size === 1) {
+        gestureMoved = false;
+        drag = dragSnapshot(event.pointerId, point);
+      }
+      if (activePointers.size === 2) {
+        const points = [...activePointers.values()];
+        gestureMoved = true;
+        pinch = {
+          distance: Math.max(1, Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y)),
+          centroid: pointerCentroid(points),
+          camera: { ...state.camera },
+        };
+      }
     });
     canvas.addEventListener('pointermove', (event) => {
-      if (!drag) {
-        const hovered = nodeAtEvent(event)?.id ?? '';
+      if (!activePointers.size) {
+        const hoveredNode = nodeAtEvent(event);
+        const hovered = hoveredNode?.id ?? '';
         if (hovered !== state.hovered) {
           state.hovered = hovered;
           canvas.classList.toggle('has-hover', Boolean(hovered));
           updateGraph();
         }
+        updateHoverCard(event, hoveredNode);
         return;
       }
+
+      if (activePointers.has(event.pointerId)) {
+        const previous = activePointers.get(event.pointerId);
+        activePointers.set(event.pointerId, { ...previous, x: event.clientX, y: event.clientY });
+      }
+      if (pinch && activePointers.size >= 2) {
+        const points = [...activePointers.values()].slice(0, 2);
+        const distance = Math.max(1, Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y));
+        const centroid = pointerCentroid(points);
+        const rectangle = canvas.getBoundingClientRect();
+        const anchor = { x: pinch.centroid.x - rectangle.left, y: pinch.centroid.y - rectangle.top };
+        const zoomed = zoomCameraAt(pinch.camera, anchor, state.viewport, distance / pinch.distance);
+        applyCamera({
+          ...zoomed,
+          panX: zoomed.panX + centroid.x - pinch.centroid.x,
+          panY: zoomed.panY + centroid.y - pinch.centroid.y,
+        });
+        if (drag) drag.moved = true;
+        gestureMoved = true;
+        canvas.classList.add('is-panning');
+        return;
+      }
+
+      if (!drag || event.pointerId !== drag.pointerId) return;
       const deltaX = event.clientX - drag.startX;
       const deltaY = event.clientY - drag.startY;
-      if (drag.pointerType !== 'mouse' && !drag.orbiting) {
-        if (Math.abs(deltaX) > 8 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2) {
-          drag.orbiting = true;
-          canvas.setPointerCapture(event.pointerId);
-        } else {
-          return;
-        }
-      }
       drag.moved ||= Math.hypot(deltaX, deltaY) > 4;
-      const pitch = drag.pointerType === 'mouse'
-        ? clamp(CAMERA_LIMITS.minimumPitch, CAMERA_LIMITS.maximumPitch, drag.pitch + deltaY * 0.004)
-        : drag.pitch;
-      setCamera({ yaw: drag.yaw + deltaX * 0.006, pitch, flat: false });
-      canvas.classList.add('is-orbiting');
+      gestureMoved ||= drag.moved;
+      if (drag.mode === 'pan') {
+        setCamera({ panX: drag.panX + deltaX, panY: drag.panY + deltaY });
+        canvas.classList.add('is-panning');
+      } else {
+        const pitch = clamp(CAMERA_LIMITS.minimumPitch, CAMERA_LIMITS.maximumPitch, drag.pitch + deltaY * 0.004);
+        setCamera({ yaw: drag.yaw + deltaX * 0.006, pitch, flat: false });
+        canvas.classList.add('is-orbiting');
+      }
     });
-    const stopDrag = (event) => {
-      if (!drag) return;
-      const shouldSelect = !drag.moved;
+    const stopDrag = (event, cancelled = false) => {
+      const releasedDrag = drag?.pointerId === event.pointerId ? drag : null;
+      activePointers.delete(event.pointerId);
       if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
-      drag = null;
-      canvas.classList.remove('is-orbiting');
+      const shouldSelect = !cancelled
+        && activePointers.size === 0
+        && releasedDrag
+        && !gestureMoved
+        && !releasedDrag.moved
+        && releasedDrag.button === 0;
+
+      pinch = null;
+      if (activePointers.size === 1) {
+        const [remainingId, remainingPoint] = activePointers.entries().next().value;
+        drag = dragSnapshot(remainingId, remainingPoint, true);
+        gestureMoved = true;
+      } else if (activePointers.size === 0) {
+        drag = null;
+        gestureMoved = false;
+        canvas.classList.remove('is-orbiting', 'is-panning');
+      }
+
       if (shouldSelect) {
         const node = nodeAtEvent(event);
         if (node) selectNode(node.id);
@@ -979,26 +2088,97 @@ import {
       }
     };
     canvas.addEventListener('pointerup', stopDrag);
-    canvas.addEventListener('pointercancel', () => {
-      drag = null;
-      canvas.classList.remove('is-orbiting');
-    });
+    canvas.addEventListener('pointercancel', (event) => stopDrag(event, true));
     canvas.addEventListener('pointerleave', () => {
       if (drag) return;
       state.hovered = '';
       canvas.classList.remove('has-hover');
+      updateHoverCard(null, null);
       updateGraph();
+    });
+    canvas.addEventListener('contextmenu', (event) => event.preventDefault());
+    canvas.addEventListener('dblclick', (event) => {
+      const node = nodeAtEvent(event);
+      if (node) selectNode(node.id, { focus: true });
+    });
+
+    minimap?.addEventListener('click', (event) => {
+      const node = minimapNodeAtEvent(event);
+      if (node) selectNode(node.id, { focus: true });
     });
 
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') clearSelection();
+      const key = event.key.toLocaleLowerCase();
+      if (key === 'escape') {
+        if (helpDialog?.open) helpDialog.close();
+        else if (settingsPanel && !settingsPanel.hidden) setSettingsOpen(false);
+        else if (state.fullscreenFallback) void toggleFullscreen();
+        else clearSelection();
+        return;
+      }
+      if (isEditableTarget(event.target) || document.activeElement !== canvas) return;
+      if (key === 'f') {
+        event.preventDefault();
+        void toggleFullscreen();
+        return;
+      }
+      if (key === '2') {
+        event.preventDefault();
+        setCamera({ flat: !state.camera.flat });
+        return;
+      }
+      if (key === 'home') {
+        event.preventDefault();
+        fitVisibleScene(true);
+        return;
+      }
+      if (key === 'c') {
+        event.preventDefault();
+        focusNode();
+        return;
+      }
+      if (key === 'b') {
+        if (state.selected) toggleBookmark(state.selected);
+        return;
+      }
+      if (key === '+' || key === '=') {
+        event.preventDefault();
+        zoomCamera(1.2);
+        return;
+      }
+      if (key === '-' || key === '_') {
+        event.preventDefault();
+        zoomCamera(1 / 1.2);
+        return;
+      }
+
+      if (state.mode === 'travel' && ['arrowleft', 'arrowup', 'a', 'w', 'arrowright', 'arrowdown', 'd', 's', 'enter'].includes(key)) {
+        event.preventDefault();
+        if (key === 'enter') commitTravel();
+        else stepTravel(['arrowleft', 'arrowup', 'a', 'w'].includes(key) ? -1 : 1);
+        return;
+      }
+
+      const amount = event.shiftKey ? 90 : 46;
+      if (key === 'a' || key === 'arrowleft') panCamera(-amount, 0);
+      else if (key === 'd' || key === 'arrowright') panCamera(amount, 0);
+      else if (key === 'w' || key === 'arrowup') panCamera(0, -amount);
+      else if (key === 's' || key === 'arrowdown') panCamera(0, amount);
+      else if (key === 'q') setCamera({ yaw: state.camera.yaw - 0.16, flat: false });
+      else if (key === 'e') setCamera({ yaw: state.camera.yaw + 0.16, flat: false });
+      else return;
+      event.preventDefault();
     });
 
+    document.addEventListener('fullscreenchange', updateFullscreenState);
     forcedColors.addEventListener('change', () => {
       resolvePalette();
       scheduleDraw();
     });
-    reduceMotion.addEventListener('change', scheduleDraw);
+    reduceMotion.addEventListener('change', () => {
+      if (reduceMotion.matches) setAutoRotate(false);
+      scheduleDraw();
+    });
     new ResizeObserver(resizeCanvas).observe(canvas);
   }
 
@@ -1034,6 +2214,7 @@ import {
       }
       state.data = data;
       state.nodeById = new Map(data.nodes.map((node) => [node.id, node]));
+      loadBookmarks();
       resolvePalette();
       updateGraph();
       bindInteractions();
