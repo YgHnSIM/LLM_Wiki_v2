@@ -1499,6 +1499,39 @@ raw 등록 해시:
 - 후대의 collapsed Gibbs sampling, topic coherence, dynamic·supervised·correlated topic model과 hierarchical Dirichlet process의 정의·평가는 각 1차 문헌으로 별도 검토해야 한다.
 - 031의 pLSI와 036의 LDA 차이는 기존 source·concept 안에서 직접 비교할 수 있어 별도 비교 읽기를 만들지 않았다. 토픽 품질 평가나 잠재 표현의 전역/지역 분리가 다른 자료와 만나 독립적인 질문이 되면 문서 수와 무관하게 즉시 비교 읽기로 발전시킨다.
 
+## [2026-07-18] ingest | 037 ROUGE와 METEOR의 과제별 생성 텍스트 평가
+
+037 영어 원문을 기존 출력과 무관하게 새로 번역하고 12절 학습용 해설을 작성했다. ROUGE-N·L과 METEOR의 precision·recall·Fmean·chunk 벌점을 표준 MathJax 식으로 복원했다. 검사된 번역·해설 쌍은 `raw/`에 그대로 보존하고 SHA-256을 등록했다.
+
+변경 문서:
+
+- `raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.ko.md`와 대응 해설
+- `wiki/sources/037_ROUGE와 METEOR의 과제별 생성 텍스트 평가.md`
+- `wiki/concepts/ROUGE.md`, `wiki/concepts/METEOR.md`
+- `wiki/sources/033_BLEU와 기계 번역 자동 평가.md`, `wiki/concepts/BLEU.md`의 방향성 연결 보강
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- Lin의 2004년 논문으로 ROUGE-N·L·W·S/SU의 서로 다른 일치 단위와 식, DUC 2001–2003의 길이별 단일·다중 문서 요약 및 인간 content coverage 상관을 확인했다.
+- ROUGE-N은 참조 측 n-gram recall이지만 ROUGE-L·S는 precision과 recall의 F-measure도 정의한다는 점을 복원했다. 지표군 전체를 단일 recall 식으로 축약하지 않았다.
+- 단일 문서·매우 짧은 요약·다중 문서 요약에서 강한 ROUGE 변형이 달랐고, 특정 100단어 다중 문서 자료에서 L·W가 잘 작동하지 않은 조건을 기록했다. 참조 수·stemming·불용어와 시스템 표본 수의 영향도 남겼다.
+- Lavie·Sagae·Jayaraman의 2004년 recall·stemming 선행 연구와 Banerjee·Lavie의 2005년 정식 METEOR 논문을 분리했다. 완성된 exact–Porter–WordNet 정렬과 chunk 벌점을 모두 2004년에 귀속하지 않았다.
+- METEOR 2005의 일대일 unigram 정렬, 최대 대응·최소 crossing 선택, $10PR/(R+9P)$와 $0.5(ch/m)^3$ 벌점을 확인했다. WordNet synonym이 sense disambiguation 없이 가능한 synset 하나의 겹침을 쓰는 제한도 기록했다.
+- TIDES 2003의 아랍어→영어 664문장·중국어→영어 920문장과 문장당 네 참조, 6·7개 시스템 조건을 복원했다. 시스템 수준 0.964 상관과 문장별 평균 0.347·0.331을 구분하고 인간 평가 정규화에 따른 변화도 기록했다.
+- BLEU precision은 원문 환각을 직접 검사하지 않고, ROUGE도 참조 밖의 중요 정보를 직접 발견하지 않으며, METEOR chunk 벌점도 유창성 전체를 측정하지 않는다는 공통 경계를 명시했다.
+
+raw 등록 해시:
+
+- 번역: `cbe95e03011f3436255ef40a96827c7d81b966b11e6ebde082fc506f848e2dc4`
+- 해설: `c8bbbd2970d80e01616cce636ac48f0a53cfdad1ed443cfd9bd2a67a5d2915ec`
+
+남은 제한:
+
+- 프로젝트에는 ACL·AMTA 원문 PDF, DUC·TIDES 평가 자료나 당시 구현을 복제하지 않았으며 raw에는 새 한국어 번역과 해설만 보존한다.
+- 후대 ROUGE 구현의 F1·tokenization 설정, METEOR 버전별 학습 매개변수와 다국어 모듈, BERTScore·COMET·LLM-as-a-judge의 타당성은 각 문헌으로 별도 검토해야 한다.
+- BLEU·ROUGE·METEOR를 함께 검증하면서 분모·대응 단위·집계·과제 목표가 모델 선택에 서로 다른 유인을 준다는 독립적인 질문이 성립했다. 037 ingest를 원격에 반영한 직후 다음 소스보다 먼저 ‘비교 읽기’ 분석을 별도 content 커밋으로 작성한다.
+
 ## 관련 항목
 
 - [[index]]

@@ -586,6 +586,31 @@ sources:
     doi: 10.18653/v1/W18-6319
     url: https://aclanthology.org/W18-6319/
     language: en
+  lin-2004-rouge:
+    title: "ROUGE: A Package for Automatic Evaluation of Summaries"
+    authors: [Chin-Yew Lin]
+    published: 2004
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/W04-1013/
+    language: en
+  lavie-sagae-jayaraman-2004-recall:
+    title: The Significance of Recall in Automatic Metrics for MT Evaluation
+    authors: [Alon Lavie, Kenji Sagae, Shyamsundar Jayaraman]
+    published: 2004
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1007/978-3-540-30194-3_16
+    url: https://aclanthology.org/2004.amta-papers.16/
+    language: en
+  banerjee-lavie-2005-meteor:
+    title: "METEOR: An Automatic Metric for MT Evaluation with Improved Correlation with Human Judgments"
+    authors: [Satanjeev Banerjee, Alon Lavie]
+    published: 2005
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/W05-0909/
+    language: en
   koehn-och-marcu-2003-phrase-smt:
     title: Statistical Phrase-Based Translation
     authors: [Philipp Koehn, Franz J. Och, Daniel Marcu]

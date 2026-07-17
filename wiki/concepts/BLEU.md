@@ -32,6 +32,9 @@ evidence:
     relation: supplements
 related:
   - source.033
+  - source.037
+  - concept.rouge
+  - concept.meteor
   - source.034
   - concept.최소-오류율-훈련
   - concept.기계-번역
@@ -99,7 +102,7 @@ BLEU는 토큰 선택, n-gram 계수와 clipping에 의존하는 비미분 지�
 
 [[Perplexity]]는 모델이 실제 토큰열에 부여한 조건부 확률의 평균을 평가하는 반면, BLEU는 생성된 번역과 참조의 표면 n-gram 일치를 평가한다. 같은 모델에서 perplexity가 낮아져도 디코딩된 번역의 BLEU가 반드시 같은 비율로 오르지 않는다. 두 지표는 측정 대상과 정규화 단위가 다르다.
 
-BLEU의 어휘 일치 한계를 보완하려고 stemming·동의어·정렬을 쓰는 METEOR, 요약의 회수율을 강조하는 ROUGE, 문맥 임베딩을 이용하는 후대 지표 등이 제안됐다. 이들은 서로 다른 오류와 품질 차원을 보므로 하나의 숫자로 대체 관계를 단정하지 않는다.
+BLEU의 어휘 일치 한계를 보완하려고 stemming·동의어·정렬을 쓰는 [[METEOR]], 요약의 참조 포괄을 강조하는 [[ROUGE]], 문맥 임베딩을 이용하는 후대 지표 등이 제안됐다. 이들은 서로 다른 오류와 품질 차원을 보므로 하나의 숫자로 대체 관계를 단정하지 않는다. [[037_ROUGE와 METEOR의 과제별 생성 텍스트 평가]]는 2004년 ROUGE·recall 선행 연구와 2005년 METEOR를 분리해 비교한다.
 
 ## 출처
 
@@ -111,6 +114,9 @@ BLEU의 어휘 일치 한계를 보완하려고 stemming·동의어·정렬을 �
 ## 관련 항목
 
 - [[033_BLEU와 기계 번역 자동 평가]]
+- [[037_ROUGE와 METEOR의 과제별 생성 텍스트 평가]]
+- [[ROUGE]]
+- [[METEOR]]
 - [[기계 번역]]
 - [[통계적 기계 번역]]
 - [[신경망 기계 번역]]

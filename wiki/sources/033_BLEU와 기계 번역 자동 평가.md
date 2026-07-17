@@ -32,6 +32,9 @@ evidence:
     relation: supplements
 related:
   - concept.bleu
+  - concept.rouge
+  - concept.meteor
+  - source.037
   - source.034
   - concept.최소-오류율-훈련
   - concept.기계-번역
@@ -150,6 +153,9 @@ raw는 BLEU를 빠르고 미분 가능한 목표로 설명하지만 원래 BLEU�
 ## 관련 항목
 
 - [[BLEU]]
+- [[ROUGE]]
+- [[METEOR]]
+- [[037_ROUGE와 METEOR의 과제별 생성 텍스트 평가]]
 - [[기계 번역]]
 - [[통계적 기계 번역]]
 - [[신경망 기계 번역]]

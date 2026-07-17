@@ -576,3 +576,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: de935f246242424cf7619fe0c0aa62569f60a7834d078df42beafd5b49f39d42
+  - path: "raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.ko.md"
+    role: translation
+    order_prefix: "037"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: cbe95e03011f3436255ef40a96827c7d81b966b11e6ebde082fc506f848e2dc4
+  - path: "raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.commentary.ko.md"
+    role: commentary
+    order_prefix: "037"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: c8bbbd2970d80e01616cce636ac48f0a53cfdad1ed443cfd9bd2a67a5d2915ec
