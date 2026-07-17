@@ -255,6 +255,8 @@ for (const hook of [
   'data-graph-inspector',
   'data-graph-status',
   'data-graph-select',
+  'data-graph-community',
+  'data-graph-clear-selection',
   'data-graph-depth-legend',
   'data-graph-text-index',
 ]) {
@@ -294,7 +296,7 @@ if (graphData !== undefined && !graphDataIsObject) {
 
 if (graphDataIsObject) {
   if (graphData.schemaVersion !== 2) errors.push(`Knowledge graph schema version must be 2, found ${graphData.schemaVersion}.`);
-  if (graphData.layoutVersion !== 3) errors.push(`Knowledge graph layout version must be 3, found ${graphData.layoutVersion}.`);
+  if (graphData.layoutVersion !== 4) errors.push(`Knowledge graph layout version must be 4, found ${graphData.layoutVersion}.`);
   if (graphData.depthMetric !== 'cross-community-neighbors') errors.push(`Knowledge graph has invalid depth metric '${graphData.depthMetric}'.`);
   if (graphData.depthScale !== 'log1p') errors.push(`Knowledge graph has invalid depth scale '${graphData.depthScale}'.`);
   const graphDepth = graphData.dimensions?.depth;
@@ -314,6 +316,19 @@ if (graphDataIsObject) {
   for (const community of graphCommunities) {
     if (community === null || typeof community !== 'object' || Array.isArray(community)) continue;
     if (!Number.isFinite(community.z) || community.z !== 0) errors.push(`Knowledge graph community ${community.id} must remain on the z=0 ground plane.`);
+  }
+  for (let leftIndex = 0; leftIndex < graphCommunities.length; leftIndex += 1) {
+    const left = graphCommunities[leftIndex];
+    if (!left || ![left.x, left.y, left.radius].every(Number.isFinite)) continue;
+    for (let rightIndex = leftIndex + 1; rightIndex < graphCommunities.length; rightIndex += 1) {
+      const right = graphCommunities[rightIndex];
+      if (!right || ![right.x, right.y, right.radius].every(Number.isFinite)) continue;
+      const separatedHorizontally = Math.abs(left.x - right.x) >= (left.radius + right.radius) * 1.18;
+      const separatedVertically = Math.abs(left.y - right.y) >= (left.radius + right.radius) * 0.86;
+      if (!separatedHorizontally && !separatedVertically) {
+        errors.push(`Knowledge graph communities ${left.id} and ${right.id} overlap in layout version 4.`);
+      }
+    }
   }
   const allowedTypes = new Set(['source', 'reference', 'concept', 'entity', 'analysis']);
   const allowedVerification = new Set(['verified', 'partial', 'disputed', 'unverified']);

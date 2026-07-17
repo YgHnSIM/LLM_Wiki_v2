@@ -1,7 +1,11 @@
-const GRAPH_WIDTH = 1600;
-const GRAPH_HEIGHT = 1000;
-const GRAPH_DEPTH = 420;
+const GRAPH_WIDTH = 2800;
+const GRAPH_HEIGHT = 1300;
+const GRAPH_DEPTH = 460;
 const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
+const NODE_SPIRAL_STEP = 36;
+const NODE_COLLISION_GAP = 10;
+const COMMUNITY_GAP = 92;
+const GRAPH_MARGIN = 150;
 
 const clamp = (minimum, maximum, value) => Math.min(maximum, Math.max(minimum, value));
 
@@ -146,26 +150,45 @@ function communityName(memberNodes, allNodes, tagLabel) {
 
 function placeCommunityCenters(communities) {
   if (!communities.length) return;
-  communities[0].x = GRAPH_WIDTH / 2;
-  communities[0].y = GRAPH_HEIGHT / 2;
 
-  const remaining = communities.length - 1;
-  const innerCount = Math.min(6, remaining);
-  const outerCount = Math.max(0, remaining - innerCount);
-  for (let index = 1; index < communities.length; index += 1) {
-    const inner = index <= innerCount;
-    const slot = inner ? index - 1 : index - innerCount - 1;
-    const slots = inner ? innerCount : outerCount;
-    const angle = -Math.PI / 2
-      + (inner ? 0 : Math.PI / Math.max(1, slots))
-      + (slots > 0 ? slot * Math.PI * 2 / slots : 0);
-    communities[index].x = GRAPH_WIDTH / 2 + Math.cos(angle) * (inner ? 405 : 620);
-    communities[index].y = GRAPH_HEIGHT / 2 + Math.sin(angle) * (inner ? 285 : 380);
+  const maximumRowWidth = GRAPH_WIDTH - GRAPH_MARGIN * 2;
+  const records = communities.map((community) => ({
+    community,
+    width: community.radius * 2 * 1.18,
+    height: community.radius * 2 * 0.86,
+  }));
+  const rows = [];
+  let row = { records: [], width: 0, height: 0 };
+  for (const record of records) {
+    const nextWidth = row.records.length
+      ? row.width + COMMUNITY_GAP + record.width
+      : record.width;
+    if (row.records.length && nextWidth > maximumRowWidth) {
+      rows.push(row);
+      row = { records: [], width: 0, height: 0 };
+    }
+    row.width = row.records.length ? row.width + COMMUNITY_GAP + record.width : record.width;
+    row.height = Math.max(row.height, record.height);
+    row.records.push(record);
+  }
+  if (row.records.length) rows.push(row);
+
+  const packedHeight = rows.reduce((sum, item) => sum + item.height, 0)
+    + COMMUNITY_GAP * Math.max(0, rows.length - 1);
+  let top = (GRAPH_HEIGHT - packedHeight) / 2;
+  for (const packedRow of rows) {
+    let left = (GRAPH_WIDTH - packedRow.width) / 2;
+    for (const record of packedRow.records) {
+      record.community.x = left + record.width / 2;
+      record.community.y = top + packedRow.height / 2;
+      left += record.width + COMMUNITY_GAP;
+    }
+    top += packedRow.height + COMMUNITY_GAP;
   }
 }
 
 function relaxNodeCollisions(nodes, community) {
-  const padding = 4;
+  const padding = NODE_COLLISION_GAP;
   for (let pass = 0; pass < 120; pass += 1) {
     let largestOverlap = 0;
     for (let leftIndex = 0; leftIndex < nodes.length; leftIndex += 1) {
@@ -331,7 +354,7 @@ export function buildKnowledgeGraph(documents, {
       colorIndex: id,
       x: 0,
       y: 0,
-      radius: clamp(96, 230, 56 + Math.sqrt(members.length) * 24),
+      radius: clamp(132, 270, 78 + Math.sqrt(members.length) * 29),
     };
   });
   const labelCounts = new Map();
@@ -365,18 +388,33 @@ export function buildKnowledgeGraph(documents, {
         || a.title.localeCompare(b.title, 'ko')
       ));
     members.forEach((node, index) => {
-      const localRadius = index ? 25 * Math.sqrt(index) : 0;
+      const localRadius = index ? NODE_SPIRAL_STEP * Math.sqrt(index) : 0;
       const jitter = (stableHash(node.id) % 13) - 6;
       const angle = index * GOLDEN_ANGLE + (stableHash(`${node.id}:angle`) % 31) / 100;
-      node.x = Math.round(clamp(24, GRAPH_WIDTH - 24, community.x + Math.cos(angle) * localRadius * 1.08 + jitter));
-      node.y = Math.round(clamp(24, GRAPH_HEIGHT - 24, community.y + Math.sin(angle) * localRadius * 0.78 - jitter));
+      node.x = Math.round(clamp(24, GRAPH_WIDTH - 24, community.x + Math.cos(angle) * localRadius * 1.04 + jitter));
+      node.y = Math.round(clamp(24, GRAPH_HEIGHT - 24, community.y + Math.sin(angle) * localRadius * 0.82 - jitter));
       node.radius = Number(clamp(
-        6,
-        18,
-        6 + Math.log2(1 + node.degree) * 1.7,
+        8,
+        22,
+        8 + Math.log2(1 + node.degree) * 1.85,
       ).toFixed(1));
     });
     relaxNodeCollisions(members, community);
+  }
+
+  const previousCenters = new Map(communities.map((community) => [community.id, {
+    x: community.x,
+    y: community.y,
+  }]));
+  placeCommunityCenters(communities);
+  for (const community of communities) {
+    const previous = previousCenters.get(community.id);
+    const shiftX = community.x - previous.x;
+    const shiftY = community.y - previous.y;
+    for (const node of nodes.filter((item) => item.community === community.id)) {
+      node.x = Number((node.x + shiftX).toFixed(1));
+      node.y = Number((node.y + shiftY).toFixed(1));
+    }
   }
 
   const maxBridgeConnections = Math.max(0, ...nodes.map((node) => node.bridgeConnections));
@@ -399,7 +437,7 @@ export function buildKnowledgeGraph(documents, {
   nodes.sort((a, b) => a.id.localeCompare(b.id, 'ko'));
   return {
     schemaVersion: 2,
-    layoutVersion: 3,
+    layoutVersion: 4,
     depthMetric: 'cross-community-neighbors',
     depthScale: 'log1p',
     dimensions: { width: GRAPH_WIDTH, height: GRAPH_HEIGHT, depth: GRAPH_DEPTH },

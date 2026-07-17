@@ -12,7 +12,7 @@ import {
 
 const EPSILON = 1e-9;
 const viewport = { width: 1200, height: 760 };
-const dimensions = { width: 1600, height: 1000, depth: 420 };
+const dimensions = { width: 2800, height: 1300, depth: 460 };
 
 function near(actual, expected, message) {
   assert.ok(Math.abs(actual - expected) <= EPSILON, `${message}: ${actual} != ${expected}`);
@@ -35,15 +35,27 @@ test('3D rotation preserves identity and maps cardinal axes deterministically', 
 
 test('3D projection centers the optical origin and makes taller nodes appear nearer', () => {
   const flatCamera = { ...DEFAULT_CAMERA, yaw: 0, pitch: 0, zoom: 1, panX: 0, panY: 0, flat: true };
-  const center = projectPoint({ x: 800, y: 500, z: 0 }, flatCamera, viewport, dimensions);
+  const center = projectPoint({ x: 1400, y: 650, z: 0 }, flatCamera, viewport, dimensions);
   near(center.x, viewport.width / 2, 'center x');
   near(center.y, viewport.height / 2, 'center y');
 
-  const base = projectPoint({ x: 900, y: 500, z: 0 }, DEFAULT_CAMERA, viewport, dimensions);
-  const raised = projectPoint({ x: 900, y: 500, z: 300 }, DEFAULT_CAMERA, viewport, dimensions);
+  const base = projectPoint({ x: 1550, y: 650, z: 0 }, DEFAULT_CAMERA, viewport, dimensions);
+  const raised = projectPoint({ x: 1550, y: 650, z: 300 }, DEFAULT_CAMERA, viewport, dimensions);
   assert.ok(raised.scale > base.scale);
   assert.ok(Math.abs(raised.x - viewport.width / 2) > Math.abs(base.x - viewport.width / 2));
-  assert.equal(projectPoint({ x: 800, y: 500, z: 10000 }, DEFAULT_CAMERA, viewport, dimensions), null);
+  assert.equal(projectPoint({ x: 1400, y: 650, z: 10000 }, DEFAULT_CAMERA, viewport, dimensions), null);
+});
+
+test('scene fitting gives a wide atlas meaningful viewport coverage', () => {
+  const flatCamera = { ...DEFAULT_CAMERA, yaw: 0, pitch: 0, zoom: 1, panX: 0, panY: 0, flat: true };
+  const corners = [
+    projectPoint({ x: 0, y: 0, z: 0 }, flatCamera, viewport, dimensions),
+    projectPoint({ x: dimensions.width, y: dimensions.height, z: 0 }, flatCamera, viewport, dimensions),
+  ];
+  const width = Math.abs(corners[1].x - corners[0].x);
+  const height = Math.abs(corners[1].y - corners[0].y);
+  assert.ok(width >= viewport.width * 0.88 && width <= viewport.width * 0.91);
+  assert.ok(height >= viewport.height * 0.62);
 });
 
 test('camera normalization clamps pitch and zoom to supported bounds', () => {

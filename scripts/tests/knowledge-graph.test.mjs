@@ -87,7 +87,7 @@ test('knowledge graph layout and communities are deterministic and internally co
   assert.equal(first.stats.edges, first.edges.length);
   assert.equal(first.stats.communities, first.communities.length);
   assert.equal(first.schemaVersion, 2);
-  assert.equal(first.layoutVersion, 3);
+  assert.equal(first.layoutVersion, 4);
   assert.equal(first.depthMetric, 'cross-community-neighbors');
   assert.equal(first.depthScale, 'log1p');
   assert.ok(first.dimensions.depth > 0);
@@ -111,6 +111,16 @@ test('knowledge graph layout and communities are deterministic and internally co
       community.size,
       first.nodes.filter((node) => node.community === community.id).length,
     );
+  }
+
+  for (let leftIndex = 0; leftIndex < first.communities.length; leftIndex += 1) {
+    const left = first.communities[leftIndex];
+    for (let rightIndex = leftIndex + 1; rightIndex < first.communities.length; rightIndex += 1) {
+      const right = first.communities[rightIndex];
+      const separatedHorizontally = Math.abs(left.x - right.x) >= (left.radius + right.radius) * 1.18;
+      const separatedVertically = Math.abs(left.y - right.y) >= (left.radius + right.radius) * 0.86;
+      assert.ok(separatedHorizontally || separatedVertically, `communities ${left.id} and ${right.id} overlap`);
+    }
   }
 
   const byBridgeCount = [...first.nodes].sort((left, right) => left.bridgeConnections - right.bridgeConnections);

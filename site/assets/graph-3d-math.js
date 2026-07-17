@@ -1,10 +1,10 @@
 export const DEFAULT_CAMERA = Object.freeze({
-  yaw: -0.52,
-  pitch: 0.78,
-  zoom: 0.92,
+  yaw: -0.38,
+  pitch: 0.66,
+  zoom: 1,
   panX: 0,
-  panY: 46,
-  distance: 2200,
+  panY: 18,
+  distance: 2400,
   flat: false,
 });
 
@@ -62,17 +62,30 @@ export function rotatePoint(point, camera = DEFAULT_CAMERA) {
   };
 }
 
-function fitScale(viewport, dimensions, flat) {
-  if (flat) {
-    return Math.min(
-      viewport.width / (dimensions.width * 1.08),
-      viewport.height / (dimensions.height * 1.08),
-    );
+function fitScale(viewport, dimensions, camera) {
+  const xValues = [-dimensions.width / 2, dimensions.width / 2];
+  const yValues = [-dimensions.height / 2, dimensions.height / 2];
+  const zValues = camera.flat ? [0] : [0, dimensions.depth];
+  const fitted = [];
+  for (const x of xValues) {
+    for (const y of yValues) {
+      for (const z of zValues) {
+        const rotated = rotatePoint({ x, y, z }, camera);
+        const cameraDepth = camera.distance - rotated.z;
+        if (cameraDepth <= CAMERA_LIMITS.nearPlane) continue;
+        const perspective = camera.distance / cameraDepth;
+        fitted.push({ x: rotated.x * perspective, y: rotated.y * perspective });
+      }
+    }
   }
-  const groundDiagonal = Math.hypot(dimensions.width, dimensions.height);
+  if (!fitted.length) return 1;
+  const spanX = Math.max(...fitted.map((point) => point.x)) - Math.min(...fitted.map((point) => point.x));
+  const spanY = Math.max(...fitted.map((point) => point.y)) - Math.min(...fitted.map((point) => point.y));
+  const horizontalFill = camera.flat ? 0.9 : 0.88;
+  const verticalFill = camera.flat ? 0.88 : 0.84;
   return Math.min(
-    viewport.width / (groundDiagonal * 1.08),
-    viewport.height / ((dimensions.height + dimensions.depth) * 1.04),
+    viewport.width * horizontalFill / Math.max(1, spanX),
+    viewport.height * verticalFill / Math.max(1, spanY),
   );
 }
 
@@ -88,7 +101,7 @@ export function projectPoint(point, cameraInput, viewport, dimensions) {
   if (!Number.isFinite(cameraDepth) || cameraDepth <= CAMERA_LIMITS.nearPlane) return null;
 
   const perspective = camera.distance / cameraDepth;
-  const scale = fitScale(viewport, dimensions, camera.flat) * camera.zoom * perspective;
+  const scale = fitScale(viewport, dimensions, camera) * camera.zoom * perspective;
   return {
     x: viewport.width / 2 + camera.panX + rotated.x * scale,
     y: viewport.height / 2 + camera.panY + rotated.y * scale,
@@ -119,7 +132,10 @@ export function hitTestProjected(nodes, projectionById, point, {
   for (const node of candidates) {
     const projected = projectionById.get(node.id);
     if (!projected) continue;
-    const radius = Math.max(minimumRadius, node.radius * projected.scale + 5);
+    const radius = Math.max(
+      minimumRadius,
+      node.radius * Math.sqrt(Math.max(0.2, projected.scale)) * 0.92 + 5,
+    );
     if (Math.hypot(point.x - projected.x, point.y - projected.y) <= radius) return node;
   }
   return null;

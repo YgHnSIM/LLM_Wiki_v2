@@ -20,6 +20,7 @@ import {
   const typeFilter = root.querySelector('[data-graph-type]');
   const verificationFilter = root.querySelector('[data-graph-verification]');
   const relationFilter = root.querySelector('[data-graph-relation]');
+  const communityFilter = root.querySelector('[data-graph-community]');
   const inspector = root.querySelector('[data-graph-inspector]');
   const inspectorContent = root.querySelector('[data-graph-inspector-content]');
   const status = root.querySelector('[data-graph-status]');
@@ -64,6 +65,8 @@ import {
     model: null,
     viewport: { width: 1, height: 1, dpr: 1 },
     projectedNodes: new Map(),
+    nodeById: new Map(),
+    inspectorId: '',
     palette: null,
     frame: 0,
   };
@@ -130,6 +133,46 @@ import {
     return state.query.split(' ').filter(Boolean).every((term) => haystack.includes(term));
   }
 
+  function compareOverviewEdges(left, right, nodeId = '') {
+    const leftNeighbor = left.source === nodeId ? left.target : left.source;
+    const rightNeighbor = right.source === nodeId ? right.target : right.source;
+    const leftNeighborNode = state.nodeById.get(leftNeighbor);
+    const rightNeighborNode = state.nodeById.get(rightNeighbor);
+    return Number(right.kind === 'both') - Number(left.kind === 'both')
+      || Number(right.reciprocal) - Number(left.reciprocal)
+      || Number(right.crossCommunity) - Number(left.crossCommunity)
+      || right.weight - left.weight
+      || (rightNeighborNode?.degree ?? 0) - (leftNeighborNode?.degree ?? 0)
+      || collator.compare(left.id, right.id);
+  }
+
+  function overviewBackbone(visibleNodes, visibleEdges) {
+    const selectedIds = new Set();
+    const incident = new Map([...visibleNodes].map((id) => [id, []]));
+    for (const edge of visibleEdges) {
+      incident.get(edge.source)?.push(edge);
+      incident.get(edge.target)?.push(edge);
+    }
+    for (const [nodeId, edges] of incident) {
+      const best = [...edges].sort((left, right) => compareOverviewEdges(left, right, nodeId))[0];
+      if (best) selectedIds.add(best.id);
+    }
+
+    const crossByCommunityPair = new Map();
+    for (const edge of visibleEdges.filter((item) => item.crossCommunity)) {
+      const sourceCommunity = state.nodeById.get(edge.source)?.community;
+      const targetCommunity = state.nodeById.get(edge.target)?.community;
+      if (sourceCommunity === undefined || targetCommunity === undefined) continue;
+      const key = sourceCommunity < targetCommunity
+        ? `${sourceCommunity}:${targetCommunity}`
+        : `${targetCommunity}:${sourceCommunity}`;
+      const current = crossByCommunityPair.get(key);
+      if (!current || compareOverviewEdges(edge, current) < 0) crossByCommunityPair.set(key, edge);
+    }
+    for (const edge of crossByCommunityPair.values()) selectedIds.add(edge.id);
+    return visibleEdges.filter((edge) => selectedIds.has(edge.id));
+  }
+
   function visibleModel() {
     const visibleNodes = new Set(state.data.nodes.filter(nodeMatchesFilters).map((node) => node.id));
     const visibleEdges = state.data.edges.filter((edge) => (
@@ -140,7 +183,8 @@ import {
       adjacency.get(edge.source).add(edge.target);
       adjacency.get(edge.target).add(edge.source);
     }
-    return { visibleNodes, visibleEdges, adjacency };
+    const overviewEdges = overviewBackbone(visibleNodes, visibleEdges);
+    return { visibleNodes, visibleEdges, overviewEdges, adjacency };
   }
 
   function scheduleDraw() {
@@ -153,7 +197,7 @@ import {
 
   function updateGraph() {
     if (!state.data) return;
-    const { visibleNodes, visibleEdges, adjacency } = visibleModel();
+    const { visibleNodes, visibleEdges, overviewEdges, adjacency } = visibleModel();
     if (state.selected && !visibleNodes.has(state.selected)) {
       state.selected = '';
       restoreInspector();
@@ -170,13 +214,47 @@ import {
     const queryMatches = new Set(state.data.nodes
       .filter((node) => visibleNodes.has(node.id) && searchMatches(node))
       .map((node) => node.id));
+    const overviewEdgeIds = new Set(overviewEdges.map((edge) => edge.id));
 
-    state.model = { visibleNodes, visibleEdges, adjacency, direct, second, queryMatches };
+    const renderedEdges = state.selected
+      ? visibleEdges.filter((edge) => (
+        edge.source === state.selected
+        || edge.target === state.selected
+        || (overviewEdgeIds.has(edge.id) && (
+          (direct.has(edge.source) && (direct.has(edge.target) || second.has(edge.target)))
+          || (direct.has(edge.target) && (direct.has(edge.source) || second.has(edge.source)))
+        ))
+      ))
+      : state.hovered
+        ? visibleEdges.filter((edge) => (
+          edge.source === state.hovered
+          || edge.target === state.hovered
+          || overviewEdgeIds.has(edge.id)
+        ))
+        : state.query
+          ? visibleEdges.filter((edge) => (
+            queryMatches.has(edge.source)
+            || queryMatches.has(edge.target)
+            || overviewEdgeIds.has(edge.id)
+          ))
+          : overviewEdges;
+
+    state.model = {
+      visibleNodes,
+      visibleEdges,
+      overviewEdges,
+      overviewEdgeIds,
+      renderedEdges,
+      adjacency,
+      direct,
+      second,
+      queryMatches,
+    };
     const searchMessage = state.query ? `, 검색 일치 ${queryMatches.size}개` : '';
-    status.textContent = `문서 ${visibleNodes.size}개와 방향 관계 ${visibleEdges.length}개 표시${searchMessage}.`;
+    status.textContent = `문서 ${visibleNodes.size}개, 전체 관계 ${visibleEdges.length}개 중 구조선 ${renderedEdges.length}개 표시${searchMessage}.`;
     if (state.selected) {
-      const selectedNode = state.data.nodes.find((node) => node.id === state.selected);
-      if (selectedNode) renderInspector(selectedNode);
+      const selectedNode = state.nodeById.get(state.selected);
+      if (selectedNode && state.inspectorId !== selectedNode.id) renderInspector(selectedNode);
     }
     scheduleDraw();
   }
@@ -185,7 +263,8 @@ import {
     const rectangle = canvas.getBoundingClientRect();
     const width = Math.max(1, Math.round(rectangle.width));
     const height = Math.max(1, Math.round(rectangle.height));
-    const dpr = Math.min(2, Math.max(1, window.devicePixelRatio || 1));
+    const maximumDpr = width > 1200 ? 1.5 : 2;
+    const dpr = Math.min(maximumDpr, Math.max(1, window.devicePixelRatio || 1));
     const pixelWidth = Math.round(width * dpr);
     const pixelHeight = Math.round(height * dpr);
     if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
@@ -259,6 +338,8 @@ import {
   }
 
   function drawCommunities() {
+    const labelBoxes = [];
+    const compact = state.viewport.width < 620;
     const visibleCommunities = state.data.communities.filter((community) => (
       state.data.nodes.some((node) => node.community === community.id && state.model.visibleNodes.has(node.id))
     ));
@@ -271,24 +352,51 @@ import {
       context.save();
       context.fillStyle = color;
       context.strokeStyle = color;
-      context.globalAlpha = forcedColors.matches ? 0.12 : 0.065;
+      context.globalAlpha = forcedColors.matches ? 0.08 : 0.035;
       tracePolygon(points);
       context.fill();
-      context.globalAlpha = forcedColors.matches ? 0.72 : 0.42;
-      context.setLineDash([7, 5]);
-      context.lineWidth = 1.2;
+      context.globalAlpha = forcedColors.matches ? 0.68 : 0.3;
+      context.lineWidth = 1;
       context.stroke();
-      context.setLineDash([]);
-      context.globalAlpha = 0.92;
+
+      const minimumX = Math.min(...points.map((point) => point.x));
+      const minimumY = Math.min(...points.map((point) => point.y));
+      const labelX = clamp(14, state.viewport.width - 230, minimumX + 10);
+      const labelY = clamp(30, state.viewport.height - 18, minimumY + 25);
+      const atlasNumber = String(community.id + 1).padStart(2, '0');
+      context.globalAlpha = 1;
+      context.textAlign = 'left';
+      context.textBaseline = 'alphabetic';
+      context.font = compact
+        ? '600 16px "Helvetica Neue", Arial, sans-serif'
+        : '500 23px "Helvetica Neue", Arial, sans-serif';
+      context.fillStyle = state.palette.blue;
+      context.fillText(atlasNumber, labelX, labelY);
+      const numberWidth = context.measureText(atlasNumber).width;
+      if (compact) {
+        labelBoxes.push({
+          x: labelX - 3,
+          y: labelY - 19,
+          width: numberWidth + 6,
+          height: 23,
+        });
+        context.restore();
+        continue;
+      }
+      context.font = '500 11px "Helvetica Neue", Arial, sans-serif';
       context.fillStyle = state.palette.ink;
-      context.strokeStyle = state.palette.paper;
-      context.lineWidth = 4;
-      context.lineJoin = 'round';
-      context.font = '700 11px "Courier New", monospace';
-      context.strokeText(`${community.label} · ${community.size}`, center.x + 7, center.y + 4);
-      context.fillText(`${community.label} · ${community.size}`, center.x + 7, center.y + 4);
+      const labelText = `${community.label} · ${community.size}`;
+      context.fillText(labelText, labelX + numberWidth + 8, labelY - 2);
+      const labelWidth = context.measureText(labelText).width;
+      labelBoxes.push({
+        x: labelX - 4,
+        y: labelY - 25,
+        width: numberWidth + labelWidth + 16,
+        height: 31,
+      });
       context.restore();
     }
+    return labelBoxes;
   }
 
   function nodeOpacity(node) {
@@ -333,8 +441,8 @@ import {
   function edgeGeometry(edge, nodeProjections) {
     const source = nodeProjections.get(edge.source);
     const target = nodeProjections.get(edge.target);
-    const sourceNode = state.data.nodes.find((node) => node.id === edge.source);
-    const targetNode = state.data.nodes.find((node) => node.id === edge.target);
+    const sourceNode = state.nodeById.get(edge.source);
+    const targetNode = state.nodeById.get(edge.target);
     if (!source || !target || !sourceNode || !targetNode) return null;
     const dx = target.x - source.x;
     const dy = target.y - source.y;
@@ -368,7 +476,7 @@ import {
   }
 
   function drawEdges(nodeProjections) {
-    const edgeRecords = state.model.visibleEdges.map((edge) => {
+    const edgeRecords = state.model.renderedEdges.map((edge) => {
       const geometry = edgeGeometry(edge, nodeProjections);
       return geometry ? { edge, geometry, depth: (geometry.source.depth + geometry.target.depth) / 2 } : null;
     }).filter(Boolean).sort((left, right) => {
@@ -379,25 +487,36 @@ import {
 
     for (const { edge, geometry } of edgeRecords) {
       const direct = Boolean(state.selected) && (edge.source === state.selected || edge.target === state.selected);
+      const hoveredDirect = !state.selected && Boolean(state.hovered)
+        && (edge.source === state.hovered || edge.target === state.hovered);
+      const searchDirect = !state.selected && Boolean(state.query)
+        && (state.model.queryMatches.has(edge.source) || state.model.queryMatches.has(edge.target));
+      const emphasized = direct || hoveredDirect || searchDirect;
       const second = Boolean(state.selected) && !direct && (
-        (state.model.direct.has(edge.source) && state.model.second.has(edge.target))
-        || (state.model.direct.has(edge.target) && state.model.second.has(edge.source))
+        (state.model.direct.has(edge.source) && (
+          state.model.direct.has(edge.target) || state.model.second.has(edge.target)
+        ))
+        || (state.model.direct.has(edge.target) && (
+          state.model.direct.has(edge.source) || state.model.second.has(edge.source)
+        ))
       );
       const distant = Boolean(state.selected) && !direct && !second;
-      let color = edge.kind === 'body' ? state.palette.blue : state.palette.ink;
-      if (direct && edge.source === state.selected) color = state.palette.pink;
+      let color = edge.crossCommunity ? state.palette.blue : state.palette.ink;
+      if (edge.kind === 'body') color = state.palette.blue;
+      if (direct && edge.source === state.selected) color = state.palette.blue;
       else if (direct && edge.target === state.selected) color = state.palette.blue;
-      let alpha = edge.kind === 'body' ? 0.18 : edge.kind === 'both' ? 0.13 : 0.1;
-      if (edge.crossCommunity) alpha += 0.04;
+      let alpha = edge.kind === 'body' ? 0.12 : edge.kind === 'both' ? 0.1 : 0.07;
+      if (edge.crossCommunity) alpha += 0.06;
       if (direct) alpha = 0.94;
+      else if (hoveredDirect || searchDirect) alpha = 0.66;
       else if (second) alpha = 0.28;
       else if (distant) alpha = 0.014;
 
       context.save();
       context.strokeStyle = color;
       context.globalAlpha = forcedColors.matches ? Math.max(alpha, 0.25) : alpha;
-      context.lineWidth = direct ? 2.25 : Math.min(1.5, 0.42 + edge.weight * 0.2);
-      context.lineCap = 'square';
+      context.lineWidth = emphasized ? 1.8 : Math.min(1.25, 0.38 + edge.weight * 0.16);
+      context.lineCap = 'round';
       context.setLineDash(edge.kind === 'body' ? [4, 5] : []);
       context.beginPath();
       context.moveTo(geometry.start.x, geometry.start.y);
@@ -444,67 +563,132 @@ import {
     return [];
   }
 
-  function shouldLabel(node, degreeCutoff) {
-    if (node.id === state.selected || node.id === state.hovered) return true;
-    if (state.model.queryMatches.has(node.id)) return true;
-    return state.viewport.width > 620 && (node.degree >= degreeCutoff || node.type === 'analysis');
+  function projectedRadius(node, point) {
+    return clamp(4.8, 24, node.radius * Math.sqrt(Math.max(0.2, point.scale)) * 0.92);
   }
 
   function drawNodes(nodeProjections) {
     const visibleNodes = state.data.nodes.filter((node) => state.model.visibleNodes.has(node.id));
-    const degreeCutoff = [...visibleNodes]
-      .sort((left, right) => right.degree - left.degree || collator.compare(left.title, right.title))
-      [Math.min(19, Math.max(0, visibleNodes.length - 1))]?.degree ?? Number.POSITIVE_INFINITY;
     for (const node of sortProjected(visibleNodes, nodeProjections)) {
       const point = nodeProjections.get(node.id);
       if (!point) continue;
       const color = state.palette.communities[node.community % state.palette.communities.length];
-      const radius = clamp(3.6, 25, node.radius * point.scale);
+      const radius = projectedRadius(node, point);
       const opacity = nodeOpacity(node);
-      const registration = forcedColors.matches ? 0 : 1.4 + node.z / state.data.dimensions.depth * 2.2;
 
       context.save();
-      context.globalAlpha = opacity * 0.24;
-      context.fillStyle = state.palette.pink;
-      traceNodeShape(node, point.x + registration, point.y, radius);
-      context.fill();
-      context.fillStyle = state.palette.cyan;
-      traceNodeShape(node, point.x - registration, point.y, radius);
-      context.fill();
-
       context.globalAlpha = opacity;
       context.fillStyle = forcedColors.matches ? state.palette.paperLight : color;
       context.strokeStyle = state.palette.ink;
-      context.lineWidth = 1.1 + Math.min(3.2, Math.log2(1 + node.evidenceCount) * 0.6);
+      context.lineWidth = 0.8 + Math.min(2.4, Math.log2(1 + node.evidenceCount) * 0.45);
       context.setLineDash(verificationDash(node));
       traceNodeShape(node, point.x, point.y, radius);
       context.fill();
       context.stroke();
       context.setLineDash([]);
 
+      if (state.model.direct.has(node.id)) {
+        context.globalAlpha = 0.48;
+        context.strokeStyle = state.palette.blue;
+        context.lineWidth = 1.2;
+        traceNodeShape(node, point.x, point.y, radius + 3);
+        context.stroke();
+      }
+
       if (node.id === state.selected || node.id === state.hovered || state.model.queryMatches.has(node.id)) {
         context.globalAlpha = node.id === state.selected ? 1 : 0.82;
-        context.strokeStyle = node.id === state.selected ? state.palette.blue : state.palette.pink;
+        context.strokeStyle = state.palette.blue;
         context.lineWidth = 2;
         traceNodeShape(node, point.x, point.y, radius + 5);
         context.stroke();
       }
-
-      if (shouldLabel(node, degreeCutoff)) {
-        const labelY = point.y - radius - 8;
-        context.globalAlpha = Math.max(0.68, opacity);
-        context.font = '700 11px "Courier New", monospace';
-        context.textAlign = 'center';
-        context.textBaseline = 'bottom';
-        context.lineJoin = 'round';
-        context.lineWidth = 4;
-        context.strokeStyle = state.palette.paperLight;
-        context.fillStyle = state.palette.ink;
-        context.strokeText(node.title, point.x, labelY);
-        context.fillText(node.title, point.x, labelY);
-      }
       context.restore();
     }
+  }
+
+  function boxesOverlap(left, right, padding = 4) {
+    return left.x < right.x + right.width + padding
+      && left.x + left.width + padding > right.x
+      && left.y < right.y + right.height + padding
+      && left.y + left.height + padding > right.y;
+  }
+
+  function labelPriority(node) {
+    if (node.id === state.selected) return 100000;
+    if (node.id === state.hovered) return 90000;
+    if (state.model.queryMatches.has(node.id)) return 80000;
+    if (state.model.direct.has(node.id)) return 60000 + node.bridgeConnections * 100 + node.degree;
+    return node.bridgeConnections * 100 + node.degree;
+  }
+
+  function drawLabels(nodeProjections, reservedBoxes = []) {
+    const visibleNodes = state.data.nodes.filter((node) => state.model.visibleNodes.has(node.id));
+    const budget = state.viewport.width < 620
+      ? 3
+      : clamp(6, 14, Math.floor(state.viewport.width * state.viewport.height / 70000));
+    const mandatory = visibleNodes.filter((node) => (
+      node.id === state.selected
+      || node.id === state.hovered
+      || state.model.queryMatches.has(node.id)
+    ));
+    const contextual = state.selected
+      ? visibleNodes
+        .filter((node) => state.model.direct.has(node.id))
+        .sort((left, right) => labelPriority(right) - labelPriority(left) || collator.compare(left.title, right.title))
+        .slice(0, state.viewport.width < 620 ? 4 : 8)
+      : [...visibleNodes]
+        .sort((left, right) => labelPriority(right) - labelPriority(left) || collator.compare(left.title, right.title))
+        .slice(0, budget);
+    const candidates = [...new Map([...mandatory, ...contextual].map((node) => [node.id, node])).values()]
+      .sort((left, right) => labelPriority(right) - labelPriority(left) || collator.compare(left.title, right.title));
+    const placed = [...reservedBoxes];
+
+    context.save();
+    context.font = '500 11px "Helvetica Neue", Arial, sans-serif';
+    context.textAlign = 'left';
+    context.textBaseline = 'middle';
+    for (const node of candidates) {
+      const point = nodeProjections.get(node.id);
+      if (!point) continue;
+      const radius = projectedRadius(node, point);
+      const textWidth = Math.ceil(context.measureText(node.title).width);
+      const width = textWidth + 12;
+      const height = 20;
+      const positions = [
+        { x: point.x + radius + 8, y: point.y - height / 2 },
+        { x: point.x - width / 2, y: point.y - radius - height - 7 },
+        { x: point.x - radius - width - 8, y: point.y - height / 2 },
+        { x: point.x - width / 2, y: point.y + radius + 7 },
+        { x: point.x + radius + 6, y: point.y - radius - height - 3 },
+        { x: point.x - radius - width - 6, y: point.y - radius - height - 3 },
+      ];
+      const mandatoryLabel = mandatory.some((item) => item.id === node.id);
+      let box = positions.find((candidate) => (
+        candidate.x >= 8
+        && candidate.y >= 8
+        && candidate.x + width <= state.viewport.width - 8
+        && candidate.y + height <= state.viewport.height - 8
+        && placed.every((other) => !boxesOverlap({ ...candidate, width, height }, other))
+      ));
+      if (!box && mandatoryLabel) {
+        box = {
+          x: clamp(8, state.viewport.width - width - 8, point.x + radius + 8),
+          y: clamp(8, state.viewport.height - height - 8, point.y - height / 2),
+        };
+      }
+      if (!box) continue;
+      const placedBox = { ...box, width, height };
+      placed.push(placedBox);
+
+      context.globalAlpha = node.id === state.selected ? 1 : 0.94;
+      context.fillStyle = state.palette.paperLight;
+      context.fillRect(box.x, box.y, width, height);
+      context.fillStyle = state.palette.blue;
+      context.fillRect(box.x, box.y, 2, height);
+      context.fillStyle = state.palette.ink;
+      context.fillText(node.title, box.x + 7, box.y + height / 2 + 0.5);
+    }
+    context.restore();
   }
 
   function drawScene() {
@@ -513,7 +697,7 @@ import {
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
     context.clearRect(0, 0, width, height);
     drawFloor();
-    drawCommunities();
+    const reservedLabelBoxes = drawCommunities();
 
     const nodeProjections = new Map();
     const groundProjections = new Map();
@@ -528,6 +712,7 @@ import {
     drawStems(nodeProjections, groundProjections);
     drawEdges(nodeProjections);
     drawNodes(nodeProjections);
+    drawLabels(nodeProjections, reservedLabelBoxes);
   }
 
   function metadataRow(term, description) {
@@ -563,7 +748,7 @@ import {
     const community = state.data.communities.find((item) => item.id === node.community);
     const relations = visibleRelations(node);
     const outsideNeighborCount = [...relations.keys()].filter((neighborId) => {
-      const neighbor = state.data.nodes.find((item) => item.id === neighborId);
+      const neighbor = state.nodeById.get(neighborId);
       return neighbor && neighbor.community !== node.community;
     }).length;
     inspectorContent.replaceChildren();
@@ -594,7 +779,7 @@ import {
     inspectorContent.append(documentLink);
 
     const ranked = [...relations.entries()]
-      .map(([id, record]) => ({ node: state.data.nodes.find((item) => item.id === id), record }))
+      .map(([id, record]) => ({ node: state.nodeById.get(id), record }))
       .filter((item) => item.node)
       .sort((left, right) => (
         Number(right.record.kinds.has('related')) - Number(left.record.kinds.has('related'))
@@ -615,23 +800,33 @@ import {
       inspectorContent.append(list);
       if (ranked.length > 12) inspectorContent.append(element('p', 'graph-relation-more', `나머지 ${ranked.length - 12}개 연결은 지도에서 확인할 수 있습니다.`));
     }
+    state.inspectorId = node.id;
   }
 
   function restoreInspector() {
     inspectorContent.innerHTML = initialInspectorMarkup;
+    state.inspectorId = '';
+    root.classList.remove('has-selection');
   }
 
-  function selectNode(id, { focusInspector = false } = {}) {
-    const node = state.data?.nodes.find((item) => item.id === id);
+  function selectNode(id) {
+    const node = state.nodeById.get(id);
     if (!node || !state.model.visibleNodes.has(id)) return;
     state.selected = id;
+    root.classList.add('has-selection');
     updateGraph();
     const relations = visibleRelations(node);
     const outsideNeighbors = [...relations.keys()].filter((neighborId) => (
-      state.data.nodes.find((item) => item.id === neighborId)?.community !== node.community
+      state.nodeById.get(neighborId)?.community !== node.community
     ));
     status.textContent = `${node.title} 선택. 표시 이웃 ${relations.size}개, 집단 밖 이웃 ${outsideNeighbors.length}개.`;
-    if (focusInspector) inspector?.focus({ preventScroll: false });
+  }
+
+  function clearSelection() {
+    if (!state.selected) return;
+    state.selected = '';
+    restoreInspector();
+    updateGraph();
   }
 
   function updateFlatButton() {
@@ -665,19 +860,15 @@ import {
 
   function bindInteractions() {
     root.addEventListener('click', (event) => {
-      const selectButton = event.target.closest('[data-select-node]');
-      if (selectButton) selectNode(selectButton.dataset.selectNode, { focusInspector: true });
-
-      const communityButton = event.target.closest('[data-community-filter]');
-      if (communityButton) {
-        state.community = communityButton.dataset.communityFilter;
-        for (const button of root.querySelectorAll('[data-community-filter]')) {
-          const active = button === communityButton;
-          button.classList.toggle('is-active', active);
-          button.setAttribute('aria-pressed', String(active));
-        }
-        updateGraph();
+      const clearButton = event.target.closest('[data-graph-clear-selection]');
+      if (clearButton) {
+        clearSelection();
+        search?.focus();
+        return;
       }
+
+      const selectButton = event.target.closest('[data-select-node]');
+      if (selectButton) selectNode(selectButton.dataset.selectNode);
 
       const zoomButton = event.target.closest('[data-graph-zoom]');
       if (zoomButton?.dataset.graphZoom === 'in') setCamera({ zoom: state.camera.zoom * 1.25 });
@@ -708,11 +899,12 @@ import {
       const matches = state.data.nodes
         .filter((node) => nodeMatchesFilters(node) && searchMatches(node))
         .sort((left, right) => collator.compare(left.title, right.title));
-      if (matches[0]) selectNode(matches[0].id, { focusInspector: true });
+      if (matches[0]) selectNode(matches[0].id);
     });
     typeFilter?.addEventListener('change', () => { state.type = typeFilter.value; updateGraph(); });
     verificationFilter?.addEventListener('change', () => { state.verification = verificationFilter.value; updateGraph(); });
     relationFilter?.addEventListener('change', () => { state.relation = relationFilter.value; updateGraph(); });
+    communityFilter?.addEventListener('change', () => { state.community = communityFilter.value; updateGraph(); });
     controls?.addEventListener('reset', () => window.requestAnimationFrame(() => {
       state.selected = '';
       state.hovered = '';
@@ -721,11 +913,6 @@ import {
       state.verification = '';
       state.relation = relationFilter?.value || 'related';
       state.community = '';
-      for (const button of root.querySelectorAll('[data-community-filter]')) {
-        const active = button.dataset.communityFilter === '';
-        button.classList.toggle('is-active', active);
-        button.setAttribute('aria-pressed', String(active));
-      }
       restoreInspector();
       resetCamera();
       updateGraph();
@@ -758,7 +945,7 @@ import {
         if (hovered !== state.hovered) {
           state.hovered = hovered;
           canvas.classList.toggle('has-hover', Boolean(hovered));
-          scheduleDraw();
+          updateGraph();
         }
         return;
       }
@@ -788,6 +975,7 @@ import {
       if (shouldSelect) {
         const node = nodeAtEvent(event);
         if (node) selectNode(node.id);
+        else clearSelection();
       }
     };
     canvas.addEventListener('pointerup', stopDrag);
@@ -799,7 +987,11 @@ import {
       if (drag) return;
       state.hovered = '';
       canvas.classList.remove('has-hover');
-      scheduleDraw();
+      updateGraph();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') clearSelection();
     });
 
     forcedColors.addEventListener('change', () => {
@@ -829,7 +1021,7 @@ import {
     .then((data) => {
       if (
         data?.schemaVersion !== 2
-        || data?.layoutVersion !== 3
+        || data?.layoutVersion !== 4
         || data?.depthMetric !== 'cross-community-neighbors'
         || data?.depthScale !== 'log1p'
         || !Number.isFinite(data?.dimensions?.depth)
@@ -841,6 +1033,7 @@ import {
         throw new TypeError('Graph data has an unsupported 3D shape.');
       }
       state.data = data;
+      state.nodeById = new Map(data.nodes.map((node) => [node.id, node]));
       resolvePalette();
       updateGraph();
       bindInteractions();
