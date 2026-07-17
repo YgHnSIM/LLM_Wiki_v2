@@ -1373,6 +1373,15 @@ sources:
     kind: conference-paper
     url: https://repository.upenn.edu/cis_papers/159
     language: en
+  huang-xu-yu-2015-bilstm-crf:
+    title: Bidirectional LSTM-CRF Models for Sequence Tagging
+    authors: [Zhiheng Huang, Wei Xu, Kai Yu]
+    published: 2015
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.1508.01991
+    url: https://arxiv.org/abs/1508.01991
+    language: en
   tsochantaridis-et-al-2004-structured-svm:
     title: Support Vector Machine Learning for Interdependent and Structured Output Spaces
     authors: [Ioannis Tsochantaridis, Thomas Hofmann, Thorsten Joachims, Yasemin Altun]

@@ -1329,6 +1329,40 @@ raw 등록 해시:
 - 의미 있는 주제가 확인되면 다음 번호나 임의의 묶음 완성을 기다리지 않고 작성한다.
 - 분석 문서는 실제 논점에 필요한 자료만 사용하고, 확인된 사실·비교 해석·입증되지 않은 계보를 구분한다.
 
+## [2026-07-18] ingest | 032 조건부 무작위장과 구조화 예측
+
+032 영어 원문을 기존 출력과 무관하게 새로 번역하고 12절 학습용 해설을 작성했다. 원문의 조건부 확률식이 `xxx`·`yyy` 변수와 세 벌의 동일 렌더링으로 겹친 구간은 표준 MathJax 식으로 한 번만 복원했다. 검사된 번역·해설 쌍은 `raw/`에 그대로 보존하고 SHA-256을 등록했다.
+
+변경 문서:
+
+- `raw/032_Conditional Random Fields - Structured Prediction for Sequences.ko.md`와 대응 해설
+- `wiki/sources/032_조건부 무작위장과 구조화 예측.md`
+- `wiki/concepts/조건부 무작위장.md`
+- `wiki/sources/027_최대 엔트로피와 서포트 벡터 머신.md`, `wiki/concepts/최대 엔트로피 모델.md`, `wiki/concepts/통계적 자연어 처리.md`의 방향성 연결
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- Lafferty·McCallum·Pereira의 2001년 원 논문으로 CRF의 일반 정의, 선형 사슬 분해, 입력별 분배 함수, improved iterative scaling과 Penn Treebank 실험을 확인했다.
+- HMM·확률 태거·MEMM도 이미 순서열을 모델링했다는 선행 맥락을 복원하고, CRF의 직접 기여를 풍부한 조건부 특징과 라벨열 전체의 전역 정규화 결합으로 한정했다.
+- MEMM의 상태별 국소 정규화와 label bias, CRF의 완전 경로 경쟁을 구분했다. 일반 CRF 정의를 1차 선형 사슬과 동일시하지 않았다.
+- 비터비·forward-backward의 밀집 1차 사슬 비용을 $O(TK^2)$로 명시하고, 길이에만 비례한다는 설명에서 생략된 라벨 수 비용을 복원했다.
+- 고정 특징 로그선형 CRF의 볼록 목적, 매개변수 유일성, 신경 인코더를 함께 학습하는 neural CRF의 비볼록성을 구분했다. 정규화 확률과 calibration도 분리했다.
+- 원 논문의 직접 자연어 증거를 Penn Treebank 45태그·110만 단어의 50% 학습 분할로 한정하고 HMM 5.69%, MEMM 6.37%, CRF 5.55%, 철자 특징을 더한 MEMM+ 4.81%, CRF+ 4.27% 오류율을 조건과 함께 기록했다.
+- Huang·Xu·Yu의 2015년 BiLSTM-CRF를 직접 신경 결합 사례로 확인하되 RNN·Transformer·LLM 전체의 직선적 직접 계보로 일반화하지 않았다.
+- 전체 검사에서 단위 테스트 50개, 157문서·192개 evidence·64개 raw artifact lint, 229페이지 사이트 빌드, 15,678개 로컬 참조와 156개 검색 항목 검사를 통과했고 미해결 위키 링크는 0개였다.
+
+raw 등록 해시:
+
+- 번역: `831e566612468cde2f243d9450343266c1564001237afba436f3f356c72986f9`
+- 해설: `712e915a73916eb3fdf2173b626a7d983f0c7dfa1f581572b1a70c04c7936612`
+
+남은 제한:
+
+- 프로젝트에는 외부 영어 원문이나 Penn Treebank 자료 자체를 복제하지 않았으며, raw에는 새 한국어 번역과 해설만 보존한다.
+- CRF의 개체명 인식·청킹·정보 추출·생의학 적용은 후속 시스템별 자료, 라벨 체계, 특징, 기준선과 평가 지표를 확인해야 한다.
+- HMM·MEMM·CRF의 생성/판별·국소/전역 정규화 비교는 이번 source와 concept 안에서 충분히 정리돼 별도 분석 문서를 만들지 않았다. 더 넓은 구조화 예측 계보가 새 자료와 함께 근거를 갖추면 비교 읽기로 확장한다.
+
 ## 관련 항목
 
 - [[index]]

@@ -496,3 +496,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 691c6752aa91440d33687bc029a2b21f7b7dd7e3a4544801249c0fe04e272658
+  - path: "raw/032_Conditional Random Fields - Structured Prediction for Sequences.ko.md"
+    role: translation
+    order_prefix: "032"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 831e566612468cde2f243d9450343266c1564001237afba436f3f356c72986f9
+  - path: "raw/032_Conditional Random Fields - Structured Prediction for Sequences.commentary.ko.md"
+    role: commentary
+    order_prefix: "032"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 712e915a73916eb3fdf2173b626a7d983f0c7dfa1f581572b1a70c04c7936612
