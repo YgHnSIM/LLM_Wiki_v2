@@ -656,3 +656,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: cdedb5d31097ee74d9599c4b42ddcf82e41f10bcb357551e5b3cabde68ac786c
+  - path: "raw/042_Wikidata Collaborative Knowledge Base for Language AI.ko.md"
+    role: translation
+    order_prefix: "042"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 82a9fa981015de4f9c0daa3e3d18dc31e5a8411a30c8553019ffb85cd36198ac
+  - path: "raw/042_Wikidata Collaborative Knowledge Base for Language AI.commentary.ko.md"
+    role: commentary
+    order_prefix: "042"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 35e683c3d681f7f9a4bd47d30a1b45d8d278e8a476e35714c02fa91464c8d02f

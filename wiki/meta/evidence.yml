@@ -1857,3 +1857,44 @@ sources:
     doi: 10.1109/ICASSP.2013.6639346
     url: https://www.cs.utoronto.ca/~hinton/absps/georgerectified.pdf
     language: en
+  vrandecic-krotzsch-2014-wikidata:
+    title: "Wikidata: A Free Collaborative Knowledgebase"
+    authors: [Denny Vrandečić, Markus Krötzsch]
+    published: 2014
+    source_type: primary-retrospective
+    kind: journal-article
+    doi: 10.1145/2629489
+    url: https://dl.acm.org/doi/pdf/10.1145/2629489
+    language: en
+  wikidata-help-data-model:
+    title: Wikidata Help — Data model
+    authors: [Wikidata community]
+    published: 2026
+    source_type: primary-archive
+    kind: software-archive
+    url: https://www.wikidata.org/wiki/Help:Data_model
+    language: en
+  wikidata-help-about-data:
+    title: Wikidata Help — About data
+    authors: [Wikidata community]
+    published: 2026
+    source_type: primary-archive
+    kind: software-archive
+    url: https://www.wikidata.org/wiki/Help:About_data
+    language: en
+  wikidata-help-references-ranking:
+    title: Wikidata Help — References and Ranking
+    authors: [Wikidata community]
+    published: 2026
+    source_type: primary-archive
+    kind: software-archive
+    url: https://www.wikidata.org/wiki/Help:Ranking
+    language: en
+  wikidata-query-service-limits:
+    title: Wikidata SPARQL Query Service — Query limits
+    authors: [Wikidata community]
+    published: 2026
+    source_type: primary-archive
+    kind: software-archive
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/query_limits
+    language: en

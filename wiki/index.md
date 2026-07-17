@@ -63,6 +63,7 @@ related:
 - [[039_Freebase와 협업형 지식 그래프]] — 편집 가능한 스키마·비계층 다중 타입·MID·CVT·MQL을 복원하고 Google Knowledge Graph 활용과 Wikidata 이전 및 추론·직접 계보 과장을 구분한 소스 (근거 6개)
 - [[040_IBM Watson과 Jeopardy 질의응답]] — 전자 텍스트 입력·DeepQA 후보 및 근거 점수화·신뢰도·게임 전략을 복원하고 공개 시연과 범용 이해의 경계를 구분한 소스 (근거 6개)
 - [[041_심층 신경망 음향 모델과 DNN-HMM 전환]] — 2009–2012년의 누적 전환과 GMM 음향 모델·HMM 디코더의 역할을 복원하고 ReLU·dropout·오류 감소·LLM 직접 계보 과장을 교정한 소스 (근거 5개)
+- [[042_Wikidata와 다언어 협업 지식 베이스]] — item·statement·qualifier·reference·rank와 P36 방향을 복원하고 다언어 재사용·SPARQL·개방 서비스·LLM grounding 과장을 교정한 소스 (근거 5개)
 
 ## 개체
 
@@ -189,7 +190,10 @@ related:
 - [[PropBank]] — 구문 트리 위에 술어별 roleset·번호형 핵심 논항·공통 ArgM 역할을 붙이는 얕은 의미 주석 자원 (근거 3개)
 - [[의미역 표지]] — 술어의 논항 경계를 찾고 자원별 역할을 부여하며 구문 입력·영역 이동 조건을 구분하는 구조화 의미 예측 과제 (근거 4개)
 - [[Freebase]] — 편집 가능한 스키마·MID·CVT·MQL과 외부 적재·공동체 편집을 결합해 2007–2015년 운영된 구조 지식 베이스 (근거 4개)
-- [[지식 그래프]] — 식별한 대상·관계·스키마·출처를 그래프로 조직하되 패턴 질의와 논리 추론, 자원별 의미 단위를 구분하는 지식 표현 (근거 3개)
+- [[지식 그래프]] — 식별한 대상·관계·스키마·출처를 그래프로 조직하되 패턴 질의와 논리 추론, qualifier·provenance와 자원별 의미 단위를 구분하는 지식 표현 (근거 5개)
+- [[Wikidata]] — 언어 중립 Q/P 식별자와 다언어 label·sitelink, qualifier·reference·rank가 있는 statement를 공동 편집하는 CC0 지식 베이스 (근거 5개)
+- [[Wikibase 데이터 모델]] — item·property·snak·statement와 qualifier·reference·rank·unknown/no value를 구분하는 Wikidata의 표현 구조 (근거 3개)
+- [[SPARQL]] — RDF triple pattern·join·filter·property path를 질의하되 자동 논리 추론과 live endpoint의 운영 한계를 구분하는 언어 (근거 2개)
 - [[IBM Watson]] — 로컬 자료에서 후보와 근거를 병렬 평가하고 신뢰도·게임 전략을 결합해 2011년 Jeopardy 특별 경기에서 우승한 질의응답 시스템 (근거 4개)
 - [[DeepQA]] — 질문 분석·고재현율 후보 생성·다중 근거 점수화·학습된 순위와 신뢰도를 병렬 결합한 Watson의 질의응답 구조 (근거 2개)
 - [[개방 영역 질의응답]] — 여러 주제와 자료에서 답을 찾되 입력·자료 접근·답 단위·근거·평가 조건의 실제 경계를 구분하는 과업 (근거 3개)

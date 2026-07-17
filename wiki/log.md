@@ -1740,6 +1740,41 @@ raw 등록 해시:
 - 2013년 이후 CTC·RNN-T·attention·Transformer·self-supervised speech model의 구조와 성능은 후속 번호 소스 또는 별도 1차 문헌으로 검토해야 한다.
 - 013 HMM, 020 TDNN과 041 DNN-HMM을 함께 읽으면 “모델이 바뀔 때 실제로 교체되는 층은 어디인가”라는 비교 질문이 생긴다. 다만 현재 공개 문서에서 HMM 상태·음향 모델·특징·디코더의 경계가 충분히 설명되므로 별도 비교 읽기를 즉시 만들지 않고, 후속 종단 간 음성 소스가 이 질문을 독립 주제로 확장할 때 갱신한다.
 
+## [2026-07-18] ingest | 042 Wikidata와 다언어 협업 지식 베이스
+
+042 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 item·property·value의 단순 소개를 qualifier·reference·rank가 있는 Wikibase statement 모델로 확장하고, 구조 지식의 사용 가능성과 실제 채택·성능을 구분했다.
+
+변경 문서:
+
+- `raw/042_Wikidata Collaborative Knowledge Base for Language AI.ko.md`와 대응 해설
+- `wiki/sources/042_Wikidata와 다언어 협업 지식 베이스.md`
+- `wiki/concepts/Wikidata.md`, `wiki/concepts/Wikibase 데이터 모델.md`, `wiki/concepts/SPARQL.md`
+- `wiki/concepts/지식 그래프.md`, `wiki/concepts/Freebase.md`의 Wikidata 연결 보강
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- Vrandečić·Krötzsch의 2014년 회고로 2012년 프로젝트 시작, sitelink·infobox·목록 생성의 초기 단계, 다언어 item과 Wikimedia 통합·공동 편집을 확인했다.
+- Wikidata 공식 데이터 모델 문서로 item·property·statement group·main snak·qualifier·reference·preferred/normal/deprecated rank·unknown/no value를 복원했다. 단순 triple은 전체 statement의 축약일 뿐이다.
+- 원문의 `(Q90 Paris, P36 capital of, Q142 France)`는 관계 방향이 반대다. Wikidata에서는 France(Q142)→capital(P36)→Paris(Q90)이고 Paris→country(P17)→France는 별도 사실이다.
+- Reference는 provenance이지 진리 보증이 아니며 모든 statement에 강제되지 않는다. Rank도 신뢰 점수나 참/거짓 표시가 아니라 여러 값의 기본 선택 상태다.
+- Wikipedia 언어판·template은 Wikidata 값을 선택적으로 재사용한다. 하나의 편집이 300개 이상 언어판의 모든 본문·infobox에 자동 전파된다는 설명을 채택하지 않았다.
+- SPARQL의 graph pattern·join·filter·property path를 저장된 관계의 질의로 설명하고 class 상속·인과·형식 추론과 구분했다. Qualifier·reference를 보존하려면 `wdt:` direct claim 이상을 질의해야 한다.
+- CC0 개방 데이터와 shared live service를 분리했다. 공식 Query Service 제한 문서의 timeout·결과 규모를 근거로 무제한·항상 millisecond 응답 주장을 교정했다.
+- 개체 연결·질의응답·번역·검색·RAG에서 사용할 수 있다는 가능성과 Siri·Alexa·검색 엔진·추천 제품의 실제 직접 채택을 분리했다.
+- Wikidata 조회 뒤에도 잘못된 item·property·관계 방향·qualifier·시점 선택, 원자료 오류와 생성 충실성 문제가 남으므로 LLM hallucination 자동 해결로 설명하지 않았다.
+
+raw 등록 해시:
+
+- 번역: `82a9fa981015de4f9c0daa3e3d18dc31e5a8411a30c8553019ffb85cd36198ac`
+- 해설: `35e683c3d681f7f9a4bd47d30a1b45d8d278e8a476e35714c02fa91464c8d02f`
+
+남은 제한:
+
+- 프로젝트에는 Wikidata dump·revision history·Query Service 결과를 복제하지 않았으며 raw에는 새 번역과 해설만 보존한다.
+- 언어·지역별 coverage와 reference 품질, 특정 NLP·LLM 시스템의 실제 Wikidata 사용 및 성능은 데이터 snapshot·과제·구현별 후속 근거가 필요하다.
+- 039 Freebase와 042 Wikidata를 함께 읽으면서 node identity를 넘어 qualifier·reference·rank가 관계의 적용 범위를 어떻게 바꾸는지가 선명해졌다. 기존 [[구조화된 의미 자원은 무엇을 노드로 삼는가]]의 후속 확장 후보지만, Wikidata statement와 Freebase CVT 비교만으로 별도 문서의 범위가 충분히 넓지 않아 현재 문서 연결로 보존한다.
+
 ## 관련 항목
 
 - [[index]]

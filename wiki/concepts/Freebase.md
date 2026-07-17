@@ -35,6 +35,7 @@ evidence:
 related:
   - source.039
   - concept.지식-그래프
+  - concept.wikidata
 ---
 # Freebase
 
@@ -96,3 +97,4 @@ Freebase 데이터가 구조화됐다는 사실은 값의 참됨·최신성·완
 
 - [[039_Freebase와 협업형 지식 그래프]]
 - [[지식 그래프]]
+- [[Wikidata]]
