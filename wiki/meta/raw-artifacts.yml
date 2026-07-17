@@ -624,3 +624,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 274e45a517884f74ad593129be31d9d51c4d8cfaa342a6cb12dc91726778e0e6
+  - path: "raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.ko.md"
+    role: translation
+    order_prefix: "040"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 0ba24283cfba3fe71b99b28759a27282076339233e62e2fe1aa5c47bca41ac73
+  - path: "raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.commentary.ko.md"
+    role: commentary
+    order_prefix: "040"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 9953ee2069d141ea4d3aca1192b3d95e6a32a874cec0bc7bffd76d095d1534f1

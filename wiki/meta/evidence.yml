@@ -1761,3 +1761,54 @@ sources:
     doi: 10.1145/2872427.2874809
     url: https://thomas.pellissier-tanon.fr/papers/2016-WWW-freebase.pdf
     language: en
+  ferrucci-et-al-2010-building-watson:
+    title: "Building Watson: An Overview of the DeepQA Project"
+    authors: [David Ferrucci, Eric Brown, Jennifer Chu-Carroll, James Fan, David Gondek, Aditya A. Kalyanpur, Adam Lally, J. William Murdock, Eric Nyberg, John Prager, Nico Schlaefer, Chris Welty]
+    published: 2010
+    source_type: primary
+    kind: journal-article
+    doi: 10.1609/aimag.v31i3.2303
+    url: https://aaai.org/ai-magazine/the-ai-behind-watson-the-technical-article/
+    language: en
+  lewis-2012-watson-jeopardy-interface:
+    title: "In the Game: The Interface between Watson and Jeopardy!"
+    authors: [B. L. Lewis]
+    published: 2012
+    source_type: primary
+    kind: journal-article
+    doi: 10.1147/JRD.2012.2188932
+    url: https://research.ibm.com/publications/in-the-game-the-interface-between-watson-and-jeopardy
+    language: en
+  ferrucci-et-al-2013-watson-beyond-jeopardy:
+    title: "Watson: Beyond Jeopardy!"
+    authors: [David Ferrucci, Anthony Levas, Sugato Bagchi, David Gondek, Erik T. Mueller]
+    published: 2013
+    source_type: primary-retrospective
+    kind: journal-article
+    doi: 10.1016/j.artint.2012.06.009
+    url: https://scalar.usc.edu/works/meet-my-friend-watson-1/media/Beyond%20Jeopardy.pdf
+    language: en
+  ibm-watson-jeopardy-history:
+    title: "Watson on Jeopardy!"
+    authors: [IBM]
+    published: 2023
+    source_type: official-secondary
+    kind: institutional-history
+    url: https://www.ibm.com/history/watson-jeopardy
+    language: en
+  smithsonian-knight-rider-lunch-box:
+    title: Knight Rider lunch box
+    authors: [Smithsonian National Museum of American History]
+    published: 1982
+    source_type: primary-archive
+    kind: institutional-history
+    url: https://www.si.edu/object/knight-rider-lunch-box%3Anmah_1054222
+    language: en
+  library-of-congress-moby-dick-1851:
+    title: "Moby-Dick; or, The Whale"
+    authors: [Herman Melville]
+    published: 1851
+    source_type: primary-archive
+    kind: book
+    url: https://www.loc.gov/exhibits/america-reads/1750-to-1899.html
+    language: en

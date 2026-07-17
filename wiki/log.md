@@ -1649,6 +1649,41 @@ raw 등록 해시:
 - DBpedia·Wikidata·AMR·OntoNotes·BabelNet처럼 여러 층을 실제로 매핑한 자원은 이번 범위에 포함하지 않았다. 각 자원의 1차 설계와 매핑 근거를 검토한 뒤 확장해야 한다.
 - 특정 LLM이 네 자원을 학습·검색·평가에 사용했는지와 내부 표상이 같은 구조를 갖는지는 모델·자료별 별도 근거 없이는 확정하지 않는다.
 
+## [2026-07-18] ingest | 040 IBM Watson과 Jeopardy 질의응답
+
+040 영어 원문을 기존 출력과 무관하게 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 그대로 보존하고 SHA-256을 등록했다. 공개 문서는 Watson이라는 구현 시스템, DeepQA라는 구조, 개방 영역 질의응답이라는 과업을 분리하고, 방송 경기·사전 QA 평가·게임 전략의 측정 범위를 구분했다.
+
+변경 문서:
+
+- `raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.ko.md`와 대응 해설
+- `wiki/sources/040_IBM Watson과 Jeopardy 질의응답.md`
+- `wiki/concepts/IBM Watson.md`, `wiki/concepts/DeepQA.md`, `wiki/concepts/개방 영역 질의응답.md`
+- `wiki/entities/IBM.md`의 시기별 연구 역할 보강
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- Ferrucci 등의 2010년 기술 논문으로 대규모 병렬 처리·많은 전문가·전 과정의 신뢰도·얕고 깊은 지식 통합이라는 DeepQA 원칙과 100개 이상 기법·50개 이상 점수 성분을 확인했다.
+- 질문 분석, 높은 재현율의 후보 생성, 초기 필터, 후보별 근거 검색·점수화, 답 병합·순위·신뢰도와 게임 전략을 분리했다. 후보군에 정답이 없으면 뒤 단계가 복구할 수 없다는 구조적 경계를 반영했다.
+- DBpedia·WordNet·YAGO 같은 구조 자료와 비정형 문서를 함께 사용했지만 구조 지식 직접 조회가 효과적인 clue는 2% 미만이었다는 기술 보고를 반영했다. 지식 그래프 단독 추론기로 축약하지 않았다.
+- 2,000개가 넘는 blind clue에서 약 70% 답변률·85% 정밀도 수준과, 실제 경기의 buzzer·clue 선택·베팅·우연이 포함된 최종 상금을 서로 다른 측정으로 구분했다.
+- Lewis의 인터페이스 논문으로 clue·category가 전자 텍스트로 전달되고 솔레노이드 buzzer·음성 합성이 사용됐음을 확인했다. Watson이 진행자의 음성이나 무대 화면을 직접 인식했다는 설명을 채택하지 않았다.
+- IBM의 역사 기록으로 두 게임짜리 특별 경기가 세 방송 회차에 걸쳐 진행됐고 최종 점수가 Watson 77,147달러, Jennings 24,000달러, Rutter 21,600달러였음을 확인했다. 90대 서버·2,880개 코어와 경기 중 인터넷 미접속도 기록했다.
+- 개발 단계의 corpus 확장에는 웹을 사용했지만 실제 경기에서는 로컬 corpus만 사용했다. “인터넷 없이 구축”과 “경기 중 실시간 웹 검색”이라는 양쪽 과장을 피했다.
+- Smithsonian·Library of Congress 자료로 *Knight Rider*의 1982–1986년 방송과 *Moby-Dick*의 1851년 미국판 출판을 확인해 raw의 1960년대·1850년 예시를 교정했다.
+- 2013년 회고의 `question in, single answer out` 범위와 영역 전환 비용을 반영해 Jeopardy 우승을 범용 언어 이해·일반 지능의 증명이나 Transformer·LLM의 직접 기원으로 확대하지 않았다.
+
+raw 등록 해시:
+
+- 번역: `0ba24283cfba3fe71b99b28759a27282076339233e62e2fe1aa5c47bca41ac73`
+- 해설: `9953ee2069d141ea4d3aca1192b3d95e6a32a874cec0bc7bffd76d095d1534f1`
+
+남은 제한:
+
+- 프로젝트에는 Jeopardy 전체 clue 자료, Watson 소스 코드·학습 자료·실행 환경을 복제하지 않았으며 raw에는 새 한국어 번역과 해설만 보존한다.
+- 2011년 경기 밖의 후속 Watson 제품, 의료·법률 적용 성능과 상용 서비스의 동일성은 제품·버전별 1차 자료가 필요하다.
+- Watson은 기존 [[AI 시연과 실제 성능]]의 통제 조건·공개 인상·실제 측정 경계를 독립적으로 보강한다. 040 ingest를 원격에 반영한 뒤 새 문서를 중복 생성하지 않고 해당 ‘비교 읽기’ 분석을 별도 content 커밋으로 갱신한다.
+
 ## 관련 항목
 
 - [[index]]

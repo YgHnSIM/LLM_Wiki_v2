@@ -10,13 +10,15 @@ tags:
   - type/entity
   - domain/ai
 created: '2026-05-08'
-updated: '2026-07-16'
+updated: '2026-07-18'
 lifecycle: active
 verification: verified
 artifacts:
   - raw/003_Georgetown-IBM Machine.md
   - raw/022_IBM Statistical Machine Translation - From Rules to Data.ko.md
   - raw/022_IBM Statistical Machine Translation - From Rules to Data.commentary.ko.md
+  - 'raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.ko.md'
+  - 'raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.commentary.ko.md'
 evidence:
   - source_id: macdonald-1963
     locator: pp. 1–4
@@ -30,12 +32,23 @@ evidence:
   - source_id: brown-et-al-1993-smt-parameter-estimation
     locator: pp. 263–311
     relation: supports
+  - source_id: ferrucci-et-al-2010-building-watson
+    locator: 'AI Magazine 31(3), pp. 59–79의 IBM Research Watson·DeepQA 개발과 성능 보고'
+    relation: supports
+  - source_id: lewis-2012-watson-jeopardy-interface
+    locator: 'Watson과 Jeopardy 경기 시스템 사이의 전자·물리 인터페이스 설명'
+    relation: supports
+  - source_id: ibm-watson-jeopardy-history
+    locator: '2011년 특별 경기·최종 점수·하드웨어·인터넷 조건에 대한 IBM 역사 기록'
+    relation: contextualizes
 related:
   - source.022
+  - source.040
   - entity.georgetown-university
   - concept.기계-번역
   - concept.통계적-기계-번역
   - concept.규칙-기반-기계-번역
+  - concept.ibm-watson
 ---
 # IBM
 
@@ -47,6 +60,8 @@ IBM은 초기 전자식 컴퓨터의 계산 능력을 언어 처리 과업에 �
 
 수십 년 뒤 Thomas J. Watson Research Center의 별도 연구진은 Canadian Hansard의 영어–프랑스어 병렬 자료로 [[통계적 기계 번역]]을 전개했다. 1988년 연구 구상, 1990년 예비 시스템과 실험, 1993년 IBM Models 1–5의 매개변수 추정은 1954년 규칙·사전 기반 시연과 같은 시스템의 연속 버전이 아니라, 같은 기업 안에서 이루어진 서로 다른 시기의 접근이다.
 
+또 다른 시기의 IBM Research 연구진은 여러 문서·구조 지식 자원에서 후보 답을 만들고 근거를 점수화하는 [[DeepQA]]를 개발했다. 이를 구현한 [[IBM Watson]]은 2011년 *Jeopardy!* 특별 경기에서 우승했다. 전자 텍스트 clue, 로컬 corpus, 90대 서버와 2,880개 프로세서 코어를 사용한 이 시스템은 1954년 기계 번역 시연이나 1980–1990년대 통계 번역 연구의 후속 버전이 아니라 별도 과업·구조·연구진을 가진 프로젝트다.
+
 ## 출처
 
 - [[003_Georgetown-IBM 기계 번역 시연]]
@@ -54,11 +69,17 @@ IBM은 초기 전자식 컴퓨터의 계산 능력을 언어 처리 과업에 �
 - Peter F. Brown 외, [A Statistical Approach to Language Translation](https://aclanthology.org/C88-1016/), 1988, pp. 71–76.
 - Peter F. Brown 외, [A Statistical Approach to Machine Translation](https://aclanthology.org/J90-2002/), 1990, pp. 79–85.
 - Peter F. Brown 외, [The Mathematics of Statistical Machine Translation: Parameter Estimation](https://aclanthology.org/J93-2003/), 1993, pp. 263–311.
+- David Ferrucci 외, [Building Watson: An Overview of the DeepQA Project](https://aaai.org/ai-magazine/the-ai-behind-watson-the-technical-article/), 2010, pp. 59–79.
+- B. L. Lewis, [In the Game: The Interface between Watson and Jeopardy!](https://research.ibm.com/publications/in-the-game-the-interface-between-watson-and-jeopardy), 2012.
+- IBM, [Watson on Jeopardy!](https://www.ibm.com/history/watson-jeopardy), 2011년 경기·하드웨어 기록.
+- [[040_IBM Watson과 Jeopardy 질의응답]]
 
 ## 관련 항목
 
 - [[022_IBM 통계적 기계 번역과 데이터 기반 전환]]
+- [[040_IBM Watson과 Jeopardy 질의응답]]
 - [[Georgetown University]]
 - [[기계 번역]]
 - [[통계적 기계 번역]]
 - [[규칙 기반 기계 번역]]
+- [[IBM Watson]]
