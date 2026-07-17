@@ -1363,6 +1363,39 @@ raw 등록 해시:
 - CRF의 개체명 인식·청킹·정보 추출·생의학 적용은 후속 시스템별 자료, 라벨 체계, 특징, 기준선과 평가 지표를 확인해야 한다.
 - HMM·MEMM·CRF의 생성/판별·국소/전역 정규화 비교는 이번 source와 concept 안에서 충분히 정리돼 별도 분석 문서를 만들지 않았다. 더 넓은 구조화 예측 계보가 새 자료와 함께 근거를 갖추면 비교 읽기로 확장한다.
 
+## [2026-07-18] ingest | 033 BLEU와 기계 번역 자동 평가
+
+033 영어 원문을 기존 출력과 무관하게 새로 번역하고 12절 학습용 해설을 작성했다. 끊어진 웹 수식은 수정 n-gram 정밀도, brevity penalty와 가중 기하평균의 표준 MathJax 식으로 복원했다. 검사된 번역·해설 쌍은 `raw/`에 그대로 보존하고 SHA-256을 등록했다.
+
+변경 문서:
+
+- `raw/033_BLEU Metric - Automatic Evaluation for Machine Translation.ko.md`와 대응 해설
+- `wiki/sources/033_BLEU와 기계 번역 자동 평가.md`
+- `wiki/concepts/BLEU.md`
+- `wiki/concepts/기계 번역.md`, `wiki/concepts/통계적 기계 번역.md`, `wiki/sources/022_IBM 통계적 기계 번역과 데이터 기반 전환.md`의 평가 맥락과 방향성 연결
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- Papineni·Roukos·Ward·Zhu의 2002년 논문으로 참조별 최대 횟수 clipping, corpus-level modified precision, 1–4-gram 기하평균, 유효 참조 길이와 brevity penalty를 확인했다.
+- 원 지표가 말뭉치 수준 시스템 비교를 목표로 하며 개별 문장 BLEU와 인간 판단이 크게 다를 수 있음을 복원했다. 500개 중국어 문장·40개 기사·4개 참조·5개 시스템이라는 실험 범위와 5개 점에서 계산한 0.99·0.96 상관의 한계를 명시했다.
+- 참조 네 개와 두 개를 썼을 때 같은 인간 번역 점수가 0.3468과 0.2571로 달라진 원 논문 결과를 기록해 BLEU가 시스템 출력만의 절대 속성이 아님을 분명히 했다.
+- Callison-Burch·Osborne·Koehn의 2006년 비교로 BLEU 상승이 인간 품질 향상의 필요조건도 충분조건도 아님을 확인하고, 의미·사실·긴 문맥·오류 심각도를 표면 n-gram 일치와 구분했다.
+- Post의 2018년 연구로 전처리·설정 차이가 최대 1.8 BLEU를 만들 수 있음을 확인하고 SacreBLEU의 표준 자료·토큰화·signature 기록을 재현성 맥락에 추가했다.
+- 결정적 점수 계산과 표본 불확실성을 구분했다. BLEU가 토큰 선택·계수·clipping에 의존하는 비미분 지표이며 신경 번역의 표준 교차 엔트로피 손실과 같지 않다는 점도 바로잡았다.
+- 전체 검사에서 단위 테스트 50개, 159문서·194개 evidence·66개 raw artifact lint, 233페이지 사이트 빌드, 15,972개 로컬 참조와 158개 검색 항목 검사를 통과했고 미해결 위키 링크는 0개였다.
+
+raw 등록 해시:
+
+- 번역: `d20dbd5efc152d162b32ddcb5217572db0f771ba0b6e6a7b63a341a2db6bc76b`
+- 해설: `e5307fefb63a28f997ac1fa7f30c9e9461cc50bf8e5d26c7a3e523cedb8d8a68`
+
+남은 제한:
+
+- 프로젝트에는 ACL 원문 PDF나 WMT 시험 자료를 복제하지 않았으며, raw에는 새 한국어 번역과 해설만 보존한다.
+- 언어쌍·분절·참조 수·평활화가 다른 BLEU 숫자는 직접 비교하지 않는다. 현대 신경 의미 지표와 인간 평가의 타당성은 각 지표·자료별 후속 검토가 필요하다.
+- BLEU 한 지표의 정의와 한계는 이번 source·concept에서 충분히 정리했다. 037의 ROUGE·METEOR까지 검증하면 정밀도·재현율·의미 대응·과제별 평가 목적을 가로지르는 독립적인 질문이 성립하는지 다시 판단하고, 근거가 충분할 때 즉시 ‘비교 읽기’로 작성한다.
+
 ## 관련 항목
 
 - [[index]]

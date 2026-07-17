@@ -512,3 +512,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 712e915a73916eb3fdf2173b626a7d983f0c7dfa1f581572b1a70c04c7936612
+  - path: "raw/033_BLEU Metric - Automatic Evaluation for Machine Translation.ko.md"
+    role: translation
+    order_prefix: "033"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: d20dbd5efc152d162b32ddcb5217572db0f771ba0b6e6a7b63a341a2db6bc76b
+  - path: "raw/033_BLEU Metric - Automatic Evaluation for Machine Translation.commentary.ko.md"
+    role: commentary
+    order_prefix: "033"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: e5307fefb63a28f997ac1fa7f30c9e9461cc50bf8e5d26c7a3e523cedb8d8a68

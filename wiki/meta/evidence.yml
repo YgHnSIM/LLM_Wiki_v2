@@ -569,6 +569,23 @@ sources:
     doi: 10.3115/1073083.1073135
     url: https://aclanthology.org/P02-1040/
     language: en
+  callison-burch-et-al-2006-bleu:
+    title: Re-evaluating the Role of Bleu in Machine Translation Research
+    authors: [Chris Callison-Burch, Miles Osborne, Philipp Koehn]
+    published: 2006
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/E06-1032/
+    language: en
+  post-2018-sacrebleu:
+    title: A Call for Clarity in Reporting BLEU Scores
+    authors: [Matt Post]
+    published: 2018
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/W18-6319
+    url: https://aclanthology.org/W18-6319/
+    language: en
   koehn-och-marcu-2003-phrase-smt:
     title: Statistical Phrase-Based Translation
     authors: [Philipp Koehn, Franz J. Och, Daniel Marcu]
