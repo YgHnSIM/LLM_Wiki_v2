@@ -14,8 +14,11 @@ const errors = [];
 let checkedReferences = 0;
 
 const requiredOutputFiles = [
+  'graph/index.html',
+  'graph-data.json',
   'search/index.html',
   'translations/index.html',
+  'assets/graph.js',
   'assets/fonts/D2Coding.woff2',
   'assets/fonts/RIDIBatang.woff2',
   'assets/fonts/OFL-1.1.txt',
@@ -48,6 +51,17 @@ for (const htmlFile of htmlFiles) {
   const duplicateIds = [...new Set(ids.filter((id, index) => ids.indexOf(id) !== index))];
   if (duplicateIds.length) {
     errors.push(`${relativeHtmlPath} contains duplicate IDs: ${duplicateIds.join(', ')}`);
+  }
+
+  const primaryNav = html.match(/<nav class="primary-nav"[\s\S]*?<\/nav>/i)?.[0] ?? '';
+  const graphNavUrl = siteUrl('/graph/');
+  const graphNavLinks = [...primaryNav.matchAll(new RegExp(`<a href="${graphNavUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"([^>]*)>그래프<\\/a>`, 'g'))];
+  if (graphNavLinks.length !== 1) {
+    errors.push(`${relativeHtmlPath} must include one primary navigation link to the knowledge graph.`);
+  } else {
+    const active = /aria-current="page"/.test(graphNavLinks[0][1]);
+    const graphPage = relativeHtmlPath.replaceAll('\\', '/') === 'graph/index.html';
+    if (active !== graphPage) errors.push(`${relativeHtmlPath} has an incorrect active state for the graph navigation link.`);
   }
 
   if (/\brole="(?:listbox|option)"/i.test(html)) {
@@ -212,6 +226,179 @@ for (const entry of searchIndex) {
     await fs.access(targetFile);
   } catch {
     errors.push(`Search index points to a missing page: ${entry.url}`);
+  }
+}
+
+let graphData;
+try {
+  graphData = JSON.parse(await fs.readFile(path.join(distDir, 'graph-data.json'), 'utf8'));
+} catch (error) {
+  errors.push(`Knowledge graph data is not valid JSON: ${error.message}`);
+}
+
+const graphPageFile = fileForUrl(siteUrl('/graph/'));
+const graphPageHtml = htmlCache.get(graphPageFile) ?? await fs.readFile(graphPageFile, 'utf8');
+htmlCache.set(graphPageFile, graphPageHtml);
+const expectedGraphScriptUrl = siteUrl('/assets/graph.js');
+const graphScriptSources = [...graphPageHtml.matchAll(/<script\b[^>]*\bsrc="([^"]+)"[^>]*>\s*<\/script>/gi)]
+  .map((match) => match[1]);
+if (graphScriptSources.filter((source) => source === expectedGraphScriptUrl).length !== 1) {
+  errors.push(`Knowledge graph page must load exactly one graph script from ${expectedGraphScriptUrl}.`);
+}
+for (const hook of ['data-knowledge-graph', 'data-graph-svg', 'data-graph-inspector', 'data-graph-status']) {
+  if (!new RegExp(`<[^>]+\\b${hook}(?:\\s|=|>)`, 'i').test(graphPageHtml)) {
+    errors.push(`Knowledge graph page is missing the ${hook} hook.`);
+  }
+}
+
+const graphDataIsObject = graphData !== null && typeof graphData === 'object' && !Array.isArray(graphData);
+if (graphData !== undefined && !graphDataIsObject) {
+  errors.push('Knowledge graph data must be a non-null JSON object.');
+}
+
+if (graphDataIsObject) {
+  if (graphData.schemaVersion !== 1) errors.push(`Knowledge graph schema version must be 1, found ${graphData.schemaVersion}.`);
+  const graphNodes = Array.isArray(graphData.nodes) ? graphData.nodes : [];
+  const graphEdges = Array.isArray(graphData.edges) ? graphData.edges : [];
+  const graphCommunities = Array.isArray(graphData.communities) ? graphData.communities : [];
+  if (!Array.isArray(graphData.nodes)) errors.push('Knowledge graph nodes must be an array.');
+  if (!Array.isArray(graphData.edges)) errors.push('Knowledge graph edges must be an array.');
+  if (!Array.isArray(graphData.communities)) errors.push('Knowledge graph communities must be an array.');
+
+  const nodeIds = new Set();
+  const nodeUrls = new Set();
+  const communityIds = new Set(graphCommunities
+    .filter((community) => community !== null && typeof community === 'object' && !Array.isArray(community))
+    .map((community) => community.id));
+  const allowedTypes = new Set(['source', 'reference', 'concept', 'entity', 'analysis']);
+  const allowedVerification = new Set(['verified', 'partial', 'disputed', 'unverified']);
+  for (const node of graphNodes) {
+    if (node === null || typeof node !== 'object' || Array.isArray(node)) {
+      errors.push(`Knowledge graph contains a non-object node: ${JSON.stringify(node)}`);
+      continue;
+    }
+    const missing = ['id', 'title', 'url', 'type', 'category', 'verification', 'community', 'x', 'y', 'radius']
+      .filter((field) => !(field in node));
+    if (missing.length) errors.push(`Knowledge graph node ${node.id ?? '(unknown)'} is missing: ${missing.join(', ')}`);
+    if (nodeIds.has(node.id)) errors.push(`Knowledge graph contains a duplicate node ID: ${node.id}`);
+    nodeIds.add(node.id);
+    if (nodeUrls.has(node.url)) errors.push(`Knowledge graph contains a duplicate node URL: ${node.url}`);
+    nodeUrls.add(node.url);
+    if (!allowedTypes.has(node.type)) errors.push(`Knowledge graph node ${node.id} has invalid type '${node.type}'.`);
+    if (!allowedVerification.has(node.verification)) errors.push(`Knowledge graph node ${node.id} has invalid verification '${node.verification}'.`);
+    if (!communityIds.has(node.community)) errors.push(`Knowledge graph node ${node.id} references missing community ${node.community}.`);
+    if (![node.x, node.y, node.radius].every(Number.isFinite)) errors.push(`Knowledge graph node ${node.id} has invalid layout coordinates.`);
+    const targetFile = fileForUrl(node.url);
+    try {
+      if (!targetFile) throw new Error('invalid URL');
+      await fs.access(targetFile);
+    } catch {
+      errors.push(`Knowledge graph node ${node.id} points to a missing page: ${node.url}`);
+    }
+  }
+
+  const expectedGraphIds = new Set(searchIndex.filter((entry) => entry.type !== 'meta').map((entry) => entry.id));
+  const searchEntriesById = new Map(searchIndex
+    .filter((entry) => entry.type !== 'meta')
+    .map((entry) => [entry.id, entry]));
+  const missingGraphIds = [...expectedGraphIds].filter((id) => !nodeIds.has(id));
+  const extraGraphIds = [...nodeIds].filter((id) => !expectedGraphIds.has(id));
+  if (missingGraphIds.length || extraGraphIds.length) {
+    errors.push(`Knowledge graph node set differs from published search entries (missing: ${missingGraphIds.join(', ') || '-'}; extra: ${extraGraphIds.join(', ') || '-'}).`);
+  }
+  if (graphNodes.length !== report.publishedDocuments) {
+    errors.push(`Knowledge graph has ${graphNodes.length} nodes, expected ${report.publishedDocuments}.`);
+  }
+
+  for (const node of graphNodes) {
+    if (node === null || typeof node !== 'object' || Array.isArray(node)) continue;
+    const searchEntry = searchEntriesById.get(node.id);
+    if (!searchEntry) continue;
+    const comparisons = [
+      ['title', node.title, searchEntry.title],
+      ['url', node.url, searchEntry.url],
+      ['type', node.type, searchEntry.type],
+      ['verification', node.verification, searchEntry.verification],
+      ['category/categoryKey', node.category, searchEntry.categoryKey],
+    ];
+    for (const [field, actual, expected] of comparisons) {
+      if (actual !== expected) {
+        errors.push(`Knowledge graph node ${node.id} ${field} does not match the search index (graph: ${JSON.stringify(actual)}; search: ${JSON.stringify(expected)}).`);
+      }
+    }
+  }
+
+  const collisions = [];
+  for (let leftIndex = 0; leftIndex < graphNodes.length; leftIndex += 1) {
+    const left = graphNodes[leftIndex];
+    if (left === null || typeof left !== 'object' || Array.isArray(left)) continue;
+    if (![left.x, left.y, left.radius].every(Number.isFinite)) continue;
+    for (let rightIndex = leftIndex + 1; rightIndex < graphNodes.length; rightIndex += 1) {
+      const right = graphNodes[rightIndex];
+      if (right === null || typeof right !== 'object' || Array.isArray(right)) continue;
+      if (left.community !== right.community || ![right.x, right.y, right.radius].every(Number.isFinite)) continue;
+      const distance = Math.hypot(right.x - left.x, right.y - left.y);
+      const minimumDistance = left.radius + right.radius + 3;
+      if (distance < minimumDistance) {
+        collisions.push(`${left.id} / ${right.id} (${distance.toFixed(1)} < ${minimumDistance.toFixed(1)})`);
+      }
+    }
+  }
+  if (collisions.length) {
+    const preview = collisions.slice(0, 8).join('; ');
+    const remainder = collisions.length > 8 ? `; ...and ${collisions.length - 8} more` : '';
+    errors.push(`Knowledge graph contains ${collisions.length} same-community node collision(s): ${preview}${remainder}.`);
+  }
+
+  const edgeIds = new Set();
+  const directedPairs = new Set();
+  const allowedKinds = new Set(['body', 'related']);
+  const representedKinds = new Set();
+  if (!graphEdges.length) errors.push('Knowledge graph must contain at least one edge.');
+  for (const edge of graphEdges) {
+    if (edge === null || typeof edge !== 'object' || Array.isArray(edge)) {
+      errors.push(`Knowledge graph contains a non-object edge: ${JSON.stringify(edge)}`);
+      continue;
+    }
+    if (edgeIds.has(edge.id)) errors.push(`Knowledge graph contains a duplicate edge ID: ${edge.id}`);
+    edgeIds.add(edge.id);
+    const pair = `${edge.source}\u0000${edge.target}`;
+    if (directedPairs.has(pair)) errors.push(`Knowledge graph contains a duplicate directed edge: ${edge.source} -> ${edge.target}`);
+    directedPairs.add(pair);
+    if (!nodeIds.has(edge.source) || !nodeIds.has(edge.target)) errors.push(`Knowledge graph edge ${edge.id} has a missing endpoint.`);
+    if (edge.source === edge.target) errors.push(`Knowledge graph edge ${edge.id} is a self edge.`);
+    const relationKinds = Array.isArray(edge.kinds)
+      ? edge.kinds
+      : edge.kind === 'both'
+        ? ['body', 'related']
+        : [edge.kind].filter(Boolean);
+    if (!relationKinds.length || relationKinds.some((kind) => !allowedKinds.has(kind)) || new Set(relationKinds).size !== relationKinds.length) {
+      errors.push(`Knowledge graph edge ${edge.id} has invalid relation kinds.`);
+    }
+    for (const kind of relationKinds) {
+      if (allowedKinds.has(kind)) representedKinds.add(kind);
+    }
+    const expectedKind = relationKinds.includes('body') && relationKinds.includes('related')
+      ? 'both'
+      : relationKinds[0];
+    if ('kind' in edge && edge.kind !== expectedKind) errors.push(`Knowledge graph edge ${edge.id} kind '${edge.kind}' does not match its relation kinds.`);
+    if (edge.confidence !== 'EXTRACTED' || edge.confidenceScore !== 1) errors.push(`Knowledge graph edge ${edge.id} must retain explicit-source confidence.`);
+  }
+  for (const requiredKind of allowedKinds) {
+    if (!representedKinds.has(requiredKind)) {
+      errors.push(`Knowledge graph edges must include at least one ${requiredKind} relation.`);
+    }
+  }
+
+  if (graphData.stats?.nodes !== graphNodes.length || graphData.stats?.edges !== graphEdges.length || graphData.stats?.communities !== graphCommunities.length) {
+    errors.push('Knowledge graph statistics do not match its arrays.');
+  }
+  if (report.graph?.nodes !== graphNodes.length || report.graph?.edges !== graphEdges.length) {
+    errors.push('Build report graph statistics do not match graph-data.json.');
+  }
+
+  if (!graphPageHtml.includes(`data-graph-url="${siteUrl('/graph-data.json')}"`)) {
+    errors.push('Knowledge graph page does not reference graph-data.json through the configured base path.');
   }
 }
 

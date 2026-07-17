@@ -1,0 +1,183 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { buildKnowledgeGraph } from '../lib/knowledge-graph.mjs';
+
+function page(id, {
+  type = 'concept',
+  category = 'concepts',
+  tags = ['type/concept', 'domain/nlp'],
+} = {}) {
+  return {
+    id,
+    title: id,
+    aliases: [],
+    pageType: type,
+    category,
+    url: `/${category}/${id}/`,
+    verification: 'verified',
+    evidence: [{ sourceId: 'test-source' }],
+    excerpt: `${id} 설명`,
+    tags,
+    outgoing: [],
+    relatedDocuments: [],
+  };
+}
+
+test('knowledge graph merges authored relation kinds while preserving direction', () => {
+  const a = page('concept.a');
+  const b = page('concept.b');
+  const c = page('concept.c');
+  const meta = page('meta.index', { type: 'meta', category: 'meta', tags: ['type/meta'] });
+  a.outgoing = [b, b, a, meta];
+  a.relatedDocuments = [b, b];
+  b.outgoing = [a];
+  meta.outgoing = [a];
+
+  const graph = buildKnowledgeGraph([meta, c, b, a], { urlFor: (document) => `/base${document.url}` });
+
+  assert.deepEqual(graph.nodes.map((node) => node.id), ['concept.a', 'concept.b', 'concept.c']);
+  assert.equal(graph.edges.length, 2);
+  assert.deepEqual(
+    graph.edges.map(({ source, target, kinds }) => ({ source, target, kinds })),
+    [
+      { source: 'concept.a', target: 'concept.b', kinds: ['related', 'body'] },
+      { source: 'concept.b', target: 'concept.a', kinds: ['body'] },
+    ],
+  );
+  assert.equal(graph.edges.every((edge) => edge.source !== edge.target), true);
+  const edgeAB = graph.edges.find((edge) => edge.source === 'concept.a' && edge.target === 'concept.b');
+  const edgeBA = graph.edges.find((edge) => edge.source === 'concept.b' && edge.target === 'concept.a');
+  assert.equal(edgeAB.kind, 'both');
+  assert.equal(edgeAB.reciprocal, true);
+  assert.equal(edgeAB.weight, 3);
+  assert.equal(edgeBA.kind, 'body');
+  assert.equal(edgeBA.reciprocal, true);
+  assert.equal(edgeBA.weight, 2);
+
+  const nodeA = graph.nodes.find((node) => node.id === 'concept.a');
+  const nodeB = graph.nodes.find((node) => node.id === 'concept.b');
+  const nodeC = graph.nodes.find((node) => node.id === 'concept.c');
+  assert.equal(nodeA.url, '/base/concepts/concept.a/');
+  assert.deepEqual(
+    [nodeA.inDegree, nodeA.outDegree, nodeA.degree],
+    [1, 1, 1],
+  );
+  assert.deepEqual(
+    [nodeB.inDegree, nodeB.outDegree, nodeB.degree],
+    [1, 1, 1],
+  );
+  assert.deepEqual(
+    [nodeC.inDegree, nodeC.outDegree, nodeC.degree],
+    [0, 0, 0],
+  );
+});
+
+test('knowledge graph layout and communities are deterministic and internally consistent', () => {
+  const pages = ['a', 'b', 'c', 'd', 'e', 'f'].map((id) => page(`concept.${id}`));
+  for (let index = 0; index < pages.length - 1; index += 1) {
+    pages[index].outgoing = [pages[index + 1]];
+    pages[index].relatedDocuments = [pages[index + 1]];
+  }
+
+  const first = buildKnowledgeGraph(pages);
+  const second = buildKnowledgeGraph([...pages].reverse());
+
+  assert.deepEqual(first, second);
+  assert.equal(first.stats.nodes, first.nodes.length);
+  assert.equal(first.stats.edges, first.edges.length);
+  assert.equal(first.stats.communities, first.communities.length);
+  assert.equal(first.nodes.every((node) => Number.isFinite(node.x) && Number.isFinite(node.y)), true);
+  assert.equal(first.edges.every((edge) => first.nodes.some((node) => node.id === edge.source)), true);
+  assert.equal(first.edges.every((edge) => first.nodes.some((node) => node.id === edge.target)), true);
+
+  assert.equal(
+    first.communities.reduce((sum, community) => sum + community.size, 0),
+    first.nodes.length,
+  );
+  for (const community of first.communities) {
+    assert.equal(
+      community.size,
+      first.nodes.filter((node) => node.community === community.id).length,
+    );
+  }
+});
+
+test('bridge counts represent unique cross-community neighbors, not directed edge count', () => {
+  const left = Array.from({ length: 6 }, (_, index) => page(`concept.left-${index}`));
+  const right = Array.from({ length: 6 }, (_, index) => page(`concept.right-${index}`));
+
+  for (const group of [left, right]) {
+    for (const source of group) {
+      source.outgoing = group.filter((target) => target !== source);
+      source.relatedDocuments = group.filter((target) => target !== source);
+    }
+  }
+
+  // Both directions describe one bridge neighbor for each endpoint.
+  left[0].outgoing.push(right[0]);
+  left[0].relatedDocuments.push(right[0]);
+  right[0].outgoing.push(left[0]);
+
+  const graph = buildKnowledgeGraph([...left, ...right]);
+  assert.ok(graph.stats.crossCommunityEdges > 0, 'fixture must form at least one cross-community edge');
+
+  for (const node of graph.nodes) {
+    const crossCommunityNeighbors = new Set(
+      graph.edges
+        .filter((edge) => edge.crossCommunity && (edge.source === node.id || edge.target === node.id))
+        .map((edge) => edge.source === node.id ? edge.target : edge.source),
+    );
+    assert.equal(node.bridgeConnections, crossCommunityNeighbors.size);
+    assert.ok(node.bridgeConnections <= node.degree);
+  }
+
+  const leftBridge = graph.nodes.find((node) => node.id === left[0].id);
+  const rightBridge = graph.nodes.find((node) => node.id === right[0].id);
+  assert.equal(leftBridge.bridgeConnections, 1);
+  assert.equal(rightBridge.bridgeConnections, 1);
+  assert.equal(
+    graph.edges.filter((edge) => edge.crossCommunity && (
+      (edge.source === leftBridge.id && edge.target === rightBridge.id)
+      || (edge.source === rightBridge.id && edge.target === leftBridge.id)
+    )).length,
+    2,
+  );
+});
+
+test('dense community layout keeps node markers from overlapping', () => {
+  const pages = Array.from({ length: 36 }, (_, index) => page(`concept.dense-${String(index).padStart(2, '0')}`));
+  for (const source of pages) {
+    source.outgoing = pages.filter((target) => target !== source);
+  }
+
+  const graph = buildKnowledgeGraph(pages);
+  assert.equal(graph.communities.length, 1, 'a complete graph should remain one community');
+
+  const members = graph.nodes.filter((node) => node.community === graph.communities[0].id);
+  for (let leftIndex = 0; leftIndex < members.length; leftIndex += 1) {
+    for (let rightIndex = leftIndex + 1; rightIndex < members.length; rightIndex += 1) {
+      const leftNode = members[leftIndex];
+      const rightNode = members[rightIndex];
+      const distance = Math.hypot(rightNode.x - leftNode.x, rightNode.y - leftNode.y);
+      const minimum = leftNode.radius + rightNode.radius + 3;
+      assert.ok(
+        distance + 0.2 >= minimum,
+        `${leftNode.id} and ${rightNode.id} overlap (${distance.toFixed(2)} < ${minimum.toFixed(2)})`,
+      );
+    }
+  }
+});
+
+test('narrative links stay distinct from links in the curated related section', () => {
+  const a = page('concept.a');
+  const b = page('concept.b');
+  a.outgoing = [b];
+  a.graphOutgoing = [];
+  a.relatedDocuments = [b];
+
+  const graph = buildKnowledgeGraph([a, b]);
+
+  assert.equal(graph.edges.length, 1);
+  assert.equal(graph.edges[0].kind, 'related');
+  assert.deepEqual(graph.edges[0].kinds, ['related']);
+});

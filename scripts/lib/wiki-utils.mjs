@@ -85,6 +85,17 @@ export function extractWikiLinks(markdown = '') {
   return [...String(markdown).matchAll(/\[\[([^\]\n]+)\]\]/g)].map((match) => match[1]);
 }
 
+export function markdownBeforeFinalH2(markdown = '', heading = '') {
+  const source = String(markdown);
+  const expectedHeading = String(heading).trim();
+  if (!expectedHeading) return source;
+
+  const matches = [...source.matchAll(/^##[ \t]+(.+?)[ \t]*\r?$/gm)]
+    .filter((match) => match[1].trim() === expectedHeading);
+  const finalMatch = matches.at(-1);
+  return finalMatch ? source.slice(0, finalMatch.index) : source;
+}
+
 export function createWikiLookup(documents, {
   filenameOf = (document) => document.filename,
   titleOf = (document) => document.title,

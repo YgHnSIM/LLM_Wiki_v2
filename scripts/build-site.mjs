@@ -13,6 +13,7 @@ import {
 } from './lib/artifact-readers.mjs';
 import { buildDirectoryAtomically } from './lib/atomic-directory.mjs';
 import { escapeHtml, firstParagraph, protectRenderedMath, readingMinutes, stripMarkdown, truncate } from './lib/content-format.mjs';
+import { buildKnowledgeGraph } from './lib/knowledge-graph.mjs';
 import { distDir, rawDir, rootDir, siteDir, wikiDir } from './lib/project-paths.mjs';
 import { normalizeBasePath, outputFileForUrl, withBasePath } from './lib/site-paths.mjs';
 import {
@@ -22,6 +23,7 @@ import {
   extractWikiLinks,
   formatDate,
   loadMarkdownDocuments,
+  markdownBeforeFinalH2,
   normalizeWikiName,
   slugify,
 } from './lib/wiki-utils.mjs';
@@ -159,6 +161,7 @@ const documents = loadedDocuments.map((loadedDocument) => {
     excerpt: truncate(firstParagraph(content), 210),
     minutes: readingMinutes(content),
     outgoing: [],
+    graphOutgoing: [],
     backlinks: [],
     relatedDocuments: [],
     relatedBacklinks: [],
@@ -197,6 +200,8 @@ let resolvedLinkCount = 0;
 
 for (const document of documents) {
   const outgoing = new Set();
+  const graphOutgoing = new Set();
+  const narrativeBody = markdownBeforeFinalH2(document.body, '관련 항목');
   for (const rawLink of extractWikiLinks(document.body)) {
     const targetName = rawLink.split('|')[0].split('#')[0].trim();
     const resolved = resolveWikiTarget(rawLink);
@@ -211,6 +216,11 @@ for (const document of documents) {
     }
   }
   document.outgoing = [...outgoing];
+  for (const rawLink of extractWikiLinks(narrativeBody)) {
+    const resolved = resolveWikiTarget(rawLink);
+    if (resolved.document && resolved.document !== document) graphOutgoing.add(resolved.document);
+  }
+  document.graphOutgoing = [...graphOutgoing];
 }
 
 for (const document of documents) {
@@ -240,6 +250,10 @@ for (const list of Object.values(grouped)) {
 
 const publishedDocuments = ['sources', 'concepts', 'entities', 'analyses'].flatMap((key) => grouped[key]);
 const latestUpdate = documents.map((document) => document.updated).filter(Boolean).sort().at(-1) ?? '';
+const graphData = buildKnowledgeGraph(publishedDocuments, {
+  urlFor: (document) => sitePath(document.url),
+  tagLabel,
+});
 
 const artifactReaders = [];
 for (const document of grouped.sources) {
@@ -316,9 +330,20 @@ function externalLink(href, label, className = '') {
 
 function tagLabel(tag) {
   const labels = {
+    'domain/academia': '학술 제도',
     'domain/ai': 'AI',
+    'domain/cognitive-science': '인지과학',
+    'domain/computer-science': '컴퓨터과학',
+    'domain/computer-vision': '컴퓨터 비전',
     'domain/nlp': 'NLP',
     'domain/conversational-ai': '대화형 AI',
+    'domain/human-computer-interaction': '인간-컴퓨터 상호작용',
+    'domain/linguistics': '언어학',
+    'domain/machine-learning': '기계 학습',
+    'domain/optimization': '최적화',
+    'domain/psychology': '심리학',
+    'domain/signal-processing': '신호 처리',
+    'domain/speech-processing': '음성 처리',
   };
   return labels[tag] ?? tag.replace(/^domain\//, '').replaceAll('-', ' ');
 }
@@ -440,7 +465,7 @@ function navLink(url, label, current) {
   return `<a href="${sitePath(url)}"${active ? ' aria-current="page"' : ''}>${label}</a>`;
 }
 
-function layout({ title, description, current = '', body, pageClass = '' }) {
+function layout({ title, description, current = '', body, pageClass = '', scripts = [] }) {
   const fullTitle = title === 'LLM Wiki' ? title : `${title} · LLM Wiki`;
   return `<!doctype html>
 <html lang="ko">
@@ -454,6 +479,7 @@ function layout({ title, description, current = '', body, pageClass = '' }) {
   <link rel="stylesheet" href="${sitePath('/assets/katex.min.css')}">
   <link rel="stylesheet" href="${sitePath('/assets/styles.css')}">
   <script src="${sitePath('/assets/app.js')}" defer></script>
+  ${scripts.map((script) => `<script src="${sitePath(script)}" defer></script>`).join('\n  ')}
 </head>
 <body class="${pageClass}" data-base-path="${escapeHtml(basePath)}">
   <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
@@ -468,6 +494,7 @@ function layout({ title, description, current = '', body, pageClass = '' }) {
         ${navLink('/concepts/', '개념', current)}
         ${navLink('/entities/', '인물·기관', current)}
         ${navLink('/analyses/', '비교 읽기', current)}
+        ${navLink('/graph/', '그래프', current)}
         ${navLink('/search/', '전체 검색', current)}
         <div class="mobile-nav-search">${renderSearch('mobile-search', { label: '모바일 사이트 검색' })}</div>
       </nav>
@@ -491,6 +518,7 @@ function layout({ title, description, current = '', body, pageClass = '' }) {
     <nav class="footer-meta" aria-label="보조 메뉴">
       <span>최근 문서 갱신 ${escapeHtml(latestUpdate)}</span>
       <a href="${sitePath('/search/')}">전체 검색</a>
+      <a href="${sitePath('/graph/')}">지식 그래프</a>
       <a href="${sitePath('/translations/')}">번역본 모아보기</a>
       <a href="${sitePath('/about/')}">위키 안내</a>
       <a href="${sitePath('/log/')}">변경 기록</a>
@@ -551,6 +579,7 @@ function renderHome() {
         <h1>언어 모델의<br><span>역사를 함께 읽다</span></h1>
         <p class="hero-intro">${escapeHtml(intro)}</p>
         ${renderSearch('hero-search', { large: true, label: '홈 주요 검색' })}
+        <a class="button-link graph-home-link" href="${sitePath('/graph/')}">문서 ${graphData.stats.nodes}개의 연결 지도 열기 <span aria-hidden="true">→</span></a>
       </div>
       <nav class="hero-collage hero-source-strip" aria-label="최근 원문 노트 빠른 이동">
         <p class="collage-label">최근 원문 노트</p>
@@ -597,6 +626,144 @@ function renderHome() {
     current: '/',
     body,
     pageClass: 'home-page',
+  });
+}
+
+function renderGraphPage() {
+  const topBridges = [...graphData.nodes]
+    .sort((a, b) => b.bridgeConnections - a.bridgeConnections || b.degree - a.degree || collator.compare(a.title, b.title))
+    .slice(0, 6);
+  const typeLabels = {
+    source: '원문 노트',
+    reference: '참고 자료',
+    concept: '개념',
+    entity: '인물·기관',
+    analysis: '비교 읽기',
+  };
+  const verificationOptions = [
+    ['verified', '검증됨'],
+    ['partial', '부분 검증'],
+    ['disputed', '논쟁 중'],
+    ['unverified', '미검증'],
+  ];
+  const nodesByCommunity = new Map(graphData.communities.map((community) => [
+    community.id,
+    graphData.nodes
+      .filter((node) => node.community === community.id)
+      .sort((a, b) => collator.compare(a.title, b.title)),
+  ]));
+
+  const body = `<main class="graph-main" id="main-content">
+    <header class="graph-hero">
+      <div class="graph-hero-copy">
+        <p class="eyebrow">지식 그래프</p>
+        <h1>연결을 따라 읽는<br><span>LLM의 역사</span></h1>
+        <p>본문에서 실제로 언급한 링크와 편집자가 고른 관련 읽기를 한 지도에 겹쳤습니다. 색은 연결 커뮤니티, 형태는 문서 유형, 외곽선은 검증 상태를 나타냅니다.</p>
+      </div>
+      <dl class="graph-stats" aria-label="그래프 현황">
+        <div><dt>문서</dt><dd>${graphData.stats.nodes}</dd></div>
+        <div><dt>방향 관계</dt><dd>${graphData.stats.edges}</dd></div>
+        <div><dt>연결 집단</dt><dd>${graphData.stats.communities}</dd></div>
+        <div><dt>집단 간 방향 관계</dt><dd>${graphData.stats.crossCommunityEdges}</dd></div>
+      </dl>
+    </header>
+
+    <section class="graph-workbench" data-knowledge-graph data-graph-url="${sitePath('/graph-data.json')}">
+      <form class="graph-controls" data-graph-controls>
+        <div class="graph-control graph-control--search">
+          <label for="graph-search">문서 찾기</label>
+          <input id="graph-search" type="search" list="graph-node-options" autocomplete="off" placeholder="제목 또는 별칭" data-graph-search>
+          <datalist id="graph-node-options">${graphData.nodes.map((node) => `<option value="${escapeHtml(node.title)}"></option>`).join('')}</datalist>
+        </div>
+        <div class="graph-control">
+          <label for="graph-type">문서 유형</label>
+          <select id="graph-type" data-graph-type>
+            <option value="">전체 유형</option>
+            ${Object.entries(typeLabels).map(([value, label]) => `<option value="${value}">${label}</option>`).join('')}
+          </select>
+        </div>
+        <div class="graph-control">
+          <label for="graph-verification">검증 상태</label>
+          <select id="graph-verification" data-graph-verification>
+            <option value="">전체 상태</option>
+            ${verificationOptions.map(([value, label]) => `<option value="${value}">${label}</option>`).join('')}
+          </select>
+        </div>
+        <div class="graph-control">
+          <label for="graph-relation">관계 표시</label>
+          <select id="graph-relation" data-graph-relation>
+            <option value="related">편집자가 고른 관계</option>
+            <option value="all">모든 명시 관계</option>
+            <option value="body">서술 본문 링크</option>
+          </select>
+        </div>
+        <button class="graph-reset" type="reset" data-graph-reset>초기화</button>
+      </form>
+
+      <div class="graph-community-filter" aria-label="연결 집단 필터">
+        <button type="button" class="is-active" data-community-filter="" aria-pressed="true">모든 집단</button>
+        ${graphData.communities.map((community) => `<button type="button" class="graph-community-button graph-community-${community.colorIndex % 14}" data-community-filter="${community.id}" aria-pressed="false"><span aria-hidden="true"></span>${escapeHtml(community.label)} <small>${community.size}</small></button>`).join('')}
+      </div>
+
+      <div class="graph-display">
+        <div class="graph-stage" data-graph-stage>
+          <svg class="knowledge-graph" data-graph-svg viewBox="0 0 ${graphData.dimensions.width} ${graphData.dimensions.height}" role="img" aria-labelledby="knowledge-graph-title knowledge-graph-description">
+            <title id="knowledge-graph-title">LLM Wiki 문서 연결 지도</title>
+            <desc id="knowledge-graph-description">문서 ${graphData.stats.nodes}개와 방향 관계 ${graphData.stats.edges}개를 연결 집단별로 배치한 인터랙티브 그래프입니다.</desc>
+            <text class="graph-static-message" x="${graphData.dimensions.width / 2}" y="${graphData.dimensions.height / 2}" text-anchor="middle">연결 지도를 불러오는 중입니다.</text>
+          </svg>
+          <div class="graph-zoom-controls" aria-label="그래프 확대와 이동">
+            <button type="button" data-graph-zoom="in">확대</button>
+            <button type="button" data-graph-zoom="out">축소</button>
+            <button type="button" data-graph-zoom="reset">전체 보기</button>
+          </div>
+          <p class="graph-instructions">노드를 선택하면 1촌과 2촌 연결이 차례로 드러납니다. 버튼으로 확대·축소할 수 있고, 데스크톱에서는 빈 곳을 끌어 이동하거나 Ctrl/⌘를 누른 채 휠로 확대할 수 있습니다.</p>
+          <p class="sr-only" data-graph-status role="status" aria-live="polite" aria-atomic="true"></p>
+        </div>
+
+        <aside class="graph-inspector" data-graph-inspector tabindex="-1">
+          <div data-graph-inspector-content>
+            <p class="eyebrow">선택 정보</p>
+            <h2>문서를 선택하세요</h2>
+            <p>지도에서 노드를 선택하면 관계의 방향과 연결 이유를 확인할 수 있습니다.</p>
+            <h3>집단 사이를 많이 잇는 문서</h3>
+            <ol class="graph-bridge-list">${topBridges.map((node) => `<li><button type="button" data-select-node="${escapeHtml(node.id)}"><span>${escapeHtml(node.title)}</span><small>집단 밖 이웃 ${node.bridgeConnections}</small></button></li>`).join('')}</ol>
+          </div>
+        </aside>
+      </div>
+
+      <section class="graph-legend" aria-labelledby="graph-legend-heading">
+        <div class="graph-legend-heading">
+          <p class="eyebrow">읽는 법</p>
+          <h2 id="graph-legend-heading">색만 보지 않아도 읽히는 지도</h2>
+        </div>
+        <dl class="graph-visual-key">
+          <div><dt><span class="graph-key-shape graph-key-shape--concept" aria-hidden="true"></span>원</dt><dd>개념</dd></div>
+          <div><dt><span class="graph-key-shape graph-key-shape--source" aria-hidden="true"></span>사각형</dt><dd>원문 노트</dd></div>
+          <div><dt><span class="graph-key-shape graph-key-shape--entity" aria-hidden="true"></span>마름모</dt><dd>인물·기관</dd></div>
+          <div><dt><span class="graph-key-shape graph-key-shape--analysis" aria-hidden="true"></span>육각형</dt><dd>비교 읽기</dd></div>
+          <div><dt><span class="graph-key-outline graph-key-outline--verified" aria-hidden="true"></span>실선 외곽</dt><dd>검증됨</dd></div>
+          <div><dt><span class="graph-key-outline graph-key-outline--partial" aria-hidden="true"></span>점선 외곽</dt><dd>부분 검증</dd></div>
+          <div><dt><span class="graph-key-line graph-key-line--related" aria-hidden="true"></span>굵은 실선</dt><dd>관련 읽기로 고른 관계</dd></div>
+          <div><dt><span class="graph-key-line graph-key-line--body" aria-hidden="true"></span>점선</dt><dd>서술 본문에서만 나온 링크</dd></div>
+        </dl>
+      </section>
+
+      <details class="graph-text-index">
+        <summary>텍스트 목록으로 문서 탐색</summary>
+        <p>그래프와 같은 문서를 연결 집단별 목록으로 제공합니다.</p>
+        <div class="graph-text-communities">${graphData.communities.map((community) => `<section class="graph-text-community graph-community-${community.colorIndex % 14}"><h2>${escapeHtml(community.label)} <span>${community.size}</span></h2><ul>${nodesByCommunity.get(community.id).map((node) => `<li><a href="${node.url}">${escapeHtml(node.title)}</a><small>${escapeHtml(typeLabels[node.type] ?? node.type)}</small></li>`).join('')}</ul></section>`).join('')}</div>
+      </details>
+    </section>
+  </main>`;
+
+  return layout({
+    title: '지식 그래프',
+    description: 'LLM Wiki 문서의 본문 링크와 관련 읽기를 연결 집단, 문서 유형, 검증 상태에 따라 탐색하는 지식 그래프',
+    current: '/graph/',
+    body,
+    pageClass: 'graph-page',
+    scripts: ['/assets/graph.js'],
   });
 }
 
@@ -1020,9 +1187,10 @@ const searchIndex = documents
 const buildReport = {
   generatedAt: new Date().toISOString(),
   basePath,
-  pages: documents.length + artifactReaders.length + 7,
+  pages: documents.length + artifactReaders.length + 8,
   documents: documents.length,
   publishedDocuments: publishedDocuments.length,
+  graph: graphData.stats,
   counts: Object.fromEntries(Object.keys(categoryMeta).map((key) => [key, grouped[key].length])),
   artifactCounts: {
     readers: artifactReaders.length,
@@ -1053,6 +1221,7 @@ async function buildInto(outputDir) {
     await writeHtml(outputDir, `/${key}/`, renderCategoryPage(key));
   }
   await writeHtml(outputDir, '/translations/', renderTranslationsPage());
+  await writeHtml(outputDir, '/graph/', renderGraphPage());
   await writeHtml(outputDir, '/search/', renderSearchPage());
   for (const document of documents) {
     if (document.url !== '/') await writeHtml(outputDir, document.url, renderArticle(document));
@@ -1062,6 +1231,7 @@ async function buildInto(outputDir) {
   }
   await fs.writeFile(path.join(outputDir, '404.html'), renderNotFound(), 'utf8');
   await fs.writeFile(path.join(outputDir, '.nojekyll'), '', 'utf8');
+  await fs.writeFile(path.join(outputDir, 'graph-data.json'), JSON.stringify(graphData), 'utf8');
   await fs.writeFile(path.join(outputDir, 'search-index.json'), JSON.stringify(searchIndex), 'utf8');
   await fs.writeFile(path.join(outputDir, 'build-report.json'), JSON.stringify(buildReport, null, 2), 'utf8');
 }

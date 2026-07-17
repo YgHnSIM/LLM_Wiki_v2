@@ -3,6 +3,7 @@ import test from 'node:test';
 import {
   createWikiLookup,
   extractWikiLinks,
+  markdownBeforeFinalH2,
   normalizeWikiName,
   parseWikiLink,
   slugify,
@@ -24,6 +25,38 @@ test('wiki links preserve headings and display labels', () => {
     label: 'ELIZA 구조',
   });
   assert.deepEqual(extractWikiLinks('[[ELIZA]]와 [[MADALINE|다중 ADALINE]]'), ['ELIZA', 'MADALINE|다중 ADALINE']);
+});
+
+test('markdown section boundaries use the final matching H2', () => {
+  const markdown = [
+    '# 문서',
+    '',
+    '## 관련 항목',
+    '본문에서 이름이 같은 중간 절입니다.',
+    '',
+    '## 해설',
+    '분석 본문입니다.',
+    '',
+    '## 관련 항목',
+    '- [[ELIZA]]',
+    '',
+  ].join('\n');
+
+  assert.equal(
+    markdownBeforeFinalH2(markdown, '관련 항목'),
+    [
+      '# 문서',
+      '',
+      '## 관련 항목',
+      '본문에서 이름이 같은 중간 절입니다.',
+      '',
+      '## 해설',
+      '분석 본문입니다.',
+      '',
+      '',
+    ].join('\n'),
+  );
+  assert.equal(markdownBeforeFinalH2(markdown, '없는 절'), markdown);
 });
 
 test('exact filenames win and aliases use the configured category rank', () => {
