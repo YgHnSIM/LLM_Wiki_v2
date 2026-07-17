@@ -13,7 +13,7 @@ tags:
   - domain/linguistics
   - domain/computer-science
 created: '2026-07-17'
-updated: '2026-07-17'
+updated: '2026-07-18'
 lifecycle: active
 verification: verified
 artifacts:
@@ -49,6 +49,8 @@ evidence:
     relation: contextualizes
 related:
   - concept.framenet
+  - concept.propbank
+  - concept.의미역-표지
   - concept.wordnet
   - concept.말뭉치-기반-학습
   - concept.통계적-자연어-처리
@@ -130,11 +132,11 @@ Gildea·Jurafsky의 2002년 연구는 FrameNet의 주석 문장과 프레임별 
 1. FrameNet은 프레임·LU·FE 정의와 사람이 붙인 말뭉치 주석을 제공한다.
 2. 의미역 표지 또는 frame-semantic parsing 시스템은 그 자료에서 패턴을 학습해 새 문장을 예측한다.
 
-FrameNet의 공개가 의미역 표지 연구에 중요한 자원을 제공했다는 평가는 가능하지만, 의미역 표지 전체가 1998년에 시작됐거나 FrameNet 한 자원에서만 발전했다고 쓰면 과장이다. [[023_Penn Treebank와 통계적 구문 분석|Penn Treebank]] 위에 구축된 PropBank도 다른 역할 체계와 더 넓은 동사 coverage를 제공했다.
+FrameNet의 공개가 [[의미역 표지]] 연구에 중요한 자원을 제공했다는 평가는 가능하지만, 의미역 표지 전체가 1998년에 시작됐거나 FrameNet 한 자원에서만 발전했다고 쓰면 과장이다. [[023_Penn Treebank와 통계적 구문 분석|Penn Treebank]] 위에 구축된 [[PropBank]]도 다른 역할 체계와 더 넓은 동사 coverage를 제공했다.
 
 ## PropBank·CoNLL과의 구분
 
-PropBank는 미리 존재한 Penn Treebank 구문 나무에 동사 술어별 논항 구조를 덧붙였다. 역할은 술어의 frameset 안에서 `Arg0`, `Arg1`처럼 번호로 표시되며, 같은 번호의 구체적 뜻은 술어·roleset 정의를 확인해야 한다. 반면 FrameNet은 여러 품사의 LU를 공유 의미 프레임 아래 묶고, `Buyer`, `Goods`처럼 프레임별 이름을 가진 FE를 사용한다.
+[[PropBank]]는 미리 존재한 Penn Treebank 구문 나무에 동사 술어별 논항 구조를 덧붙였다. 역할은 술어의 frameset 안에서 `Arg0`, `Arg1`처럼 번호로 표시되며, 같은 번호의 구체적 뜻은 술어·roleset 정의를 확인해야 한다. 반면 FrameNet은 여러 품사의 LU를 공유 의미 프레임 아래 묶고, `Buyer`, `Goods`처럼 프레임별 이름을 가진 FE를 사용한다.
 
 030 raw는 PropBank가 FrameNet 접근에서 “직접 영감을 받았다”고 서술한다. Palmer 등의 2005년 논문은 두 자원이 의미역 주석이라는 목표를 공유하지만 방법은 상당히 다르며, PropBank의 역할 체계가 주로 VerbNet class에 의존한다고 설명한다. 같은 논문은 Gildea·Jurafsky의 FrameNet 기반 초기 자동 의미역 표지 모델과 특징이 PropBank 실험에 영향을 준 사실도 기록한다. **자동 SRL 방법론의 확인되는 영향**과 **PropBank 말뭉치·역할 체계가 FrameNet에서 직접 파생됐다는 계보**를 구분해야 한다.
 
@@ -207,6 +209,8 @@ FrameNet은 언어 모델을 평가하거나 구조화된 감독을 더하는 �
 ## 관련 항목
 
 - [[FrameNet]]
+- [[PropBank]]
+- [[의미역 표지]]
 - [[WordNet]]
 - [[025_WordNet과 어휘 의미망]]
 - [[말뭉치 기반 학습]]

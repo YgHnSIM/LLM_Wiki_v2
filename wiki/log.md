@@ -1557,6 +1557,40 @@ raw 등록 해시:
 - 후대 ROUGE·METEOR 구현과 문맥 임베딩·학습된 평가자·사실성 지표는 버전별 1차 문헌 검토 전까지 직접 계보로 확정하지 않는다.
 - 인간 평가도 질문·지침·평가자 합의의 측정 오차를 가지므로 자동 지표 상관을 사용자 효용·안전·사실성 전체와 동일시하지 않는다.
 
+## [2026-07-18] ingest | 038 PropBank와 의미역 표지
+
+038 영어 원문을 기존 출력과 무관하게 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 그대로 보존하고 SHA-256을 등록했다. 공개 문서는 PropBank 자원과 의미역 표지 과제를 분리하고 기존 FrameNet·Penn Treebank 설명을 연결했다.
+
+변경 문서:
+
+- `raw/038_PropBank - Semantic Role Labeling and Proposition Bank.ko.md`와 대응 해설
+- `wiki/sources/038_PropBank와 의미역 표지.md`
+- `wiki/concepts/PropBank.md`, `wiki/concepts/의미역 표지.md`
+- `wiki/concepts/FrameNet.md`, `wiki/sources/030_FrameNet과 프레임 의미론.md`, `wiki/sources/023_Penn Treebank와 통계적 구문 분석.md`의 방향성 연결 보강
+- `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- Palmer·Gildea·Kingsbury의 2005년 논문으로 Penn Treebank 위의 술어-논항 층, roleset·frameset·frames file, Arg0–Arg5·ArgA·ArgM, tree node·trace 주석과 자동 역할 표지 실험을 확인했다.
+- 2002년 6월 사전 판정 공개와 2004년 3월 완전 주석·판정 완료를 복원했다. 2005년을 프로젝트 출범 시점으로 보지 않는다.
+- Arg0·Arg1에는 proto-agent·proto-patient 경향이 있지만 Arg2 이상의 번호는 roleset별 정의이며 동사 전체를 가로지르는 일관된 의미가 없다는 원 논문의 제한을 반영했다.
+- 3,342개 동사 프레임, 4,500개가 조금 넘는 frameset, 다의 동사 roleset 선택의 주석자 일치도 94%를 당시 Wall Street Journal 자료의 조건부 규모로 기록했다.
+- FrameNet이 공유 의미 프레임을 먼저 정하고 대표 용례를 표집하는 방식과 PropBank가 Penn Treebank의 모든 동사 용례를 노드에 주석하는 방식을 비교했다. 두 자원을 단순한 깊이 대 폭으로 축약하지 않았다.
+- Gildea·Jurafsky의 2002년 FrameNet 기반 SRL 선행 연구를 확인해 PropBank가 SRL 자체를 처음 발명했다는 서사를 교정했다.
+- CoNLL-2004의 부분 구문 입력과 CoNLL-2005의 완전 구문·Brown Corpus 영역 밖 평가를 구분하고, 역할 분류 점수가 논항 경계·구문 분석·영역 이동 조건에도 의존함을 기록했다.
+- PropBank가 공지시·양화·사실성·담화 관계를 포괄하지 않는 얕은 표현이며, 정보 추출·질의응답·번역 동기와 각 응용의 실증을 구분했다.
+
+raw 등록 해시:
+
+- 번역: `cc5429e34e3267634b97eef1900747ec79e57662885266a7a36ec3d872bc5654`
+- 해설: `c11a7d7f88f10cd71b5df0d6de609889164e2f7c74270042eb935987e280afa6`
+
+남은 제한:
+
+- 프로젝트에는 ACL 원문 PDF, Penn Treebank·PropBank 배포 자료나 CoNLL 평가 데이터를 복제하지 않았으며 raw에는 새 한국어 번역과 해설만 보존한다.
+- NomBank·OntoNotes·다언어 PropBank·AMR과 현대 neural SRL·LLM probe의 정의와 성능은 각 1차 문헌으로 별도 검토해야 한다.
+- 030 FrameNet과 038 PropBank의 검증 문서 안에서 역할 일반화 단위의 비교가 충분히 설명돼 현재는 별도 비교 읽기를 만들지 않았다. 구문 트리 의존성이나 의미 스키마 간 매핑이 다른 자료와 만나 독립적인 질문으로 발전하면 소스 수와 무관하게 즉시 비교 읽기로 정리한다.
+
 ## 관련 항목
 
 - [[index]]

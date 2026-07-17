@@ -14,7 +14,7 @@ tags:
   - domain/linguistics
   - domain/computer-science
 created: '2026-07-17'
-updated: '2026-07-17'
+updated: '2026-07-18'
 lifecycle: active
 verification: verified
 artifacts:
@@ -44,6 +44,8 @@ evidence:
     relation: contextualizes
 related:
   - source.030
+  - concept.propbank
+  - concept.의미역-표지
   - concept.wordnet
   - concept.말뭉치-기반-학습
   - concept.통계적-자연어-처리
@@ -139,7 +141,7 @@ FrameNet 자체는 자동 의미 분석기가 아니다. 2002년 Gildea·Jurafsk
 
 ### PropBank
 
-PropBank는 [[023_Penn Treebank와 통계적 구문 분석|Penn Treebank]] 구문 나무에 동사 술어별 `Arg0`·`Arg1` 등의 논항 구조를 덧붙였다. FrameNet은 여러 LU를 공유 프레임으로 묶고 FE에 의미 이름을 붙인다. 두 자원은 의미역 표지라는 목표 일부를 공유하지만 역할 단위·품사 범위·편찬 방법이 다르다. Palmer 등의 2005년 논문은 PropBank 역할 설계를 주로 Levin·VerbNet 계보에 두고 FrameNet과의 상호 보완·mapping을 설명한다. 같은 논문에 기록된 FrameNet 기반 초기 SRL 모델의 방법론적 영향과 PropBank corpus 자체의 기원을 구분해야 한다. CoNLL-2004·2005 의미역 shared task도 FrameNet이 아니라 PropBank 기반 자료를 사용했다.
+[[PropBank]]는 [[023_Penn Treebank와 통계적 구문 분석|Penn Treebank]] 구문 나무에 동사 술어별 `Arg0`·`Arg1` 등의 논항 구조를 덧붙였다. FrameNet은 여러 LU를 공유 프레임으로 묶고 FE에 의미 이름을 붙인다. 두 자원은 [[의미역 표지]]라는 목표 일부를 공유하지만 역할 단위·품사 범위·편찬 방법이 다르다. Palmer 등의 2005년 논문은 PropBank 역할 설계를 주로 Levin·VerbNet 계보에 두고 FrameNet과의 상호 보완·mapping을 설명한다. 같은 논문에 기록된 FrameNet 기반 초기 SRL 모델의 방법론적 영향과 PropBank corpus 자체의 기원을 구분해야 한다. CoNLL-2004·2005 의미역 shared task도 FrameNet이 아니라 PropBank 기반 자료를 사용했다.
 
 ### AMR
 
@@ -187,3 +189,5 @@ BERT·GPT 계열이 FrameNet 주석 없이도 역할 정보를 어느 정도 예
 - [[통계적 자연어 처리]]
 - [[023_Penn Treebank와 통계적 구문 분석]]
 - [[규칙 기반 AI에서 데이터 기반 학습으로]]
+- [[PropBank]]
+- [[의미역 표지]]

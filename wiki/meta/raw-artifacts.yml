@@ -592,3 +592,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: c8bbbd2970d80e01616cce636ac48f0a53cfdad1ed443cfd9bd2a67a5d2915ec
+  - path: "raw/038_PropBank - Semantic Role Labeling and Proposition Bank.ko.md"
+    role: translation
+    order_prefix: "038"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: cc5429e34e3267634b97eef1900747ec79e57662885266a7a36ec3d872bc5654
+  - path: "raw/038_PropBank - Semantic Role Labeling and Proposition Bank.commentary.ko.md"
+    role: commentary
+    order_prefix: "038"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: c11a7d7f88f10cd71b5df0d6de609889164e2f7c74270042eb935987e280afa6

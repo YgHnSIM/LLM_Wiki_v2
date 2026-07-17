@@ -13,7 +13,7 @@ tags:
   - domain/machine-learning
   - domain/linguistics
 created: '2026-07-16'
-updated: '2026-07-17'
+updated: '2026-07-18'
 lifecycle: active
 verification: verified
 artifacts:
@@ -57,6 +57,7 @@ related:
   - source.012
   - source.014
   - source.029
+  - concept.propbank
   - analysis.규칙-기반-ai에서-데이터-기반-학습으로
 ---
 # Penn Treebank와 통계적 구문 분석
@@ -113,6 +114,8 @@ raw의 gapping 예시도 Treebank II와 맞지 않는다. 1994년 논문은 완�
 Collins의 1997년 ACL 논문은 WSJ Sections 02–21 약 4만 문장으로 학습하고 Section 23의 2,416문장으로 시험했다. 논문이 보고한 최종 결과는 구성 성분 정밀도 88.1%, 재현율 87.5%다. 이를 “1997년 박사학위 연구의 Model 3 F1 약 88%”로 바꾸거나 인간 주석자 간 일치도와 직접 같은 조건에서 비교하지 않는다. 개발 집합은 이 논문에 명시되지 않았으므로 02–21/22/23 분할 전체를 해당 연구나 1993년 프로젝트의 공식 설계로 소급하지 않는다.
 
 ## 파싱 밖의 영향과 경계
+
+Penn Treebank의 구문 노드는 후대 [[PropBank]]가 술어별 논항 역할을 붙이는 기반이 됐다. 이 결합은 같은 트리에서 구문 위치와 의미 역할을 함께 연구하게 했지만, Penn Treebank 자체가 의미역을 완성해 제공했다는 뜻은 아니다.
 
 Penn Treebank의 품사·구문 주석은 후대 자원의 기반이 됐다. LDC 카탈로그는 Proposition Bank I을 Treebank-2에 대한 추가 주석으로 연결한다. 그러나 [[FrameNet]]처럼 독립된 이론과 자료로 발전한 프로젝트까지 Penn Treebank가 직접 낳았다고 쓰지 않는다.
 
@@ -175,4 +178,5 @@ raw가 드는 Brill 태거 사례도 조건이 다르다. 1992년 논문은 Penn
 - [[012_상징 규칙에서 통계 학습으로]]
 - [[014_증강 전이망과 절차적 자연어 파싱]]
 - [[029_통계적 구문 분석과 어휘화 파서]]
+- [[PropBank]]
 - [[규칙 기반 AI에서 데이터 기반 학습으로]]
