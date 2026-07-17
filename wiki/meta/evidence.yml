@@ -1931,3 +1931,35 @@ sources:
     doi: 10.1162/tacl_a_00134
     url: https://aclanthology.org/Q15-1016/
     language: en
+  kingma-ba-2015-adam:
+    title: 'Adam: A Method for Stochastic Optimization'
+    authors: [Diederik P. Kingma, Jimmy Ba]
+    published: 2015
+    source_type: primary
+    kind: conference-paper
+    url: https://arxiv.org/abs/1412.6980
+    language: en
+  reddi-kale-kumar-2018-adam-convergence:
+    title: On the Convergence of Adam and Beyond
+    authors: [Sashank J. Reddi, Satyen Kale, Sanjiv Kumar]
+    published: 2018
+    source_type: primary
+    kind: conference-paper
+    url: https://openreview.net/forum?id=ryQu7f-RZ
+    language: en
+  wilson-et-al-2017-adaptive-methods:
+    title: The Marginal Value of Adaptive Gradient Methods in Machine Learning
+    authors: [Ashia C. Wilson, Rebecca Roelofs, Mitchell Stern, Nati Srebro, Benjamin Recht]
+    published: 2017
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.neurips.cc/paper_files/paper/2017/hash/81b3833e2504647f9d794f7d7b9bf341-Abstract.html
+    language: en
+  loshchilov-hutter-2019-adamw:
+    title: Decoupled Weight Decay Regularization
+    authors: [Ilya Loshchilov, Frank Hutter]
+    published: 2019
+    source_type: primary
+    kind: conference-paper
+    url: https://openreview.net/forum?id=Bkg6RiCqY7
+    language: en

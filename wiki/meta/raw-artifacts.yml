@@ -688,3 +688,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 8b209a7d6ba2fba3a7118ac51bd744f7d1467a9b496a37ac7ab636218ba2a512
+  - path: "raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.ko.md"
+    role: translation
+    order_prefix: "044"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: e5adfc6af2342ab5f8f71638aaa79ca0c29c81d42956ccc130070ce372735e23
+  - path: "raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.commentary.ko.md"
+    role: commentary
+    order_prefix: "044"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: cb185e4736e5b01e69f968481e65362d40256b4e3c22a4ba2a1f77dc2a2fe8e6

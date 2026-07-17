@@ -1810,6 +1810,43 @@ raw 등록 해시:
 - 특정 언어·분야의 편향, 재학습 안정성, downstream 성능은 corpus snapshot·전처리·하이퍼파라미터·평가 자료별 후속 근거가 필요하다.
 - 031 LSI·035 NPLM·043 Word2Vec를 함께 읽으면 계수 기반과 예측 기반 표현의 차이를 알고리즘 이름보다 문맥·가중·목적·출력 선택으로 비교할 수 있다. 044 GloVe가 바로 다음 소스로 예정되어 있어, 이 비교는 044의 전역 동시출현 목적을 검증한 뒤 독립적인 ‘비교 읽기’ 문서로 확장할지 판단한다.
 
+## [2026-07-18] ingest | 044 GloVe와 Adam의 서로 다른 2014년 전환
+
+044 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 같은 2014년이라는 이유로 묶인 GloVe 표현 학습과 Adam 최적화를 독립 연구로 나누고, 각각 원 논문과 후속 검증의 범위를 복원했다.
+
+변경 문서:
+
+- `raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.ko.md`와 대응 해설
+- `wiki/sources/044_GloVe와 Adam의 서로 다른 2014년 전환.md`
+- `wiki/concepts/GloVe.md`, `wiki/concepts/Adam 최적화기.md`
+- `wiki/concepts/단어 임베딩.md`, `wiki/concepts/경사하강법.md`의 관련 목적·갱신 보강
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- GloVe의 `global`은 국소 문맥 창에서 생긴 단어–문맥 사건을 말뭉치 전체 희소 계수로 집계한다는 뜻으로 한정했다. 문서 전체의 어순·담화를 한 번에 입력하거나 장거리 의미를 직접 보는 모델로 설명하지 않았다.
+- 학습 목적이 $X_{ij}>0$인 항만 순회함을 기록했다. 5만×5만 dense 행렬의 모든 0을 저장·계산한다는 원문 설명을 교정했다.
+- 동시출현 조건부확률 비율에서 log-bilinear 회귀를 유도하는 논리를 복원하고, $x_{max}=100$, $\alpha=3/4$를 대표 실험 설정이지 모든 말뭉치의 보편 최적값으로 보지 않았다.
+- GloVe 60억·420억 token 모형의 유추 결과와 제한된 유사도·CoNLL-2003 NER 평가를 조건별로 기록했다. 희귀어·OOV 해결, 번역·검색·감성 분석 전체의 향상이나 Word2Vec에 대한 보편적 우월성으로 일반화하지 않았다.
+- Word2Vec의 SGNS도 국소 쌍의 전체 분포와 shifted PMI를 반영하므로 Word2Vec은 국소 정보만, GloVe만 전역 통계를 쓴다는 단순 대립을 채택하지 않았다.
+- Adam은 2014년 12월 공개·ICLR 2015 발표로 구분하고, Kingma와 Ba의 서로 다른 당시 소속을 기록했다. GloVe와 Adam은 공통 연대만 있을 뿐 공동 기술 계보가 아니다.
+- $m_t$를 gradient 지수평균, $v_t$를 squared-gradient의 2차 raw moment로 설명했다. $v_t$를 gradient 분산·잡음·안정성의 직접 추정치로 부르지 않았다.
+- 기본 SGD도 좌표별 gradient가 달라 실제 갱신량이 다르며, Adam은 그 이력을 추가로 precondition한다. 층 의미를 이해해 자동으로 정답 학습률을 배정한다는 비유를 교정했다.
+- 원 Adam의 기본값은 출발점이지 모든 과제의 무조정 수렴·훈련 시간 절반·최종 일반화와 재현성 보장이 아니다. Reddi 등의 수렴 반례와 Wilson 등의 optimizer별 해·일반화 차이를 함께 기록했다.
+- 원 Adam, 손실의 L2 penalty, 직접 weight decay와 AdamW의 decoupled update를 시기·정의별로 분리했다.
+- GloVe 원 논문이 AdaGrad를 사용했음을 확인해 GloVe와 Adam의 결합이 현대 언어 AI를 직접 가능하게 했다는 서사를 제거했다.
+
+raw 등록 해시:
+
+- 번역: `e5adfc6af2342ab5f8f71638aaa79ca0c29c81d42956ccc130070ce372735e23`
+- 해설: `cb185e4736e5b01e69f968481e65362d40256b4e3c22a4ba2a1f77dc2a2fe8e6`
+
+남은 제한:
+
+- 프로젝트에는 원 GloVe co-occurrence 자료·사전학습 벡터·훈련 코드와 Adam 실험 코드를 복제하지 않았으며 raw에는 새 번역과 해설만 보존한다.
+- 특정 LLM의 optimizer 구성·상태 정밀도·memory·성능은 모델별 학습 보고와 코드가 필요하다. 원 Adam 논문만으로 현대 모든 모델의 채택과 효과를 확정하지 않는다.
+- 031 LSI·043 SGNS·044 GloVe와 Levy 등의 후속 비교를 함께 읽으면 “신경 예측 대 행렬 계수”보다 문맥 정의·가중·목적·저랭크 제약이 더 실질적인 비교축이라는 독립 논점이 성립한다. 044 ingest 배포 뒤 이 주제를 ‘비교 읽기’ 분석으로 별도 작성한다.
+
 ## 관련 항목
 
 - [[index]]
