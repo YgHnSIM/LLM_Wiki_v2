@@ -672,3 +672,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 35e683c3d681f7f9a4bd47d30a1b45d8d278e8a476e35714c02fa91464c8d02f
+  - path: "raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.ko.md"
+    role: translation
+    order_prefix: "043"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 2d4b3b5e62a7ce4c120e417751ffc13b2a5ec9c23a3f1245f14dd366f073df80
+  - path: "raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.commentary.ko.md"
+    role: commentary
+    order_prefix: "043"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 8b209a7d6ba2fba3a7118ac51bd744f7d1467a9b496a37ac7ab636218ba2a512

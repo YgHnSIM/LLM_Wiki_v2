@@ -1775,6 +1775,41 @@ raw 등록 해시:
 - 언어·지역별 coverage와 reference 품질, 특정 NLP·LLM 시스템의 실제 Wikidata 사용 및 성능은 데이터 snapshot·과제·구현별 후속 근거가 필요하다.
 - 039 Freebase와 042 Wikidata를 함께 읽으면서 node identity를 넘어 qualifier·reference·rank가 관계의 적용 범위를 어떻게 바꾸는지가 선명해졌다. 기존 [[구조화된 의미 자원은 무엇을 노드로 삼는가]]의 후속 확장 후보지만, Wikidata statement와 Freebase CVT 비교만으로 별도 문서의 범위가 충분히 넓지 않아 현재 문서 연결로 보존한다.
 
+## [2026-07-18] ingest | 043 Word2Vec와 효율적 정적 단어 임베딩
+
+043 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 Word2Vec을 단일 의미 이해 발명으로 보지 않고 CBOW·Skip-gram과 출력 근사 선택을 구분했으며, 벡터 유추와 정적 표현의 실제 범위를 복원했다.
+
+변경 문서:
+
+- `raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.ko.md`와 대응 해설
+- `wiki/sources/043_Word2Vec와 효율적 정적 단어 임베딩.md`
+- `wiki/concepts/Word2Vec.md`, `wiki/concepts/CBOW.md`, `wiki/concepts/Skip-gram.md`
+- `wiki/concepts/단어 임베딩.md`의 SGNS·shifted PMI·정적 표현 연결 보강
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- Mikolov 등의 2013년 첫 논문은 밀집 신경 단어 표현의 최초 발명이 아니라 CBOW·Skip-gram으로 기존 신경 언어 모형의 계산을 단순화하고 16억 단어 규모까지 확장한 연구로 위치시켰다.
+- 첫 논문의 hierarchical softmax와 후속 NeurIPS 논문의 negative sampling·빈출어 subsampling·phrase 학습을 분리했다.
+- CBOW는 여러 문맥 벡터를 집계해 중심 단어를 예측하고 Skip-gram은 중심 단어에서 문맥별 쌍을 만든다는 방향 차이를 복원했다. 희귀어에 유리하다는 초기 관찰을 OOV 해결과 동일시하지 않았다.
+- SGNS에는 중심 단어·문맥의 두 벡터 행렬이 있고 관측 쌍과 표본 음성 쌍의 점곱을 최적화함을 기록했다. 최종 단어 벡터끼리 모든 양성은 가깝고 모든 미관측 쌍은 멀어지는 단순 대칭 목적이 아니다.
+- Levy·Goldberg의 분석으로 SGNS와 `PMI(w,c)-log k` 행렬 분해의 연결을 보강했다. 희소 동시출현 행렬은 저장·가중·저랭크 분해가 가능하므로 예측 방법과 계수 방법을 단순한 신구 대립으로 두지 않았다.
+- `king−man+woman≈queen`은 관계별 벡터 차이에 대한 최근접 이웃 평가이며 말뭉치·빈도·차원·창·정규화·검색식에 민감하다고 한정했다. 인간과 같은 의미 이해·사실 추론의 증거로 확대하지 않았다.
+- 부정 샘플링은 학습 쌍마다 전체 어휘 정규화를 피하고 소수 표본을 처리한다. 비용이 매 예시마다 어휘 크기에 직접 비례한다는 원문 서술을 교정했다.
+- 기본 Word2Vec의 word type당 하나인 정적 벡터, 다의성·국소 문맥·말뭉치 편향·OOV 한계를 기록했다. 구현상 기존 어휘 벡터의 추가 학습은 가능하므로 점진 갱신이 원리적으로 불가능하다는 단정도 채택하지 않았다.
+- 분류·번역·검색·감성 분석의 실제 성능과 제품 채택은 과제·시스템별 근거가 필요하며, GloVe·FastText·ELMo·BERT·GPT를 Word2Vec의 직접 단일 계보로 묶지 않았다.
+
+raw 등록 해시:
+
+- 번역: `2d4b3b5e62a7ce4c120e417751ffc13b2a5ec9c23a3f1245f14dd366f073df80`
+- 해설: `8b209a7d6ba2fba3a7118ac51bd744f7d1467a9b496a37ac7ab636218ba2a512`
+
+남은 제한:
+
+- 프로젝트에는 Google News 사전학습 벡터·원 훈련 코드·말뭉치와 유추 자료를 복제하지 않았으며 raw에는 새 번역과 해설만 보존한다.
+- 특정 언어·분야의 편향, 재학습 안정성, downstream 성능은 corpus snapshot·전처리·하이퍼파라미터·평가 자료별 후속 근거가 필요하다.
+- 031 LSI·035 NPLM·043 Word2Vec를 함께 읽으면 계수 기반과 예측 기반 표현의 차이를 알고리즘 이름보다 문맥·가중·목적·출력 선택으로 비교할 수 있다. 044 GloVe가 바로 다음 소스로 예정되어 있어, 이 비교는 044의 전역 동시출현 목적을 검증한 뒤 독립적인 ‘비교 읽기’ 문서로 확장할지 판단한다.
+
 ## 관련 항목
 
 - [[index]]

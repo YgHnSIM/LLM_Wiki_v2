@@ -1898,3 +1898,36 @@ sources:
     kind: software-archive
     url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/query_limits
     language: en
+  mikolov-yih-zweig-2013-linguistic-regularities:
+    title: Linguistic Regularities in Continuous Space Word Representations
+    authors: [Tomas Mikolov, Wen-tau Yih, Geoffrey Zweig]
+    published: 2013
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/N13-1090/
+    language: en
+  mikolov-et-al-2013-negative-sampling:
+    title: Distributed Representations of Words and Phrases and their Compositionality
+    authors: [Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg S. Corrado, Jeffrey Dean]
+    published: 2013
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.neurips.cc/paper/2013/hash/9aa42b31882ec039965f3c4923ce901b-Abstract.html
+    language: en
+  levy-goldberg-2014-sgns-pmi:
+    title: Neural Word Embedding as Implicit Matrix Factorization
+    authors: [Omer Levy, Yoav Goldberg]
+    published: 2014
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.neurips.cc/paper_files/paper/2014/hash/b78666971ceae55a8e87efb7cbfd9ad4-Abstract.html
+    language: en
+  levy-goldberg-dagan-2015-distributional-similarity:
+    title: Improving Distributional Similarity with Lessons Learned from Word Embeddings
+    authors: [Omer Levy, Yoav Goldberg, Ido Dagan]
+    published: 2015
+    source_type: primary
+    kind: journal-article
+    doi: 10.1162/tacl_a_00134
+    url: https://aclanthology.org/Q15-1016/
+    language: en
