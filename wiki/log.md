@@ -1466,6 +1466,39 @@ raw 등록 해시:
 - 정적 임베딩의 편향·유사도 평가, word2vec·GloVe의 별도 목적, sampled·hierarchical softmax와 신경 언어 모형의 후속 성능은 해당 1차 문헌으로 추가 검토해야 한다.
 - 이번 자료는 별도 비교 읽기 신설보다 기존 [[N-gram에서 LLM으로]]의 핵심 공백을 보강하는 편이 합성 가치가 높았다. 새 분석 문서를 만들지 않고 검증된 기존 분석에 연속 표현 전환을 통합했다.
 
+## [2026-07-18] ingest | 036 잠재 디리클레 할당과 베이지안 토픽 모델링
+
+036 영어 원문을 기존 출력과 무관하게 새로 번역하고 12절 학습용 해설을 작성했다. 깨진 중복 표기를 $K$, $\theta_d$, $\phi_k$, $\alpha$, $\beta$의 표준 MathJax 표현으로 복원했다. 검사된 번역·해설 쌍은 `raw/`에 그대로 보존하고 SHA-256을 등록했다.
+
+변경 문서:
+
+- `raw/036_Latent Dirichlet Allocation Bayesian Topic Modeling Framework.ko.md`와 대응 해설
+- `wiki/sources/036_잠재 디리클레 할당과 베이지안 토픽 모델링.md`
+- `wiki/concepts/잠재 디리클레 할당.md`
+- `wiki/sources/031_잠재 의미 분석과 확률적 잠재 의미 색인.md`, `wiki/concepts/확률적 잠재 의미 분석.md`의 LDA 연결 보강
+- `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- Blei·Ng·Jordan의 2003년 JMLR 논문으로 pLSI의 문서 수준 생성 모형 부재와 $kV+kM$ 매개변수 증가, LDA의 문서별 $\theta\sim\operatorname{Dir}(\alpha)$와 토큰별 토픽·단어 생성 구조를 확인했다.
+- 최초 기본 모형의 $\beta$는 토픽-단어 조건부확률 행렬이며 각 토픽 분포를 $\operatorname{Dir}(\beta)$에서 뽑지 않는다는 점을 복원했다. 논문 §5.4의 smoothed LDA가 별도 Dirichlet $\eta$를 추가한다는 점과 현대 표기를 구분했다.
+- 단어 주머니를 무조건적 독립이 아니라 순서에 대한 교환 가능성으로 설명하고, 잠재 혼합을 주변화한 같은 문서의 단어들은 의존할 수 있음을 기록했다.
+- 정확한 사후분포가 다루기 어려워 평균장 $q(\theta,z\mid\gamma,\varphi)$와 변분 EM을 사용한다는 점을 확인했다. 축약 깁스 표집은 후속 방법으로 분리했다.
+- 전역 모형 매개변수 수가 문서 수와 함께 늘지 않는 것과 문서별·토큰별 지역 상태가 필요 없다는 설명을 구분했다. 학습과 새 문서 추론 모두 $\gamma_d$와 $\varphi_{dn}$ 같은 근사 사후 상태를 계산한다.
+- AP 문서 예측, Reuters-21578의 50토픽 분류 특징, EachMovie 협업 필터링이라는 직접 실험만 원 논문의 증거로 남기고, 광범위한 정치학·역사학·도서관·전자상거래 응용은 후대 검증 대상으로 구분했다.
+- 토픽이 단어 확률분포인 잠재변수이며 원 논문도 인식론적 주장을 하지 않는다고 밝힌 점을 반영했다. perplexity, 인간 topic coherence와 downstream 성능을 별도 평가 질문으로 나눴다.
+
+raw 등록 해시:
+
+- 번역: `3d3321f2ae6021dee9c6b5d4f41a834f2335749a4ee69cf3ef162130edf51f32`
+- 해설: `de935f246242424cf7619fe0c0aa62569f60a7834d078df42beafd5b49f39d42`
+
+남은 제한:
+
+- 프로젝트에는 JMLR 원문 PDF, AP·Reuters-21578·EachMovie 자료나 당시 구현 코드를 복제하지 않았으며 raw에는 새 한국어 번역과 해설만 보존한다.
+- 후대의 collapsed Gibbs sampling, topic coherence, dynamic·supervised·correlated topic model과 hierarchical Dirichlet process의 정의·평가는 각 1차 문헌으로 별도 검토해야 한다.
+- 031의 pLSI와 036의 LDA 차이는 기존 source·concept 안에서 직접 비교할 수 있어 별도 비교 읽기를 만들지 않았다. 토픽 품질 평가나 잠재 표현의 전역/지역 분리가 다른 자료와 만나 독립적인 질문이 되면 문서 수와 무관하게 즉시 비교 읽기로 발전시킨다.
+
 ## 관련 항목
 
 - [[index]]
