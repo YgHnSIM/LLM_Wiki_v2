@@ -480,3 +480,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 326f7de3fe99b5b664e4f30cab3800c1b6fde83d271a07960bd20f9577f3b8c7
+  - path: "raw/031_Latent Semantic Analysis and Topic Models Discovering Hidden Structure in Text.ko.md"
+    role: translation
+    order_prefix: "031"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 0b5afef4d6ea95296899e2eeadee49727f3604a8b0d38217bd16ed1f3e427174
+  - path: "raw/031_Latent Semantic Analysis and Topic Models Discovering Hidden Structure in Text.commentary.ko.md"
+    role: commentary
+    order_prefix: "031"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 691c6752aa91440d33687bc029a2b21f7b7dd7e3a4544801249c0fe04e272658

@@ -1599,3 +1599,47 @@ sources:
     kind: dataset-release
     url: https://berkeleyfn.framenetbr.ufjf.br/framenet_data
     language: en
+  dumais-et-al-1988-lsa-access:
+    title: Using Latent Semantic Analysis to Improve Access to Textual Information
+    authors: [Susan T. Dumais, George W. Furnas, Thomas K. Landauer, Scott Deerwester, Richard A. Harshman]
+    published: 1988
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1145/57167.57214
+    url: https://doi.org/10.1145/57167.57214
+    language: en
+  deerwester-et-al-1990-lsi:
+    title: Indexing by Latent Semantic Analysis
+    authors: [Scott Deerwester, Susan T. Dumais, George W. Furnas, Thomas K. Landauer, Richard Harshman]
+    published: 1990
+    source_type: primary
+    kind: journal-article
+    doi: '10.1002/(SICI)1097-4571(199009)41:6<391::AID-ASI1>3.0.CO;2-9'
+    url: https://doi.org/10.1002/(SICI)1097-4571(199009)41:6%3C391::AID-ASI1%3E3.0.CO;2-9
+    language: en
+  landauer-foltz-laham-1998-lsa:
+    title: An Introduction to Latent Semantic Analysis
+    authors: [Thomas K. Landauer, Peter W. Foltz, Darrell Laham]
+    published: 1998
+    source_type: primary-retrospective
+    kind: journal-article
+    doi: 10.1080/01638539809545028
+    url: https://doi.org/10.1080/01638539809545028
+    language: en
+  hofmann-1999-plsi:
+    title: Probabilistic Latent Semantic Indexing
+    authors: [Thomas Hofmann]
+    published: 1999
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1145/312624.312649
+    url: https://doi.org/10.1145/312624.312649
+    language: en
+  blei-ng-jordan-2003-lda:
+    title: Latent Dirichlet Allocation
+    authors: [David M. Blei, Andrew Y. Ng, Michael I. Jordan]
+    published: 2003
+    source_type: primary
+    kind: journal-article
+    url: https://www.jmlr.org/papers/v3/blei03a.html
+    language: en
