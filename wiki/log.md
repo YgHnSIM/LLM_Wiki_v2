@@ -1532,6 +1532,31 @@ raw 등록 해시:
 - 후대 ROUGE 구현의 F1·tokenization 설정, METEOR 버전별 학습 매개변수와 다국어 모듈, BERTScore·COMET·LLM-as-a-judge의 타당성은 각 문헌으로 별도 검토해야 한다.
 - BLEU·ROUGE·METEOR를 함께 검증하면서 분모·대응 단위·집계·과제 목표가 모델 선택에 서로 다른 유인을 준다는 독립적인 질문이 성립했다. 037 ingest를 원격에 반영한 직후 다음 소스보다 먼저 ‘비교 읽기’ 분석을 별도 content 커밋으로 작성한다.
 
+## [2026-07-18] content | 자동 평가 지표는 무엇을 보상하는가
+
+033 BLEU, 034 MERT, 037 ROUGE·METEOR와 기존 검증 문서를 함께 읽어 `wiki/analyses/자동 평가 지표는 무엇을 보상하는가.md`를 ‘비교 읽기’에 추가했다. 정해진 소스 수를 묶지 않고, 세 지표의 분모·대응 단위·순서·집계 방식이 모델 선택과 최적화에 서로 다른 유인을 준다는 독립적인 질문을 중심으로 범위를 정했다.
+
+변경 문서:
+
+- `wiki/analyses/자동 평가 지표는 무엇을 보상하는가.md`
+- `wiki/concepts/조건부 확률.md`, `wiki/analyses/N-gram에서 LLM으로.md`의 중복 상호 관계 정리
+- `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+비교 근거와 해석:
+
+- 후보 측 modified precision을 쓰는 BLEU, 참조 측 recall을 중심으로 한 ROUGE-N, precision·recall을 결합하되 recall을 크게 가중한 METEOR를 같은 중첩 수의 서로 다른 정규화로 비교했다.
+- 정확 n-gram, LCS·skip-bigram, exact·stem·WordNet synonym unigram 정렬이 어떤 표현 변이를 정답으로 인정하는지 구분했다. 각 순서 신호가 문법·유창성 전체가 아니라 국소 연속성·순서 보존·청크 단편화의 근사임을 명시했다.
+- 참조 수·토큰화·대소문자·stemming·길이 제한이 부수 설정이 아니라 점수의 측정 대상과 모델 유인을 바꾸는 조건임을 BLEU·ROUGE·METEOR 원 실험에서 연결했다.
+- BLEU의 말뭉치 집계, ROUGE의 DUC 시스템 평균, METEOR의 7개 시스템 수준 0.964와 문장별 평균 0.331·0.347을 비교해 인간 상관이 지표의 고정 속성이 아니라 표본과 집계 단위의 관계임을 보였다.
+- MERT가 BLEU 같은 개발 지표를 직접 최적화하면 측정식의 precision·recall·길이·순서 가정이 decoder 특징 가중치와 후보 선택의 보상 규칙이 된다는 점을 연결했다.
+- 확인된 사실, 비교를 통한 해석, 아직 입증되지 않은 현대 의미 지표·LLM 평가 계보를 별도 절로 분리했다.
+
+검증 상태와 제한:
+
+- 외부 근거 7건과 raw artifact 6건을 연결했으며, 비교 해석이 포함되므로 `verification: partial`로 두었다.
+- 후대 ROUGE·METEOR 구현과 문맥 임베딩·학습된 평가자·사실성 지표는 버전별 1차 문헌 검토 전까지 직접 계보로 확정하지 않는다.
+- 인간 평가도 질문·지침·평가자 합의의 측정 오차를 가지므로 자동 지표 상관을 사용자 효용·안전·사실성 전체와 동일시하지 않는다.
+
 ## 관련 항목
 
 - [[index]]
