@@ -15,7 +15,7 @@ tags:
   - domain/cognitive-science
   - domain/computer-science
 created: '2026-07-16'
-updated: '2026-07-16'
+updated: '2026-07-17'
 lifecycle: active
 verification: verified
 artifacts:
@@ -51,6 +51,7 @@ evidence:
     relation: contextualizes
 related:
   - source.025
+  - concept.framenet
   - entity.조지-밀러
   - concept.단어-의미-중의성-해소
   - concept.lesk-알고리즘
@@ -135,7 +136,7 @@ WordNet 설계는 인간 lexical memory에 관한 심리언어학 이론에서 �
 
 WordNet의 명시적 이산 graph와 neural network의 distributed representation도 다른 표상이다. word embedding은 corpus에서 연속 vector를 학습한다. WordNet 관계를 embedding의 후처리나 학습 제약에 이용할 수 있지만, 관계를 활용했다는 사실만으로 Word2Vec·BERT·LLM이 WordNet에서 직접 발전했다고 볼 수 없다.
 
-FrameNet, PropBank, 일반 knowledge graph 역시 구조화된 언어·지식 자원이라는 넓은 공통점은 있으나 표현 단위와 이론적 목적이 다르다. 실제 통합·링크가 확인되는 경우와 역사적 직접 계보를 구분해야 한다.
+[[FrameNet]], PropBank, 일반 knowledge graph 역시 구조화된 언어·지식 자원이라는 넓은 공통점은 있으나 표현 단위와 이론적 목적이 다르다. 실제 통합·링크가 확인되는 경우와 역사적 직접 계보를 구분해야 한다.
 
 ## 출처
 
@@ -153,6 +154,7 @@ FrameNet, PropBank, 일반 knowledge graph 역시 구조화된 언어·지식 �
 ## 관련 항목
 
 - [[025_WordNet과 어휘 의미망]]
+- [[FrameNet]]
 - [[조지 밀러]]
 - [[단어 의미 중의성 해소]]
 - [[Lesk 알고리즘]]

@@ -1216,6 +1216,35 @@ WebGL 장면에서 연결선이 노드를 압도하고 일부 조작이 실제 3
 - 선택 초점에서는 선택 노드·직접 이웃·활성 경로의 의미색만 유지하고, 2촌은 저채도 회색, 그 밖의 노드·검증 셸·라벨과 비선택 관계선은 거의 완전한 중성 회색으로 낮췄다. 비선택 관계선의 불투명도도 함께 줄여 선택 관계의 방향색과 광선이 먼저 읽히게 했다.
 - 전체 검사에서 단위 테스트 41개, 위키 150문서 lint, 사이트 216페이지 빌드와 14,646개 로컬 참조 검사를 통과했다. 실제 브라우저에서 Q/E·WASD 궤도 조작, Pointer Lock 제한 환경의 드래그 안내, 선택 중력의 `attracting → focused`와 해제 복원의 `restoring → idle`, WebGL 콘솔 오류가 없음을 확인했다.
 
+## [2026-07-17] ingest | 030 FrameNet과 프레임 의미론
+
+030 영어 원문을 기존 출력과 무관하게 새로 번역하고 12절 학습용 해설을 작성했다. 원문의 중복·통화기호 손상 세 곳은 문맥에 맞는 문장으로 한 번만 복원했으며, 원문의 과장과 오류 가능성은 번역문에서 임의로 바꾸지 않고 해설과 공개 위키에서 별도로 검증했다. 검사된 번역·해설 쌍은 `raw/`에 그대로 보존하고 SHA-256을 등록했다.
+
+변경 문서:
+
+- `raw/030_FrameNet - A Computational Resource for Frame Semantics.ko.md`와 대응 해설
+- `wiki/sources/030_FrameNet과 프레임 의미론.md`
+- `wiki/concepts/FrameNet.md`
+- `wiki/concepts/WordNet.md`, `wiki/sources/011_개념 의존.md`, `wiki/sources/023_Penn Treebank와 통계적 구문 분석.md`, `wiki/sources/025_WordNet과 어휘 의미망.md`의 방향성 본문 및 `related` 연결
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- Baker·Fillmore·Lowe의 1998년 보고에서 FrameNet이 3년 사업의 2년 차였고, 당시 약 1만 주석 문장·200개 미만 lemma·약 12개 프레임과 개발 중 도구를 가진 상태였음을 확인했다.
+- 2003년 ICSI 작업 보고서로 2001년 5월 starter lexicon 공개와 2002년 가을 확대 공개를 확인해 “1998년 최초 공개 릴리스”를 교정했다.
+- 의미 프레임·LU·프레임별 FE와 FE/GF/PT 주석 층, 수작업 frame design·말뭉치 표집·주석·entry writing 절차를 분리했다.
+- 2024년 프로젝트 회고의 `Commerce_buy` 표를 예시로 한정하고 R1.7 XML을 대조해 6개 LU와 FE coreness를 확인했다. raw의 `buyer`·`Place`·`Time`은 유지하되 다른 프레임의 LU와 Core·Peripheral의 혼합을 교정했다.
+- Gildea·Jurafsky의 2002년 연구는 주어진 target·frame에서 FrameNet FE를 식별·분류한 초기 자동 의미역 표지 사용을 직접 뒷받침하며, CoNLL-2004·2005 공식 설명의 Penn Treebank·PropBank gold data와 구분했다.
+- PropBank와 FrameNet의 역할 체계·편찬 단위를 구분했고, AMR 3.0은 PropBank frames를 사용한다는 LDC 공식 자료로 AMR 직접 계보를 교정했다.
+- FrameNet과 WordNet·지식 그래프·BERT·GPT의 구조적 유사성, 실제 통합 사례와 역사적 직접 영향은 서로 다른 주장으로 남겼다.
+- `source:ready -- 030`에서 단위 테스트 41개, 152문서·186개 evidence·60개 raw artifact lint, 220페이지 사이트 빌드, 14,994개 로컬 참조와 151개 검색 항목 검사를 통과했고 미해결 위키 링크는 0개였다.
+
+남은 제한:
+
+- 프로젝트에는 외부 영어 원문과 FrameNet 데이터베이스 자체를 복제하지 않았으며, raw에는 새 한국어 번역과 해설만 보존한다.
+- 정보 추출·질의응답·기계 번역·언어 모델 응용은 구체적인 시스템·자료·기준선이 확인되는 1차 연구별로 추가해야 하며, 분야 전체의 보편적 성능 향상을 뜻하지 않는다.
+- FrameNet의 프레임·LU·주석 규모는 릴리스와 집계 단위에 따라 달라지므로 정확한 수치에는 버전과 frame instance·annotation set·고유 문장 구분이 필요하다.
+
 ## 관련 항목
 
 - [[index]]

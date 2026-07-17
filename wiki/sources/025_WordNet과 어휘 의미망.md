@@ -14,7 +14,7 @@ tags:
   - domain/cognitive-science
   - domain/computer-science
 created: '2026-07-16'
-updated: '2026-07-16'
+updated: '2026-07-17'
 lifecycle: active
 verification: verified
 artifacts:
@@ -62,6 +62,7 @@ evidence:
     relation: contextualizes
 related:
   - concept.wordnet
+  - concept.framenet
   - entity.조지-밀러
   - concept.단어-의미-중의성-해소
   - concept.lesk-알고리즘
@@ -153,7 +154,7 @@ WordNet의 한 synset은 명시적인 이산 포인터를 통해 다른 synset�
 
 같은 이유로 다음 계보를 분리한다.
 
-- FrameNet은 frame semantics와 frame element를, PropBank는 말뭉치의 predicate–argument 역할을 중심으로 설계됐다. 모두 구조화된 언어 자원이라는 공통점만으로 WordNet의 직접 후손이 되지는 않는다.
+- [[FrameNet]]은 frame semantics와 frame element를, PropBank는 말뭉치의 predicate–argument 역할을 중심으로 설계됐다. 모두 구조화된 언어 자원이라는 공통점만으로 WordNet의 직접 후손이 되지는 않는다.
 - 일반 knowledge graph는 개체와 세계 사실을 폭넓게 표현할 수 있지만 WordNet은 주로 어휘화된 의미와 어휘 관계를 다룬다. 일부 시스템이 WordNet을 연결하거나 통합할 수 있다는 사실과 전체 계보가 WordNet에서 시작됐다는 주장은 다르다.
 - word embedding과 contextual language model은 말뭉치에서 연속 표상을 학습한다. WordNet 관계를 후처리나 제약으로 주입한 연구가 있다는 사실은 Word2Vec·BERT·LLM 전체의 직접 기원을 입증하지 않는다.
 
@@ -179,7 +180,7 @@ raw가 제시한 문화적 편향과 높은 수작업 품질은 가능한 평가
 - raw의 `happy`·`joyful`·`cheerful`·`glad` 묶음과 특정 자동차 모델 계층은 설명용 예시일 뿐 실제 WordNet synset·instance 관계로 검증되지 않았으므로 채택하지 않는다.
 - WordNet은 lexicalized concept의 sense inventory와 관계망이지 일반 세계 사실을 포괄하는 knowledge graph가 아니다.
 - 명시적 이산 그래프와 학습된 연속 distributed representation은 서로 다른 표상이다. 관계 기반이라는 공통점만으로 WordNet에서 embedding·BERT·LLM으로 이어지는 직접 계보를 만들지 않는다.
-- FrameNet·PropBank·일반 knowledge graph도 각각 다른 이론과 표현 대상을 가지므로 WordNet의 직접 후손으로 단정하지 않는다.
+- [[FrameNet]]·PropBank·일반 knowledge graph도 각각 다른 이론과 표현 대상을 가지므로 WordNet의 직접 후손으로 단정하지 않는다.
 
 ## 핵심 문장
 
@@ -210,6 +211,7 @@ raw가 제시한 문화적 편향과 높은 수작업 품질은 가능한 평가
 ## 관련 항목
 
 - [[WordNet]]
+- [[FrameNet]]
 - [[조지 밀러]]
 - [[단어 의미 중의성 해소]]
 - [[Lesk 알고리즘]]

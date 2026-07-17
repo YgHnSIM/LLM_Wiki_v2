@@ -1540,3 +1540,62 @@ sources:
     doi: 10.18653/v1/N19-1419
     url: https://aclanthology.org/N19-1419/
     language: en
+  gildea-jurafsky-2002-srl:
+    title: Automatic Labeling of Semantic Roles
+    authors: [Daniel Gildea, Daniel Jurafsky]
+    published: 2002
+    source_type: primary
+    kind: journal-article
+    doi: 10.1162/089120102760275983
+    url: https://aclanthology.org/J02-3001/
+    language: en
+  carreras-marquez-2004-conll-srl:
+    title: "Introduction to the CoNLL-2004 Shared Task: Semantic Role Labeling"
+    authors: [Xavier Carreras, Lluís Màrquez]
+    published: 2004
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/W04-2412/
+    language: en
+  carreras-marquez-2005-conll-srl:
+    title: "Introduction to the CoNLL-2005 Shared Task: Semantic Role Labeling"
+    authors: [Xavier Carreras, Lluís Màrquez]
+    published: 2005
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/W05-0620/
+    language: en
+  knight-et-al-2020-amr-3:
+    title: Abstract Meaning Representation (AMR) Annotation Release 3.0
+    authors: [Kevin Knight, Bianca Badarau, Laura Baranescu, Claire Bonial, Madalina Bardocz, Kira Griffitt, Ulf Hermjakob, Daniel Marcu, Martha Palmer, Tim O'Gorman, Nathan Schneider]
+    published: 2020
+    source_type: primary-release
+    kind: dataset-catalog
+    doi: 10.35111/44cy-bp51
+    url: https://catalog.ldc.upenn.edu/LDC2020T02
+    language: en
+  boas-et-al-2024-framenet-25:
+    title: FrameNet at 25
+    authors: [Hans C. Boas, Josef Ruppenhofer, Collin Baker]
+    published: 2024
+    source_type: primary-retrospective
+    kind: journal-article
+    doi: 10.1093/ijl/ecae009
+    url: https://doi.org/10.1093/ijl/ecae009
+    language: en
+  johnson-et-al-2003-framenet-theory-practice:
+    title: "FrameNet: Theory and Practice"
+    authors: [Christopher R. Johnson, Miriam R. L. Petruck, Collin F. Baker, Michael Ellsworth, Josef Ruppenhofer, Charles J. Fillmore]
+    published: 2003
+    source_type: primary
+    kind: working-paper
+    url: https://ids-pub.bsz-bw.de/frontdoor/index/index/docId/5416
+    language: en
+  berkeley-framenet-1-7:
+    title: Berkeley FrameNet Data Release 1.7
+    authors: [Berkeley FrameNet Project]
+    published: 2016
+    source_type: primary-release
+    kind: dataset-release
+    url: https://berkeleyfn.framenetbr.ufjf.br/framenet_data
+    language: en

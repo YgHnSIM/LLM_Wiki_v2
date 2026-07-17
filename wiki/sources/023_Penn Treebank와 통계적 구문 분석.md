@@ -13,7 +13,7 @@ tags:
   - domain/machine-learning
   - domain/linguistics
 created: '2026-07-16'
-updated: '2026-07-16'
+updated: '2026-07-17'
 lifecycle: active
 verification: verified
 artifacts:
@@ -114,7 +114,7 @@ Collins의 1997년 ACL 논문은 WSJ Sections 02–21 약 4만 문장으로 학�
 
 ## 파싱 밖의 영향과 경계
 
-Penn Treebank의 품사·구문 주석은 후대 자원의 기반이 됐다. LDC 카탈로그는 Proposition Bank I을 Treebank-2에 대한 추가 주석으로 연결한다. 그러나 FrameNet처럼 독립된 이론과 자료로 발전한 프로젝트까지 Penn Treebank가 직접 낳았다고 쓰지 않는다.
+Penn Treebank의 품사·구문 주석은 후대 자원의 기반이 됐다. LDC 카탈로그는 Proposition Bank I을 Treebank-2에 대한 추가 주석으로 연결한다. 그러나 [[FrameNet]]처럼 독립된 이론과 자료로 발전한 프로젝트까지 Penn Treebank가 직접 낳았다고 쓰지 않는다.
 
 raw가 드는 Brill 태거 사례도 조건이 다르다. 1992년 논문은 Penn Treebank가 아니라 Brown Corpus를 90% 초기 학습, 5% 규칙 획득, 5% 시험으로 나눴고, 71개 변환 뒤 오류율 5.1%, 즉 약 94.9% 정확도를 보고했다. “Penn Treebank로 학습해 97% 이상”이나 품사 태깅 전체가 해결됐다는 결론은 이 실험에서 나오지 않는다.
 
