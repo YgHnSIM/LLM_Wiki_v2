@@ -1,5 +1,6 @@
 const GRAPH_WIDTH = 1600;
 const GRAPH_HEIGHT = 1000;
+const GRAPH_DEPTH = 420;
 const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
 
 const clamp = (minimum, maximum, value) => Math.min(maximum, Math.max(minimum, value));
@@ -372,22 +373,44 @@ export function buildKnowledgeGraph(documents, {
       node.radius = Number(clamp(
         6,
         18,
-        6 + Math.log2(1 + node.degree) * 1.7 + Math.min(3.5, node.bridgeConnections * 0.22),
+        6 + Math.log2(1 + node.degree) * 1.7,
       ).toFixed(1));
     });
     relaxNodeCollisions(members, community);
   }
 
+  const maxBridgeConnections = Math.max(0, ...nodes.map((node) => node.bridgeConnections));
+  const bridgeScale = Math.log1p(maxBridgeConnections);
+  for (const node of nodes) {
+    node.z = bridgeScale > 0
+      ? Number((Math.log1p(node.bridgeConnections) / bridgeScale * GRAPH_DEPTH).toFixed(1))
+      : 0;
+  }
+  for (const community of communities) community.z = 0;
+
+  const positiveBridgeCounts = nodes
+    .map((node) => node.bridgeConnections)
+    .filter((count) => count > 0)
+    .sort((a, b) => a - b);
+  const bridgeMedian = positiveBridgeCounts.length
+    ? positiveBridgeCounts[Math.floor((positiveBridgeCounts.length - 1) / 2)]
+    : 0;
+
   nodes.sort((a, b) => a.id.localeCompare(b.id, 'ko'));
   return {
-    schemaVersion: 1,
-    dimensions: { width: GRAPH_WIDTH, height: GRAPH_HEIGHT },
+    schemaVersion: 2,
+    layoutVersion: 3,
+    depthMetric: 'cross-community-neighbors',
+    depthScale: 'log1p',
+    dimensions: { width: GRAPH_WIDTH, height: GRAPH_HEIGHT, depth: GRAPH_DEPTH },
     stats: {
       nodes: nodes.length,
       edges: edges.length,
       communities: communities.length,
       crossCommunityEdges: edges.filter((edge) => edge.crossCommunity).length,
       bridgeNodes: nodes.filter((node) => node.bridgeConnections > 0).length,
+      maxBridgeConnections,
+      medianBridgeConnections: bridgeMedian,
     },
     communities,
     nodes,

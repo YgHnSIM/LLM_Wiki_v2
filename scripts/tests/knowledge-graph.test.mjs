@@ -86,7 +86,19 @@ test('knowledge graph layout and communities are deterministic and internally co
   assert.equal(first.stats.nodes, first.nodes.length);
   assert.equal(first.stats.edges, first.edges.length);
   assert.equal(first.stats.communities, first.communities.length);
-  assert.equal(first.nodes.every((node) => Number.isFinite(node.x) && Number.isFinite(node.y)), true);
+  assert.equal(first.schemaVersion, 2);
+  assert.equal(first.layoutVersion, 3);
+  assert.equal(first.depthMetric, 'cross-community-neighbors');
+  assert.equal(first.depthScale, 'log1p');
+  assert.ok(first.dimensions.depth > 0);
+  assert.equal(first.nodes.every((node) => (
+    Number.isFinite(node.x)
+    && Number.isFinite(node.y)
+    && Number.isFinite(node.z)
+    && node.z >= 0
+    && node.z <= first.dimensions.depth
+  )), true);
+  assert.equal(first.communities.every((community) => community.z === 0), true);
   assert.equal(first.edges.every((edge) => first.nodes.some((node) => node.id === edge.source)), true);
   assert.equal(first.edges.every((edge) => first.nodes.some((node) => node.id === edge.target)), true);
 
@@ -99,6 +111,15 @@ test('knowledge graph layout and communities are deterministic and internally co
       community.size,
       first.nodes.filter((node) => node.community === community.id).length,
     );
+  }
+
+  const byBridgeCount = [...first.nodes].sort((left, right) => left.bridgeConnections - right.bridgeConnections);
+  for (let index = 1; index < byBridgeCount.length; index += 1) {
+    assert.ok(byBridgeCount[index].z >= byBridgeCount[index - 1].z);
+  }
+  assert.equal(first.nodes.filter((node) => node.bridgeConnections === 0).every((node) => node.z === 0), true);
+  if (first.stats.maxBridgeConnections > 0) {
+    assert.equal(Math.max(...first.nodes.map((node) => node.z)), first.dimensions.depth);
   }
 });
 
@@ -135,6 +156,8 @@ test('bridge counts represent unique cross-community neighbors, not directed edg
   const rightBridge = graph.nodes.find((node) => node.id === right[0].id);
   assert.equal(leftBridge.bridgeConnections, 1);
   assert.equal(rightBridge.bridgeConnections, 1);
+  assert.ok(leftBridge.z > 0);
+  assert.ok(rightBridge.z > 0);
   assert.equal(
     graph.edges.filter((edge) => edge.crossCommunity && (
       (edge.source === leftBridge.id && edge.target === rightBridge.id)

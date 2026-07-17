@@ -467,6 +467,11 @@ function navLink(url, label, current) {
 
 function layout({ title, description, current = '', body, pageClass = '', scripts = [] }) {
   const fullTitle = title === 'LLM Wiki' ? title : `${title} · LLM Wiki`;
+  const pageScripts = scripts.map((script) => {
+    const record = typeof script === 'string' ? { src: script } : script;
+    const loadingAttribute = record.type === 'module' ? ' type="module"' : ' defer';
+    return `<script src="${sitePath(record.src)}"${loadingAttribute}></script>`;
+  }).join('\n  ');
   return `<!doctype html>
 <html lang="ko">
 <head>
@@ -479,7 +484,7 @@ function layout({ title, description, current = '', body, pageClass = '', script
   <link rel="stylesheet" href="${sitePath('/assets/katex.min.css')}">
   <link rel="stylesheet" href="${sitePath('/assets/styles.css')}">
   <script src="${sitePath('/assets/app.js')}" defer></script>
-  ${scripts.map((script) => `<script src="${sitePath(script)}" defer></script>`).join('\n  ')}
+  ${pageScripts}
 </head>
 <body class="${pageClass}" data-base-path="${escapeHtml(basePath)}">
   <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
@@ -657,8 +662,8 @@ function renderGraphPage() {
     <header class="graph-hero">
       <div class="graph-hero-copy">
         <p class="eyebrow">지식 그래프</p>
-        <h1>연결을 따라 읽는<br><span>LLM의 역사</span></h1>
-        <p>본문에서 실제로 언급한 링크와 편집자가 고른 관련 읽기를 한 지도에 겹쳤습니다. 색은 연결 커뮤니티, 형태는 문서 유형, 외곽선은 검증 상태를 나타냅니다.</p>
+        <h1>연결을 세워 읽는<br><span>LLM의 역사</span></h1>
+        <p>본문에서 실제로 언급한 링크와 편집자가 고른 관련 읽기를 3차원 지도로 펼쳤습니다. 색은 연결 커뮤니티, 형태는 문서 유형, 외곽선은 검증 상태, 높이는 집단 밖 이웃 수를 나타냅니다.</p>
       </div>
       <dl class="graph-stats" aria-label="그래프 현황">
         <div><dt>문서</dt><dd>${graphData.stats.nodes}</dd></div>
@@ -672,7 +677,10 @@ function renderGraphPage() {
       <form class="graph-controls" data-graph-controls>
         <div class="graph-control graph-control--search">
           <label for="graph-search">문서 찾기</label>
-          <input id="graph-search" type="search" list="graph-node-options" autocomplete="off" placeholder="제목 또는 별칭" data-graph-search>
+          <div class="graph-search-row">
+            <input id="graph-search" type="search" list="graph-node-options" autocomplete="off" placeholder="제목 또는 별칭" data-graph-search>
+            <button type="submit" data-graph-select>문서 선택</button>
+          </div>
           <datalist id="graph-node-options">${graphData.nodes.map((node) => `<option value="${escapeHtml(node.title)}"></option>`).join('')}</datalist>
         </div>
         <div class="graph-control">
@@ -707,17 +715,21 @@ function renderGraphPage() {
 
       <div class="graph-display">
         <div class="graph-stage" data-graph-stage>
-          <svg class="knowledge-graph" data-graph-svg viewBox="0 0 ${graphData.dimensions.width} ${graphData.dimensions.height}" role="img" aria-labelledby="knowledge-graph-title knowledge-graph-description">
-            <title id="knowledge-graph-title">LLM Wiki 문서 연결 지도</title>
-            <desc id="knowledge-graph-description">문서 ${graphData.stats.nodes}개와 방향 관계 ${graphData.stats.edges}개를 연결 집단별로 배치한 인터랙티브 그래프입니다.</desc>
-            <text class="graph-static-message" x="${graphData.dimensions.width / 2}" y="${graphData.dimensions.height / 2}" text-anchor="middle">연결 지도를 불러오는 중입니다.</text>
-          </svg>
-          <div class="graph-zoom-controls" aria-label="그래프 확대와 이동">
+          <p class="sr-only" id="knowledge-graph-description">문서 ${graphData.stats.nodes}개와 방향 관계 ${graphData.stats.edges}개를 연결 집단별로 배치했습니다. 노드 높이는 집단 밖의 고유한 이웃 수를 로그 눈금으로 나타냅니다.</p>
+          <canvas class="knowledge-graph" data-graph-canvas width="${graphData.dimensions.width}" height="${graphData.dimensions.height}" role="img" aria-describedby="knowledge-graph-description">그래프를 지원하지 않는 환경에서는 아래 텍스트 목록으로 문서를 탐색할 수 있습니다.</canvas>
+          <p class="graph-static-message" data-graph-static-message>3D 연결 지도를 불러오는 중입니다.</p>
+          <div class="graph-depth-badge" aria-hidden="true"><span>높이</span><strong>집단 밖 이웃 수</strong></div>
+          <div class="graph-camera-controls" aria-label="3D 그래프 카메라">
+            <button type="button" data-graph-orbit="left">왼쪽 회전</button>
+            <button type="button" data-graph-orbit="right">오른쪽 회전</button>
+            <button type="button" data-graph-orbit="higher">위에서 보기</button>
+            <button type="button" data-graph-orbit="lower">낮게 보기</button>
             <button type="button" data-graph-zoom="in">확대</button>
             <button type="button" data-graph-zoom="out">축소</button>
-            <button type="button" data-graph-zoom="reset">전체 보기</button>
+            <button type="button" data-graph-view="flat" aria-pressed="false">2D 평면</button>
+            <button type="button" data-graph-view="reset">기본 시점</button>
           </div>
-          <p class="graph-instructions">노드를 선택하면 1촌과 2촌 연결이 차례로 드러납니다. 버튼으로 확대·축소할 수 있고, 데스크톱에서는 빈 곳을 끌어 이동하거나 Ctrl/⌘를 누른 채 휠로 확대할 수 있습니다.</p>
+          <p class="graph-instructions">노드를 선택하면 1촌과 2촌 연결이 드러납니다. 데스크톱에서는 빈 곳을 끌어 회전하고 Ctrl/⌘+휠로 확대할 수 있습니다. 모든 시점은 위 버튼으로도 조작할 수 있습니다.</p>
           <p class="sr-only" data-graph-status role="status" aria-live="polite" aria-atomic="true"></p>
         </div>
 
@@ -747,23 +759,29 @@ function renderGraphPage() {
           <div><dt><span class="graph-key-line graph-key-line--related" aria-hidden="true"></span>굵은 실선</dt><dd>관련 읽기로 고른 관계</dd></div>
           <div><dt><span class="graph-key-line graph-key-line--body" aria-hidden="true"></span>점선</dt><dd>서술 본문에서만 나온 링크</dd></div>
         </dl>
+        <div class="graph-depth-key" data-graph-depth-legend>
+          <strong>높이 = 집단 밖 이웃 수</strong>
+          <div aria-label="집단 밖 이웃 수 로그 눈금: 0, 연결 노드 중앙값 ${graphData.stats.medianBridgeConnections}, 최대 ${graphData.stats.maxBridgeConnections}">
+            <span>바닥 0</span><i aria-hidden="true"></i><span>연결 노드 중앙값 ${graphData.stats.medianBridgeConnections}</span><i aria-hidden="true"></i><span>최대 ${graphData.stats.maxBridgeConnections}</span>
+          </div>
+        </div>
       </section>
 
-      <details class="graph-text-index">
+      <details class="graph-text-index" data-graph-text-index>
         <summary>텍스트 목록으로 문서 탐색</summary>
         <p>그래프와 같은 문서를 연결 집단별 목록으로 제공합니다.</p>
-        <div class="graph-text-communities">${graphData.communities.map((community) => `<section class="graph-text-community graph-community-${community.colorIndex % 14}"><h2>${escapeHtml(community.label)} <span>${community.size}</span></h2><ul>${nodesByCommunity.get(community.id).map((node) => `<li><a href="${node.url}">${escapeHtml(node.title)}</a><small>${escapeHtml(typeLabels[node.type] ?? node.type)}</small></li>`).join('')}</ul></section>`).join('')}</div>
+        <div class="graph-text-communities">${graphData.communities.map((community) => `<section class="graph-text-community graph-community-${community.colorIndex % 14}"><h2>${escapeHtml(community.label)} <span>${community.size}</span></h2><ul>${nodesByCommunity.get(community.id).map((node) => `<li><a href="${node.url}">${escapeHtml(node.title)}</a><small>${escapeHtml(typeLabels[node.type] ?? node.type)} · 집단 밖 이웃 ${node.bridgeConnections}</small></li>`).join('')}</ul></section>`).join('')}</div>
       </details>
     </section>
   </main>`;
 
   return layout({
     title: '지식 그래프',
-    description: 'LLM Wiki 문서의 본문 링크와 관련 읽기를 연결 집단, 문서 유형, 검증 상태에 따라 탐색하는 지식 그래프',
+    description: 'LLM Wiki 문서의 본문 링크와 관련 읽기를 연결 집단, 문서 유형, 검증 상태와 집단 밖 연결 높이에 따라 탐색하는 3D 지식 그래프',
     current: '/graph/',
     body,
     pageClass: 'graph-page',
-    scripts: ['/assets/graph.js'],
+    scripts: [{ src: '/assets/graph-3d.js', type: 'module' }],
   });
 }
 

@@ -1,5 +1,6 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import { DEFAULT_CAMERA, projectPoint } from '../site/assets/graph-3d-math.js';
 import { distDir } from './lib/project-paths.mjs';
 import { outputFileForUrl, safeDecode, withBasePath } from './lib/site-paths.mjs';
 import { walkFiles } from './lib/wiki-utils.mjs';
@@ -18,7 +19,8 @@ const requiredOutputFiles = [
   'graph-data.json',
   'search/index.html',
   'translations/index.html',
-  'assets/graph.js',
+  'assets/graph-3d.js',
+  'assets/graph-3d-math.js',
   'assets/fonts/D2Coding.woff2',
   'assets/fonts/RIDIBatang.woff2',
   'assets/fonts/OFL-1.1.txt',
@@ -239,15 +241,49 @@ try {
 const graphPageFile = fileForUrl(siteUrl('/graph/'));
 const graphPageHtml = htmlCache.get(graphPageFile) ?? await fs.readFile(graphPageFile, 'utf8');
 htmlCache.set(graphPageFile, graphPageHtml);
-const expectedGraphScriptUrl = siteUrl('/assets/graph.js');
-const graphScriptSources = [...graphPageHtml.matchAll(/<script\b[^>]*\bsrc="([^"]+)"[^>]*>\s*<\/script>/gi)]
-  .map((match) => match[1]);
-if (graphScriptSources.filter((source) => source === expectedGraphScriptUrl).length !== 1) {
+const expectedGraphScriptUrl = siteUrl('/assets/graph-3d.js');
+const graphScriptTags = [...graphPageHtml.matchAll(/<script\b[^>]*\bsrc="([^"]+)"[^>]*>\s*<\/script>/gi)];
+const matchingGraphScripts = graphScriptTags.filter((match) => match[1] === expectedGraphScriptUrl);
+if (matchingGraphScripts.length !== 1) {
   errors.push(`Knowledge graph page must load exactly one graph script from ${expectedGraphScriptUrl}.`);
+} else if (!/\btype="module"/i.test(matchingGraphScripts[0][0])) {
+  errors.push('Knowledge graph script must load as an ES module.');
 }
-for (const hook of ['data-knowledge-graph', 'data-graph-svg', 'data-graph-inspector', 'data-graph-status']) {
+for (const hook of [
+  'data-knowledge-graph',
+  'data-graph-canvas',
+  'data-graph-inspector',
+  'data-graph-status',
+  'data-graph-select',
+  'data-graph-depth-legend',
+  'data-graph-text-index',
+]) {
   if (!new RegExp(`<[^>]+\\b${hook}(?:\\s|=|>)`, 'i').test(graphPageHtml)) {
     errors.push(`Knowledge graph page is missing the ${hook} hook.`);
+  }
+}
+for (const control of [
+  'data-graph-orbit="left"',
+  'data-graph-orbit="right"',
+  'data-graph-orbit="higher"',
+  'data-graph-orbit="lower"',
+  'data-graph-zoom="in"',
+  'data-graph-zoom="out"',
+  'data-graph-view="flat"',
+  'data-graph-view="reset"',
+]) {
+  if (!graphPageHtml.includes(control)) errors.push(`Knowledge graph page is missing camera control ${control}.`);
+}
+const graphCanvases = [...graphPageHtml.matchAll(/<canvas\b[^>]*\bdata-graph-canvas\b[^>]*>/gi)].map((match) => match[0]);
+if (graphCanvases.length !== 1) {
+  errors.push(`Knowledge graph page must contain exactly one graph canvas, found ${graphCanvases.length}.`);
+} else {
+  const canvasTag = graphCanvases[0];
+  if (!/\brole="img"/i.test(canvasTag)) errors.push('Knowledge graph canvas must use role="img".');
+  if (/\btabindex=/i.test(canvasTag)) errors.push('Knowledge graph canvas must not be a keyboard tab stop.');
+  const describedBy = canvasTag.match(/\baria-describedby="([^"]+)"/i)?.[1];
+  if (!describedBy || !new RegExp(`\\bid="${describedBy.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"`, 'i').test(graphPageHtml)) {
+    errors.push('Knowledge graph canvas must reference an existing accessible description.');
   }
 }
 
@@ -257,7 +293,12 @@ if (graphData !== undefined && !graphDataIsObject) {
 }
 
 if (graphDataIsObject) {
-  if (graphData.schemaVersion !== 1) errors.push(`Knowledge graph schema version must be 1, found ${graphData.schemaVersion}.`);
+  if (graphData.schemaVersion !== 2) errors.push(`Knowledge graph schema version must be 2, found ${graphData.schemaVersion}.`);
+  if (graphData.layoutVersion !== 3) errors.push(`Knowledge graph layout version must be 3, found ${graphData.layoutVersion}.`);
+  if (graphData.depthMetric !== 'cross-community-neighbors') errors.push(`Knowledge graph has invalid depth metric '${graphData.depthMetric}'.`);
+  if (graphData.depthScale !== 'log1p') errors.push(`Knowledge graph has invalid depth scale '${graphData.depthScale}'.`);
+  const graphDepth = graphData.dimensions?.depth;
+  if (!Number.isFinite(graphDepth) || graphDepth <= 0) errors.push('Knowledge graph dimensions.depth must be a positive finite number.');
   const graphNodes = Array.isArray(graphData.nodes) ? graphData.nodes : [];
   const graphEdges = Array.isArray(graphData.edges) ? graphData.edges : [];
   const graphCommunities = Array.isArray(graphData.communities) ? graphData.communities : [];
@@ -270,6 +311,10 @@ if (graphDataIsObject) {
   const communityIds = new Set(graphCommunities
     .filter((community) => community !== null && typeof community === 'object' && !Array.isArray(community))
     .map((community) => community.id));
+  for (const community of graphCommunities) {
+    if (community === null || typeof community !== 'object' || Array.isArray(community)) continue;
+    if (!Number.isFinite(community.z) || community.z !== 0) errors.push(`Knowledge graph community ${community.id} must remain on the z=0 ground plane.`);
+  }
   const allowedTypes = new Set(['source', 'reference', 'concept', 'entity', 'analysis']);
   const allowedVerification = new Set(['verified', 'partial', 'disputed', 'unverified']);
   for (const node of graphNodes) {
@@ -277,7 +322,7 @@ if (graphDataIsObject) {
       errors.push(`Knowledge graph contains a non-object node: ${JSON.stringify(node)}`);
       continue;
     }
-    const missing = ['id', 'title', 'url', 'type', 'category', 'verification', 'community', 'x', 'y', 'radius']
+    const missing = ['id', 'title', 'url', 'type', 'category', 'verification', 'community', 'bridgeConnections', 'x', 'y', 'z', 'radius']
       .filter((field) => !(field in node));
     if (missing.length) errors.push(`Knowledge graph node ${node.id ?? '(unknown)'} is missing: ${missing.join(', ')}`);
     if (nodeIds.has(node.id)) errors.push(`Knowledge graph contains a duplicate node ID: ${node.id}`);
@@ -287,13 +332,49 @@ if (graphDataIsObject) {
     if (!allowedTypes.has(node.type)) errors.push(`Knowledge graph node ${node.id} has invalid type '${node.type}'.`);
     if (!allowedVerification.has(node.verification)) errors.push(`Knowledge graph node ${node.id} has invalid verification '${node.verification}'.`);
     if (!communityIds.has(node.community)) errors.push(`Knowledge graph node ${node.id} references missing community ${node.community}.`);
-    if (![node.x, node.y, node.radius].every(Number.isFinite)) errors.push(`Knowledge graph node ${node.id} has invalid layout coordinates.`);
+    if (![node.x, node.y, node.z, node.radius].every(Number.isFinite)) errors.push(`Knowledge graph node ${node.id} has invalid 3D layout coordinates.`);
+    if (Number.isFinite(graphDepth) && (node.z < 0 || node.z > graphDepth)) errors.push(`Knowledge graph node ${node.id} has out-of-range z=${node.z}.`);
     const targetFile = fileForUrl(node.url);
     try {
       if (!targetFile) throw new Error('invalid URL');
       await fs.access(targetFile);
     } catch {
       errors.push(`Knowledge graph node ${node.id} points to a missing page: ${node.url}`);
+    }
+  }
+
+  const valid3DNodes = graphNodes.filter((node) => (
+    node !== null
+    && typeof node === 'object'
+    && !Array.isArray(node)
+    && Number.isFinite(node.bridgeConnections)
+    && Number.isFinite(node.z)
+  ));
+  const maximumBridgeConnections = Math.max(0, ...valid3DNodes.map((node) => node.bridgeConnections));
+  const bridgeLogScale = Math.log1p(maximumBridgeConnections);
+  const positiveBridgeCounts = valid3DNodes
+    .map((node) => node.bridgeConnections)
+    .filter((count) => count > 0)
+    .sort((left, right) => left - right);
+  const medianBridgeConnections = positiveBridgeCounts.length
+    ? positiveBridgeCounts[Math.floor((positiveBridgeCounts.length - 1) / 2)]
+    : 0;
+  if (graphData.stats?.maxBridgeConnections !== maximumBridgeConnections) {
+    errors.push('Knowledge graph maximum bridge statistic does not match its nodes.');
+  }
+  if (graphData.stats?.medianBridgeConnections !== medianBridgeConnections) {
+    errors.push('Knowledge graph median bridge statistic does not match its nodes.');
+  }
+  for (const node of valid3DNodes) {
+    const expectedZ = bridgeLogScale > 0
+      ? Math.log1p(node.bridgeConnections) / bridgeLogScale * graphDepth
+      : 0;
+    if (!Number.isFinite(expectedZ) || Math.abs(node.z - expectedZ) > 0.11) {
+      errors.push(`Knowledge graph node ${node.id} z=${node.z} does not match the log1p bridge scale (${expectedZ}).`);
+    }
+    const projected = projectPoint(node, DEFAULT_CAMERA, { width: 1200, height: 760 }, graphData.dimensions);
+    if (!projected || ![projected.x, projected.y, projected.scale, projected.depth].every(Number.isFinite)) {
+      errors.push(`Knowledge graph node ${node.id} cannot be projected by the default 3D camera.`);
     }
   }
 
