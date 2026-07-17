@@ -720,3 +720,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: f6e02e6c06e236617d9d2f7df60a2e644ae8a6e9da20cfdfeb971c02264f8e78
+  - path: "raw/046_Memory Networks External Memory for Neural Question Answering.ko.md"
+    role: translation
+    order_prefix: "046"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 98dab0a05eb8c48d6ed5f9b5118d2e0aef9830a6679a97b009ec2759a6c919b0
+  - path: "raw/046_Memory Networks External Memory for Neural Question Answering.commentary.ko.md"
+    role: commentary
+    order_prefix: "046"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: b457361eb94b9c3f2f633b230cc5adc9262a4042d71dbd43355168ca83af6c68

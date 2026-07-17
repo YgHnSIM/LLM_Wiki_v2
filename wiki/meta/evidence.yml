@@ -1972,3 +1972,29 @@ sources:
     doi: 10.3115/v1/D13-1176
     url: https://aclanthology.org/D13-1176/
     language: en
+  weston-chopra-bordes-2014-memory-networks:
+    title: Memory Networks
+    authors: [Jason Weston, Sumit Chopra, Antoine Bordes]
+    published: 2014
+    source_type: primary
+    kind: research-paper
+    doi: 10.48550/arXiv.1410.3916
+    url: https://arxiv.org/abs/1410.3916
+    language: en
+  sukhbaatar-et-al-2015-end-to-end-memory-networks:
+    title: End-To-End Memory Networks
+    authors: [Sainbayar Sukhbaatar, Arthur Szlam, Jason Weston, Rob Fergus]
+    published: 2015
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.neurips.cc/paper_files/paper/2015/hash/8fb21ee7a2207526da55a679f0332de2-Abstract.html
+    language: en
+  weston-et-al-2015-babi:
+    title: "Towards AI-Complete Question Answering: A Set of Prerequisite Toy Tasks"
+    authors: [Jason Weston, Antoine Bordes, Sumit Chopra, Alexander M. Rush, Bart van Merriënboer, Armand Joulin, Tomas Mikolov]
+    published: 2015
+    source_type: primary
+    kind: research-paper
+    doi: 10.48550/arXiv.1502.05698
+    url: https://arxiv.org/abs/1502.05698
+    language: en

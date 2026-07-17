@@ -1898,6 +1898,40 @@ raw 등록 해시:
 - 언어쌍·문장 길이·어휘 분할·beam 설정별 품질과 노출 편향 대응의 효과는 별도 재현 자료가 필요하다.
 - 034 구 기반 SMT와 045 seq2seq를 함께 읽으면 “모듈형 점수 결합 대 공동 손실”이라는 비교 질문이 생기지만, 046 이후의 attention·Transformer 관련 자료가 가까이 예정되어 있어 현재는 기존 문서 연결로 보존하고 독립 비교 읽기는 근거가 더 모일 때 판단한다.
 
+## [2026-07-18] ingest | 046 메모리 네트워크와 외부 지식 접근
+
+046 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 2014년 원 MemNN과 2015년 end-to-end 변형·bAbI, 2020년 RAG를 분리해 외부 메모리와 반복 검색의 실제 범위를 복원했다.
+
+변경 문서:
+
+- `raw/046_Memory Networks External Memory for Neural Question Answering.ko.md`와 대응 해설
+- `wiki/sources/046_메모리 네트워크와 외부 지식 접근.md`
+- `wiki/concepts/메모리 네트워크.md`, `wiki/concepts/외부 메모리.md`, `wiki/concepts/다중 홉 검색.md`
+- `wiki/concepts/개방 영역 질의응답.md`의 외부 지식 접근 계보 보강
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- 원 논문의 일반 (I,G,O,R) 인터페이스와 실제 텍스트 구현을 구분했다. (G)는 새 문장을 다음 빈 슬롯에 저장했고 과거 메모리의 정교한 학습 갱신·forgetting은 대표 실험에 없었다.
+- 첫째·둘째 supporting memory는 bilinear embedding 점수의 hard `argmax`로 골랐다. 모든 슬롯을 확률 가중 합하는 soft attention 설명은 2015년 End-To-End Memory Networks에 배치했다.
+- 원 훈련은 답뿐 아니라 supporting sentences 라벨을 제공받고 margin ranking loss를 사용했다. 최종 답만으로 접근 경로 전체를 end-to-end 역전파했다는 원문 설명을 교정했다.
+- large-scale QA는 1,400만 사실을 바탕으로 기존 시스템의 상위 답 후보를 (k=1)로 재순위화했고 F1 약 0.72로 비교 임베딩 시스템 0.73과 비슷했다. 현대 자유 문서 생성 QA와 동일시하지 않았다.
+- 합성 세계의 최대 두 supporting facts·강한 감독 성과와 2015년 20개 bAbI 과제를 분리했다. 개선 MemNN도 bAbI 일부 과제를 해결하지 못했다는 원 보고를 반영했다.
+- 모든 메모리 선형 채점 비용과 word/embedding-cluster hashing을 기록했다. 외부 저장 용량만 늘리면 무제한 검색·갱신이 자동 보장된다는 주장을 제거했다.
+- 선택한 메모리 슬롯은 진단 가능한 근거지만 최종 답의 인과·충실성 전체를 증명하지 않으며, 반복 supporting-fact 선택을 인간 chain of thought와 동일시하지 않았다.
+- RAG의 dense Wikipedia index·신경 검색기·사전학습 seq2seq 생성은 외부 지식 접근 원리를 공유하지만 원 MemNN과 동일한 구조나 유일한 직계 후손은 아니다.
+
+raw 등록 해시:
+
+- 번역: `98dab0a05eb8c48d6ed5f9b5118d2e0aef9830a6679a97b009ec2759a6c919b0`
+- 해설: `b457361eb94b9c3f2f633b230cc5adc9262a4042d71dbd43355168ca83af6c68`
+
+남은 제한:
+
+- 프로젝트에는 1,400만 fact memory·simulated-world generator·bAbI 자료·RAG Wikipedia index와 모델을 복제하지 않았으며 raw에는 새 번역과 해설만 보존한다.
+- 실제 문서 분할·색인 갱신·retriever drift·다중 홉 오류·생성 충실성은 시스템별 자료와 평가가 필요하다.
+- 040 DeepQA와 046 MemNN은 모두 후보 검색과 근거 점수화를 분리하지만, 규칙·특징·학습 감독·답 형식의 비교만으로 독립 분석을 만들기에는 047 이후 독해·어텐션 계보가 더 필요해 현재는 연결로 보존한다.
+
 ## 관련 항목
 
 - [[index]]
