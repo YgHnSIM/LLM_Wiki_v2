@@ -1963,3 +1963,12 @@ sources:
     kind: conference-paper
     url: https://openreview.net/forum?id=Bkg6RiCqY7
     language: en
+  kalchbrenner-blunsom-2013-recurrent-translation:
+    title: Recurrent Continuous Translation Models
+    authors: [Nal Kalchbrenner, Phil Blunsom]
+    published: 2013
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/v1/D13-1176
+    url: https://aclanthology.org/D13-1176/
+    language: en

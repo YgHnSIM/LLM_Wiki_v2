@@ -704,3 +704,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: cb185e4736e5b01e69f968481e65362d40256b4e3c22a4ba2a1f77dc2a2fe8e6
+  - path: "raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.ko.md"
+    role: translation
+    order_prefix: "045"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 245afd4ef2e6db56bb2b14099ab1244eee1f20b4b1b593ac2cb549d6234a86ce
+  - path: "raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.commentary.ko.md"
+    role: commentary
+    order_prefix: "045"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: f6e02e6c06e236617d9d2f7df60a2e644ae8a6e9da20cfdfeb971c02264f8e78

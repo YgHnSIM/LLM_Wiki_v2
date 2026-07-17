@@ -1864,6 +1864,40 @@ raw 등록 해시:
 - 기존 외부 근거 7건과 raw artifact 8건을 연결했다. 여러 방법을 가로지르는 비교 해석이므로 `verification: partial`로 두었다.
 - “표현 방법의 실질적 차이는 구현 명칭보다 사건 정의·가중·저랭크 목적의 결합에 있다”는 문장은 네 방법을 읽는 분석 틀이며 모든 언어·과제의 보편 성능 정리가 아니다.
 
+## [2026-07-18] ingest | 045 Sequence-to-Sequence 학습과 신경 기계 번역
+
+045 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 초기 RNN 인코더-디코더의 조건부 생성 구조를 복원하고, 2014년 두 연구·어텐션·GNMT·현대 LLM 계보를 단계별로 분리했다.
+
+변경 문서:
+
+- `raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.ko.md`와 대응 해설
+- `wiki/sources/045_Sequence-to-Sequence 학습과 신경 기계 번역.md`
+- `wiki/concepts/Sequence-to-Sequence 학습.md`, `wiki/concepts/인코더-디코더.md`, `wiki/concepts/자기회귀 생성.md`
+- `wiki/concepts/신경망 기계 번역.md`, `wiki/concepts/장단기 메모리.md`의 2014년 구조와 후속 계보 보강
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- Kalchbrenner·Blunsom의 2013년 recurrent continuous translation model을 확인해 2014년 이전에는 정렬·구 단위 없는 신경 번역 시도가 전혀 없었다는 서사를 교정했다.
+- Sutskever 등의 4층 LSTM 직접 번역과 Cho 등의 RNN Encoder–Decoder 구 점수·기존 SMT 특징 결합을 분리했다. 두 논문이 완전히 같은 종단간 시스템을 독립 발명했다고 쓰지 않았다.
+- 구 기반 SMT의 구 쌍·번역 확률·재배열 점수 상당 부분도 병렬 자료에서 추정됐으므로 손작성 문법·재배열 규칙만으로 움직였다는 대비를 제거했다.
+- WMT14 영어→프랑스어의 1,200만 문장 쌍, 16만/8만 제한 어휘, 직접 LSTM 앙상블 BLEU 34.8, 구 기반 기준선 33.3, SMT 1000-best 재순위화 36.5를 경로별로 기록했다.
+- teacher forcing은 이전 정답을 제공하지만 RNN 은닉 상태의 순환 의존을 없애지 않으므로 목표 위치 전체를 병렬 훈련할 수 있다는 원문 설명을 교정했다.
+- 고정 벡터 병목과 개별 논문의 긴 문장 결과를 구분하고, 바다나우 등의 논문은 2014년 arXiv 공개·ICLR 2015 발표로 시기를 나눴다.
+- 2016년 GNMT는 8층 attention LSTM·잔차 연결·WordPiece·탐색 보정을 포함한 후속 시스템으로 기록했다. 2014년 고정 벡터 구조의 즉시 전면 제품 대체로 보지 않았다.
+- 자기회귀 언어 모델은 seq2seq보다 오래됐고 GPT·BERT에는 별도 언어 모델·사전학습 계보가 있으므로 현대 LLM 전체를 2014년 번역의 직접 후손으로 묶지 않았다.
+
+raw 등록 해시:
+
+- 번역: `245afd4ef2e6db56bb2b14099ab1244eee1f20b4b1b593ac2cb549d6234a86ce`
+- 해설: `f6e02e6c06e236617d9d2f7df60a2e644ae8a6e9da20cfdfeb971c02264f8e78`
+
+남은 제한:
+
+- 프로젝트에는 WMT14 병렬 말뭉치·훈련 코드·모델 checkpoint·GNMT production 설정을 복제하지 않았으며 raw에는 새 번역과 해설만 보존한다.
+- 언어쌍·문장 길이·어휘 분할·beam 설정별 품질과 노출 편향 대응의 효과는 별도 재현 자료가 필요하다.
+- 034 구 기반 SMT와 045 seq2seq를 함께 읽으면 “모듈형 점수 결합 대 공동 손실”이라는 비교 질문이 생기지만, 046 이후의 attention·Transformer 관련 자료가 가까이 예정되어 있어 현재는 기존 문서 연결로 보존하고 독립 비교 읽기는 근거가 더 모일 때 판단한다.
+
 ## 관련 항목
 
 - [[index]]
