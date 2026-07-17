@@ -544,3 +544,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: df887f765d872886f401a02ccfa4b846484a2c4c849b9c94c00797125190b737
+  - path: "raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.ko.md"
+    role: translation
+    order_prefix: "035"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 25506f08ea2ea984ce640720021be633e175f511bf6ed3abd9c53a82670df8c4
+  - path: "raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.commentary.ko.md"
+    role: commentary
+    order_prefix: "035"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: a065f1a8e1078943bfa365d9ca317e4a46f96b8ee8ca179fbc877fa214ab97ab

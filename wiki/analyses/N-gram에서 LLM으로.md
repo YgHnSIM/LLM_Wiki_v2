@@ -11,7 +11,7 @@ tags:
   - type/analysis
   - domain/ai
 created: '2026-05-07'
-updated: '2026-07-16'
+updated: '2026-07-18'
 lifecycle: active
 verification: partial
 artifacts:
@@ -27,6 +27,8 @@ artifacts:
   - raw/005_Chomsky's Syntactic Structures.md
   - raw/019_Katz Back-off - Handling Sparse Data in Language Models.ko.md
   - raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md
+  - raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.ko.md
+  - raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.commentary.ko.md
 evidence:
   - source_id: shannon-1948
     locator: 'Part I, §§2–3 and §6'
@@ -49,6 +51,9 @@ evidence:
   - source_id: chen-goodman-1998
     locator: '§§2.3–2.4 and §5.2.4'
     relation: supplements
+  - source_id: bengio-et-al-2003-nplm
+    locator: 'JMLR 3, pp. 1137–1155, 특히 §§1.1·2의 연속 표현 일반화와 §4의 n-gram 비교'
+    relation: supports
   - source_id: gpt-2018
     locator: '§3.1, eqs. (1)–(2), and §4.1'
     relation: contextualizes
@@ -59,6 +64,9 @@ related:
   - source.001
   - source.002
   - source.019
+  - source.035
+  - concept.신경-확률-언어-모형
+  - concept.단어-임베딩
   - concept.n-gram-모델
   - concept.마르코프-가정
   - concept.데이터-희소성
@@ -90,6 +98,12 @@ N-gram 모델은 [[마르코프 가정]]에 따라 제한된 최근 문맥만 �
 
 N-gram의 [[데이터 희소성]]은 [[Smoothing]]과 [[019_Katz 백오프와 희소 데이터 확률 추정|back-off]] 연구의 직접 동기였다. Katz 방식은 관측된 저빈도 사건의 확률을 할인하고 미관측 조합에 남은 질량을 배분하지만, 신경망의 dropout과 가중치 감쇠는 학습 목적과 매개변수에 작용하는 별도 정규화다. 고정 어휘 안의 미관측 n-gram과 어휘 밖 단어를 하위 단위로 표현하는 토큰화 문제도 구분해야 한다. 분산 표현, [[순환 신경망]]과 트랜스포머는 장거리 문맥과 일반화 문제를 다른 방식으로 다뤘지만, 이 발전을 n-gram 한계가 각 기술을 직접 낳았다는 단일 인과 사슬로 표현하지 않는다.
 
+## 확률 재분배에서 표현 공유로
+
+[[019_Katz 백오프와 희소 데이터 확률 추정|Katz back-off]]와 [[035_신경 확률 언어 모형과 분산 단어 표현|2003년 NPLM]]은 모두 보지 못한 단어열에 0이 아닌 합리적 확률을 주려 하지만 정보 공유 단위가 다르다. Katz는 현재의 정확한 n-gram 횟수에 따라 할인하고, 미관측이면 더 짧은 **표면 문맥**의 분포로 내려간다. NPLM은 단어별 [[단어 임베딩|연속 벡터]]과 공유 신경 함수를 학습해, 표면 단어가 달라도 벡터 공간에서 가까운 문맥 사이에 gradient 정보를 전달한다.
+
+이 변화는 smoothing에서 신경망으로의 단순 교체가 아니다. 2003년 실험에서도 신경 확률과 interpolated trigram을 섞으면 각각 단독일 때보다 perplexity가 낮았다. 정확 문자열 통계와 연속 표현은 서로 다른 오류를 보완했다. 오늘날 신경 언어 모형에서도 tokenization, 빈도 편향과 긴 꼬리 문제는 사라지지 않았으므로 “임베딩이 데이터 희소성을 해결했다”보다 희소성의 처리 위치가 확률표에서 공유 표현·최적화·어휘 설계로 이동했다고 읽는 편이 정확하다.
+
 ## 해석
 
 N-gram은 현대 LLM의 축소판이 아니다. Shannon의 1948년 논문은 확률적 통신원과 연속 근사를 다뤘고, 현대 n-gram 용어·smoothing·신경망 언어 모델은 후대에 각각 발전했다. 연결은 문제 설정과 수학적 어휘의 공유로 한정한다.
@@ -118,8 +132,10 @@ N-gram은 현대 LLM의 축소판이 아니다. Shannon의 1948년 논문은 확
 - [[004_퍼셉트론]]
 - [[005_촘스키의 통사 구조]]
 - [[019_Katz 백오프와 희소 데이터 확률 추정]]
+- [[035_신경 확률 언어 모형과 분산 단어 표현]]
 - Slava M. Katz, [Estimation of Probabilities from Sparse Data for the Language Model Component of a Speech Recognizer](https://doi.org/10.1109/TASSP.1987.1165125), 1987, pp. 400–401.
 - Stanley F. Chen·Joshua Goodman, [An Empirical Study of Smoothing Techniques for Language Modeling](https://dash.harvard.edu/handle/1/25104739), 1998, §§2.3–2.4·5.2.4.
+- Yoshua Bengio·Réjean Ducharme·Pascal Vincent·Christian Jauvin, [A Neural Probabilistic Language Model](https://www.jmlr.org/papers/v3/bengio03a.html), 2003, pp. 1137–1155.
 - Alec Radford 외, [Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf), 2018, §§3.1·4.1.
 - Jacob Devlin 외, [BERT](https://aclanthology.org/N19-1423/), 2019, §3.
 
@@ -128,6 +144,9 @@ N-gram은 현대 LLM의 축소판이 아니다. Shannon의 1948년 논문은 확
 - [[001_섀넌의 N-gram 모델]]
 - [[002_튜링 테스트]]
 - [[019_Katz 백오프와 희소 데이터 확률 추정]]
+- [[035_신경 확률 언어 모형과 분산 단어 표현]]
+- [[신경 확률 언어 모형]]
+- [[단어 임베딩]]
 - [[N-gram 모델]]
 - [[마르코프 가정]]
 - [[데이터 희소성]]

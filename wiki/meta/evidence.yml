@@ -611,6 +611,14 @@ sources:
     kind: conference-paper
     url: https://aclanthology.org/P07-2045/
     language: en
+  bengio-et-al-2003-nplm:
+    title: A Neural Probabilistic Language Model
+    authors: [Yoshua Bengio, Réjean Ducharme, Pascal Vincent, Christian Jauvin]
+    published: 2003
+    source_type: primary
+    kind: journal-article
+    url: https://www.jmlr.org/papers/v3/bengio03a.html
+    language: en
   church-mercer-1993:
     title: Introduction to the Special Issue on Computational Linguistics Using Large Corpora
     authors: [Kenneth W. Church, Robert L. Mercer]

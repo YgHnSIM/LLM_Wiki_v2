@@ -11,7 +11,7 @@ tags:
   - type/concept
   - domain/ai
 created: '2026-05-07'
-updated: '2026-07-16'
+updated: '2026-07-18'
 lifecycle: active
 verification: verified
 artifacts:
@@ -20,6 +20,8 @@ artifacts:
     Processing..md
   - raw/019_Katz Back-off - Handling Sparse Data in Language Models.ko.md
   - raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md
+  - raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.ko.md
+  - raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.commentary.ko.md
 evidence:
   - source_id: shannon-1948
     locator: 'Part I, §§2–3 and §6'
@@ -30,9 +32,15 @@ evidence:
   - source_id: chen-goodman-1998
     locator: '§§1.1 and 2.2–2.4'
     relation: supplements
+  - source_id: bengio-et-al-2003-nplm
+    locator: 'JMLR 3, pp. 1138–1141과 1147–1149의 n-gram 한계·기준선 비교'
+    relation: contextualizes
 related:
   - source.001
   - source.019
+  - source.035
+  - concept.신경-확률-언어-모형
+  - concept.단어-임베딩
   - concept.마르코프-가정
   - concept.조건부-확률
   - concept.데이터-희소성
@@ -67,12 +75,13 @@ N-gram 모델은 앞선 n-1개 항목을 문맥으로 삼아 다음 항목의 �
 
 ## 역사적 위치
 
-Shannon의 1948년 논문은 문자·단어 연속 근사와 조건부 확률을 통신원 모델 안에서 다뤘다. 오늘날 이를 n-gram 언어 모델의 선구적 형태로 읽을 수 있지만, 현대 n-gram 용어와 [[Smoothing]] 기법은 후대에 정립됐다. 현대 [[대규모 언어 모델]]과는 조건부 예측 과업을 공유할 뿐, 같은 기술의 단순한 규모 확장은 아니다.
+Shannon의 1948년 논문은 문자·단어 연속 근사와 조건부 확률을 통신원 모델 안에서 다뤘다. 오늘날 이를 n-gram 언어 모델의 선구적 형태로 읽을 수 있지만, 현대 n-gram 용어와 [[Smoothing]] 기법은 후대에 정립됐다. [[035_신경 확률 언어 모형과 분산 단어 표현]]은 같은 다음 단어 조건부확률을 고정 빈도표 대신 [[단어 임베딩]]과 공유 MLP로 계산한 2003년 전환을 검증한다. 현대 [[대규모 언어 모델]]과는 조건부 예측 과업을 공유할 뿐, 같은 기술의 단순한 규모 확장은 아니다.
 
 ## 출처
 
 - [[001_섀넌의 N-gram 모델]]
 - [[019_Katz 백오프와 희소 데이터 확률 추정]]
+- [[035_신경 확률 언어 모형과 분산 단어 표현]]
 - Claude E. Shannon, [A Mathematical Theory of Communication](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf), 1948, Part I §§2–3·§6.
 - Slava M. Katz, [Estimation of Probabilities from Sparse Data for the Language Model Component of a Speech Recognizer](https://doi.org/10.1109/TASSP.1987.1165125), 1987, pp. 400–401.
 - Stanley F. Chen·Joshua Goodman, [An Empirical Study of Smoothing Techniques for Language Modeling](https://dash.harvard.edu/handle/1/25104739), 1998, §§1.1·2.2–2.4.
@@ -81,6 +90,9 @@ Shannon의 1948년 논문은 문자·단어 연속 근사와 조건부 확률을
 
 - [[001_섀넌의 N-gram 모델]]
 - [[019_Katz 백오프와 희소 데이터 확률 추정]]
+- [[035_신경 확률 언어 모형과 분산 단어 표현]]
+- [[신경 확률 언어 모형]]
+- [[단어 임베딩]]
 - [[마르코프 가정]]
 - [[조건부 확률]]
 - [[데이터 희소성]]

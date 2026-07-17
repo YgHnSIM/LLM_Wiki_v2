@@ -1430,6 +1430,42 @@ raw 등록 해시:
 - phrase table pruning, decoder recombination·beam 크기, 후대 MIRA·PRO와 상용 시스템 배치는 각 구현·자료별 후속 검토가 필요하다.
 - BLEU–MERT의 측정과 최적화 간극은 이번 source와 두 concept에서 직접 설명할 수 있어 아직 별도 분석을 만들지 않았다. 037의 ROUGE·METEOR처럼 목적이 다른 지표가 추가되면, 지표 설계가 모델 행동을 어떻게 바꾸는지 독립적인 비교 읽기로 발전시킬 근거가 충분한지 다시 판단한다.
 
+## [2026-07-18] ingest | 035 신경 확률 언어 모형과 분산 단어 표현
+
+035 영어 원문을 기존 출력과 무관하게 새로 번역하고 12절 학습용 해설을 작성했다. 깨진 중복 수식은 word-feature lookup, tanh MLP, softmax와 penalized log-likelihood의 표준 MathJax 표현으로 복원했다. 검사된 번역·해설 쌍은 `raw/`에 그대로 보존하고 SHA-256을 등록했다.
+
+변경 문서:
+
+- `raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.ko.md`와 대응 해설
+- `wiki/sources/035_신경 확률 언어 모형과 분산 단어 표현.md`
+- `wiki/concepts/신경 확률 언어 모형.md`, `wiki/concepts/단어 임베딩.md`
+- `wiki/analyses/N-gram에서 LLM으로.md`의 ‘확률 재분배에서 표현 공유로’ 비교 보강
+- `wiki/concepts/N-gram 모델.md`, `wiki/concepts/대규모 언어 모델.md`의 2003년 중간 연결 추가
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- Bengio·Ducharme·Vincent·Jauvin의 2003년 JMLR 논문으로 word feature 행렬, 고정 $n-1$ 문맥 concatenate, direct path와 tanh 은닉층, 전체 어휘 softmax, weight decay가 있는 공동 로그가능도 학습을 확인했다.
+- n-gram도 앞 단어 문맥에 따라 확률을 바꾼다는 점을 복원하고, NPLM의 직접 차이를 정확 표면 문맥 사이에서 연속 임베딩과 신경 가중치를 공유하는 방식으로 한정했다. one-hot 차원과 $|V|^n$ 조합 희소성도 구분했다.
+- word type당 하나의 정적 벡터가 `hot dog`의 음식·동물 의미를 분리하지 못한다는 점과 원 논문이 polysemy용 여러 점을 미래 과제로 남겼음을 기록했다.
+- Brown 1,181,041단어의 800,000/200,000/181,041 분할과 어휘 16,383개, AP News의 약 1,399만/96만/96만 단어와 어휘 17,964개 조건을 복원했다. validation 기준 최선 n-gram 대비 논문이 요약한 약 24%·8% perplexity 차이를 범위와 함께 기록했다.
+- AP News 실행이 40 CPU에서 5 epoch에 약 3주 걸렸고 전체 어휘 출력이 계산 대부분을 차지했다는 점을 반영해, 적은 계산·자료로 전통 방식을 쉽게 대체했다는 설명을 교정했다.
+- 실험에서는 희귀어·고유명사를 특수 기호로 처리했으며 OOV 벡터 초기화는 평가되지 않은 §5.1 확장임을 구분했다. subword는 사용하지 않았다.
+- POS·NER·감성 전이, analogy와 벡터 의미 시각화는 원 논문의 실험이 아니고 표현 해석·활용 자체가 미래 과제였음을 확인했다.
+- `N-gram에서 LLM으로` 분석에 Katz의 빈도 할인·짧은 표면 문맥 back-off와 NPLM의 연속 표현 매개변수 공유를 비교했다. 두 확률을 섞으면 더 좋아졌다는 결과로 교체보다 상보성을 강조했다.
+- 전체 검사에서 단위 테스트 50개, 165문서·196개 evidence·70개 raw artifact lint, 243페이지 사이트 빌드, 16,769개 로컬 참조와 164개 검색 항목 검사를 통과했고 미해결 위키 링크는 0개였다.
+
+raw 등록 해시:
+
+- 번역: `25506f08ea2ea984ce640720021be633e175f511bf6ed3abd9c53a82670df8c4`
+- 해설: `a065f1a8e1078943bfa365d9ca317e4a46f96b8ee8ca179fbc877fa214ab97ab`
+
+남은 제한:
+
+- 프로젝트에는 JMLR 원문 PDF, Brown·AP News 자료나 당시 구현 코드를 복제하지 않았으며 raw에는 새 한국어 번역과 해설만 보존한다.
+- 정적 임베딩의 편향·유사도 평가, word2vec·GloVe의 별도 목적, sampled·hierarchical softmax와 신경 언어 모형의 후속 성능은 해당 1차 문헌으로 추가 검토해야 한다.
+- 이번 자료는 별도 비교 읽기 신설보다 기존 [[N-gram에서 LLM으로]]의 핵심 공백을 보강하는 편이 합성 가치가 높았다. 새 분석 문서를 만들지 않고 검증된 기존 분석에 연속 표현 전환을 통합했다.
+
 ## 관련 항목
 
 - [[index]]
