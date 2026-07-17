@@ -1707,6 +1707,39 @@ raw 등록 해시:
 - 의료·법률·교육 같은 실제 배치에서 Watson 또는 현대 LLM의 성능은 이 공개 시연 비교만으로 판단하지 않는다. 도메인별 자료·사용자·오류 비용·후속 조치에 대한 별도 현장 근거가 필요하다.
 - 인터페이스·과업 경계·측정·공개 효과라는 네 층은 비교를 위한 분석 틀이며 모든 AI 시연의 유일한 분류 체계라고 주장하지 않는다.
 
+## [2026-07-18] ingest | 041 심층 신경망 음향 모델과 DNN-HMM 전환
+
+041 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 2012년 단일 돌파구 서사를 2009–2012년의 누적 과정으로 바꾸고, HMM 전체와 GMM 음향 모델을 분리했다.
+
+변경 문서:
+
+- `raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.ko.md`와 대응 해설
+- `wiki/sources/041_심층 신경망 음향 모델과 DNN-HMM 전환.md`
+- `wiki/concepts/자동 음성 인식.md`, `wiki/concepts/DNN-HMM.md`, `wiki/concepts/단어 오류율.md`
+- `wiki/concepts/은닉 마르코프 모델.md`의 DNN 음향 모델 혼합 단계 보강
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- Hinton 등 11명의 2012년 종합 논문이 Toronto·Microsoft·Google·IBM 네 연구 집단의 관점을 모은 문헌임을 반영했다. 2009년 TIMIT, 2010–2011년 대어휘·대화 음성 결과와 2012년 출판을 하나의 최초 사건으로 합치지 않았다.
+- DNN이 HMM 전체를 폐기한 것이 아니라 GMM 음향 모델을 문맥 의존 HMM 상태 분류기로 교체했다. HMM 전이, 발음 사전, 언어 모델과 디코더는 단어열 탐색에 남았다.
+- 초기 시스템이 MFCC·filterbank 특징, 강제 정렬, 상태 결정 트리와 고정 프레임 창을 사용했음을 기록했다. 원시 파형부터 단어열까지의 종단 간 학습이나 장거리 문맥을 직접 해결한 순환망으로 보지 않았다.
+- 초기 대표 시스템의 sigmoid·RBM 층별 사전학습과, 대어휘 음성에서 ReLU·dropout을 함께 검토한 2013년 ICASSP 후속 논문을 분리했다.
+- Dahl 등의 business search sentence error 상대 감소 16.0%·23.2%, Seide 등의 RT03S WER 27.4%→18.5%, Mohamed 등의 TIMIT phone error를 서로 다른 자료·지표로 기록했다.
+- 상대 오류 감소와 퍼센트포인트 차이를 분리하고, 20–30% 개선을 모든 잡음·화자·억양·언어의 보편 WER 감소로 일반화하지 않았다.
+- 낮은 WER가 음성 전사의 개선임을 명시하고 발화 의미·의도·사실성 이해나 일반 지능의 증거로 확대하지 않았다.
+
+raw 등록 해시:
+
+- 번역: `c20283af26a198774b350f15c977f9e42e4f0930ed42c85238416930272a0e1e`
+- 해설: `cdedb5d31097ee74d9599c4b42ddcf82e41f10bcb357551e5b3cabde68ac786c`
+
+남은 제한:
+
+- 프로젝트에는 TIMIT·Switchboard·RT03S·Google voice search 원자료, 학습 코드나 모델을 복제하지 않았으며 raw에는 새 번역과 해설만 보존한다.
+- 2013년 이후 CTC·RNN-T·attention·Transformer·self-supervised speech model의 구조와 성능은 후속 번호 소스 또는 별도 1차 문헌으로 검토해야 한다.
+- 013 HMM, 020 TDNN과 041 DNN-HMM을 함께 읽으면 “모델이 바뀔 때 실제로 교체되는 층은 어디인가”라는 비교 질문이 생긴다. 다만 현재 공개 문서에서 HMM 상태·음향 모델·특징·디코더의 경계가 충분히 설명되므로 별도 비교 읽기를 즉시 만들지 않고, 후속 종단 간 음성 소스가 이 질문을 독립 주제로 확장할 때 갱신한다.
+
 ## 관련 항목
 
 - [[index]]

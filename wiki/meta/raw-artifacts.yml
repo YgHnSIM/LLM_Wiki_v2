@@ -640,3 +640,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 9953ee2069d141ea4d3aca1192b3d95e6a32a874cec0bc7bffd76d095d1534f1
+  - path: "raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.ko.md"
+    role: translation
+    order_prefix: "041"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: c20283af26a198774b350f15c977f9e42e4f0930ed42c85238416930272a0e1e
+  - path: "raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.commentary.ko.md"
+    role: commentary
+    order_prefix: "041"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: cdedb5d31097ee74d9599c4b42ddcf82e41f10bcb357551e5b3cabde68ac786c

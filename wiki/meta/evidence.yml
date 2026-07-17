@@ -1812,3 +1812,48 @@ sources:
     kind: book
     url: https://www.loc.gov/exhibits/america-reads/1750-to-1899.html
     language: en
+  hinton-et-al-2012-dnn-acoustic-modeling:
+    title: "Deep Neural Networks for Acoustic Modeling in Speech Recognition: The Shared Views of Four Research Groups"
+    authors: [Geoffrey Hinton, Li Deng, Dong Yu, George E. Dahl, Abdel-rahman Mohamed, Navdeep Jaitly, Andrew Senior, Vincent Vanhoucke, Patrick Nguyen, Tara N. Sainath, Brian Kingsbury]
+    published: 2012
+    source_type: primary-retrospective
+    kind: journal-article
+    doi: 10.1109/MSP.2012.2205597
+    url: https://www.cs.toronto.edu/~hinton/absps/DNN-2012-proof.pdf
+    language: en
+  mohamed-dahl-hinton-2012-dbn-acoustic-modeling:
+    title: Acoustic Modeling Using Deep Belief Networks
+    authors: [Abdel-rahman Mohamed, George E. Dahl, Geoffrey E. Hinton]
+    published: 2012
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/TASL.2011.2109382
+    url: https://doi.org/10.1109/TASL.2011.2109382
+    language: en
+  dahl-et-al-2012-context-dependent-dnn-hmm:
+    title: Context-Dependent Pre-Trained Deep Neural Networks for Large-Vocabulary Speech Recognition
+    authors: [George E. Dahl, Dong Yu, Li Deng, Alex Acero]
+    published: 2012
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/TASL.2011.2134090
+    url: https://www.microsoft.com/en-us/research/publication/context-dependent-pre-trained-deep-neural-networks-for-large-vocabulary-speech-recognition/
+    language: en
+  seide-li-yu-2011-conversational-cd-dnn-hmm:
+    title: Conversational Speech Transcription Using Context-Dependent Deep Neural Networks
+    authors: [Frank Seide, Gang Li, Dong Yu]
+    published: 2011
+    source_type: primary
+    kind: conference-paper
+    doi: 10.21437/Interspeech.2011-169
+    url: https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/CD-DNN-HMM-SWB-Interspeech2011-Pub.pdf
+    language: en
+  dahl-sainath-hinton-2013-relu-dropout-lvcsr:
+    title: Improving Deep Neural Networks for LVCSR Using Rectified Linear Units and Dropout
+    authors: [George E. Dahl, Tara N. Sainath, Geoffrey E. Hinton]
+    published: 2013
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1109/ICASSP.2013.6639346
+    url: https://www.cs.utoronto.ca/~hinton/absps/georgerectified.pdf
+    language: en
