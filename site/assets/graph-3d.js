@@ -2,7 +2,9 @@ import {
   CAMERA_LIMITS,
   DEFAULT_CAMERA,
   cameraForWorldPoint,
+  circularMinimapPoint,
   clamp,
+  edgeDirectionForNode,
   hitTestProjected,
   neighborhoodWithinDepth,
   normalizeCamera,
@@ -155,6 +157,7 @@ import {
     model: null,
     viewport: { width: 1, height: 1, dpr: 1 },
     projectedNodes: new Map(),
+    minimapPoints: new Map(),
     nodeById: new Map(),
     inspectorId: '',
     mobileRelationLimit: 8,
@@ -538,44 +541,41 @@ import {
 
       const minimumX = Math.min(...points.map((point) => point.x));
       const minimumY = Math.min(...points.map((point) => point.y));
-      const labelX = clamp(14, state.viewport.width - 230, minimumX + 10);
-      const labelY = clamp(30, state.viewport.height - 18, minimumY + 25);
       const atlasNumber = String(community.id + 1).padStart(2, '0');
+      const labelText = compact
+        ? `집단 ${atlasNumber}`
+        : `집단 ${atlasNumber} / ${community.label} · ${community.size}`;
+      const labelHeight = compact ? 25 : 32;
       context.globalAlpha = 1;
       context.textAlign = 'left';
-      context.textBaseline = 'alphabetic';
+      context.textBaseline = 'middle';
       context.font = compact
-        ? '700 16px "Courier New", "D2Coding", monospace'
-        : '700 23px "Courier New", "D2Coding", monospace';
-      context.fillStyle = state.palette.pink;
-      context.globalAlpha = 0.34;
-      context.fillText(atlasNumber, labelX + 2, labelY);
-      context.fillStyle = state.palette.cyan;
-      context.fillText(atlasNumber, labelX - 2, labelY);
-      context.globalAlpha = 1;
-      context.fillStyle = state.palette.worldInk;
-      context.fillText(atlasNumber, labelX, labelY);
-      const numberWidth = context.measureText(atlasNumber).width;
-      if (compact) {
-        labelBoxes.push({
-          x: labelX - 3,
-          y: labelY - 19,
-          width: numberWidth + 6,
-          height: 23,
-        });
-        context.restore();
-        continue;
+        ? '700 10px "Courier New", "D2Coding", monospace'
+        : '700 12px "Courier New", "D2Coding", monospace';
+      const labelWidth = Math.ceil(context.measureText(labelText).width + (compact ? 16 : 22));
+      const labelX = clamp(14, state.viewport.width - labelWidth - 14, minimumX + 10);
+      const labelY = clamp(labelHeight + 10, state.viewport.height - 14, minimumY + labelHeight);
+      const labelTop = labelY - labelHeight;
+      if (!forcedColors.matches) {
+        context.fillStyle = color;
+        context.globalAlpha = 0.88;
+        context.fillRect(labelX + 5, labelTop + 5, labelWidth, labelHeight);
       }
-      context.font = '700 11px "Courier New", "D2Coding", monospace';
-      context.fillStyle = state.palette.worldInk;
-      const labelText = `${community.label} · ${community.size}`;
-      context.fillText(labelText, labelX + numberWidth + 8, labelY - 2);
-      const labelWidth = context.measureText(labelText).width;
+      context.globalAlpha = 1;
+      context.fillStyle = state.palette.paperLight;
+      context.fillRect(labelX, labelTop, labelWidth, labelHeight);
+      context.fillStyle = color;
+      context.fillRect(labelX, labelTop, labelWidth, compact ? 4 : 6);
+      context.strokeStyle = state.palette.ink;
+      context.lineWidth = 1.5;
+      context.strokeRect(labelX + 0.75, labelTop + 0.75, labelWidth - 1.5, labelHeight - 1.5);
+      context.fillStyle = state.palette.ink;
+      context.fillText(labelText, labelX + (compact ? 8 : 11), labelTop + labelHeight / 2 + 2);
       labelBoxes.push({
-        x: labelX - 4,
-        y: labelY - 25,
-        width: numberWidth + labelWidth + 16,
-        height: 31,
+        x: labelX - 2,
+        y: labelTop - 2,
+        width: labelWidth + 9,
+        height: labelHeight + 9,
       });
       context.restore();
     }
@@ -645,11 +645,11 @@ import {
     return { source, target, start, end, control };
   }
 
-  function drawArrow(end, control, color) {
+  function drawArrow(end, control, color, size = 6.5, alpha = 1) {
     const angle = Math.atan2(end.y - control.y, end.x - control.x);
-    const size = 6.5;
     context.save();
     context.fillStyle = color;
+    context.globalAlpha = alpha;
     context.beginPath();
     context.moveTo(end.x, end.y);
     context.lineTo(end.x - Math.cos(angle - 0.55) * size, end.y - Math.sin(angle - 0.55) * size);
@@ -700,6 +700,8 @@ import {
       if (direct && edge.source === state.selected) color = state.palette.pink;
       else if (direct && edge.target === state.selected) color = state.palette.cyan;
       if (route) color = state.palette.pink;
+      const direction = edgeDirectionForNode(edge, state.selected);
+      const directHaloColor = direction === 'outgoing' ? state.palette.cyan : state.palette.pink;
       let alpha = edge.kind === 'body' ? 0.2 : edge.kind === 'both' ? 0.2 : 0.13;
       if (edge.crossCommunity) alpha += 0.09;
       if (direct) alpha = 0.96;
@@ -718,17 +720,30 @@ import {
         traceEdgePath(edge, geometry);
         context.stroke();
       }
+      if (direct && !forcedColors.matches) {
+        context.strokeStyle = directHaloColor;
+        context.globalAlpha = 0.58;
+        context.lineWidth = 6.4 * state.edgeWidth;
+        context.lineCap = 'square';
+        context.setLineDash([]);
+        traceEdgePath(edge, geometry);
+        context.stroke();
+      }
       context.strokeStyle = color;
       context.globalAlpha = forcedColors.matches ? Math.max(alpha, 0.25) : alpha;
-      context.lineWidth = (route ? 3 : emphasized ? 1.9 : Math.min(1.35, 0.48 + edge.weight * 0.17)) * state.edgeWidth;
-      context.lineCap = route ? 'square' : 'round';
+      context.lineWidth = (route ? 3 : direct ? 3.3 : emphasized ? 1.9 : Math.min(1.35, 0.48 + edge.weight * 0.17)) * state.edgeWidth;
+      context.lineCap = route || direct ? 'square' : 'round';
       context.setLineDash(edge.kind === 'body' ? [4, 5] : []);
       traceEdgePath(edge, geometry);
       context.stroke();
       context.restore();
       if (state.showArrows && (emphasized || state.density === 'backbone')) {
-        drawArrow(geometry.end, geometry.control, color);
-        if (edge.reciprocal) drawArrow(geometry.start, geometry.control, color);
+        if (direct && !forcedColors.matches) drawArrow(geometry.end, geometry.control, directHaloColor, 10, 0.56);
+        drawArrow(geometry.end, geometry.control, color, direct ? 7.8 : 6.5);
+        if (edge.reciprocal) {
+          if (direct && !forcedColors.matches) drawArrow(geometry.start, geometry.control, directHaloColor, 10, 0.56);
+          drawArrow(geometry.start, geometry.control, color, direct ? 7.8 : 6.5);
+        }
       }
     }
   }
@@ -1059,26 +1074,56 @@ import {
     minimapContext.clearRect(0, 0, width, height);
     minimapContext.fillStyle = state.palette.paperLight;
     minimapContext.fillRect(0, 0, width, height);
-    const padding = 9;
-    const scaleX = (width - padding * 2) / state.data.dimensions.width;
-    const scaleY = (height - padding * 2) / state.data.dimensions.height;
-    const pointFor = (item) => ({ x: padding + item.x * scaleX, y: padding + item.y * scaleY });
+    const padding = 8;
+    const center = { x: width / 2, y: height / 2 };
+    const radius = Math.max(1, Math.min(width, height) / 2 - padding);
+    const pointFor = (item) => circularMinimapPoint(
+      item,
+      state.data.dimensions,
+      { width, height },
+      padding,
+    );
+    const visibleNodes = state.data.nodes.filter((node) => state.model.visibleNodes.has(node.id));
+    state.minimapPoints = new Map(visibleNodes.map((node) => [node.id, pointFor(node)]));
+
+    minimapContext.save();
+    minimapContext.beginPath();
+    minimapContext.arc(center.x, center.y, radius, 0, Math.PI * 2);
+    minimapContext.clip();
+    minimapContext.fillStyle = state.palette.paperLight;
+    minimapContext.fillRect(0, 0, width, height);
+    minimapContext.strokeStyle = state.palette.ink;
+    minimapContext.globalAlpha = 0.14;
+    minimapContext.lineWidth = 1;
+    for (const guideRadius of [radius * 0.36, radius * 0.68]) {
+      minimapContext.beginPath();
+      minimapContext.arc(center.x, center.y, guideRadius, 0, Math.PI * 2);
+      minimapContext.stroke();
+    }
 
     for (const community of state.data.communities) {
       const hasVisibleNode = state.data.nodes.some((node) => node.community === community.id && state.model.visibleNodes.has(node.id));
       if (!hasVisibleNode) continue;
-      const point = pointFor(community);
       const color = state.palette.communities[community.colorIndex % state.palette.communities.length];
       minimapContext.strokeStyle = color;
-      minimapContext.globalAlpha = 0.4;
+      minimapContext.globalAlpha = 0.52;
       minimapContext.lineWidth = 1;
       minimapContext.beginPath();
-      minimapContext.ellipse(point.x, point.y, community.radius * scaleX * 1.1, community.radius * scaleY * 0.82, 0, 0, Math.PI * 2);
+      for (let index = 0; index <= 28; index += 1) {
+        const angle = index / 28 * Math.PI * 2;
+        const point = pointFor({
+          x: community.x + Math.cos(angle) * community.radius * 1.1,
+          y: community.y + Math.sin(angle) * community.radius * 0.82,
+        });
+        if (index === 0) minimapContext.moveTo(point.x, point.y);
+        else minimapContext.lineTo(point.x, point.y);
+      }
+      minimapContext.closePath();
       minimapContext.stroke();
     }
 
     const drawPath = (ids, color, widthValue, alpha) => {
-      const points = ids.map((id) => state.nodeById.get(id)).filter(Boolean).map(pointFor);
+      const points = ids.map((id) => state.minimapPoints.get(id)).filter(Boolean);
       if (points.length < 2) return;
       minimapContext.strokeStyle = color;
       minimapContext.globalAlpha = alpha;
@@ -1093,16 +1138,16 @@ import {
     for (const [index, id] of state.history.entries()) {
       const visited = state.nodeById.get(id);
       if (!visited || !state.model.visibleNodes.has(id)) continue;
-      const point = pointFor(visited);
+      const point = state.minimapPoints.get(id);
+      if (!point) continue;
       const recent = index === state.historyIndex;
       minimapContext.fillStyle = state.palette.cyan;
       minimapContext.globalAlpha = recent ? 1 : 0.38;
       minimapContext.fillRect(point.x - (recent ? 2.5 : 1.5), point.y - (recent ? 2.5 : 1.5), recent ? 5 : 3, recent ? 5 : 3);
     }
 
-    for (const node of state.data.nodes) {
-      if (!state.model.visibleNodes.has(node.id)) continue;
-      const point = pointFor(node);
+    for (const node of visibleNodes) {
+      const point = state.minimapPoints.get(node.id);
       minimapContext.fillStyle = state.palette.communities[node.community % state.palette.communities.length];
       minimapContext.globalAlpha = node.id === state.selected ? 1 : 0.72;
       minimapContext.beginPath();
@@ -1115,6 +1160,14 @@ import {
         minimapContext.strokeRect(point.x - 4, point.y - 4, 8, 8);
       }
     }
+    minimapContext.globalAlpha = 1;
+    minimapContext.restore();
+    minimapContext.strokeStyle = state.palette.ink;
+    minimapContext.globalAlpha = 0.92;
+    minimapContext.lineWidth = 1.6;
+    minimapContext.beginPath();
+    minimapContext.arc(center.x, center.y, radius, 0, Math.PI * 2);
+    minimapContext.stroke();
     minimapContext.globalAlpha = 1;
   }
 
@@ -1484,8 +1537,8 @@ import {
       metadataRow('검증 상태', verificationLabels[node.verification] ?? node.verification),
       metadataRow('등록 근거', `${node.evidenceCount}건`),
       metadataRow('표시 이웃', `${relations.size}개`),
-      metadataRow('집단 밖 이웃', `${outsideNeighborCount}개`),
-      metadataRow('3D 높이', `${node.bridgeConnections}개를 로그 눈금으로 변환`),
+      metadataRow('표시 중 다른 집단 이웃', `${outsideNeighborCount}개`),
+      metadataRow('3D 높이', `전체 다른 집단 이웃 ${node.bridgeConnections}개를 로그 눈금으로 변환`),
     );
     inspectorContent.append(metadata);
 
@@ -1625,7 +1678,7 @@ import {
           ? 'WASD로 비행 · Enter로 조준 문서 선택'
           : canvas.dataset.pointerLock === 'available'
             ? '화면을 클릭해 마우스 시점을 시작하세요.'
-            : '화면을 드래그해 둘러보고 WASD로 이동하세요.'
+            : 'WASD로 이동 · Enter로 조준 문서 선택'
         : state.mode === 'travel'
         ? candidateNode ? `Enter로 이동 · ${candidateNode.title}` : selectedNode ? '연결된 이웃이 없습니다.' : '먼저 노드를 선택하세요.'
         : selectedNode ? selectedNode.title : '노드를 선택해 탐험을 시작하세요.';
@@ -1655,13 +1708,13 @@ import {
     if (flightOutput) flightOutput.textContent = state.flightSpeed < 0.85 ? '느리게' : state.flightSpeed > 1.35 ? '빠르게' : '보통';
     if (fovOutput) fovOutput.textContent = `${Math.round(state.fov)}°`;
     if (pointerLockButton) {
-      root.classList.toggle('uses-drag-look', canvas.dataset.pointerLock === 'unavailable');
+      const pointerLockAvailable = canvas.dataset.pointerLock === 'available';
+      root.classList.toggle('uses-drag-look', !pointerLockAvailable);
+      pointerLockButton.hidden = !pointerLockAvailable;
       pointerLockButton.setAttribute('aria-pressed', String(state.pointerLocked));
       pointerLockButton.textContent = state.pointerLocked
         ? '비행 중 · Esc로 마우스 해제'
-        : canvas.dataset.pointerLock === 'available'
-          ? '화면을 클릭해 비행 시작'
-          : '화면을 드래그해 둘러보기';
+        : '화면을 클릭해 비행 시작';
     }
     updateFlatButton();
   }
@@ -1792,7 +1845,7 @@ import {
     status.textContent = state.mode === 'first-person'
       ? canvas.dataset.pointerLock === 'available'
         ? '1인칭 비행 모드입니다. 화면을 클릭해 마우스 시점을 시작하고 WASD로 이동하세요.'
-        : '1인칭 비행 모드입니다. 화면을 드래그해 둘러보고 WASD로 이동하세요.'
+        : '1인칭 비행 모드입니다. WASD로 이동하고 Enter로 조준한 문서를 선택하세요.'
       : state.mode === 'travel'
       ? '연결 여행 모드입니다. 방향키로 이웃을 고르고 Enter로 이동하세요.'
       : '궤도 탐색 모드입니다. 회전, 이동, 확대를 사용할 수 있습니다.';
@@ -1847,7 +1900,7 @@ import {
     const outsideNeighbors = [...relations.keys()].filter((neighborId) => (
       state.nodeById.get(neighborId)?.community !== node.community
     ));
-    status.textContent = `${node.title} 선택. 표시 이웃 ${relations.size}개, 집단 밖 이웃 ${outsideNeighbors.length}개.`;
+    status.textContent = `${node.title} 선택. 표시 이웃 ${relations.size}개, 표시 중 다른 집단 이웃 ${outsideNeighbors.length}개.`;
     return true;
   }
 
@@ -2167,12 +2220,15 @@ import {
   function minimapNodeAtEvent(event) {
     if (!minimap || !state.data || !state.model) return null;
     const rectangle = minimap.getBoundingClientRect();
-    const padding = 9;
-    const worldX = (event.clientX - rectangle.left - padding) / Math.max(1, rectangle.width - padding * 2) * state.data.dimensions.width;
-    const worldY = (event.clientY - rectangle.top - padding) / Math.max(1, rectangle.height - padding * 2) * state.data.dimensions.height;
+    const point = { x: event.clientX - rectangle.left, y: event.clientY - rectangle.top };
+    const radius = Math.max(1, Math.min(rectangle.width, rectangle.height) / 2 - 8);
+    if (Math.hypot(point.x - rectangle.width / 2, point.y - rectangle.height / 2) > radius + 2) return null;
     return state.data.nodes
-      .filter((node) => state.model.visibleNodes.has(node.id))
-      .map((node) => ({ node, distance: Math.hypot(node.x - worldX, node.y - worldY) }))
+      .filter((node) => state.model.visibleNodes.has(node.id) && state.minimapPoints.has(node.id))
+      .map((node) => {
+        const projected = state.minimapPoints.get(node.id);
+        return { node, distance: Math.hypot(projected.x - point.x, projected.y - point.y) };
+      })
       .sort((left, right) => left.distance - right.distance)[0]?.node ?? null;
   }
 

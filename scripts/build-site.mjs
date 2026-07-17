@@ -660,7 +660,7 @@ function renderGraphPage() {
     <section class="graph-workbench" data-knowledge-graph data-graph-url="${sitePath('/graph-data.json')}">
       <div class="graph-fullscreen-root" id="knowledge-world" data-graph-fullscreen-root>
         <div class="graph-stage" data-graph-stage>
-          <p class="sr-only" id="knowledge-graph-description">문서 ${graphData.stats.nodes}개와 방향 관계 ${graphData.stats.edges}개를 연결 집단별로 배치한 WebGL 3D 지식 세계입니다. 노드 높이는 집단 밖의 고유한 이웃 수를 로그 눈금으로 나타냅니다. 궤도 카메라로 조망하거나 1인칭 비행으로 지식 세계 안을 이동할 수 있으며, 도움말에서 전체 조작법을 확인할 수 있습니다.</p>
+          <p class="sr-only" id="knowledge-graph-description">문서 ${graphData.stats.nodes}개와 방향 관계 ${graphData.stats.edges}개를 연결 집단별로 배치한 WebGL 3D 지식 세계입니다. 노드 높이는 다른 집단에 속한 고유 이웃 수를 로그 눈금으로 나타냅니다. 궤도 카메라로 조망하거나 1인칭 비행으로 지식 세계 안을 이동할 수 있으며, 도움말에서 전체 조작법을 확인할 수 있습니다.</p>
           <canvas class="knowledge-graph" data-graph-canvas width="${graphData.dimensions.width}" height="${graphData.dimensions.height}" role="img" tabindex="0" aria-label="3D 지식 세계 조작 화면" aria-describedby="knowledge-graph-description">그래프를 지원하지 않는 환경에서는 아래 텍스트 목록으로 문서를 탐색할 수 있습니다.</canvas>
           <section class="graph-mobile-atlas" data-graph-mobile-atlas aria-labelledby="graph-mobile-atlas-title" tabindex="-1">
             <header class="graph-mobile-atlas-header">
@@ -779,7 +779,7 @@ function renderGraphPage() {
             </div>
           </header>
 
-          <div class="graph-depth-badge" aria-hidden="true"><span>높이</span><strong>집단 밖 연결</strong></div>
+          <div class="graph-depth-badge" role="note" aria-label="노드 높이는 다른 집단에 속한 고유 이웃 수를 로그 눈금으로 나타냅니다."><span>노드 높이</span><strong>다른 집단 이웃 수</strong><small>높을수록 집단 사이를 많이 잇습니다 · 로그 눈금</small></div>
           <div class="graph-engine-badge" data-graph-renderer aria-hidden="true">3D 엔진 준비 중</div>
           <div class="graph-hover-card" data-graph-hover-card hidden></div>
 
@@ -818,8 +818,8 @@ function renderGraphPage() {
           </details>
 
           <figure class="graph-minimap">
-            <figcaption>세계 지도</figcaption>
-            <canvas width="260" height="160" data-graph-minimap aria-hidden="true"></canvas>
+            <figcaption>원형 세계 지도</figcaption>
+            <canvas width="160" height="160" data-graph-minimap role="img" aria-label="연결 집단과 문서의 원형 세계 지도. 문서 선택은 주 그래프나 텍스트 목록에서도 할 수 있습니다."></canvas>
             <button type="button" data-graph-fit-visible>전체 맞춤</button>
           </figure>
 
@@ -874,7 +874,7 @@ function renderGraphPage() {
                 <div><dt>궤도 키보드</dt><dd>WASD 이동, Q/E 회전, +/− 확대, Home 전체 맞춤</dd></div>
                 <div><dt>연결 여행</dt><dd>방향키로 이웃을 고르고 Enter로 이동</dd></div>
                 <div><dt>1인칭 이동</dt><dd>WASD 비행, Space 상승, Ctrl 하강, Shift 가속</dd></div>
-                <div><dt>1인칭 시선</dt><dd>화면 클릭 후 마우스로 둘러보기. 잠금이 제한되면 드래그. 클릭 또는 Enter로 중앙 문서 선택</dd></div>
+                <div><dt>1인칭 시선</dt><dd>화면 클릭 후 마우스로 시점 전환. 클릭 또는 Enter로 중앙 문서 선택</dd></div>
                 <div><dt>모드</dt><dd>V로 궤도와 1인칭 전환, Esc로 마우스 시점 해제</dd></div>
                 <div><dt>화면</dt><dd>F 전체 화면, Home 전체 조망, 탭 전환 시 이동 자동 정지</dd></div>
               </dl>
@@ -895,11 +895,11 @@ function renderGraphPage() {
             <div><dt><span class="graph-key-outline graph-key-outline--verified" aria-hidden="true"></span>실선 외곽</dt><dd>검증됨</dd></div>
             <div><dt><span class="graph-key-outline graph-key-outline--partial" aria-hidden="true"></span>점선 외곽</dt><dd>부분 검증</dd></div>
             <div><dt><span class="graph-key-line graph-key-line--related" aria-hidden="true"></span>연한 연결선</dt><dd>현재 보이는 문서 관계</dd></div>
-            <div><dt><span class="graph-key-line graph-key-line--body" aria-hidden="true"></span>분홍·청록 강조</dt><dd>선택 문서에서 나가는 관계·들어오는 관계</dd></div>
+            <div><dt><span class="graph-key-line graph-key-line--body" aria-hidden="true"></span>분홍·청록 이중 강조</dt><dd>선택 문서에서 나가는 관계·들어오는 관계</dd></div>
           </dl>
           <div class="graph-depth-key" data-graph-depth-legend>
-            <strong>높이 = 집단 밖 이웃 수</strong>
-            <div aria-label="집단 밖 이웃 수 로그 눈금: 0, 연결 노드 중앙값 ${graphData.stats.medianBridgeConnections}, 최대 ${graphData.stats.maxBridgeConnections}">
+            <strong>노드 높이 = 다른 집단의 고유 이웃 수 · 로그 눈금</strong>
+            <div aria-label="다른 집단의 고유 이웃 수 로그 눈금: 0, 연결 노드 중앙값 ${graphData.stats.medianBridgeConnections}, 최대 ${graphData.stats.maxBridgeConnections}">
               <span>바닥 0</span><i aria-hidden="true"></i><span>연결 노드 중앙값 ${graphData.stats.medianBridgeConnections}</span><i aria-hidden="true"></i><span>최대 ${graphData.stats.maxBridgeConnections}</span>
             </div>
           </div>
@@ -909,7 +909,7 @@ function renderGraphPage() {
       <details class="graph-text-index" data-graph-text-index>
         <summary>텍스트 목록으로 문서 탐색</summary>
         <p>그래프와 같은 문서를 연결 집단별 목록으로 제공합니다.</p>
-        <div class="graph-text-communities">${graphData.communities.map((community) => `<section class="graph-text-community graph-community-${community.colorIndex % 14}"><h2>${escapeHtml(community.label)} <span>${community.size}</span></h2><ul>${nodesByCommunity.get(community.id).map((node) => `<li><a href="${node.url}">${escapeHtml(node.title)}</a><small>${escapeHtml(typeLabels[node.type] ?? node.type)} · 집단 밖 이웃 ${node.bridgeConnections}</small></li>`).join('')}</ul></section>`).join('')}</div>
+        <div class="graph-text-communities">${graphData.communities.map((community) => `<section class="graph-text-community graph-community-${community.colorIndex % 14}"><h2>${escapeHtml(community.label)} <span>${community.size}</span></h2><ul>${nodesByCommunity.get(community.id).map((node) => `<li><a href="${node.url}">${escapeHtml(node.title)}</a><small>${escapeHtml(typeLabels[node.type] ?? node.type)} · 다른 집단의 고유 이웃 ${node.bridgeConnections}</small></li>`).join('')}</ul></section>`).join('')}</div>
       </details>
       </section>
     </section>
@@ -917,7 +917,7 @@ function renderGraphPage() {
 
   return layout({
     title: '지식 그래프',
-    description: 'LLM Wiki 문서의 본문 링크와 관련 읽기를 연결 집단, 문서 유형, 검증 상태와 집단 밖 연결 높이에 따라 탐색하는 3D 지식 그래프',
+    description: 'LLM Wiki 문서의 본문 링크와 관련 읽기를 연결 집단, 문서 유형, 검증 상태와 다른 집단의 고유 이웃 수에 따른 높이로 탐색하는 3D 지식 그래프',
     current: '/graph/',
     body,
     pageClass: 'graph-page',

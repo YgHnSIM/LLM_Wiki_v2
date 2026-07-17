@@ -4,6 +4,8 @@ import {
   CAMERA_LIMITS,
   DEFAULT_CAMERA,
   cameraForWorldPoint,
+  circularMinimapPoint,
+  edgeDirectionForNode,
   hitTestProjected,
   neighborhoodWithinDepth,
   normalizeCamera,
@@ -35,6 +37,42 @@ test('3D rotation preserves identity and maps cardinal axes deterministically', 
   near(pitched.x, 0, 'pitch x');
   near(pitched.y, -1, 'pitch y');
   near(pitched.z, 0, 'pitch z');
+});
+
+test('edge direction is expressed from the selected node perspective', () => {
+  const edge = { source: 'a', target: 'b' };
+  assert.equal(edgeDirectionForNode(edge, 'a'), 'outgoing');
+  assert.equal(edgeDirectionForNode(edge, 'b'), 'incoming');
+  assert.equal(edgeDirectionForNode(edge, 'c'), '');
+  assert.equal(edgeDirectionForNode({ source: 'a', target: 'a' }, 'a'), 'both');
+  assert.equal(edgeDirectionForNode(null, 'a'), '');
+});
+
+test('circular minimap projection preserves the center and maps the world boundary to one radius', () => {
+  const mapViewport = { width: 120, height: 120 };
+  const mapDimensions = { width: 400, height: 200 };
+  const padding = 10;
+  const center = circularMinimapPoint({ x: 200, y: 100 }, mapDimensions, mapViewport, padding);
+  assert.deepEqual(center, { x: 60, y: 60 });
+
+  const boundaryPoints = [
+    { x: 200, y: 0 },
+    { x: 400, y: 100 },
+    { x: 200, y: 200 },
+    { x: 0, y: 100 },
+    { x: 0, y: 0 },
+    { x: 400, y: 200 },
+  ].map((point) => circularMinimapPoint(point, mapDimensions, mapViewport, padding));
+  for (const point of boundaryPoints) near(Math.hypot(point.x - 60, point.y - 60), 50, 'map boundary radius');
+
+  const samples = Array.from({ length: 11 }, (_, xIndex) => (
+    Array.from({ length: 11 }, (_, yIndex) => ({ x: xIndex * 40, y: yIndex * 20 }))
+  )).flat();
+  for (const sample of samples) {
+    const projected = circularMinimapPoint(sample, mapDimensions, mapViewport, padding);
+    assert.ok(Math.hypot(projected.x - 60, projected.y - 60) <= 50 + EPSILON);
+    assert.deepEqual(projected, circularMinimapPoint(sample, mapDimensions, mapViewport, padding));
+  }
 });
 
 test('3D projection centers the optical origin and makes taller nodes appear nearer', () => {

@@ -7619,11 +7619,17 @@ body.graph-page {
   z-index: 12;
   top: 108px;
   left: 18px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  width: min(286px, calc(100% - 36px));
   padding: 7px 9px;
   border: 1.5px solid var(--ink);
   background: var(--paper-light);
   box-shadow: 3px 3px 0 var(--cyan);
   color: var(--ink);
+  column-gap: 9px;
+  row-gap: 2px;
+  pointer-events: none;
   transform: rotate(-1.4deg);
 }
 
@@ -7634,12 +7640,23 @@ body.graph-page {
 
 .graph-page .graph-depth-badge strong {
   font-family: var(--font-serif);
+  font-size: 14px;
+  line-height: 1.1;
+}
+
+.graph-page .graph-depth-badge small {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1.25;
 }
 
 .graph-page .graph-engine-badge {
   position: absolute;
   z-index: 14;
-  top: 153px;
+  top: 174px;
   left: 18px;
   padding: 4px 7px;
   border: 1px solid var(--graph-world-muted);
@@ -7753,8 +7770,7 @@ body.graph-page {
 }
 
 .graph-page .uses-drag-look .graph-pointer-lock {
-  opacity: 0.78;
-  pointer-events: none;
+  display: none;
 }
 
 .graph-page .graph-fps-pad {
@@ -7856,7 +7872,7 @@ body.graph-page {
   left: 18px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  width: 224px;
+  width: 236px;
   padding: 8px;
   border: 2px solid var(--ink);
   margin: 0;
@@ -7876,16 +7892,19 @@ body.graph-page {
 
 .graph-page .graph-minimap canvas {
   display: block;
-  width: 100%;
-  height: 92px;
-  border: 1px solid var(--ink);
+  width: 112px;
+  height: auto;
+  aspect-ratio: 1;
+  justify-self: center;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
   background: var(--paper-light);
   cursor: crosshair;
 }
 
 .graph-page .graph-minimap button {
   width: 48px;
-  min-height: 92px;
+  min-height: 112px;
   padding: 5px;
   background: var(--yellow);
   box-shadow: 2px 2px 0 var(--ink);
@@ -8489,6 +8508,10 @@ body.graph-fallback-fullscreen {
   .graph-page .graph-depth-badge,
   .graph-page .graph-camera-readout {
     top: 174px;
+  }
+
+  .graph-page .graph-engine-badge {
+    top: 240px;
   }
 
   .graph-page .graph-inspector {

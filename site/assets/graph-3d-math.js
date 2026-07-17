@@ -20,6 +20,46 @@ export function clamp(minimum, maximum, value) {
   return Math.min(maximum, Math.max(minimum, value));
 }
 
+export function edgeDirectionForNode(edge, nodeId) {
+  if (!edge || !nodeId) return '';
+  const outgoing = edge.source === nodeId;
+  const incoming = edge.target === nodeId;
+  if (outgoing && incoming) return 'both';
+  if (outgoing) return 'outgoing';
+  if (incoming) return 'incoming';
+  return '';
+}
+
+export function circularMinimapPoint(point, dimensions, viewport, padding = 0) {
+  const width = Math.max(1, Number(viewport?.width) || 1);
+  const height = Math.max(1, Number(viewport?.height) || 1);
+  const worldWidth = Math.max(1, Number(dimensions?.width) || 1);
+  const worldHeight = Math.max(1, Number(dimensions?.height) || 1);
+  const inset = Math.max(0, Number(padding) || 0);
+  const radius = Math.max(0, Math.min(width, height) / 2 - inset);
+  const squareX = clamp(-1, 1, Number(point?.x) / worldWidth * 2 - 1);
+  const squareY = clamp(-1, 1, Number(point?.y) / worldHeight * 2 - 1);
+
+  if (Math.abs(squareX) < Number.EPSILON && Math.abs(squareY) < Number.EPSILON) {
+    return { x: width / 2, y: height / 2 };
+  }
+
+  let radialDistance;
+  let angle;
+  if (Math.abs(squareX) > Math.abs(squareY)) {
+    radialDistance = squareX;
+    angle = Math.PI / 4 * (squareY / squareX);
+  } else {
+    radialDistance = squareY;
+    angle = Math.PI / 2 - Math.PI / 4 * (squareX / squareY);
+  }
+
+  return {
+    x: width / 2 + Math.cos(angle) * radialDistance * radius,
+    y: height / 2 + Math.sin(angle) * radialDistance * radius,
+  };
+}
+
 export function normalizeCamera(camera = {}) {
   return {
     ...DEFAULT_CAMERA,

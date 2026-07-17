@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { edgeDirectionForNode } from './graph-3d-math.js';
 
 const UP = new THREE.Vector3(0, 1, 0);
 const ORBIT_MIN_ELEVATION = 0.08;
@@ -281,6 +282,14 @@ export function createKnowledgeWorld(canvas, options = {}) {
     }
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
   }
+  for (const key of ['beam', 'arrow', 'ring']) {
+    const geometry = geometries[key];
+    const positions = geometry.getAttribute('position');
+    if (!positions) continue;
+    const colors = new Float32Array(positions.count * 3);
+    colors.fill(1);
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+  }
 
   const materials = {
     verified: new THREE.MeshBasicMaterial({
@@ -371,7 +380,17 @@ export function createKnowledgeWorld(canvas, options = {}) {
       vertexColors: true,
       transparent: true,
       opacity: 0.2,
+      blending: THREE.NormalBlending,
+      depthWrite: false,
+      toneMapped: false,
+    }),
+    activeHalo: new THREE.MeshBasicMaterial({
+      color: 0xffffff,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.38,
       blending: THREE.AdditiveBlending,
+      depthTest: false,
       depthWrite: false,
       toneMapped: false,
     }),
@@ -501,6 +520,7 @@ export function createKnowledgeWorld(canvas, options = {}) {
   let highlightMesh = null;
   let stemMesh = null;
   let edgeMesh = null;
+  let activeEdgeHaloMesh = null;
   let edgeLines = null;
   let arrowMesh = null;
   let routeGroup = null;
@@ -1050,11 +1070,13 @@ export function createKnowledgeWorld(canvas, options = {}) {
     const labelCanvas = documentRef.createElement('canvas');
     const context = labelCanvas.getContext('2d');
     const maximumTextWidth = community ? 1120 : 960;
-    let fontSize = community ? 34 : 28;
+    let fontSize = community ? 32 : 28;
     let font = '';
     let measured = Infinity;
     do {
-      font = `700 ${fontSize}px Arial, "Noto Sans KR", sans-serif`;
+      font = community
+        ? `700 ${fontSize}px "Courier New", "D2Coding", monospace`
+        : `700 ${fontSize}px Arial, "Noto Sans KR", sans-serif`;
       context.font = font;
       measured = context.measureText(content).width;
       if (measured <= maximumTextWidth || fontSize <= 17) break;
@@ -1062,19 +1084,36 @@ export function createKnowledgeWorld(canvas, options = {}) {
     } while (fontSize >= 17);
     const horizontalPadding = community ? 42 : 34;
     const stripeWidth = community ? 9 : 6;
-    labelCanvas.width = Math.max(128, Math.ceil(measured + horizontalPadding * 2 + stripeWidth));
-    labelCanvas.height = Math.ceil(fontSize * 2.05);
+    const shadowOffset = community ? 9 : 0;
+    const contentWidth = Math.max(128, Math.ceil(measured + horizontalPadding * 2 + stripeWidth));
+    const contentHeight = Math.ceil(fontSize * (community ? 2.2 : 2.05));
+    labelCanvas.width = contentWidth + shadowOffset;
+    labelCanvas.height = contentHeight + shadowOffset;
     context.font = font;
     context.textBaseline = 'middle';
-    context.fillStyle = `rgba(${Math.round(palette.world.r * 255)},${Math.round(palette.world.g * 255)},${Math.round(palette.world.b * 255)},${community ? 0.86 : 0.8})`;
-    context.fillRect(0, 0, labelCanvas.width, labelCanvas.height);
-    context.fillStyle = `#${accent.getHexString()}`;
-    context.fillRect(0, 0, stripeWidth, labelCanvas.height);
-    context.strokeStyle = community ? `#${palette.worldInk.getHexString()}` : `#${accent.getHexString()}`;
-    context.lineWidth = community ? 3 : 2;
-    context.strokeRect(1.5, 1.5, labelCanvas.width - 3, labelCanvas.height - 3);
-    context.fillStyle = `#${palette.worldInk.getHexString()}`;
-    context.fillText(content, horizontalPadding + stripeWidth, labelCanvas.height / 2 + 1);
+    if (community) {
+      context.fillStyle = `#${accent.getHexString()}`;
+      context.fillRect(shadowOffset, shadowOffset, contentWidth, contentHeight);
+      context.fillStyle = `#${palette.paperLight.getHexString()}`;
+      context.fillRect(0, 0, contentWidth, contentHeight);
+      context.fillStyle = `#${accent.getHexString()}`;
+      context.fillRect(0, 0, contentWidth, 11);
+      context.strokeStyle = `#${palette.world.getHexString()}`;
+      context.lineWidth = 4;
+      context.strokeRect(2, 2, contentWidth - 4, contentHeight - 4);
+      context.fillStyle = `#${palette.world.getHexString()}`;
+      context.fillText(content, horizontalPadding, contentHeight / 2 + 4);
+    } else {
+      context.fillStyle = `rgba(${Math.round(palette.world.r * 255)},${Math.round(palette.world.g * 255)},${Math.round(palette.world.b * 255)},0.8)`;
+      context.fillRect(0, 0, contentWidth, contentHeight);
+      context.fillStyle = `#${accent.getHexString()}`;
+      context.fillRect(0, 0, stripeWidth, contentHeight);
+      context.strokeStyle = `#${accent.getHexString()}`;
+      context.lineWidth = 2;
+      context.strokeRect(1.5, 1.5, contentWidth - 3, contentHeight - 3);
+      context.fillStyle = `#${palette.worldInk.getHexString()}`;
+      context.fillText(content, horizontalPadding + stripeWidth, contentHeight / 2 + 1);
+    }
     const texture = new THREE.CanvasTexture(labelCanvas);
     texture.colorSpace = THREE.SRGBColorSpace;
     texture.minFilter = THREE.LinearFilter;
@@ -1101,7 +1140,7 @@ export function createKnowledgeWorld(canvas, options = {}) {
       map: texture,
       color: 0xffffff,
       transparent: true,
-      opacity: community ? 0.88 : 0.94,
+      opacity: community ? 1 : 0.94,
       depthTest: false,
       depthWrite: false,
       toneMapped: false,
@@ -1117,7 +1156,7 @@ export function createKnowledgeWorld(canvas, options = {}) {
     sprite.renderOrder = community ? 7 : 8;
     sprite.userData.nodeId = nodeId;
     sprite.userData.labelAspect = texture.userData.aspect;
-    sprite.userData.labelPixels = community ? 20 : 22;
+    sprite.userData.labelPixels = community ? 25 : 22;
     sprite.userData.labelMaximum = community ? 78 : 52;
     return sprite;
   }
@@ -1167,7 +1206,8 @@ export function createKnowledgeWorld(canvas, options = {}) {
           18,
           ...members.map((node) => worldPositionFor(node).y + Math.max(8, finite(node.radius, 8) * state.nodeScale * 1.6)),
         ) + clamp(18, 62, worldDiagonal * 0.006);
-        labelRoot.add(makeLabelSprite(community.label, {
+        const atlasNumber = String(community.id + 1).padStart(2, '0');
+        labelRoot.add(makeLabelSprite(`집단 ${atlasNumber} / ${community.label} · ${members.length}`, {
           position,
           accent: communityColor(community.id),
           community: true,
@@ -1432,7 +1472,13 @@ export function createKnowledgeWorld(canvas, options = {}) {
   function removeEdgeObjects() {
     if (edgeMesh) {
       edgeRoot.remove(edgeMesh);
+      edgeMesh.dispose?.();
       edgeMesh = null;
+    }
+    if (activeEdgeHaloMesh) {
+      edgeRoot.remove(activeEdgeHaloMesh);
+      activeEdgeHaloMesh.dispose?.();
+      activeEdgeHaloMesh = null;
     }
     if (edgeLines) {
       edgeRoot.remove(edgeLines);
@@ -1441,6 +1487,7 @@ export function createKnowledgeWorld(canvas, options = {}) {
     }
     if (arrowMesh) {
       edgeRoot.remove(arrowMesh);
+      arrowMesh.dispose?.();
       arrowMesh = null;
     }
     if (routeGroup) {
@@ -1477,8 +1524,21 @@ export function createKnowledgeWorld(canvas, options = {}) {
 
   function edgeIsEmphasized(edge) {
     if (state.routeEdgeIds.has(edge.id)) return true;
-    const focusIds = [state.selected, state.hovered, state.travelCandidate].filter(Boolean);
-    return focusIds.some((id) => edge.source === id || edge.target === id);
+    const focusId = state.selected || state.hovered || state.travelCandidate;
+    return Boolean(edgeDirectionForNode(edge, focusId));
+  }
+
+  function selectedEdgeWidth(edge, widthScale) {
+    const selectedDirection = edgeDirectionForNode(edge, state.selected);
+    const directionMultiplier = selectedDirection ? 1.15 : 1;
+    return (edge.crossCommunity ? 1.35 : 1) * widthScale * directionMultiplier;
+  }
+
+  function activeHaloColor(edge) {
+    const direction = edgeDirectionForNode(edge, state.selected);
+    if (direction === 'outgoing') return palette.cyan.clone();
+    if (direction === 'incoming') return palette.pink.clone();
+    return palette.yellow.clone();
   }
 
   function edgeEndpoints(edge) {
@@ -1525,7 +1585,11 @@ export function createKnowledgeWorld(canvas, options = {}) {
       return;
     }
 
-    materials.beam.opacity = clamp(0.08, 0.68, state.edgeOpacity * 0.72);
+    materials.beam.opacity = state.selected
+      ? clamp(0.72, 0.92, state.edgeOpacity * 1.8)
+      : clamp(0.08, 0.68, state.edgeOpacity * 0.72);
+    materials.beam.depthTest = !state.selected;
+    materials.activeHalo.opacity = clamp(0.26, 0.54, state.edgeOpacity * 0.86);
     materials.line.opacity = clamp(0.04, 0.38, state.edgeOpacity * 0.32) * (state.selected ? 0.72 : 1);
     materials.arrow.opacity = clamp(0.1, 0.62, state.edgeOpacity * 0.65);
     const widthScale = clamp(0.4, 4, state.edgeWidth);
@@ -1563,7 +1627,7 @@ export function createKnowledgeWorld(canvas, options = {}) {
       for (const edge of emphasizedEdges) {
         const endpoints = edgeEndpoints(edge);
         if (!endpoints) continue;
-        const baseWidth = (edge.crossCommunity ? 1.35 : 1) * widthScale;
+        const baseWidth = selectedEdgeWidth(edge, widthScale);
         const matrix = beamMatrix(endpoints.start, endpoints.end, baseWidth);
         if (!matrix) continue;
         edgeMesh.setMatrixAt(beamCount, matrix);
@@ -1577,8 +1641,35 @@ export function createKnowledgeWorld(canvas, options = {}) {
       if (edgeMesh.instanceColor) edgeMesh.instanceColor.needsUpdate = true;
       edgeMesh.computeBoundingSphere();
       edgeMesh.frustumCulled = true;
-      edgeMesh.renderOrder = 1;
+      edgeMesh.renderOrder = 4;
       edgeRoot.add(edgeMesh);
+    }
+
+    const activeEdges = renderedEdges.filter((edge) => edgeDirectionForNode(edge, state.selected));
+    if (activeEdges.length) {
+      activeEdgeHaloMesh = new THREE.InstancedMesh(geometries.beam, materials.activeHalo, activeEdges.length);
+      activeEdgeHaloMesh.name = 'selected-relationship-halos';
+      activeEdgeHaloMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+      let haloCount = 0;
+      const haloEdges = [];
+      for (const edge of activeEdges) {
+        const endpoints = edgeEndpoints(edge);
+        if (!endpoints) continue;
+        const haloWidth = selectedEdgeWidth(edge, widthScale) * 1.55;
+        const matrix = beamMatrix(endpoints.start, endpoints.end, haloWidth);
+        if (!matrix) continue;
+        activeEdgeHaloMesh.setMatrixAt(haloCount, matrix);
+        activeEdgeHaloMesh.setColorAt(haloCount, activeHaloColor(edge));
+        haloEdges.push(edge);
+        haloCount += 1;
+      }
+      activeEdgeHaloMesh.userData.edges = haloEdges;
+      activeEdgeHaloMesh.count = haloCount;
+      activeEdgeHaloMesh.instanceMatrix.needsUpdate = true;
+      if (activeEdgeHaloMesh.instanceColor) activeEdgeHaloMesh.instanceColor.needsUpdate = true;
+      activeEdgeHaloMesh.computeBoundingSphere();
+      activeEdgeHaloMesh.renderOrder = 3;
+      edgeRoot.add(activeEdgeHaloMesh);
     }
 
     if (state.showArrows && emphasizedEdges.length) {
@@ -1608,7 +1699,7 @@ export function createKnowledgeWorld(canvas, options = {}) {
       arrowMesh.instanceMatrix.needsUpdate = true;
       if (arrowMesh.instanceColor) arrowMesh.instanceColor.needsUpdate = true;
       arrowMesh.computeBoundingSphere();
-      arrowMesh.renderOrder = 2;
+      arrowMesh.renderOrder = 5;
       edgeRoot.add(arrowMesh);
     }
 
@@ -1727,17 +1818,29 @@ export function createKnowledgeWorld(canvas, options = {}) {
       (edgeMesh.userData.edges ?? []).forEach((edge, index) => {
         const endpoints = edgeEndpoints(edge);
         if (!endpoints) return;
-        const width = (edge.crossCommunity ? 1.35 : 1) * widthScale;
+        const width = selectedEdgeWidth(edge, widthScale);
         const matrix = beamMatrix(endpoints.start, endpoints.end, width);
         if (matrix) edgeMesh.setMatrixAt(index, matrix);
       });
       edgeMesh.instanceMatrix.needsUpdate = true;
       edgeMesh.computeBoundingSphere();
-      materials.beam.opacity = clamp(
-        0.08,
-        0.68,
-        state.edgeOpacity * 0.72 * (1 + state.focusTension * 0.28),
-      );
+      materials.beam.opacity = state.selected
+        ? clamp(0.72, 0.92, state.edgeOpacity * 1.8 * (1 + state.focusTension * 0.1))
+        : clamp(0.08, 0.68, state.edgeOpacity * 0.72 * (1 + state.focusTension * 0.28));
+    }
+
+    if (activeEdgeHaloMesh) {
+      const widthScale = clamp(0.4, 4, state.edgeWidth);
+      (activeEdgeHaloMesh.userData.edges ?? []).forEach((edge, index) => {
+        const endpoints = edgeEndpoints(edge);
+        if (!endpoints) return;
+        const width = selectedEdgeWidth(edge, widthScale) * 1.55;
+        const matrix = beamMatrix(endpoints.start, endpoints.end, width);
+        if (matrix) activeEdgeHaloMesh.setMatrixAt(index, matrix);
+      });
+      activeEdgeHaloMesh.instanceMatrix.needsUpdate = true;
+      activeEdgeHaloMesh.computeBoundingSphere();
+      materials.activeHalo.opacity = clamp(0.26, 0.58, state.edgeOpacity * 0.86 * (1 + state.focusTension * 0.2));
     }
 
     if (arrowMesh) {
