@@ -1396,6 +1396,40 @@ raw 등록 해시:
 - 언어쌍·분절·참조 수·평활화가 다른 BLEU 숫자는 직접 비교하지 않는다. 현대 신경 의미 지표와 인간 평가의 타당성은 각 지표·자료별 후속 검토가 필요하다.
 - BLEU 한 지표의 정의와 한계는 이번 source·concept에서 충분히 정리했다. 037의 ROUGE·METEOR까지 검증하면 정밀도·재현율·의미 대응·과제별 평가 목적을 가로지르는 독립적인 질문이 성립하는지 다시 판단하고, 근거가 충분할 때 즉시 ‘비교 읽기’로 작성한다.
 
+## [2026-07-18] ingest | 034 구 기반 통계적 기계 번역과 최소 오류율 훈련
+
+034 영어 원문을 기존 출력과 무관하게 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 그대로 보존하고 SHA-256을 등록했다. 하나의 원문이 함께 다룬 번역 단위와 최적화 절차를 재사용 가능한 두 개념으로 분리했다.
+
+변경 문서:
+
+- `raw/034_Phrase-Based Statistical Machine Translation & Minimum Error Rate Training Phrase-Level Learning and Direct Optimization.ko.md`와 대응 해설
+- `wiki/sources/034_구 기반 통계적 기계 번역과 최소 오류율 훈련.md`
+- `wiki/concepts/구 기반 통계적 기계 번역.md`, `wiki/concepts/최소 오류율 훈련.md`
+- `wiki/concepts/통계적 기계 번역.md`, `wiki/concepts/BLEU.md`, `wiki/sources/022_IBM 통계적 기계 번역과 데이터 기반 전환.md`, `wiki/sources/033_BLEU와 기계 번역 자동 평가.md`의 연결 보강
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- Koehn·Och·Marcu의 2003년 논문으로 구 번역의 선행 연구, noisy-channel 구 모형, beam decoder, 양방향 GIZA++ 정렬 대칭화, alignment-consistent phrase extraction과 상대 빈도 추정을 확인했다.
+- PBSMT의 `phrase`가 통사 constituent나 의미적으로 완결된 관용구가 아니라 정렬선이 경계를 넘지 않는 연속 문자열임을 분명히 했다. 통사 subtree만 남기면 80% 이상의 구 쌍이 사라지고 성능이 낮아진 실험도 기록했다.
+- Europarl 독일어→영어 실험에서 최대 길이 세 단어가 최고 수준에 가까웠고 더 긴 구의 이득이 작았으며, lexical weighting이 최대 약 0.01 BLEU를 더한 조건을 복원했다. 긴 관용구 암기와 보편적 언어 이해를 주된 원인으로 보지 않았다.
+- Och의 MERT 논문으로 이산 argmax를 포함한 비평활 목적, 지역 최적, 한 탐색 방향에서 후보 점수 직선이 교차하는 경계를 훑는 line optimization과 반복 n-best 후보 갱신을 확인했다.
+- BLEU를 목적에 넣을 때 문장 점수 합이 아니라 n-gram 일치·번역 길이·참조 길이의 말뭉치 충분통계를 갱신한다는 점을 복원했다. MERT가 BLEU를 미분 가능한 손실로 만들거나 번역 모형 전체를 종단 간 재학습한다는 설명을 교정했다.
+- 중국어→영어 5,109개 학습·640개 개발·878개 시험 문장의 실험에서 MMI BLEU 12.2와 BLEU 목적 19.6을 조건과 함께 기록했다. 지표마다 다른 최적점, 개발 집합 과적합과 지표 약점 악용에 대한 원 논문의 경고도 보존했다.
+- Moses를 구 기반 SMT의 기원이 아니라 2007년 GIZA++·언어 모형·MERT·BLEU·decoder를 반복 가능한 공개 파이프라인으로 묶은 후속 인프라로 위치시켰다.
+- 전체 검사에서 단위 테스트 50개, 162문서·195개 evidence·68개 raw artifact lint, 238페이지 사이트 빌드, 16,372개 로컬 참조와 161개 검색 항목 검사를 통과했고 미해결 위키 링크는 0개였다.
+
+raw 등록 해시:
+
+- 번역: `e588cd7f7c9ab92374992046d5c9379a47d5fbeba718d7855e459fb7ed15c770`
+- 해설: `df887f765d872886f401a02ccfa4b846484a2c4c849b9c94c00797125190b737`
+
+남은 제한:
+
+- 프로젝트에는 ACL 원문 PDF, Europarl·중국어–영어 실험 자료나 Moses 코드를 복제하지 않았으며 raw에는 새 한국어 번역과 해설만 보존한다.
+- phrase table pruning, decoder recombination·beam 크기, 후대 MIRA·PRO와 상용 시스템 배치는 각 구현·자료별 후속 검토가 필요하다.
+- BLEU–MERT의 측정과 최적화 간극은 이번 source와 두 concept에서 직접 설명할 수 있어 아직 별도 분석을 만들지 않았다. 037의 ROUGE·METEOR처럼 목적이 다른 지표가 추가되면, 지표 설계가 모델 행동을 어떻게 바꾸는지 독립적인 비교 읽기로 발전시킬 근거가 충분한지 다시 판단한다.
+
 ## 관련 항목
 
 - [[index]]

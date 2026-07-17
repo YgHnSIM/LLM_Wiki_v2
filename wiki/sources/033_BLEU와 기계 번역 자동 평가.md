@@ -32,6 +32,8 @@ evidence:
     relation: supplements
 related:
   - concept.bleu
+  - source.034
+  - concept.최소-오류율-훈련
   - concept.기계-번역
   - concept.통계적-기계-번역
   - concept.신경망-기계-번역
@@ -118,7 +120,7 @@ Callison-Burch·Osborne·Koehn은 2006년 사람 평가가 더 나은 번역으�
 
 raw는 BLEU를 빠르고 미분 가능한 목표로 설명하지만 원래 BLEU는 미분 가능하지 않다. 토큰 선택, n-gram 계수, clipping, 참조 길이 선택과 brevity penalty는 이산 출력에 적용된다. 신경 기계 번역은 보통 정답 토큰의 교차 엔트로피나 로그가능도로 매개변수를 학습하고 BLEU를 개발·시험 집합의 외부 평가에 사용한다.
 
-통계적 번역의 minimum error rate training이나 후대의 minimum risk·강화학습 계열은 후보 집합·기대 위험·표본 추정 등을 통해 BLEU 같은 비미분 지표를 간접 최적화할 수 있다. 이는 BLEU 식 자체가 매끄러운 미분 가능 손실이라는 뜻과 다르다. 034가 다루는 구 기반 번역과 MERT에서는 이 구분을 별도로 검증한다.
+통계적 번역의 [[최소 오류율 훈련]]이나 후대의 minimum risk·강화학습 계열은 후보 집합·기대 위험·표본 추정 등을 통해 BLEU 같은 비미분 지표를 간접 최적화할 수 있다. 이는 BLEU 식 자체가 매끄러운 미분 가능 손실이라는 뜻과 다르다. [[034_구 기반 통계적 기계 번역과 최소 오류율 훈련]]은 MERT의 n-best 후보·선 경계 탐색과 metric dependence를 별도로 검증한다.
 
 ## 검증 정정
 
@@ -155,3 +157,5 @@ raw는 BLEU를 빠르고 미분 가능한 목표로 설명하지만 원래 BLEU�
 - [[Perplexity]]
 - [[001_섀넌의 N-gram 모델]]
 - [[022_IBM 통계적 기계 번역과 데이터 기반 전환]]
+- [[034_구 기반 통계적 기계 번역과 최소 오류율 훈련]]
+- [[최소 오류율 훈련]]

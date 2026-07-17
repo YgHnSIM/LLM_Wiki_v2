@@ -594,6 +594,15 @@ sources:
     kind: conference-paper
     url: https://aclanthology.org/N03-1017/
     language: en
+  och-2003-mert:
+    title: Minimum Error Rate Training in Statistical Machine Translation
+    authors: [Franz Josef Och]
+    published: 2003
+    source_type: primary
+    kind: conference-paper
+    doi: 10.3115/1075096.1075117
+    url: https://aclanthology.org/P03-1021/
+    language: en
   koehn-et-al-2007-moses:
     title: "Moses: Open Source Toolkit for Statistical Machine Translation"
     authors: [Philipp Koehn, Hieu Hoang, Alexandra Birch, Chris Callison-Burch, Marcello Federico, Nicola Bertoldi, Brooke Cowan, Wade Shen, Christine Moran, Richard Zens, Chris Dyer, Ondřej Bojar, Alexandra Constantin, Evan Herbst]

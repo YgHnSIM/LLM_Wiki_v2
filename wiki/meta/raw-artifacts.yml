@@ -528,3 +528,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: e5307fefb63a28f997ac1fa7f30c9e9461cc50bf8e5d26c7a3e523cedb8d8a68
+  - path: "raw/034_Phrase-Based Statistical Machine Translation & Minimum Error Rate Training Phrase-Level Learning and Direct Optimization.ko.md"
+    role: translation
+    order_prefix: "034"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: e588cd7f7c9ab92374992046d5c9379a47d5fbeba718d7855e459fb7ed15c770
+  - path: "raw/034_Phrase-Based Statistical Machine Translation & Minimum Error Rate Training Phrase-Level Learning and Direct Optimization.commentary.ko.md"
+    role: commentary
+    order_prefix: "034"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: df887f765d872886f401a02ccfa4b846484a2c4c849b9c94c00797125190b737
