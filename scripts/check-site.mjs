@@ -47,6 +47,7 @@ const requiredOutputFiles = [
   'translations/index.html',
   'assets/graph-3d.js',
   'assets/graph-3d-math.js',
+  'assets/graph-world.js',
   'assets/fonts/D2Coding.woff2',
   'assets/fonts/RIDIBatang.woff2',
   'assets/fonts/OFL-1.1.txt',
@@ -302,7 +303,10 @@ for (const hook of [
   'data-graph-node-scale',
   'data-graph-edge-opacity',
   'data-graph-edge-width',
+  'data-graph-focus-gravity',
   'data-graph-height-scale',
+  'data-graph-flight-speed',
+  'data-graph-fov',
   'data-graph-show-arrows',
   'data-graph-show-grid',
   'data-graph-show-communities',
@@ -314,6 +318,13 @@ for (const hook of [
   'data-graph-help',
   'data-graph-clear-selection',
   'data-graph-depth-legend',
+  'data-graph-renderer',
+  'data-graph-fps-layer',
+  'data-graph-reticle',
+  'data-graph-fps-target',
+  'data-graph-pointer-lock',
+  'data-graph-fps-pad',
+  'data-graph-fps-select',
   'data-graph-text-index',
 ]) {
   if (!new RegExp(`<[^>]+\\b${hook}(?:\\s|=|>)`, 'i').test(graphPageHtml)) {
@@ -321,11 +332,25 @@ for (const hook of [
   }
 }
 
+const firstPersonModeButtons = [...graphPageHtml.matchAll(/<button\b[^>]*\bdata-graph-mode="first-person"[^>]*>/gi)]
+  .map((match) => match[0]);
+if (firstPersonModeButtons.length !== 1) {
+  errors.push(`Knowledge graph page must contain exactly one first-person mode button, found ${firstPersonModeButtons.length}.`);
+} else if (attributeValue(firstPersonModeButtons[0], 'aria-pressed') !== 'false') {
+  errors.push('First-person mode button must expose its initial aria-pressed="false" state.');
+}
+
+const pointerLockButtons = [...graphPageHtml.matchAll(/<button\b[^>]*\bdata-graph-pointer-lock(?=\s|=|>)[^>]*>/gi)]
+  .map((match) => match[0]);
+if (pointerLockButtons.length !== 1 || attributeValue(pointerLockButtons[0] ?? '', 'type') !== 'button') {
+  errors.push('Knowledge graph must contain one explicit pointer-lock button with type="button".');
+}
+
 const fullscreenRootMarkup = elementMarkupForHook(graphPageHtml, 'data-graph-fullscreen-root');
 if (!fullscreenRootMarkup) {
   errors.push('Knowledge graph fullscreen root is missing or has unbalanced markup.');
 } else {
-  for (const descendantHook of ['data-graph-canvas', 'data-graph-hud', 'data-graph-inspector']) {
+  for (const descendantHook of ['data-graph-canvas', 'data-graph-hud', 'data-graph-inspector', 'data-graph-fps-layer']) {
     if (!new RegExp(`<[^>]+\\b${descendantHook}(?=\\s|=|>)`, 'i').test(fullscreenRootMarkup)) {
       errors.push(`Knowledge graph fullscreen root must contain ${descendantHook}.`);
     }
@@ -433,7 +458,7 @@ if (graphData !== undefined && !graphDataIsObject) {
 
 if (graphDataIsObject) {
   if (graphData.schemaVersion !== 2) errors.push(`Knowledge graph schema version must be 2, found ${graphData.schemaVersion}.`);
-  if (graphData.layoutVersion !== 4) errors.push(`Knowledge graph layout version must be 4, found ${graphData.layoutVersion}.`);
+  if (graphData.layoutVersion !== 5) errors.push(`Knowledge graph layout version must be 5, found ${graphData.layoutVersion}.`);
   if (graphData.depthMetric !== 'cross-community-neighbors') errors.push(`Knowledge graph has invalid depth metric '${graphData.depthMetric}'.`);
   if (graphData.depthScale !== 'log1p') errors.push(`Knowledge graph has invalid depth scale '${graphData.depthScale}'.`);
   const graphDepth = graphData.dimensions?.depth;
@@ -460,10 +485,10 @@ if (graphDataIsObject) {
     for (let rightIndex = leftIndex + 1; rightIndex < graphCommunities.length; rightIndex += 1) {
       const right = graphCommunities[rightIndex];
       if (!right || ![right.x, right.y, right.radius].every(Number.isFinite)) continue;
-      const separatedHorizontally = Math.abs(left.x - right.x) >= (left.radius + right.radius) * 1.18;
-      const separatedVertically = Math.abs(left.y - right.y) >= (left.radius + right.radius) * 0.86;
+      const separatedHorizontally = Math.abs(left.x - right.x) >= (left.radius + right.radius) * 1.22;
+      const separatedVertically = Math.abs(left.y - right.y) >= (left.radius + right.radius) * 0.92;
       if (!separatedHorizontally && !separatedVertically) {
-        errors.push(`Knowledge graph communities ${left.id} and ${right.id} overlap in layout version 4.`);
+        errors.push(`Knowledge graph communities ${left.id} and ${right.id} overlap in layout version 5.`);
       }
     }
   }
@@ -571,7 +596,7 @@ if (graphDataIsObject) {
       if (right === null || typeof right !== 'object' || Array.isArray(right)) continue;
       if (left.community !== right.community || ![right.x, right.y, right.radius].every(Number.isFinite)) continue;
       const distance = Math.hypot(right.x - left.x, right.y - left.y);
-      const minimumDistance = left.radius + right.radius + 3;
+      const minimumDistance = left.radius + right.radius + 28;
       if (distance < minimumDistance) {
         collisions.push(`${left.id} / ${right.id} (${distance.toFixed(1)} < ${minimumDistance.toFixed(1)})`);
       }

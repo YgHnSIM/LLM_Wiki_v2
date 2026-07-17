@@ -4,7 +4,7 @@ export const DEFAULT_CAMERA = Object.freeze({
   zoom: 1,
   panX: 0,
   panY: 18,
-  distance: 2400,
+  distance: 5200,
   flat: false,
 });
 

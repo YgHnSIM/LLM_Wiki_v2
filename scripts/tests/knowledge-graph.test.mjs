@@ -87,7 +87,7 @@ test('knowledge graph layout and communities are deterministic and internally co
   assert.equal(first.stats.edges, first.edges.length);
   assert.equal(first.stats.communities, first.communities.length);
   assert.equal(first.schemaVersion, 2);
-  assert.equal(first.layoutVersion, 4);
+  assert.equal(first.layoutVersion, 5);
   assert.equal(first.depthMetric, 'cross-community-neighbors');
   assert.equal(first.depthScale, 'log1p');
   assert.ok(first.dimensions.depth > 0);
@@ -117,8 +117,8 @@ test('knowledge graph layout and communities are deterministic and internally co
     const left = first.communities[leftIndex];
     for (let rightIndex = leftIndex + 1; rightIndex < first.communities.length; rightIndex += 1) {
       const right = first.communities[rightIndex];
-      const separatedHorizontally = Math.abs(left.x - right.x) >= (left.radius + right.radius) * 1.18;
-      const separatedVertically = Math.abs(left.y - right.y) >= (left.radius + right.radius) * 0.86;
+      const separatedHorizontally = Math.abs(left.x - right.x) >= (left.radius + right.radius) * 1.22;
+      const separatedVertically = Math.abs(left.y - right.y) >= (left.radius + right.radius) * 0.92;
       assert.ok(separatedHorizontally || separatedVertically, `communities ${left.id} and ${right.id} overlap`);
     }
   }
@@ -192,7 +192,7 @@ test('dense community layout keeps node markers from overlapping', () => {
       const leftNode = members[leftIndex];
       const rightNode = members[rightIndex];
       const distance = Math.hypot(rightNode.x - leftNode.x, rightNode.y - leftNode.y);
-      const minimum = leftNode.radius + rightNode.radius + 3;
+      const minimum = leftNode.radius + rightNode.radius + 28;
       assert.ok(
         distance + 0.2 >= minimum,
         `${leftNode.id} and ${rightNode.id} overlap (${distance.toFixed(2)} < ${minimum.toFixed(2)})`,

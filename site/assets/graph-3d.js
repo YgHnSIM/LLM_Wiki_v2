@@ -11,13 +11,15 @@ import {
   sortProjected,
   zoomCameraAt,
 } from './graph-3d-math.js';
+import { createKnowledgeWorld } from './graph-world.js';
 
 (() => {
   const root = document.querySelector('[data-knowledge-graph]');
   if (!root) return;
 
-  const canvas = root.querySelector('[data-graph-canvas]');
-  const context = canvas?.getContext('2d');
+  let canvas = root.querySelector('[data-graph-canvas]');
+  let context = null;
+  let world = null;
   const fullscreenRoot = root.querySelector('[data-graph-fullscreen-root]');
   const stage = root.querySelector('[data-graph-stage]');
   const controls = root.querySelector('[data-graph-controls]');
@@ -32,7 +34,10 @@ import {
   const nodeScaleInput = root.querySelector('[data-graph-node-scale]');
   const edgeOpacityInput = root.querySelector('[data-graph-edge-opacity]');
   const edgeWidthInput = root.querySelector('[data-graph-edge-width]');
+  const focusGravityInput = root.querySelector('[data-graph-focus-gravity]');
   const heightScaleInput = root.querySelector('[data-graph-height-scale]');
+  const flightSpeedInput = root.querySelector('[data-graph-flight-speed]');
+  const fovInput = root.querySelector('[data-graph-fov]');
   const arrowsInput = root.querySelector('[data-graph-show-arrows]');
   const gridInput = root.querySelector('[data-graph-show-grid]');
   const communitiesInput = root.querySelector('[data-graph-show-communities]');
@@ -57,7 +62,11 @@ import {
   const travelTarget = root.querySelector('[data-graph-travel-target]');
   const routeHud = root.querySelector('[data-graph-route-hud]');
   const routeSummary = root.querySelector('[data-graph-route-summary]');
-  if (!canvas || !context || !fullscreenRoot || !stage || !inspectorContent || !status) return;
+  const fpsLayer = root.querySelector('[data-graph-fps-layer]');
+  const fpsTarget = root.querySelector('[data-graph-fps-target]');
+  const pointerLockButton = root.querySelector('[data-graph-pointer-lock]');
+  const rendererBadge = root.querySelector('[data-graph-renderer]');
+  if (!canvas || !fullscreenRoot || !stage || !inspectorContent || !status) return;
 
   const initialInspectorMarkup = inspectorContent.innerHTML;
   const graphUrl = root.dataset.graphUrl;
@@ -96,16 +105,22 @@ import {
     density: densityFilter?.value || 'backbone',
     localDepth: 0,
     labelDensity: 2,
-    nodeScale: 1,
-    edgeOpacity: 1,
-    edgeWidth: 1,
+    nodeScale: 1.25,
+    edgeOpacity: 0.48,
+    edgeWidth: 0.72,
+    focusGravity: 1,
     heightScale: 1,
+    flightSpeed: 1,
+    fov: 56,
     showArrows: true,
     showGrid: true,
     showCommunities: true,
     showOrphans: true,
     autoRotate: false,
     mode: 'orbit',
+    firstPersonTarget: '',
+    pointerLocked: false,
+    webglCameraInfo: null,
     travelCandidate: '',
     travelIndex: -1,
     routeStart: '',
@@ -382,14 +397,18 @@ import {
     const height = Math.max(1, Math.round(rectangle.height));
     const maximumDpr = width > 1200 ? 1.5 : 2;
     const dpr = Math.min(maximumDpr, Math.max(1, window.devicePixelRatio || 1));
-    const pixelWidth = Math.round(width * dpr);
-    const pixelHeight = Math.round(height * dpr);
-    if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
-      canvas.width = pixelWidth;
-      canvas.height = pixelHeight;
+    if (world) {
+      world.resize(width, height, dpr);
+    } else {
+      const pixelWidth = Math.round(width * dpr);
+      const pixelHeight = Math.round(height * dpr);
+      if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
+        canvas.width = pixelWidth;
+        canvas.height = pixelHeight;
+      }
     }
     state.viewport = { width, height, dpr };
-    if (state.fittingPending && state.data && width > 100 && height > 100) {
+    if (!world && state.fittingPending && state.data && width > 100 && height > 100) {
       state.fittingPending = false;
       fitVisibleScene(false);
     }
@@ -1078,6 +1097,32 @@ import {
 
   function drawScene() {
     if (!state.data || !state.model || !state.palette) return;
+    if (world) {
+      world.update({
+        model: state.model,
+        selected: state.selected,
+        hovered: state.hovered,
+        travelCandidate: state.travelCandidate,
+        routeNodeIds: state.routeNodeIds,
+        routeEdgeIds: state.routeEdgeIds,
+        bookmarks: state.bookmarks,
+        labelDensity: state.labelDensity,
+        nodeScale: state.nodeScale,
+        edgeOpacity: state.edgeOpacity,
+        edgeWidth: state.edgeWidth,
+        focusGravity: state.focusGravity,
+        heightScale: state.heightScale,
+        showGrid: state.showGrid,
+        showCommunities: state.showCommunities,
+        showArrows: state.showArrows,
+        autoRotate: state.autoRotate,
+        mode: state.mode,
+      });
+      world.render();
+      drawMinimap();
+      return;
+    }
+    if (!context) return;
     const { width, height, dpr } = state.viewport;
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
     context.clearRect(0, 0, width, height);
@@ -1253,8 +1298,22 @@ import {
     const selectedNode = state.nodeById.get(state.selected);
     const candidateNode = state.nodeById.get(state.travelCandidate);
     if (cameraReadout) {
-      const mode = state.camera.flat ? '2D' : state.mode === 'travel' ? '연결 여행' : '궤도';
-      cameraReadout.textContent = `${mode} · 확대 ${Math.round(state.camera.zoom * 100)}% · 높이 ${Math.round(state.heightScale * 100)}%`;
+      if (world) {
+        const info = world.getCameraInfo?.() ?? state.webglCameraInfo ?? {};
+        const mode = state.mode === 'first-person' ? '1인칭 비행' : state.mode === 'travel' ? '연결 여행' : '궤도 탐색';
+        const positionValues = Array.isArray(info.position)
+          ? info.position
+          : info.position && typeof info.position === 'object'
+            ? [info.position.x, info.position.y, info.position.z]
+            : [];
+        const position = positionValues.length === 3
+          ? ` · 위치 ${positionValues.map((value) => Math.round(value)).join(' / ')}`
+          : '';
+        cameraReadout.textContent = `${mode} · 시야 ${Math.round(info.fov ?? state.fov)}°${position}`;
+      } else {
+        const mode = state.camera.flat ? '2D' : state.mode === 'travel' ? '연결 여행' : '궤도';
+        cameraReadout.textContent = `${mode} · 확대 ${Math.round(state.camera.zoom * 100)}% · 높이 ${Math.round(state.heightScale * 100)}%`;
+      }
     }
     const modeButtons = root.querySelectorAll('[data-graph-mode]');
     for (const button of modeButtons) button.setAttribute('aria-pressed', String(button.dataset.graphMode === state.mode));
@@ -1270,7 +1329,13 @@ import {
       bookmarkButton.disabled = state.bookmarks.size === 0;
     }
     if (travelTarget) {
-      travelTarget.textContent = state.mode === 'travel'
+      travelTarget.textContent = state.mode === 'first-person'
+        ? state.pointerLocked
+          ? 'WASD로 비행 · Enter로 조준 문서 선택'
+          : canvas.dataset.pointerLock === 'available'
+            ? '화면을 클릭해 마우스 시점을 시작하세요.'
+            : '화면을 드래그해 둘러보고 WASD로 이동하세요.'
+        : state.mode === 'travel'
         ? candidateNode ? `Enter로 이동 · ${candidateNode.title}` : selectedNode ? '연결된 이웃이 없습니다.' : '먼저 노드를 선택하세요.'
         : selectedNode ? selectedNode.title : '노드를 선택해 탐험을 시작하세요.';
     }
@@ -1286,12 +1351,27 @@ import {
     const nodeOutput = root.querySelector('[data-graph-node-output]');
     const edgeOutput = root.querySelector('[data-graph-edge-output]');
     const widthOutput = root.querySelector('[data-graph-width-output]');
+    const focusGravityOutput = root.querySelector('[data-graph-focus-gravity-output]');
     const heightOutput = root.querySelector('[data-graph-height-output]');
+    const flightOutput = root.querySelector('[data-graph-flight-output]');
+    const fovOutput = root.querySelector('[data-graph-fov-output]');
     if (labelOutput) labelOutput.textContent = labelNames[state.labelDensity] ?? '핵심';
     if (nodeOutput) nodeOutput.textContent = `${Math.round(state.nodeScale * 100)}%`;
     if (edgeOutput) edgeOutput.textContent = `${Math.round(state.edgeOpacity * 100)}%`;
     if (widthOutput) widthOutput.textContent = `${Math.round(state.edgeWidth * 100)}%`;
+    if (focusGravityOutput) focusGravityOutput.textContent = `${Math.round(state.focusGravity * 100)}%`;
     if (heightOutput) heightOutput.textContent = `${Math.round(state.heightScale * 100)}%`;
+    if (flightOutput) flightOutput.textContent = state.flightSpeed < 0.85 ? '느리게' : state.flightSpeed > 1.35 ? '빠르게' : '보통';
+    if (fovOutput) fovOutput.textContent = `${Math.round(state.fov)}°`;
+    if (pointerLockButton) {
+      root.classList.toggle('uses-drag-look', canvas.dataset.pointerLock === 'unavailable');
+      pointerLockButton.setAttribute('aria-pressed', String(state.pointerLocked));
+      pointerLockButton.textContent = state.pointerLocked
+        ? '비행 중 · Esc로 마우스 해제'
+        : canvas.dataset.pointerLock === 'available'
+          ? '화면을 클릭해 비행 시작'
+          : '화면을 드래그해 둘러보기';
+    }
     updateFlatButton();
   }
 
@@ -1401,7 +1481,16 @@ import {
   }
 
   function setMode(mode) {
-    state.mode = mode === 'travel' ? 'travel' : 'orbit';
+    const nextMode = ['orbit', 'travel', 'first-person'].includes(mode) ? mode : 'orbit';
+    if (nextMode === 'first-person' && !world) {
+      status.textContent = '이 환경에서는 WebGL 1인칭 비행을 사용할 수 없어 2D 탐색을 유지합니다.';
+      return;
+    }
+    if (state.mode === 'first-person' && nextMode !== 'first-person') world?.releasePointerLock?.();
+    state.mode = nextMode;
+    root.classList.toggle('is-first-person', state.mode === 'first-person');
+    if (fpsLayer) fpsLayer.hidden = state.mode !== 'first-person';
+    world?.setMode?.(state.mode, { selectedId: state.selected });
     if (state.mode === 'travel') refreshTravelCandidate(0);
     else {
       state.travelCandidate = '';
@@ -1409,7 +1498,11 @@ import {
       updateHud();
       scheduleDraw();
     }
-    status.textContent = state.mode === 'travel'
+    status.textContent = state.mode === 'first-person'
+      ? canvas.dataset.pointerLock === 'available'
+        ? '1인칭 비행 모드입니다. 화면을 클릭해 마우스 시점을 시작하고 WASD로 이동하세요.'
+        : '1인칭 비행 모드입니다. 화면을 드래그해 둘러보고 WASD로 이동하세요.'
+      : state.mode === 'travel'
       ? '연결 여행 모드입니다. 방향키로 이웃을 고르고 Enter로 이동하세요.'
       : '궤도 탐색 모드입니다. 회전, 이동, 확대를 사용할 수 있습니다.';
   }
@@ -1477,7 +1570,8 @@ import {
 
   function updateFlatButton() {
     const button = root.querySelector('[data-graph-view="flat"]');
-    button?.setAttribute('aria-pressed', String(Boolean(state.camera.flat)));
+    button?.setAttribute('aria-pressed', String(!world && Boolean(state.camera.flat)));
+    if (button && world) button.textContent = '위에서 조망';
   }
 
   function cancelCameraAnimation() {
@@ -1559,6 +1653,11 @@ import {
 
   function fitVisibleScene(animate = true, cameraBasis = state.camera) {
     if (!state.data || !state.model || state.viewport.width <= 1 || state.viewport.height <= 1) return;
+    if (world) {
+      world.fit([...state.model.visibleNodes]);
+      updateHud();
+      return;
+    }
     const camera = normalizeCamera({ ...cameraBasis, zoom: 1, panX: 0, panY: 0 });
     const dimensions = displayDimensions();
     const points = state.data.nodes
@@ -1606,6 +1705,11 @@ import {
       status.textContent = '먼저 노드를 선택하세요.';
       return;
     }
+    if (world) {
+      world.focus(id);
+      updateHud();
+      return;
+    }
     const targetZoom = clamp(1.25, 2.35, Math.max(state.camera.zoom, 1.55));
     const target = cameraForWorldPoint(
       displayPoint(node),
@@ -1618,17 +1722,28 @@ import {
   }
 
   function panCamera(deltaX, deltaY) {
+    if (world) {
+      world.pan(deltaX, deltaY);
+      updateHud();
+      return;
+    }
     setCamera({ panX: state.camera.panX + deltaX, panY: state.camera.panY + deltaY });
   }
 
   function zoomCamera(factor, anchor = { x: state.viewport.width / 2, y: state.viewport.height / 2 }) {
+    if (world) {
+      world.zoom(factor);
+      updateHud();
+      return;
+    }
     cancelCameraAnimation();
     if (state.autoRotate) setAutoRotate(false);
     applyCamera(zoomCameraAt(state.camera, anchor, state.viewport, factor));
   }
 
   function resetCamera() {
-    fitVisibleScene(true, DEFAULT_CAMERA);
+    if (world) world.fit([...state.model.visibleNodes]);
+    else fitVisibleScene(true, DEFAULT_CAMERA);
   }
 
   function canvasPoint(event) {
@@ -1637,6 +1752,10 @@ import {
   }
 
   function nodeAtEvent(event) {
+    if (world) {
+      const picked = world.pick(canvasPoint(event));
+      return state.nodeById.get(typeof picked === 'string' ? picked : picked?.id) ?? null;
+    }
     return hitTestProjected(state.data.nodes, state.projectedNodes, canvasPoint(event), {
       visibleIds: state.model.visibleNodes,
       minimumRadius: 18,
@@ -1657,6 +1776,7 @@ import {
 
   function updateFullscreenState() {
     const active = document.fullscreenElement === fullscreenRoot || state.fullscreenFallback;
+    if (!active && state.pointerLocked) world?.releasePointerLock?.();
     fullscreenRoot.classList.toggle('is-fullscreen', active);
     fullscreenButton?.setAttribute('aria-pressed', String(active));
     if (fullscreenButton) fullscreenButton.textContent = active ? '전체 화면 나가기' : '전체 화면';
@@ -1693,6 +1813,10 @@ import {
   function setAutoRotate(enabled) {
     state.autoRotate = Boolean(enabled) && !reduceMotion.matches;
     if (autoRotateInput) autoRotateInput.checked = state.autoRotate;
+    if (world) {
+      scheduleDraw();
+      return;
+    }
     if (state.autoRotateFrame) window.cancelAnimationFrame(state.autoRotateFrame);
     state.autoRotateFrame = 0;
     if (!state.autoRotate) return;
@@ -1746,13 +1870,16 @@ import {
   function bindInteractions() {
     settingsToggle?.addEventListener('click', (event) => {
       event.stopPropagation();
-      setSettingsOpen(settingsPanel?.hidden ?? true);
+      const nextOpen = settingsPanel?.hidden ?? true;
+      setSettingsOpen(nextOpen);
+      if (!nextOpen) canvas.focus({ preventScroll: true });
     });
     settingsClose?.addEventListener('click', (event) => {
       event.stopPropagation();
       setSettingsOpen(false);
-      settingsToggle?.focus();
+      canvas.focus({ preventScroll: true });
     });
+    helpDialog?.addEventListener('close', () => canvas.focus({ preventScroll: true }));
 
     root.addEventListener('click', (event) => {
       const target = event.target instanceof Element ? event.target : null;
@@ -1765,6 +1892,16 @@ import {
       }
       if (target.closest('[data-graph-fullscreen]')) {
         void toggleFullscreen();
+        return;
+      }
+      if (target.closest('[data-graph-pointer-lock]')) {
+        canvas.focus({ preventScroll: true });
+        if (canvas.dataset.pointerLock === 'available') void world?.requestPointerLock?.();
+        return;
+      }
+      if (target.closest('[data-graph-fps-select]')) {
+        const targetNode = world?.getReticleTarget?.();
+        if (targetNode) selectNode(typeof targetNode === 'string' ? targetNode : targetNode.id);
         return;
       }
 
@@ -1807,6 +1944,12 @@ import {
       const modeButton = target.closest('[data-graph-mode]');
       if (modeButton) {
         setMode(modeButton.dataset.graphMode);
+        canvas.focus({ preventScroll: true });
+        if (
+          modeButton.dataset.graphMode === 'first-person'
+          && world
+          && canvas.dataset.pointerLock === 'available'
+        ) void world.requestPointerLock();
         return;
       }
 
@@ -1831,29 +1974,45 @@ import {
         if (panButton.dataset.graphPan === 'right') panCamera(amount, 0);
         if (panButton.dataset.graphPan === 'up') panCamera(0, -amount);
         if (panButton.dataset.graphPan === 'down') panCamera(0, amount);
+        canvas.focus({ preventScroll: true });
         return;
       }
 
       const zoomButton = target.closest('[data-graph-zoom]');
       if (zoomButton?.dataset.graphZoom === 'in') zoomCamera(1.25);
       else if (zoomButton?.dataset.graphZoom === 'out') zoomCamera(1 / 1.25);
-      if (zoomButton) return;
+      if (zoomButton) {
+        canvas.focus({ preventScroll: true });
+        return;
+      }
 
       const orbitButton = target.closest('[data-graph-orbit]');
       if (orbitButton) {
         const direction = orbitButton.dataset.graphOrbit;
+        if (world) {
+          if (direction === 'left') world.orbit(-72, 0);
+          if (direction === 'right') world.orbit(72, 0);
+          if (direction === 'higher') world.orbit(0, 54);
+          if (direction === 'lower') world.orbit(0, -54);
+          updateHud();
+          canvas.focus({ preventScroll: true });
+          return;
+        }
         const patch = { flat: false };
         if (direction === 'left') patch.yaw = state.camera.yaw - 0.18;
         if (direction === 'right') patch.yaw = state.camera.yaw + 0.18;
         if (direction === 'higher') patch.pitch = state.camera.pitch - 0.12;
         if (direction === 'lower') patch.pitch = state.camera.pitch + 0.12;
         setCamera(patch);
+        canvas.focus({ preventScroll: true });
         return;
       }
 
       const viewButton = target.closest('[data-graph-view]');
-      if (viewButton?.dataset.graphView === 'flat') setCamera({ flat: !state.camera.flat });
+      if (viewButton?.dataset.graphView === 'flat' && world) world.orbit(0, 1000);
+      else if (viewButton?.dataset.graphView === 'flat') setCamera({ flat: !state.camera.flat });
       else if (viewButton?.dataset.graphView === 'reset') resetCamera();
+      if (viewButton) canvas.focus({ preventScroll: true });
     });
 
     search?.addEventListener('input', () => {
@@ -1862,10 +2021,22 @@ import {
     });
     controls?.addEventListener('submit', (event) => {
       event.preventDefault();
+      const searchRank = (node) => {
+        const title = normalize(node.title);
+        const aliases = (node.aliases ?? []).map(normalize);
+        if (title === state.query) return 0;
+        if (aliases.includes(state.query)) return 1;
+        if (title.startsWith(state.query)) return 2;
+        if (aliases.some((alias) => alias.startsWith(state.query))) return 3;
+        return 4;
+      };
       const matches = state.data.nodes
         .filter((node) => state.model.baseVisibleNodes.has(node.id) && searchMatches(node))
-        .sort((left, right) => collator.compare(left.title, right.title));
-      if (matches[0]) selectNode(matches[0].id, { focus: true });
+        .sort((left, right) => searchRank(left) - searchRank(right) || collator.compare(left.title, right.title));
+      if (matches[0]) {
+        selectNode(matches[0].id, { focus: true });
+        canvas.focus({ preventScroll: true });
+      }
       else {
         const hiddenMatch = state.data.nodes.some((node) => nodeMatchesFilters(node) && searchMatches(node));
         status.textContent = hiddenMatch
@@ -1905,7 +2076,18 @@ import {
     bindRange(nodeScaleInput, 'nodeScale');
     bindRange(edgeOpacityInput, 'edgeOpacity');
     bindRange(edgeWidthInput, 'edgeWidth');
+    bindRange(focusGravityInput, 'focusGravity');
     bindRange(heightScaleInput, 'heightScale', { fit: true });
+    flightSpeedInput?.addEventListener('input', () => {
+      state.flightSpeed = Number(flightSpeedInput.value) || 1;
+      world?.setFlightSpeed?.(state.flightSpeed);
+      updateHud();
+    });
+    fovInput?.addEventListener('input', () => {
+      state.fov = Number(fovInput.value) || 56;
+      world?.setFov?.(state.fov);
+      updateHud();
+    });
 
     arrowsInput?.addEventListener('change', () => { state.showArrows = arrowsInput.checked; scheduleDraw(); });
     gridInput?.addEventListener('change', () => { state.showGrid = gridInput.checked; scheduleDraw(); });
@@ -1930,10 +2112,13 @@ import {
       state.density = densityFilter?.value || 'backbone';
       state.localDepth = Number(localDepthFilter?.value) || 0;
       state.labelDensity = Number(labelDensityInput?.value) || 2;
-      state.nodeScale = Number(nodeScaleInput?.value) || 1;
-      state.edgeOpacity = Number(edgeOpacityInput?.value) || 1;
-      state.edgeWidth = Number(edgeWidthInput?.value) || 1;
+      state.nodeScale = Number(nodeScaleInput?.value) || 1.25;
+      state.edgeOpacity = Number(edgeOpacityInput?.value) || 0.48;
+      state.edgeWidth = Number(edgeWidthInput?.value) || 0.72;
+      state.focusGravity = Number(focusGravityInput?.value) || 1;
       state.heightScale = Number(heightScaleInput?.value) || 1;
+      state.flightSpeed = Number(flightSpeedInput?.value) || 1;
+      state.fov = Number(fovInput?.value) || 56;
       state.showArrows = arrowsInput?.checked ?? true;
       state.showGrid = gridInput?.checked ?? true;
       state.showCommunities = communitiesInput?.checked ?? true;
@@ -1943,6 +2128,11 @@ import {
       state.routeNodeIds = new Set();
       state.routeEdgeIds = new Set();
       state.mode = 'orbit';
+      root.classList.remove('is-first-person');
+      if (fpsLayer) fpsLayer.hidden = true;
+      world?.setFlightSpeed?.(state.flightSpeed);
+      world?.setFov?.(state.fov);
+      world?.setMode?.('orbit');
       state.travelCandidate = '';
       state.travelIndex = -1;
       restoreInspector();
@@ -1983,6 +2173,24 @@ import {
       if (![0, 1, 2].includes(event.button)) return;
       event.preventDefault();
       canvas.focus({ preventScroll: true });
+      if (state.mode === 'first-person' && world) {
+        if (state.pointerLocked) {
+          if (event.button === 0) {
+            const targetNode = world.getReticleTarget?.();
+            if (targetNode) selectNode(typeof targetNode === 'string' ? targetNode : targetNode.id);
+          }
+          return;
+        }
+        if (event.pointerType === 'mouse' && canvas.dataset.pointerLock === 'available') {
+          void world.requestPointerLock();
+          return;
+        }
+        const touchPoint = { x: event.clientX, y: event.clientY, button: event.button, mode: 'first-look' };
+        activePointers.set(event.pointerId, touchPoint);
+        canvas.setPointerCapture(event.pointerId);
+        drag = dragSnapshot(event.pointerId, touchPoint);
+        return;
+      }
       cancelCameraAnimation();
       setAutoRotate(false);
       state.hovered = '';
@@ -2011,6 +2219,18 @@ import {
       }
     });
     canvas.addEventListener('pointermove', (event) => {
+      if (state.mode === 'first-person' && world && drag?.mode === 'first-look' && event.pointerId === drag.pointerId) {
+        const deltaX = event.clientX - drag.startX;
+        const deltaY = event.clientY - drag.startY;
+        if (Math.hypot(deltaX, deltaY) > 1) {
+          world.look(deltaX, deltaY);
+          drag.startX = event.clientX;
+          drag.startY = event.clientY;
+          drag.moved = true;
+          scheduleDraw();
+        }
+        return;
+      }
       if (!activePointers.size) {
         const hoveredNode = nodeAtEvent(event);
         const hovered = hoveredNode?.id ?? '';
@@ -2031,14 +2251,22 @@ import {
         const points = [...activePointers.values()].slice(0, 2);
         const distance = Math.max(1, Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y));
         const centroid = pointerCentroid(points);
-        const rectangle = canvas.getBoundingClientRect();
-        const anchor = { x: pinch.centroid.x - rectangle.left, y: pinch.centroid.y - rectangle.top };
-        const zoomed = zoomCameraAt(pinch.camera, anchor, state.viewport, distance / pinch.distance);
-        applyCamera({
-          ...zoomed,
-          panX: zoomed.panX + centroid.x - pinch.centroid.x,
-          panY: zoomed.panY + centroid.y - pinch.centroid.y,
-        });
+        if (world) {
+          world.zoom(distance / pinch.distance);
+          world.pan(centroid.x - pinch.centroid.x, centroid.y - pinch.centroid.y);
+          pinch.distance = distance;
+          pinch.centroid = centroid;
+          updateHud();
+        } else {
+          const rectangle = canvas.getBoundingClientRect();
+          const anchor = { x: pinch.centroid.x - rectangle.left, y: pinch.centroid.y - rectangle.top };
+          const zoomed = zoomCameraAt(pinch.camera, anchor, state.viewport, distance / pinch.distance);
+          applyCamera({
+            ...zoomed,
+            panX: zoomed.panX + centroid.x - pinch.centroid.x,
+            panY: zoomed.panY + centroid.y - pinch.centroid.y,
+          });
+        }
         if (drag) drag.moved = true;
         gestureMoved = true;
         canvas.classList.add('is-panning');
@@ -2051,11 +2279,23 @@ import {
       drag.moved ||= Math.hypot(deltaX, deltaY) > 4;
       gestureMoved ||= drag.moved;
       if (drag.mode === 'pan') {
-        setCamera({ panX: drag.panX + deltaX, panY: drag.panY + deltaY });
+        if (world) {
+          world.pan(deltaX, deltaY);
+          drag.startX = event.clientX;
+          drag.startY = event.clientY;
+          updateHud();
+        } else setCamera({ panX: drag.panX + deltaX, panY: drag.panY + deltaY });
         canvas.classList.add('is-panning');
       } else {
-        const pitch = clamp(CAMERA_LIMITS.minimumPitch, CAMERA_LIMITS.maximumPitch, drag.pitch + deltaY * 0.004);
-        setCamera({ yaw: drag.yaw + deltaX * 0.006, pitch, flat: false });
+        if (world) {
+          world.orbit(deltaX, deltaY);
+          drag.startX = event.clientX;
+          drag.startY = event.clientY;
+          updateHud();
+        } else {
+          const pitch = clamp(CAMERA_LIMITS.minimumPitch, CAMERA_LIMITS.maximumPitch, drag.pitch + deltaY * 0.004);
+          setCamera({ yaw: drag.yaw + deltaX * 0.006, pitch, flat: false });
+        }
         canvas.classList.add('is-orbiting');
       }
     });
@@ -2098,6 +2338,7 @@ import {
     });
     canvas.addEventListener('contextmenu', (event) => event.preventDefault());
     canvas.addEventListener('dblclick', (event) => {
+      if (state.mode === 'first-person') return;
       const node = nodeAtEvent(event);
       if (node) selectNode(node.id, { focus: true });
     });
@@ -2107,16 +2348,56 @@ import {
       if (node) selectNode(node.id, { focus: true });
     });
 
+    const flightPadCodes = {
+      forward: 'KeyW',
+      left: 'KeyA',
+      backward: 'KeyS',
+      right: 'KeyD',
+      up: 'Space',
+      down: 'ControlLeft',
+    };
+    for (const button of root.querySelectorAll('[data-graph-fps-move]')) {
+      const setPressed = (pressed) => {
+        const code = flightPadCodes[button.dataset.graphFpsMove];
+        if (code) world?.setKey?.(code, pressed);
+      };
+      button.addEventListener('pointerdown', (event) => {
+        event.preventDefault();
+        button.setPointerCapture?.(event.pointerId);
+        setPressed(true);
+      });
+      for (const eventName of ['pointerup', 'pointercancel', 'pointerleave']) {
+        button.addEventListener(eventName, () => setPressed(false));
+      }
+    }
+
     document.addEventListener('keydown', (event) => {
       const key = event.key.toLocaleLowerCase();
       if (key === 'escape') {
         if (helpDialog?.open) helpDialog.close();
         else if (settingsPanel && !settingsPanel.hidden) setSettingsOpen(false);
+        else if (state.mode === 'first-person' && state.pointerLocked) world?.releasePointerLock?.();
         else if (state.fullscreenFallback) void toggleFullscreen();
         else clearSelection();
         return;
       }
-      if (isEditableTarget(event.target) || document.activeElement !== canvas) return;
+      if (isEditableTarget(event.target)) return;
+      const activeElement = document.activeElement;
+      const graphHasFocus = activeElement === canvas
+        || (activeElement instanceof Element && root.contains(activeElement))
+        || document.fullscreenElement === fullscreenRoot
+        || state.fullscreenFallback
+        || state.pointerLocked;
+      if (!graphHasFocus || helpDialog?.open) return;
+      if (key === 'v') {
+        event.preventDefault();
+        setMode(state.mode === 'first-person' ? 'orbit' : 'first-person');
+        canvas.focus({ preventScroll: true });
+        if (state.mode === 'first-person' && canvas.dataset.pointerLock === 'available') {
+          void world?.requestPointerLock?.();
+        }
+        return;
+      }
       if (key === 'f') {
         event.preventDefault();
         void toggleFullscreen();
@@ -2124,7 +2405,8 @@ import {
       }
       if (key === '2') {
         event.preventDefault();
-        setCamera({ flat: !state.camera.flat });
+        if (world) world.orbit(0, 1000);
+        else setCamera({ flat: !state.camera.flat });
         return;
       }
       if (key === 'home') {
@@ -2152,6 +2434,20 @@ import {
         return;
       }
 
+      if (state.mode === 'first-person' && world) {
+        if (key === 'enter') {
+          event.preventDefault();
+          const targetNode = world.getReticleTarget?.();
+          if (targetNode) selectNode(typeof targetNode === 'string' ? targetNode : targetNode.id);
+          return;
+        }
+        if (['KeyW', 'KeyA', 'KeyS', 'KeyD', 'Space', 'ControlLeft', 'ControlRight', 'ShiftLeft', 'ShiftRight'].includes(event.code)) {
+          event.preventDefault();
+          world.setKey(event.code, true);
+          return;
+        }
+      }
+
       if (state.mode === 'travel' && ['arrowleft', 'arrowup', 'a', 'w', 'arrowright', 'arrowdown', 'd', 's', 'enter'].includes(key)) {
         event.preventDefault();
         if (key === 'enter') commitTravel();
@@ -2164,10 +2460,22 @@ import {
       else if (key === 'd' || key === 'arrowright') panCamera(amount, 0);
       else if (key === 'w' || key === 'arrowup') panCamera(0, -amount);
       else if (key === 's' || key === 'arrowdown') panCamera(0, amount);
-      else if (key === 'q') setCamera({ yaw: state.camera.yaw - 0.16, flat: false });
-      else if (key === 'e') setCamera({ yaw: state.camera.yaw + 0.16, flat: false });
+      else if (key === 'q') {
+        if (world) world.orbit(-32, 0);
+        else setCamera({ yaw: state.camera.yaw - 0.16, flat: false });
+      } else if (key === 'e') {
+        if (world) world.orbit(32, 0);
+        else setCamera({ yaw: state.camera.yaw + 0.16, flat: false });
+      }
       else return;
       event.preventDefault();
+    });
+
+    document.addEventListener('keyup', (event) => {
+      if (world) world.setKey(event.code, false);
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) world?.clearKeys?.();
     });
 
     document.addEventListener('fullscreenchange', updateFullscreenState);
@@ -2201,7 +2509,7 @@ import {
     .then((data) => {
       if (
         data?.schemaVersion !== 2
-        || data?.layoutVersion !== 4
+        || data?.layoutVersion !== 5
         || data?.depthMetric !== 'cross-community-neighbors'
         || data?.depthScale !== 'log1p'
         || !Number.isFinite(data?.dimensions?.depth)
@@ -2216,6 +2524,58 @@ import {
       state.nodeById = new Map(data.nodes.map((node) => [node.id, node]));
       loadBookmarks();
       resolvePalette();
+      const supportsWebgl2 = !forcedColors.matches && Boolean(document.createElement('canvas').getContext('webgl2'));
+      if (supportsWebgl2) {
+        try {
+          world = createKnowledgeWorld(canvas, {
+            data,
+            palette: state.palette,
+            reducedMotion: reduceMotion.matches,
+            onReticleTarget(target) {
+              const id = typeof target === 'string' ? target : target?.id ?? '';
+              if (id === state.firstPersonTarget) return;
+              state.firstPersonTarget = id;
+              const node = state.nodeById.get(id);
+              if (fpsTarget) fpsTarget.textContent = node
+                ? `${node.title} · 클릭 또는 Enter로 선택`
+                : '중앙의 노드를 조준하세요.';
+            },
+            onPointerLockChange(locked) {
+              state.pointerLocked = Boolean(locked);
+              root.classList.toggle('has-pointer-lock', state.pointerLocked);
+              world?.clearKeys?.();
+              updateHud();
+            },
+            onCameraChange(info) {
+              state.webglCameraInfo = info ?? null;
+              updateHud();
+            },
+          });
+          world.setFlightSpeed(state.flightSpeed);
+          world.setFov(state.fov);
+          root.classList.add('has-webgl');
+          stage.classList.add('has-webgl-world');
+          if (rendererBadge) rendererBadge.textContent = 'WEBGL · 실제 3D';
+        } catch (error) {
+          console.warn('WebGL knowledge world unavailable; using the 2D compatibility renderer.', error);
+          world?.dispose?.();
+          world = null;
+          const replacement = canvas.cloneNode(false);
+          canvas.replaceWith(replacement);
+          canvas = replacement;
+        }
+      }
+      if (!world) {
+        context = canvas.getContext('2d');
+        if (!context) throw new Error('Neither WebGL nor 2D Canvas is available.');
+        root.classList.add('has-canvas-fallback');
+        if (rendererBadge) rendererBadge.textContent = '2D 호환 모드';
+        const firstPersonButton = root.querySelector('[data-graph-mode="first-person"]');
+        if (firstPersonButton) {
+          firstPersonButton.disabled = true;
+          firstPersonButton.title = 'WebGL2를 사용할 수 있는 환경에서 지원합니다.';
+        }
+      }
       updateGraph();
       bindInteractions();
       resizeCanvas();

@@ -16,7 +16,7 @@ import {
 
 const EPSILON = 1e-9;
 const viewport = { width: 1200, height: 760 };
-const dimensions = { width: 2800, height: 1300, depth: 460 };
+const dimensions = { width: 5600, height: 3200, depth: 900 };
 
 function near(actual, expected, message) {
   assert.ok(Math.abs(actual - expected) <= EPSILON, `${message}: ${actual} != ${expected}`);
@@ -39,15 +39,15 @@ test('3D rotation preserves identity and maps cardinal axes deterministically', 
 
 test('3D projection centers the optical origin and makes taller nodes appear nearer', () => {
   const flatCamera = { ...DEFAULT_CAMERA, yaw: 0, pitch: 0, zoom: 1, panX: 0, panY: 0, flat: true };
-  const center = projectPoint({ x: 1400, y: 650, z: 0 }, flatCamera, viewport, dimensions);
+  const center = projectPoint({ x: 2800, y: 1600, z: 0 }, flatCamera, viewport, dimensions);
   near(center.x, viewport.width / 2, 'center x');
   near(center.y, viewport.height / 2, 'center y');
 
-  const base = projectPoint({ x: 1550, y: 650, z: 0 }, DEFAULT_CAMERA, viewport, dimensions);
-  const raised = projectPoint({ x: 1550, y: 650, z: 300 }, DEFAULT_CAMERA, viewport, dimensions);
+  const base = projectPoint({ x: 3100, y: 1600, z: 0 }, DEFAULT_CAMERA, viewport, dimensions);
+  const raised = projectPoint({ x: 3100, y: 1600, z: 300 }, DEFAULT_CAMERA, viewport, dimensions);
   assert.ok(raised.scale > base.scale);
   assert.ok(Math.abs(raised.x - viewport.width / 2) > Math.abs(base.x - viewport.width / 2));
-  assert.equal(projectPoint({ x: 1400, y: 650, z: 10000 }, DEFAULT_CAMERA, viewport, dimensions), null);
+  assert.equal(projectPoint({ x: 2800, y: 1600, z: 10000 }, DEFAULT_CAMERA, viewport, dimensions), null);
 });
 
 test('scene fitting gives a wide atlas meaningful viewport coverage', () => {

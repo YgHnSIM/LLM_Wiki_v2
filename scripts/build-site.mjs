@@ -4,6 +4,7 @@ import matter from 'gray-matter';
 import yaml from 'js-yaml';
 import katex from 'katex';
 import { marked, Renderer } from 'marked';
+import { build as bundle } from 'esbuild';
 import {
   artifactRoleMetadata,
   normalizeArtifactMarkdown,
@@ -659,7 +660,7 @@ function renderGraphPage() {
     <section class="graph-workbench" data-knowledge-graph data-graph-url="${sitePath('/graph-data.json')}">
       <div class="graph-fullscreen-root" id="knowledge-world" data-graph-fullscreen-root>
         <div class="graph-stage" data-graph-stage>
-          <p class="sr-only" id="knowledge-graph-description">문서 ${graphData.stats.nodes}개와 방향 관계 ${graphData.stats.edges}개를 연결 집단별로 배치한 3D 지식 세계입니다. 노드 높이는 집단 밖의 고유한 이웃 수를 로그 눈금으로 나타냅니다. 마우스 드래그로 회전하거나 이동하고, 휠로 확대하며, 도움말에서 전체 조작법을 확인할 수 있습니다.</p>
+          <p class="sr-only" id="knowledge-graph-description">문서 ${graphData.stats.nodes}개와 방향 관계 ${graphData.stats.edges}개를 연결 집단별로 배치한 WebGL 3D 지식 세계입니다. 노드 높이는 집단 밖의 고유한 이웃 수를 로그 눈금으로 나타냅니다. 궤도 카메라로 조망하거나 1인칭 비행으로 지식 세계 안을 이동할 수 있으며, 도움말에서 전체 조작법을 확인할 수 있습니다.</p>
           <canvas class="knowledge-graph" data-graph-canvas width="${graphData.dimensions.width}" height="${graphData.dimensions.height}" role="img" tabindex="0" aria-label="3D 지식 세계 조작 화면" aria-describedby="knowledge-graph-description">그래프를 지원하지 않는 환경에서는 아래 텍스트 목록으로 문서를 탐색할 수 있습니다.</canvas>
           <p class="graph-static-message" data-graph-static-message>지식 세계를 불러오는 중입니다.</p>
 
@@ -734,16 +735,14 @@ function renderGraphPage() {
                   </div>
                 </div>
                 <div class="graph-range-grid">
-                  <label for="graph-label-density">라벨 <output for="graph-label-density" data-graph-label-output>핵심</output></label>
-                  <input id="graph-label-density" type="range" min="0" max="3" step="1" value="2" data-graph-label-density>
-                  <label for="graph-node-scale">노드 크기 <output for="graph-node-scale" data-graph-node-output>100%</output></label>
-                  <input id="graph-node-scale" type="range" min="0.7" max="1.8" step="0.1" value="1" data-graph-node-scale>
-                  <label for="graph-edge-opacity">연결 선명도 <output for="graph-edge-opacity" data-graph-edge-output>100%</output></label>
-                  <input id="graph-edge-opacity" type="range" min="0.3" max="1.8" step="0.1" value="1" data-graph-edge-opacity>
-                  <label for="graph-edge-width">연결 굵기 <output for="graph-edge-width" data-graph-width-output>100%</output></label>
-                  <input id="graph-edge-width" type="range" min="0.7" max="2" step="0.1" value="1" data-graph-edge-width>
-                  <label for="graph-height-scale">3D 높이 <output for="graph-height-scale" data-graph-height-output>100%</output></label>
-                  <input id="graph-height-scale" type="range" min="0" max="1.6" step="0.1" value="1" data-graph-height-scale>
+                  <div><label for="graph-label-density">라벨 <output for="graph-label-density" data-graph-label-output>핵심</output></label><input id="graph-label-density" type="range" min="0" max="3" step="1" value="2" data-graph-label-density></div>
+                  <div><label for="graph-node-scale">노드 크기 <output for="graph-node-scale" data-graph-node-output>125%</output></label><input id="graph-node-scale" type="range" min="0.8" max="2.2" step="0.05" value="1.25" data-graph-node-scale></div>
+                  <div><label for="graph-edge-opacity">연결 선명도 <output for="graph-edge-opacity" data-graph-edge-output>48%</output></label><input id="graph-edge-opacity" type="range" min="0.15" max="1.2" step="0.05" value="0.48" data-graph-edge-opacity></div>
+                  <div><label for="graph-edge-width">강조 선 굵기 <output for="graph-edge-width" data-graph-width-output>72%</output></label><input id="graph-edge-width" type="range" min="0.45" max="1.6" step="0.05" value="0.72" data-graph-edge-width></div>
+                  <div><label for="graph-focus-gravity">선택 중력 <output for="graph-focus-gravity" data-graph-focus-gravity-output>100%</output></label><input id="graph-focus-gravity" type="range" min="0.45" max="1.4" step="0.05" value="1" data-graph-focus-gravity></div>
+                  <div><label for="graph-height-scale">3D 높이 <output for="graph-height-scale" data-graph-height-output>100%</output></label><input id="graph-height-scale" type="range" min="0" max="1.6" step="0.1" value="1" data-graph-height-scale></div>
+                  <div><label for="graph-flight-speed">비행 속도 <output for="graph-flight-speed" data-graph-flight-output>보통</output></label><input id="graph-flight-speed" type="range" min="0.5" max="2" step="0.1" value="1" data-graph-flight-speed></div>
+                  <div><label for="graph-fov">시야각 <output for="graph-fov" data-graph-fov-output>56°</output></label><input id="graph-fov" type="range" min="42" max="78" step="2" value="56" data-graph-fov></div>
                 </div>
                 <div class="graph-switch-grid">
                   <label><input type="checkbox" checked data-graph-show-arrows> 방향 화살표</label>
@@ -764,7 +763,23 @@ function renderGraphPage() {
           </header>
 
           <div class="graph-depth-badge" aria-hidden="true"><span>높이</span><strong>집단 밖 연결</strong></div>
+          <div class="graph-engine-badge" data-graph-renderer aria-hidden="true">3D 엔진 준비 중</div>
           <div class="graph-hover-card" data-graph-hover-card hidden></div>
+
+          <section class="graph-fps-layer" data-graph-fps-layer hidden aria-label="1인칭 비행 조작">
+            <div class="graph-reticle" data-graph-reticle aria-hidden="true"><i></i><i></i><i></i><i></i><b></b></div>
+            <p class="graph-fps-target" data-graph-fps-target>중앙의 노드를 조준하세요.</p>
+            <button class="graph-pointer-lock" type="button" data-graph-pointer-lock aria-pressed="false">화면을 클릭해 비행 시작</button>
+            <div class="graph-fps-pad" data-graph-fps-pad aria-label="터치 비행 조작">
+              <button type="button" data-graph-fps-move="forward" aria-label="앞으로 이동">W</button>
+              <button type="button" data-graph-fps-move="left" aria-label="왼쪽 이동">A</button>
+              <button type="button" data-graph-fps-move="backward" aria-label="뒤로 이동">S</button>
+              <button type="button" data-graph-fps-move="right" aria-label="오른쪽 이동">D</button>
+              <button type="button" data-graph-fps-move="up" aria-label="위로 이동">↑</button>
+              <button type="button" data-graph-fps-move="down" aria-label="아래로 이동">↓</button>
+              <button type="button" data-graph-fps-select aria-label="조준한 문서 선택">선택</button>
+            </div>
+          </section>
 
           <details class="graph-view-controls">
             <summary>카메라</summary>
@@ -811,6 +826,7 @@ function renderGraphPage() {
             <div class="graph-mode-switch" aria-label="탐험 모드">
               <button type="button" data-graph-mode="orbit" aria-pressed="true">궤도 탐색</button>
               <button type="button" data-graph-mode="travel" aria-pressed="false">연결 여행</button>
+              <button type="button" data-graph-mode="first-person" aria-pressed="false">1인칭 비행</button>
             </div>
             <div class="graph-history-controls">
               <button type="button" data-graph-history="back" disabled>이전</button>
@@ -836,9 +852,14 @@ function renderGraphPage() {
                 <div><dt>확대</dt><dd>휠 또는 두 손가락 오므리기</dd></div>
                 <div><dt>초점</dt><dd>노드를 두 번 클릭하거나 선택 후 C</dd></div>
                 <div><dt>노드 형태</dt><dd>구체는 개념, 큐브는 원문, 팔면체는 인물·기관, 육각기둥은 비교 읽기</dd></div>
-                <div><dt>키보드</dt><dd>WASD 이동, Q/E 회전, +/− 확대, Home 전체 맞춤</dd></div>
+                <div><dt>노드 색</dt><dd>외피는 연결 집단, 내부 핵은 문서 유형, 외곽 셸은 검증 상태</dd></div>
+                <div><dt>선택 중력</dt><dd>직접 연결 노드는 간격을 유지하며 가까워지고, 나머지는 어두워집니다. 선택 해제 시 원래 위치로 돌아갑니다.</dd></div>
+                <div><dt>궤도 키보드</dt><dd>WASD 이동, Q/E 회전, +/− 확대, Home 전체 맞춤</dd></div>
                 <div><dt>연결 여행</dt><dd>방향키로 이웃을 고르고 Enter로 이동</dd></div>
-                <div><dt>화면</dt><dd>F 전체 화면, 2 평면 전환, Esc 패널 또는 선택 해제</dd></div>
+                <div><dt>1인칭 이동</dt><dd>WASD 비행, Space 상승, Ctrl 하강, Shift 가속</dd></div>
+                <div><dt>1인칭 시선</dt><dd>화면 클릭 후 마우스로 둘러보기. 잠금이 제한되면 드래그. 클릭 또는 Enter로 중앙 문서 선택</dd></div>
+                <div><dt>모드</dt><dd>V로 궤도와 1인칭 전환, Esc로 마우스 시점 해제</dd></div>
+                <div><dt>화면</dt><dd>F 전체 화면, Home 전체 조망, 탭 전환 시 이동 자동 정지</dd></div>
               </dl>
             </form>
           </dialog>
@@ -856,8 +877,8 @@ function renderGraphPage() {
             <div><dt><span class="graph-key-shape graph-key-shape--analysis" aria-hidden="true"></span>육각기둥</dt><dd>비교 읽기</dd></div>
             <div><dt><span class="graph-key-outline graph-key-outline--verified" aria-hidden="true"></span>실선 외곽</dt><dd>검증됨</dd></div>
             <div><dt><span class="graph-key-outline graph-key-outline--partial" aria-hidden="true"></span>점선 외곽</dt><dd>부분 검증</dd></div>
-            <div><dt><span class="graph-key-line graph-key-line--related" aria-hidden="true"></span>굵은 실선</dt><dd>관련 읽기로 고른 관계</dd></div>
-            <div><dt><span class="graph-key-line graph-key-line--body" aria-hidden="true"></span>점선</dt><dd>서술 본문에서만 나온 링크</dd></div>
+            <div><dt><span class="graph-key-line graph-key-line--related" aria-hidden="true"></span>연한 연결선</dt><dd>현재 보이는 문서 관계</dd></div>
+            <div><dt><span class="graph-key-line graph-key-line--body" aria-hidden="true"></span>분홍·청록 강조</dt><dd>선택 문서에서 나가는 관계·들어오는 관계</dd></div>
           </dl>
           <div class="graph-depth-key" data-graph-depth-legend>
             <strong>높이 = 집단 밖 이웃 수</strong>
@@ -1333,6 +1354,16 @@ async function buildInto(outputDir) {
   await fs.rm(outputDir, { recursive: true, force: true });
   await fs.mkdir(outputDir, { recursive: true });
   await fs.cp(path.join(siteDir, 'assets'), path.join(outputDir, 'assets'), { recursive: true });
+  await bundle({
+    entryPoints: [path.join(siteDir, 'assets', 'graph-webgl-world.js')],
+    outfile: path.join(outputDir, 'assets', 'graph-world.js'),
+    bundle: true,
+    format: 'esm',
+    minify: true,
+    sourcemap: false,
+    target: ['es2022'],
+    logLevel: 'silent',
+  });
   await fs.copyFile(path.join(rootDir, 'node_modules', 'katex', 'dist', 'katex.min.css'), path.join(outputDir, 'assets', 'katex.min.css'));
   await fs.cp(path.join(rootDir, 'node_modules', 'katex', 'dist', 'fonts'), path.join(outputDir, 'assets', 'fonts'), { recursive: true });
 

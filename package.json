@@ -25,10 +25,12 @@
     "gray-matter": "^4.0.3",
     "js-yaml": "^3.15.0",
     "katex": "^0.16.22",
-    "marked": "^15.0.12"
+    "marked": "^15.0.12",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
-    "ajv-formats": "^3.0.1"
+    "ajv-formats": "^3.0.1",
+    "esbuild": "^0.28.1"
   }
 }

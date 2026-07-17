@@ -1,11 +1,11 @@
-const GRAPH_WIDTH = 2800;
-const GRAPH_HEIGHT = 1300;
-const GRAPH_DEPTH = 460;
+const GRAPH_WIDTH = 5600;
+const GRAPH_HEIGHT = 3200;
+const GRAPH_DEPTH = 900;
 const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
-const NODE_SPIRAL_STEP = 36;
-const NODE_COLLISION_GAP = 10;
-const COMMUNITY_GAP = 92;
-const GRAPH_MARGIN = 150;
+const NODE_SPIRAL_STEP = 68;
+const NODE_COLLISION_GAP = 28;
+const COMMUNITY_GAP = 220;
+const GRAPH_MARGIN = 260;
 
 const clamp = (minimum, maximum, value) => Math.min(maximum, Math.max(minimum, value));
 
@@ -154,8 +154,8 @@ function placeCommunityCenters(communities) {
   const maximumRowWidth = GRAPH_WIDTH - GRAPH_MARGIN * 2;
   const records = communities.map((community) => ({
     community,
-    width: community.radius * 2 * 1.18,
-    height: community.radius * 2 * 0.86,
+    width: community.radius * 2 * 1.22,
+    height: community.radius * 2 * 0.92,
   }));
   const rows = [];
   let row = { records: [], width: 0, height: 0 };
@@ -226,9 +226,9 @@ function relaxNodeCollisions(nodes, community) {
   community.radius = Math.max(
     community.radius,
     ...nodes.map((node) => Math.max(
-      Math.abs(node.x - community.x) / 1.12,
-      Math.abs(node.y - community.y) / 0.78,
-    ) + node.radius + 18),
+      Math.abs(node.x - community.x) / 1.16,
+      Math.abs(node.y - community.y) / 0.9,
+    ) + node.radius + 36),
   );
   for (const node of nodes) {
     node.x = Number(node.x.toFixed(1));
@@ -354,7 +354,7 @@ export function buildKnowledgeGraph(documents, {
       colorIndex: id,
       x: 0,
       y: 0,
-      radius: clamp(132, 270, 78 + Math.sqrt(members.length) * 29),
+      radius: clamp(240, 480, 130 + Math.sqrt(members.length) * 55),
     };
   });
   const labelCounts = new Map();
@@ -391,8 +391,8 @@ export function buildKnowledgeGraph(documents, {
       const localRadius = index ? NODE_SPIRAL_STEP * Math.sqrt(index) : 0;
       const jitter = (stableHash(node.id) % 13) - 6;
       const angle = index * GOLDEN_ANGLE + (stableHash(`${node.id}:angle`) % 31) / 100;
-      node.x = Math.round(clamp(24, GRAPH_WIDTH - 24, community.x + Math.cos(angle) * localRadius * 1.04 + jitter));
-      node.y = Math.round(clamp(24, GRAPH_HEIGHT - 24, community.y + Math.sin(angle) * localRadius * 0.82 - jitter));
+      node.x = Math.round(clamp(24, GRAPH_WIDTH - 24, community.x + Math.cos(angle) * localRadius * 1.1 + jitter));
+      node.y = Math.round(clamp(24, GRAPH_HEIGHT - 24, community.y + Math.sin(angle) * localRadius * 0.94 - jitter));
       node.radius = Number(clamp(
         8,
         22,
@@ -437,7 +437,7 @@ export function buildKnowledgeGraph(documents, {
   nodes.sort((a, b) => a.id.localeCompare(b.id, 'ko'));
   return {
     schemaVersion: 2,
-    layoutVersion: 4,
+    layoutVersion: 5,
     depthMetric: 'cross-community-neighbors',
     depthScale: 'log1p',
     dimensions: { width: GRAPH_WIDTH, height: GRAPH_HEIGHT, depth: GRAPH_DEPTH },

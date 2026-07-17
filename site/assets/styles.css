@@ -5947,6 +5947,13 @@ body.graph-page::before {
   visibility: visible;
 }
 
+.graph-page .is-first-person .graph-inspector,
+.graph-page .is-first-person .graph-hover-card {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
 .graph-page .graph-inspector-toolbar {
   position: sticky;
   z-index: 1;
@@ -6431,7 +6438,7 @@ body.graph-page {
   z-index: 2;
   inset: 0;
   background:
-    repeating-linear-gradient(0deg, transparent 0 5px, rgb(0 0 0 / 13%) 5px 6px),
+    repeating-linear-gradient(0deg, transparent 0 5px, rgb(0 0 0 / 8%) 5px 6px),
     linear-gradient(105deg, transparent 0 48.6%, rgb(243 236 216 / 3%) 49%, transparent 49.5% 100%);
   content: '';
   mix-blend-mode: multiply;
@@ -6443,7 +6450,7 @@ body.graph-page {
   z-index: 3;
   inset: 0;
   border: 9px double rgb(243 236 216 / 15%);
-  box-shadow: inset 0 0 90px rgb(0 0 0 / 58%);
+  box-shadow: inset 0 0 90px rgb(0 0 0 / 32%);
   content: '';
   pointer-events: none;
 }
@@ -6475,6 +6482,30 @@ body.graph-page {
 
 .graph-page .knowledge-graph.has-hover {
   cursor: pointer;
+}
+
+.graph-page .is-first-person .knowledge-graph {
+  cursor: crosshair;
+}
+
+.graph-page .has-pointer-lock .knowledge-graph {
+  cursor: none;
+}
+
+.graph-page .graph-stage.has-webgl-world {
+  background:
+    radial-gradient(circle at 52% 42%, rgb(36 73 255 / 18%), transparent 34%),
+    radial-gradient(circle at 18% 72%, rgb(255 0 110 / 11%), transparent 30%),
+    radial-gradient(circle at 82% 20%, rgb(0 255 204 / 9%), transparent 27%),
+    #080a0e;
+}
+
+.graph-page .graph-stage.has-webgl-world::before {
+  background:
+    repeating-linear-gradient(0deg, transparent 0 6px, rgb(0 0 0 / 10%) 6px 7px),
+    radial-gradient(circle at center, transparent 48%, rgb(0 0 0 / 32%) 100%);
+  mix-blend-mode: screen;
+  opacity: 0.54;
 }
 
 .graph-page .graph-static-message {
@@ -6763,11 +6794,18 @@ body.graph-page {
 
 .graph-page .graph-range-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   padding: 12px 0;
   border-block: 2px solid var(--ink);
   margin-top: 14px;
   gap: 10px;
+}
+
+.graph-page .graph-range-grid > div {
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--ink);
+  background: rgb(232 224 192 / 72%);
 }
 
 .graph-page .graph-range-grid label {
@@ -6842,6 +6880,131 @@ body.graph-page {
 
 .graph-page .graph-depth-badge strong {
   font-family: var(--font-serif);
+}
+
+.graph-page .graph-engine-badge {
+  position: absolute;
+  z-index: 14;
+  top: 153px;
+  left: 18px;
+  padding: 4px 7px;
+  border: 1px solid var(--graph-world-muted);
+  background: rgb(23 23 17 / 78%);
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+}
+
+.graph-page .graph-fps-layer {
+  position: absolute;
+  z-index: 23;
+  inset: 0;
+  pointer-events: none;
+}
+
+.graph-page .graph-fps-layer[hidden] {
+  display: none;
+}
+
+.graph-page .graph-reticle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 62px;
+  height: 62px;
+  filter: drop-shadow(2px 2px 0 rgb(23 23 17 / 88%));
+  transform: translate(-50%, -50%);
+}
+
+.graph-page .graph-reticle i,
+.graph-page .graph-reticle b {
+  position: absolute;
+  display: block;
+  background: var(--cyan);
+  content: '';
+}
+
+.graph-page .graph-reticle i:nth-child(1),
+.graph-page .graph-reticle i:nth-child(2) {
+  top: 30px;
+  width: 19px;
+  height: 2px;
+}
+
+.graph-page .graph-reticle i:nth-child(1) { left: 0; }
+.graph-page .graph-reticle i:nth-child(2) { right: 0; }
+
+.graph-page .graph-reticle i:nth-child(3),
+.graph-page .graph-reticle i:nth-child(4) {
+  left: 30px;
+  width: 2px;
+  height: 19px;
+}
+
+.graph-page .graph-reticle i:nth-child(3) { top: 0; }
+.graph-page .graph-reticle i:nth-child(4) { bottom: 0; }
+
+.graph-page .graph-reticle b {
+  top: 28px;
+  left: 28px;
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--ink);
+  background: var(--pink);
+  transform: rotate(45deg);
+}
+
+.graph-page .graph-fps-target {
+  position: absolute;
+  bottom: 82px;
+  left: 50%;
+  max-width: min(560px, calc(100% - 36px));
+  padding: 7px 11px;
+  border: 1px solid rgb(243 236 216 / 46%);
+  margin: 0;
+  background: rgb(8 10 14 / 74%);
+  box-shadow: 3px 3px 0 var(--pink);
+  color: var(--graph-world-ink);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.graph-page .graph-pointer-lock {
+  position: absolute;
+  top: calc(50% + 64px);
+  left: 50%;
+  min-height: 42px;
+  padding: 8px 12px;
+  border: 2px solid var(--ink);
+  background: var(--yellow);
+  box-shadow: 5px 5px 0 var(--pink);
+  color: var(--ink);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  pointer-events: auto;
+  transform: translateX(-50%) rotate(-0.6deg);
+  transition: opacity 100ms linear;
+}
+
+.graph-page .has-pointer-lock .graph-pointer-lock {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.graph-page .uses-drag-look .graph-pointer-lock {
+  opacity: 0.78;
+  pointer-events: none;
+}
+
+.graph-page .graph-fps-pad {
+  display: none;
 }
 
 .graph-page .graph-hover-card {
@@ -7003,6 +7166,13 @@ body.graph-page {
   transform: rotate(0.35deg);
   transition-delay: 0s;
   visibility: visible;
+}
+
+.graph-page .is-first-person .graph-inspector,
+.graph-page .is-first-person .graph-hover-card {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
 }
 
 .graph-page .graph-inspector-toolbar {
@@ -7218,6 +7388,10 @@ body.graph-page {
 
 .graph-page .graph-mode-switch button[aria-pressed='true'] {
   background: var(--cyan);
+}
+
+.graph-page .graph-mode-switch button[data-graph-mode='first-person'][aria-pressed='true'] {
+  background: var(--pink);
 }
 
 .graph-page .graph-history-controls span,
@@ -7704,6 +7878,11 @@ body.graph-fallback-fullscreen {
     display: none;
   }
 
+  .graph-page .graph-engine-badge {
+    top: 112px;
+    left: 8px;
+  }
+
   .graph-page .graph-camera-readout {
     top: 111px;
     right: 8px;
@@ -7815,6 +7994,18 @@ body.graph-fallback-fullscreen {
     text-align: left;
   }
 
+  .graph-page .graph-fps-target {
+    bottom: 174px;
+    max-width: calc(100% - 150px);
+    font-size: 8px;
+    text-align: left;
+  }
+
+  .graph-page .graph-pointer-lock {
+    top: calc(50% + 48px);
+    max-width: calc(100% - 32px);
+  }
+
   .graph-page .graph-help-dialog {
     width: calc(100% - 18px);
     max-height: calc(100dvh - 18px);
@@ -7846,6 +8037,41 @@ body.graph-fallback-fullscreen {
 
   .graph-page .graph-depth-key {
     grid-column: 1 / -1;
+  }
+}
+
+@media (pointer: coarse) {
+  .graph-page .is-first-person .graph-fps-pad {
+    position: absolute;
+    right: 10px;
+    bottom: 156px;
+    display: grid;
+    grid-template-columns: repeat(3, 42px);
+    gap: 5px;
+    pointer-events: auto;
+  }
+
+  .graph-page .graph-fps-pad button {
+    min-width: 42px;
+    min-height: 38px;
+    padding: 4px;
+    border: 1.5px solid var(--ink);
+    background: rgb(243 236 216 / 88%);
+    box-shadow: 2px 2px 0 var(--cyan);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    touch-action: none;
+  }
+
+  .graph-page .graph-fps-pad button[data-graph-fps-move='forward'] { grid-column: 2; }
+  .graph-page .graph-fps-pad button[data-graph-fps-move='left'] { grid-column: 1; }
+  .graph-page .graph-fps-pad button[data-graph-fps-move='backward'] { grid-column: 2; }
+  .graph-page .graph-fps-pad button[data-graph-fps-move='right'] { grid-column: 3; }
+  .graph-page .graph-fps-pad button[data-graph-fps-select] {
+    grid-column: 1 / -1;
+    background: var(--pink);
   }
 }
 
