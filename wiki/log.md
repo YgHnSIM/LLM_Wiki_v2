@@ -1624,6 +1624,31 @@ raw 등록 해시:
 - Freebase의 개별 데이터 원천·편집 권한·중복 해소 알고리즘, 제품별 개체 연결·질의응답 효과, 후대 지식 베이스 완성 벤치마크는 각 1차 자료로 별도 검토해야 한다.
 - WordNet·FrameNet·PropBank·Freebase를 함께 검증하면서 “구조화된 의미 자원은 무엇을 하나의 노드로 삼는가”라는 독립 질문이 성립했다. 039 ingest를 원격에 반영한 직후 소스 수와 무관하게 ‘비교 읽기’ 분석을 별도 content 커밋으로 작성한다.
 
+## [2026-07-18] content | 구조화된 의미 자원은 무엇을 노드로 삼는가
+
+025 WordNet, 030 FrameNet, 038 PropBank, 039 Freebase와 기존 검증 문서를 함께 읽어 `wiki/analyses/구조화된 의미 자원은 무엇을 노드로 삼는가.md`를 ‘비교 읽기’에 추가했다. 정해진 소스 수를 묶지 않고, 네 자원이 무엇을 동일한 대상으로 세며 관계와 근거를 어디에 붙이는지라는 독립 질문을 중심으로 범위를 정했다.
+
+변경 문서:
+
+- `wiki/analyses/구조화된 의미 자원은 무엇을 노드로 삼는가.md`
+- `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+비교 근거와 해석:
+
+- WordNet의 word form·word meaning·synset과 품사별 lexical/semantic relation을 현실 개체 그래프와 구분했다.
+- FrameNet의 frame·frame element·lexical unit과 target·FE/GF/PT 말뭉치 주석을 상황 유형·어휘적 환기·관찰 용례의 서로 다른 층으로 나눴다.
+- PropBank의 roleset·frameset과 개별 predicate token·argument span·Penn Treebank node를 구분하고, Arg2 이상의 번호가 roleset 지역 정의라는 점을 통합 원칙에 반영했다.
+- Freebase의 topic·MID·type·property·CVT를 개체 동일성·사실 통합의 단위로 두고, CVT가 독립 현실 개체가 아닌 복합 관계 노드일 수 있음을 비교했다.
+- 같은 문자열이 word sense disambiguation, frame semantic parsing, semantic role labeling, entity linking에서 서로 다른 정답 단위로 처리된다는 점을 연결했다.
+- 네 자원의 간선을 공통 `related_to`로 평탄화하지 않고 relation의 정의역·공역·버전·locator를 보존해야 한다는 실무 원칙을 정리했다.
+- 확인된 설계 사실, 네 자원을 함께 읽어 얻은 동일성 기준이라는 비교 해석, WordNet→FrameNet→PropBank→Freebase→LLM 단일 직접 계보 같은 미확인 주장을 분리했다.
+
+검증 상태와 제한:
+
+- 외부 근거 6건과 raw artifact 8건을 연결했으며, 자원 간 동일성 기준이라는 비교 해석이 포함되므로 `verification: partial`로 두었다.
+- DBpedia·Wikidata·AMR·OntoNotes·BabelNet처럼 여러 층을 실제로 매핑한 자원은 이번 범위에 포함하지 않았다. 각 자원의 1차 설계와 매핑 근거를 검토한 뒤 확장해야 한다.
+- 특정 LLM이 네 자원을 학습·검색·평가에 사용했는지와 내부 표상이 같은 구조를 갖는지는 모델·자료별 별도 근거 없이는 확정하지 않는다.
+
 ## 관련 항목
 
 - [[index]]
