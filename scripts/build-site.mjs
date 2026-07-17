@@ -662,6 +662,23 @@ function renderGraphPage() {
         <div class="graph-stage" data-graph-stage>
           <p class="sr-only" id="knowledge-graph-description">문서 ${graphData.stats.nodes}개와 방향 관계 ${graphData.stats.edges}개를 연결 집단별로 배치한 WebGL 3D 지식 세계입니다. 노드 높이는 집단 밖의 고유한 이웃 수를 로그 눈금으로 나타냅니다. 궤도 카메라로 조망하거나 1인칭 비행으로 지식 세계 안을 이동할 수 있으며, 도움말에서 전체 조작법을 확인할 수 있습니다.</p>
           <canvas class="knowledge-graph" data-graph-canvas width="${graphData.dimensions.width}" height="${graphData.dimensions.height}" role="img" tabindex="0" aria-label="3D 지식 세계 조작 화면" aria-describedby="knowledge-graph-description">그래프를 지원하지 않는 환경에서는 아래 텍스트 목록으로 문서를 탐색할 수 있습니다.</canvas>
+          <section class="graph-mobile-atlas" data-graph-mobile-atlas aria-labelledby="graph-mobile-atlas-title" tabindex="-1">
+            <header class="graph-mobile-atlas-header">
+              <p>모바일 2D 보기</p>
+              <h2 id="graph-mobile-atlas-title">연결 카드판</h2>
+              <p data-graph-mobile-summary>문서를 불러오는 중입니다.</p>
+            </header>
+            <dl class="graph-mobile-direction-key" aria-label="연결 방향">
+              <div><dt><span aria-hidden="true"></span>분홍</dt><dd>선택 문서에서 나가는 연결</dd></div>
+              <div><dt><span aria-hidden="true"></span>청록</dt><dd>선택 문서로 들어오는 연결</dd></div>
+            </dl>
+            <div class="graph-mobile-scene" data-graph-mobile-scene>
+              <svg data-graph-mobile-connectors aria-hidden="true"></svg>
+              <div data-graph-mobile-content>
+                <p class="graph-mobile-loading">검색하거나 연결이 많은 시작 문서를 선택하세요.</p>
+              </div>
+            </div>
+          </section>
           <p class="graph-static-message" data-graph-static-message>지식 세계를 불러오는 중입니다.</p>
 
           <header class="graph-game-header" data-graph-hud>
@@ -681,7 +698,7 @@ function renderGraphPage() {
                 <datalist id="graph-node-options">${graphData.nodes.map((node) => `<option value="${escapeHtml(node.title)}"></option>`).join('')}</datalist>
               </div>
 
-              <section class="graph-settings-panel" id="graph-world-settings" data-graph-settings hidden aria-label="지식 세계 설정">
+              <section class="graph-settings-panel" id="graph-world-settings" data-graph-settings hidden role="dialog" aria-modal="true" aria-label="지식 세계 설정">
                 <div class="graph-panel-heading">
                   <div><span>세계 설정</span><strong>표시와 움직임</strong></div>
                   <button type="button" data-graph-settings-close>닫기</button>
@@ -716,7 +733,7 @@ function renderGraphPage() {
                       ${graphData.communities.map((community) => `<option value="${community.id}">${String(community.id + 1).padStart(2, '0')} · ${escapeHtml(community.label)} (${community.size})</option>`).join('')}
                     </select>
                   </div>
-                  <div class="graph-control">
+                  <div class="graph-control graph-desktop-settings-only">
                     <label for="graph-density">연결 밀도</label>
                     <select id="graph-density" data-graph-density>
                       <option value="backbone">핵심 구조</option>
@@ -734,7 +751,7 @@ function renderGraphPage() {
                     </select>
                   </div>
                 </div>
-                <div class="graph-range-grid">
+                <div class="graph-range-grid graph-desktop-settings-only">
                   <div><label for="graph-label-density">라벨 <output for="graph-label-density" data-graph-label-output>핵심</output></label><input id="graph-label-density" type="range" min="0" max="3" step="1" value="2" data-graph-label-density></div>
                   <div><label for="graph-node-scale">노드 크기 <output for="graph-node-scale" data-graph-node-output>125%</output></label><input id="graph-node-scale" type="range" min="0.8" max="2.2" step="0.05" value="1.25" data-graph-node-scale></div>
                   <div><label for="graph-edge-opacity">연결 선명도 <output for="graph-edge-opacity" data-graph-edge-output>48%</output></label><input id="graph-edge-opacity" type="range" min="0.15" max="1.2" step="0.05" value="0.48" data-graph-edge-opacity></div>
@@ -745,11 +762,11 @@ function renderGraphPage() {
                   <div><label for="graph-fov">시야각 <output for="graph-fov" data-graph-fov-output>56°</output></label><input id="graph-fov" type="range" min="42" max="78" step="2" value="56" data-graph-fov></div>
                 </div>
                 <div class="graph-switch-grid">
-                  <label><input type="checkbox" checked data-graph-show-arrows> 방향 화살표</label>
-                  <label><input type="checkbox" checked data-graph-show-grid> 바닥 격자</label>
-                  <label><input type="checkbox" checked data-graph-show-communities> 집단 영역</label>
+                  <label class="graph-desktop-settings-only"><input type="checkbox" checked data-graph-show-arrows> 방향 화살표</label>
+                  <label class="graph-desktop-settings-only"><input type="checkbox" checked data-graph-show-grid> 바닥 격자</label>
+                  <label class="graph-desktop-settings-only"><input type="checkbox" checked data-graph-show-communities> 집단 영역</label>
                   <label><input type="checkbox" checked data-graph-show-orphans> 고립 문서</label>
-                  <label><input type="checkbox" data-graph-auto-rotate> 자동 회전</label>
+                  <label class="graph-desktop-settings-only"><input type="checkbox" data-graph-auto-rotate> 자동 회전</label>
                 </div>
                 <button class="graph-reset" type="reset" data-graph-reset>모든 설정 초기화</button>
               </section>

@@ -440,6 +440,7 @@ export function createKnowledgeWorld(canvas, options = {}) {
   const state = {
     disposed: false,
     contextLost: false,
+    active: true,
     viewport: {
       width: Math.max(1, canvas.clientWidth || 1),
       height: Math.max(1, canvas.clientHeight || 1),
@@ -2113,7 +2114,7 @@ export function createKnowledgeWorld(canvas, options = {}) {
   }
 
   function animationShouldRun() {
-    if (state.disposed || state.contextLost || documentRef.visibilityState === 'hidden') return false;
+    if (!state.active || state.disposed || state.contextLost || documentRef.visibilityState === 'hidden') return false;
     return state.mode === 'first-person' || state.autoRotate || !reducedMotion;
   }
 
@@ -2138,7 +2139,7 @@ export function createKnowledgeWorld(canvas, options = {}) {
   }
 
   function render(timestamp = windowRef?.performance?.now?.() ?? Date.now()) {
-    if (state.disposed || state.contextLost) return;
+    if (!state.active || state.disposed || state.contextLost) return;
     const deltaSeconds = state.lastFrameTime
       ? Math.min(0.05, Math.max(0, (timestamp - state.lastFrameTime) / 1000))
       : 0;
@@ -2166,6 +2167,19 @@ export function createKnowledgeWorld(canvas, options = {}) {
     renderer.render(scene, camera);
     notifyCamera();
     ensureAnimationLoop();
+  }
+
+  function setActive(nextActive) {
+    state.active = Boolean(nextActive);
+    canvas.dataset.webglActive = String(state.active);
+    if (!state.active) {
+      stopAnimationLoop();
+      clearKeys();
+      releasePointerLock();
+      return;
+    }
+    state.lastFrameTime = 0;
+    render();
   }
 
   function getReticleTarget() {
@@ -2300,6 +2314,7 @@ export function createKnowledgeWorld(canvas, options = {}) {
     setFov,
     getCameraInfo,
     getReticleTarget,
+    setActive,
     dispose,
   };
 }

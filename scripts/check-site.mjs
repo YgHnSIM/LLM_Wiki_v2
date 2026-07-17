@@ -47,6 +47,7 @@ const requiredOutputFiles = [
   'translations/index.html',
   'assets/graph-3d.js',
   'assets/graph-3d-math.js',
+  'assets/graph-mobile-model.js',
   'assets/graph-world.js',
   'assets/fonts/D2Coding.woff2',
   'assets/fonts/RIDIBatang.woff2',
@@ -281,6 +282,11 @@ for (const hook of [
   'data-graph-fullscreen-root',
   'data-graph-stage',
   'data-graph-canvas',
+  'data-graph-mobile-atlas',
+  'data-graph-mobile-scene',
+  'data-graph-mobile-content',
+  'data-graph-mobile-connectors',
+  'data-graph-mobile-summary',
   'data-graph-hud',
   'data-graph-controls',
   'data-graph-search',
@@ -354,6 +360,26 @@ if (!fullscreenRootMarkup) {
     if (!new RegExp(`<[^>]+\\b${descendantHook}(?=\\s|=|>)`, 'i').test(fullscreenRootMarkup)) {
       errors.push(`Knowledge graph fullscreen root must contain ${descendantHook}.`);
     }
+  }
+}
+
+const mobileAtlasMarkup = elementMarkupForHook(graphPageHtml, 'data-graph-mobile-atlas');
+if (!mobileAtlasMarkup) {
+  errors.push('Knowledge graph mobile relation-card atlas is missing or has unbalanced markup.');
+} else {
+  for (const descendantHook of [
+    'data-graph-mobile-scene',
+    'data-graph-mobile-content',
+    'data-graph-mobile-connectors',
+    'data-graph-mobile-summary',
+  ]) {
+    if (!new RegExp(`<[^>]+\\b${descendantHook}(?=\\s|=|>)`, 'i').test(mobileAtlasMarkup)) {
+      errors.push(`Knowledge graph mobile atlas must contain ${descendantHook}.`);
+    }
+  }
+  const connector = mobileAtlasMarkup.match(/<svg\b[^>]*\bdata-graph-mobile-connectors(?=\s|=|>)[^>]*>/i)?.[0] ?? '';
+  if (attributeValue(connector, 'aria-hidden') !== 'true') {
+    errors.push('Knowledge graph mobile connectors must be hidden from assistive technology.');
   }
 }
 
