@@ -9,7 +9,7 @@ aliases:
 tags:
   - type/meta
 created: '2026-05-07'
-updated: '2026-07-18'
+updated: '2026-07-19'
 lifecycle: active
 verification: verified
 artifacts: []
@@ -22,7 +22,7 @@ related:
 
 이 위키는 언어 모델링, 기계 지능 평가, 초기 기계 번역, 신경망 학습, 형식언어, 대화형 AI의 역사를 1차 문헌과 함께 연결한다. 수집 당시의 번역·해설은 `raw/`에 보존하고, 공개 문서는 locator가 있는 근거로 검증한다.
 
-## 마흔아홉 개 소스의 범위
+## 쉰 개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -73,6 +73,7 @@ related:
 - [[048_잔차 학습과 매우 깊은 신경망]]은 [[ResNet]]의 [[Degradation problem]]과 (F(x)+x) [[잔차 연결]]을 복원하고, 기울기 소실·Highway Network·pre-activation·Transformer residual stream을 구분한다.
 - [[049_층 정규화와 시퀀스 모델의 배치 독립성]]은 [[Batch Normalization]]과 [[Layer Normalization]]의 통계 공유 축·훈련/추론 상태를 복원하고, token별 hidden 정규화·Post/Pre-LN·[[RMSNorm]]의 범위를 검증한다.
 - [[050_FastText와 서브워드 표현의 두 경로]]는 [[FastText]]의 문자 n-gram 합·hash·정적 OOV 근사와 [[Byte Pair Encoding|BPE]]의 sequence 분절을 구분하고, [[서브워드 토큰화]]·SentencePiece·현대 Transformer 연결의 범위를 검증한다.
+- [[051_SQuAD와 추출형 독해 평가]]는 536개 위키백과 문서·107,785개 질문, 답 구간·EM·토큰 F1을 복원하고, [[추출형 질의응답]]과 검색·생성·일반 언어 이해의 경계 및 SQuAD 2.0의 답 없음 판단을 검증한다.
 
 ## 현재 핵심 주제
 
@@ -113,6 +114,7 @@ related:
 - [[단어 임베딩]]의 정적 word type 표현, 의미·통사·빈도 신호의 혼합, 다의어·OOV·contextual representation과의 경계
 - [[FastText]]가 SGNS 입력 벡터를 문자 n-gram 합으로 매개변수화하는 방식, [[Byte Pair Encoding|BPE]]가 token sequence를 바꾸는 방식, SentencePiece가 raw text에서 여러 subword model을 다루는 범위
 - [[서브워드는 한 벡터의 특징인가 여러 토큰인가]]에서 비교하는 기본 SGNS·FastText·BPE·SentencePiece의 조각 역할, 조합 시점, 문맥 상호작용과 OOV의 세 층
+- [[추출형 질의응답]]의 시작·끝 구간 선택, 검색·생성 단계와의 경계, EM·토큰 F1 및 SQuAD 2.0의 기권 판단
 - [[N-gram에서 LLM으로]]에서 비교하는 Katz의 표면 문맥 확률 재분배와 NPLM의 연속 표현 매개변수 공유
 - [[BM25]]의 희소 용어 가중, 문서 내 빈도 포화, 평균 문서 길이 보정과 보정된 관련성 확률이 아닌 순위 점수라는 해석
 - [[스티븐 로버트슨]]·[[캐런 스파크 존스]]·Steve Walker와 Okapi 팀의 서로 다른 기여, BM25와 Dense Passage Retrieval·RAG의 기준선·대체 검색기 관계
@@ -222,6 +224,8 @@ related:
 - [[Batch Normalization]]
 - [[RMSNorm]]
 - [[050_FastText와 서브워드 표현의 두 경로]]
+- [[051_SQuAD와 추출형 독해 평가]]
+- [[추출형 질의응답]]
 - [[FastText]]
 - [[서브워드 토큰화]]
 - [[Byte Pair Encoding]]
@@ -255,7 +259,9 @@ related:
 
 ## 현재 상태
 
-소스 44개, 개념 110개, 개체 29개, 분석 12개와 메타 문서 3개, 총 198개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 177개는 `verified`, 해석적 문서 18개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 229개 외부 근거와 88개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 50개, 개념 126개, 개체 29개, 분석 14개와 메타 문서 3개, 총 222개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 199개는 `verified`, 해석적 문서 20개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 246개 외부 근거와 100개 불변 raw artifact가 레지스트리에 등록돼 있다.
+
+`051`의 Robin Jia를 2016년 원 논문 저자로 섞은 설명, 정확히 10만 개라는 규모 축약, 답 구간 추출과 검색·자유 생성의 혼합, EM·F1과 의미 이해의 동일시, 모든 질문에 답이 있는 SQuAD 1.1의 제약, 서로 다른 사람 기준선과 모델 점수의 단순 비교, SQuAD 2.0의 답 불가능 질문 수, 어텐션·Transformer·BERT·LLM의 직접 원인 계보와 설정 없는 GPT-3·GPT-4 성능 주장도 공개 문서에서 교정했다.
 
 `006`의 잘못된 MADALINE 약어·선형 LMS 국소 최솟값·VAD 배치 서술, `007`의 튜링 테스트 직접 계보 주장, `008`의 복잡도 산술과 Transformer 병렬성 서술, `009`의 출판 연대·이름 순서·이해 범위 과장, `010`의 VSM·IDF 단일 연도 귀속과 의미 이해 과장, `011`의 고정 원시 ACT 수·술어 논리 비판·MARGIE 질의응답·AMR 직접 계보, `012`의 1980년대 단일 혁명·Brown Corpus 연대·규칙 시스템의 원리적 무능력·자동 데이터 확장, `013`의 HMM 기원·비터비 목적·관측 독립성·MFCC 동시대성·상용화 범위·LLM 직접 계보, `014`의 1970년 단독 발명·BBN 귀속·CFG와 차트 파서 무능력·ATN 보편 지수 복잡도·레지스터의 담화 기억·후대 파서 직접 계보, `015`의 단일 1973년 귀속·PTQ 유형과 유니콘 존재 양화식·문맥 배제·가능세계 열거와 보편 지수 복잡도·LUNAR와 현대 LLM 직접 계보, `016`의 기계 일반 불가능론·포더/퍼트넘 대표 귀속·목표 논문과 저자 응답의 페이지 혼합·결합 반론 변경·모든 LLM의 다음 토큰 예측·현대 LLM에 대한 확정 판결, `017`의 1983년·Bell Labs 귀속·전역 의미 조합 탐색·선형 복잡도·OED 사용·대규모 성능·현대 NLP 직접 계보, `018`의 1986년 단독 발명·즉시 딥러닝 실용화·오류의 인과적 책임·보편 선형 시간·합성 과제의 광범위한 응용 확대·모든 언어 AI와 LLM의 직접 계보, `019`의 트라이그램 차수 혼동·α의 보간 가중치 오해·75만 단어와 100문장 평가의 과대 일반화·어텐션·드롭아웃·가중치 감쇠와 Katz 백오프의 동일시, `020`의 단독 발명·원시 음성 종단 간 처리·화자 독립·HMM 수동 확률·위치별 순차 계산·무제한 시간 불변성·제품 배포·CNN·RNN·Transformer 직접 계보, `021`의 1988년 단독 발명·수표 인식 귀속·완전 연결층의 위치 정보 삭제·일반 3×3 필터의 9개 매개변수·완전한 이동 불변성·특징 공학 제거·BatchNorm과 ResNet의 단일 해결책 서사·텍스트 CNN과 Word2Vec·GloVe·seq2seq·어텐션·Transformer의 직접 계보, `022`의 1991년 단일 발명·IBM Models 차이·EM 최고 정렬 오해·Hansard 자료 혼합·BLEU와 Moses 연대·통계 방식의 보편적 우월성·IBM 정렬에서 어텐션·Transformer·LLM으로의 직접 계보는 위키 본문에서 교정했다. raw의 원문 결손과 오류는 보존하되 공개 지식의 기준으로 사용하지 않는다.
 

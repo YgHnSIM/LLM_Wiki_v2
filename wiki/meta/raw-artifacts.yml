@@ -784,3 +784,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 4efa864145ba5cff63f928c4e34fb53b11952a986999808e5895a3fd86200399
+  - path: "raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md"
+    role: translation
+    order_prefix: "051"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 9025808bdfd66c425cba121f69b64b1390fb2406cb33959564940718006b8d04
+  - path: "raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.commentary.ko.md"
+    role: commentary
+    order_prefix: "051"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: a06f4b9ee79b29f28106ff05d6351d639a99a8a433df5cbec88deb3b622c51a6
