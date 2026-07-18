@@ -736,3 +736,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: b457361eb94b9c3f2f633b230cc5adc9262a4042d71dbd43355168ca83af6c68
+  - path: "raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md"
+    role: translation
+    order_prefix: "048"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: cf1997f9d3e9616eedf3b3a457b9b3ccf50b446499a8255b198d785f9fc1b0b5
+  - path: "raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.commentary.ko.md"
+    role: commentary
+    order_prefix: "048"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 187e901b78101a4cd499a81fb750f061e0924eb572c1d42875b13b7a09f3d6d2

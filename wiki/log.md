@@ -1932,6 +1932,40 @@ raw 등록 해시:
 - 실제 문서 분할·색인 갱신·retriever drift·다중 홉 오류·생성 충실성은 시스템별 자료와 평가가 필요하다.
 - 040 DeepQA와 046 MemNN은 모두 후보 검색과 근거 점수화를 분리하지만, 규칙·특징·학습 감독·답 형식의 비교만으로 독립 분석을 만들기에는 047 이후 독해·어텐션 계보가 더 필요해 현재는 연결로 보존한다.
 
+## [2026-07-18] ingest | 048 잔차 학습과 매우 깊은 신경망
+
+047번은 실제 원문 파일이 없어 규칙대로 문서를 만들지 않고 건너뛰었다. 048 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했으며, 검사된 쌍을 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 ResNet을 기울기 소실의 단일 해법으로 보지 않고 degradation·residual parameterization·직접 gradient 경로의 범위를 복원했다.
+
+변경 문서:
+
+- `raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md`와 대응 해설
+- `wiki/sources/048_잔차 학습과 매우 깊은 신경망.md`
+- `wiki/concepts/잔차 연결.md`, `wiki/concepts/ResNet.md`, `wiki/concepts/Degradation problem.md`
+- `wiki/concepts/기울기 소실.md`, `wiki/concepts/합성곱 신경망.md`의 degradation·잔차 학습 구분 보강
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- 정규화 초기화와 BatchNorm 뒤에도 깊은 plain network의 훈련 오류가 더 높은 degradation을 원 논문의 직접 문제로 복원했다. 이를 vanishing gradient와 같은 현상으로 합치지 않았다.
+- (y=F(x)+x)와 dimension mismatch의 (F(x)+W_sx)를 구분하고, CIFAR option A의 zero-padding identity 때문에 모든 전환이 1×1 projection은 아님을 기록했다.
+- 국소 Jacobian (I+J_F)의 identity 항은 직접 경로를 제공하지만 branch 상쇄와 전체 곱의 소실·폭주를 보편적으로 없애지 않는다고 한정했다.
+- gated Highway Networks가 2015년 앞서 수백 층 훈련을 제시했다는 선행 계보와 ResNet의 무매개변수 identity shortcut 차이를 기록했다.
+- 원 post-activation block과 2016년 full pre-activation 후속 연구를 분리했다. 1001층 CIFAR 결과를 원 2015년 블록 사양으로 소급하지 않았다.
+- 152층 단일 모델 10-crop top-5 오류 4.49%와 여러 residual net 앙상블의 ILSVRC test 3.57% 우승 결과를 구분했다.
+- CIFAR 1202층이 110층보다 시험 오류가 높았음을 기록해 깊이가 늘면 항상 일반화가 개선된다는 주장을 제거했다.
+- Transformer 원 post-LN residual과 후대 pre-LN·scaling 변형을 구분했다. CNN ResNet과 Transformer sublayer가 동일 연산이라는 설명은 채택하지 않았다.
+
+raw 등록 해시:
+
+- 번역: `cf1997f9d3e9616eedf3b3a457b9b3ccf50b446499a8255b198d785f9fc1b0b5`
+- 해설: `187e901b78101a4cd499a81fb750f061e0924eb572c1d42875b13b7a09f3d6d2`
+
+남은 제한:
+
+- 프로젝트에는 ImageNet·CIFAR 자료, 원 Caffe 모델·훈련 기록과 ILSVRC ensemble을 복제하지 않았으며 raw에는 새 번역과 해설만 보존한다.
+- 현대 LLM별 residual scaling·normalization 위치·깊이 안정성은 049 Layer Normalization과 후속 모델별 근거가 필요하다.
+- 048은 바로 다음 049의 정규화 배치와 함께 읽을 때 Transformer block의 안정화 설계를 독립 비교할 근거가 더 강해지므로, 비교 읽기 작성 여부는 049 공개 처리 뒤 판단한다.
+
 ## 관련 항목
 
 - [[index]]

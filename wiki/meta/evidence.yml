@@ -1998,3 +1998,21 @@ sources:
     doi: 10.48550/arXiv.1502.05698
     url: https://arxiv.org/abs/1502.05698
     language: en
+  srivastava-greff-schmidhuber-2015-highway:
+    title: Highway Networks
+    authors: [Rupesh Kumar Srivastava, Klaus Greff, Jürgen Schmidhuber]
+    published: 2015
+    source_type: primary
+    kind: research-paper
+    doi: 10.48550/arXiv.1505.00387
+    url: https://arxiv.org/abs/1505.00387
+    language: en
+  he-et-al-2016-identity-mappings:
+    title: Identity Mappings in Deep Residual Networks
+    authors: [Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun]
+    published: 2016
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1007/978-3-319-46493-0_38
+    url: https://arxiv.org/abs/1603.05027
+    language: en
