@@ -2000,6 +2000,27 @@ raw 등록 해시:
 - 정규화 축·epsilon·affine·precision·residual scaling의 효과는 모델·깊이·optimizer별 후속 근거가 필요하다.
 - 048 residual identity/pre-activation과 049 Post/Pre-LN을 함께 읽으면 “학습 branch의 변환을 identity 경로 안쪽과 바깥쪽 어디에 둘 것인가”라는 독립 비교 질문이 충분히 성립해, 049 ingest 배포 뒤 비교 읽기 문서로 보존한다.
 
+## [2026-07-18] content | 잔차 경로와 정규화는 어디에 놓이는가
+
+048과 049를 함께 읽어 생긴 독립 질문을 ‘비교 읽기’ 분석으로 보존했다. ResNet과 Transformer를 같은 구조라고 합치지 않고, additive identity path 위에 activation·normalization의 Jacobian을 반복해서 둘 것인지 학습 branch 안으로 옮길 것인지를 공통 비교 축으로 삼았다.
+
+변경 문서:
+
+- `wiki/analyses/잔차 경로와 정규화는 어디에 놓이는가.md`
+- `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 범위:
+
+- 원 ResNet post-activation, 후속 full pre-activation, 원 Transformer Post-LN, 후속 Pre-LN을 수식과 표로 같은 좌표에 놓았다.
+- 덧셈 뒤 변환은 대략 `J_N(I+J_F)`, branch 안 변환은 `I+J_FJ_N` 형태가 된다는 경로 차이를 설명하되 gradient 보존의 절대 보장으로 확대하지 않았다.
+- BatchNorm·ReLU와 LayerNorm은 연산·통계 축이 다르며, ResNet pre-activation이 Transformer Pre-LN의 직접 원인이라는 계보는 입증되지 않았다고 분리했다.
+- RMSNorm의 통계 선택과 Post/Pre-LN의 위치 선택은 서로 다른 설계 축으로 구분했다.
+
+남은 제한:
+
+- 현대 LLM의 구체적 normalization·residual scaling·optimizer 조합은 모델별 1차 자료와 재현 실험이 더 필요하다.
+- 이 문서는 초기 gradient와 경로 구조의 비교이며 모든 모델에서 Pre-LN의 최종 품질 우위를 주장하지 않는다.
+
 ## 관련 항목
 
 - [[index]]

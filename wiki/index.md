@@ -230,6 +230,7 @@ related:
 
 ## 분석
 
+- [[잔차 경로와 정규화는 어디에 놓이는가]] — ResNet post-/pre-activation과 Transformer Post-/Pre-LN을 additive identity path 위의 Jacobian 배치로 비교한 분석 (근거 5개)
 - [[계수 기반과 예측 기반 단어 표현은 얼마나 다른가]] — LSI·NPLM·SGNS·GloVe를 문맥 단위·통계 집계·가중·저랭크 목적·평가 축으로 비교한 분석 (근거 7개)
 - [[구조화된 의미 자원은 무엇을 노드로 삼는가]] — WordNet synset·FrameNet frame·PropBank roleset과 token·Freebase topic이 선택하는 동일성·관계·근거 단위를 비교한 분석 (근거 6개)
 - [[자동 평가 지표는 무엇을 보상하는가]] — BLEU·ROUGE·METEOR의 분모·대응 단위·순서·집계가 모델 선택에 만드는 유인과 참조 기반 평가의 공통 사각지대를 비교한 분석 (근거 7개)

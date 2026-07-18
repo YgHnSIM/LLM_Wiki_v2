@@ -137,6 +137,7 @@ related:
 - [[메모리 네트워크]]의 객체 슬롯과 hard supporting-fact 선택, [[외부 메모리]]·매개변수 지식의 갱신 경계, [[다중 홉 검색]]의 후보 재현율·오류 누적과 RAG의 별도 검색·생성 구조
 - [[잔차 연결]]의 (I+J_F) 직접 경로와 보장의 경계, [[Degradation problem]]과 기울기 소실·과적합의 구분, [[ResNet]] 원 post-activation과 후속 pre-activation 및 Transformer residual stream
 - [[Layer Normalization]]과 [[Batch Normalization]]의 사례/feature 통계 축, affine 전후 평균·분산의 차이, Post-LN·Pre-LN에서 [[잔차 연결]] identity path가 달라지는 방식과 [[RMSNorm]]의 uncentered second moment
+- [[잔차 경로와 정규화는 어디에 놓이는가]]에서 비교하는 ResNet post-/pre-activation과 Transformer Post-/Pre-LN, additive identity path 위에 activation·normalization Jacobian을 둘 때의 최적화 차이
 - [[조지 밀러]]와 공동 연구진의 1985–1998년 WordNet 구축·공개 단계, 심리언어학적 설계 동기와 인간 기억 모형이라는 실증 주장의 구분
 - [[Lesk 알고리즘]], [[단어 의미 중의성 해소]], WordNet 의미 목록, 사전 글로스의 정확 중첩과 후대 문맥–글로스 비교 방법의 구분
 - [[증강 전이망]], [[파싱]], 재귀 호출, 레지스터·조건·구조 구축 동작을 통한 절차적 문법 공학
@@ -200,6 +201,7 @@ related:
 - [[GloVe]]
 - [[Adam 최적화기]]
 - [[계수 기반과 예측 기반 단어 표현은 얼마나 다른가]]
+- [[잔차 경로와 정규화는 어디에 놓이는가]]
 - [[045_Sequence-to-Sequence 학습과 신경 기계 번역]]
 - [[Sequence-to-Sequence 학습]]
 - [[인코더-디코더]]
