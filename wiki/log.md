@@ -2144,6 +2144,31 @@ raw 등록 해시:
 - 실제 산업 검색의 latency·index freshness·ANN recall·비용은 제품별 색인과 트래픽 자료가 필요하다.
 - 051·052를 함께 읽으면 검색 실패와 독해 실패를 분리하는 재사용 가능한 비교 축이 충분히 선명해져, 052 ingest 배포 뒤 별도 비교 읽기로 보존한다.
 
+## [2026-07-19] content | 검색은 근거를 찾고 독해는 답을 찾는다
+
+051·052와 기존 BM25·개방 영역 QA 문서를 함께 읽어 생긴 독립 질문을 ‘비교 읽기’ 분석으로 보존했다. 검색 점수와 독해 점수를 하나의 일반 이해도로 합치지 않고, 컬렉션에서 근거를 후보에 넣는 단계·후보에서 답을 고르는 단계·근거가 부족할 때 기권하는 단계의 실패를 분리했다.
+
+변경 문서:
+
+- `wiki/analyses/검색은 근거를 찾고 독해는 답을 찾는다.md`
+- `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 범위:
+
+- BM25·DSSM·DRMM의 출력은 문서 순위이며 SQuAD의 출력은 주어진 문단의 답 구간이라고 구분했다.
+- retrieval recall@k, reader EM·F1·faithfulness, 기권 calibration을 서로 다른 평가 경계로 정리했다.
+- gold context reader, retrieved context reader, retrieval-only라는 세 진단 설정으로 병목 위치를 찾는 틀을 제시했다.
+- top-k gold evidence 재현율이 end-to-end 정확도의 상한이 되는 조건과 annotation 누락·다중 근거·매개변수 지식 때문에 성립하지 않는 경우를 함께 밝혔다.
+- SQuAD 2.0의 passage-level 답 없음과 전체 컬렉션의 근거 부재·검색 실패·근거 충돌을 구분했다.
+- sparse·dense·reranker의 역할을 후보 재현율과 세부 상호작용의 trade-off로 비교했다.
+- Watson·SQuAD·DPR·RAG의 컬렉션·답 형식·지표가 달라 성능 숫자를 직접 비교할 수 없다고 정리했다.
+
+남은 제한:
+
+- 단계별 오차가 독립이라는 가정은 일반적으로 성립하지 않으며 단순 곱 분해는 조건부 진단으로만 사용해야 한다.
+- 실제 RAG의 citation entailment·latency·비용·최신성은 시스템별 trace와 평가 자료가 필요하다.
+- 이 분석은 평가 인터페이스의 비교이며 특정 sparse·dense·reader·generator 조합의 보편적 우위를 주장하지 않는다.
+
 ## 관련 항목
 
 - [[index]]
