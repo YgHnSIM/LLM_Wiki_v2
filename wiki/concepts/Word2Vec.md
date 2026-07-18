@@ -18,6 +18,8 @@ verification: verified
 artifacts:
   - 'raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.ko.md'
   - 'raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.commentary.ko.md'
+  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md'
+  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md'
 evidence:
   - source_id: mikolov-et-al-2013-word-representations
     locator: 'arXiv:1301.3781, §§1–4의 계산 목표·CBOW·Skip-gram·유추 평가'
@@ -28,6 +30,9 @@ evidence:
   - source_id: levy-goldberg-2014-sgns-pmi
     locator: 'NeurIPS 2014, §§2–4의 SGNS 목적과 shifted PMI 분해'
     relation: contextualizes
+  - source_id: bojanowski-et-al-2017-fasttext
+    locator: 'TACL 5, §§3.1–3.2의 Skip-gram 입력을 character n-gram 합으로 바꾼 확장'
+    relation: supplements
 related:
   - source.043
   - concept.cbow
@@ -71,6 +76,10 @@ Levy와 Goldberg는 충분한 차원에서 최적화된 SGNS 점곱이 대략 $P
 
 `king−man+woman` 벡터에 가까운 단어를 찾는 3CosAdd형 평가는 관계별 차이가 공간에서 얼마나 일정한지 측정한다. 일부 의미·통사 관계에서 높은 결과를 냈지만 말뭉치·빈도·하이퍼파라미터·검색 규칙에 민감하다. 유추 성공을 문장 이해, 사실 추론 또는 인간의 개념 구조 전체와 동일시하지 않는다.
 
+## FastText 확장
+
+FastText는 Skip-gram with negative sampling의 중심–문맥 목적을 유지하고 중심 단어 입력 벡터를 문자 n-gram 벡터의 합으로 바꿨다. 이는 Word2Vec이 스스로 제공한 OOV 기능이 아니라 2017년 출판된 후속 매개변수화이며, 문자 조각을 여러 token position으로 만드는 BPE와도 다르다.
+
 ## 한계
 
 - word type당 하나의 벡터여서 다의성을 문맥별로 분리하지 못한다.
@@ -85,6 +94,7 @@ Levy와 Goldberg는 충분한 차원에서 최적화된 SGNS 점곱이 대략 $P
 - Tomas Mikolov 외, [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/abs/1301.3781), 2013, §§1–4.
 - Tomas Mikolov 외, [Distributed Representations of Words and Phrases and their Compositionality](https://proceedings.neurips.cc/paper_files/paper/2013/hash/9aa42b31882ec039965f3c4923ce901b-Abstract.html), NeurIPS 2013, §§2–4.
 - Omer Levy·Yoav Goldberg, [Neural Word Embedding as Implicit Matrix Factorization](https://proceedings.neurips.cc/paper_files/paper/2014/hash/b78666971ceae55a8e87efb7cbfd9ad4-Abstract.html), NeurIPS 2014, §§2–4.
+- Piotr Bojanowski·Edouard Grave·Armand Joulin·Tomas Mikolov, [Enriching Word Vectors with Subword Information](https://aclanthology.org/Q17-1010/), TACL 5, 2017, §§3.1–3.2.
 
 ## 관련 항목
 

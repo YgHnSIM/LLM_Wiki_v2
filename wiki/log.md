@@ -2021,6 +2021,41 @@ raw 등록 해시:
 - 현대 LLM의 구체적 normalization·residual scaling·optimizer 조합은 모델별 1차 자료와 재현 실험이 더 필요하다.
 - 이 문서는 초기 gradient와 경로 구조의 비교이며 모든 모델에서 Pre-LN의 최종 품질 우위를 주장하지 않는다.
 
+## [2026-07-18] ingest | 050 FastText와 서브워드 표현의 두 경로
+
+050 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 FastText의 한 word vector 내부 합성과 BPE의 여러 token sequence 분절을 분리해, 같은 ‘서브워드’라는 이름이 가리키는 모델 인터페이스 차이를 검증했다.
+
+변경 문서:
+
+- `raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md`와 대응 해설
+- `wiki/sources/050_FastText와 서브워드 표현의 두 경로.md`
+- `wiki/concepts/FastText.md`, `wiki/concepts/서브워드 토큰화.md`, `wiki/concepts/Byte Pair Encoding.md`
+- `wiki/concepts/단어 임베딩.md`, `wiki/concepts/Word2Vec.md`, `wiki/concepts/신경망 기계 번역.md`
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- FastText 단어 벡터 논문은 2016년 제출을 거쳐 TACL 2017에 출판됐다고 구분했다.
+- 관측 단어의 표현은 완전 단어 특별 벡터와 길이 3–6 문자 n-gram 벡터의 합이며, 문맥 출력 벡터와 SGNS 점수를 계산한다고 복원했다.
+- FNV-1a로 200만 bucket에 사상해 메모리를 제한하고 hash collision을 허용한다는 구현을 기록했다.
+- OOV 벡터 계산과 새 단어 의미 이해를 분리하고, 문자 n-gram이 형태소 경계를 보장하지 않는다고 한정했다.
+- 원 논문의 직접 평가는 9개 언어 유사도·유추·자료량/n-gram 분석과 일부 언어 모형이며, NER·검색·콘텐츠 조정 사례는 직접 실험으로 채택하지 않았다.
+- 1994년 byte-pair 압축과 2016년 NMT 문자·문자열 pair merge를 구분하고, 원 NMT BPE의 word boundary·merge-count 어휘를 복원했다.
+- SentencePiece를 BPE의 동의어가 아니라 raw sentence에서 BPE·Unigram 등을 다루는 tokenizer/detokenizer 틀로 기록했다.
+- 현대 Transformer가 tokenizer와 embedding을 항상 공동 학습한다는 원문 주장을 교정하고, tokenizer 설정에 따라 OOV·normalization 손실이 남을 수 있음을 밝혔다.
+- FastText가 BPE·SentencePiece를 직접 낳았다는 계보 대신 비슷한 시기의 병행 문제 해결로 한정했다.
+
+raw 등록 해시:
+
+- 번역: `064de3272f563201b7112d715f9d6ee809417b8336627f941b94e5cc554974b1`
+- 해설: `4efa864145ba5cff63f928c4e34fb53b11952a986999808e5895a3fd86200399`
+
+남은 제한:
+
+- 프로젝트에는 9개 Wikipedia 말뭉치·원 FastText C++ 훈련·WMT 2015 NMT·SentencePiece 실험을 복제하지 않았으며 raw에는 새 번역과 해설만 보존한다.
+- 한국어 음절·자모·byte 정규화와 현대 LLM별 tokenizer는 모델별 어휘·규칙·측정 자료가 더 필요하다.
+- FastText와 BPE가 공유하는 ‘서브워드’가 각각 한 벡터의 특징과 여러 시퀀스 토큰이라는 차이는 독립 비교 질문으로 재사용 가치가 있어, 050 ingest 배포 뒤 비교 읽기로 보존한다.
+
 ## 관련 항목
 
 - [[index]]

@@ -768,3 +768,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 6b8d9cc44e786ab67288e44233d918259555cbaa6a8496f612acb25c4449c2d2
+  - path: "raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md"
+    role: translation
+    order_prefix: "050"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 064de3272f563201b7112d715f9d6ee809417b8336627f941b94e5cc554974b1
+  - path: "raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md"
+    role: commentary
+    order_prefix: "050"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 4efa864145ba5cff63f928c4e34fb53b11952a986999808e5895a3fd86200399

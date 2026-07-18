@@ -2050,3 +2050,47 @@ sources:
     doi: 10.48550/arXiv.2002.04745
     url: https://arxiv.org/abs/2002.04745
     language: en
+  gage-1994-byte-pair-encoding:
+    title: A New Algorithm for Data Compression
+    authors: [Philip Gage]
+    published: 1994
+    source_type: primary
+    kind: journal-article
+    url: https://www.derczynski.com/papers/archive/BPE_Gage.pdf
+    language: en
+  sennrich-haddow-birch-2016-subword-nmt:
+    title: Neural Machine Translation of Rare Words with Subword Units
+    authors: [Rico Sennrich, Barry Haddow, Alexandra Birch]
+    published: 2016
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/P16-1162
+    url: https://aclanthology.org/P16-1162/
+    language: en
+  bojanowski-et-al-2017-fasttext:
+    title: Enriching Word Vectors with Subword Information
+    authors: [Piotr Bojanowski, Edouard Grave, Armand Joulin, Tomas Mikolov]
+    published: 2017
+    source_type: primary
+    kind: journal-article
+    doi: 10.1162/tacl_a_00051
+    url: https://aclanthology.org/Q17-1010/
+    language: en
+  kudo-2018-subword-regularization:
+    title: Subword Regularization
+    authors: [Taku Kudo]
+    published: 2018
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/P18-1007
+    url: https://aclanthology.org/P18-1007/
+    language: en
+  kudo-richardson-2018-sentencepiece:
+    title: 'SentencePiece: A simple and language independent subword tokenizer and detokenizer for Neural Text Processing'
+    authors: [Taku Kudo, John Richardson]
+    published: 2018
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/D18-2012
+    url: https://aclanthology.org/D18-2012/
+    language: en
