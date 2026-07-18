@@ -1554,6 +1554,14 @@ sources:
     kind: official-blog
     url: https://deepmind.google/blog/wavenet-launches-in-the-google-assistant/
     language: en
+  van-den-oord-et-al-2018-parallel-wavenet:
+    title: 'Parallel WaveNet: Fast High-Fidelity Speech Synthesis'
+    authors: [Aaron van den Oord, Yazhe Li, Igor Babuschkin, Karen Simonyan, Oriol Vinyals, Koray Kavukcuoglu, George van den Driessche, Edward Lockhart, Luis C. Cobo, Florian Stimberg, Norman Casagrande, Dominik Grewe, Seb Noury, Sander Dieleman, Erich Elsen, Nal Kalchbrenner, Heiga Zen, Alex Graves, Helen King, Tom Walters, Dan Belov, Demis Hassabis]
+    published: 2018
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.mlr.press/v80/oord18a.html
+    language: en
   magerman-1995-statistical-parsing:
     title: Statistical Decision-Tree Models for Parsing
     authors: [David M. Magerman]

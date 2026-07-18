@@ -2265,6 +2265,31 @@ raw 등록 해시:
 - 개별 현대 상용 모델의 비공개 구조·자료·학습 세부는 2017년 논문만으로 확정하지 않는다.
 - 054·055와 기존 RNN·자기회귀 문서를 함께 읽으면 ‘훈련 병렬성과 생성 순차성은 다른 축’이라는 재사용 가능한 비교 질문이 충분히 성립해, 055 ingest 배포 뒤 별도 비교 읽기로 보존한다.
 
+## [2026-07-19] content | 훈련 병렬성과 생성 순차성은 다른 축이다
+
+045·054·055와 기존 자기회귀 개념을 함께 읽어 생긴 독립 질문을 ‘비교 읽기’ 분석으로 보존했다. 모델 전체를 병렬·순차라는 한 단어로 분류하지 않고, 표현 계산 그래프·정답 이력이 있는 훈련·실제 출력 sampling·총연산과 메모리를 서로 다른 축으로 분리했다.
+
+변경 문서:
+
+- `wiki/analyses/훈련 병렬성과 생성 순차성은 다른 축이다.md`
+- `wiki/meta/evidence.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 범위:
+
+- LSTM hidden state는 teacher forcing 아래에서도 앞 시점 상태를 기다린다고 구분했다.
+- WaveNet causal convolution과 Transformer masked attention은 정답 이력이 있는 훈련에서 위치를 병렬 계산하지만 표준 sampling은 앞선 실제 출력에 의존한다고 정리했다.
+- encoder, teacher-forced decoder training, prefill, autoregressive decode를 서로 다른 실행 단계로 나눴다.
+- WaveNet의 초당 약 16,000개 파형 표본과 텍스트 token처럼 출력 단위의 시간 해상도가 실제 지연을 바꾼다고 설명했다.
+- Transformer의 $O(1)$ sequential operations와 $O(n^2d)$ 총연산·메모리가 동시에 성립한다고 분리했다.
+- KV cache는 한 step의 중복 계산을 줄이지만 token별 순차 round를 제거하지 않는다고 한정했다.
+- Parallel WaveNet이 별도 inverse autoregressive flow student와 probability density distillation을 도입해 생성 분해를 바꾼 사례를 보강했다.
+
+남은 제한:
+
+- 이 분석은 모든 자기회귀 분포에 대한 병렬 sampling 불가능 정리를 주장하지 않는다.
+- speculative decoding·비자기회귀 번역·diffusion의 실제 우위는 acceptance, 반복 횟수, 품질과 hardware 조건별 별도 평가가 필요하다.
+- wall-clock 성능은 FLOPs뿐 아니라 memory bandwidth·통신·batch·kernel·출력 길이에 좌우되므로 구조식만으로 제품 latency를 확정하지 않는다.
+
 ## 관련 항목
 
 - [[index]]

@@ -243,6 +243,7 @@ related:
 
 ## 분석
 
+- [[훈련 병렬성과 생성 순차성은 다른 축이다]] — RNN·WaveNet·Transformer를 표현 계산·teacher forcing·sampling·총연산의 네 축으로 분리한 분석 (근거 4개)
 - [[검색은 근거를 찾고 독해는 답을 찾는다]] — BM25·DSSM/DRMM·SQuAD·DPR/RAG를 검색 재현율·독해 정확도·기권의 세 경계로 분해한 분석 (근거 7개)
 - [[서브워드는 한 벡터의 특징인가 여러 토큰인가]] — 기본 SGNS·FastText·BPE·SentencePiece를 조각의 역할·결합 시점·문맥화·OOV·계산 비용으로 비교한 분석 (근거 6개)
 - [[잔차 경로와 정규화는 어디에 놓이는가]] — ResNet post-/pre-activation과 Transformer Post-/Pre-LN을 additive identity path 위의 Jacobian 배치로 비교한 분석 (근거 5개)

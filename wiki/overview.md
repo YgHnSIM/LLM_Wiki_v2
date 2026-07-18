@@ -149,6 +149,7 @@ related:
 - [[잔차 연결]]의 (I+J_F) 직접 경로와 보장의 경계, [[Degradation problem]]과 기울기 소실·과적합의 구분, [[ResNet]] 원 post-activation과 후속 pre-activation 및 Transformer residual stream
 - [[Layer Normalization]]과 [[Batch Normalization]]의 사례/feature 통계 축, affine 전후 평균·분산의 차이, Post-LN·Pre-LN에서 [[잔차 연결]] identity path가 달라지는 방식과 [[RMSNorm]]의 uncentered second moment
 - [[잔차 경로와 정규화는 어디에 놓이는가]]에서 비교하는 ResNet post-/pre-activation과 Transformer Post-/Pre-LN, additive identity path 위에 activation·normalization Jacobian을 둘 때의 최적화 차이
+- [[훈련 병렬성과 생성 순차성은 다른 축이다]]에서 비교하는 RNN hidden-state 의존, WaveNet causal convolution, Transformer masked attention의 teacher-forced 훈련과 실제 sampling 차이
 - [[조지 밀러]]와 공동 연구진의 1985–1998년 WordNet 구축·공개 단계, 심리언어학적 설계 동기와 인간 기억 모형이라는 실증 주장의 구분
 - [[Lesk 알고리즘]], [[단어 의미 중의성 해소]], WordNet 의미 목록, 사전 글로스의 정확 중첩과 후대 문맥–글로스 비교 방법의 구분
 - [[증강 전이망]], [[파싱]], 재귀 호출, 레지스터·조건·구조 구축 동작을 통한 절차적 문법 공학
@@ -268,7 +269,7 @@ related:
 
 ## 현재 상태
 
-소스 54개, 개념 129개, 개체 29개, 분석 15개와 메타 문서 3개, 총 230개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 206개는 `verified`, 해석적 문서 21개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 254개 외부 근거와 108개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 54개, 개념 129개, 개체 29개, 분석 16개와 메타 문서 3개, 총 231개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 206개는 `verified`, 해석적 문서 22개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 255개 외부 근거와 108개 불변 raw artifact가 레지스트리에 등록돼 있다.
 
 `051`의 Robin Jia를 2016년 원 논문 저자로 섞은 설명, 정확히 10만 개라는 규모 축약, 답 구간 추출과 검색·자유 생성의 혼합, EM·F1과 의미 이해의 동일시, 모든 질문에 답이 있는 SQuAD 1.1의 제약, 서로 다른 사람 기준선과 모델 점수의 단순 비교, SQuAD 2.0의 답 불가능 질문 수, 어텐션·Transformer·BERT·LLM의 직접 원인 계보와 설정 없는 GPT-3·GPT-4 성능 주장도 공개 문서에서 교정했다.
 
