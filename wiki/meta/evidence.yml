@@ -2112,3 +2112,29 @@ sources:
     doi: 10.18653/v1/P18-2124
     url: https://aclanthology.org/P18-2124/
     language: en
+  huang-et-al-2013-dssm:
+    title: Learning Deep Structured Semantic Models for Web Search using Clickthrough Data
+    authors: [Po-Sen Huang, Xiaodong He, Jianfeng Gao, Li Deng, Alex Acero, Larry Heck]
+    published: 2013
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1145/2505515.2505665
+    url: https://doi.org/10.1145/2505515.2505665
+    language: en
+  shen-et-al-2014-cdssm:
+    title: Learning Semantic Representations Using Convolutional Neural Networks for Web Search
+    authors: [Yelong Shen, Xiaodong He, Jianfeng Gao, Li Deng, Gregoire Mesnil]
+    published: 2014
+    source_type: primary
+    kind: conference-paper
+    url: https://www.microsoft.com/en-us/research/wp-content/uploads/2014/04/www2014_cdssm_p06.pdf
+    language: en
+  guo-et-al-2016-drmm:
+    title: A Deep Relevance Matching Model for Ad-hoc Retrieval
+    authors: [Jiafeng Guo, Yixing Fan, Qingyao Ai, W. Bruce Croft]
+    published: 2016
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1145/2983323.2983769
+    url: https://doi.org/10.1145/2983323.2983769
+    language: en

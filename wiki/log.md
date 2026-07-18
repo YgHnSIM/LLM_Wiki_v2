@@ -2111,6 +2111,39 @@ raw 등록 해시:
 - 후속 적대 평가·도메인 이동·현대 LLM별 SQuAD 성능은 모델·프롬프트·자료 분할이 지정된 별도 근거가 필요하다.
 - 검색·독해·생성의 경계는 다음 052 정보 검색 자료와 함께 읽을 때 독립 비교 질문으로 발전할 가능성이 있어, 현재는 소스와 개념 문서의 범위로 보존한다.
 
+## [2026-07-19] ingest | 052 신경 정보 검색과 의미 대응
+
+052 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 신경 정보 검색을 2016년 한 번의 의미 혁명으로 묶지 않고 DSSM·C-DSSM·DRMM과 후대 DPR을 표현·상호작용·후보 생성 단계별로 분리했다.
+
+변경 문서:
+
+- `raw/052_Neural Information Retrieval Semantic Search with Deep Learning.ko.md`와 대응 해설
+- `wiki/sources/052_신경 정보 검색과 의미 대응.md`
+- `wiki/concepts/신경 정보 검색.md`
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- DSSM은 CIKM 2013, C-DSSM은 WWW Companion 2014라고 연대를 복원해 2016년 단일 출현 서사를 교정했다.
+- DSSM의 문자 trigram word hashing·공통 전역 벡터·cosine·click likelihood와 C-DSSM의 convolution-max pooling을 분리했다.
+- 원 DSSM 계열의 문서 입력과 Web ranking 실험 범위를 모든 장문·도메인의 전체 벡터 검색으로 확대하지 않았다.
+- DRMM이 semantic matching과 ad-hoc relevance를 구분하고 exact match·질의어 중요도·다양한 국소 대응을 histogram과 term gating으로 보존했다고 기록했다.
+- DRMM은 query-likelihood 모델의 상위 2,000개를 재순위화했으며 전체 컬렉션의 첫 단계 검색을 대체하지 않았다.
+- 클릭·비클릭은 position·presentation·exposure bias가 있는 표지이며 음성 표본이 학습 경계를 만든다고 분리했다.
+- BM25의 희소 lexical signal과 밀집 의미 대응을 세대 교체가 아닌 상보적 후보 신호로 설명했다.
+- DPR·RAG와 독립 인코딩의 구조적 공통점은 인정하되 Transformer·passage 감독·hard negatives·ANN·생성 결합을 생략한 직접 계보는 채택하지 않았다.
+
+raw 등록 해시:
+
+- 번역: `1540632683efba69509e6b0990813089a475554430abdcfa0601a10de122b48d`
+- 해설: `3daf923fd286658d28d006a2d071b7fce5bac203d7f7f43404891442fe8c0f33`
+
+남은 제한:
+
+- 프로젝트에는 비공개 Web 클릭 로그와 DSSM·C-DSSM의 원 대규모 실험을 재현하지 않았고, DRMM은 공개 TREC 조건과 보고 수치의 범위에서 검증했다.
+- 실제 산업 검색의 latency·index freshness·ANN recall·비용은 제품별 색인과 트래픽 자료가 필요하다.
+- 051·052를 함께 읽으면 검색 실패와 독해 실패를 분리하는 재사용 가능한 비교 축이 충분히 선명해져, 052 ingest 배포 뒤 별도 비교 읽기로 보존한다.
+
 ## 관련 항목
 
 - [[index]]

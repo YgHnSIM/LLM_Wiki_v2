@@ -800,3 +800,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: a06f4b9ee79b29f28106ff05d6351d639a99a8a433df5cbec88deb3b622c51a6
+  - path: "raw/052_Neural Information Retrieval Semantic Search with Deep Learning.ko.md"
+    role: translation
+    order_prefix: "052"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 1540632683efba69509e6b0990813089a475554430abdcfa0601a10de122b48d
+  - path: "raw/052_Neural Information Retrieval Semantic Search with Deep Learning.commentary.ko.md"
+    role: commentary
+    order_prefix: "052"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 3daf923fd286658d28d006a2d071b7fce5bac203d7f7f43404891442fe8c0f33
