@@ -2233,6 +2233,38 @@ raw 등록 해시:
 - 음성 복제·딥페이크 위험은 원 논문의 중심 실험이 아니라 후대 적용의 문제이므로 별도 근거가 필요하다.
 - 훈련 병렬성과 생성 순차성의 구분은 055 Transformer와 함께 읽을 때 독립 비교 질문으로 발전할 가능성이 있어 다음 소스 처리 뒤 판단한다.
 
+## [2026-07-19] ingest | 055 Transformer와 자기어텐션 기반 시퀀스 모델링
+
+055 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 2017년 원 Transformer의 6층 encoder–decoder·scaled multi-head attention·위치 인코딩·Post-LN과 번역 실험을 복원하고, 후대 사전학습·대규모 LLM 성과를 별도 계보로 분리했다.
+
+변경 문서:
+
+- `raw/055_The Transformer Attention Is All You Need.ko.md`와 대응 해설
+- `wiki/sources/055_Transformer와 자기어텐션 기반 시퀀스 모델링.md`
+- `wiki/concepts/Transformer.md`, `wiki/concepts/자기회귀 생성.md`, `wiki/concepts/신경망 기계 번역.md`
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- base 모델의 encoder·decoder 각 6층, 512 hidden, 8 heads, head당 64차원, 2048 feed-forward와 원 Post-LN 배치를 복원했다.
+- self-attention의 $O(n^2d)$ 계산·$O(1)$ 순차 연산·$O(1)$ 최대 경로를 recurrent layer와 비교하고 $n<d$ 조건을 명시했다.
+- 최종 NeurIPS 논문의 WMT14 영어→독일어 BLEU 28.4, 영어→프랑스어 41.8과 8개 P100 기준 base 12시간·big 3.5일을 기록했다.
+- 사인파 위치 인코딩의 긴 길이 외삽은 선택 동기이지 보장된 실험 결론이 아니라고 교정했다.
+- causal mask 아래 teacher-forced 훈련의 위치 병렬성과 자기회귀 추론의 토큰별 순차성을 분리했다.
+- attention weight는 분석 가능한 내부 신호지만 충실한 설명 여부는 Jain–Wallace와 Wiegreffe–Pinter의 실험·반론처럼 별도 검증이 필요한 논쟁이라고 기록했다.
+- BERT·GPT는 원 구조의 encoder·decoder 계열을 재사용하지만 사전학습 목표·자료·최적화·분산 시스템을 추가한 후속 단계라고 구분했다.
+
+raw 등록 해시:
+
+- 번역: `a75c2c0247b007e4899e9bab0c2e128e8aa52f6b39f5e121e044075dbd3b8389`
+- 해설: `0906b10e5cb1661d2653c0defc1be3cd2ae83acea000d849c2d1adc45c62c0b0`
+
+남은 제한:
+
+- WMT 번역 훈련과 attention 분석을 재현하지 않았으며, 공개 논문이 보고한 설정·수치의 범위에서 검증했다.
+- 개별 현대 상용 모델의 비공개 구조·자료·학습 세부는 2017년 논문만으로 확정하지 않는다.
+- 054·055와 기존 RNN·자기회귀 문서를 함께 읽으면 ‘훈련 병렬성과 생성 순차성은 다른 축’이라는 재사용 가능한 비교 질문이 충분히 성립해, 055 ingest 배포 뒤 별도 비교 읽기로 보존한다.
+
 ## 관련 항목
 
 - [[index]]

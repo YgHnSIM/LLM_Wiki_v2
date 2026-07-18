@@ -848,3 +848,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 1967a87b08011eb8bf79fea93533c239e10d144f2a72954f4a0dbd0d7601b3bb
+  - path: "raw/055_The Transformer Attention Is All You Need.ko.md"
+    role: translation
+    order_prefix: "055"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: a75c2c0247b007e4899e9bab0c2e128e8aa52f6b39f5e121e044075dbd3b8389
+  - path: "raw/055_The Transformer Attention Is All You Need.commentary.ko.md"
+    role: commentary
+    order_prefix: "055"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 0906b10e5cb1661d2653c0defc1be3cd2ae83acea000d849c2d1adc45c62c0b0
