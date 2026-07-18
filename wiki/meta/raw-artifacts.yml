@@ -832,3 +832,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: c5f7b10bee9c31fcc05be2fac6cd36617169ff8ed3847e2c5e7202aacc355d2c
+  - path: "raw/054_WaveNet - Neural Audio Generation Revolution.ko.md"
+    role: translation
+    order_prefix: "054"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 2927f811d0e6d0bd79e622847aa0cbee393b7877c201210dd0bda080d3d9a316
+  - path: "raw/054_WaveNet - Neural Audio Generation Revolution.commentary.ko.md"
+    role: commentary
+    order_prefix: "054"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 1967a87b08011eb8bf79fea93533c239e10d144f2a72954f4a0dbd0d7601b3bb

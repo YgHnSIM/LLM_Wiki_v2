@@ -1519,6 +1519,23 @@ sources:
     kind: official-blog
     url: https://research.google/blog/a-neural-network-for-machine-translation-at-production-scale/
     language: en
+  van-den-oord-et-al-2016-wavenet:
+    title: 'WaveNet: A Generative Model for Raw Audio'
+    authors: [Aaron van den Oord, Sander Dieleman, Heiga Zen, Karen Simonyan, Oriol Vinyals, Alex Graves, Nal Kalchbrenner, Andrew Senior, Koray Kavukcuoglu]
+    published: 2016
+    source_type: primary
+    kind: research-paper
+    doi: 10.48550/arXiv.1609.03499
+    url: https://arxiv.org/abs/1609.03499
+    language: en
+  deepmind-2017-wavenet-assistant:
+    title: WaveNet launches in the Google Assistant
+    authors: [Aaron van den Oord, Tom Walters]
+    published: 2017
+    source_type: primary
+    kind: official-blog
+    url: https://deepmind.google/blog/wavenet-launches-in-the-google-assistant/
+    language: en
   magerman-1995-statistical-parsing:
     title: Statistical Decision-Tree Models for Parsing
     authors: [David M. Magerman]
