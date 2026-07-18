@@ -2056,6 +2056,28 @@ raw 등록 해시:
 - 한국어 음절·자모·byte 정규화와 현대 LLM별 tokenizer는 모델별 어휘·규칙·측정 자료가 더 필요하다.
 - FastText와 BPE가 공유하는 ‘서브워드’가 각각 한 벡터의 특징과 여러 시퀀스 토큰이라는 차이는 독립 비교 질문으로 재사용 가치가 있어, 050 ingest 배포 뒤 비교 읽기로 보존한다.
 
+## [2026-07-18] content | 서브워드는 한 벡터의 특징인가 여러 토큰인가
+
+050에서 독립적으로 발전한 질문을 ‘비교 읽기’ 분석으로 보존했다. subword라는 한 이름 아래 FastText의 word-vector 내부 특징, BPE의 sequence token, SentencePiece의 tokenizer 인터페이스가 섞이는 문제를 분리하고, 조각을 어느 시점에 합쳐 어느 단위가 문맥과 상호작용하는지를 공통 비교 축으로 삼았다.
+
+변경 문서:
+
+- `wiki/analyses/서브워드는 한 벡터의 특징인가 여러 토큰인가.md`
+- `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 범위:
+
+- 기본 SGNS·FastText·BPE NMT·SentencePiece를 sequence 단위, 조각 역할, 결합 시점, 문맥화와 희소성 대응으로 비교했다.
+- FastText n-gram과 BPE token이 같은 문자열이어도 각각 합성 word-level SGNS와 position-level sequence objective에서 다른 gradient를 받는다고 구분했다.
+- OOV를 부호화 가능성, parameter의 통계적 신뢰도, 새 의미 추론의 세 문제로 분리했다.
+- tokenizer의 normalization·공백·기본 alphabet·vocabulary version을 downstream model과의 경계 계약으로 정리했다.
+- 공통 문제와 구조적 비교는 보존하되 FastText가 BPE·SentencePiece·현대 LLM tokenizer의 직접 원인이라는 계보는 입증되지 않았다고 밝혔다.
+
+남은 제한:
+
+- 한국어 음절·자모·byte 분절의 실제 우열과 현대 모델별 tokenizer 비용은 말뭉치·어휘·모델을 통제한 별도 실험이 필요하다.
+- 이 분석은 모델 인터페이스를 비교하며 특정 tokenizer의 보편적 성능 순위를 제시하지 않는다.
+
 ## 관련 항목
 
 - [[index]]

@@ -112,6 +112,7 @@ related:
 - [[신경 확률 언어 모형]]의 lookup–concatenation–tanh–softmax 구조, 단어 feature와 확률 함수의 공동 학습, 고정 창과 전체 어휘 계산 비용
 - [[단어 임베딩]]의 정적 word type 표현, 의미·통사·빈도 신호의 혼합, 다의어·OOV·contextual representation과의 경계
 - [[FastText]]가 SGNS 입력 벡터를 문자 n-gram 합으로 매개변수화하는 방식, [[Byte Pair Encoding|BPE]]가 token sequence를 바꾸는 방식, SentencePiece가 raw text에서 여러 subword model을 다루는 범위
+- [[서브워드는 한 벡터의 특징인가 여러 토큰인가]]에서 비교하는 기본 SGNS·FastText·BPE·SentencePiece의 조각 역할, 조합 시점, 문맥 상호작용과 OOV의 세 층
 - [[N-gram에서 LLM으로]]에서 비교하는 Katz의 표면 문맥 확률 재분배와 NPLM의 연속 표현 매개변수 공유
 - [[BM25]]의 희소 용어 가중, 문서 내 빈도 포화, 평균 문서 길이 보정과 보정된 관련성 확률이 아닌 순위 점수라는 해석
 - [[스티븐 로버트슨]]·[[캐런 스파크 존스]]·Steve Walker와 Okapi 팀의 서로 다른 기여, BM25와 Dense Passage Retrieval·RAG의 기준선·대체 검색기 관계
@@ -224,6 +225,7 @@ related:
 - [[FastText]]
 - [[서브워드 토큰화]]
 - [[Byte Pair Encoding]]
+- [[서브워드는 한 벡터의 특징인가 여러 토큰인가]]
 - [[031_잠재 의미 분석과 확률적 잠재 의미 색인]]
 - [[잠재 의미 분석]]
 - [[확률적 잠재 의미 분석]]
