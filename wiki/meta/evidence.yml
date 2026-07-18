@@ -1511,6 +1511,14 @@ sources:
     doi: 10.48550/arXiv.1609.08144
     url: https://arxiv.org/abs/1609.08144
     language: en
+  google-research-2016-gnmt-production:
+    title: A Neural Network for Machine Translation, at Production Scale
+    authors: [Quoc V. Le, Mike Schuster]
+    published: 2016
+    source_type: primary
+    kind: official-blog
+    url: https://research.google/blog/a-neural-network-for-machine-translation-at-production-scale/
+    language: en
   magerman-1995-statistical-parsing:
     title: Statistical Decision-Tree Models for Parsing
     authors: [David M. Magerman]

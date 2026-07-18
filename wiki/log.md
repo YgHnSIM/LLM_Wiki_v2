@@ -2169,6 +2169,38 @@ raw 등록 해시:
 - 실제 RAG의 citation entailment·latency·비용·최신성은 시스템별 trace와 평가 자료가 필요하다.
 - 이 분석은 평가 인터페이스의 비교이며 특정 sparse·dense·reader·generator 조합의 보편적 우위를 주장하지 않는다.
 
+## [2026-07-19] ingest | 053 GNMT와 제품 규모 신경 번역
+
+053 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 GNMT를 초기 seq2seq의 단순 확대가 아니라 깊은 LSTM·어텐션·잔차 연결·WordPiece·탐색 보정과 분산 실행을 결합한 제품 규모 시스템으로 복원했다.
+
+변경 문서:
+
+- `raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md`와 대응 해설
+- `wiki/sources/053_GNMT와 제품 규모 신경 번역.md`
+- `wiki/concepts/신경망 기계 번역.md`
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+- `scripts/check-site.mjs`의 0.1px 좌표 직렬화 오차 허용치를 기존 그래프 배치 회귀 테스트와 일치시켰다.
+
+검증 근거와 정정:
+
+- GNMT의 맨 아래 인코더 층만 양방향이고 위층은 단방향인 8층 LSTM 구조와 어텐션 연결 위치를 구분했다.
+- 잔차 연결·다중 장치 배치·저정밀 계산·beam search의 길이 정규화와 coverage penalty를 제품 시스템의 일부로 기록했다.
+- WordPiece는 미등록 문자열을 표현하지만 정확한 희귀 용어 번역을 보장하지 않는다고 범위를 제한했다.
+- 인간 평가의 평균 약 60% 번역 오류 감소를 고립된 단순 문장과 특정 언어 방향의 side-by-side 조건으로 한정했다.
+- 다언어 논문 평가와 최초 제품 배포를 분리하고, 2016년 9월 공지가 확인하는 100% 적용은 중국어→영어·하루 약 1,800만 건이라고 기록했다.
+- 긴 문장·누락·희귀어와 대규모 자료·계산 요구가 남았으며 “종단간”이 시스템 공학의 제거를 뜻하지 않는다고 교정했다.
+
+raw 등록 해시:
+
+- 번역: `1a995d6349627e6c1c1ec826c5845735c0de87e68ee8f664ab5cb0d83cf89b9a`
+- 해설: `c5f7b10bee9c31fcc05be2fac6cd36617169ff8ed3847e2c5e7202aacc355d2c`
+
+남은 제한:
+
+- 프로젝트에는 비공개 생산 데이터·처리량·지연·비용을 재현하지 않았고, 논문과 공식 제품 공지의 공개 범위에서 검증했다.
+- 문서 단위 담화·저자원 언어·편향에 대한 현대 번역 품질은 별도 자료와 평가가 필요하다.
+- 045와 겹치는 핵심 논점은 기존 신경망 기계 번역 개념을 보강하는 것으로 충분하며, 독립 비교 읽기를 만들 만큼 새로운 긴장은 확인되지 않았다.
+
 ## 관련 항목
 
 - [[index]]

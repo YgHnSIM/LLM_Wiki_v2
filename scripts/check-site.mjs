@@ -623,7 +623,9 @@ if (graphDataIsObject) {
       if (left.community !== right.community || ![right.x, right.y, right.radius].every(Number.isFinite)) continue;
       const distance = Math.hypot(right.x - left.x, right.y - left.y);
       const minimumDistance = left.radius + right.radius + 28;
-      if (distance < minimumDistance) {
+      // Graph coordinates are serialized to 0.1px, so allow the same 0.2px
+      // rounding tolerance used by the layout regression test.
+      if (distance + 0.2 < minimumDistance) {
         collisions.push(`${left.id} / ${right.id} (${distance.toFixed(1)} < ${minimumDistance.toFixed(1)})`);
       }
     }

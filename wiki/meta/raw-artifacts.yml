@@ -816,3 +816,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 3daf923fd286658d28d006a2d071b7fce5bac203d7f7f43404891442fe8c0f33
+  - path: "raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md"
+    role: translation
+    order_prefix: "053"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 1a995d6349627e6c1c1ec826c5845735c0de87e68ee8f664ab5cb0d83cf89b9a
+  - path: "raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.commentary.ko.md"
+    role: commentary
+    order_prefix: "053"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: c5f7b10bee9c31fcc05be2fac6cd36617169ff8ed3847e2c5e7202aacc355d2c
