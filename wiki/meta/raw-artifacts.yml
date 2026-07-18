@@ -752,3 +752,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 187e901b78101a4cd499a81fb750f061e0924eb572c1d42875b13b7a09f3d6d2
+  - path: "raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md"
+    role: translation
+    order_prefix: "049"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 4f29ea51ad1e117ad40e8837ef7ae1fe263f0d792ab4c2dd73dd70411a9afb4b
+  - path: "raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md"
+    role: commentary
+    order_prefix: "049"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 6b8d9cc44e786ab67288e44233d918259555cbaa6a8496f612acb25c4449c2d2

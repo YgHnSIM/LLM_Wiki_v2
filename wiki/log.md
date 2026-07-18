@@ -1966,6 +1966,40 @@ raw 등록 해시:
 - 현대 LLM별 residual scaling·normalization 위치·깊이 안정성은 049 Layer Normalization과 후속 모델별 근거가 필요하다.
 - 048은 바로 다음 049의 정규화 배치와 함께 읽을 때 Transformer block의 안정화 설계를 독립 비교할 근거가 더 강해지므로, 비교 읽기 작성 여부는 049 공개 처리 뒤 판단한다.
 
+## [2026-07-18] ingest | 049 층 정규화와 시퀀스 모델의 배치 독립성
+
+049 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 정규화를 “어느 축의 항목들이 통계를 공유하는가”로 재구성하고 LayerNorm의 RNN·Transformer 적용, Post/Pre-LN과 RMSNorm의 실제 수식을 검증했다.
+
+변경 문서:
+
+- `raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md`와 대응 해설
+- `wiki/sources/049_층 정규화와 시퀀스 모델의 배치 독립성.md`
+- `wiki/concepts/Layer Normalization.md`, `wiki/concepts/Batch Normalization.md`, `wiki/concepts/RMSNorm.md`
+- `wiki/concepts/잔차 연결.md`의 Post-LN·Pre-LN 위치와 gradient 연결 보강
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- BatchNorm은 같은 feature를 mini-batch 사례에 걸쳐, LayerNorm은 한 사례의 층 features에 걸쳐 통계를 계산한다. 표준 Transformer에서는 각 token별 hidden 축이며 문장 전체 token을 한 통계로 합치지 않는다.
+- affine 전 표준화 값과 γ, β 적용 뒤 최종 출력을 구분했다. 공통 affine parameter가 사례별로 사라진 원래 평균·분산을 정확히 복원한다는 원문 주장을 교정했다.
+- RNN의 각 time step별 hidden-unit 통계와 gain·bias 공유, running average 없는 동일 train/test 계산을 원 논문 범위로 복원했다.
+- variable-length RNN에 BatchNorm을 적용하는 것이 불가능한 것은 아니며 recurrent adaptation이 가능하지만 batch·시점 통계 관리가 복잡하다고 한정했다.
+- internal covariate shift 감소를 BatchNorm·LayerNorm 성공의 확정 인과로 두지 않고 Santurkar 등의 smooth loss/gradient 분석을 함께 기록했다.
+- 원 Transformer는 `LayerNorm(x + Sublayer(x))`인 Post-LN이며, 후대 Pre-LN과 위치별 초기 gradient·warmup 차이를 Xiong 등의 분석으로 구분했다.
+- RMSNorm은 mean을 뺀 variance-only가 아니라 mean centering 없는 root mean square로 scale한다고 교정했다.
+- BatchNorm의 batch noise·CNN 선호와 LayerNorm의 시퀀스 선호를 보편적 우열·정규화 필요량 법칙으로 확대하지 않았다.
+
+raw 등록 해시:
+
+- 번역: `4f29ea51ad1e117ad40e8837ef7ae1fe263f0d792ab4c2dd73dd70411a9afb4b`
+- 해설: `6b8d9cc44e786ab67288e44233d918259555cbaa6a8496f612acb25c4449c2d2`
+
+남은 제한:
+
+- 프로젝트에는 원 RNN·attention·skip-thought 학습 코드와 Transformer별 LayerNorm 구현·훈련 로그를 복제하지 않았으며 raw에는 새 번역과 해설만 보존한다.
+- 정규화 축·epsilon·affine·precision·residual scaling의 효과는 모델·깊이·optimizer별 후속 근거가 필요하다.
+- 048 residual identity/pre-activation과 049 Post/Pre-LN을 함께 읽으면 “학습 branch의 변환을 identity 경로 안쪽과 바깥쪽 어디에 둘 것인가”라는 독립 비교 질문이 충분히 성립해, 049 ingest 배포 뒤 비교 읽기 문서로 보존한다.
+
 ## 관련 항목
 
 - [[index]]

@@ -22,7 +22,7 @@ related:
 
 이 위키는 언어 모델링, 기계 지능 평가, 초기 기계 번역, 신경망 학습, 형식언어, 대화형 AI의 역사를 1차 문헌과 함께 연결한다. 수집 당시의 번역·해설은 `raw/`에 보존하고, 공개 문서는 locator가 있는 근거로 검증한다.
 
-## 마흔일곱 개 소스의 범위
+## 마흔여덟 개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -71,6 +71,7 @@ related:
 - [[045_Sequence-to-Sequence 학습과 신경 기계 번역]]은 [[Sequence-to-Sequence 학습]]의 조건부 생성 인터페이스와 [[인코더-디코더]]·[[자기회귀 생성]]을 복원하고, Sutskever·Cho 시스템의 역할 차이와 어텐션·GNMT·현대 LLM 계보의 범위를 검증한다.
 - [[046_메모리 네트워크와 외부 지식 접근]]은 [[메모리 네트워크]]의 I·G·O·R와 hard supporting-fact 선택·강한 감독을 복원하고, [[외부 메모리]]·[[다중 홉 검색]]에서 End-To-End MemNN·bAbI·RAG로 이어지는 단계의 범위를 검증한다.
 - [[048_잔차 학습과 매우 깊은 신경망]]은 [[ResNet]]의 [[Degradation problem]]과 (F(x)+x) [[잔차 연결]]을 복원하고, 기울기 소실·Highway Network·pre-activation·Transformer residual stream을 구분한다.
+- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]은 [[Batch Normalization]]과 [[Layer Normalization]]의 통계 공유 축·훈련/추론 상태를 복원하고, token별 hidden 정규화·Post/Pre-LN·[[RMSNorm]]의 범위를 검증한다.
 
 ## 현재 핵심 주제
 
@@ -135,6 +136,7 @@ related:
 - [[Sequence-to-Sequence 학습]]의 조건부 연쇄 분해, 4층 LSTM 고정 벡터와 원문 역순, teacher forcing과 순환 시간축 의존, [[인코더-디코더]]에서 어텐션으로 바뀐 입력 접근 방식
 - [[메모리 네트워크]]의 객체 슬롯과 hard supporting-fact 선택, [[외부 메모리]]·매개변수 지식의 갱신 경계, [[다중 홉 검색]]의 후보 재현율·오류 누적과 RAG의 별도 검색·생성 구조
 - [[잔차 연결]]의 (I+J_F) 직접 경로와 보장의 경계, [[Degradation problem]]과 기울기 소실·과적합의 구분, [[ResNet]] 원 post-activation과 후속 pre-activation 및 Transformer residual stream
+- [[Layer Normalization]]과 [[Batch Normalization]]의 사례/feature 통계 축, affine 전후 평균·분산의 차이, Post-LN·Pre-LN에서 [[잔차 연결]] identity path가 달라지는 방식과 [[RMSNorm]]의 uncentered second moment
 - [[조지 밀러]]와 공동 연구진의 1985–1998년 WordNet 구축·공개 단계, 심리언어학적 설계 동기와 인간 기억 모형이라는 실증 주장의 구분
 - [[Lesk 알고리즘]], [[단어 의미 중의성 해소]], WordNet 의미 목록, 사전 글로스의 정확 중첩과 후대 문맥–글로스 비교 방법의 구분
 - [[증강 전이망]], [[파싱]], 재귀 호출, 레지스터·조건·구조 구축 동작을 통한 절차적 문법 공학
@@ -210,6 +212,10 @@ related:
 - [[잔차 연결]]
 - [[ResNet]]
 - [[Degradation problem]]
+- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]
+- [[Layer Normalization]]
+- [[Batch Normalization]]
+- [[RMSNorm]]
 - [[031_잠재 의미 분석과 확률적 잠재 의미 색인]]
 - [[잠재 의미 분석]]
 - [[확률적 잠재 의미 분석]]

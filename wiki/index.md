@@ -69,6 +69,7 @@ related:
 - [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] — RNN 인코더-디코더의 조건부 생성을 복원하고 2014년 두 시스템·어텐션·GNMT·LLM 계보를 구분한 소스 (근거 5개)
 - [[046_메모리 네트워크와 외부 지식 접근]] — 외부 메모리의 I·G·O·R 인터페이스와 hard 다중 홉 선택을 복원하고 End-To-End MemNN·bAbI·RAG를 구분한 소스 (근거 4개)
 - [[048_잔차 학습과 매우 깊은 신경망]] — 깊은 plain net의 degradation과 잔차 parameterization을 복원하고 Highway·pre-activation·Transformer 연결을 구분한 소스 (근거 4개)
+- [[049_층 정규화와 시퀀스 모델의 배치 독립성]] — BatchNorm·LayerNorm의 통계 축과 train/inference 차이를 복원하고 Post/Pre-LN·RMSNorm을 구분한 소스 (근거 6개)
 
 ## 개체
 
@@ -220,9 +221,12 @@ related:
 - [[메모리 네트워크]] — 읽고 쓸 수 있는 외부 메모리와 입력·갱신·출력·응답 구성 요소를 결합한 학습 틀 (근거 2개)
 - [[외부 메모리]] — 매개변수와 구분되어 문서·사실 항목을 개별적으로 저장·갱신·조회할 수 있는 저장소 (근거 2개)
 - [[다중 홉 검색]] — 한 검색 결과로 다음 질의를 갱신해 여러 supporting facts를 순차적으로 찾는 방식 (근거 2개)
-- [[잔차 연결]] — 변환 branch 출력에 입력을 더해 항등 기준점과 직접 신호 경로를 제공하는 깊은 신경망 연결 (근거 3개)
+- [[잔차 연결]] — 변환 branch 출력에 입력을 더해 항등 기준점과 직접 신호 경로를 제공하는 깊은 신경망 연결 (근거 4개)
 - [[ResNet]] — 잔차 블록을 반복해 깊은 CNN의 최적화를 개선하고 ImageNet·CIFAR에서 깊이를 검증한 구조 계열 (근거 2개)
 - [[Degradation problem]] — 층을 더한 plain network에서 시험 오류뿐 아니라 훈련 오류도 증가하는 최적화 현상 (근거 1개)
+- [[Layer Normalization]] — 사례·시점·token별 feature 축에서 통계를 계산해 batch 구성과 train/inference 계산을 분리한 정규화 (근거 3개)
+- [[Batch Normalization]] — 같은 feature의 mini-batch 통계와 running statistics를 사용하는 정규화 및 작동 원리 논쟁 (근거 2개)
+- [[RMSNorm]] — mean centering 없이 feature의 root mean square로 scale만 정규화하는 LayerNorm 변형 (근거 2개)
 
 ## 분석
 
