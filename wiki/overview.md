@@ -271,7 +271,7 @@ related:
 
 ## 현재 상태
 
-소스 59개, 개념 135개, 개체 29개, 분석 17개와 메타 문서 3개, 총 243개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 217개는 `verified`, 해석적 문서 23개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 268개 외부 근거와 118개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 59개, 개념 135개, 개체 29개, 분석 17개와 메타 문서 3개, 총 243개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 217개는 `verified`, 해석적 문서 23개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 267개 외부 근거와 118개 불변 raw artifact가 레지스트리에 등록돼 있다.
 
 `060`의 GLUE 연구진을 Google Research 중심으로 보는 소속 오류, QNLI를 자유 질의응답으로 보는 설명, 하나의 shared multi-task model을 강제했다는 주장, GLUE score에 task 난이도·중요도 weight가 있다는 서술, 중앙 server가 추가 자료·compute·ensemble까지 같은 조건으로 만든다는 해석, GLUE 원 발표와 2019년 별도 인간 기준선의 혼합, aggregate 인간 추정치 초과를 전 task·일반 이해의 인간 초월로 보는 주장, SuperGLUE가 open-ended 생성 과제를 포함했다는 설명, GLUE가 더 이른 SQuAD·ImageNet·COCO 평가 설계에 영향을 주었다는 역방향 계보와 private test가 contamination·leaderboard overfitting을 해결한다는 주장도 공개 문서에서 교정했다.
 

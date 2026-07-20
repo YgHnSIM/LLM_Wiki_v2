@@ -19,7 +19,7 @@ artifacts:
   - 'raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md'
   - 'raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md'
 evidence:
-  - source_id: devlin-et-al-2019-bert
+  - source_id: bert-2019
     locator: '§§1–3의 encoder·MLM·NSP·fine-tuning, §4와 Tables 1–5의 GLUE·SQuAD·SWAG·ablation, Appendix A의 학습 절차'
     relation: supports
   - source_id: liu-et-al-2019-roberta

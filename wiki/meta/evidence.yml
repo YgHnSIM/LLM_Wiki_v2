@@ -2239,15 +2239,6 @@ sources:
     doi: 10.18653/v1/P18-1031
     url: https://aclanthology.org/P18-1031/
     language: en
-  devlin-et-al-2019-bert:
-    title: 'BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding'
-    authors: [Jacob Devlin, Ming-Wei Chang, Kenton Lee, Kristina Toutanova]
-    published: 2019
-    source_type: primary
-    kind: conference-paper
-    doi: 10.18653/v1/N19-1423
-    url: https://aclanthology.org/N19-1423/
-    language: en
   liu-et-al-2019-roberta:
     title: 'RoBERTa: A Robustly Optimized BERT Pretraining Approach'
     authors: [Yinhan Liu, Myle Ott, Naman Goyal, Jingfei Du, Mandar Joshi, Danqi Chen, Omer Levy, Mike Lewis, Luke Zettlemoyer, Veselin Stoyanov]

@@ -2467,6 +2467,23 @@ raw 등록 해시:
 - 현재 leaderboard 상태·최신 모델 순위는 시간에 따라 바뀌므로 역사적 원 발표와 2019년 포화 시점에 한정했다.
 - aggregate score가 만드는 선택 유인은 source·concept 문서에서 충분히 설명돼 새 비교 읽기를 추가하지 않았다.
 
+## [2026-07-20] fix | BERT 근거 레지스트리 중복 제거
+
+060까지 완료한 뒤 전체 근거 레지스트리를 점검해 BERT 원 논문이 기존 `bert-2019`와 신규 `devlin-et-al-2019-bert` 두 ID로 중복 등록된 사실을 확인했다. 058과 후속 개념·분석 문서가 기존 ID를 사용하도록 통합하고 신규 중복 record를 제거했다.
+
+변경 문서:
+
+- `wiki/sources/058_BERT의 마스크드 양방향 사전 학습.md`
+- `wiki/concepts/BERT.md`, `wiki/concepts/마스크드 언어 모델링.md`, `wiki/concepts/언어 모델 전이 학습.md`
+- `wiki/analyses/사전 학습 지식은 과제에 어떻게 도착하는가.md`
+- `wiki/meta/evidence.yml`, `wiki/overview.md`, `wiki/log.md`
+
+검증 결과:
+
+- 페이지별 근거 수와 locator는 유지됐다.
+- 외부 근거 레지스트리는 268개에서 중복 하나를 제외한 267개가 됐다.
+- raw artifact와 공개 문서 수에는 변화가 없다.
+
 ## 관련 항목
 
 - [[index]]
