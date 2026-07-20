@@ -484,7 +484,7 @@ if (graphData !== undefined && !graphDataIsObject) {
 
 if (graphDataIsObject) {
   if (graphData.schemaVersion !== 2) errors.push(`Knowledge graph schema version must be 2, found ${graphData.schemaVersion}.`);
-  if (graphData.layoutVersion !== 5) errors.push(`Knowledge graph layout version must be 5, found ${graphData.layoutVersion}.`);
+  if (graphData.layoutVersion !== 6) errors.push(`Knowledge graph layout version must be 6, found ${graphData.layoutVersion}.`);
   if (graphData.depthMetric !== 'cross-community-neighbors') errors.push(`Knowledge graph has invalid depth metric '${graphData.depthMetric}'.`);
   if (graphData.depthScale !== 'log1p') errors.push(`Knowledge graph has invalid depth scale '${graphData.depthScale}'.`);
   const graphDepth = graphData.dimensions?.depth;
@@ -492,9 +492,16 @@ if (graphDataIsObject) {
   const graphNodes = Array.isArray(graphData.nodes) ? graphData.nodes : [];
   const graphEdges = Array.isArray(graphData.edges) ? graphData.edges : [];
   const graphCommunities = Array.isArray(graphData.communities) ? graphData.communities : [];
+  const graphLayouts = Array.isArray(graphData.layouts) ? graphData.layouts : [];
   if (!Array.isArray(graphData.nodes)) errors.push('Knowledge graph nodes must be an array.');
   if (!Array.isArray(graphData.edges)) errors.push('Knowledge graph edges must be an array.');
   if (!Array.isArray(graphData.communities)) errors.push('Knowledge graph communities must be an array.');
+  if (!Array.isArray(graphData.layouts)) errors.push('Knowledge graph layouts must be an array.');
+  const layoutIds = new Set(graphLayouts.map((layout) => layout?.id).filter(Boolean));
+  if (!layoutIds.has(graphData.defaultLayout)) errors.push(`Knowledge graph default layout '${graphData.defaultLayout}' is not registered.`);
+  for (const requiredLayout of ['community', 'network', 'radial']) {
+    if (!layoutIds.has(requiredLayout)) errors.push(`Knowledge graph is missing required layout '${requiredLayout}'.`);
+  }
 
   const nodeIds = new Set();
   const nodeUrls = new Set();
@@ -514,7 +521,7 @@ if (graphDataIsObject) {
       const separatedHorizontally = Math.abs(left.x - right.x) >= (left.radius + right.radius) * 1.22;
       const separatedVertically = Math.abs(left.y - right.y) >= (left.radius + right.radius) * 0.92;
       if (!separatedHorizontally && !separatedVertically) {
-        errors.push(`Knowledge graph communities ${left.id} and ${right.id} overlap in layout version 5.`);
+        errors.push(`Knowledge graph communities ${left.id} and ${right.id} overlap in the community layout.`);
       }
     }
   }
@@ -525,7 +532,7 @@ if (graphDataIsObject) {
       errors.push(`Knowledge graph contains a non-object node: ${JSON.stringify(node)}`);
       continue;
     }
-    const missing = ['id', 'title', 'url', 'type', 'category', 'verification', 'community', 'bridgeConnections', 'x', 'y', 'z', 'radius']
+    const missing = ['id', 'title', 'url', 'type', 'category', 'verification', 'community', 'bridgeConnections', 'x', 'y', 'z', 'radius', 'layouts']
       .filter((field) => !(field in node));
     if (missing.length) errors.push(`Knowledge graph node ${node.id ?? '(unknown)'} is missing: ${missing.join(', ')}`);
     if (nodeIds.has(node.id)) errors.push(`Knowledge graph contains a duplicate node ID: ${node.id}`);
@@ -536,6 +543,12 @@ if (graphDataIsObject) {
     if (!allowedVerification.has(node.verification)) errors.push(`Knowledge graph node ${node.id} has invalid verification '${node.verification}'.`);
     if (!communityIds.has(node.community)) errors.push(`Knowledge graph node ${node.id} references missing community ${node.community}.`);
     if (![node.x, node.y, node.z, node.radius].every(Number.isFinite)) errors.push(`Knowledge graph node ${node.id} has invalid 3D layout coordinates.`);
+    for (const layoutId of layoutIds) {
+      const position = node.layouts?.[layoutId];
+      if (![position?.x, position?.y].every(Number.isFinite)) {
+        errors.push(`Knowledge graph node ${node.id} has invalid '${layoutId}' layout coordinates.`);
+      }
+    }
     if (Number.isFinite(graphDepth) && (node.z < 0 || node.z > graphDepth)) errors.push(`Knowledge graph node ${node.id} has out-of-range z=${node.z}.`);
     const targetFile = fileForUrl(node.url);
     try {

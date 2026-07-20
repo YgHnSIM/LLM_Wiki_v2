@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { edgeDirectionForNode } from './graph-3d-math.js';
+import { edgeDirectionForNode, focusBurstLayout, labelIsExposed } from './graph-3d-math.js';
 
 const UP = new THREE.Vector3(0, 1, 0);
 const ORBIT_MIN_ELEVATION = 0.08;
@@ -161,6 +161,13 @@ export function createKnowledgeWorld(canvas, options = {}) {
   const baseFlightSpeed = clamp(80, 720, worldDiagonal * 0.038);
   const nodeById = new Map(data.nodes.map((node) => [node.id, node]));
   const communityById = new Map(data.communities.map((community) => [community.id, community]));
+  const layoutIds = new Set((data.layouts ?? []).map((layout) => layout?.id).filter(Boolean));
+  const defaultLayout = layoutIds.has(data.defaultLayout)
+    ? data.defaultLayout
+    : layoutIds.has('community') ? 'community' : [...layoutIds][0] ?? 'community';
+  const normalizeLayout = (value, fallback = defaultLayout) => (
+    layoutIds.has(String(value ?? '')) ? String(value) : fallback
+  );
 
   const paletteInput = options.palette ?? {};
   const palette = {
@@ -478,6 +485,7 @@ export function createKnowledgeWorld(canvas, options = {}) {
     routeNodeIds: new Set(),
     routeEdgeIds: new Set(),
     bookmarks: new Set(),
+    layout: normalizeLayout(options.layout),
     nodeScale: 1.25,
     edgeOpacity: 0.48,
     edgeWidth: 0.72,
@@ -533,10 +541,13 @@ export function createKnowledgeWorld(canvas, options = {}) {
   }
 
   function baseWorldPositionFor(node, heightScale = state.heightScale) {
+    const position = node.layouts?.[state.layout]
+      ?? node.layouts?.[defaultLayout]
+      ?? node;
     return new THREE.Vector3(
-      finite(node.x) - dimensions.width / 2,
+      finite(position.x, finite(node.x)) - dimensions.width / 2,
       finite(node.z) * Math.max(0, finite(heightScale, 1)),
-      finite(node.y) - dimensions.height / 2,
+      finite(position.y, finite(node.y)) - dimensions.height / 2,
     );
   }
 
@@ -635,6 +646,11 @@ export function createKnowledgeWorld(canvas, options = {}) {
   }
 
   function dominantCommunitySpawn() {
+    if (state.layout !== 'community') {
+      state.orbitTarget.set(0, dimensions.depth * 0.18, 0);
+      state.orbitDistance = Math.max(520, worldDiagonal * 0.28);
+      return;
+    }
     const dominant = [...data.communities]
       .sort((left, right) => (
         finite(right.crossEdges) - finite(left.crossEdges)
@@ -803,6 +819,7 @@ export function createKnowledgeWorld(canvas, options = {}) {
 
   function currentFocusLayoutSignature() {
     return [
+      state.layout,
       state.selected,
       sortedSetSignature(state.model.direct),
       sortedSetSignature(state.model.visibleNodes),
@@ -841,33 +858,46 @@ export function createKnowledgeWorld(canvas, options = {}) {
         .map((id) => nodeById.get(id))
         .sort((left, right) => String(left.id).localeCompare(String(right.id), 'ko'));
       focusNeighborCount = neighbors.length;
-      const orbitMaximum = clamp(260, 430, 270 + Math.sqrt(neighbors.length) * 18);
-      const targets = neighbors.map((node) => {
+      const minimumRadius = clamp(176, 260, 242 - state.focusGravity * 42);
+      const maximumRadius = clamp(440, 760, 470 + Math.sqrt(neighbors.length) * 56);
+      const layout = focusBurstLayout(
+        { x: center.x, y: center.z },
+        neighbors.map((node) => {
+          const base = baseWorldPositionFor(node);
+          return {
+            id: node.id,
+            x: base.x,
+            y: base.z,
+            radius: focusNodeRadius(node),
+            labelSpan: clamp(96, 330, String(node.title ?? '').length * 8.2 + 52),
+          };
+        }),
+        {
+          minimumRadius,
+          ringGap: clamp(128, 182, 138 + neighbors.length * 2.2),
+          maximumRadius,
+          ringFill: 0.72,
+        },
+      );
+      const layoutById = new Map(layout.map((item) => [item.id, item]));
+      const targets = neighbors.map((node, index) => {
         const base = baseWorldPositionFor(node);
-        const horizontal = new THREE.Vector2(base.x - center.x, base.z - center.z);
-        if (horizontal.lengthSq() < EPSILON) {
-          const angle = (stableHash(node.id) % 360) * Math.PI / 180;
-          horizontal.set(Math.cos(angle), Math.sin(angle));
-        }
-        const originalDistance = Math.max(1, horizontal.length());
-        horizontal.normalize();
-        const attractionScale = clamp(0.32, 0.5, 0.56 - state.focusGravity * 0.14);
-        const desiredDistance = clamp(
-          112 + focusNodeRadius(selectedNode) + focusNodeRadius(node),
-          orbitMaximum,
-          originalDistance * attractionScale,
-        );
-        const tangent = new THREE.Vector2(-horizontal.y, horizontal.x)
-          .multiplyScalar(((stableHash(node.id) % 2001) / 1000 - 1) * Math.min(34, 8 + neighbors.length * 0.72));
+        const burst = layoutById.get(node.id);
+        const heightOffset = ((index % 3) - 1) * Math.min(16, neighbors.length * 0.6);
         const preferred = new THREE.Vector3(
-          center.x + horizontal.x * desiredDistance + tangent.x,
-          base.y,
-          center.z + horizontal.y * desiredDistance + tangent.y,
+          burst?.x ?? base.x,
+          center.y + (base.y - center.y) * 0.28 + heightOffset,
+          burst?.y ?? base.z,
         );
-        return { node, preferred, target: preferred.clone() };
+        return {
+          node,
+          preferred,
+          target: preferred.clone(),
+          labelSpan: burst?.span ?? focusNodeRadius(node) * 2 + 24,
+        };
       });
 
-      for (let iteration = 0; iteration < 18; iteration += 1) {
+      for (let iteration = 0; iteration < 12; iteration += 1) {
         for (let leftIndex = 0; leftIndex < targets.length; leftIndex += 1) {
           for (let rightIndex = leftIndex + 1; rightIndex < targets.length; rightIndex += 1) {
             const left = targets[leftIndex];
@@ -875,7 +905,10 @@ export function createKnowledgeWorld(canvas, options = {}) {
             let dx = right.target.x - left.target.x;
             let dz = right.target.z - left.target.z;
             let distance = Math.hypot(dx, dz);
-            const minimum = focusNodeRadius(left.node) + focusNodeRadius(right.node) + 22;
+            const minimum = Math.max(
+              focusNodeRadius(left.node) + focusNodeRadius(right.node) + 28,
+              Math.min(176, (left.labelSpan + right.labelSpan) * 0.28),
+            );
             if (distance >= minimum) continue;
             if (distance < EPSILON) {
               const angle = (stableHash(`${left.node.id}:${right.node.id}`) % 360) * Math.PI / 180;
@@ -898,8 +931,8 @@ export function createKnowledgeWorld(canvas, options = {}) {
           const dx = item.target.x - center.x;
           const dz = item.target.z - center.z;
           const distance = Math.hypot(dx, dz);
-          if (distance > orbitMaximum && distance > EPSILON) {
-            const scale = orbitMaximum / distance;
+          if (distance > maximumRadius && distance > EPSILON) {
+            const scale = maximumRadius / distance;
             item.target.x = center.x + dx * scale;
             item.target.z = center.z + dz * scale;
           }
@@ -1016,6 +1049,7 @@ export function createKnowledgeWorld(canvas, options = {}) {
 
   function currentNodeBuildSignature() {
     return [
+      state.layout,
       sortedSetSignature(state.model.visibleNodes),
       sortedSetSignature(state.model.direct),
       sortedSetSignature(state.model.second),
@@ -1035,6 +1069,7 @@ export function createKnowledgeWorld(canvas, options = {}) {
       .map((edge) => edge?.id ?? `${edge?.source ?? ''}>${edge?.target ?? ''}`)
       .join('\u0001');
     return [
+      state.layout,
       renderedEdgeIds,
       sortedSetSignature(state.model.visibleNodes),
       sortedSetSignature(state.routeEdgeIds),
@@ -1050,9 +1085,11 @@ export function createKnowledgeWorld(canvas, options = {}) {
 
   function currentLabelBuildSignature() {
     return [
+      state.layout,
       sortedSetSignature(state.model.visibleNodes),
       sortedSetSignature(state.model.queryMatches),
       sortedSetSignature(state.bookmarks),
+      sortedSetSignature(state.routeNodeIds),
       state.selected,
       state.hovered,
       state.travelCandidate,
@@ -1161,10 +1198,218 @@ export function createKnowledgeWorld(canvas, options = {}) {
     return sprite;
   }
 
+  function labelBoxesOverlap(left, right, padding = 6) {
+    return left.x < right.x + right.width + padding
+      && left.x + left.width + padding > right.x
+      && left.y < right.y + right.height + padding
+      && left.y + left.height + padding > right.y;
+  }
+
+  function focusLabelSafeArea() {
+    const width = state.viewport.width;
+    const height = state.viewport.height;
+    const desktop = width >= 860;
+    let rightInset = 14;
+    if (desktop && state.selected) {
+      const canvasRectangle = canvas.getBoundingClientRect();
+      const inspectorRectangle = documentRef.querySelector('[data-graph-inspector]')?.getBoundingClientRect();
+      const overlap = inspectorRectangle
+        ? Math.max(0, canvasRectangle.right - Math.max(canvasRectangle.left, inspectorRectangle.left) + 14)
+        : Math.min(350, width * 0.31);
+      rightInset = Math.max(14, Math.min(Math.max(14, width - 300), overlap));
+    }
+    const topInset = desktop ? Math.min(118, height * 0.18) : 14;
+    const bottomInset = desktop ? Math.min(118, height * 0.2) : 14;
+    const area = {
+      left: 14,
+      top: topInset,
+      right: width - rightInset,
+      bottom: height - bottomInset,
+    };
+    if (area.right - area.left < 260) area.right = Math.min(width - 14, area.left + 280);
+    if (area.bottom - area.top < 220) {
+      area.top = 14;
+      area.bottom = height - 14;
+    }
+    return area;
+  }
+
+  function focusLabelObstacles() {
+    const canvasRectangle = canvas.getBoundingClientRect();
+    const selectors = [
+      '.graph-minimap',
+      '[data-graph-inspector]',
+      '.graph-view-controls',
+      '.graph-travel-hud',
+      '.graph-route-hud',
+    ];
+    const obstacles = [];
+    for (const selector of selectors) {
+      const item = documentRef.querySelector(selector);
+      if (!item || item.hidden) continue;
+      const rectangle = item.getBoundingClientRect();
+      if (!rectangle.width || !rectangle.height) continue;
+      const left = Math.max(canvasRectangle.left, rectangle.left);
+      const top = Math.max(canvasRectangle.top, rectangle.top);
+      const right = Math.min(canvasRectangle.right, rectangle.right);
+      const bottom = Math.min(canvasRectangle.bottom, rectangle.bottom);
+      if (right <= left || bottom <= top) continue;
+      obstacles.push({
+        x: left - canvasRectangle.left - 8,
+        y: top - canvasRectangle.top - 8,
+        width: right - left + 16,
+        height: bottom - top + 16,
+      });
+    }
+    return obstacles;
+  }
+
+  function screenPointForWorld(position) {
+    const projected = position.clone().project(camera);
+    if (![projected.x, projected.y, projected.z].every(Number.isFinite)) return null;
+    return {
+      x: (projected.x + 1) * state.viewport.width / 2,
+      y: (1 - projected.y) * state.viewport.height / 2,
+      z: projected.z,
+    };
+  }
+
+  function worldPointForScreen(x, y, z) {
+    return new THREE.Vector3(
+      x / Math.max(1, state.viewport.width) * 2 - 1,
+      1 - y / Math.max(1, state.viewport.height) * 2,
+      z,
+    ).unproject(camera);
+  }
+
+  function placeFocusLabels(sprites) {
+    if (!state.selected || sprites.length < 2) return;
+    const selectedSprite = sprites.find((sprite) => sprite.userData.nodeId === state.selected);
+    const selectedPoint = selectedSprite ? screenPointForWorld(selectedSprite.position) : null;
+    if (!selectedPoint) return;
+    const safe = focusLabelSafeArea();
+    const directCount = asIdSet(state.model.direct).size;
+    const labelPixels = directCount > 18 ? 17 : directCount > 12 ? 19 : 22;
+    const items = sprites
+      .map((sprite) => {
+        const point = screenPointForWorld(sprite.position);
+        if (!point) return null;
+        const pixels = sprite.userData.nodeId === state.selected ? Math.max(22, labelPixels) : labelPixels;
+        const width = Math.max(36, pixels * finite(sprite.userData.labelAspect, 1));
+        const height = pixels;
+        const dx = point.x - selectedPoint.x;
+        const dy = point.y - selectedPoint.y;
+        return {
+          sprite,
+          point,
+          width,
+          height,
+          angle: Math.atan2(dy, dx),
+          selected: sprite.userData.nodeId === state.selected,
+        };
+      })
+      .filter(Boolean)
+      .sort((left, right) => (
+        Number(right.selected) - Number(left.selected)
+        || left.angle - right.angle
+        || String(left.sprite.userData.nodeId).localeCompare(String(right.sprite.userData.nodeId), 'ko')
+      ));
+    const placed = focusLabelObstacles();
+
+    for (const item of items) {
+      const length = Math.hypot(item.point.x - selectedPoint.x, item.point.y - selectedPoint.y) || 1;
+      const outward = item.selected
+        ? { x: 0, y: -1 }
+        : {
+          x: (item.point.x - selectedPoint.x) / length,
+          y: (item.point.y - selectedPoint.y) / length,
+        };
+      const tangent = { x: -outward.y, y: outward.x };
+      const candidates = [];
+      const distances = item.selected ? [12, 34] : [12, 32, 58, 88, 122];
+      for (const distance of distances) {
+        const directions = [
+          outward,
+          { x: outward.x * 0.82 + tangent.x * 0.58, y: outward.y * 0.82 + tangent.y * 0.58 },
+          { x: outward.x * 0.82 - tangent.x * 0.58, y: outward.y * 0.82 - tangent.y * 0.58 },
+          tangent,
+          { x: -tangent.x, y: -tangent.y },
+          { x: -outward.x, y: -outward.y },
+        ];
+        for (const direction of directions) {
+          const centerX = item.point.x + direction.x * (distance + item.width * Math.abs(direction.x) * 0.5);
+          const centerY = item.point.y + direction.y * (distance + item.height * Math.abs(direction.y) * 0.5);
+          candidates.push({
+            x: clamp(safe.left, safe.right - item.width, centerX - item.width / 2),
+            y: clamp(safe.top, safe.bottom - item.height, centerY - item.height / 2),
+            width: item.width,
+            height: item.height,
+          });
+        }
+      }
+      let box = candidates.find((candidate) => placed.every((other) => !labelBoxesOverlap(candidate, other)));
+      if (!box) {
+        const gridCandidates = [];
+        const horizontalStep = Math.max(72, item.width * 0.58);
+        const verticalStep = item.height + 9;
+        for (let y = safe.top; y <= safe.bottom - item.height; y += verticalStep) {
+          for (let x = safe.left; x <= safe.right - item.width; x += horizontalStep) {
+            gridCandidates.push({
+              x,
+              y,
+              width: item.width,
+              height: item.height,
+            });
+          }
+        }
+        gridCandidates.sort((left, right) => {
+          const leftDistance = Math.hypot(
+            left.x + left.width / 2 - item.point.x,
+            left.y + left.height / 2 - item.point.y,
+          );
+          const rightDistance = Math.hypot(
+            right.x + right.width / 2 - item.point.x,
+            right.y + right.height / 2 - item.point.y,
+          );
+          return leftDistance - rightDistance || left.y - right.y || left.x - right.x;
+        });
+        candidates.push(...gridCandidates);
+        box = gridCandidates.find((candidate) => placed.every((other) => !labelBoxesOverlap(candidate, other)));
+      }
+      if (!box) {
+        box = candidates
+          .map((candidate) => ({
+            ...candidate,
+            overlap: placed.reduce((sum, other) => {
+              const overlapX = Math.max(0, Math.min(candidate.x + candidate.width, other.x + other.width) - Math.max(candidate.x, other.x));
+              const overlapY = Math.max(0, Math.min(candidate.y + candidate.height, other.y + other.height) - Math.max(candidate.y, other.y));
+              return sum + overlapX * overlapY;
+            }, 0),
+          }))
+          .sort((left, right) => left.overlap - right.overlap)[0];
+      }
+      if (!box) continue;
+      placed.push(box);
+      item.sprite.position.copy(worldPointForScreen(
+        box.x + box.width / 2,
+        box.y + box.height,
+        item.point.z,
+      ));
+    }
+  }
+
   function updateLabelScales() {
     if (!labelRoot.children.length) return;
     const worldHeightAtDistance = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov * 0.5));
+    const focusSprites = [];
+    const direct = asIdSet(state.model.direct);
+    const queryMatches = asIdSet(state.model.queryMatches);
     for (const sprite of labelRoot.children) {
+      const node = nodeById.get(sprite.userData.nodeId);
+      if (node) {
+        sprite.position.copy(worldPositionFor(node));
+        sprite.position.y += Math.max(10, finite(node.radius, 8) * state.nodeScale * 1.62);
+      }
       const distance = Math.max(1, camera.position.distanceTo(sprite.position));
       const pixels = finite(sprite.userData.labelPixels, 22);
       const height = clamp(
@@ -1173,7 +1418,17 @@ export function createKnowledgeWorld(canvas, options = {}) {
         distance * worldHeightAtDistance / Math.max(1, state.viewport.height) * pixels,
       );
       sprite.scale.set(height * finite(sprite.userData.labelAspect, 1), height, 1);
+      if (node && labelIsExposed(node.id, {
+        selected: state.selected,
+        direct,
+        routeNodeIds: state.routeNodeIds,
+        hovered: state.hovered,
+        travelCandidate: state.travelCandidate,
+        queryMatches,
+        bookmarks: state.bookmarks,
+      })) focusSprites.push(sprite);
     }
+    placeFocusLabels(focusSprites);
   }
 
   function removeLabels() {
@@ -1185,6 +1440,8 @@ export function createKnowledgeWorld(canvas, options = {}) {
 
   function nodeLabelPriority(node) {
     if (node.id === state.selected) return 1000000;
+    if (state.selected && asIdSet(state.model.direct).has(node.id)) return 950000;
+    if (state.routeNodeIds.has(node.id)) return 925000;
     if (node.id === state.hovered) return 900000;
     if (node.id === state.travelCandidate) return 800000;
     if (asIdSet(state.model.queryMatches).has(node.id)) return 700000;
@@ -1197,7 +1454,7 @@ export function createKnowledgeWorld(canvas, options = {}) {
     const visibleIds = asIdSet(state.model.visibleNodes);
     const visibleNodes = data.nodes.filter((node) => visibleIds.has(node.id));
 
-    if (state.showCommunities) {
+    if (state.layout === 'community' && state.showCommunities && !state.selected) {
       for (const community of data.communities) {
         const members = visibleNodes.filter((node) => node.community === community.id);
         if (!members.length || !community.label) continue;
@@ -1218,20 +1475,29 @@ export function createKnowledgeWorld(canvas, options = {}) {
     const density = clamp(0, 3, Math.round(state.labelDensity));
     const caps = [8, 14, 26, 42];
     const queryMatches = asIdSet(state.model.queryMatches);
-    const mandatory = (node) => (
-      node.id === state.selected
-      || node.id === state.hovered
-      || node.id === state.travelCandidate
-      || queryMatches.has(node.id)
-      || state.bookmarks.has(node.id)
-    );
-    const candidates = visibleNodes
-      .filter((node) => density > 0 || mandatory(node))
+    const direct = asIdSet(state.model.direct);
+    const mandatory = (node) => labelIsExposed(node.id, {
+      selected: state.selected,
+      direct,
+      routeNodeIds: state.routeNodeIds,
+      hovered: state.hovered,
+      travelCandidate: state.travelCandidate,
+      queryMatches,
+      bookmarks: state.bookmarks,
+    });
+    const mandatoryNodes = visibleNodes.filter(mandatory);
+    const ambientNodes = visibleNodes
+      .filter((node) => !state.selected && !mandatory(node) && density > 0)
       .sort((left, right) => (
         nodeLabelPriority(right) - nodeLabelPriority(left)
         || String(left.title).localeCompare(String(right.title), 'ko')
       ))
-      .slice(0, caps[density]);
+      .slice(0, Math.max(0, caps[density] - mandatoryNodes.length));
+    const candidates = [...mandatoryNodes, ...ambientNodes]
+      .sort((left, right) => (
+        nodeLabelPriority(right) - nodeLabelPriority(left)
+        || String(left.title).localeCompare(String(right.title), 'ko')
+      ));
 
     for (const node of candidates) {
       if (!node.title) continue;
@@ -1868,10 +2134,10 @@ export function createKnowledgeWorld(canvas, options = {}) {
       data.nodes.filter((node) => visibleIds.has(node.id)).map((node) => node.community),
     );
     for (const [communityId, object] of communityObjects) {
-      object.visible = state.showCommunities && visibleCommunities.has(communityId);
+      object.visible = state.layout === 'community' && state.showCommunities && visibleCommunities.has(communityId);
     }
     for (const light of communityLights) {
-      light.visible = state.showCommunities && visibleCommunities.has(light.userData.communityId);
+      light.visible = state.layout === 'community' && state.showCommunities && visibleCommunities.has(light.userData.communityId);
     }
     grid.visible = state.showGrid;
   }
@@ -1920,20 +2186,63 @@ export function createKnowledgeWorld(canvas, options = {}) {
     return true;
   }
 
+  function frameFocusedNeighborhood(nodeId) {
+    const node = nodeById.get(nodeId);
+    if (!node) return false;
+    const selectedPosition = focusPhysics.get(node.id)?.target ?? worldPositionFor(node);
+    const ids = [node.id, ...asIdSet(state.model.direct)];
+    const box = new THREE.Box3();
+    let count = 0;
+    for (const id of ids) {
+      const item = nodeById.get(id);
+      if (!item) continue;
+      const position = focusPhysics.get(id)?.target ?? worldPositionFor(item);
+      const labelPadding = id === node.id
+        ? focusNodeRadius(item) * 2.2 + 38
+        : clamp(58, 180, String(item.title ?? '').length * 3.8 + focusNodeRadius(item) * 1.8);
+      box.expandByPoint(position.clone().addScalar(labelPadding));
+      box.expandByPoint(position.clone().addScalar(-labelPadding));
+      count += 1;
+    }
+    if (!count || box.isEmpty()) return false;
+
+    const sphere = new THREE.Sphere();
+    box.getBoundingSphere(sphere);
+    const halfVerticalFov = THREE.MathUtils.degToRad(camera.fov * 0.5);
+    const halfHorizontalFov = Math.atan(Math.tan(halfVerticalFov) * Math.max(0.4, camera.aspect));
+    const fitAngle = Math.max(0.18, Math.min(halfVerticalFov, halfHorizontalFov));
+    state.orbitTarget.copy(selectedPosition);
+    state.orbitDistance = clamp(
+      Math.max(210, sphere.radius * 1.15),
+      worldDiagonal * 4,
+      Math.max(240, sphere.radius / Math.max(0.18, Math.sin(fitAngle)) * 1.26),
+    );
+    syncOrbitCamera();
+
+    if (state.viewport.width >= 860) {
+      const safe = focusLabelSafeArea();
+      const safeCenterX = (safe.left + safe.right) / 2;
+      const horizontalShiftPixels = state.viewport.width / 2 - safeCenterX;
+      if (horizontalShiftPixels > 1) {
+        const worldPerPixel = state.orbitDistance
+          * 2
+          * Math.tan(halfVerticalFov)
+          / Math.max(1, state.viewport.height);
+        const right = new THREE.Vector3(1, 0, 0).applyQuaternion(camera.quaternion).normalize();
+        state.orbitTarget.addScaledVector(right, horizontalShiftPixels * worldPerPixel);
+        syncOrbitCamera();
+      }
+    }
+    return true;
+  }
+
   function focus(nodeId) {
     const node = nodeById.get(nodeId);
     if (!node) return false;
-    const target = worldPositionFor(node);
     if (state.mode === 'first-person') {
       spawnNearNode(nodeId);
     } else {
-      state.orbitTarget.copy(target);
-      state.orbitDistance = clamp(
-        Math.max(72, finite(node.radius, 8) * state.nodeScale * 9),
-        Math.max(180, worldDiagonal * 0.08),
-        Math.max(100, worldDiagonal * 0.022),
-      );
-      syncOrbitCamera();
+      frameFocusedNeighborhood(nodeId);
     }
     notifyCamera(true);
     render();
@@ -1948,7 +2257,7 @@ export function createKnowledgeWorld(canvas, options = {}) {
     for (const id of candidates) {
       const node = nodeById.get(id);
       if (!node) continue;
-      const position = worldPositionFor(node);
+      const position = focusPhysics.get(node.id)?.target ?? worldPositionFor(node);
       const padding = Math.max(4, finite(node.radius, 8) * state.nodeScale * 1.7);
       box.expandByPoint(position.clone().addScalar(padding));
       box.expandByPoint(position.clone().addScalar(-padding));
@@ -2172,6 +2481,8 @@ export function createKnowledgeWorld(canvas, options = {}) {
 
   function update(nextState = {}) {
     if (state.disposed) return;
+    const previousSelected = state.selected;
+    const previousLayout = state.layout;
     const nextModel = nextState.model ?? state.model;
     state.model = {
       ...state.model,
@@ -2190,6 +2501,7 @@ export function createKnowledgeWorld(canvas, options = {}) {
     state.routeNodeIds = asIdSet(nextState.routeNodeIds ?? state.routeNodeIds);
     state.routeEdgeIds = asIdSet(nextState.routeEdgeIds ?? state.routeEdgeIds);
     state.bookmarks = asIdSet(nextState.bookmarks ?? state.bookmarks);
+    state.layout = normalizeLayout(nextState.layout, state.layout);
     state.nodeScale = clamp(0.35, 3, finite(nextState.nodeScale, state.nodeScale));
     state.edgeOpacity = clamp(0.05, 2.5, finite(nextState.edgeOpacity, state.edgeOpacity));
     state.edgeWidth = clamp(0.35, 4, finite(nextState.edgeWidth, state.edgeWidth));
@@ -2207,6 +2519,9 @@ export function createKnowledgeWorld(canvas, options = {}) {
       if (requestedMode !== state.mode) setMode(requestedMode, { selectedId: state.selected });
     }
     const focusLayoutChanged = configureFocusLayout();
+    const selectionChanged = previousSelected !== state.selected;
+    const layoutChanged = previousLayout !== state.layout;
+    if ((selectionChanged || layoutChanged) && state.selected && state.mode === 'orbit') frameFocusedNeighborhood(state.selected);
     const nodesChanged = focusLayoutChanged || currentNodeBuildSignature() !== state.nodeBuildSignature;
     if (nodesChanged) buildNodes();
     if (nodesChanged || currentEdgeBuildSignature() !== state.edgeBuildSignature) buildEdges();

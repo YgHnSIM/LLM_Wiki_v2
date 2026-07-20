@@ -6,6 +6,29 @@ const NODE_SPIRAL_STEP = 68;
 const NODE_COLLISION_GAP = 28;
 const COMMUNITY_GAP = 220;
 const GRAPH_MARGIN = 260;
+const NETWORK_LAYOUT_ITERATIONS = 240;
+const LAYOUT_EDGE_MARGIN = 54;
+
+const GRAPH_LAYOUTS = Object.freeze([
+  {
+    id: 'community',
+    label: '연결 집단',
+    description: '구조적으로 밀접한 문서를 집단별로 묶어 보여 줍니다.',
+    grouped: true,
+  },
+  {
+    id: 'network',
+    label: '관계 중심',
+    description: '집단 경계 없이 작성된 연결의 강도로 노드 거리를 결정합니다.',
+    grouped: false,
+  },
+  {
+    id: 'radial',
+    label: '중심-주변',
+    description: '연결망의 핵심도와 가중 연결 수를 기준으로 중심에서 밖으로 배치합니다.',
+    grouped: false,
+  },
+]);
 
 const clamp = (minimum, maximum, value) => Math.min(maximum, Math.max(minimum, value));
 
@@ -236,6 +259,231 @@ function relaxNodeCollisions(nodes, community) {
   }
 }
 
+function saveNodeLayout(nodes, layoutId) {
+  for (const node of nodes) {
+    node.layouts ??= {};
+    node.layouts[layoutId] = {
+      x: Number(node.x.toFixed(1)),
+      y: Number(node.y.toFixed(1)),
+    };
+  }
+}
+
+function restoreNodeLayout(nodes, layoutId) {
+  for (const node of nodes) {
+    const position = node.layouts?.[layoutId];
+    if (!position) continue;
+    node.x = position.x;
+    node.y = position.y;
+  }
+}
+
+function relaxGlobalNodeCollisions(nodes, { passes = 180 } = {}) {
+  for (let pass = 0; pass < passes; pass += 1) {
+    let largestOverlap = 0;
+    for (let leftIndex = 0; leftIndex < nodes.length; leftIndex += 1) {
+      const left = nodes[leftIndex];
+      for (let rightIndex = leftIndex + 1; rightIndex < nodes.length; rightIndex += 1) {
+        const right = nodes[rightIndex];
+        let dx = right.x - left.x;
+        let dy = right.y - left.y;
+        let distance = Math.hypot(dx, dy);
+        const minimum = left.radius + right.radius + NODE_COLLISION_GAP;
+        if (distance >= minimum) continue;
+        if (distance < 1e-6) {
+          const angle = (stableHash(`collision:${left.id}:${right.id}`) % 360) * Math.PI / 180;
+          dx = Math.cos(angle);
+          dy = Math.sin(angle);
+          distance = 1;
+        }
+        const overlap = minimum - distance;
+        largestOverlap = Math.max(largestOverlap, overlap);
+        const shiftX = dx / distance * overlap / 2;
+        const shiftY = dy / distance * overlap / 2;
+        left.x -= shiftX;
+        left.y -= shiftY;
+        right.x += shiftX;
+        right.y += shiftY;
+      }
+    }
+    for (const node of nodes) {
+      const margin = node.radius + LAYOUT_EDGE_MARGIN;
+      node.x = clamp(margin, GRAPH_WIDTH - margin, node.x);
+      node.y = clamp(margin, GRAPH_HEIGHT - margin, node.y);
+    }
+    if (largestOverlap < 0.05) break;
+  }
+
+  for (const node of nodes) {
+    node.x = Number(node.x.toFixed(1));
+    node.y = Number(node.y.toFixed(1));
+  }
+}
+
+function placeNetworkLayout(nodes, undirectedEdges) {
+  if (!nodes.length) return;
+
+  const centerX = GRAPH_WIDTH / 2;
+  const centerY = GRAPH_HEIGHT / 2;
+  const weightedDegree = new Map(nodes.map((node) => [node.id, 0]));
+  for (const edge of undirectedEdges) {
+    weightedDegree.set(edge.source, (weightedDegree.get(edge.source) ?? 0) + edge.weight);
+    weightedDegree.set(edge.target, (weightedDegree.get(edge.target) ?? 0) + edge.weight);
+  }
+  const ordered = [...nodes].sort((left, right) => (
+    (weightedDegree.get(right.id) ?? 0) - (weightedDegree.get(left.id) ?? 0)
+    || right.degree - left.degree
+    || left.id.localeCompare(right.id, 'ko')
+  ));
+  const initialScale = Math.min(GRAPH_WIDTH, GRAPH_HEIGHT) * 0.39 / Math.sqrt(Math.max(1, nodes.length));
+  for (const [index, node] of ordered.entries()) {
+    const angle = index * GOLDEN_ANGLE + (stableHash(`network:${node.id}`) % 37) / 100;
+    const radius = initialScale * Math.sqrt(index);
+    node.x = centerX + Math.cos(angle) * radius * 1.52;
+    node.y = centerY + Math.sin(angle) * radius;
+  }
+
+  const nodeById = new Map(nodes.map((node) => [node.id, node]));
+  const usableArea = (GRAPH_WIDTH - GRAPH_MARGIN * 2) * (GRAPH_HEIGHT - GRAPH_MARGIN * 2);
+  const naturalSpacing = clamp(120, 260, Math.sqrt(usableArea / Math.max(1, nodes.length)));
+  const displacement = new Map(nodes.map((node) => [node.id, { x: 0, y: 0 }]));
+
+  for (let iteration = 0; iteration < NETWORK_LAYOUT_ITERATIONS; iteration += 1) {
+    for (const vector of displacement.values()) {
+      vector.x = 0;
+      vector.y = 0;
+    }
+
+    for (let leftIndex = 0; leftIndex < nodes.length; leftIndex += 1) {
+      const left = nodes[leftIndex];
+      for (let rightIndex = leftIndex + 1; rightIndex < nodes.length; rightIndex += 1) {
+        const right = nodes[rightIndex];
+        let dx = right.x - left.x;
+        let dy = right.y - left.y;
+        let distance = Math.hypot(dx, dy);
+        if (distance < 1e-6) {
+          const angle = (stableHash(`network-pair:${left.id}:${right.id}`) % 360) * Math.PI / 180;
+          dx = Math.cos(angle);
+          dy = Math.sin(angle);
+          distance = 1;
+        }
+        const force = naturalSpacing * naturalSpacing / Math.max(32, distance);
+        const forceX = dx / distance * force;
+        const forceY = dy / distance * force;
+        displacement.get(left.id).x -= forceX;
+        displacement.get(left.id).y -= forceY;
+        displacement.get(right.id).x += forceX;
+        displacement.get(right.id).y += forceY;
+      }
+    }
+
+    for (const edge of undirectedEdges) {
+      const source = nodeById.get(edge.source);
+      const target = nodeById.get(edge.target);
+      if (!source || !target) continue;
+      const dx = target.x - source.x;
+      const dy = target.y - source.y;
+      const distance = Math.max(1, Math.hypot(dx, dy));
+      const idealDistance = clamp(88, naturalSpacing * 1.35, naturalSpacing * 1.18 / Math.sqrt(edge.weight));
+      const force = (distance - idealDistance) * 0.16 * Math.sqrt(edge.weight);
+      const forceX = dx / distance * force;
+      const forceY = dy / distance * force;
+      displacement.get(source.id).x += forceX;
+      displacement.get(source.id).y += forceY;
+      displacement.get(target.id).x -= forceX;
+      displacement.get(target.id).y -= forceY;
+    }
+
+    const progress = iteration / Math.max(1, NETWORK_LAYOUT_ITERATIONS - 1);
+    const temperature = 68 * (1 - progress) + 2;
+    for (const node of nodes) {
+      const vector = displacement.get(node.id);
+      vector.x += (centerX - node.x) * 0.018;
+      vector.y += (centerY - node.y) * 0.018;
+      const magnitude = Math.max(1, Math.hypot(vector.x, vector.y));
+      const step = Math.min(temperature, magnitude);
+      node.x += vector.x / magnitude * step;
+      node.y += vector.y / magnitude * step;
+      const margin = node.radius + LAYOUT_EDGE_MARGIN;
+      node.x = clamp(margin, GRAPH_WIDTH - margin, node.x);
+      node.y = clamp(margin, GRAPH_HEIGHT - margin, node.y);
+    }
+  }
+
+  relaxGlobalNodeCollisions(nodes);
+}
+
+function graphCoreNumbers(nodes, undirectedEdges) {
+  const neighbors = new Map(nodes.map((node) => [node.id, new Set()]));
+  for (const edge of undirectedEdges) {
+    neighbors.get(edge.source)?.add(edge.target);
+    neighbors.get(edge.target)?.add(edge.source);
+  }
+  const remaining = new Set(nodes.map((node) => node.id));
+  const degrees = new Map(nodes.map((node) => [node.id, neighbors.get(node.id).size]));
+  const core = new Map();
+
+  while (remaining.size) {
+    const id = [...remaining].sort((left, right) => (
+      degrees.get(left) - degrees.get(right) || left.localeCompare(right, 'ko')
+    ))[0];
+    const value = degrees.get(id);
+    core.set(id, value);
+    remaining.delete(id);
+    for (const neighbor of neighbors.get(id)) {
+      if (remaining.has(neighbor) && degrees.get(neighbor) > value) {
+        degrees.set(neighbor, degrees.get(neighbor) - 1);
+      }
+    }
+  }
+
+  return core;
+}
+
+function placeRadialLayout(nodes, undirectedEdges) {
+  if (!nodes.length) return;
+
+  const core = graphCoreNumbers(nodes, undirectedEdges);
+  const weightedDegree = new Map(nodes.map((node) => [node.id, 0]));
+  for (const edge of undirectedEdges) {
+    weightedDegree.set(edge.source, (weightedDegree.get(edge.source) ?? 0) + edge.weight);
+    weightedDegree.set(edge.target, (weightedDegree.get(edge.target) ?? 0) + edge.weight);
+  }
+  const ordered = [...nodes].sort((left, right) => (
+    core.get(right.id) - core.get(left.id)
+    || (weightedDegree.get(right.id) ?? 0) - (weightedDegree.get(left.id) ?? 0)
+    || right.degree - left.degree
+    || left.id.localeCompare(right.id, 'ko')
+  ));
+  const centerX = GRAPH_WIDTH / 2;
+  const centerY = GRAPH_HEIGHT / 2;
+  const maximumRadius = Math.max(0, ...nodes.map((node) => node.radius));
+  const minimumSeparation = maximumRadius * 2 + NODE_COLLISION_GAP + 8;
+  const ringSpacing = minimumSeparation + 20;
+
+  ordered[0].x = centerX;
+  ordered[0].y = centerY;
+  let cursor = 1;
+  let ring = 1;
+  while (cursor < ordered.length) {
+    const radialDistance = ring * ringSpacing;
+    const angleStep = 2 * Math.asin(Math.min(1, minimumSeparation / (2 * radialDistance)));
+    const capacity = Math.max(1, Math.floor(Math.PI * 2 / angleStep));
+    const count = Math.min(capacity, ordered.length - cursor);
+    const offset = (stableHash(`radial-ring:${ring}`) % 360) * Math.PI / 180;
+    for (let index = 0; index < count; index += 1) {
+      const node = ordered[cursor + index];
+      const angle = offset + index * Math.PI * 2 / count;
+      node.x = centerX + Math.cos(angle) * radialDistance;
+      node.y = centerY + Math.sin(angle) * radialDistance;
+    }
+    cursor += count;
+    ring += 1;
+  }
+
+  relaxGlobalNodeCollisions(nodes, { passes: 60 });
+}
+
 /**
  * Convert already-resolved wiki documents into a deterministic graph payload.
  * `outgoing` and `relatedDocuments` must contain document object references.
@@ -339,6 +587,13 @@ export function buildKnowledgeGraph(documents, {
       + (edge.reciprocal ? 0.5 : 0);
   }
   for (const node of nodes) node.bridgeConnections = bridgeNeighbors.get(node.id).size;
+  for (const node of nodes) {
+    node.radius = Number(clamp(
+      8,
+      22,
+      8 + Math.log2(1 + node.degree) * 1.85,
+    ).toFixed(1));
+  }
 
   const communityIds = [...new Set(nodes.map((node) => node.community))].sort((a, b) => a - b);
   const communities = communityIds.map((id) => {
@@ -393,11 +648,6 @@ export function buildKnowledgeGraph(documents, {
       const angle = index * GOLDEN_ANGLE + (stableHash(`${node.id}:angle`) % 31) / 100;
       node.x = Math.round(clamp(24, GRAPH_WIDTH - 24, community.x + Math.cos(angle) * localRadius * 1.1 + jitter));
       node.y = Math.round(clamp(24, GRAPH_HEIGHT - 24, community.y + Math.sin(angle) * localRadius * 0.94 - jitter));
-      node.radius = Number(clamp(
-        8,
-        22,
-        8 + Math.log2(1 + node.degree) * 1.85,
-      ).toFixed(1));
     });
     relaxNodeCollisions(members, community);
   }
@@ -416,6 +666,13 @@ export function buildKnowledgeGraph(documents, {
       node.y = Number((node.y + shiftY).toFixed(1));
     }
   }
+
+  saveNodeLayout(nodes, 'community');
+  placeNetworkLayout(nodes, undirectedEdges);
+  saveNodeLayout(nodes, 'network');
+  placeRadialLayout(nodes, undirectedEdges);
+  saveNodeLayout(nodes, 'radial');
+  restoreNodeLayout(nodes, 'community');
 
   const maxBridgeConnections = Math.max(0, ...nodes.map((node) => node.bridgeConnections));
   const bridgeScale = Math.log1p(maxBridgeConnections);
@@ -437,7 +694,9 @@ export function buildKnowledgeGraph(documents, {
   nodes.sort((a, b) => a.id.localeCompare(b.id, 'ko'));
   return {
     schemaVersion: 2,
-    layoutVersion: 5,
+    layoutVersion: 6,
+    defaultLayout: 'community',
+    layouts: GRAPH_LAYOUTS.map((layout) => ({ ...layout })),
     depthMetric: 'cross-community-neighbors',
     depthScale: 'log1p',
     dimensions: { width: GRAPH_WIDTH, height: GRAPH_HEIGHT, depth: GRAPH_DEPTH },

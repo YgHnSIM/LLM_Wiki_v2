@@ -23,6 +23,26 @@ function page(id, {
   };
 }
 
+function assertLayoutHasNoMarkerOverlaps(graph, layoutId, nodes = graph.nodes) {
+  for (let leftIndex = 0; leftIndex < nodes.length; leftIndex += 1) {
+    for (let rightIndex = leftIndex + 1; rightIndex < nodes.length; rightIndex += 1) {
+      const left = nodes[leftIndex];
+      const right = nodes[rightIndex];
+      const leftPosition = left.layouts[layoutId];
+      const rightPosition = right.layouts[layoutId];
+      const distance = Math.hypot(
+        rightPosition.x - leftPosition.x,
+        rightPosition.y - leftPosition.y,
+      );
+      const minimum = left.radius + right.radius + 28;
+      assert.ok(
+        distance + 0.2 >= minimum,
+        `${layoutId}: ${left.id} and ${right.id} overlap (${distance.toFixed(2)} < ${minimum.toFixed(2)})`,
+      );
+    }
+  }
+}
+
 test('knowledge graph merges authored relation kinds while preserving direction', () => {
   const a = page('concept.a');
   const b = page('concept.b');
@@ -87,7 +107,16 @@ test('knowledge graph layout and communities are deterministic and internally co
   assert.equal(first.stats.edges, first.edges.length);
   assert.equal(first.stats.communities, first.communities.length);
   assert.equal(first.schemaVersion, 2);
-  assert.equal(first.layoutVersion, 5);
+  assert.equal(first.layoutVersion, 6);
+  assert.equal(first.defaultLayout, 'community');
+  assert.deepEqual(
+    first.layouts.map(({ id, grouped }) => ({ id, grouped })),
+    [
+      { id: 'community', grouped: true },
+      { id: 'network', grouped: false },
+      { id: 'radial', grouped: false },
+    ],
+  );
   assert.equal(first.depthMetric, 'cross-community-neighbors');
   assert.equal(first.depthScale, 'log1p');
   assert.ok(first.dimensions.depth > 0);
@@ -97,6 +126,19 @@ test('knowledge graph layout and communities are deterministic and internally co
     && Number.isFinite(node.z)
     && node.z >= 0
     && node.z <= first.dimensions.depth
+  )), true);
+  assert.equal(first.nodes.every((node) => (
+    Object.keys(node.layouts).join(',') === 'community,network,radial'
+    && Object.values(node.layouts).every((position) => (
+      Number.isFinite(position.x)
+      && Number.isFinite(position.y)
+      && position.x >= 0
+      && position.x <= first.dimensions.width
+      && position.y >= 0
+      && position.y <= first.dimensions.height
+    ))
+    && node.x === node.layouts.community.x
+    && node.y === node.layouts.community.y
   )), true);
   assert.equal(first.communities.every((community) => community.z === 0), true);
   assert.equal(first.edges.every((edge) => first.nodes.some((node) => node.id === edge.source)), true);
@@ -131,6 +173,7 @@ test('knowledge graph layout and communities are deterministic and internally co
   if (first.stats.maxBridgeConnections > 0) {
     assert.equal(Math.max(...first.nodes.map((node) => node.z)), first.dimensions.depth);
   }
+  for (const layout of first.layouts) assertLayoutHasNoMarkerOverlaps(first, layout.id);
 });
 
 test('bridge counts represent unique cross-community neighbors, not directed edge count', () => {
@@ -187,18 +230,56 @@ test('dense community layout keeps node markers from overlapping', () => {
   assert.equal(graph.communities.length, 1, 'a complete graph should remain one community');
 
   const members = graph.nodes.filter((node) => node.community === graph.communities[0].id);
-  for (let leftIndex = 0; leftIndex < members.length; leftIndex += 1) {
-    for (let rightIndex = leftIndex + 1; rightIndex < members.length; rightIndex += 1) {
-      const leftNode = members[leftIndex];
-      const rightNode = members[rightIndex];
-      const distance = Math.hypot(rightNode.x - leftNode.x, rightNode.y - leftNode.y);
-      const minimum = leftNode.radius + rightNode.radius + 28;
-      assert.ok(
-        distance + 0.2 >= minimum,
-        `${leftNode.id} and ${rightNode.id} overlap (${distance.toFixed(2)} < ${minimum.toFixed(2)})`,
-      );
-    }
-  }
+  for (const layout of graph.layouts) assertLayoutHasNoMarkerOverlaps(graph, layout.id, members);
+});
+
+test('center-periphery layout places the most connected node inside isolated documents', () => {
+  const hub = page('concept.hub');
+  const leaves = Array.from({ length: 8 }, (_, index) => page(`concept.leaf-${index}`));
+  const isolated = page('concept.isolated');
+  hub.outgoing = leaves;
+  hub.relatedDocuments = leaves;
+
+  const graph = buildKnowledgeGraph([isolated, ...leaves, hub]);
+  const graphCenter = {
+    x: graph.dimensions.width / 2,
+    y: graph.dimensions.height / 2,
+  };
+  const distanceFromCenter = (node) => Math.hypot(
+    node.layouts.radial.x - graphCenter.x,
+    node.layouts.radial.y - graphCenter.y,
+  );
+  const graphHub = graph.nodes.find((node) => node.id === hub.id);
+  const graphIsolated = graph.nodes.find((node) => node.id === isolated.id);
+
+  assert.equal(distanceFromCenter(graphHub), 0);
+  assert.ok(distanceFromCenter(graphIsolated) > distanceFromCenter(graphHub));
+  assert.ok(
+    distanceFromCenter(graphIsolated)
+      >= Math.max(...leaves.map((leaf) => distanceFromCenter(graph.nodes.find((node) => node.id === leaf.id)))),
+  );
+});
+
+test('relationship layout pulls a stronger authored connection closer', () => {
+  const hub = page('concept.hub');
+  const strong = page('concept.strong');
+  const weak = page('concept.weak');
+  hub.outgoing = [strong, weak];
+  hub.relatedDocuments = [strong];
+  strong.outgoing = [hub];
+
+  const graph = buildKnowledgeGraph([weak, strong, hub]);
+  const byId = new Map(graph.nodes.map((node) => [node.id, node]));
+  const networkDistance = (leftId, rightId) => {
+    const left = byId.get(leftId).layouts.network;
+    const right = byId.get(rightId).layouts.network;
+    return Math.hypot(right.x - left.x, right.y - left.y);
+  };
+
+  assert.ok(
+    networkDistance(hub.id, strong.id) < networkDistance(hub.id, weak.id),
+    'related, narrative, and reciprocal evidence should create a shorter weighted spring',
+  );
 });
 
 test('narrative links stay distinct from links in the curated related section', () => {

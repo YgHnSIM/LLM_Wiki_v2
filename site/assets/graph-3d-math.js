@@ -20,6 +20,88 @@ export function clamp(minimum, maximum, value) {
   return Math.min(maximum, Math.max(minimum, value));
 }
 
+export function focusBurstLayout(center, neighbors, {
+  minimumRadius = 120,
+  ringGap = 96,
+  maximumRadius = Number.POSITIVE_INFINITY,
+  ringFill = 0.78,
+} = {}) {
+  const origin = {
+    x: Number.isFinite(Number(center?.x)) ? Number(center.x) : 0,
+    y: Number.isFinite(Number(center?.y)) ? Number(center.y) : 0,
+  };
+  const items = (Array.isArray(neighbors) ? neighbors : [])
+    .filter((item) => item?.id)
+    .map((item) => {
+      const x = Number.isFinite(Number(item.x)) ? Number(item.x) : origin.x;
+      const y = Number.isFinite(Number(item.y)) ? Number(item.y) : origin.y;
+      const dx = x - origin.x;
+      const dy = y - origin.y;
+      return {
+        ...item,
+        x,
+        y,
+        angle: Math.atan2(dy, dx),
+        span: Math.max(36, Number(item.labelSpan) || 0, (Number(item.radius) || 0) * 2 + 18),
+      };
+    })
+    .sort((left, right) => (
+      left.angle - right.angle
+      || String(left.id).localeCompare(String(right.id), 'ko')
+    ));
+  if (!items.length) return [];
+
+  const startRadius = Math.max(1, Number(minimumRadius) || 120);
+  const gap = Math.max(1, Number(ringGap) || 96);
+  const radiusLimit = Math.max(startRadius, Number(maximumRadius) || startRadius);
+  const fill = clamp(0.35, 0.92, Number(ringFill) || 0.78);
+  const positioned = [];
+  let cursor = 0;
+  let ring = 0;
+
+  while (cursor < items.length) {
+    const radius = Math.min(radiusLimit, startRadius + ring * gap);
+    const circumferenceBudget = Math.max(1, Math.PI * 2 * radius * fill);
+    const atRadiusLimit = Number.isFinite(radiusLimit) && radius >= radiusLimit - Number.EPSILON;
+    const ringItems = [];
+    let occupied = 0;
+    while (cursor < items.length) {
+      const item = items[cursor];
+      if (ringItems.length && occupied + item.span > circumferenceBudget && !atRadiusLimit) break;
+      ringItems.push(item);
+      occupied += item.span;
+      cursor += 1;
+    }
+    if (!ringItems.length) {
+      ringItems.push(items[cursor]);
+      occupied = items[cursor].span;
+      cursor += 1;
+    }
+
+    const fullCircle = Math.PI * 2;
+    const angularScale = fullCircle / Math.max(occupied, 1);
+    const first = ringItems[0];
+    let spanCursor = 0;
+    for (const item of ringItems) {
+      const localAngle = (spanCursor + item.span / 2) * angularScale;
+      const firstLocalAngle = first.span / 2 * angularScale;
+      const angle = first.angle + localAngle - firstLocalAngle;
+      positioned.push({
+        ...item,
+        x: origin.x + Math.cos(angle) * radius,
+        y: origin.y + Math.sin(angle) * radius,
+        angle,
+        radius,
+        ring,
+      });
+      spanCursor += item.span;
+    }
+    ring += 1;
+  }
+
+  return positioned;
+}
+
 export function edgeDirectionForNode(edge, nodeId) {
   if (!edge || !nodeId) return '';
   const outgoing = edge.source === nodeId;
@@ -279,4 +361,24 @@ export function shortestPath(edges, startId, targetId, visibleIds) {
     }
   }
   return [];
+}
+
+export function labelIsExposed(nodeId, {
+  selected = '',
+  direct = new Set(),
+  routeNodeIds = new Set(),
+  hovered = '',
+  travelCandidate = '',
+  queryMatches = new Set(),
+  bookmarks = new Set(),
+} = {}) {
+  const asSet = (value) => value instanceof Set ? value : new Set(value ?? []);
+  const directIds = asSet(direct);
+  const routeIds = asSet(routeNodeIds);
+  if (selected) return nodeId === selected || directIds.has(nodeId) || routeIds.has(nodeId);
+  return nodeId === hovered
+    || nodeId === travelCandidate
+    || routeIds.has(nodeId)
+    || asSet(queryMatches).has(nodeId)
+    || asSet(bookmarks).has(nodeId);
 }

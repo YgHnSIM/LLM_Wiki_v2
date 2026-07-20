@@ -5,7 +5,9 @@ import {
   circularMinimapPoint,
   clamp,
   edgeDirectionForNode,
+  focusBurstLayout,
   hitTestProjected,
+  labelIsExposed,
   neighborhoodWithinDepth,
   normalizeCamera,
   projectPoint,
@@ -39,6 +41,8 @@ import {
   const verificationFilter = root.querySelector('[data-graph-verification]');
   const relationFilter = root.querySelector('[data-graph-relation]');
   const communityFilter = root.querySelector('[data-graph-community]');
+  const layoutFilter = root.querySelector('[data-graph-layout]');
+  const layoutDescription = root.querySelector('[data-graph-layout-description]');
   const densityFilter = root.querySelector('[data-graph-density]');
   const localDepthFilter = root.querySelector('[data-graph-local-depth]');
   const labelDensityInput = root.querySelector('[data-graph-label-density]');
@@ -121,6 +125,7 @@ import {
     verification: '',
     relation: relationFilter?.value || 'related',
     community: '',
+    layout: layoutFilter?.value || 'community',
     density: densityFilter?.value || 'backbone',
     localDepth: 0,
     labelDensity: 2,
@@ -233,6 +238,27 @@ import {
       ...(node.domains ?? []).map((domain) => domain.label),
     ].join(' '));
     return state.query.split(' ').filter(Boolean).every((term) => haystack.includes(term));
+  }
+
+  function normalizeLayoutId(value, fallback = state.data?.defaultLayout ?? 'community') {
+    const ids = new Set((state.data?.layouts ?? []).map((layout) => layout.id));
+    const candidate = String(value ?? '');
+    if (ids.has(candidate)) return candidate;
+    if (ids.has(fallback)) return fallback;
+    return state.data?.layouts?.[0]?.id ?? 'community';
+  }
+
+  function layoutMetadata(layoutId = state.layout) {
+    return state.data?.layouts?.find((layout) => layout.id === layoutId) ?? null;
+  }
+
+  function nodeLayoutPoint(node, layoutId = state.layout) {
+    const normalizedLayout = normalizeLayoutId(layoutId);
+    const position = node?.layouts?.[normalizedLayout]
+      ?? node?.layouts?.[state.data?.defaultLayout]
+      ?? node;
+    if (!Number.isFinite(position?.x) || !Number.isFinite(position?.y)) return node;
+    return { ...node, x: position.x, y: position.y };
   }
 
   function compareOverviewEdges(left, right, nodeId = '') {
@@ -405,7 +431,8 @@ import {
     };
     const searchMessage = state.query ? `, 검색 일치 ${queryMatches.size}개` : '';
     const densityLabel = state.density === 'all' ? '전체' : state.density === 'balanced' ? '균형' : '핵심';
-    status.textContent = `문서 ${visibleNodes.size}개, 관계 ${visibleEdges.length}개 중 ${densityLabel} 연결 ${renderedEdges.length}개 표시${searchMessage}.`;
+    const activeLayoutLabel = layoutMetadata()?.label ?? '연결 집단';
+    status.textContent = `문서 ${visibleNodes.size}개, 관계 ${visibleEdges.length}개 중 ${densityLabel} 연결 ${renderedEdges.length}개 표시${searchMessage} · ${activeLayoutLabel} 배치.`;
     if (visibleCount) visibleCount.textContent = String(visibleNodes.size);
     if (state.selected) {
       const selectedNode = state.nodeById.get(state.selected);
@@ -516,7 +543,7 @@ import {
 
   function drawCommunities() {
     const labelBoxes = [];
-    if (!state.showCommunities) return labelBoxes;
+    if (!state.showCommunities || state.layout !== 'community') return labelBoxes;
     const compact = state.viewport.width < 620;
     const visibleCommunities = state.data.communities.filter((community) => (
       state.data.nodes.some((node) => node.community === community.id && state.model.visibleNodes.has(node.id))
@@ -538,6 +565,10 @@ import {
       context.setLineDash([8, 7]);
       context.stroke();
       context.setLineDash([]);
+      if (state.selected) {
+        context.restore();
+        continue;
+      }
 
       const minimumX = Math.min(...points.map((point) => point.x));
       const minimumY = Math.min(...points.map((point) => point.y));
@@ -991,20 +1022,19 @@ import {
       ? [0, 2, 4, 8][state.labelDensity]
       : [0, 5, 14, 28][state.labelDensity];
     const budget = Math.max(0, baseBudget ?? 14);
-    const mandatory = visibleNodes.filter((node) => (
-      node.id === state.selected
-      || node.id === state.travelCandidate
-      || node.id === state.hovered
-      || state.routeNodeIds.has(node.id)
-      || state.model.queryMatches.has(node.id)
-    ));
+    const mandatory = visibleNodes.filter((node) => labelIsExposed(node.id, {
+      selected: state.selected,
+      direct: state.model.direct,
+      routeNodeIds: state.routeNodeIds,
+      hovered: state.hovered,
+      travelCandidate: state.travelCandidate,
+      queryMatches: state.model.queryMatches,
+      bookmarks: state.bookmarks,
+    }));
     const contextual = budget === 0
       ? []
       : state.selected
-      ? visibleNodes
-        .filter((node) => state.model.direct.has(node.id))
-        .sort((left, right) => labelPriority(right) - labelPriority(left) || collator.compare(left.title, right.title))
-        .slice(0, Math.min(budget, state.viewport.width < 620 ? 4 : 10))
+      ? []
       : [...visibleNodes]
         .sort((left, right) => labelPriority(right) - labelPriority(left) || collator.compare(left.title, right.title))
         .slice(0, budget);
@@ -1084,7 +1114,7 @@ import {
       padding,
     );
     const visibleNodes = state.data.nodes.filter((node) => state.model.visibleNodes.has(node.id));
-    state.minimapPoints = new Map(visibleNodes.map((node) => [node.id, pointFor(node)]));
+    state.minimapPoints = new Map(visibleNodes.map((node) => [node.id, pointFor(nodeLayoutPoint(node))]));
 
     minimapContext.save();
     minimapContext.beginPath();
@@ -1101,25 +1131,27 @@ import {
       minimapContext.stroke();
     }
 
-    for (const community of state.data.communities) {
-      const hasVisibleNode = state.data.nodes.some((node) => node.community === community.id && state.model.visibleNodes.has(node.id));
-      if (!hasVisibleNode) continue;
-      const color = state.palette.communities[community.colorIndex % state.palette.communities.length];
-      minimapContext.strokeStyle = color;
-      minimapContext.globalAlpha = 0.52;
-      minimapContext.lineWidth = 1;
-      minimapContext.beginPath();
-      for (let index = 0; index <= 28; index += 1) {
-        const angle = index / 28 * Math.PI * 2;
-        const point = pointFor({
-          x: community.x + Math.cos(angle) * community.radius * 1.1,
-          y: community.y + Math.sin(angle) * community.radius * 0.82,
-        });
-        if (index === 0) minimapContext.moveTo(point.x, point.y);
-        else minimapContext.lineTo(point.x, point.y);
+    if (state.layout === 'community' && state.showCommunities) {
+      for (const community of state.data.communities) {
+        const hasVisibleNode = state.data.nodes.some((node) => node.community === community.id && state.model.visibleNodes.has(node.id));
+        if (!hasVisibleNode) continue;
+        const color = state.palette.communities[community.colorIndex % state.palette.communities.length];
+        minimapContext.strokeStyle = color;
+        minimapContext.globalAlpha = 0.52;
+        minimapContext.lineWidth = 1;
+        minimapContext.beginPath();
+        for (let index = 0; index <= 28; index += 1) {
+          const angle = index / 28 * Math.PI * 2;
+          const point = pointFor({
+            x: community.x + Math.cos(angle) * community.radius * 1.1,
+            y: community.y + Math.sin(angle) * community.radius * 0.82,
+          });
+          if (index === 0) minimapContext.moveTo(point.x, point.y);
+          else minimapContext.lineTo(point.x, point.y);
+        }
+        minimapContext.closePath();
+        minimapContext.stroke();
       }
-      minimapContext.closePath();
-      minimapContext.stroke();
     }
 
     const drawPath = (ids, color, widthValue, alpha) => {
@@ -1171,11 +1203,61 @@ import {
     minimapContext.globalAlpha = 1;
   }
 
+  function spreadFocusedProjections(nodeProjections, groundProjections) {
+    if (!state.selected || !state.model?.direct?.size) return;
+    const center = nodeProjections.get(state.selected);
+    if (!center) return;
+    const safe = fitSafeArea();
+    const availableWidth = Math.max(240, state.viewport.width - safe.left - safe.right);
+    const availableHeight = Math.max(220, state.viewport.height - safe.top - safe.bottom);
+    const minimumRadius = clamp(104, 168, Math.min(availableWidth, availableHeight) * 0.24);
+    const maximumRadius = Math.max(
+      minimumRadius,
+      Math.min(availableWidth * 0.46, availableHeight * 0.47),
+    );
+    const neighbors = [...state.model.direct]
+      .map((id) => {
+        const node = state.nodeById.get(id);
+        const point = nodeProjections.get(id);
+        if (!node || !point) return null;
+        return {
+          id,
+          x: point.x,
+          y: point.y,
+          radius: projectedRadius(node, point),
+          labelSpan: clamp(72, 220, String(node.title ?? '').length * 7 + 28),
+        };
+      })
+      .filter(Boolean);
+    const layout = focusBurstLayout(center, neighbors, {
+      minimumRadius,
+      ringGap: clamp(72, 112, 76 + neighbors.length * 1.8),
+      maximumRadius,
+      ringFill: 0.74,
+    });
+    for (const item of layout) {
+      const point = nodeProjections.get(item.id);
+      if (!point) continue;
+      const nextX = clamp(safe.left + 18, state.viewport.width - safe.right - 18, item.x);
+      const nextY = clamp(safe.top + 18, state.viewport.height - safe.bottom - 18, item.y);
+      const deltaX = nextX - point.x;
+      const deltaY = nextY - point.y;
+      nodeProjections.set(item.id, { ...point, x: nextX, y: nextY });
+      const ground = groundProjections.get(item.id);
+      if (ground) groundProjections.set(item.id, {
+        ...ground,
+        x: ground.x + deltaX,
+        y: ground.y + deltaY,
+      });
+    }
+  }
+
   function drawScene() {
     if (!state.data || !state.model || !state.palette) return;
     if (world) {
       world.update({
         model: state.model,
+        layout: state.layout,
         selected: state.selected,
         hovered: state.hovered,
         travelCandidate: state.travelCandidate,
@@ -1209,11 +1291,13 @@ import {
     const groundProjections = new Map();
     for (const node of state.data.nodes) {
       if (!state.model.visibleNodes.has(node.id)) continue;
-      const top = projected(node);
-      const ground = projected({ ...node, z: 0 });
+      const layoutPoint = nodeLayoutPoint(node);
+      const top = projected(layoutPoint);
+      const ground = projected({ ...layoutPoint, z: 0 });
       if (top) nodeProjections.set(node.id, top);
       if (ground) groundProjections.set(node.id, ground);
     }
+    spreadFocusedProjections(nodeProjections, groundProjections);
     state.projectedNodes = nodeProjections;
     drawStems(nodeProjections, groundProjections);
     drawEdges(nodeProjections);
@@ -1527,9 +1611,14 @@ import {
       return neighbor && neighbor.community !== node.community;
     }).length;
     inspectorContent.replaceChildren();
-    inspectorContent.append(element('p', 'eyebrow', typeLabels[node.type] ?? node.type));
-    inspectorContent.append(element('h2', '', node.title));
-    inspectorContent.append(element('p', 'graph-inspector-excerpt', node.excerpt));
+    const columns = element('div', 'graph-inspector-columns');
+    const primary = element('section', 'graph-inspector-primary');
+    const directPanel = element('section', 'graph-inspector-relations');
+    primary.setAttribute('aria-label', '선택한 문서');
+    directPanel.setAttribute('aria-label', '직접 연결');
+    primary.append(element('p', 'eyebrow', typeLabels[node.type] ?? node.type));
+    primary.append(element('h2', '', node.title));
+    primary.append(element('p', 'graph-inspector-excerpt', node.excerpt));
 
     const metadata = element('dl', 'graph-node-metadata');
     metadata.append(
@@ -1540,18 +1629,18 @@ import {
       metadataRow('표시 중 다른 집단 이웃', `${outsideNeighborCount}개`),
       metadataRow('3D 높이', `전체 다른 집단 이웃 ${node.bridgeConnections}개를 로그 눈금으로 변환`),
     );
-    inspectorContent.append(metadata);
+    primary.append(metadata);
 
     if (node.domains?.length) {
       const tags = element('ul', 'graph-domain-list');
       tags.setAttribute('aria-label', '분야 태그');
       for (const domain of node.domains) tags.append(element('li', '', domain.label));
-      inspectorContent.append(tags);
+      primary.append(tags);
     }
 
     const documentLink = element('a', 'button-link graph-document-link', '문서 읽기');
     documentLink.href = node.url;
-    inspectorContent.append(documentLink);
+    primary.append(documentLink);
 
     const actions = element('div', 'graph-inspector-actions');
     const focusButton = element('button', '', '이 문서로 이동');
@@ -1566,10 +1655,10 @@ import {
     route.type = 'button';
     route.dataset.graphRouteNode = node.id;
     actions.append(focusButton, bookmark, route);
-    inspectorContent.append(actions);
+    primary.append(actions);
 
     if (state.routePath.length > 1) {
-      inspectorContent.append(element('h3', '', `현재 경로 ${state.routePath.length - 1}단계`));
+      primary.append(element('h3', '', `현재 경로 ${state.routePath.length - 1}단계`));
       const pathList = element('ol', 'graph-route-list');
       for (const id of state.routePath) {
         const pathNode = state.nodeById.get(id);
@@ -1581,7 +1670,7 @@ import {
         item.append(button);
         pathList.append(item);
       }
-      inspectorContent.append(pathList);
+      primary.append(pathList);
     }
 
     const ranked = [...relations.entries()]
@@ -1593,23 +1682,56 @@ import {
         || collator.compare(left.node.title, right.node.title)
       ));
 
+    directPanel.append(element('p', 'eyebrow', '관계 탐색'));
+    directPanel.append(element('h3', 'graph-direct-heading', `직접 연결 ${ranked.length}개`));
     if (ranked.length) {
-      inspectorContent.append(element('h3', '', `직접 연결 ${ranked.length}개`));
       const list = element('ul', 'graph-relation-list');
-      for (const { node: neighbor, record } of ranked.slice(0, 12)) {
+      for (const { node: neighbor, record } of ranked) {
         const item = element('li');
-        const link = element('a', '', neighbor.title);
+        const select = element('button', 'graph-relation-select');
+        select.type = 'button';
+        select.dataset.selectNode = neighbor.id;
+        select.setAttribute('aria-label', `${neighbor.title} 노드 선택`);
+        select.append(
+          element('strong', '', neighbor.title),
+          element('span', '', relationDescription(record)),
+        );
+        const link = element('a', 'graph-relation-document', '문서 열기');
         link.href = neighbor.url;
-        item.append(link, element('span', '', relationDescription(record)));
+        link.setAttribute('aria-label', `${neighbor.title} 문서 열기`);
+        item.append(select, link);
         list.append(item);
       }
-      inspectorContent.append(list);
-      if (ranked.length > 12) inspectorContent.append(element('p', 'graph-relation-more', `나머지 ${ranked.length - 12}개 연결은 지도에서 확인할 수 있습니다.`));
+      directPanel.append(list);
+    } else {
+      directPanel.append(element('p', 'graph-relation-empty', '현재 표시 조건에서 직접 연결된 문서가 없습니다.'));
     }
+    columns.append(primary, directPanel);
+    inspectorContent.append(columns);
     state.inspectorId = node.id;
   }
 
   const BOOKMARK_STORAGE_KEY = 'llm-wiki:knowledge-world:bookmarks:v1';
+  const LAYOUT_STORAGE_KEY = 'llm-wiki:knowledge-world:layout:v1';
+
+  function loadLayoutPreference() {
+    let preferred = layoutFilter?.value || state.data?.defaultLayout;
+    try {
+      preferred = window.localStorage.getItem(LAYOUT_STORAGE_KEY) || preferred;
+    } catch {
+      // The graph still uses its built-in default when storage is unavailable.
+    }
+    state.layout = normalizeLayoutId(preferred);
+    if (layoutFilter) layoutFilter.value = state.layout;
+  }
+
+  function saveLayoutPreference() {
+    try {
+      window.localStorage.setItem(LAYOUT_STORAGE_KEY, state.layout);
+    } catch {
+      // Layout switching remains available for the current visit.
+    }
+  }
 
   function loadBookmarks() {
     try {
@@ -1707,6 +1829,14 @@ import {
     if (heightOutput) heightOutput.textContent = `${Math.round(state.heightScale * 100)}%`;
     if (flightOutput) flightOutput.textContent = state.flightSpeed < 0.85 ? '느리게' : state.flightSpeed > 1.35 ? '빠르게' : '보통';
     if (fovOutput) fovOutput.textContent = `${Math.round(state.fov)}°`;
+    const activeLayout = layoutMetadata();
+    if (layoutDescription) layoutDescription.textContent = activeLayout?.description ?? '';
+    if (layoutFilter && layoutFilter.value !== state.layout) layoutFilter.value = state.layout;
+    if (communitiesInput) {
+      communitiesInput.disabled = state.layout !== 'community';
+      communitiesInput.closest('label')?.toggleAttribute('data-layout-disabled', state.layout !== 'community');
+    }
+    root.dataset.graphLayout = state.layout;
     if (pointerLockButton) {
       const pointerLockAvailable = canvas.dataset.pointerLock === 'available';
       root.classList.toggle('uses-drag-look', !pointerLockAvailable);
@@ -1887,7 +2017,8 @@ import {
   function selectNode(id, { focus = false, record = true } = {}) {
     const node = state.nodeById.get(id);
     if (!node || !state.model.baseVisibleNodes.has(id)) return false;
-    if (state.selected !== id) state.mobileRelationLimit = 8;
+    const selectionChanged = state.selected !== id;
+    if (selectionChanged) state.mobileRelationLimit = 8;
     state.selected = id;
     state.travelCandidate = '';
     state.travelIndex = -1;
@@ -1895,7 +2026,11 @@ import {
     root.classList.add('has-selection');
     updateGraph();
     if (state.mode === 'travel') refreshTravelCandidate(0);
-    if (focus) focusNode(id);
+    if (focus || (selectionChanged && state.mode === 'orbit' && !mobileMode.matches)) {
+      window.requestAnimationFrame(() => {
+        if (state.selected === id) focusNode(id);
+      });
+    }
     const relations = visibleRelations(node);
     const outsideNeighbors = [...relations.keys()].filter((neighborId) => (
       state.nodeById.get(neighborId)?.community !== node.community
@@ -1975,7 +2110,8 @@ import {
   }
 
   function displayPoint(node) {
-    return node.z ? { ...node, z: node.z * state.heightScale } : node;
+    const point = nodeLayoutPoint(node);
+    return point.z ? { ...point, z: point.z * state.heightScale } : point;
   }
 
   function fitSafeArea() {
@@ -1992,7 +2128,7 @@ import {
       : 54;
     const left = compact ? 28 : 52;
     const right = !compact && root.classList.contains('has-selection') && inspectorRectangle
-      ? clamp(52, state.viewport.width * 0.38, canvasRectangle.right - inspectorRectangle.left + 24)
+      ? clamp(52, Math.max(52, state.viewport.width - 300), canvasRectangle.right - inspectorRectangle.left + 24)
       : compact ? 28 : 52;
     return { top, right, bottom, left };
   }
@@ -2069,13 +2205,21 @@ import {
       return;
     }
     const targetZoom = clamp(1.25, 2.35, Math.max(state.camera.zoom, 1.55));
-    const target = cameraForWorldPoint(
+    const centeredTarget = cameraForWorldPoint(
       displayPoint(node),
       { ...state.camera, flat: false },
       state.viewport,
       displayDimensions(),
       targetZoom,
     );
+    const safe = fitSafeArea();
+    const availableWidth = Math.max(160, state.viewport.width - safe.left - safe.right);
+    const availableHeight = Math.max(180, state.viewport.height - safe.top - safe.bottom);
+    const target = normalizeCamera({
+      ...centeredTarget,
+      panX: centeredTarget.panX + safe.left + availableWidth / 2 - state.viewport.width / 2,
+      panY: centeredTarget.panY + safe.top + availableHeight / 2 - state.viewport.height / 2,
+    });
     animateCameraTo(target);
   }
 
@@ -2456,6 +2600,12 @@ import {
     verificationFilter?.addEventListener('change', () => updateStructure({ verification: verificationFilter.value }));
     relationFilter?.addEventListener('change', () => updateStructure({ relation: relationFilter.value }, { fit: false }));
     communityFilter?.addEventListener('change', () => updateStructure({ community: communityFilter.value }));
+    layoutFilter?.addEventListener('change', () => {
+      state.layout = normalizeLayoutId(layoutFilter.value);
+      saveLayoutPreference();
+      updateGraph();
+      window.requestAnimationFrame(() => fitVisibleScene(true));
+    });
     densityFilter?.addEventListener('change', () => {
       state.density = densityFilter.value;
       updateGraph();
@@ -2510,6 +2660,8 @@ import {
       state.verification = '';
       state.relation = relationFilter?.value || 'related';
       state.community = '';
+      state.layout = normalizeLayoutId(layoutFilter?.value || state.data?.defaultLayout);
+      saveLayoutPreference();
       state.density = densityFilter?.value || 'backbone';
       state.localDepth = Number(localDepthFilter?.value) || 0;
       state.labelDensity = Number(labelDensityInput?.value) || 2;
@@ -2973,6 +3125,7 @@ import {
         if (context || mobileMode.matches) return false;
         candidate = createKnowledgeWorld(canvas, {
           data,
+          layout: state.layout,
           palette: state.palette,
           reducedMotion: reduceMotion.matches,
           onReticleTarget(target) {
@@ -3027,19 +3180,28 @@ import {
     .then(async (data) => {
       if (
         data?.schemaVersion !== 2
-        || data?.layoutVersion !== 5
+        || data?.layoutVersion !== 6
+        || !Array.isArray(data?.layouts)
+        || !data.layouts.some((layout) => layout?.id === data.defaultLayout)
         || data?.depthMetric !== 'cross-community-neighbors'
         || data?.depthScale !== 'log1p'
         || !Number.isFinite(data?.dimensions?.depth)
         || !Array.isArray(data.nodes)
         || !Array.isArray(data.edges)
         || !Array.isArray(data.communities)
-        || data.nodes.some((node) => !Number.isFinite(node.z))
+        || data.nodes.some((node) => (
+          !Number.isFinite(node.z)
+          || data.layouts.some((layout) => (
+            !Number.isFinite(node.layouts?.[layout.id]?.x)
+            || !Number.isFinite(node.layouts?.[layout.id]?.y)
+          ))
+        ))
       ) {
         throw new TypeError('Graph data has an unsupported 3D shape.');
       }
       state.data = data;
       state.nodeById = new Map(data.nodes.map((node) => [node.id, node]));
+      loadLayoutPreference();
       loadBookmarks();
       resolvePalette();
       if (!mobileMode.matches) {

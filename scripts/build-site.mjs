@@ -660,7 +660,7 @@ function renderGraphPage() {
     <section class="graph-workbench" data-knowledge-graph data-graph-url="${sitePath('/graph-data.json')}">
       <div class="graph-fullscreen-root" id="knowledge-world" data-graph-fullscreen-root>
         <div class="graph-stage" data-graph-stage>
-          <p class="sr-only" id="knowledge-graph-description">문서 ${graphData.stats.nodes}개와 방향 관계 ${graphData.stats.edges}개를 연결 집단별로 배치한 WebGL 3D 지식 세계입니다. 노드 높이는 다른 집단에 속한 고유 이웃 수를 로그 눈금으로 나타냅니다. 궤도 카메라로 조망하거나 1인칭 비행으로 지식 세계 안을 이동할 수 있으며, 도움말에서 전체 조작법을 확인할 수 있습니다.</p>
+          <p class="sr-only" id="knowledge-graph-description">문서 ${graphData.stats.nodes}개와 방향 관계 ${graphData.stats.edges}개를 연결 집단, 관계 중심, 중심-주변 배치로 전환해 보는 WebGL 3D 지식 세계입니다. 노드 높이는 다른 집단에 속한 고유 이웃 수를 로그 눈금으로 나타냅니다. 궤도 카메라로 조망하거나 1인칭 비행으로 지식 세계 안을 이동할 수 있으며, 도움말에서 전체 조작법을 확인할 수 있습니다.</p>
           <canvas class="knowledge-graph" data-graph-canvas width="${graphData.dimensions.width}" height="${graphData.dimensions.height}" role="img" tabindex="0" aria-label="3D 지식 세계 조작 화면" aria-describedby="knowledge-graph-description">그래프를 지원하지 않는 환경에서는 아래 텍스트 목록으로 문서를 탐색할 수 있습니다.</canvas>
           <section class="graph-mobile-atlas" data-graph-mobile-atlas aria-labelledby="graph-mobile-atlas-title" tabindex="-1">
             <header class="graph-mobile-atlas-header">
@@ -704,6 +704,13 @@ function renderGraphPage() {
                   <button type="button" data-graph-settings-close>닫기</button>
                 </div>
                 <div class="graph-filter-grid">
+                  <div class="graph-control graph-control--layout">
+                    <label for="graph-layout">노드 배치</label>
+                    <select id="graph-layout" data-graph-layout aria-describedby="graph-layout-description">
+                      ${graphData.layouts.map((layout) => `<option value="${escapeHtml(layout.id)}"${layout.id === graphData.defaultLayout ? ' selected' : ''}>${escapeHtml(layout.label)}</option>`).join('')}
+                    </select>
+                    <p id="graph-layout-description" data-graph-layout-description>${escapeHtml(graphData.layouts.find((layout) => layout.id === graphData.defaultLayout)?.description ?? '')}</p>
+                  </div>
                   <div class="graph-control">
                     <label for="graph-type">문서 유형</label>
                     <select id="graph-type" data-graph-type>
@@ -819,7 +826,7 @@ function renderGraphPage() {
 
           <figure class="graph-minimap">
             <figcaption>원형 세계 지도</figcaption>
-            <canvas width="160" height="160" data-graph-minimap role="img" aria-label="연결 집단과 문서의 원형 세계 지도. 문서 선택은 주 그래프나 텍스트 목록에서도 할 수 있습니다."></canvas>
+            <canvas width="160" height="160" data-graph-minimap role="img" aria-label="현재 배치와 문서의 원형 세계 지도. 문서 선택은 주 그래프나 텍스트 목록에서도 할 수 있습니다."></canvas>
             <button type="button" data-graph-fit-visible>전체 맞춤</button>
           </figure>
 
@@ -917,7 +924,7 @@ function renderGraphPage() {
 
   return layout({
     title: '지식 그래프',
-    description: 'LLM Wiki 문서의 본문 링크와 관련 읽기를 연결 집단, 문서 유형, 검증 상태와 다른 집단의 고유 이웃 수에 따른 높이로 탐색하는 3D 지식 그래프',
+    description: 'LLM Wiki 문서의 본문 링크와 관련 읽기를 연결 집단, 관계 중심, 중심-주변 배치와 다른 집단의 고유 이웃 수에 따른 높이로 탐색하는 3D 지식 그래프',
     current: '/graph/',
     body,
     pageClass: 'graph-page',

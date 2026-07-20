@@ -7546,6 +7546,24 @@ body.graph-page {
   background: rgb(232 224 192 / 82%);
 }
 
+.graph-page .graph-control--layout {
+  grid-column: span 1;
+  background: var(--cyan) !important;
+}
+
+.graph-page [data-graph-layout-description] {
+  min-height: 2.5em;
+  margin: 6px 0 0;
+  color: #414036;
+  font-family: var(--font-serif);
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.graph-page [data-layout-disabled] {
+  opacity: 0.45;
+}
+
 .graph-page .graph-range-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -7916,8 +7934,11 @@ body.graph-page {
   z-index: 28;
   top: 126px;
   right: 18px;
-  overflow-y: auto;
-  width: clamp(320px, 24vw, 410px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: clamp(660px, 56vw, 820px);
+  height: min(680px, calc(100% - 244px));
   max-height: calc(100% - 244px);
   padding: 0 18px 18px;
   border: 2px solid var(--ink);
@@ -7931,6 +7952,35 @@ body.graph-page {
   transform: translateX(20px) rotate(0.35deg);
   transition: opacity 130ms steps(3, end), transform 130ms steps(3, end), visibility 0s linear 130ms;
   visibility: hidden;
+}
+
+.graph-page .graph-inspector > [data-graph-inspector-content] {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.graph-page .graph-inspector-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 0.94fr) minmax(280px, 1.06fr);
+  height: 100%;
+  min-height: 0;
+}
+
+.graph-page :is(.graph-inspector-primary, .graph-inspector-relations) {
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.graph-page .graph-inspector-primary {
+  padding: 0 18px 18px 0;
+}
+
+.graph-page .graph-inspector-relations {
+  padding: 0 0 18px 18px;
+  border-left: 2px solid var(--ink);
 }
 
 .graph-page .has-selection .graph-inspector {
@@ -7952,6 +8002,7 @@ body.graph-page {
   position: sticky;
   z-index: 2;
   top: 0;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -7998,6 +8049,16 @@ body.graph-page {
   margin: 21px 0 8px;
   font-family: var(--font-mono);
   font-size: 11px;
+}
+
+.graph-page .graph-inspector .graph-direct-heading {
+  padding-top: 0;
+  border-top: 0;
+  margin: 0 0 9px;
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -0.035em;
 }
 
 .graph-page .graph-inspector-excerpt {
@@ -8081,15 +8142,67 @@ body.graph-page {
   border-top: 1px dotted var(--ink);
 }
 
-.graph-page .graph-relation-list a {
-  font-family: var(--font-serif);
-  font-size: 15px;
+.graph-page .graph-relation-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
-.graph-page .graph-relation-list span {
+.graph-page .graph-relation-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.graph-page .graph-relation-select {
+  display: grid;
+  min-width: 0;
+  padding: 10px 8px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+
+.graph-page .graph-relation-select:hover,
+.graph-page .graph-relation-select:focus-visible {
+  outline: 1.5px solid var(--ink);
+  background: var(--yellow);
+}
+
+.graph-page .graph-relation-select strong {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.graph-page .graph-relation-select span {
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: 9px;
+}
+
+.graph-page .graph-relation-list .graph-relation-document {
+  padding: 5px 6px;
+  border: 1px solid var(--ink);
+  background: var(--cyan);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.graph-page .graph-relation-empty {
+  padding: 12px;
+  border: 1px dashed var(--ink);
+  background: rgb(232 224 192 / 72%);
+  font-family: var(--font-serif);
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .graph-page .graph-route-hud {
@@ -8431,7 +8544,7 @@ body.graph-fallback-fullscreen {
 
   .graph-page .graph-inspector {
     right: 22px;
-    width: 410px;
+    width: 820px;
   }
 
   .graph-page .graph-minimap {
@@ -8474,7 +8587,7 @@ body.graph-fallback-fullscreen {
   }
 
   .graph-page .graph-inspector {
-    width: 340px;
+    width: min(720px, calc(100% - 300px));
   }
 
   .graph-page .graph-route-hud {
@@ -8516,7 +8629,12 @@ body.graph-fallback-fullscreen {
 
   .graph-page .graph-inspector {
     top: 214px;
+    width: min(640px, calc(100% - 300px));
     max-height: calc(100% - 334px);
+  }
+
+  .graph-page .graph-inspector-columns {
+    grid-template-columns: minmax(0, 0.92fr) minmax(220px, 1.08fr);
   }
 
   .graph-page .graph-filter-grid {

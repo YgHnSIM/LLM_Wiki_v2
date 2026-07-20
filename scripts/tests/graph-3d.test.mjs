@@ -6,7 +6,9 @@ import {
   cameraForWorldPoint,
   circularMinimapPoint,
   edgeDirectionForNode,
+  focusBurstLayout,
   hitTestProjected,
+  labelIsExposed,
   neighborhoodWithinDepth,
   normalizeCamera,
   projectPoint,
@@ -46,6 +48,61 @@ test('edge direction is expressed from the selected node perspective', () => {
   assert.equal(edgeDirectionForNode(edge, 'c'), '');
   assert.equal(edgeDirectionForNode({ source: 'a', target: 'a' }, 'a'), 'both');
   assert.equal(edgeDirectionForNode(null, 'a'), '');
+});
+
+test('selected-node labels expose only the focus neighborhood and active route', () => {
+  const focusState = {
+    selected: 'selected',
+    direct: new Set(['direct']),
+    routeNodeIds: new Set(['route']),
+    hovered: 'hovered',
+    travelCandidate: 'travel',
+    queryMatches: new Set(['query']),
+    bookmarks: new Set(['bookmark']),
+  };
+  for (const id of ['selected', 'direct', 'route']) assert.equal(labelIsExposed(id, focusState), true);
+  for (const id of ['hovered', 'travel', 'query', 'bookmark', 'ambient']) {
+    assert.equal(labelIsExposed(id, focusState), false);
+  }
+
+  const overviewState = { ...focusState, selected: '' };
+  for (const id of ['hovered', 'travel', 'query', 'bookmark', 'route']) {
+    assert.equal(labelIsExposed(id, overviewState), true);
+  }
+  assert.equal(labelIsExposed('ambient', overviewState), false);
+});
+
+test('focus burst layout expands neighbors into deterministic label-aware rings', () => {
+  const neighbors = Array.from({ length: 11 }, (_, index) => ({
+    id: `node-${String(index).padStart(2, '0')}`,
+    x: 40,
+    y: 0,
+    radius: 9,
+    labelSpan: 88,
+  }));
+  const options = {
+    minimumRadius: 100,
+    ringGap: 84,
+    maximumRadius: 300,
+    ringFill: 0.72,
+  };
+  const forward = focusBurstLayout({ x: 0, y: 0 }, neighbors, options);
+  const reversed = focusBurstLayout({ x: 0, y: 0 }, [...neighbors].reverse(), options);
+  const snapshot = (items) => items.map((item) => ({
+    id: item.id,
+    x: Number(item.x.toFixed(6)),
+    y: Number(item.y.toFixed(6)),
+    ring: item.ring,
+    radius: item.radius,
+  }));
+
+  assert.deepEqual(snapshot(reversed), snapshot(forward));
+  assert.equal(new Set(forward.map((item) => `${item.x.toFixed(5)}:${item.y.toFixed(5)}`)).size, neighbors.length);
+  assert.ok(new Set(forward.map((item) => item.ring)).size > 1);
+  for (const item of forward) {
+    near(Math.hypot(item.x, item.y), item.radius, 'focus ring radius');
+    assert.ok(item.radius >= options.minimumRadius && item.radius <= options.maximumRadius);
+  }
 });
 
 test('circular minimap projection preserves the center and maps the world boundary to one radius', () => {
