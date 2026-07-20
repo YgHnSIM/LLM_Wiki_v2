@@ -14,14 +14,14 @@ updated: '2026-07-18'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md'
-  - 'raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.commentary.ko.md'
+  - 'raw/047_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md'
+  - 'raw/047_Residual Connections Enabling Training of Very Deep Neural Networks.commentary.ko.md'
 evidence:
   - source_id: he-et-al-2016-resnet
     locator: '§1과 Figures 1·4·6의 더 깊은 plain network에서 증가한 training error'
     relation: supports
 related:
-  - source.048
+  - source.047
   - concept.잔차-연결
   - concept.resnet
   - concept.기울기-소실
@@ -44,12 +44,12 @@ vanishing/exploding gradient는 반복 Jacobian 곱 때문에 학습 신호가 �
 
 ## 출처
 
-- [[048_잔차 학습과 매우 깊은 신경망]]
+- [[047_잔차 학습과 매우 깊은 신경망]]
 - Kaiming He 외, [Deep Residual Learning for Image Recognition](https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html), 2016, §1과 Figures 1·4·6.
 
 ## 관련 항목
 
-- [[048_잔차 학습과 매우 깊은 신경망]]
+- [[047_잔차 학습과 매우 깊은 신경망]]
 - [[잔차 연결]]
 - [[ResNet]]
 - [[기울기 소실]]

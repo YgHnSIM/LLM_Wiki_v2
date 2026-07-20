@@ -28,6 +28,17 @@ export function sha256(content) {
   return createHash('sha256').update(content).digest('hex');
 }
 
+export function sourceUrlFromMarkdown(content) {
+  const match = String(content).match(/(?:^|\n)(?:Source|출처):\s*(https?:\/\/[^\s]+)/i);
+  if (!match) return '';
+  try {
+    const parsed = new URL(match[1]);
+    return parsed.protocol === 'https:' || parsed.protocol === 'http:' ? parsed.href : '';
+  } catch {
+    return '';
+  }
+}
+
 function countFrontmatterDelimiters(content) {
   return String(content).match(/^---\s*$/gm)?.length ?? 0;
 }
@@ -63,7 +74,8 @@ export function validateTranslationPair({ translation, commentary }) {
   return errors;
 }
 
-export function createArtifactRecords({ prefix, translationFilename, commentaryFilename, translationHash, commentaryHash }) {
+export function createArtifactRecords({ prefix, translationFilename, commentaryFilename, translationHash, commentaryHash, sourceUrl = '' }) {
+  const provenance = sourceUrl ? { source_url: sourceUrl } : {};
   return [
     {
       path: `raw/${translationFilename}`,
@@ -73,6 +85,7 @@ export function createArtifactRecords({ prefix, translationFilename, commentaryF
       source_type: 'derivative',
       provenance: 'external-original-used',
       original_in_repository: false,
+      ...provenance,
       sha256: translationHash,
     },
     {
@@ -83,6 +96,7 @@ export function createArtifactRecords({ prefix, translationFilename, commentaryF
       source_type: 'derivative',
       provenance: 'external-original-used',
       original_in_repository: false,
+      ...provenance,
       sha256: commentaryHash,
     },
   ];
@@ -97,6 +111,7 @@ export function formatArtifactRecords(records) {
     `    source_type: ${record.source_type}`,
     `    provenance: ${record.provenance}`,
     `    original_in_repository: ${record.original_in_repository}`,
+    ...(record.source_url ? [`    source_url: ${record.source_url}`] : []),
     `    sha256: ${record.sha256}`,
   ].join('\n')).join('\n');
 }
@@ -112,5 +127,6 @@ export function validateArtifactRecord(actual, expected) {
     'original_in_repository',
     'sha256',
   ];
+  if (expected?.source_url) keys.splice(keys.length - 1, 0, 'source_url');
   return keys.filter((key) => String(actual?.[key]) !== String(expected?.[key]));
 }

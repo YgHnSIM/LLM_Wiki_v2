@@ -1,10 +1,10 @@
 ---
 schema_version: 2
-id: source.059
+id: source.058
 page_type: source
 title: GPT-1과 GPT-2의 전이 방식 변화
 aliases:
-  - 059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning
+  - 058_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning
   - Improving Language Understanding by Generative Pre-Training
   - Language Models are Unsupervised Multitask Learners
 tags:
@@ -17,8 +17,8 @@ updated: '2026-07-20'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md'
-  - 'raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md'
+  - 'raw/058_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md'
+  - 'raw/058_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md'
 evidence:
   - source_id: gpt-2018
     locator: '초록과 §§1–3의 자기회귀 사전 학습·과제별 입력 변환·지도 미세조정, §§4–5와 Tables 2–7의 12개 과제·ablation·zero-shot 분석'
@@ -34,11 +34,11 @@ related:
   - concept.자기회귀-생성
   - concept.언어-모델-전이-학습
   - concept.bert
-  - source.058
+  - source.057
 ---
 # GPT-1과 GPT-2의 전이 방식 변화
 
-059 raw는 GPT-1과 GPT-2가 자기회귀 사전 학습과 전이 학습으로 현대 생성 LLM의 토대를 만들었다고 설명한다. 큰 방향은 맞지만 두 모델의 적응 방식, zero-shot 성능의 강도, 구조 세부, ‘창발’의 후대 용어와 단계적 공개의 결말을 한 서사로 합친다. 공개 문서는 [[GPT-1과 GPT-2]]를 **지도 미세조정에서 입력 조건화로 이동한 두 실험**으로 구분한다.
+058 raw는 GPT-1과 GPT-2가 자기회귀 사전 학습과 전이 학습으로 현대 생성 LLM의 토대를 만들었다고 설명한다. 큰 방향은 맞지만 두 모델의 적응 방식, zero-shot 성능의 강도, 구조 세부, ‘창발’의 후대 용어와 단계적 공개의 결말을 한 서사로 합친다. 공개 문서는 [[GPT-1과 GPT-2]]를 **지도 미세조정에서 입력 조건화로 이동한 두 실험**으로 구분한다.
 
 ## 공통 기반: causal Transformer
 
@@ -141,7 +141,7 @@ GPT-1과 BERT는 전체 fine-tuning 인터페이스를 공유하지만 사전 �
 - Alec Radford 외, [Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf), 2018.
 - Alec Radford 외, [Language Models are Unsupervised Multitask Learners](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf), 2019.
 - OpenAI, [Better Language Models and Their Implications](https://openai.com/index/better-language-models/), 2019 original post와 interim updates.
-- 프로젝트 보존 자료: `raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md`, `raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/058_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md`, `raw/058_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md`.
 
 ## 관련 항목
 
@@ -149,4 +149,4 @@ GPT-1과 BERT는 전체 fine-tuning 인터페이스를 공유하지만 사전 �
 - [[자기회귀 생성]]
 - [[언어 모델 전이 학습]]
 - [[BERT]]
-- [[058_BERT의 마스크드 양방향 사전 학습]]
+- [[057_BERT의 마스크드 양방향 사전 학습]]

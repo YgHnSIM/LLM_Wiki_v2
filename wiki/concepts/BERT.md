@@ -16,8 +16,8 @@ updated: '2026-07-20'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md'
-  - 'raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md'
+  - 'raw/057_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md'
+  - 'raw/057_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md'
 evidence:
   - source_id: bert-2019
     locator: '§§1–3의 encoder·MLM·NSP·fine-tuning, §4와 Tables 1–5의 GLUE·SQuAD·SWAG·ablation, Appendix A의 학습 절차'
@@ -26,7 +26,7 @@ evidence:
     locator: '§§1–4의 BERT 학습 조건 재평가와 NSP 제거·동적 masking·자료·batch·학습량 비교'
     relation: contextualizes
 related:
-  - source.058
+  - source.057
   - concept.마스크드-언어-모델링
   - concept.언어-모델-전이-학습
   - concept.transformer
@@ -84,13 +84,13 @@ BERT 원 ablation은 NSP가 일부 문장쌍·질의응답 결과에 도움을 �
 
 ## 출처
 
-- [[058_BERT의 마스크드 양방향 사전 학습]]
+- [[057_BERT의 마스크드 양방향 사전 학습]]
 - Jacob Devlin 외, [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://aclanthology.org/N19-1423/), NAACL 2019.
 - Yinhan Liu 외, [RoBERTa: A Robustly Optimized BERT Pretraining Approach](https://arxiv.org/abs/1907.11692), 2019.
 
 ## 관련 항목
 
-- [[058_BERT의 마스크드 양방향 사전 학습]]
+- [[057_BERT의 마스크드 양방향 사전 학습]]
 - [[마스크드 언어 모델링]]
 - [[언어 모델 전이 학습]]
 - [[Transformer]]

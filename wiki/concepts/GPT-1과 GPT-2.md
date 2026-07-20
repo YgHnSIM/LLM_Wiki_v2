@@ -18,8 +18,8 @@ updated: '2026-07-20'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md'
-  - 'raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md'
+  - 'raw/058_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md'
+  - 'raw/058_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md'
 evidence:
   - source_id: gpt-2018
     locator: '§§1–3의 117M causal Transformer·BookCorpus·두 단계 학습·input transformations와 §§4–5의 12개 과제 결과'
@@ -31,7 +31,7 @@ evidence:
     locator: '2019년 original post·interim updates의 117M·345M 공개와 zero-shot·release policy 설명'
     relation: contextualizes
 related:
-  - source.059
+  - source.058
   - concept.자기회귀-생성
   - concept.언어-모델-전이-학습
   - concept.bert
@@ -86,14 +86,14 @@ GPT-2 full 1.5B weights는 2019년 2월 즉시 공개되지 않았다. 117M→34
 
 ## 출처
 
-- [[059_GPT-1과 GPT-2의 전이 방식 변화]]
+- [[058_GPT-1과 GPT-2의 전이 방식 변화]]
 - Alec Radford 외, [Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf), 2018.
 - Alec Radford 외, [Language Models are Unsupervised Multitask Learners](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf), 2019.
 - OpenAI, [Better Language Models and Their Implications](https://openai.com/index/better-language-models/), 2019.
 
 ## 관련 항목
 
-- [[059_GPT-1과 GPT-2의 전이 방식 변화]]
+- [[058_GPT-1과 GPT-2의 전이 방식 변화]]
 - [[자기회귀 생성]]
 - [[언어 모델 전이 학습]]
 - [[BERT]]

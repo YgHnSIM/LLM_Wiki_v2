@@ -1,10 +1,10 @@
 ---
 schema_version: 2
-id: source.056
+id: source.055
 page_type: source
 title: RLHF 토대와 인간 선호 기반 보상 학습
 aliases:
-  - 056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning
+  - 055_RLHF Foundations Learning from Human Preferences in Reinforcement Learning
   - Deep Reinforcement Learning from Human Preferences
 tags:
   - type/source
@@ -16,8 +16,8 @@ updated: '2026-07-20'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md'
-  - 'raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.commentary.ko.md'
+  - 'raw/055_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md'
+  - 'raw/055_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.commentary.ko.md'
 evidence:
   - source_id: christiano-et-al-2017-human-preferences
     locator: '초록과 §§2–4의 trajectory segment 비교·reward ensemble·정책 반복 학습, §§5–6의 Atari·simulated robotics'
@@ -38,7 +38,7 @@ related:
 ---
 # RLHF 토대와 인간 선호 기반 보상 학습
 
-056 raw는 2017년 「Deep Reinforcement Learning from Human Preferences」를 현대 언어 모델 RLHF의 토대로 설명한다. 방향은 맞지만 원 제어·게임 실험과 2019–2022년 언어 모델 보상 학습·PPO 파이프라인, 현재 상용 모델의 비공개 훈련을 한 사건처럼 연결한다. 공개 문서는 실제 비교 단위·학습 순환·실험 범위와 후속 계보를 나누어 검증한다.
+055 raw는 2017년 「Deep Reinforcement Learning from Human Preferences」를 현대 언어 모델 RLHF의 토대로 설명한다. 방향은 맞지만 원 제어·게임 실험과 2019–2022년 언어 모델 보상 학습·PPO 파이프라인, 현재 상용 모델의 비공개 훈련을 한 사건처럼 연결한다. 공개 문서는 실제 비교 단위·학습 순환·실험 범위와 후속 계보를 나누어 검증한다.
 
 ## 손작성 보상 대신 비교 판단
 
@@ -93,7 +93,7 @@ related:
 - Daniel M. Ziegler 외, [Fine-Tuning Language Models from Human Preferences](https://arxiv.org/abs/1909.08593), 2019.
 - Nisan Stiennon 외, [Learning to Summarize from Human Feedback](https://proceedings.neurips.cc/paper/2020/hash/1f89885d556929e98d3ef9b86448f951-Abstract.html), NeurIPS 2020.
 - Long Ouyang 외, [Training Language Models to Follow Instructions with Human Feedback](https://arxiv.org/abs/2203.02155), 2022.
-- 프로젝트 보존 자료: `raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md`, `raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/055_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md`, `raw/055_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.commentary.ko.md`.
 
 ## 관련 항목
 

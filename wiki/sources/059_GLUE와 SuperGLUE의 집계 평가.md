@@ -1,10 +1,10 @@
 ---
 schema_version: 2
-id: source.060
+id: source.059
 page_type: source
 title: GLUE와 SuperGLUE의 집계 평가
 aliases:
-  - 060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding
+  - 059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding
   - SuperGLUE A Stickier Benchmark
 tags:
   - type/source
@@ -16,8 +16,8 @@ updated: '2026-07-20'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md'
-  - 'raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md'
+  - 'raw/059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md'
+  - 'raw/059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md'
 evidence:
   - source_id: wang-et-al-2018-glue
     locator: '초록과 pp. 353–355의 아홉 과제·자료량·domain·private test·diagnostic set·baseline 설계'
@@ -31,13 +31,13 @@ evidence:
 related:
   - concept.glue-superglue
   - concept.bert
-  - source.051
+  - source.050
   - analysis.평가-지표와-모델-유인
   - analysis.튜링-테스트와-llm-평가
 ---
 # GLUE와 SuperGLUE의 집계 평가
 
-060 raw는 GLUE와 SuperGLUE가 표준화된 종합 평가로 언어 AI 모델 비교를 바꿨다고 설명한다. 이 평가는 중요했지만 원문은 GLUE score의 가중 방식, multi-task model 요구, 인간 기준선의 출처, SuperGLUE의 출력 형식과 선행 benchmark 계보를 부정확하게 넓힌다. 공개 문서는 [[GLUE와 SuperGLUE]]가 실제로 표준화한 것과 한 숫자가 숨기는 것을 함께 검증한다.
+059 raw는 GLUE와 SuperGLUE가 표준화된 종합 평가로 언어 AI 모델 비교를 바꿨다고 설명한다. 이 평가는 중요했지만 원문은 GLUE score의 가중 방식, multi-task model 요구, 인간 기준선의 출처, SuperGLUE의 출력 형식과 선행 benchmark 계보를 부정확하게 넓힌다. 공개 문서는 [[GLUE와 SuperGLUE]]가 실제로 표준화한 것과 한 숫자가 숨기는 것을 함께 검증한다.
 
 ## GLUE가 묶은 것
 
@@ -142,12 +142,12 @@ GLUE가 SQuAD 평가 원칙을 만들었다거나 ImageNet·COCO가 GLUE 방식�
 - Alex Wang 외, [GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding](https://aclanthology.org/W18-5446/), BlackboxNLP 2018, pp. 353–355.
 - Nikita Nangia·Samuel R. Bowman, [Human vs. Muppet: A Conservative Estimate of Human Performance on the GLUE Benchmark](https://aclanthology.org/P19-1449/), ACL 2019.
 - Alex Wang 외, [SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems](https://proceedings.neurips.cc/paper/2019/hash/4496bf24afe7fab6f046bf4923da8de6-Abstract.html), NeurIPS 2019.
-- 프로젝트 보존 자료: `raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md`, `raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md`, `raw/059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md`.
 
 ## 관련 항목
 
 - [[GLUE와 SuperGLUE]]
 - [[BERT]]
-- [[051_SQuAD와 추출형 독해 평가]]
+- [[050_SQuAD와 추출형 독해 평가]]
 - [[자동 평가 지표는 무엇을 보상하는가]]
 - [[튜링 테스트와 LLM 평가]]

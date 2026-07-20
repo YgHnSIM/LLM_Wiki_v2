@@ -10,6 +10,7 @@ import {
   formatArtifactRecords,
   normalizeSourceSelection,
   sha256,
+  sourceUrlFromMarkdown,
   validateArtifactRecord,
   validateTranslationPair,
 } from './lib/source-workflow.mjs';
@@ -44,10 +45,13 @@ async function loadContext(selection) {
   const prefix = normalizeSourceSelection(selection);
   const sourceFilename = await readSourceInventory(prefix);
   const filenames = derivePairFilenames(sourceFilename);
+  const sourcePath = path.join(sourceDir, sourceFilename);
+  const sourceUrl = sourceUrlFromMarkdown(await fs.readFile(sourcePath, 'utf8'));
   return {
     prefix,
     sourceFilename,
-    sourcePath: path.join(sourceDir, sourceFilename),
+    sourcePath,
+    sourceUrl,
     translationFilename: filenames.translation,
     commentaryFilename: filenames.commentary,
     translationPath: path.join(translationDir, filenames.translation),
@@ -95,6 +99,7 @@ function expectedRecords(context, pair) {
     commentaryFilename: context.commentaryFilename,
     translationHash: sha256(pair.translation),
     commentaryHash: sha256(pair.commentary),
+    sourceUrl: context.sourceUrl,
   });
 }
 

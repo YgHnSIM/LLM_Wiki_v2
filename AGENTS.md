@@ -133,7 +133,7 @@ related:
 ### 3.2 raw 불변성과 정정
 
 1. `raw/`의 수집 artifact는 수정하거나 삭제하지 않는다. 운영 설명서인 `raw/README.md`만 스키마 변경 때 갱신할 수 있다.
-2. 각 raw Markdown은 `wiki/meta/raw-artifacts.yml`에 역할, 출처 상태, SHA-256 해시를 기록한다.
+2. 각 raw Markdown은 `wiki/meta/raw-artifacts.yml`에 역할, 출처 상태, 원문 `source_url`, SHA-256 해시를 기록한다.
 3. raw에 오류나 결손이 있으면 위키 본문에서 1차 자료로 교정하고, 필요하면 `검증 정정` 또는 `원문 상태` 절을 둔다.
 4. raw를 “사실의 source of truth”라고 부르지 않는다. raw는 수집 당시 상태를 보존한 artifact다.
 5. 원문·번역·해설을 서로 다른 `role`로 기록하고, 원문이 저장소에 없으면 명시한다.
@@ -185,7 +185,7 @@ related:
 1. `/lt NNN`으로 `C:\Vault\ObsidianVault\Assets\LLM_sources`의 단일 원문을 새로 번역하고 해설을 작성한다.
 2. 번역과 해설은 `C:\Vault\ObsidianVault\LLM_ko`에 동일 stem의 `.ko.md`, `.commentary.ko.md` 쌍으로 저장하고 스킬 검사를 통과해야 한다.
 3. `npm run source:status -- NNN`으로 입력·출력·raw·공개 페이지 상태를 확인한다.
-4. `npm run source:copy -- NNN`으로 검증된 쌍을 `raw/`에 복사하고 `raw-artifacts.yml`에 SHA-256을 등록한다.
+4. `npm run source:copy -- NNN`으로 검증된 쌍을 `raw/`에 복사하고 `raw-artifacts.yml`에 원문 `source_url`과 SHA-256을 등록한다.
 5. raw 복사 단계에서는 커밋·푸시하지 않는다. 기존 raw와 내용이 다르면 덮어쓰지 않고 중단한다.
 
 ### 6.2 공개 소스 처리

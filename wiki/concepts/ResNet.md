@@ -14,8 +14,8 @@ updated: '2026-07-18'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md'
-  - 'raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.commentary.ko.md'
+  - 'raw/047_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md'
+  - 'raw/047_Residual Connections Enabling Training of Very Deep Neural Networks.commentary.ko.md'
 evidence:
   - source_id: he-et-al-2016-resnet
     locator: '전체, 특히 Figures 2–6, Tables 2–6의 18–152층 ImageNet과 20–1202층 CIFAR 실험'
@@ -24,7 +24,7 @@ evidence:
     locator: '§§3–4의 pre-activation ResNet과 1001층 CIFAR·200층 ImageNet 평가'
     relation: supplements
 related:
-  - source.048
+  - source.047
   - concept.잔차-연결
   - concept.degradation-problem
   - concept.합성곱-신경망
@@ -47,13 +47,13 @@ related:
 
 ## 출처
 
-- [[048_잔차 학습과 매우 깊은 신경망]]
+- [[047_잔차 학습과 매우 깊은 신경망]]
 - Kaiming He 외, [Deep Residual Learning for Image Recognition](https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html), 2016.
 - Kaiming He 외, [Identity Mappings in Deep Residual Networks](https://arxiv.org/abs/1603.05027), 2016.
 
 ## 관련 항목
 
-- [[048_잔차 학습과 매우 깊은 신경망]]
+- [[047_잔차 학습과 매우 깊은 신경망]]
 - [[잔차 연결]]
 - [[Degradation problem]]
 - [[합성곱 신경망]]

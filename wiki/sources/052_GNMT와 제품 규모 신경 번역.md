@@ -1,10 +1,10 @@
 ---
 schema_version: 2
-id: source.053
+id: source.052
 page_type: source
 title: GNMT와 제품 규모 신경 번역
 aliases:
-  - 053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation
+  - 052_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation
   - Google Neural Machine Translation
   - GNMT
 tags:
@@ -17,8 +17,8 @@ updated: '2026-07-19'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md'
-  - 'raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.commentary.ko.md'
+  - 'raw/052_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md'
+  - 'raw/052_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.commentary.ko.md'
 evidence:
   - source_id: wu-et-al-2016-gnmt
     locator: '초록, §§2–5, Figures 1–2, Tables 1–4의 8층 LSTM·attention·residual·WordPiece·평가와 배포 설계'
@@ -34,7 +34,7 @@ related:
 ---
 # GNMT와 제품 규모 신경 번역
 
-053 raw는 2016년 Google Neural Machine Translation(GNMT)을 신경 번역의 제품 규모 전환으로 설명한다. 큰 방향은 맞지만, 단일한 “종단간 신경망”이라는 표현만으로는 8층 LSTM·어텐션·잔차 연결·WordPiece·탐색 보정·분산 실행을 결합한 실제 시스템이 보이지 않는다. 공개 문서는 초기 seq2seq와 GNMT의 차이, 논문 평가와 최초 제품 배포 범위를 나누어 검증한다.
+052 raw는 2016년 Google Neural Machine Translation(GNMT)을 신경 번역의 제품 규모 전환으로 설명한다. 큰 방향은 맞지만, 단일한 “종단간 신경망”이라는 표현만으로는 8층 LSTM·어텐션·잔차 연결·WordPiece·탐색 보정·분산 실행을 결합한 실제 시스템이 보이지 않는다. 공개 문서는 초기 seq2seq와 GNMT의 차이, 논문 평가와 최초 제품 배포 범위를 나누어 검증한다.
 
 ## 초기 seq2seq의 단순 확대가 아닌 통합 시스템
 
@@ -92,7 +92,7 @@ GNMT의 중요성은 “신경망 하나가 번역을 해결했다”는 데 있
 
 - Yonghui Wu 외, [Google's Neural Machine Translation System: Bridging the Gap between Human and Machine Translation](https://arxiv.org/abs/1609.08144), 2016, 특히 §§2–5, Figures 1–2와 Tables 1–4.
 - Quoc V. Le·Mike Schuster, [A Neural Network for Machine Translation, at Production Scale](https://research.google/blog/a-neural-network-for-machine-translation-at-production-scale/), Google Research, 2016-09-27.
-- 프로젝트 보존 자료: `raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md`, `raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/052_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md`, `raw/052_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.commentary.ko.md`.
 
 ## 관련 항목
 

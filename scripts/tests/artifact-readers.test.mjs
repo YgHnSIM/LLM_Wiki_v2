@@ -7,6 +7,7 @@ import {
   normalizeArtifactPath,
   resolveRawArtifactPath,
   sourceOriginForArtifact,
+  sourceUrlForArtifact,
 } from '../lib/artifact-readers.mjs';
 
 test('artifact reader roles preserve legacy distinctions', () => {
@@ -52,5 +53,13 @@ test('artifact source origin prefers the recorded source URL', () => {
   assert.equal(
     sourceOriginForArtifact('출처: https://example.org/writing/item\n\n본문'),
     'https://example.org',
+  );
+  assert.equal(
+    sourceOriginForArtifact('Source: https://example.net/writing/item\n\nBody'),
+    'https://example.net',
+  );
+  assert.equal(
+    sourceUrlForArtifact('출처: https://inline.example/item', 'https://recorded.example/article'),
+    'https://recorded.example/article',
   );
 });

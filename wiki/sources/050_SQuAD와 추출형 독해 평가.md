@@ -1,10 +1,10 @@
 ---
 schema_version: 2
-id: source.051
+id: source.050
 page_type: source
 title: SQuAD와 추출형 독해 평가
 aliases:
-  - 051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark
+  - 050_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark
   - SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark
 tags:
   - type/source
@@ -17,8 +17,8 @@ updated: '2026-07-19'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md'
-  - 'raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.commentary.ko.md'
+  - 'raw/050_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md'
+  - 'raw/050_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.commentary.ko.md'
 evidence:
   - source_id: rajpurkar-et-al-2016-squad
     locator: 'EMNLP 2016, pp. 2383–2392의 §§1–4 데이터 구축·분할·분석·로지스틱 기준선과 표 1–3'
@@ -34,7 +34,7 @@ related:
 ---
 # SQuAD와 추출형 독해 평가
 
-051 raw는 2016년 SQuAD를 독해의 대표 벤치마크로 소개하고, 지문 안 답 구간·완전 일치·F1·순위표를 중심으로 신경 질의응답과 현대 언어 모델까지 이어지는 영향사를 설명한다. 공개 문서는 **2016년 원 논문과 SQuAD 1.1 배포**, **2018년 SQuAD 2.0**, **제한된 [[추출형 질의응답]] 점수와 일반 언어 이해**를 구분한다.
+050 raw는 2016년 SQuAD를 독해의 대표 벤치마크로 소개하고, 지문 안 답 구간·완전 일치·F1·순위표를 중심으로 신경 질의응답과 현대 언어 모델까지 이어지는 영향사를 설명한다. 공개 문서는 **2016년 원 논문과 SQuAD 1.1 배포**, **2018년 SQuAD 2.0**, **제한된 [[추출형 질의응답]] 점수와 일반 언어 이해**를 구분한다.
 
 ## 2016년 원 논문의 저자와 데이터 규모
 
@@ -114,7 +114,7 @@ SQuAD는 지문·질문·답 구간이라는 데이터 형식, EM·F1, 공개 �
 - Pranav Rajpurkar·Jian Zhang·Konstantin Lopyrev·Percy Liang, [SQuAD: 100,000+ Questions for Machine Comprehension of Text](https://aclanthology.org/D16-1264/), EMNLP 2016, pp. 2383–2392.
 - Pranav Rajpurkar·Robin Jia·Percy Liang, [Know What You Don’t Know: Unanswerable Questions for SQuAD](https://aclanthology.org/P18-2124/), ACL 2018, pp. 784–789.
 - [SQuAD 공식 데이터·평가 사이트](https://rajpurkar.github.io/SQuAD-explorer/).
-- 프로젝트 보존 자료: `raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md`와 대응 해설.
+- 프로젝트 보존 자료: `raw/050_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md`와 대응 해설.
 
 ## 관련 항목
 

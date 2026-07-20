@@ -6,6 +6,7 @@ import {
   formatArtifactRecords,
   normalizeSourceSelection,
   sha256,
+  sourceUrlFromMarkdown,
   validateArtifactRecord,
   validateTranslationPair,
 } from '../lib/source-workflow.mjs';
@@ -47,12 +48,21 @@ test('artifact records use stable roles, paths, and hashes', () => {
     commentaryFilename: '010_Example.commentary.ko.md',
     translationHash,
     commentaryHash,
+    sourceUrl: 'https://example.com/writing/example',
   });
 
   assert.equal(records[0].role, 'translation');
   assert.equal(records[1].role, 'commentary');
   assert.equal(records[0].path, 'raw/010_Example.ko.md');
   assert.match(formatArtifactRecords(records), /order_prefix: "010"/);
+  assert.equal(records[0].source_url, 'https://example.com/writing/example');
+  assert.match(formatArtifactRecords(records), /source_url: https:\/\/example\.com\/writing\/example/);
   assert.deepEqual(validateArtifactRecord(records[0], { ...records[0] }), []);
   assert.deepEqual(validateArtifactRecord({ ...records[0], sha256: 'wrong' }, records[0]), ['sha256']);
+});
+
+test('source URLs are extracted from English and Korean source markers', () => {
+  assert.equal(sourceUrlFromMarkdown('Source: https://example.com/a\n'), 'https://example.com/a');
+  assert.equal(sourceUrlFromMarkdown('출처: https://example.com/b\n'), 'https://example.com/b');
+  assert.equal(sourceUrlFromMarkdown('# no source'), '');
 });

@@ -14,8 +14,8 @@ updated: '2026-07-18'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md'
-  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md'
+  - 'raw/049_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md'
+  - 'raw/049_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md'
 evidence:
   - source_id: gage-1994-byte-pair-encoding
     locator: '초록과 §1의 빈번한 인접 byte pair를 미사용 byte로 치환하는 압축 알고리즘'
@@ -24,7 +24,7 @@ evidence:
     locator: '§3.2와 Algorithm 1의 문자·문자열 pair merge, word boundary와 merge-count vocabulary'
     relation: supports
 related:
-  - source.050
+  - source.049
 ---
 # Byte Pair Encoding
 
@@ -48,10 +48,10 @@ related:
 
 ## 출처
 
-- [[050_FastText와 서브워드 표현의 두 경로]]
+- [[049_FastText와 서브워드 표현의 두 경로]]
 - Philip Gage, [A New Algorithm for Data Compression](https://www.derczynski.com/papers/archive/BPE_Gage.pdf), The C Users Journal 12(2), 1994, pp. 23–38.
 - Rico Sennrich·Barry Haddow·Alexandra Birch, [Neural Machine Translation of Rare Words with Subword Units](https://aclanthology.org/P16-1162/), ACL 2016, §3.2.
 
 ## 관련 항목
 
-- [[050_FastText와 서브워드 표현의 두 경로]]
+- [[049_FastText와 서브워드 표현의 두 경로]]

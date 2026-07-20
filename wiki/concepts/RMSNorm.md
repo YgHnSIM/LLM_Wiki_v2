@@ -15,8 +15,8 @@ updated: '2026-07-18'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md'
-  - 'raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md'
+  - 'raw/048_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md'
+  - 'raw/048_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md'
 evidence:
   - source_id: zhang-sennrich-2019-rmsnorm
     locator: '초록과 §§3–5의 re-centering 제거, RMS 식, pRMSNorm과 속도·성능 평가'
@@ -25,7 +25,7 @@ evidence:
     locator: '§§2–3의 mean·variance LayerNorm 정의'
     relation: contextualizes
 related:
-  - source.049
+  - source.048
   - concept.layer-normalization
 ---
 # RMSNorm
@@ -47,11 +47,11 @@ Zhang·Sennrich는 re-centering invariance가 필수적이지 않고 re-scaling 
 
 ## 출처
 
-- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]
+- [[048_층 정규화와 시퀀스 모델의 배치 독립성]]
 - Biao Zhang·Rico Sennrich, [Root Mean Square Layer Normalization](https://proceedings.neurips.cc/paper/2019/hash/1e8a19426224ca89e83cef47f1e7f53b-Abstract.html), 2019.
 - Jimmy Lei Ba·Jamie Ryan Kiros·Geoffrey E. Hinton, [Layer Normalization](https://arxiv.org/abs/1607.06450), 2016.
 
 ## 관련 항목
 
-- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]
+- [[048_층 정규화와 시퀀스 모델의 배치 독립성]]
 - [[Layer Normalization]]

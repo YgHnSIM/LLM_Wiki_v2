@@ -10,6 +10,7 @@ import {
   normalizeArtifactPath,
   resolveRawArtifactPath,
   sourceOriginForArtifact,
+  sourceUrlForArtifact,
 } from './lib/artifact-readers.mjs';
 import { buildDirectoryAtomically } from './lib/atomic-directory.mjs';
 import { escapeHtml, firstParagraph, protectRenderedMath, readingMinutes, stripMarkdown, truncate } from './lib/content-format.mjs';
@@ -285,8 +286,9 @@ for (const document of grouped.sources) {
     const absolutePath = resolveRawArtifactPath({ rootDir, rawDir, artifactPath });
     const rawMarkdown = await fs.readFile(absolutePath, 'utf8');
     const parsed = matter(rawMarkdown);
+    const sourceUrl = sourceUrlForArtifact(parsed.content, record.source_url);
     const body = normalizeArtifactMarkdown(parsed.content, {
-      sourceOrigin: sourceOriginForArtifact(parsed.content),
+      sourceOrigin: sourceOriginForArtifact(parsed.content, 'https://mbrenndoerfer.com', sourceUrl),
     });
     const reader = {
       id: `${document.id}.${role.routeRole}`,
@@ -299,6 +301,7 @@ for (const document of grouped.sources) {
       sourceNumber: document.sourceNumber,
       artifactPath,
       registryRole: String(record.role),
+      sourceUrl,
       routeRole: role.routeRole,
       label: role.label,
       description: role.description,
@@ -1055,6 +1058,7 @@ function renderArtifactReader(reader) {
         <div class="source-note article-source-note artifact-source-note">
           <span>보존 파일</span>
           <code>${escapeHtml(reader.artifactPath)}</code>
+          ${reader.sourceUrl ? externalLink(reader.sourceUrl, '원문 출처') : ''}
           ${externalLink(githubArtifactUrl(reader), 'GitHub에서 보기')}
         </div>
       </div>

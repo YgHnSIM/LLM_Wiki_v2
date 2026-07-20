@@ -7,7 +7,7 @@
 ```text
 /lt 010
   → 번역·해설 쌍 검증
-  → source:copy (raw + SHA-256, Git 작업 없음)
+  → source:copy (raw + 원문 source_url + SHA-256, Git 작업 없음)
   → 1차 자료 검증과 공개 위키 작성
   → source:ready (전체 검사, Git 작업 없음)
   → 변경 범위 검토
@@ -63,7 +63,7 @@ npm run source:copy -- 010
 
 1. 번역·해설 파일의 존재, UTF-8 텍스트, H1, frontmatter, 코드 펜스, mojibake, 해설 placeholder를 검사한다.
 2. 두 파일을 같은 이름으로 `raw/`에 복사한다.
-3. SHA-256을 계산해 `wiki/meta/raw-artifacts.yml`에 `translation`, `commentary` 역할로 등록한다.
+3. 원문 Markdown의 `Source:` 또는 `출처:` URL과 SHA-256을 `wiki/meta/raw-artifacts.yml`에 `translation`, `commentary` 역할로 등록한다.
 4. 복사본과 레지스트리를 다시 읽어 해시를 확인한다.
 
 이 명령은 Git을 호출하지 않는다. 파일이 이미 있고 바이트가 같으면 반복 실행해도 변경하지 않는다. 기존 raw와 내용이 다르면 불변 규칙에 따라 덮어쓰지 않고 실패한다.
@@ -110,7 +110,7 @@ npm run source:ready -- 010
 `source:ready`는 다음 조건을 요구한다.
 
 - 번역·해설과 raw 복사본의 바이트가 일치함
-- 두 raw artifact의 레지스트리 필드와 SHA-256이 일치함
+- 두 raw artifact의 원문 `source_url`, 나머지 레지스트리 필드와 SHA-256이 일치함
 - `source.010` 공개 페이지가 존재함
 - 현재 브랜치가 `main`임
 - `npm run verify` 전체 통과

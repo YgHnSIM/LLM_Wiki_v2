@@ -1,10 +1,10 @@
 ---
 schema_version: 2
-id: source.055
+id: source.054
 page_type: source
 title: Transformer와 자기어텐션 기반 시퀀스 모델링
 aliases:
-  - 055_The Transformer Attention Is All You Need
+  - 054_The Transformer Attention Is All You Need
   - The Transformer Attention Is All You Need
   - Attention Is All You Need
 tags:
@@ -17,8 +17,8 @@ updated: '2026-07-19'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/055_The Transformer Attention Is All You Need.ko.md'
-  - 'raw/055_The Transformer Attention Is All You Need.commentary.ko.md'
+  - 'raw/054_The Transformer Attention Is All You Need.ko.md'
+  - 'raw/054_The Transformer Attention Is All You Need.commentary.ko.md'
 evidence:
   - source_id: vaswani-et-al-2017-attention
     locator: 'pp. 5998–6008, 특히 §§3–5, Figure 1과 Tables 1–3의 구조·복잡도·번역 성능·훈련 비용'
@@ -39,11 +39,11 @@ related:
   - concept.transformer
   - concept.신경망-기계-번역
   - concept.자기회귀-생성
-  - source.054
+  - source.053
 ---
 # Transformer와 자기어텐션 기반 시퀀스 모델링
 
-055 raw는 2017년 [[Transformer]]의 self-attention·multi-head·위치 인코딩을 설명하고 현대 LLM까지의 영향을 서술한다. 구조 입문은 유용하지만 원 번역 실험, 2018년 이후 사전학습, 2020년대 대규모 시스템의 성과를 하나의 직접 결과처럼 합친다. 공개 문서는 원 논문이 실제로 비교한 복잡도·BLEU·훈련 비용과 후속 계보를 나누어 검증한다.
+054 raw는 2017년 [[Transformer]]의 self-attention·multi-head·위치 인코딩을 설명하고 현대 LLM까지의 영향을 서술한다. 구조 입문은 유용하지만 원 번역 실험, 2018년 이후 사전학습, 2020년대 대규모 시스템의 성과를 하나의 직접 결과처럼 합친다. 공개 문서는 원 논문이 실제로 비교한 복잡도·BLEU·훈련 비용과 후속 계보를 나누어 검증한다.
 
 ## 순환을 없앤다는 뜻
 
@@ -94,7 +94,7 @@ RNN의 hidden vector 자체가 시퀀스 길이에 따라 커지는 것도 아�
 
 정답 목표열이 있는 훈련에서는 decoder 입력 전체를 한 칸 이동해 주고 causal mask 아래 모든 위치의 손실을 병렬 계산할 수 있다. 하지만 추론에서는 다음 token을 생성해야 그 token을 조건으로 다음 위치를 계산할 수 있다. 표준 decoder의 [[자기회귀 생성]]은 순차적이다.
 
-이 구분은 [[054_WaveNet과 표본 단위 신경 오디오 생성|WaveNet]]과도 공통된다. WaveNet의 인과 합성곱과 Transformer의 masked self-attention은 구조가 다르지만, 정답 이력이 있는 훈련은 병렬화하고 자기 표본을 되먹이는 생성은 순차적으로 수행한다. Transformer가 ‘시퀀스를 병렬 처리한다’는 문장을 생성 단계 전체에 적용하지 않는다.
+이 구분은 [[053_WaveNet과 표본 단위 신경 오디오 생성|WaveNet]]과도 공통된다. WaveNet의 인과 합성곱과 Transformer의 masked self-attention은 구조가 다르지만, 정답 이력이 있는 훈련은 병렬화하고 자기 표본을 되먹이는 생성은 순차적으로 수행한다. Transformer가 ‘시퀀스를 병렬 처리한다’는 문장을 생성 단계 전체에 적용하지 않는다.
 
 ## attention은 해석 가능한가
 
@@ -134,11 +134,11 @@ Wiegreffe·Pinter는 설명의 정의와 모델 전체 맥락을 고려해야 �
 - Jacob Devlin 외, [BERT](https://aclanthology.org/N19-1423/), NAACL 2019, §3.1과 Figure 1.
 - Sarthak Jain·Byron C. Wallace, [Attention is not Explanation](https://aclanthology.org/N19-1357/), NAACL 2019, pp. 3543–3556.
 - Sarah Wiegreffe·Yuval Pinter, [Attention is not not Explanation](https://aclanthology.org/D19-1002/), EMNLP-IJCNLP 2019, pp. 11–20.
-- 프로젝트 보존 자료: `raw/055_The Transformer Attention Is All You Need.ko.md`, `raw/055_The Transformer Attention Is All You Need.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/054_The Transformer Attention Is All You Need.ko.md`, `raw/054_The Transformer Attention Is All You Need.commentary.ko.md`.
 
 ## 관련 항목
 
 - [[Transformer]]
 - [[신경망 기계 번역]]
 - [[자기회귀 생성]]
-- [[054_WaveNet과 표본 단위 신경 오디오 생성]]
+- [[053_WaveNet과 표본 단위 신경 오디오 생성]]

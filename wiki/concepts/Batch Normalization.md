@@ -14,8 +14,8 @@ updated: '2026-07-18'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md'
-  - 'raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md'
+  - 'raw/048_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md'
+  - 'raw/048_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md'
 evidence:
   - source_id: ioffe-szegedy-2015-batch-normalization
     locator: '초록과 §§2–3의 mini-batch mean·variance, learned scale/shift와 train/inference 차이'
@@ -24,7 +24,7 @@ evidence:
     locator: '초록과 §§1–3·6의 internal covariate shift 반례와 loss/gradient smoothness'
     relation: contextualizes
 related:
-  - source.049
+  - source.048
   - concept.layer-normalization
 ---
 # Batch Normalization
@@ -43,11 +43,11 @@ BatchNorm은 batch noise가 regularization처럼 작동할 수 있고 CNN에서 
 
 ## 출처
 
-- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]
+- [[048_층 정규화와 시퀀스 모델의 배치 독립성]]
 - Sergey Ioffe·Christian Szegedy, [Batch Normalization](https://proceedings.mlr.press/v37/ioffe15.html), 2015.
 - Shibani Santurkar 외, [How Does Batch Normalization Help Optimization?](https://proceedings.neurips.cc/paper/2018/hash/905056c1ac1dad141560467e0a99e1cf-Abstract.html), 2018.
 
 ## 관련 항목
 
-- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]
+- [[048_층 정규화와 시퀀스 모델의 배치 독립성]]
 - [[Layer Normalization]]

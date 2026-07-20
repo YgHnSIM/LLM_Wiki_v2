@@ -1,10 +1,10 @@
 ---
 schema_version: 2
-id: source.058
+id: source.057
 page_type: source
 title: BERT의 마스크드 양방향 사전 학습
 aliases:
-  - 058_BERT Bidirectional Pretraining Revolutionizes Language Understanding
+  - 057_BERT Bidirectional Pretraining Revolutionizes Language Understanding
   - BERT Pre-training of Deep Bidirectional Transformers
 tags:
   - type/source
@@ -16,8 +16,8 @@ updated: '2026-07-20'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md'
-  - 'raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md'
+  - 'raw/057_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md'
+  - 'raw/057_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md'
 evidence:
   - source_id: bert-2019
     locator: '초록과 §§1–3의 feature/fine-tuning 대비·MLM·NSP·입력 표현, §4와 Tables 1–5의 열한 과제·ablation, Appendix A의 15%·80/10/10 masking'
@@ -30,11 +30,11 @@ related:
   - concept.마스크드-언어-모델링
   - concept.언어-모델-전이-학습
   - concept.transformer
-  - source.057
+  - source.056
 ---
 # BERT의 마스크드 양방향 사전 학습
 
-058 raw는 BERT가 양방향 사전 학습으로 언어 이해를 혁명적으로 바꿨다고 설명한다. 핵심 방향은 맞지만 ‘양방향’을 사람과 같은 이해로 넓히고, ELMo·GPT와의 구조 차이, MLM의 실제 예측 단위, NSP 후속 평가, 원 논문의 벤치마크 범위와 현대 생성 모델 계보를 압축한다. 공개 문서는 [[BERT]]의 구조·목적함수·전이 인터페이스를 1차 논문 범위에서 복원한다.
+057 raw는 BERT가 양방향 사전 학습으로 언어 이해를 혁명적으로 바꿨다고 설명한다. 핵심 방향은 맞지만 ‘양방향’을 사람과 같은 이해로 넓히고, ELMo·GPT와의 구조 차이, MLM의 실제 예측 단위, NSP 후속 평가, 원 논문의 벤치마크 범위와 현대 생성 모델 계보를 압축한다. 공개 문서는 [[BERT]]의 구조·목적함수·전이 인터페이스를 1차 논문 범위에서 복원한다.
 
 ## feature 기반과 fine-tuning 기반 사이
 
@@ -108,7 +108,7 @@ BERT의 encoder는 입력 전체가 주어졌을 때 각 위치 표현을 계산
 
 - Jacob Devlin 외, [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://aclanthology.org/N19-1423/), NAACL 2019, pp. 4171–4186.
 - Yinhan Liu 외, [RoBERTa: A Robustly Optimized BERT Pretraining Approach](https://arxiv.org/abs/1907.11692), 2019.
-- 프로젝트 보존 자료: `raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md`, `raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/057_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md`, `raw/057_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md`.
 
 ## 관련 항목
 
@@ -116,4 +116,4 @@ BERT의 encoder는 입력 전체가 주어졌을 때 각 위치 표현을 계산
 - [[마스크드 언어 모델링]]
 - [[언어 모델 전이 학습]]
 - [[Transformer]]
-- [[057_ELMo와 ULMFiT의 두 전이 학습 경로]]
+- [[056_ELMo와 ULMFiT의 두 전이 학습 경로]]

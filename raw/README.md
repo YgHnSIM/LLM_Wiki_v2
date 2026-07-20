@@ -6,7 +6,7 @@
 
 1. 웹 아티클, 논문, 보고서, 번역, 해설을 역할이 드러나는 파일명으로 저장
 2. 이미지·PDF 등 첨부파일은 `assets/` 하위 폴더에 저장
-3. `wiki/meta/raw-artifacts.yml`에 역할, 출처 상태와 SHA-256 해시 등록
+3. `wiki/meta/raw-artifacts.yml`에 역할, 출처 상태, 원문 `source_url`과 SHA-256 해시 등록
 4. 외부 문헌은 `wiki/meta/evidence.yml`에 별도 등록
 5. LLM에게 "새 소스 처리해줘" 또는 파일명을 지정하여 처리 요청
 

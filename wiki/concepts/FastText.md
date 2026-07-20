@@ -14,8 +14,8 @@ updated: '2026-07-18'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md'
-  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md'
+  - 'raw/049_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md'
+  - 'raw/049_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md'
 evidence:
   - source_id: mikolov-et-al-2013-negative-sampling
     locator: '§§2–3의 Skip-gram with negative sampling 목적'
@@ -24,7 +24,7 @@ evidence:
     locator: '§§3.1–3.2의 character n-gram 합·경계 기호·hash, §§4–6의 9개 언어 평가'
     relation: supports
 related:
-  - source.050
+  - source.049
 ---
 # FastText
 
@@ -57,10 +57,10 @@ $$
 
 ## 출처
 
-- [[050_FastText와 서브워드 표현의 두 경로]]
+- [[049_FastText와 서브워드 표현의 두 경로]]
 - Piotr Bojanowski·Edouard Grave·Armand Joulin·Tomas Mikolov, [Enriching Word Vectors with Subword Information](https://aclanthology.org/Q17-1010/), TACL 5, 2017, pp. 135–146.
 - Tomas Mikolov 외, [Distributed Representations of Words and Phrases and their Compositionality](https://proceedings.neurips.cc/paper_files/paper/2013/hash/9aa42b31882ec039965f3c4923ce901b-Abstract.html), NeurIPS 2013.
 
 ## 관련 항목
 
-- [[050_FastText와 서브워드 표현의 두 경로]]
+- [[049_FastText와 서브워드 표현의 두 경로]]

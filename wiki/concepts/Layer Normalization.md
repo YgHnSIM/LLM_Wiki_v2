@@ -15,8 +15,8 @@ updated: '2026-07-18'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md'
-  - 'raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md'
+  - 'raw/048_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md'
+  - 'raw/048_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md'
 evidence:
   - source_id: ba-kiros-hinton-2016-layer-normalization
     locator: '초록과 §§2–3의 layer mean·variance·gain/bias와 recurrent formulation, §§4–5의 실험'
@@ -28,7 +28,7 @@ evidence:
     locator: '초록과 §§2–4의 Post-LN·Pre-LN 정의와 초기 gradient 분석'
     relation: supplements
 related:
-  - source.049
+  - source.048
   - concept.batch-normalization
   - concept.rmsnorm
   - concept.잔차-연결
@@ -58,14 +58,14 @@ LayerNorm은 batch size·구성에 독립적이지만 정규화 축 안의 featu
 
 ## 출처
 
-- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]
+- [[048_층 정규화와 시퀀스 모델의 배치 독립성]]
 - Jimmy Lei Ba·Jamie Ryan Kiros·Geoffrey E. Hinton, [Layer Normalization](https://arxiv.org/abs/1607.06450), 2016.
 - Ashish Vaswani 외, [Attention Is All You Need](https://proceedings.neurips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html), 2017.
 - Ruibin Xiong 외, [On Layer Normalization in the Transformer Architecture](https://arxiv.org/abs/2002.04745), 2020.
 
 ## 관련 항목
 
-- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]
+- [[048_층 정규화와 시퀀스 모델의 배치 독립성]]
 - [[Batch Normalization]]
 - [[RMSNorm]]
 - [[잔차 연결]]

@@ -50,10 +50,26 @@ export function resolveRawArtifactPath({ rootDir, rawDir, artifactPath }) {
   return absolutePath;
 }
 
-export function sourceOriginForArtifact(markdown, fallback = 'https://mbrenndoerfer.com') {
-  const sourceUrl = String(markdown).match(/(?:^|\n)출처:\s*(https?:\/\/[^\s]+)/)?.[1];
+export function sourceUrlForArtifact(markdown, recordedSourceUrl = '') {
+  const candidates = [
+    String(recordedSourceUrl).trim(),
+    String(markdown).match(/(?:^|\n)(?:출처|Source):\s*(https?:\/\/[^\s]+)/i)?.[1] ?? '',
+  ];
+  for (const candidate of candidates) {
+    try {
+      const parsed = new URL(candidate);
+      if (parsed.protocol === 'https:' || parsed.protocol === 'http:') return parsed.href;
+    } catch {
+      // Try the next provenance source.
+    }
+  }
+  return '';
+}
+
+export function sourceOriginForArtifact(markdown, fallback = 'https://mbrenndoerfer.com', recordedSourceUrl = '') {
+  const sourceUrl = sourceUrlForArtifact(markdown, recordedSourceUrl);
   try {
-    return new URL(sourceUrl ?? fallback).origin;
+    return new URL(sourceUrl || fallback).origin;
   } catch {
     return fallback;
   }

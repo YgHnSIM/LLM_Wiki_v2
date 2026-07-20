@@ -18,8 +18,8 @@ updated: '2026-07-20'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md'
-  - 'raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md'
+  - 'raw/059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md'
+  - 'raw/059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md'
 evidence:
   - source_id: wang-et-al-2018-glue
     locator: 'pp. 353–355와 Table 1의 아홉 task·metric·domain·자료량·private test와 diagnostic platform'
@@ -31,9 +31,9 @@ evidence:
     locator: '§§1–3과 Tables 1–3의 여덟 task·metric·human baseline·toolkit·leaderboard rule'
     relation: supports
 related:
-  - source.060
+  - source.059
   - concept.bert
-  - source.051
+  - source.050
   - analysis.평가-지표와-모델-유인
   - analysis.튜링-테스트와-llm-평가
 ---
@@ -93,15 +93,15 @@ SuperGLUE는 GLUE 포화에 대한 직접 대응이었다. 후대 BIG-bench·MML
 
 ## 출처
 
-- [[060_GLUE와 SuperGLUE의 집계 평가]]
+- [[059_GLUE와 SuperGLUE의 집계 평가]]
 - Alex Wang 외, [GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding](https://aclanthology.org/W18-5446/), BlackboxNLP 2018.
 - Nikita Nangia·Samuel R. Bowman, [Human vs. Muppet](https://aclanthology.org/P19-1449/), ACL 2019.
 - Alex Wang 외, [SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems](https://proceedings.neurips.cc/paper/2019/hash/4496bf24afe7fab6f046bf4923da8de6-Abstract.html), NeurIPS 2019.
 
 ## 관련 항목
 
-- [[060_GLUE와 SuperGLUE의 집계 평가]]
+- [[059_GLUE와 SuperGLUE의 집계 평가]]
 - [[BERT]]
-- [[051_SQuAD와 추출형 독해 평가]]
+- [[050_SQuAD와 추출형 독해 평가]]
 - [[자동 평가 지표는 무엇을 보상하는가]]
 - [[튜링 테스트와 LLM 평가]]

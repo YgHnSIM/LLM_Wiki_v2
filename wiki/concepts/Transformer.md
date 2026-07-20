@@ -17,8 +17,8 @@ updated: '2026-07-19'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/055_The Transformer Attention Is All You Need.ko.md'
-  - 'raw/055_The Transformer Attention Is All You Need.commentary.ko.md'
+  - 'raw/054_The Transformer Attention Is All You Need.ko.md'
+  - 'raw/054_The Transformer Attention Is All You Need.commentary.ko.md'
 evidence:
   - source_id: vaswani-et-al-2017-attention
     locator: 'pp. 5998–6008, 특히 §§3–5, Figure 1, Tables 1–3의 encoder–decoder·attention·위치 인코딩·복잡도·번역 평가'
@@ -36,7 +36,7 @@ evidence:
     locator: 'EMNLP-IJCNLP 2019, pp. 11–20의 설명 정의 비판과 네 가지 진단·검증 제안'
     relation: contextualizes
 related:
-  - source.055
+  - source.054
   - concept.신경망-기계-번역
   - concept.자기회귀-생성
   - concept.잔차-연결
@@ -111,7 +111,7 @@ Wiegreffe·Pinter는 ‘설명’의 정의와 모델 전체를 고려해야 한
 
 ## 출처
 
-- [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]]
+- [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]]
 - Ashish Vaswani 외, [Attention Is All You Need](https://proceedings.neurips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html), NeurIPS 2017, pp. 5998–6008.
 - Alec Radford 외, [Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf), 2018, §2.
 - Jacob Devlin 외, [BERT](https://aclanthology.org/N19-1423/), NAACL 2019, §3.1.
@@ -120,7 +120,7 @@ Wiegreffe·Pinter는 ‘설명’의 정의와 모델 전체를 고려해야 한
 
 ## 관련 항목
 
-- [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]]
+- [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]]
 - [[신경망 기계 번역]]
 - [[자기회귀 생성]]
 - [[잔차 연결]]

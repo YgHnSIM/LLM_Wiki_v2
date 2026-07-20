@@ -1,4 +1,4 @@
-﻿---
+---
 schema_version: 2
 id: meta.overview
 page_type: meta
@@ -70,15 +70,15 @@ related:
 - [[044_GloVe와 Adam의 서로 다른 2014년 전환]]은 [[GloVe]]의 국소 창·전역 희소 계수·가중 log-bilinear 회귀와 [[Adam 최적화기]]의 모멘트·편향 보정·후속 수렴 및 AdamW를 독립 연구로 검증한다.
 - [[045_Sequence-to-Sequence 학습과 신경 기계 번역]]은 [[Sequence-to-Sequence 학습]]의 조건부 생성 인터페이스와 [[인코더-디코더]]·[[자기회귀 생성]]을 복원하고, Sutskever·Cho 시스템의 역할 차이와 어텐션·GNMT·현대 LLM 계보의 범위를 검증한다.
 - [[046_메모리 네트워크와 외부 지식 접근]]은 [[메모리 네트워크]]의 I·G·O·R와 hard supporting-fact 선택·강한 감독을 복원하고, [[외부 메모리]]·[[다중 홉 검색]]에서 End-To-End MemNN·bAbI·RAG로 이어지는 단계의 범위를 검증한다.
-- [[048_잔차 학습과 매우 깊은 신경망]]은 [[ResNet]]의 [[Degradation problem]]과 (F(x)+x) [[잔차 연결]]을 복원하고, 기울기 소실·Highway Network·pre-activation·Transformer residual stream을 구분한다.
-- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]은 [[Batch Normalization]]과 [[Layer Normalization]]의 통계 공유 축·훈련/추론 상태를 복원하고, token별 hidden 정규화·Post/Pre-LN·[[RMSNorm]]의 범위를 검증한다.
-- [[050_FastText와 서브워드 표현의 두 경로]]는 [[FastText]]의 문자 n-gram 합·hash·정적 OOV 근사와 [[Byte Pair Encoding|BPE]]의 sequence 분절을 구분하고, [[서브워드 토큰화]]·SentencePiece·현대 Transformer 연결의 범위를 검증한다.
-- [[051_SQuAD와 추출형 독해 평가]]는 536개 위키백과 문서·107,785개 질문, 답 구간·EM·토큰 F1을 복원하고, [[추출형 질의응답]]과 검색·생성·일반 언어 이해의 경계 및 SQuAD 2.0의 답 없음 판단을 검증한다.
-- [[052_신경 정보 검색과 의미 대응]]은 2013년 DSSM·2014년 C-DSSM·2016년 DRMM을 구분하고, [[신경 정보 검색]]의 표현 중심·상호작용 중심 구조와 희소 exact signal·재순위화·DPR·RAG 연결 범위를 검증한다.
-- [[053_GNMT와 제품 규모 신경 번역]]은 8층 LSTM·어텐션·잔차 연결·WordPiece·탐색 보정을 하나의 제품 시스템으로 복원하고, 평균 약 60% 오류 감소의 평가 조건과 중국어→영어 최초 배포 범위를 구분한다.
-- [[054_WaveNet과 표본 단위 신경 오디오 생성]]은 μ-law 양자화 표본의 자기회귀 분포와 팽창 인과 합성곱을 복원하고, 훈련 병렬성·생성 순차성·MOS 격차·2017년 후속 제품 배포를 구분한다.
-- [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]]은 6층 encoder–decoder·scaled multi-head attention·위치 인코딩·Post-LN을 복원하고, 훈련 병렬성·길이 제곱 비용·자기회귀 생성·후대 LLM 계보를 분리한다.
-- [[056_RLHF 토대와 인간 선호 기반 보상 학습]]은 2017년 행동 구간 비교·보상 ensemble·반복 정책 학습을 복원하고, 원 제어·게임 실험과 2019–2022년 언어 모델 RLHF를 구분한다.
+- [[047_잔차 학습과 매우 깊은 신경망]]은 [[ResNet]]의 [[Degradation problem]]과 (F(x)+x) [[잔차 연결]]을 복원하고, 기울기 소실·Highway Network·pre-activation·Transformer residual stream을 구분한다.
+- [[048_층 정규화와 시퀀스 모델의 배치 독립성]]은 [[Batch Normalization]]과 [[Layer Normalization]]의 통계 공유 축·훈련/추론 상태를 복원하고, token별 hidden 정규화·Post/Pre-LN·[[RMSNorm]]의 범위를 검증한다.
+- [[049_FastText와 서브워드 표현의 두 경로]]는 [[FastText]]의 문자 n-gram 합·hash·정적 OOV 근사와 [[Byte Pair Encoding|BPE]]의 sequence 분절을 구분하고, [[서브워드 토큰화]]·SentencePiece·현대 Transformer 연결의 범위를 검증한다.
+- [[050_SQuAD와 추출형 독해 평가]]는 536개 위키백과 문서·107,785개 질문, 답 구간·EM·토큰 F1을 복원하고, [[추출형 질의응답]]과 검색·생성·일반 언어 이해의 경계 및 SQuAD 2.0의 답 없음 판단을 검증한다.
+- [[051_신경 정보 검색과 의미 대응]]은 2013년 DSSM·2014년 C-DSSM·2016년 DRMM을 구분하고, [[신경 정보 검색]]의 표현 중심·상호작용 중심 구조와 희소 exact signal·재순위화·DPR·RAG 연결 범위를 검증한다.
+- [[052_GNMT와 제품 규모 신경 번역]]은 8층 LSTM·어텐션·잔차 연결·WordPiece·탐색 보정을 하나의 제품 시스템으로 복원하고, 평균 약 60% 오류 감소의 평가 조건과 중국어→영어 최초 배포 범위를 구분한다.
+- [[053_WaveNet과 표본 단위 신경 오디오 생성]]은 μ-law 양자화 표본의 자기회귀 분포와 팽창 인과 합성곱을 복원하고, 훈련 병렬성·생성 순차성·MOS 격차·2017년 후속 제품 배포를 구분한다.
+- [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]]은 6층 encoder–decoder·scaled multi-head attention·위치 인코딩·Post-LN을 복원하고, 훈련 병렬성·길이 제곱 비용·자기회귀 생성·후대 LLM 계보를 분리한다.
+- [[055_RLHF 토대와 인간 선호 기반 보상 학습]]은 2017년 행동 구간 비교·보상 ensemble·반복 정책 학습을 복원하고, 원 제어·게임 실험과 2019–2022년 언어 모델 RLHF를 구분한다.
 
 ## 현재 핵심 주제
 
@@ -224,18 +224,18 @@ related:
 - [[메모리 네트워크]]
 - [[외부 메모리]]
 - [[다중 홉 검색]]
-- [[048_잔차 학습과 매우 깊은 신경망]]
+- [[047_잔차 학습과 매우 깊은 신경망]]
 - [[잔차 연결]]
 - [[ResNet]]
 - [[Degradation problem]]
-- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]
+- [[048_층 정규화와 시퀀스 모델의 배치 독립성]]
 - [[Layer Normalization]]
 - [[Batch Normalization]]
 - [[RMSNorm]]
-- [[050_FastText와 서브워드 표현의 두 경로]]
-- [[051_SQuAD와 추출형 독해 평가]]
+- [[049_FastText와 서브워드 표현의 두 경로]]
+- [[050_SQuAD와 추출형 독해 평가]]
 - [[추출형 질의응답]]
-- [[052_신경 정보 검색과 의미 대응]]
+- [[051_신경 정보 검색과 의미 대응]]
 - [[신경 정보 검색]]
 - [[검색은 근거를 찾고 독해는 답을 찾는다]]
 - [[FastText]]
@@ -273,17 +273,17 @@ related:
 
 소스 59개, 개념 135개, 개체 29개, 분석 17개와 메타 문서 3개, 총 243개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 217개는 `verified`, 해석적 문서 23개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 267개 외부 근거와 118개 불변 raw artifact가 레지스트리에 등록돼 있다.
 
-`060`의 GLUE 연구진을 Google Research 중심으로 보는 소속 오류, QNLI를 자유 질의응답으로 보는 설명, 하나의 shared multi-task model을 강제했다는 주장, GLUE score에 task 난이도·중요도 weight가 있다는 서술, 중앙 server가 추가 자료·compute·ensemble까지 같은 조건으로 만든다는 해석, GLUE 원 발표와 2019년 별도 인간 기준선의 혼합, aggregate 인간 추정치 초과를 전 task·일반 이해의 인간 초월로 보는 주장, SuperGLUE가 open-ended 생성 과제를 포함했다는 설명, GLUE가 더 이른 SQuAD·ImageNet·COCO 평가 설계에 영향을 주었다는 역방향 계보와 private test가 contamination·leaderboard overfitting을 해결한다는 주장도 공개 문서에서 교정했다.
+`059`의 GLUE 연구진을 Google Research 중심으로 보는 소속 오류, QNLI를 자유 질의응답으로 보는 설명, 하나의 shared multi-task model을 강제했다는 주장, GLUE score에 task 난이도·중요도 weight가 있다는 서술, 중앙 server가 추가 자료·compute·ensemble까지 같은 조건으로 만든다는 해석, GLUE 원 발표와 2019년 별도 인간 기준선의 혼합, aggregate 인간 추정치 초과를 전 task·일반 이해의 인간 초월로 보는 주장, SuperGLUE가 open-ended 생성 과제를 포함했다는 설명, GLUE가 더 이른 SQuAD·ImageNet·COCO 평가 설계에 영향을 주었다는 역방향 계보와 private test가 contamination·leaderboard overfitting을 해결한다는 주장도 공개 문서에서 교정했다.
 
-`059`의 GPT가 NLP 전이 학습을 단독 발명했다는 설명, GPT-1에 과제별 입력 변환·표지 자료·출력층이 없었다는 축약과 12개 과제 전부 최고 성능이라는 확대, GPT-2를 매개변수만 10배 늘린 단순 확장으로 보는 서술, WebText를 인터넷 전체 무차별 crawl로 보는 설명, 번역·요약·QA zero-shot 출력과 지도 최고 성능의 동일시, GPT-2가 현대 few-shot prompting과 불연속적 창발을 이미 입증했다는 소급, 1.5B 모델이 끝내 비공개였다는 현재 상태 오류와 next-token 예측을 사실 검증·명시적 추론으로 보는 주장도 공개 문서에서 교정했다.
+`058`의 GPT가 NLP 전이 학습을 단독 발명했다는 설명, GPT-1에 과제별 입력 변환·표지 자료·출력층이 없었다는 축약과 12개 과제 전부 최고 성능이라는 확대, GPT-2를 매개변수만 10배 늘린 단순 확장으로 보는 서술, WebText를 인터넷 전체 무차별 crawl로 보는 설명, 번역·요약·QA zero-shot 출력과 지도 최고 성능의 동일시, GPT-2가 현대 few-shot prompting과 불연속적 창발을 이미 입증했다는 소급, 1.5B 모델이 끝내 비공개였다는 현재 상태 오류와 next-token 예측을 사실 검증·명시적 추론으로 보는 주장도 공개 문서에서 교정했다.
 
-`058`의 BERT를 Transformer 발명으로 보는 설명, ELMo에는 양방향 문맥이 없었다는 대조, MLM이 입력의 15%만 보거나 선택 token 모두를 `[MASK]`로 바꾼다는 축약, NSP를 실제 문장 의미 관계의 깊은 이해로 보는 해석, RoBERTa가 NSP의 보편적 무용성을 단독 증명했다는 결론, 열한 과제 최고 성능과 사람 같은 일반 이해의 동일시, BERT를 자연스러운 범용 생성 모델로 보는 설명과 모든 현대 생성 LLM이 BERT식 양방향 attention을 쓴다는 계보도 공개 문서에서 교정했다.
+`057`의 BERT를 Transformer 발명으로 보는 설명, ELMo에는 양방향 문맥이 없었다는 대조, MLM이 입력의 15%만 보거나 선택 token 모두를 `[MASK]`로 바꾼다는 축약, NSP를 실제 문장 의미 관계의 깊은 이해로 보는 해석, RoBERTa가 NSP의 보편적 무용성을 단독 증명했다는 결론, 열한 과제 최고 성능과 사람 같은 일반 이해의 동일시, BERT를 자연스러운 범용 생성 모델로 보는 설명과 모든 현대 생성 LLM이 BERT식 양방향 attention을 쓴다는 계보도 공개 문서에서 교정했다.
 
-`057`의 ELMo·ULMFiT를 같은 양방향 언어 모델 전이로 묶는 설명, ELMo와 BERT의 양방향 목적 혼합, ELMo 층별 구문·의미의 고정 분업과 완전한 담화 이해, ULMFiT의 세 단계에서 목표 영역 LM 적응·concat pooling을 누락한 축약, 여섯 텍스트 분류 결과를 질의응답·생성 등 모든 NLP 과제로 확대하는 주장, 표지 예시 100개의 100배 효율을 보편화한 설명, ELMo·ULMFiT가 Transformer를 낳고 BERT·GPT로 직접 이어졌다는 단일 계보도 공개 문서에서 교정했다.
+`056`의 ELMo·ULMFiT를 같은 양방향 언어 모델 전이로 묶는 설명, ELMo와 BERT의 양방향 목적 혼합, ELMo 층별 구문·의미의 고정 분업과 완전한 담화 이해, ULMFiT의 세 단계에서 목표 영역 LM 적응·concat pooling을 누락한 축약, 여섯 텍스트 분류 결과를 질의응답·생성 등 모든 NLP 과제로 확대하는 주장, 표지 예시 100개의 100배 효율을 보편화한 설명, ELMo·ULMFiT가 Transformer를 낳고 BERT·GPT로 직접 이어졌다는 단일 계보도 공개 문서에서 교정했다.
 
-`051`의 Robin Jia를 2016년 원 논문 저자로 섞은 설명, 정확히 10만 개라는 규모 축약, 답 구간 추출과 검색·자유 생성의 혼합, EM·F1과 의미 이해의 동일시, 모든 질문에 답이 있는 SQuAD 1.1의 제약, 서로 다른 사람 기준선과 모델 점수의 단순 비교, SQuAD 2.0의 답 불가능 질문 수, 어텐션·Transformer·BERT·LLM의 직접 원인 계보와 설정 없는 GPT-3·GPT-4 성능 주장도 공개 문서에서 교정했다.
+`050`의 Robin Jia를 2016년 원 논문 저자로 섞은 설명, 정확히 10만 개라는 규모 축약, 답 구간 추출과 검색·자유 생성의 혼합, EM·F1과 의미 이해의 동일시, 모든 질문에 답이 있는 SQuAD 1.1의 제약, 서로 다른 사람 기준선과 모델 점수의 단순 비교, SQuAD 2.0의 답 불가능 질문 수, 어텐션·Transformer·BERT·LLM의 직접 원인 계보와 설정 없는 GPT-3·GPT-4 성능 주장도 공개 문서에서 교정했다.
 
-`052`의 2016년 단일 신경 검색 출현, 전통 검색을 원시 키워드·선형 특징으로만 보는 설명, DSSM word hashing과 ANN hash의 혼동, 초기 문서 제목 실험을 전체 장문 벡터 검색으로 넓힌 주장, semantic similarity와 ad-hoc relevance의 동일시, DRMM을 첫 단계 전체 검색으로 보는 서술, 클릭·비클릭을 편향 없는 관련성 표지로 보는 설명, 신경 검색의 보편적 산업 효과와 DSSM에서 벡터 데이터베이스·DPR·RAG로 이어지는 단일 직접 계보도 공개 문서에서 교정했다.
+`051`의 2016년 단일 신경 검색 출현, 전통 검색을 원시 키워드·선형 특징으로만 보는 설명, DSSM word hashing과 ANN hash의 혼동, 초기 문서 제목 실험을 전체 장문 벡터 검색으로 넓힌 주장, semantic similarity와 ad-hoc relevance의 동일시, DRMM을 첫 단계 전체 검색으로 보는 서술, 클릭·비클릭을 편향 없는 관련성 표지로 보는 설명, 신경 검색의 보편적 산업 효과와 DSSM에서 벡터 데이터베이스·DPR·RAG로 이어지는 단일 직접 계보도 공개 문서에서 교정했다.
 
 `006`의 잘못된 MADALINE 약어·선형 LMS 국소 최솟값·VAD 배치 서술, `007`의 튜링 테스트 직접 계보 주장, `008`의 복잡도 산술과 Transformer 병렬성 서술, `009`의 출판 연대·이름 순서·이해 범위 과장, `010`의 VSM·IDF 단일 연도 귀속과 의미 이해 과장, `011`의 고정 원시 ACT 수·술어 논리 비판·MARGIE 질의응답·AMR 직접 계보, `012`의 1980년대 단일 혁명·Brown Corpus 연대·규칙 시스템의 원리적 무능력·자동 데이터 확장, `013`의 HMM 기원·비터비 목적·관측 독립성·MFCC 동시대성·상용화 범위·LLM 직접 계보, `014`의 1970년 단독 발명·BBN 귀속·CFG와 차트 파서 무능력·ATN 보편 지수 복잡도·레지스터의 담화 기억·후대 파서 직접 계보, `015`의 단일 1973년 귀속·PTQ 유형과 유니콘 존재 양화식·문맥 배제·가능세계 열거와 보편 지수 복잡도·LUNAR와 현대 LLM 직접 계보, `016`의 기계 일반 불가능론·포더/퍼트넘 대표 귀속·목표 논문과 저자 응답의 페이지 혼합·결합 반론 변경·모든 LLM의 다음 토큰 예측·현대 LLM에 대한 확정 판결, `017`의 1983년·Bell Labs 귀속·전역 의미 조합 탐색·선형 복잡도·OED 사용·대규모 성능·현대 NLP 직접 계보, `018`의 1986년 단독 발명·즉시 딥러닝 실용화·오류의 인과적 책임·보편 선형 시간·합성 과제의 광범위한 응용 확대·모든 언어 AI와 LLM의 직접 계보, `019`의 트라이그램 차수 혼동·α의 보간 가중치 오해·75만 단어와 100문장 평가의 과대 일반화·어텐션·드롭아웃·가중치 감쇠와 Katz 백오프의 동일시, `020`의 단독 발명·원시 음성 종단 간 처리·화자 독립·HMM 수동 확률·위치별 순차 계산·무제한 시간 불변성·제품 배포·CNN·RNN·Transformer 직접 계보, `021`의 1988년 단독 발명·수표 인식 귀속·완전 연결층의 위치 정보 삭제·일반 3×3 필터의 9개 매개변수·완전한 이동 불변성·특징 공학 제거·BatchNorm과 ResNet의 단일 해결책 서사·텍스트 CNN과 Word2Vec·GloVe·seq2seq·어텐션·Transformer의 직접 계보, `022`의 1991년 단일 발명·IBM Models 차이·EM 최고 정렬 오해·Hansard 자료 혼합·BLEU와 Moses 연대·통계 방식의 보편적 우월성·IBM 정렬에서 어텐션·Transformer·LLM으로의 직접 계보는 위키 본문에서 교정했다. raw의 원문 결손과 오류는 보존하되 공개 지식의 기준으로 사용하지 않는다.
 

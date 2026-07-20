@@ -1,10 +1,10 @@
 ---
 schema_version: 2
-id: source.054
+id: source.053
 page_type: source
 title: WaveNet과 표본 단위 신경 오디오 생성
 aliases:
-  - 054_WaveNet - Neural Audio Generation Revolution
+  - 053_WaveNet - Neural Audio Generation Revolution
   - WaveNet - Neural Audio Generation Revolution
 tags:
   - type/source
@@ -16,8 +16,8 @@ updated: '2026-07-19'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/054_WaveNet - Neural Audio Generation Revolution.ko.md'
-  - 'raw/054_WaveNet - Neural Audio Generation Revolution.commentary.ko.md'
+  - 'raw/053_WaveNet - Neural Audio Generation Revolution.ko.md'
+  - 'raw/053_WaveNet - Neural Audio Generation Revolution.commentary.ko.md'
 evidence:
   - source_id: van-den-oord-et-al-2016-wavenet
     locator: '초록과 §§2–5, Figures 2–5와 Table 1의 자기회귀 파형 분포·팽창 인과 합성곱·조건화·MOS 평가'
@@ -33,7 +33,7 @@ related:
 ---
 # WaveNet과 표본 단위 신경 오디오 생성
 
-054 raw는 2016년 [[WaveNet]]을 원시 파형 생성의 혁명으로 설명한다. 직접 파형·팽창 인과 합성곱·자기회귀 생성의 중요성은 잘 짚지만, 자연 음성과의 실제 평가 격차, 외부 언어 특징 조건화, 2016년 연구 원형과 2017년 제품 배포를 섞는다. 공개 문서는 모델의 확률 단위와 제품 전환의 시점을 나누어 검증한다.
+053 raw는 2016년 [[WaveNet]]을 원시 파형 생성의 혁명으로 설명한다. 직접 파형·팽창 인과 합성곱·자기회귀 생성의 중요성은 잘 짚지만, 자연 음성과의 실제 평가 격차, 외부 언어 특징 조건화, 2016년 연구 원형과 2017년 제품 배포를 섞는다. 공개 문서는 모델의 확률 단위와 제품 전환의 시점을 나누어 검증한다.
 
 ## 원시 파형을 확률분포로 만들기
 
@@ -100,7 +100,7 @@ WaveNet은 neural vocoder, WaveRNN, flow·diffusion 기반 파형 생성과 신�
 
 - Aaron van den Oord 외, [WaveNet: A Generative Model for Raw Audio](https://arxiv.org/abs/1609.03499), 2016, 특히 §§2–5, Figures 2–5와 Table 1.
 - Aaron van den Oord·Tom Walters, [WaveNet launches in the Google Assistant](https://deepmind.google/blog/wavenet-launches-in-the-google-assistant/), Google DeepMind, 2017-10-04.
-- 프로젝트 보존 자료: `raw/054_WaveNet - Neural Audio Generation Revolution.ko.md`, `raw/054_WaveNet - Neural Audio Generation Revolution.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/053_WaveNet - Neural Audio Generation Revolution.ko.md`, `raw/053_WaveNet - Neural Audio Generation Revolution.commentary.ko.md`.
 
 ## 관련 항목
 

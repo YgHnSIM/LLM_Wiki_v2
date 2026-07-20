@@ -175,6 +175,13 @@ const rawMarkdown = (await walkFiles(path.join(rootDir, 'raw'), '.md'))
   .sort(collator.compare);
 for (const relative of rawMarkdown) if (!artifactRecords.has(relative)) errors.push(`${relative}: raw artifact is not registered.`);
 for (const [relative, record] of artifactRecords) {
+  const sourceUrl = String(record.source_url ?? '').trim();
+  try {
+    const parsed = new URL(sourceUrl);
+    if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') throw new Error('unsupported protocol');
+  } catch {
+    errors.push(`${relative}: raw artifact source_url must be an absolute HTTP(S) URL.`);
+  }
   const absolute = path.join(rootDir, ...relative.split('/'));
   try {
     const content = await fs.readFile(absolute);

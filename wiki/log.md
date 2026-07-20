@@ -45,7 +45,7 @@ related:
 메모:
 
 - 초기 위키라 기존 페이지와의 모순은 발견되지 않았다.
-- 향후 019번 Katz Back-off, 035번 Neural Probabilistic Language Model, 043번 Word2Vec, 044번 GloVe, 055번 Transformer 관련 소스가 추가되면 현재 개념 페이지를 확장할 수 있다.
+- 향후 019번 Katz Back-off, 035번 Neural Probabilistic Language Model, 043번 Word2Vec, 044번 GloVe, 054번 Transformer 관련 소스가 추가되면 현재 개념 페이지를 확장할 수 있다.
 
 ## [2026-05-08] ingest | 튜링 테스트
 
@@ -1932,14 +1932,14 @@ raw 등록 해시:
 - 실제 문서 분할·색인 갱신·retriever drift·다중 홉 오류·생성 충실성은 시스템별 자료와 평가가 필요하다.
 - 040 DeepQA와 046 MemNN은 모두 후보 검색과 근거 점수화를 분리하지만, 규칙·특징·학습 감독·답 형식의 비교만으로 독립 분석을 만들기에는 047 이후 독해·어텐션 계보가 더 필요해 현재는 연결로 보존한다.
 
-## [2026-07-18] ingest | 048 잔차 학습과 매우 깊은 신경망
+## [2026-07-18] ingest | 047 잔차 학습과 매우 깊은 신경망
 
-047번은 실제 원문 파일이 없어 규칙대로 문서를 만들지 않고 건너뛰었다. 048 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했으며, 검사된 쌍을 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 ResNet을 기울기 소실의 단일 해법으로 보지 않고 degradation·residual parameterization·직접 gradient 경로의 범위를 복원했다.
+수집 당시에는 047 원문이 없어 이 자료를 048로 처리했으나, 2026-07-21 번호 연속성 정리에서 047로 이동했다. 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했으며, 검사된 쌍을 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 ResNet을 기울기 소실의 단일 해법으로 보지 않고 degradation·residual parameterization·직접 gradient 경로의 범위를 복원했다.
 
 변경 문서:
 
-- `raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md`와 대응 해설
-- `wiki/sources/048_잔차 학습과 매우 깊은 신경망.md`
+- `raw/047_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md`와 대응 해설
+- `wiki/sources/047_잔차 학습과 매우 깊은 신경망.md`
 - `wiki/concepts/잔차 연결.md`, `wiki/concepts/ResNet.md`, `wiki/concepts/Degradation problem.md`
 - `wiki/concepts/기울기 소실.md`, `wiki/concepts/합성곱 신경망.md`의 degradation·잔차 학습 구분 보강
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
@@ -1963,17 +1963,17 @@ raw 등록 해시:
 남은 제한:
 
 - 프로젝트에는 ImageNet·CIFAR 자료, 원 Caffe 모델·훈련 기록과 ILSVRC ensemble을 복제하지 않았으며 raw에는 새 번역과 해설만 보존한다.
-- 현대 LLM별 residual scaling·normalization 위치·깊이 안정성은 049 Layer Normalization과 후속 모델별 근거가 필요하다.
-- 048은 바로 다음 049의 정규화 배치와 함께 읽을 때 Transformer block의 안정화 설계를 독립 비교할 근거가 더 강해지므로, 비교 읽기 작성 여부는 049 공개 처리 뒤 판단한다.
+- 현대 LLM별 residual scaling·normalization 위치·깊이 안정성은 048 Layer Normalization과 후속 모델별 근거가 필요하다.
+- 047은 바로 다음 048의 정규화 배치와 함께 읽을 때 Transformer block의 안정화 설계를 독립 비교할 근거가 더 강해지므로, 비교 읽기 작성 여부는 048 공개 처리 뒤 판단한다.
 
-## [2026-07-18] ingest | 049 층 정규화와 시퀀스 모델의 배치 독립성
+## [2026-07-18] ingest | 048 층 정규화와 시퀀스 모델의 배치 독립성
 
-049 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 정규화를 “어느 축의 항목들이 통계를 공유하는가”로 재구성하고 LayerNorm의 RNN·Transformer 적용, Post/Pre-LN과 RMSNorm의 실제 수식을 검증했다.
+048 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 정규화를 “어느 축의 항목들이 통계를 공유하는가”로 재구성하고 LayerNorm의 RNN·Transformer 적용, Post/Pre-LN과 RMSNorm의 실제 수식을 검증했다.
 
 변경 문서:
 
-- `raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md`와 대응 해설
-- `wiki/sources/049_층 정규화와 시퀀스 모델의 배치 독립성.md`
+- `raw/048_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md`와 대응 해설
+- `wiki/sources/048_층 정규화와 시퀀스 모델의 배치 독립성.md`
 - `wiki/concepts/Layer Normalization.md`, `wiki/concepts/Batch Normalization.md`, `wiki/concepts/RMSNorm.md`
 - `wiki/concepts/잔차 연결.md`의 Post-LN·Pre-LN 위치와 gradient 연결 보강
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
@@ -1998,11 +1998,11 @@ raw 등록 해시:
 
 - 프로젝트에는 원 RNN·attention·skip-thought 학습 코드와 Transformer별 LayerNorm 구현·훈련 로그를 복제하지 않았으며 raw에는 새 번역과 해설만 보존한다.
 - 정규화 축·epsilon·affine·precision·residual scaling의 효과는 모델·깊이·optimizer별 후속 근거가 필요하다.
-- 048 residual identity/pre-activation과 049 Post/Pre-LN을 함께 읽으면 “학습 branch의 변환을 identity 경로 안쪽과 바깥쪽 어디에 둘 것인가”라는 독립 비교 질문이 충분히 성립해, 049 ingest 배포 뒤 비교 읽기 문서로 보존한다.
+- 047 residual identity/pre-activation과 048 Post/Pre-LN을 함께 읽으면 “학습 branch의 변환을 identity 경로 안쪽과 바깥쪽 어디에 둘 것인가”라는 독립 비교 질문이 충분히 성립해, 048 ingest 배포 뒤 비교 읽기 문서로 보존한다.
 
 ## [2026-07-18] content | 잔차 경로와 정규화는 어디에 놓이는가
 
-048과 049를 함께 읽어 생긴 독립 질문을 ‘비교 읽기’ 분석으로 보존했다. ResNet과 Transformer를 같은 구조라고 합치지 않고, additive identity path 위에 activation·normalization의 Jacobian을 반복해서 둘 것인지 학습 branch 안으로 옮길 것인지를 공통 비교 축으로 삼았다.
+047과 048를 함께 읽어 생긴 독립 질문을 ‘비교 읽기’ 분석으로 보존했다. ResNet과 Transformer를 같은 구조라고 합치지 않고, additive identity path 위에 activation·normalization의 Jacobian을 반복해서 둘 것인지 학습 branch 안으로 옮길 것인지를 공통 비교 축으로 삼았다.
 
 변경 문서:
 
@@ -2021,14 +2021,14 @@ raw 등록 해시:
 - 현대 LLM의 구체적 normalization·residual scaling·optimizer 조합은 모델별 1차 자료와 재현 실험이 더 필요하다.
 - 이 문서는 초기 gradient와 경로 구조의 비교이며 모든 모델에서 Pre-LN의 최종 품질 우위를 주장하지 않는다.
 
-## [2026-07-18] ingest | 050 FastText와 서브워드 표현의 두 경로
+## [2026-07-18] ingest | 049 FastText와 서브워드 표현의 두 경로
 
-050 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 FastText의 한 word vector 내부 합성과 BPE의 여러 token sequence 분절을 분리해, 같은 ‘서브워드’라는 이름이 가리키는 모델 인터페이스 차이를 검증했다.
+049 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 FastText의 한 word vector 내부 합성과 BPE의 여러 token sequence 분절을 분리해, 같은 ‘서브워드’라는 이름이 가리키는 모델 인터페이스 차이를 검증했다.
 
 변경 문서:
 
-- `raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md`와 대응 해설
-- `wiki/sources/050_FastText와 서브워드 표현의 두 경로.md`
+- `raw/049_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md`와 대응 해설
+- `wiki/sources/049_FastText와 서브워드 표현의 두 경로.md`
 - `wiki/concepts/FastText.md`, `wiki/concepts/서브워드 토큰화.md`, `wiki/concepts/Byte Pair Encoding.md`
 - `wiki/concepts/단어 임베딩.md`, `wiki/concepts/Word2Vec.md`, `wiki/concepts/신경망 기계 번역.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
@@ -2054,11 +2054,11 @@ raw 등록 해시:
 
 - 프로젝트에는 9개 Wikipedia 말뭉치·원 FastText C++ 훈련·WMT 2015 NMT·SentencePiece 실험을 복제하지 않았으며 raw에는 새 번역과 해설만 보존한다.
 - 한국어 음절·자모·byte 정규화와 현대 LLM별 tokenizer는 모델별 어휘·규칙·측정 자료가 더 필요하다.
-- FastText와 BPE가 공유하는 ‘서브워드’가 각각 한 벡터의 특징과 여러 시퀀스 토큰이라는 차이는 독립 비교 질문으로 재사용 가치가 있어, 050 ingest 배포 뒤 비교 읽기로 보존한다.
+- FastText와 BPE가 공유하는 ‘서브워드’가 각각 한 벡터의 특징과 여러 시퀀스 토큰이라는 차이는 독립 비교 질문으로 재사용 가치가 있어, 049 ingest 배포 뒤 비교 읽기로 보존한다.
 
 ## [2026-07-18] content | 서브워드는 한 벡터의 특징인가 여러 토큰인가
 
-050에서 독립적으로 발전한 질문을 ‘비교 읽기’ 분석으로 보존했다. subword라는 한 이름 아래 FastText의 word-vector 내부 특징, BPE의 sequence token, SentencePiece의 tokenizer 인터페이스가 섞이는 문제를 분리하고, 조각을 어느 시점에 합쳐 어느 단위가 문맥과 상호작용하는지를 공통 비교 축으로 삼았다.
+049에서 독립적으로 발전한 질문을 ‘비교 읽기’ 분석으로 보존했다. subword라는 한 이름 아래 FastText의 word-vector 내부 특징, BPE의 sequence token, SentencePiece의 tokenizer 인터페이스가 섞이는 문제를 분리하고, 조각을 어느 시점에 합쳐 어느 단위가 문맥과 상호작용하는지를 공통 비교 축으로 삼았다.
 
 변경 문서:
 
@@ -2078,14 +2078,14 @@ raw 등록 해시:
 - 한국어 음절·자모·byte 분절의 실제 우열과 현대 모델별 tokenizer 비용은 말뭉치·어휘·모델을 통제한 별도 실험이 필요하다.
 - 이 분석은 모델 인터페이스를 비교하며 특정 tokenizer의 보편적 성능 순위를 제시하지 않는다.
 
-## [2026-07-19] ingest | 051 SQuAD와 추출형 독해 평가
+## [2026-07-19] ingest | 050 SQuAD와 추출형 독해 평가
 
-051 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 SQuAD의 지문·질문·답 구간 인터페이스와 EM·토큰 F1을 복원하고, 이미 주어진 문단의 추출 평가를 검색·자유 생성·일반 언어 이해와 구분했다.
+050 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 SQuAD의 지문·질문·답 구간 인터페이스와 EM·토큰 F1을 복원하고, 이미 주어진 문단의 추출 평가를 검색·자유 생성·일반 언어 이해와 구분했다.
 
 변경 문서:
 
-- `raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md`와 대응 해설
-- `wiki/sources/051_SQuAD와 추출형 독해 평가.md`
+- `raw/050_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md`와 대응 해설
+- `wiki/sources/050_SQuAD와 추출형 독해 평가.md`
 - `wiki/concepts/추출형 질의응답.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
 
@@ -2109,16 +2109,16 @@ raw 등록 해시:
 
 - 프로젝트에는 원 데이터 수집·주석자 합의·공식 시험 제출을 재현하지 않았으며 공개 논문과 공식 사이트의 보고 범위를 검증했다.
 - 후속 적대 평가·도메인 이동·현대 LLM별 SQuAD 성능은 모델·프롬프트·자료 분할이 지정된 별도 근거가 필요하다.
-- 검색·독해·생성의 경계는 다음 052 정보 검색 자료와 함께 읽을 때 독립 비교 질문으로 발전할 가능성이 있어, 현재는 소스와 개념 문서의 범위로 보존한다.
+- 검색·독해·생성의 경계는 다음 051 정보 검색 자료와 함께 읽을 때 독립 비교 질문으로 발전할 가능성이 있어, 현재는 소스와 개념 문서의 범위로 보존한다.
 
-## [2026-07-19] ingest | 052 신경 정보 검색과 의미 대응
+## [2026-07-19] ingest | 051 신경 정보 검색과 의미 대응
 
-052 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 신경 정보 검색을 2016년 한 번의 의미 혁명으로 묶지 않고 DSSM·C-DSSM·DRMM과 후대 DPR을 표현·상호작용·후보 생성 단계별로 분리했다.
+051 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 신경 정보 검색을 2016년 한 번의 의미 혁명으로 묶지 않고 DSSM·C-DSSM·DRMM과 후대 DPR을 표현·상호작용·후보 생성 단계별로 분리했다.
 
 변경 문서:
 
-- `raw/052_Neural Information Retrieval Semantic Search with Deep Learning.ko.md`와 대응 해설
-- `wiki/sources/052_신경 정보 검색과 의미 대응.md`
+- `raw/051_Neural Information Retrieval Semantic Search with Deep Learning.ko.md`와 대응 해설
+- `wiki/sources/051_신경 정보 검색과 의미 대응.md`
 - `wiki/concepts/신경 정보 검색.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
 
@@ -2142,11 +2142,11 @@ raw 등록 해시:
 
 - 프로젝트에는 비공개 Web 클릭 로그와 DSSM·C-DSSM의 원 대규모 실험을 재현하지 않았고, DRMM은 공개 TREC 조건과 보고 수치의 범위에서 검증했다.
 - 실제 산업 검색의 latency·index freshness·ANN recall·비용은 제품별 색인과 트래픽 자료가 필요하다.
-- 051·052를 함께 읽으면 검색 실패와 독해 실패를 분리하는 재사용 가능한 비교 축이 충분히 선명해져, 052 ingest 배포 뒤 별도 비교 읽기로 보존한다.
+- 050·051를 함께 읽으면 검색 실패와 독해 실패를 분리하는 재사용 가능한 비교 축이 충분히 선명해져, 051 ingest 배포 뒤 별도 비교 읽기로 보존한다.
 
 ## [2026-07-19] content | 검색은 근거를 찾고 독해는 답을 찾는다
 
-051·052와 기존 BM25·개방 영역 QA 문서를 함께 읽어 생긴 독립 질문을 ‘비교 읽기’ 분석으로 보존했다. 검색 점수와 독해 점수를 하나의 일반 이해도로 합치지 않고, 컬렉션에서 근거를 후보에 넣는 단계·후보에서 답을 고르는 단계·근거가 부족할 때 기권하는 단계의 실패를 분리했다.
+050·051와 기존 BM25·개방 영역 QA 문서를 함께 읽어 생긴 독립 질문을 ‘비교 읽기’ 분석으로 보존했다. 검색 점수와 독해 점수를 하나의 일반 이해도로 합치지 않고, 컬렉션에서 근거를 후보에 넣는 단계·후보에서 답을 고르는 단계·근거가 부족할 때 기권하는 단계의 실패를 분리했다.
 
 변경 문서:
 
@@ -2169,14 +2169,14 @@ raw 등록 해시:
 - 실제 RAG의 citation entailment·latency·비용·최신성은 시스템별 trace와 평가 자료가 필요하다.
 - 이 분석은 평가 인터페이스의 비교이며 특정 sparse·dense·reader·generator 조합의 보편적 우위를 주장하지 않는다.
 
-## [2026-07-19] ingest | 053 GNMT와 제품 규모 신경 번역
+## [2026-07-19] ingest | 052 GNMT와 제품 규모 신경 번역
 
-053 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 GNMT를 초기 seq2seq의 단순 확대가 아니라 깊은 LSTM·어텐션·잔차 연결·WordPiece·탐색 보정과 분산 실행을 결합한 제품 규모 시스템으로 복원했다.
+052 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 GNMT를 초기 seq2seq의 단순 확대가 아니라 깊은 LSTM·어텐션·잔차 연결·WordPiece·탐색 보정과 분산 실행을 결합한 제품 규모 시스템으로 복원했다.
 
 변경 문서:
 
-- `raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md`와 대응 해설
-- `wiki/sources/053_GNMT와 제품 규모 신경 번역.md`
+- `raw/052_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md`와 대응 해설
+- `wiki/sources/052_GNMT와 제품 규모 신경 번역.md`
 - `wiki/concepts/신경망 기계 번역.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
 - `scripts/check-site.mjs`의 0.1px 좌표 직렬화 오차 허용치를 기존 그래프 배치 회귀 테스트와 일치시켰다.
@@ -2201,14 +2201,14 @@ raw 등록 해시:
 - 문서 단위 담화·저자원 언어·편향에 대한 현대 번역 품질은 별도 자료와 평가가 필요하다.
 - 045와 겹치는 핵심 논점은 기존 신경망 기계 번역 개념을 보강하는 것으로 충분하며, 독립 비교 읽기를 만들 만큼 새로운 긴장은 확인되지 않았다.
 
-## [2026-07-19] ingest | 054 WaveNet과 표본 단위 신경 오디오 생성
+## [2026-07-19] ingest | 053 WaveNet과 표본 단위 신경 오디오 생성
 
-054 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 WaveNet을 원시 파형의 양자화 표본 분포·팽창 인과 합성곱·조건화·순차 생성으로 복원하고, 2016년 연구 평가와 2017년 후속 제품 배포를 분리했다.
+053 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 WaveNet을 원시 파형의 양자화 표본 분포·팽창 인과 합성곱·조건화·순차 생성으로 복원하고, 2016년 연구 평가와 2017년 후속 제품 배포를 분리했다.
 
 변경 문서:
 
-- `raw/054_WaveNet - Neural Audio Generation Revolution.ko.md`와 대응 해설
-- `wiki/sources/054_WaveNet과 표본 단위 신경 오디오 생성.md`
+- `raw/053_WaveNet - Neural Audio Generation Revolution.ko.md`와 대응 해설
+- `wiki/sources/053_WaveNet과 표본 단위 신경 오디오 생성.md`
 - `wiki/concepts/WaveNet.md`, `wiki/concepts/자기회귀 생성.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
 
@@ -2231,16 +2231,16 @@ raw 등록 해시:
 
 - 원 Google TTS 데이터와 청취 평가를 재현하지 않았고 논문·공식 공지의 보고 범위에서 검증했다.
 - 음성 복제·딥페이크 위험은 원 논문의 중심 실험이 아니라 후대 적용의 문제이므로 별도 근거가 필요하다.
-- 훈련 병렬성과 생성 순차성의 구분은 055 Transformer와 함께 읽을 때 독립 비교 질문으로 발전할 가능성이 있어 다음 소스 처리 뒤 판단한다.
+- 훈련 병렬성과 생성 순차성의 구분은 054 Transformer와 함께 읽을 때 독립 비교 질문으로 발전할 가능성이 있어 다음 소스 처리 뒤 판단한다.
 
-## [2026-07-19] ingest | 055 Transformer와 자기어텐션 기반 시퀀스 모델링
+## [2026-07-19] ingest | 054 Transformer와 자기어텐션 기반 시퀀스 모델링
 
-055 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 2017년 원 Transformer의 6층 encoder–decoder·scaled multi-head attention·위치 인코딩·Post-LN과 번역 실험을 복원하고, 후대 사전학습·대규모 LLM 성과를 별도 계보로 분리했다.
+054 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 2017년 원 Transformer의 6층 encoder–decoder·scaled multi-head attention·위치 인코딩·Post-LN과 번역 실험을 복원하고, 후대 사전학습·대규모 LLM 성과를 별도 계보로 분리했다.
 
 변경 문서:
 
-- `raw/055_The Transformer Attention Is All You Need.ko.md`와 대응 해설
-- `wiki/sources/055_Transformer와 자기어텐션 기반 시퀀스 모델링.md`
+- `raw/054_The Transformer Attention Is All You Need.ko.md`와 대응 해설
+- `wiki/sources/054_Transformer와 자기어텐션 기반 시퀀스 모델링.md`
 - `wiki/concepts/Transformer.md`, `wiki/concepts/자기회귀 생성.md`, `wiki/concepts/신경망 기계 번역.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
 
@@ -2263,11 +2263,11 @@ raw 등록 해시:
 
 - WMT 번역 훈련과 attention 분석을 재현하지 않았으며, 공개 논문이 보고한 설정·수치의 범위에서 검증했다.
 - 개별 현대 상용 모델의 비공개 구조·자료·학습 세부는 2017년 논문만으로 확정하지 않는다.
-- 054·055와 기존 RNN·자기회귀 문서를 함께 읽으면 ‘훈련 병렬성과 생성 순차성은 다른 축’이라는 재사용 가능한 비교 질문이 충분히 성립해, 055 ingest 배포 뒤 별도 비교 읽기로 보존한다.
+- 053·054와 기존 RNN·자기회귀 문서를 함께 읽으면 ‘훈련 병렬성과 생성 순차성은 다른 축’이라는 재사용 가능한 비교 질문이 충분히 성립해, 054 ingest 배포 뒤 별도 비교 읽기로 보존한다.
 
 ## [2026-07-19] content | 훈련 병렬성과 생성 순차성은 다른 축이다
 
-045·054·055와 기존 자기회귀 개념을 함께 읽어 생긴 독립 질문을 ‘비교 읽기’ 분석으로 보존했다. 모델 전체를 병렬·순차라는 한 단어로 분류하지 않고, 표현 계산 그래프·정답 이력이 있는 훈련·실제 출력 sampling·총연산과 메모리를 서로 다른 축으로 분리했다.
+045·053·054와 기존 자기회귀 개념을 함께 읽어 생긴 독립 질문을 ‘비교 읽기’ 분석으로 보존했다. 모델 전체를 병렬·순차라는 한 단어로 분류하지 않고, 표현 계산 그래프·정답 이력이 있는 훈련·실제 출력 sampling·총연산과 메모리를 서로 다른 축으로 분리했다.
 
 변경 문서:
 
@@ -2290,14 +2290,14 @@ raw 등록 해시:
 - speculative decoding·비자기회귀 번역·diffusion의 실제 우위는 acceptance, 반복 횟수, 품질과 hardware 조건별 별도 평가가 필요하다.
 - wall-clock 성능은 FLOPs뿐 아니라 memory bandwidth·통신·batch·kernel·출력 길이에 좌우되므로 구조식만으로 제품 latency를 확정하지 않는다.
 
-## [2026-07-20] ingest | 056 RLHF 토대와 인간 선호 기반 보상 학습
+## [2026-07-20] ingest | 055 RLHF 토대와 인간 선호 기반 보상 학습
 
-056 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 2017년 행동 구간 쌍대 비교·reward ensemble·정책과 보상 모델의 반복 학습을 복원하고, 원 제어·게임 실험과 후대 언어 모델 RLHF를 분리했다.
+055 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 2017년 행동 구간 쌍대 비교·reward ensemble·정책과 보상 모델의 반복 학습을 복원하고, 원 제어·게임 실험과 후대 언어 모델 RLHF를 분리했다.
 
 변경 문서:
 
-- `raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md`와 대응 해설
-- `wiki/sources/056_RLHF 토대와 인간 선호 기반 보상 학습.md`
+- `raw/055_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md`와 대응 해설
+- `wiki/sources/055_RLHF 토대와 인간 선호 기반 보상 학습.md`
 - `wiki/concepts/인간 피드백 강화학습.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
 
@@ -2321,14 +2321,14 @@ raw 등록 해시:
 - 문화·집단별 선호 충돌, 평가 노동 조건, 최신 DPO·RLAIF 변형은 별도 근거와 분석이 필요하다.
 - 이번 자료의 핵심은 기존 문서에 없던 선호 학습 개념 자체이므로 현재는 새 비교 읽기보다 소스·개념 문서 보강으로 충분하다.
 
-## [2026-07-20] ingest | 057 ELMo와 ULMFiT의 두 전이 학습 경로
+## [2026-07-20] ingest | 056 ELMo와 ULMFiT의 두 전이 학습 경로
 
-057 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 ELMo의 고정 biLM 층별 특징 추출과 ULMFiT의 일반 LM·목표 영역 LM·분류기 미세조정을 분리해 전이 학습의 두 인터페이스로 정리했다.
+056 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 ELMo의 고정 biLM 층별 특징 추출과 ULMFiT의 일반 LM·목표 영역 LM·분류기 미세조정을 분리해 전이 학습의 두 인터페이스로 정리했다.
 
 변경 문서:
 
-- `raw/057_ELMo and ULMFiT Transfer Learning for Natural Language Processing.ko.md`와 대응 해설
-- `wiki/sources/057_ELMo와 ULMFiT의 두 전이 학습 경로.md`
+- `raw/056_ELMo and ULMFiT Transfer Learning for Natural Language Processing.ko.md`와 대응 해설
+- `wiki/sources/056_ELMo와 ULMFiT의 두 전이 학습 경로.md`
 - `wiki/concepts/언어 모델 전이 학습.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
 
@@ -2348,17 +2348,17 @@ raw 등록 해시:
 남은 제한:
 
 - 원 논문의 벤치마크를 재현하지 않았고 ACL 논문에 보고된 구조·표·ablation 범위에서 검증했다.
-- 후속 BERT·GPT의 목적함수와 적응 방식은 058·059 자료에서 별도로 검증한다.
-- 두 전이 경로는 새 개념 문서로 충분히 보존됐으며, 058·059와 함께 읽을 때 독립적인 비교 질문이 성립하는지 다시 판단한다.
+- 후속 BERT·GPT의 목적함수와 적응 방식은 057·058 자료에서 별도로 검증한다.
+- 두 전이 경로는 새 개념 문서로 충분히 보존됐으며, 057·058와 함께 읽을 때 독립적인 비교 질문이 성립하는지 다시 판단한다.
 
-## [2026-07-20] ingest | 058 BERT의 마스크드 양방향 사전 학습
+## [2026-07-20] ingest | 057 BERT의 마스크드 양방향 사전 학습
 
-058 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 BERT의 encoder 입력, MLM 15%·80/10/10 교란, NSP, 전체 모델 미세조정을 복원하고 ELMo·GPT와 다른 양방향성과 생성 인터페이스를 구분했다.
+057 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 BERT의 encoder 입력, MLM 15%·80/10/10 교란, NSP, 전체 모델 미세조정을 복원하고 ELMo·GPT와 다른 양방향성과 생성 인터페이스를 구분했다.
 
 변경 문서:
 
-- `raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md`와 대응 해설
-- `wiki/sources/058_BERT의 마스크드 양방향 사전 학습.md`
+- `raw/057_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md`와 대응 해설
+- `wiki/sources/057_BERT의 마스크드 양방향 사전 학습.md`
 - `wiki/concepts/BERT.md`, `wiki/concepts/마스크드 언어 모델링.md`, `wiki/concepts/언어 모델 전이 학습.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
 
@@ -2380,16 +2380,16 @@ raw 등록 해시:
 
 - BERT 사전 학습과 열한 과제를 재현하지 않았고 NAACL 논문의 표·부록·ablation 범위에서 검증했다.
 - NSP의 효과는 negative sampling과 학습 조건에 따라 달라질 수 있어 보편 결론을 내리지 않았다.
-- 059의 GPT 자기회귀 전이를 처리한 뒤 MLM과 causal LM의 비교가 독립 분석으로 발전할지 판단한다.
+- 058의 GPT 자기회귀 전이를 처리한 뒤 MLM과 causal LM의 비교가 독립 분석으로 발전할지 판단한다.
 
-## [2026-07-20] ingest | 059 GPT-1과 GPT-2의 전이 방식 변화
+## [2026-07-20] ingest | 058 GPT-1과 GPT-2의 전이 방식 변화
 
-059 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 GPT-1의 지도 fine-tuning과 GPT-2의 cue 기반 zero-shot 평가를 분리하고, 모델·자료·context·tokenizer 변화와 과제별 절대 성능을 복원했다.
+058 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 GPT-1의 지도 fine-tuning과 GPT-2의 cue 기반 zero-shot 평가를 분리하고, 모델·자료·context·tokenizer 변화와 과제별 절대 성능을 복원했다.
 
 변경 문서:
 
-- `raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md`와 대응 해설
-- `wiki/sources/059_GPT-1과 GPT-2의 전이 방식 변화.md`
+- `raw/058_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md`와 대응 해설
+- `wiki/sources/058_GPT-1과 GPT-2의 전이 방식 변화.md`
 - `wiki/concepts/GPT-1과 GPT-2.md`, `wiki/concepts/자기회귀 생성.md`, `wiki/concepts/언어 모델 전이 학습.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
 
@@ -2411,11 +2411,11 @@ raw 등록 해시:
 
 - GPT-1·GPT-2 훈련과 벤치마크를 재현하지 않았고 OpenAI 논문·공개 기록 범위에서 검증했다.
 - WebText의 실제 문서별 구성·중복·평가 자료 오염은 공개되지 않은 전체 corpus 없이는 완전 감사할 수 없다.
-- 057–059를 함께 읽어 드러난 과제 적응 인터페이스의 변화는 별도 비교 읽기 분석으로 보존한다.
+- 056–058를 함께 읽어 드러난 과제 적응 인터페이스의 변화는 별도 비교 읽기 분석으로 보존한다.
 
 ## [2026-07-20] content | 사전 학습 지식은 과제에 어떻게 도착하는가
 
-057–059와 기존 전이·BERT·GPT 개념을 함께 읽어 생긴 독립 질문을 ‘비교 읽기’ 분석으로 보존했다. 사전 학습 모델을 하나의 공통 패러다임으로만 묶지 않고 과제 적응이 hidden feature, 전체 weights, 목표 영역 분포, 입력 context 가운데 어디에서 일어나는지 비교했다.
+056–058와 기존 전이·BERT·GPT 개념을 함께 읽어 생긴 독립 질문을 ‘비교 읽기’ 분석으로 보존했다. 사전 학습 모델을 하나의 공통 패러다임으로만 묶지 않고 과제 적응이 hidden feature, 전체 weights, 목표 영역 분포, 입력 context 가운데 어디에서 일어나는지 비교했다.
 
 변경 문서:
 
@@ -2436,14 +2436,14 @@ raw 등록 해시:
 - prompting이 fine-tuning보다 보편적으로 우월하거나 context 적응이 필연적 종착점이라는 주장을 하지 않는다.
 - GPT-2 scale 결과만으로 불연속적 창발과 model size의 단독 인과를 확정하지 않는다.
 
-## [2026-07-20] ingest | 060 GLUE와 SuperGLUE의 집계 평가
+## [2026-07-20] ingest | 059 GLUE와 SuperGLUE의 집계 평가
 
-060 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 GLUE 아홉·SuperGLUE 여덟 task, 과제별 metric과 aggregate 평균, private test·diagnostic set·human baseline·포화의 범위를 복원했다.
+059 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 GLUE 아홉·SuperGLUE 여덟 task, 과제별 metric과 aggregate 평균, private test·diagnostic set·human baseline·포화의 범위를 복원했다.
 
 변경 문서:
 
-- `raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md`와 대응 해설
-- `wiki/sources/060_GLUE와 SuperGLUE의 집계 평가.md`
+- `raw/059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md`와 대응 해설
+- `wiki/sources/059_GLUE와 SuperGLUE의 집계 평가.md`
 - `wiki/concepts/GLUE와 SuperGLUE.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
 
@@ -2469,11 +2469,11 @@ raw 등록 해시:
 
 ## [2026-07-20] fix | BERT 근거 레지스트리 중복 제거
 
-060까지 완료한 뒤 전체 근거 레지스트리를 점검해 BERT 원 논문이 기존 `bert-2019`와 신규 `devlin-et-al-2019-bert` 두 ID로 중복 등록된 사실을 확인했다. 058과 후속 개념·분석 문서가 기존 ID를 사용하도록 통합하고 신규 중복 record를 제거했다.
+059까지 완료한 뒤 전체 근거 레지스트리를 점검해 BERT 원 논문이 기존 `bert-2019`와 신규 `devlin-et-al-2019-bert` 두 ID로 중복 등록된 사실을 확인했다. 057과 후속 개념·분석 문서가 기존 ID를 사용하도록 통합하고 신규 중복 record를 제거했다.
 
 변경 문서:
 
-- `wiki/sources/058_BERT의 마스크드 양방향 사전 학습.md`
+- `wiki/sources/057_BERT의 마스크드 양방향 사전 학습.md`
 - `wiki/concepts/BERT.md`, `wiki/concepts/마스크드 언어 모델링.md`, `wiki/concepts/언어 모델 전이 학습.md`
 - `wiki/analyses/사전 학습 지식은 과제에 어떻게 도착하는가.md`
 - `wiki/meta/evidence.yml`, `wiki/overview.md`, `wiki/log.md`
@@ -2566,6 +2566,36 @@ raw 등록 해시:
 - 사이트 빌드에서 243개 위키 문서 lint, 368개 페이지 생성, 4,018개 위키 링크와 22,580개 로컬 참조 검사를 통과했다.
 - 문서 관계 탐색기와 `relationship-data.json`은 유지되고 독립 그래프 산출물은 배포 결과에서 제거됐음을 확인했다.
 - `raw/`와 위키 지식 문서 내용에는 변경이 없다.
+
+## [2026-07-21] fix | 원문 출처 추적 보강
+
+변경 내용:
+
+- Michael Brenndoerfer의 `History of Language AI` 기사 목록과 로컬 원문을 대조해, 출처 표기가 없던 001–010의 정확한 원문 URL을 복원했다.
+- `raw/` 파일은 수정하지 않고 118개 보존 artifact 모두의 `source_url`을 `raw-artifacts.yml`에 기록했다.
+- 앞으로 `source:copy`가 원문 Markdown의 `Source:` 또는 `출처:` URL을 읽어 번역·해설 artifact 레코드에 함께 등록하도록 했다.
+- 보존 자료 페이지에서 레지스트리의 원문 출처를 직접 열 수 있게 하고, 영문 `Source:` 표기도 인식하도록 보완했다.
+- 사이트의 109개 기사와 로컬 108개 원문을 대조한 결과, 유일한 미수집 기사는 `Multi-Vector Retrievers: Fine-Grained Token-Level Matching for Neural Information Retrieval`임을 확인했다. 번호 연속성 정리 뒤 빈 번호 072의 원문으로 관리한다.
+
+검증 결과:
+
+- 원문 URL 형식과 raw artifact 해시를 wiki lint에서 함께 검사한다.
+- `raw/`의 내용과 SHA-256은 변경하지 않았다.
+
+## [2026-07-21] fix | 047 이후 소스 번호 연속성 정리
+
+변경 내용:
+
+- 기존 048–110의 원문 번호를 각각 1씩 낮춰 047–109로 재배치했다.
+- 이미 공개된 048–060 소스 문서와 raw artifact 경로를 047–059로 이동하고, page ID·관련 링크·artifact 레지스트리·색인·개요·작업 로그의 참조를 함께 갱신했다.
+- 외부 원문 62개와 기존 번역·해설 13쌍의 파일명을 같은 규칙으로 이동했다. 이미 검증된 번역·해설 본문은 raw와 동일한 수집 당시 상태를 유지한다.
+- 공개 소스는 001–059가 연속되고, 로컬 원문은 001–109 가운데 072만 비어 있다. 072는 원문 사이트에는 있으나 아직 로컬에 수집되지 않은 Multi-Vector Retrievers 기사에 배정한다.
+
+보존 원칙:
+
+- `raw/` artifact 본문은 수정하지 않았고 파일 경로만 이동했으므로 기존 SHA-256은 그대로 유지된다.
+- 외부의 기존 번역·해설도 이동된 raw와 바이트 단위로 동일하게 유지해 `source:status`의 덮어쓰기 방지 조건을 보존한다.
+- 번호 변경은 문서 식별 체계를 재배치한 것이며, 근거 문헌·원문 URL·검증 상태에는 영향을 주지 않는다.
 
 ## 관련 항목
 
