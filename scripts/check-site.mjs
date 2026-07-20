@@ -40,13 +40,9 @@ function elementMarkupForHook(html, hook) {
 }
 
 const requiredOutputFiles = [
-  'graph/index.html',
-  'graph-data.json',
+  'relationship-data.json',
   'search/index.html',
   'translations/index.html',
-  'assets/graph-map-loader.js',
-  'assets/graph-map.js',
-  'assets/graph-map-model.js',
   'assets/relationship-explorer.js',
   'assets/fonts/D2Coding.woff2',
   'assets/fonts/RIDIBatang.woff2',
@@ -62,11 +58,20 @@ for (const relativePath of requiredOutputFiles) {
   }
 }
 
-try {
-  await fs.access(path.join(distDir, 'assets', 'graph-mobile-model.js'));
-  errors.push('Removed mobile graph model must not be present in the build output.');
-} catch {
-  // Expected: the desktop graph no longer ships a mobile graph implementation.
+for (const retiredGraphOutput of [
+  'graph/index.html',
+  'graph-data.json',
+  'assets/graph-map-loader.js',
+  'assets/graph-map.js',
+  'assets/graph-map-model.js',
+  'assets/graph-mobile-model.js',
+]) {
+  try {
+    await fs.access(path.join(distDir, ...retiredGraphOutput.split('/')));
+    errors.push(`Removed graph section output must not be present: ${retiredGraphOutput}`);
+  } catch {
+    // Expected: the standalone graph section and its runtimes are retired.
+  }
 }
 
 for (const htmlFile of htmlFiles) {
@@ -89,20 +94,17 @@ for (const htmlFile of htmlFiles) {
     errors.push(`${relativeHtmlPath} contains duplicate IDs: ${duplicateIds.join(', ')}`);
   }
 
-  const primaryNav = html.match(/<nav class="primary-nav"[\s\S]*?<\/nav>/i)?.[0] ?? '';
-  const graphNavUrl = siteUrl('/graph/');
-  const graphNavLinks = [...primaryNav.matchAll(/<a\b[^>]*>그래프<\/a>/g)]
-    .map((match) => match[0])
-    .filter((markup) => attributeValue(markup, 'href') === graphNavUrl);
-  if (graphNavLinks.length !== 1) {
-    errors.push(`${relativeHtmlPath} must include one primary navigation link to the knowledge graph.`);
-  } else {
-    const active = attributeValue(graphNavLinks[0], 'aria-current') === 'page';
-    const graphPage = relativeHtmlPath.replaceAll('\\', '/') === 'graph/index.html';
-    if (active !== graphPage) errors.push(`${relativeHtmlPath} has an incorrect active state for the graph navigation link.`);
-    if (!/\bdesktop-graph-link\b/.test(attributeValue(graphNavLinks[0], 'class') ?? '')) {
-      errors.push(`${relativeHtmlPath} must mark the graph navigation entry as desktop-only.`);
-    }
+  if (new RegExp(`href="${escapeRegExp(siteUrl('/graph/'))}"`, 'i').test(html)) {
+    errors.push(`${relativeHtmlPath} must not link to the removed graph section.`);
+  }
+  if (/data-knowledge-map|\bgraph-map-page\b|\bdesktop-graph-link\b/i.test(html)) {
+    errors.push(`${relativeHtmlPath} retains standalone graph section markup.`);
+  }
+  if (/data-relationship-explorer/i.test(html) && !html.includes(`data-relationship-url="${siteUrl('/relationship-data.json')}"`)) {
+    errors.push(`${relativeHtmlPath} relationship explorer does not reference relationship-data.json.`);
+  }
+  if (/data-graph-url/i.test(html)) {
+    errors.push(`${relativeHtmlPath} retains the retired graph data attribute.`);
   }
 
   if (/\brole="(?:listbox|option)"/i.test(html)) {
@@ -170,6 +172,11 @@ for (const htmlFile of htmlFiles) {
       }
     }
   }
+}
+
+const compiledStyles = await fs.readFile(path.join(distDir, 'assets', 'styles.css'), 'utf8');
+if (/2D knowledge map|\.knowledge-map\b|\.graph-map-page\b/.test(compiledStyles)) {
+  errors.push('Stylesheet retains standalone graph section rules.');
 }
 
 if (htmlFiles.length !== report.pages) {
@@ -272,119 +279,9 @@ for (const entry of searchIndex) {
 
 let graphData;
 try {
-  graphData = JSON.parse(await fs.readFile(path.join(distDir, 'graph-data.json'), 'utf8'));
+  graphData = JSON.parse(await fs.readFile(path.join(distDir, 'relationship-data.json'), 'utf8'));
 } catch (error) {
-  errors.push(`Knowledge graph data is not valid JSON: ${error.message}`);
-}
-
-const graphPageFile = fileForUrl(siteUrl('/graph/'));
-const graphPageHtml = htmlCache.get(graphPageFile) ?? await fs.readFile(graphPageFile, 'utf8');
-htmlCache.set(graphPageFile, graphPageHtml);
-const compiledMapStyles = await fs.readFile(path.join(distDir, 'assets', 'styles.css'), 'utf8');
-const mapLoaderSource = await fs.readFile(path.join(distDir, 'assets', 'graph-map-loader.js'), 'utf8');
-const expectedMapScriptUrl = siteUrl('/assets/graph-map-loader.js');
-const expectedRelationshipScriptUrlForMap = siteUrl('/assets/relationship-explorer.js');
-const mapScriptTags = [...graphPageHtml.matchAll(/<script\b[^>]*\bsrc="([^"]+)"[^>]*>\s*<\/script>/gi)];
-const matchingMapScripts = mapScriptTags.filter((match) => match[1] === expectedMapScriptUrl);
-if (matchingMapScripts.length !== 1) {
-  errors.push(`Knowledge map page must load exactly one map script from ${expectedMapScriptUrl}.`);
-} else if (!/\btype="module"/i.test(matchingMapScripts[0][0])) {
-  errors.push('Knowledge map script must load as an ES module.');
-}
-if (mapScriptTags.some((match) => match[1] === expectedRelationshipScriptUrlForMap)) {
-  errors.push(`Knowledge map page must not load the article relationship script ${expectedRelationshipScriptUrlForMap}.`);
-}
-if (mapScriptTags.some((match) => match[1] === siteUrl('/assets/graph-map.js'))) {
-  errors.push('Knowledge map page must defer the full map runtime to the responsive loader.');
-}
-if (
-  !/matchMedia\(['"]\(min-width:\s*1025px\)['"]\)/.test(mapLoaderSource)
-  || !/import\(['"]\.\/graph-map\.js['"]\)/.test(mapLoaderSource)
-  || /\bfetch\s*\(|graph-data\.json/.test(mapLoaderSource)
-) {
-  errors.push('Knowledge map loader must use the width-only 1025px desktop boundary and dynamically import the map without fetching graph data itself.');
-}
-const mapMain = graphPageHtml.match(/<main\b[^>]*\bclass="[^"]*\bmap-main\b[^"]*"[^>]*>/i)?.[0] ?? '';
-if (!mapMain || attributeValue(mapMain, 'data-mobile-fallback') !== siteUrl('/')) {
-  errors.push('Knowledge map main region must expose the configured mobile fallback URL.');
-}
-for (const hook of [
-  'data-knowledge-map',
-  'data-map-command-bar',
-  'data-map-search-form',
-  'data-map-search',
-  'data-map-layout',
-  'data-map-filters-open',
-  'data-map-filters',
-  'data-map-viewport',
-  'data-map-svg',
-  'data-map-node-actions',
-  'data-map-fit',
-  'data-map-details-toggle',
-  'data-map-details',
-  'data-map-details-content',
-  'data-map-status',
-  'data-map-text-index',
-]) {
-  if (!new RegExp(`<[^>]+\\b${hook}(?:\\s|=|>)`, 'i').test(graphPageHtml)) {
-    errors.push(`Knowledge map page is missing the ${hook} hook.`);
-  }
-}
-const layoutButtons = [...graphPageHtml.matchAll(/<button\b[^>]*\bdata-map-layout="([^"]+)"[^>]*>/gi)];
-const layoutButtonIds = new Set(layoutButtons.map((match) => match[1]));
-if (layoutButtons.length !== 3 || !['community', 'network', 'radial'].every((id) => layoutButtonIds.has(id))) {
-  errors.push('Knowledge map must expose exactly the community, network, and radial layout buttons.');
-}
-if (layoutButtons.filter((match) => attributeValue(match[0], 'aria-pressed') === 'true').length !== 1) {
-  errors.push('Knowledge map must start with exactly one active layout button.');
-}
-const mapSvg = graphPageHtml.match(/<svg\b[^>]*\bdata-map-svg(?=\s|=|>)[^>]*>/i)?.[0] ?? '';
-if (!mapSvg || attributeValue(mapSvg, 'aria-hidden') !== 'true' || attributeValue(mapSvg, 'focusable') !== 'false') {
-  errors.push('Knowledge map SVG must be a hidden, non-focusable visual layer.');
-}
-const mapDetailsToggle = graphPageHtml.match(/<button\b[^>]*\bdata-map-details-toggle(?=\s|=|>)[^>]*>/i)?.[0] ?? '';
-if (
-  !mapDetailsToggle
-  || attributeValue(mapDetailsToggle, 'aria-expanded') !== 'false'
-  || !/\bdisabled(?=\s|=|>)/i.test(mapDetailsToggle)
-) {
-  errors.push('Knowledge map details toggle must start disabled and collapsed.');
-}
-const mapDetails = graphPageHtml.match(/<aside\b[^>]*\bdata-map-details(?=\s|=|>)[^>]*>/i)?.[0] ?? '';
-if (!mapDetails || attributeValue(mapDetails, 'aria-hidden') !== 'true' || !/\bhidden(?=\s|=|>)/i.test(mapDetails)) {
-  errors.push('Knowledge map details panel must start hidden from view and assistive technology.');
-}
-const mapStatusTags = [...graphPageHtml.matchAll(/<[a-z][\w:-]*\b[^>]*\bdata-map-status(?=\s|=|>)[^>]*>/gi)].map((match) => match[0]);
-if (
-  mapStatusTags.length !== 1
-  || attributeValue(mapStatusTags[0], 'role') !== 'status'
-  || attributeValue(mapStatusTags[0], 'aria-live') !== 'polite'
-  || attributeValue(mapStatusTags[0], 'aria-atomic') !== 'true'
-) {
-  errors.push('Knowledge map must contain one polite, atomic live status region.');
-}
-if (/<canvas\b|data-graph-mode="first-person"|data-graph-minimap|data-graph-pointer-lock/i.test(graphPageHtml)) {
-  errors.push('Knowledge map page must not retain canvas, first-person, pointer-lock, or minimap UI.');
-}
-if (!graphPageHtml.includes(`data-graph-url="${siteUrl('/graph-data.json')}"`)) {
-  errors.push('Knowledge map page does not reference graph-data.json through the configured base path.');
-}
-const mapTextIndex = elementMarkupForHook(graphPageHtml, 'data-map-text-index');
-if (!mapTextIndex || !/<a\b[^>]*\bhref="[^"]+"/i.test(mapTextIndex)) {
-  errors.push('Knowledge map must retain a linked text index fallback.');
-}
-if (!compiledMapStyles.includes('.knowledge-map') || !compiledMapStyles.includes('.map-viewport')) {
-  errors.push('Knowledge map stylesheet is missing its core 2D map surfaces.');
-}
-if (
-  !compiledMapStyles.includes('.desktop-graph-link,')
-  || !compiledMapStyles.includes('.graph-map-page .map-main {')
-  || !compiledMapStyles.includes('display: none !important;')
-) {
-  errors.push('Mobile layouts must remove graph entry points and the complete knowledge map section.');
-}
-if (/data-relationship-context="graph"|relationship-explorer--graph|data-graph-mobile/.test(graphPageHtml)) {
-  errors.push('Knowledge map page must not retain a mobile or relationship-explorer graph surface.');
+  errors.push(`Relationship data is not valid JSON: ${error.message}`);
 }
 
 const graphDataIsObject = graphData !== null && typeof graphData === 'object' && !Array.isArray(graphData);
@@ -581,12 +478,8 @@ if (graphDataIsObject) {
   if (graphData.stats?.nodes !== graphNodes.length || graphData.stats?.edges !== graphEdges.length || graphData.stats?.communities !== graphCommunities.length) {
     errors.push('Knowledge graph statistics do not match its arrays.');
   }
-  if (report.graph?.nodes !== graphNodes.length || report.graph?.edges !== graphEdges.length) {
-    errors.push('Build report graph statistics do not match graph-data.json.');
-  }
-
-  if (!graphPageHtml.includes(`data-graph-url="${siteUrl('/graph-data.json')}"`)) {
-    errors.push('Knowledge graph page does not reference graph-data.json through the configured base path.');
+  if (report.relationships?.nodes !== graphNodes.length || report.relationships?.edges !== graphEdges.length) {
+    errors.push('Build report relationship statistics do not match relationship-data.json.');
   }
 }
 

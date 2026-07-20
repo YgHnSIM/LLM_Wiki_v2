@@ -627,7 +627,7 @@ export async function initializeRelationshipExplorers() {
   const roots = [...document.querySelectorAll('[data-relationship-explorer]')];
   await Promise.all(roots.map(async (root) => {
     try {
-      const data = await loadGraph(root.dataset.graphUrl);
+      const data = await loadGraph(root.dataset.relationshipUrl);
       new RelationshipExplorer(root, data);
     } catch (error) {
       root.replaceChildren(element('p', 'relationship-results__empty', '연결 데이터를 불러오지 못했습니다. 전체 검색을 이용해 주세요.'));

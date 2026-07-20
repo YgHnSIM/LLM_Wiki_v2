@@ -515,7 +515,6 @@ function layout({ title, description, current = '', body, pageClass = '', script
         ${navLink('/concepts/', '개념', current)}
         ${navLink('/entities/', '인물·기관', current)}
         ${navLink('/analyses/', '비교 읽기', current)}
-        ${navLink('/graph/', '그래프', current, { className: 'desktop-graph-link' })}
         ${navLink('/search/', '전체 검색', current)}
         <div class="mobile-nav-search">${renderSearch('mobile-search', { label: '모바일 사이트 검색' })}</div>
       </nav>
@@ -539,7 +538,6 @@ function layout({ title, description, current = '', body, pageClass = '', script
     <nav class="footer-meta" aria-label="보조 메뉴">
       <span>최근 문서 갱신 ${escapeHtml(latestUpdate)}</span>
       <a href="${sitePath('/search/')}">전체 검색</a>
-      <a class="desktop-graph-link" href="${sitePath('/graph/')}">지식 그래프</a>
       <a href="${sitePath('/translations/')}">번역본 모아보기</a>
       <a href="${sitePath('/about/')}">위키 안내</a>
       <a href="${sitePath('/log/')}">변경 기록</a>
@@ -600,7 +598,6 @@ function renderHome() {
         <h1>언어 모델의<br><span>역사를 함께 읽다</span></h1>
         <p class="hero-intro">${escapeHtml(intro)}</p>
         ${renderSearch('hero-search', { large: true, label: '홈 주요 검색' })}
-        <a class="button-link graph-home-link desktop-graph-link" href="${sitePath('/graph/')}">문서 ${graphData.stats.nodes}개의 연결 지도 열기 <span aria-hidden="true">→</span></a>
       </div>
       <nav class="hero-collage hero-source-strip" aria-label="최근 원문 노트 빠른 이동">
         <p class="collage-label">최근 원문 노트</p>
@@ -647,180 +644,6 @@ function renderHome() {
     current: '/',
     body,
     pageClass: 'home-page',
-  });
-}
-
-function renderGraphPage() {
-  const typeLabels = {
-    source: '원문 노트',
-    reference: '참고 자료',
-    concept: '개념',
-    entity: '인물·기관',
-    analysis: '비교 읽기',
-  };
-  const verificationOptions = [
-    ['verified', '검증됨'],
-    ['partial', '부분 검증'],
-    ['disputed', '논쟁 중'],
-    ['unverified', '미검증'],
-  ];
-  const nodesByCommunity = new Map(graphData.communities.map((community) => [
-    community.id,
-    graphData.nodes
-      .filter((node) => node.community === community.id)
-      .sort((a, b) => collator.compare(a.title, b.title)),
-  ]));
-  const defaultLayout = graphData.layouts.find((layout) => layout.id === graphData.defaultLayout) ?? graphData.layouts[0];
-
-  const body = `<main class="map-main" id="main-content" data-mobile-fallback="${sitePath('/')}">
-    <section class="knowledge-map" data-knowledge-map data-graph-url="${sitePath('/graph-data.json')}" aria-labelledby="knowledge-map-title">
-      <header class="map-masthead">
-        <div class="map-identity">
-          <p><span>LLM WIKI</span><span>MAP 001—${String(graphData.stats.nodes).padStart(3, '0')}</span></p>
-          <h1 id="knowledge-map-title">연결 지도</h1>
-        </div>
-        <div class="map-introduction">
-          <p>문서 사이의 직접 연결과 구조적 집단을 확대 수준에 맞춰 읽는 2D 지식지도입니다.</p>
-          <dl aria-label="그래프 규모">
-            <div><dt>문서</dt><dd>${graphData.stats.nodes}</dd></div>
-            <div><dt>관계</dt><dd>${graphData.stats.edges}</dd></div>
-            <div><dt>집단</dt><dd>${graphData.stats.communities}</dd></div>
-          </dl>
-        </div>
-      </header>
-
-      <div class="map-command-bar" data-map-command-bar>
-        <form class="map-search" data-map-search-form role="search">
-          <label class="sr-only" for="map-search-input">문서 제목 또는 별칭 검색</label>
-          <input id="map-search-input" type="search" list="map-node-options" autocomplete="off" placeholder="문서 제목 또는 별칭" data-map-search>
-          <datalist id="map-node-options">${graphData.nodes.map((node) => `<option value="${escapeHtml(node.title)}"></option>`).join('')}</datalist>
-          <button type="submit">찾기</button>
-        </form>
-
-        <fieldset class="map-layout-switch" aria-label="노드 배치">
-          <legend class="sr-only">노드 배치</legend>
-          ${graphData.layouts.map((layout) => `<button type="button" data-map-layout="${escapeHtml(layout.id)}" aria-pressed="${layout.id === graphData.defaultLayout ? 'true' : 'false'}" title="${escapeHtml(layout.description)}">${escapeHtml(layout.label)}</button>`).join('')}
-        </fieldset>
-
-        <button class="map-command-button" type="button" data-map-filters-open aria-haspopup="dialog" aria-controls="map-filter-dialog">필터 <span data-map-filter-count>0</span></button>
-        <button class="map-command-button" type="button" data-map-details-toggle aria-expanded="false" aria-controls="map-details" disabled>세부 정보</button>
-      </div>
-
-      <div class="map-layout-note" data-map-layout-note>
-        <strong>${escapeHtml(defaultLayout.label)}</strong>
-        <span>${escapeHtml(defaultLayout.description)}</span>
-      </div>
-
-      <div class="map-workspace" data-map-workspace>
-        <section class="map-viewport" data-map-viewport aria-label="2D 지식지도. 드래그하여 이동하고 휠 또는 더하기와 빼기 키로 확대·축소합니다." aria-describedby="map-instructions">
-          <p class="sr-only" id="map-instructions">축소하면 연결 집단, 중간 확대에서는 중심 문서, 확대하면 개별 문서와 관계가 나타납니다. 노드를 선택하면 선택 문서와 직접 연결된 문서의 라벨만 강조됩니다. 슬래시 키는 검색, Home 키는 전체 맞춤, Escape 키는 현재 패널 또는 선택을 닫습니다.</p>
-          <svg class="map-canvas" data-map-svg viewBox="0 0 1200 760" aria-hidden="true" focusable="false">
-            <title id="map-svg-title">LLM Wiki 문서 연결 지도</title>
-            <desc id="map-svg-description">${graphData.stats.nodes}개 문서와 ${graphData.stats.edges}개 방향 관계를 세 가지 배치로 탐색하는 2D 그래프입니다.</desc>
-            <defs>
-              <pattern id="map-grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="1"/></pattern>
-              <marker id="map-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 Z"/></marker>
-            </defs>
-            <g data-map-scene>
-              <rect class="map-grid" x="-20000" y="-20000" width="40000" height="40000" fill="url(#map-grid-pattern)" aria-hidden="true"></rect>
-              <g class="map-community-layer" data-map-communities aria-hidden="true"></g>
-              <g class="map-edge-layer" data-map-edges aria-hidden="true"></g>
-              <g class="map-node-layer" data-map-nodes></g>
-              <g class="map-label-layer" data-map-labels aria-hidden="true"></g>
-            </g>
-          </svg>
-          <div class="map-node-actions" data-map-node-actions aria-label="표시된 문서"></div>
-
-          <div class="map-scale-readout" aria-hidden="true">
-            <span data-map-tier>집단</span>
-            <i></i>
-            <span data-map-visible-count>${graphData.stats.nodes} 문서</span>
-          </div>
-
-          <div class="map-zoom-controls" aria-label="지도 확대와 맞춤">
-            <button type="button" data-map-zoom="out" aria-label="축소">−</button>
-            <output data-map-zoom-output aria-label="현재 확대율">100%</output>
-            <button type="button" data-map-zoom="in" aria-label="확대">+</button>
-            <button type="button" data-map-fit aria-label="전체 지도 맞춤">맞춤</button>
-          </div>
-
-          <p class="map-loading" data-map-loading>연결 지도를 불러오는 중입니다.</p>
-        </section>
-
-        <aside class="map-details" id="map-details" data-map-details hidden aria-hidden="true" aria-label="선택한 문서 세부 정보">
-          <header>
-            <p>선택 문서</p>
-            <button type="button" data-map-details-close aria-label="세부 정보 닫기">닫기</button>
-          </header>
-          <div data-map-details-content>
-            <h2>문서를 선택하세요</h2>
-            <p>노드를 선택한 뒤 ‘세부 정보’를 누르면 문서 요약과 직접 연결을 확인할 수 있습니다.</p>
-          </div>
-        </aside>
-      </div>
-
-      <footer class="map-status-bar">
-        <p data-map-summary>전체 구조 · 문서 ${graphData.stats.nodes}개</p>
-        <p data-map-status role="status" aria-live="polite" aria-atomic="true"></p>
-        <p><kbd>/</kbd> 검색 <kbd>Home</kbd> 맞춤 <kbd>Esc</kbd> 닫기</p>
-      </footer>
-
-      <dialog class="map-filter-dialog" id="map-filter-dialog" data-map-filters aria-labelledby="map-filter-title">
-        <form method="dialog" data-map-filter-form>
-          <header>
-            <div><p>보기 설정</p><h2 id="map-filter-title">표시할 문서와 관계</h2></div>
-            <button type="button" data-map-filters-close aria-label="필터 닫기">닫기</button>
-          </header>
-          <div class="map-filter-grid">
-            <label>문서 유형
-              <select data-map-type>
-                <option value="">전체 유형</option>
-                ${Object.entries(typeLabels).map(([value, label]) => `<option value="${value}">${label}</option>`).join('')}
-              </select>
-            </label>
-            <label>검증 상태
-              <select data-map-verification>
-                <option value="">전체 상태</option>
-                ${verificationOptions.map(([value, label]) => `<option value="${value}">${label}</option>`).join('')}
-              </select>
-            </label>
-            <label>연결 집단
-              <select data-map-community>
-                <option value="">모든 집단</option>
-                ${graphData.communities.map((community) => `<option value="${community.id}">${String(community.id + 1).padStart(2, '0')} · ${escapeHtml(community.label)} (${community.size})</option>`).join('')}
-              </select>
-            </label>
-            <label>관계 근거
-              <select data-map-relation>
-                <option value="all">모든 명시 관계</option>
-                <option value="related">편집자가 고른 관계</option>
-                <option value="body">서술 본문 링크</option>
-              </select>
-            </label>
-          </div>
-          <label class="map-filter-check"><input type="checkbox" checked data-map-show-orphans> 연결이 없는 문서도 표시</label>
-          <footer>
-            <button type="reset" data-map-filter-reset>초기화</button>
-            <button type="button" data-map-filters-apply>지도에 적용</button>
-          </footer>
-        </form>
-      </dialog>
-
-      <details class="map-text-index" data-map-text-index>
-        <summary>텍스트 목록으로 탐색</summary>
-        <p>그래프와 같은 문서를 연결 집단별로 제공합니다. JavaScript 없이도 모든 문서로 이동할 수 있습니다.</p>
-        <div>${graphData.communities.map((community) => `<section><h2><span>${String(community.id + 1).padStart(2, '0')}</span>${escapeHtml(community.label)} <small>${community.size}</small></h2><ul>${nodesByCommunity.get(community.id).map((node) => `<li><a href="${node.url}">${escapeHtml(node.title)}</a><small>${escapeHtml(typeLabels[node.type] ?? node.type)} · 연결 ${node.degree}</small></li>`).join('')}</ul></section>`).join('')}</div>
-      </details>
-    </section>
-  </main>`;
-
-  return layout({
-    title: '연결 지도',
-    description: 'LLM Wiki 문서의 직접 관계와 구조적 집단을 의미 줌과 세 가지 배치로 탐색하는 2D 지식지도',
-    current: '/graph/',
-    body,
-    pageClass: 'graph-page graph-map-page',
-    scripts: [{ src: '/assets/graph-map-loader.js', type: 'module' }],
   });
 }
 
@@ -1127,7 +950,7 @@ function renderRelationshipPreview(document) {
         <strong id="relationship-dialog-title">연결 탐색</strong>
         <button type="button" data-close-relationship-dialog>닫기</button>
       </header>
-      <section class="relationship-explorer relationship-explorer--article" data-relationship-explorer data-relationship-context="article" data-focus-id="${escapeHtml(document.id)}" data-graph-url="${sitePath('/graph-data.json')}" aria-label="${escapeHtml(document.title)} 연결 탐색기">
+      <section class="relationship-explorer relationship-explorer--article" data-relationship-explorer data-relationship-context="article" data-focus-id="${escapeHtml(document.id)}" data-relationship-url="${sitePath('/relationship-data.json')}" aria-label="${escapeHtml(document.title)} 연결 탐색기">
         <p class="relationship-explorer__loading" role="status">연결 데이터를 불러오는 중입니다.</p>
       </section>
     </div>
@@ -1300,10 +1123,10 @@ const searchIndex = documents
 const buildReport = {
   generatedAt: new Date().toISOString(),
   basePath,
-  pages: documents.length + artifactReaders.length + 8,
+  pages: documents.length + artifactReaders.length + 7,
   documents: documents.length,
   publishedDocuments: publishedDocuments.length,
-  graph: graphData.stats,
+  relationships: graphData.stats,
   counts: Object.fromEntries(Object.keys(categoryMeta).map((key) => [key, grouped[key].length])),
   artifactCounts: {
     readers: artifactReaders.length,
@@ -1334,7 +1157,6 @@ async function buildInto(outputDir) {
     await writeHtml(outputDir, `/${key}/`, renderCategoryPage(key));
   }
   await writeHtml(outputDir, '/translations/', renderTranslationsPage());
-  await writeHtml(outputDir, '/graph/', renderGraphPage());
   await writeHtml(outputDir, '/search/', renderSearchPage());
   for (const document of documents) {
     if (document.url !== '/') await writeHtml(outputDir, document.url, renderArticle(document));
@@ -1344,7 +1166,7 @@ async function buildInto(outputDir) {
   }
   await fs.writeFile(path.join(outputDir, '404.html'), renderNotFound(), 'utf8');
   await fs.writeFile(path.join(outputDir, '.nojekyll'), '', 'utf8');
-  await fs.writeFile(path.join(outputDir, 'graph-data.json'), JSON.stringify(graphData), 'utf8');
+  await fs.writeFile(path.join(outputDir, 'relationship-data.json'), JSON.stringify(graphData), 'utf8');
   await fs.writeFile(path.join(outputDir, 'search-index.json'), JSON.stringify(searchIndex), 'utf8');
   await fs.writeFile(path.join(outputDir, 'build-report.json'), JSON.stringify(buildReport, null, 2), 'utf8');
 }
