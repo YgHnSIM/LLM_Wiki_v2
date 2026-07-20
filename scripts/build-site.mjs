@@ -240,6 +240,21 @@ for (const document of documents) {
   ])].sort((a, b) => collator.compare(a.title, b.title));
 }
 
+for (const document of documents) document.graphIncoming = [];
+for (const document of documents) {
+  for (const target of document.graphOutgoing) target.graphIncoming.push(document);
+}
+for (const document of documents) {
+  document.graphNeighbors = [...new Set([
+    ...document.graphOutgoing,
+    ...document.relatedDocuments,
+    ...document.graphIncoming,
+    ...document.relatedBacklinks,
+  ])]
+    .filter((item) => item !== document && item.category !== 'meta')
+    .sort((a, b) => collator.compare(a.title, b.title));
+}
+
 const grouped = Object.fromEntries(Object.keys(categoryMeta).map((key) => [key, []]));
 for (const document of documents) grouped[document.category].push(document);
 for (const list of Object.values(grouped)) {
@@ -536,7 +551,7 @@ function layout({ title, description, current = '', body, pageClass = '', script
 }
 
 function meaningfulConnectionCount(document) {
-  return document.meaningfulOutgoing.length;
+  return document.graphNeighbors?.length ?? document.meaningfulOutgoing.length;
 }
 
 function cardDataAttributes(document) {
@@ -662,22 +677,8 @@ function renderGraphPage() {
         <div class="graph-stage" data-graph-stage>
           <p class="sr-only" id="knowledge-graph-description">문서 ${graphData.stats.nodes}개와 방향 관계 ${graphData.stats.edges}개를 연결 집단, 관계 중심, 중심-주변 배치로 전환해 보는 WebGL 3D 지식 세계입니다. 노드 높이는 다른 집단에 속한 고유 이웃 수를 로그 눈금으로 나타냅니다. 궤도 카메라로 조망하거나 1인칭 비행으로 지식 세계 안을 이동할 수 있으며, 도움말에서 전체 조작법을 확인할 수 있습니다.</p>
           <canvas class="knowledge-graph" data-graph-canvas width="${graphData.dimensions.width}" height="${graphData.dimensions.height}" role="img" tabindex="0" aria-label="3D 지식 세계 조작 화면" aria-describedby="knowledge-graph-description">그래프를 지원하지 않는 환경에서는 아래 텍스트 목록으로 문서를 탐색할 수 있습니다.</canvas>
-          <section class="graph-mobile-atlas" data-graph-mobile-atlas aria-labelledby="graph-mobile-atlas-title" tabindex="-1">
-            <header class="graph-mobile-atlas-header">
-              <p>모바일 2D 보기</p>
-              <h2 id="graph-mobile-atlas-title">연결 카드판</h2>
-              <p data-graph-mobile-summary>문서를 불러오는 중입니다.</p>
-            </header>
-            <dl class="graph-mobile-direction-key" aria-label="연결 방향">
-              <div><dt><span aria-hidden="true"></span>분홍</dt><dd>선택 문서에서 나가는 연결</dd></div>
-              <div><dt><span aria-hidden="true"></span>청록</dt><dd>선택 문서로 들어오는 연결</dd></div>
-            </dl>
-            <div class="graph-mobile-scene" data-graph-mobile-scene>
-              <svg data-graph-mobile-connectors aria-hidden="true"></svg>
-              <div data-graph-mobile-content>
-                <p class="graph-mobile-loading">검색하거나 연결이 많은 시작 문서를 선택하세요.</p>
-              </div>
-            </div>
+          <section class="relationship-explorer relationship-explorer--graph" data-relationship-explorer data-relationship-context="graph" data-graph-url="${sitePath('/graph-data.json')}" aria-label="모바일 연결 탐색기">
+            <p class="relationship-explorer__loading" role="status">연결 데이터를 불러오는 중입니다.</p>
           </section>
           <p class="graph-static-message" data-graph-static-message>지식 세계를 불러오는 중입니다.</p>
 
@@ -936,7 +937,10 @@ function renderGraphPage() {
     current: '/graph/',
     body,
     pageClass: 'graph-page',
-    scripts: [{ src: '/assets/graph-3d.js', type: 'module' }],
+    scripts: [
+      { src: '/assets/relationship-explorer.js', type: 'module' },
+      { src: '/assets/graph-3d.js', type: 'module' },
+    ],
   });
 }
 
@@ -1194,6 +1198,62 @@ function renderBacklinks(document) {
   </section>`;
 }
 
+function relationshipDirection(document, target) {
+  const outgoing = document.graphOutgoing.includes(target) || document.relatedDocuments.includes(target);
+  const incoming = document.graphIncoming.includes(target) || document.relatedBacklinks.includes(target);
+  if (outgoing && incoming) return '서로 가리킴';
+  return outgoing ? '이 문서에서 가리킴' : '이 문서를 가리킴';
+}
+
+function relationshipBasis(document, target) {
+  const curated = document.relatedDocuments.includes(target) || document.relatedBacklinks.includes(target);
+  const body = document.graphOutgoing.includes(target) || document.graphIncoming.includes(target);
+  if (curated && body) return '편집 관계 + 본문 링크';
+  return curated ? '편집 관계' : '본문 링크';
+}
+
+function renderRelationshipPreview(document) {
+  const preview = [...new Set([
+    ...document.relatedDocuments,
+    ...document.relatedBacklinks,
+    ...document.graphOutgoing,
+    ...document.graphIncoming,
+  ])]
+    .filter((item) => item !== document && item.category !== 'meta')
+    .slice(0, 3);
+  const items = preview.map((item, index) => `<li>
+    <a href="${sitePath(item.url)}">
+      <span class="relationship-preview__index" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>
+      <span class="relationship-preview__copy">
+        <span>${escapeHtml(categoryMeta[item.category].singular)} · ${escapeHtml(relationshipBasis(document, item))} · ${escapeHtml(relationshipDirection(document, item))}</span>
+        <strong>${escapeHtml(item.title)}</strong>
+      </span>
+      ${verificationBadge(item)}
+    </a>
+  </li>`).join('');
+  const count = meaningfulConnectionCount(document);
+  return `<section class="relationship-preview" id="relationship-preview" aria-labelledby="relationship-preview-heading">
+    <header class="relationship-preview__header">
+      <div><p>연결 탐색</p><h2 id="relationship-preview-heading">관련 문서</h2></div>
+      <span>직접 연결 ${count}개</span>
+    </header>
+    ${items ? `<ol class="relationship-preview__list">${items}</ol>` : '<p class="relationship-preview__empty">직접 연결된 공개 문서가 없습니다.</p>'}
+    <a class="relationship-preview__open" href="#relationship-explorer-dialog" data-open-relationship-dialog aria-controls="relationship-explorer-dialog">연결 모두 보기</a>
+    <noscript><p class="relationship-preview__noscript"><a href="${sitePath('/graph/')}">지식 그래프에서 문서 찾기</a></p></noscript>
+  </section>
+  <dialog class="relationship-dialog" id="relationship-explorer-dialog" data-relationship-dialog aria-labelledby="relationship-dialog-title">
+    <div class="relationship-dialog__frame">
+      <header class="relationship-dialog__toolbar">
+        <strong id="relationship-dialog-title">연결 탐색</strong>
+        <button type="button" data-close-relationship-dialog>닫기</button>
+      </header>
+      <section class="relationship-explorer relationship-explorer--article" data-relationship-explorer data-relationship-context="article" data-focus-id="${escapeHtml(document.id)}" data-graph-url="${sitePath('/graph-data.json')}" aria-label="${escapeHtml(document.title)} 연결 탐색기">
+        <p class="relationship-explorer__loading" role="status">연결 데이터를 불러오는 중입니다.</p>
+      </section>
+    </div>
+  </dialog>`;
+}
+
 function renderArticle(document) {
   const rendered = renderMarkdown(document);
   const siblings = grouped[document.category];
@@ -1221,7 +1281,7 @@ function renderArticle(document) {
         <div><dt>근거 상태</dt><dd>${verificationBadge(document)}</dd></div>
         <div><dt>최근 갱신</dt><dd>${escapeHtml(document.updated || '기록 없음')}</dd></div>
         <div><dt>읽기</dt><dd>약 ${document.minutes}분</dd></div>
-        <div><dt>연결</dt><dd>${meaningfulConnectionCount(document)}개 문서</dd></div>
+        <div><dt>연결</dt><dd><a class="article-connection-link" href="#relationship-preview" data-open-relationship-dialog aria-controls="relationship-explorer-dialog">직접 연결 ${meaningfulConnectionCount(document)}개</a></dd></div>
       </dl>
     </header>
     ${reviewNote}
@@ -1243,8 +1303,7 @@ function renderArticle(document) {
       </div>
     </div>
     ${renderEvidenceLedger(document)}
-    ${renderRelatedReading(document)}
-    ${renderBacklinks(document)}
+    ${renderRelationshipPreview(document)}
     <nav class="article-pagination" aria-label="이전 및 다음 문서">
       ${previous ? `<a class="previous" href="${sitePath(previous.url)}"><span>이전</span><strong>${escapeHtml(previous.title)}</strong></a>` : '<span></span>'}
       ${next ? `<a class="next" href="${sitePath(next.url)}"><span>다음</span><strong>${escapeHtml(next.title)}</strong></a>` : '<span></span>'}
@@ -1257,6 +1316,7 @@ function renderArticle(document) {
     current: document.category === 'meta' ? '' : `/${document.category}/`,
     body,
     pageClass: `article-page article-page--${document.category}`,
+    scripts: [{ src: '/assets/relationship-explorer.js', type: 'module' }],
   });
 }
 

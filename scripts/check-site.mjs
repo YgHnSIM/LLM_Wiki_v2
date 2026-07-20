@@ -48,6 +48,7 @@ const requiredOutputFiles = [
   'assets/graph-3d.js',
   'assets/graph-3d-math.js',
   'assets/graph-mobile-model.js',
+  'assets/relationship-explorer.js',
   'assets/graph-world.js',
   'assets/fonts/D2Coding.woff2',
   'assets/fonts/RIDIBatang.woff2',
@@ -270,6 +271,7 @@ const graphPageFile = fileForUrl(siteUrl('/graph/'));
 const graphPageHtml = htmlCache.get(graphPageFile) ?? await fs.readFile(graphPageFile, 'utf8');
 htmlCache.set(graphPageFile, graphPageHtml);
 const expectedGraphScriptUrl = siteUrl('/assets/graph-3d.js');
+const expectedRelationshipScriptUrl = siteUrl('/assets/relationship-explorer.js');
 const graphScriptTags = [...graphPageHtml.matchAll(/<script\b[^>]*\bsrc="([^"]+)"[^>]*>\s*<\/script>/gi)];
 const matchingGraphScripts = graphScriptTags.filter((match) => match[1] === expectedGraphScriptUrl);
 if (matchingGraphScripts.length !== 1) {
@@ -277,16 +279,19 @@ if (matchingGraphScripts.length !== 1) {
 } else if (!/\btype="module"/i.test(matchingGraphScripts[0][0])) {
   errors.push('Knowledge graph script must load as an ES module.');
 }
+const matchingRelationshipScripts = graphScriptTags.filter((match) => match[1] === expectedRelationshipScriptUrl);
+if (matchingRelationshipScripts.length !== 1) {
+  errors.push(`Knowledge graph page must load exactly one relationship explorer script from ${expectedRelationshipScriptUrl}.`);
+} else if (!/\btype="module"/i.test(matchingRelationshipScripts[0][0])) {
+  errors.push('Relationship explorer script must load as an ES module.');
+}
 for (const hook of [
   'data-knowledge-graph',
   'data-graph-fullscreen-root',
   'data-graph-stage',
   'data-graph-canvas',
-  'data-graph-mobile-atlas',
-  'data-graph-mobile-scene',
-  'data-graph-mobile-content',
-  'data-graph-mobile-connectors',
-  'data-graph-mobile-summary',
+  'data-relationship-explorer',
+  'data-relationship-context',
   'data-graph-hud',
   'data-graph-controls',
   'data-graph-search',
@@ -394,23 +399,19 @@ if (!fullscreenRootMarkup) {
   }
 }
 
-const mobileAtlasMarkup = elementMarkupForHook(graphPageHtml, 'data-graph-mobile-atlas');
-if (!mobileAtlasMarkup) {
-  errors.push('Knowledge graph mobile relation-card atlas is missing or has unbalanced markup.');
+const mobileExplorerMarkup = elementMarkupForHook(graphPageHtml, 'data-relationship-explorer');
+if (!mobileExplorerMarkup) {
+  errors.push('Knowledge graph mobile relationship explorer is missing or has unbalanced markup.');
 } else {
-  for (const descendantHook of [
-    'data-graph-mobile-scene',
-    'data-graph-mobile-content',
-    'data-graph-mobile-connectors',
-    'data-graph-mobile-summary',
-  ]) {
-    if (!new RegExp(`<[^>]+\\b${descendantHook}(?=\\s|=|>)`, 'i').test(mobileAtlasMarkup)) {
-      errors.push(`Knowledge graph mobile atlas must contain ${descendantHook}.`);
-    }
+  const explorerTag = mobileExplorerMarkup.match(/^<[a-z][\w:-]*\b[^>]*>/i)?.[0] ?? '';
+  if (attributeValue(explorerTag, 'data-relationship-context') !== 'graph') {
+    errors.push('Knowledge graph relationship explorer must declare the graph context.');
   }
-  const connector = mobileAtlasMarkup.match(/<svg\b[^>]*\bdata-graph-mobile-connectors(?=\s|=|>)[^>]*>/i)?.[0] ?? '';
-  if (attributeValue(connector, 'aria-hidden') !== 'true') {
-    errors.push('Knowledge graph mobile connectors must be hidden from assistive technology.');
+  if (attributeValue(explorerTag, 'data-graph-url') !== siteUrl('/graph-data.json')) {
+    errors.push('Knowledge graph relationship explorer must point to the generated graph data.');
+  }
+  if (!/\brelationship-explorer--graph\b/.test(attributeValue(explorerTag, 'class') ?? '')) {
+    errors.push('Knowledge graph relationship explorer must use the graph presentation class.');
   }
 }
 
