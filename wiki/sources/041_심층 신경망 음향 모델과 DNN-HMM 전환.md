@@ -14,7 +14,7 @@ tags:
   - domain/nlp
   - domain/speech-processing
 created: '2026-07-18'
-updated: '2026-07-18'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -162,6 +162,7 @@ Dahl·Sainath·Hinton이 대어휘 음성 인식에서 ReLU와 dropout을 함께
 - George E. Dahl·Dong Yu·Li Deng·Alex Acero, [Context-Dependent Pre-Trained Deep Neural Networks for Large-Vocabulary Speech Recognition](https://www.microsoft.com/en-us/research/publication/context-dependent-pre-trained-deep-neural-networks-for-large-vocabulary-speech-recognition/), 2012, pp. 30–42.
 - Frank Seide·Gang Li·Dong Yu, [Conversational Speech Transcription Using Context-Dependent Deep Neural Networks](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/CD-DNN-HMM-SWB-Interspeech2011-Pub.pdf), Interspeech 2011, pp. 437–440.
 - George E. Dahl·Tara N. Sainath·Geoffrey Hinton, [Improving Deep Neural Networks for LVCSR Using Rectified Linear Units and Dropout](https://www.cs.utoronto.ca/~hinton/absps/georgerectified.pdf), ICASSP 2013, pp. 8609–8613.
+- 프로젝트 번역·검토 출발 자료: [Deep Learning for Speech Recognition The 2012 Breakthrough](https://mbrenndoerfer.com/writing/deep-learning-speech-recognition-breakthrough)
 - 프로젝트 보존 자료: `raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.ko.md`, `raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.commentary.ko.md`.
 
 ## 관련 항목

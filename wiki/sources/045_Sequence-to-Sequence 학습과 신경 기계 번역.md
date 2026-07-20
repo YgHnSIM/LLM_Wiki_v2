@@ -12,7 +12,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-18'
-updated: '2026-07-18'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -131,6 +131,7 @@ Transformer가 NMT와 어텐션 연구에서 중요한 동기를 얻었다는 �
 - Kyunghyun Cho 외, [Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation](https://aclanthology.org/D14-1179/), EMNLP 2014, pp. 1724–1734.
 - Dzmitry Bahdanau·Kyunghyun Cho·Yoshua Bengio, [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/abs/1409.0473), 2014년 공개·ICLR 2015.
 - Yonghui Wu 외, [Google's Neural Machine Translation System](https://arxiv.org/abs/1609.08144), 2016.
+- 프로젝트 번역·검토 출발 자료: [Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution](https://mbrenndoerfer.com/writing/sequence-to-sequence-neural-machine-translation)
 - 프로젝트 보존 자료: `raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.ko.md`, `raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.commentary.ko.md`.
 
 ## 관련 항목

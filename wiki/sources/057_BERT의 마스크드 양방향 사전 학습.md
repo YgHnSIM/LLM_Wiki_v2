@@ -12,7 +12,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-20'
-updated: '2026-07-20'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -108,6 +108,7 @@ BERT의 encoder는 입력 전체가 주어졌을 때 각 위치 표현을 계산
 
 - Jacob Devlin 외, [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://aclanthology.org/N19-1423/), NAACL 2019, pp. 4171–4186.
 - Yinhan Liu 외, [RoBERTa: A Robustly Optimized BERT Pretraining Approach](https://arxiv.org/abs/1907.11692), 2019.
+- 프로젝트 번역·검토 출발 자료: [BERT Bidirectional Pretraining Revolutionizes Language Understanding](https://mbrenndoerfer.com/writing/bert-bidirectional-pretraining-revolutionizes-language-understanding)
 - 프로젝트 보존 자료: `raw/057_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md`, `raw/057_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md`.
 
 ## 관련 항목

@@ -12,7 +12,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-20'
-updated: '2026-07-20'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -142,6 +142,7 @@ GLUE가 SQuAD 평가 원칙을 만들었다거나 ImageNet·COCO가 GLUE 방식�
 - Alex Wang 외, [GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding](https://aclanthology.org/W18-5446/), BlackboxNLP 2018, pp. 353–355.
 - Nikita Nangia·Samuel R. Bowman, [Human vs. Muppet: A Conservative Estimate of Human Performance on the GLUE Benchmark](https://aclanthology.org/P19-1449/), ACL 2019.
 - Alex Wang 외, [SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems](https://proceedings.neurips.cc/paper/2019/hash/4496bf24afe7fab6f046bf4923da8de6-Abstract.html), NeurIPS 2019.
+- 프로젝트 번역·검토 출발 자료: [GLUE and SuperGLUE Standardized Evaluation for Language Understanding](https://mbrenndoerfer.com/writing/glue-superglue-standardized-evaluation-language-understanding)
 - 프로젝트 보존 자료: `raw/059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md`, `raw/059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md`.
 
 ## 관련 항목

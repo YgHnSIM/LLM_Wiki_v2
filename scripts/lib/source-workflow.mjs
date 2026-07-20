@@ -39,6 +39,16 @@ export function sourceUrlFromMarkdown(content) {
   }
 }
 
+export function requireSourceUrl(value = '', context = 'Source input') {
+  try {
+    const parsed = new URL(String(value).trim());
+    if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') throw new Error('unsupported protocol');
+    return parsed.href;
+  } catch {
+    throw new Error(`${context} must provide source_url as an absolute HTTP(S) URL on a Source: or 출처: line.`);
+  }
+}
+
 function countFrontmatterDelimiters(content) {
   return String(content).match(/^---\s*$/gm)?.length ?? 0;
 }
@@ -75,7 +85,7 @@ export function validateTranslationPair({ translation, commentary }) {
 }
 
 export function createArtifactRecords({ prefix, translationFilename, commentaryFilename, translationHash, commentaryHash, sourceUrl = '' }) {
-  const provenance = sourceUrl ? { source_url: sourceUrl } : {};
+  const provenance = { source_url: requireSourceUrl(sourceUrl, 'Raw artifact records') };
   return [
     {
       path: `raw/${translationFilename}`,

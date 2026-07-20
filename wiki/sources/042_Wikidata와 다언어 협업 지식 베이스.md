@@ -13,7 +13,7 @@ tags:
   - domain/computer-science
   - domain/nlp
 created: '2026-07-18'
-updated: '2026-07-18'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -218,6 +218,7 @@ Raw는 구조 지식 조회를 검색 증강 생성 전체와 곧바로 동일�
 - Wikidata community, [Help:About data](https://www.wikidata.org/wiki/Help:About_data), Wikibase model·RDF·CC0 절.
 - Wikidata community, [Help:Ranking](https://www.wikidata.org/wiki/Help:Ranking), normal·preferred·deprecated와 reference 구분.
 - Wikidata community, [Wikidata SPARQL Query Service — Query limits](https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/query_limits), 결과 규모·timeout 예시.
+- 프로젝트 번역·검토 출발 자료: [Wikidata Collaborative Knowledge Base for Language AI](https://mbrenndoerfer.com/writing/wikidata-collaborative-knowledge-base-language-ai)
 - 프로젝트 보존 자료: `raw/042_Wikidata Collaborative Knowledge Base for Language AI.ko.md`, `raw/042_Wikidata Collaborative Knowledge Base for Language AI.commentary.ko.md`.
 
 ## 관련 항목

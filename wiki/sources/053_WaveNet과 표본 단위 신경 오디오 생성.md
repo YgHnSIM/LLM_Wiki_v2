@@ -12,7 +12,7 @@ tags:
   - domain/machine-learning
   - domain/speech-processing
 created: '2026-07-19'
-updated: '2026-07-19'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -100,6 +100,7 @@ WaveNet은 neural vocoder, WaveRNN, flow·diffusion 기반 파형 생성과 신�
 
 - Aaron van den Oord 외, [WaveNet: A Generative Model for Raw Audio](https://arxiv.org/abs/1609.03499), 2016, 특히 §§2–5, Figures 2–5와 Table 1.
 - Aaron van den Oord·Tom Walters, [WaveNet launches in the Google Assistant](https://deepmind.google/blog/wavenet-launches-in-the-google-assistant/), Google DeepMind, 2017-10-04.
+- 프로젝트 번역·검토 출발 자료: [WaveNet - Neural Audio Generation Revolution](https://mbrenndoerfer.com/writing/wavenet-neural-audio-generation-speech-synthesis)
 - 프로젝트 보존 자료: `raw/053_WaveNet - Neural Audio Generation Revolution.ko.md`, `raw/053_WaveNet - Neural Audio Generation Revolution.commentary.ko.md`.
 
 ## 관련 항목

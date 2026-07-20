@@ -12,7 +12,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-20'
-updated: '2026-07-20'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -106,6 +106,7 @@ BERT의 깊은 양방향 표현은 ELMo와 문맥화라는 문제를 공유하�
 
 - Matthew E. Peters 외, [Deep Contextualized Word Representations](https://aclanthology.org/N18-1202/), NAACL 2018, pp. 2227–2237.
 - Jeremy Howard·Sebastian Ruder, [Universal Language Model Fine-tuning for Text Classification](https://aclanthology.org/P18-1031/), ACL 2018, pp. 328–339.
+- 프로젝트 번역·검토 출발 자료: [ELMo and ULMFiT Transfer Learning for Natural Language Processing](https://mbrenndoerfer.com/writing/elmo-ulmfit-transfer-learning-natural-language-processing)
 - 프로젝트 보존 자료: `raw/056_ELMo and ULMFiT Transfer Learning for Natural Language Processing.ko.md`, `raw/056_ELMo and ULMFiT Transfer Learning for Natural Language Processing.commentary.ko.md`.
 
 ## 관련 항목

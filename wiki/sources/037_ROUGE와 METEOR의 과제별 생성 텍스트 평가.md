@@ -14,7 +14,7 @@ tags:
   - domain/machine-learning
   - domain/linguistics
 created: '2026-07-18'
-updated: '2026-07-18'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -194,6 +194,7 @@ $$
 - Alon Lavie·Kenji Sagae·Shyamsundar Jayaraman, [The Significance of Recall in Automatic Metrics for MT Evaluation](https://aclanthology.org/2004.amta-papers.16/), 2004, pp. 134–143.
 - Satanjeev Banerjee·Alon Lavie, [METEOR: An Automatic Metric for MT Evaluation with Improved Correlation with Human Judgments](https://aclanthology.org/W05-0909/), 2005, pp. 65–72.
 - [[033_BLEU와 기계 번역 자동 평가]]
+- 프로젝트 번역·검토 출발 자료: [ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics](https://mbrenndoerfer.com/writing/history-rouge-meteor-evaluation-metrics)
 - 프로젝트 보존 자료: `raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.ko.md`, `raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.commentary.ko.md`.
 
 ## 관련 항목

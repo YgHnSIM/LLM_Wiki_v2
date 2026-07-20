@@ -12,7 +12,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-18'
-updated: '2026-07-18'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -158,6 +158,7 @@ Word2Vec 벡터는 분류·개체명 인식·검색·추천 등 여러 과제의
 - Tomas Mikolov·Ilya Sutskever·Kai Chen·Greg Corrado·Jeffrey Dean, [Distributed Representations of Words and Phrases and their Compositionality](https://proceedings.neurips.cc/paper_files/paper/2013/hash/9aa42b31882ec039965f3c4923ce901b-Abstract.html), NeurIPS 2013, pp. 3111–3119.
 - Omer Levy·Yoav Goldberg, [Neural Word Embedding as Implicit Matrix Factorization](https://proceedings.neurips.cc/paper_files/paper/2014/hash/b78666971ceae55a8e87efb7cbfd9ad4-Abstract.html), NeurIPS 2014, pp. 2177–2185.
 - Omer Levy·Yoav Goldberg·Ido Dagan, [Improving Distributional Similarity with Lessons Learned from Word Embeddings](https://aclanthology.org/Q15-1016/), TACL 3, 2015, pp. 211–225.
+- 프로젝트 번역·검토 출발 자료: [Word2Vec Dense Word Embeddings and Neural Language Representations](https://mbrenndoerfer.com/writing/word2vec-neural-word-embeddings)
 - 프로젝트 보존 자료: `raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.ko.md`, `raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.commentary.ko.md`.
 
 ## 관련 항목

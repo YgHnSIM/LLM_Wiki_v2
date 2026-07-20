@@ -13,7 +13,7 @@ tags:
   - domain/linguistics
   - domain/machine-learning
 created: '2026-07-18'
-updated: '2026-07-18'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -140,6 +140,7 @@ OntoNotes는 PropBank식 술어·논항 주석을 다른 구문·의미·담화 
 - Daniel Gildea·Daniel Jurafsky, [Automatic Labeling of Semantic Roles](https://aclanthology.org/J02-3001/), 2002, pp. 245–288.
 - Xavier Carreras·Lluís Màrquez, [Introduction to the CoNLL-2004 Shared Task: Semantic Role Labeling](https://aclanthology.org/W04-2412/), 2004, pp. 89–97.
 - Xavier Carreras·Lluís Màrquez, [Introduction to the CoNLL-2005 Shared Task: Semantic Role Labeling](https://aclanthology.org/W05-0620/), 2005, pp. 152–164.
+- 프로젝트 번역·검토 출발 자료: [PropBank - Semantic Role Labeling and Proposition Bank](https://mbrenndoerfer.com/writing/history-propbank-semantic-role-labeling)
 - 프로젝트 보존 자료: `raw/038_PropBank - Semantic Role Labeling and Proposition Bank.ko.md`, `raw/038_PropBank - Semantic Role Labeling and Proposition Bank.commentary.ko.md`.
 
 ## 관련 항목

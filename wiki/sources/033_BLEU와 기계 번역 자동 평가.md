@@ -14,7 +14,7 @@ tags:
   - domain/machine-learning
   - domain/linguistics
 created: '2026-07-18'
-updated: '2026-07-18'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -148,6 +148,7 @@ raw는 BLEU를 빠르고 미분 가능한 목표로 설명하지만 원래 BLEU�
 - Kishore Papineni·Salim Roukos·Todd Ward·Wei-Jing Zhu, [Bleu: a Method for Automatic Evaluation of Machine Translation](https://aclanthology.org/P02-1040/), 2002, pp. 311–318.
 - Chris Callison-Burch·Miles Osborne·Philipp Koehn, [Re-evaluating the Role of Bleu in Machine Translation Research](https://aclanthology.org/E06-1032/), 2006, pp. 249–256.
 - Matt Post, [A Call for Clarity in Reporting BLEU Scores](https://aclanthology.org/W18-6319/), 2018, pp. 186–191.
+- 프로젝트 번역·검토 출발 자료: [BLEU Metric - Automatic Evaluation for Machine Translation](https://mbrenndoerfer.com/writing/history-bleu-metric-evaluation)
 - 프로젝트 보존 자료: `raw/033_BLEU Metric - Automatic Evaluation for Machine Translation.ko.md`, `raw/033_BLEU Metric - Automatic Evaluation for Machine Translation.commentary.ko.md`.
 
 ## 관련 항목

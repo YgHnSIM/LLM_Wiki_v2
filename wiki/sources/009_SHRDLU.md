@@ -13,7 +13,7 @@ tags:
   - domain/conversational-ai
   - domain/human-computer-interaction
 created: '2026-07-16'
-updated: '2026-07-16'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -87,6 +87,7 @@ SHRDLU의 성과는 일반 언어 이해를 완성한 데 있지 않다. 제한�
 - Terry Winograd, [Understanding Natural Language](https://doi.org/10.1016/0010-0285(72)90002-3), *Cognitive Psychology* 3(1), 1972, pp. 1–191.
 - Terry Winograd, [What Does It Mean to Understand Language?](https://doi.org/10.1207/s15516709cog0403_1), *Cognitive Science* 4(3), 1980, pp. 212–218.
 - Marvin Minsky·Seymour Papert, [Progress Report on Artificial Intelligence](https://www.mit.edu/~dxh/marvin/web.media.mit.edu/~minsky/papers/PR1971.html), 1971, §5.2.
+- 프로젝트 번역·검토 출발 자료: [SHRDLU - Understanding Language Through Action](https://mbrenndoerfer.com/writing/history-shrdlu-language-understanding-blocks-world)
 - 프로젝트 보존 자료: `raw/009_SHRDLU - Understanding Language Through Action.ko.md`, `raw/009_SHRDLU - Understanding Language Through Action.commentary.ko.md`.
 
 ## 관련 항목

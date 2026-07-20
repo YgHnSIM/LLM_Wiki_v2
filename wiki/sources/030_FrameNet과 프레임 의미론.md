@@ -13,7 +13,7 @@ tags:
   - domain/linguistics
   - domain/computer-science
 created: '2026-07-17'
-updated: '2026-07-18'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -204,6 +204,7 @@ FrameNet은 언어 모델을 평가하거나 구조화된 감독을 더하는 �
 - Xavier Carreras·Lluís Màrquez, [Introduction to the CoNLL-2004 Shared Task: Semantic Role Labeling](https://aclanthology.org/W04-2412/), 2004, pp. 89–97.
 - Xavier Carreras·Lluís Màrquez, [Introduction to the CoNLL-2005 Shared Task: Semantic Role Labeling](https://aclanthology.org/W05-0620/), 2005, pp. 152–164.
 - Kevin Knight 외, [Abstract Meaning Representation (AMR) Annotation Release 3.0](https://catalog.ldc.upenn.edu/LDC2020T02), LDC2020T02, 2020.
+- 프로젝트 번역·검토 출발 자료: [FrameNet - A Computational Resource for Frame Semantics](https://mbrenndoerfer.com/writing/history-framenet-frame-semantics)
 - 프로젝트 보존 자료: `raw/030_FrameNet - A Computational Resource for Frame Semantics.ko.md`, `raw/030_FrameNet - A Computational Resource for Frame Semantics.commentary.ko.md`.
 
 ## 관련 항목

@@ -13,7 +13,7 @@ tags:
   - domain/machine-learning
   - domain/signal-processing
 created: '2026-07-14'
-updated: '2026-07-15'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -83,6 +83,7 @@ MADALINE은 여러 학습 요소를 결합했다는 점에서 역사적으로 �
 - Rodney Winter·Bernard Widrow, [MADALINE Rule II: A Training Algorithm for Neural Networks](https://isl.stanford.edu/~widrow/papers/c1988madalinerule.pdf), 1988, 특히 pp. 1-401–1-403.
 - Bernard Widrow·Michael A. Lehr, [30 Years of Adaptive Neural Networks: Perceptron, Madaline, and Backpropagation](https://isl.stanford.edu/people/widrow/papers/j199030years.pdf), 1990, pp. 1415–1419·1428–1432.
 - Bernard Widrow 외, [Adaptive Noise Cancelling: Principles and Applications](https://isl.stanford.edu/~widrow/papers/j1975adaptivenoise.pdf), 1975, pp. 1692–1716.
+- 프로젝트 번역·검토 출발 자료: [MADALINE - Multiple Adaptive Linear Neural Networks](https://mbrenndoerfer.com/writing/history-madaline-neural-network-adaptive-learning)
 - 프로젝트 보존 자료: `raw/006_1962_위드로-호프_MADALINE.md`, `raw/006_1962_위드로-호프_MADALINE_해설.md`.
 
 ## 관련 항목

@@ -13,7 +13,7 @@ tags:
   - domain/machine-learning
   - domain/linguistics
 created: '2026-07-16'
-updated: '2026-07-18'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -162,6 +162,7 @@ raw가 드는 Brill 태거 사례도 조건이 다르다. 1992년 논문은 Penn
 - Eric Brill, [A Simple Rule-Based Part of Speech Tagger](https://aclanthology.org/A92-1021/), 1992, pp. 152–155.
 - Fernando Pereira·Yves Schabes, [Inside-Outside Reestimation From Partially Bracketed Corpora](https://aclanthology.org/P92-1017/), 1992, pp. 128–135.
 - David Chiang, [A Hierarchical Phrase-Based Model for Statistical Machine Translation](https://aclanthology.org/P05-1033/), 2005, pp. 263–270.
+- 프로젝트 번역·검토 출발 자료: [1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing](https://mbrenndoerfer.com/writing/history-penn-treebank-statistical-parsing)
 - 프로젝트 보존 자료: raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.ko.md, raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.commentary.ko.md.
 
 ## 관련 항목

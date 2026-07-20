@@ -15,6 +15,14 @@ import {
   normalizeWikiName,
   walkFiles,
 } from './lib/wiki-utils.mjs';
+import {
+  brenndoerferSourceUrlsForArtifacts,
+  missingBrenndoerferSourceUrls,
+  pageRequiresStagedStructure,
+  REQUIRE_STAGED_STRUCTURE_FOR_ALL_NON_META,
+  strictStagedStructureEnabled,
+  validateStagedPageStructure,
+} from './lib/wiki-lint.mjs';
 
 function expectedPageTypes(relativePath) {
   const parts = relativePath.split('/');
@@ -54,6 +62,8 @@ const artifactRecords = new Map((artifactRegistry.artifacts ?? []).map((item) =>
 const allowedRedLinks = new Set(asArray(redLinkRegistry.allowed).map(normalizeWikiName));
 const errors = [];
 const warnings = [];
+const strictStagedStructure = strictStagedStructureEnabled();
+let legacyStructureCount = 0;
 
 for (const [name, registry] of [
   ['tags.yml', tagRegistry],
@@ -118,11 +128,37 @@ for (const document of documents) {
 
   const sections = sourceSections(document.body);
   if (data.page_type !== 'meta' && sections !== 1) errors.push(`${document.relativePath}: expected one ## 출처 section, found ${sections}.`);
+  if (data.page_type !== 'meta') {
+    const requireStagedStructure = REQUIRE_STAGED_STRUCTURE_FOR_ALL_NON_META || pageRequiresStagedStructure({
+      created: data.created,
+      pageType: data.page_type,
+      id: data.id,
+    }, { strict: strictStagedStructure });
+    const structure = validateStagedPageStructure(document.body, {
+      requireAll: requireStagedStructure,
+    });
+    if (!structure.staged && !requireStagedStructure) legacyStructureCount += 1;
+    for (const error of structure.errors) errors.push(`${document.relativePath}: ${error}`);
+  }
+  if (data.page_type === 'source' || data.page_type === 'reference') {
+    const provenanceUrls = brenndoerferSourceUrlsForArtifacts(artifacts, artifactRecords);
+    if (data.page_type === 'source' && provenanceUrls.length === 0) {
+      errors.push(`${document.relativePath}: source page must reference a raw artifact with Brenndoerfer source_url provenance.`);
+    }
+    const missingSourceUrls = missingBrenndoerferSourceUrls(document.body, artifacts, artifactRecords);
+    for (const sourceUrl of missingSourceUrls) {
+      errors.push(`${document.relativePath}: ## 출처 must directly include raw artifact source_url '${sourceUrl}'.`);
+    }
+  }
   if (lastH2(document.body) !== '관련 항목') errors.push(`${document.relativePath}: ## 관련 항목 must be the final H2.`);
   if (data.verification === 'verified' && /\[!WARNING\]/i.test(document.body)) errors.push(`${document.relativePath}: verified page contains an unresolved WARNING callout.`);
   if (/^## 인용할 만한 구절\s*$/m.test(document.body)) errors.push(`${document.relativePath}: generated quote section must be converted to 핵심 문장 or sourced quotes.`);
   if (data.page_type !== 'meta' && /^>\s*[“"']/m.test(document.body)) errors.push(`${document.relativePath}: quote block lacks the structured citation format.`);
 
+}
+
+if (legacyStructureCount) {
+  warnings.push(`${legacyStructureCount} non-meta page(s) still use the legacy section structure.`);
 }
 
 function resolveLink(rawLink) {

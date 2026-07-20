@@ -13,7 +13,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-19'
-updated: '2026-07-19'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -134,6 +134,7 @@ Wiegreffe·Pinter는 설명의 정의와 모델 전체 맥락을 고려해야 �
 - Jacob Devlin 외, [BERT](https://aclanthology.org/N19-1423/), NAACL 2019, §3.1과 Figure 1.
 - Sarthak Jain·Byron C. Wallace, [Attention is not Explanation](https://aclanthology.org/N19-1357/), NAACL 2019, pp. 3543–3556.
 - Sarah Wiegreffe·Yuval Pinter, [Attention is not not Explanation](https://aclanthology.org/D19-1002/), EMNLP-IJCNLP 2019, pp. 11–20.
+- 프로젝트 번역·검토 출발 자료: [The Transformer Attention Is All You Need](https://mbrenndoerfer.com/writing/transformer-attention-is-all-you-need)
 - 프로젝트 보존 자료: `raw/054_The Transformer Attention Is All You Need.ko.md`, `raw/054_The Transformer Attention Is All You Need.commentary.ko.md`.
 
 ## 관련 항목

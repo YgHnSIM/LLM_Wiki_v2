@@ -13,7 +13,7 @@ tags:
   - domain/machine-learning
   - domain/academia
 created: '2026-07-19'
-updated: '2026-07-19'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -114,6 +114,7 @@ SQuAD는 지문·질문·답 구간이라는 데이터 형식, EM·F1, 공개 �
 - Pranav Rajpurkar·Jian Zhang·Konstantin Lopyrev·Percy Liang, [SQuAD: 100,000+ Questions for Machine Comprehension of Text](https://aclanthology.org/D16-1264/), EMNLP 2016, pp. 2383–2392.
 - Pranav Rajpurkar·Robin Jia·Percy Liang, [Know What You Don’t Know: Unanswerable Questions for SQuAD](https://aclanthology.org/P18-2124/), ACL 2018, pp. 784–789.
 - [SQuAD 공식 데이터·평가 사이트](https://rajpurkar.github.io/SQuAD-explorer/).
+- 프로젝트 번역·검토 출발 자료: [SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark](https://mbrenndoerfer.com/writing/squad-stanford-question-answering-dataset-reading-comprehension-benchmark)
 - 프로젝트 보존 자료: `raw/050_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md`와 대응 해설.
 
 ## 관련 항목

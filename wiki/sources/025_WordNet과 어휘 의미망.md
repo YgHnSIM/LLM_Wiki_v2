@@ -14,7 +14,7 @@ tags:
   - domain/cognitive-science
   - domain/computer-science
 created: '2026-07-16'
-updated: '2026-07-17'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -206,6 +206,7 @@ raw가 제시한 문화적 편향과 높은 수작업 품질은 가능한 평가
 - Manaal Faruqui 외, [Retrofitting Word Vectors to Semantic Lexicons](https://aclanthology.org/N15-1184/), 2015, pp. 1606–1615.
 - Collin F. Baker·Charles J. Fillmore·John B. Lowe, [The Berkeley FrameNet Project](https://aclanthology.org/P98-1013/), 1998, pp. 86–90.
 - Martha Palmer·Daniel Gildea·Paul Kingsbury, [The Proposition Bank](https://aclanthology.org/J05-1004/), 2005, 특히 pp. 71–72.
+- 프로젝트 번역·검토 출발 자료: [WordNet - A Semantic Network for Language Understanding](https://mbrenndoerfer.com/writing/history-wordnet-semantic-network)
 - 프로젝트 보존 자료: `raw/025_WordNet - A Semantic Network for Language Understanding.ko.md`, `raw/025_WordNet - A Semantic Network for Language Understanding.commentary.ko.md`.
 
 ## 관련 항목

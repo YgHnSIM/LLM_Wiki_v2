@@ -1,10 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
+import { promises as fs } from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { metaDir, rawDir } from '../lib/project-paths.mjs';
 import {
   createArtifactRecords,
   derivePairFilenames,
   formatArtifactRecords,
   normalizeSourceSelection,
+  requireSourceUrl,
   sha256,
   sourceUrlFromMarkdown,
   validateArtifactRecord,
@@ -65,4 +71,82 @@ test('source URLs are extracted from English and Korean source markers', () => {
   assert.equal(sourceUrlFromMarkdown('Source: https://example.com/a\n'), 'https://example.com/a');
   assert.equal(sourceUrlFromMarkdown('출처: https://example.com/b\n'), 'https://example.com/b');
   assert.equal(sourceUrlFromMarkdown('# no source'), '');
+});
+
+test('artifact creation rejects a missing or non-HTTP source_url before copy can write', () => {
+  assert.equal(requireSourceUrl('https://example.com/source', 'Source Markdown 060_example.md'), 'https://example.com/source');
+  assert.throws(
+    () => requireSourceUrl('', 'Source Markdown 060_example.md'),
+    /Source Markdown 060_example\.md must provide source_url as an absolute HTTP\(S\) URL/,
+  );
+  assert.throws(
+    () => createArtifactRecords({
+      prefix: '060',
+      translationFilename: '060_example.ko.md',
+      commentaryFilename: '060_example.commentary.ko.md',
+      translationHash: sha256('translation'),
+      commentaryHash: sha256('commentary'),
+    }),
+    /Raw artifact records must provide source_url/,
+  );
+});
+
+test('source:copy and source:ready fail clearly when the source Markdown has no source_url', async () => {
+  const fixtureRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'llm-wiki-source-url-'));
+  const sourceDir = path.join(fixtureRoot, 'sources');
+  const translationDir = path.join(fixtureRoot, 'translations');
+  await fs.mkdir(sourceDir);
+  await fs.mkdir(translationDir);
+  await fs.writeFile(path.join(sourceDir, '060_missing-url.md'), '# Missing URL\n\nBody\n', 'utf8');
+  const registryPath = path.join(metaDir, 'raw-artifacts.yml');
+  const expectedRawPaths = [
+    path.join(rawDir, '060_missing-url.ko.md'),
+    path.join(rawDir, '060_missing-url.commentary.ko.md'),
+  ];
+  const rawSnapshot = () => Promise.all(expectedRawPaths.map(async (rawPath) => {
+    try {
+      const content = await fs.readFile(rawPath);
+      return { exists: true, sha256: sha256(content) };
+    } catch (error) {
+      if (error.code !== 'ENOENT') throw error;
+      return { exists: false, sha256: null };
+    }
+  }));
+  const registryBefore = await fs.readFile(registryPath, 'utf8');
+  const rawSnapshotBefore = await rawSnapshot();
+
+  try {
+    const statusResult = spawnSync(process.execPath, ['scripts/source-workflow.mjs', 'status', '060'], {
+      cwd: process.cwd(),
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        LLM_SOURCE_DIR: sourceDir,
+        LLM_TRANSLATION_DIR: translationDir,
+      },
+    });
+    assert.equal(statusResult.status, 0);
+    assert.match(statusResult.stdout, /source_url: missing \(source:copy and source:ready will fail\)/);
+    assert.equal(await fs.readFile(registryPath, 'utf8'), registryBefore);
+    assert.deepEqual(await rawSnapshot(), rawSnapshotBefore);
+
+    for (const command of ['copy', 'ready']) {
+      const result = spawnSync(process.execPath, ['scripts/source-workflow.mjs', command, '060'], {
+        cwd: process.cwd(),
+        encoding: 'utf8',
+        env: {
+          ...process.env,
+          LLM_SOURCE_DIR: sourceDir,
+          LLM_TRANSLATION_DIR: translationDir,
+        },
+      });
+      assert.notEqual(result.status, 0, `${command} unexpectedly succeeded`);
+      assert.match(result.stderr, /Source Markdown 060_missing-url\.md must provide source_url as an absolute HTTP\(S\) URL/);
+      assert.equal(await fs.readFile(registryPath, 'utf8'), registryBefore);
+      assert.deepEqual(await rawSnapshot(), rawSnapshotBefore);
+    }
+    assert.deepEqual(await fs.readdir(translationDir), []);
+  } finally {
+    await fs.rm(fixtureRoot, { recursive: true, force: true });
+  }
 });

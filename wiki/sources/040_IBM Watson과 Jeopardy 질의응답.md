@@ -14,7 +14,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-18'
-updated: '2026-07-18'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -160,6 +160,7 @@ Watson과 현대 [[대규모 언어 모델]]은 모두 많은 자료에서 언�
 - IBM, [Watson on Jeopardy!](https://www.ibm.com/history/watson-jeopardy), 경기 형식·점수·하드웨어·Toronto 오답 절.
 - Smithsonian National Museum of American History, [Knight Rider lunch box](https://www.si.edu/object/knight-rider-lunch-box%3Anmah_1054222), 1982–1986년 방송 설명.
 - Library of Congress, [America Reads: 1750 to 1899](https://www.loc.gov/exhibits/america-reads/1750-to-1899.html), *Moby-Dick; or, The Whale*, 1851.
+- 프로젝트 번역·검토 출발 자료: [IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering](https://mbrenndoerfer.com/writing/ibm-watson-jeopardy-open-domain-question-answering-nlp-information-retrieval)
 - 프로젝트 보존 자료: `raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.ko.md`, `raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.commentary.ko.md`.
 
 ## 관련 항목

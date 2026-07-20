@@ -13,7 +13,7 @@ tags:
   - domain/nlp
   - domain/conversational-ai
 created: '2026-07-14'
-updated: '2026-07-15'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -79,6 +79,7 @@ ELIZA를 [[튜링 테스트]]의 “최초 구현” 또는 튜링이 구상한 
 
 - Joseph Weizenbaum, [ELIZA—A Computer Program for the Study of Natural Language Communication Between Man and Machine](https://doi.org/10.1145/365153.365168), 1966, pp. 36–45.
 - MIT Libraries, [ELIZA source code and DOCTOR script records](https://dome.mit.edu/handle/1721.3/201699?show=full), 1965.
+- 프로젝트 번역·검토 출발 자료: [ELIZA - The First Conversational AI Program](https://mbrenndoerfer.com/writing/history-eliza-conversational-ai)
 - 프로젝트 보존 자료: `raw/007_ELIZA - The First Conversational AI Program.ko.md`, `raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md`.
 
 ## 관련 항목

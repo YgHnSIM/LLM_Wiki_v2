@@ -9,11 +9,18 @@ import {
   derivePairFilenames,
   formatArtifactRecords,
   normalizeSourceSelection,
+  requireSourceUrl,
   sha256,
   sourceUrlFromMarkdown,
   validateArtifactRecord,
   validateTranslationPair,
 } from './lib/source-workflow.mjs';
+import {
+  duplicateArtifactPaths,
+  missingExpectedArtifactPaths,
+  unexpectedArtifactPaths,
+  verificationEnvironmentForSource,
+} from './lib/wiki-lint.mjs';
 
 const sourceDir = process.env.LLM_SOURCE_DIR || 'C:\\Vault\\ObsidianVault\\Assets\\LLM_sources';
 const translationDir = process.env.LLM_TRANSLATION_DIR || 'C:\\Vault\\ObsidianVault\\LLM_ko';
@@ -41,12 +48,15 @@ async function readSourceInventory(prefix) {
   return matches[0];
 }
 
-async function loadContext(selection) {
+async function loadContext(selection, { requireOriginalUrl = false } = {}) {
   const prefix = normalizeSourceSelection(selection);
   const sourceFilename = await readSourceInventory(prefix);
   const filenames = derivePairFilenames(sourceFilename);
   const sourcePath = path.join(sourceDir, sourceFilename);
-  const sourceUrl = sourceUrlFromMarkdown(await fs.readFile(sourcePath, 'utf8'));
+  const detectedSourceUrl = sourceUrlFromMarkdown(await fs.readFile(sourcePath, 'utf8'));
+  const sourceUrl = requireOriginalUrl
+    ? requireSourceUrl(detectedSourceUrl, `Source Markdown ${sourceFilename}`)
+    : detectedSourceUrl;
   return {
     prefix,
     sourceFilename,
@@ -141,6 +151,21 @@ async function inspect(context, { requireRaw = false, requirePage = false } = {}
 
   const publicSourcePage = await findPublicSourcePage(context.prefix);
   if (requirePage && !publicSourcePage) problems.push(`No wiki source page has id source.${context.prefix}.`);
+  if (requirePage && publicSourcePage) {
+    const publicPage = matter(await fs.readFile(publicSourcePage, 'utf8'));
+    const pageArtifacts = Array.isArray(publicPage.data.artifacts) ? publicPage.data.artifacts.map(String) : [];
+    const expectedPageArtifacts = records.map((record) => record.path);
+    const missingPageArtifacts = missingExpectedArtifactPaths(pageArtifacts, expectedPageArtifacts);
+    for (const artifactPath of missingPageArtifacts) {
+      problems.push(`Public source page source.${context.prefix} frontmatter is missing expected artifact '${artifactPath}'.`);
+    }
+    for (const artifactPath of unexpectedArtifactPaths(pageArtifacts, expectedPageArtifacts)) {
+      problems.push(`Public source page source.${context.prefix} frontmatter has unexpected artifact '${artifactPath}'; expected exactly the translation/commentary pair.`);
+    }
+    for (const artifactPath of duplicateArtifactPaths(pageArtifacts)) {
+      problems.push(`Public source page source.${context.prefix} frontmatter repeats artifact '${artifactPath}'.`);
+    }
+  }
   return { pair, records, publicSourcePage, problems };
 }
 
@@ -203,9 +228,10 @@ async function ready(context) {
   const branch = run('git', ['branch', '--show-current']).stdout.trim();
   if (branch !== 'main') fail(`Source finalization is allowed only on main; current branch is ${branch || '(detached)'}.`);
 
+  const verificationEnvironment = verificationEnvironmentForSource(context.prefix, process.env);
   const verification = process.env.npm_execpath
-    ? run(process.execPath, [process.env.npm_execpath, 'run', 'verify'], { stdio: 'inherit' })
-    : run('npm', ['run', 'verify'], { stdio: 'inherit', shell: process.platform === 'win32' });
+    ? run(process.execPath, [process.env.npm_execpath, 'run', 'verify'], { stdio: 'inherit', env: verificationEnvironment })
+    : run('npm', ['run', 'verify'], { stdio: 'inherit', env: verificationEnvironment, shell: process.platform === 'win32' });
   if (verification.status !== 0) process.exit(verification.status || 1);
 
   console.log(`Source ${context.prefix} is ready for reviewed staging on main.`);
@@ -226,8 +252,14 @@ async function status(context) {
   console.log(`- raw translation: ${rawTranslationExists ? 'present' : 'missing'}`);
   console.log(`- raw commentary: ${rawCommentaryExists ? 'present' : 'missing'}`);
   console.log(`- public source page: ${publicSourcePage ? path.relative(rootDir, publicSourcePage) : 'missing'}`);
+  console.log(`- source_url: ${context.sourceUrl || 'missing (source:copy and source:ready will fail)'}`);
 
   if (translationExists && commentaryExists) {
+    if (!context.sourceUrl) {
+      console.log('- validation problems:');
+      console.log('  - Source Markdown must provide source_url as an absolute HTTP(S) URL on a Source: or 출처: line.');
+      return;
+    }
     const inspection = await inspect(context);
     if (inspection.problems.length) {
       console.log('- validation problems:');
@@ -256,7 +288,7 @@ if (!command || !selection || !['status', 'copy', 'ready'].includes(command)) {
   process.exitCode = 1;
 } else {
   try {
-    const context = await loadContext(selection);
+    const context = await loadContext(selection, { requireOriginalUrl: command !== 'status' });
     if (command === 'status') await status(context);
     if (command === 'copy') await copyRaw(context);
     if (command === 'ready') await ready(context);

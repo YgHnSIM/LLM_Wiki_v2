@@ -13,7 +13,7 @@ tags:
   - domain/machine-learning
   - domain/optimization
 created: '2026-07-18'
-updated: '2026-07-18'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -169,6 +169,7 @@ Adam은 매개변수마다 $m$과 $v$ 두 상태를 저장한다. 두 상태를 
 - Sashank J. Reddi·Satyen Kale·Sanjiv Kumar, [On the Convergence of Adam and Beyond](https://openreview.net/forum?id=ryQu7f-RZ), ICLR 2018.
 - Ashia C. Wilson 외, [The Marginal Value of Adaptive Gradient Methods in Machine Learning](https://proceedings.neurips.cc/paper_files/paper/2017/hash/81b3833e2504647f9d794f7d7b9bf341-Abstract.html), NeurIPS 2017.
 - Ilya Loshchilov·Frank Hutter, [Decoupled Weight Decay Regularization](https://openreview.net/forum?id=Bkg6RiCqY7), ICLR 2019.
+- 프로젝트 번역·검토 출발 자료: [GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization](https://mbrenndoerfer.com/writing/glove-adam-optimizer-word-embeddings)
 - 프로젝트 보존 자료: `raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.ko.md`, `raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.commentary.ko.md`.
 
 ## 관련 항목

@@ -13,7 +13,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-20'
-updated: '2026-07-20'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -141,6 +141,7 @@ GPT-1과 BERT는 전체 fine-tuning 인터페이스를 공유하지만 사전 �
 - Alec Radford 외, [Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf), 2018.
 - Alec Radford 외, [Language Models are Unsupervised Multitask Learners](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf), 2019.
 - OpenAI, [Better Language Models and Their Implications](https://openai.com/index/better-language-models/), 2019 original post와 interim updates.
+- 프로젝트 번역·검토 출발 자료: [GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning](https://mbrenndoerfer.com/writing/gpt1-gpt2-autoregressive-pretraining-transfer-learning)
 - 프로젝트 보존 자료: `raw/058_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md`, `raw/058_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md`.
 
 ## 관련 항목

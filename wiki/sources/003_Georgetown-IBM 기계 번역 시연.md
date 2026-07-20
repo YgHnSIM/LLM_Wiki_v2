@@ -12,7 +12,7 @@ tags:
   - domain/ai
   - domain/nlp
 created: '2026-05-08'
-updated: '2026-07-15'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -68,6 +68,7 @@ Georgetown의 후대 보고서에 따르면 시연은 화학 분야에서 고른
 
 - R. Ross Macdonald, [The Georgetown-IBM Experiment Demonstrated in January 1954](https://aclanthology.org/www.mt-archive.info/50/Georgetown-1963-Macdonald.pdf), Georgetown University, 1963, pp. 1–4.
 - [IBM History: Machine-aided translation](https://www.ibm.com/history/machine-aided-translation), 시연 일자·장소·장비 확인.
+- 프로젝트 번역·검토 출발 자료: [Georgetown-IBM Machine](https://mbrenndoerfer.com/writing/georgetown-ibm-machine-translation-demonstration)
 - 프로젝트 보존 자료: `raw/003_Georgetown-IBM Machine.md`, `raw/003_Georgetown-IBM Machine.commentary.md`.
 
 ## 관련 항목

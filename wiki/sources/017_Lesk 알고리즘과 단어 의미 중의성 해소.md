@@ -12,7 +12,7 @@ tags:
   - domain/ai
   - domain/computer-science
 created: '2026-07-16'
-updated: '2026-07-16'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -125,6 +125,7 @@ Oele와 van Noord의 2018년 방법은 Lesk에서 영감을 받았다고 명시�
 - Alessandro Raganato·Jose Camacho-Collados·Roberto Navigli, [Word Sense Disambiguation: A Unified Evaluation Framework and Empirical Comparison](https://aclanthology.org/E17-1010/), 2017, pp. 99–110.
 - Dieke Oele·Gertjan van Noord, [Simple Embedding-Based Word Sense Disambiguation](https://aclanthology.org/2018.gwc-1.30/), 2018, pp. 259–265.
 - Luyao Huang 외, [GlossBERT](https://aclanthology.org/D19-1355/), 2019, pp. 3509–3514.
+- 프로젝트 번역·검토 출발 자료: [Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP](https://mbrenndoerfer.com/writing/lesk-algorithm-word-sense-disambiguation-nlp-history)
 - 프로젝트 보존 자료: `raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.ko.md`, `raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.commentary.ko.md`.
 
 ## 관련 항목

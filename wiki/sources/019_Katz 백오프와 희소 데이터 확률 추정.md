@@ -14,7 +14,7 @@ tags:
   - domain/nlp
   - domain/speech-processing
 created: '2026-07-16'
-updated: '2026-07-16'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -151,6 +151,7 @@ GPT의 2018년 연구는 Transformer에 언어 모델 목적함수로 사전 학
 - Slava M. Katz, [Estimation of Probabilities from Sparse Data for the Language Model Component of a Speech Recognizer](https://doi.org/10.1109/TASSP.1987.1165125), 1987, p. 400의 초록과 식 (1)–(15), p. 401의 식 (16)–(23)과 Table I.
 - Stanley F. Chen·Joshua Goodman, [An Empirical Study of Smoothing Techniques for Language Modeling](https://dash.harvard.edu/handle/1/25104739), Harvard Computer Science Technical Report TR-10-98, 1998, §§1.1, 2.2–2.4, 2.8, 5–6.
 - Alec Radford 외, [Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf), 2018, §§3.1–3.3·4.1.
+- 프로젝트 번역·검토 출발 자료: [Katz Back-off - Handling Sparse Data in Language Models](https://mbrenndoerfer.com/writing/history-katz-backoff-sparse-data-language-models)
 - 프로젝트 보존 자료: `raw/019_Katz Back-off - Handling Sparse Data in Language Models.ko.md`, `raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md`.
 
 ## 관련 항목

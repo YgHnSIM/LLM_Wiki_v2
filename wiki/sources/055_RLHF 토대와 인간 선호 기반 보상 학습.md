@@ -12,7 +12,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-20'
-updated: '2026-07-20'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -93,6 +93,7 @@ related:
 - Daniel M. Ziegler 외, [Fine-Tuning Language Models from Human Preferences](https://arxiv.org/abs/1909.08593), 2019.
 - Nisan Stiennon 외, [Learning to Summarize from Human Feedback](https://proceedings.neurips.cc/paper/2020/hash/1f89885d556929e98d3ef9b86448f951-Abstract.html), NeurIPS 2020.
 - Long Ouyang 외, [Training Language Models to Follow Instructions with Human Feedback](https://arxiv.org/abs/2203.02155), 2022.
+- 프로젝트 번역·검토 출발 자료: [RLHF Foundations Learning from Human Preferences in Reinforcement Learning](https://mbrenndoerfer.com/writing/rlhf-foundations-reinforcement-learning-human-preferences)
 - 프로젝트 보존 자료: `raw/055_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md`, `raw/055_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.commentary.ko.md`.
 
 ## 관련 항목

@@ -13,7 +13,7 @@ tags:
   - domain/computer-science
   - domain/nlp
 created: '2026-07-18'
-updated: '2026-07-18'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -159,6 +159,7 @@ WordNet의 중심 단위는 영어 단어 형태와 어휘화된 의미의 synse
 - Amit Singhal, [Introducing the Knowledge Graph — Things, not strings](https://blog.google/products-and-platforms/products/search/introducing-knowledge-graph-things-not/), 2012-05-16.
 - Google, [Freebase Data Dumps](https://developers.google.com/freebase), Freebase history·Data dumps 절.
 - Thomas Pellissier Tanon 외, [From Freebase to Wikidata — The Great Migration](https://thomas.pellissier-tanon.fr/papers/2016-WWW-freebase.pdf), 2016, pp. 1419–1428.
+- 프로젝트 번역·검토 출발 자료: [Freebase Collaborative Knowledge Graph for Structured Information](https://mbrenndoerfer.com/writing/history-freebase-knowledge-graph)
 - 프로젝트 보존 자료: `raw/039_Freebase Collaborative Knowledge Graph for Structured Information.ko.md`, `raw/039_Freebase Collaborative Knowledge Graph for Structured Information.commentary.ko.md`.
 
 ## 관련 항목

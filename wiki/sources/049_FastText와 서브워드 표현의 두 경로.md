@@ -12,7 +12,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-18'
-updated: '2026-07-18'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -142,6 +142,7 @@ FastText가 BPE의 직접 원인이었다는 계보도 현재 근거로 확정�
 - Piotr Bojanowski·Edouard Grave·Armand Joulin·Tomas Mikolov, [Enriching Word Vectors with Subword Information](https://aclanthology.org/Q17-1010/), TACL 5, 2017, pp. 135–146.
 - Taku Kudo, [Subword Regularization](https://aclanthology.org/P18-1007/), ACL 2018, pp. 66–75.
 - Taku Kudo·John Richardson, [SentencePiece](https://aclanthology.org/D18-2012/), EMNLP System Demonstrations 2018, pp. 66–71.
+- 프로젝트 번역·검토 출발 자료: [Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations](https://mbrenndoerfer.com/writing/subword-tokenization-fasttext-character-ngram-embeddings-robust-word-representations)
 - 프로젝트 보존 자료: "raw/049_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md"와 대응 해설.
 
 ## 관련 항목

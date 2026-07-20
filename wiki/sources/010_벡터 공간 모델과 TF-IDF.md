@@ -13,7 +13,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-16'
-updated: '2026-07-16'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -110,6 +110,7 @@ TF-IDF처럼 성분이 음수가 아닌 벡터에서는 값이 보통 0과 1 사
 - Karen Spärck Jones, [A Statistical Interpretation of Term Specificity and Its Application in Retrieval](https://doi.org/10.1108/eb026526), 1972, pp. 11–21.
 - Gerard Salton, Anita Wong, Chung-Shu Yang, [A Vector Space Model for Automatic Indexing](https://doi.org/10.1145/361219.361220), 1975, pp. 613–620.
 - Gerard Salton, Christopher Buckley, [Term-Weighting Approaches in Automatic Text Retrieval](https://doi.org/10.1016/0306-4573(88)90021-0), 1988, pp. 513–523.
+- 프로젝트 번역·검토 출발 자료: [Vector Space Model & TF-IDF Foundation of Modern Information Retrieval & Semantic Search](https://mbrenndoerfer.com/writing/vector-space-model-tfidf-information-retrieval-semantic-search-history)
 - 프로젝트 보존 자료: `raw/010_Vector Space Model & TF-IDF Foundation of Modern Information Retrieval & Semantic Search.ko.md`, `raw/010_Vector Space Model & TF-IDF Foundation of Modern Information Retrieval & Semantic Search.commentary.ko.md`.
 
 ## 관련 항목
