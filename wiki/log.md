@@ -2351,6 +2351,37 @@ raw 등록 해시:
 - 후속 BERT·GPT의 목적함수와 적응 방식은 058·059 자료에서 별도로 검증한다.
 - 두 전이 경로는 새 개념 문서로 충분히 보존됐으며, 058·059와 함께 읽을 때 독립적인 비교 질문이 성립하는지 다시 판단한다.
 
+## [2026-07-20] ingest | 058 BERT의 마스크드 양방향 사전 학습
+
+058 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 BERT의 encoder 입력, MLM 15%·80/10/10 교란, NSP, 전체 모델 미세조정을 복원하고 ELMo·GPT와 다른 양방향성과 생성 인터페이스를 구분했다.
+
+변경 문서:
+
+- `raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md`와 대응 해설
+- `wiki/sources/058_BERT의 마스크드 양방향 사전 학습.md`
+- `wiki/concepts/BERT.md`, `wiki/concepts/마스크드 언어 모델링.md`, `wiki/concepts/언어 모델 전이 학습.md`
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- BERT의 양방향성을 causal mask 없는 encoder와 masked-token 복원 목적의 결합으로 정의했다.
+- 선택 token 15%와 80% `[MASK]`·10% 무작위·10% 유지 규칙, 선택 위치에만 적용되는 MLM 손실을 복원했다.
+- `[CLS]`·`[SEP]`, token·segment·position embedding과 과제별 classification·span·token 출력층을 정리했다.
+- 기반 모델을 고정하지 않고 전체 미세조정한다는 점을 ELMo 특징 기반 전이와 구분했다.
+- RoBERTa가 NSP 제거 외에도 자료·batch·학습량·sequence·dynamic masking을 함께 바꿨다고 기록했다.
+- GLUE·SQuAD·SWAG 결과를 일반 추론·사실성·생성 능력의 보편 증거로 확대하지 않았다.
+
+raw 등록 해시:
+
+- 번역: `5344baf192a824f6e43317510ab4f97f71f8699bdc5cd270c10edade579a3726`
+- 해설: `efb263603fd95f7837c43e4537372140ec9783ec94b4e6610235e725953a18a2`
+
+남은 제한:
+
+- BERT 사전 학습과 열한 과제를 재현하지 않았고 NAACL 논문의 표·부록·ablation 범위에서 검증했다.
+- NSP의 효과는 negative sampling과 학습 조건에 따라 달라질 수 있어 보편 결론을 내리지 않았다.
+- 059의 GPT 자기회귀 전이를 처리한 뒤 MLM과 causal LM의 비교가 독립 분석으로 발전할지 판단한다.
+
 ## 관련 항목
 
 - [[index]]

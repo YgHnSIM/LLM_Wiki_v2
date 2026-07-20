@@ -896,3 +896,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 72daac1a1fa9d5936cfcc4b4300dd50911141fef6df9b8155666cbd03c9b4bab
+  - path: "raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md"
+    role: translation
+    order_prefix: "058"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 5344baf192a824f6e43317510ab4f97f71f8699bdc5cd270c10edade579a3726
+  - path: "raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md"
+    role: commentary
+    order_prefix: "058"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: efb263603fd95f7837c43e4537372140ec9783ec94b4e6610235e725953a18a2
