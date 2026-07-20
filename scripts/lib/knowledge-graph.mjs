@@ -8,6 +8,8 @@ const COMMUNITY_GAP = 220;
 const GRAPH_MARGIN = 260;
 const NETWORK_LAYOUT_ITERATIONS = 240;
 const LAYOUT_EDGE_MARGIN = 54;
+const RADIAL_NODE_GAP = 52;
+const RADIAL_RING_GAP = 58;
 
 const GRAPH_LAYOUTS = Object.freeze([
   {
@@ -25,7 +27,7 @@ const GRAPH_LAYOUTS = Object.freeze([
   {
     id: 'radial',
     label: '중심-주변',
-    description: '연결망의 핵심도와 가중 연결 수를 기준으로 중심에서 밖으로 배치합니다.',
+    description: '연결망의 핵심도와 가중 연결 수를 기준으로, 넉넉한 동심원 간격을 두고 중심에서 밖으로 배치합니다.',
     grouped: false,
   },
 ]);
@@ -459,7 +461,8 @@ function placeRadialLayout(nodes, undirectedEdges) {
   const centerY = GRAPH_HEIGHT / 2;
   const maximumRadius = Math.max(0, ...nodes.map((node) => node.radius));
   const minimumSeparation = maximumRadius * 2 + NODE_COLLISION_GAP + 8;
-  const ringSpacing = minimumSeparation + 20;
+  const radialSeparation = minimumSeparation + RADIAL_NODE_GAP;
+  const ringSpacing = radialSeparation + RADIAL_RING_GAP;
 
   ordered[0].x = centerX;
   ordered[0].y = centerY;
@@ -467,7 +470,7 @@ function placeRadialLayout(nodes, undirectedEdges) {
   let ring = 1;
   while (cursor < ordered.length) {
     const radialDistance = ring * ringSpacing;
-    const angleStep = 2 * Math.asin(Math.min(1, minimumSeparation / (2 * radialDistance)));
+    const angleStep = 2 * Math.asin(Math.min(1, radialSeparation / (2 * radialDistance)));
     const capacity = Math.max(1, Math.floor(Math.PI * 2 / angleStep));
     const count = Math.min(capacity, ordered.length - cursor);
     const offset = (stableHash(`radial-ring:${ring}`) % 360) * Math.PI / 180;
@@ -666,6 +669,7 @@ export function buildKnowledgeGraph(documents, {
       node.y = Number((node.y + shiftY).toFixed(1));
     }
   }
+  relaxGlobalNodeCollisions(nodes, { passes: 60 });
 
   saveNodeLayout(nodes, 'community');
   placeNetworkLayout(nodes, undirectedEdges);

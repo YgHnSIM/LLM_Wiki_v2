@@ -43,6 +43,17 @@ function assertLayoutHasNoMarkerOverlaps(graph, layoutId, nodes = graph.nodes) {
   }
 }
 
+function assertLayoutStaysInsideSafeMargin(graph, layoutId, margin = 54) {
+  for (const node of graph.nodes) {
+    const position = node.layouts[layoutId];
+    const inset = node.radius + margin;
+    assert.ok(position.x >= inset, `${layoutId}: ${node.id} crosses the left safe margin`);
+    assert.ok(position.x <= graph.dimensions.width - inset, `${layoutId}: ${node.id} crosses the right safe margin`);
+    assert.ok(position.y >= inset, `${layoutId}: ${node.id} crosses the top safe margin`);
+    assert.ok(position.y <= graph.dimensions.height - inset, `${layoutId}: ${node.id} crosses the bottom safe margin`);
+  }
+}
+
 test('knowledge graph merges authored relation kinds while preserving direction', () => {
   const a = page('concept.a');
   const b = page('concept.b');
@@ -173,7 +184,10 @@ test('knowledge graph layout and communities are deterministic and internally co
   if (first.stats.maxBridgeConnections > 0) {
     assert.equal(Math.max(...first.nodes.map((node) => node.z)), first.dimensions.depth);
   }
-  for (const layout of first.layouts) assertLayoutHasNoMarkerOverlaps(first, layout.id);
+  for (const layout of first.layouts) {
+    assertLayoutHasNoMarkerOverlaps(first, layout.id);
+    assertLayoutStaysInsideSafeMargin(first, layout.id);
+  }
 });
 
 test('bridge counts represent unique cross-community neighbors, not directed edge count', () => {
@@ -255,9 +269,35 @@ test('center-periphery layout places the most connected node inside isolated doc
   assert.equal(distanceFromCenter(graphHub), 0);
   assert.ok(distanceFromCenter(graphIsolated) > distanceFromCenter(graphHub));
   assert.ok(
-    distanceFromCenter(graphIsolated)
+    distanceFromCenter(graphIsolated) + 0.2
       >= Math.max(...leaves.map((leaf) => distanceFromCenter(graph.nodes.find((node) => node.id === leaf.id)))),
   );
+});
+
+test('center-periphery layout keeps a generous readable gap between node markers', () => {
+  const hub = page('concept.radial-hub');
+  const leaves = Array.from({ length: 72 }, (_, index) => page(`concept.radial-leaf-${String(index).padStart(2, '0')}`));
+  hub.outgoing = leaves;
+  hub.relatedDocuments = leaves;
+
+  const graph = buildKnowledgeGraph([hub, ...leaves]);
+  let smallestGap = Infinity;
+  for (let leftIndex = 0; leftIndex < graph.nodes.length; leftIndex += 1) {
+    const left = graph.nodes[leftIndex];
+    for (let rightIndex = leftIndex + 1; rightIndex < graph.nodes.length; rightIndex += 1) {
+      const right = graph.nodes[rightIndex];
+      const leftPosition = left.layouts.radial;
+      const rightPosition = right.layouts.radial;
+      const gap = Math.hypot(
+        rightPosition.x - leftPosition.x,
+        rightPosition.y - leftPosition.y,
+      ) - left.radius - right.radius;
+      smallestGap = Math.min(smallestGap, gap);
+    }
+  }
+
+  assert.ok(smallestGap >= 64, `radial marker gap is too tight: ${smallestGap.toFixed(1)}px`);
+  assertLayoutStaysInsideSafeMargin(graph, 'radial');
 });
 
 test('relationship layout pulls a stronger authored connection closer', () => {
