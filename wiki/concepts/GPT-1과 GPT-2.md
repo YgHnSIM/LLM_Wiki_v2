@@ -1,0 +1,100 @@
+---
+schema_version: 2
+id: concept.gpt-1-gpt-2
+page_type: concept
+title: GPT-1과 GPT-2
+aliases:
+  - GPT-1
+  - GPT-2
+  - Generative Pre-trained Transformer
+  - 생성 사전 학습 Transformer
+tags:
+  - type/concept
+  - domain/ai
+  - domain/nlp
+  - domain/machine-learning
+created: '2026-07-20'
+updated: '2026-07-20'
+lifecycle: active
+verification: verified
+artifacts:
+  - 'raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md'
+  - 'raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md'
+evidence:
+  - source_id: gpt-2018
+    locator: '§§1–3의 117M causal Transformer·BookCorpus·두 단계 학습·input transformations와 §§4–5의 12개 과제 결과'
+    relation: supports
+  - source_id: radford-et-al-2019-gpt2
+    locator: '§§1–3의 WebText·모델 네 크기·byte-level BPE·zero-shot 설정과 §§3–4의 과제별 결과·한계'
+    relation: supports
+  - source_id: openai-2019-gpt2-release
+    locator: '2019년 original post·interim updates의 117M·345M 공개와 zero-shot·release policy 설명'
+    relation: contextualizes
+related:
+  - source.059
+  - concept.자기회귀-생성
+  - concept.언어-모델-전이-학습
+  - concept.bert
+  - concept.transformer
+---
+# GPT-1과 GPT-2
+
+[[GPT-1과 GPT-2]]는 causal [[Transformer]]를 다음 token 예측으로 사전 학습해 여러 자연어 처리 과제에 적용한 초기 Generative Pre-trained Transformer 모델이다. GPT-1은 지도 미세조정, GPT-2는 규모 확대와 zero-shot text continuation에 초점을 맞췄다.
+
+## GPT-1
+
+GPT-1은 12층·약 117M 매개변수·512 token context를 사용했다. BookCorpus에서 자기회귀 언어 모델을 사전 학습한 뒤 자연어 추론·질의응답·유사도·분류의 구조를 delimiter가 있는 token sequence로 바꿔 전체 모델을 미세조정했다.
+
+사전 학습과 지도 미세조정의 목적은 다음처럼 결합됐다.
+
+$$
+L_3(\mathcal{C})=L_2(\mathcal{C})+\lambda L_1(\mathcal{C}).
+$$
+
+$L_2$는 과제 라벨 목적, $L_1$은 보조 언어 모델 목적이다. 후자는 미세조정 중 일반 표현을 유지하는 regularizer 역할을 했다. 12개 평가 중 9개에서 당시 최고 결과를 유의하게 개선했다.
+
+## GPT-2
+
+GPT-2는 117M·345M·762/774M·1542M 네 크기를 평가했다. 가장 큰 모델은 48층, hidden size 1600, context 1024였다. WebText 약 8백만 문서와 byte-level BPE를 사용했다.
+
+논문의 목표는 fine-tuning보다 language modeling 안에 자연 발생한 task를 zero-shot으로 꺼낼 수 있는지 시험하는 것이었다. task별 cue와 scoring을 사용했지만 모델 가중치는 바꾸지 않았다.
+
+## 전이 인터페이스의 차이
+
+| 모델 | 과제 적응 위치 | 표지 과제 학습 | 대표 출력 |
+|---|---|---|---|
+| GPT-1 | 입력 delimiter·출력층·전체 가중치 | 있음 | class·후보 점수 |
+| GPT-2 | 입력 cue와 decoding/scoring | 없음 | text continuation·후보 probability |
+
+GPT-2가 GPT-1의 지도 fine-tuning을 폐기했다고 일반화할 수는 없다. GPT-2 논문은 zero-shot 가능성을 연구했고 fine-tuning이 후속 과제 성능을 더 높일 것으로 예상했다.
+
+## zero-shot 결과 읽기
+
+language modeling·LAMBADA·CBT·Winograd에서는 강한 결과가 있었다. 반면 translation·summarization·QA·reading comprehension은 task 형식의 출력을 만들었지만 지도 최고 결과와 큰 차이가 났다. 각 평가의 metric·cue·decoding과 절대 성능을 함께 기록해야 한다.
+
+‘zero-shot’은 해당 과제의 표지 training set으로 매개변수를 갱신하지 않았다는 설정이다. 사전 학습 corpus에 유사한 문서나 task 형식이 없었다는 보장은 아니며, 오늘날의 instruction following이나 few-shot prompting과 동일하지 않다.
+
+## 생성의 강점과 한계
+
+causal LM은 앞 문맥에서 다음 token을 뽑는 자연스러운 생성 인터페이스를 제공한다. 동시에 현재 위치의 표현은 오른쪽 입력을 보지 못한다. 사실 검증 목적도 없으므로 유창하지만 틀린 continuation을 만들 수 있다.
+
+표준 sampling은 token별 순차 과정이다. 훈련 때 여러 정답 위치를 병렬 계산할 수 있다는 것과 긴 출력의 generation latency를 혼동하지 않는다.
+
+## 공개와 안전
+
+GPT-2 full 1.5B weights는 2019년 2월 즉시 공개되지 않았다. 117M→345M→774M→1.5B 순으로 단계적으로 공개됐다. 이는 합성 text 오용과 탐지 연구를 고려한 공개 실험이었고, 2019년 11월 full release로 끝났다.
+
+## 출처
+
+- [[059_GPT-1과 GPT-2의 전이 방식 변화]]
+- Alec Radford 외, [Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf), 2018.
+- Alec Radford 외, [Language Models are Unsupervised Multitask Learners](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf), 2019.
+- OpenAI, [Better Language Models and Their Implications](https://openai.com/index/better-language-models/), 2019.
+
+## 관련 항목
+
+- [[059_GPT-1과 GPT-2의 전이 방식 변화]]
+- [[자기회귀 생성]]
+- [[언어 모델 전이 학습]]
+- [[BERT]]
+- [[Transformer]]

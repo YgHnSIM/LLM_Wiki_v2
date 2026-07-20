@@ -912,3 +912,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: efb263603fd95f7837c43e4537372140ec9783ec94b4e6610235e725953a18a2
+  - path: "raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md"
+    role: translation
+    order_prefix: "059"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: cd7de16e6f177bd7a2fa0009f623f85135a02de7e2140e33cf3f2692196259ef
+  - path: "raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md"
+    role: commentary
+    order_prefix: "059"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 04dead39f09202573d53a2701d6425a55e34ce0b96a5796f8f114b13efc1b65c

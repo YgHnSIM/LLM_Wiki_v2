@@ -2382,6 +2382,37 @@ raw 등록 해시:
 - NSP의 효과는 negative sampling과 학습 조건에 따라 달라질 수 있어 보편 결론을 내리지 않았다.
 - 059의 GPT 자기회귀 전이를 처리한 뒤 MLM과 causal LM의 비교가 독립 분석으로 발전할지 판단한다.
 
+## [2026-07-20] ingest | 059 GPT-1과 GPT-2의 전이 방식 변화
+
+059 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 GPT-1의 지도 fine-tuning과 GPT-2의 cue 기반 zero-shot 평가를 분리하고, 모델·자료·context·tokenizer 변화와 과제별 절대 성능을 복원했다.
+
+변경 문서:
+
+- `raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md`와 대응 해설
+- `wiki/sources/059_GPT-1과 GPT-2의 전이 방식 변화.md`
+- `wiki/concepts/GPT-1과 GPT-2.md`, `wiki/concepts/자기회귀 생성.md`, `wiki/concepts/언어 모델 전이 학습.md`
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- GPT-1의 117M·12층·BookCorpus와 지도 loss+보조 LM loss, 구조화된 과제 입력 변환을 복원했다.
+- 12개 평가 중 9개에서 유의한 당시 최고 결과를 냈다는 범위로 한정했다.
+- GPT-2의 117M–1.542B 네 크기, WebText 약 8백만 문서·40GB, byte-level BPE와 1024 context를 구분했다.
+- language modeling·LAMBADA·CBT·Winograd의 강한 결과와 번역·요약·QA의 낮은 zero-shot 절대 성능을 분리했다.
+- GPT-2의 cue 기반 평가를 현대 instruction tuning·few-shot prompting과 동일시하지 않았다.
+- 1.5B 모델이 2019년 2월 보류된 뒤 11월 staged release로 공개됐다고 현재 상태를 교정했다.
+
+raw 등록 해시:
+
+- 번역: `cd7de16e6f177bd7a2fa0009f623f85135a02de7e2140e33cf3f2692196259ef`
+- 해설: `04dead39f09202573d53a2701d6425a55e34ce0b96a5796f8f114b13efc1b65c`
+
+남은 제한:
+
+- GPT-1·GPT-2 훈련과 벤치마크를 재현하지 않았고 OpenAI 논문·공개 기록 범위에서 검증했다.
+- WebText의 실제 문서별 구성·중복·평가 자료 오염은 공개되지 않은 전체 corpus 없이는 완전 감사할 수 없다.
+- 057–059를 함께 읽어 드러난 과제 적응 인터페이스의 변화는 별도 비교 읽기 분석으로 보존한다.
+
 ## 관련 항목
 
 - [[index]]

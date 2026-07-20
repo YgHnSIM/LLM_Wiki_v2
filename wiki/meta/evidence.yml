@@ -2256,3 +2256,19 @@ sources:
     kind: preprint
     url: https://arxiv.org/abs/1907.11692
     language: en
+  radford-et-al-2019-gpt2:
+    title: Language Models are Unsupervised Multitask Learners
+    authors: [Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, Ilya Sutskever]
+    published: 2019
+    source_type: primary
+    kind: research-paper
+    url: https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf
+    language: en
+  openai-2019-gpt2-release:
+    title: Better Language Models and Their Implications
+    authors: [OpenAI]
+    published: 2019
+    source_type: primary
+    kind: web-article
+    url: https://openai.com/index/better-language-models/
+    language: en
