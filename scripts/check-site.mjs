@@ -86,13 +86,18 @@ for (const htmlFile of htmlFiles) {
 
   const primaryNav = html.match(/<nav class="primary-nav"[\s\S]*?<\/nav>/i)?.[0] ?? '';
   const graphNavUrl = siteUrl('/graph/');
-  const graphNavLinks = [...primaryNav.matchAll(new RegExp(`<a href="${graphNavUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"([^>]*)>그래프<\\/a>`, 'g'))];
+  const graphNavLinks = [...primaryNav.matchAll(/<a\b[^>]*>그래프<\/a>/g)]
+    .map((match) => match[0])
+    .filter((markup) => attributeValue(markup, 'href') === graphNavUrl);
   if (graphNavLinks.length !== 1) {
     errors.push(`${relativeHtmlPath} must include one primary navigation link to the knowledge graph.`);
   } else {
-    const active = /aria-current="page"/.test(graphNavLinks[0][1]);
+    const active = attributeValue(graphNavLinks[0], 'aria-current') === 'page';
     const graphPage = relativeHtmlPath.replaceAll('\\', '/') === 'graph/index.html';
     if (active !== graphPage) errors.push(`${relativeHtmlPath} has an incorrect active state for the graph navigation link.`);
+    if (!/\bdesktop-graph-link\b/.test(attributeValue(graphNavLinks[0], 'class') ?? '')) {
+      errors.push(`${relativeHtmlPath} must mark the graph navigation entry as desktop-only.`);
+    }
   }
 
   if (/\brole="(?:listbox|option)"/i.test(html)) {
@@ -270,6 +275,15 @@ try {
 const graphPageFile = fileForUrl(siteUrl('/graph/'));
 const graphPageHtml = htmlCache.get(graphPageFile) ?? await fs.readFile(graphPageFile, 'utf8');
 htmlCache.set(graphPageFile, graphPageHtml);
+const compiledStyles = await fs.readFile(path.join(distDir, 'assets', 'styles.css'), 'utf8');
+for (const forbiddenStyle of ['relationship-explorer--graph', '--relationship-', '#002fa7', 'Swiss editorial index']) {
+  if (compiledStyles.includes(forbiddenStyle)) {
+    errors.push(`Site stylesheet retains removed mobile graph or Swiss relationship styling: ${forbiddenStyle}.`);
+  }
+}
+if (!compiledStyles.includes('.desktop-graph-link,') || !compiledStyles.includes('.graph-page .graph-main,')) {
+  errors.push('Site stylesheet must remove graph entry points and the graph section from mobile layouts.');
+}
 const expectedGraphScriptUrl = siteUrl('/assets/graph-3d.js');
 const expectedRelationshipScriptUrl = siteUrl('/assets/relationship-explorer.js');
 const graphScriptTags = [...graphPageHtml.matchAll(/<script\b[^>]*\bsrc="([^"]+)"[^>]*>\s*<\/script>/gi)];
@@ -280,18 +294,14 @@ if (matchingGraphScripts.length !== 1) {
   errors.push('Knowledge graph script must load as an ES module.');
 }
 const matchingRelationshipScripts = graphScriptTags.filter((match) => match[1] === expectedRelationshipScriptUrl);
-if (matchingRelationshipScripts.length !== 1) {
-  errors.push(`Knowledge graph page must load exactly one relationship explorer script from ${expectedRelationshipScriptUrl}.`);
-} else if (!/\btype="module"/i.test(matchingRelationshipScripts[0][0])) {
-  errors.push('Relationship explorer script must load as an ES module.');
+if (matchingRelationshipScripts.length !== 0) {
+  errors.push('Knowledge graph page must not load the mobile relationship explorer.');
 }
 for (const hook of [
   'data-knowledge-graph',
   'data-graph-fullscreen-root',
   'data-graph-stage',
   'data-graph-canvas',
-  'data-relationship-explorer',
-  'data-relationship-context',
   'data-graph-hud',
   'data-graph-controls',
   'data-graph-search',
@@ -399,20 +409,8 @@ if (!fullscreenRootMarkup) {
   }
 }
 
-const mobileExplorerMarkup = elementMarkupForHook(graphPageHtml, 'data-relationship-explorer');
-if (!mobileExplorerMarkup) {
-  errors.push('Knowledge graph mobile relationship explorer is missing or has unbalanced markup.');
-} else {
-  const explorerTag = mobileExplorerMarkup.match(/^<[a-z][\w:-]*\b[^>]*>/i)?.[0] ?? '';
-  if (attributeValue(explorerTag, 'data-relationship-context') !== 'graph') {
-    errors.push('Knowledge graph relationship explorer must declare the graph context.');
-  }
-  if (attributeValue(explorerTag, 'data-graph-url') !== siteUrl('/graph-data.json')) {
-    errors.push('Knowledge graph relationship explorer must point to the generated graph data.');
-  }
-  if (!/\brelationship-explorer--graph\b/.test(attributeValue(explorerTag, 'class') ?? '')) {
-    errors.push('Knowledge graph relationship explorer must use the graph presentation class.');
-  }
+if (/data-relationship-context="graph"|relationship-explorer--graph/.test(graphPageHtml)) {
+  errors.push('Knowledge graph page must not retain mobile relationship explorer markup.');
 }
 
 const fullscreenRootTag = fullscreenRootMarkup.match(/^<[a-z][\w:-]*\b[^>]*>/i)?.[0] ?? '';

@@ -476,9 +476,10 @@ function renderSearch(id, { large = false, label = '위키 검색' } = {}) {
     </form>`;
 }
 
-function navLink(url, label, current) {
+function navLink(url, label, current, { className = '' } = {}) {
   const active = current === url;
-  return `<a href="${sitePath(url)}"${active ? ' aria-current="page"' : ''}>${label}</a>`;
+  const classAttribute = className ? ` class="${escapeHtml(className)}"` : '';
+  return `<a${classAttribute} href="${sitePath(url)}"${active ? ' aria-current="page"' : ''}>${label}</a>`;
 }
 
 function layout({ title, description, current = '', body, pageClass = '', scripts = [] }) {
@@ -515,7 +516,7 @@ function layout({ title, description, current = '', body, pageClass = '', script
         ${navLink('/concepts/', '개념', current)}
         ${navLink('/entities/', '인물·기관', current)}
         ${navLink('/analyses/', '비교 읽기', current)}
-        ${navLink('/graph/', '그래프', current)}
+        ${navLink('/graph/', '그래프', current, { className: 'desktop-graph-link' })}
         ${navLink('/search/', '전체 검색', current)}
         <div class="mobile-nav-search">${renderSearch('mobile-search', { label: '모바일 사이트 검색' })}</div>
       </nav>
@@ -539,7 +540,7 @@ function layout({ title, description, current = '', body, pageClass = '', script
     <nav class="footer-meta" aria-label="보조 메뉴">
       <span>최근 문서 갱신 ${escapeHtml(latestUpdate)}</span>
       <a href="${sitePath('/search/')}">전체 검색</a>
-      <a href="${sitePath('/graph/')}">지식 그래프</a>
+      <a class="desktop-graph-link" href="${sitePath('/graph/')}">지식 그래프</a>
       <a href="${sitePath('/translations/')}">번역본 모아보기</a>
       <a href="${sitePath('/about/')}">위키 안내</a>
       <a href="${sitePath('/log/')}">변경 기록</a>
@@ -600,7 +601,7 @@ function renderHome() {
         <h1>언어 모델의<br><span>역사를 함께 읽다</span></h1>
         <p class="hero-intro">${escapeHtml(intro)}</p>
         ${renderSearch('hero-search', { large: true, label: '홈 주요 검색' })}
-        <a class="button-link graph-home-link" href="${sitePath('/graph/')}">문서 ${graphData.stats.nodes}개의 연결 지도 열기 <span aria-hidden="true">→</span></a>
+        <a class="button-link graph-home-link desktop-graph-link" href="${sitePath('/graph/')}">문서 ${graphData.stats.nodes}개의 연결 지도 열기 <span aria-hidden="true">→</span></a>
       </div>
       <nav class="hero-collage hero-source-strip" aria-label="최근 원문 노트 빠른 이동">
         <p class="collage-label">최근 원문 노트</p>
@@ -677,9 +678,6 @@ function renderGraphPage() {
         <div class="graph-stage" data-graph-stage>
           <p class="sr-only" id="knowledge-graph-description">문서 ${graphData.stats.nodes}개와 방향 관계 ${graphData.stats.edges}개를 연결 집단, 관계 중심, 중심-주변 배치로 전환해 보는 WebGL 3D 지식 세계입니다. 노드 높이는 다른 집단에 속한 고유 이웃 수를 로그 눈금으로 나타냅니다. 궤도 카메라로 조망하거나 1인칭 비행으로 지식 세계 안을 이동할 수 있으며, 도움말에서 전체 조작법을 확인할 수 있습니다.</p>
           <canvas class="knowledge-graph" data-graph-canvas width="${graphData.dimensions.width}" height="${graphData.dimensions.height}" role="img" tabindex="0" aria-label="3D 지식 세계 조작 화면" aria-describedby="knowledge-graph-description">그래프를 지원하지 않는 환경에서는 아래 텍스트 목록으로 문서를 탐색할 수 있습니다.</canvas>
-          <section class="relationship-explorer relationship-explorer--graph" data-relationship-explorer data-relationship-context="graph" data-graph-url="${sitePath('/graph-data.json')}" aria-label="모바일 연결 탐색기">
-            <p class="relationship-explorer__loading" role="status">연결 데이터를 불러오는 중입니다.</p>
-          </section>
           <p class="graph-static-message" data-graph-static-message>지식 세계를 불러오는 중입니다.</p>
 
           <header class="graph-game-header" data-graph-hud>
@@ -937,10 +935,7 @@ function renderGraphPage() {
     current: '/graph/',
     body,
     pageClass: 'graph-page',
-    scripts: [
-      { src: '/assets/relationship-explorer.js', type: 'module' },
-      { src: '/assets/graph-3d.js', type: 'module' },
-    ],
+    scripts: [{ src: '/assets/graph-3d.js', type: 'module' }],
   });
 }
 
@@ -1239,7 +1234,7 @@ function renderRelationshipPreview(document) {
     </header>
     ${items ? `<ol class="relationship-preview__list">${items}</ol>` : '<p class="relationship-preview__empty">직접 연결된 공개 문서가 없습니다.</p>'}
     <a class="relationship-preview__open" href="#relationship-explorer-dialog" data-open-relationship-dialog aria-controls="relationship-explorer-dialog">연결 모두 보기</a>
-    <noscript><p class="relationship-preview__noscript"><a href="${sitePath('/graph/')}">지식 그래프에서 문서 찾기</a></p></noscript>
+    <noscript><p class="relationship-preview__noscript"><a href="${sitePath('/search/')}">전체 검색에서 문서 찾기</a></p></noscript>
   </section>
   <dialog class="relationship-dialog" id="relationship-explorer-dialog" data-relationship-dialog aria-labelledby="relationship-dialog-title">
     <div class="relationship-dialog__frame">

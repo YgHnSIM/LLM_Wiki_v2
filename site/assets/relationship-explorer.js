@@ -207,13 +207,9 @@ function loadGraph(url) {
 class RelationshipExplorer {
   constructor(root, data) {
     this.root = root;
-    this.context = root.dataset.relationshipContext || 'article';
-    this.root.id ||= `relationship-explorer-${this.context}`;
+    this.root.id ||= 'relationship-explorer-article';
     this.index = createRelationshipIndex(data);
-    const urlFocus = this.context === 'graph' ? new URL(window.location.href).searchParams.get('focus') : '';
-    const initialId = this.index.nodeById.has(urlFocus)
-      ? urlFocus
-      : this.index.nodeById.has(root.dataset.focusId) ? root.dataset.focusId : '';
+    const initialId = this.index.nodeById.has(root.dataset.focusId) ? root.dataset.focusId : '';
     this.focusId = initialId;
     this.tab = 'recommended';
     this.limit = 6;
@@ -227,16 +223,6 @@ class RelationshipExplorer {
     this.render();
   }
 
-  updateUrl() {
-    if (this.context !== 'graph') return;
-    const url = new URL(window.location.href);
-    if (this.focusId) url.searchParams.set('focus', this.focusId);
-    else url.searchParams.delete('focus');
-    if (this.communityId !== null) url.searchParams.set('community', String(this.communityId));
-    else url.searchParams.delete('community');
-    window.history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
-  }
-
   focus(id, { fromHistory = false } = {}) {
     if (!this.index.nodeById.has(id)) return;
     this.focusId = id;
@@ -247,15 +233,10 @@ class RelationshipExplorer {
     if (!fromHistory && this.history.at(-1) !== id) this.history.push(id);
     this.history = this.history.slice(-12);
     saveHistory(this.history);
-    this.updateUrl();
     this.render();
     const focusCard = this.root.querySelector('.relationship-explorer__focus');
-    if (this.context === 'article') {
-      this.root.scrollTop = 0;
-      focusCard?.focus({ preventScroll: true });
-    } else {
-      focusCard?.focus();
-    }
+    this.root.scrollTop = 0;
+    focusCard?.focus({ preventScroll: true });
   }
 
   openCommunity(id) {
@@ -264,7 +245,6 @@ class RelationshipExplorer {
     this.focusId = '';
     this.query = '';
     this.communityLimit = 12;
-    this.updateUrl();
     this.render();
   }
 
@@ -316,7 +296,6 @@ class RelationshipExplorer {
       this.focusId = '';
       this.communityId = null;
       this.query = '';
-      this.updateUrl();
       this.render();
     }
   }
@@ -363,7 +342,7 @@ class RelationshipExplorer {
       : String(this.index.data.stats?.nodes ?? this.index.data.nodes.length).padStart(2, '0');
     const copy = element('div', 'relationship-explorer__masthead-copy');
     copy.append(element('p', '', '연결 탐색'));
-    const heading = element(this.context === 'graph' ? 'h1' : 'h2', '', focus?.title ?? '지식 연결');
+    const heading = element('h2', '', focus?.title ?? '지식 연결');
     copy.append(heading);
     const summary = focus
       ? `${typeLabels[focus.type] ?? focus.type} · ${verificationLabels[focus.verification] ?? focus.verification}`
@@ -651,7 +630,7 @@ export async function initializeRelationshipExplorers() {
       const data = await loadGraph(root.dataset.graphUrl);
       new RelationshipExplorer(root, data);
     } catch (error) {
-      root.replaceChildren(element('p', 'relationship-results__empty', '연결 데이터를 불러오지 못했습니다. 지식 그래프나 검색을 이용해 주세요.'));
+      root.replaceChildren(element('p', 'relationship-results__empty', '연결 데이터를 불러오지 못했습니다. 전체 검색을 이용해 주세요.'));
       console.error(error);
     }
   }));

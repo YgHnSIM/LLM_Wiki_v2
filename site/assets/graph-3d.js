@@ -25,6 +25,9 @@ import {
 } from './graph-mobile-model.js';
 
 (() => {
+  const mobileMode = window.matchMedia(MOBILE_GRAPH_MEDIA_QUERY);
+  if (mobileMode.matches) return;
+
   const root = document.querySelector('[data-knowledge-graph]');
   if (!root) return;
 
@@ -96,7 +99,6 @@ import {
   const graphUrl = root.dataset.graphUrl;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const forcedColors = window.matchMedia('(forced-colors: active)');
-  const mobileMode = window.matchMedia(MOBILE_GRAPH_MEDIA_QUERY);
   root.classList.toggle('is-mobile-atlas', mobileMode.matches);
   const collator = new Intl.Collator('ko', { numeric: true, sensitivity: 'base' });
   const normalize = (value) => String(value ?? '')
