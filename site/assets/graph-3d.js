@@ -60,9 +60,12 @@ import {
   const autoRotateInput = root.querySelector('[data-graph-auto-rotate]');
   const inspector = root.querySelector('[data-graph-inspector]');
   const inspectorContent = root.querySelector('[data-graph-inspector-content]');
+  const inspectorToggle = root.querySelector('[data-graph-inspector-toggle]');
   const status = root.querySelector('[data-graph-status]');
   const staticMessage = root.querySelector('[data-graph-static-message]');
   const minimap = root.querySelector('[data-graph-minimap]');
+  const minimapPanel = root.querySelector('[data-graph-minimap-panel]');
+  const minimapToggle = root.querySelector('[data-graph-minimap-toggle]');
   const minimapContext = minimap?.getContext('2d');
   const hoverCard = root.querySelector('[data-graph-hover-card]');
   const settingsPanel = root.querySelector('[data-graph-settings]');
@@ -165,6 +168,9 @@ import {
     minimapPoints: new Map(),
     nodeById: new Map(),
     inspectorId: '',
+    inspectorOpen: false,
+    inspectorTab: 'document',
+    minimapOpen: false,
     mobileRelationLimit: 8,
     mobileRenderedId: '',
     mobileFrame: 0,
@@ -1611,9 +1617,32 @@ import {
       return neighbor && neighbor.community !== node.community;
     }).length;
     inspectorContent.replaceChildren();
-    const columns = element('div', 'graph-inspector-columns');
-    const primary = element('section', 'graph-inspector-primary');
-    const directPanel = element('section', 'graph-inspector-relations');
+    const tabs = element('div', 'graph-inspector-tabs');
+    const documentTab = element('button', '', '문서 정보');
+    const relationsTab = element('button', '', `직접 연결 ${relations.size}`);
+    const primary = element('section', 'graph-inspector-panel graph-inspector-primary');
+    const directPanel = element('section', 'graph-inspector-panel graph-inspector-relations');
+    tabs.setAttribute('role', 'tablist');
+    tabs.setAttribute('aria-label', '현장 카드 보기');
+    documentTab.type = 'button';
+    documentTab.id = 'graph-inspector-document-tab';
+    documentTab.dataset.graphInspectorTab = 'document';
+    documentTab.setAttribute('role', 'tab');
+    documentTab.setAttribute('aria-controls', 'graph-inspector-document-panel');
+    relationsTab.type = 'button';
+    relationsTab.id = 'graph-inspector-relations-tab';
+    relationsTab.dataset.graphInspectorTab = 'relations';
+    relationsTab.setAttribute('role', 'tab');
+    relationsTab.setAttribute('aria-controls', 'graph-inspector-relations-panel');
+    tabs.append(documentTab, relationsTab);
+    primary.id = 'graph-inspector-document-panel';
+    primary.setAttribute('role', 'tabpanel');
+    primary.setAttribute('aria-labelledby', documentTab.id);
+    primary.tabIndex = 0;
+    directPanel.id = 'graph-inspector-relations-panel';
+    directPanel.setAttribute('role', 'tabpanel');
+    directPanel.setAttribute('aria-labelledby', relationsTab.id);
+    directPanel.tabIndex = 0;
     primary.setAttribute('aria-label', '선택한 문서');
     directPanel.setAttribute('aria-label', '직접 연결');
     primary.append(element('p', 'eyebrow', typeLabels[node.type] ?? node.type));
@@ -1706,9 +1735,23 @@ import {
     } else {
       directPanel.append(element('p', 'graph-relation-empty', '현재 표시 조건에서 직접 연결된 문서가 없습니다.'));
     }
-    columns.append(primary, directPanel);
-    inspectorContent.append(columns);
+    inspectorContent.append(tabs, primary, directPanel);
     state.inspectorId = node.id;
+    setInspectorTab(state.inspectorTab);
+  }
+
+  function setInspectorTab(tabId, { focus = false } = {}) {
+    const nextTab = tabId === 'relations' ? 'relations' : 'document';
+    state.inspectorTab = nextTab;
+    for (const button of inspectorContent.querySelectorAll('[data-graph-inspector-tab]')) {
+      const selected = button.dataset.graphInspectorTab === nextTab;
+      button.setAttribute('aria-selected', String(selected));
+      button.tabIndex = selected ? 0 : -1;
+      if (selected && focus) button.focus();
+    }
+    for (const panel of inspectorContent.querySelectorAll('.graph-inspector-panel')) {
+      panel.hidden = panel.id !== `graph-inspector-${nextTab}-panel`;
+    }
   }
 
   const BOOKMARK_STORAGE_KEY = 'llm-wiki:knowledge-world:bookmarks:v1';
@@ -1963,6 +2006,12 @@ import {
     if (state.mode === 'first-person' && nextMode !== 'first-person') world?.releasePointerLock?.();
     state.mode = nextMode;
     root.classList.toggle('is-first-person', state.mode === 'first-person');
+    if (state.mode === 'first-person') {
+      setInspectorOpen(false);
+      setMinimapOpen(false);
+    } else {
+      syncInspectorVisibility();
+    }
     if (fpsLayer) fpsLayer.hidden = state.mode !== 'first-person';
     world?.setMode?.(state.mode, { selectedId: state.selected });
     if (state.mode === 'travel') refreshTravelCandidate(0);
@@ -2008,10 +2057,43 @@ import {
     status.textContent = '현재 필터에서 이동할 수 있는 방문 기록이 없습니다.';
   }
 
+  function syncInspectorVisibility() {
+    const available = Boolean(state.selected) && !mobileMode.matches;
+    const open = available && state.inspectorOpen && state.mode !== 'first-person';
+    inspectorToggle?.toggleAttribute('disabled', !available);
+    inspectorToggle?.setAttribute('aria-pressed', String(available && state.inspectorOpen));
+    inspector?.setAttribute('aria-hidden', String(!open));
+    root.classList.toggle('is-inspector-open', open);
+  }
+
+  function setInspectorOpen(open, { focus = false } = {}) {
+    state.inspectorOpen = Boolean(open && state.selected && !mobileMode.matches);
+    syncInspectorVisibility();
+    scheduleDraw();
+    if (state.inspectorOpen && focus) {
+      window.requestAnimationFrame(() => {
+        inspectorContent.querySelector('[data-graph-inspector-tab][aria-selected="true"]')?.focus();
+      });
+    }
+  }
+
+  function setMinimapOpen(open, { focus = false } = {}) {
+    state.minimapOpen = Boolean(open && !mobileMode.matches);
+    if (minimapPanel) minimapPanel.hidden = !state.minimapOpen;
+    minimapToggle?.setAttribute('aria-expanded', String(state.minimapOpen));
+    root.classList.toggle('is-minimap-open', state.minimapOpen);
+    scheduleDraw();
+    if (state.minimapOpen && focus) {
+      window.requestAnimationFrame(() => minimapPanel?.querySelector('[data-graph-minimap-close]')?.focus());
+    }
+  }
+
   function restoreInspector() {
     inspectorContent.innerHTML = initialInspectorMarkup;
     state.inspectorId = '';
+    state.inspectorOpen = false;
     root.classList.remove('has-selection');
+    syncInspectorVisibility();
   }
 
   function selectNode(id, { focus = false, record = true } = {}) {
@@ -2025,6 +2107,7 @@ import {
     if (record) recordHistory(id);
     root.classList.add('has-selection');
     updateGraph();
+    syncInspectorVisibility();
     if (state.mode === 'travel') refreshTravelCandidate(0);
     if (focus || (selectionChanged && state.mode === 'orbit' && !mobileMode.matches)) {
       window.requestAnimationFrame(() => {
@@ -2127,7 +2210,7 @@ import {
       ? clamp(32, state.viewport.height * 0.34, canvasRectangle.bottom - travelRectangle.top + 18)
       : 54;
     const left = compact ? 28 : 52;
-    const right = !compact && root.classList.contains('has-selection') && inspectorRectangle
+    const right = !compact && root.classList.contains('is-inspector-open') && inspectorRectangle
       ? clamp(52, Math.max(52, state.viewport.width - 300), canvasRectangle.right - inspectorRectangle.left + 24)
       : compact ? 28 : 52;
     return { top, right, bottom, left };
@@ -2432,6 +2515,30 @@ import {
         return;
       }
 
+      if (target.closest('[data-graph-inspector-toggle]')) {
+        setInspectorOpen(!state.inspectorOpen, { focus: true });
+        return;
+      }
+      if (target.closest('[data-graph-inspector-close]')) {
+        setInspectorOpen(false);
+        inspectorToggle?.focus();
+        return;
+      }
+      const inspectorTab = target.closest('[data-graph-inspector-tab]');
+      if (inspectorTab) {
+        setInspectorTab(inspectorTab.dataset.graphInspectorTab, { focus: true });
+        return;
+      }
+      if (target.closest('[data-graph-minimap-toggle]')) {
+        setMinimapOpen(!state.minimapOpen, { focus: true });
+        return;
+      }
+      if (target.closest('[data-graph-minimap-close]')) {
+        setMinimapOpen(false);
+        minimapToggle?.focus();
+        return;
+      }
+
       const clearButton = event.target.closest('[data-graph-clear-selection]');
       if (clearButton) {
         clearSelection();
@@ -2689,6 +2796,7 @@ import {
       state.travelCandidate = '';
       state.travelIndex = -1;
       restoreInspector();
+      setMinimapOpen(false);
       updateGraph();
       resetCamera();
       status.textContent = '세계 설정과 카메라를 초기 상태로 되돌렸습니다.';
@@ -2931,7 +3039,19 @@ import {
         else if (settingsPanel && !settingsPanel.hidden) setSettingsOpen(false);
         else if (state.mode === 'first-person' && state.pointerLocked) world?.releasePointerLock?.();
         else if (state.fullscreenFallback) void toggleFullscreen();
+        else if (state.inspectorOpen) setInspectorOpen(false);
+        else if (state.minimapOpen) setMinimapOpen(false);
         else clearSelection();
+        return;
+      }
+      if (
+        event.target instanceof Element
+        && event.target.matches('[data-graph-inspector-tab]')
+        && ['arrowleft', 'arrowright', 'home', 'end'].includes(key)
+      ) {
+        event.preventDefault();
+        const nextTab = key === 'arrowright' || key === 'end' ? 'relations' : 'document';
+        setInspectorTab(nextTab, { focus: true });
         return;
       }
       if (isEditableTarget(event.target)) return;
@@ -3044,6 +3164,12 @@ import {
     mobileMode.addEventListener('change', () => {
       root.classList.toggle('is-mobile-atlas', mobileMode.matches);
       world?.setActive?.(!mobileMode.matches);
+      if (mobileMode.matches) {
+        setInspectorOpen(false);
+        setMinimapOpen(false);
+      } else {
+        syncInspectorVisibility();
+      }
       if (mobileMode.matches && state.mode !== 'orbit') {
         state.mode = 'orbit';
         root.classList.remove('is-first-person');

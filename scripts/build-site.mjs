@@ -824,16 +824,24 @@ function renderGraphPage() {
             </div>
           </details>
 
-          <figure class="graph-minimap">
-            <figcaption>원형 세계 지도</figcaption>
-            <canvas width="160" height="160" data-graph-minimap role="img" aria-label="현재 배치와 문서의 원형 세계 지도. 문서 선택은 주 그래프나 텍스트 목록에서도 할 수 있습니다."></canvas>
+          <div class="graph-utility-dock" data-graph-utility-dock role="toolbar" aria-label="그래프 보조 도구">
+            <button type="button" data-graph-inspector-toggle aria-pressed="false" aria-controls="graph-inspector" disabled>현장 카드</button>
+            <button type="button" data-graph-minimap-toggle aria-expanded="false" aria-controls="graph-minimap">지도</button>
             <button type="button" data-graph-fit-visible>전체 맞춤</button>
+          </div>
+
+          <figure class="graph-minimap" id="graph-minimap" data-graph-minimap-panel hidden>
+            <figcaption><span>원형 세계 지도</span><button type="button" data-graph-minimap-close>숨기기</button></figcaption>
+            <canvas width="160" height="160" data-graph-minimap role="img" aria-label="현재 배치와 문서의 원형 세계 지도. 문서 선택은 주 그래프나 텍스트 목록에서도 할 수 있습니다."></canvas>
           </figure>
 
-          <aside class="graph-inspector" data-graph-inspector aria-label="선택한 문서 정보">
+          <aside class="graph-inspector" id="graph-inspector" data-graph-inspector aria-label="선택한 문서 정보" aria-hidden="true">
             <div class="graph-inspector-toolbar">
               <span>현장 카드</span>
-              <button type="button" data-graph-clear-selection>닫기</button>
+              <div>
+                <button type="button" data-graph-clear-selection>선택 해제</button>
+                <button type="button" data-graph-inspector-close>숨기기</button>
+              </div>
             </div>
             <div data-graph-inspector-content>
               <h2>문서를 선택하세요</h2>

@@ -1209,8 +1209,9 @@ export function createKnowledgeWorld(canvas, options = {}) {
     const width = state.viewport.width;
     const height = state.viewport.height;
     const desktop = width >= 860;
+    const graphRoot = canvas.closest('[data-knowledge-graph]');
     let rightInset = 14;
-    if (desktop && state.selected) {
+    if (desktop && state.selected && graphRoot?.classList.contains('is-inspector-open')) {
       const canvasRectangle = canvas.getBoundingClientRect();
       const inspectorRectangle = documentRef.querySelector('[data-graph-inspector]')?.getBoundingClientRect();
       const overlap = inspectorRectangle
@@ -1247,6 +1248,8 @@ export function createKnowledgeWorld(canvas, options = {}) {
     for (const selector of selectors) {
       const item = documentRef.querySelector(selector);
       if (!item || item.hidden) continue;
+      const itemStyle = windowRef?.getComputedStyle?.(item);
+      if (itemStyle?.display === 'none' || itemStyle?.visibility === 'hidden') continue;
       const rectangle = item.getBoundingClientRect();
       if (!rectangle.width || !rectangle.height) continue;
       const left = Math.max(canvasRectangle.left, rectangle.left);

@@ -292,6 +292,8 @@ for (const hook of [
   'data-graph-search',
   'data-graph-inspector',
   'data-graph-inspector-content',
+  'data-graph-inspector-toggle',
+  'data-graph-inspector-close',
   'data-graph-status',
   'data-graph-static-message',
   'data-graph-select',
@@ -320,7 +322,12 @@ for (const hook of [
   'data-graph-auto-rotate',
   'data-graph-camera-readout',
   'data-graph-focus-selection',
+  'data-graph-utility-dock',
+  'data-graph-minimap-panel',
   'data-graph-minimap',
+  'data-graph-minimap-toggle',
+  'data-graph-minimap-close',
+  'data-graph-fit-visible',
   'data-graph-help',
   'data-graph-clear-selection',
   'data-graph-depth-legend',
@@ -350,6 +357,30 @@ const pointerLockButtons = [...graphPageHtml.matchAll(/<button\b[^>]*\bdata-grap
   .map((match) => match[0]);
 if (pointerLockButtons.length !== 1 || attributeValue(pointerLockButtons[0] ?? '', 'type') !== 'button') {
   errors.push('Knowledge graph must contain one explicit pointer-lock button with type="button".');
+}
+
+const inspectorToggleMarkup = graphPageHtml.match(/<button\b[^>]*\bdata-graph-inspector-toggle(?=\s|=|>)[^>]*>/i)?.[0] ?? '';
+if (
+  !inspectorToggleMarkup
+  || attributeValue(inspectorToggleMarkup, 'aria-pressed') !== 'false'
+  || !/\bdisabled(?=\s|=|>)/i.test(inspectorToggleMarkup)
+) {
+  errors.push('Knowledge graph field-card toggle must start disabled and unpressed until a node is selected.');
+}
+
+const inspectorMarkup = graphPageHtml.match(/<aside\b[^>]*\bdata-graph-inspector(?=\s|=|>)[^>]*>/i)?.[0] ?? '';
+if (!inspectorMarkup || attributeValue(inspectorMarkup, 'aria-hidden') !== 'true') {
+  errors.push('Knowledge graph field card must be hidden on initial load.');
+}
+
+const minimapToggleMarkup = graphPageHtml.match(/<button\b[^>]*\bdata-graph-minimap-toggle(?=\s|=|>)[^>]*>/i)?.[0] ?? '';
+if (!minimapToggleMarkup || attributeValue(minimapToggleMarkup, 'aria-expanded') !== 'false') {
+  errors.push('Knowledge graph minimap toggle must start collapsed.');
+}
+
+const minimapPanelMarkup = graphPageHtml.match(/<figure\b[^>]*\bdata-graph-minimap-panel(?=\s|=|>)[^>]*>/i)?.[0] ?? '';
+if (!minimapPanelMarkup || !/\bhidden(?=\s|=|>)/i.test(minimapPanelMarkup)) {
+  errors.push('Knowledge graph minimap panel must be hidden on initial load.');
 }
 
 const fullscreenRootMarkup = elementMarkupForHook(graphPageHtml, 'data-graph-fullscreen-root');
