@@ -14,7 +14,7 @@ tags:
   - domain/machine-learning
   - domain/linguistics
 created: '2026-07-18'
-updated: '2026-07-18'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -36,9 +36,18 @@ related:
 ---
 # METEOR
 
+> [!note] 학습 안내
+> **난이도:** 중급<br>
+> **선수 지식:** [[BLEU]]<br>
+> **읽고 나면:** METEOR의 우선순위 단어 정렬, recall 가중 점수와 chunk 벌점이 무엇을 측정하고 놓치는지 설명할 수 있다.
+
+## 1단계 — 먼저 잡을 핵심
+
 METEOR(Metric for Evaluation of Translation with Explicit ORdering)는 후보 번역과 인간 참조 번역의 unigram을 명시적으로 정렬하고 precision·recall과 어순 단편화 벌점을 결합하는 자동 기계 번역 평가 지표다. 2004년 recall·stemming 선행 연구를 바탕으로 Banerjee·Lavie가 2005년 정식 구조와 평가를 발표했다.
 
-## 단계별 정렬
+## 2단계 — 작동 원리
+
+### 단계별 정렬
 
 2005년 기본 구성은 아직 연결되지 않은 단어에 다음 모듈을 순서대로 적용했다.
 
@@ -50,7 +59,11 @@ METEOR(Metric for Evaluation of Translation with Explicit ORdering)는 후보 �
 
 WordNet 모듈은 문맥 속 단어 의미를 disambiguation하지 않는다. 가능한 sense 하나의 synset이 겹치면 대응하므로 문맥상 다른 뜻을 연결할 수 있고, WordNet coverage가 낮은 언어·도메인에서는 사용할 수 있는 정보가 줄어든다.
 
-## 점수
+점수를 낼 때는 이 정렬에서 일치한 단어 수로 precision과 recall을 구하고, 같은 순서로 이어진 대응이 얼마나 잘게 끊겼는지를 벌점으로 반영한다.
+
+## 3단계 — 기술과 근거
+
+### 점수
 
 후보 길이를 $|h|$, 참조 길이를 $|r|$, 정렬된 unigram 수를 $m$이라 하면 다음과 같다.
 
@@ -74,13 +87,15 @@ $$
 
 청크 벌점은 대응 단어가 얼마나 흩어지고 재배열됐는지를 근사한다. 문법성·유창성 전체를 직접 측정하지 않는다. 참조가 여러 개면 각각 독립적으로 점수를 계산한 뒤 가장 높은 참조를 고른다.
 
-## 원 평가의 범위
+### 원 평가의 범위
 
 TIDES 2003의 아랍어→영어 664문장과 중국어→영어 920문장, 문장별 영어 참조 네 개를 사용했다. 두 평가자의 adequacy·fluency 평균과 METEOR의 문장별 Pearson 상관을 시스템마다 구해 평균하면 아랍어 0.347, 중국어 0.331이었다. 인간 점수를 정규화하면 0.403과 0.365였다.
 
 exact만 쓴 상관보다 Porter stem과 WordNet synonym을 차례로 추가한 상관이 높았지만 개선 폭은 이 두 자료와 당시 시스템에 조건부다. 시스템 수준 0.964 상관은 중국어 시스템 일곱 점을 집계한 결과이므로 문장 수준이나 다른 언어쌍에 그대로 적용하지 않는다.
 
-## 한계
+## 검증과 한계
+
+### 한계
 
 - 후보·참조만 비교하므로 원문 의미 보존과 사실성을 직접 확인하지 않는다.
 - 가능한 WordNet sense의 겹침은 문맥 의미 동등성을 보장하지 않는다.
@@ -90,6 +105,19 @@ exact만 쓴 상관보다 Porter stem과 WordNet synonym을 차례로 추가한 
 - 지표와 인간 판단의 상관은 평가 자료, 시스템 범위, 집계 단위와 인간 평가 신뢰도에 따라 달라진다.
 
 후대 METEOR 버전은 모듈 가중치·매개변수·언어 지원을 확장했으므로 버전이 다른 점수를 같은 정의로 취급하지 않는다.
+
+## 학습 확인
+
+### 확인 질문
+
+1. 2005년 METEOR가 exact, stem, WordNet synonym 대응을 이 순서로 적용하는 이유는 무엇인가?
+2. 정렬된 unigram 수에서 precision·recall, $F_{mean}$과 chunk 벌점으로 이어지는 계산은 어떻게 구성되는가?
+3. WordNet 대응과 높은 시스템 수준 상관이 문맥 의미나 다른 언어·자료의 인간 판단을 보장하지 않는 이유는 무엇인가?
+
+### 다음 문서
+
+- [[WordNet]] — METEOR의 synonym 모듈이 사용하는 synset 관계와 문맥 의미 판별의 차이를 살핀다.
+- [[최소 오류율 훈련]] — 자동 평가 지표를 개발 집합 최적화 목표로 사용할 때 생기는 유인과 한계를 살핀다.
 
 ## 출처
 
