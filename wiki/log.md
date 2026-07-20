@@ -2413,6 +2413,29 @@ raw 등록 해시:
 - WebText의 실제 문서별 구성·중복·평가 자료 오염은 공개되지 않은 전체 corpus 없이는 완전 감사할 수 없다.
 - 057–059를 함께 읽어 드러난 과제 적응 인터페이스의 변화는 별도 비교 읽기 분석으로 보존한다.
 
+## [2026-07-20] content | 사전 학습 지식은 과제에 어떻게 도착하는가
+
+057–059와 기존 전이·BERT·GPT 개념을 함께 읽어 생긴 독립 질문을 ‘비교 읽기’ 분석으로 보존했다. 사전 학습 모델을 하나의 공통 패러다임으로만 묶지 않고 과제 적응이 hidden feature, 전체 weights, 목표 영역 분포, 입력 context 가운데 어디에서 일어나는지 비교했다.
+
+변경 문서:
+
+- `wiki/analyses/사전 학습 지식은 과제에 어떻게 도착하는가.md`
+- `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 범위:
+
+- ELMo의 고정 biLM 층별 특징과 후속 과제 구조, ULMFiT의 일반 LM→목표 영역 LM→분류기 세 단계를 구분했다.
+- BERT와 GPT-1이 전체 fine-tuning을 공유해도 MLM encoder와 causal LM, 입력 형식이 다르다고 비교했다.
+- GPT-2 zero-shot에서 과제 적응이 weights 밖의 cue·scoring·decoding으로 이동했다고 정리했다.
+- 과제별 deep architecture가 줄어도 label schema·input serialization·prompt·metric의 과제 명세는 남는다고 분석했다.
+- label 수만으로 자료 효율을 비교하지 않고 pretraining data·compute·비표지 영역 text·context example을 분모에 포함했다.
+
+남은 제한:
+
+- 다섯 연구를 직접 단일 계보로 연결하지 않고 공통 문제에 대한 병렬 비교로 한정했다.
+- prompting이 fine-tuning보다 보편적으로 우월하거나 context 적응이 필연적 종착점이라는 주장을 하지 않는다.
+- GPT-2 scale 결과만으로 불연속적 창발과 model size의 단독 인과를 확정하지 않는다.
+
 ## 관련 항목
 
 - [[index]]
