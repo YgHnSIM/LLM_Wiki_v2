@@ -669,7 +669,9 @@ export function buildKnowledgeGraph(documents, {
       node.y = Number((node.y + shiftY).toFixed(1));
     }
   }
-  relaxGlobalNodeCollisions(nodes, { passes: 60 });
+  // Large real-world communities can need more than the radial layout's short
+  // cleanup pass after their resized centers are repacked near a graph edge.
+  relaxGlobalNodeCollisions(nodes, { passes: 180 });
 
   saveNodeLayout(nodes, 'community');
   placeNetworkLayout(nodes, undirectedEdges);
