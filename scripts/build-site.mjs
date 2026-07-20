@@ -4,7 +4,6 @@ import matter from 'gray-matter';
 import yaml from 'js-yaml';
 import katex from 'katex';
 import { marked, Renderer } from 'marked';
-import { build as bundle } from 'esbuild';
 import {
   artifactRoleMetadata,
   normalizeArtifactMarkdown,
@@ -671,271 +670,157 @@ function renderGraphPage() {
       .filter((node) => node.community === community.id)
       .sort((a, b) => collator.compare(a.title, b.title)),
   ]));
+  const defaultLayout = graphData.layouts.find((layout) => layout.id === graphData.defaultLayout) ?? graphData.layouts[0];
 
-  const body = `<main class="graph-main" id="main-content">
-    <section class="graph-workbench" data-knowledge-graph data-graph-url="${sitePath('/graph-data.json')}">
-      <div class="graph-fullscreen-root" id="knowledge-world" data-graph-fullscreen-root>
-        <div class="graph-stage" data-graph-stage>
-          <p class="sr-only" id="knowledge-graph-description">문서 ${graphData.stats.nodes}개와 방향 관계 ${graphData.stats.edges}개를 연결 집단, 관계 중심, 중심-주변 배치로 전환해 보는 WebGL 3D 지식 세계입니다. 노드 높이는 다른 집단에 속한 고유 이웃 수를 로그 눈금으로 나타냅니다. 궤도 카메라로 조망하거나 1인칭 비행으로 지식 세계 안을 이동할 수 있으며, 도움말에서 전체 조작법을 확인할 수 있습니다.</p>
-          <canvas class="knowledge-graph" data-graph-canvas width="${graphData.dimensions.width}" height="${graphData.dimensions.height}" role="img" tabindex="0" aria-label="3D 지식 세계 조작 화면" aria-describedby="knowledge-graph-description">그래프를 지원하지 않는 환경에서는 아래 텍스트 목록으로 문서를 탐색할 수 있습니다.</canvas>
-          <p class="graph-static-message" data-graph-static-message>지식 세계를 불러오는 중입니다.</p>
-
-          <header class="graph-game-header" data-graph-hud>
-            <div class="graph-world-title">
-              <p class="eyebrow">LLM Wiki · 3D 탐험</p>
-              <h1>지식 세계</h1>
-              <p><strong data-graph-visible-count>${graphData.stats.nodes}</strong>개 문서 · <strong>${graphData.stats.communities}</strong>개 연결 집단</p>
-            </div>
-
-            <form class="graph-controls" data-graph-controls>
-              <div class="graph-control graph-control--search">
-                <label for="graph-search">문서 찾기</label>
-                <div class="graph-search-row">
-                  <input id="graph-search" type="search" list="graph-node-options" autocomplete="off" placeholder="제목 또는 별칭" data-graph-search>
-                  <button type="submit" data-graph-select>이동</button>
-                </div>
-                <datalist id="graph-node-options">${graphData.nodes.map((node) => `<option value="${escapeHtml(node.title)}"></option>`).join('')}</datalist>
-              </div>
-
-              <section class="graph-settings-panel" id="graph-world-settings" data-graph-settings hidden role="dialog" aria-modal="true" aria-label="지식 세계 설정">
-                <div class="graph-panel-heading">
-                  <div><span>세계 설정</span><strong>표시와 움직임</strong></div>
-                  <button type="button" data-graph-settings-close>닫기</button>
-                </div>
-                <div class="graph-filter-grid">
-                  <div class="graph-control graph-control--layout">
-                    <label for="graph-layout">노드 배치</label>
-                    <select id="graph-layout" data-graph-layout aria-describedby="graph-layout-description">
-                      ${graphData.layouts.map((layout) => `<option value="${escapeHtml(layout.id)}"${layout.id === graphData.defaultLayout ? ' selected' : ''}>${escapeHtml(layout.label)}</option>`).join('')}
-                    </select>
-                    <p id="graph-layout-description" data-graph-layout-description>${escapeHtml(graphData.layouts.find((layout) => layout.id === graphData.defaultLayout)?.description ?? '')}</p>
-                  </div>
-                  <div class="graph-control">
-                    <label for="graph-type">문서 유형</label>
-                    <select id="graph-type" data-graph-type>
-                      <option value="">전체 유형</option>
-                      ${Object.entries(typeLabels).map(([value, label]) => `<option value="${value}">${label}</option>`).join('')}
-                    </select>
-                  </div>
-                  <div class="graph-control">
-                    <label for="graph-verification">검증 상태</label>
-                    <select id="graph-verification" data-graph-verification>
-                      <option value="">전체 상태</option>
-                      ${verificationOptions.map(([value, label]) => `<option value="${value}">${label}</option>`).join('')}
-                    </select>
-                  </div>
-                  <div class="graph-control">
-                    <label for="graph-relation">관계 근거</label>
-                    <select id="graph-relation" data-graph-relation>
-                      <option value="related">편집자가 고른 관계</option>
-                      <option value="all">모든 명시 관계</option>
-                      <option value="body">서술 본문 링크</option>
-                    </select>
-                  </div>
-                  <div class="graph-control">
-                    <label for="graph-community">연결 집단</label>
-                    <select id="graph-community" data-graph-community>
-                      <option value="">모든 집단</option>
-                      ${graphData.communities.map((community) => `<option value="${community.id}">${String(community.id + 1).padStart(2, '0')} · ${escapeHtml(community.label)} (${community.size})</option>`).join('')}
-                    </select>
-                  </div>
-                  <div class="graph-control graph-desktop-settings-only">
-                    <label for="graph-density">연결 밀도</label>
-                    <select id="graph-density" data-graph-density>
-                      <option value="backbone">핵심 구조</option>
-                      <option value="balanced">균형</option>
-                      <option value="all">전체 관계</option>
-                    </select>
-                  </div>
-                  <div class="graph-control">
-                    <label for="graph-local-depth">선택 주변</label>
-                    <select id="graph-local-depth" data-graph-local-depth>
-                      <option value="0">전체 세계</option>
-                      <option value="1">1단계 이웃</option>
-                      <option value="2">2단계 이웃</option>
-                      <option value="3">3단계 이웃</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="graph-range-grid graph-desktop-settings-only">
-                  <div><label for="graph-label-density">라벨 <output for="graph-label-density" data-graph-label-output>핵심</output></label><input id="graph-label-density" type="range" min="0" max="3" step="1" value="2" data-graph-label-density></div>
-                  <div><label for="graph-node-scale">노드 크기 <output for="graph-node-scale" data-graph-node-output>125%</output></label><input id="graph-node-scale" type="range" min="0.8" max="2.2" step="0.05" value="1.25" data-graph-node-scale></div>
-                  <div><label for="graph-edge-opacity">연결 선명도 <output for="graph-edge-opacity" data-graph-edge-output>48%</output></label><input id="graph-edge-opacity" type="range" min="0.15" max="1.2" step="0.05" value="0.48" data-graph-edge-opacity></div>
-                  <div><label for="graph-edge-width">강조 선 굵기 <output for="graph-edge-width" data-graph-width-output>72%</output></label><input id="graph-edge-width" type="range" min="0.45" max="1.6" step="0.05" value="0.72" data-graph-edge-width></div>
-                  <div><label for="graph-focus-gravity">선택 중력 <output for="graph-focus-gravity" data-graph-focus-gravity-output>100%</output></label><input id="graph-focus-gravity" type="range" min="0.45" max="1.4" step="0.05" value="1" data-graph-focus-gravity></div>
-                  <div><label for="graph-height-scale">3D 높이 <output for="graph-height-scale" data-graph-height-output>100%</output></label><input id="graph-height-scale" type="range" min="0" max="1.6" step="0.1" value="1" data-graph-height-scale></div>
-                  <div><label for="graph-flight-speed">비행 속도 <output for="graph-flight-speed" data-graph-flight-output>보통</output></label><input id="graph-flight-speed" type="range" min="0.5" max="2" step="0.1" value="1" data-graph-flight-speed></div>
-                  <div><label for="graph-fov">시야각 <output for="graph-fov" data-graph-fov-output>56°</output></label><input id="graph-fov" type="range" min="42" max="78" step="2" value="56" data-graph-fov></div>
-                </div>
-                <div class="graph-switch-grid">
-                  <label class="graph-desktop-settings-only"><input type="checkbox" checked data-graph-show-arrows> 방향 화살표</label>
-                  <label class="graph-desktop-settings-only"><input type="checkbox" checked data-graph-show-grid> 바닥 격자</label>
-                  <label class="graph-desktop-settings-only"><input type="checkbox" checked data-graph-show-communities> 집단 영역</label>
-                  <label><input type="checkbox" checked data-graph-show-orphans> 고립 문서</label>
-                  <label class="graph-desktop-settings-only"><input type="checkbox" data-graph-auto-rotate> 자동 회전</label>
-                </div>
-                <button class="graph-reset" type="reset" data-graph-reset>모든 설정 초기화</button>
-              </section>
-            </form>
-
-            <div class="graph-hud-actions" aria-label="지식 세계 메뉴">
-              <button type="button" data-graph-settings-toggle aria-expanded="false" aria-controls="graph-world-settings">설정</button>
-              <button type="button" data-graph-help-open>조작법</button>
-              <button type="button" data-graph-fullscreen aria-pressed="false" aria-controls="knowledge-world">전체 화면</button>
-            </div>
-          </header>
-
-          <div class="graph-depth-badge" role="note" aria-label="노드 높이는 다른 집단에 속한 고유 이웃 수를 로그 눈금으로 나타냅니다."><span>노드 높이</span><strong>다른 집단 이웃 수</strong><small>높을수록 집단 사이를 많이 잇습니다 · 로그 눈금</small></div>
-          <div class="graph-engine-badge" data-graph-renderer aria-hidden="true">3D 엔진 준비 중</div>
-          <div class="graph-hover-card" data-graph-hover-card hidden></div>
-
-          <section class="graph-fps-layer" data-graph-fps-layer hidden aria-label="1인칭 비행 조작">
-            <div class="graph-reticle" data-graph-reticle aria-hidden="true"><i></i><i></i><i></i><i></i><b></b></div>
-            <p class="graph-fps-target" data-graph-fps-target>중앙의 노드를 조준하세요.</p>
-            <button class="graph-pointer-lock" type="button" data-graph-pointer-lock aria-pressed="false">화면을 클릭해 비행 시작</button>
-            <div class="graph-fps-pad" data-graph-fps-pad aria-label="터치 비행 조작">
-              <button type="button" data-graph-fps-move="forward" aria-label="앞으로 이동">W</button>
-              <button type="button" data-graph-fps-move="left" aria-label="왼쪽 이동">A</button>
-              <button type="button" data-graph-fps-move="backward" aria-label="뒤로 이동">S</button>
-              <button type="button" data-graph-fps-move="right" aria-label="오른쪽 이동">D</button>
-              <button type="button" data-graph-fps-move="up" aria-label="위로 이동">↑</button>
-              <button type="button" data-graph-fps-move="down" aria-label="아래로 이동">↓</button>
-              <button type="button" data-graph-fps-select aria-label="조준한 문서 선택">선택</button>
-            </div>
-          </section>
-
-          <details class="graph-view-controls">
-            <summary>카메라</summary>
-            <div class="graph-camera-controls" aria-label="3D 그래프 카메라">
-              <button type="button" data-graph-orbit="left">왼쪽 회전</button>
-              <button type="button" data-graph-orbit="right">오른쪽 회전</button>
-              <button type="button" data-graph-orbit="higher">위에서 보기</button>
-              <button type="button" data-graph-orbit="lower">낮게 보기</button>
-              <button type="button" data-graph-pan="left">왼쪽 이동</button>
-              <button type="button" data-graph-pan="right">오른쪽 이동</button>
-              <button type="button" data-graph-pan="up">위로 이동</button>
-              <button type="button" data-graph-pan="down">아래로 이동</button>
-              <button type="button" data-graph-zoom="in">확대</button>
-              <button type="button" data-graph-zoom="out">축소</button>
-              <button type="button" data-graph-focus-selection>선택에 초점</button>
-              <button type="button" data-graph-view="flat" aria-pressed="false">2D 평면</button>
-              <button type="button" data-graph-view="reset">전체 맞춤</button>
-            </div>
-          </details>
-
-          <div class="graph-utility-dock" data-graph-utility-dock role="toolbar" aria-label="그래프 보조 도구">
-            <button type="button" data-graph-inspector-toggle aria-pressed="false" aria-controls="graph-inspector" disabled>현장 카드</button>
-            <button type="button" data-graph-minimap-toggle aria-expanded="false" aria-controls="graph-minimap">지도</button>
-            <button type="button" data-graph-fit-visible>전체 맞춤</button>
-          </div>
-
-          <figure class="graph-minimap" id="graph-minimap" data-graph-minimap-panel hidden>
-            <figcaption><span>원형 세계 지도</span><button type="button" data-graph-minimap-close>숨기기</button></figcaption>
-            <canvas width="160" height="160" data-graph-minimap role="img" aria-label="현재 배치와 문서의 원형 세계 지도. 문서 선택은 주 그래프나 텍스트 목록에서도 할 수 있습니다."></canvas>
-          </figure>
-
-          <aside class="graph-inspector" id="graph-inspector" data-graph-inspector aria-label="선택한 문서 정보" aria-hidden="true">
-            <div class="graph-inspector-toolbar">
-              <span>현장 카드</span>
-              <div>
-                <button type="button" data-graph-clear-selection>선택 해제</button>
-                <button type="button" data-graph-inspector-close>숨기기</button>
-              </div>
-            </div>
-            <div data-graph-inspector-content>
-              <h2>문서를 선택하세요</h2>
-              <p>노드를 선택하면 실제 문서 링크와 연결 방향을 확인하고, 경로의 출발점이나 표식으로 남길 수 있습니다.</p>
-            </div>
-          </aside>
-
-          <div class="graph-route-hud" data-graph-route-hud hidden>
-            <span data-graph-route-summary></span>
-            <button type="button" data-graph-route-clear>경로 지우기</button>
-          </div>
-
-          <nav class="graph-travel-hud" aria-label="지식 세계 이동">
-            <div class="graph-mode-switch" aria-label="탐험 모드">
-              <button type="button" data-graph-mode="orbit" aria-pressed="true">궤도 탐색</button>
-              <button type="button" data-graph-mode="travel" aria-pressed="false">연결 여행</button>
-              <button type="button" data-graph-mode="first-person" aria-pressed="false">1인칭 비행</button>
-            </div>
-            <div class="graph-history-controls">
-              <button type="button" data-graph-history="back" disabled>이전</button>
-              <span data-graph-history-label>방문 기록 없음</span>
-              <button type="button" data-graph-history="forward" disabled>다음</button>
-            </div>
-            <button type="button" data-graph-bookmarks disabled>표식 0</button>
-            <span class="graph-travel-target" data-graph-travel-target>노드를 선택해 탐험을 시작하세요.</span>
-          </nav>
-
-          <div class="graph-camera-readout" data-graph-camera-readout>궤도 · 확대 100%</div>
-          <p class="graph-live-status" data-graph-status role="status" aria-live="polite" aria-atomic="true"></p>
-
-          <dialog class="graph-help-dialog" data-graph-help>
-            <form method="dialog">
-              <div class="graph-panel-heading">
-                <div><span>조작법</span><strong>지식 세계 탐험</strong></div>
-                <button type="submit">닫기</button>
-              </div>
-              <dl class="graph-help-grid">
-                <div><dt>회전</dt><dd>왼쪽 버튼을 누른 채 드래그</dd></div>
-                <div><dt>이동</dt><dd>Shift+드래그, 가운데 또는 오른쪽 버튼 드래그</dd></div>
-                <div><dt>확대</dt><dd>휠 또는 두 손가락 오므리기</dd></div>
-                <div><dt>초점</dt><dd>노드를 두 번 클릭하거나 선택 후 C</dd></div>
-                <div><dt>노드 형태</dt><dd>구체는 개념, 큐브는 원문, 팔면체는 인물·기관, 육각기둥은 비교 읽기</dd></div>
-                <div><dt>노드 색</dt><dd>외피는 연결 집단, 내부 핵은 문서 유형, 외곽 셸은 검증 상태</dd></div>
-                <div><dt>선택 중력</dt><dd>직접 연결 노드는 간격을 유지하며 가까워지고, 나머지는 어두워집니다. 선택 해제 시 원래 위치로 돌아갑니다.</dd></div>
-                <div><dt>궤도 키보드</dt><dd>WASD 이동, Q/E 회전, +/− 확대, Home 전체 맞춤</dd></div>
-                <div><dt>연결 여행</dt><dd>방향키로 이웃을 고르고 Enter로 이동</dd></div>
-                <div><dt>1인칭 이동</dt><dd>WASD 비행, Space 상승, Ctrl 하강, Shift 가속</dd></div>
-                <div><dt>1인칭 시선</dt><dd>화면 클릭 후 마우스로 시점 전환. 클릭 또는 Enter로 중앙 문서 선택</dd></div>
-                <div><dt>모드</dt><dd>V로 궤도와 1인칭 전환, Esc로 마우스 시점 해제</dd></div>
-                <div><dt>화면</dt><dd>F 전체 화면, Home 전체 조망, 탭 전환 시 이동 자동 정지</dd></div>
-              </dl>
-            </form>
-          </dialog>
+  const body = `<main class="map-main" id="main-content" data-mobile-fallback="${sitePath('/')}">
+    <section class="knowledge-map" data-knowledge-map data-graph-url="${sitePath('/graph-data.json')}" aria-labelledby="knowledge-map-title">
+      <header class="map-masthead">
+        <div class="map-identity">
+          <p><span>LLM WIKI</span><span>MAP 001—${String(graphData.stats.nodes).padStart(3, '0')}</span></p>
+          <h1 id="knowledge-map-title">연결 지도</h1>
         </div>
+        <div class="map-introduction">
+          <p>문서 사이의 직접 연결과 구조적 집단을 확대 수준에 맞춰 읽는 2D 지식지도입니다.</p>
+          <dl aria-label="그래프 규모">
+            <div><dt>문서</dt><dd>${graphData.stats.nodes}</dd></div>
+            <div><dt>관계</dt><dd>${graphData.stats.edges}</dd></div>
+            <div><dt>집단</dt><dd>${graphData.stats.communities}</dd></div>
+          </dl>
+        </div>
+      </header>
+
+      <div class="map-command-bar" data-map-command-bar>
+        <form class="map-search" data-map-search-form role="search">
+          <label class="sr-only" for="map-search-input">문서 제목 또는 별칭 검색</label>
+          <input id="map-search-input" type="search" list="map-node-options" autocomplete="off" placeholder="문서 제목 또는 별칭" data-map-search>
+          <datalist id="map-node-options">${graphData.nodes.map((node) => `<option value="${escapeHtml(node.title)}"></option>`).join('')}</datalist>
+          <button type="submit">찾기</button>
+        </form>
+
+        <fieldset class="map-layout-switch" aria-label="노드 배치">
+          <legend class="sr-only">노드 배치</legend>
+          ${graphData.layouts.map((layout) => `<button type="button" data-map-layout="${escapeHtml(layout.id)}" aria-pressed="${layout.id === graphData.defaultLayout ? 'true' : 'false'}" title="${escapeHtml(layout.description)}">${escapeHtml(layout.label)}</button>`).join('')}
+        </fieldset>
+
+        <button class="map-command-button" type="button" data-map-filters-open aria-haspopup="dialog" aria-controls="map-filter-dialog">필터 <span data-map-filter-count>0</span></button>
+        <button class="map-command-button" type="button" data-map-details-toggle aria-expanded="false" aria-controls="map-details" disabled>세부 정보</button>
       </div>
 
-      <section class="graph-afterworld" aria-label="그래프 안내와 대체 탐색">
-      <details class="graph-legend">
-        <summary id="graph-legend-heading">그래프 읽는 법</summary>
-        <div class="graph-legend-body" aria-labelledby="graph-legend-heading">
-          <dl class="graph-visual-key">
-            <div><dt><span class="graph-key-shape graph-key-shape--concept" aria-hidden="true"></span>구체</dt><dd>개념</dd></div>
-            <div><dt><span class="graph-key-shape graph-key-shape--source" aria-hidden="true"></span>큐브</dt><dd>원문 노트</dd></div>
-            <div><dt><span class="graph-key-shape graph-key-shape--entity" aria-hidden="true"></span>팔면체</dt><dd>인물·기관</dd></div>
-            <div><dt><span class="graph-key-shape graph-key-shape--analysis" aria-hidden="true"></span>육각기둥</dt><dd>비교 읽기</dd></div>
-            <div><dt><span class="graph-key-outline graph-key-outline--verified" aria-hidden="true"></span>실선 외곽</dt><dd>검증됨</dd></div>
-            <div><dt><span class="graph-key-outline graph-key-outline--partial" aria-hidden="true"></span>점선 외곽</dt><dd>부분 검증</dd></div>
-            <div><dt><span class="graph-key-line graph-key-line--related" aria-hidden="true"></span>연한 연결선</dt><dd>현재 보이는 문서 관계</dd></div>
-            <div><dt><span class="graph-key-line graph-key-line--body" aria-hidden="true"></span>분홍·청록 이중 강조</dt><dd>선택 문서에서 나가는 관계·들어오는 관계</dd></div>
-          </dl>
-          <div class="graph-depth-key" data-graph-depth-legend>
-            <strong>노드 높이 = 다른 집단의 고유 이웃 수 · 로그 눈금</strong>
-            <div aria-label="다른 집단의 고유 이웃 수 로그 눈금: 0, 연결 노드 중앙값 ${graphData.stats.medianBridgeConnections}, 최대 ${graphData.stats.maxBridgeConnections}">
-              <span>바닥 0</span><i aria-hidden="true"></i><span>연결 노드 중앙값 ${graphData.stats.medianBridgeConnections}</span><i aria-hidden="true"></i><span>최대 ${graphData.stats.maxBridgeConnections}</span>
-            </div>
-          </div>
-        </div>
-      </details>
+      <div class="map-layout-note" data-map-layout-note>
+        <strong>${escapeHtml(defaultLayout.label)}</strong>
+        <span>${escapeHtml(defaultLayout.description)}</span>
+      </div>
 
-      <details class="graph-text-index" data-graph-text-index>
-        <summary>텍스트 목록으로 문서 탐색</summary>
-        <p>그래프와 같은 문서를 연결 집단별 목록으로 제공합니다.</p>
-        <div class="graph-text-communities">${graphData.communities.map((community) => `<section class="graph-text-community graph-community-${community.colorIndex % 14}"><h2>${escapeHtml(community.label)} <span>${community.size}</span></h2><ul>${nodesByCommunity.get(community.id).map((node) => `<li><a href="${node.url}">${escapeHtml(node.title)}</a><small>${escapeHtml(typeLabels[node.type] ?? node.type)} · 다른 집단의 고유 이웃 ${node.bridgeConnections}</small></li>`).join('')}</ul></section>`).join('')}</div>
+      <div class="map-workspace" data-map-workspace>
+        <section class="map-viewport" data-map-viewport aria-label="2D 지식지도. 드래그하여 이동하고 휠 또는 더하기와 빼기 키로 확대·축소합니다." aria-describedby="map-instructions">
+          <p class="sr-only" id="map-instructions">축소하면 연결 집단, 중간 확대에서는 중심 문서, 확대하면 개별 문서와 관계가 나타납니다. 노드를 선택하면 선택 문서와 직접 연결된 문서의 라벨만 강조됩니다. 슬래시 키는 검색, Home 키는 전체 맞춤, Escape 키는 현재 패널 또는 선택을 닫습니다.</p>
+          <svg class="map-canvas" data-map-svg viewBox="0 0 1200 760" aria-hidden="true" focusable="false">
+            <title id="map-svg-title">LLM Wiki 문서 연결 지도</title>
+            <desc id="map-svg-description">${graphData.stats.nodes}개 문서와 ${graphData.stats.edges}개 방향 관계를 세 가지 배치로 탐색하는 2D 그래프입니다.</desc>
+            <defs>
+              <pattern id="map-grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="1"/></pattern>
+              <marker id="map-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 Z"/></marker>
+            </defs>
+            <g data-map-scene>
+              <rect class="map-grid" x="-20000" y="-20000" width="40000" height="40000" fill="url(#map-grid-pattern)" aria-hidden="true"></rect>
+              <g class="map-community-layer" data-map-communities aria-hidden="true"></g>
+              <g class="map-edge-layer" data-map-edges aria-hidden="true"></g>
+              <g class="map-node-layer" data-map-nodes></g>
+              <g class="map-label-layer" data-map-labels aria-hidden="true"></g>
+            </g>
+          </svg>
+          <div class="map-node-actions" data-map-node-actions aria-label="표시된 문서"></div>
+
+          <div class="map-scale-readout" aria-hidden="true">
+            <span data-map-tier>집단</span>
+            <i></i>
+            <span data-map-visible-count>${graphData.stats.nodes} 문서</span>
+          </div>
+
+          <div class="map-zoom-controls" aria-label="지도 확대와 맞춤">
+            <button type="button" data-map-zoom="out" aria-label="축소">−</button>
+            <output data-map-zoom-output aria-label="현재 확대율">100%</output>
+            <button type="button" data-map-zoom="in" aria-label="확대">+</button>
+            <button type="button" data-map-fit aria-label="전체 지도 맞춤">맞춤</button>
+          </div>
+
+          <p class="map-loading" data-map-loading>연결 지도를 불러오는 중입니다.</p>
+        </section>
+
+        <aside class="map-details" id="map-details" data-map-details hidden aria-hidden="true" aria-label="선택한 문서 세부 정보">
+          <header>
+            <p>선택 문서</p>
+            <button type="button" data-map-details-close aria-label="세부 정보 닫기">닫기</button>
+          </header>
+          <div data-map-details-content>
+            <h2>문서를 선택하세요</h2>
+            <p>노드를 선택한 뒤 ‘세부 정보’를 누르면 문서 요약과 직접 연결을 확인할 수 있습니다.</p>
+          </div>
+        </aside>
+      </div>
+
+      <footer class="map-status-bar">
+        <p data-map-summary>전체 구조 · 문서 ${graphData.stats.nodes}개</p>
+        <p data-map-status role="status" aria-live="polite" aria-atomic="true"></p>
+        <p><kbd>/</kbd> 검색 <kbd>Home</kbd> 맞춤 <kbd>Esc</kbd> 닫기</p>
+      </footer>
+
+      <dialog class="map-filter-dialog" id="map-filter-dialog" data-map-filters aria-labelledby="map-filter-title">
+        <form method="dialog" data-map-filter-form>
+          <header>
+            <div><p>보기 설정</p><h2 id="map-filter-title">표시할 문서와 관계</h2></div>
+            <button type="button" data-map-filters-close aria-label="필터 닫기">닫기</button>
+          </header>
+          <div class="map-filter-grid">
+            <label>문서 유형
+              <select data-map-type>
+                <option value="">전체 유형</option>
+                ${Object.entries(typeLabels).map(([value, label]) => `<option value="${value}">${label}</option>`).join('')}
+              </select>
+            </label>
+            <label>검증 상태
+              <select data-map-verification>
+                <option value="">전체 상태</option>
+                ${verificationOptions.map(([value, label]) => `<option value="${value}">${label}</option>`).join('')}
+              </select>
+            </label>
+            <label>연결 집단
+              <select data-map-community>
+                <option value="">모든 집단</option>
+                ${graphData.communities.map((community) => `<option value="${community.id}">${String(community.id + 1).padStart(2, '0')} · ${escapeHtml(community.label)} (${community.size})</option>`).join('')}
+              </select>
+            </label>
+            <label>관계 근거
+              <select data-map-relation>
+                <option value="all">모든 명시 관계</option>
+                <option value="related">편집자가 고른 관계</option>
+                <option value="body">서술 본문 링크</option>
+              </select>
+            </label>
+          </div>
+          <label class="map-filter-check"><input type="checkbox" checked data-map-show-orphans> 연결이 없는 문서도 표시</label>
+          <footer>
+            <button type="reset" data-map-filter-reset>초기화</button>
+            <button type="button" data-map-filters-apply>지도에 적용</button>
+          </footer>
+        </form>
+      </dialog>
+
+      <details class="map-text-index" data-map-text-index>
+        <summary>텍스트 목록으로 탐색</summary>
+        <p>그래프와 같은 문서를 연결 집단별로 제공합니다. JavaScript 없이도 모든 문서로 이동할 수 있습니다.</p>
+        <div>${graphData.communities.map((community) => `<section><h2><span>${String(community.id + 1).padStart(2, '0')}</span>${escapeHtml(community.label)} <small>${community.size}</small></h2><ul>${nodesByCommunity.get(community.id).map((node) => `<li><a href="${node.url}">${escapeHtml(node.title)}</a><small>${escapeHtml(typeLabels[node.type] ?? node.type)} · 연결 ${node.degree}</small></li>`).join('')}</ul></section>`).join('')}</div>
       </details>
-      </section>
     </section>
   </main>`;
 
   return layout({
-    title: '지식 그래프',
-    description: 'LLM Wiki 문서의 본문 링크와 관련 읽기를 연결 집단, 관계 중심, 중심-주변 배치와 다른 집단의 고유 이웃 수에 따른 높이로 탐색하는 3D 지식 그래프',
+    title: '연결 지도',
+    description: 'LLM Wiki 문서의 직접 관계와 구조적 집단을 의미 줌과 세 가지 배치로 탐색하는 2D 지식지도',
     current: '/graph/',
     body,
-    pageClass: 'graph-page',
-    scripts: [{ src: '/assets/graph-3d.js', type: 'module' }],
+    pageClass: 'graph-page graph-map-page',
+    scripts: [{ src: '/assets/graph-map-loader.js', type: 'module' }],
   });
 }
 
@@ -1441,16 +1326,6 @@ async function buildInto(outputDir) {
   await fs.rm(outputDir, { recursive: true, force: true });
   await fs.mkdir(outputDir, { recursive: true });
   await fs.cp(path.join(siteDir, 'assets'), path.join(outputDir, 'assets'), { recursive: true });
-  await bundle({
-    entryPoints: [path.join(siteDir, 'assets', 'graph-webgl-world.js')],
-    outfile: path.join(outputDir, 'assets', 'graph-world.js'),
-    bundle: true,
-    format: 'esm',
-    minify: true,
-    sourcemap: false,
-    target: ['es2022'],
-    logLevel: 'silent',
-  });
   await fs.copyFile(path.join(rootDir, 'node_modules', 'katex', 'dist', 'katex.min.css'), path.join(outputDir, 'assets', 'katex.min.css'));
   await fs.cp(path.join(rootDir, 'node_modules', 'katex', 'dist', 'fonts'), path.join(outputDir, 'assets', 'fonts'), { recursive: true });
 
