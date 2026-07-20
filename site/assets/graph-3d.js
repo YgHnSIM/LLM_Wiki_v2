@@ -15,17 +15,9 @@ import {
   sortProjected,
   zoomCameraAt,
 } from './graph-3d-math.js';
-import {
-  buildMobileRelationGroups,
-  limitMobileRelationGroups,
-  MOBILE_GRAPH_MEDIA_QUERY,
-  mobileConnectorPath,
-  mobileDirectionLabel,
-  mobileStartNodes,
-} from './graph-mobile-model.js';
 
 (() => {
-  const mobileMode = window.matchMedia(MOBILE_GRAPH_MEDIA_QUERY);
+  const mobileMode = window.matchMedia('(max-width: 760px), (any-pointer: coarse) and (max-width: 1024px)');
   if (mobileMode.matches) return;
 
   const root = document.querySelector('[data-knowledge-graph]');
@@ -87,11 +79,6 @@ import {
   const fpsTarget = root.querySelector('[data-graph-fps-target]');
   const pointerLockButton = root.querySelector('[data-graph-pointer-lock]');
   const rendererBadge = root.querySelector('[data-graph-renderer]');
-  const mobileAtlas = root.querySelector('[data-graph-mobile-atlas]');
-  const mobileScene = root.querySelector('[data-graph-mobile-scene]');
-  const mobileContent = root.querySelector('[data-graph-mobile-content]');
-  const mobileConnectors = root.querySelector('[data-graph-mobile-connectors]');
-  const mobileSummary = root.querySelector('[data-graph-mobile-summary]');
   if (!canvas || !fullscreenRoot || !stage || !inspectorContent || !status) return;
   if (gameHeader) stage.prepend(gameHeader);
 
@@ -99,7 +86,6 @@ import {
   const graphUrl = root.dataset.graphUrl;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const forcedColors = window.matchMedia('(forced-colors: active)');
-  root.classList.toggle('is-mobile-atlas', mobileMode.matches);
   const collator = new Intl.Collator('ko', { numeric: true, sensitivity: 'base' });
   const normalize = (value) => String(value ?? '')
     .normalize('NFKC')
@@ -173,9 +159,6 @@ import {
     inspectorOpen: false,
     inspectorTab: 'document',
     minimapOpen: false,
-    mobileRelationLimit: 8,
-    mobileRenderedId: '',
-    mobileFrame: 0,
     palette: null,
     frame: 0,
   };
@@ -446,7 +429,6 @@ import {
       const selectedNode = state.nodeById.get(state.selected);
       if (selectedNode && state.inspectorId !== selectedNode.id) renderInspector(selectedNode);
     }
-    renderMobileAtlas(state.nodeById.get(state.selected));
     updateHud();
     scheduleDraw();
   }
@@ -472,7 +454,6 @@ import {
       state.fittingPending = false;
       fitVisibleScene(false);
     }
-    scheduleMobileConnectors();
     scheduleDraw();
   }
 
@@ -1343,274 +1324,6 @@ import {
     return relations;
   }
 
-  function mobileCommunityLabel(node) {
-    return state.data.communities.find((item) => item.id === node.community)?.label ?? '분류 없음';
-  }
-
-  function mobileKindsLabel(kinds) {
-    const values = new Set(kinds ?? []);
-    if (values.has('related') && values.has('body')) return '본문 + 관련 읽기';
-    return values.has('related') ? '관련 읽기' : '본문 링크';
-  }
-
-  function mobileRelationCard(item, index) {
-    const button = element('button', `graph-mobile-relation-card is-${item.direction}`);
-    button.type = 'button';
-    button.dataset.selectNode = item.node.id;
-    button.dataset.mobileRelationCard = '';
-    button.dataset.mobileDirection = item.direction;
-    button.dataset.mobileCardIndex = String(index);
-    button.style.setProperty('--mobile-card-index', String(index));
-    button.setAttribute('aria-label', `${item.node.title}, ${mobileDirectionLabel(item.direction)}`);
-
-    const header = element('span', 'graph-mobile-card-header');
-    header.append(
-      element('span', 'graph-mobile-card-type', typeLabels[item.node.type] ?? item.node.type),
-      element('span', 'graph-mobile-card-direction', mobileDirectionLabel(item.direction)),
-    );
-    button.append(
-      header,
-      element('strong', 'graph-mobile-card-title', item.node.title),
-      element('span', 'graph-mobile-card-footer', `${mobileKindsLabel(item.kinds)} · 근거 ${item.node.evidenceCount}건`),
-    );
-    return button;
-  }
-
-  function mobileRelationGroup(group, startIndex) {
-    const section = element('section', `graph-mobile-relation-group is-${group.direction}`);
-    section.dataset.mobileDirectionGroup = group.direction;
-    const heading = element('h3');
-    heading.append(
-      element('span', 'graph-mobile-direction-mark'),
-      document.createTextNode(`${group.label} `),
-      element('small', '', `${group.items.length}개 중 ${group.visibleItems.length}개`),
-    );
-    const grid = element('div', 'graph-mobile-relation-grid');
-    group.visibleItems.forEach((item, index) => grid.append(mobileRelationCard(item, startIndex + index)));
-    section.append(heading, grid);
-    return section;
-  }
-
-  function mobileFocusCard(node, relationCount) {
-    const article = element('article', 'graph-mobile-focus-card');
-    article.dataset.mobileFocusCard = '';
-    article.tabIndex = -1;
-    article.setAttribute('aria-current', 'true');
-
-    const label = element('p', 'graph-mobile-focus-label', '지금 선택한 문서');
-    const title = element('h2', '', node.title);
-    const metadata = element('ul', 'graph-mobile-focus-metadata');
-    for (const text of [
-      typeLabels[node.type] ?? node.type,
-      mobileCommunityLabel(node),
-      verificationLabels[node.verification] ?? node.verification,
-      `직접 연결 ${relationCount}개`,
-    ]) metadata.append(element('li', '', text));
-
-    const primaryActions = element('div', 'graph-mobile-focus-primary');
-    const documentLink = element('a', 'button-link graph-mobile-document-link', '문서 읽기');
-    documentLink.href = node.url;
-    const clearButton = element('button', 'graph-mobile-clear', '선택 해제');
-    clearButton.type = 'button';
-    clearButton.dataset.graphClearSelection = '';
-    primaryActions.append(documentLink, clearButton);
-
-    const details = element('details', 'graph-mobile-focus-details');
-    details.append(element('summary', '', '설명과 탐색 도구'));
-    details.append(element('p', 'graph-mobile-focus-excerpt', node.excerpt));
-    if (node.domains?.length) {
-      const domains = element('ul', 'graph-mobile-focus-domains');
-      domains.setAttribute('aria-label', '분야 태그');
-      for (const domain of node.domains) domains.append(element('li', '', domain.label));
-      details.append(domains);
-    }
-    const secondaryActions = element('div', 'graph-mobile-focus-secondary');
-    const bookmark = element('button', '', state.bookmarks.has(node.id) ? '표식 지우기' : '표식 남기기');
-    bookmark.type = 'button';
-    bookmark.dataset.graphBookmark = node.id;
-    secondaryActions.append(bookmark);
-    details.append(secondaryActions);
-
-    article.append(label, title, metadata, primaryActions, details);
-    return article;
-  }
-
-  function renderMobileStart() {
-    const candidateIds = state.query ? state.model.queryMatches : state.model.visibleNodes;
-    const candidates = mobileStartNodes(state.data.nodes, candidateIds, 6, { collator });
-    mobileContent.replaceChildren();
-    const section = element('section', 'graph-mobile-start');
-    section.append(element('p', 'graph-mobile-start-kicker', state.query ? '검색 일치 문서' : '연결이 많은 시작 문서'));
-    const heading = element('h2', '', state.query ? `${candidates.length}개 후보` : '어디서 시작할까요?');
-    section.append(heading);
-
-    if (!candidates.length) {
-      section.append(element('p', 'graph-mobile-empty', '현재 검색과 필터에 맞는 문서가 없습니다. 조건을 줄여 보세요.'));
-    } else {
-      const grid = element('div', 'graph-mobile-start-grid');
-      candidates.forEach((node, index) => {
-        const button = element('button', 'graph-mobile-start-card');
-        button.type = 'button';
-        button.dataset.selectNode = node.id;
-        button.style.setProperty('--mobile-card-index', String(index));
-        button.append(
-          element('span', 'graph-mobile-start-number', String(index + 1).padStart(2, '0')),
-          element('strong', '', node.title),
-          element('span', '', `${typeLabels[node.type] ?? node.type} · 연결 ${node.degree}개`),
-        );
-        grid.append(button);
-      });
-      section.append(grid);
-    }
-    mobileContent.append(section);
-    state.mobileRenderedId = '';
-    mobileSummary.textContent = state.query
-      ? `검색과 필터에 맞는 문서 ${candidateIds.size}개 중 시작 후보 ${candidates.length}개입니다.`
-      : `현재 필터의 문서 ${candidateIds.size}개 중 연결이 많은 시작 후보 ${candidates.length}개입니다.`;
-    mobileConnectors.replaceChildren();
-  }
-
-  function svgElement(name, attributes = {}) {
-    const item = document.createElementNS('http://www.w3.org/2000/svg', name);
-    for (const [key, value] of Object.entries(attributes)) item.setAttribute(key, String(value));
-    return item;
-  }
-
-  function connectorMarker(id, className) {
-    const marker = svgElement('marker', {
-      id,
-      viewBox: '0 0 8 8',
-      refX: 7,
-      refY: 4,
-      markerWidth: 7,
-      markerHeight: 7,
-      orient: 'auto-start-reverse',
-    });
-    marker.classList.add(className);
-    marker.append(svgElement('path', { d: 'M 0 0 L 8 4 L 0 8 Z' }));
-    return marker;
-  }
-
-  function drawMobileConnectors() {
-    if (!mobileMode.matches || !mobileScene || !mobileConnectors || !state.selected) return;
-    const focus = mobileScene.querySelector('[data-mobile-focus-card]');
-    const cards = [...mobileScene.querySelectorAll('[data-mobile-relation-card]')];
-    if (!focus || !cards.length) {
-      mobileConnectors.replaceChildren();
-      return;
-    }
-
-    const sceneRectangle = mobileScene.getBoundingClientRect();
-    const relativeRectangle = (item) => {
-      const rectangle = item.getBoundingClientRect();
-      return {
-        x: rectangle.left - sceneRectangle.left,
-        y: rectangle.top - sceneRectangle.top,
-        width: rectangle.width,
-        height: rectangle.height,
-      };
-    };
-    const width = Math.max(1, Math.round(mobileScene.clientWidth));
-    const height = Math.max(1, Math.round(mobileScene.scrollHeight));
-    const focusRectangle = relativeRectangle(focus);
-    const cardRectangles = cards.map((card) => ({
-      card,
-      rectangle: relativeRectangle(card),
-    }));
-    mobileConnectors.replaceChildren();
-    mobileConnectors.setAttribute('viewBox', `0 0 ${width} ${height}`);
-    mobileConnectors.setAttribute('width', String(width));
-    mobileConnectors.setAttribute('height', String(height));
-
-    const definitions = svgElement('defs');
-    definitions.append(
-      connectorMarker('graph-mobile-arrow-out', 'is-out'),
-      connectorMarker('graph-mobile-arrow-in', 'is-in'),
-    );
-    mobileConnectors.append(definitions);
-    const appendPath = (source, target, direction, offset = 0) => {
-      const path = svgElement('path', {
-        d: mobileConnectorPath(source, target, offset),
-        pathLength: 1,
-        'marker-end': `url(#graph-mobile-arrow-${direction})`,
-      });
-      path.classList.add('graph-mobile-connector', `is-${direction}`);
-      mobileConnectors.append(path);
-    };
-
-    for (const { card, rectangle } of cardRectangles) {
-      const direction = card.dataset.mobileDirection;
-      if (direction === 'in') appendPath(rectangle, focusRectangle, 'in');
-      else if (direction === 'out') appendPath(focusRectangle, rectangle, 'out');
-      else {
-        appendPath(rectangle, focusRectangle, 'in', -3);
-        appendPath(focusRectangle, rectangle, 'out', 3);
-      }
-    }
-  }
-
-  function scheduleMobileConnectors() {
-    if (!mobileMode.matches || !mobileConnectors) return;
-    if (state.mobileFrame) window.cancelAnimationFrame(state.mobileFrame);
-    state.mobileFrame = window.requestAnimationFrame(() => {
-      state.mobileFrame = 0;
-      drawMobileConnectors();
-    });
-  }
-
-  function renderMobileAtlas(node = state.nodeById.get(state.selected)) {
-    if (!mobileAtlas || !mobileContent || !mobileConnectors || !mobileSummary) return;
-    root.classList.toggle('is-mobile-atlas', mobileMode.matches);
-    if (!mobileMode.matches) return;
-    if (!node) {
-      renderMobileStart();
-      return;
-    }
-
-    const preserveDetails = state.mobileRenderedId === node.id
-      && Boolean(mobileContent.querySelector('.graph-mobile-focus-details[open]'));
-    const refocusBookmark = state.mobileRenderedId === node.id
-      && document.activeElement?.matches?.('[data-graph-bookmark]');
-    const groups = buildMobileRelationGroups(node.id, state.model.visibleEdges, state.nodeById, { collator });
-    const limited = limitMobileRelationGroups(groups, state.mobileRelationLimit);
-    mobileContent.replaceChildren();
-    const stack = element('div', 'graph-mobile-stack');
-    let cardIndex = 0;
-    const appendDirection = (direction) => {
-      const group = limited.groups.find((item) => item.direction === direction);
-      if (!group) return;
-      stack.append(mobileRelationGroup(group, cardIndex));
-      cardIndex += group.visibleItems.length;
-    };
-
-    appendDirection('in');
-    stack.append(mobileFocusCard(node, limited.total));
-    appendDirection('both');
-    appendDirection('out');
-    if (!limited.total) stack.append(element('p', 'graph-mobile-empty', '현재 필터에서 이 문서와 직접 연결된 문서가 없습니다.'));
-
-    if (limited.total > 8) {
-      const limitButton = element(
-        'button',
-        'graph-mobile-limit',
-        limited.shown < limited.total ? `연결 모두 보기 · ${limited.total}개` : '핵심 연결 8개만 보기',
-      );
-      limitButton.type = 'button';
-      limitButton.dataset.mobileRelationLimit = limited.shown < limited.total ? 'all' : 'compact';
-      stack.append(limitButton);
-    }
-    mobileContent.append(stack);
-    state.mobileRenderedId = node.id;
-    if (preserveDetails) mobileContent.querySelector('.graph-mobile-focus-details')?.setAttribute('open', '');
-    if (refocusBookmark) {
-      window.requestAnimationFrame(() => mobileContent.querySelector('[data-graph-bookmark]')?.focus({ preventScroll: true }));
-    }
-
-    const counts = Object.fromEntries(groups.map((group) => [group.direction, group.items.length]));
-    mobileSummary.textContent = `${node.title} · 들어옴 ${counts.in ?? 0} · 서로 ${counts.both ?? 0} · 나감 ${counts.out ?? 0} · ${limited.shown}/${limited.total}개 표시`;
-    scheduleMobileConnectors();
-  }
-
   function renderInspector(node) {
     const community = state.data.communities.find((item) => item.id === node.community);
     const relations = visibleRelations(node);
@@ -2102,7 +1815,6 @@ import {
     const node = state.nodeById.get(id);
     if (!node || !state.model.baseVisibleNodes.has(id)) return false;
     const selectionChanged = state.selected !== id;
-    if (selectionChanged) state.mobileRelationLimit = 8;
     state.selected = id;
     state.travelCandidate = '';
     state.travelIndex = -1;
@@ -2129,7 +1841,6 @@ import {
     state.selected = '';
     state.travelCandidate = '';
     state.travelIndex = -1;
-    state.mobileRelationLimit = 8;
     restoreInspector();
     updateGraph();
   }
@@ -2271,17 +1982,6 @@ import {
     const node = state.nodeById.get(id);
     if (!node || !state.model.visibleNodes.has(id)) {
       status.textContent = '먼저 노드를 선택하세요.';
-      return;
-    }
-    if (mobileMode.matches) {
-      window.requestAnimationFrame(() => {
-        const card = mobileScene?.querySelector('[data-mobile-focus-card]');
-        card?.scrollIntoView({
-          block: 'center',
-          behavior: reduceMotion.matches ? 'auto' : 'smooth',
-        });
-        card?.focus({ preventScroll: true });
-      });
       return;
     }
     if (world) {
@@ -2462,8 +2162,7 @@ import {
   }
 
   function focusGraphSurface() {
-    const surface = mobileMode.matches ? mobileAtlas : canvas;
-    surface?.focus({ preventScroll: true });
+    if (!mobileMode.matches) canvas.focus({ preventScroll: true });
   }
 
   function bindInteractions() {
@@ -2545,24 +2244,6 @@ import {
       if (clearButton) {
         clearSelection();
         search?.focus();
-        return;
-      }
-
-      const relationLimit = target.closest('[data-mobile-relation-limit]');
-      if (relationLimit) {
-        const expanding = relationLimit.dataset.mobileRelationLimit === 'all';
-        state.mobileRelationLimit = expanding ? Infinity : 8;
-        renderMobileAtlas(state.nodeById.get(state.selected));
-        status.textContent = state.mobileRelationLimit === 8
-          ? '모바일 카드판을 핵심 연결 8개로 접었습니다.'
-          : '모바일 카드판에서 직접 연결을 모두 펼쳤습니다.';
-        window.requestAnimationFrame(() => {
-          const nextTarget = expanding
-            ? mobileScene?.querySelector('[data-mobile-card-index="8"]')
-            : mobileScene?.querySelector('[data-mobile-relation-limit]');
-          nextTarget?.scrollIntoView({ block: 'center', behavior: reduceMotion.matches ? 'auto' : 'smooth' });
-          nextTarget?.focus({ preventScroll: true });
-        });
         return;
       }
 
@@ -3164,7 +2845,6 @@ import {
       scheduleDraw();
     });
     mobileMode.addEventListener('change', () => {
-      root.classList.toggle('is-mobile-atlas', mobileMode.matches);
       world?.setActive?.(!mobileMode.matches);
       if (mobileMode.matches) {
         setInspectorOpen(false);
@@ -3193,7 +2873,6 @@ import {
       resizeCanvas();
     });
     new ResizeObserver(resizeCanvas).observe(canvas);
-    if (mobileScene) new ResizeObserver(scheduleMobileConnectors).observe(mobileScene);
   }
 
   function fail(error) {
@@ -3203,9 +2882,6 @@ import {
       staticMessage.textContent = message;
     }
     status.textContent = message;
-    if (mobileSummary) mobileSummary.textContent = '연결 카드판을 불러오지 못했습니다.';
-    if (mobileContent) mobileContent.replaceChildren(element('p', 'graph-mobile-empty', `${message} 아래 텍스트 목록을 이용해 주세요.`));
-    mobileConnectors?.replaceChildren();
     stage.classList.add('has-graph-error');
     console.error(error);
   }
@@ -3337,8 +3013,6 @@ import {
         if (!initialized && !activateCanvasFallback({ replaceCanvas: true })) {
           throw new Error('Neither WebGL nor 2D Canvas is available.');
         }
-      } else if (rendererBadge) {
-        rendererBadge.textContent = '모바일 2D 카드판';
       }
       updateGraph();
       bindInteractions();

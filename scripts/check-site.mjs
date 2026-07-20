@@ -47,7 +47,6 @@ const requiredOutputFiles = [
   'translations/index.html',
   'assets/graph-3d.js',
   'assets/graph-3d-math.js',
-  'assets/graph-mobile-model.js',
   'assets/relationship-explorer.js',
   'assets/graph-world.js',
   'assets/fonts/D2Coding.woff2',
@@ -62,6 +61,13 @@ for (const relativePath of requiredOutputFiles) {
   } catch {
     errors.push(`Required build output is missing: ${relativePath}`);
   }
+}
+
+try {
+  await fs.access(path.join(distDir, 'assets', 'graph-mobile-model.js'));
+  errors.push('Removed mobile graph model must not be present in the build output.');
+} catch {
+  // Expected: the desktop graph no longer ships a mobile graph implementation.
 }
 
 for (const htmlFile of htmlFiles) {
