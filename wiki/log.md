@@ -2321,6 +2321,36 @@ raw 등록 해시:
 - 문화·집단별 선호 충돌, 평가 노동 조건, 최신 DPO·RLAIF 변형은 별도 근거와 분석이 필요하다.
 - 이번 자료의 핵심은 기존 문서에 없던 선호 학습 개념 자체이므로 현재는 새 비교 읽기보다 소스·개념 문서 보강으로 충분하다.
 
+## [2026-07-20] ingest | 057 ELMo와 ULMFiT의 두 전이 학습 경로
+
+057 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 ELMo의 고정 biLM 층별 특징 추출과 ULMFiT의 일반 LM·목표 영역 LM·분류기 미세조정을 분리해 전이 학습의 두 인터페이스로 정리했다.
+
+변경 문서:
+
+- `raw/057_ELMo and ULMFiT Transfer Learning for Natural Language Processing.ko.md`와 대응 해설
+- `wiki/sources/057_ELMo와 ULMFiT의 두 전이 학습 경로.md`
+- `wiki/concepts/언어 모델 전이 학습.md`
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- ELMo가 순방향·역방향 LSTM의 대응 층을 결합하며 BERT식 masked LM과 다른 ‘양방향’이라고 구분했다.
+- ELMo 표현을 과제별 스칼라 가중합과 크기 계수로 만들고 원 대표 설정의 biLM 고정을 복원했다.
+- ULMFiT의 WikiText-103 사전 학습, 목표 영역 LM 적응, 분류기 미세조정과 판별적 학습률·점진적 동결 해제·slanted triangular schedule을 정리했다.
+- ULMFiT의 원 검증을 여섯 텍스트 분류 자료로 한정하고 18–24% 오류 감소와 100배 자료 효율을 조건부 실험 결과로 기록했다.
+- Transformer는 2017년에 먼저 발표됐고 BERT·GPT는 서로 다른 구조와 목적함수로 전이 문제를 확장했다고 구분했다.
+
+raw 등록 해시:
+
+- 번역: `de9fe1385845419d36a83a520f6ebd488dbfe1a725071f97a9195b4384c595c7`
+- 해설: `72daac1a1fa9d5936cfcc4b4300dd50911141fef6df9b8155666cbd03c9b4bab`
+
+남은 제한:
+
+- 원 논문의 벤치마크를 재현하지 않았고 ACL 논문에 보고된 구조·표·ablation 범위에서 검증했다.
+- 후속 BERT·GPT의 목적함수와 적응 방식은 058·059 자료에서 별도로 검증한다.
+- 두 전이 경로는 새 개념 문서로 충분히 보존됐으며, 058·059와 함께 읽을 때 독립적인 비교 질문이 성립하는지 다시 판단한다.
+
 ## 관련 항목
 
 - [[index]]

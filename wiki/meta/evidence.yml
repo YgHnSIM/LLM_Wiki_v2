@@ -2221,3 +2221,21 @@ sources:
     doi: 10.1145/2983323.2983769
     url: https://doi.org/10.1145/2983323.2983769
     language: en
+  peters-et-al-2018-elmo:
+    title: Deep Contextualized Word Representations
+    authors: [Matthew E. Peters, Mark Neumann, Mohit Iyyer, Matt Gardner, Christopher Clark, Kenton Lee, Luke Zettlemoyer]
+    published: 2018
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/N18-1202
+    url: https://aclanthology.org/N18-1202/
+    language: en
+  howard-ruder-2018-ulmfit:
+    title: Universal Language Model Fine-tuning for Text Classification
+    authors: [Jeremy Howard, Sebastian Ruder]
+    published: 2018
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/P18-1031
+    url: https://aclanthology.org/P18-1031/
+    language: en

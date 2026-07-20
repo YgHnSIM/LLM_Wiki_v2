@@ -880,3 +880,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 335ba23351b318c889f76072042059de12ff70c536a68f03b1c120f47f45ed3f
+  - path: "raw/057_ELMo and ULMFiT Transfer Learning for Natural Language Processing.ko.md"
+    role: translation
+    order_prefix: "057"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: de9fe1385845419d36a83a520f6ebd488dbfe1a725071f97a9195b4384c595c7
+  - path: "raw/057_ELMo and ULMFiT Transfer Learning for Natural Language Processing.commentary.ko.md"
+    role: commentary
+    order_prefix: "057"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 72daac1a1fa9d5936cfcc4b4300dd50911141fef6df9b8155666cbd03c9b4bab
