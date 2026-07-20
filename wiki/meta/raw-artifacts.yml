@@ -928,3 +928,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 04dead39f09202573d53a2701d6425a55e34ce0b96a5796f8f114b13efc1b65c
+  - path: "raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md"
+    role: translation
+    order_prefix: "060"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: c344822cce8e2c508c56cf8d3f83c725c7e35ba8022b311aa3a8c1055bbbd944
+  - path: "raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md"
+    role: commentary
+    order_prefix: "060"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 03baeb442bce5d810d2781402676c3a4d6111df036ab1258dbda3d21b622a9f4

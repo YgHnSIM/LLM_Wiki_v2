@@ -2272,3 +2272,29 @@ sources:
     kind: web-article
     url: https://openai.com/index/better-language-models/
     language: en
+  wang-et-al-2018-glue:
+    title: 'GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding'
+    authors: [Alex Wang, Amanpreet Singh, Julian Michael, Felix Hill, Omer Levy, Samuel R. Bowman]
+    published: 2018
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/W18-5446
+    url: https://aclanthology.org/W18-5446/
+    language: en
+  nangia-bowman-2019-human-glue:
+    title: 'Human vs. Muppet: A Conservative Estimate of Human Performance on the GLUE Benchmark'
+    authors: [Nikita Nangia, Samuel R. Bowman]
+    published: 2019
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/P19-1449
+    url: https://aclanthology.org/P19-1449/
+    language: en
+  wang-et-al-2019-superglue:
+    title: 'SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems'
+    authors: [Alex Wang, Yada Pruksachatkun, Nikita Nangia, Amanpreet Singh, Julian Michael, Felix Hill, Omer Levy, Samuel R. Bowman]
+    published: 2019
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.neurips.cc/paper/2019/hash/4496bf24afe7fab6f046bf4923da8de6-Abstract.html
+    language: en

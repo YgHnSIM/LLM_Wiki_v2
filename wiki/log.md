@@ -2436,6 +2436,37 @@ raw 등록 해시:
 - prompting이 fine-tuning보다 보편적으로 우월하거나 context 적응이 필연적 종착점이라는 주장을 하지 않는다.
 - GPT-2 scale 결과만으로 불연속적 창발과 model size의 단독 인과를 확정하지 않는다.
 
+## [2026-07-20] ingest | 060 GLUE와 SuperGLUE의 집계 평가
+
+060 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 GLUE 아홉·SuperGLUE 여덟 task, 과제별 metric과 aggregate 평균, private test·diagnostic set·human baseline·포화의 범위를 복원했다.
+
+변경 문서:
+
+- `raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md`와 대응 해설
+- `wiki/sources/060_GLUE와 SuperGLUE의 집계 평가.md`
+- `wiki/concepts/GLUE와 SuperGLUE.md`
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- GLUE의 CoLA·SST-2·MRPC·STS-B·QQP·MNLI·QNLI·RTE·WNLI와 각 metric을 복원했다.
+- GLUE가 task별 separate model을 허용했고 aggregate가 난이도 weight가 아닌 task metric 평균이라고 구분했다.
+- 네 private test와 중앙 server가 label 노출을 줄여도 extra data·compute·ensemble·pretraining contamination은 통제하지 않는다고 한정했다.
+- human 87.1이 2019년 별도 비전문가 추정이며 XLNet 88.4가 aggregate와 네 task에서 넘었다고 범위를 명시했다.
+- SuperGLUE의 BoolQ·CB·COPA·MultiRC·ReCoRD·RTE·WiC·WSC와 human baseline·toolkit·usage rule을 정리했다.
+- SQuAD·ImageNet·COCO가 GLUE보다 먼저라는 연대를 복원하고 open-ended generation 포함 주장을 채택하지 않았다.
+
+raw 등록 해시:
+
+- 번역: `c344822cce8e2c508c56cf8d3f83c725c7e35ba8022b311aa3a8c1055bbbd944`
+- 해설: `03baeb442bce5d810d2781402676c3a4d6111df036ab1258dbda3d21b622a9f4`
+
+남은 제한:
+
+- GLUE·SuperGLUE 제출을 재현하지 않았고 원 논문·공개 human baseline의 task와 metric 정의를 검증했다.
+- 현재 leaderboard 상태·최신 모델 순위는 시간에 따라 바뀌므로 역사적 원 발표와 2019년 포화 시점에 한정했다.
+- aggregate score가 만드는 선택 유인은 source·concept 문서에서 충분히 설명돼 새 비교 읽기를 추가하지 않았다.
+
 ## 관련 항목
 
 - [[index]]
