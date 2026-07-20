@@ -2290,6 +2290,37 @@ raw 등록 해시:
 - speculative decoding·비자기회귀 번역·diffusion의 실제 우위는 acceptance, 반복 횟수, 품질과 hardware 조건별 별도 평가가 필요하다.
 - wall-clock 성능은 FLOPs뿐 아니라 memory bandwidth·통신·batch·kernel·출력 길이에 좌우되므로 구조식만으로 제품 latency를 확정하지 않는다.
 
+## [2026-07-20] ingest | 056 RLHF 토대와 인간 선호 기반 보상 학습
+
+056 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했다. 검사된 번역·해설 쌍은 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 2017년 행동 구간 쌍대 비교·reward ensemble·정책과 보상 모델의 반복 학습을 복원하고, 원 제어·게임 실험과 후대 언어 모델 RLHF를 분리했다.
+
+변경 문서:
+
+- `raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md`와 대응 해설
+- `wiki/sources/056_RLHF 토대와 인간 선호 기반 보상 학습.md`
+- `wiki/concepts/인간 피드백 강화학습.md`
+- `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
+
+검증 근거와 정정:
+
+- 보상 모델이 완전 궤적이 아니라 짧은 trajectory segment의 시점별 보상 합으로 선호 확률을 계산했다고 복원했다.
+- 단일 모델의 보정된 확신도가 아니라 reward ensemble의 예측 불일치로 query를 선택했다고 구분했다.
+- 원 실험은 Atari와 MuJoCo형 시뮬레이션 제어이며 인간이 상호작용의 1% 미만을 관찰했다고 범위를 한정했다.
+- 2019년 언어 모델 선호 미세조정, 2020년 요약, 2022년 InstructGPT의 SFT·ranking·reward model·PPO를 별도 단계로 연결했다.
+- 보상 모델을 인간 가치의 절대 측정값으로 보지 않고 평가자·지침·prompt·정책 분포의 선호 proxy로 한정했다.
+- RLHF가 도움됨·사실성·안전성을 보장하거나 모든 상용 모델이 같은 절차를 쓴다는 주장을 채택하지 않았다.
+
+raw 등록 해시:
+
+- 번역: `91303910a9b5a9f1ddbbd7a4f4503c1949a0297f480e7c1db8f9d55e6a0eb4c4`
+- 해설: `335ba23351b318c889f76072042059de12ff70c536a68f03b1c120f47f45ed3f`
+
+남은 제한:
+
+- Atari·시뮬레이션 제어 실험과 인간 비교를 재현하지 않았고 공개 논문의 보고 범위에서 검증했다.
+- 문화·집단별 선호 충돌, 평가 노동 조건, 최신 DPO·RLAIF 변형은 별도 근거와 분석이 필요하다.
+- 이번 자료의 핵심은 기존 문서에 없던 선호 학습 개념 자체이므로 현재는 새 비교 읽기보다 소스·개념 문서 보강으로 충분하다.
+
 ## 관련 항목
 
 - [[index]]

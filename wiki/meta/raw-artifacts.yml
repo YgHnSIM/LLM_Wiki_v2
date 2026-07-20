@@ -864,3 +864,19 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     sha256: 0906b10e5cb1661d2653c0defc1be3cd2ae83acea000d849c2d1adc45c62c0b0
+  - path: "raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md"
+    role: translation
+    order_prefix: "056"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 91303910a9b5a9f1ddbbd7a4f4503c1949a0297f480e7c1db8f9d55e6a0eb4c4
+  - path: "raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.commentary.ko.md"
+    role: commentary
+    order_prefix: "056"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    sha256: 335ba23351b318c889f76072042059de12ff70c536a68f03b1c120f47f45ed3f

@@ -1562,6 +1562,38 @@ sources:
     kind: conference-paper
     url: https://proceedings.mlr.press/v80/oord18a.html
     language: en
+  christiano-et-al-2017-human-preferences:
+    title: Deep Reinforcement Learning from Human Preferences
+    authors: [Paul F. Christiano, Jan Leike, Tom B. Brown, Miljan Martic, Shane Legg, Dario Amodei]
+    published: 2017
+    source_type: primary
+    kind: conference-paper
+    url: https://arxiv.org/abs/1706.03741
+    language: en
+  ziegler-et-al-2019-lm-preferences:
+    title: Fine-Tuning Language Models from Human Preferences
+    authors: [Daniel M. Ziegler, Nisan Stiennon, Jeffrey Wu, Tom B. Brown, Alec Radford, Dario Amodei, Paul Christiano, Geoffrey Irving]
+    published: 2019
+    source_type: primary
+    kind: research-paper
+    url: https://arxiv.org/abs/1909.08593
+    language: en
+  stiennon-et-al-2020-human-feedback-summarization:
+    title: Learning to Summarize from Human Feedback
+    authors: [Nisan Stiennon, Long Ouyang, Jeffrey Wu, Daniel M. Ziegler, Ryan Lowe, Chelsea Voss, Alec Radford, Dario Amodei, Paul Christiano]
+    published: 2020
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.neurips.cc/paper/2020/hash/1f89885d556929e98d3ef9b86448f951-Abstract.html
+    language: en
+  ouyang-et-al-2022-instructgpt:
+    title: Training Language Models to Follow Instructions with Human Feedback
+    authors: [Long Ouyang, Jeff Wu, Xu Jiang, Diogo Almeida, Carroll L. Wainwright, Pamela Mishkin, Chong Zhang, Sandhini Agarwal, Katarina Slama, Alex Ray, John Schulman, Jacob Hilton, Fraser Kelton, Luke Miller, Maddie Simens, Amanda Askell, Peter Welinder, Paul Christiano, Jan Leike, Ryan Lowe]
+    published: 2022
+    source_type: primary
+    kind: research-paper
+    url: https://arxiv.org/abs/2203.02155
+    language: en
   magerman-1995-statistical-parsing:
     title: Statistical Decision-Tree Models for Parsing
     authors: [David M. Magerman]
