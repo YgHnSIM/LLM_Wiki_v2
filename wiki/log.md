@@ -3646,6 +3646,24 @@ raw 등록 해시:
 - `source:ready -- 090`은 96개 회귀 테스트와 308개 Markdown strict lint를 통과해 351개 evidence와 180개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 594개 HTML을 만들고 6,760개 wiki link를 모두 해소했다.
 - 다음 순차 입력은 공식 091 `QLoRA: Efficient Fine-Tuning of Quantized Language Models`다.
 
+## [2026-07-22] content | Permissive 가중치 면허와 학습 재현 장부의 분리
+
+변경 내용:
+
+- 새 분석 문서를 늘리지 않고 기존 [[공개 가중치와 재현 가능성은 같은 축인가]]를 공식 090까지 확장했다. The Pile·파운데이션 모델 보고서·BLOOM/ROOTS/RAIL·LLaMA 1·HELM 비교에 MPT·Falcon·Mistral을 추가해 여덟 사례를 법적·절차적 접근, 검사, 변형, 재배포, 재현, 실행 비용과 거버넌스의 일곱 축으로 읽었다.
+- MPT-7B·30B의 상세한 mixture·config·hardware와 빠진 exact document snapshot·sample order·전체 log를 함께 기록했다. 2023년 최초 발표 당시 base·llm-foundry의 Apache 2.0, Instruct의 CC-BY-SA-3.0, Chat의 CC-BY-NC-SA-4.0을 현재 repository license와 구분하도록 공식 MPT-30B 발표를 추가 evidence로 등록했다.
+- Falcon의 최초 custom 조건과 2023-05-31 Apache 2.0 전환, 약 5T-token RefinedWeb 처리 pool·약 500–650B-token 공개 extract·curated corpus를 포함한 production mixture를 분리했다. 공개 dataset 일부를 7B·40B 학습 corpus 전체로 바꾸지 않는다.
+- Mistral 7B의 Apache 2.0 weight·reference code와 공개되지 않은 corpus·총 token·전체 compute·hardware를 같은 표에 놓았다. Permissive weight license가 training transparency나 exact retraining 가능성과 단조롭게 비례하지 않음을 직접 비교했다.
+- Local weight는 독립 실행·검사·사내망 배치의 선택지를 넓히는 affordance지만, precision·quantization·batch·context·KV cache·hardware가 실제 비용을 바꾸고 logging·telemetry·권한·backup이 privacy와 governance를 결정한다는 system 경계를 추가했다.
+- 공식 090 raw 두 파일과 source, 15개 090 evidence를 분석에 연결하고 [[index]]·[[overview]]의 근거 수와 설명을 동기화했다. 분석은 기존 9개 근거에 15개를 더해 24개 locator를 사용한다.
+
+검증 경계:
+
+- BLOOM의 RAIL, LLaMA 1의 신청 승인형 비상업 조건, MPT의 2023년 variant별 license, Falcon의 license 전환과 Mistral의 Apache 공개를 하나의 `open` 순위로 환산하지 않는다. Artifact·version·행위별 권리를 기록한다.
+- Weight·code 공개가 제공하는 probing·fine-tuning·독립 benchmark의 가치를 exact retraining 결손 때문에 지우지 않으며, 반대로 weight 접근을 corpus·pipeline·환경·compute의 완전한 재현으로 확대하지 않는다.
+- Falcon-40B 학습은 LLaMA 1 발표 전인 2022년 12월 시작됐다. 출시 연표를 LLaMA가 MPT·Falcon·Mistral 개발을 일제히 촉발했다는 단선 계보로 바꾸지 않는다.
+- 전체 검증은 96개 회귀 테스트와 308개 Markdown strict lint를 통과해 352개 evidence와 180개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 594개 HTML을 만들고 6,763개 wiki link를 모두 해소했다.
+
 ## 관련 항목
 
 - [[index]]

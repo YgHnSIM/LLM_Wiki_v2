@@ -2905,6 +2905,14 @@ sources:
     kind: official-blog
     url: https://www.databricks.com/blog/mpt-7b
     language: en
+  mosaicml-2023-mpt-30b-release:
+    title: 'MPT-30B: Raising the bar for open-source foundation models'
+    authors: [The Databricks AI Research Team]
+    published: 2023
+    source_type: primary-release
+    kind: official-blog
+    url: https://www.databricks.com/blog/mpt-30b
+    language: en
   press-et-al-2022-alibi:
     title: 'Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation'
     authors: [Ofir Press, Noah A. Smith, Mike Lewis]

@@ -210,7 +210,7 @@ related:
 - [[인간 피드백 강화학습]]에서 구분하는 평가자 시연 SFT, 응답 순위에서 학습한 보상 모델, SFT 정책 기준 KL과 PPO-ptx 사전 학습 혼합 및 선호 대표성의 경계
 - [[ChatGPT 연구 미리보기 (2022)]]에서 구분하는 GPT-3.5 계열 모델, 대화형 RLHF, 다중 턴 인터페이스, moderation·피드백 배포 층과 지속 기억·현재 제품의 시간 경계
 - [[BLOOM]]에서 구분하는 176B decoder-only architecture, ROOTS의 언어·token 분포, 공공 HPC 학습과 문서·weight·code·data·license·실행 자원의 서로 다른 접근 층
-- [[공개 가중치와 재현 가능성은 같은 축인가]]에서 분리하는 검사·변형·재배포·재현·실행 비용·거버넌스 참여, 그리고 BLOOM의 공개 weight·RAIL과 LLaMA 1의 신청 승인형 비상업 연구 배포처럼 추론·평가·학습 재현이 요구하는 서로 다른 artifact·license·자원
+- [[공개 가중치와 재현 가능성은 같은 축인가]]에서 분리하는 법적 접근·검사·변형·재배포·재현·실행 비용·거버넌스 참여, 그리고 BLOOM·LLaMA 1·MPT·Falcon·Mistral처럼 weight 면허와 training data·log·compute 공개가 서로 다르게 움직이는 artifact·version 장부
 - [[손실 곡선과 능력 곡선 사이]]에서 분리하는 2021년의 암묵적으로 유도된 행동이라는 넓은 창발, 2022년의 규모별 emergent ability, PaLM의 세 점 log-linear 외삽 잔차·62B 장기 학습, 평균 token cross-entropy·task score·능력 threshold와 metric·표본·checkpoint·관측 scale
 - [[검색은 근거를 찾고 독해는 답을 찾는다]]에서 분리하는 단일 벡터·후기 상호작용·교차 인코더의 후보 생성/정밀 점수화 경계, retrieval recall, 답 EM·F1·faithfulness와 기권 calibration
 - [[검색 증강 생성]]에서 구분하는 원 RAG의 DPR–BART 잠재 문서 주변화, 고정 document encoder·색인과 학습되는 query encoder, 검색 provenance와 claim-level citation의 차이
@@ -426,13 +426,13 @@ related:
 
 ## 현재 상태
 
-소스 90개, 참고 자료 0개, 개념 164개, 개체 29개, 분석 22개와 메타 문서 3개, 총 308개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 277개는 `verified`, 해석적 문서 28개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 351개 외부 근거와 180개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 90개, 참고 자료 0개, 개념 164개, 개체 29개, 분석 22개와 메타 문서 3개, 총 308개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 277개는 `verified`, 해석적 문서 28개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 352개 외부 근거와 180개 불변 raw artifact가 레지스트리에 등록돼 있다.
 
 [[090_공개 가중치 LLM 파동과 서로 다른 공개 범위]]는 2023년 MPT·Falcon·Mistral 출시를 모두 같은 `open-source`로 묶지 않는다. MPT의 base와 chat·instruct variant, Falcon의 2023년 5월 Apache 2.0 전환과 RefinedWeb의 5T-token 처리 pool·600B-token 공개 extract, Mistral 7B의 Apache weight·reference code와 공개되지 않은 training corpus·token·compute를 artifact별로 나눈다. ALiBi의 fixed distance penalty, Falcon의 MQA, Mistral의 GQA·4,096-token sliding window와 FlashAttention kernel도 서로 다른 병목의 기법이다. MPT·Falcon의 개발이 LLaMA 공개 전부터 진행됐으므로 단선 촉발 계보를 만들지 않고, Mistral의 Llama 계열 비교를 proprietary frontier·다국어·consumer hardware 우월성으로 확대하지 않는다.
 
 [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]]와 [[LLaMA 1]]은 7B·13B의 1.0T token, 33B·65B의 1.4T token 학습을 모든 규모의 보편 20:1 규칙이 아니라 training-compute optimum을 지나 더 작은 inference parameter footprint를 노린 선택으로 복원했다. 실제 token/parameter는 약 149·77·43·21.5이며, RMSNorm·SwiGLU·RoPE는 선행 기법이고 구성요소별 ablation도 없으므로 성능을 어느 하나의 발명·단독 인과로 돌리지 않는다. 최초 weight 배포는 신청 승인과 noncommercial research license가 붙었고, base LLaMA·제한적 LLaMA-I 실험·후속 Llama 2를 서로 다른 artifact와 세대로 구분한다.
 
-[[공개 가중치와 재현 가능성은 같은 축인가]]는 이 배포를 BLOOM·ROOTS·RAIL과 함께 읽어 공개성을 법적·절차적 접근, 검사, 변형, 재배포, 재현, 실행 비용과 거버넌스의 일곱 축으로 확장했다. BLOOM의 RAIL 조건 직접 접근과 LLaMA 1의 신청 승인형 비상업 연구 접근은 모두 weight-level 검증을 열지만, 받을 수 있는 주체·파생물·재배포 권리와 동일 corpus·training pipeline·compute의 재현 범위가 다르다. 13B single-V100 추론을 65B의 1,022,362 GPU-hour 학습이나 전체 개발 1,015 tCO2eq와 같은 접근성 주장으로 합치지 않는다.
+[[공개 가중치와 재현 가능성은 같은 축인가]]는 The Pile·파운데이션 모델 보고서·BLOOM/ROOTS/RAIL·LLaMA 1·MPT·Falcon·Mistral·HELM을 법적·절차적 접근, 검사, 변형, 재배포, 재현, 실행 비용과 거버넌스의 일곱 축으로 비교한다. BLOOM의 RAIL 조건 직접 접근, LLaMA 1의 신청 승인형 비상업 연구 배포, MPT의 base/variant별 면허, Falcon의 Apache 2.0 전환과 부분 data 공개, Mistral의 Apache weight·code와 미공개 corpus·token·compute는 단일 `open` 순위를 만들지 않는다. Permissive weight license는 training transparency나 exact retraining을 예측하지 않으며, local 실행 선택지도 실제 총비용·privacy·운영 권한의 개선을 자동 보장하지 않는다.
 
 [[088_FlashAttention과 IO 인지형 정확 어텐션]]과 [[FlashAttention]]은 dense softmax attention의 수학을 바꾸지 않고 HBM–SRAM 사이의 데이터 이동을 줄이는 실행을 복원했다. 온라인 softmax는 tile별 행 최댓값·정규화 합·출력 누산값을 재조정하고, backward는 저장하지 않은 score·probability block을 다시 계산한다. 표준 구현의 $O(n^2)$ 중간 저장은 $O(n)$ 추가 메모리로 줄지만 $O(n^2d)$ 산술량과 model weight·KV cache는 남으며, `exact`도 부동소수점 bitwise 동일성을 뜻하지 않는다. Figure 2의 더 많은 FLOPs·더 적은 HBM 읽기·쓰기량·더 짧은 시간, kernel 속도와 end-to-end 속도, dense 정확 방식과 별도 block-sparse 근사, FlashAttention 1·2·3의 version 경계를 각각 분리했다.
 

@@ -119,7 +119,7 @@ related:
 - [[087_Whisper와 대규모 약한 감독 음성 인식]] — 68만 시간 약한 감독·audio-conditioned Transformer·다중 과제 token을 복원하고 자동 전사 자료·번역 방향·SOTA·언어 수·사람 수준·공개 범위 과장을 교정한 소스 (근거 4개)
 - [[088_FlashAttention과 IO 인지형 정확 어텐션]] — dense softmax attention은 유지하면서 HBM–SRAM 타일링·온라인 softmax·선택적 재계산으로 중간 저장과 메모리 이동을 줄인 I/O 인지형 실행을 검증한 소스 (근거 3개)
 - [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]] — 7B–65B 제품군의 추론 예산 지향 장기 학습과 data·benchmark·hardware 조건을 복원하고 open-source·상업 이용·보편 20:1·후속 세대 혼동을 교정한 소스 (근거 2개)
-- [[090_공개 가중치 LLM 파동과 서로 다른 공개 범위]] — MPT·Falcon·Mistral의 weight·code·data·license·compute 공개 범위를 분리하고 단선 계보·proprietary parity·재현성 과장을 교정한 소스 (근거 14개)
+- [[090_공개 가중치 LLM 파동과 서로 다른 공개 범위]] — MPT·Falcon·Mistral의 weight·code·data·license·compute 공개 범위를 분리하고 단선 계보·proprietary parity·재현성 과장을 교정한 소스 (근거 15개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 
 ## 개체
@@ -323,7 +323,7 @@ related:
 
 ## 분석
 
-- [[공개 가중치와 재현 가능성은 같은 축인가]] — The Pile·파운데이션 모델 보고서·BLOOM·LLaMA 1·HELM을 함께 읽어 법적 접근·검사·변형·재배포·재현·실행 비용·거버넌스를 서로 다른 공개 축으로 분리한 분석 (근거 9개)
+- [[공개 가중치와 재현 가능성은 같은 축인가]] — The Pile·BLOOM·LLaMA 1·MPT·Falcon·Mistral·HELM을 함께 읽어 일곱 공개 축을 분리하고 permissive 면허와 학습 재현 장부의 비대칭을 비교한 분석 (근거 24개)
 - [[데이터 품질과 분포 다양성은 같은 축인가]] — WebText·C4·GPT-3·The Pile·Chinchilla를 비교해 품질 proxy·고유 pool·분포·sampling·반복·누적 token과 인과 한계를 분리한 분석 (근거 5개)
 - [[총 매개변수와 활성 계산량은 같은 축인가]] — dense $N$과 sparse MoE의 total·active parameters를 분리하고 FLOPs·memory·communication·wall-clock·data·quality 장부로 규모 비교 조건을 정리한 분석 (근거 8개)
 - [[같은 병렬 문장은 무엇을 학습시키는가]] — 병렬 문장쌍이 IBM SMT의 잠재 단어 정렬, seq2seq NMT의 target sequence, XLM TLM의 양방향 masked-token 문맥으로 쓰이는 차이를 비교한 분석 (근거 6개)
