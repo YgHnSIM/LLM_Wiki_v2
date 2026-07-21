@@ -3360,6 +3360,20 @@ raw 등록 해시:
 - `source:ready -- 082`에서 87개 회귀 테스트와 291개 Markdown strict lint를 통과해 320개 evidence와 164개 raw artifact를 확인했다. 사이트는 99개 legacy redirect를 포함한 561개 HTML을 만들고 6,168개 wiki link를 모두 해소했다.
 - 다음 순차 입력은 공식 083 PaLM이다. 다만 사용자 요청에 따라 083 시작 전에 전체 외부 원문·번역본·raw에서 읽기 수준 UI 단락을 제거하고, 이번 명시적 raw 불변 예외의 hash 변경을 검증·기록한다.
 
+## [2026-07-21] content | 공개 가중치와 재현 가능성의 축 분리
+
+변경 내용:
+
+- [[공개 가중치와 재현 가능성은 같은 축인가]]를 만들고 The Pile·파운데이션 모델 보고서·BLOOM·ROOTS·RAIL·HELM을 함께 읽었다. `오픈`이라는 한 단어 대신 문서·data·code·weight·평가 산출물·개발 과정의 목적어와 검사·변형·재배포·재현·실행·참여라는 동사를 분리했다.
+- 공개 weight가 checkpoint 검사와 허용된 변형을 넓혀도 training data snapshot·환경·대규모 compute를 자동 제공하지 않는다는 점, 공개 prompt·completion이 과거 평가 run의 감사를 돕더라도 변경 가능한 폐쇄형 API의 과거 model을 복원하지는 못한다는 점을 비교했다.
+- Project-level license와 underlying text rights, BLOOM RAIL·Apache 2.0 code·ROOTS의 source별 조건, 법적 접근과 실제 실행 능력, 협업 참여자 수와 의사 결정권을 같은 축으로 합치지 않았다. The Pile→파운데이션 모델 보고서→BLOOM·HELM의 단선적 직접 계보와 공개가 안전·공정성을 자동 개선한다는 인과도 입증되지 않은 범위로 남겼다.
+- [[index]]의 분석 목록, [[overview]]의 공개·재현 읽기 경로와 핵심 주제를 갱신했다.
+
+검증 결과와 남은 한계:
+
+- 분석은 7개 1차 근거와 공식 074·076·079·082 raw 쌍을 사용하고, 확인된 사실·비교를 통한 해석·아직 입증되지 않은 계보를 분리한다.
+- Exact retraining만을 재현성의 유일한 기준으로 삼지 않는다. 제한된 compute에서 공개 weight·code·output으로 수행하는 독립 검증과 원 사전학습을 같은 조건으로 반복하는 일은 서로 다른 성취로 기록한다.
+
 ## 관련 항목
 
 - [[index]]
