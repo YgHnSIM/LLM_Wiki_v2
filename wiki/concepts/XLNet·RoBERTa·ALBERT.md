@@ -35,6 +35,7 @@ related:
   - concept.bert
   - concept.마스크드-언어-모델링
   - concept.transformer
+  - concept.transformer-xl
   - concept.glue-superglue
 ---
 # XLNet·RoBERTa·ALBERT
@@ -71,6 +72,10 @@ XLNet·RoBERTa·ALBERT는 2019년 전후에 BERT의 서로 다른 병목을 겨�
 ### XLNet은 무엇을 순열하는가
 
 XLNet은 문장 안 단어 위치를 섞지 않는다. 가능한 factorization order를 표본 추출하고, 각 target을 그 순서에서 먼저 공개된 token 내용에 조건화한다. query stream은 target 위치를 알지만 target 내용은 보지 않고, content stream은 공개된 내용을 전달한다. fine-tuning에서는 content stream만 사용한다.
+
+### Transformer-XL과 XLNet을 구분하기
+
+[[Transformer-XL]]은 segment-level recurrence와 상대 위치 attention으로 고정 길이 segment 경계를 넘어 문맥을 재사용하는 자기회귀 언어 모델 구조다. XLNet은 이 backbone을 사용하면서 generalized autoregressive objective와 target 누설을 막는 two-stream attention을 추가한 사전 학습 방법이다. 따라서 Transformer-XL 자체가 permutation objective를 쓰는 것은 아니며, XLNet을 Transformer-XL의 단순한 이름 변경으로 볼 수도 없다.
 
 ### RoBERTa에서 ‘더 오래’의 뜻
 
@@ -122,4 +127,5 @@ ALBERT의 lite는 주로 parameter count와 저장 memory를 가리킨다. layer
 - [[BERT]]
 - [[마스크드 언어 모델링]]
 - [[Transformer]]
+- [[Transformer-XL]]
 - [[GLUE와 SuperGLUE]]

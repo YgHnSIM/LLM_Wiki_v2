@@ -19,10 +19,15 @@ verification: verified
 artifacts:
   - 'raw/054_The Transformer Attention Is All You Need.ko.md'
   - 'raw/054_The Transformer Attention Is All You Need.commentary.ko.md'
+  - 'raw/063_Transformer-XL Extending Transformers to Long Sequences.ko.md'
+  - 'raw/063_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md'
 evidence:
   - source_id: vaswani-et-al-2017-attention
     locator: 'pp. 5998–6008, 특히 §§3–5, Figure 1, Tables 1–3의 encoder–decoder·attention·위치 인코딩·복잡도·번역 평가'
     relation: supports
+  - source_id: dai-et-al-2019-transformer-xl
+    locator: 'pp. 2978–2988, 특히 §§3.1–3.3과 Figures 1–2의 stop-gradient segment recurrence·relative positional attention, §4.5와 Table 9의 evaluation-speed 조건'
+    relation: supplements
   - source_id: gpt-2018
     locator: '§2와 Figure 1의 Transformer decoder 기반 generative pre-training·task-aware input transformation'
     relation: contextualizes
@@ -37,10 +42,12 @@ evidence:
     relation: contextualizes
 related:
   - source.054
+  - source.063
   - concept.신경망-기계-번역
   - concept.자기회귀-생성
   - concept.잔차-연결
   - concept.layer-normalization
+  - concept.transformer-xl
 ---
 # Transformer
 
@@ -106,6 +113,12 @@ $$
 
 반대로 $n$이 매우 커지면 모든 위치 쌍의 점수와 $n\times n$ 행렬이 병목이 된다. ‘병렬화 가능’은 총연산량이 항상 작다는 뜻이 아니다. FlashAttention은 정확한 attention의 메모리 이동을 개선하고, sparse·linear attention은 다른 구조적 trade-off를 택하는 후속 연구다.
 
+### 세그먼트 내부 병렬성과 세그먼트 사이 상태 재사용
+
+[[Transformer-XL]]은 고정 길이 segment를 독립 처리할 때 생기는 context fragmentation을 줄이기 위해 이전 segment의 각 layer hidden state를 길이 $M$의 memory로 보존한다. 현재 segment의 query는 현재 hidden state뿐 아니라 stop-gradient가 적용된 이전 segment memory에도 attend한다. 따라서 현재 segment 안 위치들은 attention으로 병렬 계산할 수 있지만, 다음 segment의 forward 계산은 이전 segment memory가 준비된 뒤 시작된다.
+
+이 recurrence는 RNN식 token-by-token state update와 다르고, gradient가 이전 segment로 이어지는 full backpropagation through time도 아니다. 또한 길이 $L$의 query가 memory와 현재 segment를 합친 $M+L$개의 key·value를 보는 dense attention이므로, 더 긴 문맥을 재사용한다는 사실이 attention의 길이 비용을 없애지는 않는다.
+
 ### 번역 실험의 실제 범위
 
 원 논문의 Transformer-big은 WMT 2014 영어→독일어에서 BLEU 28.4, 영어→프랑스어에서 41.8을 보고했다. base 모델은 8개 NVIDIA P100 GPU에서 12시간, big 모델은 3.5일 훈련됐다. 이는 당시 비교 시스템보다 품질·훈련 비용이 좋았다는 근거지만, 모든 길이·과제·하드웨어에서 RNN보다 항상 빠르다는 보편 법칙은 아니다.
@@ -142,7 +155,9 @@ Wiegreffe·Pinter는 ‘설명’의 정의와 모델 전체를 고려해야 한
 ## 출처
 
 - [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]]
+- [[063_Transformer-XL과 세그먼트 수준 재귀]]
 - Ashish Vaswani 외, [Attention Is All You Need](https://proceedings.neurips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html), NeurIPS 2017, pp. 5998–6008.
+- Zihang Dai 외, [Transformer-XL: Attentive Language Models beyond a Fixed-Length Context](https://aclanthology.org/P19-1285/), ACL 2019, pp. 2978–2988.
 - Alec Radford 외, [Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf), 2018, §2.
 - Jacob Devlin 외, [BERT](https://aclanthology.org/N19-1423/), NAACL 2019, §3.1.
 - Sarthak Jain·Byron C. Wallace, [Attention is not Explanation](https://aclanthology.org/N19-1357/), NAACL 2019, pp. 3543–3556.
@@ -151,7 +166,9 @@ Wiegreffe·Pinter는 ‘설명’의 정의와 모델 전체를 고려해야 한
 ## 관련 항목
 
 - [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]]
+- [[063_Transformer-XL과 세그먼트 수준 재귀]]
 - [[신경망 기계 번역]]
 - [[자기회귀 생성]]
 - [[잔차 연결]]
 - [[Layer Normalization]]
+- [[Transformer-XL]]

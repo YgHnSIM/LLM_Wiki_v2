@@ -1116,3 +1116,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/t5-text-to-text-framework-unified-nlp-through-text-transformations
     sha256: d2db6cf2e0a3e26a30faed1e21295af8153a3f6cb6975fb05472d7cdd15e1095
+  - path: "raw/063_Transformer-XL Extending Transformers to Long Sequences.ko.md"
+    role: translation
+    order_prefix: "063"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/transformer-xl-long-sequences-segment-recurrence
+    sha256: e993150754ec9fad2fc7572e4c3e17a279def868b6f9b37045971c701925ec6f
+  - path: "raw/063_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md"
+    role: commentary
+    order_prefix: "063"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/transformer-xl-long-sequences-segment-recurrence
+    sha256: 1dea733d6e063bf5059eabac2d7edd27d4272b306da4163ac181be3df28b1a5a

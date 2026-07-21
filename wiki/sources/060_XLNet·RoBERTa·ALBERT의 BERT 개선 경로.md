@@ -35,6 +35,7 @@ related:
   - concept.xlnet-roberta-albert
   - concept.bert
   - concept.마스크드-언어-모델링
+  - concept.transformer-xl
   - source.057
   - source.059
 ---
@@ -63,7 +64,7 @@ related:
 
 | 질문 | 모델 | 주로 바꾼 것 | 유지하거나 계승한 것 |
 |---|---|---|---|
-| `[MASK]` 없이 양쪽 문맥을 쓸 수 있는가? | XLNet | permutation language modeling, two-stream attention | Transformer-XL의 recurrence·상대 위치 표현 |
+| `[MASK]` 없이 양쪽 문맥을 쓸 수 있는가? | XLNet | permutation language modeling, two-stream attention | [[Transformer-XL]]의 recurrence·상대 위치 표현 |
 | BERT를 더 충분하고 일관되게 훈련하면 어디까지 가는가? | RoBERTa | corpus·batch·mask 일정·NSP·sequence 구성 | BERT encoder와 MLM |
 | hidden size를 키워도 parameter 증가를 억제할 수 있는가? | ALBERT | factorized embedding, cross-layer sharing, SOP | BERT식 encoder와 MLM |
 
@@ -183,5 +184,6 @@ XLNet·RoBERTa·ALBERT 논문은 서로 같은 corpus·tokenizer·training budge
 - [[XLNet·RoBERTa·ALBERT]]
 - [[BERT]]
 - [[마스크드 언어 모델링]]
+- [[Transformer-XL]]
 - [[057_BERT의 마스크드 양방향 사전 학습]]
 - [[059_GLUE와 SuperGLUE의 집계 평가]]

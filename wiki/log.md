@@ -2756,6 +2756,24 @@ raw 등록 해시:
 - 사이트는 381개 페이지를 빌드해 4,938개 위키 링크와 28,377개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 249개 항목을 포함했다.
 - raw 설명 자료는 원 논문보다 넓은 성능·계보·배포 주장을 포함하므로 보존 artifact로만 남겼고, 공개 source·concept·analysis의 핵심 주장은 Raffel 등의 JMLR 논문 범위 안에서 검증했다.
 
+## [2026-07-21] ingest | Transformer-XL과 세그먼트 수준 재귀
+
+변경 내용:
+
+- `063_Transformer-XL Extending Transformers to Long Sequences.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 검증된 쌍을 새 immutable raw artifact로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다.
+- [[063_Transformer-XL과 세그먼트 수준 재귀]]와 [[Transformer-XL]]을 만들고, 길이 $M$의 bounded hidden-state memory, 이전 $n-1$층 상태의 stop-gradient 재사용과 layer shift, 고정 사인파 상대 위치 행렬과 네 항 attention을 정리했다.
+- [[Transformer]]와 [[훈련 병렬성과 생성 순차성은 다른 축이다]]에는 현재 segment 내부 위치 병렬성, segment 사이 forward 상태 의존, 끊긴 gradient 경로를 서로 다른 축으로 추가했다. [[XLNet·RoBERTa·ALBERT]]와 [[060_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]]에는 Transformer-XL backbone과 XLNet의 permutation objective·two-stream attention을 구분하는 연결을 보강했다.
+- ACL 2019 원 논문을 대조해 WikiText-103 18.3 perplexity, enwik8 0.99 bpc 등 다섯 언어 모델 자료의 직접 실험과 ablation·RECL·평가 속도 조건을 확인했다. 길이 $L$의 query가 $M+L$ key를 보는 dense attention 비용도 상태 재사용과 별도로 명시했다.
+- raw의 무제한 cache, 같은 층을 잇는 gradient recurrence, learned 상대 위치 행렬, attention 제곱 비용 제거, 조건 없는 1,874배·80%·450% 수치, 평가하지 않은 문서 분류·상호참조·QA·code 성능과 광범위한 후대 장문 모델 직접 계보를 공개 문서에서 교정했다.
+- 새 소스가 만든 핵심 비교는 기존 [[훈련 병렬성과 생성 순차성은 다른 축이다]]의 계산 경계 분석을 실질적으로 보강하므로 그 문서를 갱신했다. 같은 논점을 반복하는 신규 analysis는 만들지 않았다.
+
+검증 결과:
+
+- 번역 스킬 검사는 063 번역·해설 쌍을 `valid_pairs: 1`로 확인했고, 별도 구조 대조는 79개 Markdown link의 URL 순서를 확인했다. source workflow는 두 raw artifact의 원문 URL·역할·해시 일치를 확인했다.
+- 49개 회귀 테스트와 252개 위키 문서 strict lint를 통과했으며 272개 evidence 레코드와 126개 immutable raw artifact를 확인했다.
+- 사이트는 385개 페이지를 빌드해 4,986개 위키 링크와 28,669개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 251개 항목을 포함했다.
+- raw 설명 자료는 원 논문보다 memory·성능·응용·계보 범위를 넓혔으므로 보존 artifact로만 남겼고, 공개 source·concept·analysis의 핵심 주장은 Dai 등의 ACL 논문 범위 안에서 검증했다.
+
 ## 관련 항목
 
 - [[index]]
