@@ -3168,6 +3168,24 @@ raw 등록 해시:
 - 사이트는 446개 페이지를 빌드해 5,911개 위키 링크와 33,660개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 282개 항목을 포함했다.
 - 공개 source·concept는 Hoffmann et al. NeurIPS 2022 본문과 supplemental의 fixed-compute 세 방법, Gopher 비교, data mixture·optimizer·tokenizer 차이, 높은 compute 외삽 범위 안에서 검증했다. 20:1의 보편성, parameter 비활성 mechanism, 모든 architecture·domain의 동일 비율과 후대 산업 영향은 입증되지 않은 범위로 남겼다.
 
+## [2026-07-21] content | 스케일링 token과 데이터 분포
+
+변경 내용:
+
+- 새 analysis를 만들지 않고 기존 [[데이터 품질과 분포 다양성은 같은 축인가]]를 보강했다. 077의 질문은 이 문서가 이미 분리하던 포함 기준·분포 범위·sampling weight·평가 조건에 고유 자료량과 누적 token 노출량을 추가하므로 별도 문서를 만들면 비교축이 중복된다.
+- 포함 기준·고유 자료량·분포 범위·노출 가중치·노출 총량·평가 조건의 여섯 장부를 세우고, component $d$의 고유 token pool $U_d$, sampling weight $w_d$, 전체 노출 $D$에 대해 $e_d\approx Dw_d/U_d$로 반복 횟수를 분리했다.
+- Scaling law의 $D$를 optimizer가 본 누적 token 수로 정의하고, 고유 문서 수·중복·domain coverage·사실성·안전·권리·품질 점수와 분리했다. 같은 $D$라도 넓은 고유 자료의 1회 노출과 작은 자료의 반복 노출이 서로 다른 학습 분포를 만들 수 있음을 설명했다.
+- MassiveText Table A1의 sampling proportion과 1.4T-token epoch를 복원했다. MassiveWeb 45%·1.24 epochs, Books 30%·0.75, C4 10%·0.77, News 10%·0.21, GitHub 4%·0.13, Wikipedia 1%·3.40을 기록해 raw 크기·학습 비중·반복 횟수가 같지 않음을 보였다.
+- Appendix C의 1-epoch 미만 IsoFLOP에서 C4 0.50/0.50, GitHub code 0.53/0.47 지수를 확인했다. 서로 다른 두 자료에서도 약 등비 scaling이 나타났다는 사실과, 저자들이 data quality·반복의 관계를 후속 과제로 남겼다는 조건을 함께 기록했다.
+- 따라서 compute frontier에서 더 많은 token이 중요했다는 결과를 어떤 $20N$ token도 동등하다는 결론으로 확대하지 않았다. 품질·분포·sampling·반복을 하나의 scalar 순위로 만들지 않고, 확인된 사실·비교 해석·입증되지 않은 인과를 분리해 `verification: partial`을 유지했다.
+- Analysis에 077 raw artifact 쌍과 기존 `hoffmann-et-al-2022-chinchilla` evidence를 연결하고, [[index]]와 [[overview]]의 설명·근거 수·현재 핵심 주제를 갱신했다.
+
+검증 결과:
+
+- 49개 회귀 테스트와 283개 위키 문서 strict lint를 통과했으며 306개 evidence 레코드와 156개 immutable raw artifact를 확인했다.
+- 사이트는 446개 페이지를 빌드해 5,919개 위키 링크와 33,674개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 282개 항목을 포함했다.
+- MassiveText sampling·epoch와 C4·GitHub scaling 수치는 Hoffmann et al. supplemental Appendices A·C와 Tables A1–A2의 직접 사실이다. 이를 고유 pool·sampling weight·누적 노출의 여섯 장부로 묶은 부분은 비교를 통한 합성 해석이므로 `verification: partial`을 유지했다.
+
 ## 관련 항목
 
 - [[index]]

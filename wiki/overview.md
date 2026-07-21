@@ -172,7 +172,7 @@ related:
 - [[다중 벡터 검색]]에서 구분하는 독립 문맥화 벡터 집합, MaxSim 후기 상호작용, single-vector·cross-encoder 사이 계산 경계와 색인·ANN·질의 비용
 - [[언어 모델 스케일링 법칙]]에서 함께 확인하는 token loss, N·D·compute 병목, Kaplan의 0.73/0.27과 Chinchilla의 세 가지 약 0.5/0.5 배분, 조건부 20:1 및 관측 범위 밖 외삽의 차이
 - [[The Pile]]에서 구분하는 22개 component의 raw size·epoch 가중 effective size, component deduplication·split leakage·benchmark decontamination과 project license·underlying rights
-- [[데이터 품질과 분포 다양성은 같은 축인가]]에서 분리하는 문서 입장 filter, domain support, sampling weight와 평가 분포 및 quality proxy의 인과 한계
+- [[데이터 품질과 분포 다양성은 같은 축인가]]에서 분리하는 문서 입장 filter, 고유 token pool, domain support, sampling weight, component별 epoch, 누적 token $D$와 평가 분포 및 quality proxy의 인과 한계
 - [[문맥 내 학습]]에서 구분하는 고정 가중치, instruction·demonstration·query의 입력 조건화, zero·one·few-shot과 가중치를 갱신하는 지시 미세조정의 지속성 차이
 - [[지시 미세조정]]에서 구분하는 여러 과제의 지시–출력 supervision, 평가 군집 보류, 고정된 가중치의 문맥 내 학습 및 선호 기반 RLHF와의 경계
 - [[인간 피드백 강화학습]]에서 구분하는 평가자 시연 SFT, 응답 순위에서 학습한 보상 모델, SFT 정책 기준 KL과 PPO-ptx 사전 학습 혼합 및 선호 대표성의 경계
@@ -383,7 +383,7 @@ related:
 
 [[확률, 마진, 순위 점수]]에는 DALL·E의 다음 image token 조건부분포와 CLIP 계열 scaled cosine 재순위 점수를 추가했다. 전자는 매 위치 8,192개 범주에서 정규화돼 후보 풀을 표본화하고, 후자는 이미 생성된 512개 후보 안의 순서를 정한다. 1/8·7/8은 modality 확률이 아니라 손실 가중치이고, 512는 신뢰도가 아니라 후보 탐색 예산이라는 경계를 기록했다.
 
-[[데이터 품질과 분포 다양성은 같은 축인가]]는 WebText의 Reddit 승인 proxy, C4의 heuristic filter와 domain-aligned corpus 비교, GPT-3의 curated-similarity filter·source weighting, The Pile의 22-component mixture와 40GB 통제 실험을 함께 읽는다. 품질은 형식·중복·출처 proxy·과제 적합성·사실·안전·권리의 벡터이고, 다양성은 domain support와 sampling probability의 설계이므로 한 순위로 합치지 않는다. T5 Table 8과 Pile Table 3의 과제별 순위 변화를 직접 근거로 두되, filter·composition·weight의 단독 인과는 입증되지 않은 범위로 남겼다.
+[[데이터 품질과 분포 다양성은 같은 축인가]]는 WebText의 Reddit 승인 proxy, C4의 heuristic filter와 domain-aligned corpus 비교, GPT-3의 curated-similarity filter·source weighting, The Pile의 22-component mixture와 40GB 통제 실험, Chinchilla의 MassiveText sampling·epoch와 누적 token $D$를 함께 읽는다. 품질은 형식·중복·출처 proxy·과제 적합성·사실·안전·권리의 벡터이고, 다양성은 domain support와 sampling probability의 설계이며, $D$는 고유 정보량이 아닌 token 노출 총량이므로 한 순위로 합치지 않는다. T5 Table 8, Pile Table 3, Chinchilla Tables A1–A2를 직접 근거로 두되, filter·composition·weight·반복의 단독 인과와 임의의 $20N$ token 동등성은 입증되지 않은 범위로 남겼다.
 
 `071`의 지시 미세조정을 단일 연구가 처음 발명했다는 서사, 수백 개 과제·단일 universal checkpoint·모든 규모에서의 일관된 향상, 지시 문장을 입력에 붙이는 것만으로 weights가 바뀐다는 설명, safety·RLHF·제품 배포까지 직접 검증했다는 주장도 공개 문서에서 교정했다. 원 FLAN은 62개 데이터셋을 12개 과제 군집으로 나누고 평가 군집마다 그 군집을 제외한 별도 137B LaMDA-PT checkpoint를 학습했다. 각 데이터셋에 10개 수동 template를 두었고 best-dev template 조건에서 zero-shot GPT-3보다 20/25 데이터셋에서 높았지만, 422M·2B·8B에서는 지시 미세조정 뒤 보류 과제 평균이 오히려 낮아졌다. Natural Instructions의 선행 2021년 공개와 InstructGPT의 SFT–선호 순위–보상 모델–PPO 경로도 별도 계보로 기록했다.
 
