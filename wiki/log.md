@@ -3203,6 +3203,19 @@ raw 등록 해시:
 - 사이트는 canonical 문서·artifact reader·legacy redirect를 합쳐 539개 HTML을 빌드했다. 5,919개 위키 링크와 33,868개 로컬 참조를 검사했고 미해결 위키 대상은 0개였으며 검색 색인은 282개 항목을 유지했다.
 - 다음 작업 입력은 로컬 수집 접두사 078이고, 공개 대상은 공식 079 HELM이다.
 
+## [2026-07-21] fix | 비번호 참고 자료의 001 중복 표시 제거
+
+변경 내용:
+
+- source 목록 첫 카드에 비번호 reference [[GLaM에서 Mixtral까지의 희소 MoE 확장]]이 놓이면서, 카드 배열 위치 fallback이 `001` badge를 만든 문제를 확인했다. 실제 `source.001`은 [[001_섀넌의 N-gram 모델]] 하나뿐이었지만 공개 목록에서는 두 카드가 `001`처럼 보였다.
+- 정규 `page_type: source`만 공식 세 자리 장 번호를 표시하게 하고, `page_type: reference`는 번호 source 뒤에 배치해 `참고` badge로 구분했다. 첫 자료·최근 자료 홈 영역도 정규 source만 사용하므로 비번호 reference가 연대 순서를 밀어내지 않는다.
+- 홈과 source 목록의 수를 source 77개와 reference 1개로 분리했다. 번역 모아보기와 reference artifact reader도 빈 번호나 배열 fallback 대신 `참고 자료`로 표시한다.
+- 사이트 회귀 검사에 source 목록의 공식 번호 badge 중복 금지, `001` 정확히 한 번, 비번호 reference의 `참고` 표시와 정규 source 뒤 배치를 추가했다.
+
+검증 결과:
+
+- 정적 사이트 회귀 검사가 통과했고, 생성된 source 목록에서 `001`은 섀넌 source 한 번만 나타나며 GLaM–Mixtral reference는 목록 마지막의 `참고` 카드로 렌더링됐다.
+
 ## 관련 항목
 
 - [[index]]

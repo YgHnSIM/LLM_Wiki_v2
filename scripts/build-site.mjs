@@ -259,11 +259,17 @@ const grouped = Object.fromEntries(Object.keys(categoryMeta).map((key) => [key, 
 for (const document of documents) grouped[document.category].push(document);
 for (const list of Object.values(grouped)) {
   list.sort((a, b) => {
-    if (a.sourceNumber || b.sourceNumber) return collator.compare(a.sourceNumber, b.sourceNumber);
+    if (a.category === 'sources' && b.category === 'sources') {
+      if (a.sourceNumber && b.sourceNumber) return collator.compare(a.sourceNumber, b.sourceNumber);
+      if (a.sourceNumber) return -1;
+      if (b.sourceNumber) return 1;
+    }
     return collator.compare(a.title, b.title);
   });
 }
 
+const sourceDocuments = grouped.sources.filter((document) => document.pageType === 'source');
+const referenceDocuments = grouped.sources.filter((document) => document.pageType === 'reference');
 const publishedDocuments = ['sources', 'concepts', 'entities', 'analyses'].flatMap((key) => grouped[key]);
 const latestUpdate = documents.map((document) => document.updated).filter(Boolean).sort().at(-1) ?? '';
 const graphData = buildKnowledgeGraph(publishedDocuments, {
@@ -636,14 +642,21 @@ function meaningfulConnectionCount(document) {
   return document.graphNeighbors?.length ?? document.meaningfulOutgoing.length;
 }
 
+function sourceDisplayNumber(document) {
+  if (document.sourceNumber) return document.sourceNumber;
+  if (document.pageType === 'reference') return '참고';
+  throw new Error(`Source document ${document.id} has no official chapter number.`);
+}
+
 function cardDataAttributes(document) {
   return `data-card data-category="${escapeHtml(document.category)}" data-verification="${escapeHtml(document.verification)}" data-tags="${escapeHtml(publicTags(document).join(' '))}" data-title="${escapeHtml(document.title)}" data-sort-title="${escapeHtml(document.title)}" data-updated="${escapeHtml(document.updated)}" data-connections="${meaningfulConnectionCount(document)}" data-filter-value="${escapeHtml([document.title, ...document.aliases, ...document.tags, document.excerpt].join(' '))}"`;
 }
 
 function sourceCard(document, index, { headingLevel = 3 } = {}) {
-  const number = document.sourceNumber || String(index + 1).padStart(3, '0');
+  const number = sourceDisplayNumber(document);
+  const numberClass = document.pageType === 'reference' ? ' source-number--reference' : '';
   return `<article class="source-card source-card--${(index % 4) + 1}" ${cardDataAttributes(document)}>
-    <span class="source-number" aria-hidden="true">${escapeHtml(number)}</span>
+    <span class="source-number${numberClass}" aria-hidden="true">${escapeHtml(number)}</span>
     <div class="source-card-body">
       <div class="card-meta">${verificationBadge(document)}<span>연결 ${meaningfulConnectionCount(document)}</span></div>
       <h${headingLevel}><a href="${sitePath(document.url)}">${escapeHtml(document.title)}</a></h${headingLevel}>
@@ -668,8 +681,8 @@ function noteCard(document, { headingLevel = 3 } = {}) {
 function renderHome() {
   const overview = documents.find((document) => document.filename === 'overview');
   const intro = truncate(firstParagraph(overview?.body ?? ''), 130);
-  const sourcePreview = grouped.sources.slice(0, 3);
-  const heroSourcePreview = grouped.sources.slice(-6).reverse();
+  const sourcePreview = sourceDocuments.slice(0, 3);
+  const heroSourcePreview = sourceDocuments.slice(-6).reverse();
   const analysisPreview = grouped.analyses.slice(0, 3);
   const topConcepts = [...grouped.concepts]
     .sort((a, b) => b.meaningfulBacklinks.length - a.meaningfulBacklinks.length || collator.compare(a.title, b.title))
@@ -678,20 +691,20 @@ function renderHome() {
   const body = `<main id="main-content">
     <section class="home-hero">
       <div class="hero-copy">
-        <p class="eyebrow">원문 노트 ${grouped.sources.length}개·비교 읽기 ${grouped.analyses.length}개</p>
+        <p class="eyebrow">원문 노트 ${sourceDocuments.length}개·참고 자료 ${referenceDocuments.length}개·비교 읽기 ${grouped.analyses.length}개</p>
         <h1>언어 모델의<br><span>역사를 함께 읽다</span></h1>
         <p class="hero-intro">${escapeHtml(intro)}</p>
         ${renderSearch('hero-search', { large: true, label: '홈 주요 검색' })}
       </div>
       <nav class="hero-collage hero-source-strip" aria-label="최근 원문 노트 빠른 이동">
         <p class="collage-label">최근 원문 노트</p>
-        <ul class="hero-source-list">${heroSourcePreview.map((document) => `<li class="hero-source-item"><a href="${sitePath(document.url)}"><span>${escapeHtml(document.sourceNumber || String(grouped.sources.indexOf(document) + 1).padStart(3, '0'))}</span><strong>${escapeHtml(document.title)}</strong></a></li>`).join('')}</ul>
-        <a class="hero-source-all" href="${sitePath('/sources/')}"><strong>전체 원문 노트 ${grouped.sources.length}개 보기</strong><span aria-hidden="true">→</span></a>
+        <ul class="hero-source-list">${heroSourcePreview.map((document) => `<li class="hero-source-item"><a href="${sitePath(document.url)}"><span>${escapeHtml(sourceDisplayNumber(document))}</span><strong>${escapeHtml(document.title)}</strong></a></li>`).join('')}</ul>
+        <a class="hero-source-all" href="${sitePath('/sources/')}"><strong>원문 노트 ${sourceDocuments.length}개·참고 자료 ${referenceDocuments.length}개 보기</strong><span aria-hidden="true">→</span></a>
       </nav>
     </section>
 
     <section class="stats-strip" aria-label="위키 문서 현황">
-      ${['sources', 'concepts', 'entities', 'analyses'].map((key) => `<a href="${sitePath(`/${key}/`)}"><strong>${grouped[key].length}</strong><span>${categoryMeta[key].label}</span></a>`).join('')}
+      ${['sources', 'concepts', 'entities', 'analyses'].map((key) => `<a href="${sitePath(`/${key}/`)}"><strong>${key === 'sources' ? sourceDocuments.length : grouped[key].length}</strong><span>${categoryMeta[key].label}</span></a>`).join('')}
     </section>
 
     <section class="home-section source-section">
@@ -700,7 +713,7 @@ function renderHome() {
         <p>통계적 언어 처리에서 대화형 AI까지, 핵심 자료를 번호순으로 읽습니다.</p>
       </div>
       <div class="source-timeline">${sourcePreview.map((document, index) => sourceCard(document, index)).join('')}</div>
-      <a class="text-link" href="${sitePath('/sources/')}">원문 노트 ${grouped.sources.length}개 전체 보기 <span aria-hidden="true">→</span></a>
+      <a class="text-link" href="${sitePath('/sources/')}">원문 노트 ${sourceDocuments.length}개·참고 자료 ${referenceDocuments.length}개 전체 보기 <span aria-hidden="true">→</span></a>
     </section>
 
     <section class="home-section analysis-section">
@@ -739,7 +752,7 @@ function renderCategoryPage(key) {
     : list.map((document) => noteCard(document, { headingLevel: 2 })).join('');
   const body = `<main id="main-content" class="listing-main">
     <header class="listing-hero">
-      <p class="eyebrow">${list.length}개 문서</p>
+      <p class="eyebrow">${key === 'sources' ? `원문 노트 ${sourceDocuments.length}개 · 참고 자료 ${referenceDocuments.length}개` : `${list.length}개 문서`}</p>
       <div><h1>${escapeHtml(meta.label)}</h1><span class="listing-count">${list.length}</span></div>
       ${key === 'sources' && translationReaders.length ? `<a class="translation-directory-link" href="${sitePath('/translations/')}"><span>별도 읽기</span><strong>번역본 ${translationReaders.length}개 모아보기</strong><span aria-hidden="true">→</span></a>` : ''}
       <p>${escapeHtml(meta.description)}</p>
@@ -788,7 +801,7 @@ function renderCategoryPage(key) {
 function renderTranslationsPage() {
   const cards = translationReaders.map((reader) => `<li class="translation-card">
     <a href="${sitePath(reader.url)}">
-      <span class="translation-number">${escapeHtml(reader.sourceNumber)}</span>
+      <span class="translation-number">${escapeHtml(sourceDisplayNumber(reader.sourceDocument))}</span>
       <span class="translation-card-copy"><small>${escapeHtml(reader.label)}</small><strong>${escapeHtml(reader.sourceDocument.title)}</strong></span>
       <span class="translation-reading-time">${reader.minutes}분 읽기 <span aria-hidden="true">→</span></span>
     </a>
@@ -1057,7 +1070,7 @@ function renderArticle(document) {
     <nav class="breadcrumbs" aria-label="현재 위치">${breadcrumbFor(document)}</nav>
     <header class="article-hero">
       <div class="article-title-block">
-        <div class="article-kicker"><span>${escapeHtml(categoryMeta[document.category].singular)}</span>${document.sourceNumber ? `<span>No. ${document.sourceNumber}</span>` : ''}</div>
+        <div class="article-kicker"><span>${escapeHtml(document.pageType === 'reference' ? '참고 자료' : categoryMeta[document.category].singular)}</span>${document.sourceNumber ? `<span>No. ${document.sourceNumber}</span>` : ''}</div>
         <h1 id="article-title">${escapeHtml(document.title)}</h1>
         ${aliases.length ? `<p class="aliases">${aliases.map(escapeHtml).join(' · ')}</p>` : ''}
         <p class="article-summary">${escapeHtml(truncate(document.excerpt, 180))}</p>
@@ -1109,12 +1122,13 @@ function renderArticle(document) {
 
 function renderArtifactReader(reader) {
   const document = reader.sourceDocument;
+  const sourceLabel = document.pageType === 'reference' ? '참고 자료' : `No. ${sourceDisplayNumber(document)}`;
   const rendered = renderMarkdown(reader, { artifact: true });
   const body = `<main id="main-content" class="article-main artifact-main">
     <nav class="breadcrumbs" aria-label="현재 위치">${breadcrumbForArtifact(reader)}</nav>
     <header class="article-hero artifact-hero">
       <div class="article-title-block">
-        <div class="article-kicker"><span>${escapeHtml(reader.label)}</span><span>No. ${escapeHtml(document.sourceNumber)}</span></div>
+        <div class="article-kicker"><span>${escapeHtml(reader.label)}</span><span>${escapeHtml(sourceLabel)}</span></div>
         <h1 id="article-title">${escapeHtml(document.title)}</h1>
         <p class="article-summary">${escapeHtml(reader.description)}</p>
       </div>
@@ -1122,7 +1136,7 @@ function renderArtifactReader(reader) {
         <div><dt>자료 유형</dt><dd>${escapeHtml(reader.label)}</dd></div>
         <div><dt>보존 역할</dt><dd>${escapeHtml(reader.registryRole)}</dd></div>
         <div><dt>읽기</dt><dd>약 ${reader.minutes}분</dd></div>
-        <div><dt>기준 문서</dt><dd>No. ${escapeHtml(document.sourceNumber)}</dd></div>
+        <div><dt>기준 문서</dt><dd>${escapeHtml(sourceLabel)}</dd></div>
       </dl>
     </header>
     ${renderArtifactSwitcher(document, reader.routeRole)}

@@ -681,6 +681,11 @@ a {
   text-shadow: 4px 0 var(--pink), -4px 0 var(--cyan);
 }
 
+.source-number--reference {
+  font-size: clamp(34px, 4vw, 54px);
+  letter-spacing: -0.08em;
+}
+
 .source-number::before {
   position: absolute;
   z-index: -1;

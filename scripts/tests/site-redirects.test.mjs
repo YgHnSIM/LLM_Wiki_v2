@@ -19,6 +19,21 @@ test('renumbered source and artifact-reader URLs retain static legacy redirects'
   const report = JSON.parse(await fs.readFile(path.join(distDir, 'build-report.json'), 'utf8'));
   assert.equal(report.redirectCount, report.redirects.length);
 
+  const sourceDirectoryHtml = await fs.readFile(path.join(distDir, 'sources', 'index.html'), 'utf8');
+  const sourceLabels = [...sourceDirectoryHtml.matchAll(/<span class="source-number(?: source-number--reference)?" aria-hidden="true">([^<]+)<\/span>/g)]
+    .map((match) => match[1]);
+  const officialNumbers = sourceLabels.filter((label) => /^\d{3}$/.test(label));
+  assert.equal(new Set(officialNumbers).size, officialNumbers.length, 'Official source numbers must appear only once.');
+  assert.equal(officialNumbers.filter((label) => label === '001').length, 1);
+  assert.equal(sourceLabels.filter((label) => label === '참고').length, 1);
+  assert.ok(sourceLabels.indexOf('참고') > sourceLabels.indexOf('078'), 'Unnumbered references must follow official sources.');
+
+  const translationsHtml = await fs.readFile(path.join(distDir, 'translations', 'index.html'), 'utf8');
+  const translationLabels = [...translationsHtml.matchAll(/<span class="translation-number">([^<]+)<\/span>/g)]
+    .map((match) => match[1]);
+  assert.equal(translationLabels.filter((label) => label === '001').length, 1);
+  assert.equal(translationLabels.filter((label) => label === '참고').length, 1);
+
   for (let canonicalNumber = 48; canonicalNumber <= 78; canonicalNumber += 1) {
     const canonicalPrefix = String(canonicalNumber).padStart(3, '0');
     const artifactPrefix = String(canonicalNumber - 1).padStart(3, '0');
