@@ -263,7 +263,7 @@ related:
 - [[Transformer-XL]]에서 구분하는 현재 segment 내부 병렬 계산, segment 사이 forward memory 재사용, stop-gradient로 끊긴 학습 경로와 설정된 memory 길이
 - [[FlashAttention]]에서 구분하는 dense attention operator, 온라인 softmax·타일링·재계산 algorithm, hardware별 kernel과 $O(n^2d)$ 산술량·HBM 이동·$O(n)$ 추가 중간 저장의 서로 다른 비용 축
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]]에서 비교하는 ELMo 고정 특징, 전체 미세조정, QLoRA의 NF4 동결 base–BF16 계산–학습 adapter, 입력 cue·demonstration, 다과제 지시, CLIP class prototype, Flamingo의 동결 백본–학습 bridge–멀티모달 context, DALL·E 2의 CLIP image-embedding target, Stable Diffusion의 text-token 교차 어텐션 조건과 공간 latent, Codex 실행 선택 및 foundation model–adapted model–deployed system의 층위·접근권
-- [[자동 평가 지표는 무엇을 보상하는가]]에서 비교하는 BLEU·ROUGE·METEOR의 참조 중첩, HumanEval unit test, InstructGPT 보상 모델과 HELM의 다차원 행렬, pass@k·평가 지침·prompt 분포·누락된 조합·메트릭 선택이 점수 유인에 들어가는 서로 다른 위치
+- [[자동 평가 지표는 무엇을 보상하는가]]에서 비교하는 BLEU·ROUGE·METEOR의 참조 중첩, HumanEval unit test, InstructGPT 보상 모델, HELM의 다차원 행렬과 Function Calling의 JSON→schema→의미→권한→실행→grounding 직렬 관문 및 분모·pass@k·평가 지침·prompt 분포·누락된 조합이 점수 유인에 들어가는 서로 다른 위치
 - [[함수 호출과 도구 사용]]에서 분리하는 model의 call proposal, JSON·schema·semantic validation, 사용자·resource authorization, side-effect execution과 tool-result grounding 및 2023년 function calling–JSON mode–parallel calls–2024년 strict schema의 version 경계
 - [[XLM]]의 monolingual CLM·MLM과 parallel-data TLM, shared BPE·언어 sampling 및 target-language text와 task label을 분리한 zero-shot 조건
 - [[같은 병렬 문장은 무엇을 학습시키는가]]에서 비교하는 SMT의 잠재 단어 정렬, NMT의 target sequence supervision, TLM의 양방향 masked-token 문맥과 서로 다른 alignment 층위

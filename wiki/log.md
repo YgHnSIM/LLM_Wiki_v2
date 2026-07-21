@@ -3724,6 +3724,22 @@ raw 등록 해시:
 - `source:ready -- 092`는 96개 회귀 테스트와 312개 Markdown strict lint를 통과해 361개 evidence와 184개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 602개 HTML을 만들고 6,852개 wiki link를 모두 해소했다.
 - 다음 순차 입력은 공식 093 `Multimodal Large Language Models - Vision-Language Integration That Transformed AI Capabilities`다.
 
+## [2026-07-22] content | 도구 호출 평가의 직렬 관문과 분모
+
+변경 내용:
+
+- 새 분석 문서를 늘리지 않고 기존 [[자동 평가 지표는 무엇을 보상하는가]]를 공식 092까지 확장했다. 참조 중첩·HumanEval 실행 test·InstructGPT 학습 보상·HELM 병렬 평가 행렬에 Function Calling의 직렬 execution trace를 추가했다.
+- 도구 호출 평가를 call 필요성·tool 선택·valid JSON·schema 일치·argument 의미·권한·실행 postcondition·결과 grounding의 관문으로 분해했다. Component 진단에는 앞 관문을 통과한 조건부 분모를, 실제 배포 결과에는 전체 요청 분모를 함께 사용하도록 했다.
+- 직렬 관문의 전체 성공을 조건부 확률의 곱으로 표현해 schema-valid 표본에서만 계산한 argument accuracy를 end-to-end 성공률로 바꿀 수 없음을 보였다. No-call 요청의 과잉 호출과 read/write·고위험 tool의 서로 다른 false-positive 비용도 평가 장부에 넣었다.
+- 2023년 11월 JSON mode와 2024년 `strict: true`는 각각 JSON·schema 관문을 강화하지만 의미 값·권한·외부 실행·최종 답을 보장하지 않는다. Timeout retry가 API 성공률을 높이면서 중복 결제·발송을 만들 수 있어 idempotency·transaction·postcondition을 oracle에 포함했다.
+- 공식 092 raw 두 파일과 OpenAI의 2023년 Function Calling·DevDay, 2024년 Structured Outputs 근거를 분석에 연결했다. Evidence는 10개에서 13개로 늘었고 [[index]]·[[overview]]의 설명과 읽기 경로를 동기화했다.
+
+검증 경계:
+
+- OpenAI의 `gpt-4-0613` 40% 미만과 `gpt-4o-2024-08-06` strict 100%는 company-internal complex-schema conformance 평가다. 일반 tool-use 실패율·argument 사실성·권한·행동 안전이나 다른 provider의 독립 재현으로 확대하지 않는다.
+- Model snapshot뿐 아니라 tool catalog·description, orchestrator, identity·policy, external service와 UI가 system 결과를 만든다. 한 component의 점수를 기반 model의 고유 능력으로 귀속하지 않는다.
+- 전체 검증은 96개 회귀 테스트와 312개 Markdown strict lint를 통과해 361개 evidence와 184개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 602개 HTML을 만들고 6,861개 wiki link를 모두 해소했다.
+
 ## 관련 항목
 
 - [[index]]

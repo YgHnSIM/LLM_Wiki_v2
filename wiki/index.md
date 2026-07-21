@@ -339,7 +339,7 @@ related:
 - [[잔차 경로와 정규화는 어디에 놓이는가]] — ResNet post-/pre-activation과 Transformer Post-/Pre-LN을 additive identity path 위의 Jacobian 배치로 비교한 분석 (근거 5개)
 - [[계수 기반과 예측 기반 단어 표현은 얼마나 다른가]] — LSI·NPLM·SGNS·GloVe를 문맥 단위·통계 집계·가중·저랭크 목적·평가 축으로 비교한 분석 (근거 7개)
 - [[구조화된 의미 자원은 무엇을 노드로 삼는가]] — WordNet synset·FrameNet frame·PropBank roleset과 token·Freebase topic이 선택하는 동일성·관계·근거 단위를 비교한 분석 (근거 6개)
-- [[자동 평가 지표는 무엇을 보상하는가]] — 참조 중첩·HumanEval unit test·InstructGPT 학습 보상을 비교하고 pass@k·평가자 분포·proxy 최적화의 유인을 분석한 문서 (근거 10개)
+- [[자동 평가 지표는 무엇을 보상하는가]] — 참조 중첩·HumanEval unit test·InstructGPT 보상·HELM 병렬 장부와 Function Calling의 schema→권한→실행 직렬 관문을 비교해 분모·proxy 최적화의 유인을 분석한 문서 (근거 13개)
 - [[N-gram에서 LLM으로]] — 조건부 예측의 공통점과 n-gram 빈도표·Katz 백오프·신경망 어텐션의 기술적 단절을 정리한 분석 (근거 11개)
 - [[최고 경로와 기대 통계, 백오프]] — Viterbi의 최고 경로, 경로합·EM의 기대 통계, Katz의 미관측 확률 추정이 답하는 서로 다른 질문을 구분한 분석 (근거 8개)
 - [[확률, 마진, 순위 점수]] — 생성·조건부 확률, SVM 결정값, BM25 점수와 DALL·E의 이미지 token 분포·대조 재순위 점수에서 정규화 범위·후보 집합·원점수 해석을 구분한 분석 (근거 8개)
