@@ -18,7 +18,7 @@ tags:
   - domain/machine-learning
   - domain/nlp
 created: '2026-07-21'
-updated: '2026-07-21'
+updated: '2026-07-22'
 lifecycle: active
 verification: verified
 artifacts:
@@ -34,8 +34,13 @@ evidence:
   - source_id: openai-2021-dalle-dvae
     locator: 'README와 model_card.md의 Model Details·Model Use·Training Data·Performance and Limitations에 기록된 공개 범위와 dVAE 복원 한계'
     relation: supplements
+  - source_id: ramesh-et-al-2022-unclip
+    locator: 'arXiv:2204.06125v1, §§2.1–2.2·5.1·6–7과 Appendix C·Table 3의 동결 CLIP 인코더·prior·64×64 확산 디코더·업샘플러·classifier-free guidance, CLIP gradient guidance 대비 및 DALL·E 1 차이'
+    relation: supplements
 related:
   - source.075
+  - source.085
+  - concept.dall-e-2
   - concept.transformer
   - concept.자기회귀-생성
   - concept.clip
@@ -101,7 +106,7 @@ CLIP은 이미지와 텍스트를 비교하는 이중 인코더이며 DALL·E는
 
 새 조합을 그린다는 행동은 인간과 같은 의도·이해·창의성을 입증하지 않는다. 전체 훈련 자료의 출처·권리·동의·편향 구성도 공개되지 않았고 원 논문은 체계적인 편향 감사를 수행하지 않았다.
 
-후속 DALL·E 제품과 diffusion 모델은 같은 텍스트-이미지 문제를 다루더라도 표현·목적함수·decoder가 달라질 수 있다. DALL·E 1을 모든 후속 이미지 생성 모델의 공통 설계도로 놓으려면 각 후속 논문의 직접 근거가 따로 필요하다.
+공식 085 논문으로 직접 비교할 수 있는 후속 모델은 [[DALL·E 2]]의 연구 구조인 unCLIP이다. DALL·E 1은 dVAE의 이산 이미지 토큰을 텍스트 토큰과 함께 자기회귀적으로 예측하지만, unCLIP은 동결된 CLIP 텍스트·이미지 인코더를 공유 좌표계로 사용한다. Prior가 텍스트 조건의 CLIP 이미지 임베딩을 생성하고, 64×64 확산 디코더와 두 업샘플러가 이를 1,024×1,024 이미지로 복원한다. Prior와 기본 디코더가 사용하는 조건 강화는 매 단계의 외부 CLIP gradient guidance가 아니라 classifier-free guidance다. 이 차이는 DALL·E 1이 모든 후속 diffusion 모델의 공통 설계도였다는 주장을 지지하지 않는다.
 
 ## 학습 확인
 
@@ -114,6 +119,8 @@ CLIP은 이미지와 텍스트를 비교하는 이중 인코더이며 DALL·E는
 ### 다음 문서
 
 - [[075_DALL·E와 이산 이미지 토큰 생성]] — 원 논문의 수치·평가·중복 분석과 raw 설명의 검증 정정을 locator로 확인한다.
+- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] — 후속 unCLIP의 동결 CLIP·prior·계층적 확산 경로를 원 논문 수치와 함께 확인한다.
+- [[DALL·E 2]] — DALL·E 1과 달라진 중간 표현·생성 방식·guidance를 개념 중심으로 비교한다.
 - [[CLIP]] — 생성 후보를 점수화하는 대조 표현 모델과 이미지 생성기의 역할 차이를 이어서 본다.
 
 ## 출처
@@ -123,11 +130,15 @@ CLIP은 이미지와 텍스트를 비교하는 이중 인코더이며 DALL·E는
 - Aditya Ramesh 외, [arXiv 본문·부록 통합본](https://arxiv.org/abs/2102.12092), Appendix §§A–C·F–G, Figures 10–14와 Listings 1–2.
 - OpenAI, [DALL·E: Creating images from text](https://openai.com/index/dall-e/), 2021-01-05, Overview, Capabilities와 Summary of approach and prior work.
 - OpenAI, [DALL·E dVAE repository and model card](https://github.com/openai/DALL-E), README와 `model_card.md`.
+- 공식 085 검증 노트: [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]; 구조 요약: [[DALL·E 2]].
+- Aditya Ramesh 외, [Hierarchical Text-Conditional Image Generation with CLIP Latents](https://arxiv.org/abs/2204.06125), 2022, §§2.1–2.2·5.1·6–7과 Appendix C·Table 3.
 - 프로젝트 보존 자료: `raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md`, `raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md`.
 
 ## 관련 항목
 
 - [[075_DALL·E와 이산 이미지 토큰 생성]]
+- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
+- [[DALL·E 2]]
 - [[Transformer]]
 - [[자기회귀 생성]]
 - [[CLIP]]

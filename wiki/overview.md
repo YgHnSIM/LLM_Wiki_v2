@@ -26,13 +26,13 @@ related:
 
 공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism (2015)**이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-21 현재 원문을 제공하지 않는다.
 
-따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 84개는 공식 001–046·048–084·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 085 `DALL·E 2: Diffusion-Based Text-to-Image Generation with CLIP Guidance`이다.
+따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 85개는 공식 001–046·048–085·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 086 `Stable Diffusion: Latent Diffusion Models for Accessible Text-to-Image Generation`이다.
 
 숫자 badge는 정규 source의 공식 장 번호에만 쓴다. 비번호 reference가 추가되면 번호 source 뒤에서 `참고`로 표시하며, 목록 위치를 `001` 같은 장 번호로 바꾸지 않는다. 같은 장의 검증 노트·번역·해설은 서로 다른 장이 아니라 하나의 source 묶음에 속한다.
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 84개, reference 0개, concept 158개, entity 29개, analysis 22개를 합친 비메타 문서 293개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 85개, reference 0개, concept 159개, entity 29개, analysis 22개를 합친 비메타 문서 295개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -46,7 +46,7 @@ related:
 | 자연어 지시는 언제 가중치에 들어가나 | [[063_T5와 Text-to-Text 통합 프레임워크]] | [[067_GPT-3와 문맥 내 학습]] → [[072_지시 미세조정과 FLAN의 제로샷 일반화]] → [[077_InstructGPT와 인간 선호 정렬]] → [[인간 피드백 강화학습]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
 | 대화 인터페이스는 모델 능력과 신뢰를 어떻게 바꾸나 | [[007_ELIZA]] | [[077_InstructGPT와 인간 선호 정렬]] → [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]] → [[ChatGPT 연구 미리보기 (2022)]] | [[ELIZA에서 LLM으로]] |
 | 프롬프트는 추론 성능을 어떻게 바꾸나 | [[067_GPT-3와 문맥 내 학습]] | [[080_사고 연쇄 프롬프팅과 추론 행동 유도]] → [[사고 연쇄 프롬프팅]] → [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]] → [[079_HELM과 다차원 언어 모델 평가]] | [[손실 곡선과 능력 곡선 사이]] |
-| 이미지·동영상 예시는 생성 모델에 어떻게 들어가나 | [[070_CLIP과 대조적 언어-이미지 사전 학습]] | [[CLIP]] → [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]] → [[Flamingo]] → [[문맥 내 학습]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
+| 이미지·동영상 예시는 생성 모델에 어떻게 들어가나 | [[070_CLIP과 대조적 언어-이미지 사전 학습]] | [[CLIP]] → [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]] → [[Flamingo]] → [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] → [[DALL·E 2]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
 | 모델 공개는 곧 재현 가능성을 뜻하나 | [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] | [[076_파운데이션 모델 보고서와 AI 생태계]] → [[082_BLOOM과 공개 접근 다국어 LLM]] → [[BLOOM]] | [[공개 가중치와 재현 가능성은 같은 축인가]] |
 | 희소 모델의 ‘크기’는 무엇을 뜻하나 | [[069_전문가 혼합과 희소 활성 스케일링]] | [[GLaM에서 Mixtral까지의 희소 MoE 확장]] → [[Mixtral 8x7B]] | [[총 매개변수와 활성 계산량은 같은 축인가]] |
 | 학습 데이터의 양과 구성을 어떻게 읽나 | [[063_T5와 Text-to-Text 통합 프레임워크]] | [[066_신경 언어 모델의 스케일링 법칙]] → [[067_GPT-3와 문맥 내 학습]] → [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] → [[The Pile]] → [[078_Chinchilla와 계산 최적 언어 모델 학습]] | [[데이터 품질과 분포 다양성은 같은 축인가]] |
@@ -59,7 +59,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 84개 소스의 범위
+## 85개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -144,6 +144,7 @@ related:
 - [[082_BLOOM과 공개 접근 다국어 LLM]]은 176B decoder-only model, ROOTS 498개 구성 dataset·46개 자연어와 13개 programming language, Jean Zay 학습을 복원하고 weight·code·data·RAIL·compute를 분리해 최초성·최첨단·편향 해소·민주화 과장을 교정한다.
 - [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]]은 540.35B dense decoder-only Transformer, 780B-token mixture와 두 TPU v4 Pod·6,144 chip 훈련을 복원하고, sparse attention·공개 weight·균등한 100개 언어 지원·base PaLM과 PaLM-Coder 혼동·일반 추론 과장을 평가 조건으로 교정한다.
 - [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]]은 동결 NFNet-F6·언어 모델 사이에 64개 시각 token의 Perceiver Resampler와 0-init gated cross-attention을 연결한 구조를 복원하고, 퓨샷 문맥 조건화와 미세조정·gate 학습을 구분하며 16개 과제·자료 mixture·실패 양상·연구용 한계를 검증한다.
+- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]은 동결 [[CLIP]] 표현에서 image embedding을 생성하는 prior와 계층적 확산 decoder·upsampler를 복원하고, classifier-free guidance와 CLIP gradient guidance, 논문 unCLIP과 Preview 제품 기능, 품질·다양성 평가 축을 구분한다.
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]]은 GLaM·Mixtral의 total·active parameter와 token별 routing을 복원하고, 2024년 최초성·Meta 귀속·dense 계산의 제곱 증가·깨끗한 domain expert·민주화 과장을 교정한다.
 
 ## 현재 핵심 주제
@@ -210,6 +211,7 @@ related:
 - [[CLIP]]에서 구분하는 이미지·텍스트 이중 인코더, 정규화된 shared embedding과 대칭 대조 손실, class prompt로 합성한 zero-shot classifier 및 cross-attention·생성 능력의 부재
 - [[Flamingo]]에서 구분하는 동결 시각·언어 backbone, 64개 시각 token 병목, 0-init gated cross-attention, 고정 weight의 멀티모달 문맥 내 학습과 과제별 fine-tuning의 차이
 - [[DALL·E (2021)]]에서 구분하는 dVAE의 8,192개 범주 시각 어휘·1,024개 이미지 토큰, 최대 256개 text token과의 공동 자기회귀 분포, 512개 후보 생성과 별도 대조 재순위화
+- [[DALL·E 2]]에서 구분하는 동결 CLIP 표현, caption-conditioned image-embedding prior, 64×64 확산 decoder와 두 upsampler, classifier-free guidance 및 논문 unCLIP·Preview 제품의 서로 다른 범위
 - [[파운데이션 모델]]에서 구분하는 광범위한 사전 학습, 여러 적응 경로, 완성된 배포 시스템과 공통 기반의 개선·결함이 전파되는 동질화
 - [[OpenAI Codex (2021)]]에서 구분하는 연구용 Python 코드 모델군, Codex-S의 함수 분포 지도 미세조정, docstring prompt와 표본 생성·실행 선택 및 현행 동명 제품
 - [[N-gram에서 LLM으로]]에서 비교하는 Katz의 표면 문맥 확률 재분배와 NPLM의 연속 표현 매개변수 공유
@@ -275,6 +277,8 @@ related:
 - [[The Pile]]
 - [[075_DALL·E와 이산 이미지 토큰 생성]]
 - [[DALL·E (2021)]]
+- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
+- [[DALL·E 2]]
 - [[076_파운데이션 모델 보고서와 AI 생태계]]
 - [[파운데이션 모델]]
 - [[077_InstructGPT와 인간 선호 정렬]]
@@ -399,57 +403,59 @@ related:
 
 ## 현재 상태
 
-소스 84개, 참고 자료 0개, 개념 158개, 개체 29개, 분석 22개와 메타 문서 3개, 총 296개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 265개는 `verified`, 해석적 문서 28개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 321개 외부 근거와 168개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 85개, 참고 자료 0개, 개념 159개, 개체 29개, 분석 22개와 메타 문서 3개, 총 298개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 267개는 `verified`, 해석적 문서 28개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 324개 외부 근거와 170개 불변 raw artifact가 레지스트리에 등록돼 있다.
 
-`077`의 $C^{1/3}$ scaling, Kaplan의 model–data 절충 누락, 보편적인 20 tokens/parameter, 175B model의 단일 정답 3.5T tokens, Gopher보다 낮은 훈련비, 과소 훈련 parameter의 기계적 비활성, 모든 자료·architecture로의 직접 일반화 주장을 공개 문서에서 교정했다. Hoffmann 등의 세 fixed-compute 추정법은 $N$과 $D$에 0.50/0.50·0.49/0.51·0.46/0.54 지수를 주며, Gopher와 Chinchilla는 약 $5.76\times10^{23}$ FLOPs의 같은 사전 학습 compute를 사용했다. 20:1은 특정 dense Transformer·자료 혼합·schedule에 조건화된 근사이고, 175B 외삽은 접근별 약 3.7T·4.3T·12.0T로 벌어진다.
+[[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]과 [[DALL·E 2]]는 공식 논문의 unCLIP을 caption-conditioned CLIP image embedding prior와 계층적 확산 decoder로 복원했다. 생성 과정은 매 denoising step에서 CLIP gradient로 중간 이미지를 채점하는 방식이 아니라 동결된 CLIP 잠재 표현과 classifier-free guidance를 사용하며, 논문의 variation·보간 실험과 Preview 제품의 inpainting·안전·접근 통제는 서로 다른 근거 층위로 기록했다.
+
+`078`의 $C^{1/3}$ scaling, Kaplan의 model–data 절충 누락, 보편적인 20 tokens/parameter, 175B model의 단일 정답 3.5T tokens, Gopher보다 낮은 훈련비, 과소 훈련 parameter의 기계적 비활성, 모든 자료·architecture로의 직접 일반화 주장을 공개 문서에서 교정했다. Hoffmann 등의 세 fixed-compute 추정법은 $N$과 $D$에 0.50/0.50·0.49/0.51·0.46/0.54 지수를 주며, Gopher와 Chinchilla는 약 $5.76\times10^{23}$ FLOPs의 같은 사전 학습 compute를 사용했다. 20:1은 특정 dense Transformer·자료 혼합·schedule에 조건화된 근사이고, 175B 외삽은 접근별 약 3.7T·4.3T·12.0T로 벌어진다.
 
 [[언어 모델 스케일링 법칙]]에는 Kaplan의 0.73/0.27과 Chinchilla의 세 추정값, $D$가 고유 문서 수나 품질 점수가 아니라 누적 token 노출량이라는 경계를 추가했다. 더 많은 token이 compute frontier에서 중요했다는 결과와 어떤 20N token도 동등하다는 결론을 분리했으며, 품질·분포·반복 노출의 합성 질문은 기존 [[데이터 품질과 분포 다양성은 같은 축인가]]에서 이어 간다.
 
-`075`의 파운데이션 모델을 최소한의 과제별 학습을 쓰는 큰 LLM으로만 정의하는 축약, GPT-4의 2021년 사례 소급, 접근 민주화의 달성, 광범위한 지식·추론의 보편적 보장, 추론 환경비용 누락과 연구·정책·투자에 대한 직접 인과를 공개 문서에서 교정했다. 2021년 보고서의 정의는 광범위한 데이터로 대규모 훈련해 여러 후속 과제에 적응되는 역할을 가리키며, BERT의 전체 미세조정·GPT-3의 prompt·CLIP의 자연어 class 적응처럼 서로 다른 경로를 포함한다. 창발은 암묵적으로 유도된 행동이라는 넓은 뜻이고, 동질화는 공통 기반의 개선과 결함을 여러 응용으로 함께 전파하는 구조다. 보고서 §5.3은 훈련뿐 아니라 반복 추론·배포 energy와 훈련비용 상각도 이미 다뤘다.
+`076`의 파운데이션 모델을 최소한의 과제별 학습을 쓰는 큰 LLM으로만 정의하는 축약, GPT-4의 2021년 사례 소급, 접근 민주화의 달성, 광범위한 지식·추론의 보편적 보장, 추론 환경비용 누락과 연구·정책·투자에 대한 직접 인과를 공개 문서에서 교정했다. 2021년 보고서의 정의는 광범위한 데이터로 대규모 훈련해 여러 후속 과제에 적응되는 역할을 가리키며, BERT의 전체 미세조정·GPT-3의 prompt·CLIP의 자연어 class 적응처럼 서로 다른 경로를 포함한다. 창발은 암묵적으로 유도된 행동이라는 넓은 뜻이고, 동질화는 공통 기반의 개선과 결함을 여러 응용으로 함께 전파하는 구조다. 보고서 §5.3은 훈련뿐 아니라 반복 추론·배포 energy와 훈련비용 상각도 이미 다뤘다.
 
 [[사전 학습 지식은 과제에 어떻게 도착하는가]]에는 파운데이션 모델이 열세 번째 adaptation algorithm이 아니라 기존 경로를 공통 기반–적응–배포 관계로 읽는 상위 범주라는 점을 기록했다. Flamingo를 동결 백본 표현, 사전 학습된 bridge weights, downstream multimodal context activation을 결합하는 열두 번째 경로로 보강하고, model-parameter gradient·continuous-input gradient·output-only API 접근권과 foundation checkpoint·adapted model·deployed system의 관측 층위를 분리했다. [[손실 곡선과 능력 곡선 사이]]에는 Bommasani 등의 2021년 emergence가 암묵적으로 유도된 행동이라는 넓은 연구 의제이고, Wei 등의 2022년 emergent ability는 작은 규모에 없다가 큰 규모에서 관찰되는 task-level 판정이라는 용어 차이를 기록했다.
 
-`074`의 2021년 제품·전체 weight 공개, 텍스트 encoder 뒤 이미지 decoder, 8,192개 image token, 특정 조합의 훈련 중 완전 미노출, attention이 만든 인간 수준 구성 이해·창의성, 광범위한 실제 직업 활용, FID·IS 표준화와 모든 후속 이미지 모델의 공통 architecture 주장을 공개 문서에서 교정했다. DALL·E 1은 8,192개 범주의 시각 어휘에서 1,024개 image token을 만들고 최대 256개 text token과 공동 분포를 학습한 12B·64층 decoder-only sparse Transformer였다. 대표 비교는 512개 후보를 별도 대조 모델로 재순위화했으며, MS-COCO 사람 비교에서는 강했지만 CUB FID는 선행 최고 방법보다 거의 40점 나빴다. 전체 12B 생성 모델은 공개되지 않았고 dVAE만 공개됐다.
+`075`의 2021년 제품·전체 weight 공개, 텍스트 encoder 뒤 이미지 decoder, 8,192개 image token, 특정 조합의 훈련 중 완전 미노출, attention이 만든 인간 수준 구성 이해·창의성, 광범위한 실제 직업 활용, FID·IS 표준화와 모든 후속 이미지 모델의 공통 architecture 주장을 공개 문서에서 교정했다. DALL·E 1은 8,192개 범주의 시각 어휘에서 1,024개 image token을 만들고 최대 256개 text token과 공동 분포를 학습한 12B·64층 decoder-only sparse Transformer였다. 대표 비교는 512개 후보를 별도 대조 모델로 재순위화했으며, MS-COCO 사람 비교에서는 강했지만 CUB FID는 선행 최고 방법보다 거의 40점 나빴다. 전체 12B 생성 모델은 공개되지 않았고 dVAE만 공개됐다.
 
 [[확률, 마진, 순위 점수]]에는 DALL·E의 다음 image token 조건부분포와 CLIP 계열 scaled cosine 재순위 점수를 추가했다. 전자는 매 위치 8,192개 범주에서 정규화돼 후보 풀을 표본화하고, 후자는 이미 생성된 512개 후보 안의 순서를 정한다. 1/8·7/8은 modality 확률이 아니라 손실 가중치이고, 512는 신뢰도가 아니라 후보 탐색 예산이라는 경계를 기록했다.
 
 [[데이터 품질과 분포 다양성은 같은 축인가]]는 WebText의 Reddit 승인 proxy, C4의 heuristic filter와 domain-aligned corpus 비교, GPT-3의 curated-similarity filter·source weighting, The Pile의 22-component mixture와 40GB 통제 실험, Chinchilla의 MassiveText sampling·epoch와 누적 token $D$를 함께 읽는다. 품질은 형식·중복·출처 proxy·과제 적합성·사실·안전·권리의 벡터이고, 다양성은 domain support와 sampling probability의 설계이며, $D$는 고유 정보량이 아닌 token 노출 총량이므로 한 순위로 합치지 않는다. T5 Table 8, Pile Table 3, Chinchilla Tables A1–A2를 직접 근거로 두되, filter·composition·weight·반복의 단독 인과와 임의의 $20N$ token 동등성은 입증되지 않은 범위로 남겼다.
 
-`071`의 지시 미세조정을 단일 연구가 처음 발명했다는 서사, 수백 개 과제·단일 universal checkpoint·모든 규모에서의 일관된 향상, 지시 문장을 입력에 붙이는 것만으로 weights가 바뀐다는 설명, safety·RLHF·제품 배포까지 직접 검증했다는 주장도 공개 문서에서 교정했다. 원 FLAN은 62개 데이터셋을 12개 과제 군집으로 나누고 평가 군집마다 그 군집을 제외한 별도 137B LaMDA-PT checkpoint를 학습했다. 각 데이터셋에 10개 수동 template를 두었고 best-dev template 조건에서 zero-shot GPT-3보다 20/25 데이터셋에서 높았지만, 422M·2B·8B에서는 지시 미세조정 뒤 보류 과제 평균이 오히려 낮아졌다. Natural Instructions의 선행 2021년 공개와 InstructGPT의 SFT–선호 순위–보상 모델–PPO 경로도 별도 계보로 기록했다.
+`072`의 지시 미세조정을 단일 연구가 처음 발명했다는 서사, 수백 개 과제·단일 universal checkpoint·모든 규모에서의 일관된 향상, 지시 문장을 입력에 붙이는 것만으로 weights가 바뀐다는 설명, safety·RLHF·제품 배포까지 직접 검증했다는 주장도 공개 문서에서 교정했다. 원 FLAN은 62개 데이터셋을 12개 과제 군집으로 나누고 평가 군집마다 그 군집을 제외한 별도 137B LaMDA-PT checkpoint를 학습했다. 각 데이터셋에 10개 수동 template를 두었고 best-dev template 조건에서 zero-shot GPT-3보다 20/25 데이터셋에서 높았지만, 422M·2B·8B에서는 지시 미세조정 뒤 보류 과제 평균이 오히려 낮아졌다. Natural Instructions의 선행 2021년 공개와 InstructGPT의 SFT–선호 순위–보상 모델–PPO 경로도 별도 계보로 기록했다.
 
-`070`의 2021년 8월 단일 최초 공개, 175B GPT-3의 그대로인 코드 모델, 여러 언어·프레임워크·대규모 저장소 이해, 의미·예외 처리의 일반적 보장, test 작성·교육·온보딩·생산성·오류 감소의 직접 실험, 공개 코드의 license 문제 해결과 수학·과학·법률 특화 모델로의 직접 계보 주장도 공개 문서에서 교정했다. 연구 Codex는 최대 12B, 필터링된 Python 159GB와 1,000억 token 조건이었고 HumanEval은 164개 독립 함수·평균 7.7개 test였다. Table 1의 Codex-12B pass@1 28.81%와 pass@100 72.31%, Codex-S의 단일 표본 37.7%·평균 log-probability 선택 44.5%·unit-test oracle 77.5%를 서로 다른 생성·선택 조건으로 기록했다.
+`071`의 2021년 8월 단일 최초 공개, 175B GPT-3의 그대로인 코드 모델, 여러 언어·프레임워크·대규모 저장소 이해, 의미·예외 처리의 일반적 보장, test 작성·교육·온보딩·생산성·오류 감소의 직접 실험, 공개 코드의 license 문제 해결과 수학·과학·법률 특화 모델로의 직접 계보 주장도 공개 문서에서 교정했다. 연구 Codex는 최대 12B, 필터링된 Python 159GB와 1,000억 token 조건이었고 HumanEval은 164개 독립 함수·평균 7.7개 test였다. Table 1의 Codex-12B pass@1 28.81%와 pass@100 72.31%, Codex-S의 단일 표본 37.7%·평균 log-probability 선택 44.5%·unit-test oracle 77.5%를 서로 다른 생성·선택 조건으로 기록했다.
 
-`069`의 일반 멀티모달 이해·ViT 단일 image encoder·학습에서 전혀 보지 않은 class라는 zero-shot 해석, 조합·공간 관계와 VQA·style transfer·generation의 단독 수행, DALL·E·Stable Diffusion·GPT-4V로 이어지는 일괄 직접 계보, fine-grained task의 일률적 실패 및 `256 V100·18일` 계산량 결합도 공개 문서에서 교정했다. CLIP은 수정 ResNet 5종과 ViT 3종, Transformer text encoder를 대칭 대조 손실로 공동 학습하고 class prompt를 분류기 weight처럼 쓴다. ImageNet 76.2%는 원 ResNet-50과의 비교이며, RN50x64는 592 V100·18일, ViT-L/14는 256 V100·12일이었다. `074`의 1차 근거로 DALL·E 1에서의 직접 관계는 생성 backbone이 아니라 512개 후보의 별도 대조 재순위화였음을 추가로 확인했으며, 후속 diffusion·잠재 공간 계보는 각 후속 논문까지 유보한다.
+`070`의 일반 멀티모달 이해·ViT 단일 image encoder·학습에서 전혀 보지 않은 class라는 zero-shot 해석, 조합·공간 관계와 VQA·style transfer·generation의 단독 수행, DALL·E·Stable Diffusion·GPT-4V로 이어지는 일괄 직접 계보, fine-grained task의 일률적 실패 및 `256 V100·18일` 계산량 결합도 공개 문서에서 교정했다. CLIP은 수정 ResNet 5종과 ViT 3종, Transformer text encoder를 대칭 대조 손실로 공동 학습하고 class prompt를 분류기 weight처럼 쓴다. ImageNet 76.2%는 원 ResNet-50과의 비교이며, RN50x64는 592 V100·18일, ViT-L/14는 256 V100·12일이었다. `075`의 DALL·E 1에서는 CLIP 계열 대조 모델이 512개 생성 후보를 재순위화했고, `085`의 unCLIP에서는 동결 CLIP 좌표계가 prior의 목표와 확산 decoder의 조건으로 쓰였다. Stable Diffusion과 그 밖의 후속 계보는 각 원 논문 근거까지 유보한다.
 
-`067`의 DPR·RAG 단일 발명 서사, BM25를 정확 일치로만 보는 대조, 최소 표지 자료·보편 우월·조건 없는 billion-scale 지연 시간, RAG의 GPT-2 생성기·passage 직접 감독·전체 색인 공동 학습, Sequence/Token 주변화와 비용의 혼동, 실시간 최신성·자동 인용·법률·의료·뉴스·다문서 요약의 직접 검증 주장도 공개 문서에서 교정했다. DPR의 SQuAD 예외, 원 RAG의 BART-large와 고정된 2018 Wikipedia 색인, query encoder만 포함한 검색기 학습, 82개 world-leader hot-swap 및 검색 passage와 claim-level citation의 차이를 함께 기록했다.
+`068`의 DPR·RAG 단일 발명 서사, BM25를 정확 일치로만 보는 대조, 최소 표지 자료·보편 우월·조건 없는 billion-scale 지연 시간, RAG의 GPT-2 생성기·passage 직접 감독·전체 색인 공동 학습, Sequence/Token 주변화와 비용의 혼동, 실시간 최신성·자동 인용·법률·의료·뉴스·다문서 요약의 직접 검증 주장도 공개 문서에서 교정했다. DPR의 SQuAD 예외, 원 RAG의 BART-large와 고정된 2018 Wikipedia 색인, query encoder만 포함한 검색기 학습, 82개 world-leader hot-swap 및 검색 passage와 claim-level citation의 차이를 함께 기록했다.
 
 [[손실 곡선과 능력 곡선 사이]]는 Bommasani의 넓은 emergence, Kaplan의 평균 token cross-entropy, Brown의 task별 GPT-3 곡선, FLAN의 규모별 개입 효과, PaLM의 세 점 BIG-bench 외삽 잔차·62B 장기 학습, Wei의 emergent ability 정의와 Schaeffer의 metric·표본 해상도 반론을 함께 읽는다. 암묵적으로 유도된 행동이나 특정 두 점 외삽의 실패에서 내부 상전이를 바로 추론하지 않으며, 급격한 task score만으로 내부 질적 전환을 확정할 수도 없고 metric 효과만으로 모든 창발 가능성을 부정할 수도 없다는 한계를 기록했다.
 
-`066`의 GPT-2 대비 10배라는 비교 대상 오류, 문맥 내 학습의 내부 메커니즘 확정, 미세조정 제거와 광범위한 고정밀 성능, 175B에서의 불연속 창발, code benchmark·API 민주화·prompt engineering 산업·구체 훈련비와 후대 모델의 직접 계보 주장도 공개 문서에서 교정했다. zero·one·few-shot의 demonstration 수와 가중치 고정, SuperGLUE 71.8 대 fine-tuned 최고 89.0, TriviaQA 71.2, 자리수별 산술 exact match와 contamination filtering bug를 함께 기록했다.
+`067`의 GPT-2 대비 10배라는 비교 대상 오류, 문맥 내 학습의 내부 메커니즘 확정, 미세조정 제거와 광범위한 고정밀 성능, 175B에서의 불연속 창발, code benchmark·API 민주화·prompt engineering 산업·구체 훈련비와 후대 모델의 직접 계보 주장도 공개 문서에서 교정했다. zero·one·few-shot의 demonstration 수와 가중치 고정, SuperGLUE 71.8 대 fine-tuned 최고 89.0, TriviaQA 71.2, 자리수별 산술 exact match와 contamination filtering bug를 함께 기록했다.
 
-`065`의 capability 사전 예측, 768 thousand라는 최솟값, architecture·dataset 독립의 근본 법칙, QA·독해 downstream 검증, diminishing returns 부정, Kaplan의 fixed-compute 배분 누락, Chinchilla가 처음 model–data 균형을 다뤘다는 설명, GPT-3·PaLM·GPT-4 규모의 직접 인과와 광범위한 조직 채택·비용 주장도 공개 문서에서 교정했다.
+`066`의 capability 사전 예측, 768 thousand라는 최솟값, architecture·dataset 독립의 근본 법칙, QA·독해 downstream 검증, diminishing returns 부정, Kaplan의 fixed-compute 배분 누락, Chinchilla가 처음 model–data 균형을 다뤘다는 설명, GPT-3·PaLM·GPT-4 규모의 직접 인과와 광범위한 조직 채택·비용 주장도 공개 문서에서 교정했다.
 
-`064`의 초기 neural IR을 dual encoder 하나로 축약한 역사, encoder–decoder cross-attention과 BERT 결합 self-attention의 혼동, attention weight와 `[CLS]` 분류 점수의 동일시, 대표 학습을 pairwise·listwise로 묶은 설명, BERT가 전체 컬렉션 first-stage retrieval과 자연 길이 장문을 직접 처리한다는 주장, 조건 없는 100–1,000개 후보·광범위한 산업 배포·Google 내부 구조·ColBERT 계보도 공개 문서에서 교정했다.
+`065`의 초기 neural IR을 dual encoder 하나로 축약한 역사, encoder–decoder cross-attention과 BERT 결합 self-attention의 혼동, attention weight와 `[CLS]` 분류 점수의 동일시, 대표 학습을 pairwise·listwise로 묶은 설명, BERT가 전체 컬렉션 first-stage retrieval과 자연 길이 장문을 직접 처리한다는 주장, 조건 없는 100–1,000개 후보·광범위한 산업 배포·Google 내부 구조·ColBERT 계보도 공개 문서에서 교정했다.
 
-`063`의 memory를 전체 history가 계속 커지는 무제한 cache로 보는 설명, 이전 segment의 같은 layer를 직접 잇는 recurrence, learned relative-position table, self-attention의 제곱 비용 제거, 조건 없는 1,874배 속도와 450% 긴 의존성, 평가하지 않은 document classification·coreference·QA·code 결과, GPT-3·PaLM·LLaMA·RoPE·Longformer·BigBird로 이어지는 직접 계보도 공개 문서에서 교정했다.
+`064`의 memory를 전체 history가 계속 커지는 무제한 cache로 보는 설명, 이전 segment의 같은 layer를 직접 잇는 recurrence, learned relative-position table, self-attention의 제곱 비용 제거, 조건 없는 1,874배 속도와 450% 긴 의존성, 평가하지 않은 document classification·coreference·QA·code 결과, GPT-3·PaLM·LLaMA·RoPE·Longformer·BigBird로 이어지는 직접 계보도 공개 문서에서 교정했다.
 
-`062`의 T5를 최초의 통합 NLP 발명이나 하나의 universal zero-shot checkpoint로 보는 설명, text output과 공통 metric의 동일시, task prefix와 현대 instruction following의 혼동, 빠진 sentinel 예시, span corruption이 MLM보다 느리고 보편적으로 우월하다는 주장, C4의 사실성·중립성 확대, encoder–decoder parameter와 계산량의 동일시, WMT English→German 최고 성능·광범위한 multilingual translation·abstractive SQuAD 주장, production 비용 절감과 BART·GPT-3·PaLM·GPT-4 직접 계보도 공개 문서에서 교정했다.
+`063`의 T5를 최초의 통합 NLP 발명이나 하나의 universal zero-shot checkpoint로 보는 설명, text output과 공통 metric의 동일시, task prefix와 현대 instruction following의 혼동, 빠진 sentinel 예시, span corruption이 MLM보다 느리고 보편적으로 우월하다는 주장, C4의 사실성·중립성 확대, encoder–decoder parameter와 계산량의 동일시, WMT English→German 최고 성능·광범위한 multilingual translation·abstractive SQuAD 주장, production 비용 절감과 BART·GPT-3·PaLM·GPT-4 직접 계보도 공개 문서에서 교정했다.
 
-`061`의 XLM을 하나의 고정 모델로 보는 설명, CLM 뒤 TLM을 순차 학습한다는 서술, zero-shot을 사전 학습에서도 target 언어를 보지 않은 것으로 해석한 Italian QA 예시, 평가하지 않은 few-shot·교차 언어 QA·검색, shared BPE의 자동 의미 정렬, mBERT·XNLI를 XLM의 후속 산물로 보는 역방향 계보, 모든 저자원 언어·deployment compute·multimodal AI·mT5·GPT로 확대한 영향과 data가 architecture보다 중요하다는 일반 결론도 공개 문서에서 교정했다.
+`062`의 XLM을 하나의 고정 모델로 보는 설명, CLM 뒤 TLM을 순차 학습한다는 서술, zero-shot을 사전 학습에서도 target 언어를 보지 않은 것으로 해석한 Italian QA 예시, 평가하지 않은 few-shot·교차 언어 QA·검색, shared BPE의 자동 의미 정렬, mBERT·XNLI를 XLM의 후속 산물로 보는 역방향 계보, 모든 저자원 언어·deployment compute·multimodal AI·mT5·GPT로 확대한 영향과 data가 architecture보다 중요하다는 일반 결론도 공개 문서에서 교정했다.
 
-`060`의 BERT가 사전 학습에서 실제 단어를 전혀 보지 않는다는 설명, XLNet이 입력 token 자체를 섞고 첫 target에서 나머지 내용을 모두 본다는 순열 예시, fine-tuning에도 query stream이 남는다는 해석, RoBERTa가 BERT보다 더 많은 step으로 완전 수렴했고 dynamic masking이 큰 향상의 단일 원인이라는 주장, ALBERT의 공유 축·base/large 성능 비교·mobile 효율 확대, parameter 수와 FLOPs·latency의 동일시, 세 모델을 정적 embedding·동일한 encoder-only 계열로 묶는 설명과 production·후대 모델의 직접 계보도 공개 문서에서 교정했다.
+`061`의 BERT가 사전 학습에서 실제 단어를 전혀 보지 않는다는 설명, XLNet이 입력 token 자체를 섞고 첫 target에서 나머지 내용을 모두 본다는 순열 예시, fine-tuning에도 query stream이 남는다는 해석, RoBERTa가 BERT보다 더 많은 step으로 완전 수렴했고 dynamic masking이 큰 향상의 단일 원인이라는 주장, ALBERT의 공유 축·base/large 성능 비교·mobile 효율 확대, parameter 수와 FLOPs·latency의 동일시, 세 모델을 정적 embedding·동일한 encoder-only 계열로 묶는 설명과 production·후대 모델의 직접 계보도 공개 문서에서 교정했다.
 
-`059`의 GLUE 연구진을 Google Research 중심으로 보는 소속 오류, QNLI를 자유 질의응답으로 보는 설명, 하나의 shared multi-task model을 강제했다는 주장, GLUE score에 task 난이도·중요도 weight가 있다는 서술, 중앙 server가 추가 자료·compute·ensemble까지 같은 조건으로 만든다는 해석, GLUE 원 발표와 2019년 별도 인간 기준선의 혼합, aggregate 인간 추정치 초과를 전 task·일반 이해의 인간 초월로 보는 주장, SuperGLUE가 open-ended 생성 과제를 포함했다는 설명, GLUE가 더 이른 SQuAD·ImageNet·COCO 평가 설계에 영향을 주었다는 역방향 계보와 private test가 contamination·leaderboard overfitting을 해결한다는 주장도 공개 문서에서 교정했다.
+`060`의 GLUE 연구진을 Google Research 중심으로 보는 소속 오류, QNLI를 자유 질의응답으로 보는 설명, 하나의 shared multi-task model을 강제했다는 주장, GLUE score에 task 난이도·중요도 weight가 있다는 서술, 중앙 server가 추가 자료·compute·ensemble까지 같은 조건으로 만든다는 해석, GLUE 원 발표와 2019년 별도 인간 기준선의 혼합, aggregate 인간 추정치 초과를 전 task·일반 이해의 인간 초월로 보는 주장, SuperGLUE가 open-ended 생성 과제를 포함했다는 설명, GLUE가 더 이른 SQuAD·ImageNet·COCO 평가 설계에 영향을 주었다는 역방향 계보와 private test가 contamination·leaderboard overfitting을 해결한다는 주장도 공개 문서에서 교정했다.
 
-`058`의 GPT가 NLP 전이 학습을 단독 발명했다는 설명, GPT-1에 과제별 입력 변환·표지 자료·출력층이 없었다는 축약과 12개 과제 전부 최고 성능이라는 확대, GPT-2를 매개변수만 10배 늘린 단순 확장으로 보는 서술, WebText를 인터넷 전체 무차별 crawl로 보는 설명, 번역·요약·QA zero-shot 출력과 지도 최고 성능의 동일시, GPT-2가 현대 few-shot prompting과 불연속적 창발을 이미 입증했다는 소급, 1.5B 모델이 끝내 비공개였다는 현재 상태 오류와 next-token 예측을 사실 검증·명시적 추론으로 보는 주장도 공개 문서에서 교정했다.
+`059`의 GPT가 NLP 전이 학습을 단독 발명했다는 설명, GPT-1에 과제별 입력 변환·표지 자료·출력층이 없었다는 축약과 12개 과제 전부 최고 성능이라는 확대, GPT-2를 매개변수만 10배 늘린 단순 확장으로 보는 서술, WebText를 인터넷 전체 무차별 crawl로 보는 설명, 번역·요약·QA zero-shot 출력과 지도 최고 성능의 동일시, GPT-2가 현대 few-shot prompting과 불연속적 창발을 이미 입증했다는 소급, 1.5B 모델이 끝내 비공개였다는 현재 상태 오류와 next-token 예측을 사실 검증·명시적 추론으로 보는 주장도 공개 문서에서 교정했다.
 
-`057`의 BERT를 Transformer 발명으로 보는 설명, ELMo에는 양방향 문맥이 없었다는 대조, MLM이 입력의 15%만 보거나 선택 token 모두를 `[MASK]`로 바꾼다는 축약, NSP를 실제 문장 의미 관계의 깊은 이해로 보는 해석, RoBERTa가 NSP의 보편적 무용성을 단독 증명했다는 결론, 열한 과제 최고 성능과 사람 같은 일반 이해의 동일시, BERT를 자연스러운 범용 생성 모델로 보는 설명과 모든 현대 생성 LLM이 BERT식 양방향 attention을 쓴다는 계보도 공개 문서에서 교정했다.
+`058`의 BERT를 Transformer 발명으로 보는 설명, ELMo에는 양방향 문맥이 없었다는 대조, MLM이 입력의 15%만 보거나 선택 token 모두를 `[MASK]`로 바꾼다는 축약, NSP를 실제 문장 의미 관계의 깊은 이해로 보는 해석, RoBERTa가 NSP의 보편적 무용성을 단독 증명했다는 결론, 열한 과제 최고 성능과 사람 같은 일반 이해의 동일시, BERT를 자연스러운 범용 생성 모델로 보는 설명과 모든 현대 생성 LLM이 BERT식 양방향 attention을 쓴다는 계보도 공개 문서에서 교정했다.
 
-`056`의 ELMo·ULMFiT를 같은 양방향 언어 모델 전이로 묶는 설명, ELMo와 BERT의 양방향 목적 혼합, ELMo 층별 구문·의미의 고정 분업과 완전한 담화 이해, ULMFiT의 세 단계에서 목표 영역 LM 적응·concat pooling을 누락한 축약, 여섯 텍스트 분류 결과를 질의응답·생성 등 모든 NLP 과제로 확대하는 주장, 표지 예시 100개의 100배 효율을 보편화한 설명, ELMo·ULMFiT가 Transformer를 낳고 BERT·GPT로 직접 이어졌다는 단일 계보도 공개 문서에서 교정했다.
+`057`의 ELMo·ULMFiT를 같은 양방향 언어 모델 전이로 묶는 설명, ELMo와 BERT의 양방향 목적 혼합, ELMo 층별 구문·의미의 고정 분업과 완전한 담화 이해, ULMFiT의 세 단계에서 목표 영역 LM 적응·concat pooling을 누락한 축약, 여섯 텍스트 분류 결과를 질의응답·생성 등 모든 NLP 과제로 확대하는 주장, 표지 예시 100개의 100배 효율을 보편화한 설명, ELMo·ULMFiT가 Transformer를 낳고 BERT·GPT로 직접 이어졌다는 단일 계보도 공개 문서에서 교정했다.
 
-`050`의 Robin Jia를 2016년 원 논문 저자로 섞은 설명, 정확히 10만 개라는 규모 축약, 답 구간 추출과 검색·자유 생성의 혼합, EM·F1과 의미 이해의 동일시, 모든 질문에 답이 있는 SQuAD 1.1의 제약, 서로 다른 사람 기준선과 모델 점수의 단순 비교, SQuAD 2.0의 답 불가능 질문 수, 어텐션·Transformer·BERT·LLM의 직접 원인 계보와 설정 없는 GPT-3·GPT-4 성능 주장도 공개 문서에서 교정했다.
+`051`의 Robin Jia를 2016년 원 논문 저자로 섞은 설명, 정확히 10만 개라는 규모 축약, 답 구간 추출과 검색·자유 생성의 혼합, EM·F1과 의미 이해의 동일시, 모든 질문에 답이 있는 SQuAD 1.1의 제약, 서로 다른 사람 기준선과 모델 점수의 단순 비교, SQuAD 2.0의 답 불가능 질문 수, 어텐션·Transformer·BERT·LLM의 직접 원인 계보와 설정 없는 GPT-3·GPT-4 성능 주장도 공개 문서에서 교정했다.
 
-`051`의 2016년 단일 신경 검색 출현, 전통 검색을 원시 키워드·선형 특징으로만 보는 설명, DSSM word hashing과 ANN hash의 혼동, 초기 문서 제목 실험을 전체 장문 벡터 검색으로 넓힌 주장, semantic similarity와 ad-hoc relevance의 동일시, DRMM을 첫 단계 전체 검색으로 보는 서술, 클릭·비클릭을 편향 없는 관련성 표지로 보는 설명, 신경 검색의 보편적 산업 효과와 DSSM에서 벡터 데이터베이스·DPR·RAG로 이어지는 단일 직접 계보도 공개 문서에서 교정했다.
+`052`의 2016년 단일 신경 검색 출현, 전통 검색을 원시 키워드·선형 특징으로만 보는 설명, DSSM word hashing과 ANN hash의 혼동, 초기 문서 제목 실험을 전체 장문 벡터 검색으로 넓힌 주장, semantic similarity와 ad-hoc relevance의 동일시, DRMM을 첫 단계 전체 검색으로 보는 서술, 클릭·비클릭을 편향 없는 관련성 표지로 보는 설명, 신경 검색의 보편적 산업 효과와 DSSM에서 벡터 데이터베이스·DPR·RAG로 이어지는 단일 직접 계보도 공개 문서에서 교정했다.
 
 `006`의 잘못된 MADALINE 약어·선형 LMS 국소 최솟값·VAD 배치 서술, `007`의 튜링 테스트 직접 계보 주장, `008`의 복잡도 산술과 Transformer 병렬성 서술, `009`의 출판 연대·이름 순서·이해 범위 과장, `010`의 VSM·IDF 단일 연도 귀속과 의미 이해 과장, `011`의 고정 원시 ACT 수·술어 논리 비판·MARGIE 질의응답·AMR 직접 계보, `012`의 1980년대 단일 혁명·Brown Corpus 연대·규칙 시스템의 원리적 무능력·자동 데이터 확장, `013`의 HMM 기원·비터비 목적·관측 독립성·MFCC 동시대성·상용화 범위·LLM 직접 계보, `014`의 1970년 단독 발명·BBN 귀속·CFG와 차트 파서 무능력·ATN 보편 지수 복잡도·레지스터의 담화 기억·후대 파서 직접 계보, `015`의 단일 1973년 귀속·PTQ 유형과 유니콘 존재 양화식·문맥 배제·가능세계 열거와 보편 지수 복잡도·LUNAR와 현대 LLM 직접 계보, `016`의 기계 일반 불가능론·포더/퍼트넘 대표 귀속·목표 논문과 저자 응답의 페이지 혼합·결합 반론 변경·모든 LLM의 다음 토큰 예측·현대 LLM에 대한 확정 판결, `017`의 1983년·Bell Labs 귀속·전역 의미 조합 탐색·선형 복잡도·OED 사용·대규모 성능·현대 NLP 직접 계보, `018`의 1986년 단독 발명·즉시 딥러닝 실용화·오류의 인과적 책임·보편 선형 시간·합성 과제의 광범위한 응용 확대·모든 언어 AI와 LLM의 직접 계보, `019`의 트라이그램 차수 혼동·α의 보간 가중치 오해·75만 단어와 100문장 평가의 과대 일반화·어텐션·드롭아웃·가중치 감쇠와 Katz 백오프의 동일시, `020`의 단독 발명·원시 음성 종단 간 처리·화자 독립·HMM 수동 확률·위치별 순차 계산·무제한 시간 불변성·제품 배포·CNN·RNN·Transformer 직접 계보, `021`의 1988년 단독 발명·수표 인식 귀속·완전 연결층의 위치 정보 삭제·일반 3×3 필터의 9개 매개변수·완전한 이동 불변성·특징 공학 제거·BatchNorm과 ResNet의 단일 해결책 서사·텍스트 CNN과 Word2Vec·GloVe·seq2seq·어텐션·Transformer의 직접 계보, `022`의 1991년 단일 발명·IBM Models 차이·EM 최고 정렬 오해·Hansard 자료 혼합·BLEU와 Moses 연대·통계 방식의 보편적 우월성·IBM 정렬에서 어텐션·Transformer·LLM으로의 직접 계보는 위키 본문에서 교정했다. raw의 원문 결손과 오류는 보존하되 공개 지식의 기준으로 사용하지 않는다.
 

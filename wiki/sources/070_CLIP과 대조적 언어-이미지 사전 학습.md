@@ -14,7 +14,7 @@ tags:
   - domain/machine-learning
   - domain/nlp
 created: '2026-07-21'
-updated: '2026-07-21'
+updated: '2026-07-22'
 lifecycle: active
 verification: verified
 artifacts:
@@ -27,10 +27,15 @@ evidence:
   - source_id: ramesh-et-al-2021-dalle
     locator: '§2.6과 Figures 3·6·9(c)의 DALL·E 생성 후보 512개에 대한 별도 대조 모델 재순위화와 sample-pool 효과'
     relation: supplements
+  - source_id: ramesh-et-al-2022-unclip
+    locator: 'arXiv:2204.06125, §§2.1–2.2·3.1–3.3·5.1–5.5·6와 Figures 2–10의 동결 CLIP, text-to-image embedding prior, diffusion decoder 조건화, classifier-free guidance와 CLIP gradient guidance의 구분'
+    relation: supplements
 related:
   - concept.clip
   - source.075
+  - source.085
   - concept.dall-e-2021
+  - concept.dall-e-2
   - concept.transformer
   - concept.합성곱-신경망
   - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
@@ -137,7 +142,7 @@ class당 예제가 적어도 16개 있는 20개 데이터셋의 평균에서는 
 - **이미지 인코더는 Vision Transformer였다:** 연구진은 수정된 ResNet 다섯 개와 ViT 세 개를 모두 학습했다. 가장 좋은 보고 모델이 ViT-L/14@336px였다는 사실을 전체 모델 계열의 단일 아키텍처와 혼동하면 안 된다.
 - **제로샷은 학습 중 보지 못한 개념을 인식한다는 뜻이다:** 논문은 주로 unseen dataset과 task로의 전이라는 더 넓은 의미로 zero-shot을 사용했다. WIT에 class 이름·설명·유사 이미지가 없었다는 조건을 보장하지 않는다.
 - **CLIP 자체가 VQA와 이미지 생성을 수행했다:** CLIP은 후보 이미지와 텍스트의 유사도를 계산하는 dual encoder다. 원 논문은 VQA를 “여기서 연구한 것보다 복잡한 공동 과제”의 관련 연구로 분류했으며, CLIP에 텍스트나 이미지를 생성하는 decoder를 두지 않았다.
-- **CLIP이 DALL·E 계열을 직접 낳았다:** [[075_DALL·E와 이산 이미지 토큰 생성]]의 1차 근거로 확인되는 직접 관계는 DALL·E 1의 자기회귀 생성 후보 512개를 CLIP 계열의 별도 대조 모델로 재순위화한 것이다. CLIP이 생성 backbone이나 image decoder였다는 뜻은 아니며, DALL·E 2의 CLIP latent 사용은 2022년 해당 원 논문으로 별도 확인해야 한다.
+- **CLIP이 DALL·E 계열에서 늘 같은 역할을 했다:** [[075_DALL·E와 이산 이미지 토큰 생성]]의 DALL·E 1에서는 별도 대조 모델이 자기회귀 생성 후보 512개를 재순위화했다. 반면 [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]의 unCLIP에서는 동결된 CLIP의 텍스트 표현을 바탕으로 prior가 CLIP 이미지 임베딩을 생성하고, 확산 decoder가 그 임베딩을 조건으로 이미지를 복원한다. 이때 guidance는 중간 이미지를 CLIP gradient로 매번 채점하는 방식이 아니라 classifier-free guidance다. 재순위기와 생성 조건 표현을 같은 역할로 합치지 않는다.
 - **Stable Diffusion이 CLIP에서 직접 이어졌다:** 텍스트 encoder 사용과 모델 전체의 직접 계보는 같은 주장이다. 이 관계는 Stable Diffusion·Latent Diffusion의 1차 설계 자료 없이는 이 소스만으로 확정하지 않는다.
 - **GPT-4V는 CLIP의 발상을 확장한 직접 후속이다:** 공개된 CLIP 논문은 후대 GPT-4 계열의 내부 학습 구성이나 직접 영향 관계를 증명할 수 없다. 비슷한 시각-언어 문제를 다룬다는 사실을 아키텍처 계보로 바꾸지 않는다.
 
@@ -168,6 +173,7 @@ CLIP은 class 설명을 텍스트 임베딩으로 바꾸어 사전 학습 지식
 ### 다음 문서
 
 - [[CLIP]] — dual encoder, 대조 손실과 zero-shot classifier를 재사용 가능한 모델 개념으로 정리한다.
+- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] — 동결된 CLIP 표현이 prior와 확산 decoder를 잇는 생성 조건으로 바뀌는 구조를 확인한다.
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 자연어로 만든 class vector를 미세조정·선형 탐침과 비교해 사전 학습 지식의 전달 경로를 살핀다.
 
 ## 출처
@@ -176,6 +182,8 @@ CLIP은 class 설명을 텍스트 임베딩으로 바꾸어 사전 학습 지식
 - Alec Radford 외, [Supplementary Material](https://proceedings.mlr.press/v139/radford21a/radford21a-supp.pdf), 특히 §§A–B·D–E·I, Figures 13–14와 Tables 2·4·8–10·18–20.
 - [[075_DALL·E와 이산 이미지 토큰 생성]]
 - Aditya Ramesh 외, [Zero-Shot Text-to-Image Generation](https://proceedings.mlr.press/v139/ramesh21a.html), ICML 2021, §2.6과 Figures 3·6·9(c).
+- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
+- Aditya Ramesh 외, [Hierarchical Text-Conditional Image Generation with CLIP Latents](https://arxiv.org/abs/2204.06125), 2022, 특히 §§2.1–2.2·3.1–3.3·5.1–5.5·6와 Figures 2–10.
 - 프로젝트 번역·검토 출발 자료: [CLIP: Contrastive Language-Image Pre-training for Multimodal Understanding](https://mbrenndoerfer.com/writing/clip-contrastive-language-image-pretraining-multimodal).
 - 프로젝트 보존 자료: `raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md`, `raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md`.
 
@@ -183,7 +191,9 @@ CLIP은 class 설명을 텍스트 임베딩으로 바꾸어 사전 학습 지식
 
 - [[CLIP]]
 - [[075_DALL·E와 이산 이미지 토큰 생성]]
+- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
 - [[DALL·E (2021)]]
+- [[DALL·E 2]]
 - [[Transformer]]
 - [[합성곱 신경망]]
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]]

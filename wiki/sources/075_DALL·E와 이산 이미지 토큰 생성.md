@@ -14,7 +14,7 @@ tags:
   - domain/machine-learning
   - domain/nlp
 created: '2026-07-21'
-updated: '2026-07-21'
+updated: '2026-07-22'
 lifecycle: active
 verification: verified
 artifacts:
@@ -30,8 +30,13 @@ evidence:
   - source_id: openai-2021-dalle-dvae
     locator: 'README와 model_card.md의 Model Details·Model Use·Training Data·Performance and Limitations에 기록된 dVAE 공개 범위와 복원 한계'
     relation: supplements
+  - source_id: ramesh-et-al-2022-unclip
+    locator: 'arXiv:2204.06125v1, §§2.1–2.2·5.1·6–7과 Appendix C·Table 3의 동결 CLIP 인코더·prior·64×64 확산 디코더·업샘플러·classifier-free guidance, CLIP gradient guidance 대비 및 DALL·E 1 차이'
+    relation: contextualizes
 related:
   - concept.dall-e-2021
+  - source.085
+  - concept.dall-e-2
   - concept.transformer
   - concept.자기회귀-생성
   - concept.clip
@@ -116,7 +121,7 @@ MS-COCO에서는 강한 결과를 보였지만 CUB에서는 큰 격차로 뒤졌
 - **“초밥으로 만든 고양이”가 학습 자료에 없었다:** 이 문구는 원 논문의 대표 예시가 아니며 비공개 2억 5천만 쌍 전체에서 부재했음을 확인할 수 없다. Zero-shot은 평가 자료에 맞춘 별도 미세조정이 없었다는 protocol이다.
 - **Attention이 구성적 이해를 만들었다:** 일부 조합 결과는 관찰됐지만 attention 하나의 인과나 인간과 같은 이해·창의성을 검증한 실험은 없다. 원 논문은 변수 결속 실패와 표현 변화에 대한 불안정성도 함께 보고했다.
 - **곧바로 창작 제품과 직업에 적용됐다:** 2021년 전체 생성 모델은 공개 제품이 아니었다. 당시 글의 마케팅·교육·디자인 활용은 사용자 연구로 입증된 효과가 아니라 잠재 응용이다.
-- **후속 이미지 모델의 공통 아키텍처가 됐다:** DALL·E 1 논문만으로 DALL·E 2·Stable Diffusion·Midjourney의 생성 구조와 직접 계보를 확정할 수 없다. FID와 IS도 DALL·E가 만든 지표가 아니라 선행 이미지 생성 평가 지표다.
+- **후속 이미지 모델의 공통 아키텍처가 됐다:** 공식 085 논문으로 확인되는 좁은 대비는 [[DALL·E 2]]까지다. DALL·E 1은 dVAE의 이산 이미지 토큰을 텍스트와 한 흐름에서 자기회귀적으로 생성했다. 반면 DALL·E 2의 연구 모델 unCLIP은 동결된 CLIP 텍스트·이미지 인코더를 좌표계로 삼아 prior가 텍스트 조건의 CLIP 이미지 임베딩을 생성하고, 64×64 확산 디코더와 두 업샘플러가 이를 1,024×1,024 이미지로 복원한다. Prior와 기본 디코더의 조건 강화도 매 단계의 외부 CLIP gradient guidance가 아니라 classifier-free guidance다. 이 직접 비교를 Stable Diffusion·Midjourney까지 동일한 구조나 계보로 확대할 수는 없으며, FID와 IS도 DALL·E가 만든 지표가 아니라 선행 이미지 생성 평가 지표다.
 
 ### 확인된 한계와 미측정 위험
 
@@ -135,6 +140,8 @@ dVAE 압축은 세부와 문자를 잃을 수 있고, 이미지 토큰의 순차
 ### 다음 문서
 
 - [[DALL·E (2021)]] — 첫 시스템의 구조·학습·선택 단계를 재사용 가능한 모델 개념으로 정리한다.
+- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] — 이산 토큰 자기회귀에서 동결 CLIP 잠재 표현과 계층적 확산 생성으로 바뀐 후속 구조를 직접 비교한다.
+- [[DALL·E 2]] — prior·확산 디코더·업샘플러와 classifier-free guidance의 역할을 개념 중심으로 이어서 본다.
 - [[CLIP]] — 생성기가 아닌 대조 임베딩 모델이 후보 점수화와 제로샷 분류에서 맡는 역할을 구분한다.
 
 ## 출처
@@ -143,12 +150,16 @@ dVAE 압축은 세부와 문자를 잃을 수 있고, 이미지 토큰의 순차
 - Aditya Ramesh 외, [arXiv 본문·부록 통합본](https://arxiv.org/abs/2102.12092), Appendix §§A–C·F–G, Figures 10–14와 Listings 1–2의 재검증 경로.
 - OpenAI, [DALL·E: Creating images from text](https://openai.com/index/dall-e/), 2021-01-05, 특히 Overview, Drawing multiple objects, Zero-shot visual reasoning, Summary of approach and prior work와 footnote A.
 - OpenAI, [DALL·E dVAE repository and model card](https://github.com/openai/DALL-E), README와 `model_card.md`의 Model Details·Model Use·Training Data·Performance and Limitations.
+- 공식 085 검증 노트: [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]; 구조 요약: [[DALL·E 2]].
+- Aditya Ramesh 외, [Hierarchical Text-Conditional Image Generation with CLIP Latents](https://arxiv.org/abs/2204.06125), 2022, §§2.1–2.2·5.1·6–7과 Appendix C·Table 3.
 - 프로젝트 번역·검토 출발 자료: [DALL·E: Text-to-Image Generation with Transformer Architectures](https://mbrenndoerfer.com/writing/dalle-text-to-image-generation-transformer), 2025-06-29.
 - 프로젝트 보존 자료: `raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md`, `raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md`.
 
 ## 관련 항목
 
 - [[DALL·E (2021)]]
+- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
+- [[DALL·E 2]]
 - [[Transformer]]
 - [[자기회귀 생성]]
 - [[CLIP]]

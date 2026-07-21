@@ -1512,3 +1512,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/flamingo-few-shot-vision-language-learning-gated-cross-attention
     sha256: 0d823245efa401aa6e9533f9fb85b059a6e1c43145a47e203f338ab349acd5e2
+  - path: "raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.ko.md"
+    role: translation
+    order_prefix: "085"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/dalle2-diffusion-text-to-image-generation-clip-guidance
+    sha256: 0cd72f560a6390365593e69af558f50652527b397cd7258d5d3ec73c400815df
+  - path: "raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.commentary.ko.md"
+    role: commentary
+    order_prefix: "085"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/dalle2-diffusion-text-to-image-generation-clip-guidance
+    sha256: d05c3b28a4fd589b3cee2834b32a93d9825a6d80863c6913ac06139f41c0772c

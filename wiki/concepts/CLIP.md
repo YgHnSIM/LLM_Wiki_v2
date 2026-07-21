@@ -25,6 +25,8 @@ artifacts:
   - 'raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md'
   - 'raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.ko.md'
   - 'raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.commentary.ko.md'
+  - 'raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.ko.md'
+  - 'raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.commentary.ko.md'
 evidence:
   - source_id: radford-et-al-2021-clip
     locator: 'PMLR 139, pp. 8748–8763의 §§2.1–2.5·Figures 1–3, §§3–6·Figures 4–7과 supplement §§A–B·D–E·I, Tables 2·4·8–10·18–20의 WIT·dual encoder·대칭 대조 손실·zero-shot classifier·prompt ensemble·dataset·overlap·bias·학습 및 평가 조건'
@@ -35,11 +37,16 @@ evidence:
   - source_id: alayrac-et-al-2022-flamingo
     locator: 'NeurIPS 2022, §§1·2.1–2.5·5와 Figures 2–4의 대조 시각 encoder 재사용, 조건부 생성 구조와 분류 성능 trade-off; Supplementary §§B.1.3·B.2.1과 Tables 7·11'
     relation: contextualizes
+  - source_id: ramesh-et-al-2022-unclip
+    locator: 'arXiv:2204.06125, §§2.1–2.2·3.1–3.3·5.1–5.5·6와 Figures 2–10의 동결 CLIP, text-to-image embedding prior, diffusion decoder 조건화, classifier-free guidance와 CLIP gradient guidance의 구분'
+    relation: contextualizes
 related:
   - source.070
   - source.075
   - source.084
+  - source.085
   - concept.dall-e-2021
+  - concept.dall-e-2
   - concept.flamingo
   - concept.transformer
   - concept.합성곱-신경망
@@ -136,6 +143,14 @@ ViT-L/14@336px의 ImageNet zero-shot top-1 accuracy는 76.2%로, ImageNet의 128
 
 따라서 대조 임베딩은 생성기의 decoder나 학습 backbone이 아니다. [[DALL·E (2021)]]의 최종 표본 품질에는 생성 분포·표본 수·재순위 점수가 함께 작용하며, CLIP 계열 점수를 사용했다는 사실만으로 CLIP 자체에 이미지 생성 능력이 생기지는 않는다.
 
+### DALL·E 2에서는 잠재 표현이 생성 조건이 된다
+
+[[DALL·E 2]]의 연구 모델 unCLIP은 ViT-H/16 이미지 인코더와 텍스트 인코더로 이루어진 CLIP을 먼저 학습한 뒤 동결한다. Prior는 caption과 CLIP 텍스트 임베딩을 조건으로 가능한 CLIP 이미지 임베딩을 생성하고, 확산 decoder는 그 이미지 임베딩을 timestep 표현과 추가 문맥 token으로 받아 64×64 이미지를 복원한다. 두 upsampler가 이를 1,024×1,024까지 확대한다.
+
+이 구조에서 CLIP은 DALL·E 1처럼 완성된 후보를 끝에서 재순위화하는 별도 판정기만도 아니고, [[Flamingo]]처럼 언어 모델의 각 층에 cross-attention으로 시각 token을 주입하는 연결부도 아니다. 텍스트와 이미지 사이의 동결된 잠재 좌표계가 prior와 생성 decoder를 잇는 조건 interface가 된다.
+
+Prior와 기본 decoder는 조건을 일부 비운 예측과 조건부 예측의 차이를 확대하는 **classifier-free guidance**를 사용한다. 매 잡음 제거 단계에서 부분 이미지를 CLIP에 넣고 text-image similarity의 gradient로 표본을 움직이는 **CLIP gradient guidance**와 구분해야 한다. CLIP 표현을 생성 조건으로 사용했다는 사실이 CLIP 자체를 확산 decoder로 바꾸지는 않는다.
+
 ### Flamingo에서는 대조 시각 encoder가 생성 model의 입력이 된다
 
 [[Flamingo]]는 CLIP weight를 그대로 사용하지 않았지만, ALIGN·LTIP 쌍에 대조 목적을 적용해 사전 학습한 NFNet-F6 시각 encoder를 동결해 사용했다. 이 전역·공간 특징을 Perceiver Resampler가 64개 시각 token으로 압축하고, 별도 gated cross-attention이 동결 언어 model의 생성 과정에 공급한다. 즉 대조 학습된 시각 표현이 끝점의 similarity classifier가 아니라 조건부 text 생성의 입력 자산으로 재사용된다.
@@ -173,6 +188,7 @@ Prompt wording과 후보 클래스 설계는 정확도와 편향을 함께 바�
 ### 다음 문서
 
 - [[070_CLIP과 대조적 언어-이미지 사전 학습]] — WIT 구성, architecture, 27개 평가와 원 raw 설명의 검증 정정을 1차 근거 locator로 확인한다.
+- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] — 동결된 CLIP 잠재 좌표계가 prior와 확산 decoder의 생성 조건으로 쓰이는 방식을 확인한다.
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]] — CLIP의 class prompt를 feature extraction·fine-tuning·in-context prompting과 비교해 과제 명세가 놓이는 위치를 확장한다.
 
 ## 출처
@@ -180,18 +196,23 @@ Prompt wording과 후보 클래스 설계는 정확도와 편향을 함께 바�
 - [[070_CLIP과 대조적 언어-이미지 사전 학습]]
 - [[075_DALL·E와 이산 이미지 토큰 생성]]
 - [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]]
+- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
 - Alec Radford 외, [Learning Transferable Visual Models From Natural Language Supervision](https://proceedings.mlr.press/v139/radford21a.html), ICML 2021, PMLR 139:8748–8763, 특히 §§2.1–2.5, Figures 1–3, §§3–6, Figures 4–7과 supplementary §§A–B·D–E·I, Tables 2·4·8–10·18–20.
 - Aditya Ramesh 외, [Zero-Shot Text-to-Image Generation](https://proceedings.mlr.press/v139/ramesh21a.html), ICML 2021, §2.6과 Figures 3·6·9(c).
 - Jean-Baptiste Alayrac 외, [*Flamingo: a Visual Language Model for Few-Shot Learning*](https://proceedings.neurips.cc/paper_files/paper/2022/hash/960a172bc7fbf0177ccccbb411a7d800-Abstract-Conference.html), NeurIPS 2022, §§1·2.1–2.5·5와 Supplementary §§B.1.3·B.2.1.
+- Aditya Ramesh 외, [*Hierarchical Text-Conditional Image Generation with CLIP Latents*](https://arxiv.org/abs/2204.06125), 2022, §§2.1–2.2·3.1–3.3·5.1–5.5·6와 Figures 2–10.
 - 프로젝트 보존 자료: `raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md`, `raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md`.
 - 추가 보존 자료: `raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md`, `raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md`.
+- 추가 보존 자료: `raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.ko.md`, `raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.commentary.ko.md`.
 
 ## 관련 항목
 
 - [[070_CLIP과 대조적 언어-이미지 사전 학습]]
 - [[075_DALL·E와 이산 이미지 토큰 생성]]
 - [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]]
+- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
 - [[DALL·E (2021)]]
+- [[DALL·E 2]]
 - [[Flamingo]]
 - [[Transformer]]
 - [[합성곱 신경망]]

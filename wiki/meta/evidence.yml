@@ -2746,3 +2746,28 @@ sources:
     kind: official-blog
     url: https://ai.meta.com/blog/democratizing-access-to-large-scale-language-models-with-opt-175b/
     language: en
+  ramesh-et-al-2022-unclip:
+    title: Hierarchical Text-Conditional Image Generation with CLIP Latents
+    authors: [Aditya Ramesh, Prafulla Dhariwal, Alex Nichol, Casey Chu, Mark Chen]
+    published: 2022
+    source_type: primary
+    kind: research-paper
+    doi: 10.48550/arXiv.2204.06125
+    url: https://arxiv.org/abs/2204.06125
+    language: en
+  openai-2022-dalle2:
+    title: DALL·E 2
+    authors: [OpenAI]
+    published: 2022
+    source_type: primary-release
+    kind: official-blog
+    url: https://openai.com/index/dall-e-2/
+    language: en
+  mishkin-et-al-2022-dalle2-preview:
+    title: DALL·E 2 Preview — Risks and Limitations
+    authors: [Pamela Mishkin, Lama Ahmad, Miles Brundage, Gretchen Krueger, Girish Sastry]
+    published: 2022
+    source_type: primary-release
+    kind: system-card
+    url: https://github.com/openai/dalle-2-preview/blob/main/system-card.md
+    language: en

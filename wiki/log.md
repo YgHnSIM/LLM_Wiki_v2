@@ -3457,6 +3457,27 @@ raw 등록 해시:
 - 확인된 architecture·훈련·평가 절차, 여러 자료를 함께 읽은 비교 해석, 입증되지 않은 직접 계보를 분리해 `verification: partial`을 유지했다. 16개 benchmark의 성과를 일반적인 멀티모달 추론 증명으로 확대하지 않는다.
 - 전체 검증은 96개 회귀 테스트와 296개 Markdown strict lint를 통과해 321개 evidence와 168개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 570개 HTML을 만들고 미해결 wiki target 0개를 확인했다.
 
+## [2026-07-22] ingest | DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성
+
+변경 내용:
+
+- 공식 085 `DALL·E 2: Diffusion-Based Text-to-Image Generation with CLIP Guidance`를 원문 58개 내용 block과 23개 link에 맞춰 새로 번역하고, 12절 해설에서 원문 주장·논문 결과·Preview 제품 기능을 분리했다. 번역은 표준 `원본 출처:`를 한 번 기록하고 읽기 수준 UI 문구를 포함하지 않는다.
+- 검증된 번역·해설을 raw 두 파일로 등록했다. 번역 SHA-256은 `0cd72f560a6390365593e69af558f50652527b397cd7258d5d3ec73c400815df`, 해설은 `d05c3b28a4fd589b3cee2834b32a93d9825a6d80863c6913ac06139f41c0772c`다.
+- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]과 [[DALL·E 2]]를 만들고, 동결 CLIP 표현에서 image embedding을 생성하는 prior, 64×64 GLIDE 계열 확산 decoder와 256·1,024 해상도의 두 upsampler를 복원했다.
+- [[070_CLIP과 대조적 언어-이미지 사전 학습]], [[CLIP]], [[075_DALL·E와 이산 이미지 토큰 생성]], [[DALL·E (2021)]]을 보강해 DALL·E 1의 이산 image-token 자기회귀·별도 대조 재순위화와 unCLIP의 잠재 조건·계층적 확산을 구분했다.
+- Ramesh 등의 unCLIP 논문, OpenAI DALL·E 2 제품 비교, DALL·E 2 Preview system card를 evidence로 등록했다. [[index]]와 [[overview]]는 source 85개·concept 159개·비메타 295개, 공식 범위 001–046·048–085·103과 다음 공식 086 Stable Diffusion으로 갱신했다.
+- `overview` 현재 상태 절에 남아 있던 047 결손 이전 임시 번호를 공식 번호로 전수 교정했다. SQuAD 051부터 Chinchilla 078까지 19개 주제와 CLIP 절의 DALL·E 참조가 이제 공개 source·raw의 공식 번호와 일치한다.
+- 새 쌍을 포함하도록 읽기 수준 전수 검사 inventory를 번역·해설 166개, raw Markdown 171개로 갱신했다. 기존 raw artifact는 다시 쓰지 않았다.
+
+검증 정정과 남은 한계:
+
+- 원 raw의 “CLIP 유도 확산”은 매 잡음 제거 단계에서 부분 이미지를 CLIP gradient로 채점하는 구조가 아니다. unCLIP의 prior와 기본 decoder는 classifier-free guidance를 사용하고, 동결 CLIP은 text·image embedding 좌표계와 decoder 조건을 제공한다.
+- DALL·E 1은 원시 pixel을 한 칸씩 생성한 것이 아니라 dVAE 이산 image token을 텍스트와 공동 자기회귀 모델링했다. 논문 unCLIP의 variation·보간·text diff와 제품판의 inpainting·접근 통제·안전 필터도 같은 실험 결과로 합치지 않는다.
+- 확산 prior unCLIP은 GLIDE 대비 사실성 48.9%·caption 일치 45.3%로 근소하게 열세였지만 다양성은 70.5%로 선호됐다. MS-COCO zero-shot FID 10.39와 DALL·E 1 대비 제품 선호도는 서로 다른 비교이므로 모든 품질 축의 일괄 우위로 확대하지 않는다.
+- 논문은 hardware 수·총 FLOPs·wall-clock·단일 image latency를 보고하지 않았고, 초기 Preview는 공개 weight나 공개 API가 아니라 제한된 interface였다. 마케팅·디자인·교육·과학의 생산성, 상업적 성공과 후속 모델의 직접 계보는 원 논문 평가 범위 밖이다.
+- 번역·해설 쌍 검사는 `valid_pairs: 1`, 오류 0을 확인했다. `reading-level:check`는 외부 원문 109개, 번역·해설 166개, raw Markdown 171개, 위키 Markdown 298개에서 UI 단락 0개를 확인했고, 번역 정규화 검사는 표준 `원본 출처:` 83개와 변경 필요 0개를 확인했다.
+- `source:ready -- 085`는 96개 회귀 테스트와 298개 Markdown strict lint를 통과해 324개 evidence와 170개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 574개 HTML을 만들고 6,403개 wiki link를 모두 해소했다.
+
 ## 관련 항목
 
 - [[index]]
