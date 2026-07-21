@@ -2991,6 +2991,23 @@ raw 등록 해시:
 - 사이트는 427개 페이지를 빌드해 5,613개 위키 링크와 32,101개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 273개 항목을 포함했다.
 - 공개 source·concept와 기존 개념 보강은 Gao et al. 2020과 Biderman et al. 2022의 직접 구성·처리·비교·문서화 범위 안에서 검증했다. 다양성·품질의 단독 인과, 모든 model 규모의 우위, 후속 공개 model·산업 채택과 법적 적합성은 별도 근거가 필요한 범위로 남겼다.
 
+## [2026-07-21] content | 데이터 품질과 분포 다양성은 같은 축인가
+
+변경 내용:
+
+- [[데이터 품질과 분포 다양성은 같은 축인가]]를 만들고 WebText의 Reddit 승인 proxy, C4의 heuristic filtering과 domain-aligned corpus, GPT-3의 curated-similarity filter·source별 sampling weight, The Pile의 22-component·epoch 가중 mixture를 포함 기준·분포 범위·노출 가중치·평가 조건의 네 장부로 비교했다.
+- T5 Table 8의 고정 220M·약 34B-token protocol에서 filtered C4가 unfiltered C4보다 일곱 집계 metric 모두 높았다는 결과와, Wikipedia+TBC·RealNews-like 같은 좁은 corpus가 영역이 맞는 과제에서 C4를 앞선 결과를 함께 기록했다. Pile Table 3에서는 동일 1.3B·약 40GB 비교의 Pile BPB·WikiText 우위와 CC-100의 더 낮은 LAMBADA perplexity를 함께 보존했다.
+- GPT-3 Table 2.2의 499B-token pool과 300B-token training mixture, 60%·22%·8%·8%·3% source weight를 분리했다. 문서 품질 proxy·factuality·safety·rights, domain support·sampling probability와 target-domain 적합성을 하나의 `quality` 순위로 합치지 않았다.
+- [[073_The Pile과 대규모 언어 모델 학습 말뭉치]], [[The Pile]], [[말뭉치 기반 학습]], [[언어 모델 스케일링 법칙]]에서 새 분석으로 가는 최소 방향 링크를 추가했다. 스케일링 문서의 $D$가 token 수이지 mixture composition을 나타내지 않는다는 한계를 보강하고 선수 지식·다음 문서 수를 현행 가이드에 맞췄다.
+- GPT-2 원 논문 감사에서 확인되지 않은 `reddit.com 제거` 표현은 [[058_GPT-1과 GPT-2의 전이 방식 변화]]에서 Reddit 외부 링크 수집 기준과 명시적인 Wikipedia 제외로 교정했다.
+
+검증 결과:
+
+- 새 analysis는 Radford 2019, Raffel 2020, Brown 2020, Gao 2020의 기존 1차 evidence 4개와 058·062·066·073의 immutable raw artifact 8개만 사용했다. `evidence.yml`과 `raw-artifacts.yml`은 변경하지 않았다.
+- 49개 회귀 테스트와 275개 위키 문서 strict lint를 통과했으며 298개 evidence 레코드와 146개 immutable raw artifact를 확인했다.
+- 사이트는 428개 페이지를 빌드해 5,649개 위키 링크와 32,219개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 274개 항목을 포함했다.
+- 네 문헌의 수집·가중·평가 수치와 조건은 1차 자료로 확인했지만, 이를 quality proxy·coverage·weight·evaluation의 네 축으로 묶은 결론은 합성 해석이다. Filter·component·weight의 독립 인과와 모든 언어·domain의 최적 mixture는 입증되지 않았으므로 `verification: partial`을 유지했다.
+
 ## 관련 항목
 
 - [[index]]

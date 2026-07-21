@@ -36,6 +36,7 @@ related:
   - concept.언어-모델-스케일링-법칙
   - concept.대규모-언어-모델
   - concept.perplexity
+  - analysis.데이터-품질과-분포-다양성은-같은-축인가
 ---
 # The Pile과 대규모 언어 모델 학습 말뭉치
 
@@ -162,7 +163,7 @@ Datasheet는 2억 1,104만 3,181개 unweighted document를 보고했지만, 규�
 ### 다음 문서
 
 - [[The Pile]] — 22개 component·가중 혼합·분할·평가·권리 장부를 재사용 가능한 dataset 개념으로 정리한다.
-- [[언어 모델 스케일링 법칙]] — 저장 byte가 아니라 model·token·compute·mixture 조건을 함께 기록해야 하는 이유를 연결한다.
+- [[데이터 품질과 분포 다양성은 같은 축인가]] — 품질 필터·영역 coverage·sampling weight·평가 분포를 네 축으로 비교한다.
 
 ## 출처
 
@@ -183,3 +184,4 @@ Datasheet는 2억 1,104만 3,181개 unweighted document를 보고했지만, 규�
 - [[062_T5와 Text-to-Text 통합 프레임워크]]
 - [[065_신경 언어 모델의 스케일링 법칙]]
 - [[066_GPT-3와 문맥 내 학습]]
+- [[데이터 품질과 분포 다양성은 같은 축인가]]

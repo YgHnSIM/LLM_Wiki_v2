@@ -102,7 +102,7 @@ GPT-2는 모델·자료·context를 함께 확대했다.
 | large | 36 | 1280 | 762M/후속 공개 명칭 774M |
 | XL | 48 | 1600 | 1542M |
 
-WebText는 Reddit post에서 karma 3 이상을 받은 외부 link를 출발점으로 만든 약 8백만 문서, 40GB text였다. Reddit 자체 text 전체나 무차별 인터넷 crawl과 같지 않다. `reddit.com`과 Wikipedia 문서를 제거하려 했지만 웹 편향·중복·영어 중심 coverage는 남았다.
+WebText는 Reddit post에서 karma 3 이상을 받은 외부 link를 출발점으로 만든 약 8백만 문서, 40GB text였다. Reddit 자체 text 전체나 무차별 인터넷 crawl과 같지 않다. 수집 기준 자체가 Reddit 밖의 외부 link였고 Wikipedia 문서는 별도로 제거했지만, 웹 편향·중복·영어 중심 coverage는 남았다.
 
 GPT-2는 byte-level BPE, 1024 token context, pre-normalization에 가까운 layer normalization 배치와 마지막 layer norm을 사용했다. GPT-1 대비 결과를 매개변수 하나만의 효과로 볼 수 없는 이유다.
 

@@ -36,6 +36,7 @@ related:
   - concept.언어-모델-스케일링-법칙
   - concept.대규모-언어-모델
   - concept.perplexity
+  - analysis.데이터-품질과-분포-다양성은-같은-축인가
 ---
 # The Pile
 
@@ -147,7 +148,7 @@ Gao 등은 같은 1.3B architecture와 약 40GB data 조건에서 Pile·CC-100 E
 ### 다음 문서
 
 - [[073_The Pile과 대규모 언어 모델 학습 말뭉치]] — 원문 서사의 영향·법적 명확성·성능 과장을 1차 자료와 대조한다.
-- [[언어 모델 스케일링 법칙]] — Data byte·token·quality·mixture와 compute의 서로 다른 규모 축을 살핀다.
+- [[데이터 품질과 분포 다양성은 같은 축인가]] — 필터·domain coverage·epoch weight와 평가 분포를 비교한다.
 
 ## 출처
 
@@ -166,3 +167,4 @@ Gao 등은 같은 1.3B architecture와 약 40GB data 조건에서 Pile·CC-100 E
 - [[062_T5와 Text-to-Text 통합 프레임워크]]
 - [[065_신경 언어 모델의 스케일링 법칙]]
 - [[066_GPT-3와 문맥 내 학습]]
+- [[데이터 품질과 분포 다양성은 같은 축인가]]
