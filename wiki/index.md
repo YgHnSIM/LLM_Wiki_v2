@@ -99,6 +99,7 @@ related:
 - [[066_GPT-3와 문맥 내 학습]] — 125M–175B 모델군의 zero·one·few-shot 문맥 적응을 복원하고 과제별 성능·오염·창발 서사의 범위를 검증한 소스 (근거 2개)
 - [[067_DPR과 검색 증강 생성]] — BERT dual encoder·hard negative·FAISS의 DPR와 DPR–BART 잠재 문서 주변화의 원 RAG를 분리하고 검색·생성·인용의 실제 경계를 검증한 소스 (근거 2개)
 - [[068_전문가 혼합과 희소 활성 스케일링]] — MoE의 1991·2017년 계보와 GShard top-2·Switch top-1을 분리하고 total capacity·active compute·memory·communication의 경계를 검증한 소스 (근거 5개)
+- [[069_CLIP과 대조적 언어-이미지 사전 학습]] — 4억 이미지-텍스트 쌍의 대칭 대조 학습과 class prompt 제로샷 분류를 복원하고 shared embedding·평가·후대 계보의 범위를 검증한 소스 (근거 1개)
 
 ## 개체
 
@@ -148,6 +149,7 @@ related:
 - [[XLNet·RoBERTa·ALBERT]] — BERT 이후의 objective·training recipe·parameterization 개선을 비용 조건과 함께 비교하는 세 모델 묶음 (근거 3개)
 - [[XLM]] — shared multilingual encoder에서 CLM·MLM과 병렬 문장쌍 TLM을 구분하고 교차 언어 전이를 학습하는 방법군 (근거 1개)
 - [[T5]] — task를 text target으로 통합하고 sentinel span corruption 뒤 과제별 supervised fine-tuning으로 전이하는 encoder–decoder model family (근거 2개)
+- [[CLIP]] — 이미지·텍스트 이중 인코더를 대칭 대조 손실로 정렬하고 class prompt를 제로샷 분류기 weight처럼 사용하는 시각-언어 모델 (근거 1개)
 - [[N-gram 모델]] — 앞선 n-1개 단위의 빈도와 조건부 확률로 다음 항목을 예측하고 평활화로 미관측 조합을 다루는 언어 모델 (근거 4개)
 - [[마르코프 가정]] — 다음 항목의 확률을 제한된 최근 문맥으로 근사하는 가정 (근거 3개)
 - [[조건부 확률]] — 문맥이 주어졌을 때 다음 항목이 나타날 확률을 표현하는 수학적 개념 (근거 1개)
@@ -283,7 +285,7 @@ related:
 
 - [[총 매개변수와 활성 계산량은 같은 축인가]] — dense $N$과 sparse MoE의 total·active parameters를 분리하고 FLOPs·memory·communication·wall-clock·data·quality 장부로 규모 비교 조건을 정리한 분석 (근거 5개)
 - [[같은 병렬 문장은 무엇을 학습시키는가]] — 병렬 문장쌍이 IBM SMT의 잠재 단어 정렬, seq2seq NMT의 target sequence, XLM TLM의 양방향 masked-token 문맥으로 쓰이는 차이를 비교한 분석 (근거 6개)
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — ELMo·ULMFiT·BERT·GPT·XLM·T5에서 지식 전달 경로와 head·cue·demonstration·공통 text output의 과제 명세 위치를 비교한 분석 (근거 8개)
+- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — ELMo·ULMFiT·BERT·GPT·XLM·T5·CLIP에서 지식 전달 경로와 head·cue·demonstration·class prompt·공통 text output의 과제 명세 위치를 비교한 분석 (근거 9개)
 - [[손실 곡선과 능력 곡선 사이]] — 평균 token loss·downstream task score·능력 threshold를 분리하고 metric·표본·관측 scale이 창발 판정에 미치는 영향을 비교한 분석 (근거 4개)
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]] — RNN·WaveNet·Transformer를 표현 계산·teacher forcing·sampling·총연산의 네 축으로 분리한 분석 (근거 5개)
 - [[검색은 근거를 찾고 독해는 답을 찾는다]] — BM25·DSSM/DRMM·SQuAD·DPR/RAG를 검색 재현율·독해 정확도·기권의 세 경계로 분해한 분석 (근거 8개)

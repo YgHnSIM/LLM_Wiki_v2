@@ -2442,3 +2442,11 @@ sources:
     doi: 10.48550/arXiv.2204.02311
     url: https://research.google/pubs/palm-scaling-language-modeling-with-pathways/
     language: en
+  radford-et-al-2021-clip:
+    title: Learning Transferable Visual Models From Natural Language Supervision
+    authors: [Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, Gretchen Krueger, Ilya Sutskever]
+    published: 2021
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.mlr.press/v139/radford21a.html
+    language: en

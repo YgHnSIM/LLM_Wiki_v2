@@ -1224,3 +1224,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/mixture-of-experts-sparse-activation
     sha256: ef9ba2e6924d192fe1dd75eeaf32f435cce7e712eda4764fa83bcf59c74c6e79
+  - path: "raw/069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md"
+    role: translation
+    order_prefix: "069"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/clip-contrastive-language-image-pretraining-multimodal
+    sha256: 72df1cd7527f5f61c9c4dceefe0e16a5781fb2bd129b5c5ce99f29074b556a39
+  - path: "raw/069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md"
+    role: commentary
+    order_prefix: "069"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/clip-contrastive-language-image-pretraining-multimodal
+    sha256: 65a380843dd36736dd61cc8adaf5b22f83ac1c1ae4a24980b7c9d4bffa14f35c

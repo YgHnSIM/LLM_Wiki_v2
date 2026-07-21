@@ -2898,6 +2898,24 @@ raw 등록 해시:
 - 사이트는 407개 페이지를 빌드해 5,334개 위키 링크와 30,520개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 263개 항목을 포함했다.
 - 문헌별 수치와 비교 조건은 1차 자료로 확인했지만, 다섯 연구를 total·active parameter, FLOPs, memory, communication, wall-clock, data와 quality의 여덟 축으로 묶은 결론은 합성 해석이므로 `verification: partial`을 유지했다.
 
+## [2026-07-21] ingest | CLIP과 대조적 언어-이미지 사전 학습
+
+변경 내용:
+
+- `069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 55개 의미 블록, H1/H2 1/6과 23개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- [[069_CLIP과 대조적 언어-이미지 사전 학습]]과 [[CLIP]]을 만들고, 수정 ResNet 5종·ViT 3종의 image encoder, Transformer text encoder, 정규화 projection, $N\times N$ 대칭 대조 손실과 class prompt로 합성하는 zero-shot classifier를 분리해 설명했다.
+- [[사전 학습 지식은 과제에 어떻게 도착하는가]]에는 CLIP을 아홉 번째 전이 경로로 추가했다. GPT-3의 input-context demonstration과 CLIP의 class prototype, CLIP zero-shot과 표지 예제로 logistic regression을 학습하는 few-shot linear probe를 구분했다.
+- Radford 등의 ICML 2021 논문과 supplement를 대조해 WIT 4억 쌍·50만 query·query당 최대 2만 쌍, batch 32,768·32 epochs, ImageNet 76.2%, 기본 prompt +1.3 points와 80-template ensemble 추가 +3.5 points, 27개 중 16개 비교 우위와 과제별 편차를 확인했다. RN50x64의 592 V100·18일과 ViT-L/14의 256 V100·12일도 서로 다른 조건으로 복원했다.
+- raw의 일반 멀티모달 이해, ViT 단일 image encoder, 학습에서 전혀 보지 않은 class라는 zero-shot 해석, 조합·공간 관계와 VQA·style transfer·generation의 단독 수행, DALL·E·Stable Diffusion·GPT-4V 일괄 직접 계보 및 fine-grained task의 일률적 실패 주장을 공개 문서에서 교정했다.
+- 새 분석 문서는 만들지 않았다. shared embedding·cross-attention·생성 잠재공간의 차이는 후속 083 Flamingo·084 DALL·E 2·085 Stable Diffusion의 1차 자료까지 검증한 뒤 비교해야 근거가 충분하므로, 현재는 기존 전이 분석을 실질적으로 보강했다.
+
+검증 결과:
+
+- 번역 스킬 검사는 069 번역·해설 쌍을 `done: true`로 확인했고, source workflow는 두 raw artifact의 원문 URL·역할·SHA-256 일치를 확인했다.
+- 49개 회귀 테스트와 266개 위키 문서 strict lint를 통과했으며 286개 evidence 레코드와 138개 immutable raw artifact를 확인했다.
+- 사이트는 411개 페이지를 빌드해 5,371개 위키 링크와 30,819개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 265개 항목을 포함했다.
+- 공개 source·concept와 기존 분석 보강은 Radford et al. 2021 본문과 supplement의 직접 구조·학습·평가·편향 범위 안에서 검증했다. 일반 멀티모달 이해, 생성·VQA 능력과 후대 모델의 직접 계보는 각 후속 1차 자료가 필요한 범위로 남겼다.
+
 ## 관련 항목
 
 - [[index]]
