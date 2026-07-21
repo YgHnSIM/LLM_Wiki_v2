@@ -2738,6 +2738,24 @@ raw 등록 해시:
 - 사이트는 377개 페이지를 빌드해 4,888개 위키 링크와 28,079개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 247개 항목을 포함했다.
 - 분석의 개별 사실은 1차 문헌으로 확인했지만 세 연구군을 하나의 목적 함수 비교틀로 묶은 결론은 합성 해석이므로 `verification: partial`을 유지했다.
 
+## [2026-07-21] ingest | T5와 Text-to-Text 통합 프레임워크
+
+변경 내용:
+
+- `062_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.md`를 원문부터 새로 번역·윤문하고 학습 해설을 작성했다. 검증된 쌍을 새 immutable raw artifact로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다.
+- [[062_T5와 Text-to-Text 통합 프레임워크]]와 [[T5]]를 만들고 분류·질의응답·요약·번역을 공통 text input/output과 token likelihood로 표현하는 범위, encoder–decoder와 sentinel span corruption, C4와 과제별 fine-tuning을 정리했다.
+- [[마스크드 언어 모델링]]에는 BERT식 위치별 token 분류와 T5의 short-target span 복원을 비교했다. [[언어 모델 전이 학습]]과 [[사전 학습 지식은 과제에 어떻게 도착하는가]]에는 BERT·GPT-2·XLM과 다른 T5의 supervised text-to-text 전이 경로를 추가했다.
+- JMLR 원 논문을 대조해 15% corruption·평균 span 길이 3·첫/마지막 sentinel, 약 750GB English C4, parameter와 계산량의 차이, multi-task pretraining 뒤 task별 fine-tuning, 24개 중 18개 최고 결과와 WMT English→German 32.1 BLEU를 확인했다.
+- raw의 최초 통합 발명, 공통 metric·universal zero-shot checkpoint, task prefix와 현대 instruction following의 동일시, span corruption 속도·우월성, C4 사실성, encoder–decoder 계산량 두 배, WMT 최고 성능·광범위한 multilingual translation·abstractive SQuAD, production 절감과 BART·GPT-3·PaLM·GPT-4 직접 계보를 공개 문서에서 교정했다.
+- 새 자료의 핵심 질문은 기존 [[사전 학습 지식은 과제에 어떻게 도착하는가]]의 전이 interface 비교를 실질적으로 보강하므로 그 문서를 갱신했다. output interface와 task-specific metric의 긴장은 독립 근거가 더 쌓일 때 별도 분석으로 재검토하며, 062만으로 반복 분석 문서를 만들지는 않았다.
+
+검증 결과:
+
+- 번역 스킬 검사는 062 번역·해설 쌍을 `valid_pairs: 1`로 확인했고, source workflow는 두 raw artifact의 원문 URL·역할·해시 일치를 확인했다.
+- 49개 회귀 테스트와 250개 위키 문서 strict lint를 통과했으며 271개 evidence 레코드와 124개 immutable raw artifact를 확인했다.
+- 사이트는 381개 페이지를 빌드해 4,938개 위키 링크와 28,377개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 249개 항목을 포함했다.
+- raw 설명 자료는 원 논문보다 넓은 성능·계보·배포 주장을 포함하므로 보존 artifact로만 남겼고, 공개 source·concept·analysis의 핵심 주장은 Raffel 등의 JMLR 논문 범위 안에서 검증했다.
+
 ## 관련 항목
 
 - [[index]]

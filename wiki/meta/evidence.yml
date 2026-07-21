@@ -2271,6 +2271,14 @@ sources:
     kind: conference-paper
     url: https://proceedings.neurips.cc/paper_files/paper/2019/hash/c04c19c2c2474dbf5f7ac4372c5b9af1-Abstract.html
     language: en
+  raffel-et-al-2020-t5:
+    title: Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer
+    authors: [Colin Raffel, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, Peter J. Liu]
+    published: 2020
+    source_type: primary
+    kind: journal-article
+    url: https://www.jmlr.org/papers/v21/20-074.html
+    language: en
   radford-et-al-2019-gpt2:
     title: Language Models are Unsupervised Multitask Learners
     authors: [Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, Ilya Sutskever]

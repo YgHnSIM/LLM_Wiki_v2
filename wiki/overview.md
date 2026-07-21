@@ -24,14 +24,14 @@ related:
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 61개, concept 137개, entity 29개, analysis 18개를 합친 비메타 문서 245개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 62개, concept 138개, entity 29개, analysis 18개를 합친 비메타 문서 247개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
 | 언어 모델은 어떻게 발전했나 | [[001_섀넌의 N-gram 모델]] | [[N-gram 모델]] → [[019_Katz 백오프와 희소 데이터 확률 추정]] → [[035_신경 확률 언어 모형과 분산 단어 표현]] → [[자기회귀 생성]] | [[N-gram에서 LLM으로]] |
 | 기계의 언어 행동을 어떻게 평가하나 | [[002_튜링 테스트]] | [[033_BLEU와 기계 번역 자동 평가]] → [[050_SQuAD와 추출형 독해 평가]] → [[059_GLUE와 SuperGLUE의 집계 평가]] | [[튜링 테스트와 LLM 평가]] |
 | 규칙에서 학습으로 무엇이 바뀌었나 | [[003_Georgetown-IBM 기계 번역 시연]] | [[012_상징 규칙에서 통계 학습으로]] → [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[규칙 기반 AI에서 데이터 기반 학습으로]] |
-| 현대 Transformer 계열은 어디서 왔나 | [[018_역전파와 다층 신경망 학습]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]] → [[057_BERT의 마스크드 양방향 사전 학습]] | [[060_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]] |
+| 현대 Transformer 계열은 어디서 왔나 | [[018_역전파와 다층 신경망 학습]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]] → [[057_BERT의 마스크드 양방향 사전 학습]] → [[060_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]] | [[062_T5와 Text-to-Text 통합 프레임워크]] |
 | 한 언어의 지식은 다른 언어로 어떻게 옮겨지나 | [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[061_XLM과 교차 언어 사전 학습]] → [[XLM]] | [[같은 병렬 문장은 무엇을 학습시키는가]] |
 | 검색과 외부 지식은 어떻게 연결되나 | [[010_벡터 공간 모델과 TF-IDF]] | [[024_BM25와 확률적 정보 검색]] → [[039_Freebase와 협업형 지식 그래프]] → [[051_신경 정보 검색과 의미 대응]] | [[검색은 근거를 찾고 독해는 답을 찾는다]] |
 
@@ -106,6 +106,7 @@ related:
 - [[059_GLUE와 SuperGLUE의 집계 평가]]는 [[GLUE와 SuperGLUE]]의 과제·metric·단순 평균·human estimate·포화를 복원하고, 표준화가 통제하지 않는 training 조건과 benchmark 과적합을 검증한다.
 - [[060_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]]는 [[XLNet·RoBERTa·ALBERT]]를 objective·training recipe·parameterization의 세 축으로 나누고, factorization order·총 sequence·parameter와 FLOPs의 차이 및 raw의 성능 과장을 교정한다.
 - [[061_XLM과 교차 언어 사전 학습]]은 [[XLM]]의 CLM·MLM·TLM, shared BPE·언어 sampling과 English-label XNLI 전이를 복원하고, unseen-language zero-shot·few-shot·QA·검색·mBERT 후속 계보의 과장을 교정한다.
+- [[062_T5와 Text-to-Text 통합 프레임워크]]는 [[T5]]의 공통 text input/output, sentinel span corruption, C4와 task별 fine-tuning을 복원하고, metric·checkpoint·instruction·번역·QA·계산량·직접 후속 계보의 과장을 교정한다.
 
 ## 현재 핵심 주제
 
@@ -178,10 +179,11 @@ related:
 - [[Layer Normalization]]과 [[Batch Normalization]]의 사례/feature 통계 축, affine 전후 평균·분산의 차이, Post-LN·Pre-LN에서 [[잔차 연결]] identity path가 달라지는 방식과 [[RMSNorm]]의 uncentered second moment
 - [[잔차 경로와 정규화는 어디에 놓이는가]]에서 비교하는 ResNet post-/pre-activation과 Transformer Post-/Pre-LN, additive identity path 위에 activation·normalization Jacobian을 둘 때의 최적화 차이
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]]에서 비교하는 RNN hidden-state 의존, WaveNet causal convolution, Transformer masked attention의 teacher-forced 훈련과 실제 sampling 차이
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]에서 비교하는 ELMo 고정 특징, ULMFiT 영역·분류 적응, BERT·GPT-1 전체 미세조정과 GPT-2 입력 cue의 과제 명세 위치
+- [[사전 학습 지식은 과제에 어떻게 도착하는가]]에서 비교하는 ELMo 고정 특징, ULMFiT 영역·분류 적응, BERT·GPT-1 전체 미세조정, GPT-2 입력 cue, XLM 언어 공유와 T5 공통 text output의 과제 명세 위치
 - [[XLM]]의 monolingual CLM·MLM과 parallel-data TLM, shared BPE·언어 sampling 및 target-language text와 task label을 분리한 zero-shot 조건
 - [[같은 병렬 문장은 무엇을 학습시키는가]]에서 비교하는 SMT의 잠재 단어 정렬, NMT의 target sequence supervision, TLM의 양방향 masked-token 문맥과 서로 다른 alignment 층위
 - [[XLNet·RoBERTa·ALBERT]]에서 분리하는 factorization objective, data·batch·masking training recipe, embedding factorization·layer sharing과 parameter 수·FLOPs·latency의 차이
+- [[T5]]의 task prefix·encoder–decoder·sentinel span corruption과 shared interface, shared pretrained checkpoint, task별 fine-tuned weights의 구분
 - [[조지 밀러]]와 공동 연구진의 1985–1998년 WordNet 구축·공개 단계, 심리언어학적 설계 동기와 인간 기억 모형이라는 실증 주장의 구분
 - [[Lesk 알고리즘]], [[단어 의미 중의성 해소]], WordNet 의미 목록, 사전 글로스의 정확 중첩과 후대 문맥–글로스 비교 방법의 구분
 - [[증강 전이망]], [[파싱]], 재귀 호출, 레지스터·조건·구조 구축 동작을 통한 절차적 문법 공학
@@ -301,7 +303,9 @@ related:
 
 ## 현재 상태
 
-소스 61개, 개념 137개, 개체 29개, 분석 18개와 메타 문서 3개, 총 248개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 221개는 `verified`, 해석적 문서 24개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 270개 외부 근거와 122개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 62개, 개념 138개, 개체 29개, 분석 18개와 메타 문서 3개, 총 250개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 223개는 `verified`, 해석적 문서 24개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 271개 외부 근거와 124개 불변 raw artifact가 레지스트리에 등록돼 있다.
+
+`062`의 T5를 최초의 통합 NLP 발명이나 하나의 universal zero-shot checkpoint로 보는 설명, text output과 공통 metric의 동일시, task prefix와 현대 instruction following의 혼동, 빠진 sentinel 예시, span corruption이 MLM보다 느리고 보편적으로 우월하다는 주장, C4의 사실성·중립성 확대, encoder–decoder parameter와 계산량의 동일시, WMT English→German 최고 성능·광범위한 multilingual translation·abstractive SQuAD 주장, production 비용 절감과 BART·GPT-3·PaLM·GPT-4 직접 계보도 공개 문서에서 교정했다.
 
 `061`의 XLM을 하나의 고정 모델로 보는 설명, CLM 뒤 TLM을 순차 학습한다는 서술, zero-shot을 사전 학습에서도 target 언어를 보지 않은 것으로 해석한 Italian QA 예시, 평가하지 않은 few-shot·교차 언어 QA·검색, shared BPE의 자동 의미 정렬, mBERT·XNLI를 XLM의 후속 산물로 보는 역방향 계보, 모든 저자원 언어·deployment compute·multimodal AI·mT5·GPT로 확대한 영향과 data가 architecture보다 중요하다는 일반 결론도 공개 문서에서 교정했다.
 

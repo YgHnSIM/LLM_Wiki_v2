@@ -1098,3 +1098,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/xlm-cross-lingual-language-model-multilingual-nlp
     sha256: 99e859a36c969bcf6ed8d7c1aa436af0c2490510bddb200fceeda9e9dfe54817
+  - path: "raw/062_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.ko.md"
+    role: translation
+    order_prefix: "062"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/t5-text-to-text-framework-unified-nlp-through-text-transformations
+    sha256: 36c223a502b0dc0a31b3c432ccd9387309b7fad83a8455905350440311f5db7e
+  - path: "raw/062_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.commentary.ko.md"
+    role: commentary
+    order_prefix: "062"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/t5-text-to-text-framework-unified-nlp-through-text-transformations
+    sha256: d2db6cf2e0a3e26a30faed1e21295af8153a3f6cb6975fb05472d7cdd15e1095
