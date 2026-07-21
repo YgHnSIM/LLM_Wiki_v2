@@ -8,10 +8,6 @@ Source: https://mbrenndoerfer.com/writing/gpt3-in-context-learning-emergent-capa
 
 OpenAI가 2020년에 선보인 GPT-3를 폭넓게 다루는 안내서다. 매개변수 1,750억 개로 규모를 키우면서 문맥 내 학습과 퓨샷 능력이 어떻게 나타났는지, 프롬프트의 패턴을 인식하는 메커니즘은 무엇인지, 여러 과제에서 미세조정의 필요성을 어떻게 없앴는지, 그리고 프롬프트 엔지니어링과 현대 언어 모델 배포에 어떤 지대한 영향을 미쳤는지를 살펴본다.
 
-읽기 수준
-
-자신의 전문 지식 수준을 선택하면 용어 설명의 양을 조절할 수 있다. 초급자에게는 더 많은 도구 설명이 표시되고, 전문가는 읽기 흐름을 유지하도록 더 적은 설명을 보게 된다. 밑줄 친 용어 위에 마우스를 올리면 즉시 정의를 확인할 수 있다.
-
 ## 2020년: GPT-3와 문맥 내 학습
 
 OpenAI가 2020년에 [GPT-3](/writing/gpt-3-scale-few-shot-in-context-learning)를 공개한 일은 대규모 언어 모델의 발전에서 분수령이 되었다. [자기회귀](/writing/gpt1-gpt2-autoregressive-pretraining-transfer-learning) 언어 모델의 규모를 수천억 개의 매개변수로 키우면 AI 시스템이 인간과 상호작용하고 인간에게서 학습하는 방식을 근본적으로 바꾸는 [출현 능력](/writing/emergence-neural-networks-phase-transitions-scaling)이 생길 수 있음을 보여주었기 때문이다. 매개변수 1,750억 개를 지닌 GPT-3는 GPT-2보다 규모가 10배 이상 컸고, 이 전례 없는 규모에서 놀라운 현상이 나타났다. 입력 프롬프트에 제공된 몇 가지 예시나 과제 설명을 조건으로 삼기만 해도 그래디언트 기반 미세조정 없이 다양한 과제를 높은 정확도로 수행할 수 있었다. 연구자들이 "[문맥 내 학습](/writing/in-context-learning-llm-examples)" 또는 "[퓨샷 학습](/writing/in-context-learning-emergence-scale-mechanisms)"이라고 부른 이 능력은 대규모 언어 모델이 [자기회귀 생성](/writing/autoregressive-generation-gpt-text-generation) 메커니즘을 통해 새로운 과제에 즉석에서 적응할 수 있음을 보여주었다. 명시적인 훈련 데이터가 필요한 대신 프롬프트 자체의 패턴에서 학습하는 방식이었다.

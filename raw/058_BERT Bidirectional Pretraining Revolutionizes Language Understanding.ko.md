@@ -6,10 +6,6 @@
 
 BERT(Bidirectional Encoder Representations from Transformers)를 종합적으로 설명한다. 마스크드 언어 모델링, 양방향 문맥 표현, 사전 학습 뒤 미세조정 패러다임과 자연어 처리에 미친 영향을 살펴본다.
 
-읽기 수준
-
-전문성 수준을 선택하면 용어 설명의 양을 조절할 수 있다. 초급자는 더 많은 도구 설명을 보고, 전문가는 읽기 흐름을 유지하도록 더 적은 설명을 본다. 밑줄 친 용어에 마우스를 올리면 바로 정의를 확인할 수 있다.
-
 ## 2018년: BERT
 
 2018년 10월 Google AI Language 연구진은 자연어 처리를 크게 바꾼 논문 「BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding」를 공개했다. BERT(Bidirectional Encoder Representations from Transformers)는 질의응답부터 감성 분석까지 열한 개 자연어 이해 과제에서 당시 최고 결과를 달성했다. 변화를 만든 것은 성능뿐 아니라 접근 방식이었다. 양방향 Transformer encoder를 마스크드 언어 모델링(masked language modeling, MLM)과 다음 문장 예측(next sentence prediction, NSP)이라는 두 과제로 사전 학습한 뒤, 과제별 구조를 조금만 추가해 다양한 자연어 처리 과제에 전체 모델을 미세조정할 수 있었다.

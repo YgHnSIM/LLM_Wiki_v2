@@ -6,10 +6,6 @@
 
 Facebook AI Research가 2019년에 발표한 XLM(Cross-lingual Language Model)을 종합적으로 설명한다. 번역 언어 모델링을 이용한 교차 언어 사전 학습이 언어 사이 zero-shot 전이를 어떻게 가능하게 하고 다국어 자연어 처리의 새로운 기준을 세웠는지 살펴본다.
 
-읽기 수준
-
-전문성 수준을 선택하면 용어 설명의 양을 조절할 수 있다. 초급자는 더 많은 도구 설명을 보고, 전문가는 읽기 흐름을 유지하도록 더 적은 설명을 본다. 밑줄 친 용어에 마우스를 올리면 바로 정의를 확인할 수 있다.
-
 ## 2019년: XLM
 
 2019년 Facebook AI Research는 XLM(Cross-lingual Language Model)을 발표했다. XLM은 번역 언어 모델링을 이용한 교차 언어 사전 학습으로 언어 사이에 강한 zero-shot·few-shot 전이를 실현할 수 있음을 보여 준 다국어 자연어 처리의 획기적인 모델이었다. 서로 다른 언어 사이의 의미 유사성을 포착하는 교차 언어 표현을 학습하는 능력은 [다국어 AI](/writing/specialized-llms-low-resource-languages-ai-equity-global-accessibility) 응용에 새로운 가능성을 열었고, 뒤이은 여러 다국어 언어 모델 개발에 영향을 주었다. XLM의 성공은 신경 언어 모델 하나가 여러 언어의 text를 동시에 이해하고 생성하도록 훈련할 수 있음을 보여 주었다. 이는 다국어 NLP의 새로운 기준을 세우고 단일 모델로 여러 언어를 처리하는 후속 시스템 개발에 영향을 주었다.

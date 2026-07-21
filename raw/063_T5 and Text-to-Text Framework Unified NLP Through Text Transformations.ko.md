@@ -6,10 +6,6 @@
 
 Google이 2019년에 발표한 T5(Text-to-Text Transfer Transformer)를 종합적으로 설명한다. text-to-text 프레임워크가 다양한 NLP 과제를 어떻게 통합했는지, span corruption 사전 학습을 사용하는 encoder-decoder architecture, multi-task learning을 위한 task prefix, 그리고 현대 언어 모델과 instruction tuning에 남긴 지속적인 영향을 살펴본다.
 
-읽기 수준
-
-전문성 수준을 선택하면 용어 설명의 양을 조절할 수 있다. 초급자는 더 많은 도구 설명을 보고, 전문가는 읽기 흐름을 유지하도록 더 적은 설명을 본다. 밑줄 친 용어에 마우스를 올리면 바로 정의를 확인할 수 있다.
-
 ## 2019년: T5와 Text-to-Text 프레임워크
 
 Google Research가 2019년에 [Text-to-Text Transfer Transformer](/writing/t5-architecture-text-to-text-transformer)(T5)를 발표한 일은 연구자들이 자연어 처리 과제에 접근하는 방식의 paradigm shift를 나타냈다. T5는 NLP 문제마다 특화된 architecture와 training procedure를 개발하는 대신, 번역과 요약부터 [질의응답](/writing/ibm-watson-jeopardy-open-domain-question-answering-nlp-information-retrieval), 분류에 이르는 모든 과제를 [text-to-text](/writing/t5-task-formatting-text-to-text-nlp) 변환으로 다시 구성하면 하나의 통합 framework로 처리할 수 있음을 보여 주었다. 이 통합은 model development, training pipeline, evaluation을 단순화하면서 수많은 benchmark에서 state-of-the-art 성능을 달성했고, 사전 학습 언어 모델을 다양한 NLP 과제에 적용하는 새로운 표준을 확립했다.

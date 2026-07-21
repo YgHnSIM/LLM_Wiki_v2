@@ -6,10 +6,6 @@ Source: https://mbrenndoerfer.com/writing/dense-passage-retrieval-retrieval-augm
 
 언어 모델이 외부 지식 소스에 접근할 수 있게 한 2020년의 혁신, 밀집 구절 검색(Dense Passage Retrieval, DPR)과 검색 증강 생성(Retrieval-Augmented Generation, RAG)을 포괄적으로 다루는 안내서다. 밀집 벡터 검색이 의미 검색을 어떻게 바꾸었는지, RAG가 검색과 생성을 어떻게 통합했는지, 그리고 이 기술들이 지식 인식 AI 시스템에 어떤 지속적인 영향을 미쳤는지 살펴본다.
 
-읽기 수준
-
-자신의 전문 지식 수준을 선택해 설명되는 용어의 수를 조정할 수 있다. 초보자에게는 더 많은 툴팁이 표시되고, 전문가는 읽기 흐름을 유지할 수 있도록 더 적은 툴팁을 보게 된다. 밑줄 친 용어 위에 마우스를 올리면 정의를 바로 확인할 수 있다.
-
 ## 2020년: 밀집 구절 검색과 검색 증강 생성
 
 2020년, Facebook AI Research(현재 Meta AI)의 연구자들은 언어 모델이 지식과 상호 작용하는 방식을 근본적으로 바꿀, 서로 밀접하게 연관된 두 가지 혁신을 소개했다. [밀집 구절 검색](/writing/dense-retrieval-semantic-search-bi-encoders)([DPR](/writing/contrastive-learning-retrieval-infonce-dpr))과 검색 증강 생성([RAG](/writing/long-term-knowledge-storage-and-retrieval))이다. 이 기술들은 사전 학습 언어 모델의 중대한 한계, 즉 학습 중 매개변수에 부호화된 범위를 넘어 외부 지식에 접근하고 이를 통합할 수 없다는 문제를 해결하고자 했다. [BERT](/writing/bert-bidirectional-pretraining-revolutionizes-language-understanding)와 [GPT](/writing/gpt1-gpt2-autoregressive-pretraining-transfer-learning) 같은 모델은 언어 이해와 생성 과제에서 뛰어난 성능을 거두었지만, 정적인 [지식 베이스](/writing/wikidata-collaborative-knowledge-base-language-ai)에 묶여 있었다. 최신 정보나 도메인 특화 지식, 학습 데이터에 없던 구체적인 사실에는 접근할 수 없었다. DPR과 RAG는 밀집 벡터 검색을 신경망 언어 모델과 결합하면 외부 지식 소스를 활용해 질문에 답하고, 더 정확하고 사실적인 텍스트를 생성하며, 재학습 없이 새로운 정보에 적응할 수 있는 시스템을 만들 수 있음을 보여주었다.

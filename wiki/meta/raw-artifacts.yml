@@ -188,7 +188,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/conceptual-dependency-canonical-meaning-representation-natural-language-understanding
-    sha256: e0fedc93026b2093382a41555b7a14043d3618ec231616dd109d21aed20a4c5a
+    sha256: 1e473aadf06e7a5894fa234aedf51005336cb3eeeecbe074bd3bbe0e8dc1e73c
   - path: "raw/011_Conceptual Dependency - Canonical Meaning Representation for Natural Language Understanding.commentary.ko.md"
     role: commentary
     order_prefix: "011"
@@ -224,7 +224,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-hidden-markov-models-speech-recognition
-    sha256: 60f9d769f14d433e691db470927dd2062313ab74ce11a084f72e7c405ed52c2f
+    sha256: d1224e52847bebf92848ff77c12c31e55bef55bc7ff314b0ea34ecaadea1ec80
   - path: "raw/013_Hidden Markov Models - Statistical Speech Recognition.commentary.ko.md"
     role: commentary
     order_prefix: "013"
@@ -242,7 +242,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/augmented-transition-networks-procedural-parsing-formalism-natural-language
-    sha256: 22679129202b484d609ded7fe4c4553b8069175a69b82169a106adbf17300223
+    sha256: 26cd760f9f29db0ce66faaadec24f6682a47e8d8bd4ff77f1b7ee8a4cbaa4797
   - path: "raw/014_Augmented Transition Networks - Procedural Parsing Formalism for Natural Language.commentary.ko.md"
     role: commentary
     order_prefix: "014"
@@ -260,7 +260,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/montague-semantics-formal-compositional-natural-language-understanding
-    sha256: 54335a29d9fd6c1edf97755ca820d55e20ed6a9e2184f84962d2e220cd8453d3
+    sha256: d8f5ed48226e140ab0ed774422573ae1f0df7459b9bf26e0e05483c584f304e2
   - path: "raw/015_Montague Semantics - The Formal Foundation of Compositional Language Understanding.commentary.ko.md"
     role: commentary
     order_prefix: "015"
@@ -278,7 +278,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/chinese-room-argument-syntax-semantics-limits-computation
-    sha256: 9ea9539f20d2bc654c07ef018f1b4bfecd3ece2ea4344214922dcae1036846d7
+    sha256: b0db62a03a0233e1fc2334e833d7fe2a8c090f868ea85b0a034cc0e1444aad2d
   - path: "raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.commentary.ko.md"
     role: commentary
     order_prefix: "016"
@@ -296,7 +296,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/lesk-algorithm-word-sense-disambiguation-nlp-history
-    sha256: 5e2e11571cb65258197e2e0128df1bdab811ffb524fe47ce3183a83e9d8e0d62
+    sha256: 971d0d5f1bc9795bda5dab73a8263f79c8923db0168cbc7d2c5550448777ddfe
   - path: "raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.commentary.ko.md"
     role: commentary
     order_prefix: "017"
@@ -314,7 +314,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-backpropagation-deep-learning-training
-    sha256: b2e997d93118a41587cbda57838196c87141b1ff5ff218d169490e71e2b7b51f
+    sha256: fba7b7f982429d3f1c35a483ae5960bbd43a4391e0bb0e47f60a53d079892351
   - path: "raw/018_Backpropagation - Training Deep Neural Networks.commentary.ko.md"
     role: commentary
     order_prefix: "018"
@@ -332,7 +332,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-katz-backoff-sparse-data-language-models
-    sha256: 715ee17010304fcba984319bb7c3d766c145787da3f5eb80c05c2dbf5e6679d4
+    sha256: 17b8b86a8209f641ad73c4f9eeaeda68499575ae257318d385e4edd338305ec4
   - path: "raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md"
     role: commentary
     order_prefix: "019"
@@ -350,7 +350,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-tdnn-time-delay-neural-networks
-    sha256: 3313685ee44e485edb9acc489b091bb6840f9e9f66bf77e951de142722de3841
+    sha256: 673f4846ccfef47644de1d0ed79f0906683adce6e7508f4da035c0b229233cb1
   - path: "raw/020_Time Delay Neural Networks - Processing Sequential Data with Temporal Convolutions.commentary.ko.md"
     role: commentary
     order_prefix: "020"
@@ -368,7 +368,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-cnn-convolutional-neural-networks
-    sha256: a12173d28215641b0f4057dabe2c43c8f143f27f0e9c10da7f3f729d32731b0b
+    sha256: 16530ffdbc342111599d956f68d8025a5d9c5e699212d6f0954445b2c140af12
   - path: "raw/021_Convolutional Neural Networks - Revolutionizing Feature Learning.commentary.ko.md"
     role: commentary
     order_prefix: "021"
@@ -386,7 +386,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-statistical-mt-ibm-models
-    sha256: 9360d4e78a0d84d0e314f20efb4a6140b4fe777a8f7bed0c53ef57eb3e769710
+    sha256: 8e8771a192a961de4d4cb7a39b674fb6cf5885fc42f2e199ab2dadb89b5fe13d
   - path: "raw/022_IBM Statistical Machine Translation - From Rules to Data.commentary.ko.md"
     role: commentary
     order_prefix: "022"
@@ -404,7 +404,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-penn-treebank-statistical-parsing
-    sha256: 910c79d6a328710a170433f6d161447f83833c50f15266eda6fc95ff6afb32a0
+    sha256: 8c7e591a8eb4e900b99908be4e123b5f2bbb852b369840bffafb9454e852edcf
   - path: "raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.commentary.ko.md"
     role: commentary
     order_prefix: "023"
@@ -422,7 +422,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/bm25-probabilistic-ranking-information-retrieval
-    sha256: 9c9af95f25e3210c49577b24bbf59da4c9a6abcec70bcddd94a6669fac38cde0
+    sha256: c07fb756ee3d3e7f84c04d9bb9a00c43b96f4277ce7e3fd7f68e6df6205c9f6e
   - path: "raw/024_BM25 The Probabilistic Ranking Revolution in Information Retrieval.commentary.ko.md"
     role: commentary
     order_prefix: "024"
@@ -440,7 +440,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-wordnet-semantic-network
-    sha256: d04a299940260af34e852fef48be1bf593e3dbea8e9f9c891c7266997f38ff44
+    sha256: 602ba94abe08ee1a6ec231b4b3bca50821d2045ab7a50a0880323ef844d268ea
   - path: "raw/025_WordNet - A Semantic Network for Language Understanding.commentary.ko.md"
     role: commentary
     order_prefix: "025"
@@ -458,7 +458,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-rnn-recurrent-neural-networks
-    sha256: a9fbee49c932940ceaf2cb476ad9df288203028cdb68477a9da44c9c57c8cc77
+    sha256: d4a261b61415b8c205e57b4423c6f390a39b662f6884247454e14cbd8957a67a
   - path: "raw/026_Recurrent Neural Networks - Machines That Remember.commentary.ko.md"
     role: commentary
     order_prefix: "026"
@@ -476,7 +476,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-maximum-entropy-svms-nlp
-    sha256: 4409cacd2159d3c5ea918129856ef8b531d96c94b14f098258f835b240f07554
+    sha256: d2fa5624420eebed04da2346d2d96ec9c56be859fa268c85e95ec408d6e25f4e
   - path: "raw/027_Maximum Entropy & Support Vector Machines in NLP Feature-Based Discriminative Learning.commentary.ko.md"
     role: commentary
     order_prefix: "027"
@@ -494,7 +494,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-lstm-long-short-term-memory
-    sha256: 8c4ce13c65a9d1894d1c0861dd386d9112f481e3179a5e7a16f425cf72ec24f0
+    sha256: dcb2982399a6f17a8e92a74fd04c652768e6737d42534c60d3461ac13125ec9c
   - path: "raw/028_Long Short-Term Memory - Solving the Memory Problem.commentary.ko.md"
     role: commentary
     order_prefix: "028"
@@ -512,7 +512,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-statistical-parsers-probabilistic-parsing
-    sha256: 911cfd12689727c137abe4410873362dd8bdeb5d000f9692cc0b854812a250fd
+    sha256: 300f6ee42e9e18991ad091b6db8218cb2f53ec4ef3ce183d4fbe4d8c14502443
   - path: "raw/029_Statistical Parsers From Rules to Probabilities - Revolution in Natural Language Parsing.commentary.ko.md"
     role: commentary
     order_prefix: "029"
@@ -530,7 +530,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-framenet-frame-semantics
-    sha256: 0febf6f938da5ca57a6ddfc3b92919bb26b7ae588cdbd9f3b961226dbeb62c27
+    sha256: 124a42732a2e8488fa9b29303464814f226cef7d484d23b3c959685bac42f0f5
   - path: "raw/030_FrameNet - A Computational Resource for Frame Semantics.commentary.ko.md"
     role: commentary
     order_prefix: "030"
@@ -548,7 +548,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/latent-semantic-analysis-topic-models-discovery
-    sha256: 0b5afef4d6ea95296899e2eeadee49727f3604a8b0d38217bd16ed1f3e427174
+    sha256: b6d09e7452b99057196e0931e69c33a9205183cce2cdf794eb30a4014bdee042
   - path: "raw/031_Latent Semantic Analysis and Topic Models Discovering Hidden Structure in Text.commentary.ko.md"
     role: commentary
     order_prefix: "031"
@@ -566,7 +566,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-crf-conditional-random-fields
-    sha256: 831e566612468cde2f243d9450343266c1564001237afba436f3f356c72986f9
+    sha256: c46d497ce07e99e9d2832f632e9a3607789fba4a925f542ba53cdf43717a93ca
   - path: "raw/032_Conditional Random Fields - Structured Prediction for Sequences.commentary.ko.md"
     role: commentary
     order_prefix: "032"
@@ -584,7 +584,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-bleu-metric-evaluation
-    sha256: d20dbd5efc152d162b32ddcb5217572db0f771ba0b6e6a7b63a341a2db6bc76b
+    sha256: 498e699517ea29c0c6a71eef46e6df9d144f0fa10813a62a94913230a9996b38
   - path: "raw/033_BLEU Metric - Automatic Evaluation for Machine Translation.commentary.ko.md"
     role: commentary
     order_prefix: "033"
@@ -638,7 +638,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/latent-dirichlet-allocation-bayesian-topic-modeling
-    sha256: 3d3321f2ae6021dee9c6b5d4f41a834f2335749a4ee69cf3ef162130edf51f32
+    sha256: 4de35e776e431fcd719c11b8324ddd9f9aaca82e3c1e51eecc2250d48ca33317
   - path: "raw/036_Latent Dirichlet Allocation Bayesian Topic Modeling Framework.commentary.ko.md"
     role: commentary
     order_prefix: "036"
@@ -656,7 +656,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-rouge-meteor-evaluation-metrics
-    sha256: cbe95e03011f3436255ef40a96827c7d81b966b11e6ebde082fc506f848e2dc4
+    sha256: 84c9f46b706651d8cc6b3f74512efbe4ebb5f874e4553005c445cb631caf98e6
   - path: "raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.commentary.ko.md"
     role: commentary
     order_prefix: "037"
@@ -674,7 +674,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-propbank-semantic-role-labeling
-    sha256: cc5429e34e3267634b97eef1900747ec79e57662885266a7a36ec3d872bc5654
+    sha256: 0d7e03462e8fd231febb9f3ef74984f05a64f8baf4f62aa32a304aba53eab7f8
   - path: "raw/038_PropBank - Semantic Role Labeling and Proposition Bank.commentary.ko.md"
     role: commentary
     order_prefix: "038"
@@ -692,7 +692,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-freebase-knowledge-graph
-    sha256: a970d259c29f20abcc06ab9b57ade431f164011f2ba1f4caa1af84c3cc30469f
+    sha256: 0097e3c33ad9201d1f3826a2c2dd2c27f915b7f76e12b12087272ddcdb83bbec
   - path: "raw/039_Freebase Collaborative Knowledge Graph for Structured Information.commentary.ko.md"
     role: commentary
     order_prefix: "039"
@@ -710,7 +710,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/ibm-watson-jeopardy-open-domain-question-answering-nlp-information-retrieval
-    sha256: 0ba24283cfba3fe71b99b28759a27282076339233e62e2fe1aa5c47bca41ac73
+    sha256: b4243b384082e9066a77da67657f14290de21c054e9e34f037a13eb4db39b0e6
   - path: "raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.commentary.ko.md"
     role: commentary
     order_prefix: "040"
@@ -998,7 +998,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/elmo-ulmfit-transfer-learning-natural-language-processing
-    sha256: de9fe1385845419d36a83a520f6ebd488dbfe1a725071f97a9195b4384c595c7
+    sha256: 14cb8cbc4a0072befbff1ebb9d0e95654ded7c35f69ad183aaa0eeb605d34180
   - path: "raw/057_ELMo and ULMFiT Transfer Learning for Natural Language Processing.commentary.ko.md"
     role: commentary
     order_prefix: "057"
@@ -1016,7 +1016,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/bert-bidirectional-pretraining-revolutionizes-language-understanding
-    sha256: 5344baf192a824f6e43317510ab4f97f71f8699bdc5cd270c10edade579a3726
+    sha256: 232078a0408e4e1885632de7bbead83c369c66cc17fca873f106f3e036e91e67
   - path: "raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md"
     role: commentary
     order_prefix: "058"
@@ -1034,7 +1034,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/gpt1-gpt2-autoregressive-pretraining-transfer-learning
-    sha256: cd7de16e6f177bd7a2fa0009f623f85135a02de7e2140e33cf3f2692196259ef
+    sha256: 09b78f7bc81335c273b2c3c24d01e2f440849917708b7b01edfc454089f5a353
   - path: "raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md"
     role: commentary
     order_prefix: "059"
@@ -1052,7 +1052,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/glue-superglue-standardized-evaluation-language-understanding
-    sha256: c344822cce8e2c508c56cf8d3f83c725c7e35ba8022b311aa3a8c1055bbbd944
+    sha256: 37dbf038f24c45a13b27ee41807fcddb098b5e393e42180c727623f03c3d8a75
   - path: "raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md"
     role: commentary
     order_prefix: "060"
@@ -1070,7 +1070,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/xlnet-roberta-albert-bert-refinements
-    sha256: 79b9c701c0b530b127165b20feb082cb16776829125a446fd8530be896ebeaba
+    sha256: 44bf9edaa446bfe93a791b3e5d3a17d01111d027087195705e94eada9433db99
   - path: "raw/061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.commentary.ko.md"
     role: commentary
     order_prefix: "061"
@@ -1088,7 +1088,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/xlm-cross-lingual-language-model-multilingual-nlp
-    sha256: 75e3db0cc40dfc87d2bb49e4216bb189961e4e54edfe0b73725284fce7ea8814
+    sha256: 7b2214bd0c0d773761a7cd30987d4a0eacedbee6f2721dc8dbe9d13dec380fcb
   - path: "raw/062_XLM Cross-lingual Language Model for Multilingual NLP.commentary.ko.md"
     role: commentary
     order_prefix: "062"
@@ -1106,7 +1106,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/t5-text-to-text-framework-unified-nlp-through-text-transformations
-    sha256: 36c223a502b0dc0a31b3c432ccd9387309b7fad83a8455905350440311f5db7e
+    sha256: 66deb590ec251cb73b75aaef91ceaad9b317dce470cf9a0e352923eb128ff463
   - path: "raw/063_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.commentary.ko.md"
     role: commentary
     order_prefix: "063"
@@ -1124,7 +1124,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/transformer-xl-long-sequences-segment-recurrence
-    sha256: e993150754ec9fad2fc7572e4c3e17a279def868b6f9b37045971c701925ec6f
+    sha256: 0f0c7e645c8c6f64843a0aa1f38e61e96f312ab474ae66bdf2cd0902200ba738
   - path: "raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md"
     role: commentary
     order_prefix: "064"
@@ -1142,7 +1142,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/bert-information-retrieval-transformer-ranking-semantic-search
-    sha256: d8b0a5385de52600786e48fab8f1954dd2006097dbad152f81146414e0192f8e
+    sha256: 9655d8366a91a946bbca91f626eabf75a2d02b0cc98006f2d243fbfc18baf8e1
   - path: "raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.commentary.ko.md"
     role: commentary
     order_prefix: "065"
@@ -1160,7 +1160,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/scaling-laws-neural-language-models-power-law-predictions
-    sha256: 2ceec3472d89817592f21e956103ed1f6c19183aecee63efa2b4bd09c63f5d40
+    sha256: cf6bf93b5c31f04454ceacd4f0bbfd379b6ae41830a5680ca0c25085d777b2d0
   - path: "raw/066_Scaling Laws for Neural Language Models Predicting Performance from Scale.commentary.ko.md"
     role: commentary
     order_prefix: "066"
@@ -1178,7 +1178,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/gpt3-in-context-learning-emergent-capabilities-from-scale
-    sha256: ec407d2c1b02e843c3414053c7329d190858dd26d725f6db062109b6d806b500
+    sha256: 536d73a2b669772fffd84d6447ce6e6cc6aeb47749e8da84f2c8ca9bdbb59b1c
   - path: "raw/067_GPT-3 and In-Context Learning Emergent Capabilities from Scale.commentary.ko.md"
     role: commentary
     order_prefix: "067"
@@ -1196,7 +1196,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/dense-passage-retrieval-retrieval-augmented-generation-rag
-    sha256: 692ff8e9a110049393b239c497e24e1f7ad9af60ea62fe89df5a29ec734696a6
+    sha256: 2dd5c6fab19b689b0ed2283a74704c22925f3b950e119aef0a81f17f705cc2d9
   - path: "raw/068_Dense Passage Retrieval and Retrieval-Augmented Generation Integrating Knowledge with Language Models.commentary.ko.md"
     role: commentary
     order_prefix: "068"
@@ -1214,7 +1214,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/mixture-of-experts-sparse-activation
-    sha256: 637b0a630c86b2e53252c4bf293ac0acdc9a544a1c69932d49fdffe2497c8011
+    sha256: f2c296224b08b3bb5fdbfa67224a8f5b49eaa5cf3333f40254cb1eec95576609
   - path: "raw/069_Mixture of Experts Sparse Activation for Scaling Language Models.commentary.ko.md"
     role: commentary
     order_prefix: "069"
@@ -1232,7 +1232,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/clip-contrastive-language-image-pretraining-multimodal
-    sha256: 72df1cd7527f5f61c9c4dceefe0e16a5781fb2bd129b5c5ce99f29074b556a39
+    sha256: 7fedcede1f0c95cdc6663ca558b1561bdea2c46d4bd37f77c4bf12649b1287b7
   - path: "raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md"
     role: commentary
     order_prefix: "070"
@@ -1250,7 +1250,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/codex-ai-assisted-code-generation-transformation-software-development
-    sha256: d2e61a5b7b2a41ad0c46d5e48d783d86652fe922cc0a4eedb430e5e9e2deb373
+    sha256: bf76bf4bc2a529d28809a852944248c23e8d7dc6ecbdad88c7e64416397a201c
   - path: "raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.commentary.ko.md"
     role: commentary
     order_prefix: "071"
@@ -1268,7 +1268,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/instruction-tuning-adapting-language-models-to-follow-explicit-instructions
-    sha256: 09258cfc095790b0659853b0446ec39a12ea63ffa4e38c2f0e04ca73beb57701
+    sha256: 7d509726db6f5716e9ec91c580b62d93bcabfb870c99e4994ab29fc3a310c17b
   - path: "raw/072_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.commentary.ko.md"
     role: commentary
     order_prefix: "072"
@@ -1286,7 +1286,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/the-pile-open-source-training-dataset-large-language-models
-    sha256: 5bb7e46940d68bf341109584bb167cb74354a928d29f60e8e3ccb82e22984e4f
+    sha256: 8785ffc1a4c21e33cb5487a33b00b9aeb7a2abfe6f7017a6b7e31382a143fcc4
   - path: "raw/074_The Pile Open-Source Training Dataset for Large Language Models.commentary.ko.md"
     role: commentary
     order_prefix: "074"
@@ -1304,7 +1304,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/dalle-text-to-image-generation-transformer
-    sha256: 6256193030dc1b2933670f7eb2690e064c18093aa57d970999e8007cfcd48ea7
+    sha256: 6cf3d59e4eee293aa81327d45ed967b8481564ba2d55546d5a8e4b3c662dfae9
   - path: "raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md"
     role: commentary
     order_prefix: "075"
@@ -1322,7 +1322,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/foundation-models-report-defining-new-paradigm-ai
-    sha256: 65cb3fb0064a73bbf85844d8744db881a6bcead763c7c27ea2446e0abe97e288
+    sha256: 01cc9eb88c6db5e43b92f8e8bc08ab82e9cde3a39dd8ebce9c32e3ef75075f92
   - path: "raw/076_Foundation Models Report Defining a New Paradigm in AI.commentary.ko.md"
     role: commentary
     order_prefix: "076"
@@ -1340,7 +1340,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/instructgpt-rlhf-aligning-language-models-human-preferences
-    sha256: 84634da0410dd33fe92ccc6f072e2737a161d2f1896802fd2c61a4efca2a3473
+    sha256: b7d33b09b36ff750a2e1d5e179b80ab384f9eb6eefd153eff3d7121ad3d130cd
   - path: "raw/077_InstructGPT and RLHF Aligning Language Models with Human Preferences.commentary.ko.md"
     role: commentary
     order_prefix: "077"
@@ -1358,7 +1358,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/multi-vector-retrievers-fine-grained-token-level-matching-for-neural-information-retrieval
-    sha256: 23f6e6a8bf8428536381ac65b2cedbd352819c5f45013b3cafd0a4dbab510185
+    sha256: 320fc9214b8e65e5b9253e82c96eb8ada788413b2c4b933138613801476b0ef1
   - path: "raw/073_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval.commentary.ko.md"
     role: commentary
     order_prefix: "073"
@@ -1376,7 +1376,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/chinchilla-scaling-laws-compute-optimal-training-resource-allocation
-    sha256: c6bf093e0f01b47405a9ed14fd318e7baf72600eaa8e2492d2a82581f279b7ba
+    sha256: 0779668d2ed0bc8f915f355ab2a7b1546c5e20557a524e42f0a504c100d1cfb0
   - path: "raw/078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.commentary.ko.md"
     role: commentary
     order_prefix: "078"
@@ -1394,7 +1394,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/mixture-of-experts-at-scale-sparse-activation-dynamic-routing-efficient-scaling
-    sha256: 8e58982a419e855215e2ec4e2b4ffeb8d2ef5401556de3ee68ceacfd109e0ad8
+    sha256: 907ff5cd39441e504b9a41ccb025db417a4dcfddca72e1fb60a0643bcb8aeadf
   - path: "raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md"
     role: commentary
     order_prefix: "103"
@@ -1412,7 +1412,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/helm-holistic-evaluation-language-models-framework
-    sha256: c798c700eaf68a096d2b947f3571ed1d5a6742f55a2e75528d9fc8293465481e
+    sha256: 3db5975d91976e3e5d3f9fc9f99d9e24b55d57044f8d89c249969be314b23dea
   - path: "raw/079_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md"
     role: commentary
     order_prefix: "079"

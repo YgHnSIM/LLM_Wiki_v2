@@ -8,10 +8,6 @@ Source: https://mbrenndoerfer.com/writing/instructgpt-rlhf-aligning-language-mod
 
 지도 미세조정, 보상 모델링, 강화학습 최적화로 이루어진 3단계 RLHF 훈련 과정과 대규모 언어 모델을 인간 선호에 맞추는 데 미친 근본적 영향을 포함해 OpenAI의 2022년 InstructGPT 연구를 다루는 종합 안내서다.
 
-읽기 수준
-
-전문 지식 수준을 선택하면 설명되는 용어의 수를 조절할 수 있다. 초보자에게는 더 많은 도구 설명을 제공하고, 전문가는 읽기 흐름을 유지하도록 설명을 줄인다. 밑줄 친 용어 위에 마우스를 올리면 즉시 정의를 볼 수 있다.
-
 ## 2022년: InstructGPT와 RLHF
 
 2022년 초 OpenAI는 대규모 언어 모델을 [인간 선호](/writing/rlhf-foundations-reinforcement-learning-human-preferences)에 맞추고 실제로 배포하는 방식을 근본적으로 바꿀 연구를 발표했다. 「인간 피드백으로 지시를 따르도록 언어 모델 훈련하기」라는 논문으로 발표되고 InstructGPT라는 모델로 구현된 이 연구는 지도 미세조정, [보상 모델링](/writing/reward-modeling-rlhf-architecture-training), 강화학습을 결합한 3단계 훈련 과정을 도입해 사전 학습 모델보다 더 도움이 되고 정직하며 무해한 언어 모델을 만들었다. 이 연구는 모델이 인간 가치에 맞도록 학습하는 방식의 근본적 한계를 다루며, 언어 모델을 현실 세계에 실용적이고 안전하게 배포하는 데 결정적인 진전이었다.

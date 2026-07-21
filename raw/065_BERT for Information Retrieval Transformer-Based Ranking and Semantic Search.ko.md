@@ -8,10 +8,6 @@
 
 2019년 정보 검색에 BERT를 적용한 방식을 종합적으로 설명하는 안내서다. 트랜스포머 아키텍처가 교차 어텐션 메커니즘, 세밀한 질의-문서 매칭, 문맥 이해를 통해 검색 및 랭킹 시스템을 어떻게 혁신하고 키워드 매칭을 넘어 관련성을 개선했는지 알아본다.
 
-읽기 수준
-
-전문 지식 수준을 선택하면 용어 설명의 양을 조절할 수 있다. 초보자에게는 더 많은 툴팁이 표시되고, 전문가는 읽기 흐름을 유지하도록 더 적은 툴팁을 보게 된다. 밑줄 친 용어 위에 마우스를 올리면 즉시 정의를 확인할 수 있다.
-
 ## 2019년: 정보 검색을 위한 BERT
 
 2019년은 2018년에 자연어 이해에 혁신을 일으킨 트랜스포머의 양방향 인코더 표현인 [BERT](/writing/bert-bidirectional-pretraining-revolutionizes-language-understanding)를 검색 및 랭킹 시스템 개선에 적용하면서 정보 검색이 크게 전환된 해였다. [신경망 정보 검색](/writing/neural-information-retrieval-semantic-search)은 이미 학습된 의미 표현의 위력을 입증했지만, BERT의 심층 문맥 이해는 훨씬 더 정교한 질의-문서 매칭의 가능성을 열었다. 과제는 [질의응답](/writing/ibm-watson-jeopardy-open-domain-question-answering-nlp-information-retrieval)과 분류 같은 이해 과제를 위해 설계된 BERT 아키텍처를 정보 검색의 고유한 요구 사항, 즉 질의를 빠르게 처리하고 수백만 개의 문서를 순위화하며 세밀한 수준에서 관련성을 이해하는 일에 맞게 조정하는 것이었다.

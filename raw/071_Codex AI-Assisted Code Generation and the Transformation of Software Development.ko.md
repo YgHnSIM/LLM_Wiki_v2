@@ -8,10 +8,6 @@ Source: https://mbrenndoerfer.com/writing/codex-ai-assisted-code-generation-tran
 
 2021년에 공개된 OpenAI의 Codex를 포괄적으로 다루는 안내서다. GPT-3를 코드로 특화 미세 조정하여 강력한 코드 생성 능력을 구현한 방법, GitHub Copilot과의 통합, 소프트웨어 개발에서의 응용, 한계와 과제, AI 지원 프로그래밍에 남긴 지속적인 영향을 살펴본다.
 
-읽기 수준
-
-전문 지식 수준을 선택하면 용어 설명의 분량이 조절된다. 초급자에게는 툴팁이 더 많이 표시되고, 전문가에게는 읽기 흐름을 유지할 수 있도록 더 적게 표시된다. 밑줄이 그어진 용어에 마우스를 올리면 곧바로 정의를 볼 수 있다.
-
 ## 2021년: Codex
 
 2021년 8월, OpenAI는 컴퓨터 코드를 생성하고 이해하며 변환할 목적으로 [GPT-3](/writing/gpt3-in-context-learning-emergent-capabilities-from-scale)를 미세 조정한 특화 언어 모델 Codex를 공개했다. Mark Chen과 Jerry Tworek 등 OpenAI 연구진이 개발한 Codex는 대규모 언어 모델을 과제에 맞게 특화 미세 조정하는 방향으로의 중요한 전환을 보여 주었다. 범용 언어 능력을 보여 준 GPT-3와 달리 Codex는 프로그래밍 과제에 특별히 최적화되었으며, 공개 GitHub 저장소의 수십억 줄에 이르는 코드와 기술 문서로 학습되었다. Codex의 공개는 대규모 언어 모델이 놀라운 숙련도로 코드를 이해하고 생성할 수 있음을 보여 주며 AI 지원 소프트웨어 개발의 새 시대를 열었다.

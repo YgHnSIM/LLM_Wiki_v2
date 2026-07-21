@@ -8,10 +8,6 @@
 
 전문가 혼합(Mixture of Experts, MoE) 아키텍처가 2024년 대규모 언어 모델의 확장 방식을 어떻게 바꾸었는지 종합적으로 살펴본다. MoE 모델이 희소 활성화, 동적 전문가 라우팅, 부하 균형 메커니즘을 통해 매개변수당 더 나은 성능을 달성하는 방법과 대규모 언어 모델에 대한 접근성을 민주화하는 데 미친 영향을 알아본다.
 
-읽기 수준
-
-설명되는 용어의 수를 조절하려면 자신의 전문 지식 수준을 선택하라. 초급자에게는 더 많은 툴팁이 표시되고, 전문가에게는 읽기의 흐름을 유지하도록 더 적은 툴팁이 표시된다. 밑줄 친 용어 위에 마우스를 올리면 즉시 정의를 볼 수 있다.
-
 ## 2024년: 대규모 전문가 혼합
 
 2024년에 [전문가 혼합](/writing/mixture-of-experts-sparse-activation)(Mixture of Experts, MoE) 아키텍처가 널리 채택되고 확장된 일은 대규모 언어 모델을 설계하고 배포하는 방식의 근본적인 변화를 나타냈다. [Switch Transformer](/writing/switch-transformer-top-1-routing-trillion-parameter-scaling)와 GLaM 같은 앞선 모델의 연구를 토대로 한 이 아키텍처 혁신은 모든 계산에 모든 매개변수를 사용하는 대신, 입력마다 관련 있는 ‘전문가’ 구성 요소만 선택적으로 활성화함으로써 매개변수당 더 나은 성능을 달성할 수 있음을 보여 주었다. 2024년의 돌파구는 [MoE 모델](/writing/sparse-models-conditional-computation-efficiency)을 전례 없는 규모로 성공적으로 확장한 데서 나왔다. Google의 Switch Transformer 변형과 Meta의 [Mixtral](/writing/mixtral-sparse-moe-production-ready-efficient-language-models) 제품군 같은 모델은 희소 활성화 패턴이 모델 품질을 유지하거나 개선하면서 계산 효율을 크게 높일 수 있음을 보여 주었다.

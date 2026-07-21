@@ -6,10 +6,6 @@
 
 2005년 펜실베이니아대학교의 PropBank 프로젝트는 Penn Treebank에 의미역 표지를 더해, 주요 구문 트리뱅크와 직접 결합할 수 있는 대규모 의미 주석 자원을 만들었다. 번호가 붙은 논항과 동사별 프레임 파일을 사용함으로써 PropBank는 의미역 표지(semantic role labeling, SRL)를 표준적인 자연어 처리 과제로 정착시키고 현대 의미 이해 시스템의 발전에 영향을 주었다.
 
-읽기 수준
-
-전문 수준을 선택하면 설명되는 용어의 수가 달라진다. 초급자에게는 더 많은 도움말을 보여 주고, 전문 독자에게는 읽기 흐름을 유지하도록 설명을 줄인다. 밑줄 친 용어 위에 마우스를 올리면 정의를 바로 확인할 수 있다.
-
 ## 2005년: PropBank
 
 2000년대 중반 통계적 자연어 처리가 성숙하고 의미역 표지가 중요한 과제로 떠오르자, 펜실베이니아대학교 연구진은 계산언어학의 의미 분석 방식을 바꿀 야심찬 프로젝트를 진행했다. Martha Palmer, Daniel Gildea, Paul Kingsbury가 이끈 PropBank, 즉 Proposition Bank는 기존 [[023_Penn Treebank Statistical Parsing and Syntactic Annotation|Penn Treebank]] 구문 주석 위에 의미역 표지를 추가했다. 이 자원은 구문 구조를 활용하면서 문장에서 “누가 누구에게 무엇을 했는가”를 통계 시스템이 학습하도록 만들었다.

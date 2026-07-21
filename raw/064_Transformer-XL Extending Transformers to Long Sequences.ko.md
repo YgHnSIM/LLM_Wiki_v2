@@ -6,10 +6,6 @@
 
 세그먼트 수준 순환(segment-level recurrence)과 상대 위치 인코딩(relative positional encoding)을 통해 Transformer가 더 긴 시퀀스를 처리할 수 있게 한 아키텍처 혁신, Transformer-XL을 종합적으로 설명한다. 이 모델이 효율성을 유지하면서 문맥 길이를 어떻게 확장했고 현대 언어 모델에 어떤 영향을 미쳤는지 살펴본다.
 
-읽기 수준
-
-전문성 수준을 선택하면 용어 설명의 양을 조절할 수 있다. 초급자는 더 많은 도구 설명을 보고, 전문가는 읽기 흐름을 유지하도록 더 적은 설명을 본다. 밑줄 친 용어에 마우스를 올리면 바로 정의를 확인할 수 있다.
-
 ## 2019년: Transformer-XL
 
 2019년에 이르러 [Transformer](/writing/transformer-attention-is-all-you-need) 아키텍처는 자연어 처리를 혁신했으며, [BERT](/writing/bert-bidirectional-pretraining-revolutionizes-language-understanding)와 [GPT](/writing/gpt1-gpt2-autoregressive-pretraining-transfer-learning) 같은 모델이 다양한 과제에서 뛰어난 성능을 달성할 수 있게 했다. 그러나 연구자들은 근본적인 한계에 직면하고 있었다. 표준 Transformer는 긴 시퀀스를 처리하는 데 어려움을 겪었다. 이 아키텍처의 [어텐션 메커니즘](/writing/attention-mechanism-intuition-soft-lookup-weights-context-vectors)은 시퀀스 길이에 대해 이차 계산 복잡도를 지녔고, 원래 Transformer 설계에 사용된 고정 위치 인코딩은 훈련 중에 본 것보다 긴 시퀀스를 처리할 때 문제를 일으켰다. 문서 모델링, 장문 텍스트 생성, 긴 구절 전체의 문맥 이해처럼 장거리 의존성을 파악해야 하는 과제에서 표준 Transformer는 계산 비용이 많이 들거나 근본적으로 제약됐다.
