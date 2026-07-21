@@ -3314,6 +3314,20 @@ raw 등록 해시:
 - 새 analysis 문서는 만들지 않았다. 대화 인터페이스가 사용자 귀속과 신뢰를 바꾸는 문제와 공개 예시가 대표 성능 측정을 대신하지 못하는 문제는 기존 [[ELIZA에서 LLM으로]]과 [[AI 시연과 실제 성능]]을 별도 content 변경으로 보강한다.
 - `source:ready -- 081`에서 86개 회귀 테스트와 289개 Markdown strict lint를 통과해 314개 evidence와 162개 immutable raw artifact를 확인했다. 사이트는 99개 legacy redirect를 포함한 557개 HTML을 만들었고 미해결 wiki target은 0개였다.
 
+## [2026-07-21] content | ChatGPT 배포를 대화·시연 분석에 연결
+
+변경 내용:
+
+- [[ELIZA에서 LLM으로]]에 2022년 ChatGPT의 GPT-3.5 계열 모델·대화형 RLHF·다중 턴 UI·사용자 피드백 순환을 연결했다. DOCTOR와 ChatGPT의 생성 구조는 다르지만 역할 인터페이스가 사용자 귀속을 조직한다는 공통 평가 문제를 비교하고, 직접 기술 계보는 주장하지 않았다.
+- 같은 대화 안의 문맥 유지를 persistent memory와 구분하고, 사과·정정·거절의 선택된 공개 행동을 대표 표본에서 반복 측정한 신뢰성과 구분했다. OpenAI가 공개한 그럴듯한 오답·표현 민감성·유해·편향 응답과 moderation 오탐·미탐도 비교의 한계로 남겼다.
+- [[AI 시연과 실제 성능]]의 네 층 비교에 2022년 ChatGPT 연구 미리보기를 추가했다. 기반 모델, 대화형 RLHF, 다중 턴 UI, moderation·외부 filter, feedback 경로를 분해하고 출시 대화 예시와 피드백 계획이 정확도·위해율·calibration의 독립 benchmark를 대신하지 않는다고 정리했다.
+- 두 분석에 공식 081 raw 쌍과 `openai-2022-introducing-chatgpt` evidence, [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]]·[[ChatGPT 연구 미리보기 (2022)]] 연결을 추가하고 [[index]]·[[overview]]를 동기화했다. 새 분석 문서는 만들지 않았다.
+
+검증 결과와 남은 한계:
+
+- 두 문서는 확인된 출시 구조와 공개 한계, 여러 사례를 함께 읽은 비교 해석, 입증되지 않은 직접 계보를 분리한다. 2022년 발표의 선택된 예시를 현재 ChatGPT 제품·정확한 매개변수 수·장기 사회 효과로 소급하지 않는다.
+- 86개 회귀 테스트와 289개 Markdown strict lint를 통과해 314개 evidence와 162개 immutable raw artifact를 확인했다. 사이트는 99개 legacy redirect를 포함한 557개 HTML을 만들었고 미해결 wiki target은 0개였다.
+
 ## 관련 항목
 
 - [[index]]

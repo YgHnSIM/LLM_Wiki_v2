@@ -218,7 +218,8 @@ related:
 - [[구조화된 의미 자원은 무엇을 노드로 삼는가]]에서 비교하는 WordNet synset·FrameNet frame·PropBank roleset과 token·Freebase topic의 동일성 기준, 관계 정의역·공역과 근거가 붙는 위치
 - [[IBM Watson]]과 [[DeepQA]]의 질문 분석·후보 재현율·다중 근거 점수·신뢰도·답변 임계값, 2,880개 코어 병렬화와 *Jeopardy!* 게임 전략의 분리
 - [[개방 영역 질의응답]]에서 구분하는 주제 폭, 시험 중 자료 접근, 입력 양식, 답 단위, 근거 반환, 정확도·답변률·시간·calibration 평가 조건
-- [[AI 시연과 실제 성능]]에서 비교하는 Georgetown·ELIZA·SHRDLU·Watson의 입력 인터페이스, 통제된 과업 경계, 반복 평가와 관객이 본 공개 효과
+- [[AI 시연과 실제 성능]]에서 비교하는 Georgetown·ELIZA·SHRDLU·Watson·2022년 ChatGPT의 입력 인터페이스, 통제된 과업 경계, 반복 평가·선택된 출시 예시와 관객이 본 공개 효과
+- [[ELIZA에서 LLM으로]]에서 비교하는 DOCTOR의 역할 규칙과 ChatGPT의 모델·대화형 RLHF·다중 턴 UI·피드백 순환, 사용자 귀속과 직접 기술 계보의 차이
 - [[자동 음성 인식]]의 특징·음향 모델·발음 사전·언어 모델·디코더 구성과 [[DNN-HMM]] 전환에서 교체된 GMM·유지된 HMM의 역할
 - [[단어 오류율]]의 치환·삭제·삽입, 상대 오류 감소와 퍼센트포인트 차이, 평균 WER가 숨기는 화자·잡음·중요 단어별 실패
 - [[Wikidata]]의 언어 중립 Q/P 식별자와 다언어 label·sitelink, [[Wikibase 데이터 모델]]의 qualifier·reference·rank·unknown/no value
