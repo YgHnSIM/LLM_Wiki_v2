@@ -2686,6 +2686,38 @@ sources:
     kind: conference-paper
     url: https://openreview.net/forum?id=WE_vluYUL-X
     language: en
+  schick-et-al-2023-toolformer:
+    title: 'Toolformer: Language Models Can Teach Themselves to Use Tools'
+    authors: [Timo Schick, Jane Dwivedi-Yu, Roberto Dessì, Roberta Raileanu, Maria Lomeli, Eric Hambro, Luke Zettlemoyer, Nicola Cancedda, Thomas Scialom]
+    published: 2023
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.neurips.cc/paper_files/paper/2023/hash/d842425e4bf79ba039352da0f658a906-Abstract-Conference.html
+    language: en
+  openai-2023-function-calling-api-update:
+    title: Function calling and other API updates
+    authors: [OpenAI]
+    published: 2023
+    source_type: primary-release
+    kind: official-blog
+    url: https://openai.com/index/function-calling-and-other-api-updates/
+    language: en
+  openai-2023-devday-developer-products:
+    title: New models and developer products announced at DevDay
+    authors: [OpenAI]
+    published: 2023
+    source_type: primary-release
+    kind: official-blog
+    url: https://openai.com/index/new-models-and-developer-products-announced-at-devday/
+    language: en
+  openai-2024-structured-outputs:
+    title: Introducing Structured Outputs in the API
+    authors: [OpenAI]
+    published: 2024
+    source_type: primary-release
+    kind: official-blog
+    url: https://openai.com/index/introducing-structured-outputs-in-the-api/
+    language: en
   openai-2022-introducing-chatgpt:
     title: Introducing ChatGPT
     authors: [OpenAI]

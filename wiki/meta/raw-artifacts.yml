@@ -1638,3 +1638,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/qlora-efficient-finetuning-quantized-language-models
     sha256: 22d554cac4b541d0fde3bdebf35d704a3ef9eb614a6694984ec740067ad45e90
+  - path: "raw/092_Function Calling and Tool Use Enabling Practical AI Agent Systems.ko.md"
+    role: translation
+    order_prefix: "092"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/function-calling-tool-use-practical-ai-agents
+    sha256: ee0455ee9aa822b87b92d51eaa6666d8d6660c7f89a5b658a451efc4b0cda521
+  - path: "raw/092_Function Calling and Tool Use Enabling Practical AI Agent Systems.commentary.ko.md"
+    role: commentary
+    order_prefix: "092"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/function-calling-tool-use-practical-ai-agents
+    sha256: 10e5a846450077b8749933c3ff315f189745196f6a7c6a97a949cc31e8fce753

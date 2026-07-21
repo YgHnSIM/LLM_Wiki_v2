@@ -3703,6 +3703,27 @@ raw 등록 해시:
 - Adapter를 별도 artifact로 배포할 수 있어도 당시 LLaMA 1 base access·license, target module·rank·scale, NF4 block·compute dtype과 library version이 재현 장부에 남는다.
 - 전체 검증은 96개 회귀 테스트와 310개 Markdown strict lint를 통과해 357개 evidence와 182개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 598개 HTML을 만들고 6,816개 wiki link를 모두 해소했다.
 
+## [2026-07-22] ingest | 함수 호출의 제안·실행·엄격한 스키마 경계
+
+변경 내용:
+
+- 공식 092 `Function Calling and Tool Use: Enabling Practical AI Agent Systems`를 H1·H2·H3 `1/6/0`과 40개 Markdown link의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 번역은 첫 제목 바로 뒤에 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않는다.
+- 독립 감사를 거쳐 2023년 6월 지원 snapshot을 `gpt-4-0613`·`gpt-4-32k-0613`·`gpt-3.5-turbo-0613`으로 맞추고, 같은 해 11월 parallel function calls·JSON mode와 2024년 8월 Structured Outputs `strict: true`를 분리한 뒤 신규 raw를 등록했다. 번역 SHA-256은 `ee0455ee9aa822b87b92d51eaa6666d8d6660c7f89a5b658a451efc4b0cda521`, 해설은 `10e5a846450077b8749933c3ff315f189745196f6a7c6a97a949cc31e8fce753`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[092_함수 호출과 도구 사용의 모델-실행 경계]]과 [[함수 호출과 도구 사용]]을 만들었다. 함수 schema와 model의 call proposal, application의 JSON·schema·semantic validation, 인증·인가·사용자 확인, side-effect execution과 tool-result grounding을 서로 다른 신뢰 경계로 배치했다.
+- OpenAI의 2023년 6월 function-calling 발표, 11월 DevDay 발표, 2024년 Structured Outputs 발표와 Toolformer를 evidence에 등록하고 기존 ReAct 1차 근거를 연결했다. 2023년 API가 후대 strict schema를 보장했다거나 도구 사용을 처음 발명했다는 서사는 유지하지 않았다.
+- [[index]]와 [[overview]]를 source 92개·concept 166개·비메타 309개, 공식 범위 001–046·048–092·103과 다음 공식 093 Multimodal Large Language Models 기준으로 갱신했다. 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 180개, raw Markdown 185개, 위키 Markdown 312개에서 UI 단락 0개를 확인했고, 번역 정규화 검사는 표준 `원본 출처:` 90개와 변경 필요 0개를 확인했다.
+
+검증 정정과 남은 한계:
+
+- Function calling에서 model은 함수 이름과 JSON argument를 생성한다. 실제 network·database·filesystem 접근, 사용자·resource 권한 확인과 부작용은 application runtime이 수행하므로 model output을 실행 권한과 동일시하지 않는다.
+- 2023년 6월에는 여러 함수 정의 중 호출을 제안할 수 있었지만 한 message의 복수·parallel calls와 JSON mode는 11월 `-1106` 발표의 별도 개선이다. JSON mode의 valid JSON도 특정 schema 일치를 보장하지 않는다.
+- 엄격한 schema 일치는 2024년 `strict: true`의 후대 기능이다. OpenAI의 complex-schema 내부 평가에서 `gpt-4-0613`은 40% 미만, `gpt-4o-2024-08-06` strict 조건은 100%였지만 이는 value 사실성·올바른 tool 선택·권한·실행 성공률이 아니다.
+- ReAct와 Toolformer는 2023년 6월보다 앞서 action–observation loop와 API-call 학습을 다뤘다. OpenAI API가 두 연구에서 직접 파생됐다는 근거는 없으므로 선행 맥락으로만 연결한다.
+- Tool result는 최신 data를 새 context로 제공할 뿐 model의 training cutoff를 없애지 않는다. 신뢰하지 않은 tool output의 prompt injection, 잘못된 의미 값, 중복 side effect에는 최소 권한·allowlist·사용자 확인·idempotency·audit가 별도로 필요하다.
+- 고객 서비스·coding·data analysis·전자상거래의 변혁, production readiness와 광범위한 adoption은 원 웹글의 가능한 use-case 열거만으로 입증되지 않는다.
+- `source:ready -- 092`는 96개 회귀 테스트와 312개 Markdown strict lint를 통과해 361개 evidence와 184개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 602개 HTML을 만들고 6,852개 wiki link를 모두 해소했다.
+- 다음 순차 입력은 공식 093 `Multimodal Large Language Models - Vision-Language Integration That Transformed AI Capabilities`다.
+
 ## 관련 항목
 
 - [[index]]
