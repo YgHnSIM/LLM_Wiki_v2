@@ -320,7 +320,7 @@ related:
 - [[데이터 품질과 분포 다양성은 같은 축인가]] — WebText·C4·GPT-3·The Pile·Chinchilla를 비교해 품질 proxy·고유 pool·분포·sampling·반복·누적 token과 인과 한계를 분리한 분석 (근거 5개)
 - [[총 매개변수와 활성 계산량은 같은 축인가]] — dense $N$과 sparse MoE의 total·active parameters를 분리하고 FLOPs·memory·communication·wall-clock·data·quality 장부로 규모 비교 조건을 정리한 분석 (근거 8개)
 - [[같은 병렬 문장은 무엇을 학습시키는가]] — 병렬 문장쌍이 IBM SMT의 잠재 단어 정렬, seq2seq NMT의 target sequence, XLM TLM의 양방향 masked-token 문맥으로 쓰이는 차이를 비교한 분석 (근거 6개)
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 특징·전체 미세조정·prompt·지시·class prototype·학습 bridge·실행 선택을 비교하고 foundation–adapted–deployed 층위와 model 접근권을 분리한 분석 (근거 13개)
+- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 특징·전체 미세조정·prompt·지시·class prototype·학습 bridge와 생성 목표 잠재·교차 어텐션 조건·실행 선택을 비교하고 foundation–adapted–deployed 층위를 분리한 분석 (근거 16개)
 - [[손실 곡선과 능력 곡선 사이]] — 평균 token loss·task score·능력 threshold와 PaLM의 세 점 외삽 잔차를 metric·표본·checkpoint·관측 scale로 구분한 분석 (근거 7개)
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]] — RNN·WaveNet·Transformer를 표현 계산·teacher forcing·sampling·총연산의 네 축으로 분리한 분석 (근거 5개)
 - [[검색은 근거를 찾고 독해는 답을 찾는다]] — 단일 벡터·후기 상호작용·교차 인코더의 후보 경계와 검색 재현율·독해 정확도·기권을 분리한 분석 (근거 9개)

@@ -3505,6 +3505,22 @@ raw 등록 해시:
 - CVPR 최종본 Table 2의 MS-COCO FID를 LDM-KL-8-G 12.61, unguided LDM-KL-8 23.35, DALL·E 약 27.50, CogView 27.10, Lafite 26.94로 다시 귀속했다. LDM-KL-8-G가 그 표에서 가장 낮지만, 이를 모든 모델·metric·품질 축의 보편적 우위로 확대하지 않는다.
 - Evidence registry와 raw artifact는 바꾸지 않았다. 두 원 논문을 다시 대조해 서로 다른 표의 model·protocol·수치를 한 문장에 합치지 않는 경계를 복구했다.
 
+## [2026-07-22] content | 시각-언어 사전 학습 표현의 생성기 도착 경로
+
+변경 내용:
+
+- 새 분석을 기계적으로 만들지 않고 기존 [[사전 학습 지식은 과제에 어떻게 도착하는가]]를 공식 085·086까지 확장했다. 기존 열두 과제 적응 경로는 유지하고, DALL·E 2·Stable Diffusion처럼 동결 표현을 사용하되 새 생성기를 대규모로 학습한 사례는 별도의 생성 조합 경로로 분리했다.
+- 사전 학습 자산의 역할을 두 경계로 추가했다. 고정 표현이 class prototype·별도 key/value memory·생성 prior target·잡음 제거 조건 가운데 어디에 놓이는지, 실제 생성 state가 pixel·전역 CLIP image embedding·오토인코더 공간 latent 가운데 어디에 놓이는지를 구분한다.
+- CLIP zero-shot은 text class prototype과 image embedding의 cosine score, Flamingo는 별도 대조 학습 NFNet-F6의 visual memory와 학습된 Resampler·gated block, DALL·E 2는 prior가 생성하는 전역 CLIP image embedding과 pixel 확산 계층, Stable Diffusion v1은 동결 CLIP text-token 조건과 64×64×4 오토인코더 latent로 비교했다.
+- DALL·E 2의 CLIP과 Stable Diffusion의 CLIP은 같은 weight가 아니며, Flamingo도 CLIP이 아니라 별도 NFNet-F6를 사용한다. `CLIP→Flamingo→DALL·E 2→Stable Diffusion`의 직선 계보와 shared embedding·cross-attention·guidance를 같은 역할로 보는 설명을 입증되지 않은 범위로 남겼다.
+- 공식 085·086 raw 네 파일과 unCLIP 논문, CVPR LDM 논문, Stable Diffusion v1-4 model card를 분석의 artifacts·evidence·related에 연결했다. [[index]]와 [[overview]]의 분석 설명·핵심 주제·현재 상태를 동기화했다.
+
+검증 경계:
+
+- CLIP의 대상 dataset label 없는 zero-shot 분류, Flamingo의 downstream weight 고정 few-shot, DALL·E 2의 MS-COCO zero-shot 평가를 같은 protocol로 합치지 않는다. 일반 prompt-to-image 사용 전체도 자동으로 zero-shot task transfer라고 부르지 않는다.
+- 동결 백본은 새 학습의 부재를 뜻하지 않는다. Flamingo의 Resampler·약 10B gated block, DALL·E 2의 prior·decoder·upsampler, Stable Diffusion의 latent U-Net 학습 비용과 현재 prompt·sampling rule을 각각 남겼다.
+- 전체 검증에서 96개 회귀 테스트, 301개 Markdown 문서, 328개 evidence record, 172개 raw artifact, 579개 HTML과 6,487개 위키 링크를 확인했고 미해결 링크는 0개였다.
+
 ## 관련 항목
 
 - [[index]]
