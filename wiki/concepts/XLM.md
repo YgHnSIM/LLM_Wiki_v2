@@ -30,6 +30,7 @@ related:
   - concept.언어-모델-전이-학습
   - concept.신경망-기계-번역
   - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+  - analysis.같은-병렬-문장은-무엇을-학습시키는가
 ---
 # XLM
 
@@ -51,7 +52,7 @@ XLM(Cross-lingual Language Model)은 여러 언어가 Transformer parameter와 s
 3. 병렬 문장쌍이 있으면 TLM으로 두 언어 문맥을 직접 연결한다.
 4. 영어 task label로 fine-tune한 뒤 target-language label 없이 다른 언어를 평가한다.
 
-1–2만으로도 교차 언어 전이가 가능했다. 3의 TLM은 parallel data가 있을 때 추가하는 명시적 alignment 신호다.
+1–2만으로도 교차 언어 전이가 가능했다. 3의 TLM은 parallel data가 있을 때 추가하는 직접적인 교차 언어 문맥 신호다.
 
 ## 3단계 — 기술과 근거
 
@@ -63,7 +64,7 @@ XLM(Cross-lingual Language Model)은 여러 언어가 Transformer parameter와 s
 | MLM | 언어별 text | 같은 문장의 양쪽 문맥에서 masked token | 불필요 |
 | TLM | 번역 문장쌍 | 두 언어 문장 전체에서 양쪽 masked token | 필요 |
 
-MLM+TLM 모델은 monolingual MLM batch와 parallel TLM batch를 교대로 학습한다. TLM은 target 번역을 순차 생성하는 [[신경망 기계 번역]] loss와 다르다. 번역쌍은 출력 정답이 아니라 공유 encoder의 복원 문맥으로 쓰인다.
+MLM+TLM 모델은 monolingual MLM batch와 parallel TLM batch를 교대로 학습한다. TLM은 target 번역을 순차 생성하는 [[신경망 기계 번역]] loss와 다르다. 한쪽 문장 전체가 자기회귀 출력 정답으로 쓰이지 않고, 양쪽 문장이 shared encoder의 masked-token 복원 문맥이 된다.
 
 ### zero-shot의 두 언어 조건
 
@@ -81,7 +82,7 @@ XNLI encoder pretraining에는 target 언어의 unlabeled text가 포함된다. 
 
 ### 공유 vocabulary가 하는 일과 하지 않는 일
 
-shared BPE는 같은 문자열 조각, 숫자, 고유명 같은 anchor를 공유하게 한다. 철자가 다른 번역어의 의미 대응은 BPE merge만으로 생기지 않는다. shared parameter에서의 공동 학습과 TLM의 parallel context가 추가 정렬 신호를 제공한다.
+shared BPE는 같은 문자열 조각, 숫자, 고유명 같은 anchor를 공유하게 한다. 철자가 다른 번역어의 의미 대응은 BPE merge만으로 생기지 않는다. shared parameter에서의 공동 학습과 TLM의 parallel context가 추가 교차 언어 대응 신호를 제공한다.
 
 ## 검증과 한계
 
@@ -105,8 +106,8 @@ shared BPE는 같은 문자열 조각, 숫자, 고유명 같은 anchor를 공유
 
 ### 다음 문서
 
+- [[같은 병렬 문장은 무엇을 학습시키는가]] — 병렬 pair가 SMT의 잠재 정렬, NMT의 target 생성, TLM의 masked 복원에서 맡는 역할을 비교한다.
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 과제 전이에 언어 축이 추가될 때 zero-shot의 경계를 비교한다.
-- [[신경망 기계 번역]] — 병렬 문장을 target 생성 정답으로 쓰는 조건부 번역과 TLM을 구분한다.
 
 ## 출처
 
@@ -121,3 +122,4 @@ shared BPE는 같은 문자열 조각, 숫자, 고유명 같은 anchor를 공유
 - [[언어 모델 전이 학습]]
 - [[신경망 기계 번역]]
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]]
+- [[같은 병렬 문장은 무엇을 학습시키는가]]

@@ -2721,6 +2721,23 @@ raw 등록 해시:
 - 사이트는 376개 페이지를 빌드해 4,857개 위키 링크와 27,971개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다.
 - raw 설명 자료는 원 논문에 없는 활용 예시와 과도한 계보를 포함하므로 보존 artifact로만 남겼고, 공개 source·concept·analysis의 핵심 주장은 원 논문의 범위 안에서 검증했다.
 
+## [2026-07-21] content | 같은 병렬 문장은 무엇을 학습시키는가
+
+변경 내용:
+
+- [[022_IBM 통계적 기계 번역과 데이터 기반 전환]], [[045_Sequence-to-Sequence 학습과 신경 기계 번역]], [[061_XLM과 교차 언어 사전 학습]]을 함께 읽어, 같은 형식의 병렬 문장쌍이 목적 함수에 따라 서로 다른 supervision이 되는 과정을 [[같은 병렬 문장은 무엇을 학습시키는가]]에 정리했다.
+- IBM SMT에서는 sentence pair가 관측되고 word alignment가 잠재 변수라는 점, Sutskever식 seq2seq에서는 참조 번역의 다음 token이 직접 target이라는 점, XLM TLM에서는 두 문장이 양방향 masked-token 복원 문맥이라는 점을 관측값·예측값·잠재 구조의 세 축으로 비교했다.
+- Cho 등의 RNN Encoder–Decoder가 기존 SMT의 phrase score로 쓰인 혼합 경로와 Bahdanau attention이 gold alignment label이 아니라 translation loss 안의 연속 가중치라는 경계를 추가했다. `IBM 정렬→신경 attention→TLM`을 단선적 직접 계보로 만들지 않았다.
+- MLM 71.5와 MLM+TLM 75.1의 3.6%p 차이는 해당 설정에서 parallel data와 TLM objective를 함께 추가한 결과로 한정했다. 서로 다른 Hansard·WMT·XLM corpus를 동일 자료의 통제 실험처럼 비교하거나 TLM의 보편적 우월성으로 일반화하지 않았다.
+- [[XLM]]의 TLM 설명을 한쪽 문장 전체의 자기회귀 target이 아니라 양쪽 masked-token 복원으로 더 정확히 다듬고 새 분석으로 이어지는 학습 경로를 만들었다. [[index]]와 [[overview]]에는 analysis 18개·비메타 245개·전체 248개 상태와 새 다국어 비교 진입점을 반영했다.
+
+검증 결과:
+
+- 새 analysis는 기존에 등록된 6개 1차 evidence와 022·045·061의 immutable raw artifact만 사용했으며 `evidence.yml`과 `raw-artifacts.yml`은 변경하지 않았다.
+- 49개 회귀 테스트와 248개 위키 문서 strict lint를 통과했으며 270개 evidence 레코드와 122개 immutable raw artifact를 확인했다.
+- 사이트는 377개 페이지를 빌드해 4,888개 위키 링크와 28,079개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 247개 항목을 포함했다.
+- 분석의 개별 사실은 1차 문헌으로 확인했지만 세 연구군을 하나의 목적 함수 비교틀로 묶은 결론은 합성 해석이므로 `verification: partial`을 유지했다.
+
 ## 관련 항목
 
 - [[index]]

@@ -24,7 +24,7 @@ related:
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 61개, concept 137개, entity 29개, analysis 17개를 합친 비메타 문서 244개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 61개, concept 137개, entity 29개, analysis 18개를 합친 비메타 문서 245개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -32,7 +32,7 @@ related:
 | 기계의 언어 행동을 어떻게 평가하나 | [[002_튜링 테스트]] | [[033_BLEU와 기계 번역 자동 평가]] → [[050_SQuAD와 추출형 독해 평가]] → [[059_GLUE와 SuperGLUE의 집계 평가]] | [[튜링 테스트와 LLM 평가]] |
 | 규칙에서 학습으로 무엇이 바뀌었나 | [[003_Georgetown-IBM 기계 번역 시연]] | [[012_상징 규칙에서 통계 학습으로]] → [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[규칙 기반 AI에서 데이터 기반 학습으로]] |
 | 현대 Transformer 계열은 어디서 왔나 | [[018_역전파와 다층 신경망 학습]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]] → [[057_BERT의 마스크드 양방향 사전 학습]] | [[060_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]] |
-| 한 언어의 지식은 다른 언어로 어떻게 옮겨지나 | [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[049_FastText와 서브워드 표현의 두 경로]] → [[061_XLM과 교차 언어 사전 학습]] | [[XLM]] |
+| 한 언어의 지식은 다른 언어로 어떻게 옮겨지나 | [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[061_XLM과 교차 언어 사전 학습]] → [[XLM]] | [[같은 병렬 문장은 무엇을 학습시키는가]] |
 | 검색과 외부 지식은 어떻게 연결되나 | [[010_벡터 공간 모델과 TF-IDF]] | [[024_BM25와 확률적 정보 검색]] → [[039_Freebase와 협업형 지식 그래프]] → [[051_신경 정보 검색과 의미 대응]] | [[검색은 근거를 찾고 독해는 답을 찾는다]] |
 
 ## 난이도에 따른 읽기 방법
@@ -180,6 +180,7 @@ related:
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]]에서 비교하는 RNN hidden-state 의존, WaveNet causal convolution, Transformer masked attention의 teacher-forced 훈련과 실제 sampling 차이
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]]에서 비교하는 ELMo 고정 특징, ULMFiT 영역·분류 적응, BERT·GPT-1 전체 미세조정과 GPT-2 입력 cue의 과제 명세 위치
 - [[XLM]]의 monolingual CLM·MLM과 parallel-data TLM, shared BPE·언어 sampling 및 target-language text와 task label을 분리한 zero-shot 조건
+- [[같은 병렬 문장은 무엇을 학습시키는가]]에서 비교하는 SMT의 잠재 단어 정렬, NMT의 target sequence supervision, TLM의 양방향 masked-token 문맥과 서로 다른 alignment 층위
 - [[XLNet·RoBERTa·ALBERT]]에서 분리하는 factorization objective, data·batch·masking training recipe, embedding factorization·layer sharing과 parameter 수·FLOPs·latency의 차이
 - [[조지 밀러]]와 공동 연구진의 1985–1998년 WordNet 구축·공개 단계, 심리언어학적 설계 동기와 인간 기억 모형이라는 실증 주장의 구분
 - [[Lesk 알고리즘]], [[단어 의미 중의성 해소]], WordNet 의미 목록, 사전 글로스의 정확 중첩과 후대 문맥–글로스 비교 방법의 구분
@@ -300,7 +301,7 @@ related:
 
 ## 현재 상태
 
-소스 61개, 개념 137개, 개체 29개, 분석 17개와 메타 문서 3개, 총 247개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 221개는 `verified`, 해석적 문서 23개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 270개 외부 근거와 122개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 61개, 개념 137개, 개체 29개, 분석 18개와 메타 문서 3개, 총 248개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 221개는 `verified`, 해석적 문서 24개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 270개 외부 근거와 122개 불변 raw artifact가 레지스트리에 등록돼 있다.
 
 `061`의 XLM을 하나의 고정 모델로 보는 설명, CLM 뒤 TLM을 순차 학습한다는 서술, zero-shot을 사전 학습에서도 target 언어를 보지 않은 것으로 해석한 Italian QA 예시, 평가하지 않은 few-shot·교차 언어 QA·검색, shared BPE의 자동 의미 정렬, mBERT·XNLI를 XLM의 후속 산물로 보는 역방향 계보, 모든 저자원 언어·deployment compute·multimodal AI·mT5·GPT로 확대한 영향과 data가 architecture보다 중요하다는 일반 결론도 공개 문서에서 교정했다.
 
