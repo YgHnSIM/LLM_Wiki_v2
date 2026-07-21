@@ -1476,3 +1476,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/bloom-open-access-multilingual-language-model-democratization-ai-research
     sha256: 4748c4bb50c45aef5739b28cc8e848d2c1feeba9a754375f9171064521e0c0cf
+  - path: "raw/083_PaLM Pathways Language Model - Large-Scale Training, Reasoning, and Multilingual Capabilities.ko.md"
+    role: translation
+    order_prefix: "083"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/palm-pathways-language-model-large-scale-training-reasoning
+    sha256: 153fca53ac5daa76574330fafc0c982fbcc6abcd08488812be4a4c2fc13de5c1
+  - path: "raw/083_PaLM Pathways Language Model - Large-Scale Training, Reasoning, and Multilingual Capabilities.commentary.ko.md"
+    role: commentary
+    order_prefix: "083"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/palm-pathways-language-model-large-scale-training-reasoning
+    sha256: 156d5355d2e2f6883db3fe12b275019a3cc3eb250ae4d6eb5147b216f545a75e

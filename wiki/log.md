@@ -3391,6 +3391,23 @@ raw 등록 해시:
 - 백업 manifest에는 외부 원문 98개와 raw 51개, 총 149개 변경 파일이 기록됐다. Registry diff의 변경 payload 102줄은 기존·신규 SHA-256 각 51줄뿐이며 다른 필드 변경은 0줄이다.
 - 전체 검증은 96개 회귀 테스트와 292개 Markdown strict lint를 통과해 320개 evidence와 164개 raw artifact를 확인했다. 사이트는 99개 legacy redirect를 포함한 562개 HTML을 만들고 6,204개 wiki link를 모두 해소했다.
 
+## [2026-07-21] ingest | PaLM과 Pathways 기반 대규모 언어 모델 확장
+
+변경 내용:
+
+- 공식 083 원문을 새로 번역하고 12절 해설을 작성한 뒤, `raw/083_PaLM Pathways Language Model - Large-Scale Training, Reasoning, and Multilingual Capabilities.ko.md`와 대응 해설을 SHA-256 레지스트리에 보존했다. 두 파일 모두 읽기 수준 UI 단락 없이 표준 `원본 출처:` 표기를 사용한다.
+- [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]]과 [[PaLM]]을 만들고 540.35B dense decoder-only architecture, 780B-token mixture, 두 TPU v4 Pod·6,144 chip의 Pathways 병렬화, English NLP·BIG-bench·CoT·code·다국어 평가를 각 prompt·fine-tuning·metric 조건으로 복원했다.
+- Raw의 sparse attention, 일반 배포 safety prompt, 공개 weight, 균등한 100개 이상 언어 지원, base PaLM과 PaLM-Coder 혼동, scale만으로 얻은 일반 추론, 후속 model 전체의 직접 계보 주장을 교정했다. 8B·540B의 780B-token checkpoint와 선택 실수로 795B token을 쓴 62B 평가도 구분했다.
+- [[대규모 언어 모델]]에는 parameter·token·분산 system·prompt·metric을 함께 읽는 PaLM 사례를, [[언어 모델 스케일링 법칙]]에는 PaLM의 약 1.44 tokens/parameter와 Chinchilla의 조건부 20:1을 같은 보편 식으로 직접 비교할 수 없는 이유 및 Appendix F의 62B 추가 학습 결과를 보강했다.
+- 새 번역·해설과 raw 쌍을 포함하도록 `reading-level:check`의 감사 inventory를 번역·해설 162개, raw Markdown 167개로 갱신했다. 기존 원문·raw 내용을 다시 쓰지는 않았다.
+- [[index]]와 [[overview]]의 source·concept 수, 공식 번호 범위, 다음 084 입력, 읽기 경로와 핵심 주제를 갱신했다.
+
+검증 결과와 남은 한계:
+
+- 번역·해설 스킬 검사는 `valid_pairs: 1`, 오류 0을 확인했고, 원문–번역 H1/H2·본문 block·27개 link의 대상과 순서가 일치했다. 두 결과 파일은 UTF-8·LF·BOM 없음·끝줄 개행이며 `Reading Level`·`읽기 수준` UI 단락은 없다.
+- 1차 근거는 PaLM 논문의 architecture·data·distributed training·evaluation·memorization·contamination·bias/toxicity·model card와 Appendix B·F에 한정했다. 논문은 weight release를 보고하지 않으므로, publication 공개를 공개 weight로 확대하지 않는다.
+- `source:ready -- 083`은 96개 회귀 테스트와 294개 Markdown strict lint를 통과해 320개 evidence와 166개 raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 566개 HTML을 만들고 6,253개 wiki link를 모두 해소했다. 별도 `reading-level:check`도 외부 원문 109개, 번역·해설 162개, raw Markdown 167개, 위키 Markdown 294개에서 UI 단락 0개를 확인했고, 번역 정규화 검사는 표준 `원본 출처:` 81개와 변경 필요 0개를 확인했다.
+
 ## 관련 항목
 
 - [[index]]

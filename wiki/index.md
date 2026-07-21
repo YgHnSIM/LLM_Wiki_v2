@@ -112,6 +112,7 @@ related:
 - [[080_사고 연쇄 프롬프팅과 추론 행동 유도]] — few-shot CoT와 2단계 Zero-shot-CoT를 분리하고 대표 정확도 상승의 모델·과제·prompt 조건, 출력 충실성·추론 비용·후속 계보의 범위를 검증한 소스 (근거 6개)
 - [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]] — 무료 연구 미리보기·다중 턴 대화 UI·대화형 RLHF와 사용자 피드백 순환을 복원하고 175B·지속 기억·안전·산업 영향 과장을 교정한 소스 (근거 2개)
 - [[082_BLOOM과 공개 접근 다국어 LLM]] — 176B BLOOM·ROOTS·Jean Zay 학습과 weight·code·data·RAIL의 공개 범위를 복원하고 최초성·최첨단·편향 해소·민주화 과장을 교정한 소스 (근거 6개)
+- [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]] — 540.35B dense architecture·780B token·두 TPU v4 Pod의 Pathways 훈련을 복원하고 sparse attention·공개 weight·일반 추론·다국어·PaLM-Coder 과장을 평가 조건으로 교정한 소스 (근거 1개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 
 ## 개체
@@ -149,6 +150,7 @@ related:
 ## 개념
 
 - [[BLOOM]] — 176B decoder-only Transformer, ROOTS 다국어 말뭉치, 공공 compute와 서로 다른 weight·code·data 공개 조건을 한 모델 장부로 구분하는 개념 (근거 6개)
+- [[PaLM]] — 540.35B dense decoder-only Transformer, Pathways 분산 학습과 CoT·다국어·code 평가 조건 및 model access 한계를 구분하는 개념 (근거 1개)
 - [[WaveNet]] — 팽창 인과 합성곱으로 양자화 오디오 표본을 순차 생성하는 원시 파형 자기회귀 모델 (근거 2개)
 - [[Transformer]] — multi-head self-attention과 위치 표현으로 순환 없이 시퀀스 위치를 상호작용시키는 신경망 구조 (근거 8개)
 - [[Transformer-XL]] — stop-gradient segment memory와 상대 위치 attention으로 고정 길이 경계를 넘어 과거 표현을 재사용하는 causal Transformer (근거 1개)
@@ -189,8 +191,8 @@ related:
 - [[CBOW]] — 주변 문맥 벡터를 합·평균해 중심 단어를 예측하는 Word2Vec 구조 (근거 2개)
 - [[Skip-gram]] — 중심 단어에서 창 안의 문맥 단어별 학습 쌍을 만드는 Word2Vec 구조 (근거 3개)
 - [[GloVe]] — 말뭉치 전체에 집계한 비영 단어–문맥 계수의 로그를 가중 저랭크 회귀로 근사하는 정적 임베딩 방법 (근거 3개)
-- [[대규모 언어 모델]] — 대규모 텍스트의 자기지도 목표로 문맥 표현을 학습하고 대화형 평가·번역·초기 신경망·언어 구조 문제와 연결되는 현대 언어 모델 (근거 19개)
-- [[언어 모델 스케일링 법칙]] — 모델·데이터·학습 compute와 token loss 사이의 경험식을 병목·관측 범위·compute-optimal 배분 조건과 함께 읽는 개념 (근거 4개)
+- [[대규모 언어 모델]] — 대규모 텍스트의 자기지도 목표로 문맥 표현을 학습하고 대화형 평가·번역·초기 신경망·언어 구조 문제와 연결되는 현대 언어 모델 (근거 20개)
+- [[언어 모델 스케일링 법칙]] — 모델·데이터·학습 compute와 token loss 사이의 경험식을 병목·관측 범위·compute-optimal 배분 조건과 함께 읽는 개념 (근거 5개)
 - [[튜링 테스트]] — 텍스트 대화에서 인간과 기계를 구별할 수 있는지를 묻는 기계 지능 평가 사고실험 (근거 3개)
 - [[모방 게임]] — 튜링 테스트의 원래 설정으로, 대화만으로 인간과 기계를 판별하게 하는 실험 구성 (근거 3개)
 - [[행동주의적 지능 기준|행동 기반 지능 기준]] — 내면 상태보다 관찰 가능한 수행을 평가하되 Skinner식 행동주의와 구분하는 접근 (근거 4개)
