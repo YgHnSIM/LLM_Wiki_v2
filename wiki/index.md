@@ -94,6 +94,7 @@ related:
 - [[061_XLM과 교차 언어 사전 학습]] — CLM·MLM·TLM과 target-language label 없는 XNLI 전이를 구분하고 다국어·후속 계보 과장을 교정한 소스 (근거 1개)
 - [[062_T5와 Text-to-Text 통합 프레임워크]] — 공통 text-to-text interface와 span corruption을 복원하고 universal checkpoint·instruction·성능 과장을 교정한 소스 (근거 1개)
 - [[063_Transformer-XL과 세그먼트 수준 재귀]] — bounded segment memory·stop-gradient·상대 위치 attention을 복원하고 RECL·평가 속도·후속 계보 과장을 교정한 소스 (근거 1개)
+- [[064_BERT 기반 passage 재순위화]] — BM25 후보를 BERT 결합 self-attention과 `[CLS]` 분류 점수로 다시 매기고 후보 recall·길이·비용·제품 공개 범위를 구분한 소스 (근거 4개)
 
 ## 개체
 
@@ -132,9 +133,10 @@ related:
 - [[WaveNet]] — 팽창 인과 합성곱으로 양자화 오디오 표본을 순차 생성하는 원시 파형 자기회귀 모델 (근거 2개)
 - [[Transformer]] — multi-head self-attention과 위치 표현으로 순환 없이 시퀀스 위치를 상호작용시키는 신경망 구조 (근거 6개)
 - [[Transformer-XL]] — stop-gradient segment memory와 상대 위치 attention으로 고정 길이 경계를 넘어 과거 표현을 재사용하는 causal Transformer (근거 1개)
+- [[교차 인코더 재순위화]] — 질의와 후보를 공동 부호화해 세밀한 관련성 점수를 내되 first-stage 후보와 후보별 추론 비용에 제약받는 재순위화 방식 (근거 3개)
 - [[인간 피드백 강화학습]] — 인간의 행동·응답 비교로 보상 신호를 학습하고 정책을 선호에 맞춰 최적화하는 방법 계열 (근거 4개)
 - [[언어 모델 전이 학습]] — 사전 학습 언어 모델의 내부 표현이나 매개변수를 후속 과제에 재사용·적응시키는 방법 계열 (근거 6개)
-- [[BERT]] — 마스크드 언어 모델링으로 깊은 양방향 Transformer encoder를 사전 학습하고 과제별로 전체 미세조정하는 모델 (근거 2개)
+- [[BERT]] — 마스크드 언어 모델링으로 깊은 양방향 Transformer encoder를 사전 학습하고 과제별로 전체 미세조정하는 모델 (근거 3개)
 - [[마스크드 언어 모델링]] — 입력 token 일부를 교란하고 좌우 문맥에서 원 token을 복원하는 사전 학습 목적 (근거 5개)
 - [[GPT-1과 GPT-2]] — causal Transformer의 지도 미세조정과 zero-shot text continuation을 잇는 초기 GPT 모델 계열 (근거 3개)
 - [[GLUE와 SuperGLUE]] — 여러 영어 NLU 과제·metric·test server·leaderboard를 묶어 broad transfer를 비교하는 평가 suite (근거 3개)
@@ -245,7 +247,7 @@ related:
 - [[DeepQA]] — 질문 분석·고재현율 후보 생성·다중 근거 점수화·학습된 순위와 신뢰도를 병렬 결합한 Watson의 질의응답 구조 (근거 2개)
 - [[개방 영역 질의응답]] — 여러 주제와 자료에서 답을 찾되 입력·자료 접근·답 단위·근거·평가 조건의 실제 경계를 구분하는 과업 (근거 5개)
 - [[추출형 질의응답]] — 주어진 문맥의 연속 답 구간을 시작·끝 위치로 선택하고 검색·생성·답 없음 판단과 구분하는 과업 (근거 2개)
-- [[신경 정보 검색]] — 질의·문서 표현이나 상호작용·순위 점수를 신경망으로 학습하며 첫 단계 검색과 재순위화를 구분하는 접근군 (근거 4개)
+- [[신경 정보 검색]] — 질의·문서 표현이나 상호작용·순위 점수를 신경망으로 학습하며 첫 단계 검색과 재순위화를 구분하는 접근군 (근거 6개)
 - [[역전파]] — 계산 그래프를 역순으로 순회해 손실의 매개변수별 그래디언트를 구하는 역모드 미분 절차 (근거 8개)
 - [[다층 퍼셉트론]] — 비선형 은닉층을 통해 입력을 단계적으로 다시 표현하는 순방향 신경망 (근거 6개)
 - [[기울기 소실]] — 깊은 층이나 긴 시간 경로에서 역방향 그래디언트가 지나치게 작아지는 조건적 현상 (근거 6개)
@@ -274,7 +276,7 @@ related:
 - [[같은 병렬 문장은 무엇을 학습시키는가]] — 병렬 문장쌍이 IBM SMT의 잠재 단어 정렬, seq2seq NMT의 target sequence, XLM TLM의 양방향 masked-token 문맥으로 쓰이는 차이를 비교한 분석 (근거 6개)
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]] — ELMo·ULMFiT·BERT·GPT·XLM·T5에서 지식 전달 경로와 head·cue·공통 text output의 과제 명세 위치를 비교한 분석 (근거 7개)
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]] — RNN·WaveNet·Transformer를 표현 계산·teacher forcing·sampling·총연산의 네 축으로 분리한 분석 (근거 5개)
-- [[검색은 근거를 찾고 독해는 답을 찾는다]] — BM25·DSSM/DRMM·SQuAD·DPR/RAG를 검색 재현율·독해 정확도·기권의 세 경계로 분해한 분석 (근거 7개)
+- [[검색은 근거를 찾고 독해는 답을 찾는다]] — BM25·DSSM/DRMM·SQuAD·DPR/RAG를 검색 재현율·독해 정확도·기권의 세 경계로 분해한 분석 (근거 8개)
 - [[서브워드는 한 벡터의 특징인가 여러 토큰인가]] — 기본 SGNS·FastText·BPE·SentencePiece를 조각의 역할·결합 시점·문맥화·OOV·계산 비용으로 비교한 분석 (근거 6개)
 - [[잔차 경로와 정규화는 어디에 놓이는가]] — ResNet post-/pre-activation과 Transformer Post-/Pre-LN을 additive identity path 위의 Jacobian 배치로 비교한 분석 (근거 5개)
 - [[계수 기반과 예측 기반 단어 표현은 얼마나 다른가]] — LSI·NPLM·SGNS·GloVe를 문맥 단위·통계 집계·가중·저랭크 목적·평가 축으로 비교한 분석 (근거 7개)

@@ -2774,6 +2774,24 @@ raw 등록 해시:
 - 사이트는 385개 페이지를 빌드해 4,986개 위키 링크와 28,669개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 251개 항목을 포함했다.
 - raw 설명 자료는 원 논문보다 memory·성능·응용·계보 범위를 넓혔으므로 보존 artifact로만 남겼고, 공개 source·concept·analysis의 핵심 주장은 Dai 등의 ACL 논문 범위 안에서 검증했다.
 
+## [2026-07-21] ingest | BERT 기반 passage 재순위화
+
+변경 내용:
+
+- `064_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 검증된 쌍을 새 immutable raw artifact로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다.
+- [[064_BERT 기반 passage 재순위화]]와 [[교차 인코더 재순위화]]를 만들고, BM25 상위 1,000개 후보를 결합 self-attention으로 부호화한 뒤 `[CLS]` 이진 분류 점수로 다시 매기는 2019년 BERT reranker의 계산 경계를 정리했다.
+- [[BERT]]와 [[신경 정보 검색]]에는 질의–passage 공동 부호화, pointwise cross-entropy, candidate recall과 후보별 추론 비용을 보강했다. [[051_신경 정보 검색과 의미 대응]]에는 초기 표현·상호작용 모델과 현대 dual/cross encoder의 연결을 추가했다.
+- [[검색은 근거를 찾고 독해는 답을 찾는다]]에 first-stage 후보 누락과 reranker 정렬 실패를 구분하는 진단을 추가했다. 새 자료의 핵심 질문을 기존 분석이 수용하므로 같은 논점을 반복하는 신규 analysis는 만들지 않았다.
+- Nogueira와 Cho의 원 논문을 대조해 query 최대 64 token, 결합 입력 최대 512 WordPiece token, BM25 top-1,000, MS MARCO eval MRR@10 0.358과 TREC-CAR MAP 0.335, batch 128·100,000 step·TPU v3-8 약 30시간을 확인했다. CEDR는 contextual token 표현과 기존 interaction ranker의 결합 경로로, Google의 2019년 공지는 ranking·featured snippets와 미국 영어 검색 10건 중 1건이라는 공개 범위로 한정했다.
+- raw의 dual encoder 중심 역사, encoder–decoder cross-attention과 결합 self-attention의 혼동, attention weight와 `[CLS]` 점수의 동일시, 대표 학습을 pairwise·listwise로 묶은 설명, first-stage retrieval·장문 입력·보편 후보 수·광범위한 배포·Google 내부 구조·ColBERT 계보 주장을 공개 문서에서 교정했다.
+
+검증 결과:
+
+- 번역 스킬 검사는 064 번역·해설 쌍을 `valid_pairs: 1`로 확인했고, 별도 구조 대조는 원문의 68개 Markdown link URL 순서를 모두 보존했음을 확인했다. source workflow는 두 raw artifact의 원문 URL·역할·해시 일치를 확인했다.
+- 49개 회귀 테스트와 254개 위키 문서 strict lint를 통과했으며 275개 evidence 레코드와 128개 immutable raw artifact를 확인했다.
+- 사이트는 389개 페이지를 빌드해 5,042개 위키 링크와 28,979개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 253개 항목을 포함했다.
+- raw 설명 자료는 원 논문과 공식 제품 공지보다 역사·방법·배포 범위를 넓혔으므로 보존 artifact로만 남겼고, 공개 source·concept·analysis의 핵심 주장은 BERT·Nogueira–Cho·CEDR·Google 2019 자료 범위 안에서 검증했다.
+
 ## 관련 항목
 
 - [[index]]

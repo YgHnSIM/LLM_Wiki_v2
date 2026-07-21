@@ -18,6 +18,8 @@ verification: verified
 artifacts:
   - 'raw/057_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md'
   - 'raw/057_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md'
+  - 'raw/064_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.ko.md'
+  - 'raw/064_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.commentary.ko.md'
 evidence:
   - source_id: bert-2019
     locator: '§§1–3의 encoder·MLM·NSP·fine-tuning, §4와 Tables 1–5의 GLUE·SQuAD·SWAG·ablation, Appendix A의 학습 절차'
@@ -25,11 +27,16 @@ evidence:
   - source_id: liu-et-al-2019-roberta
     locator: '§§1–4의 BERT 학습 조건 재평가와 NSP 제거·동적 masking·자료·batch·학습량 비교'
     relation: contextualizes
+  - source_id: nogueira-cho-2019-bert-reranking
+    locator: '§2와 Eq. 1의 query–passage 결합 입력·[CLS] 이진 분류·pointwise cross-entropy·BM25 상위 1,000개 재순위화, §3과 Table 1의 MS MARCO·TREC-CAR 평가'
+    relation: supplements
 related:
   - source.057
+  - source.064
   - concept.마스크드-언어-모델링
   - concept.언어-모델-전이-학습
   - concept.transformer
+  - concept.교차-인코더-재순위화
 ---
 # BERT
 
@@ -78,6 +85,12 @@ BERT는 과제 전용 깊은 구조 대신 출력 인터페이스를 바꿨다.
 
 각 경우 기반 BERT도 함께 갱신한다. 이를 ELMo식 고정 특징 사용과 구분한다.
 
+### 질의–passage 점수화
+
+[[064_BERT 기반 passage 재순위화]]에서 확인되는 BERT의 검색 적용은 질의와 후보 passage를 `[CLS] query [SEP] passage [SEP]`로 묶는다. 결합 시퀀스가 같은 encoder의 양방향 self-attention을 통과하므로 질의 token과 passage token은 층마다 서로 조건화된다. 이를 검색 문헌에서 교차 상호작용이라고 부를 수 있지만, Transformer encoder–decoder 사이의 별도 cross-attention 층과는 구분해야 한다.
+
+최종 관련성 점수는 attention weight를 직접 읽은 값이 아니다. 마지막 `[CLS]` 은닉 표현에 학습된 분류층을 적용해 관련성 logit과 확률을 만들고, 후보별 확률로 순서를 다시 매긴다. 이 [[교차 인코더 재순위화]]는 token 수준 공동 상호작용을 직접 모델링할 수 있지만 질의마다 각 후보 쌍을 다시 인코딩해야 하므로, 문서 표현을 한 번 계산해 전체 질의에 재사용하는 dual encoder보다 후보별 계산이 비싸다. Nogueira와 Cho의 실험이 BERT를 전체 컬렉션의 첫 단계 검색기가 아니라 BM25 상위 1,000개 후보의 재순위화에 사용한 이유도 이 비용 경계에 있다.
+
 ### ‘양방향’의 정확한 뜻
 
 BERT의 한 위치 표현은 모든 encoder 층에서 왼쪽과 오른쪽 입력에 공동 조건화된다. ELMo는 독립 순·역방향 LSTM의 표현을 연결한다. GPT형 decoder는 위치 $i$가 보통 $i$보다 앞선 token에만 접근한다. 셋 모두 문맥 표현을 만들지만 attention graph와 학습 목적이 다르다.
@@ -115,12 +128,16 @@ BERT 원 ablation은 NSP가 일부 문장쌍·질의응답 결과에 도움을 �
 ## 출처
 
 - [[057_BERT의 마스크드 양방향 사전 학습]]
+- [[064_BERT 기반 passage 재순위화]]
 - Jacob Devlin 외, [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://aclanthology.org/N19-1423/), NAACL 2019.
 - Yinhan Liu 외, [RoBERTa: A Robustly Optimized BERT Pretraining Approach](https://arxiv.org/abs/1907.11692), 2019.
+- Rodrigo Nogueira·Kyunghyun Cho, [Passage Re-ranking with BERT](https://arxiv.org/abs/1901.04085), 2019.
 
 ## 관련 항목
 
 - [[057_BERT의 마스크드 양방향 사전 학습]]
+- [[064_BERT 기반 passage 재순위화]]
 - [[마스크드 언어 모델링]]
 - [[언어 모델 전이 학습]]
 - [[Transformer]]
+- [[교차 인코더 재순위화]]

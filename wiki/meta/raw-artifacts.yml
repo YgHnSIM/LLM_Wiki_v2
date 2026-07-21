@@ -1134,3 +1134,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/transformer-xl-long-sequences-segment-recurrence
     sha256: 1dea733d6e063bf5059eabac2d7edd27d4272b306da4163ac181be3df28b1a5a
+  - path: "raw/064_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.ko.md"
+    role: translation
+    order_prefix: "064"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/bert-information-retrieval-transformer-ranking-semantic-search
+    sha256: d8b0a5385de52600786e48fab8f1954dd2006097dbad152f81146414e0192f8e
+  - path: "raw/064_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.commentary.ko.md"
+    role: commentary
+    order_prefix: "064"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/bert-information-retrieval-transformer-ranking-semantic-search
+    sha256: c61274340eec160a7f66926453f1188e073cc037bf98ff66bdccb7da04e41f69

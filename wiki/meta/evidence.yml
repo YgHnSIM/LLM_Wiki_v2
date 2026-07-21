@@ -2330,3 +2330,28 @@ sources:
     doi: 10.18653/v1/P19-1285
     url: https://aclanthology.org/P19-1285/
     language: en
+  nogueira-cho-2019-bert-reranking:
+    title: 'Passage Re-ranking with BERT'
+    authors: [Rodrigo Nogueira, Kyunghyun Cho]
+    published: 2019
+    source_type: primary
+    kind: preprint
+    url: https://arxiv.org/abs/1901.04085
+    language: en
+  macavaney-et-al-2019-cedr:
+    title: 'CEDR: Contextualized Embeddings for Document Ranking'
+    authors: [Sean MacAvaney, Andrew Yates, Arman Cohan, Nazli Goharian]
+    published: 2019
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1145/3331184.3331317
+    url: https://arxiv.org/abs/1904.07094
+    language: en
+  google-search-2019-bert:
+    title: 'Understanding searches better than ever before'
+    authors: [Pandu Nayak]
+    published: 2019
+    source_type: primary
+    kind: web-article
+    url: https://blog.google/products-and-platforms/products/search/search-language-understanding-bert/
+    language: en
