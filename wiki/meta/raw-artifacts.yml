@@ -1296,3 +1296,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/mixture-of-experts-at-scale-sparse-activation-dynamic-routing-efficient-scaling
     sha256: 24fb08b5d62ed782843cf3c90499d305a4e225dd7397e319c45080a65c768e0c
+  - path: "raw/073_The Pile Open-Source Training Dataset for Large Language Models.ko.md"
+    role: translation
+    order_prefix: "073"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/the-pile-open-source-training-dataset-large-language-models
+    sha256: 5bb7e46940d68bf341109584bb167cb74354a928d29f60e8e3ccb82e22984e4f
+  - path: "raw/073_The Pile Open-Source Training Dataset for Large Language Models.commentary.ko.md"
+    role: commentary
+    order_prefix: "073"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/the-pile-open-source-training-dataset-large-language-models
+    sha256: 2833650f8cfb9ae7436b776abcca38087d006f92b97a189ac0390022b7a33559

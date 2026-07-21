@@ -2972,6 +2972,25 @@ raw 등록 해시:
 - 사이트는 423개 페이지를 빌드해 5,566개 위키 링크와 31,808개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 271개 항목을 포함했다.
 - 공개 source·concept와 기존 문서 보강은 Du et al. 2022, Jiang et al. 2024와 Mistral AI 2023의 직접 구조·수치·평가 범위 안에서 검증했다. 모델 간 품질·효율 차이를 sparse routing 하나의 효과로 돌리는 인과와 모든 배치·하드웨어에서의 고정 속도 배수는 입증되지 않은 범위로 남겼다.
 
+## [2026-07-21] ingest | The Pile과 대규모 언어 모델 학습 말뭉치
+
+변경 내용:
+
+- `073_The Pile Open-Source Training Dataset for Large Language Models.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문과 번역의 115줄·57개 의미 block·H1/H2 1/6·15개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- [[073_The Pile과 대규모 언어 모델 학습 말뭉치]]와 [[The Pile]]을 만들고, 22개 영어 중심 component의 825.18 GiB raw size와 epoch 가중 뒤 1,254.20 GiB effective size, 2억 1,104만 3,181개 unweighted document를 서로 다른 장부로 설명했다.
+- [[말뭉치 기반 학습]]에는 작은 주석·병렬 말뭉치에서 대규모 weighted pretraining mixture로 이어지는 구성을 추가했다. Component 선택·가중치·provenance·deduplication·split leakage·benchmark decontamination과 underlying rights를 각각 별도 설계 축으로 연결했다.
+- Gao et al. The Pile 원 논문과 Biderman et al. datasheet를 evidence 레지스트리에 등록했다. 같은 1.3B architecture와 약 40GB 조건의 Pile·CC-100 English·Raw Common Crawl 비교에서 Pile BPB·WikiText 우위, LAMBADA metric의 혼합 결과와 component causal ablation 부재를 locator에 맞춰 기록했다.
+- Raw의 2021년 단일 시작, 전 구성요소의 동료 심사·고품질, Pile-wide deduplication, 전체 benchmark contamination 제거, 법적 준수·명확성 보장, 825GB만으로 GPT-3급 학습 충분, 동일 data만으로 공정 비교·원인 귀속, 모든 benchmark 우위, GPT-Neo/J의 독점 model 경쟁력과 전체 LLM 개발 대중화 주장을 공개 문서에서 교정했다.
+- 2022 datasheet의 MIT 배포 표기와 Books3 등 copyrighted component·상이한 consent를 함께 기록했다. Project-level license가 underlying text rights를 통일하지 않으며 논문의 fair-use 논의는 저자 입장이지 법률 보증이 아님을 명시했다.
+- 새 분석은 ingest에 섞지 않았다. The Pile의 크기 통제 비교는 데이터 품질 필터와 분포 다양성을 단일 순위로 합칠 수 없다는 별도 질문을 충분히 뒷받침하므로, 073 공개·배포 뒤 기존 058·062·066과 함께 별도 `content` 작업으로 작성한다.
+
+검증 결과:
+
+- 번역 스킬 검사는 073 번역·해설 쌍을 `done: true`로 확인했고, source workflow는 두 raw artifact의 원문 URL·역할·SHA-256 일치를 확인했다.
+- 49개 회귀 테스트와 274개 위키 문서 strict lint를 통과했으며 298개 evidence 레코드와 146개 immutable raw artifact를 확인했다.
+- 사이트는 427개 페이지를 빌드해 5,613개 위키 링크와 32,101개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 273개 항목을 포함했다.
+- 공개 source·concept와 기존 개념 보강은 Gao et al. 2020과 Biderman et al. 2022의 직접 구성·처리·비교·문서화 범위 안에서 검증했다. 다양성·품질의 단독 인과, 모든 model 규모의 우위, 후속 공개 model·산업 채택과 법적 적합성은 별도 근거가 필요한 범위로 남겼다.
+
 ## 관련 항목
 
 - [[index]]

@@ -2458,6 +2458,24 @@ sources:
     kind: official-blog
     url: https://mistral.ai/news/mixtral-of-experts/
     language: en
+  gao-et-al-2020-pile:
+    title: 'The Pile: An 800GB Dataset of Diverse Text for Language Modeling'
+    authors: [Leo Gao, Stella Biderman, Sid Black, Laurence Golding, Travis Hoppe, Charles Foster, Jason Phang, Horace He, Anish Thite, Noa Nabeshima, Shawn Presser, Connor Leahy]
+    published: 2020
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2101.00027
+    url: https://arxiv.org/abs/2101.00027
+    language: en
+  biderman-et-al-2022-pile-datasheet:
+    title: Datasheet for the Pile
+    authors: [Stella Biderman, Kieran Bicheno, Leo Gao]
+    published: 2022
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2201.07311
+    url: https://arxiv.org/abs/2201.07311
+    language: en
   chowdhery-et-al-2022-palm:
     title: 'PaLM: Scaling Language Modeling with Pathways'
     authors: [Aakanksha Chowdhery, Sharan Narang, Jacob Devlin, Maarten Bosma, Gaurav Mishra, Adam Roberts, Paul Barham, Hyung Won Chung, Charles Sutton, Sebastian Gehrmann, Parker Schuh, Kensen Shi, Sasha Tsvyashchenko, Joshua Maynez, Abhishek Rao, Parker Barnes, Yi Tay, Noam Shazeer, Vinodkumar Prabhakaran, Emily Reif, Nan Du, Ben Hutchinson, Reiner Pope, James Bradbury, Jacob Austin, Michael Isard, Guy Gur-Ari, Pengcheng Yin, Toju Duke, Anselm Levskaya, Sanjay Ghemawat, Sunipa Dev, Henryk Michalewski, Xavier Garcia, Vedant Misra, Kevin Robinson, Liam Fedus, Denny Zhou, Daphne Ippolito, David Luan, Hyeontaek Lim, Barret Zoph, Alexander Spiridonov, Ryan Sepassi, David Dohan, Shivani Agrawal, Mark Omernick, Andrew M. Dai, Thanumalayan Sankaranarayana Pillai, Marie Pellat, Aitor Lewkowycz, Erica Moreira, Rewon Child, Oleksandr Polozov, Katherine Lee, Zongwei Zhou, Xuezhi Wang, Brennan Saeta, Mark Diaz, Orhan Firat, Michele Catasta, Jason Wei, Kathy Meier-Hellstern, Douglas Eck, Jeff Dean, Slav Petrov, Noah Fiedel]

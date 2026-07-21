@@ -24,7 +24,7 @@ related:
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 72개, concept 148개, entity 29개, analysis 20개를 합친 비메타 문서 269개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 73개, concept 149개, entity 29개, analysis 20개를 합친 비메타 문서 271개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -37,6 +37,7 @@ related:
 | 자연어 명세는 어떻게 실행 코드가 되나 | [[066_GPT-3와 문맥 내 학습]] | [[070_Codex와 HumanEval 기반 코드 생성 평가]] → [[OpenAI Codex (2021)]] | [[자동 평가 지표는 무엇을 보상하는가]] |
 | 자연어 지시는 언제 가중치에 들어가나 | [[062_T5와 Text-to-Text 통합 프레임워크]] | [[066_GPT-3와 문맥 내 학습]] → [[071_지시 미세조정과 FLAN의 제로샷 일반화]] → [[지시 미세조정]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
 | 희소 모델의 ‘크기’는 무엇을 뜻하나 | [[068_전문가 혼합과 희소 활성 스케일링]] | [[072_GLaM에서 Mixtral까지의 희소 MoE 확장]] → [[Mixtral 8x7B]] | [[총 매개변수와 활성 계산량은 같은 축인가]] |
+| 학습 데이터의 양과 구성을 어떻게 읽나 | [[062_T5와 Text-to-Text 통합 프레임워크]] | [[065_신경 언어 모델의 스케일링 법칙]] → [[066_GPT-3와 문맥 내 학습]] → [[073_The Pile과 대규모 언어 모델 학습 말뭉치]] → [[The Pile]] | [[말뭉치 기반 학습]] |
 
 ## 난이도에 따른 읽기 방법
 
@@ -46,7 +47,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 72개 소스의 범위
+## 73개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -120,6 +121,7 @@ related:
 - [[070_Codex와 HumanEval 기반 코드 생성 평가]]는 최대 12B 연구 Codex의 Python 코드 계속학습과 Codex-S 추가 미세조정을 분리하고, HumanEval·pass@k·unit-test oracle 및 GitHub Copilot production version의 경계를 검증한다.
 - [[071_지시 미세조정과 FLAN의 제로샷 일반화]]는 62개 데이터셋·12개 과제 군집을 자연어 지시로 미세조정한 137B FLAN을 복원하고, 군집별 별도 checkpoint·template 선택·모델 규모 효과와 최초 발명·보편적 향상·안전 정렬 주장의 경계를 검증한다.
 - [[072_GLaM에서 Mixtral까지의 희소 MoE 확장]]은 2024년 단일 돌파 서사를 GLaM의 1.2T/96.6B와 Mixtral의 46.7B/12.9B total/active 장부로 교정하고, 공개 가중치·memory·routing·benchmark 비교의 조건을 검증한다.
+- [[073_The Pile과 대규모 언어 모델 학습 말뭉치]]는 22개 영어 중심 component의 825.18 GiB raw·1,254.20 GiB effective mixture를 복원하고, Pile-wide dedupulation 부재·40GB 통제 비교·권리와 동의·재현성의 경계를 검증한다.
 
 ## 현재 핵심 주제
 
@@ -164,6 +166,7 @@ related:
 - [[신경 정보 검색]]의 질의·문서 독립 표현과 token interaction, 클릭·음성 표본의 편향, 첫 단계 검색·재순위화 및 sparse·dense 상보성
 - [[교차 인코더 재순위화]]에서 구분하는 질의–후보 공동 부호화, `[CLS]` relevance logit, first-stage 누락 복구 불가와 후보별 추론 비용
 - [[언어 모델 스케일링 법칙]]에서 함께 확인하는 token loss, N·D·compute 병목, 관측 범위 밖 외삽과 Kaplan·Chinchilla compute-optimal 배분의 차이
+- [[The Pile]]에서 구분하는 22개 component의 raw size·epoch 가중 effective size, component deduplication·split leakage·benchmark decontamination과 project license·underlying rights
 - [[문맥 내 학습]]에서 구분하는 고정 가중치, instruction·demonstration·query의 입력 조건화, zero·one·few-shot과 가중치를 갱신하는 지시 미세조정의 지속성 차이
 - [[지시 미세조정]]에서 구분하는 여러 과제의 지시–출력 supervision, 평가 군집 보류, 고정된 가중치의 문맥 내 학습 및 선호 기반 RLHF와의 경계
 - [[손실 곡선과 능력 곡선 사이]]에서 분리하는 평균 token cross-entropy, downstream exact match·accuracy, 능력 threshold와 metric·표본·관측 scale, FLAN 규모별 adaptation 효과
@@ -230,6 +233,8 @@ related:
 - [[지시 미세조정]]
 - [[072_GLaM에서 Mixtral까지의 희소 MoE 확장]]
 - [[Mixtral 8x7B]]
+- [[073_The Pile과 대규모 언어 모델 학습 말뭉치]]
+- [[The Pile]]
 - [[전문가 혼합]]
 - [[총 매개변수와 활성 계산량은 같은 축인가]]
 - [[검색 증강 생성]]
@@ -345,7 +350,7 @@ related:
 
 ## 현재 상태
 
-소스 71개, 개념 147개, 개체 29개, 분석 20개와 메타 문서 3개, 총 270개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 241개는 `verified`, 해석적 문서 26개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 293개 외부 근거와 142개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 73개, 개념 149개, 개체 29개, 분석 20개와 메타 문서 3개, 총 274개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 245개는 `verified`, 해석적 문서 26개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 298개 외부 근거와 146개 불변 raw artifact가 레지스트리에 등록돼 있다.
 
 `071`의 지시 미세조정을 단일 연구가 처음 발명했다는 서사, 수백 개 과제·단일 universal checkpoint·모든 규모에서의 일관된 향상, 지시 문장을 입력에 붙이는 것만으로 weights가 바뀐다는 설명, safety·RLHF·제품 배포까지 직접 검증했다는 주장도 공개 문서에서 교정했다. 원 FLAN은 62개 데이터셋을 12개 과제 군집으로 나누고 평가 군집마다 그 군집을 제외한 별도 137B LaMDA-PT checkpoint를 학습했다. 각 데이터셋에 10개 수동 template를 두었고 best-dev template 조건에서 zero-shot GPT-3보다 20/25 데이터셋에서 높았지만, 422M·2B·8B에서는 지시 미세조정 뒤 보류 과제 평균이 오히려 낮아졌다. Natural Instructions의 선행 2021년 공개와 InstructGPT의 SFT–선호 순위–보상 모델–PPO 경로도 별도 계보로 기록했다.
 

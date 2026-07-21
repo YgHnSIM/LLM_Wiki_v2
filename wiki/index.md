@@ -103,6 +103,7 @@ related:
 - [[070_Codex와 HumanEval 기반 코드 생성 평가]] — Python 코드 계속학습과 Codex-S를 분리하고 HumanEval·pass@k·실행 선택 및 연구 모델·Copilot production version의 경계를 검증한 소스 (근거 3개)
 - [[071_지시 미세조정과 FLAN의 제로샷 일반화]] — 62개 데이터셋·12개 과제 군집의 FLAN 학습과 군집별 checkpoint·template·규모 절제를 복원하고 최초성·범용성·정렬 계보 과장을 교정한 소스 (근거 5개)
 - [[072_GLaM에서 Mixtral까지의 희소 MoE 확장]] — GLaM의 1.2T/96.6B와 Mixtral의 46.7B/12.9B total·active 장부를 복원하고 2024 단일 돌파·Meta 귀속·제곱 계산·주제 expert·고정 속도 배수 과장을 교정한 소스 (근거 7개)
+- [[073_The Pile과 대규모 언어 모델 학습 말뭉치]] — 22개 영어 중심 component의 825.18 GiB raw·1,254.20 GiB effective mixture를 복원하고 전역 중복 제거·법적 보증·공정 비교·대중화 과장을 교정한 소스 (근거 2개)
 
 ## 개체
 
@@ -152,6 +153,7 @@ related:
 - [[XLNet·RoBERTa·ALBERT]] — BERT 이후의 objective·training recipe·parameterization 개선을 비용 조건과 함께 비교하는 세 모델 묶음 (근거 3개)
 - [[XLM]] — shared multilingual encoder에서 CLM·MLM과 병렬 문장쌍 TLM을 구분하고 교차 언어 전이를 학습하는 방법군 (근거 1개)
 - [[T5]] — task를 text target으로 통합하고 sentinel span corruption 뒤 과제별 supervised fine-tuning으로 전이하는 encoder–decoder model family (근거 3개)
+- [[The Pile]] — 22개 component·epoch 가중치·BPB 평가를 deduplication·decontamination·underlying rights와 구분하는 825.18 GiB 영어 중심 말뭉치 (근거 2개)
 - [[CLIP]] — 이미지·텍스트 이중 인코더를 대칭 대조 손실로 정렬하고 class prompt를 제로샷 분류기 weight처럼 사용하는 시각-언어 모델 (근거 1개)
 - [[OpenAI Codex (2021)]] — GPT 계열을 Python 코드 분포로 계속 학습하고 docstring에서 함수 후보를 생성해 unit test로 평가한 2021년 코드 모델군 (근거 3개)
 - [[지시 미세조정]] — 여러 과제의 instruction–target 감독을 weights에 축적하고 현재 과제를 inference instruction으로 지정하는 지도 후학습 방식 (근거 5개)
@@ -242,7 +244,7 @@ related:
 - [[개념 의존]] — 자연어 의미를 원시 ACT와 의존 관계의 정규 네트워크로 표현하려는 이론 (근거 4개)
 - [[스크립트]] — 전형적인 사건·역할·기대를 이용해 이야기의 생략 정보를 보완하는 지식 구조 (근거 2개)
 - [[통계적 자연어 처리]] — 말뭉치에서 확률과 매개변수를 추정해 언어 분석·출력 후보를 선택하는 접근 (근거 15개)
-- [[말뭉치 기반 학습]] — 표집·주석된 실제 언어 자료에서 패턴과 모델 매개변수를 학습하는 접근 (근거 8개)
+- [[말뭉치 기반 학습]] — 표집·정제·주석하거나 가중 혼합한 실제 언어 자료에서 패턴과 모델 매개변수를 학습하는 접근 (근거 10개)
 - [[증강 전이망]] — 재귀 전이망에 레지스터·조건·구조 구축 동작을 결합한 절차적 파싱 형식론 (근거 4개)
 - [[몬태규 의미론]] — 자연언어의 통사 규칙과 내포 논리 번역·모형이론적 해석을 연결하는 형식 의미론 (근거 4개)
 - [[Lesk 알고리즘]] — 사전 글로스의 정확한 어휘 중첩으로 문맥 속 후보 의미를 고르는 1986년 지식 기반 WSD 절차 (근거 5개)
