@@ -4,7 +4,7 @@ id: source.061
 page_type: source
 title: XLNet·RoBERTa·ALBERT의 BERT 개선 경로
 aliases:
-  - 060_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency
+  - 061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency
   - BERT 이후 세 가지 개선 경로
 tags:
   - type/source
@@ -16,8 +16,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/060_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.ko.md'
-  - 'raw/060_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.commentary.ko.md'
+  - 'raw/061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.ko.md'
+  - 'raw/061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.commentary.ko.md'
 evidence:
   - source_id: bert-2019
     locator: '§3.1과 Appendix A.2의 15%·80/10/10 MLM·NSP 표본화, §5.1과 Table 5의 사전 학습 objective ablation, Appendix C.2와 Table 8의 masking 방식 비교'
@@ -177,7 +177,7 @@ XLNet·RoBERTa·ALBERT 논문은 서로 같은 corpus·tokenizer·training budge
 - Yinhan Liu 외, [RoBERTa: A Robustly Optimized BERT Pretraining Approach](https://arxiv.org/abs/1907.11692), 2019, 특히 §§3–5.
 - Zhenzhong Lan 외, [ALBERT: A Lite BERT for Self-supervised Learning of Language Representations](https://openreview.net/forum?id=H1eA7AEtvS), ICLR 2020, 특히 §§3–5.
 - 프로젝트 번역·검토 출발 자료: [XLNet, RoBERTa, ALBERT: Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency](https://mbrenndoerfer.com/writing/xlnet-roberta-albert-bert-refinements)
-- 프로젝트 보존 자료: `raw/060_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.ko.md`, `raw/060_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.ko.md`, `raw/061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.commentary.ko.md`.
 
 ## 관련 항목
 

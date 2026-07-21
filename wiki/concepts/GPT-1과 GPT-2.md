@@ -18,10 +18,10 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/058_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md'
-  - 'raw/058_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md'
-  - 'raw/066_GPT-3 and In-Context Learning Emergent Capabilities from Scale.ko.md'
-  - 'raw/066_GPT-3 and In-Context Learning Emergent Capabilities from Scale.commentary.ko.md'
+  - 'raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md'
+  - 'raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md'
+  - 'raw/067_GPT-3 and In-Context Learning Emergent Capabilities from Scale.ko.md'
+  - 'raw/067_GPT-3 and In-Context Learning Emergent Capabilities from Scale.commentary.ko.md'
 evidence:
   - source_id: gpt-2018
     locator: '§§1–3의 117M causal Transformer·BookCorpus·두 단계 학습·input transformations와 §§4–5의 12개 과제 결과'

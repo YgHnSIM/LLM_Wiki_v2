@@ -4,7 +4,7 @@ id: source.050
 page_type: source
 title: FastText와 서브워드 표현의 두 경로
 aliases:
-  - 049_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations
+  - 050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations
   - Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations
 tags:
   - type/source
@@ -16,8 +16,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/049_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md'
-  - 'raw/049_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md'
+  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md'
+  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md'
 evidence:
   - source_id: mikolov-et-al-2013-negative-sampling
     locator: 'NeurIPS 2013, §§2–3의 Skip-gram negative sampling과 subsampling'
@@ -168,7 +168,7 @@ FastText가 BPE의 직접 원인이었다는 계보도 현재 근거로 확정�
 - Taku Kudo, [Subword Regularization](https://aclanthology.org/P18-1007/), ACL 2018, pp. 66–75.
 - Taku Kudo·John Richardson, [SentencePiece](https://aclanthology.org/D18-2012/), EMNLP System Demonstrations 2018, pp. 66–71.
 - 프로젝트 번역·검토 출발 자료: [Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations](https://mbrenndoerfer.com/writing/subword-tokenization-fasttext-character-ngram-embeddings-robust-word-representations)
-- 프로젝트 보존 자료: "raw/049_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md"와 대응 해설.
+- 프로젝트 보존 자료: "raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md"와 대응 해설.
 
 ## 관련 항목
 

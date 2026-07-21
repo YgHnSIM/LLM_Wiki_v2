@@ -91,20 +91,20 @@ test('artifact creation rejects a missing or non-HTTP source_url before copy can
   );
 });
 
-test('source:status keeps the local selector but reports the mapped official chapter', async () => {
+test('source:status uses the official selector unchanged and accepts chapter 110', async () => {
   const fixtureRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'llm-wiki-source-numbering-'));
   const sourceDir = path.join(fixtureRoot, 'sources');
   const translationDir = path.join(fixtureRoot, 'translations');
   await fs.mkdir(sourceDir);
   await fs.mkdir(translationDir);
   await fs.writeFile(
-    path.join(sourceDir, '077_numbering-example.md'),
+    path.join(sourceDir, '110_numbering-example.md'),
     '# Numbering example\n\nSource: https://example.com/writing/numbering-example\n',
     'utf8',
   );
 
   try {
-    const result = spawnSync(process.execPath, ['scripts/source-workflow.mjs', 'status', '077'], {
+    const result = spawnSync(process.execPath, ['scripts/source-workflow.mjs', 'status', '110'], {
       cwd: process.cwd(),
       encoding: 'utf8',
       env: {
@@ -114,10 +114,24 @@ test('source:status keeps the local selector but reports the mapped official cha
       },
     });
     assert.equal(result.status, 0, result.stderr);
-    assert.match(result.stdout, /Local inventory 077 -> official chapter 078/);
-    assert.match(result.stdout, /public source page \(source\.078\):/);
+    assert.match(result.stdout, /Official source 110: 110_numbering-example\.md/);
+    assert.match(result.stdout, /public source page \(source\.110\):/);
   } finally {
     await fs.rm(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('every source workflow command rejects official chapter 047 as a known upstream gap', () => {
+  for (const command of ['status', 'copy', 'ready']) {
+    const result = spawnSync(process.execPath, ['scripts/source-workflow.mjs', command, '047'], {
+      cwd: process.cwd(),
+      encoding: 'utf8',
+    });
+    assert.notEqual(result.status, 0, `${command} unexpectedly accepted official source 047`);
+    assert.match(
+      result.stderr,
+      /Official source 047 is unavailable because its upstream original is missing/,
+    );
   }
 });
 

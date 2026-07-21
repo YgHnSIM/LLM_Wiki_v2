@@ -37,7 +37,7 @@ npm run source:ready -- 010
 
 `source:copy`는 번역 쌍을 검사하고 `raw/`와 SHA-256 레지스트리만 갱신한다. 이 단계에서는 커밋·푸시하지 않는다. `source:ready`도 전체 검증만 수행하며 Git을 변경하지 않는다. 공개 소스 처리가 끝난 뒤 변경 범위를 검토해 `main`에서 한 번만 커밋·푸시한다. 자세한 절차와 실패 복구 규칙은 [소스 수집 워크플로](docs/source-ingestion-workflow.md)에 있다.
 
-명령의 세 자리 값은 외부 원문과 raw를 찾는 **로컬 수집 접두사**다. 공개 `source.NNN`과 위키 파일·URL·커밋에는 [공식 책 목차 번호](docs/source-numbering.md)를 쓴다. 공식 047번 게시물이 원문 목록에서 빠졌으므로 로컬 047부터는 공개 번호가 1 크며, raw 파일명과 `order_prefix`는 불변 보존한다.
+명령의 세 자리 값은 [공식 책 목차 번호](docs/source-numbering.md)다. 외부 원문·번역·raw 파일명, `order_prefix`, 공개 `source.NNN`, 위키 파일·URL·커밋이 모두 같은 번호를 쓴다. 공식 047은 upstream 원문이 없어 `wiki/meta/source-gaps.yml`에 결손으로 기록하며 다른 문서에 재사용하지 않는다.
 
 ## 사이트 기능
 

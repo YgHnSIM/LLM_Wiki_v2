@@ -4,7 +4,7 @@ id: source.056
 page_type: source
 title: RLHF 토대와 인간 선호 기반 보상 학습
 aliases:
-  - 055_RLHF Foundations Learning from Human Preferences in Reinforcement Learning
+  - 056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning
   - Deep Reinforcement Learning from Human Preferences
 tags:
   - type/source
@@ -16,8 +16,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/055_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md'
-  - 'raw/055_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.commentary.ko.md'
+  - 'raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md'
+  - 'raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.commentary.ko.md'
 evidence:
   - source_id: christiano-et-al-2017-human-preferences
     locator: '초록과 §§2–4의 trajectory segment 비교·reward ensemble·정책 반복 학습, §§5–6의 Atari·simulated robotics'
@@ -120,7 +120,7 @@ related:
 - Nisan Stiennon 외, [Learning to Summarize from Human Feedback](https://proceedings.neurips.cc/paper/2020/hash/1f89885d556929e98d3ef9b86448f951-Abstract.html), NeurIPS 2020.
 - Long Ouyang 외, [Training Language Models to Follow Instructions with Human Feedback](https://arxiv.org/abs/2203.02155), 2022.
 - 프로젝트 번역·검토 출발 자료: [RLHF Foundations Learning from Human Preferences in Reinforcement Learning](https://mbrenndoerfer.com/writing/rlhf-foundations-reinforcement-learning-human-preferences)
-- 프로젝트 보존 자료: `raw/055_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md`, `raw/055_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md`, `raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.commentary.ko.md`.
 
 ## 관련 항목
 

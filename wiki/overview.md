@@ -22,11 +22,11 @@ related:
 
 이 위키는 언어 모델링, 기계 지능 평가, 초기 기계 번역, 신경망 학습, 형식언어, 대화형 AI의 역사를 1차 문헌과 함께 연결한다. 수집 당시의 번역·해설은 `raw/`에 보존하고, 공개 문서는 locator가 있는 근거로 검증한다.
 
-## 공식 장 번호와 수집 접두사
+## 공식 장 번호와 원문 결손
 
 공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism (2015)**이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-21 현재 원문을 제공하지 않는다.
 
-따라서 공개 위키에는 공식 047을 다른 문서로 채우지 않고 결손으로 남긴다. 외부 원문·번역·raw의 로컬 수집 접두사 001–046은 공식 번호와 같고, 로컬 047–109는 공식 048–110에 대응한다. raw 파일명·해시·`order_prefix`는 수집 이력으로 보존하고, 공개 파일명·`source.NNN`·링크·URL은 공식 번호를 쓴다. 현재 source 79개는 공식 001–046·048–079·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]은 로컬 102 원문과 URL이 일치하는 공식 103장으로 바로잡았으며, 다음 순차 입력 079는 공식 080 Chain-of-Thought Prompting으로 공개한다.
+따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 79개는 공식 001–046·048–079·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 080 Chain-of-Thought Prompting이다.
 
 숫자 badge는 정규 source의 공식 장 번호에만 쓴다. 비번호 reference가 추가되면 번호 source 뒤에서 `참고`로 표시하며, 목록 위치를 `001` 같은 장 번호로 바꾸지 않는다. 같은 장의 검증 노트·번역·해설은 서로 다른 장이 아니라 하나의 source 묶음에 속한다.
 

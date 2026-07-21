@@ -18,8 +18,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/078_HELM Holistic Evaluation of Language Models Framework.ko.md'
-  - 'raw/078_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md'
+  - 'raw/079_HELM Holistic Evaluation of Language Models Framework.ko.md'
+  - 'raw/079_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md'
 evidence:
   - source_id: liang-et-al-2023-helm
     locator: '초록, §§1.1–1.2·3–8·10–11, Tables 4–6·8·13과 Appendices A·C·F–J의 시나리오·적응·일곱 메트릭·평가 규모·인간 평가·비용·오염·설계 한계'
@@ -252,7 +252,7 @@ HELM은 이 문제를 해결된 보편 순위로 제시하지 않았다. 사용�
 - 같은 논문의 [arXiv:2211.09110](https://arxiv.org/abs/2211.09110), 최초 공개 2022-11-16, 현재 TMLR 판 포함.
 - Stanford CRFM, [HELM v0.1.0 결과와 원시 산출물](https://crfm.stanford.edu/helm/v0.1.0/) 및 [공개 구현](https://github.com/stanford-crfm/helm).
 - [[079_HELM과 다차원 언어 모델 평가]]
-- 프로젝트 보존 자료: `raw/078_HELM Holistic Evaluation of Language Models Framework.ko.md`, `raw/078_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/079_HELM Holistic Evaluation of Language Models Framework.ko.md`, `raw/079_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md`.
 
 ## 관련 항목
 

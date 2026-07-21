@@ -4,7 +4,7 @@ id: source.059
 page_type: source
 title: GPT-1과 GPT-2의 전이 방식 변화
 aliases:
-  - 058_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning
+  - 059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning
   - Improving Language Understanding by Generative Pre-Training
   - Language Models are Unsupervised Multitask Learners
 tags:
@@ -17,8 +17,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/058_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md'
-  - 'raw/058_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md'
+  - 'raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md'
+  - 'raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md'
 evidence:
   - source_id: gpt-2018
     locator: '초록과 §§1–3의 자기회귀 사전 학습·과제별 입력 변환·지도 미세조정, §§4–5와 Tables 2–7의 12개 과제·ablation·zero-shot 분석'
@@ -172,7 +172,7 @@ GPT-1과 BERT는 전체 fine-tuning 인터페이스를 공유하지만 사전 �
 - Alec Radford 외, [Language Models are Unsupervised Multitask Learners](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf), 2019.
 - OpenAI, [Better Language Models and Their Implications](https://openai.com/index/better-language-models/), 2019 original post와 interim updates.
 - 프로젝트 번역·검토 출발 자료: [GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning](https://mbrenndoerfer.com/writing/gpt1-gpt2-autoregressive-pretraining-transfer-learning)
-- 프로젝트 보존 자료: `raw/058_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md`, `raw/058_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md`, `raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md`.
 
 ## 관련 항목
 

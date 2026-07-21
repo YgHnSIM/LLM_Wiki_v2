@@ -19,10 +19,10 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md'
-  - 'raw/069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md'
-  - 'raw/074_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md'
-  - 'raw/074_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md'
+  - 'raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md'
+  - 'raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md'
+  - 'raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md'
+  - 'raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md'
 evidence:
   - source_id: radford-et-al-2021-clip
     locator: 'PMLR 139, pp. 8748–8763의 §§2.1–2.5·Figures 1–3, §§3–6·Figures 4–7과 supplement §§A–B·D–E·I, Tables 2·4·8–10·18–20의 WIT·dual encoder·대칭 대조 손실·zero-shot classifier·prompt ensemble·dataset·overlap·bias·학습 및 평가 조건'
@@ -168,8 +168,8 @@ Prompt wording과 후보 클래스 설계는 정확도와 편향을 함께 바�
 - [[075_DALL·E와 이산 이미지 토큰 생성]]
 - Alec Radford 외, [Learning Transferable Visual Models From Natural Language Supervision](https://proceedings.mlr.press/v139/radford21a.html), ICML 2021, PMLR 139:8748–8763, 특히 §§2.1–2.5, Figures 1–3, §§3–6, Figures 4–7과 supplementary §§A–B·D–E·I, Tables 2·4·8–10·18–20.
 - Aditya Ramesh 외, [Zero-Shot Text-to-Image Generation](https://proceedings.mlr.press/v139/ramesh21a.html), ICML 2021, §2.6과 Figures 3·6·9(c).
-- 프로젝트 보존 자료: `raw/069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md`, `raw/069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md`.
-- 추가 보존 자료: `raw/074_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md`, `raw/074_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md`, `raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md`.
+- 추가 보존 자료: `raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md`, `raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md`.
 
 ## 관련 항목
 

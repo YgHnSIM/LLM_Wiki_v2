@@ -14,8 +14,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/047_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md'
-  - 'raw/047_Residual Connections Enabling Training of Very Deep Neural Networks.commentary.ko.md'
+  - 'raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md'
+  - 'raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.commentary.ko.md'
 evidence:
   - source_id: he-et-al-2016-resnet
     locator: '§1과 Figures 1·4·6의 더 깊은 plain network에서 증가한 training error'

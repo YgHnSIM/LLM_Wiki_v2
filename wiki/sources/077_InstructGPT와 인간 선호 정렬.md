@@ -18,8 +18,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/076_InstructGPT and RLHF Aligning Language Models with Human Preferences.ko.md'
-  - 'raw/076_InstructGPT and RLHF Aligning Language Models with Human Preferences.commentary.ko.md'
+  - 'raw/077_InstructGPT and RLHF Aligning Language Models with Human Preferences.ko.md'
+  - 'raw/077_InstructGPT and RLHF Aligning Language Models with Human Preferences.commentary.ko.md'
 evidence:
   - source_id: ouyang-et-al-2022-instructgpt
     locator: '초록, §§3.1–3.6와 Figure 2·Table 6의 SFT·4–9개 응답 순위·reward model·SFT 기준 KL·PPO/PPO-ptx, §§4.1–4.4와 Figures 3–7·9의 인간 선호·TruthfulQA·toxicity·bias·단순 오류, §§5.1–5.5와 Appendices A–C·E의 자료·평가자 대표성·계산량·성능 회귀·오용 한계'
@@ -195,7 +195,7 @@ Raw 번역은 2025년 회고 글의 서술과 `/writing/...` 탐색 링크를 �
 - OpenAI, [Aligning language models to follow instructions](https://openai.com/index/instruction-following/), 2022-01-27.
 - OpenAI, [InstructGPT model card](https://github.com/openai/following-instructions-human-feedback/blob/main/model-card.md), 알려진 한계와 배포판 범위.
 - 프로젝트 번역·검토 출발 자료: Michael Brenndoerfer, [InstructGPT and RLHF: Aligning Language Models with Human Preferences](https://mbrenndoerfer.com/writing/instructgpt-rlhf-aligning-language-models-human-preferences), 2025.
-- 프로젝트 보존 자료: `raw/076_InstructGPT and RLHF Aligning Language Models with Human Preferences.ko.md`, `raw/076_InstructGPT and RLHF Aligning Language Models with Human Preferences.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/077_InstructGPT and RLHF Aligning Language Models with Human Preferences.ko.md`, `raw/077_InstructGPT and RLHF Aligning Language Models with Human Preferences.commentary.ko.md`.
 
 ## 관련 항목
 

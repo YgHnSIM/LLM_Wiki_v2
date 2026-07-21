@@ -16,10 +16,10 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/057_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md'
-  - 'raw/057_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md'
-  - 'raw/064_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.ko.md'
-  - 'raw/064_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.commentary.ko.md'
+  - 'raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md'
+  - 'raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md'
+  - 'raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.ko.md'
+  - 'raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.commentary.ko.md'
 evidence:
   - source_id: bert-2019
     locator: '§§1–3의 encoder·MLM·NSP·fine-tuning, §4와 Tables 1–5의 GLUE·SQuAD·SWAG·ablation, Appendix A의 학습 절차'

@@ -18,8 +18,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md'
-  - 'raw/059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md'
+  - 'raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md'
+  - 'raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md'
 evidence:
   - source_id: wang-et-al-2018-glue
     locator: 'pp. 353–355와 Table 1의 아홉 task·metric·domain·자료량·private test와 diagnostic platform'

@@ -4,7 +4,7 @@ id: source.072
 page_type: source
 title: 지시 미세조정과 FLAN의 제로샷 일반화
 aliases:
-  - 071_Instruction Tuning Adapting Language Models to Follow Explicit Instructions
+  - 072_Instruction Tuning Adapting Language Models to Follow Explicit Instructions
   - Instruction Tuning Adapting Language Models to Follow Explicit Instructions
   - FLAN instruction tuning
 tags:
@@ -18,8 +18,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/071_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.ko.md'
-  - 'raw/071_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.commentary.ko.md'
+  - 'raw/072_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.ko.md'
+  - 'raw/072_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.commentary.ko.md'
 evidence:
   - source_id: wei-et-al-2022-flan
     locator: '초록, §§1–4와 Figures 1–10의 정의·62개 데이터셋·12개 과제 군집·군집 보류·LaMDA-PT 학습·GPT-3 비교·과제 수·규모·지시 절제, §6·Appendix C와 FAQ의 한계'
@@ -189,7 +189,7 @@ raw의 Self-Instruct·ChatGPT·GPT-4·Claude·multimodal 확장은 후대 자료
 - Yizhong Wang 외, [Self-Instruct: Aligning Language Models with Self-Generated Instructions](https://aclanthology.org/2023.acl-long.754/), ACL 2023, §§2–3·8; arXiv v1 2022-12-20.
 - Long Ouyang 외, [Training language models to follow instructions with human feedback](https://arxiv.org/abs/2203.02155), 2022, §§1·3.1–3.2.
 - 프로젝트 번역·검토 출발 자료: [Instruction Tuning: Adapting Language Models to Follow Explicit Instructions](https://mbrenndoerfer.com/writing/instruction-tuning-adapting-language-models-to-follow-explicit-instructions)
-- 프로젝트 보존 자료: `raw/071_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.ko.md`, `raw/071_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/072_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.ko.md`, `raw/072_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.commentary.ko.md`.
 
 ## 관련 항목
 

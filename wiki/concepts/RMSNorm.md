@@ -15,8 +15,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/048_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md'
-  - 'raw/048_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md'
+  - 'raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md'
+  - 'raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md'
 evidence:
   - source_id: zhang-sennrich-2019-rmsnorm
     locator: '초록과 §§3–5의 re-centering 제거, RMS 식, pRMSNorm과 속도·성능 평가'

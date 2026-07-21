@@ -5,7 +5,7 @@ import yaml from 'js-yaml';
 import matter from 'gray-matter';
 import { metaDir, rawDir, rootDir, wikiDir } from './lib/project-paths.mjs';
 import {
-  canonicalSourcePrefix,
+  officialSourcePrefix,
   sourcePageNumberingErrors,
 } from './lib/source-numbering.mjs';
 import {
@@ -53,8 +53,7 @@ async function readSourceInventory(prefix) {
 }
 
 async function loadContext(selection, { requireOriginalUrl = false } = {}) {
-  const prefix = normalizeSourceSelection(selection);
-  const canonicalPrefix = canonicalSourcePrefix(prefix);
+  const prefix = officialSourcePrefix(normalizeSourceSelection(selection));
   const sourceFilename = await readSourceInventory(prefix);
   const filenames = derivePairFilenames(sourceFilename);
   const sourcePath = path.join(sourceDir, sourceFilename);
@@ -64,7 +63,6 @@ async function loadContext(selection, { requireOriginalUrl = false } = {}) {
     : detectedSourceUrl;
   return {
     prefix,
-    canonicalPrefix,
     sourceFilename,
     sourcePath,
     sourceUrl,
@@ -119,13 +117,13 @@ function expectedRecords(context, pair) {
   });
 }
 
-async function findPublicSourcePage(canonicalPrefix) {
+async function findPublicSourcePage(prefix) {
   const sourcePagesDir = path.join(wikiDir, 'sources');
   const filenames = (await fs.readdir(sourcePagesDir)).filter((name) => name.endsWith('.md'));
   for (const filename of filenames) {
     const content = await fs.readFile(path.join(sourcePagesDir, filename), 'utf8');
     const parsed = matter(content);
-    if (String(parsed.data.id) === `source.${canonicalPrefix}`) return path.join(sourcePagesDir, filename);
+    if (String(parsed.data.id) === `source.${prefix}`) return path.join(sourcePagesDir, filename);
   }
   return null;
 }
@@ -155,9 +153,9 @@ async function inspect(context, { requireRaw = false, requirePage = false } = {}
     }
   }
 
-  const publicSourcePage = await findPublicSourcePage(context.canonicalPrefix);
+  const publicSourcePage = await findPublicSourcePage(context.prefix);
   if (requirePage && !publicSourcePage) {
-    problems.push(`No wiki source page has official id source.${context.canonicalPrefix} (local inventory ${context.prefix}).`);
+    problems.push(`No wiki source page has official id source.${context.prefix}.`);
   }
   if (requirePage && publicSourcePage) {
     const publicPage = matter(await fs.readFile(publicSourcePage, 'utf8'));
@@ -169,17 +167,17 @@ async function inspect(context, { requireRaw = false, requirePage = false } = {}
       filename: publicFilename,
       artifacts: pageArtifacts,
     })) {
-      problems.push(`Public source page source.${context.canonicalPrefix} numbering: ${numberingError}`);
+      problems.push(`Public source page source.${context.prefix} numbering: ${numberingError}`);
     }
     const missingPageArtifacts = missingExpectedArtifactPaths(pageArtifacts, expectedPageArtifacts);
     for (const artifactPath of missingPageArtifacts) {
-      problems.push(`Public source page source.${context.canonicalPrefix} frontmatter is missing expected artifact '${artifactPath}'.`);
+      problems.push(`Public source page source.${context.prefix} frontmatter is missing expected artifact '${artifactPath}'.`);
     }
     for (const artifactPath of unexpectedArtifactPaths(pageArtifacts, expectedPageArtifacts)) {
-      problems.push(`Public source page source.${context.canonicalPrefix} frontmatter has unexpected artifact '${artifactPath}'; expected exactly the translation/commentary pair.`);
+      problems.push(`Public source page source.${context.prefix} frontmatter has unexpected artifact '${artifactPath}'; expected exactly the translation/commentary pair.`);
     }
     for (const artifactPath of duplicateArtifactPaths(pageArtifacts)) {
-      problems.push(`Public source page source.${context.canonicalPrefix} frontmatter repeats artifact '${artifactPath}'.`);
+      problems.push(`Public source page source.${context.prefix} frontmatter repeats artifact '${artifactPath}'.`);
     }
   }
   return { pair, records, publicSourcePage, problems };
@@ -224,7 +222,7 @@ async function copyRaw(context) {
   const verified = await inspect(context, { requireRaw: true });
   if (verified.problems.length) fail(`Post-copy validation failed:\n${verified.problems.join('\n')}`);
 
-  console.log(`Raw pair verified and registered for local inventory ${context.prefix} (official chapter ${context.canonicalPrefix}):`);
+  console.log(`Raw pair verified and registered for official source ${context.prefix}:`);
   for (const record of verified.records) console.log(`- ${record.path} (${record.sha256})`);
   console.log('Git commit/push: not run. Continue with public wiki source processing.');
 }
@@ -244,14 +242,14 @@ async function ready(context) {
   const branch = run('git', ['branch', '--show-current']).stdout.trim();
   if (branch !== 'main') fail(`Source finalization is allowed only on main; current branch is ${branch || '(detached)'}.`);
 
-  const verificationEnvironment = verificationEnvironmentForSource(context.canonicalPrefix, process.env);
+  const verificationEnvironment = verificationEnvironmentForSource(context.prefix, process.env);
   const verification = process.env.npm_execpath
     ? run(process.execPath, [process.env.npm_execpath, 'run', 'verify'], { stdio: 'inherit', env: verificationEnvironment })
     : run('npm', ['run', 'verify'], { stdio: 'inherit', env: verificationEnvironment, shell: process.platform === 'win32' });
   if (verification.status !== 0) process.exit(verification.status || 1);
 
-  console.log(`Official source ${context.canonicalPrefix} (local inventory ${context.prefix}) is ready for reviewed staging on main.`);
-  console.log(`Suggested commit prefix: ingest: ${context.canonicalPrefix}_short_title`);
+  console.log(`Official source ${context.prefix} is ready for reviewed staging on main.`);
+  console.log(`Suggested commit prefix: ingest: ${context.prefix}_short_title`);
   console.log('This command did not stage, commit, or push anything.');
 }
 
@@ -260,14 +258,14 @@ async function status(context) {
   const commentaryExists = await exists(context.commentaryPath);
   const rawTranslationExists = await exists(context.rawTranslationPath);
   const rawCommentaryExists = await exists(context.rawCommentaryPath);
-  const publicSourcePage = await findPublicSourcePage(context.canonicalPrefix);
+  const publicSourcePage = await findPublicSourcePage(context.prefix);
 
-  console.log(`Local inventory ${context.prefix} -> official chapter ${context.canonicalPrefix}: ${context.sourceFilename}`);
+  console.log(`Official source ${context.prefix}: ${context.sourceFilename}`);
   console.log(`- translation: ${translationExists ? 'ready' : 'missing'} (${context.translationPath})`);
   console.log(`- commentary: ${commentaryExists ? 'ready' : 'missing'} (${context.commentaryPath})`);
   console.log(`- raw translation: ${rawTranslationExists ? 'present' : 'missing'}`);
   console.log(`- raw commentary: ${rawCommentaryExists ? 'present' : 'missing'}`);
-  console.log(`- public source page (source.${context.canonicalPrefix}): ${publicSourcePage ? path.relative(rootDir, publicSourcePage) : 'missing'}`);
+  console.log(`- public source page (source.${context.prefix}): ${publicSourcePage ? path.relative(rootDir, publicSourcePage) : 'missing'}`);
   console.log(`- source_url: ${context.sourceUrl || 'missing (source:copy and source:ready will fail)'}`);
 
   if (translationExists && commentaryExists) {
@@ -295,10 +293,10 @@ function printHelp() {
 Commands:
   status  Read-only view of translation, raw, and official-numbered public-wiki state.
   copy    Validate the Korean pair, copy it into raw/, and append SHA-256 records. Never runs Git.
-  ready   Require raw registration and the mapped official source.NNN, then run npm verify on main. Never runs Git writes.
+  ready   Require raw registration and the same-numbered official source.NNN, then run npm verify on main. Never runs Git writes.
 
-NNN always selects the local inventory/raw prefix. Official chapter 047 is absent upstream,
-so local 047-109 publish as official 048-110.`);
+NNN is the official source number used by the original, translation, raw artifact, and public page.
+Official source 047 is reserved but unavailable because its upstream original is missing.`);
 }
 
 const [command, selection] = process.argv.slice(2);

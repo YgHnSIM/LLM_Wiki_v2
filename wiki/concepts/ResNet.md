@@ -14,8 +14,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/047_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md'
-  - 'raw/047_Residual Connections Enabling Training of Very Deep Neural Networks.commentary.ko.md'
+  - 'raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md'
+  - 'raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.commentary.ko.md'
 evidence:
   - source_id: he-et-al-2016-resnet
     locator: '전체, 특히 Figures 2–6, Tables 2–6의 18–152층 ImageNet과 20–1202층 CIFAR 실험'

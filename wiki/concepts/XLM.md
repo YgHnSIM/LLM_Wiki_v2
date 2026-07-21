@@ -17,8 +17,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/061_XLM Cross-lingual Language Model for Multilingual NLP.ko.md'
-  - 'raw/061_XLM Cross-lingual Language Model for Multilingual NLP.commentary.ko.md'
+  - 'raw/062_XLM Cross-lingual Language Model for Multilingual NLP.ko.md'
+  - 'raw/062_XLM Cross-lingual Language Model for Multilingual NLP.commentary.ko.md'
 evidence:
   - source_id: conneau-lample-2019-xlm
     locator: '§§3.1–3.5와 Figure 1의 language sampling·shared BPE·CLM/MLM/TLM, §§4–5와 Tables 1–5의 전이 protocol·평가 결과'

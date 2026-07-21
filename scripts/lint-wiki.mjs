@@ -4,7 +4,10 @@ import path from 'node:path';
 import yaml from 'js-yaml';
 import { createFrontmatterValidator, schemaErrorMessage } from './lib/frontmatter-schema.mjs';
 import { metaDir, rootDir, wikiDir } from './lib/project-paths.mjs';
-import { sourcePageNumberingErrors } from './lib/source-numbering.mjs';
+import {
+  rawArtifactRecordNumberingErrors,
+  sourcePageNumberingErrors,
+} from './lib/source-numbering.mjs';
 import {
   asArray,
   asStringArray,
@@ -221,6 +224,9 @@ const rawMarkdown = (await walkFiles(path.join(rootDir, 'raw'), '.md'))
   .sort(collator.compare);
 for (const relative of rawMarkdown) if (!artifactRecords.has(relative)) errors.push(`${relative}: raw artifact is not registered.`);
 for (const [relative, record] of artifactRecords) {
+  for (const numberingError of rawArtifactRecordNumberingErrors(record)) {
+    errors.push(`${relative}: ${numberingError}`);
+  }
   const sourceUrl = String(record.source_url ?? '').trim();
   try {
     const parsed = new URL(sourceUrl);

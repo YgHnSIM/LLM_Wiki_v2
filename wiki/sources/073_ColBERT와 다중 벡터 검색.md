@@ -4,7 +4,7 @@ id: source.073
 page_type: source
 title: ColBERT와 다중 벡터 검색
 aliases:
-  - 072_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval
+  - 073_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval
   - Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval
   - Multi-Vector Retrievers
   - ColBERT late interaction
@@ -19,8 +19,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/072_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval.ko.md'
-  - 'raw/072_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval.commentary.ko.md'
+  - 'raw/073_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval.ko.md'
+  - 'raw/073_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval.commentary.ko.md'
 evidence:
   - source_id: khattab-zaharia-2020-colbert
     locator: 'SIGIR 2020, §§3.2–3.6·4.2–4.5, Eqs. 1–3와 Tables 1–4의 독립 BERT 부호화·MaxSim·FAISS 후보 검색·MS MARCO/TREC CAR 평가·색인 비용'
@@ -186,7 +186,7 @@ ColBERT-QA·Baleen·ColBERTv2는 원형의 후속 계보지만 각각 weak super
 - Omar Khattab·Christopher Potts·Matei Zaharia, [Baleen: Robust Multi-Hop Reasoning at Scale via Condensed Retrieval](https://proceedings.neurips.cc/paper/2021/hash/e8b1cbd05f6e6a358a81dee52493dd06-Abstract.html), NeurIPS 2021.
 - Keshav Santhanam 외, [ColBERTv2: Effective and Efficient Retrieval via Lightweight Late Interaction](https://aclanthology.org/2022.naacl-main.272/), NAACL 2022, pp. 3715–3734.
 - 프로젝트 번역·검토 출발 자료: [Multi-Vector Retrievers: Fine-Grained Token-Level Matching for Neural Information Retrieval](https://mbrenndoerfer.com/writing/multi-vector-retrievers-fine-grained-token-level-matching-for-neural-information-retrieval)
-- 프로젝트 보존 자료: `raw/072_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval.ko.md`, `raw/072_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/073_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval.ko.md`, `raw/073_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval.commentary.ko.md`.
 
 ## 관련 항목
 

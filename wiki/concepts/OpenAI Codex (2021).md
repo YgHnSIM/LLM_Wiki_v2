@@ -20,8 +20,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/070_Codex AI-Assisted Code Generation and the Transformation of Software Development.ko.md'
-  - 'raw/070_Codex AI-Assisted Code Generation and the Transformation of Software Development.commentary.ko.md'
+  - 'raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.ko.md'
+  - 'raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.commentary.ko.md'
 evidence:
   - source_id: chen-et-al-2021-codex
     locator: '초록과 §1·Figure 1의 연구 모델–production version 구분, §§2.1–2.3·Equation 1·Figure 3의 HumanEval·pass@k·sandbox, §§3.1–3.3·Figures 4–8·Table 1의 Python 자료·미세조정·Codex-12B 평가, §4·Figures 9–10의 Codex-S, §§6–8과 Appendices A·F–G의 한계·위험·선행 연구'
@@ -177,7 +177,7 @@ APPS의 full-program 문제에서는 HumanEval보다 훨씬 낮은 결과가 나
 - Mark Chen 외, [Evaluating Large Language Models Trained on Code](https://arxiv.org/abs/2107.03374), 2021, 특히 초록, §§1–4·6–8, Equation 1, Figures 1·3–10, Table 1과 Appendices A·F–G.
 - Wojciech Zaremba·Greg Brockman, [OpenAI Codex](https://openai.com/index/openai-codex/), 2021-08-10, GPT-3 descendant·학습 자료·지원 언어·context·API·Copilot 제품 설명과 페이지 상단의 2023년 구형 model 폐기·2025년 동명 agent 안내.
 - Nat Friedman, [Introducing GitHub Copilot: your AI pair programmer](https://github.blog/news-insights/product-news/introducing-github-copilot-ai-pair-programmer/), 2021-06-29, technical preview의 Codex 기반·편집기 문맥·지원 언어 설명.
-- 프로젝트 보존 자료: `raw/070_Codex AI-Assisted Code Generation and the Transformation of Software Development.ko.md`, `raw/070_Codex AI-Assisted Code Generation and the Transformation of Software Development.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.ko.md`, `raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.commentary.ko.md`.
 
 ## 관련 항목
 

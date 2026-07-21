@@ -22,8 +22,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/074_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md'
-  - 'raw/074_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md'
+  - 'raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md'
+  - 'raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md'
 evidence:
   - source_id: ramesh-et-al-2021-dalle
     locator: 'PMLR 139, pp. 8821–8831의 §§1–3·Figures 1–9와 Appendix §§A–C·F–G·Figures 10–14·Listings 1–2의 두 단계 모델·joint token stream·재순위화·zero-shot 평가·실패 조건'
@@ -123,7 +123,7 @@ CLIP은 이미지와 텍스트를 비교하는 이중 인코더이며 DALL·E는
 - Aditya Ramesh 외, [arXiv 본문·부록 통합본](https://arxiv.org/abs/2102.12092), Appendix §§A–C·F–G, Figures 10–14와 Listings 1–2.
 - OpenAI, [DALL·E: Creating images from text](https://openai.com/index/dall-e/), 2021-01-05, Overview, Capabilities와 Summary of approach and prior work.
 - OpenAI, [DALL·E dVAE repository and model card](https://github.com/openai/DALL-E), README와 `model_card.md`.
-- 프로젝트 보존 자료: `raw/074_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md`, `raw/074_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md`, `raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md`.
 
 ## 관련 항목
 

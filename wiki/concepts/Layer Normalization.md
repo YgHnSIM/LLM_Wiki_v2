@@ -15,8 +15,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/048_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md'
-  - 'raw/048_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md'
+  - 'raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md'
+  - 'raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md'
 evidence:
   - source_id: ba-kiros-hinton-2016-layer-normalization
     locator: '초록과 §§2–3의 layer mean·variance·gain/bias와 recurrent formulation, §§4–5의 실험'

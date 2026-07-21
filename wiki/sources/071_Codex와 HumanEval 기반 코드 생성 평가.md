@@ -4,7 +4,7 @@ id: source.071
 page_type: source
 title: Codex와 HumanEval 기반 코드 생성 평가
 aliases:
-  - 070_Codex AI-Assisted Code Generation and the Transformation of Software Development
+  - 071_Codex AI-Assisted Code Generation and the Transformation of Software Development
   - Evaluating Large Language Models Trained on Code
   - OpenAI Codex 2021
 tags:
@@ -19,8 +19,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/070_Codex AI-Assisted Code Generation and the Transformation of Software Development.ko.md'
-  - 'raw/070_Codex AI-Assisted Code Generation and the Transformation of Software Development.commentary.ko.md'
+  - 'raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.ko.md'
+  - 'raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.commentary.ko.md'
 evidence:
   - source_id: chen-et-al-2021-codex
     locator: '초록, §§1–7, Figures 1·4–8과 Tables 1–3, Appendices A·C–H의 HumanEval·pass@k·코드 미세조정·Codex-S·한계·위험 분석'
@@ -196,7 +196,7 @@ Training data에는 보안상 좋지 않은 관행, 편향된 주석과 여러 l
 - Wojciech Zaremba·Greg Brockman, [OpenAI Codex](https://openai.com/index/openai-codex/), 2021-08-10, 자연어-코드 demo·API 공개와 Copilot용 production model 설명.
 - Nat Friedman, [Introducing GitHub Copilot: your AI pair programmer](https://github.blog/news-insights/product-news/introducing-github-copilot-ai-pair-programmer/), 2021-06-29, technical preview의 Codex 기반·편집기 문맥·지원 언어 설명.
 - 프로젝트 번역·검토 출발 자료: [Codex: AI-Assisted Code Generation and the Transformation of Software Development](https://mbrenndoerfer.com/writing/codex-ai-assisted-code-generation-transformation-software-development).
-- 프로젝트 보존 자료: `raw/070_Codex AI-Assisted Code Generation and the Transformation of Software Development.ko.md`, `raw/070_Codex AI-Assisted Code Generation and the Transformation of Software Development.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.ko.md`, `raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.commentary.ko.md`.
 
 ## 관련 항목
 

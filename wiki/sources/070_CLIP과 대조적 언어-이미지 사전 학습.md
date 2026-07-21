@@ -4,7 +4,7 @@ id: source.070
 page_type: source
 title: CLIP과 대조적 언어-이미지 사전 학습
 aliases:
-  - 069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding
+  - 070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding
   - CLIP Contrastive Language-Image Pre-training for Multimodal Understanding
 tags:
   - type/source
@@ -18,8 +18,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md'
-  - 'raw/069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md'
+  - 'raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md'
+  - 'raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md'
 evidence:
   - source_id: radford-et-al-2021-clip
     locator: 'ICML 2021, §§2.1–2.5·3.1–3.4·4–6, Figures 1–5와 Table 1; Supplementary §§A–B·D–E·I, Figures 13–14와 Tables 2·4·8–10·18–20'
@@ -177,7 +177,7 @@ CLIP은 class 설명을 텍스트 임베딩으로 바꾸어 사전 학습 지식
 - [[075_DALL·E와 이산 이미지 토큰 생성]]
 - Aditya Ramesh 외, [Zero-Shot Text-to-Image Generation](https://proceedings.mlr.press/v139/ramesh21a.html), ICML 2021, §2.6과 Figures 3·6·9(c).
 - 프로젝트 번역·검토 출발 자료: [CLIP: Contrastive Language-Image Pre-training for Multimodal Understanding](https://mbrenndoerfer.com/writing/clip-contrastive-language-image-pretraining-multimodal).
-- 프로젝트 보존 자료: `raw/069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md`, `raw/069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md`, `raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md`.
 
 ## 관련 항목
 

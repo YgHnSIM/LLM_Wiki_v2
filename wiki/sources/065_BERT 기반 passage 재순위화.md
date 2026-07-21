@@ -4,7 +4,7 @@ id: source.065
 page_type: source
 title: BERT 기반 passage 재순위화
 aliases:
-  - 064_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search
+  - 065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search
   - Passage Re-ranking with BERT
   - BERT for Information Retrieval
 tags:
@@ -18,8 +18,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/064_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.ko.md'
-  - 'raw/064_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.commentary.ko.md'
+  - 'raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.ko.md'
+  - 'raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.commentary.ko.md'
 evidence:
   - source_id: bert-2019
     locator: '§3과 Figure 1의 문장쌍 결합 입력·[CLS] sequence classification·전체 미세조정, Appendix A.2의 최대 512 WordPiece 입력'
@@ -175,7 +175,7 @@ MS MARCO의 question-like query와 TREC-CAR passage 결과를 웹 문서·상품
 - Sean MacAvaney 외, [CEDR: Contextualized Embeddings for Document Ranking](https://arxiv.org/abs/1904.07094), SIGIR 2019, pp. 1101–1104.
 - Pandu Nayak, [Understanding searches better than ever before](https://blog.google/products-and-platforms/products/search/search-language-understanding-bert/), Google, 2019-10-25.
 - 프로젝트 번역·검토 출발 자료: [BERT for Information Retrieval: Transformer-Based Ranking and Semantic Search](https://mbrenndoerfer.com/writing/bert-information-retrieval-transformer-ranking-semantic-search)
-- 프로젝트 보존 자료: `raw/064_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.ko.md`, `raw/064_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.ko.md`, `raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.commentary.ko.md`.
 
 ## 관련 항목
 

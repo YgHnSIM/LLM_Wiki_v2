@@ -4,7 +4,7 @@ id: source.063
 page_type: source
 title: T5와 Text-to-Text 통합 프레임워크
 aliases:
-  - 062_T5 and Text-to-Text Framework Unified NLP Through Text Transformations
+  - 063_T5 and Text-to-Text Framework Unified NLP Through Text Transformations
   - T5 and Text-to-Text Framework
   - Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer
 tags:
@@ -17,8 +17,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/062_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.ko.md'
-  - 'raw/062_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.commentary.ko.md'
+  - 'raw/063_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.ko.md'
+  - 'raw/063_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.commentary.ko.md'
 evidence:
   - source_id: raffel-et-al-2020-t5
     locator: 'pp. 1–67, 특히 §§1–2.4와 Figures 1–2의 연구 목적·architecture·C4·task format·denoising, §§3.2–3.7와 Tables 2–15의 architecture·objective·data·transfer·scaling 비교와 최종 결과, §§4.1–4.2의 종합과 한계'
@@ -145,7 +145,7 @@ T5-11B의 결과는 11B parameter와 큰 pretraining budget에 의존해 재현�
 
 - Colin Raffel 외, [Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer](https://www.jmlr.org/papers/v21/20-074.html), *Journal of Machine Learning Research* 21(140), 2020, pp. 1–67.
 - 프로젝트 번역·검토 출발 자료: [T5 and Text-to-Text Framework: Unified NLP Through Text Transformations](https://mbrenndoerfer.com/writing/t5-text-to-text-framework-unified-nlp-through-text-transformations)
-- 프로젝트 보존 자료: `raw/062_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.ko.md`, `raw/062_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/063_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.ko.md`, `raw/063_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.commentary.ko.md`.
 
 ## 관련 항목
 

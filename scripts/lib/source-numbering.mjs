@@ -1,7 +1,5 @@
 export const OFFICIAL_SOURCE_COUNT = 110;
-export const LOCAL_INVENTORY_SOURCE_COUNT = 109;
 export const MISSING_OFFICIAL_SOURCE_PREFIX = '047';
-export const FIRST_SHIFTED_LOCAL_PREFIX = '047';
 
 function threeDigitPrefix(value, label) {
   const prefix = String(value ?? '').trim();
@@ -16,37 +14,25 @@ function formatPrefix(value) {
 }
 
 /**
- * Convert the physical collection prefix used by /lt and raw artifacts to the
- * official History of Language AI book chapter number.
+ * Validate a History of Language AI official chapter number.
  *
- * The local inventory omits official chapter 047, whose upstream article is
- * unavailable. Consequently local 047–109 correspond to official 048–110.
+ * Every selector, source filename, translated artifact, public source ID,
+ * and commit number uses this same official prefix. Chapter 047 is reserved in
+ * the official table of contents, but its upstream original is unavailable.
  */
-export function canonicalSourcePrefix(localPrefix) {
-  const prefix = threeDigitPrefix(localPrefix, 'Local inventory prefix');
-  const number = Number(prefix);
-  if (number < 1 || number > LOCAL_INVENTORY_SOURCE_COUNT) {
-    throw new Error(`Local inventory prefix must be between 001 and ${formatPrefix(LOCAL_INVENTORY_SOURCE_COUNT)}.`);
-  }
-  return formatPrefix(number >= Number(FIRST_SHIFTED_LOCAL_PREFIX) ? number + 1 : number);
-}
-
-/**
- * Convert an official chapter number back to the physical local inventory
- * prefix. Official chapter 047 has no local artifact and therefore returns
- * null.
- */
-export function localInventoryPrefixForCanonical(canonicalPrefix) {
-  const prefix = threeDigitPrefix(canonicalPrefix, 'Official chapter prefix');
+export function officialSourcePrefix(value) {
+  const prefix = threeDigitPrefix(value, 'Official source prefix');
   const number = Number(prefix);
   if (number < 1 || number > OFFICIAL_SOURCE_COUNT) {
-    throw new Error(`Official chapter prefix must be between 001 and ${formatPrefix(OFFICIAL_SOURCE_COUNT)}.`);
+    throw new Error(`Official source prefix must be between 001 and ${formatPrefix(OFFICIAL_SOURCE_COUNT)}.`);
   }
-  if (prefix === MISSING_OFFICIAL_SOURCE_PREFIX) return null;
-  return formatPrefix(number > Number(MISSING_OFFICIAL_SOURCE_PREFIX) ? number - 1 : number);
+  if (prefix === MISSING_OFFICIAL_SOURCE_PREFIX) {
+    throw new Error(`Official source ${MISSING_OFFICIAL_SOURCE_PREFIX} is unavailable because its upstream original is missing.`);
+  }
+  return prefix;
 }
 
-export function localInventoryPrefixesFromArtifacts(artifacts = []) {
+export function sourcePrefixesFromArtifacts(artifacts = []) {
   const prefixes = artifacts.flatMap((artifact) => {
     const match = String(artifact).replaceAll('\\', '/').match(/^raw\/(\d{3})(?:[_-])/i);
     return match ? [match[1]] : [];
@@ -54,35 +40,51 @@ export function localInventoryPrefixesFromArtifacts(artifacts = []) {
   return [...new Set(prefixes)].sort();
 }
 
-/**
- * Validate the numbering invariant for a public source page. The raw artifact
- * prefix remains physical provenance; only the page ID and filename use the
- * official book chapter number.
- */
-export function sourcePageNumberingErrors({ id, filename, artifacts = [] } = {}) {
-  const errors = [];
-  const localPrefixes = localInventoryPrefixesFromArtifacts(artifacts);
-  if (localPrefixes.length === 0) {
-    return ['source page must reference at least one raw artifact with a three-digit local inventory prefix.'];
-  }
-  if (localPrefixes.length > 1) {
-    return [`source page artifacts use multiple local inventory prefixes: ${localPrefixes.join(', ')}.`];
+/** Validate that a raw registry record uses one official prefix consistently. */
+export function rawArtifactRecordNumberingErrors({ path: artifactPath, order_prefix: orderPrefix } = {}) {
+  const normalizedPath = String(artifactPath ?? '').replaceAll('\\', '/');
+  const pathPrefix = normalizedPath.match(/^raw\/(\d{3})(?:[_-])/i)?.[1] ?? '';
+  if (!pathPrefix) {
+    return [`raw artifact path '${artifactPath ?? ''}' must start with a three-digit official source prefix.`];
   }
 
-  const localPrefix = localPrefixes[0];
-  let canonicalPrefix;
   try {
-    canonicalPrefix = canonicalSourcePrefix(localPrefix);
+    officialSourcePrefix(pathPrefix);
   } catch (error) {
     return [error.message];
   }
 
-  const expectedId = `source.${canonicalPrefix}`;
-  if (String(id ?? '') !== expectedId) {
-    errors.push(`id '${id ?? ''}' must be '${expectedId}' for local raw prefix ${localPrefix}.`);
+  const declaredPrefix = String(orderPrefix ?? '').trim();
+  if (declaredPrefix !== pathPrefix) {
+    return [`order_prefix '${declaredPrefix}' must match raw path prefix ${pathPrefix}.`];
   }
-  if (!new RegExp(`^${canonicalPrefix}(?:[_-]|$)`).test(String(filename ?? ''))) {
-    errors.push(`filename '${filename ?? ''}' must start with official prefix ${canonicalPrefix}_ or ${canonicalPrefix}-.`);
+  return [];
+}
+
+/** Validate the single-number invariant for a public source page. */
+export function sourcePageNumberingErrors({ id, filename, artifacts = [] } = {}) {
+  const errors = [];
+  const artifactPrefixes = sourcePrefixesFromArtifacts(artifacts);
+  if (artifactPrefixes.length === 0) {
+    return ['source page must reference at least one raw artifact with a three-digit official source prefix.'];
+  }
+  if (artifactPrefixes.length > 1) {
+    return [`source page artifacts use multiple official source prefixes: ${artifactPrefixes.join(', ')}.`];
+  }
+
+  const prefix = artifactPrefixes[0];
+  try {
+    officialSourcePrefix(prefix);
+  } catch (error) {
+    return [error.message];
+  }
+
+  const expectedId = `source.${prefix}`;
+  if (String(id ?? '') !== expectedId) {
+    errors.push(`id '${id ?? ''}' must be '${expectedId}' for raw prefix ${prefix}.`);
+  }
+  if (!new RegExp(`^${prefix}(?:[_-]|$)`).test(String(filename ?? ''))) {
+    errors.push(`filename '${filename ?? ''}' must start with official prefix ${prefix}_ or ${prefix}-.`);
   }
   return errors;
 }

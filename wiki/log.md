@@ -1940,13 +1940,13 @@ raw 등록 해시:
 - 실제 문서 분할·색인 갱신·retriever drift·다중 홉 오류·생성 충실성은 시스템별 자료와 평가가 필요하다.
 - 040 DeepQA와 046 MemNN은 모두 후보 검색과 근거 점수화를 분리하지만, 규칙·특징·학습 감독·답 형식의 비교만으로 독립 분석을 만들기에는 047 이후 독해·어텐션 계보가 더 필요해 현재는 연결로 보존한다.
 
-## [2026-07-18] ingest | 047 잔차 학습과 매우 깊은 신경망
+## [2026-07-18] ingest | 048 잔차 학습과 매우 깊은 신경망
 
-수집 당시에는 047 원문이 없어 이 자료를 048로 처리했으나, 2026-07-21 번호 연속성 정리에서 047로 이동했다. 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했으며, 검사된 쌍을 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 ResNet을 기울기 소실의 단일 해법으로 보지 않고 degradation·residual parameterization·직접 gradient 경로의 범위를 복원했다.
+이 자료는 공식 048 Residual Connections 원문이다. 처리 초기에는 공식 047 원문 결손을 반영하지 못한 임시 수집 번호 047을 썼지만, 2026-07-21 공식 번호 통합에서 원문·번역·raw를 048로 확정했다. 영어 원문을 새로 번역하고 12절 학습용 해설을 작성했으며, 검사된 쌍을 `raw/`에 보존하고 SHA-256을 등록했다. 공개 문서는 ResNet을 기울기 소실의 단일 해법으로 보지 않고 degradation·residual parameterization·직접 gradient 경로의 범위를 복원했다.
 
 변경 문서:
 
-- `raw/047_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md`와 대응 해설
+- `raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md`와 대응 해설
 - `wiki/sources/048_잔차 학습과 매우 깊은 신경망.md`
 - `wiki/concepts/잔차 연결.md`, `wiki/concepts/ResNet.md`, `wiki/concepts/Degradation problem.md`
 - `wiki/concepts/기울기 소실.md`, `wiki/concepts/합성곱 신경망.md`의 degradation·잔차 학습 구분 보강
@@ -1980,7 +1980,7 @@ raw 등록 해시:
 
 변경 문서:
 
-- `raw/048_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md`와 대응 해설
+- `raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md`와 대응 해설
 - `wiki/sources/049_층 정규화와 시퀀스 모델의 배치 독립성.md`
 - `wiki/concepts/Layer Normalization.md`, `wiki/concepts/Batch Normalization.md`, `wiki/concepts/RMSNorm.md`
 - `wiki/concepts/잔차 연결.md`의 Post-LN·Pre-LN 위치와 gradient 연결 보강
@@ -2035,7 +2035,7 @@ raw 등록 해시:
 
 변경 문서:
 
-- `raw/049_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md`와 대응 해설
+- `raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md`와 대응 해설
 - `wiki/sources/050_FastText와 서브워드 표현의 두 경로.md`
 - `wiki/concepts/FastText.md`, `wiki/concepts/서브워드 토큰화.md`, `wiki/concepts/Byte Pair Encoding.md`
 - `wiki/concepts/단어 임베딩.md`, `wiki/concepts/Word2Vec.md`, `wiki/concepts/신경망 기계 번역.md`
@@ -2092,7 +2092,7 @@ raw 등록 해시:
 
 변경 문서:
 
-- `raw/050_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md`와 대응 해설
+- `raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md`와 대응 해설
 - `wiki/sources/051_SQuAD와 추출형 독해 평가.md`
 - `wiki/concepts/추출형 질의응답.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
@@ -2125,7 +2125,7 @@ raw 등록 해시:
 
 변경 문서:
 
-- `raw/051_Neural Information Retrieval Semantic Search with Deep Learning.ko.md`와 대응 해설
+- `raw/052_Neural Information Retrieval Semantic Search with Deep Learning.ko.md`와 대응 해설
 - `wiki/sources/052_신경 정보 검색과 의미 대응.md`
 - `wiki/concepts/신경 정보 검색.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
@@ -2183,7 +2183,7 @@ raw 등록 해시:
 
 변경 문서:
 
-- `raw/052_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md`와 대응 해설
+- `raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md`와 대응 해설
 - `wiki/sources/053_GNMT와 제품 규모 신경 번역.md`
 - `wiki/concepts/신경망 기계 번역.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
@@ -2215,7 +2215,7 @@ raw 등록 해시:
 
 변경 문서:
 
-- `raw/053_WaveNet - Neural Audio Generation Revolution.ko.md`와 대응 해설
+- `raw/054_WaveNet - Neural Audio Generation Revolution.ko.md`와 대응 해설
 - `wiki/sources/054_WaveNet과 표본 단위 신경 오디오 생성.md`
 - `wiki/concepts/WaveNet.md`, `wiki/concepts/자기회귀 생성.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
@@ -2247,7 +2247,7 @@ raw 등록 해시:
 
 변경 문서:
 
-- `raw/054_The Transformer Attention Is All You Need.ko.md`와 대응 해설
+- `raw/055_The Transformer Attention Is All You Need.ko.md`와 대응 해설
 - `wiki/sources/055_Transformer와 자기어텐션 기반 시퀀스 모델링.md`
 - `wiki/concepts/Transformer.md`, `wiki/concepts/자기회귀 생성.md`, `wiki/concepts/신경망 기계 번역.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
@@ -2304,7 +2304,7 @@ raw 등록 해시:
 
 변경 문서:
 
-- `raw/055_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md`와 대응 해설
+- `raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md`와 대응 해설
 - `wiki/sources/056_RLHF 토대와 인간 선호 기반 보상 학습.md`
 - `wiki/concepts/인간 피드백 강화학습.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
@@ -2335,7 +2335,7 @@ raw 등록 해시:
 
 변경 문서:
 
-- `raw/056_ELMo and ULMFiT Transfer Learning for Natural Language Processing.ko.md`와 대응 해설
+- `raw/057_ELMo and ULMFiT Transfer Learning for Natural Language Processing.ko.md`와 대응 해설
 - `wiki/sources/057_ELMo와 ULMFiT의 두 전이 학습 경로.md`
 - `wiki/concepts/언어 모델 전이 학습.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
@@ -2365,7 +2365,7 @@ raw 등록 해시:
 
 변경 문서:
 
-- `raw/057_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md`와 대응 해설
+- `raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md`와 대응 해설
 - `wiki/sources/058_BERT의 마스크드 양방향 사전 학습.md`
 - `wiki/concepts/BERT.md`, `wiki/concepts/마스크드 언어 모델링.md`, `wiki/concepts/언어 모델 전이 학습.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
@@ -2396,7 +2396,7 @@ raw 등록 해시:
 
 변경 문서:
 
-- `raw/058_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md`와 대응 해설
+- `raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md`와 대응 해설
 - `wiki/sources/059_GPT-1과 GPT-2의 전이 방식 변화.md`
 - `wiki/concepts/GPT-1과 GPT-2.md`, `wiki/concepts/자기회귀 생성.md`, `wiki/concepts/언어 모델 전이 학습.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
@@ -2450,7 +2450,7 @@ raw 등록 해시:
 
 변경 문서:
 
-- `raw/059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md`와 대응 해설
+- `raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md`와 대응 해설
 - `wiki/sources/060_GLUE와 SuperGLUE의 집계 평가.md`
 - `wiki/concepts/GLUE와 SuperGLUE.md`
 - `wiki/meta/evidence.yml`, `wiki/meta/raw-artifacts.yml`, `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`
@@ -2692,7 +2692,7 @@ raw 등록 해시:
 
 변경 내용:
 
-- `060_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.md`를 원문부터 새로 번역·윤문하고 학습 해설을 작성했다. 검증된 쌍을 새 immutable raw artifact로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다.
+- `061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.md`를 원문부터 새로 번역·윤문하고 학습 해설을 작성했다. 검증된 쌍을 새 immutable raw artifact로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다.
 - [[061_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]]와 [[XLNet·RoBERTa·ALBERT]]를 만들고 BERT 이후 개선을 permutation objective, training recipe, parameterization의 세 축으로 분리했다. 기존 [[마스크드 언어 모델링]]에는 XLNet의 목표와 RoBERTa dynamic masking의 통제 실험 범위를 보강했다.
 - BERT의 15%·80/10/10 masking, XLNet의 factorization order·two-stream fine-tuning, RoBERTa의 500K step·큰 batch·dynamic masking 효과, ALBERT의 layer sharing·base/large 비교·parameter와 FLOPs 차이를 네 원 논문의 locator로 검증했다.
 - raw의 잘못된 XLNet 순열 예시, RoBERTa 완전 수렴·단일 인과, ALBERT mobile 효율·성능 확대, contextual representation을 static embedding으로 보는 설명, 세 모델을 동일한 encoder-only 계열로 묶는 서술과 입증되지 않은 production·후대 모델 직접 계보를 공개 문서에서 교정했다.
@@ -2708,7 +2708,7 @@ raw 등록 해시:
 
 변경 내용:
 
-- `061_XLM Cross-lingual Language Model for Multilingual NLP.md`를 원문부터 새로 번역·윤문하고 학습 해설을 작성했다. 검증된 쌍을 새 immutable raw artifact로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다.
+- `062_XLM Cross-lingual Language Model for Multilingual NLP.md`를 원문부터 새로 번역·윤문하고 학습 해설을 작성했다. 검증된 쌍을 새 immutable raw artifact로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다.
 - [[062_XLM과 교차 언어 사전 학습]]과 [[XLM]]을 만들고 CLM·MLM·TLM의 입력과 목적을 분리했다. 기존 [[마스크드 언어 모델링]]에는 병렬 문장쌍으로 확장한 TLM을, [[Byte Pair Encoding]]에는 다국어 shared BPE의 역할과 한계를 보강했다.
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]]에 영어 표지 NLI fine-tuning 뒤 target-language label 없이 평가하는 XLM의 전이 경로를 추가했다. 과제 표지의 유무와 target 언어 표지의 유무를 분리해 서로 다른 zero-shot 용법을 비교했다.
 - NeurIPS 원 논문을 대조해 shared BPE 어휘 구성의 sampling 지수 $\alpha=0.5$와 CLM·MLM 학습 batch 선택의 $\alpha=0.7$을 구분했다. XNLI 평균 71.5%·75.1%, TLM의 3.6%p 개선, 기계 번역 BLEU와 네팔어 perplexity를 표·절 locator로 확인했다.
@@ -2742,7 +2742,7 @@ raw 등록 해시:
 
 변경 내용:
 
-- `062_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.md`를 원문부터 새로 번역·윤문하고 학습 해설을 작성했다. 검증된 쌍을 새 immutable raw artifact로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다.
+- `063_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.md`를 원문부터 새로 번역·윤문하고 학습 해설을 작성했다. 검증된 쌍을 새 immutable raw artifact로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다.
 - [[063_T5와 Text-to-Text 통합 프레임워크]]와 [[T5]]를 만들고 분류·질의응답·요약·번역을 공통 text input/output과 token likelihood로 표현하는 범위, encoder–decoder와 sentinel span corruption, C4와 과제별 fine-tuning을 정리했다.
 - [[마스크드 언어 모델링]]에는 BERT식 위치별 token 분류와 T5의 short-target span 복원을 비교했다. [[언어 모델 전이 학습]]과 [[사전 학습 지식은 과제에 어떻게 도착하는가]]에는 BERT·GPT-2·XLM과 다른 T5의 supervised text-to-text 전이 경로를 추가했다.
 - JMLR 원 논문을 대조해 15% corruption·평균 span 길이 3·첫/마지막 sentinel, 약 750GB English C4, parameter와 계산량의 차이, multi-task pretraining 뒤 task별 fine-tuning, 24개 중 18개 최고 결과와 WMT English→German 32.1 BLEU를 확인했다.
@@ -2760,7 +2760,7 @@ raw 등록 해시:
 
 변경 내용:
 
-- `063_Transformer-XL Extending Transformers to Long Sequences.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 검증된 쌍을 새 immutable raw artifact로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다.
+- `064_Transformer-XL Extending Transformers to Long Sequences.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 검증된 쌍을 새 immutable raw artifact로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다.
 - [[064_Transformer-XL과 세그먼트 수준 재귀]]와 [[Transformer-XL]]을 만들고, 길이 $M$의 bounded hidden-state memory, 이전 $n-1$층 상태의 stop-gradient 재사용과 layer shift, 고정 사인파 상대 위치 행렬과 네 항 attention을 정리했다.
 - [[Transformer]]와 [[훈련 병렬성과 생성 순차성은 다른 축이다]]에는 현재 segment 내부 위치 병렬성, segment 사이 forward 상태 의존, 끊긴 gradient 경로를 서로 다른 축으로 추가했다. [[XLNet·RoBERTa·ALBERT]]와 [[061_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]]에는 Transformer-XL backbone과 XLNet의 permutation objective·two-stream attention을 구분하는 연결을 보강했다.
 - ACL 2019 원 논문을 대조해 WikiText-103 18.3 perplexity, enwik8 0.99 bpc 등 다섯 언어 모델 자료의 직접 실험과 ablation·RECL·평가 속도 조건을 확인했다. 길이 $L$의 query가 $M+L$ key를 보는 dense attention 비용도 상태 재사용과 별도로 명시했다.
@@ -2778,7 +2778,7 @@ raw 등록 해시:
 
 변경 내용:
 
-- `064_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 검증된 쌍을 새 immutable raw artifact로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다.
+- `065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 검증된 쌍을 새 immutable raw artifact로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다.
 - [[065_BERT 기반 passage 재순위화]]와 [[교차 인코더 재순위화]]를 만들고, BM25 상위 1,000개 후보를 결합 self-attention으로 부호화한 뒤 `[CLS]` 이진 분류 점수로 다시 매기는 2019년 BERT reranker의 계산 경계를 정리했다.
 - [[BERT]]와 [[신경 정보 검색]]에는 질의–passage 공동 부호화, pointwise cross-entropy, candidate recall과 후보별 추론 비용을 보강했다. [[052_신경 정보 검색과 의미 대응]]에는 초기 표현·상호작용 모델과 현대 dual/cross encoder의 연결을 추가했다.
 - [[검색은 근거를 찾고 독해는 답을 찾는다]]에 first-stage 후보 누락과 reranker 정렬 실패를 구분하는 진단을 추가했다. 새 자료의 핵심 질문을 기존 분석이 수용하므로 같은 논점을 반복하는 신규 analysis는 만들지 않았다.
@@ -2796,7 +2796,7 @@ raw 등록 해시:
 
 변경 내용:
 
-- `065_Scaling Laws for Neural Language Models Predicting Performance from Scale.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 검증된 쌍을 새 immutable raw artifact로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다.
+- `066_Scaling Laws for Neural Language Models Predicting Performance from Scale.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 검증된 쌍을 새 immutable raw artifact로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다.
 - [[066_신경 언어 모델의 스케일링 법칙]]과 [[언어 모델 스케일링 법칙]]을 만들고, WebText2 decoder-only Transformer의 token cross-entropy가 비임베딩 매개변수 $N$, 데이터 token $D$, 최적 배분 compute $C_{min}$과 이루는 조건부 power law를 정리했다.
 - [[대규모 언어 모델]]에는 model·data·compute 공동 병목을, [[Perplexity]]에는 token loss와 downstream 능력의 평가 경계를, [[N-gram에서 LLM으로]]에는 조건부 예측 과업의 연속성과 현대 규모 실험의 차이를 보강했다. [[035_신경 확률 언어 모형과 분산 단어 표현]]의 기존 scaling-law 경계도 새 source·concept로 연결했다.
 - Kaplan 등의 원 논문을 대조해 768–1.5B non-embedding parameters, 22M–23B tokens, $\alpha_N\approx0.076$·$\alpha_D\approx0.095$·$\alpha_C^{min}\approx0.050$, fixed-compute의 $N_{opt}\propto C^{0.73}$·$D_{opt}\propto C^{0.27}$을 확인했다.
@@ -2814,7 +2814,7 @@ raw 등록 해시:
 
 변경 내용:
 
-- `066_GPT-3 and In-Context Learning Emergent Capabilities from Scale.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 67개 본문 블록·6개 H2와 83개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- `067_GPT-3 and In-Context Learning Emergent Capabilities from Scale.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 67개 본문 블록·6개 H2와 83개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
 - [[067_GPT-3와 문맥 내 학습]]과 [[문맥 내 학습]]을 만들고, 125M–175B 여덟 모델·300B training token·2,048-token context, zero/one/few-shot의 demonstration 수와 task-specific gradient update가 없는 평가 경계를 정리했다.
 - [[GPT-1과 GPT-2]]와 [[언어 모델 전이 학습]]에는 GPT-2 cue에서 GPT-3 instruction·demonstration으로 과제 명세가 이동한 범위를 보강했다. [[대규모 언어 모델]]에는 model scale·평균 loss·task score를 분리했고, [[사전 학습 지식은 과제에 어떻게 도착하는가]]에는 입력 activation을 통한 일시적 적응을 여덟 번째 전이 경로로 추가했다.
 - Brown 등의 원 논문을 대조해 SuperGLUE few-shot 71.8 대 fine-tuned 최고 89.0, closed-book TriviaQA 64.3/68.0/71.2, 2–5자리 덧셈·뺄셈과 exact-match 산술 곡선, benchmark filtering bug와 13-gram clean subset 분석을 확인했다.
@@ -2849,7 +2849,7 @@ raw 등록 해시:
 
 변경 내용:
 
-- `067_Dense Passage Retrieval and Retrieval-Augmented Generation Integrating Knowledge with Language Models.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 74개 본문 블록, H1/H2/H3 1/6/11과 67개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- `068_Dense Passage Retrieval and Retrieval-Augmented Generation Integrating Knowledge with Language Models.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 74개 본문 블록, H1/H2/H3 1/6/11과 67개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
 - [[068_DPR과 검색 증강 생성]]과 [[검색 증강 생성]]을 만들고, DPR의 독립 BERT encoder·내적·in-batch/BM25 hard negative·FAISS 색인과 원 RAG의 DPR query encoder·BART-large·잠재 문서 주변화를 분리했다. RAG-Sequence와 RAG-Token은 새 문서를 매 token 재검색하는 방식이 아니라 같은 top-$K$ 후보를 서로 다른 단위에서 주변화한다는 점을 명시했다.
 - [[신경 정보 검색]]에는 DPR의 negative 구성과 SQuAD에서 BM25가 앞선 예외를, [[개방 영역 질의응답]]에는 네 QA 자료와 MS MARCO·Jeopardy·FEVER의 서로 다른 평가 범위를 보강했다. [[외부 메모리]]에는 고정 document encoder·색인과 82명 world-leader hot-swap을, [[검색은 근거를 찾고 독해는 답을 찾는다]]에는 NQ의 검색 문서 내 정답 부재 사례 11.8%와 provenance trace·claim-level citation의 차이를 추가했다.
 - 기존 `karpukhin-et-al-2020-dpr`와 `lewis-et-al-2020-rag` 1차 evidence를 재사용하고 locator를 실제 사용 절·표에 맞췄다. 새 evidence 레코드는 만들지 않았다.
@@ -2867,7 +2867,7 @@ raw 등록 해시:
 
 변경 내용:
 
-- `068_Mixture of Experts Sparse Activation for Scaling Language Models.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 58개 본문 블록, H1/H2/H3 1/6/4와 57개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- `069_Mixture of Experts Sparse Activation for Scaling Language Models.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 58개 본문 블록, H1/H2/H3 1/6/4와 57개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
 - [[069_전문가 혼합과 희소 활성 스케일링]]과 [[전문가 혼합]]을 만들고, 1991년 adaptive mixture·2017년 sparsely-gated LSTM layer·GShard의 top-2 Transformer MoE·Switch의 top-1 routing을 시기와 구조별로 분리했다. Total parameters, token당 active expert, 공유 경로, FLOPs, memory와 all-to-all communication을 서로 다른 비용 축으로 정리했다.
 - [[Transformer]]에는 attention이 아니라 일부 position-wise FFN을 expert FFN으로 교체하는 경계를, [[대규모 언어 모델]]에는 dense와 sparse parameter 규모 비교 기준을, [[언어 모델 스케일링 법칙]]에는 dense $N$ fit과 sparse total capacity의 차이를 보강했다. [[T5]]에는 원 T5와 그 위에서 실험한 후속 Switch architecture를 분리했다.
 - Jacobs·Shazeer·GShard·Switch의 1차 논문을 대조해 1991년 MoE 계보, 2017년 noisy top-k와 최대 137.7B, GShard 600B·2,048 TPU v3 cores·top-2, Switch-C 1.571T·2,048 experts·top-1과 $\alpha N\sum_i f_iP_i$ 보조 손실을 확인했다. PaLM 원 논문의 `densely activated` 설명으로 raw의 MoE 계보 주장도 반박했다.
@@ -2902,7 +2902,7 @@ raw 등록 해시:
 
 변경 내용:
 
-- `069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 55개 의미 블록, H1/H2 1/6과 23개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- `070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 55개 의미 블록, H1/H2 1/6과 23개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
 - [[070_CLIP과 대조적 언어-이미지 사전 학습]]과 [[CLIP]]을 만들고, 수정 ResNet 5종·ViT 3종의 image encoder, Transformer text encoder, 정규화 projection, $N\times N$ 대칭 대조 손실과 class prompt로 합성하는 zero-shot classifier를 분리해 설명했다.
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]]에는 CLIP을 아홉 번째 전이 경로로 추가했다. GPT-3의 input-context demonstration과 CLIP의 class prototype, CLIP zero-shot과 표지 예제로 logistic regression을 학습하는 few-shot linear probe를 구분했다.
 - Radford 등의 ICML 2021 논문과 supplement를 대조해 WIT 4억 쌍·50만 query·query당 최대 2만 쌍, batch 32,768·32 epochs, ImageNet 76.2%, 기본 prompt +1.3 points와 80-template ensemble 추가 +3.5 points, 27개 중 16개 비교 우위와 과제별 편차를 확인했다. RN50x64의 592 V100·18일과 ViT-L/14의 256 V100·12일도 서로 다른 조건으로 복원했다.
@@ -2920,7 +2920,7 @@ raw 등록 해시:
 
 변경 내용:
 
-- `070_Codex AI-Assisted Code Generation and the Transformation of Software Development.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 63개 의미 블록, H1/H2/H3 1/6/4와 10개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- `071_Codex AI-Assisted Code Generation and the Transformation of Software Development.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 63개 의미 블록, H1/H2/H3 1/6/4와 10개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
 - [[071_Codex와 HumanEval 기반 코드 생성 평가]]와 [[OpenAI Codex (2021)]]을 만들고, 최대 12B 연구 Codex의 Python 코드 계속학습, Codex-S의 독립 함수 지도 미세조정, docstring prompt, HumanEval·pass@k와 생성·선택·검증 단계를 분리했다. 연구 checkpoint, GitHub Copilot용 별도 production version과 현행 동명 Codex도 서로 다른 대상으로 구분했다.
 - [[언어 모델 전이 학습]]과 [[사전 학습 지식은 과제에 어떻게 도착하는가]]에는 코드 분포 weights·함수 과제 weights·입력 명세·sampling budget·외부 검증기에 과제 정보가 나뉘는 경로를 추가했다. [[자동 평가 지표는 무엇을 보상하는가]]에는 BLEU 문자열 중첩과 unit-test 기능 정확성, pass@k의 표본 예산·temperature·test oracle을 비교하는 절을 보강했다.
 - [[067_GPT-3와 문맥 내 학습]]이 남긴 “GPT-3 원 논문은 코드 benchmark를 평가하지 않았다”는 경계를 070의 별도 1차 근거로 연결했다. Chen et al. 논문, GitHub Copilot 2021 technical preview와 OpenAI Codex API 발표를 외부 evidence로 등록했다.
@@ -2939,7 +2939,7 @@ raw 등록 해시:
 
 변경 내용:
 
-- `071_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 50개 의미 블록, H1/H2 1/6과 24개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- `072_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 50개 의미 블록, H1/H2 1/6과 24개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
 - [[072_지시 미세조정과 FLAN의 제로샷 일반화]]와 [[지시 미세조정]]을 만들고, 여러 과제의 지시–출력 supervision으로 weights를 갱신하는 방식과 inference 시 weights를 고정한 채 instruction·demonstration을 넣는 [[문맥 내 학습]], task-specific fine-tuning 및 선호 기반 RLHF를 구분했다.
 - [[언어 모델 전이 학습]]과 [[사전 학습 지식은 과제에 어떻게 도착하는가]]에는 FLAN의 다과제 지시 mixture를 과제 명세의 별도 경로로 추가했다. [[T5]]에는 원 FLAN이 T5가 아니라 137B decoder-only LaMDA-PT에 대한 전체 미세조정이었다는 경계를, [[문맥 내 학습]]에는 지시 미세조정과의 결합 가능성을 보강했다.
 - [[손실 곡선과 능력 곡선 사이]]에는 같은 지시 개입이 422M·2B·8B 보류 과제 평균을 낮추고 68B·137B에서는 높인 규모별 결과를 추가했다. 이를 보편적인 phase transition이나 내부 능력의 단일 임계값으로 확대하지 않도록 adaptation·평가 metric·관측 scale을 분리했다.
@@ -2958,7 +2958,7 @@ raw 등록 해시:
 
 변경 내용:
 
-- `073_The Pile Open-Source Training Dataset for Large Language Models.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문과 번역의 115줄·57개 의미 block·H1/H2 1/6·15개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- `074_The Pile Open-Source Training Dataset for Large Language Models.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문과 번역의 115줄·57개 의미 block·H1/H2 1/6·15개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
 - [[074_The Pile과 대규모 언어 모델 학습 말뭉치]]와 [[The Pile]]을 만들고, 22개 영어 중심 component의 825.18 GiB raw size와 epoch 가중 뒤 1,254.20 GiB effective size, 2억 1,104만 3,181개 unweighted document를 서로 다른 장부로 설명했다.
 - [[말뭉치 기반 학습]]에는 작은 주석·병렬 말뭉치에서 대규모 weighted pretraining mixture로 이어지는 구성을 추가했다. Component 선택·가중치·provenance·deduplication·split leakage·benchmark decontamination과 underlying rights를 각각 별도 설계 축으로 연결했다.
 - Gao et al. The Pile 원 논문과 Biderman et al. datasheet를 evidence 레지스트리에 등록했다. 같은 1.3B architecture와 약 40GB 조건의 Pile·CC-100 English·Raw Common Crawl 비교에서 Pile BPB·WikiText 우위, LAMBADA metric의 혼합 결과와 component causal ablation 부재를 locator에 맞춰 기록했다.
@@ -2994,7 +2994,7 @@ raw 등록 해시:
 
 변경 내용:
 
-- `074_DALL·E Text-to-Image Generation with Transformer Architectures.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 87개 행, H1/H2/H3 1/6/3과 Markdown link target 15개의 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- `075_DALL·E Text-to-Image Generation with Transformer Architectures.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 87개 행, H1/H2/H3 1/6/3과 Markdown link target 15개의 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
 - [[075_DALL·E와 이산 이미지 토큰 생성]]과 [[DALL·E (2021)]]을 만들고, 256×256 RGB 이미지를 32×32=1,024개 이산 token으로 압축하는 dVAE, 최대 256개 text token과의 1,280-token joint stream, 12B·64층 decoder-only sparse Transformer와 text 1/8·image 7/8 loss를 복원했다.
 - 생성 후보 512개와 CLIP 계열 별도 대조 재순위화를 생성 model의 학습 목적·decoder와 분리했다. [[CLIP]], [[070_CLIP과 대조적 언어-이미지 사전 학습]], [[자기회귀 생성]]에는 생성 확률·표본 수·정렬 점수가 최종 선택에 들어가는 서로 다른 위치를 최소 방향 링크로 보강했다.
 - Ramesh et al. 2021 논문, OpenAI의 2021-01-05 발표 글과 공개 dVAE repository·model card를 evidence 레지스트리에 등록했다. 2.5억 pair, 1,024 V100·430,000 update, MS-COCO 사람 비교의 사실성 90.0%·caption 일치 93.3%, CUB의 약 40 FID 열세, MS-COCO 약 21%·CUB 약 12% image overlap을 조건과 함께 기록했다.
@@ -3028,7 +3028,7 @@ raw 등록 해시:
 
 변경 내용:
 
-- `075_Foundation Models Report Defining a New Paradigm in AI.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 119줄·59개 비공백 block·H1/H2 1/10과 Markdown link target 20개의 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- `076_Foundation Models Report Defining a New Paradigm in AI.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 119줄·59개 비공백 block·H1/H2 1/10과 Markdown link target 20개의 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
 - [[076_파운데이션 모델 보고서와 AI 생태계]]와 [[파운데이션 모델]]을 만들고, 광범위한 data로 대규모 훈련한 model을 여러 downstream task에 적응시키는 정의와 창발·동질화·중간 자산의 생태계를 복원했다.
 - 114명 저자의 Bommasani et al. 보고서 arXiv v3를 evidence 레지스트리에 등록했다. Percy Liang·Rishi Bommasani의 집필 공동 주도와 Drew Hudson의 도표 기여, 2021-08-16 초판과 2022-07-12 v3, capabilities·applications·technology·society의 26개 절을 locator에 맞춰 기록했다.
 - BERT의 전체 미세조정, GPT-3의 문맥 내 conditioning, CLIP의 자연어 class 적응을 서로 다른 경로로 구분했다. 파운데이션 모델은 특정 adaptation algorithm이나 LLM의 동의어가 아니라, 공통 기반이 여러 응용에 재사용되는 역할 범주임을 명시했다.
@@ -3064,7 +3064,7 @@ raw 등록 해시:
 
 변경 내용:
 
-- `076_InstructGPT and RLHF Aligning Language Models with Human Preferences.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 123줄·61개 비공백 block·H1/H2/H3 1/6/3과 Markdown link target 56개의 순서·빈 줄 위치를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- `077_InstructGPT and RLHF Aligning Language Models with Human Preferences.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 123줄·61개 비공백 block·H1/H2/H3 1/6/3과 Markdown link target 56개의 순서·빈 줄 위치를 보존한 쌍을 새 immutable raw artifact로 등록했다.
 - [[077_InstructGPT와 인간 선호 정렬]]을 만들고 평가자 시연 SFT, 4–9개 응답 순위에서 동률을 제외한 쌍 비교로 학습한 6B 보상 모델, SFT 정책 기준 token별 KL과 PPO-ptx의 별도 사전 학습 기울기 혼합을 복원했다.
 - 기존 `ouyang-et-al-2022-instructgpt` evidence를 정밀한 locator와 함께 재사용했다. SFT 12,725개·보상 모델 33,207개·PPO 31,144개 학습 prompt, 약 40명 계약 평가자와 96% 이상 영어인 자료의 대표성 범위를 기록했다.
 - 1.3B InstructGPT가 175B GPT-3보다 선호된 결과, 175B 기준 85±3%·few-shot GPT-3 기준 71±4% 선호, closed-domain hallucination 21% 대 41%를 일반 능력 우위가 아닌 보류 API prompt·평가 지침에 조건화된 행동 비교로 해석했다.
@@ -3136,7 +3136,7 @@ raw 등록 해시:
 
 변경 내용:
 
-- `077_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 115줄·57개 비공백 block·H1/H2/H3 1/6/4와 Markdown link target 63개의 순서·빈 줄 위치를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- `078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 115줄·57개 비공백 block·H1/H2/H3 1/6/4와 Markdown link target 63개의 순서·빈 줄 위치를 보존한 쌍을 새 immutable raw artifact로 등록했다.
 - 번역 SHA-256은 `c6bf093e0f01b47405a9ed14fd318e7baf72600eaa8e2492d2a82581f279b7ba`, 해설은 `d4a6c11ac7964371918e30296175a4e0810b2ad9ab7dc1af04c68c8c4e0d2722`다. 번역 스킬 검사는 쌍을 `done: true`로 확인했고 source workflow는 원문 URL·역할·해시 일치를 확인했다.
 - [[078_Chinchilla와 계산 최적 언어 모델 학습]]을 만들고 fixed-compute 세 추정법의 0.50/0.50·0.49/0.51·0.46/0.54 지수, $C\approx6ND$, 70B·1.4T Chinchilla와 280B·300B Gopher의 같은 약 $5.76\times10^{23}$ 훈련 FLOPs를 복원했다.
 - 기존 `hoffmann-et-al-2022-chinchilla` evidence를 NeurIPS 2022 공식 논문으로 정규화하고 §§1·3.1–3.4·4–5, Tables 1–5와 Appendices A·C·D–F의 locator를 연결했다. [[066_신경 언어 모델의 스케일링 법칙]]과 [[언어 모델 스케일링 법칙]]에는 Kaplan의 0.73/0.27과 Chinchilla의 세 재추정값을 함께 기록했다.
@@ -3202,15 +3202,15 @@ raw 등록 해시:
 
 변경 내용:
 
-- 공식 *A History of Language AI* 목차의 103장 URL과 로컬 102 `Mixture of Experts at Scale: Efficient Scaling Through Sparse Activation and Dynamic Routing`의 URL이 정확히 일치함을 확인했다. 로컬 102 원문을 처음부터 새로 번역·윤문하고 12절 해설을 작성해 스킬 검사를 통과한 쌍을 정규 `raw/102_*` artifact로 등록했다.
+- 공식 *A History of Language AI* 목차의 103장 URL과 당시 수집 접두사 102였던 `Mixture of Experts at Scale: Efficient Scaling Through Sparse Activation and Dynamic Routing`의 URL이 정확히 일치함을 확인했다. 원문을 처음부터 새로 번역·윤문하고 12절 해설을 작성해 스킬 검사를 통과한 쌍을 등록했으며, 후속 번호 통합에서 원문·번역·raw 경로를 공식 103으로 맞췄다.
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]]을 `source.103`으로 전환하고, [[069_전문가 혼합과 희소 활성 스케일링]], [[전문가 혼합]], [[Mixtral 8x7B]], [[총 매개변수와 활성 계산량은 같은 축인가]]의 related ID와 artifact 경로를 공식 번호 체계에 맞췄다.
-- 사용자의 정정 지시에 따라 같은 원문이 잘못 배정됐던 MoE `raw/072_*` 두 파일과 레지스트리 항목을 제거했다. 실제 로컬 072 ColBERT 번역·해설과 그 레지스트리는 변경하지 않았다.
+- 사용자의 정정 지시에 따라 같은 원문이 잘못 배정됐던 MoE `raw/072_*` 두 파일과 레지스트리 항목을 제거했다. 당시 수집 접두사 072였던 실제 ColBERT 번역·해설은 보존했으며, 후속 번호 통합에서 공식 073으로 이동했다.
 - 기존 비번호 reference를 source 색인에서 제거하고 공식 103 source로 옮겼다. 이전 비번호 문서와 번역·해설 URL은 새 공식 103 URL로 직접 이동하는 정적 리다이렉트 세 개로 보존했으며, redirect chain과 canonical 충돌을 막는 검사를 추가했다.
-- 별도 분석 문서는 만들지 않았다. 이 원문의 재사용 가치가 있는 질문은 이미 [[총 매개변수와 활성 계산량은 같은 축인가]]가 다루므로, 새 번호 범위 문서 대신 기존 분석과 개념의 raw 근거를 102로 교체했다.
+- 별도 분석 문서는 만들지 않았다. 이 원문의 재사용 가치가 있는 질문은 이미 [[총 매개변수와 활성 계산량은 같은 축인가]]가 다루므로, 새 번호 범위 문서 대신 기존 분석과 개념의 raw 근거를 공식 103으로 교체했다.
 
 검증 결과:
 
-- 번역 스킬 검사는 local 102 번역·해설을 `valid_pairs: 1`, `invalid_or_pending: 0`으로 확인했고 source workflow는 두 raw의 원문 URL·역할·SHA-256과 `source.103`의 정확한 artifact 쌍을 확인했다.
+- 번역 스킬 검사는 당시 수집 접두사 102 번역·해설을 `valid_pairs: 1`, `invalid_or_pending: 0`으로 확인했고 source workflow는 두 raw의 원문 URL·역할·SHA-256과 `source.103`의 정확한 artifact 쌍을 확인했다. 후속 번호 통합 뒤 같은 쌍의 공식 파일명은 103이다.
 - 55개 회귀 테스트와 283개 위키 문서 strict lint를 통과했으며 306개 evidence 레코드와 156개 raw artifact를 확인했다.
 - 사이트는 542개 HTML을 빌드해 5,922개 위키 링크와 33,887개 로컬 참조를 검사했다. 미해결 위키 대상은 0개였고 검색 색인은 282개 항목을 포함했다.
 
@@ -3218,19 +3218,36 @@ raw 등록 해시:
 
 변경 내용:
 
-- 로컬 수집 접두사 078의 `HELM: Holistic Evaluation of Language Models Framework`를 새로 번역·윤문하고 12절 학습 해설을 작성한 뒤, 두 파일을 `raw/078_*` immutable artifact로 등록했다. 공개 문서에는 매핑된 공식 장 번호 079를 사용했다.
+- 당시 수집 접두사 078의 `HELM: Holistic Evaluation of Language Models Framework`를 새로 번역·윤문하고 12절 학습 해설을 작성했다. 후속 번호 통합에서 원문·번역·raw 파일명을 공개 문서와 같은 공식 079로 맞췄으며 보존 본문과 SHA-256은 바꾸지 않았다.
 - [[079_HELM과 다차원 언어 모델 평가]]와 [[HELM]]을 만들고, 시나리오–적응–메트릭–실행의 평가 구조와 16개 핵심·26개 표적 시나리오, 30개 모델, 적용 가능한 시나리오의 공통 5-shot 적응, 정확도·보정·강건성·공정성·편향·독성·효율성의 일곱 메트릭을 정리했다.
 - Liang 등의 TMLR 2023 논문을 `liang-et-al-2023-helm` evidence로 등록했다. 112개 핵심 시나리오–메트릭 조합 중 98개를 측정한 87.5%와 기존 17.9%에서 HELM 평가 뒤 96.0%가 된 값을 각각 메트릭 coverage와 모델–시나리오 coverage로 구분했다.
 - Raw의 모든 중요한 차원 평가, 일곱 메트릭의 전 시나리오 적용, 공정성과 편향의 동일시, 독성·허위정보·안전의 포괄 평가, 전 모델·과제 인간 검수, 훈련·추론 효율의 전수 profiling, 공통 prompt의 모델별 최적성, 높은 점수의 배포 준비 보증과 광범위한 후대 영향 주장을 원 논문의 범위에 맞춰 교정했다.
 - 새 analysis는 만들지 않았다. 단일 점수와 다차원 평가가 모델 선택의 유인을 어떻게 바꾸는지는 기존 [[자동 평가 지표는 무엇을 보상하는가]]와 [[튜링 테스트와 LLM 평가]]가 이어서 다룬다.
-- [[index]]와 [[overview]]를 source 79개·reference 0개·concept 153개 기준으로 갱신했다. 현재 공식 source 범위는 001–046·048–079·103이며 다음 순차 입력은 로컬 079, 공개 대상은 공식 080 Chain-of-Thought Prompting이다.
+- [[index]]와 [[overview]]를 source 79개·reference 0개·concept 153개 기준으로 갱신했다. 현재 공식 source 범위는 001–046·048–079·103이며 다음 순차 입력은 공식 080 Chain-of-Thought Prompting이다.
 
 검증 근거와 남은 한계:
 
-- `source.079`와 `concept.helm`은 각각 local 078 번역·해설 artifact 두 개와 `liang-et-al-2023-helm` evidence를 연결한다.
+- `source.079`와 `concept.helm`은 각각 공식 079 번역·해설 artifact 두 개와 `liang-et-al-2023-helm` evidence를 연결한다.
 - 초기 HELM은 영어 중심의 선택된 시나리오와 자동 메트릭을 주로 평가했다. 적용 가능한 시나리오의 공통 5-shot 조건은 비교를 위한 선택이며 보편 최적 prompt, 단일 모델 순위나 실제 배포의 안전 인증을 보장하지 않는다.
 - 파일 집계는 source 79 + concept 153 + entity 29 + analysis 21 = 비메타 282개이며 reference 문서는 0개다. 공식 번호 집계는 001–046의 46개 + 048–079의 32개 + 103의 1개 = 79개다.
 - `npm run source:ready -- 078`에서 55개 회귀 테스트, 285개 Markdown strict lint, 307개 evidence와 158개 immutable raw artifact 검증을 통과했다. 사이트는 549개 HTML을 만들고 6,000개 wiki link를 모두 해소했다.
+
+## [2026-07-21] fix | 로컬 파일과 공식 장 번호 통합
+
+변경 내용:
+
+- 외부 원문 63개를 047–109에서 공식 048–110으로, source-stem이 일치하는 번역·해설 33쌍을 공식 048–079·103으로 이름만 이동했다. 최종 원문 목록은 001–046·048–110의 109개이며 047 파일은 없다.
+- `raw/`의 번역·해설 33쌍 66개도 공식 048–079·103으로 이동하고, 95개 위키 문서의 435개 literal raw 경로와 `raw-artifacts.yml` 66개 레코드의 path·`order_prefix`를 같은 번호로 맞췄다. Raw 본문·역할·원문 URL·SHA-256은 바꾸지 않았다.
+- `wiki/meta/source-gaps.yml`에 공식 047 **Attention Mechanism (2015)**을 `upstream-original-unavailable`로 등록했다. `/lt`·`source:*` selector, 외부 원문·번역·raw·레지스트리·공개 source·커밋은 이제 하나의 공식 번호를 사용하며, 047은 명시적 결손 오류로 거부하고 110까지 허용한다.
+- 과거 번호 교정으로 이미 배포된 source.048–079의 한 번호 낮은 source·translation·commentary 주소 96개와 공식 103의 옛 비번호 주소 3개는 raw 접두사 산술에서 분리한 명시적 호환 장부로 보존했다. 이후 080 이상에는 장부에 없는 자동 리다이렉트를 만들지 않는다.
+- 활성 `LLM_ko`에 남아 있던 잘못된 구판 `072_Mixture of Experts at Scale` 번역·해설은 정규 새 103 쌍과 내용이 다른 고아 파일임을 확인해 제거했다. 두 파일은 복구 가능하도록 `C:\tmp\LLM_ko_obsolete_072_moe_20260721`에 격리했다.
+
+검증 결과와 보존 경계:
+
+- 외부 원문 109개는 접두사 중복 없이 001–046·048–110에 정확히 놓였고, `LLM_ko` 154개는 번역·해설 77쌍으로 완전하다. 공식 079 HELM과 103 MoE 쌍의 SHA-256은 이동 전과 같고, 다음 공식 080 Chain-of-Thought는 아직 번역·raw·공개 source가 없는 첫 미완료 원문이다.
+- `source:status -- 079`와 `-- 103`은 외부 쌍·raw·레지스트리·공개 페이지의 일치를 확인했고, `-- 080`과 `-- 110`은 같은 공식 번호의 원문을 찾았으며, `-- 047`은 upstream 원문 결손을 명시하고 실패했다.
+- 57개 회귀 테스트와 285개 Markdown strict lint를 통과해 307개 evidence와 158개 immutable raw artifact의 경로·번호·해시를 확인했다. 사이트는 99개 legacy redirect를 포함한 549개 HTML을 만들고 6,000개 wiki link를 모두 해소했다.
+- Raw 해설 안의 수집 당시 `source_file`·`source_stem`·`order_prefix`와 자기 파일명 문장은 보존 artifact의 바이트 일부이므로 다시 쓰지 않았다. 현재 번호의 기준은 공식 raw 경로와 레지스트리이며 이 경계는 `docs/source-numbering.md`에 기록했다.
 
 ## 관련 항목
 

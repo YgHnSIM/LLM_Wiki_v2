@@ -4,7 +4,7 @@ id: source.058
 page_type: source
 title: BERT의 마스크드 양방향 사전 학습
 aliases:
-  - 057_BERT Bidirectional Pretraining Revolutionizes Language Understanding
+  - 058_BERT Bidirectional Pretraining Revolutionizes Language Understanding
   - BERT Pre-training of Deep Bidirectional Transformers
 tags:
   - type/source
@@ -16,8 +16,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/057_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md'
-  - 'raw/057_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md'
+  - 'raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md'
+  - 'raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md'
 evidence:
   - source_id: bert-2019
     locator: '초록과 §§1–3의 feature/fine-tuning 대비·MLM·NSP·입력 표현, §4와 Tables 1–5의 열한 과제·ablation, Appendix A의 15%·80/10/10 masking'
@@ -139,7 +139,7 @@ BERT의 encoder는 입력 전체가 주어졌을 때 각 위치 표현을 계산
 - Jacob Devlin 외, [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://aclanthology.org/N19-1423/), NAACL 2019, pp. 4171–4186.
 - Yinhan Liu 외, [RoBERTa: A Robustly Optimized BERT Pretraining Approach](https://arxiv.org/abs/1907.11692), 2019.
 - 프로젝트 번역·검토 출발 자료: [BERT Bidirectional Pretraining Revolutionizes Language Understanding](https://mbrenndoerfer.com/writing/bert-bidirectional-pretraining-revolutionizes-language-understanding)
-- 프로젝트 보존 자료: `raw/057_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md`, `raw/057_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md`, `raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md`.
 
 ## 관련 항목
 

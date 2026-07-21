@@ -17,12 +17,12 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/054_The Transformer Attention Is All You Need.ko.md'
-  - 'raw/054_The Transformer Attention Is All You Need.commentary.ko.md'
-  - 'raw/063_Transformer-XL Extending Transformers to Long Sequences.ko.md'
-  - 'raw/063_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md'
-  - 'raw/068_Mixture of Experts Sparse Activation for Scaling Language Models.ko.md'
-  - 'raw/068_Mixture of Experts Sparse Activation for Scaling Language Models.commentary.ko.md'
+  - 'raw/055_The Transformer Attention Is All You Need.ko.md'
+  - 'raw/055_The Transformer Attention Is All You Need.commentary.ko.md'
+  - 'raw/064_Transformer-XL Extending Transformers to Long Sequences.ko.md'
+  - 'raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md'
+  - 'raw/069_Mixture of Experts Sparse Activation for Scaling Language Models.ko.md'
+  - 'raw/069_Mixture of Experts Sparse Activation for Scaling Language Models.commentary.ko.md'
 evidence:
   - source_id: vaswani-et-al-2017-attention
     locator: 'pp. 5998–6008, 특히 §§3–5, Figure 1, Tables 1–3의 encoder–decoder·attention·위치 인코딩·복잡도·번역 평가'

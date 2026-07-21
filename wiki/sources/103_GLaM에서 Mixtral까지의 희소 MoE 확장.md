@@ -18,8 +18,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/102_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md'
-  - 'raw/102_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md'
+  - 'raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md'
+  - 'raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md'
 evidence:
   - source_id: shazeer-et-al-2017-sparsely-gated-moe
     locator: 'ICLR 2017, §§1.2–2.1·4–5와 Appendix E의 noisy top-k routing·load balancing·제한적 expert specialization 사례'
@@ -188,7 +188,7 @@ Mixtral의 2023년 공식 발표가 제시한 “Llama 2 70B보다 6배 빠른 i
 - Mistral AI, [Mixtral of experts](https://mistral.ai/news/mixtral-of-experts/), 2023-12-11.
 - Jared Kaplan 외, [Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361), 2020, 특히 Appendix C의 dense compute 근사.
 - 프로젝트 번역·검토 출발 자료: [Mixture of Experts at Scale: Efficient Scaling Through Sparse Activation and Dynamic Routing](https://mbrenndoerfer.com/writing/mixture-of-experts-at-scale-sparse-activation-dynamic-routing-efficient-scaling)
-- 프로젝트 보존 자료: `raw/102_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md`, `raw/102_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md`, `raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md`.
 
 ## 관련 항목
 

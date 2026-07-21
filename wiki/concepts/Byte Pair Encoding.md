@@ -14,10 +14,10 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/049_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md'
-  - 'raw/049_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md'
-  - 'raw/061_XLM Cross-lingual Language Model for Multilingual NLP.ko.md'
-  - 'raw/061_XLM Cross-lingual Language Model for Multilingual NLP.commentary.ko.md'
+  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md'
+  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md'
+  - 'raw/062_XLM Cross-lingual Language Model for Multilingual NLP.ko.md'
+  - 'raw/062_XLM Cross-lingual Language Model for Multilingual NLP.commentary.ko.md'
 evidence:
   - source_id: gage-1994-byte-pair-encoding
     locator: '초록과 §1의 빈번한 인접 byte pair를 미사용 byte로 치환하는 압축 알고리즘'

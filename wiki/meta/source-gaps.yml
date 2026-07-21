@@ -1,0 +1,8 @@
+schema_version: 1
+gaps:
+  - source_number: "047"
+    title: Attention Mechanism (2015)
+    status: upstream-original-unavailable
+    source_url: https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment
+    last_checked: '2026-07-21'
+    note: 공식 책 목차에는 장이 있으나 연재 카테고리와 로컬 원문 목록에는 게시물이 없고 연결 주소도 Content Not Found를 반환한다.

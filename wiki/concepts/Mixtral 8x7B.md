@@ -19,8 +19,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/102_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md'
-  - 'raw/102_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md'
+  - 'raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md'
+  - 'raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md'
 evidence:
   - source_id: jiang-et-al-2024-mixtral
     locator: 'arXiv submission history, 초록, §§1–6, Tables 1–3·5와 Figures 1·7–8의 2024-01-08 v1·architecture·rounded total/active parameters·32K context·SFT와 DPO·평가 조건·memory와 routing 분석'
@@ -156,7 +156,7 @@ Routing 분석도 세 layer와 정한 data subset의 관찰이다. 다른 seed·
 - Albert Q. Jiang 외, [Mixtral of Experts](https://arxiv.org/abs/2401.04088), arXiv:2401.04088, 2024, §§1–6과 Tables 1–5.
 - Mistral AI, [Mixtral of experts](https://mistral.ai/news/mixtral-of-experts/), 2023-12-11.
 - [[GLaM에서 Mixtral까지의 희소 MoE 확장]]
-- 프로젝트 보존 자료: `raw/102_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md`, `raw/102_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md`, `raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md`.
 
 ## 관련 항목
 

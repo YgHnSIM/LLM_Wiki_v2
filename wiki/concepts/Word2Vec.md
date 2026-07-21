@@ -18,8 +18,8 @@ verification: verified
 artifacts:
   - 'raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.ko.md'
   - 'raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.commentary.ko.md'
-  - 'raw/049_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md'
-  - 'raw/049_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md'
+  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md'
+  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md'
 evidence:
   - source_id: mikolov-et-al-2013-word-representations
     locator: 'arXiv:1301.3781, §§1–4의 계산 목표·CBOW·Skip-gram·유추 평가'

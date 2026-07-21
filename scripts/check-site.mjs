@@ -267,7 +267,7 @@ const sourceRedirectById = new Map();
 const allowedRedirectKinds = new Set(['source', 'translation', 'commentary']);
 
 for (const redirect of redirects) {
-  const missing = ['kind', 'sourceId', 'canonicalNumber', 'artifactPrefix', 'from', 'to']
+  const missing = ['kind', 'sourceId', 'canonicalNumber', 'legacyPrefix', 'from', 'to']
     .filter((field) => !String(redirect?.[field] ?? '').trim());
   if (missing.length) {
     errors.push(`Legacy redirect metadata is incomplete (${missing.join(', ')}): ${JSON.stringify(redirect)}`);
@@ -276,8 +276,8 @@ for (const redirect of redirects) {
   if (!allowedRedirectKinds.has(redirect.kind)) {
     errors.push(`Legacy redirect ${redirect.from} has invalid kind '${redirect.kind}'.`);
   }
-  if (Number(redirect.canonicalNumber) !== Number(redirect.artifactPrefix) + 1) {
-    errors.push(`Legacy redirect ${redirect.from} does not preserve the artifact-prefix + 1 numbering rule.`);
+  if (!/^\d{3}$/.test(String(redirect.legacyPrefix ?? ''))) {
+    errors.push(`Legacy redirect ${redirect.from} has an invalid compatibility prefix '${redirect.legacyPrefix ?? ''}'.`);
   }
   if (redirectByFrom.has(redirect.from)) {
     errors.push(`Build report contains a duplicate legacy redirect route: ${redirect.from}`);

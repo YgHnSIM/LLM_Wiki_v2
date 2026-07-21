@@ -4,7 +4,7 @@ id: source.074
 page_type: source
 title: The Pile과 대규모 언어 모델 학습 말뭉치
 aliases:
-  - 073_The Pile Open-Source Training Dataset for Large Language Models
+  - 074_The Pile Open-Source Training Dataset for Large Language Models
   - The Pile Open-Source Training Dataset for Large Language Models
   - The Pile 학습 데이터셋
 tags:
@@ -18,8 +18,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/073_The Pile Open-Source Training Dataset for Large Language Models.ko.md'
-  - 'raw/073_The Pile Open-Source Training Dataset for Large Language Models.commentary.ko.md'
+  - 'raw/074_The Pile Open-Source Training Dataset for Large Language Models.ko.md'
+  - 'raw/074_The Pile Open-Source Training Dataset for Large Language Models.commentary.ko.md'
 evidence:
   - source_id: gao-et-al-2020-pile
     locator: 'arXiv submission history, 초록, §§1–7, Tables 1·3–5와 Appendices C–D의 2020-12-31 v1·22개 구성요소·825.18/1,254.20 GiB·가중 혼합·1.3B/40GB 비교·중복 제거·언어·편향·동의·법적 한계'
@@ -172,7 +172,7 @@ Datasheet는 2억 1,104만 3,181개 unweighted document를 보고했지만, 규�
 - [[066_신경 언어 모델의 스케일링 법칙]]
 - [[067_GPT-3와 문맥 내 학습]]
 - 프로젝트 번역·검토 출발 자료: [The Pile: Open-Source Training Dataset for Large Language Models](https://mbrenndoerfer.com/writing/the-pile-open-source-training-dataset-large-language-models)
-- 프로젝트 보존 자료: `raw/073_The Pile Open-Source Training Dataset for Large Language Models.ko.md`, `raw/073_The Pile Open-Source Training Dataset for Large Language Models.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/074_The Pile Open-Source Training Dataset for Large Language Models.ko.md`, `raw/074_The Pile Open-Source Training Dataset for Large Language Models.commentary.ko.md`.
 
 ## 관련 항목
 

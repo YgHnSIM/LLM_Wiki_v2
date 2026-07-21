@@ -320,22 +320,49 @@ for (const document of grouped.sources) {
 }
 const translationReaders = artifactReaders.filter((reader) => reader.directory);
 
-function artifactPrefixForSource(document) {
-  const prefixes = [...new Set(document.artifacts
-    .map((artifactPath) => normalizeArtifactPath(artifactPath).match(/^raw\/(\d{3})_/)?.[1] ?? '')
-    .filter(Boolean))];
-  return prefixes.length === 1 ? prefixes[0] : '';
-}
-
-const legacySourceRouteOverrides = new Map([
-  ['source.103', '/sources/glam에서-mixtral까지의-희소-moe-확장/'],
+const legacySourceCompatibility = new Map([
+  ['source.048', { legacyPrefix: '047' }],
+  ['source.049', { legacyPrefix: '048' }],
+  ['source.050', { legacyPrefix: '049' }],
+  ['source.051', { legacyPrefix: '050' }],
+  ['source.052', { legacyPrefix: '051' }],
+  ['source.053', { legacyPrefix: '052' }],
+  ['source.054', { legacyPrefix: '053' }],
+  ['source.055', { legacyPrefix: '054' }],
+  ['source.056', { legacyPrefix: '055' }],
+  ['source.057', { legacyPrefix: '056' }],
+  ['source.058', { legacyPrefix: '057' }],
+  ['source.059', { legacyPrefix: '058' }],
+  ['source.060', { legacyPrefix: '059' }],
+  ['source.061', { legacyPrefix: '060' }],
+  ['source.062', { legacyPrefix: '061' }],
+  ['source.063', { legacyPrefix: '062' }],
+  ['source.064', { legacyPrefix: '063' }],
+  ['source.065', { legacyPrefix: '064' }],
+  ['source.066', { legacyPrefix: '065' }],
+  ['source.067', { legacyPrefix: '066' }],
+  ['source.068', { legacyPrefix: '067' }],
+  ['source.069', { legacyPrefix: '068' }],
+  ['source.070', { legacyPrefix: '069' }],
+  ['source.071', { legacyPrefix: '070' }],
+  ['source.072', { legacyPrefix: '071' }],
+  ['source.073', { legacyPrefix: '072' }],
+  ['source.074', { legacyPrefix: '073' }],
+  ['source.075', { legacyPrefix: '074' }],
+  ['source.076', { legacyPrefix: '075' }],
+  ['source.077', { legacyPrefix: '076' }],
+  ['source.078', { legacyPrefix: '077' }],
+  ['source.079', { legacyPrefix: '078' }],
+  ['source.103', {
+    legacyPrefix: '102',
+    sourceRoute: '/sources/glam에서-mixtral까지의-희소-moe-확장/',
+  }],
 ]);
 
-function legacySourceRoute(document, artifactPrefix) {
-  const override = legacySourceRouteOverrides.get(document.id);
-  if (override) return override;
+function legacySourceRoute(document, { legacyPrefix, sourceRoute = '' }) {
+  if (sourceRoute) return sourceRoute;
   if (!/^\d{3}/.test(document.filename)) return '';
-  const legacyFilename = document.filename.replace(/^\d{3}/, artifactPrefix);
+  const legacyFilename = document.filename.replace(/^\d{3}/, legacyPrefix);
   return routeFor(`sources/${legacyFilename}.md`, 'sources', legacyFilename);
 }
 
@@ -356,7 +383,7 @@ for (const reader of artifactReaders) registerCanonicalRoute(reader.url, `artifa
 
 const legacyRedirects = [];
 const legacyRoutes = new Map();
-function addLegacyRedirect({ kind, sourceDocument, artifactPrefix, from, to }) {
+function addLegacyRedirect({ kind, sourceDocument, legacyPrefix, from, to }) {
   const canonicalOwner = canonicalRoutes.get(from);
   if (canonicalOwner) {
     throw new Error(`Legacy redirect route ${from} collides with ${canonicalOwner}.`);
@@ -373,7 +400,7 @@ function addLegacyRedirect({ kind, sourceDocument, artifactPrefix, from, to }) {
     kind,
     sourceId: sourceDocument.id,
     canonicalNumber: sourceDocument.sourceNumber,
-    artifactPrefix,
+    legacyPrefix,
     from,
     to,
   };
@@ -381,16 +408,20 @@ function addLegacyRedirect({ kind, sourceDocument, artifactPrefix, from, to }) {
   legacyRedirects.push(redirect);
 }
 
-for (const document of grouped.sources) {
-  const artifactPrefix = artifactPrefixForSource(document);
-  if (!artifactPrefix || Number(document.sourceNumber) !== Number(artifactPrefix) + 1) continue;
+const sourceDocumentsById = new Map(grouped.sources.map((document) => [document.id, document]));
+for (const [sourceId, compatibility] of legacySourceCompatibility) {
+  const document = sourceDocumentsById.get(sourceId);
+  if (!document) throw new Error(`Legacy source compatibility entry has no source document: ${sourceId}`);
+  if (!/^\d{3}$/.test(compatibility.legacyPrefix)) {
+    throw new Error(`Legacy source compatibility entry has an invalid prefix: ${sourceId}`);
+  }
 
-  const legacyBaseUrl = legacySourceRoute(document, artifactPrefix);
+  const legacyBaseUrl = legacySourceRoute(document, compatibility);
   if (!legacyBaseUrl || legacyBaseUrl === document.url) continue;
   addLegacyRedirect({
     kind: 'source',
     sourceDocument: document,
-    artifactPrefix,
+    legacyPrefix: compatibility.legacyPrefix,
     from: legacyBaseUrl,
     to: document.url,
   });
@@ -400,7 +431,7 @@ for (const document of grouped.sources) {
     addLegacyRedirect({
       kind: reader.routeRole,
       sourceDocument: document,
-      artifactPrefix,
+      legacyPrefix: compatibility.legacyPrefix,
       from: `${legacyBaseUrl}${reader.routeRole}/`,
       to: reader.url,
     });

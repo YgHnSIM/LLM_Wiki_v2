@@ -4,7 +4,7 @@ id: source.053
 page_type: source
 title: GNMT와 제품 규모 신경 번역
 aliases:
-  - 052_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation
+  - 053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation
   - Google Neural Machine Translation
   - GNMT
 tags:
@@ -17,8 +17,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/052_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md'
-  - 'raw/052_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.commentary.ko.md'
+  - 'raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md'
+  - 'raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.commentary.ko.md'
 evidence:
   - source_id: wu-et-al-2016-gnmt
     locator: '초록, §§2–5, Figures 1–2, Tables 1–4의 8층 LSTM·attention·residual·WordPiece·평가와 배포 설계'
@@ -122,7 +122,7 @@ GNMT의 중요성은 “신경망 하나가 번역을 해결했다”는 데 있
 - Yonghui Wu 외, [Google's Neural Machine Translation System: Bridging the Gap between Human and Machine Translation](https://arxiv.org/abs/1609.08144), 2016, 특히 §§2–5, Figures 1–2와 Tables 1–4.
 - Quoc V. Le·Mike Schuster, [A Neural Network for Machine Translation, at Production Scale](https://research.google/blog/a-neural-network-for-machine-translation-at-production-scale/), Google Research, 2016-09-27.
 - 프로젝트 번역·검토 출발 자료: [Google Neural Machine Translation End-to-End Learning Revolutionizes Translation](https://mbrenndoerfer.com/writing/google-neural-machine-translation-end-to-end-learning-revolutionizes-translation)
-- 프로젝트 보존 자료: `raw/052_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md`, `raw/052_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md`, `raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.commentary.ko.md`.
 
 ## 관련 항목
 

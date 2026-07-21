@@ -1,50 +1,74 @@
 import assert from 'node:assert/strict';
+import { promises as fs } from 'node:fs';
 import test from 'node:test';
+import yaml from 'js-yaml';
+import { metaDir } from '../lib/project-paths.mjs';
 import {
-  canonicalSourcePrefix,
-  localInventoryPrefixForCanonical,
-  localInventoryPrefixesFromArtifacts,
+  MISSING_OFFICIAL_SOURCE_PREFIX,
+  officialSourcePrefix,
+  rawArtifactRecordNumberingErrors,
   sourcePageNumberingErrors,
+  sourcePrefixesFromArtifacts,
 } from '../lib/source-numbering.mjs';
 
-test('local inventory prefixes map to the official book numbering around the missing chapter', () => {
-  assert.equal(canonicalSourcePrefix('001'), '001');
-  assert.equal(canonicalSourcePrefix('046'), '046');
-  assert.equal(canonicalSourcePrefix('047'), '048');
-  assert.equal(canonicalSourcePrefix('077'), '078');
-  assert.equal(canonicalSourcePrefix('078'), '079');
-  assert.equal(canonicalSourcePrefix('102'), '103');
-  assert.equal(canonicalSourcePrefix('109'), '110');
+test('selectors use official source numbers directly and reserve missing chapter 047', () => {
+  for (const prefix of ['001', '046', '048', '078', '079', '103', '109', '110']) {
+    assert.equal(officialSourcePrefix(prefix), prefix);
+  }
+  assert.throws(
+    () => officialSourcePrefix(MISSING_OFFICIAL_SOURCE_PREFIX),
+    /Official source 047 is unavailable because its upstream original is missing/,
+  );
+  assert.throws(() => officialSourcePrefix('000'), /between 001 and 110/);
+  assert.throws(() => officialSourcePrefix('111'), /between 001 and 110/);
 });
 
-test('official numbering maps back to local inventory while chapter 047 remains absent', () => {
-  assert.equal(localInventoryPrefixForCanonical('001'), '001');
-  assert.equal(localInventoryPrefixForCanonical('046'), '046');
-  assert.equal(localInventoryPrefixForCanonical('047'), null);
-  assert.equal(localInventoryPrefixForCanonical('048'), '047');
-  assert.equal(localInventoryPrefixForCanonical('078'), '077');
-  assert.equal(localInventoryPrefixForCanonical('103'), '102');
-  assert.equal(localInventoryPrefixForCanonical('110'), '109');
-  assert.throws(() => canonicalSourcePrefix('110'), /between 001 and 109/);
-  assert.throws(() => localInventoryPrefixForCanonical('111'), /between 001 and 110/);
+test('the machine-readable source gap registry matches the rejected official prefix', async () => {
+  const registry = yaml.safeLoad(await fs.readFile(`${metaDir}/source-gaps.yml`, 'utf8'));
+  assert.equal(registry.schema_version, 1);
+  assert.deepEqual(registry.gaps.map((gap) => String(gap.source_number)), [MISSING_OFFICIAL_SOURCE_PREFIX]);
+  assert.equal(registry.gaps[0].status, 'upstream-original-unavailable');
+  assert.throws(
+    () => officialSourcePrefix(registry.gaps[0].source_number),
+    /upstream original is missing/,
+  );
 });
 
-test('raw artifact prefixes remain physical local inventory identifiers', () => {
-  assert.deepEqual(localInventoryPrefixesFromArtifacts([
-    'raw/077_Chinchilla.ko.md',
-    'raw/077_Chinchilla.commentary.ko.md',
+test('raw artifact paths expose their official source prefixes', () => {
+  assert.deepEqual(sourcePrefixesFromArtifacts([
+    'raw/078_Chinchilla.ko.md',
+    'raw/078_Chinchilla.commentary.ko.md',
     'raw/not-numbered.md',
-  ]), ['077']);
-  assert.deepEqual(localInventoryPrefixesFromArtifacts([
-    'raw/048_second.md',
-    'raw/047-first.md',
-  ]), ['047', '048']);
+  ]), ['078']);
+  assert.deepEqual(sourcePrefixesFromArtifacts([
+    'raw/049_second.md',
+    'raw/048-first.md',
+  ]), ['048', '049']);
 });
 
-test('public source pages must use the canonical ID and filename derived from raw provenance', () => {
+test('raw registry order_prefix must equal the official path prefix', () => {
+  assert.deepEqual(rawArtifactRecordNumberingErrors({
+    path: 'raw/103_Mixture of Experts at Scale.ko.md',
+    order_prefix: '103',
+  }), []);
+  assert.deepEqual(rawArtifactRecordNumberingErrors({
+    path: 'raw/103_Mixture of Experts at Scale.ko.md',
+    order_prefix: '102',
+  }), ["order_prefix '102' must match raw path prefix 103."]);
+  assert.deepEqual(rawArtifactRecordNumberingErrors({
+    path: 'raw/unnumbered.md',
+    order_prefix: '103',
+  }), ["raw artifact path 'raw/unnumbered.md' must start with a three-digit official source prefix."]);
+  assert.deepEqual(rawArtifactRecordNumberingErrors({
+    path: 'raw/047_missing.md',
+    order_prefix: '047',
+  }), ['Official source 047 is unavailable because its upstream original is missing.']);
+});
+
+test('public source IDs, filenames, and raw artifacts use the same official prefix', () => {
   const artifacts = [
-    'raw/077_Chinchilla.ko.md',
-    'raw/077_Chinchilla.commentary.ko.md',
+    'raw/078_Chinchilla.ko.md',
+    'raw/078_Chinchilla.commentary.ko.md',
   ];
   assert.deepEqual(sourcePageNumberingErrors({
     id: 'source.078',
@@ -56,14 +80,14 @@ test('public source pages must use the canonical ID and filename derived from ra
     id: 'source.103',
     filename: '103_GLaM에서 Mixtral까지의 희소 MoE 확장',
     artifacts: [
-      'raw/102_Mixture of Experts at Scale.ko.md',
-      'raw/102_Mixture of Experts at Scale.commentary.ko.md',
+      'raw/103_Mixture of Experts at Scale.ko.md',
+      'raw/103_Mixture of Experts at Scale.commentary.ko.md',
     ],
   }), []);
 
   const errors = sourcePageNumberingErrors({
-    id: 'source.077',
-    filename: '077_Chinchilla와 계산 최적 언어 모델 학습',
+    id: 'source.079',
+    filename: '079_Chinchilla와 계산 최적 언어 모델 학습',
     artifacts,
   });
   assert.ok(errors.some((error) => error.includes("must be 'source.078'")));
@@ -72,11 +96,16 @@ test('public source pages must use the canonical ID and filename derived from ra
   assert.deepEqual(sourcePageNumberingErrors({
     id: 'source.048',
     filename: '048_잔차 학습',
-    artifacts: ['raw/047_a.md', 'raw/048_b.md'],
-  }), ['source page artifacts use multiple local inventory prefixes: 047, 048.']);
+    artifacts: ['raw/048_a.md', 'raw/049_b.md'],
+  }), ['source page artifacts use multiple official source prefixes: 048, 049.']);
   assert.deepEqual(sourcePageNumberingErrors({
     id: 'source.048',
     filename: '048_잔차 학습',
     artifacts: ['raw/unnumbered.md'],
-  }), ['source page must reference at least one raw artifact with a three-digit local inventory prefix.']);
+  }), ['source page must reference at least one raw artifact with a three-digit official source prefix.']);
+  assert.deepEqual(sourcePageNumberingErrors({
+    id: 'source.047',
+    filename: '047_Attention Mechanism',
+    artifacts: ['raw/047_Attention Mechanism.ko.md'],
+  }), ['Official source 047 is unavailable because its upstream original is missing.']);
 });

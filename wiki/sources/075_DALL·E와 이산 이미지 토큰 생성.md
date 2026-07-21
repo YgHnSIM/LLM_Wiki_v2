@@ -4,7 +4,7 @@ id: source.075
 page_type: source
 title: DALL·E와 이산 이미지 토큰 생성
 aliases:
-  - 074_DALL·E Text-to-Image Generation with Transformer Architectures
+  - 075_DALL·E Text-to-Image Generation with Transformer Architectures
   - DALL·E Text-to-Image Generation with Transformer Architectures
 tags:
   - type/source
@@ -18,8 +18,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/074_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md'
-  - 'raw/074_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md'
+  - 'raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md'
+  - 'raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md'
 evidence:
   - source_id: ramesh-et-al-2021-dalle
     locator: 'PMLR 139, pp. 8821–8831의 §§1–4·Figures 1–9와 Appendix §§A–C·F–G·Figures 10–14·Listings 1–2의 dVAE·joint token stream·희소 attention·학습·재순위화·평가·중복 분석'
@@ -144,7 +144,7 @@ dVAE 압축은 세부와 문자를 잃을 수 있고, 이미지 토큰의 순차
 - OpenAI, [DALL·E: Creating images from text](https://openai.com/index/dall-e/), 2021-01-05, 특히 Overview, Drawing multiple objects, Zero-shot visual reasoning, Summary of approach and prior work와 footnote A.
 - OpenAI, [DALL·E dVAE repository and model card](https://github.com/openai/DALL-E), README와 `model_card.md`의 Model Details·Model Use·Training Data·Performance and Limitations.
 - 프로젝트 번역·검토 출발 자료: [DALL·E: Text-to-Image Generation with Transformer Architectures](https://mbrenndoerfer.com/writing/dalle-text-to-image-generation-transformer), 2025-06-29.
-- 프로젝트 보존 자료: `raw/074_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md`, `raw/074_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md`, `raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md`.
 
 ## 관련 항목
 

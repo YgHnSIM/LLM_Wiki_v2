@@ -4,7 +4,7 @@ id: source.055
 page_type: source
 title: Transformer와 자기어텐션 기반 시퀀스 모델링
 aliases:
-  - 054_The Transformer Attention Is All You Need
+  - 055_The Transformer Attention Is All You Need
   - The Transformer Attention Is All You Need
   - Attention Is All You Need
 tags:
@@ -17,8 +17,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/054_The Transformer Attention Is All You Need.ko.md'
-  - 'raw/054_The Transformer Attention Is All You Need.commentary.ko.md'
+  - 'raw/055_The Transformer Attention Is All You Need.ko.md'
+  - 'raw/055_The Transformer Attention Is All You Need.commentary.ko.md'
 evidence:
   - source_id: vaswani-et-al-2017-attention
     locator: 'pp. 5998–6008, 특히 §§3–5, Figure 1과 Tables 1–3의 구조·복잡도·번역 성능·훈련 비용'
@@ -165,7 +165,7 @@ Wiegreffe·Pinter는 설명의 정의와 모델 전체 맥락을 고려해야 �
 - Sarthak Jain·Byron C. Wallace, [Attention is not Explanation](https://aclanthology.org/N19-1357/), NAACL 2019, pp. 3543–3556.
 - Sarah Wiegreffe·Yuval Pinter, [Attention is not not Explanation](https://aclanthology.org/D19-1002/), EMNLP-IJCNLP 2019, pp. 11–20.
 - 프로젝트 번역·검토 출발 자료: [The Transformer Attention Is All You Need](https://mbrenndoerfer.com/writing/transformer-attention-is-all-you-need)
-- 프로젝트 보존 자료: `raw/054_The Transformer Attention Is All You Need.ko.md`, `raw/054_The Transformer Attention Is All You Need.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/055_The Transformer Attention Is All You Need.ko.md`, `raw/055_The Transformer Attention Is All You Need.commentary.ko.md`.
 
 ## 관련 항목
 

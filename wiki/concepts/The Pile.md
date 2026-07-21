@@ -18,8 +18,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/073_The Pile Open-Source Training Dataset for Large Language Models.ko.md'
-  - 'raw/073_The Pile Open-Source Training Dataset for Large Language Models.commentary.ko.md'
+  - 'raw/074_The Pile Open-Source Training Dataset for Large Language Models.ko.md'
+  - 'raw/074_The Pile Open-Source Training Dataset for Large Language Models.commentary.ko.md'
 evidence:
   - source_id: gao-et-al-2020-pile
     locator: '초록, §§1–7, Tables 1·3–5와 Appendices C–D의 구성요소·가중치·BPB benchmark·40GB 비교·deduplication·language·bias·consent'
@@ -155,7 +155,7 @@ Gao 등은 같은 1.3B architecture와 약 40GB data 조건에서 Pile·CC-100 E
 - Leo Gao 외, [The Pile: An 800GB Dataset of Diverse Text for Language Modeling](https://arxiv.org/abs/2101.00027), 2020, §§1–7, Tables 1·3–5와 Appendices C–D.
 - Stella Biderman·Kieran Bicheno·Leo Gao, [Datasheet for the Pile](https://arxiv.org/abs/2201.07311), 2022, PDF pp. 1·8–17.
 - [[074_The Pile과 대규모 언어 모델 학습 말뭉치]]
-- 프로젝트 보존 자료: `raw/073_The Pile Open-Source Training Dataset for Large Language Models.ko.md`, `raw/073_The Pile Open-Source Training Dataset for Large Language Models.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/074_The Pile Open-Source Training Dataset for Large Language Models.ko.md`, `raw/074_The Pile Open-Source Training Dataset for Large Language Models.commentary.ko.md`.
 
 ## 관련 항목
 

@@ -29,8 +29,8 @@ artifacts:
   - raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md
   - raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.ko.md
   - raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.commentary.ko.md
-  - raw/065_Scaling Laws for Neural Language Models Predicting Performance from Scale.ko.md
-  - raw/065_Scaling Laws for Neural Language Models Predicting Performance from Scale.commentary.ko.md
+  - raw/066_Scaling Laws for Neural Language Models Predicting Performance from Scale.ko.md
+  - raw/066_Scaling Laws for Neural Language Models Predicting Performance from Scale.commentary.ko.md
 evidence:
   - source_id: shannon-1948
     locator: 'Part I, §§2–3 and §6'

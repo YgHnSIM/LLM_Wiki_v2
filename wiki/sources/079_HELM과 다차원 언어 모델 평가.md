@@ -4,7 +4,7 @@ id: source.079
 page_type: source
 title: HELM과 다차원 언어 모델 평가
 aliases:
-  - 078_HELM Holistic Evaluation of Language Models Framework
+  - 079_HELM Holistic Evaluation of Language Models Framework
 tags:
   - type/source
   - domain/ai
@@ -16,8 +16,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/078_HELM Holistic Evaluation of Language Models Framework.ko.md'
-  - 'raw/078_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md'
+  - 'raw/079_HELM Holistic Evaluation of Language Models Framework.ko.md'
+  - 'raw/079_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md'
 evidence:
   - source_id: liang-et-al-2023-helm
     locator: '초록, §§1.1–1.2·3–8·10–11, Tables 4–6·8·13과 Appendices A·C·F–J의 시나리오·메트릭·30개 모델·5-shot 적응·인간 평가·비용·오염·설계 한계'
@@ -216,7 +216,7 @@ Few-shot 평가는 정확한 test 문장뿐 아니라 평가 분포 자체가 �
 - [[076_파운데이션 모델 보고서와 AI 생태계]]
 - [[077_InstructGPT와 인간 선호 정렬]]
 - 프로젝트 번역·검토 출발 자료: [HELM: Holistic Evaluation of Language Models Framework](https://mbrenndoerfer.com/writing/helm-holistic-evaluation-language-models-framework)
-- 프로젝트 보존 자료: `raw/078_HELM Holistic Evaluation of Language Models Framework.ko.md`, `raw/078_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/079_HELM Holistic Evaluation of Language Models Framework.ko.md`, `raw/079_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md`.
 
 ## 관련 항목
 

@@ -18,6 +18,7 @@ test('renumbered source and artifact-reader URLs retain static legacy redirects'
 
   const report = JSON.parse(await fs.readFile(path.join(distDir, 'build-report.json'), 'utf8'));
   assert.equal(report.redirectCount, report.redirects.length);
+  assert.equal(report.redirectCount, 99);
 
   const sourceDirectoryHtml = await fs.readFile(path.join(distDir, 'sources', 'index.html'), 'utf8');
   const sourceLabels = [...sourceDirectoryHtml.matchAll(/<span class="source-number(?: source-number--reference)?" aria-hidden="true">([^<]+)<\/span>/g)]
@@ -36,15 +37,62 @@ test('renumbered source and artifact-reader URLs retain static legacy redirects'
   assert.equal(translationLabels.filter((label) => label === '103').length, 1);
   assert.ok(translationLabels.every((label) => /^\d{3}$/.test(label) || label === '참고'));
 
-  for (let canonicalNumber = 48; canonicalNumber <= 78; canonicalNumber += 1) {
-    const canonicalPrefix = String(canonicalNumber).padStart(3, '0');
-    const artifactPrefix = String(canonicalNumber - 1).padStart(3, '0');
-    const entries = report.redirects.filter((redirect) => redirect.canonicalNumber === canonicalPrefix);
+  const expectedNumberedLegacyPrefixes = new Map([
+    ['source.048', '047'],
+    ['source.049', '048'],
+    ['source.050', '049'],
+    ['source.051', '050'],
+    ['source.052', '051'],
+    ['source.053', '052'],
+    ['source.054', '053'],
+    ['source.055', '054'],
+    ['source.056', '055'],
+    ['source.057', '056'],
+    ['source.058', '057'],
+    ['source.059', '058'],
+    ['source.060', '059'],
+    ['source.061', '060'],
+    ['source.062', '061'],
+    ['source.063', '062'],
+    ['source.064', '063'],
+    ['source.065', '064'],
+    ['source.066', '065'],
+    ['source.067', '066'],
+    ['source.068', '067'],
+    ['source.069', '068'],
+    ['source.070', '069'],
+    ['source.071', '070'],
+    ['source.072', '071'],
+    ['source.073', '072'],
+    ['source.074', '073'],
+    ['source.075', '074'],
+    ['source.076', '075'],
+    ['source.077', '076'],
+    ['source.078', '077'],
+    ['source.079', '078'],
+  ]);
+  const sourceRedirects = report.redirects.filter((redirect) => redirect.kind === 'source');
+  assert.deepEqual(
+    sourceRedirects.map((redirect) => redirect.sourceId).sort(),
+    [...expectedNumberedLegacyPrefixes.keys(), 'source.103'].sort(),
+  );
+  assert.deepEqual(
+    sourceRedirects.filter((redirect) => (
+      Number(redirect.canonicalNumber) >= 80 && redirect.sourceId !== 'source.103'
+    )),
+    [],
+    'Sources 080 and later must not acquire redirects unless they are explicitly listed.',
+  );
+
+  for (const [sourceId, legacyPrefix] of expectedNumberedLegacyPrefixes) {
+    const canonicalPrefix = sourceId.slice('source.'.length);
+    const entries = report.redirects.filter((redirect) => redirect.sourceId === sourceId);
     assert.deepEqual(entries.map((redirect) => redirect.kind).sort(), ['commentary', 'source', 'translation']);
 
     const sourceRedirect = entries.find((redirect) => redirect.kind === 'source');
-    assert.equal(sourceRedirect.artifactPrefix, artifactPrefix);
-    assert.match(sourceRedirect.from, new RegExp(`^/sources/${artifactPrefix}-`));
+    assert.equal(sourceRedirect.canonicalNumber, canonicalPrefix);
+    assert.equal(sourceRedirect.legacyPrefix, legacyPrefix);
+    assert.match(sourceRedirect.from, new RegExp(`^/sources/${legacyPrefix}-`));
     assert.match(sourceRedirect.to, new RegExp(`^/sources/${canonicalPrefix}-`));
 
     for (const kind of ['translation', 'commentary']) {
@@ -57,7 +105,7 @@ test('renumbered source and artifact-reader URLs retain static legacy redirects'
   const source103Redirects = report.redirects.filter((redirect) => redirect.canonicalNumber === '103');
   assert.deepEqual(source103Redirects.map((redirect) => redirect.kind).sort(), ['commentary', 'source', 'translation']);
   const source103Redirect = source103Redirects.find((redirect) => redirect.kind === 'source');
-  assert.equal(source103Redirect.artifactPrefix, '102');
+  assert.equal(source103Redirect.legacyPrefix, '102');
   assert.equal(source103Redirect.from, '/sources/glam에서-mixtral까지의-희소-moe-확장/');
   assert.match(source103Redirect.to, /^\/sources\/103-glam에서-mixtral까지의-희소-moe-확장\/$/);
   for (const kind of ['translation', 'commentary']) {

@@ -17,8 +17,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/063_Transformer-XL Extending Transformers to Long Sequences.ko.md'
-  - 'raw/063_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md'
+  - 'raw/064_Transformer-XL Extending Transformers to Long Sequences.ko.md'
+  - 'raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md'
 evidence:
   - source_id: dai-et-al-2019-transformer-xl
     locator: 'pp. 2980–2986, 특히 §§3.2–3.3와 Figures 1–2의 state reuse·stop-gradient·layer shift·relative positional attention, §§4.2–4.5와 Tables 6–9의 ablation·RECL·평가 속도 조건'
@@ -119,7 +119,7 @@ memory를 늘리면 더 긴 과거를 직접 읽는 대신 계산량과 저장�
 
 - [[064_Transformer-XL과 세그먼트 수준 재귀]]
 - Zihang Dai 외, [Transformer-XL: Attentive Language Models beyond a Fixed-Length Context](https://aclanthology.org/P19-1285/), ACL 2019, pp. 2978–2988. 특히 §§3.2–3.3, Figures 1–2, Tables 6–9.
-- 프로젝트 보존 자료: `raw/063_Transformer-XL Extending Transformers to Long Sequences.ko.md`, `raw/063_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/064_Transformer-XL Extending Transformers to Long Sequences.ko.md`, `raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md`.
 
 ## 관련 항목
 

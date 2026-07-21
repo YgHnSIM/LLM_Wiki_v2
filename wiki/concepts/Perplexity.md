@@ -19,8 +19,8 @@ artifacts:
     Processing..md
   - raw/019_Katz Back-off - Handling Sparse Data in Language Models.ko.md
   - raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md
-  - raw/065_Scaling Laws for Neural Language Models Predicting Performance from Scale.ko.md
-  - raw/065_Scaling Laws for Neural Language Models Predicting Performance from Scale.commentary.ko.md
+  - raw/066_Scaling Laws for Neural Language Models Predicting Performance from Scale.ko.md
+  - raw/066_Scaling Laws for Neural Language Models Predicting Performance from Scale.commentary.ko.md
 evidence:
   - source_id: shannon-1948
     locator: 'Part I, §§2–3 and §6'

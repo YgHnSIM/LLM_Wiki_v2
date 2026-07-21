@@ -4,7 +4,7 @@ id: source.078
 page_type: source
 title: Chinchilla와 계산 최적 언어 모델 학습
 aliases:
-  - 077_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models
+  - 078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models
   - Chinchilla Scaling Laws
   - Training Compute-Optimal Large Language Models
   - 계산 최적 언어 모델 훈련
@@ -19,8 +19,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/077_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.ko.md'
-  - 'raw/077_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.commentary.ko.md'
+  - 'raw/078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.ko.md'
+  - 'raw/078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.commentary.ko.md'
 evidence:
   - source_id: hoffmann-et-al-2022-chinchilla
     locator: '초록, §§1·3.1–3.4·4–5, Eqs. 1–2, Tables 1–5와 Appendices A·C·D.2–D.4·E–F의 fixed-compute 최적화·세 추정법·Chinchilla–Gopher 비교·데이터와 FLOP 조건'
@@ -182,7 +182,7 @@ Scaling law의 직접 적합 대상은 평균 pretraining loss다. Reasoning, fa
 - [NeurIPS 2022 공식 논문 페이지](https://proceedings.neurips.cc/paper_files/paper/2022/hash/c1e2faff6f588870935f114ebe04a3e5-Abstract-Conference.html)와 [supplemental PDF](https://proceedings.neurips.cc/paper_files/paper/2022/file/c1e2faff6f588870935f114ebe04a3e5-Supplemental-Conference.pdf).
 - [[066_신경 언어 모델의 스케일링 법칙]]
 - 프로젝트 번역·검토 출발 자료: [Chinchilla Scaling Laws: Compute-Optimal Training and Resource Allocation for Large Language Models](https://mbrenndoerfer.com/writing/chinchilla-scaling-laws-compute-optimal-training-resource-allocation)
-- 프로젝트 보존 자료: `raw/077_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.ko.md`, `raw/077_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.ko.md`, `raw/078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.commentary.ko.md`.
 
 ## 관련 항목
 

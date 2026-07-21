@@ -4,7 +4,7 @@ id: source.064
 page_type: source
 title: Transformer-XL과 세그먼트 수준 재귀
 aliases:
-  - 063_Transformer-XL Extending Transformers to Long Sequences
+  - 064_Transformer-XL Extending Transformers to Long Sequences
   - 'Transformer-XL: Attentive Language Models beyond a Fixed-Length Context'
   - Transformer-XL 논문
 tags:
@@ -17,8 +17,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/063_Transformer-XL Extending Transformers to Long Sequences.ko.md'
-  - 'raw/063_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md'
+  - 'raw/064_Transformer-XL Extending Transformers to Long Sequences.ko.md'
+  - 'raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md'
 evidence:
   - source_id: dai-et-al-2019-transformer-xl
     locator: 'pp. 2978–2988, 특히 §§3.1–3.3와 Figures 1–2의 fixed-segment baseline·stop-gradient state reuse·relative positional attention, §§4.1–4.5와 Tables 1–9의 language-model results·ablation·RECL·evaluation-speed 조건'
@@ -142,7 +142,7 @@ WikiText-103에서 수천 token의 글을 생성한 결과는 저자들이 사�
 
 - Zihang Dai 외, [Transformer-XL: Attentive Language Models beyond a Fixed-Length Context](https://aclanthology.org/P19-1285/), ACL 2019, pp. 2978–2988. 특히 §§3.1–3.3, Figures 1–2, Tables 1–9.
 - 프로젝트 번역·검토 출발 자료: [Transformer-XL: Extending Transformers to Long Sequences](https://mbrenndoerfer.com/writing/transformer-xl-long-sequences-segment-recurrence)
-- 프로젝트 보존 자료: `raw/063_Transformer-XL Extending Transformers to Long Sequences.ko.md`, `raw/063_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/064_Transformer-XL Extending Transformers to Long Sequences.ko.md`, `raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md`.
 
 ## 관련 항목
 

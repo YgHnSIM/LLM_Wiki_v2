@@ -16,8 +16,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/053_WaveNet - Neural Audio Generation Revolution.ko.md'
-  - 'raw/053_WaveNet - Neural Audio Generation Revolution.commentary.ko.md'
+  - 'raw/054_WaveNet - Neural Audio Generation Revolution.ko.md'
+  - 'raw/054_WaveNet - Neural Audio Generation Revolution.commentary.ko.md'
 evidence:
   - source_id: van-den-oord-et-al-2016-wavenet
     locator: '초록과 §§2–5, Figures 2–5와 Table 1의 자기회귀 파형 분포·팽창 인과 합성곱·조건화·MOS 평가'

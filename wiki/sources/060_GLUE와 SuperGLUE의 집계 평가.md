@@ -4,7 +4,7 @@ id: source.060
 page_type: source
 title: GLUE와 SuperGLUE의 집계 평가
 aliases:
-  - 059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding
+  - 060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding
   - SuperGLUE A Stickier Benchmark
 tags:
   - type/source
@@ -16,8 +16,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md'
-  - 'raw/059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md'
+  - 'raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md'
+  - 'raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md'
 evidence:
   - source_id: wang-et-al-2018-glue
     locator: '초록과 pp. 353–355의 아홉 과제·자료량·domain·private test·diagnostic set·baseline 설계'
@@ -179,7 +179,7 @@ GLUE가 SQuAD 평가 원칙을 만들었다거나 ImageNet·COCO가 GLUE 방식�
 - Alex Wang 외, [SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems](https://proceedings.neurips.cc/paper/2019/hash/4496bf24afe7fab6f046bf4923da8de6-Abstract.html), NeurIPS 2019.
 - [[079_HELM과 다차원 언어 모델 평가]]
 - 프로젝트 번역·검토 출발 자료: [GLUE and SuperGLUE Standardized Evaluation for Language Understanding](https://mbrenndoerfer.com/writing/glue-superglue-standardized-evaluation-language-understanding)
-- 프로젝트 보존 자료: `raw/059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md`, `raw/059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md`, `raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md`.
 
 ## 관련 항목
 

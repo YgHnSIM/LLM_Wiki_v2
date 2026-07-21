@@ -4,7 +4,7 @@ id: source.051
 page_type: source
 title: SQuAD와 추출형 독해 평가
 aliases:
-  - 050_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark
+  - 051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark
   - SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark
 tags:
   - type/source
@@ -17,8 +17,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/050_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md'
-  - 'raw/050_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.commentary.ko.md'
+  - 'raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md'
+  - 'raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.commentary.ko.md'
 evidence:
   - source_id: rajpurkar-et-al-2016-squad
     locator: 'EMNLP 2016, pp. 2383–2392의 §§1–4 데이터 구축·분할·분석·로지스틱 기준선과 표 1–3'
@@ -144,7 +144,7 @@ SQuAD는 지문·질문·답 구간이라는 데이터 형식, EM·F1, 공개 �
 - Pranav Rajpurkar·Robin Jia·Percy Liang, [Know What You Don’t Know: Unanswerable Questions for SQuAD](https://aclanthology.org/P18-2124/), ACL 2018, pp. 784–789.
 - [SQuAD 공식 데이터·평가 사이트](https://rajpurkar.github.io/SQuAD-explorer/).
 - 프로젝트 번역·검토 출발 자료: [SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark](https://mbrenndoerfer.com/writing/squad-stanford-question-answering-dataset-reading-comprehension-benchmark)
-- 프로젝트 보존 자료: `raw/050_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md`와 대응 해설.
+- 프로젝트 보존 자료: `raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md`와 대응 해설.
 
 ## 관련 항목
 
