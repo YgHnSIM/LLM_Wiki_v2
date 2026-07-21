@@ -1188,3 +1188,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/gpt3-in-context-learning-emergent-capabilities-from-scale
     sha256: 1d4b08f6d329a93bb18361108b91e2ad3b754acb7017373a95d18da262d234ae
+  - path: "raw/067_Dense Passage Retrieval and Retrieval-Augmented Generation Integrating Knowledge with Language Models.ko.md"
+    role: translation
+    order_prefix: "067"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/dense-passage-retrieval-retrieval-augmented-generation-rag
+    sha256: 692ff8e9a110049393b239c497e24e1f7ad9af60ea62fe89df5a29ec734696a6
+  - path: "raw/067_Dense Passage Retrieval and Retrieval-Augmented Generation Integrating Knowledge with Language Models.commentary.ko.md"
+    role: commentary
+    order_prefix: "067"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/dense-passage-retrieval-retrieval-augmented-generation-rag
+    sha256: 4548ac4d3c14fe06c8e4bf3e7eae76d381965e3f24100b993869e433d9a97215

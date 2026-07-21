@@ -2845,6 +2845,24 @@ raw 등록 해시:
 - 사이트는 398개 페이지를 빌드해 5,204개 위키 링크와 29,751개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 258개 항목을 포함했다.
 - 문헌별 수치와 metric 정의는 1차 자료로 확인했지만, 네 연구를 loss→task score→능력 판정의 세 층으로 묶은 결론은 합성 해석이므로 `verification: partial`을 유지했다.
 
+## [2026-07-21] ingest | DPR과 검색 증강 생성
+
+변경 내용:
+
+- `067_Dense Passage Retrieval and Retrieval-Augmented Generation Integrating Knowledge with Language Models.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 74개 본문 블록, H1/H2/H3 1/6/11과 67개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- [[067_DPR과 검색 증강 생성]]과 [[검색 증강 생성]]을 만들고, DPR의 독립 BERT encoder·내적·in-batch/BM25 hard negative·FAISS 색인과 원 RAG의 DPR query encoder·BART-large·잠재 문서 주변화를 분리했다. RAG-Sequence와 RAG-Token은 새 문서를 매 token 재검색하는 방식이 아니라 같은 top-$K$ 후보를 서로 다른 단위에서 주변화한다는 점을 명시했다.
+- [[신경 정보 검색]]에는 DPR의 negative 구성과 SQuAD에서 BM25가 앞선 예외를, [[개방 영역 질의응답]]에는 네 QA 자료와 MS MARCO·Jeopardy·FEVER의 서로 다른 평가 범위를 보강했다. [[외부 메모리]]에는 고정 document encoder·색인과 82명 world-leader hot-swap을, [[검색은 근거를 찾고 독해는 답을 찾는다]]에는 NQ의 검색 문서 내 정답 부재 사례 11.8%와 provenance trace·claim-level citation의 차이를 추가했다.
+- 기존 `karpukhin-et-al-2020-dpr`와 `lewis-et-al-2020-rag` 1차 evidence를 재사용하고 locator를 실제 사용 절·표에 맞췄다. 새 evidence 레코드는 만들지 않았다.
+- raw의 DPR·RAG 단일 발명 서사, BM25를 exact match로만 보는 대조, 적은 표지 자료와 보편 우월·조건 없는 billion-scale 속도, RAG의 GPT-2 generator·passage 직접 감독·전체 색인 공동 학습, Sequence/Token 비용, 실시간 최신성·자동 인용·법률·의료·뉴스·다문서 요약 검증 주장을 공개 문서에서 교정했다.
+- 새 분석은 만들지 않았다. 검색 재현율, 답 생성과 인용 충실성의 구분은 기존 [[검색은 근거를 찾고 독해는 답을 찾는다]]의 비교 질문과 정확히 겹치므로 그 문서를 실질적으로 보강하는 편이 재사용성과 중복 억제에 더 적합했다.
+
+검증 결과:
+
+- 번역 스킬 검사는 067 번역·해설 쌍을 `done: true`로 확인했고, source workflow는 두 raw artifact의 원문 URL·역할·SHA-256 일치를 확인했다.
+- 49개 회귀 테스트와 261개 위키 문서 strict lint를 통과했으며 280개 evidence 레코드와 134개 immutable raw artifact를 확인했다.
+- 사이트는 402개 페이지를 빌드해 5,240개 위키 링크와 30,075개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 260개 항목을 포함했다.
+- 공개 source·concept와 기존 문서 보강은 DPR·RAG 두 2020년 1차 논문의 직접 구현·평가 범위 안에서 검증했다. 현대의 넓은 RAG pipeline, 실시간 운영, claim-level citation과 도메인별 신뢰성은 별도 근거가 필요한 후속 범위로 남겼다.
+
 ## 관련 항목
 
 - [[index]]
