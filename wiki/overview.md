@@ -24,7 +24,7 @@ related:
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 71개, concept 147개, entity 29개, analysis 20개를 합친 비메타 문서 267개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 72개, concept 148개, entity 29개, analysis 20개를 합친 비메타 문서 269개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -36,6 +36,7 @@ related:
 | 검색과 외부 지식은 어떻게 연결되나 | [[010_벡터 공간 모델과 TF-IDF]] | [[024_BM25와 확률적 정보 검색]] → [[051_신경 정보 검색과 의미 대응]] → [[064_BERT 기반 passage 재순위화]] → [[067_DPR과 검색 증강 생성]] | [[검색은 근거를 찾고 독해는 답을 찾는다]] |
 | 자연어 명세는 어떻게 실행 코드가 되나 | [[066_GPT-3와 문맥 내 학습]] | [[070_Codex와 HumanEval 기반 코드 생성 평가]] → [[OpenAI Codex (2021)]] | [[자동 평가 지표는 무엇을 보상하는가]] |
 | 자연어 지시는 언제 가중치에 들어가나 | [[062_T5와 Text-to-Text 통합 프레임워크]] | [[066_GPT-3와 문맥 내 학습]] → [[071_지시 미세조정과 FLAN의 제로샷 일반화]] → [[지시 미세조정]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
+| 희소 모델의 ‘크기’는 무엇을 뜻하나 | [[068_전문가 혼합과 희소 활성 스케일링]] | [[072_GLaM에서 Mixtral까지의 희소 MoE 확장]] → [[Mixtral 8x7B]] | [[총 매개변수와 활성 계산량은 같은 축인가]] |
 
 ## 난이도에 따른 읽기 방법
 
@@ -45,7 +46,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 71개 소스의 범위
+## 72개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -118,6 +119,7 @@ related:
 - [[069_CLIP과 대조적 언어-이미지 사전 학습]]은 4억 image–text pair의 대칭 대조 학습, 수정 ResNet·ViT 이중 인코더와 class prompt 기반 zero-shot 분류를 복원하고, shared embedding과 일반 멀티모달 이해·생성·VQA의 경계를 검증한다.
 - [[070_Codex와 HumanEval 기반 코드 생성 평가]]는 최대 12B 연구 Codex의 Python 코드 계속학습과 Codex-S 추가 미세조정을 분리하고, HumanEval·pass@k·unit-test oracle 및 GitHub Copilot production version의 경계를 검증한다.
 - [[071_지시 미세조정과 FLAN의 제로샷 일반화]]는 62개 데이터셋·12개 과제 군집을 자연어 지시로 미세조정한 137B FLAN을 복원하고, 군집별 별도 checkpoint·template 선택·모델 규모 효과와 최초 발명·보편적 향상·안전 정렬 주장의 경계를 검증한다.
+- [[072_GLaM에서 Mixtral까지의 희소 MoE 확장]]은 2024년 단일 돌파 서사를 GLaM의 1.2T/96.6B와 Mixtral의 46.7B/12.9B total/active 장부로 교정하고, 공개 가중치·memory·routing·benchmark 비교의 조건을 검증한다.
 
 ## 현재 핵심 주제
 
@@ -168,6 +170,7 @@ related:
 - [[검색은 근거를 찾고 독해는 답을 찾는다]]에서 분리하는 컬렉션→후보 retrieval recall, 후보→답 EM·F1·faithfulness, 답→행동 기권 calibration과 oracle reader 진단
 - [[검색 증강 생성]]에서 구분하는 원 RAG의 DPR–BART 잠재 문서 주변화, 고정 document encoder·색인과 학습되는 query encoder, 검색 provenance와 claim-level citation의 차이
 - [[전문가 혼합]]에서 구분하는 total parameters·token당 active expert, shared Transformer 경로, top-$k$ routing·capacity·load balancing과 memory·all-to-all communication 비용
+- [[Mixtral 8x7B]]에서 구분하는 46.7B total·12.9B active parameters, 8개 중 top-2, Apache 2.0 공개 가중치와 topic expert가 아닌 routing locality
 - [[총 매개변수와 활성 계산량은 같은 축인가]]에서 비교하는 dense non-embedding $N$, sparse total·active parameters, FLOPs·memory·communication·wall-clock·data·quality와 논문 안/논문 사이 비교 경계
 - [[CLIP]]에서 구분하는 이미지·텍스트 이중 인코더, 정규화된 shared embedding과 대칭 대조 손실, class prompt로 합성한 zero-shot classifier 및 cross-attention·생성 능력의 부재
 - [[OpenAI Codex (2021)]]에서 구분하는 연구용 Python 코드 모델군, Codex-S의 함수 분포 지도 미세조정, docstring prompt와 표본 생성·실행 선택 및 현행 동명 제품
@@ -225,6 +228,8 @@ related:
 - [[OpenAI Codex (2021)]]
 - [[071_지시 미세조정과 FLAN의 제로샷 일반화]]
 - [[지시 미세조정]]
+- [[072_GLaM에서 Mixtral까지의 희소 MoE 확장]]
+- [[Mixtral 8x7B]]
 - [[전문가 혼합]]
 - [[총 매개변수와 활성 계산량은 같은 축인가]]
 - [[검색 증강 생성]]

@@ -2954,6 +2954,24 @@ raw 등록 해시:
 - 사이트는 419개 페이지를 빌드해 5,509개 위키 링크와 31,506개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 269개 항목을 포함했다.
 - 공개 source·concept와 기존 문서 보강은 Wei et al. FLAN 본문·부록, Google Research 공개 기록, Mishra et al. Natural Instructions, Wang et al. Self-Instruct와 Ouyang et al. InstructGPT의 직접 기술·평가 범위 안에서 검증했다. 후대 대화형 모델의 제품 동작, 안전성·선호 정렬과 보편적인 규모 임계값은 별도 근거가 필요한 범위로 남겼다.
 
+## [2026-07-21] ingest | GLaM에서 Mixtral까지의 희소 MoE 확장
+
+변경 내용:
+
+- History of Language AI 분류 페이지에서 누락된 072 원문 `Mixture of Experts at Scale: Efficient Scaling Through Sparse Activation and Dynamic Routing`을 찾아 본문 37개 문단·H2 6개·링크 43개를 보존한 Markdown 원문으로 보충했다. 이를 처음부터 새로 번역·윤문하고 12절 학습 해설을 작성해 검사를 통과한 쌍을 immutable raw artifact로 등록했다.
+- [[072_GLaM에서 Mixtral까지의 희소 MoE 확장]]과 [[Mixtral 8x7B]]를 만들고, dense Transformer와 sparse MoE의 total parameters·active parameters·FLOPs·memory·routing·communication·wall-clock을 서로 다른 장부로 설명했다.
+- [[전문가 혼합]]에는 GLaM의 64개 expert·top-2와 Mixtral의 8개 FFN expert·top-2를 추가하고, [[068_전문가 혼합과 희소 활성 스케일링]]에서 후속 확장으로 연결했다. [[총 매개변수와 활성 계산량은 같은 축인가]]에는 decoder-only GLaM·Mixtral 사례를 추가해 dense와 sparse 규모 비교의 조건을 구체화했다.
+- Du et al. GLaM 논문, Jiang et al. Mixtral 논문과 Mistral AI 공식 발표를 evidence 레지스트리에 등록했다. GLaM 1.2T total·96.6B active와 Mixtral 46.7B total·12.9B active 수치를 원문 표·본문 locator에 맞춰 복원했다.
+- raw의 2024년 단일 돌파·Meta 귀속·parameter count에 대한 제곱 계산 증가·난도별 가변 expert 수·주제별 expert 전문화·고정 6배 속도·모든 평가의 일률적 우위를 공개 문서에서 교정했다. 특히 Mixtral의 expert 배정은 뚜렷한 주제 분업보다 통사·token·시간적 locality가 관찰됐고, 6배 속도는 공식 구현·비교 조건이 붙은 발표 수치로 한정했다.
+- 새 분석 문서는 만들지 않았다. total capacity와 active compute의 차이는 기존 [[총 매개변수와 활성 계산량은 같은 축인가]]의 핵심 질문을 직접 보강하므로, 새 페이지보다 기존 분석에 GLaM·Mixtral의 수치와 한계를 합치는 편이 중복 없이 재사용 가치가 높았다.
+
+검증 결과:
+
+- 번역 스킬 검사는 072 번역·해설 쌍을 `done: true`로 확인했고, source workflow는 두 raw artifact의 원문 URL·역할·SHA-256 일치를 확인했다.
+- 49개 회귀 테스트와 272개 위키 문서 strict lint를 통과했으며 296개 evidence 레코드와 144개 immutable raw artifact를 확인했다.
+- 사이트는 423개 페이지를 빌드해 5,566개 위키 링크와 31,808개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 271개 항목을 포함했다.
+- 공개 source·concept와 기존 문서 보강은 Du et al. 2022, Jiang et al. 2024와 Mistral AI 2023의 직접 구조·수치·평가 범위 안에서 검증했다. 모델 간 품질·효율 차이를 sparse routing 하나의 효과로 돌리는 인과와 모든 배치·하드웨어에서의 고정 속도 배수는 입증되지 않은 범위로 남겼다.
+
 ## 관련 항목
 
 - [[index]]

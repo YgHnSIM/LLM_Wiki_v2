@@ -102,6 +102,7 @@ related:
 - [[069_CLIP과 대조적 언어-이미지 사전 학습]] — 4억 이미지-텍스트 쌍의 대칭 대조 학습과 class prompt 제로샷 분류를 복원하고 shared embedding·평가·후대 계보의 범위를 검증한 소스 (근거 1개)
 - [[070_Codex와 HumanEval 기반 코드 생성 평가]] — Python 코드 계속학습과 Codex-S를 분리하고 HumanEval·pass@k·실행 선택 및 연구 모델·Copilot production version의 경계를 검증한 소스 (근거 3개)
 - [[071_지시 미세조정과 FLAN의 제로샷 일반화]] — 62개 데이터셋·12개 과제 군집의 FLAN 학습과 군집별 checkpoint·template·규모 절제를 복원하고 최초성·범용성·정렬 계보 과장을 교정한 소스 (근거 5개)
+- [[072_GLaM에서 Mixtral까지의 희소 MoE 확장]] — GLaM의 1.2T/96.6B와 Mixtral의 46.7B/12.9B total·active 장부를 복원하고 2024 단일 돌파·Meta 귀속·제곱 계산·주제 expert·고정 속도 배수 과장을 교정한 소스 (근거 7개)
 
 ## 개체
 
@@ -261,7 +262,8 @@ related:
 - [[추출형 질의응답]] — 주어진 문맥의 연속 답 구간을 시작·끝 위치로 선택하고 검색·생성·답 없음 판단과 구분하는 과업 (근거 2개)
 - [[신경 정보 검색]] — 질의·문서 표현이나 상호작용·순위 점수를 신경망으로 학습하며 첫 단계 검색과 재순위화를 구분하는 접근군 (근거 6개)
 - [[검색 증강 생성]] — 외부 passage 검색과 생성을 결합하되 원 DPR–BART 잠재 문서 모형과 후대의 넓은 RAG 용례를 구분하는 방식 (근거 2개)
-- [[전문가 혼합]] — 여러 expert와 token router로 일부 FFN만 조건부 활성화하며 total parameters와 active compute·저장·통신을 구분하는 모델 구조 (근거 4개)
+- [[전문가 혼합]] — 여러 expert와 token router로 일부 FFN만 조건부 활성화하며 total parameters와 active compute·저장·통신을 구분하는 모델 구조 (근거 7개)
+- [[Mixtral 8x7B]] — 8개 FFN 중 top-2를 쓰는 46.7B total·12.9B active 공개 가중치 모델과 memory·평가·routing 조건을 정리한 개념 (근거 2개)
 - [[역전파]] — 계산 그래프를 역순으로 순회해 손실의 매개변수별 그래디언트를 구하는 역모드 미분 절차 (근거 8개)
 - [[다층 퍼셉트론]] — 비선형 은닉층을 통해 입력을 단계적으로 다시 표현하는 순방향 신경망 (근거 6개)
 - [[기울기 소실]] — 깊은 층이나 긴 시간 경로에서 역방향 그래디언트가 지나치게 작아지는 조건적 현상 (근거 6개)
@@ -287,7 +289,7 @@ related:
 
 ## 분석
 
-- [[총 매개변수와 활성 계산량은 같은 축인가]] — dense $N$과 sparse MoE의 total·active parameters를 분리하고 FLOPs·memory·communication·wall-clock·data·quality 장부로 규모 비교 조건을 정리한 분석 (근거 5개)
+- [[총 매개변수와 활성 계산량은 같은 축인가]] — dense $N$과 sparse MoE의 total·active parameters를 분리하고 FLOPs·memory·communication·wall-clock·data·quality 장부로 규모 비교 조건을 정리한 분석 (근거 8개)
 - [[같은 병렬 문장은 무엇을 학습시키는가]] — 병렬 문장쌍이 IBM SMT의 잠재 단어 정렬, seq2seq NMT의 target sequence, XLM TLM의 양방향 masked-token 문맥으로 쓰이는 차이를 비교한 분석 (근거 6개)
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]] — ELMo·ULMFiT·BERT·GPT·XLM·T5·FLAN·CLIP·Codex에서 지식 전달 경로와 head·cue·instruction mixture·demonstration·class prompt·공통 text output·실행 선택의 위치를 비교한 분석 (근거 11개)
 - [[손실 곡선과 능력 곡선 사이]] — 평균 token loss·downstream task score·능력 threshold를 분리하고 FLAN adaptation 개입을 포함해 metric·표본·관측 scale이 창발 판정에 미치는 영향을 비교한 분석 (근거 5개)

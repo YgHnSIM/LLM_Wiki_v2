@@ -1278,3 +1278,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/instruction-tuning-adapting-language-models-to-follow-explicit-instructions
     sha256: 3e9235956e5eef513607b71a8ce68f30d184655b8e3e88aaa719d4f6326713da
+  - path: "raw/072_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md"
+    role: translation
+    order_prefix: "072"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/mixture-of-experts-at-scale-sparse-activation-dynamic-routing-efficient-scaling
+    sha256: fa1f3de2ac386ba4d7a6a66db76dd1cb05874cfd4c5cd622e0cb8566e0a2cf54
+  - path: "raw/072_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md"
+    role: commentary
+    order_prefix: "072"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/mixture-of-experts-at-scale-sparse-activation-dynamic-routing-efficient-scaling
+    sha256: 24fb08b5d62ed782843cf3c90499d305a4e225dd7397e319c45080a65c768e0c
