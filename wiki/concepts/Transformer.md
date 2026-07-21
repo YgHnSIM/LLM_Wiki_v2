@@ -49,9 +49,9 @@ evidence:
     locator: 'JMLR 23(120), §§2–3과 Figures 1–2의 공유 attention·희소 Switch FFN·top-1 token routing'
     relation: supplements
 related:
-  - source.054
-  - source.063
-  - source.068
+  - source.055
+  - source.064
+  - source.069
   - concept.신경망-기계-번역
   - concept.자기회귀-생성
   - concept.잔차-연결
@@ -103,7 +103,7 @@ base 모델은 $d_{model}=512$를 8개 head의 64차원 query·key·value 투영
 
 ### 희소 MoE는 attention이 아니라 일부 FFN을 바꾼다
 
-[[068_전문가 혼합과 희소 활성 스케일링]]의 GShard와 Switch Transformer는 보통 self-attention을 여러 expert로 대체하지 않았다. 일부 위치별 FFN sublayer를 여러 expert FFN과 token router로 바꾸고, GShard는 top-2, Switch는 top-1 expert만 실행했다. Attention·embedding·normalization 같은 공유 경로는 계속 계산된다.
+[[069_전문가 혼합과 희소 활성 스케일링]]의 GShard와 Switch Transformer는 보통 self-attention을 여러 expert로 대체하지 않았다. 일부 위치별 FFN sublayer를 여러 expert FFN과 token router로 바꾸고, GShard는 top-2, Switch는 top-1 expert만 실행했다. Attention·embedding·normalization 같은 공유 경로는 계속 계산된다.
 
 따라서 [[전문가 혼합]]을 Transformer 전체가 여러 독립 모델로 갈라지는 ensemble로 이해하지 않는다. 희소화되는 경로, 공유되는 경로와 layer별 routing을 구분해야 total parameters와 token당 active compute를 비교할 수 있다.
 
@@ -170,9 +170,9 @@ Wiegreffe·Pinter는 ‘설명’의 정의와 모델 전체를 고려해야 한
 
 ## 출처
 
-- [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]]
-- [[063_Transformer-XL과 세그먼트 수준 재귀]]
-- [[068_전문가 혼합과 희소 활성 스케일링]]
+- [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]]
+- [[064_Transformer-XL과 세그먼트 수준 재귀]]
+- [[069_전문가 혼합과 희소 활성 스케일링]]
 - Ashish Vaswani 외, [Attention Is All You Need](https://proceedings.neurips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html), NeurIPS 2017, pp. 5998–6008.
 - Zihang Dai 외, [Transformer-XL: Attentive Language Models beyond a Fixed-Length Context](https://aclanthology.org/P19-1285/), ACL 2019, pp. 2978–2988.
 - Alec Radford 외, [Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf), 2018, §2.
@@ -184,9 +184,9 @@ Wiegreffe·Pinter는 ‘설명’의 정의와 모델 전체를 고려해야 한
 
 ## 관련 항목
 
-- [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]]
-- [[063_Transformer-XL과 세그먼트 수준 재귀]]
-- [[068_전문가 혼합과 희소 활성 스케일링]]
+- [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]]
+- [[064_Transformer-XL과 세그먼트 수준 재귀]]
+- [[069_전문가 혼합과 희소 활성 스케일링]]
 - [[신경망 기계 번역]]
 - [[자기회귀 생성]]
 - [[잔차 연결]]

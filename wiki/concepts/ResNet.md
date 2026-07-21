@@ -24,7 +24,7 @@ evidence:
     locator: '§§3–4의 pre-activation ResNet과 1001층 CIFAR·200층 ImageNet 평가'
     relation: supplements
 related:
-  - source.047
+  - source.048
   - concept.잔차-연결
   - concept.degradation-problem
   - concept.합성곱-신경망
@@ -78,13 +78,13 @@ ResNet의 비교 실험은 잔차 매개변수화가 동일 깊이의 plain netw
 
 ## 출처
 
-- [[047_잔차 학습과 매우 깊은 신경망]]
+- [[048_잔차 학습과 매우 깊은 신경망]]
 - Kaiming He 외, [Deep Residual Learning for Image Recognition](https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html), 2016.
 - Kaiming He 외, [Identity Mappings in Deep Residual Networks](https://arxiv.org/abs/1603.05027), 2016.
 
 ## 관련 항목
 
-- [[047_잔차 학습과 매우 깊은 신경망]]
+- [[048_잔차 학습과 매우 깊은 신경망]]
 - [[잔차 연결]]
 - [[Degradation problem]]
 - [[합성곱 신경망]]

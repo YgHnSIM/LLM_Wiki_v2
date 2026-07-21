@@ -91,6 +91,36 @@ test('artifact creation rejects a missing or non-HTTP source_url before copy can
   );
 });
 
+test('source:status keeps the local selector but reports the mapped official chapter', async () => {
+  const fixtureRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'llm-wiki-source-numbering-'));
+  const sourceDir = path.join(fixtureRoot, 'sources');
+  const translationDir = path.join(fixtureRoot, 'translations');
+  await fs.mkdir(sourceDir);
+  await fs.mkdir(translationDir);
+  await fs.writeFile(
+    path.join(sourceDir, '077_numbering-example.md'),
+    '# Numbering example\n\nSource: https://example.com/writing/numbering-example\n',
+    'utf8',
+  );
+
+  try {
+    const result = spawnSync(process.execPath, ['scripts/source-workflow.mjs', 'status', '077'], {
+      cwd: process.cwd(),
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        LLM_SOURCE_DIR: sourceDir,
+        LLM_TRANSLATION_DIR: translationDir,
+      },
+    });
+    assert.equal(result.status, 0, result.stderr);
+    assert.match(result.stdout, /Local inventory 077 -> official chapter 078/);
+    assert.match(result.stdout, /public source page \(source\.078\):/);
+  } finally {
+    await fs.rm(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
 test('source:copy and source:ready fail clearly when the source Markdown has no source_url', async () => {
   const fixtureRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'llm-wiki-source-url-'));
   const sourceDir = path.join(fixtureRoot, 'sources');

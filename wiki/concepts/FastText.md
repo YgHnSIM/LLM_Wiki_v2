@@ -24,7 +24,7 @@ evidence:
     locator: '§§3.1–3.2의 character n-gram 합·경계 기호·hash, §§4–6의 9개 언어 평가'
     relation: supports
 related:
-  - source.049
+  - source.050
 ---
 # FastText
 
@@ -82,14 +82,14 @@ $$
 
 ### 다음 문서
 
-- [[052_GNMT와 제품 규모 신경 번역]] — 문자 특징의 합과 달리 subword를 실제 번역 시퀀스 단위로 쓰는 제품 규모 사례를 본다.
+- [[053_GNMT와 제품 규모 신경 번역]] — 문자 특징의 합과 달리 subword를 실제 번역 시퀀스 단위로 쓰는 제품 규모 사례를 본다.
 
 ## 출처
 
-- [[049_FastText와 서브워드 표현의 두 경로]]
+- [[050_FastText와 서브워드 표현의 두 경로]]
 - Piotr Bojanowski·Edouard Grave·Armand Joulin·Tomas Mikolov, [Enriching Word Vectors with Subword Information](https://aclanthology.org/Q17-1010/), TACL 5, 2017, pp. 135–146.
 - Tomas Mikolov 외, [Distributed Representations of Words and Phrases and their Compositionality](https://proceedings.neurips.cc/paper_files/paper/2013/hash/9aa42b31882ec039965f3c4923ce901b-Abstract.html), NeurIPS 2013.
 
 ## 관련 항목
 
-- [[049_FastText와 서브워드 표현의 두 경로]]
+- [[050_FastText와 서브워드 표현의 두 경로]]

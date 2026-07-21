@@ -24,7 +24,7 @@ evidence:
     locator: '§§3.1–3.5와 Figure 1의 language sampling·shared BPE·CLM/MLM/TLM, §§4–5와 Tables 1–5의 전이 protocol·평가 결과'
     relation: supports
 related:
-  - source.061
+  - source.062
   - concept.마스크드-언어-모델링
   - concept.byte-pair-encoding
   - concept.언어-모델-전이-학습
@@ -111,12 +111,12 @@ shared BPE는 같은 문자열 조각, 숫자, 고유명 같은 anchor를 공유
 
 ## 출처
 
-- [[061_XLM과 교차 언어 사전 학습]]
+- [[062_XLM과 교차 언어 사전 학습]]
 - Alexis Conneau·Guillaume Lample, [Cross-lingual Language Model Pretraining](https://proceedings.neurips.cc/paper_files/paper/2019/hash/c04c19c2c2474dbf5f7ac4372c5b9af1-Abstract.html), NeurIPS 2019, 특히 §§3–5.
 
 ## 관련 항목
 
-- [[061_XLM과 교차 언어 사전 학습]]
+- [[062_XLM과 교차 언어 사전 학습]]
 - [[마스크드 언어 모델링]]
 - [[Byte Pair Encoding]]
 - [[언어 모델 전이 학습]]

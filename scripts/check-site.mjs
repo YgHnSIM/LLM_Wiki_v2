@@ -246,6 +246,108 @@ for (const reader of artifactReaders) {
   }
 }
 
+const redirects = Array.isArray(report.redirects) ? report.redirects : [];
+if (report.redirectCount !== redirects.length) {
+  errors.push(`Build report declares ${report.redirectCount} redirect(s), but its redirect ledger contains ${redirects.length}.`);
+}
+
+const canonicalUrls = new Set([
+  siteUrl('/'),
+  siteUrl('/sources/'),
+  siteUrl('/concepts/'),
+  siteUrl('/entities/'),
+  siteUrl('/analyses/'),
+  siteUrl('/translations/'),
+  siteUrl('/search/'),
+  ...searchIndex.map((entry) => entry.url),
+  ...artifactReaders.map((reader) => siteUrl(reader.url)),
+]);
+const redirectByFrom = new Map();
+const sourceRedirectById = new Map();
+const allowedRedirectKinds = new Set(['source', 'translation', 'commentary']);
+
+for (const redirect of redirects) {
+  const missing = ['kind', 'sourceId', 'canonicalNumber', 'artifactPrefix', 'from', 'to']
+    .filter((field) => !String(redirect?.[field] ?? '').trim());
+  if (missing.length) {
+    errors.push(`Legacy redirect metadata is incomplete (${missing.join(', ')}): ${JSON.stringify(redirect)}`);
+    continue;
+  }
+  if (!allowedRedirectKinds.has(redirect.kind)) {
+    errors.push(`Legacy redirect ${redirect.from} has invalid kind '${redirect.kind}'.`);
+  }
+  if (Number(redirect.canonicalNumber) !== Number(redirect.artifactPrefix) + 1) {
+    errors.push(`Legacy redirect ${redirect.from} does not preserve the artifact-prefix + 1 numbering rule.`);
+  }
+  if (redirectByFrom.has(redirect.from)) {
+    errors.push(`Build report contains a duplicate legacy redirect route: ${redirect.from}`);
+  }
+  redirectByFrom.set(redirect.from, redirect);
+  if (redirect.kind === 'source') {
+    if (sourceRedirectById.has(redirect.sourceId)) {
+      errors.push(`Build report contains more than one source redirect for ${redirect.sourceId}.`);
+    }
+    sourceRedirectById.set(redirect.sourceId, redirect);
+  }
+
+  const fromUrl = siteUrl(redirect.from);
+  const targetUrl = siteUrl(redirect.to);
+  if (fromUrl === targetUrl) errors.push(`Legacy redirect points to itself: ${redirect.from}`);
+  if (canonicalUrls.has(fromUrl)) errors.push(`Legacy redirect collides with a canonical URL: ${redirect.from}`);
+  if (!canonicalUrls.has(targetUrl)) errors.push(`Legacy redirect target is not canonical: ${redirect.from} -> ${redirect.to}`);
+
+  const redirectFile = fileForUrl(fromUrl);
+  const targetFile = fileForUrl(targetUrl);
+  try {
+    await fs.access(redirectFile);
+    await fs.access(targetFile);
+  } catch {
+    errors.push(`Legacy redirect or its target is missing: ${redirect.from} -> ${redirect.to}`);
+    continue;
+  }
+
+  const redirectHtml = htmlCache.get(redirectFile) ?? await fs.readFile(redirectFile, 'utf8');
+  htmlCache.set(redirectFile, redirectHtml);
+  if (!redirectHtml.includes(`data-legacy-redirect="${redirect.kind}"`)) {
+    errors.push(`Legacy redirect ${redirect.from} is missing its redirect marker.`);
+  }
+  if (!redirectHtml.includes(`<meta http-equiv="refresh" content="0; url=${targetUrl}">`)) {
+    errors.push(`Legacy redirect ${redirect.from} has an incorrect refresh target.`);
+  }
+  if (!redirectHtml.includes(`<link rel="canonical" href="${targetUrl}">`)) {
+    errors.push(`Legacy redirect ${redirect.from} has an incorrect canonical target.`);
+  }
+  if (!redirectHtml.includes(`href="${targetUrl}"`)) {
+    errors.push(`Legacy redirect ${redirect.from} has no accessible link to its target.`);
+  }
+}
+
+for (const redirect of redirects) {
+  if (redirectByFrom.has(redirect.to)) {
+    errors.push(`Legacy redirect chain is not allowed: ${redirect.from} -> ${redirect.to}`);
+  }
+  if (redirect.kind === 'source') continue;
+  const sourceRedirect = sourceRedirectById.get(redirect.sourceId);
+  if (!sourceRedirect
+    || redirect.from !== `${sourceRedirect.from}${redirect.kind}/`
+    || redirect.to !== `${sourceRedirect.to}${redirect.kind}/`) {
+    errors.push(`Legacy ${redirect.kind} redirect for ${redirect.sourceId} does not follow its source redirect.`);
+  }
+}
+
+for (const sourceRedirect of sourceRedirectById.values()) {
+  const expectedReaders = artifactReaders.filter((reader) => (
+    reader.sourceUrl === sourceRedirect.to && ['translation', 'commentary'].includes(reader.role)
+  ));
+  for (const reader of expectedReaders) {
+    const expectedFrom = `${sourceRedirect.from}${reader.role}/`;
+    const readerRedirect = redirectByFrom.get(expectedFrom);
+    if (!readerRedirect || readerRedirect.to !== reader.url || readerRedirect.sourceId !== sourceRedirect.sourceId) {
+      errors.push(`Legacy redirect is missing for ${sourceRedirect.sourceId} ${reader.role} reader.`);
+    }
+  }
+}
+
 const requiredSearchFields = [
   'title',
   'url',

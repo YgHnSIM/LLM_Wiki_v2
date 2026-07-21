@@ -31,8 +31,8 @@ evidence:
     locator: '§2와 Eq. 1의 query–passage 결합 입력·[CLS] 이진 분류·pointwise cross-entropy·BM25 상위 1,000개 재순위화, §3과 Table 1의 MS MARCO·TREC-CAR 평가'
     relation: supplements
 related:
-  - source.057
-  - source.064
+  - source.058
+  - source.065
   - concept.마스크드-언어-모델링
   - concept.언어-모델-전이-학습
   - concept.transformer
@@ -87,7 +87,7 @@ BERT는 과제 전용 깊은 구조 대신 출력 인터페이스를 바꿨다.
 
 ### 질의–passage 점수화
 
-[[064_BERT 기반 passage 재순위화]]에서 확인되는 BERT의 검색 적용은 질의와 후보 passage를 `[CLS] query [SEP] passage [SEP]`로 묶는다. 결합 시퀀스가 같은 encoder의 양방향 self-attention을 통과하므로 질의 token과 passage token은 층마다 서로 조건화된다. 이를 검색 문헌에서 교차 상호작용이라고 부를 수 있지만, Transformer encoder–decoder 사이의 별도 cross-attention 층과는 구분해야 한다.
+[[065_BERT 기반 passage 재순위화]]에서 확인되는 BERT의 검색 적용은 질의와 후보 passage를 `[CLS] query [SEP] passage [SEP]`로 묶는다. 결합 시퀀스가 같은 encoder의 양방향 self-attention을 통과하므로 질의 token과 passage token은 층마다 서로 조건화된다. 이를 검색 문헌에서 교차 상호작용이라고 부를 수 있지만, Transformer encoder–decoder 사이의 별도 cross-attention 층과는 구분해야 한다.
 
 최종 관련성 점수는 attention weight를 직접 읽은 값이 아니다. 마지막 `[CLS]` 은닉 표현에 학습된 분류층을 적용해 관련성 logit과 확률을 만들고, 후보별 확률로 순서를 다시 매긴다. 이 [[교차 인코더 재순위화]]는 token 수준 공동 상호작용을 직접 모델링할 수 있지만 질의마다 각 후보 쌍을 다시 인코딩해야 하므로, 문서 표현을 한 번 계산해 전체 질의에 재사용하는 dual encoder보다 후보별 계산이 비싸다. Nogueira와 Cho의 실험이 BERT를 전체 컬렉션의 첫 단계 검색기가 아니라 BM25 상위 1,000개 후보의 재순위화에 사용한 이유도 이 비용 경계에 있다.
 
@@ -127,16 +127,16 @@ BERT 원 ablation은 NSP가 일부 문장쌍·질의응답 결과에 도움을 �
 
 ## 출처
 
-- [[057_BERT의 마스크드 양방향 사전 학습]]
-- [[064_BERT 기반 passage 재순위화]]
+- [[058_BERT의 마스크드 양방향 사전 학습]]
+- [[065_BERT 기반 passage 재순위화]]
 - Jacob Devlin 외, [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://aclanthology.org/N19-1423/), NAACL 2019.
 - Yinhan Liu 외, [RoBERTa: A Robustly Optimized BERT Pretraining Approach](https://arxiv.org/abs/1907.11692), 2019.
 - Rodrigo Nogueira·Kyunghyun Cho, [Passage Re-ranking with BERT](https://arxiv.org/abs/1901.04085), 2019.
 
 ## 관련 항목
 
-- [[057_BERT의 마스크드 양방향 사전 학습]]
-- [[064_BERT 기반 passage 재순위화]]
+- [[058_BERT의 마스크드 양방향 사전 학습]]
+- [[065_BERT 기반 passage 재순위화]]
 - [[마스크드 언어 모델링]]
 - [[언어 모델 전이 학습]]
 - [[Transformer]]

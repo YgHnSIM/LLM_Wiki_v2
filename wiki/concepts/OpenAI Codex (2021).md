@@ -33,8 +33,8 @@ evidence:
     locator: '2021-06-29 technical preview 발표의 OpenAI Codex 기반·편집기 문맥·줄과 함수 제안·Python·JavaScript·TypeScript·Ruby·Go 제품 범위'
     relation: contextualizes
 related:
-  - source.070
-  - source.066
+  - source.071
+  - source.067
   - concept.언어-모델-전이-학습
   - concept.자기회귀-생성
   - analysis.평가-지표와-모델-유인
@@ -168,12 +168,12 @@ APPS의 full-program 문제에서는 HumanEval보다 훨씬 낮은 결과가 나
 
 ### 다음 문서
 
-- [[070_Codex와 HumanEval 기반 코드 생성 평가]] — 연구 결과와 raw 서사의 정정, 제품 연표를 1차 근거 locator에 따라 확인한다.
+- [[071_Codex와 HumanEval 기반 코드 생성 평가]] — 연구 결과와 raw 서사의 정정, 제품 연표를 1차 근거 locator에 따라 확인한다.
 - [[자동 평가 지표는 무엇을 보상하는가]] — 문자열 중첩과 실행 기반 pass@$k$가 각각 어떤 출력을 보상하는지 비교한다.
 
 ## 출처
 
-- [[070_Codex와 HumanEval 기반 코드 생성 평가]]
+- [[071_Codex와 HumanEval 기반 코드 생성 평가]]
 - Mark Chen 외, [Evaluating Large Language Models Trained on Code](https://arxiv.org/abs/2107.03374), 2021, 특히 초록, §§1–4·6–8, Equation 1, Figures 1·3–10, Table 1과 Appendices A·F–G.
 - Wojciech Zaremba·Greg Brockman, [OpenAI Codex](https://openai.com/index/openai-codex/), 2021-08-10, GPT-3 descendant·학습 자료·지원 언어·context·API·Copilot 제품 설명과 페이지 상단의 2023년 구형 model 폐기·2025년 동명 agent 안내.
 - Nat Friedman, [Introducing GitHub Copilot: your AI pair programmer](https://github.blog/news-insights/product-news/introducing-github-copilot-ai-pair-programmer/), 2021-06-29, technical preview의 Codex 기반·편집기 문맥·지원 언어 설명.
@@ -181,8 +181,8 @@ APPS의 full-program 문제에서는 HumanEval보다 훨씬 낮은 결과가 나
 
 ## 관련 항목
 
-- [[070_Codex와 HumanEval 기반 코드 생성 평가]]
-- [[066_GPT-3와 문맥 내 학습]]
+- [[071_Codex와 HumanEval 기반 코드 생성 평가]]
+- [[067_GPT-3와 문맥 내 학습]]
 - [[언어 모델 전이 학습]]
 - [[자기회귀 생성]]
 - [[자동 평가 지표는 무엇을 보상하는가]]

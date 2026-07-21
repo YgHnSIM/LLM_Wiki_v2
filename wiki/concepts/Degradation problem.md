@@ -21,7 +21,7 @@ evidence:
     locator: '§1과 Figures 1·4·6의 더 깊은 plain network에서 증가한 training error'
     relation: supports
 related:
-  - source.047
+  - source.048
   - concept.잔차-연결
   - concept.resnet
   - concept.기울기-소실
@@ -71,12 +71,12 @@ ResNet 실험은 residual parameterization이 같은 깊이의 plain network보�
 
 ## 출처
 
-- [[047_잔차 학습과 매우 깊은 신경망]]
+- [[048_잔차 학습과 매우 깊은 신경망]]
 - Kaiming He 외, [Deep Residual Learning for Image Recognition](https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html), 2016, §1과 Figures 1·4·6.
 
 ## 관련 항목
 
-- [[047_잔차 학습과 매우 깊은 신경망]]
+- [[048_잔차 학습과 매우 깊은 신경망]]
 - [[잔차 연결]]
 - [[ResNet]]
 - [[기울기 소실]]

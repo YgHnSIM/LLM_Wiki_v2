@@ -43,7 +43,7 @@ evidence:
     locator: '2023-12-11 공개일, Pushing the frontier of open models with sparse architectures, Performance와 Apache 2.0 공개 가중치 설명'
     relation: supports
 related:
-  - source.068
+  - source.069
   - concept.전문가-혼합
   - concept.mixtral-8x7b
   - concept.transformer
@@ -55,14 +55,14 @@ related:
 
 > [!note] 학습 안내
 > **난이도:** 심화<br>
-> **선수 지식:** [[068_전문가 혼합과 희소 활성 스케일링]], [[전문가 혼합]], [[Transformer]]<br>
+> **선수 지식:** [[069_전문가 혼합과 희소 활성 스케일링]], [[전문가 혼합]], [[Transformer]]<br>
 > **읽고 나면:** GLaM과 Mixtral의 total·active parameter를 구분하고, 2024년 단일 돌파 서사·주제별 expert·고정 배수 속도 주장을 실험 조건에 맞게 평가할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
 
 ### 2024년 발명이 아니라 공개 가중치 단계로의 이동이다
 
-번호 정정 전 072로 수집된 raw의 출발 자료는 2025년에 게시된 웹 해설이며, MoE 대규모 확장을 2024년의 전환으로 묶는다. 그러나 [[068_전문가 혼합과 희소 활성 스케일링]]에서 확인했듯 학습되는 gate는 1991년, 수천 expert의 희소 layer는 2017년, GShard와 Switch Transformer의 수천억·수조 매개변수 Transformer는 2020–2021년에 이미 공개됐다.
+번호 정정 전 072로 수집된 raw의 출발 자료는 2025년에 게시된 웹 해설이며, MoE 대규모 확장을 2024년의 전환으로 묶는다. 그러나 [[069_전문가 혼합과 희소 활성 스케일링]]에서 확인했듯 학습되는 gate는 1991년, 수천 expert의 희소 layer는 2017년, GShard와 Switch Transformer의 수천억·수조 매개변수 Transformer는 2020–2021년에 이미 공개됐다.
 
 그 다음 전환은 한 해의 발명보다 두 사례로 읽는 편이 정확하다.
 
@@ -182,7 +182,7 @@ Mixtral의 2023년 공식 발표가 제시한 “Llama 2 70B보다 6배 빠른 i
 
 ## 출처
 
-- [[068_전문가 혼합과 희소 활성 스케일링]]
+- [[069_전문가 혼합과 희소 활성 스케일링]]
 - Nan Du 외, [GLaM: Efficient Scaling of Language Models with Mixture-of-Experts](https://proceedings.mlr.press/v162/du22c.html), ICML 2022, 특히 §§4–6·8–9와 Tables 1·4.
 - Albert Q. Jiang 외, [Mixtral of Experts](https://arxiv.org/abs/2401.04088), arXiv:2401.04088, 2024, 특히 §§1–6와 Tables 1–3·5.
 - Mistral AI, [Mixtral of experts](https://mistral.ai/news/mixtral-of-experts/), 2023-12-11.
@@ -192,7 +192,7 @@ Mixtral의 2023년 공식 발표가 제시한 “Llama 2 70B보다 6배 빠른 i
 
 ## 관련 항목
 
-- [[068_전문가 혼합과 희소 활성 스케일링]]
+- [[069_전문가 혼합과 희소 활성 스케일링]]
 - [[전문가 혼합]]
 - [[Mixtral 8x7B]]
 - [[Transformer]]

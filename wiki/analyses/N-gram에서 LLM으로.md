@@ -70,7 +70,7 @@ related:
   - source.002
   - source.019
   - source.035
-  - source.065
+  - source.066
   - concept.언어-모델-스케일링-법칙
   - concept.신경-확률-언어-모형
   - concept.단어-임베딩
@@ -149,7 +149,7 @@ Attention은 입력에 따라 여러 위치의 표현을 결합하는 학습된 
 
 ### 예측 과업의 연속성과 현대 규모 실험의 차이
 
-N-gram, 2003년 NPLM과 decoder-only LLM은 앞 문맥에서 다음 항목의 조건부확률을 예측한다는 과업을 공유한다. 그러나 Kaplan 등의 [[065_신경 언어 모델의 스케일링 법칙|2020년 실험]]은 빈도표의 차수를 키운 연구가 아니라, 학습된 표현을 쓰는 Transformer에서 비임베딩 매개변수 $N$, 데이터 token 수 $D$, 학습 compute $C$를 통제하며 token 교차 엔트로피를 측정한 규모 실험이다. 그러므로 확인되는 연속성은 예측 질문과 확률 평가에 있고, 현대 [[언어 모델 스케일링 법칙]]의 실험 대상은 표현 학습·최적화·계산 배분까지 포함한다.
+N-gram, 2003년 NPLM과 decoder-only LLM은 앞 문맥에서 다음 항목의 조건부확률을 예측한다는 과업을 공유한다. 그러나 Kaplan 등의 [[066_신경 언어 모델의 스케일링 법칙|2020년 실험]]은 빈도표의 차수를 키운 연구가 아니라, 학습된 표현을 쓰는 Transformer에서 비임베딩 매개변수 $N$, 데이터 token 수 $D$, 학습 compute $C$를 통제하며 token 교차 엔트로피를 측정한 규모 실험이다. 그러므로 확인되는 연속성은 예측 질문과 확률 평가에 있고, 현대 [[언어 모델 스케일링 법칙]]의 실험 대상은 표현 학습·최적화·계산 배분까지 포함한다.
 
 ### 평가 축과의 접점
 
@@ -208,7 +208,7 @@ N-gram은 현대 LLM의 축소판이 아니다. Shannon의 1948년 논문은 확
 - [[005_촘스키의 통사 구조]]
 - [[019_Katz 백오프와 희소 데이터 확률 추정]]
 - [[035_신경 확률 언어 모형과 분산 단어 표현]]
-- [[065_신경 언어 모델의 스케일링 법칙]]
+- [[066_신경 언어 모델의 스케일링 법칙]]
 - Slava M. Katz, [Estimation of Probabilities from Sparse Data for the Language Model Component of a Speech Recognizer](https://doi.org/10.1109/TASSP.1987.1165125), 1987, pp. 400–401.
 - Stanley F. Chen·Joshua Goodman, [An Empirical Study of Smoothing Techniques for Language Modeling](https://dash.harvard.edu/handle/1/25104739), 1998, §§2.3–2.4·5.2.4.
 - Yoshua Bengio·Réjean Ducharme·Pascal Vincent·Christian Jauvin, [A Neural Probabilistic Language Model](https://www.jmlr.org/papers/v3/bengio03a.html), 2003, pp. 1137–1155.
@@ -222,7 +222,7 @@ N-gram은 현대 LLM의 축소판이 아니다. Shannon의 1948년 논문은 확
 - [[002_튜링 테스트]]
 - [[019_Katz 백오프와 희소 데이터 확률 추정]]
 - [[035_신경 확률 언어 모형과 분산 단어 표현]]
-- [[065_신경 언어 모델의 스케일링 법칙]]
+- [[066_신경 언어 모델의 스케일링 법칙]]
 - [[언어 모델 스케일링 법칙]]
 - [[신경 확률 언어 모형]]
 - [[단어 임베딩]]

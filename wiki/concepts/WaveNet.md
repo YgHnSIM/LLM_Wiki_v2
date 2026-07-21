@@ -26,7 +26,7 @@ evidence:
     locator: '2017-10-04 공지의 원형 연구 모델과 1,000배 이상 빠른 후속 생산 모델, 미국 영어·일본어 Assistant 배포 구분'
     relation: supplements
 related:
-  - source.053
+  - source.054
   - concept.자기회귀-생성
   - concept.합성곱-신경망
   - concept.잔차-연결
@@ -106,13 +106,13 @@ WaveNet은 [[합성곱 신경망]]을 이미지 분류가 아닌 시퀀스 생�
 
 ## 출처
 
-- [[053_WaveNet과 표본 단위 신경 오디오 생성]]
+- [[054_WaveNet과 표본 단위 신경 오디오 생성]]
 - Aaron van den Oord 외, [WaveNet: A Generative Model for Raw Audio](https://arxiv.org/abs/1609.03499), 2016, §§2–5와 Table 1.
 - Aaron van den Oord·Tom Walters, [WaveNet launches in the Google Assistant](https://deepmind.google/blog/wavenet-launches-in-the-google-assistant/), Google DeepMind, 2017-10-04.
 
 ## 관련 항목
 
-- [[053_WaveNet과 표본 단위 신경 오디오 생성]]
+- [[054_WaveNet과 표본 단위 신경 오디오 생성]]
 - [[자기회귀 생성]]
 - [[합성곱 신경망]]
 - [[잔차 연결]]

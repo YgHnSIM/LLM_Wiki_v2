@@ -24,7 +24,7 @@ evidence:
     locator: '초록과 §§1–3·6의 internal covariate shift 반례와 loss/gradient smoothness'
     relation: contextualizes
 related:
-  - source.048
+  - source.049
   - concept.layer-normalization
 ---
 # Batch Normalization
@@ -70,11 +70,11 @@ BatchNorm의 효과를 internal covariate shift 하나로 확정하지 않는다
 
 ## 출처
 
-- [[048_층 정규화와 시퀀스 모델의 배치 독립성]]
+- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]
 - Sergey Ioffe·Christian Szegedy, [Batch Normalization](https://proceedings.mlr.press/v37/ioffe15.html), 2015.
 - Shibani Santurkar 외, [How Does Batch Normalization Help Optimization?](https://proceedings.neurips.cc/paper/2018/hash/905056c1ac1dad141560467e0a99e1cf-Abstract.html), 2018.
 
 ## 관련 항목
 
-- [[048_층 정규화와 시퀀스 모델의 배치 독립성]]
+- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]
 - [[Layer Normalization]]

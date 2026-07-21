@@ -28,10 +28,10 @@ evidence:
     locator: '초록과 PDF pp. 1·8–17의 component provenance·211,043,181 documents·processing·배포·저작권·PII·동의 문답'
     relation: supports
 related:
-  - source.073
-  - source.062
-  - source.065
+  - source.074
+  - source.063
   - source.066
+  - source.067
   - concept.말뭉치-기반-학습
   - concept.언어-모델-스케일링-법칙
   - concept.대규모-언어-모델
@@ -147,24 +147,24 @@ Gao 등은 같은 1.3B architecture와 약 40GB data 조건에서 Pile·CC-100 E
 
 ### 다음 문서
 
-- [[073_The Pile과 대규모 언어 모델 학습 말뭉치]] — 원문 서사의 영향·법적 명확성·성능 과장을 1차 자료와 대조한다.
+- [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] — 원문 서사의 영향·법적 명확성·성능 과장을 1차 자료와 대조한다.
 - [[데이터 품질과 분포 다양성은 같은 축인가]] — 필터·domain coverage·epoch weight와 평가 분포를 비교한다.
 
 ## 출처
 
 - Leo Gao 외, [The Pile: An 800GB Dataset of Diverse Text for Language Modeling](https://arxiv.org/abs/2101.00027), 2020, §§1–7, Tables 1·3–5와 Appendices C–D.
 - Stella Biderman·Kieran Bicheno·Leo Gao, [Datasheet for the Pile](https://arxiv.org/abs/2201.07311), 2022, PDF pp. 1·8–17.
-- [[073_The Pile과 대규모 언어 모델 학습 말뭉치]]
+- [[074_The Pile과 대규모 언어 모델 학습 말뭉치]]
 - 프로젝트 보존 자료: `raw/073_The Pile Open-Source Training Dataset for Large Language Models.ko.md`, `raw/073_The Pile Open-Source Training Dataset for Large Language Models.commentary.ko.md`.
 
 ## 관련 항목
 
-- [[073_The Pile과 대규모 언어 모델 학습 말뭉치]]
+- [[074_The Pile과 대규모 언어 모델 학습 말뭉치]]
 - [[말뭉치 기반 학습]]
 - [[언어 모델 스케일링 법칙]]
 - [[대규모 언어 모델]]
 - [[Perplexity]]
-- [[062_T5와 Text-to-Text 통합 프레임워크]]
-- [[065_신경 언어 모델의 스케일링 법칙]]
-- [[066_GPT-3와 문맥 내 학습]]
+- [[063_T5와 Text-to-Text 통합 프레임워크]]
+- [[066_신경 언어 모델의 스케일링 법칙]]
+- [[067_GPT-3와 문맥 내 학습]]
 - [[데이터 품질과 분포 다양성은 같은 축인가]]

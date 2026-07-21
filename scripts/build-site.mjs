@@ -314,6 +314,87 @@ for (const document of grouped.sources) {
 }
 const translationReaders = artifactReaders.filter((reader) => reader.directory);
 
+function artifactPrefixForSource(document) {
+  const prefixes = [...new Set(document.artifacts
+    .map((artifactPath) => normalizeArtifactPath(artifactPath).match(/^raw\/(\d{3})_/)?.[1] ?? '')
+    .filter(Boolean))];
+  return prefixes.length === 1 ? prefixes[0] : '';
+}
+
+function legacySourceRoute(document, artifactPrefix) {
+  if (!/^\d{3}/.test(document.filename)) return '';
+  const legacyFilename = document.filename.replace(/^\d{3}/, artifactPrefix);
+  return routeFor(`sources/${legacyFilename}.md`, 'sources', legacyFilename);
+}
+
+const canonicalRoutes = new Map();
+function registerCanonicalRoute(url, owner) {
+  const existing = canonicalRoutes.get(url);
+  if (existing) throw new Error(`Canonical site route collision at ${url}: ${existing} / ${owner}`);
+  canonicalRoutes.set(url, owner);
+}
+
+for (const route of ['/', '/sources/', '/concepts/', '/entities/', '/analyses/', '/translations/', '/search/']) {
+  registerCanonicalRoute(route, `site page ${route}`);
+}
+for (const document of documents) {
+  if (document.url !== '/') registerCanonicalRoute(document.url, `document ${document.id}`);
+}
+for (const reader of artifactReaders) registerCanonicalRoute(reader.url, `artifact reader ${reader.id}`);
+
+const legacyRedirects = [];
+const legacyRoutes = new Map();
+function addLegacyRedirect({ kind, sourceDocument, artifactPrefix, from, to }) {
+  const canonicalOwner = canonicalRoutes.get(from);
+  if (canonicalOwner) {
+    throw new Error(`Legacy redirect route ${from} collides with ${canonicalOwner}.`);
+  }
+  const existing = legacyRoutes.get(from);
+  if (existing) {
+    throw new Error(`Duplicate legacy redirect route ${from}: ${existing.sourceId} / ${sourceDocument.id}`);
+  }
+  if (!canonicalRoutes.has(to)) {
+    throw new Error(`Legacy redirect target is not a canonical page: ${from} -> ${to}`);
+  }
+
+  const redirect = {
+    kind,
+    sourceId: sourceDocument.id,
+    canonicalNumber: sourceDocument.sourceNumber,
+    artifactPrefix,
+    from,
+    to,
+  };
+  legacyRoutes.set(from, redirect);
+  legacyRedirects.push(redirect);
+}
+
+for (const document of grouped.sources) {
+  const artifactPrefix = artifactPrefixForSource(document);
+  if (!artifactPrefix || Number(document.sourceNumber) !== Number(artifactPrefix) + 1) continue;
+
+  const legacyBaseUrl = legacySourceRoute(document, artifactPrefix);
+  if (!legacyBaseUrl || legacyBaseUrl === document.url) continue;
+  addLegacyRedirect({
+    kind: 'source',
+    sourceDocument: document,
+    artifactPrefix,
+    from: legacyBaseUrl,
+    to: document.url,
+  });
+
+  for (const reader of document.artifactReaders) {
+    if (!['translation', 'commentary'].includes(reader.routeRole)) continue;
+    addLegacyRedirect({
+      kind: reader.routeRole,
+      sourceDocument: document,
+      artifactPrefix,
+      from: `${legacyBaseUrl}${reader.routeRole}/`,
+      to: reader.url,
+    });
+  }
+}
+
 function lifecycleLabel(lifecycle) {
   return lifecycle === 'draft' ? '초안' : lifecycle === 'archived' ? '보관됨' : '공개';
 }
@@ -1088,6 +1169,28 @@ function renderNotFound() {
   return layout({ title: '페이지를 찾을 수 없음', description: '요청한 LLM Wiki 문서를 찾을 수 없습니다.', body, pageClass: 'error-page' });
 }
 
+function renderLegacyRedirect(redirect) {
+  const destination = sitePath(redirect.to);
+  return `<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, follow">
+  <meta http-equiv="refresh" content="0; url=${escapeHtml(destination)}">
+  <link rel="canonical" href="${escapeHtml(destination)}">
+  <title>문서 주소가 변경되었습니다 · LLM Wiki</title>
+</head>
+<body data-legacy-redirect="${escapeHtml(redirect.kind)}">
+  <main id="main-content">
+    <h1>문서 주소가 변경되었습니다.</h1>
+    <p>공식 장 번호에 맞춘 새 주소로 이동합니다.</p>
+    <p><a href="${escapeHtml(destination)}">새 주소에서 문서 읽기</a></p>
+  </main>
+</body>
+</html>`;
+}
+
 async function writeHtml(outputDir, url, html) {
   const outputPath = outputFileForUrl(url, { outputDir });
   if (!outputPath) throw new Error(`Cannot map site URL to the build directory: ${url}`);
@@ -1127,7 +1230,7 @@ const searchIndex = documents
 const buildReport = {
   generatedAt: new Date().toISOString(),
   basePath,
-  pages: documents.length + artifactReaders.length + 7,
+  pages: documents.length + artifactReaders.length + legacyRedirects.length + 7,
   documents: documents.length,
   publishedDocuments: publishedDocuments.length,
   relationships: graphData.stats,
@@ -1143,6 +1246,8 @@ const buildReport = {
     sourceUrl: reader.sourceDocument.url,
     listedAsTranslation: reader.directory,
   })),
+  redirectCount: legacyRedirects.length,
+  redirects: legacyRedirects,
   resolvedLinks: resolvedLinkCount,
   unresolvedLinks: [...unresolved.values()]
     .map((record) => ({ target: record.target, count: record.count, from: [...record.from].sort(collator.compare) }))
@@ -1168,6 +1273,9 @@ async function buildInto(outputDir) {
   for (const reader of artifactReaders) {
     await writeHtml(outputDir, reader.url, renderArtifactReader(reader));
   }
+  for (const redirect of legacyRedirects) {
+    await writeHtml(outputDir, redirect.from, renderLegacyRedirect(redirect));
+  }
   await fs.writeFile(path.join(outputDir, '404.html'), renderNotFound(), 'utf8');
   await fs.writeFile(path.join(outputDir, '.nojekyll'), '', 'utf8');
   await fs.writeFile(path.join(outputDir, 'relationship-data.json'), JSON.stringify(graphData), 'utf8');
@@ -1177,5 +1285,5 @@ async function buildInto(outputDir) {
 
 await buildDirectoryAtomically(distDir, buildInto);
 
-console.log(`Built ${buildReport.pages} pages from ${documents.length} wiki documents and ${artifactReaders.length} artifact readers.`);
+console.log(`Built ${buildReport.pages} pages from ${documents.length} wiki documents, ${artifactReaders.length} artifact readers, and ${legacyRedirects.length} legacy redirects.`);
 console.log(`Resolved ${resolvedLinkCount} wiki links; ${buildReport.unresolvedLinks.length} unresolved target(s).`);

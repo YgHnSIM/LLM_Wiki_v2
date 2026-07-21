@@ -22,6 +22,12 @@ related:
 
 이 위키는 언어 모델링, 기계 지능 평가, 초기 기계 번역, 신경망 학습, 형식언어, 대화형 AI의 역사를 1차 문헌과 함께 연결한다. 수집 당시의 번역·해설은 `raw/`에 보존하고, 공개 문서는 locator가 있는 근거로 검증한다.
 
+## 공식 장 번호와 수집 접두사
+
+공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism (2015)**이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-21 현재 원문을 제공하지 않는다.
+
+따라서 공개 위키에는 공식 047을 다른 문서로 채우지 않고 결손으로 남긴다. 외부 원문·번역·raw의 로컬 수집 접두사 001–046은 공식 번호와 같고, 로컬 047–109는 공식 048–110에 대응한다. raw 파일명·해시·`order_prefix`는 수집 이력으로 보존하고, 공개 파일명·`source.NNN`·링크·URL은 공식 번호를 쓴다. 현재 source 77개는 공식 001–046과 048–078을 다루며, 다음 로컬 입력 078은 공식 079 HELM으로 공개한다.
+
 ## 처음 읽는 사람을 위한 길잡이
 
 처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 77개, reference 1개, concept 152개, entity 29개, analysis 21개를 합친 비메타 문서 280개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
@@ -29,15 +35,15 @@ related:
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
 | 언어 모델은 어떻게 발전했나 | [[001_섀넌의 N-gram 모델]] | [[N-gram 모델]] → [[019_Katz 백오프와 희소 데이터 확률 추정]] → [[035_신경 확률 언어 모형과 분산 단어 표현]] → [[자기회귀 생성]] | [[N-gram에서 LLM으로]] |
-| 기계의 언어 행동을 어떻게 평가하나 | [[002_튜링 테스트]] | [[033_BLEU와 기계 번역 자동 평가]] → [[050_SQuAD와 추출형 독해 평가]] → [[059_GLUE와 SuperGLUE의 집계 평가]] | [[튜링 테스트와 LLM 평가]] |
+| 기계의 언어 행동을 어떻게 평가하나 | [[002_튜링 테스트]] | [[033_BLEU와 기계 번역 자동 평가]] → [[051_SQuAD와 추출형 독해 평가]] → [[060_GLUE와 SuperGLUE의 집계 평가]] | [[튜링 테스트와 LLM 평가]] |
 | 규칙에서 학습으로 무엇이 바뀌었나 | [[003_Georgetown-IBM 기계 번역 시연]] | [[012_상징 규칙에서 통계 학습으로]] → [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[규칙 기반 AI에서 데이터 기반 학습으로]] |
-| 현대 Transformer 계열은 어디서 왔나 | [[018_역전파와 다층 신경망 학습]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]] → [[063_Transformer-XL과 세그먼트 수준 재귀]] → [[060_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]] | [[065_신경 언어 모델의 스케일링 법칙]] |
-| 한 언어의 지식은 다른 언어로 어떻게 옮겨지나 | [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[061_XLM과 교차 언어 사전 학습]] → [[XLM]] | [[같은 병렬 문장은 무엇을 학습시키는가]] |
-| 검색과 외부 지식은 어떻게 연결되나 | [[010_벡터 공간 모델과 TF-IDF]] | [[024_BM25와 확률적 정보 검색]] → [[051_신경 정보 검색과 의미 대응]] → [[064_BERT 기반 passage 재순위화]] → [[067_DPR과 검색 증강 생성]] → [[072_ColBERT와 다중 벡터 검색]] | [[검색은 근거를 찾고 독해는 답을 찾는다]] |
-| 자연어 명세는 어떻게 실행 코드가 되나 | [[066_GPT-3와 문맥 내 학습]] | [[070_Codex와 HumanEval 기반 코드 생성 평가]] → [[OpenAI Codex (2021)]] | [[자동 평가 지표는 무엇을 보상하는가]] |
-| 자연어 지시는 언제 가중치에 들어가나 | [[062_T5와 Text-to-Text 통합 프레임워크]] | [[066_GPT-3와 문맥 내 학습]] → [[071_지시 미세조정과 FLAN의 제로샷 일반화]] → [[076_InstructGPT와 인간 선호 정렬]] → [[인간 피드백 강화학습]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
-| 희소 모델의 ‘크기’는 무엇을 뜻하나 | [[068_전문가 혼합과 희소 활성 스케일링]] | [[GLaM에서 Mixtral까지의 희소 MoE 확장]] → [[Mixtral 8x7B]] | [[총 매개변수와 활성 계산량은 같은 축인가]] |
-| 학습 데이터의 양과 구성을 어떻게 읽나 | [[062_T5와 Text-to-Text 통합 프레임워크]] | [[065_신경 언어 모델의 스케일링 법칙]] → [[066_GPT-3와 문맥 내 학습]] → [[073_The Pile과 대규모 언어 모델 학습 말뭉치]] → [[The Pile]] → [[077_Chinchilla와 계산 최적 언어 모델 학습]] | [[데이터 품질과 분포 다양성은 같은 축인가]] |
+| 현대 Transformer 계열은 어디서 왔나 | [[018_역전파와 다층 신경망 학습]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]] → [[064_Transformer-XL과 세그먼트 수준 재귀]] → [[061_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]] | [[066_신경 언어 모델의 스케일링 법칙]] |
+| 한 언어의 지식은 다른 언어로 어떻게 옮겨지나 | [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[062_XLM과 교차 언어 사전 학습]] → [[XLM]] | [[같은 병렬 문장은 무엇을 학습시키는가]] |
+| 검색과 외부 지식은 어떻게 연결되나 | [[010_벡터 공간 모델과 TF-IDF]] | [[024_BM25와 확률적 정보 검색]] → [[052_신경 정보 검색과 의미 대응]] → [[065_BERT 기반 passage 재순위화]] → [[068_DPR과 검색 증강 생성]] → [[073_ColBERT와 다중 벡터 검색]] | [[검색은 근거를 찾고 독해는 답을 찾는다]] |
+| 자연어 명세는 어떻게 실행 코드가 되나 | [[067_GPT-3와 문맥 내 학습]] | [[071_Codex와 HumanEval 기반 코드 생성 평가]] → [[OpenAI Codex (2021)]] | [[자동 평가 지표는 무엇을 보상하는가]] |
+| 자연어 지시는 언제 가중치에 들어가나 | [[063_T5와 Text-to-Text 통합 프레임워크]] | [[067_GPT-3와 문맥 내 학습]] → [[072_지시 미세조정과 FLAN의 제로샷 일반화]] → [[077_InstructGPT와 인간 선호 정렬]] → [[인간 피드백 강화학습]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
+| 희소 모델의 ‘크기’는 무엇을 뜻하나 | [[069_전문가 혼합과 희소 활성 스케일링]] | [[GLaM에서 Mixtral까지의 희소 MoE 확장]] → [[Mixtral 8x7B]] | [[총 매개변수와 활성 계산량은 같은 축인가]] |
+| 학습 데이터의 양과 구성을 어떻게 읽나 | [[063_T5와 Text-to-Text 통합 프레임워크]] | [[066_신경 언어 모델의 스케일링 법칙]] → [[067_GPT-3와 문맥 내 학습]] → [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] → [[The Pile]] → [[078_Chinchilla와 계산 최적 언어 모델 학습]] | [[데이터 품질과 분포 다양성은 같은 축인가]] |
 
 ## 난이도에 따른 읽기 방법
 
@@ -95,37 +101,37 @@ related:
 - [[044_GloVe와 Adam의 서로 다른 2014년 전환]]은 [[GloVe]]의 국소 창·전역 희소 계수·가중 log-bilinear 회귀와 [[Adam 최적화기]]의 모멘트·편향 보정·후속 수렴 및 AdamW를 독립 연구로 검증한다.
 - [[045_Sequence-to-Sequence 학습과 신경 기계 번역]]은 [[Sequence-to-Sequence 학습]]의 조건부 생성 인터페이스와 [[인코더-디코더]]·[[자기회귀 생성]]을 복원하고, Sutskever·Cho 시스템의 역할 차이와 어텐션·GNMT·현대 LLM 계보의 범위를 검증한다.
 - [[046_메모리 네트워크와 외부 지식 접근]]은 [[메모리 네트워크]]의 I·G·O·R와 hard supporting-fact 선택·강한 감독을 복원하고, [[외부 메모리]]·[[다중 홉 검색]]에서 End-To-End MemNN·bAbI·RAG로 이어지는 단계의 범위를 검증한다.
-- [[047_잔차 학습과 매우 깊은 신경망]]은 [[ResNet]]의 [[Degradation problem]]과 (F(x)+x) [[잔차 연결]]을 복원하고, 기울기 소실·Highway Network·pre-activation·Transformer residual stream을 구분한다.
-- [[048_층 정규화와 시퀀스 모델의 배치 독립성]]은 [[Batch Normalization]]과 [[Layer Normalization]]의 통계 공유 축·훈련/추론 상태를 복원하고, token별 hidden 정규화·Post/Pre-LN·[[RMSNorm]]의 범위를 검증한다.
-- [[049_FastText와 서브워드 표현의 두 경로]]는 [[FastText]]의 문자 n-gram 합·hash·정적 OOV 근사와 [[Byte Pair Encoding|BPE]]의 sequence 분절을 구분하고, [[서브워드 토큰화]]·SentencePiece·현대 Transformer 연결의 범위를 검증한다.
-- [[050_SQuAD와 추출형 독해 평가]]는 536개 위키백과 문서·107,785개 질문, 답 구간·EM·토큰 F1을 복원하고, [[추출형 질의응답]]과 검색·생성·일반 언어 이해의 경계 및 SQuAD 2.0의 답 없음 판단을 검증한다.
-- [[051_신경 정보 검색과 의미 대응]]은 2013년 DSSM·2014년 C-DSSM·2016년 DRMM을 구분하고, [[신경 정보 검색]]의 표현 중심·상호작용 중심 구조와 희소 exact signal·재순위화·DPR·RAG 연결 범위를 검증한다.
-- [[052_GNMT와 제품 규모 신경 번역]]은 8층 LSTM·어텐션·잔차 연결·WordPiece·탐색 보정을 하나의 제품 시스템으로 복원하고, 평균 약 60% 오류 감소의 평가 조건과 중국어→영어 최초 배포 범위를 구분한다.
-- [[053_WaveNet과 표본 단위 신경 오디오 생성]]은 μ-law 양자화 표본의 자기회귀 분포와 팽창 인과 합성곱을 복원하고, 훈련 병렬성·생성 순차성·MOS 격차·2017년 후속 제품 배포를 구분한다.
-- [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]]은 6층 encoder–decoder·scaled multi-head attention·위치 인코딩·Post-LN을 복원하고, 훈련 병렬성·길이 제곱 비용·자기회귀 생성·후대 LLM 계보를 분리한다.
-- [[055_RLHF 토대와 인간 선호 기반 보상 학습]]은 2017년 행동 구간 비교·보상 ensemble·반복 정책 학습을 복원하고, 원 제어·게임 실험과 2019–2022년 언어 모델 RLHF를 구분한다.
-- [[056_ELMo와 ULMFiT의 두 전이 학습 경로]]는 ELMo의 고정 문맥 특징과 ULMFiT의 단계적 전체 미세조정을 구분하고, 두 접근의 양방향성·목표 영역 적응·적은 표지 자료 결과와 현대 Transformer 계보의 범위를 검증한다.
-- [[057_BERT의 마스크드 양방향 사전 학습]]은 [[BERT]]의 encoder·[[마스크드 언어 모델링]]·NSP·전체 미세조정을 복원하고, 15%·80/10/10 masking과 benchmark·생성 범위를 검증한다.
-- [[058_GPT-1과 GPT-2의 전이 방식 변화]]는 GPT-1의 지도 미세조정과 GPT-2의 cue 기반 zero-shot text continuation을 구분하고, WebText·과제별 출력·release 연표와 현대 prompting 계보의 범위를 검증한다.
-- [[059_GLUE와 SuperGLUE의 집계 평가]]는 [[GLUE와 SuperGLUE]]의 과제·metric·단순 평균·human estimate·포화를 복원하고, 표준화가 통제하지 않는 training 조건과 benchmark 과적합을 검증한다.
-- [[060_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]]는 [[XLNet·RoBERTa·ALBERT]]를 objective·training recipe·parameterization의 세 축으로 나누고, factorization order·총 sequence·parameter와 FLOPs의 차이 및 raw의 성능 과장을 교정한다.
-- [[061_XLM과 교차 언어 사전 학습]]은 [[XLM]]의 CLM·MLM·TLM, shared BPE·언어 sampling과 English-label XNLI 전이를 복원하고, unseen-language zero-shot·few-shot·QA·검색·mBERT 후속 계보의 과장을 교정한다.
-- [[062_T5와 Text-to-Text 통합 프레임워크]]는 [[T5]]의 공통 text input/output, sentinel span corruption, C4와 task별 fine-tuning을 복원하고, metric·checkpoint·instruction·번역·QA·계산량·직접 후속 계보의 과장을 교정한다.
-- [[063_Transformer-XL과 세그먼트 수준 재귀]]는 [[Transformer-XL]]의 stop-gradient memory와 layer-shift recurrence, 상대 위치 attention을 복원하고, memory 길이·dependency·dense attention 비용과 조건부 RECL·평가 속도 수치를 구분한다.
-- [[064_BERT 기반 passage 재순위화]]는 BM25 상위 후보를 BERT 결합 self-attention과 `[CLS]` 분류 점수로 다시 매기는 구조를 복원하고, 후보 recall·512 WordPiece·후보별 계산 비용과 Google 공개 범위를 구분한다.
-- [[065_신경 언어 모델의 스케일링 법칙]]은 WebText2 자기회귀 token loss의 모델·데이터·compute별 조건부 power law와 Kaplan식 0.73/0.27 배분을 복원하고, downstream 능력 예측·보편 법칙·Chinchilla가 처음 균형 문제를 풀었다는 과장을 교정한다.
-- [[066_GPT-3와 문맥 내 학습]]은 125M–175B 여덟 모델의 zero·one·few-shot 조건을 복원하고, 과제별 성능 차이·산술 exact match·benchmark 오염·후대 창발 용어와 내부 메커니즘의 범위를 검증한다.
-- [[067_DPR과 검색 증강 생성]]은 BERT dual encoder·hard negative·FAISS를 사용한 DPR와 DPR query encoder·BART-large·잠재 문서 주변화를 결합한 원 RAG를 분리하고, 고정 문서 색인·평가 과제·hot-swap·인용 충실성의 실제 경계를 검증한다.
-- [[068_전문가 혼합과 희소 활성 스케일링]]은 1991년 adaptive mixture, 2017년 sparsely-gated layer, GShard의 top-2와 Switch의 top-1을 분리하고, total parameters·active compute·memory·communication 및 expert specialization의 증거 경계를 검증한다.
-- [[069_CLIP과 대조적 언어-이미지 사전 학습]]은 4억 image–text pair의 대칭 대조 학습, 수정 ResNet·ViT 이중 인코더와 class prompt 기반 zero-shot 분류를 복원하고, shared embedding과 일반 멀티모달 이해·생성·VQA의 경계를 검증한다.
-- [[070_Codex와 HumanEval 기반 코드 생성 평가]]는 최대 12B 연구 Codex의 Python 코드 계속학습과 Codex-S 추가 미세조정을 분리하고, HumanEval·pass@k·unit-test oracle 및 GitHub Copilot production version의 경계를 검증한다.
-- [[071_지시 미세조정과 FLAN의 제로샷 일반화]]는 62개 데이터셋·12개 과제 군집을 자연어 지시로 미세조정한 137B FLAN을 복원하고, 군집별 별도 checkpoint·template 선택·모델 규모 효과와 최초 발명·보편적 향상·안전 정렬 주장의 경계를 검증한다.
-- [[072_ColBERT와 다중 벡터 검색]]은 SIGIR 2020 ColBERT의 독립 BERT 부호화·MaxSim 후기 상호작용·FAISS 후보 검색을 복원하고, 2021 연도·저자 소속·exact match·문서 길이 제곱 비용·cross-encoder 계보와 후속 응용의 범위를 교정한다.
-- [[073_The Pile과 대규모 언어 모델 학습 말뭉치]]는 22개 영어 중심 component의 825.18 GiB raw·1,254.20 GiB effective mixture를 복원하고, Pile-wide dedupulation 부재·40GB 통제 비교·권리와 동의·재현성의 경계를 검증한다.
-- [[074_DALL·E와 이산 이미지 토큰 생성]]은 256×256 이미지를 1,024개 이산 토큰으로 압축해 text와 공동 자기회귀 모델링한 12B sparse Transformer를 복원하고, 대조 재순위화·MS-COCO/CUB 평가·중복·공개 범위와 인간 창의성·후대 직선 계보의 경계를 검증한다.
-- [[075_파운데이션 모델 보고서와 AI 생태계]]는 광범위한 데이터·대규모 학습·후속 과제 적응의 정의와 창발·동질화·중간 자산의 생태계를 복원하고, GPT-4 소급·최소 과제 학습·달성된 민주화·추론 환경비용 누락·후대 영향 인과를 교정한다.
-- [[076_InstructGPT와 인간 선호 정렬]]은 평가자 시연 SFT·4–9개 응답 순위의 보상 모델·SFT 기준 KL과 PPO-ptx를 복원하고, 보편적 인간 가치·능력 무손실·안전한 거절·모든 후속 모델의 단일 계보라는 확대를 교정한다.
-- [[077_Chinchilla와 계산 최적 언어 모델 학습]]은 fixed-compute 세 추정법의 0.50/0.50·0.49/0.51·0.46/0.54 배분과 Chinchilla–Gopher의 같은 훈련 FLOPs를 복원하고, $C^{1/3}$·보편 20:1·Kaplan의 절충 누락·단일 175B 외삽값을 교정한다.
+- [[048_잔차 학습과 매우 깊은 신경망]]은 [[ResNet]]의 [[Degradation problem]]과 (F(x)+x) [[잔차 연결]]을 복원하고, 기울기 소실·Highway Network·pre-activation·Transformer residual stream을 구분한다.
+- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]은 [[Batch Normalization]]과 [[Layer Normalization]]의 통계 공유 축·훈련/추론 상태를 복원하고, token별 hidden 정규화·Post/Pre-LN·[[RMSNorm]]의 범위를 검증한다.
+- [[050_FastText와 서브워드 표현의 두 경로]]는 [[FastText]]의 문자 n-gram 합·hash·정적 OOV 근사와 [[Byte Pair Encoding|BPE]]의 sequence 분절을 구분하고, [[서브워드 토큰화]]·SentencePiece·현대 Transformer 연결의 범위를 검증한다.
+- [[051_SQuAD와 추출형 독해 평가]]는 536개 위키백과 문서·107,785개 질문, 답 구간·EM·토큰 F1을 복원하고, [[추출형 질의응답]]과 검색·생성·일반 언어 이해의 경계 및 SQuAD 2.0의 답 없음 판단을 검증한다.
+- [[052_신경 정보 검색과 의미 대응]]은 2013년 DSSM·2014년 C-DSSM·2016년 DRMM을 구분하고, [[신경 정보 검색]]의 표현 중심·상호작용 중심 구조와 희소 exact signal·재순위화·DPR·RAG 연결 범위를 검증한다.
+- [[053_GNMT와 제품 규모 신경 번역]]은 8층 LSTM·어텐션·잔차 연결·WordPiece·탐색 보정을 하나의 제품 시스템으로 복원하고, 평균 약 60% 오류 감소의 평가 조건과 중국어→영어 최초 배포 범위를 구분한다.
+- [[054_WaveNet과 표본 단위 신경 오디오 생성]]은 μ-law 양자화 표본의 자기회귀 분포와 팽창 인과 합성곱을 복원하고, 훈련 병렬성·생성 순차성·MOS 격차·2017년 후속 제품 배포를 구분한다.
+- [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]]은 6층 encoder–decoder·scaled multi-head attention·위치 인코딩·Post-LN을 복원하고, 훈련 병렬성·길이 제곱 비용·자기회귀 생성·후대 LLM 계보를 분리한다.
+- [[056_RLHF 토대와 인간 선호 기반 보상 학습]]은 2017년 행동 구간 비교·보상 ensemble·반복 정책 학습을 복원하고, 원 제어·게임 실험과 2019–2022년 언어 모델 RLHF를 구분한다.
+- [[057_ELMo와 ULMFiT의 두 전이 학습 경로]]는 ELMo의 고정 문맥 특징과 ULMFiT의 단계적 전체 미세조정을 구분하고, 두 접근의 양방향성·목표 영역 적응·적은 표지 자료 결과와 현대 Transformer 계보의 범위를 검증한다.
+- [[058_BERT의 마스크드 양방향 사전 학습]]은 [[BERT]]의 encoder·[[마스크드 언어 모델링]]·NSP·전체 미세조정을 복원하고, 15%·80/10/10 masking과 benchmark·생성 범위를 검증한다.
+- [[059_GPT-1과 GPT-2의 전이 방식 변화]]는 GPT-1의 지도 미세조정과 GPT-2의 cue 기반 zero-shot text continuation을 구분하고, WebText·과제별 출력·release 연표와 현대 prompting 계보의 범위를 검증한다.
+- [[060_GLUE와 SuperGLUE의 집계 평가]]는 [[GLUE와 SuperGLUE]]의 과제·metric·단순 평균·human estimate·포화를 복원하고, 표준화가 통제하지 않는 training 조건과 benchmark 과적합을 검증한다.
+- [[061_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]]는 [[XLNet·RoBERTa·ALBERT]]를 objective·training recipe·parameterization의 세 축으로 나누고, factorization order·총 sequence·parameter와 FLOPs의 차이 및 raw의 성능 과장을 교정한다.
+- [[062_XLM과 교차 언어 사전 학습]]은 [[XLM]]의 CLM·MLM·TLM, shared BPE·언어 sampling과 English-label XNLI 전이를 복원하고, unseen-language zero-shot·few-shot·QA·검색·mBERT 후속 계보의 과장을 교정한다.
+- [[063_T5와 Text-to-Text 통합 프레임워크]]는 [[T5]]의 공통 text input/output, sentinel span corruption, C4와 task별 fine-tuning을 복원하고, metric·checkpoint·instruction·번역·QA·계산량·직접 후속 계보의 과장을 교정한다.
+- [[064_Transformer-XL과 세그먼트 수준 재귀]]는 [[Transformer-XL]]의 stop-gradient memory와 layer-shift recurrence, 상대 위치 attention을 복원하고, memory 길이·dependency·dense attention 비용과 조건부 RECL·평가 속도 수치를 구분한다.
+- [[065_BERT 기반 passage 재순위화]]는 BM25 상위 후보를 BERT 결합 self-attention과 `[CLS]` 분류 점수로 다시 매기는 구조를 복원하고, 후보 recall·512 WordPiece·후보별 계산 비용과 Google 공개 범위를 구분한다.
+- [[066_신경 언어 모델의 스케일링 법칙]]은 WebText2 자기회귀 token loss의 모델·데이터·compute별 조건부 power law와 Kaplan식 0.73/0.27 배분을 복원하고, downstream 능력 예측·보편 법칙·Chinchilla가 처음 균형 문제를 풀었다는 과장을 교정한다.
+- [[067_GPT-3와 문맥 내 학습]]은 125M–175B 여덟 모델의 zero·one·few-shot 조건을 복원하고, 과제별 성능 차이·산술 exact match·benchmark 오염·후대 창발 용어와 내부 메커니즘의 범위를 검증한다.
+- [[068_DPR과 검색 증강 생성]]은 BERT dual encoder·hard negative·FAISS를 사용한 DPR와 DPR query encoder·BART-large·잠재 문서 주변화를 결합한 원 RAG를 분리하고, 고정 문서 색인·평가 과제·hot-swap·인용 충실성의 실제 경계를 검증한다.
+- [[069_전문가 혼합과 희소 활성 스케일링]]은 1991년 adaptive mixture, 2017년 sparsely-gated layer, GShard의 top-2와 Switch의 top-1을 분리하고, total parameters·active compute·memory·communication 및 expert specialization의 증거 경계를 검증한다.
+- [[070_CLIP과 대조적 언어-이미지 사전 학습]]은 4억 image–text pair의 대칭 대조 학습, 수정 ResNet·ViT 이중 인코더와 class prompt 기반 zero-shot 분류를 복원하고, shared embedding과 일반 멀티모달 이해·생성·VQA의 경계를 검증한다.
+- [[071_Codex와 HumanEval 기반 코드 생성 평가]]는 최대 12B 연구 Codex의 Python 코드 계속학습과 Codex-S 추가 미세조정을 분리하고, HumanEval·pass@k·unit-test oracle 및 GitHub Copilot production version의 경계를 검증한다.
+- [[072_지시 미세조정과 FLAN의 제로샷 일반화]]는 62개 데이터셋·12개 과제 군집을 자연어 지시로 미세조정한 137B FLAN을 복원하고, 군집별 별도 checkpoint·template 선택·모델 규모 효과와 최초 발명·보편적 향상·안전 정렬 주장의 경계를 검증한다.
+- [[073_ColBERT와 다중 벡터 검색]]은 SIGIR 2020 ColBERT의 독립 BERT 부호화·MaxSim 후기 상호작용·FAISS 후보 검색을 복원하고, 2021 연도·저자 소속·exact match·문서 길이 제곱 비용·cross-encoder 계보와 후속 응용의 범위를 교정한다.
+- [[074_The Pile과 대규모 언어 모델 학습 말뭉치]]는 22개 영어 중심 component의 825.18 GiB raw·1,254.20 GiB effective mixture를 복원하고, Pile-wide dedupulation 부재·40GB 통제 비교·권리와 동의·재현성의 경계를 검증한다.
+- [[075_DALL·E와 이산 이미지 토큰 생성]]은 256×256 이미지를 1,024개 이산 토큰으로 압축해 text와 공동 자기회귀 모델링한 12B sparse Transformer를 복원하고, 대조 재순위화·MS-COCO/CUB 평가·중복·공개 범위와 인간 창의성·후대 직선 계보의 경계를 검증한다.
+- [[076_파운데이션 모델 보고서와 AI 생태계]]는 광범위한 데이터·대규모 학습·후속 과제 적응의 정의와 창발·동질화·중간 자산의 생태계를 복원하고, GPT-4 소급·최소 과제 학습·달성된 민주화·추론 환경비용 누락·후대 영향 인과를 교정한다.
+- [[077_InstructGPT와 인간 선호 정렬]]은 평가자 시연 SFT·4–9개 응답 순위의 보상 모델·SFT 기준 KL과 PPO-ptx를 복원하고, 보편적 인간 가치·능력 무손실·안전한 거절·모든 후속 모델의 단일 계보라는 확대를 교정한다.
+- [[078_Chinchilla와 계산 최적 언어 모델 학습]]은 fixed-compute 세 추정법의 0.50/0.50·0.49/0.51·0.46/0.54 배분과 Chinchilla–Gopher의 같은 훈련 FLOPs를 복원하고, $C^{1/3}$·보편 20:1·Kaplan의 절충 누락·단일 175B 외삽값을 교정한다.
 
 ## 현재 핵심 주제
 
@@ -231,28 +237,28 @@ related:
 ## 주요 진입점
 
 - [[N-gram에서 LLM으로]]
-- [[066_GPT-3와 문맥 내 학습]]
-- [[067_DPR과 검색 증강 생성]]
-- [[068_전문가 혼합과 희소 활성 스케일링]]
-- [[069_CLIP과 대조적 언어-이미지 사전 학습]]
+- [[067_GPT-3와 문맥 내 학습]]
+- [[068_DPR과 검색 증강 생성]]
+- [[069_전문가 혼합과 희소 활성 스케일링]]
+- [[070_CLIP과 대조적 언어-이미지 사전 학습]]
 - [[CLIP]]
-- [[070_Codex와 HumanEval 기반 코드 생성 평가]]
+- [[071_Codex와 HumanEval 기반 코드 생성 평가]]
 - [[OpenAI Codex (2021)]]
-- [[071_지시 미세조정과 FLAN의 제로샷 일반화]]
+- [[072_지시 미세조정과 FLAN의 제로샷 일반화]]
 - [[지시 미세조정]]
-- [[072_ColBERT와 다중 벡터 검색]]
+- [[073_ColBERT와 다중 벡터 검색]]
 - [[다중 벡터 검색]]
 - [[GLaM에서 Mixtral까지의 희소 MoE 확장]]
 - [[Mixtral 8x7B]]
-- [[073_The Pile과 대규모 언어 모델 학습 말뭉치]]
+- [[074_The Pile과 대규모 언어 모델 학습 말뭉치]]
 - [[The Pile]]
-- [[074_DALL·E와 이산 이미지 토큰 생성]]
+- [[075_DALL·E와 이산 이미지 토큰 생성]]
 - [[DALL·E (2021)]]
-- [[075_파운데이션 모델 보고서와 AI 생태계]]
+- [[076_파운데이션 모델 보고서와 AI 생태계]]
 - [[파운데이션 모델]]
-- [[076_InstructGPT와 인간 선호 정렬]]
+- [[077_InstructGPT와 인간 선호 정렬]]
 - [[인간 피드백 강화학습]]
-- [[077_Chinchilla와 계산 최적 언어 모델 학습]]
+- [[078_Chinchilla와 계산 최적 언어 모델 학습]]
 - [[데이터 품질과 분포 다양성은 같은 축인가]]
 - [[전문가 혼합]]
 - [[총 매개변수와 활성 계산량은 같은 축인가]]
@@ -322,18 +328,18 @@ related:
 - [[메모리 네트워크]]
 - [[외부 메모리]]
 - [[다중 홉 검색]]
-- [[047_잔차 학습과 매우 깊은 신경망]]
+- [[048_잔차 학습과 매우 깊은 신경망]]
 - [[잔차 연결]]
 - [[ResNet]]
 - [[Degradation problem]]
-- [[048_층 정규화와 시퀀스 모델의 배치 독립성]]
+- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]
 - [[Layer Normalization]]
 - [[Batch Normalization]]
 - [[RMSNorm]]
-- [[049_FastText와 서브워드 표현의 두 경로]]
-- [[050_SQuAD와 추출형 독해 평가]]
+- [[050_FastText와 서브워드 표현의 두 경로]]
+- [[051_SQuAD와 추출형 독해 평가]]
 - [[추출형 질의응답]]
-- [[051_신경 정보 검색과 의미 대응]]
+- [[052_신경 정보 검색과 의미 대응]]
 - [[신경 정보 검색]]
 - [[검색은 근거를 찾고 독해는 답을 찾는다]]
 - [[FastText]]

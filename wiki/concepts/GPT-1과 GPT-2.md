@@ -36,8 +36,8 @@ evidence:
     locator: '§§1–3, 특히 §2와 Tables 2.1–2.2의 8개 모델·300B token 학습, zero/one/few-shot 정의와 task별 결과'
     relation: supplements
 related:
-  - source.058
-  - source.066
+  - source.059
+  - source.067
   - concept.자기회귀-생성
   - concept.언어-모델-전이-학습
   - concept.문맥-내-학습
@@ -98,7 +98,7 @@ language modeling·LAMBADA·CBT·Winograd에서는 강한 결과가 있었다. �
 
 ### GPT-3로 이어진 다음 경계
 
-[[066_GPT-3와 문맥 내 학습]]은 GPT-2의 cue 기반 zero-shot을 instruction과 demonstration을 함께 넣는 [[문맥 내 학습]]으로 확장해 체계적으로 비교했다. 125M부터 175B까지 여덟 모델은 모두 300B token을 처리했고, zero-shot·one-shot·few-shot 어느 조건에서도 가중치를 갱신하지 않았다. 175B는 GPT-2의 1.5B보다 약 117배 크다. Brown 등이 말한 ‘10배’는 GPT-2가 아니라 당시 이전의 가장 큰 비희소 언어 모델과의 비교다.
+[[067_GPT-3와 문맥 내 학습]]은 GPT-2의 cue 기반 zero-shot을 instruction과 demonstration을 함께 넣는 [[문맥 내 학습]]으로 확장해 체계적으로 비교했다. 125M부터 175B까지 여덟 모델은 모두 300B token을 처리했고, zero-shot·one-shot·few-shot 어느 조건에서도 가중치를 갱신하지 않았다. 175B는 GPT-2의 1.5B보다 약 117배 크다. Brown 등이 말한 ‘10배’는 GPT-2가 아니라 당시 이전의 가장 큰 비희소 언어 모델과의 비교다.
 
 이 연결은 GPT-3가 GPT-2의 모든 한계를 규모 하나로 해결했다는 뜻이 아니다. Brown 등의 과제별 결과는 크게 달랐고, few-shot도 보통 입력 문맥에 10–100개의 표지 예시를 요구했다. GPT-2의 cue, GPT-3의 demonstration, 후대 instruction tuning을 서로 다른 과제 적응 조건으로 구분해야 한다.
 
@@ -129,17 +129,17 @@ GPT-2 full 1.5B weights는 2019년 2월 즉시 공개되지 않았다. 117M→34
 
 ## 출처
 
-- [[058_GPT-1과 GPT-2의 전이 방식 변화]]
+- [[059_GPT-1과 GPT-2의 전이 방식 변화]]
 - Alec Radford 외, [Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf), 2018.
 - Alec Radford 외, [Language Models are Unsupervised Multitask Learners](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf), 2019.
 - OpenAI, [Better Language Models and Their Implications](https://openai.com/index/better-language-models/), 2019.
-- [[066_GPT-3와 문맥 내 학습]]
+- [[067_GPT-3와 문맥 내 학습]]
 - Tom B. Brown 외, [Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165), NeurIPS 2020, §§1–3.
 
 ## 관련 항목
 
-- [[058_GPT-1과 GPT-2의 전이 방식 변화]]
-- [[066_GPT-3와 문맥 내 학습]]
+- [[059_GPT-1과 GPT-2의 전이 방식 변화]]
+- [[067_GPT-3와 문맥 내 학습]]
 - [[자기회귀 생성]]
 - [[언어 모델 전이 학습]]
 - [[문맥 내 학습]]

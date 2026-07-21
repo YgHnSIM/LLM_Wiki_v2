@@ -36,7 +36,7 @@ evidence:
     relation: supports
 related:
   - source.019
-  - source.065
+  - source.066
   - concept.언어-모델-스케일링-법칙
   - concept.n-gram-모델
   - concept.조건부-확률
@@ -84,7 +84,7 @@ Katz는 약 75만 단어의 사무 서신 데이터로 학습하고 100문장으
 
 ### 스케일링 곡선이 측정한 것
 
-Kaplan 등의 [[065_신경 언어 모델의 스케일링 법칙|2020년 스케일링 연구]]가 맞춘 값은 WebText2 계열 token의 평균 교차 엔트로피 손실이었다. 같은 tokenization과 자연로그 조건이면 perplexity는 이 손실을 지수화한 값이므로 두 지표는 같은 평균 예측 오차를 다른 척도로 나타낸다. 그러나 논문은 손실 감소가 관련 언어 과제의 향상으로 이어지는지를 후속 조사 문제로 남겼다. 따라서 매끄러운 loss·perplexity 곡선을 downstream 정확도, 사실성, 안전성이나 특정 능력의 직접 예측으로 바꿔 읽을 수 없다.
+Kaplan 등의 [[066_신경 언어 모델의 스케일링 법칙|2020년 스케일링 연구]]가 맞춘 값은 WebText2 계열 token의 평균 교차 엔트로피 손실이었다. 같은 tokenization과 자연로그 조건이면 perplexity는 이 손실을 지수화한 값이므로 두 지표는 같은 평균 예측 오차를 다른 척도로 나타낸다. 그러나 논문은 손실 감소가 관련 언어 과제의 향상으로 이어지는지를 후속 조사 문제로 남겼다. 따라서 매끄러운 loss·perplexity 곡선을 downstream 정확도, 사실성, 안전성이나 특정 능력의 직접 예측으로 바꿔 읽을 수 없다.
 
 ## 검증과 한계
 
@@ -104,7 +104,7 @@ Perplexity는 같은 평가열·토큰화·어휘와 확률 정의 아래에서 
 
 - [[001_섀넌의 N-gram 모델]]
 - [[019_Katz 백오프와 희소 데이터 확률 추정]]
-- [[065_신경 언어 모델의 스케일링 법칙]]
+- [[066_신경 언어 모델의 스케일링 법칙]]
 - Claude E. Shannon, [A Mathematical Theory of Communication](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf), 1948, Part I §6.
 - Slava M. Katz, [Estimation of Probabilities from Sparse Data for the Language Model Component of a Speech Recognizer](https://doi.org/10.1109/TASSP.1987.1165125), 1987, p. 401, Table I.
 - Stanley F. Chen·Joshua Goodman, [An Empirical Study of Smoothing Techniques for Language Modeling](https://dash.harvard.edu/handle/1/25104739), 1998, §1.1.
@@ -113,7 +113,7 @@ Perplexity는 같은 평가열·토큰화·어휘와 확률 정의 아래에서 
 ## 관련 항목
 
 - [[N-gram 모델]]
-- [[065_신경 언어 모델의 스케일링 법칙]]
+- [[066_신경 언어 모델의 스케일링 법칙]]
 - [[언어 모델 스케일링 법칙]]
 - [[조건부 확률]]
 - [[데이터 희소성]]

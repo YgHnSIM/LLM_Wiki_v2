@@ -4,6 +4,7 @@ import path from 'node:path';
 import yaml from 'js-yaml';
 import { createFrontmatterValidator, schemaErrorMessage } from './lib/frontmatter-schema.mjs';
 import { metaDir, rootDir, wikiDir } from './lib/project-paths.mjs';
+import { sourcePageNumberingErrors } from './lib/source-numbering.mjs';
 import {
   asArray,
   asStringArray,
@@ -119,6 +120,15 @@ for (const document of documents) {
   const artifacts = asStringArray(data.artifacts);
   for (const artifact of artifacts) {
     if (!artifactRecords.has(artifact)) errors.push(`${document.relativePath}: artifact '${artifact}' is not registered.`);
+  }
+  if (data.page_type === 'source') {
+    for (const numberingError of sourcePageNumberingErrors({
+      id: data.id,
+      filename: document.filename,
+      artifacts,
+    })) {
+      errors.push(`${document.relativePath}: ${numberingError}`);
+    }
   }
 
   const evidence = Array.isArray(data.evidence) ? data.evidence : [];

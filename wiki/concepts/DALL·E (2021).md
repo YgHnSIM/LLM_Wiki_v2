@@ -35,7 +35,7 @@ evidence:
     locator: 'README와 model_card.md의 Model Details·Model Use·Training Data·Performance and Limitations에 기록된 공개 범위와 dVAE 복원 한계'
     relation: supplements
 related:
-  - source.074
+  - source.075
   - concept.transformer
   - concept.자기회귀-생성
   - concept.clip
@@ -113,12 +113,12 @@ CLIP은 이미지와 텍스트를 비교하는 이중 인코더이며 DALL·E는
 
 ### 다음 문서
 
-- [[074_DALL·E와 이산 이미지 토큰 생성]] — 원 논문의 수치·평가·중복 분석과 raw 설명의 검증 정정을 locator로 확인한다.
+- [[075_DALL·E와 이산 이미지 토큰 생성]] — 원 논문의 수치·평가·중복 분석과 raw 설명의 검증 정정을 locator로 확인한다.
 - [[CLIP]] — 생성 후보를 점수화하는 대조 표현 모델과 이미지 생성기의 역할 차이를 이어서 본다.
 
 ## 출처
 
-- [[074_DALL·E와 이산 이미지 토큰 생성]]
+- [[075_DALL·E와 이산 이미지 토큰 생성]]
 - Aditya Ramesh 외, [Zero-Shot Text-to-Image Generation](https://proceedings.mlr.press/v139/ramesh21a.html), ICML 2021, PMLR 139:8821–8831, §§1–3, Figures 1–9와 Appendix §§A–C·F–G, Figures 10–14, Listings 1–2.
 - Aditya Ramesh 외, [arXiv 본문·부록 통합본](https://arxiv.org/abs/2102.12092), Appendix §§A–C·F–G, Figures 10–14와 Listings 1–2.
 - OpenAI, [DALL·E: Creating images from text](https://openai.com/index/dall-e/), 2021-01-05, Overview, Capabilities와 Summary of approach and prior work.
@@ -127,7 +127,7 @@ CLIP은 이미지와 텍스트를 비교하는 이중 인코더이며 DALL·E는
 
 ## 관련 항목
 
-- [[074_DALL·E와 이산 이미지 토큰 생성]]
+- [[075_DALL·E와 이산 이미지 토큰 생성]]
 - [[Transformer]]
 - [[자기회귀 생성]]
 - [[CLIP]]

@@ -28,7 +28,7 @@ evidence:
     locator: '초록과 §§2–4의 Post-LN·Pre-LN 정의와 초기 gradient 분석'
     relation: supplements
 related:
-  - source.048
+  - source.049
   - concept.batch-normalization
   - concept.rmsnorm
   - concept.잔차-연결
@@ -89,14 +89,14 @@ LayerNorm이 batch 사례 사이의 의존성을 없앤다는 사실과 feature 
 
 ## 출처
 
-- [[048_층 정규화와 시퀀스 모델의 배치 독립성]]
+- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]
 - Jimmy Lei Ba·Jamie Ryan Kiros·Geoffrey E. Hinton, [Layer Normalization](https://arxiv.org/abs/1607.06450), 2016.
 - Ashish Vaswani 외, [Attention Is All You Need](https://proceedings.neurips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html), 2017.
 - Ruibin Xiong 외, [On Layer Normalization in the Transformer Architecture](https://arxiv.org/abs/2002.04745), 2020.
 
 ## 관련 항목
 
-- [[048_층 정규화와 시퀀스 모델의 배치 독립성]]
+- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]
 - [[Batch Normalization]]
 - [[RMSNorm]]
 - [[잔차 연결]]

@@ -31,7 +31,7 @@ evidence:
     locator: '§§3–5와 Tables 1–5의 factorization·layer sharing·SOP·parameter/compute 비교'
     relation: supports
 related:
-  - source.060
+  - source.061
   - concept.bert
   - concept.마스크드-언어-모델링
   - concept.transformer
@@ -116,14 +116,14 @@ ALBERT의 lite는 주로 parameter count와 저장 memory를 가리킨다. layer
 
 ## 출처
 
-- [[060_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]]
+- [[061_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]]
 - Zhilin Yang 외, [XLNet: Generalized Autoregressive Pretraining for Language Understanding](https://proceedings.neurips.cc/paper_files/paper/2019/hash/dc6a7e655d7e5840e66733e9ee67cc69-Abstract.html), NeurIPS 2019, 특히 §§2–3.
 - Yinhan Liu 외, [RoBERTa: A Robustly Optimized BERT Pretraining Approach](https://arxiv.org/abs/1907.11692), 2019, 특히 §§3–5.
 - Zhenzhong Lan 외, [ALBERT: A Lite BERT for Self-supervised Learning of Language Representations](https://openreview.net/forum?id=H1eA7AEtvS), ICLR 2020, 특히 §§3–5.
 
 ## 관련 항목
 
-- [[060_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]]
+- [[061_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]]
 - [[BERT]]
 - [[마스크드 언어 모델링]]
 - [[Transformer]]

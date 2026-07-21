@@ -29,8 +29,8 @@ evidence:
     locator: '§3.1의 multilingual corpus sampling·shared BPE vocabulary와 공통 문자열 anchor에 대한 설명'
     relation: contextualizes
 related:
-  - source.049
-  - source.061
+  - source.050
+  - source.062
   - concept.xlm
 ---
 # Byte Pair Encoding
@@ -88,14 +88,14 @@ related:
 
 ## 출처
 
-- [[049_FastText와 서브워드 표현의 두 경로]]
-- [[061_XLM과 교차 언어 사전 학습]]
+- [[050_FastText와 서브워드 표현의 두 경로]]
+- [[062_XLM과 교차 언어 사전 학습]]
 - Philip Gage, [A New Algorithm for Data Compression](https://www.derczynski.com/papers/archive/BPE_Gage.pdf), The C Users Journal 12(2), 1994, pp. 23–38.
 - Rico Sennrich·Barry Haddow·Alexandra Birch, [Neural Machine Translation of Rare Words with Subword Units](https://aclanthology.org/P16-1162/), ACL 2016, §3.2.
 - Alexis Conneau·Guillaume Lample, [Cross-lingual Language Model Pretraining](https://proceedings.neurips.cc/paper_files/paper/2019/hash/c04c19c2c2474dbf5f7ac4372c5b9af1-Abstract.html), NeurIPS 2019, §3.1.
 
 ## 관련 항목
 
-- [[049_FastText와 서브워드 표현의 두 경로]]
-- [[061_XLM과 교차 언어 사전 학습]]
+- [[050_FastText와 서브워드 표현의 두 경로]]
+- [[062_XLM과 교차 언어 사전 학습]]
 - [[XLM]]

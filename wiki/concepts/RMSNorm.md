@@ -25,7 +25,7 @@ evidence:
     locator: '§§2–3의 mean·variance LayerNorm 정의'
     relation: contextualizes
 related:
-  - source.048
+  - source.049
   - concept.layer-normalization
 ---
 # RMSNorm
@@ -76,11 +76,11 @@ Zhang·Sennrich는 re-centering invariance가 필수적이지 않고 re-scaling 
 
 ## 출처
 
-- [[048_층 정규화와 시퀀스 모델의 배치 독립성]]
+- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]
 - Biao Zhang·Rico Sennrich, [Root Mean Square Layer Normalization](https://proceedings.neurips.cc/paper/2019/hash/1e8a19426224ca89e83cef47f1e7f53b-Abstract.html), 2019.
 - Jimmy Lei Ba·Jamie Ryan Kiros·Geoffrey E. Hinton, [Layer Normalization](https://arxiv.org/abs/1607.06450), 2016.
 
 ## 관련 항목
 
-- [[048_층 정규화와 시퀀스 모델의 배치 독립성]]
+- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]
 - [[Layer Normalization]]

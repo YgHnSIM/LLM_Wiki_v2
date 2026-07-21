@@ -181,7 +181,9 @@ related:
 
 ### 6.0 중단 작업 재개 (`하던 작업 계속 진행`)
 
-새 세션에서 사용자가 정확히 `하던 작업 계속 진행`이라고 입력하면, 별도의 복구 체계를 만들지 않고 **030부터 실제 원문이 있는 첫 미완료 번호를 찾아 6.1–6.3의 기존 워크플로를 한 번에 하나씩 그대로 적용한다.** 현재 체크포인트는 029 공개 처리와 020–029 후속 분석까지 완료된 상태이므로 다음 대상은 030이다.
+새 세션에서 사용자가 정확히 `하던 작업 계속 진행`이라고 입력하면, 별도의 복구 체계를 만들지 않고 **외부 원문 목록에서 실제 원문이 있는 첫 미완료 수집 접두사를 찾아 6.1–6.3의 기존 워크플로를 한 번에 하나씩 그대로 적용한다.** 현재 체크포인트는 로컬 수집 접두사 077의 공식 078 Chinchilla 공개 처리와 후속 분석까지 완료된 상태이므로 다음 입력 대상은 로컬 078, 공식 079 HELM이다.
+
+번호는 두 역할을 분리한다. `/lt NNN`과 `source:* -- NNN`, 외부 원문·번역·raw 파일명 및 `raw-artifacts.yml`의 `order_prefix`는 **로컬 수집 접두사**를 사용한다. `wiki/sources/` 파일명, `source.NNN`, 위키 링크, 공개 URL과 ingest 커밋 번호는 **공식 책 목차 장 번호**를 사용한다. 공식 047 Attention Mechanism 게시물이 원문 목록에서 빠졌으므로 로컬 001–046은 공식 번호와 같고 로컬 047–109는 공식 048–110에 대응한다. 공식 047은 다른 문서에 재사용하지 않는다. 전체 규칙은 `docs/source-numbering.md`를 따른다.
 
 1. `git status --short --branch`와 `npm run source:status -- NNN`으로 대상과 중단 지점을 확인한다.
 2. 새 번호는 기존 번역본을 무시하고 `/lt NNN`부터 새로 번역한다. 이번 작업에서 이미 검증까지 마친 단계가 있다면 그 다음 단계부터 잇는다.
@@ -191,21 +193,21 @@ related:
 
 ### 6.1 번역과 raw 보존
 
-1. `/lt NNN`으로 `C:\Vault\ObsidianVault\Assets\LLM_sources`의 단일 원문을 새로 번역하고 해설을 작성한다.
+1. `/lt NNN`의 `NNN`을 로컬 수집 접두사로 사용해 `C:\Vault\ObsidianVault\Assets\LLM_sources`의 단일 원문을 새로 번역하고 해설을 작성한다.
 2. 번역과 해설은 `C:\Vault\ObsidianVault\LLM_ko`에 동일 stem의 `.ko.md`, `.commentary.ko.md` 쌍으로 저장하고 스킬 검사를 통과해야 한다.
 3. `npm run source:status -- NNN`으로 입력·출력·raw·공개 페이지 상태를 확인한다.
-4. `npm run source:copy -- NNN`으로 검증된 쌍을 `raw/`에 복사하고 `raw-artifacts.yml`에 원문 `source_url`과 SHA-256을 등록한다.
+4. `npm run source:copy -- NNN`으로 검증된 쌍을 원래 수집 접두사 그대로 `raw/`에 복사하고 `raw-artifacts.yml`에 원문 `source_url`, 로컬 `order_prefix`와 SHA-256을 등록한다.
 5. raw 복사 단계에서는 커밋·푸시하지 않는다. 기존 raw와 내용이 다르면 덮어쓰지 않고 중단한다.
 
 ### 6.2 공개 소스 처리
 
 1. raw artifact와 외부 원문 출처를 구분해 확인한다.
 2. 외부 1차 자료를 evidence 레지스트리에 등록한다.
-3. `wiki/sources/`에 요약·검증 정정·핵심 문장·출처·관련 항목을 작성한다.
+3. 매핑된 공식 장 번호로 `wiki/sources/` 파일명과 `source.NNN`을 정해 요약·검증 정정·핵심 문장·출처·관련 항목을 작성한다.
 4. 관련 entity·concept·analysis를 갱신한다.
 5. `index.md`, `overview.md`, `log.md`를 갱신한다. log에는 raw 보존과 공개 처리 결과를 하나의 ingest 기록으로 남긴다.
 6. `npm run sync:index` 후 `npm run source:ready -- NNN`으로 단위 테스트, wiki lint, 사이트 빌드와 산출물 검사를 실행한다.
-7. 현재 브랜치가 `main`이고 변경 범위가 해당 소스에 한정됐는지 확인한 뒤 `ingest: number_title`로 한 번만 커밋하고 `origin/main`에 푸시한다. 브랜치를 새로 만들지 않는다.
+7. 현재 브랜치가 `main`이고 변경 범위가 해당 소스에 한정됐는지 확인한 뒤 공식 장 번호를 쓴 `ingest: number_title`로 한 번만 커밋하고 `origin/main`에 푸시한다. 브랜치를 새로 만들지 않는다.
 
 세부 절차와 실패 복구 규칙은 `docs/source-ingestion-workflow.md`를 따른다.
 
@@ -232,6 +234,7 @@ related:
 - `wiki/meta/page.schema.json`에 대한 frontmatter 구조·타입·enum 검증
 - 폴더·`page_type`·`type/*` 일치
 - ID 중복, H1·title 불일치
+- source 페이지의 공식 장 번호와 raw 수집 접두사 매핑 불일치
 - 허용되지 않은 태그
 - 존재하지 않거나 해시가 달라진 raw artifact
 - 존재하지 않는 evidence ID, 빈 locator
@@ -274,7 +277,7 @@ related:
 - `site: short_title`
 - `docs: short_title`
 
-정규 번호 소스의 번역·raw 복사 단계에서는 커밋·푸시하지 않는다. 공개 소스 처리와 전체 검증을 마친 뒤 raw·레지스트리·wiki 변경을 하나의 `ingest` 커밋으로 묶어 `main`에 푸시한다.
+정규 번호 소스의 번역·raw 복사 단계에서는 커밋·푸시하지 않는다. 공개 소스 처리와 전체 검증을 마친 뒤 raw·레지스트리·wiki 변경을 하나의 `ingest` 커밋으로 묶어 `main`에 푸시하며, 메시지의 번호는 공식 장 번호를 쓴다.
 
 ## 9. 작업 원칙
 

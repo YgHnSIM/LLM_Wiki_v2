@@ -31,8 +31,8 @@ evidence:
     locator: '§2.6과 Figures 3·6·9(c)의 별도 대조 모델을 이용한 512개 생성 후보 재순위화와 sample-pool 크기별 FID·IS 변화'
     relation: supplements
 related:
-  - source.069
-  - source.074
+  - source.070
+  - source.075
   - concept.dall-e-2021
   - concept.transformer
   - concept.합성곱-신경망
@@ -125,7 +125,7 @@ ViT-L/14@336px의 ImageNet zero-shot top-1 accuracy는 76.2%로, ImageNet의 128
 
 ### DALL·E에서는 생성기가 아니라 후보 재순위기다
 
-[[074_DALL·E와 이산 이미지 토큰 생성]]의 DALL·E 1은 텍스트와 이미지 토큰의 자기회귀 Transformer로 후보를 생성했다. 그 뒤 CLIP과 같은 대조 학습 절차의 별도 모델이 caption과 후보 이미지의 일치 점수를 계산해 512개 가운데 상위 표본을 골랐다.
+[[075_DALL·E와 이산 이미지 토큰 생성]]의 DALL·E 1은 텍스트와 이미지 토큰의 자기회귀 Transformer로 후보를 생성했다. 그 뒤 CLIP과 같은 대조 학습 절차의 별도 모델이 caption과 후보 이미지의 일치 점수를 계산해 512개 가운데 상위 표본을 골랐다.
 
 따라서 대조 임베딩은 생성기의 decoder나 학습 backbone이 아니다. [[DALL·E (2021)]]의 최종 표본 품질에는 생성 분포·표본 수·재순위 점수가 함께 작용하며, CLIP 계열 점수를 사용했다는 사실만으로 CLIP 자체에 이미지 생성 능력이 생기지는 않는다.
 
@@ -159,13 +159,13 @@ Prompt wording과 후보 클래스 설계는 정확도와 편향을 함께 바�
 
 ### 다음 문서
 
-- [[069_CLIP과 대조적 언어-이미지 사전 학습]] — WIT 구성, architecture, 27개 평가와 원 raw 설명의 검증 정정을 1차 근거 locator로 확인한다.
+- [[070_CLIP과 대조적 언어-이미지 사전 학습]] — WIT 구성, architecture, 27개 평가와 원 raw 설명의 검증 정정을 1차 근거 locator로 확인한다.
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]] — CLIP의 class prompt를 feature extraction·fine-tuning·in-context prompting과 비교해 과제 명세가 놓이는 위치를 확장한다.
 
 ## 출처
 
-- [[069_CLIP과 대조적 언어-이미지 사전 학습]]
-- [[074_DALL·E와 이산 이미지 토큰 생성]]
+- [[070_CLIP과 대조적 언어-이미지 사전 학습]]
+- [[075_DALL·E와 이산 이미지 토큰 생성]]
 - Alec Radford 외, [Learning Transferable Visual Models From Natural Language Supervision](https://proceedings.mlr.press/v139/radford21a.html), ICML 2021, PMLR 139:8748–8763, 특히 §§2.1–2.5, Figures 1–3, §§3–6, Figures 4–7과 supplementary §§A–B·D–E·I, Tables 2·4·8–10·18–20.
 - Aditya Ramesh 외, [Zero-Shot Text-to-Image Generation](https://proceedings.mlr.press/v139/ramesh21a.html), ICML 2021, §2.6과 Figures 3·6·9(c).
 - 프로젝트 보존 자료: `raw/069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md`, `raw/069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md`.
@@ -173,8 +173,8 @@ Prompt wording과 후보 클래스 설계는 정확도와 편향을 함께 바�
 
 ## 관련 항목
 
-- [[069_CLIP과 대조적 언어-이미지 사전 학습]]
-- [[074_DALL·E와 이산 이미지 토큰 생성]]
+- [[070_CLIP과 대조적 언어-이미지 사전 학습]]
+- [[075_DALL·E와 이산 이미지 토큰 생성]]
 - [[DALL·E (2021)]]
 - [[Transformer]]
 - [[합성곱 신경망]]

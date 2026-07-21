@@ -30,7 +30,7 @@ evidence:
     relation: supports
 related:
   - reference.glam-mixtral-moe
-  - source.068
+  - source.069
   - concept.전문가-혼합
   - concept.transformer
   - concept.대규모-언어-모델
@@ -161,7 +161,7 @@ Routing 분석도 세 layer와 정한 data subset의 관찰이다. 다른 seed·
 ## 관련 항목
 
 - [[GLaM에서 Mixtral까지의 희소 MoE 확장]]
-- [[068_전문가 혼합과 희소 활성 스케일링]]
+- [[069_전문가 혼합과 희소 활성 스케일링]]
 - [[전문가 혼합]]
 - [[Transformer]]
 - [[대규모 언어 모델]]
