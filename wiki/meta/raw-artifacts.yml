@@ -1368,3 +1368,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/instructgpt-rlhf-aligning-language-models-human-preferences
     sha256: 923274478068d0319d65fd33908f0a039f3460c46eb43dbaf29a9a5a30f0bf8f
+  - path: "raw/072_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval.ko.md"
+    role: translation
+    order_prefix: "072"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/multi-vector-retrievers-fine-grained-token-level-matching-for-neural-information-retrieval
+    sha256: 23f6e6a8bf8428536381ac65b2cedbd352819c5f45013b3cafd0a4dbab510185
+  - path: "raw/072_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval.commentary.ko.md"
+    role: commentary
+    order_prefix: "072"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/multi-vector-retrievers-fine-grained-token-level-matching-for-neural-information-retrieval
+    sha256: f37908699134df9bcd21aad4234e727946f02bf55c154086a26128966b15c376

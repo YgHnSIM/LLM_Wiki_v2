@@ -24,7 +24,7 @@ related:
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 76개, concept 151개, entity 29개, analysis 21개를 합친 비메타 문서 277개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 76개, reference 1개, concept 152개, entity 29개, analysis 21개를 합친 비메타 문서 279개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -33,10 +33,10 @@ related:
 | 규칙에서 학습으로 무엇이 바뀌었나 | [[003_Georgetown-IBM 기계 번역 시연]] | [[012_상징 규칙에서 통계 학습으로]] → [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[규칙 기반 AI에서 데이터 기반 학습으로]] |
 | 현대 Transformer 계열은 어디서 왔나 | [[018_역전파와 다층 신경망 학습]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]] → [[063_Transformer-XL과 세그먼트 수준 재귀]] → [[060_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]] | [[065_신경 언어 모델의 스케일링 법칙]] |
 | 한 언어의 지식은 다른 언어로 어떻게 옮겨지나 | [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[061_XLM과 교차 언어 사전 학습]] → [[XLM]] | [[같은 병렬 문장은 무엇을 학습시키는가]] |
-| 검색과 외부 지식은 어떻게 연결되나 | [[010_벡터 공간 모델과 TF-IDF]] | [[024_BM25와 확률적 정보 검색]] → [[051_신경 정보 검색과 의미 대응]] → [[064_BERT 기반 passage 재순위화]] → [[067_DPR과 검색 증강 생성]] | [[검색은 근거를 찾고 독해는 답을 찾는다]] |
+| 검색과 외부 지식은 어떻게 연결되나 | [[010_벡터 공간 모델과 TF-IDF]] | [[024_BM25와 확률적 정보 검색]] → [[051_신경 정보 검색과 의미 대응]] → [[064_BERT 기반 passage 재순위화]] → [[067_DPR과 검색 증강 생성]] → [[072_ColBERT와 다중 벡터 검색]] | [[검색은 근거를 찾고 독해는 답을 찾는다]] |
 | 자연어 명세는 어떻게 실행 코드가 되나 | [[066_GPT-3와 문맥 내 학습]] | [[070_Codex와 HumanEval 기반 코드 생성 평가]] → [[OpenAI Codex (2021)]] | [[자동 평가 지표는 무엇을 보상하는가]] |
 | 자연어 지시는 언제 가중치에 들어가나 | [[062_T5와 Text-to-Text 통합 프레임워크]] | [[066_GPT-3와 문맥 내 학습]] → [[071_지시 미세조정과 FLAN의 제로샷 일반화]] → [[076_InstructGPT와 인간 선호 정렬]] → [[인간 피드백 강화학습]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
-| 희소 모델의 ‘크기’는 무엇을 뜻하나 | [[068_전문가 혼합과 희소 활성 스케일링]] | [[072_GLaM에서 Mixtral까지의 희소 MoE 확장]] → [[Mixtral 8x7B]] | [[총 매개변수와 활성 계산량은 같은 축인가]] |
+| 희소 모델의 ‘크기’는 무엇을 뜻하나 | [[068_전문가 혼합과 희소 활성 스케일링]] | [[GLaM에서 Mixtral까지의 희소 MoE 확장]] → [[Mixtral 8x7B]] | [[총 매개변수와 활성 계산량은 같은 축인가]] |
 | 학습 데이터의 양과 구성을 어떻게 읽나 | [[062_T5와 Text-to-Text 통합 프레임워크]] | [[065_신경 언어 모델의 스케일링 법칙]] → [[066_GPT-3와 문맥 내 학습]] → [[073_The Pile과 대규모 언어 모델 학습 말뭉치]] → [[The Pile]] | [[데이터 품질과 분포 다양성은 같은 축인가]] |
 
 ## 난이도에 따른 읽기 방법
@@ -120,7 +120,7 @@ related:
 - [[069_CLIP과 대조적 언어-이미지 사전 학습]]은 4억 image–text pair의 대칭 대조 학습, 수정 ResNet·ViT 이중 인코더와 class prompt 기반 zero-shot 분류를 복원하고, shared embedding과 일반 멀티모달 이해·생성·VQA의 경계를 검증한다.
 - [[070_Codex와 HumanEval 기반 코드 생성 평가]]는 최대 12B 연구 Codex의 Python 코드 계속학습과 Codex-S 추가 미세조정을 분리하고, HumanEval·pass@k·unit-test oracle 및 GitHub Copilot production version의 경계를 검증한다.
 - [[071_지시 미세조정과 FLAN의 제로샷 일반화]]는 62개 데이터셋·12개 과제 군집을 자연어 지시로 미세조정한 137B FLAN을 복원하고, 군집별 별도 checkpoint·template 선택·모델 규모 효과와 최초 발명·보편적 향상·안전 정렬 주장의 경계를 검증한다.
-- [[072_GLaM에서 Mixtral까지의 희소 MoE 확장]]은 2024년 단일 돌파 서사를 GLaM의 1.2T/96.6B와 Mixtral의 46.7B/12.9B total/active 장부로 교정하고, 공개 가중치·memory·routing·benchmark 비교의 조건을 검증한다.
+- [[072_ColBERT와 다중 벡터 검색]]은 SIGIR 2020 ColBERT의 독립 BERT 부호화·MaxSim 후기 상호작용·FAISS 후보 검색을 복원하고, 2021 연도·저자 소속·exact match·문서 길이 제곱 비용·cross-encoder 계보와 후속 응용의 범위를 교정한다.
 - [[073_The Pile과 대규모 언어 모델 학습 말뭉치]]는 22개 영어 중심 component의 825.18 GiB raw·1,254.20 GiB effective mixture를 복원하고, Pile-wide dedupulation 부재·40GB 통제 비교·권리와 동의·재현성의 경계를 검증한다.
 - [[074_DALL·E와 이산 이미지 토큰 생성]]은 256×256 이미지를 1,024개 이산 토큰으로 압축해 text와 공동 자기회귀 모델링한 12B sparse Transformer를 복원하고, 대조 재순위화·MS-COCO/CUB 평가·중복·공개 범위와 인간 창의성·후대 직선 계보의 경계를 검증한다.
 - [[075_파운데이션 모델 보고서와 AI 생태계]]는 광범위한 데이터·대규모 학습·후속 과제 적응의 정의와 창발·동질화·중간 자산의 생태계를 복원하고, GPT-4 소급·최소 과제 학습·달성된 민주화·추론 환경비용 누락·후대 영향 인과를 교정한다.
@@ -168,6 +168,7 @@ related:
 - [[추출형 질의응답]]의 시작·끝 구간 선택, 검색·생성 단계와의 경계, EM·토큰 F1 및 SQuAD 2.0의 기권 판단
 - [[신경 정보 검색]]의 질의·문서 독립 표현과 token interaction, 클릭·음성 표본의 편향, 첫 단계 검색·재순위화 및 sparse·dense 상보성
 - [[교차 인코더 재순위화]]에서 구분하는 질의–후보 공동 부호화, `[CLS]` relevance logit, first-stage 누락 복구 불가와 후보별 추론 비용
+- [[다중 벡터 검색]]에서 구분하는 독립 문맥화 벡터 집합, MaxSim 후기 상호작용, single-vector·cross-encoder 사이 계산 경계와 색인·ANN·질의 비용
 - [[언어 모델 스케일링 법칙]]에서 함께 확인하는 token loss, N·D·compute 병목, 관측 범위 밖 외삽과 Kaplan·Chinchilla compute-optimal 배분의 차이
 - [[The Pile]]에서 구분하는 22개 component의 raw size·epoch 가중 effective size, component deduplication·split leakage·benchmark decontamination과 project license·underlying rights
 - [[데이터 품질과 분포 다양성은 같은 축인가]]에서 분리하는 문서 입장 filter, domain support, sampling weight와 평가 분포 및 quality proxy의 인과 한계
@@ -238,7 +239,9 @@ related:
 - [[OpenAI Codex (2021)]]
 - [[071_지시 미세조정과 FLAN의 제로샷 일반화]]
 - [[지시 미세조정]]
-- [[072_GLaM에서 Mixtral까지의 희소 MoE 확장]]
+- [[072_ColBERT와 다중 벡터 검색]]
+- [[다중 벡터 검색]]
+- [[GLaM에서 Mixtral까지의 희소 MoE 확장]]
 - [[Mixtral 8x7B]]
 - [[073_The Pile과 대규모 언어 모델 학습 말뭉치]]
 - [[The Pile]]

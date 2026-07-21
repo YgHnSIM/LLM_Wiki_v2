@@ -29,7 +29,7 @@ evidence:
     locator: '2023-12-11 공개일, Apache 2.0 공개 가중치, architecture·46.7B total·12.9B active와 공식 비교 주장'
     relation: supports
 related:
-  - source.072
+  - reference.glam-mixtral-moe
   - source.068
   - concept.전문가-혼합
   - concept.transformer
@@ -148,19 +148,19 @@ Routing 분석도 세 layer와 정한 data subset의 관찰이다. 다른 seed·
 
 ### 다음 문서
 
-- [[072_GLaM에서 Mixtral까지의 희소 MoE 확장]] — GLaM의 내부 통제 비교와 Mixtral 공개를 역사·증거 수준별로 연결한다.
+- [[GLaM에서 Mixtral까지의 희소 MoE 확장]] — GLaM의 내부 통제 비교와 Mixtral 공개를 역사·증거 수준별로 연결한다.
 - [[총 매개변수와 활성 계산량은 같은 축인가]] — Total·active parameter, FLOPs, memory와 communication을 하나의 장부로 비교한다.
 
 ## 출처
 
 - Albert Q. Jiang 외, [Mixtral of Experts](https://arxiv.org/abs/2401.04088), arXiv:2401.04088, 2024, §§1–6과 Tables 1–5.
 - Mistral AI, [Mixtral of experts](https://mistral.ai/news/mixtral-of-experts/), 2023-12-11.
-- [[072_GLaM에서 Mixtral까지의 희소 MoE 확장]]
+- [[GLaM에서 Mixtral까지의 희소 MoE 확장]]
 - 프로젝트 보존 자료: `raw/072_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md`, `raw/072_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md`.
 
 ## 관련 항목
 
-- [[072_GLaM에서 Mixtral까지의 희소 MoE 확장]]
+- [[GLaM에서 Mixtral까지의 희소 MoE 확장]]
 - [[068_전문가 혼합과 희소 활성 스케일링]]
 - [[전문가 혼합]]
 - [[Transformer]]

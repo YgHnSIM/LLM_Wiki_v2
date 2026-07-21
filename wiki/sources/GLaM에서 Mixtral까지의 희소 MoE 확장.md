@@ -1,14 +1,14 @@
 ---
 schema_version: 2
-id: source.072
-page_type: source
+id: reference.glam-mixtral-moe
+page_type: reference
 title: GLaM에서 Mixtral까지의 희소 MoE 확장
 aliases:
-  - 072_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing
+  - 072_GLaM에서 Mixtral까지의 희소 MoE 확장
   - Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing
   - 대규모 MoE와 Mixtral
 tags:
-  - type/source
+  - type/reference
   - domain/ai
   - domain/computer-science
   - domain/nlp
@@ -62,7 +62,7 @@ related:
 
 ### 2024년 발명이 아니라 공개 가중치 단계로의 이동이다
 
-072 raw의 출발 자료는 2025년에 게시된 웹 해설이며, MoE 대규모 확장을 2024년의 전환으로 묶는다. 그러나 [[068_전문가 혼합과 희소 활성 스케일링]]에서 확인했듯 학습되는 gate는 1991년, 수천 expert의 희소 layer는 2017년, GShard와 Switch Transformer의 수천억·수조 매개변수 Transformer는 2020–2021년에 이미 공개됐다.
+번호 정정 전 072로 수집된 raw의 출발 자료는 2025년에 게시된 웹 해설이며, MoE 대규모 확장을 2024년의 전환으로 묶는다. 그러나 [[068_전문가 혼합과 희소 활성 스케일링]]에서 확인했듯 학습되는 gate는 1991년, 수천 expert의 희소 layer는 2017년, GShard와 Switch Transformer의 수천억·수조 매개변수 Transformer는 2020–2021년에 이미 공개됐다.
 
 그 다음 전환은 한 해의 발명보다 두 사례로 읽는 편이 정확하다.
 

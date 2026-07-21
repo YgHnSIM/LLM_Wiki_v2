@@ -3114,6 +3114,25 @@ raw 등록 해시:
 - 사이트는 439개 페이지를 빌드해 5,815개 위키 링크와 33,121개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 279개 항목을 포함했다.
 - 보상 모델 자료·정확도·KL·PPO-ptx와 평가 범위는 Ouyang et al. 2022의 직접 사실이다. 이를 고정 지표·실행 oracle과 같은 최적화 유인 축으로 묶은 부분은 비교를 통한 합성 해석이며 직접 계보가 아니다.
 
+## [2026-07-21] ingest | ColBERT와 다중 벡터 검색
+
+변경 내용:
+
+- 공식 *History of Language AI* 연재 목록과 저장소의 과거 결손 기록을 대조해 072의 실제 대상이 `Multi-Vector Retrievers: Fine-Grained Token-Level Matching for Neural Information Retrieval`임을 확인했다. 번호가 잘못 붙었던 MoE 회고 raw 두 파일은 수정·삭제하지 않고 그대로 보존했으며, 공개 문서만 [[GLaM에서 Mixtral까지의 희소 MoE 확장]] 참고 자료로 재분류했다.
+- 실제 072 원문을 처음부터 새로 번역·윤문하고 학습 해설을 작성했다. 원문의 95줄·47개 비공백 block·H1/H2 1/6과 Markdown link target 40개의 순서·빈 줄 위치를 보존한 쌍을 immutable raw artifact로 등록했다. 번역 SHA-256은 `23f6e6a8bf8428536381ac65b2cedbd352819c5f45013b3cafd0a4dbab510185`, 해설은 `f37908699134df9bcd21aad4234e727946f02bf55c154086a26128966b15c376`이다.
+- [[072_ColBERT와 다중 벡터 검색]]과 [[다중 벡터 검색]]을 만들고, 독립 BERT 부호화·문맥화된 벡터 집합·MaxSim 후기 상호작용·FAISS IVFPQ 후보 생성·후보별 정확 MaxSim 재순위화를 복원했다. [[신경 정보 검색]], [[교차 인코더 재순위화]], [[064_BERT 기반 passage 재순위화]], [[067_DPR과 검색 증강 생성]]에는 상호작용 시점과 비용 경계를 연결했다.
+- SIGIR 2020 ColBERT, TACL 2021 ColBERT-QA, NeurIPS 2021 Baleen, NAACL 2022 ColBERTv2를 새 evidence로 등록했다. ColBERT의 2020년 발표와 Stanford 저자 소속, $O(N_qN_dm)$ MaxSim, MS MARCO 재순위화·880만 passage 검색, 색인 크기·압축 결과를 locator와 함께 검증했다.
+- Raw의 2021년 원형, CMU·Waterloo 귀속, sparse+dense hybrid·exact match, 문서 길이 제곱 비용, 단일 벡터의 균등 기여, 긴 문서·개체·기술·대화·typo·설명 가능성의 직접 검증, ColBERT에서 cross-encoder로 이어진 계보를 교정했다. ColBERT-QA1과 single-vector ablation은 같은 BM25 supervision을 썼지만 full-corpus retrieval와 BM25 top-1,000 재순위화라는 후보 범위가 달랐고, QA2·QA3은 supervision도 달랐음을 분리했다.
+- Reference도 보존 번역·해설 reader로 이동할 수 있도록 사이트의 자료 보기 switcher를 `source`와 `reference` 모두에 표시하게 고쳤다. 색인에는 정규 072 source와 비번호 MoE 참고 자료를 서로 다른 유형으로 한 번씩만 실었다.
+- 새 analysis 문서는 만들지 않았다. 단일 벡터 검색·후기 상호작용·교차 인코더를 검색 단계와 상호작용 시점으로 비교하는 질문은 기존 [[검색은 근거를 찾고 독해는 답을 찾는다]]를 보강하는 별도 `content` 작업으로 이어 간다.
+
+검증 결과:
+
+- 번역 스킬 검사와 source workflow가 새 072 원문·번역·해설 쌍, 원문 URL, raw 역할과 SHA-256 일치를 확인했다.
+- 49개 회귀 테스트와 282개 위키 문서 strict lint를 통과했으며 306개 evidence 레코드와 154개 immutable raw artifact를 확인했다.
+- 사이트는 443개 페이지를 빌드해 5,867개 위키 링크와 33,424개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 281개 항목을 포함했다.
+- 공개 source·concept의 핵심 수식·표 수치·연도·소속·색인 크기·후속 응용 범위는 네 1차 논문과 대조했다. MaxSim 정렬의 인과적 설명 가능성, 광범위한 production 표준화, 장문·다언어·정확 문자열 질의 일반화는 입증되지 않은 범위로 남겼다.
+
 ## 관련 항목
 
 - [[index]]

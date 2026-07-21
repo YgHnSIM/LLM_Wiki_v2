@@ -34,6 +34,8 @@ evidence:
     locator: '2019-10-25, “Applying BERT models to Search”·“Cracking your queries”의 ranking·featured snippets 적용과 미국 영어 검색 10건 중 1건이라는 공개 범위'
     relation: contextualizes
 related:
+  - source.072
+  - concept.다중-벡터-검색
   - concept.교차-인코더-재순위화
   - concept.bert
   - concept.신경-정보-검색
@@ -178,6 +180,8 @@ MS MARCO의 question-like query와 TREC-CAR passage 결과를 웹 문서·상품
 ## 관련 항목
 
 - [[교차 인코더 재순위화]]
+- [[다중 벡터 검색]]
+- [[072_ColBERT와 다중 벡터 검색]]
 - [[BERT]]
 - [[신경 정보 검색]]
 - [[BM25]]

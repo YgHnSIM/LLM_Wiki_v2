@@ -991,7 +991,7 @@ function renderArticle(document) {
       </dl>
     </header>
     ${reviewNote}
-    ${document.pageType === 'source' ? renderArtifactSwitcher(document) : ''}
+    ${['source', 'reference'].includes(document.pageType) ? renderArtifactSwitcher(document) : ''}
     <div class="article-layout">
       <aside class="article-sidebar">
         <details class="toc-card" data-toc-details open>
