@@ -2492,6 +2492,15 @@ sources:
     kind: conference-paper
     url: https://proceedings.mlr.press/v139/radford21a.html
     language: en
+  alayrac-et-al-2022-flamingo:
+    title: 'Flamingo: a Visual Language Model for Few-Shot Learning'
+    authors: [Jean-Baptiste Alayrac, Jeff Donahue, Pauline Luc, Antoine Miech, Iain Barr, Yana Hasson, Karel Lenc, Arthur Mensch, Katie Millican, Malcolm Reynolds, Roman Ring, Eliza Rutherford, Serkan Cabi, Tengda Han, Zhitao Gong, Sina Samangooei, Marianne Monteiro, Jacob Menick, Sebastian Borgeaud, Andrew Brock, Aida Nematzadeh, Sahand Sharifzadeh, Mikolaj Binkowski, Ricardo Barreira, Oriol Vinyals, Andrew Zisserman, Karen Simonyan]
+    published: 2022
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2204.14198
+    url: https://proceedings.neurips.cc/paper_files/paper/2022/hash/960a172bc7fbf0177ccccbb411a7d800-Abstract-Conference.html
+    language: en
   ramesh-et-al-2021-dalle:
     title: Zero-Shot Text-to-Image Generation
     authors: [Aditya Ramesh, Mikhail Pavlov, Gabriel Goh, Scott Gray, Chelsea Voss, Alec Radford, Mark Chen, Ilya Sutskever]

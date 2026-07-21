@@ -113,6 +113,7 @@ related:
 - [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]] — 무료 연구 미리보기·다중 턴 대화 UI·대화형 RLHF와 사용자 피드백 순환을 복원하고 175B·지속 기억·안전·산업 영향 과장을 교정한 소스 (근거 2개)
 - [[082_BLOOM과 공개 접근 다국어 LLM]] — 176B BLOOM·ROOTS·Jean Zay 학습과 weight·code·data·RAIL의 공개 범위를 복원하고 최초성·최첨단·편향 해소·민주화 과장을 교정한 소스 (근거 6개)
 - [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]] — 540.35B dense architecture·780B token·두 TPU v4 Pod의 Pathways 훈련을 복원하고 sparse attention·공개 weight·일반 추론·다국어·PaLM-Coder 과장을 평가 조건으로 교정한 소스 (근거 1개)
+- [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]] — 동결 시각·언어 backbone을 Resampler와 gated cross-attention으로 연결하고 멀티모달 퓨샷 평가·미세조정·실패·위험의 경계를 검증한 소스 (근거 1개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 
 ## 개체
@@ -161,7 +162,7 @@ related:
 - [[BERT]] — 마스크드 언어 모델링으로 깊은 양방향 Transformer encoder를 사전 학습하고 과제별로 전체 미세조정하는 모델 (근거 3개)
 - [[마스크드 언어 모델링]] — 입력 token 일부를 교란하고 좌우 문맥에서 원 token을 복원하는 사전 학습 목적 (근거 5개)
 - [[GPT-1과 GPT-2]] — causal Transformer의 지도 미세조정과 zero-shot text continuation을 잇는 초기 GPT 모델 계열 (근거 4개)
-- [[문맥 내 학습]] — 가중치를 갱신하지 않고 입력 문맥의 instruction·demonstration으로 새 query의 출력 분포를 조건화하는 적응 방식 (근거 5개)
+- [[문맥 내 학습]] — 가중치를 갱신하지 않고 입력 문맥의 instruction·demonstration으로 새 query의 출력 분포를 조건화하는 적응 방식 (근거 6개)
 - [[사고 연쇄 프롬프팅]] — 중간 풀이 token을 답 앞에 생성하도록 유도하되 few-shot·zero-shot 절차, 조건부 성능·비용과 출력 타당성·답 정확도·인과적 충실성을 구분하는 prompting 방법 (근거 6개)
 - [[GLUE와 SuperGLUE]] — 여러 영어 NLU 과제·metric·test server·leaderboard를 묶어 broad transfer를 비교하는 평가 suite (근거 3개)
 - [[HELM]] — 시나리오·적응·메트릭·실행을 분리해 언어 모델의 정확도·위험·비용을 같은 조건과 원시 출력으로 비교하는 다차원 평가 프레임워크 (근거 1개)
@@ -169,7 +170,8 @@ related:
 - [[XLM]] — shared multilingual encoder에서 CLM·MLM과 병렬 문장쌍 TLM을 구분하고 교차 언어 전이를 학습하는 방법군 (근거 1개)
 - [[T5]] — task를 text target으로 통합하고 sentinel span corruption 뒤 과제별 supervised fine-tuning으로 전이하는 encoder–decoder model family (근거 3개)
 - [[The Pile]] — 22개 component·epoch 가중치·BPB 평가를 deduplication·decontamination·underlying rights와 구분하는 825.18 GiB 영어 중심 말뭉치 (근거 2개)
-- [[CLIP]] — 이미지·텍스트 이중 인코더를 대칭 대조 손실로 정렬하고 class prompt를 제로샷 분류기 weight처럼 사용하는 시각-언어 모델 (근거 2개)
+- [[CLIP]] — 이미지·텍스트 이중 인코더를 대칭 대조 손실로 정렬하고 class prompt를 제로샷 분류기 weight처럼 사용하는 시각-언어 모델 (근거 3개)
+- [[Flamingo]] — 동결 시각·언어 backbone 사이의 64개 시각 token 병목과 gated cross-attention으로 멀티모달 문맥 내 생성을 수행하는 모델 계열 (근거 1개)
 - [[DALL·E (2021)]] — 1,024개 이산 이미지 토큰과 최대 256개 텍스트 토큰을 공동 자기회귀 모델링하고 별도 대조 모델로 후보를 재순위화한 2021년 생성 시스템 (근거 3개)
 - [[파운데이션 모델]] — 광범위한 데이터로 대규모 훈련해 여러 과제의 기반으로 적응되는 모델과 그 훈련·적응·배포 생태계를 구분하는 역할 중심 개념 (근거 7개)
 - [[OpenAI Codex (2021)]] — GPT 계열을 Python 코드 분포로 계속 학습하고 docstring에서 함수 후보를 생성해 unit test로 평가한 2021년 코드 모델군 (근거 3개)

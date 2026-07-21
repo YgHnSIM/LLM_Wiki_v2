@@ -15,7 +15,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-21'
-updated: '2026-07-21'
+updated: '2026-07-22'
 lifecycle: active
 verification: verified
 artifacts:
@@ -23,6 +23,8 @@ artifacts:
   - 'raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md'
   - 'raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md'
   - 'raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md'
+  - 'raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.ko.md'
+  - 'raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.commentary.ko.md'
 evidence:
   - source_id: radford-et-al-2021-clip
     locator: 'PMLR 139, pp. 8748–8763의 §§2.1–2.5·Figures 1–3, §§3–6·Figures 4–7과 supplement §§A–B·D–E·I, Tables 2·4·8–10·18–20의 WIT·dual encoder·대칭 대조 손실·zero-shot classifier·prompt ensemble·dataset·overlap·bias·학습 및 평가 조건'
@@ -30,10 +32,15 @@ evidence:
   - source_id: ramesh-et-al-2021-dalle
     locator: '§2.6과 Figures 3·6·9(c)의 별도 대조 모델을 이용한 512개 생성 후보 재순위화와 sample-pool 크기별 FID·IS 변화'
     relation: supplements
+  - source_id: alayrac-et-al-2022-flamingo
+    locator: 'NeurIPS 2022, §§1·2.1–2.5·5와 Figures 2–4의 대조 시각 encoder 재사용, 조건부 생성 구조와 분류 성능 trade-off; Supplementary §§B.1.3·B.2.1과 Tables 7·11'
+    relation: contextualizes
 related:
   - source.070
   - source.075
+  - source.084
   - concept.dall-e-2021
+  - concept.flamingo
   - concept.transformer
   - concept.합성곱-신경망
   - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
@@ -129,6 +136,12 @@ ViT-L/14@336px의 ImageNet zero-shot top-1 accuracy는 76.2%로, ImageNet의 128
 
 따라서 대조 임베딩은 생성기의 decoder나 학습 backbone이 아니다. [[DALL·E (2021)]]의 최종 표본 품질에는 생성 분포·표본 수·재순위 점수가 함께 작용하며, CLIP 계열 점수를 사용했다는 사실만으로 CLIP 자체에 이미지 생성 능력이 생기지는 않는다.
 
+### Flamingo에서는 대조 시각 encoder가 생성 model의 입력이 된다
+
+[[Flamingo]]는 CLIP weight를 그대로 사용하지 않았지만, ALIGN·LTIP 쌍에 대조 목적을 적용해 사전 학습한 NFNet-F6 시각 encoder를 동결해 사용했다. 이 전역·공간 특징을 Perceiver Resampler가 64개 시각 token으로 압축하고, 별도 gated cross-attention이 동결 언어 model의 생성 과정에 공급한다. 즉 대조 학습된 시각 표현이 끝점의 similarity classifier가 아니라 조건부 text 생성의 입력 자산으로 재사용된다.
+
+이 확장은 CLIP의 dual encoder가 자체적으로 VQA·captioning 능력을 가졌다는 뜻이 아니다. Flamingo는 약 10B의 새 gated block, 194M Resampler, interleaved·paired multimodal 자료와 자기회귀 목적을 추가했다. Flamingo 논문도 분류에서는 생성형 언어 목적이 대조 model보다 낮은 성능을 보였다고 기록하므로, 자유 형식 생성과 효율적인 closed-set 비교는 서로 다른 목적·interface의 trade-off로 읽어야 한다.
+
 ## 검증과 한계
 
 ### ‘제로샷’이 보장하는 것
@@ -166,8 +179,10 @@ Prompt wording과 후보 클래스 설계는 정확도와 편향을 함께 바�
 
 - [[070_CLIP과 대조적 언어-이미지 사전 학습]]
 - [[075_DALL·E와 이산 이미지 토큰 생성]]
+- [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]]
 - Alec Radford 외, [Learning Transferable Visual Models From Natural Language Supervision](https://proceedings.mlr.press/v139/radford21a.html), ICML 2021, PMLR 139:8748–8763, 특히 §§2.1–2.5, Figures 1–3, §§3–6, Figures 4–7과 supplementary §§A–B·D–E·I, Tables 2·4·8–10·18–20.
 - Aditya Ramesh 외, [Zero-Shot Text-to-Image Generation](https://proceedings.mlr.press/v139/ramesh21a.html), ICML 2021, §2.6과 Figures 3·6·9(c).
+- Jean-Baptiste Alayrac 외, [*Flamingo: a Visual Language Model for Few-Shot Learning*](https://proceedings.neurips.cc/paper_files/paper/2022/hash/960a172bc7fbf0177ccccbb411a7d800-Abstract-Conference.html), NeurIPS 2022, §§1·2.1–2.5·5와 Supplementary §§B.1.3·B.2.1.
 - 프로젝트 보존 자료: `raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md`, `raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md`.
 - 추가 보존 자료: `raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md`, `raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md`.
 
@@ -175,7 +190,9 @@ Prompt wording과 후보 클래스 설계는 정확도와 편향을 함께 바�
 
 - [[070_CLIP과 대조적 언어-이미지 사전 학습]]
 - [[075_DALL·E와 이산 이미지 토큰 생성]]
+- [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]]
 - [[DALL·E (2021)]]
+- [[Flamingo]]
 - [[Transformer]]
 - [[합성곱 신경망]]
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]]

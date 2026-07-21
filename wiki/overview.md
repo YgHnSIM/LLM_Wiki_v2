@@ -26,13 +26,13 @@ related:
 
 공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism (2015)**이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-21 현재 원문을 제공하지 않는다.
 
-따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 83개는 공식 001–046·048–083·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 084 `Flamingo: Few-Shot Vision-Language Learning with Gated Cross-Attention`이다.
+따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 84개는 공식 001–046·048–084·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 085 `DALL·E 2: Diffusion-Based Text-to-Image Generation with CLIP Guidance`이다.
 
 숫자 badge는 정규 source의 공식 장 번호에만 쓴다. 비번호 reference가 추가되면 번호 source 뒤에서 `참고`로 표시하며, 목록 위치를 `001` 같은 장 번호로 바꾸지 않는다. 같은 장의 검증 노트·번역·해설은 서로 다른 장이 아니라 하나의 source 묶음에 속한다.
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 83개, reference 0개, concept 157개, entity 29개, analysis 22개를 합친 비메타 문서 291개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 84개, reference 0개, concept 158개, entity 29개, analysis 22개를 합친 비메타 문서 293개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -46,6 +46,7 @@ related:
 | 자연어 지시는 언제 가중치에 들어가나 | [[063_T5와 Text-to-Text 통합 프레임워크]] | [[067_GPT-3와 문맥 내 학습]] → [[072_지시 미세조정과 FLAN의 제로샷 일반화]] → [[077_InstructGPT와 인간 선호 정렬]] → [[인간 피드백 강화학습]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
 | 대화 인터페이스는 모델 능력과 신뢰를 어떻게 바꾸나 | [[007_ELIZA]] | [[077_InstructGPT와 인간 선호 정렬]] → [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]] → [[ChatGPT 연구 미리보기 (2022)]] | [[ELIZA에서 LLM으로]] |
 | 프롬프트는 추론 성능을 어떻게 바꾸나 | [[067_GPT-3와 문맥 내 학습]] | [[080_사고 연쇄 프롬프팅과 추론 행동 유도]] → [[사고 연쇄 프롬프팅]] → [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]] → [[079_HELM과 다차원 언어 모델 평가]] | [[손실 곡선과 능력 곡선 사이]] |
+| 이미지·동영상 예시는 생성 모델에 어떻게 들어가나 | [[070_CLIP과 대조적 언어-이미지 사전 학습]] | [[CLIP]] → [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]] → [[Flamingo]] → [[문맥 내 학습]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
 | 모델 공개는 곧 재현 가능성을 뜻하나 | [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] | [[076_파운데이션 모델 보고서와 AI 생태계]] → [[082_BLOOM과 공개 접근 다국어 LLM]] → [[BLOOM]] | [[공개 가중치와 재현 가능성은 같은 축인가]] |
 | 희소 모델의 ‘크기’는 무엇을 뜻하나 | [[069_전문가 혼합과 희소 활성 스케일링]] | [[GLaM에서 Mixtral까지의 희소 MoE 확장]] → [[Mixtral 8x7B]] | [[총 매개변수와 활성 계산량은 같은 축인가]] |
 | 학습 데이터의 양과 구성을 어떻게 읽나 | [[063_T5와 Text-to-Text 통합 프레임워크]] | [[066_신경 언어 모델의 스케일링 법칙]] → [[067_GPT-3와 문맥 내 학습]] → [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] → [[The Pile]] → [[078_Chinchilla와 계산 최적 언어 모델 학습]] | [[데이터 품질과 분포 다양성은 같은 축인가]] |
@@ -58,7 +59,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 83개 소스의 범위
+## 84개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -142,6 +143,7 @@ related:
 - [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]]는 무료 연구 미리보기와 다중 턴 UI, 대화 시연 SFT→응답 순위·보상 모델→PPO, 사용자 피드백 순환을 복원하고 초기 ChatGPT의 175B·지속 기억·완전한 안전·산업 영향 인과 과장을 교정한다.
 - [[082_BLOOM과 공개 접근 다국어 LLM]]은 176B decoder-only model, ROOTS 498개 구성 dataset·46개 자연어와 13개 programming language, Jean Zay 학습을 복원하고 weight·code·data·RAIL·compute를 분리해 최초성·최첨단·편향 해소·민주화 과장을 교정한다.
 - [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]]은 540.35B dense decoder-only Transformer, 780B-token mixture와 두 TPU v4 Pod·6,144 chip 훈련을 복원하고, sparse attention·공개 weight·균등한 100개 언어 지원·base PaLM과 PaLM-Coder 혼동·일반 추론 과장을 평가 조건으로 교정한다.
+- [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]]은 동결 NFNet-F6·언어 모델 사이에 64개 시각 token의 Perceiver Resampler와 0-init gated cross-attention을 연결한 구조를 복원하고, 퓨샷 문맥 조건화와 미세조정·gate 학습을 구분하며 16개 과제·자료 mixture·실패 양상·연구용 한계를 검증한다.
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]]은 GLaM·Mixtral의 total·active parameter와 token별 routing을 복원하고, 2024년 최초성·Meta 귀속·dense 계산의 제곱 증가·깨끗한 domain expert·민주화 과장을 교정한다.
 
 ## 현재 핵심 주제
@@ -206,6 +208,7 @@ related:
 - [[Mixtral 8x7B]]에서 구분하는 46.7B total·12.9B active parameters, 8개 중 top-2, Apache 2.0 공개 가중치와 topic expert가 아닌 routing locality
 - [[총 매개변수와 활성 계산량은 같은 축인가]]에서 비교하는 dense non-embedding $N$, sparse total·active parameters, FLOPs·memory·communication·wall-clock·data·quality와 논문 안/논문 사이 비교 경계
 - [[CLIP]]에서 구분하는 이미지·텍스트 이중 인코더, 정규화된 shared embedding과 대칭 대조 손실, class prompt로 합성한 zero-shot classifier 및 cross-attention·생성 능력의 부재
+- [[Flamingo]]에서 구분하는 동결 시각·언어 backbone, 64개 시각 token 병목, 0-init gated cross-attention, 고정 weight의 멀티모달 문맥 내 학습과 과제별 fine-tuning의 차이
 - [[DALL·E (2021)]]에서 구분하는 dVAE의 8,192개 범주 시각 어휘·1,024개 이미지 토큰, 최대 256개 text token과의 공동 자기회귀 분포, 512개 후보 생성과 별도 대조 재순위화
 - [[파운데이션 모델]]에서 구분하는 광범위한 사전 학습, 여러 적응 경로, 완성된 배포 시스템과 공통 기반의 개선·결함이 전파되는 동질화
 - [[OpenAI Codex (2021)]]에서 구분하는 연구용 Python 코드 모델군, Codex-S의 함수 분포 지도 미세조정, docstring prompt와 표본 생성·실행 선택 및 현행 동명 제품
@@ -396,7 +399,7 @@ related:
 
 ## 현재 상태
 
-소스 77개, 참고 자료 1개, 개념 152개, 개체 29개, 분석 21개와 메타 문서 3개, 총 283개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 253개는 `verified`, 해석적 문서 27개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 306개 외부 근거와 156개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 84개, 참고 자료 0개, 개념 158개, 개체 29개, 분석 22개와 메타 문서 3개, 총 296개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 265개는 `verified`, 해석적 문서 28개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 321개 외부 근거와 168개 불변 raw artifact가 레지스트리에 등록돼 있다.
 
 `077`의 $C^{1/3}$ scaling, Kaplan의 model–data 절충 누락, 보편적인 20 tokens/parameter, 175B model의 단일 정답 3.5T tokens, Gopher보다 낮은 훈련비, 과소 훈련 parameter의 기계적 비활성, 모든 자료·architecture로의 직접 일반화 주장을 공개 문서에서 교정했다. Hoffmann 등의 세 fixed-compute 추정법은 $N$과 $D$에 0.50/0.50·0.49/0.51·0.46/0.54 지수를 주며, Gopher와 Chinchilla는 약 $5.76\times10^{23}$ FLOPs의 같은 사전 학습 compute를 사용했다. 20:1은 특정 dense Transformer·자료 혼합·schedule에 조건화된 근사이고, 175B 외삽은 접근별 약 3.7T·4.3T·12.0T로 벌어진다.
 

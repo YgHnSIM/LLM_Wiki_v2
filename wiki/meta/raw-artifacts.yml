@@ -1494,3 +1494,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/palm-pathways-language-model-large-scale-training-reasoning
     sha256: 156d5355d2e2f6883db3fe12b275019a3cc3eb250ae4d6eb5147b216f545a75e
+  - path: "raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.ko.md"
+    role: translation
+    order_prefix: "084"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/flamingo-few-shot-vision-language-learning-gated-cross-attention
+    sha256: ff36a5d2a7a6f065ee4df84d73c7b7da02143bb65fc7d7af9cbb0b330f504e5f
+  - path: "raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.commentary.ko.md"
+    role: commentary
+    order_prefix: "084"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/flamingo-few-shot-vision-language-learning-gated-cross-attention
+    sha256: 0d823245efa401aa6e9533f9fb85b059a6e1c43145a47e203f338ab349acd5e2

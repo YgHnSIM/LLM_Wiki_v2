@@ -3422,6 +3422,25 @@ raw 등록 해시:
 - PaLM의 세 규모 비교는 같은 architecture family·vocabulary·shuffled mixture를 사용하지만, 관측 규모가 세 개뿐이고 62B의 training token이 15B 더 많다. 따라서 변화가 시작된 규모와 곡선의 연속성은 식별할 수 없다.
 - 분석은 확인된 수치와 이 위키의 합성 해석을 분리해 `verification: partial`을 유지한다. 전체 검증은 96개 회귀 테스트와 294개 Markdown strict lint를 통과해 320개 evidence와 166개 raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 566개 HTML을 만들고 6,260개 wiki link를 모두 해소했다.
 
+## [2026-07-22] ingest | Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습
+
+변경 내용:
+
+- 공식 084 `Flamingo: Few-Shot Vision-Language Learning with Gated Cross-Attention`을 새로 번역·윤문하고 12절 학습 해설을 작성했다. 번역은 표준 `원본 출처:`를 한 번 기록하고 읽기 수준 UI 문구를 포함하지 않는다.
+- 검증된 번역·해설을 raw 두 파일로 등록했다. 번역 SHA-256은 `ff36a5d2a7a6f065ee4df84d73c7b7da02143bb65fc7d7af9cbb0b330f504e5f`, 해설은 `0d823245efa401aa6e9533f9fb85b059a6e1c43145a47e203f338ab349acd5e2`다.
+- [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]]과 [[Flamingo]]를 만들고, 동결 NFNet-F6·언어 모델, 64개 시각 token의 Perceiver Resampler, 0-init gated cross-attention, 네 자료 mixture와 멀티모달 문맥 내 학습을 복원했다.
+- [[CLIP]]과 [[문맥 내 학습]]에는 shared embedding 기반 후보 비교와 조건부 생성의 차이, 고정 weight에서 시각 demonstration이 문맥을 조건화하는 방식을 보강했다.
+- NeurIPS 2022 최종 논문과 supplement를 evidence로 등록하고 [[index]]와 [[overview]]를 source 84개·concept 158개·비메타 293개 기준으로 갱신했다. 공식 source 범위는 001–046·048–084·103이며 다음 순차 입력은 공식 085 DALL·E 2다.
+- 새 번역·해설과 raw 쌍을 포함하도록 `reading-level:check`의 감사 inventory를 번역·해설 164개, raw Markdown 169개로 갱신했다. 기존 원문·raw 내용은 다시 쓰지 않았다.
+
+검증 정정과 남은 한계:
+
+- Gate는 추론 때 예시마다 새로 학습되는 router가 아니라 사전 학습에서 최적화되는 층별 scalar다. 시각 token도 일반 언어 token으로 삽입되는 것이 아니라 별도 key/value memory로 남는다.
+- Published few-shot 비교가 있는 아홉 과제의 4-shot 결과와 전체 16개 benchmark를 합치지 않았고, 32-shot이 fine-tuned 최고 결과를 넘은 범위는 본문·Figure 2·model card가 반복하는 여섯 과제로 판정했다. RareAct에는 zero-shot 행만 있으며, text-only 예시 두 개는 open-ended zero-shot에만 적용된다.
+- ALIGN·LTIP의 일부 사전 지정 benchmark 중복 제거와 M3W·VTP 미제거를 구분했다. 가장 큰 model의 단일 학습 run, 2,048-token 문맥 한계, hallucination·prompt 민감성·web 자료 bias와 연구용 model card의 사용 제한을 남겼다.
+- 번역·해설 쌍 검사는 `valid_pairs: 1`, 오류 0을 확인했다. `translation:normalize:check -- --expected-count 82`는 표준 원본 출처 82개, 읽기 수준 블록 0개, 변경 필요 0개를 확인했고 레지스트리에만 있는 공식 007을 별도로 보고했다.
+- `source:ready -- 084`은 96개 회귀 테스트와 296개 Markdown strict lint를 통과해 321개 evidence와 168개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 570개 HTML을 만들고 6,320개 wiki link를 모두 해소했다.
+
 ## 관련 항목
 
 - [[index]]
