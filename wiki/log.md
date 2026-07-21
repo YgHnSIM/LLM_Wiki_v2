@@ -2688,6 +2688,22 @@ raw 등록 해시:
 - 사이트는 368개 페이지를 빌드해 4,762개 위키 링크와 27,347개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다.
 - `raw/` 본문과 SHA-256에는 변경이 없다.
 
+## [2026-07-21] ingest | XLNet·RoBERTa·ALBERT의 BERT 개선 경로
+
+변경 내용:
+
+- `060_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.md`를 원문부터 새로 번역·윤문하고 학습 해설을 작성했다. 검증된 쌍을 새 immutable raw artifact로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다.
+- [[060_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]]와 [[XLNet·RoBERTa·ALBERT]]를 만들고 BERT 이후 개선을 permutation objective, training recipe, parameterization의 세 축으로 분리했다. 기존 [[마스크드 언어 모델링]]에는 XLNet의 목표와 RoBERTa dynamic masking의 통제 실험 범위를 보강했다.
+- BERT의 15%·80/10/10 masking, XLNet의 factorization order·two-stream fine-tuning, RoBERTa의 500K step·큰 batch·dynamic masking 효과, ALBERT의 layer sharing·base/large 비교·parameter와 FLOPs 차이를 네 원 논문의 locator로 검증했다.
+- raw의 잘못된 XLNet 순열 예시, RoBERTa 완전 수렴·단일 인과, ALBERT mobile 효율·성능 확대, contextual representation을 static embedding으로 보는 설명, 세 모델을 동일한 encoder-only 계열로 묶는 서술과 입증되지 않은 production·후대 모델 직접 계보를 공개 문서에서 교정했다.
+- [[overview]]에서 누락돼 있던 source 056–059의 범위 설명을 복원하고 source 060·concept 136개·raw 120개 상태를 반영했다. 이 소스 자체가 세 개선축을 이미 비교하므로 반복적인 analysis는 만들지 않았고, scaling 근거가 들어온 뒤 parameter 수와 실제 계산 효율이라는 독립 질문이 성립할 때 재검토하기로 했다.
+
+검증 결과:
+
+- 번역 스킬 검사는 060 번역·해설 쌍을 `valid_pairs: 1`로 확인했고, source workflow는 두 raw artifact의 원문 URL·역할·해시 일치를 확인했다.
+- 49개 회귀 테스트와 245개 위키 문서 strict lint를 통과했으며 269개 evidence 레코드와 120개 immutable raw artifact를 확인했다.
+- 사이트는 372개 페이지를 빌드해 4,805개 위키 링크와 27,659개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다.
+
 ## 관련 항목
 
 - [[index]]

@@ -90,6 +90,7 @@ related:
 - [[057_BERT의 마스크드 양방향 사전 학습]] — MLM·NSP·encoder 전체 미세조정을 복원하고 양방향 이해와 생성의 범위를 구분한 소스 (근거 2개)
 - [[058_GPT-1과 GPT-2의 전이 방식 변화]] — GPT-1 지도 미세조정과 GPT-2 cue 기반 zero-shot 수행을 구분한 자기회귀 전이 학습 소스 (근거 3개)
 - [[059_GLUE와 SuperGLUE의 집계 평가]] — GLUE 아홉·SuperGLUE 여덟 과제의 metric·평균·human baseline·포화와 표준화의 경계를 검증한 소스 (근거 3개)
+- [[060_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]] — BERT 이후 개선을 permutation objective·training recipe·parameterization의 세 축으로 분리하고 원문의 효율·성능 과장을 교정한 소스 (근거 4개)
 
 ## 개체
 
@@ -130,9 +131,10 @@ related:
 - [[인간 피드백 강화학습]] — 인간의 행동·응답 비교로 보상 신호를 학습하고 정책을 선호에 맞춰 최적화하는 방법 계열 (근거 4개)
 - [[언어 모델 전이 학습]] — 사전 학습 언어 모델의 내부 표현이나 매개변수를 후속 과제에 재사용·적응시키는 방법 계열 (근거 5개)
 - [[BERT]] — 마스크드 언어 모델링으로 깊은 양방향 Transformer encoder를 사전 학습하고 과제별로 전체 미세조정하는 모델 (근거 2개)
-- [[마스크드 언어 모델링]] — 입력 token 일부를 교란하고 좌우 문맥에서 원 token을 복원하는 사전 학습 목적 (근거 2개)
+- [[마스크드 언어 모델링]] — 입력 token 일부를 교란하고 좌우 문맥에서 원 token을 복원하는 사전 학습 목적 (근거 3개)
 - [[GPT-1과 GPT-2]] — causal Transformer의 지도 미세조정과 zero-shot text continuation을 잇는 초기 GPT 모델 계열 (근거 3개)
 - [[GLUE와 SuperGLUE]] — 여러 영어 NLU 과제·metric·test server·leaderboard를 묶어 broad transfer를 비교하는 평가 suite (근거 3개)
+- [[XLNet·RoBERTa·ALBERT]] — BERT 이후의 objective·training recipe·parameterization 개선을 비용 조건과 함께 비교하는 세 모델 묶음 (근거 3개)
 - [[N-gram 모델]] — 앞선 n-1개 단위의 빈도와 조건부 확률로 다음 항목을 예측하고 평활화로 미관측 조합을 다루는 언어 모델 (근거 4개)
 - [[마르코프 가정]] — 다음 항목의 확률을 제한된 최근 문맥으로 근사하는 가정 (근거 3개)
 - [[조건부 확률]] — 문맥이 주어졌을 때 다음 항목이 나타날 확률을 표현하는 수학적 개념 (근거 1개)

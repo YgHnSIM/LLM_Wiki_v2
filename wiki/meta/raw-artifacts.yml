@@ -1062,3 +1062,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/glue-superglue-standardized-evaluation-language-understanding
     sha256: 03baeb442bce5d810d2781402676c3a4d6111df036ab1258dbda3d21b622a9f4
+  - path: "raw/060_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.ko.md"
+    role: translation
+    order_prefix: "060"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/xlnet-roberta-albert-bert-refinements
+    sha256: 79b9c701c0b530b127165b20feb082cb16776829125a446fd8530be896ebeaba
+  - path: "raw/060_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.commentary.ko.md"
+    role: commentary
+    order_prefix: "060"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/xlnet-roberta-albert-bert-refinements
+    sha256: d1d199a565902634b705dfe985b7143e44428f31c066e341fe92b8d2f5d26982

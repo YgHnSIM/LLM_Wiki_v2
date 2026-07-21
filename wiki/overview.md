@@ -24,14 +24,14 @@ related:
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 59개, concept 135개, entity 29개, analysis 17개를 합친 비메타 문서 240개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 재구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐으므로 신규 source 060부터도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 60개, concept 136개, entity 29개, analysis 17개를 합친 비메타 문서 242개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source 060에도 같은 구조를 처음부터 적용했다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
 | 언어 모델은 어떻게 발전했나 | [[001_섀넌의 N-gram 모델]] | [[N-gram 모델]] → [[019_Katz 백오프와 희소 데이터 확률 추정]] → [[035_신경 확률 언어 모형과 분산 단어 표현]] → [[자기회귀 생성]] | [[N-gram에서 LLM으로]] |
 | 기계의 언어 행동을 어떻게 평가하나 | [[002_튜링 테스트]] | [[033_BLEU와 기계 번역 자동 평가]] → [[050_SQuAD와 추출형 독해 평가]] → [[059_GLUE와 SuperGLUE의 집계 평가]] | [[튜링 테스트와 LLM 평가]] |
 | 규칙에서 학습으로 무엇이 바뀌었나 | [[003_Georgetown-IBM 기계 번역 시연]] | [[012_상징 규칙에서 통계 학습으로]] → [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[규칙 기반 AI에서 데이터 기반 학습으로]] |
-| 현대 Transformer 계열은 어디서 왔나 | [[018_역전파와 다층 신경망 학습]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]] | [[057_BERT의 마스크드 양방향 사전 학습]]·[[058_GPT-1과 GPT-2의 전이 방식 변화]] |
+| 현대 Transformer 계열은 어디서 왔나 | [[018_역전파와 다층 신경망 학습]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]] → [[057_BERT의 마스크드 양방향 사전 학습]] | [[060_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]] |
 | 검색과 외부 지식은 어떻게 연결되나 | [[010_벡터 공간 모델과 TF-IDF]] | [[024_BM25와 확률적 정보 검색]] → [[039_Freebase와 협업형 지식 그래프]] → [[051_신경 정보 검색과 의미 대응]] | [[검색은 근거를 찾고 독해는 답을 찾는다]] |
 
 ## 난이도에 따른 읽기 방법
@@ -42,7 +42,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 59개 소스의 범위
+## 60개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -99,6 +99,11 @@ related:
 - [[053_WaveNet과 표본 단위 신경 오디오 생성]]은 μ-law 양자화 표본의 자기회귀 분포와 팽창 인과 합성곱을 복원하고, 훈련 병렬성·생성 순차성·MOS 격차·2017년 후속 제품 배포를 구분한다.
 - [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]]은 6층 encoder–decoder·scaled multi-head attention·위치 인코딩·Post-LN을 복원하고, 훈련 병렬성·길이 제곱 비용·자기회귀 생성·후대 LLM 계보를 분리한다.
 - [[055_RLHF 토대와 인간 선호 기반 보상 학습]]은 2017년 행동 구간 비교·보상 ensemble·반복 정책 학습을 복원하고, 원 제어·게임 실험과 2019–2022년 언어 모델 RLHF를 구분한다.
+- [[056_ELMo와 ULMFiT의 두 전이 학습 경로]]는 ELMo의 고정 문맥 특징과 ULMFiT의 단계적 전체 미세조정을 구분하고, 두 접근의 양방향성·목표 영역 적응·적은 표지 자료 결과와 현대 Transformer 계보의 범위를 검증한다.
+- [[057_BERT의 마스크드 양방향 사전 학습]]은 [[BERT]]의 encoder·[[마스크드 언어 모델링]]·NSP·전체 미세조정을 복원하고, 15%·80/10/10 masking과 benchmark·생성 범위를 검증한다.
+- [[058_GPT-1과 GPT-2의 전이 방식 변화]]는 GPT-1의 지도 미세조정과 GPT-2의 cue 기반 zero-shot text continuation을 구분하고, WebText·과제별 출력·release 연표와 현대 prompting 계보의 범위를 검증한다.
+- [[059_GLUE와 SuperGLUE의 집계 평가]]는 [[GLUE와 SuperGLUE]]의 과제·metric·단순 평균·human estimate·포화를 복원하고, 표준화가 통제하지 않는 training 조건과 benchmark 과적합을 검증한다.
+- [[060_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]]는 [[XLNet·RoBERTa·ALBERT]]를 objective·training recipe·parameterization의 세 축으로 나누고, factorization order·총 sequence·parameter와 FLOPs의 차이 및 raw의 성능 과장을 교정한다.
 
 ## 현재 핵심 주제
 
@@ -172,6 +177,7 @@ related:
 - [[잔차 경로와 정규화는 어디에 놓이는가]]에서 비교하는 ResNet post-/pre-activation과 Transformer Post-/Pre-LN, additive identity path 위에 activation·normalization Jacobian을 둘 때의 최적화 차이
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]]에서 비교하는 RNN hidden-state 의존, WaveNet causal convolution, Transformer masked attention의 teacher-forced 훈련과 실제 sampling 차이
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]]에서 비교하는 ELMo 고정 특징, ULMFiT 영역·분류 적응, BERT·GPT-1 전체 미세조정과 GPT-2 입력 cue의 과제 명세 위치
+- [[XLNet·RoBERTa·ALBERT]]에서 분리하는 factorization objective, data·batch·masking training recipe, embedding factorization·layer sharing과 parameter 수·FLOPs·latency의 차이
 - [[조지 밀러]]와 공동 연구진의 1985–1998년 WordNet 구축·공개 단계, 심리언어학적 설계 동기와 인간 기억 모형이라는 실증 주장의 구분
 - [[Lesk 알고리즘]], [[단어 의미 중의성 해소]], WordNet 의미 목록, 사전 글로스의 정확 중첩과 후대 문맥–글로스 비교 방법의 구분
 - [[증강 전이망]], [[파싱]], 재귀 호출, 레지스터·조건·구조 구축 동작을 통한 절차적 문법 공학
@@ -291,7 +297,9 @@ related:
 
 ## 현재 상태
 
-소스 59개, 개념 135개, 개체 29개, 분석 17개와 메타 문서 3개, 총 243개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 217개는 `verified`, 해석적 문서 23개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 267개 외부 근거와 118개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 60개, 개념 136개, 개체 29개, 분석 17개와 메타 문서 3개, 총 245개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 219개는 `verified`, 해석적 문서 23개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 269개 외부 근거와 120개 불변 raw artifact가 레지스트리에 등록돼 있다.
+
+`060`의 BERT가 사전 학습에서 실제 단어를 전혀 보지 않는다는 설명, XLNet이 입력 token 자체를 섞고 첫 target에서 나머지 내용을 모두 본다는 순열 예시, fine-tuning에도 query stream이 남는다는 해석, RoBERTa가 BERT보다 더 많은 step으로 완전 수렴했고 dynamic masking이 큰 향상의 단일 원인이라는 주장, ALBERT의 공유 축·base/large 성능 비교·mobile 효율 확대, parameter 수와 FLOPs·latency의 동일시, 세 모델을 정적 embedding·동일한 encoder-only 계열로 묶는 설명과 production·후대 모델의 직접 계보도 공개 문서에서 교정했다.
 
 `059`의 GLUE 연구진을 Google Research 중심으로 보는 소속 오류, QNLI를 자유 질의응답으로 보는 설명, 하나의 shared multi-task model을 강제했다는 주장, GLUE score에 task 난이도·중요도 weight가 있다는 서술, 중앙 server가 추가 자료·compute·ensemble까지 같은 조건으로 만든다는 해석, GLUE 원 발표와 2019년 별도 인간 기준선의 혼합, aggregate 인간 추정치 초과를 전 task·일반 이해의 인간 초월로 보는 주장, SuperGLUE가 open-ended 생성 과제를 포함했다는 설명, GLUE가 더 이른 SQuAD·ImageNet·COCO 평가 설계에 영향을 주었다는 역방향 계보와 private test가 contamination·leaderboard overfitting을 해결한다는 주장도 공개 문서에서 교정했다.
 
