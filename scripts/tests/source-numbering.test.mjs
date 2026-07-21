@@ -13,6 +13,7 @@ test('local inventory prefixes map to the official book numbering around the mis
   assert.equal(canonicalSourcePrefix('047'), '048');
   assert.equal(canonicalSourcePrefix('077'), '078');
   assert.equal(canonicalSourcePrefix('078'), '079');
+  assert.equal(canonicalSourcePrefix('102'), '103');
   assert.equal(canonicalSourcePrefix('109'), '110');
 });
 
@@ -22,6 +23,7 @@ test('official numbering maps back to local inventory while chapter 047 remains 
   assert.equal(localInventoryPrefixForCanonical('047'), null);
   assert.equal(localInventoryPrefixForCanonical('048'), '047');
   assert.equal(localInventoryPrefixForCanonical('078'), '077');
+  assert.equal(localInventoryPrefixForCanonical('103'), '102');
   assert.equal(localInventoryPrefixForCanonical('110'), '109');
   assert.throws(() => canonicalSourcePrefix('110'), /between 001 and 109/);
   assert.throws(() => localInventoryPrefixForCanonical('111'), /between 001 and 110/);
@@ -48,6 +50,15 @@ test('public source pages must use the canonical ID and filename derived from ra
     id: 'source.078',
     filename: '078_Chinchilla와 계산 최적 언어 모델 학습',
     artifacts,
+  }), []);
+
+  assert.deepEqual(sourcePageNumberingErrors({
+    id: 'source.103',
+    filename: '103_GLaM에서 Mixtral까지의 희소 MoE 확장',
+    artifacts: [
+      'raw/102_Mixture of Experts at Scale.ko.md',
+      'raw/102_Mixture of Experts at Scale.commentary.ko.md',
+    ],
   }), []);
 
   const errors = sourcePageNumberingErrors({

@@ -2954,24 +2954,6 @@ raw 등록 해시:
 - 사이트는 419개 페이지를 빌드해 5,509개 위키 링크와 31,506개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 269개 항목을 포함했다.
 - 공개 source·concept와 기존 문서 보강은 Wei et al. FLAN 본문·부록, Google Research 공개 기록, Mishra et al. Natural Instructions, Wang et al. Self-Instruct와 Ouyang et al. InstructGPT의 직접 기술·평가 범위 안에서 검증했다. 후대 대화형 모델의 제품 동작, 안전성·선호 정렬과 보편적인 규모 임계값은 별도 근거가 필요한 범위로 남겼다.
 
-## [2026-07-21] ingest | GLaM에서 Mixtral까지의 희소 MoE 확장
-
-변경 내용:
-
-- History of Language AI 분류 페이지에서 누락된 072 원문 `Mixture of Experts at Scale: Efficient Scaling Through Sparse Activation and Dynamic Routing`을 찾아 본문 37개 문단·H2 6개·링크 43개를 보존한 Markdown 원문으로 보충했다. 이를 처음부터 새로 번역·윤문하고 12절 학습 해설을 작성해 검사를 통과한 쌍을 immutable raw artifact로 등록했다.
-- [[GLaM에서 Mixtral까지의 희소 MoE 확장]]과 [[Mixtral 8x7B]]를 만들고, dense Transformer와 sparse MoE의 total parameters·active parameters·FLOPs·memory·routing·communication·wall-clock을 서로 다른 장부로 설명했다.
-- [[전문가 혼합]]에는 GLaM의 64개 expert·top-2와 Mixtral의 8개 FFN expert·top-2를 추가하고, [[069_전문가 혼합과 희소 활성 스케일링]]에서 후속 확장으로 연결했다. [[총 매개변수와 활성 계산량은 같은 축인가]]에는 decoder-only GLaM·Mixtral 사례를 추가해 dense와 sparse 규모 비교의 조건을 구체화했다.
-- Du et al. GLaM 논문, Jiang et al. Mixtral 논문과 Mistral AI 공식 발표를 evidence 레지스트리에 등록했다. GLaM 1.2T total·96.6B active와 Mixtral 46.7B total·12.9B active 수치를 원문 표·본문 locator에 맞춰 복원했다.
-- raw의 2024년 단일 돌파·Meta 귀속·parameter count에 대한 제곱 계산 증가·난도별 가변 expert 수·주제별 expert 전문화·고정 6배 속도·모든 평가의 일률적 우위를 공개 문서에서 교정했다. 특히 Mixtral의 expert 배정은 뚜렷한 주제 분업보다 통사·token·시간적 locality가 관찰됐고, 6배 속도는 공식 구현·비교 조건이 붙은 발표 수치로 한정했다.
-- 새 분석 문서는 만들지 않았다. total capacity와 active compute의 차이는 기존 [[총 매개변수와 활성 계산량은 같은 축인가]]의 핵심 질문을 직접 보강하므로, 새 페이지보다 기존 분석에 GLaM·Mixtral의 수치와 한계를 합치는 편이 중복 없이 재사용 가치가 높았다.
-
-검증 결과:
-
-- 번역 스킬 검사는 072 번역·해설 쌍을 `done: true`로 확인했고, source workflow는 두 raw artifact의 원문 URL·역할·SHA-256 일치를 확인했다.
-- 49개 회귀 테스트와 272개 위키 문서 strict lint를 통과했으며 296개 evidence 레코드와 144개 immutable raw artifact를 확인했다.
-- 사이트는 423개 페이지를 빌드해 5,566개 위키 링크와 31,808개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 271개 항목을 포함했다.
-- 공개 source·concept와 기존 문서 보강은 Du et al. 2022, Jiang et al. 2024와 Mistral AI 2023의 직접 구조·수치·평가 범위 안에서 검증했다. 모델 간 품질·효율 차이를 sparse routing 하나의 효과로 돌리는 인과와 모든 배치·하드웨어에서의 고정 속도 배수는 입증되지 않은 범위로 남겼다.
-
 ## [2026-07-21] ingest | The Pile과 대규모 언어 모델 학습 말뭉치
 
 변경 내용:
@@ -3118,7 +3100,7 @@ raw 등록 해시:
 
 변경 내용:
 
-- 공식 *History of Language AI* 연재 목록과 저장소의 과거 결손 기록을 대조해 072의 실제 대상이 `Multi-Vector Retrievers: Fine-Grained Token-Level Matching for Neural Information Retrieval`임을 확인했다. 번호가 잘못 붙었던 MoE 회고 raw 두 파일은 수정·삭제하지 않고 그대로 보존했으며, 공개 문서만 [[GLaM에서 Mixtral까지의 희소 MoE 확장]] 참고 자료로 재분류했다.
+- 공식 *History of Language AI* 연재 목록과 저장소의 과거 결손 기록을 대조해 072의 실제 대상이 `Multi-Vector Retrievers: Fine-Grained Token-Level Matching for Neural Information Retrieval`임을 확인했다. 이후 공식 103장을 처리하면서 번호가 잘못 붙었던 중복 MoE raw와 레지스트리 항목을 제거하고, [[GLaM에서 Mixtral까지의 희소 MoE 확장]]은 로컬 102에 근거한 `source.103`으로 전환했다.
 - 실제 072 원문을 처음부터 새로 번역·윤문하고 학습 해설을 작성했다. 원문의 95줄·47개 비공백 block·H1/H2 1/6과 Markdown link target 40개의 순서·빈 줄 위치를 보존한 쌍을 immutable raw artifact로 등록했다. 번역 SHA-256은 `23f6e6a8bf8428536381ac65b2cedbd352819c5f45013b3cafd0a4dbab510185`, 해설은 `f37908699134df9bcd21aad4234e727946f02bf55c154086a26128966b15c376`이다.
 - [[073_ColBERT와 다중 벡터 검색]]과 [[다중 벡터 검색]]을 만들고, 독립 BERT 부호화·문맥화된 벡터 집합·MaxSim 후기 상호작용·FAISS IVFPQ 후보 생성·후보별 정확 MaxSim 재순위화를 복원했다. [[신경 정보 검색]], [[교차 인코더 재순위화]], [[065_BERT 기반 passage 재순위화]], [[068_DPR과 검색 증강 생성]]에는 상호작용 시점과 비용 경계를 연결했다.
 - SIGIR 2020 ColBERT, TACL 2021 ColBERT-QA, NeurIPS 2021 Baleen, NAACL 2022 ColBERTv2를 새 evidence로 등록했다. ColBERT의 2020년 발표와 Stanford 저자 소속, $O(N_qN_dm)$ MaxSim, MS MARCO 재순위화·880만 passage 검색, 색인 크기·압축 결과를 locator와 함께 검증했다.
@@ -3195,7 +3177,7 @@ raw 등록 해시:
 - 기존 공개 source 31개의 파일명과 ID를 047–077에서 공식 048–078로 옮기고, 위키 전체의 `source.NNN`, 번호형 링크, 로그의 공개 파일 경로를 함께 교정했다. source 수는 77개로 변하지 않으며 현재 공식 001–046과 048–078을 다룬다.
 - `source:status`, `source:copy`, `source:ready`는 로컬 접두사를 입력받되 매핑된 공식 public source를 찾도록 분리했다. source 페이지가 연결한 raw 접두사와 공식 ID·파일명 접두사가 어긋나면 lint가 실패하는 회귀 방지 규칙과 001–110 양방향 매핑 테스트를 추가했다.
 - 교정 전 배포된 047–077 source 주소와 각각의 번역·해설 reader 주소를 새 048–078 주소로 보내는 정적 리다이렉트 93개를 만들었다. 빌드 장부와 사이트 검사가 중복·canonical 충돌·redirect chain·누락된 대상을 거부한다.
-- `raw/` 156개 artifact와 `raw-artifacts.yml`의 경로·`order_prefix`·SHA-256은 수정하지 않았다. 과거 072 MoE raw 쌍은 비번호 reference 자료로 보존하고, 정규 로컬 072 ColBERT는 공식 073, 로컬 102 MoE는 향후 공식 103으로 처리하도록 예외를 문서화했다.
+- 이 번호 교정 시점에는 `raw/` 156개 artifact와 `raw-artifacts.yml`의 경로·`order_prefix`·SHA-256을 유지했다. 이후 공식 103장 처리에서 잘못 배정된 중복 072 MoE raw만 제거하고 로컬 102를 공식 103의 정규 artifact로 등록했으며, 실제 로컬 072 ColBERT raw는 그대로 유지했다.
 
 검증 결과:
 
@@ -3215,6 +3197,22 @@ raw 등록 해시:
 검증 결과:
 
 - 정적 사이트 회귀 검사가 통과했고, 생성된 source 목록에서 `001`은 섀넌 source 한 번만 나타나며 GLaM–Mixtral reference는 목록 마지막의 `참고` 카드로 렌더링됐다.
+
+## [2026-07-21] ingest | 공식 103장 GLaM에서 Mixtral까지의 희소 MoE 확장
+
+변경 내용:
+
+- 공식 *A History of Language AI* 목차의 103장 URL과 로컬 102 `Mixture of Experts at Scale: Efficient Scaling Through Sparse Activation and Dynamic Routing`의 URL이 정확히 일치함을 확인했다. 로컬 102 원문을 처음부터 새로 번역·윤문하고 12절 해설을 작성해 스킬 검사를 통과한 쌍을 정규 `raw/102_*` artifact로 등록했다.
+- [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]]을 `source.103`으로 전환하고, [[069_전문가 혼합과 희소 활성 스케일링]], [[전문가 혼합]], [[Mixtral 8x7B]], [[총 매개변수와 활성 계산량은 같은 축인가]]의 related ID와 artifact 경로를 공식 번호 체계에 맞췄다.
+- 사용자의 정정 지시에 따라 같은 원문이 잘못 배정됐던 MoE `raw/072_*` 두 파일과 레지스트리 항목을 제거했다. 실제 로컬 072 ColBERT 번역·해설과 그 레지스트리는 변경하지 않았다.
+- 기존 비번호 reference를 source 색인에서 제거하고 공식 103 source로 옮겼다. 이전 비번호 문서와 번역·해설 URL은 새 공식 103 URL로 직접 이동하는 정적 리다이렉트 세 개로 보존했으며, redirect chain과 canonical 충돌을 막는 검사를 추가했다.
+- 별도 분석 문서는 만들지 않았다. 이 원문의 재사용 가치가 있는 질문은 이미 [[총 매개변수와 활성 계산량은 같은 축인가]]가 다루므로, 새 번호 범위 문서 대신 기존 분석과 개념의 raw 근거를 102로 교체했다.
+
+검증 결과:
+
+- 번역 스킬 검사는 local 102 번역·해설을 `valid_pairs: 1`, `invalid_or_pending: 0`으로 확인했고 source workflow는 두 raw의 원문 URL·역할·SHA-256과 `source.103`의 정확한 artifact 쌍을 확인했다.
+- 55개 회귀 테스트와 283개 위키 문서 strict lint를 통과했으며 306개 evidence 레코드와 156개 raw artifact를 확인했다.
+- 사이트는 542개 HTML을 빌드해 5,922개 위키 링크와 33,887개 로컬 참조를 검사했다. 미해결 위키 대상은 0개였고 검색 색인은 282개 항목을 포함했다.
 
 ## 관련 항목
 

@@ -1,14 +1,14 @@
 ---
 schema_version: 2
-id: reference.glam-mixtral-moe
-page_type: reference
+id: source.103
+page_type: source
 title: GLaM에서 Mixtral까지의 희소 MoE 확장
 aliases:
-  - 072_GLaM에서 Mixtral까지의 희소 MoE 확장
+  - 103_GLaM에서 Mixtral까지의 희소 MoE 확장
   - Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing
   - 대규모 MoE와 Mixtral
 tags:
-  - type/reference
+  - type/source
   - domain/ai
   - domain/computer-science
   - domain/nlp
@@ -18,8 +18,8 @@ updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
-  - 'raw/072_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md'
-  - 'raw/072_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md'
+  - 'raw/102_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md'
+  - 'raw/102_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md'
 evidence:
   - source_id: shazeer-et-al-2017-sparsely-gated-moe
     locator: 'ICLR 2017, §§1.2–2.1·4–5와 Appendix E의 noisy top-k routing·load balancing·제한적 expert specialization 사례'
@@ -62,7 +62,7 @@ related:
 
 ### 2024년 발명이 아니라 공개 가중치 단계로의 이동이다
 
-번호 정정 전 072로 수집된 raw의 출발 자료는 2025년에 게시된 웹 해설이며, MoE 대규모 확장을 2024년의 전환으로 묶는다. 그러나 [[069_전문가 혼합과 희소 활성 스케일링]]에서 확인했듯 학습되는 gate는 1991년, 수천 expert의 희소 layer는 2017년, GShard와 Switch Transformer의 수천억·수조 매개변수 Transformer는 2020–2021년에 이미 공개됐다.
+공식 책 목차의 103장은 2025년에 게시된 이 웹 해설이며, 로컬 수집 목록의 102번 원문과 URL이 정확히 일치한다. 이 장은 MoE 대규모 확장을 2024년의 전환으로 묶지만, [[069_전문가 혼합과 희소 활성 스케일링]]에서 확인했듯 학습되는 gate는 1991년, 수천 expert의 희소 layer는 2017년, GShard와 Switch Transformer의 수천억·수조 매개변수 Transformer는 2020–2021년에 이미 공개됐다.
 
 그 다음 전환은 한 해의 발명보다 두 사례로 읽는 편이 정확하다.
 
@@ -188,7 +188,7 @@ Mixtral의 2023년 공식 발표가 제시한 “Llama 2 70B보다 6배 빠른 i
 - Mistral AI, [Mixtral of experts](https://mistral.ai/news/mixtral-of-experts/), 2023-12-11.
 - Jared Kaplan 외, [Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361), 2020, 특히 Appendix C의 dense compute 근사.
 - 프로젝트 번역·검토 출발 자료: [Mixture of Experts at Scale: Efficient Scaling Through Sparse Activation and Dynamic Routing](https://mbrenndoerfer.com/writing/mixture-of-experts-at-scale-sparse-activation-dynamic-routing-efficient-scaling)
-- 프로젝트 보존 자료: `raw/072_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md`, `raw/072_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/102_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md`, `raw/102_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md`.
 
 ## 관련 항목
 

@@ -1278,24 +1278,6 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/instruction-tuning-adapting-language-models-to-follow-explicit-instructions
     sha256: 3e9235956e5eef513607b71a8ce68f30d184655b8e3e88aaa719d4f6326713da
-  - path: "raw/072_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md"
-    role: translation
-    order_prefix: "072"
-    language: ko
-    source_type: derivative
-    provenance: external-original-used
-    original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/mixture-of-experts-at-scale-sparse-activation-dynamic-routing-efficient-scaling
-    sha256: fa1f3de2ac386ba4d7a6a66db76dd1cb05874cfd4c5cd622e0cb8566e0a2cf54
-  - path: "raw/072_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md"
-    role: commentary
-    order_prefix: "072"
-    language: ko
-    source_type: derivative
-    provenance: external-original-used
-    original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/mixture-of-experts-at-scale-sparse-activation-dynamic-routing-efficient-scaling
-    sha256: 24fb08b5d62ed782843cf3c90499d305a4e225dd7397e319c45080a65c768e0c
   - path: "raw/073_The Pile Open-Source Training Dataset for Large Language Models.ko.md"
     role: translation
     order_prefix: "073"
@@ -1404,3 +1386,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/chinchilla-scaling-laws-compute-optimal-training-resource-allocation
     sha256: d4a6c11ac7964371918e30296175a4e0810b2ad9ab7dc1af04c68c8c4e0d2722
+  - path: "raw/102_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md"
+    role: translation
+    order_prefix: "102"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/mixture-of-experts-at-scale-sparse-activation-dynamic-routing-efficient-scaling
+    sha256: 8e58982a419e855215e2ec4e2b4ffeb8d2ef5401556de3ee68ceacfd109e0ad8
+  - path: "raw/102_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md"
+    role: commentary
+    order_prefix: "102"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/mixture-of-experts-at-scale-sparse-activation-dynamic-routing-efficient-scaling
+    sha256: 19fadc80b858feeb86be5daff9aff613facf210af4e0529410e93fb80fc2447f

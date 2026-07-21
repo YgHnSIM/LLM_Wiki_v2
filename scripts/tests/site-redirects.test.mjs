@@ -25,14 +25,16 @@ test('renumbered source and artifact-reader URLs retain static legacy redirects'
   const officialNumbers = sourceLabels.filter((label) => /^\d{3}$/.test(label));
   assert.equal(new Set(officialNumbers).size, officialNumbers.length, 'Official source numbers must appear only once.');
   assert.equal(officialNumbers.filter((label) => label === '001').length, 1);
-  assert.equal(sourceLabels.filter((label) => label === '참고').length, 1);
-  assert.ok(sourceLabels.indexOf('참고') > sourceLabels.indexOf('078'), 'Unnumbered references must follow official sources.');
+  assert.equal(officialNumbers.filter((label) => label === '103').length, 1);
+  assert.equal(sourceLabels.filter((label) => label === '참고').length, report.counts.sources - officialNumbers.length);
+  assert.ok(sourceLabels.every((label) => /^\d{3}$/.test(label) || label === '참고'));
 
   const translationsHtml = await fs.readFile(path.join(distDir, 'translations', 'index.html'), 'utf8');
   const translationLabels = [...translationsHtml.matchAll(/<span class="translation-number">([^<]+)<\/span>/g)]
     .map((match) => match[1]);
   assert.equal(translationLabels.filter((label) => label === '001').length, 1);
-  assert.equal(translationLabels.filter((label) => label === '참고').length, 1);
+  assert.equal(translationLabels.filter((label) => label === '103').length, 1);
+  assert.ok(translationLabels.every((label) => /^\d{3}$/.test(label) || label === '참고'));
 
   for (let canonicalNumber = 48; canonicalNumber <= 78; canonicalNumber += 1) {
     const canonicalPrefix = String(canonicalNumber).padStart(3, '0');
@@ -50,6 +52,18 @@ test('renumbered source and artifact-reader URLs retain static legacy redirects'
       assert.equal(readerRedirect.from, `${sourceRedirect.from}${kind}/`);
       assert.equal(readerRedirect.to, `${sourceRedirect.to}${kind}/`);
     }
+  }
+
+  const source103Redirects = report.redirects.filter((redirect) => redirect.canonicalNumber === '103');
+  assert.deepEqual(source103Redirects.map((redirect) => redirect.kind).sort(), ['commentary', 'source', 'translation']);
+  const source103Redirect = source103Redirects.find((redirect) => redirect.kind === 'source');
+  assert.equal(source103Redirect.artifactPrefix, '102');
+  assert.equal(source103Redirect.from, '/sources/glam에서-mixtral까지의-희소-moe-확장/');
+  assert.match(source103Redirect.to, /^\/sources\/103-glam에서-mixtral까지의-희소-moe-확장\/$/);
+  for (const kind of ['translation', 'commentary']) {
+    const readerRedirect = source103Redirects.find((redirect) => redirect.kind === kind);
+    assert.equal(readerRedirect.from, `${source103Redirect.from}${kind}/`);
+    assert.equal(readerRedirect.to, `${source103Redirect.to}${kind}/`);
   }
 
   const fromRoutes = report.redirects.map((redirect) => redirect.from);

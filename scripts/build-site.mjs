@@ -327,7 +327,13 @@ function artifactPrefixForSource(document) {
   return prefixes.length === 1 ? prefixes[0] : '';
 }
 
+const legacySourceRouteOverrides = new Map([
+  ['source.103', '/sources/glam에서-mixtral까지의-희소-moe-확장/'],
+]);
+
 function legacySourceRoute(document, artifactPrefix) {
+  const override = legacySourceRouteOverrides.get(document.id);
+  if (override) return override;
   if (!/^\d{3}/.test(document.filename)) return '';
   const legacyFilename = document.filename.replace(/^\d{3}/, artifactPrefix);
   return routeFor(`sources/${legacyFilename}.md`, 'sources', legacyFilename);

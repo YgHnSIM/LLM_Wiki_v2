@@ -108,10 +108,7 @@ related:
 - [[076_파운데이션 모델 보고서와 AI 생태계]] — 공통 기반의 정의와 창발·동질화·훈련–적응–배포 생태계를 복원하고 민주화·GPT-4·환경·후대 영향 과장을 교정한 소스 (근거 1개)
 - [[077_InstructGPT와 인간 선호 정렬]] — 평가자 시연 SFT·응답 순위 보상 모델·PPO-ptx를 복원하고 선호 대표성·능력 회귀·안전성 과장을 교정한 소스 (근거 1개)
 - [[078_Chinchilla와 계산 최적 언어 모델 학습]] — 세 fixed-compute 추정법의 약 0.5/0.5 배분과 Chinchilla–Gopher 동일 FLOP 비교를 복원하고 $C^{1/3}$·보편 20:1·Kaplan 누락 과장을 교정한 소스 (근거 1개)
-
-## 참고 자료
-
-- [[GLaM에서 Mixtral까지의 희소 MoE 확장]] — 번호 정정 전 수집된 회고 artifact를 보존하면서 GLaM·Mixtral의 total·active parameter와 희소 MoE 비용 장부를 검증한 참고 자료 (근거 7개)
+- [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 
 ## 개체
 
