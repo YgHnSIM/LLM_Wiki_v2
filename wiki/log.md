@@ -3264,6 +3264,23 @@ raw 등록 해시:
 - 초기 HELM의 자동 메트릭 중심 범위와 두 허위정보 시나리오·6개 모델에 한정된 상세 인간 평가를 유지했으며, 공통 5-shot이 모델별 최적 prompt나 배포 적합성을 보장한다고 확대하지 않았다.
 - 57개 회귀 테스트와 285개 Markdown strict lint를 통과해 307개 evidence와 158개 immutable raw artifact를 확인했다. 사이트는 99개 legacy redirect를 포함한 549개 HTML을 만들고 6,016개 wiki link를 모두 해소했다.
 
+## [2026-07-21] ingest | 사고 연쇄 프롬프팅과 추론 행동 유도
+
+변경 내용:
+
+- 공식 080 `Chain-of-Thought Prompting: Unlocking Latent Reasoning in Language Models`를 새로 번역·윤문하고 12절 학습 해설을 작성했다. 번역본에는 웹 UI용 `읽기 수준` 안내를 남기지 않았고 원본 URL은 `출처:` 한 줄로 기록했다.
+- 검증된 번역·해설 쌍을 immutable raw 두 파일로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다. [[080_사고 연쇄 프롬프팅과 추론 행동 유도]]와 [[사고 연쇄 프롬프팅]]을 만들고 [[문맥 내 학습]]을 보강했다.
+- Wei 등의 few-shot CoT와 Kojima 등의 2단계 Zero-shot-CoT를 분리했다. PaLM 540B GSM8K 17.9%→56.9%, text-davinci-002 MultiArith 17.7%→78.7%·GSM8K 10.4%→40.7%를 모델·과제·prompt·답 추출 조건과 함께 기록했다.
+- `wei-et-al-2022-chain-of-thought`, `kojima-et-al-2022-zero-shot-reasoners`, `turpin-et-al-2023-unfaithful-cot`, `wang-et-al-2023-self-consistency`, `yao-et-al-2023-tree-of-thoughts`, `yao-et-al-2023-react` 1차 evidence 여섯 개를 등록했다. self-consistency·ToT·ReAct의 확인 가능한 직접 연결은 보존하되 현대 agent·추론 model 전체를 단일 직계 계보로 묶지 않았다.
+- [[index]]와 [[overview]]를 source 80개·concept 154개·비메타 284개 기준으로 갱신했다. 다음 순차 입력은 공식 081 self-consistency prompting이지만, 사용자 요청에 따라 그 전에 원문 노트 표현과 전체 번역본의 읽기 수준·출처 표기를 일괄 정비한다.
+
+검증 정정과 남은 한계:
+
+- Raw의 중복된 `17−9=817…`, `3−2=13…` 표기는 웹 수식 렌더링 결손으로 판정해 공용 설명의 산술 예시로 복사하지 않았다.
+- 고정 모델에서 prompt 조건에 따라 출력 행동과 정확도가 달라졌다는 결과를, 내부에 사람과 같은 추론 모듈이 이미 존재한다는 증명으로 확대하지 않았다. 출력 단계의 타당성·최종 답 정확도·내부 원인에 대한 인과적 충실성을 분리하고, 재훈련이 없어도 중간 token·두 번째 호출·다중 경로가 추론 비용을 만든다는 점을 기록했다.
+- 새 analysis 문서는 만들지 않았다. prompt가 가중치를 바꾸지 않고 관측 행동·답 추출·비용을 바꾸는 연결은 기존 [[문맥 내 학습]]의 보강으로 충분했고, 후속 계보는 source와 concept의 확인 가능한 범위 안에 두었다.
+- `source:ready -- 080`과 최종 검증에서 57개 회귀 테스트와 287개 Markdown strict lint를 통과해 313개 evidence와 160개 immutable raw artifact를 확인했다. 사이트는 99개 legacy redirect를 포함한 553개 HTML을 만들고 6,061개 wiki link를 모두 해소했다.
+
 ## 관련 항목
 
 - [[index]]

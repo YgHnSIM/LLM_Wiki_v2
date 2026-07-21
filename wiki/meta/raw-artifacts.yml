@@ -1422,3 +1422,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/helm-holistic-evaluation-language-models-framework
     sha256: 5dc84f0962cc0562208b1060626d17428c986edc9e0bea4746ba35f237bf61fb
+  - path: "raw/080_Chain-of-Thought Prompting Unlocking Latent Reasoning in Language Models.ko.md"
+    role: translation
+    order_prefix: "080"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/chain-of-thought-prompting-unlocking-latent-reasoning-language-models
+    sha256: 96b84293836c65cfe0a9f90870a770b60e0cd699e0f23cf4e2bbe6228d75ac8d
+  - path: "raw/080_Chain-of-Thought Prompting Unlocking Latent Reasoning in Language Models.commentary.ko.md"
+    role: commentary
+    order_prefix: "080"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/chain-of-thought-prompting-unlocking-latent-reasoning-language-models
+    sha256: eaa041cd036a921a445e4e48bd3532abbccf67cbb6d045e52e658f7889a89396

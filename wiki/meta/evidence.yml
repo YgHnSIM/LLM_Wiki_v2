@@ -2629,3 +2629,51 @@ sources:
     doi: 10.18653/v1/2022.naacl-main.272
     url: https://aclanthology.org/2022.naacl-main.272/
     language: en
+  wei-et-al-2022-chain-of-thought:
+    title: Chain-of-Thought Prompting Elicits Reasoning in Large Language Models
+    authors: [Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Brian Ichter, Fei Xia, Ed H. Chi, Quoc V. Le, Denny Zhou]
+    published: 2022
+    source_type: primary
+    kind: conference-paper
+    url: https://papers.neurips.cc/paper_files/paper/2022/hash/9d5609613524ecf4f15af0f7b31abca4-Abstract-Conference.html
+    language: en
+  kojima-et-al-2022-zero-shot-reasoners:
+    title: Large Language Models Are Zero-Shot Reasoners
+    authors: [Takeshi Kojima, Shixiang Shane Gu, Machel Reid, Yutaka Matsuo, Yusuke Iwasawa]
+    published: 2022
+    source_type: primary
+    kind: conference-paper
+    url: https://papers.neurips.cc/paper_files/paper/2022/hash/8bb0d291acd4acf06ef112099c16f326-Abstract-Conference.html
+    language: en
+  turpin-et-al-2023-unfaithful-cot:
+    title: "Language Models Don't Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting"
+    authors: [Miles Turpin, Julian Michael, Ethan Perez, Samuel R. Bowman]
+    published: 2023
+    source_type: primary
+    kind: conference-paper
+    url: https://papers.neurips.cc/paper_files/paper/2023/hash/ed3fea9033a80fea1376299fa7863f4a-Abstract-Conference.html
+    language: en
+  wang-et-al-2023-self-consistency:
+    title: Self-Consistency Improves Chain of Thought Reasoning in Language Models
+    authors: [Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc V. Le, Ed H. Chi, Sharan Narang, Aakanksha Chowdhery, Denny Zhou]
+    published: 2023
+    source_type: primary
+    kind: conference-paper
+    url: https://openreview.net/forum?id=1PL1NIMMrw
+    language: en
+  yao-et-al-2023-tree-of-thoughts:
+    title: 'Tree of Thoughts: Deliberate Problem Solving with Large Language Models'
+    authors: [Shunyu Yao, Dian Yu, Jeffrey Zhao, Izhak Shafran, Thomas L. Griffiths, Yuan Cao, Karthik Narasimhan]
+    published: 2023
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.neurips.cc/paper_files/paper/2023/hash/271db9922b8d1f4dd7aaef84ed5ac703-Abstract.html
+    language: en
+  yao-et-al-2023-react:
+    title: 'ReAct: Synergizing Reasoning and Acting in Language Models'
+    authors: [Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, Yuan Cao]
+    published: 2023
+    source_type: primary
+    kind: conference-paper
+    url: https://openreview.net/forum?id=WE_vluYUL-X
+    language: en

@@ -109,6 +109,7 @@ related:
 - [[077_InstructGPT와 인간 선호 정렬]] — 평가자 시연 SFT·응답 순위 보상 모델·PPO-ptx를 복원하고 선호 대표성·능력 회귀·안전성 과장을 교정한 소스 (근거 1개)
 - [[078_Chinchilla와 계산 최적 언어 모델 학습]] — 세 fixed-compute 추정법의 약 0.5/0.5 배분과 Chinchilla–Gopher 동일 FLOP 비교를 복원하고 $C^{1/3}$·보편 20:1·Kaplan 누락 과장을 교정한 소스 (근거 1개)
 - [[079_HELM과 다차원 언어 모델 평가]] — 16개 핵심·26개 표적 시나리오와 일곱 메트릭·적용 가능한 시나리오의 공통 5-shot 적응을 복원하고 coverage·안전 인증·인간 평가·배포 일반화를 교정한 소스 (근거 1개)
+- [[080_사고 연쇄 프롬프팅과 추론 행동 유도]] — few-shot CoT와 2단계 Zero-shot-CoT를 분리하고 대표 정확도 상승의 모델·과제·prompt 조건, 출력 충실성·추론 비용·후속 계보의 범위를 검증한 소스 (근거 6개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 
 ## 개체
@@ -154,7 +155,8 @@ related:
 - [[BERT]] — 마스크드 언어 모델링으로 깊은 양방향 Transformer encoder를 사전 학습하고 과제별로 전체 미세조정하는 모델 (근거 3개)
 - [[마스크드 언어 모델링]] — 입력 token 일부를 교란하고 좌우 문맥에서 원 token을 복원하는 사전 학습 목적 (근거 5개)
 - [[GPT-1과 GPT-2]] — causal Transformer의 지도 미세조정과 zero-shot text continuation을 잇는 초기 GPT 모델 계열 (근거 4개)
-- [[문맥 내 학습]] — 가중치를 갱신하지 않고 입력 문맥의 instruction·demonstration으로 새 query의 출력 분포를 조건화하는 적응 방식 (근거 3개)
+- [[문맥 내 학습]] — 가중치를 갱신하지 않고 입력 문맥의 instruction·demonstration으로 새 query의 출력 분포를 조건화하는 적응 방식 (근거 5개)
+- [[사고 연쇄 프롬프팅]] — 중간 풀이 token을 답 앞에 생성하도록 유도하되 few-shot·zero-shot 절차, 조건부 성능·비용과 출력 타당성·답 정확도·인과적 충실성을 구분하는 prompting 방법 (근거 6개)
 - [[GLUE와 SuperGLUE]] — 여러 영어 NLU 과제·metric·test server·leaderboard를 묶어 broad transfer를 비교하는 평가 suite (근거 3개)
 - [[HELM]] — 시나리오·적응·메트릭·실행을 분리해 언어 모델의 정확도·위험·비용을 같은 조건과 원시 출력으로 비교하는 다차원 평가 프레임워크 (근거 1개)
 - [[XLNet·RoBERTa·ALBERT]] — BERT 이후의 objective·training recipe·parameterization 개선을 비용 조건과 함께 비교하는 세 모델 묶음 (근거 3개)
