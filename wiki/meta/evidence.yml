@@ -2685,3 +2685,55 @@ sources:
     kind: official-blog
     url: https://openai.com/index/chatgpt/
     language: en
+  bigscience-workshop-2022-bloom:
+    title: 'BLOOM: A 176B-Parameter Open-Access Multilingual Language Model'
+    authors: [BigScience Workshop]
+    published: 2022
+    source_type: primary
+    kind: technical-report
+    doi: 10.48550/arXiv.2211.05100
+    url: https://arxiv.org/abs/2211.05100
+    language: en
+  bigscience-2022-bloom-model-card:
+    title: BLOOM Model Card
+    authors: [BigScience]
+    published: 2022
+    source_type: primary-release
+    kind: model-card
+    doi: 10.57967/hf/0003
+    url: https://huggingface.co/bigscience/bloom
+    language: en
+  laurencon-et-al-2023-roots:
+    title: 'The BigScience ROOTS Corpus: A 1.6TB Composite Multilingual Dataset'
+    authors: [Hugo Laurençon, Lucile Saulnier, Thomas Wang, BigScience Workshop]
+    published: 2023
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2303.03915
+    url: https://arxiv.org/abs/2303.03915
+    language: en
+  bigscience-2022-bloom-rail:
+    title: BigScience RAIL License v1.0
+    authors: [BigScience]
+    published: 2022
+    source_type: primary-release
+    kind: license-document
+    url: https://huggingface.co/spaces/bigscience/license/raw/main/BLOOMLICENSE.txt
+    language: en
+  akiki-et-al-2022-bigscience-case-study:
+    title: 'BigScience: A Case Study in the Social Construction of a Multilingual Large Language Model'
+    authors: [Christopher Akiki, Giada Pistilli, Margot Mieskes, Matthias Gallé, Thomas Wolf, Suzana Ilić, Yacine Jernite]
+    published: 2022
+    source_type: primary
+    kind: workshop-paper
+    doi: 10.48550/arXiv.2212.04960
+    url: https://arxiv.org/abs/2212.04960
+    language: en
+  meta-2022-opt-175b-release:
+    title: Democratizing access to large-scale language models with OPT-175B
+    authors: [Meta AI]
+    published: 2022
+    source_type: primary-release
+    kind: official-blog
+    url: https://ai.meta.com/blog/democratizing-access-to-large-scale-language-models-with-opt-175b/
+    language: en

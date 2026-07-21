@@ -3341,6 +3341,25 @@ raw 등록 해시:
 - 회귀 테스트는 세 legacy 역할의 공통 label, standalone 출처 줄 제거, 본문·code fence·해설 보존과 `원본 출처:` URL 추출을 확인한다.
 - 81개 원문 번역본 artifact page를 다시 생성해 본문 영역에 세 출처 표기가 남지 않았음을 확인했다. 전체 검증은 87개 테스트, 289개 Markdown strict lint, 314개 evidence, 162개 immutable raw artifact와 미해결 wiki target 0개를 확인했다.
 
+## [2026-07-21] ingest | BLOOM과 공개 접근 다국어 LLM
+
+변경 내용:
+
+- 공식 082 `BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research`를 새로 번역·윤문하고 12절 학습 해설을 작성했다. 번역은 원문 H1·H2·링크 구조를 보존하고 `원본 출처:`를 한 번 기록했으며, 읽기 수준 UI와 placeholder 없이 translate-llm-sources 쌍 검사를 통과했다.
+- 검증된 번역·해설을 raw 두 파일로 등록했다. 번역 SHA-256은 `d9c9610ff23ce65d58e635c000a73828acb836399ee66de516ba3e8b654da14b`, 해설은 `4748c4bb50c45aef5739b28cc8e848d2c1feeba9a754375f9171064521e0c0cf`다.
+- [[082_BLOOM과 공개 접근 다국어 LLM]]과 [[BLOOM]]을 만들고 [[파운데이션 모델]]에 문서·weight·code·training data·이용 권리·실행 자원을 나누는 접근 장부를 보강했다. 정확한 176,247,271,424개 매개변수, 70 layer·112 head·14,336 hidden dimension·2,048 token context, byte-level BPE 250,680개 vocabulary를 기록했다.
+- ROOTS의 498개 구성 dataset·1.61TB·46개 자연어와 13개 programming language, 약 341B corpus token과 반복 25B를 더한 366B 학습 노출, Jean Zay A100 384개·1,082,990 GPU-hours를 서로 다른 측정으로 복원했다.
+- BLOOM 논문·model card, ROOTS 논문, BigScience RAIL 원문, BigScience 협업 case study와 OPT-175B 공식 발표 여섯 건을 evidence로 등록했다. [[index]]와 [[overview]]를 source 82개·concept 156개·비메타 288개 기준으로 갱신했다.
+
+검증 정정과 남은 한계:
+
+- Meta의 OPT-175B가 2022년 5월 연구용 공개를 발표했고 BLOOM은 7월 공개됐으므로 “그 규모에서 최초”를 채택하지 않았다. BigScience의 공식 집계는 1,200명 초과 등록, 365명 추적 가능한 직접 기여, 거주지가 확인된 308명·38개국으로 분모를 나눴으며 raw의 70여 개국 서술을 교정했다.
+- Model weight는 use restriction이 있는 RAIL, code는 Apache 2.0이고 Data는 RAIL 대상에서 제외된다. ROOTS는 전체 원문을 하나의 자유 license로 배포한 것이 아니라 gated인 큰 초기 subset과 source별 release 조건을 제공했다. 공개 weight도 약 329GB와 큰 실행 자원을 요구하므로 완전한 재현·민주화와 동일시하지 않았다.
+- 여러 언어의 포함을 동등한 지원이나 bias 제거로 확대하지 않았고, 기본 BLOOM과 별도 multitask fine-tuning을 거친 BLOOMZ를 분리했다. 포괄적 최첨단 성능·후속 정책·기술 영향 인과는 현재 1차 근거의 범위를 넘으므로 채택하지 않았다.
+- 새 analysis는 ingest와 분리한다. Weight·code·data·license·compute·governance 공개가 검사·수정·재배포·재현 가능성에 서로 다른 효과를 내는 비교는 원격 반영 뒤 별도 content 문서로 작성한다.
+- `source:ready -- 082`에서 87개 회귀 테스트와 291개 Markdown strict lint를 통과해 320개 evidence와 164개 raw artifact를 확인했다. 사이트는 99개 legacy redirect를 포함한 561개 HTML을 만들고 6,168개 wiki link를 모두 해소했다.
+- 다음 순차 입력은 공식 083 PaLM이다. 다만 사용자 요청에 따라 083 시작 전에 전체 외부 원문·번역본·raw에서 읽기 수준 UI 단락을 제거하고, 이번 명시적 raw 불변 예외의 hash 변경을 검증·기록한다.
+
 ## 관련 항목
 
 - [[index]]

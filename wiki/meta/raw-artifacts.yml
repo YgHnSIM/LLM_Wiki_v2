@@ -1458,3 +1458,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/chatgpt-conversational-ai-becomes-mainstream
     sha256: 9b570a6b74b8d2a8f0c57e2f78f2ada80ffa6fb247a64e7bd8eb51de94df11a3
+  - path: "raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.ko.md"
+    role: translation
+    order_prefix: "082"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/bloom-open-access-multilingual-language-model-democratization-ai-research
+    sha256: d9c9610ff23ce65d58e635c000a73828acb836399ee66de516ba3e8b654da14b
+  - path: "raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.commentary.ko.md"
+    role: commentary
+    order_prefix: "082"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/bloom-open-access-multilingual-language-model-democratization-ai-research
+    sha256: 4748c4bb50c45aef5739b28cc8e848d2c1feeba9a754375f9171064521e0c0cf

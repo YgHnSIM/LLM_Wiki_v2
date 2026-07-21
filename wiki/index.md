@@ -111,6 +111,7 @@ related:
 - [[079_HELM과 다차원 언어 모델 평가]] — 16개 핵심·26개 표적 시나리오와 일곱 메트릭·적용 가능한 시나리오의 공통 5-shot 적응을 복원하고 coverage·안전 인증·인간 평가·배포 일반화를 교정한 소스 (근거 1개)
 - [[080_사고 연쇄 프롬프팅과 추론 행동 유도]] — few-shot CoT와 2단계 Zero-shot-CoT를 분리하고 대표 정확도 상승의 모델·과제·prompt 조건, 출력 충실성·추론 비용·후속 계보의 범위를 검증한 소스 (근거 6개)
 - [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]] — 무료 연구 미리보기·다중 턴 대화 UI·대화형 RLHF와 사용자 피드백 순환을 복원하고 175B·지속 기억·안전·산업 영향 과장을 교정한 소스 (근거 2개)
+- [[082_BLOOM과 공개 접근 다국어 LLM]] — 176B BLOOM·ROOTS·Jean Zay 학습과 weight·code·data·RAIL의 공개 범위를 복원하고 최초성·최첨단·편향 해소·민주화 과장을 교정한 소스 (근거 6개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 
 ## 개체
@@ -147,6 +148,7 @@ related:
 
 ## 개념
 
+- [[BLOOM]] — 176B decoder-only Transformer, ROOTS 다국어 말뭉치, 공공 compute와 서로 다른 weight·code·data 공개 조건을 한 모델 장부로 구분하는 개념 (근거 6개)
 - [[WaveNet]] — 팽창 인과 합성곱으로 양자화 오디오 표본을 순차 생성하는 원시 파형 자기회귀 모델 (근거 2개)
 - [[Transformer]] — multi-head self-attention과 위치 표현으로 순환 없이 시퀀스 위치를 상호작용시키는 신경망 구조 (근거 8개)
 - [[Transformer-XL]] — stop-gradient segment memory와 상대 위치 attention으로 고정 길이 경계를 넘어 과거 표현을 재사용하는 causal Transformer (근거 1개)
@@ -167,7 +169,7 @@ related:
 - [[The Pile]] — 22개 component·epoch 가중치·BPB 평가를 deduplication·decontamination·underlying rights와 구분하는 825.18 GiB 영어 중심 말뭉치 (근거 2개)
 - [[CLIP]] — 이미지·텍스트 이중 인코더를 대칭 대조 손실로 정렬하고 class prompt를 제로샷 분류기 weight처럼 사용하는 시각-언어 모델 (근거 2개)
 - [[DALL·E (2021)]] — 1,024개 이산 이미지 토큰과 최대 256개 텍스트 토큰을 공동 자기회귀 모델링하고 별도 대조 모델로 후보를 재순위화한 2021년 생성 시스템 (근거 3개)
-- [[파운데이션 모델]] — 광범위한 데이터로 대규모 훈련해 여러 과제의 기반으로 적응되는 모델과 그 훈련·적응·배포 생태계를 구분하는 역할 중심 개념 (근거 4개)
+- [[파운데이션 모델]] — 광범위한 데이터로 대규모 훈련해 여러 과제의 기반으로 적응되는 모델과 그 훈련·적응·배포 생태계를 구분하는 역할 중심 개념 (근거 7개)
 - [[OpenAI Codex (2021)]] — GPT 계열을 Python 코드 분포로 계속 학습하고 docstring에서 함수 후보를 생성해 unit test로 평가한 2021년 코드 모델군 (근거 3개)
 - [[지시 미세조정]] — 여러 과제의 instruction–target 감독을 weights에 축적하고 현재 과제를 inference instruction으로 지정하는 지도 후학습 방식 (근거 5개)
 - [[N-gram 모델]] — 앞선 n-1개 단위의 빈도와 조건부 확률로 다음 항목을 예측하고 평활화로 미관측 조합을 다루는 언어 모델 (근거 4개)
