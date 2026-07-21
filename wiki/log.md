@@ -2828,6 +2828,23 @@ raw 등록 해시:
 - 사이트는 397개 페이지를 빌드해 5,165개 위키 링크와 29,628개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 257개 항목을 포함했다.
 - 공개 source·concept와 기존 문서 보강은 Brown et al. 2020과 Kaplan et al. 2020의 범위 안에서 검증했다. 문맥 내 학습의 내부 알고리즘과 후대 ‘창발’ 판정은 별도 근거가 필요한 해석 문제로 남겼다.
 
+## [2026-07-21] content | 손실 곡선과 능력 곡선 사이
+
+변경 내용:
+
+- [[손실 곡선과 능력 곡선 사이]]를 만들고 Kaplan의 평균 token cross-entropy, Brown의 GPT-3 downstream 곡선, Wei의 창발 능력 정의, Schaeffer의 metric·표본 해상도 반론을 하나의 측정 경계로 비교했다.
+- 사전 학습 loss, exact match·multiple-choice grade·edit distance 같은 과제 점수, 무작위·실용 threshold를 넘었는지에 대한 능력 판정을 세 층으로 분리했다. per-token 정답 확률 $p(N)$이 매끄러워도 완전 일치는 독립 근사에서 $p(N)^L$처럼 비선형으로 변할 수 있음을 설명하되 오류 독립성을 사실로 가정하지 않았다.
+- Brown의 13B→175B 산술 관측점을 4·5자리 덧셈·뺄셈 수치로 복원하고, 약 13.5배 떨어진 두 model size만으로 임계점이나 불연속을 식별할 수 없음을 명시했다. Wei가 scale을 불변 임계값으로 보지 않은 한계와 부분점수에서도 남은 일부 곡선도 함께 기록했다.
+- Schaeffer의 직접 재평가는 조회 가능한 GPT 계열 네 모델과 두 2-shot 산술 과제에 한정했다. 같은 출력의 token edit distance와 추가 평가 표본에서 더 매끄러운 변화가 보였다는 결과를 사용했지만, 모든 창발이 환상이라는 결론이나 edit distance가 유일한 참 metric이라는 주장은 하지 않았다.
+- [[065_신경 언어 모델의 스케일링 법칙]], [[066_GPT-3와 문맥 내 학습]], [[언어 모델 스케일링 법칙]], [[문맥 내 학습]]에 새 분석으로 가는 방향 링크를 추가했다. [[index]]와 [[overview]]에는 analysis 19개·비메타 256개·전체 259개 상태와 새 평가 진입점을 반영했다.
+
+검증 결과:
+
+- 새 analysis는 Kaplan·Brown·Wei·Schaeffer 4개 1차 evidence와 065·066의 immutable raw artifact 4개만 사용했다. `evidence.yml`에는 Wei 2022와 Schaeffer 2023 레코드 2개를 추가했고 `raw-artifacts.yml`은 변경하지 않았다.
+- 49개 회귀 테스트와 259개 위키 문서 strict lint를 통과했으며 280개 evidence 레코드와 132개 immutable raw artifact를 확인했다.
+- 사이트는 398개 페이지를 빌드해 5,204개 위키 링크와 29,751개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 258개 항목을 포함했다.
+- 문헌별 수치와 metric 정의는 1차 자료로 확인했지만, 네 연구를 loss→task score→능력 판정의 세 층으로 묶은 결론은 합성 해석이므로 `verification: partial`을 유지했다.
+
 ## 관련 항목
 
 - [[index]]

@@ -24,7 +24,7 @@ related:
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 66개, concept 142개, entity 29개, analysis 18개를 합친 비메타 문서 255개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 66개, concept 142개, entity 29개, analysis 19개를 합친 비메타 문서 256개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -156,6 +156,7 @@ related:
 - [[교차 인코더 재순위화]]에서 구분하는 질의–후보 공동 부호화, `[CLS]` relevance logit, first-stage 누락 복구 불가와 후보별 추론 비용
 - [[언어 모델 스케일링 법칙]]에서 함께 확인하는 token loss, N·D·compute 병목, 관측 범위 밖 외삽과 Kaplan·Chinchilla compute-optimal 배분의 차이
 - [[문맥 내 학습]]에서 구분하는 고정 가중치, instruction·demonstration·query의 입력 조건화, zero·one·few-shot과 fine-tuning의 지속성 차이
+- [[손실 곡선과 능력 곡선 사이]]에서 분리하는 평균 token cross-entropy, downstream exact match·accuracy, 능력 threshold와 metric·표본·관측 scale의 영향
 - [[검색은 근거를 찾고 독해는 답을 찾는다]]에서 분리하는 컬렉션→후보 retrieval recall, 후보→답 EM·F1·faithfulness, 답→행동 기권 calibration과 oracle reader 진단
 - [[N-gram에서 LLM으로]]에서 비교하는 Katz의 표면 문맥 확률 재분배와 NPLM의 연속 표현 매개변수 공유
 - [[BM25]]의 희소 용어 가중, 문서 내 빈도 포화, 평균 문서 길이 보정과 보정된 관련성 확률이 아닌 순위 점수라는 해석
@@ -203,6 +204,7 @@ related:
 - [[N-gram에서 LLM으로]]
 - [[066_GPT-3와 문맥 내 학습]]
 - [[문맥 내 학습]]
+- [[손실 곡선과 능력 곡선 사이]]
 - [[최고 경로와 기대 통계, 백오프]]
 - [[확률, 마진, 순위 점수]]
 - [[자동 평가 지표는 무엇을 보상하는가]]
@@ -313,7 +315,9 @@ related:
 
 ## 현재 상태
 
-소스 66개, 개념 142개, 개체 29개, 분석 18개와 메타 문서 3개, 총 258개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 231개는 `verified`, 해석적 문서 24개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 278개 외부 근거와 132개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 66개, 개념 142개, 개체 29개, 분석 19개와 메타 문서 3개, 총 259개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 231개는 `verified`, 해석적 문서 25개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 280개 외부 근거와 132개 불변 raw artifact가 레지스트리에 등록돼 있다.
+
+[[손실 곡선과 능력 곡선 사이]]는 Kaplan의 평균 token cross-entropy, Brown의 task별 GPT-3 곡선, Wei의 창발 정의, Schaeffer의 metric·표본 해상도 반론을 함께 읽는다. 급격한 task score만으로 내부 질적 전환을 확정할 수 없다는 결론과, metric 효과만으로 모든 창발 가능성을 부정할 수도 없다는 한계를 함께 기록했다.
 
 `066`의 GPT-2 대비 10배라는 비교 대상 오류, 문맥 내 학습의 내부 메커니즘 확정, 미세조정 제거와 광범위한 고정밀 성능, 175B에서의 불연속 창발, code benchmark·API 민주화·prompt engineering 산업·구체 훈련비와 후대 모델의 직접 계보 주장도 공개 문서에서 교정했다. zero·one·few-shot의 demonstration 수와 가중치 고정, SuperGLUE 71.8 대 fine-tuned 최고 89.0, TriviaQA 71.2, 자리수별 산술 exact match와 contamination filtering bug를 함께 기록했다.
 

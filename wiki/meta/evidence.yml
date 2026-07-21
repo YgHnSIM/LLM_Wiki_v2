@@ -2382,3 +2382,21 @@ sources:
     doi: 10.48550/arXiv.2005.14165
     url: https://arxiv.org/abs/2005.14165
     language: en
+  wei-et-al-2022-emergent-abilities:
+    title: 'Emergent Abilities of Large Language Models'
+    authors: [Jason Wei, Yi Tay, Rishi Bommasani, Colin Raffel, Barret Zoph, Sebastian Borgeaud, Dani Yogatama, Maarten Bosma, Denny Zhou, Donald Metzler, Ed H. Chi, Tatsunori Hashimoto, Oriol Vinyals, Percy Liang, Jeff Dean, William Fedus]
+    published: 2022
+    source_type: primary
+    kind: journal-article
+    doi: 10.48550/arXiv.2206.07682
+    url: https://arxiv.org/abs/2206.07682
+    language: en
+  schaeffer-et-al-2023-emergence-mirage:
+    title: 'Are Emergent Abilities of Large Language Models a Mirage?'
+    authors: [Rylan Schaeffer, Brando Miranda, Sanmi Koyejo]
+    published: 2023
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2304.15004
+    url: https://arxiv.org/abs/2304.15004
+    language: en
