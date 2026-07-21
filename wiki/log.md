@@ -3078,6 +3078,25 @@ raw 등록 해시:
 - 사이트는 436개 페이지를 빌드해 5,782개 위키 링크와 32,888개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 278개 항목을 포함했다.
 - 파운데이션 모델의 정의·model/system 경계·adaptation access와 2021년 emergence 용례는 Bommasani et al. v3 §§1–1.2·4.3의 직접 사실이다. 이를 기존 전이 경로의 상위 범주로 읽고 두 창발 정의를 측정 계보로 연결한 부분은 비교를 통한 합성 해석이므로 `verification: partial`을 유지했다.
 
+## [2026-07-21] ingest | InstructGPT와 인간 선호 정렬
+
+변경 내용:
+
+- `076_InstructGPT and RLHF Aligning Language Models with Human Preferences.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 123줄·61개 비공백 block·H1/H2/H3 1/6/3과 Markdown link target 56개의 순서·빈 줄 위치를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- [[076_InstructGPT와 인간 선호 정렬]]을 만들고 평가자 시연 SFT, 4–9개 응답 순위에서 동률을 제외한 쌍 비교로 학습한 6B 보상 모델, SFT 정책 기준 token별 KL과 PPO-ptx의 별도 사전 학습 기울기 혼합을 복원했다.
+- 기존 `ouyang-et-al-2022-instructgpt` evidence를 정밀한 locator와 함께 재사용했다. SFT 12,725개·보상 모델 33,207개·PPO 31,144개 학습 prompt, 약 40명 계약 평가자와 96% 이상 영어인 자료의 대표성 범위를 기록했다.
+- 1.3B InstructGPT가 175B GPT-3보다 선호된 결과, 175B 기준 85±3%·few-shot GPT-3 기준 71±4% 선호, closed-domain hallucination 21% 대 41%를 일반 능력 우위가 아닌 보류 API prompt·평가 지침에 조건화된 행동 비교로 해석했다.
+- [[인간 피드백 강화학습]]에는 SFT 기준 KL과 PPO-ptx 사전 학습 혼합의 역할 차이, 평가자 집단 밖 대표성을 증명하지 않는 보류 평가자 결과를 보강했다. [[index]]와 [[overview]]에는 새 source와 자연어 지시→선호 정렬 독서 경로를 반영했다.
+- Raw의 세 단계 RLHF 최초 발명, 보편적 인간 가치, 원 사전 학습 모델 기준 KL, 능력 무손실, 안정적인 유해 요청 거절, 모든 구조·후속 모델의 동일 pipeline, 안전한 배포와 정렬 문제 해결 주장을 공개 문서에서 교정했다. 정중한 지시 조건의 독성 출력 약 25% 감소와 bias 미개선·유해 지시 추종·일부 공개 NLP 과제 회귀를 함께 보존했다.
+- 새 analysis 문서는 만들지 않았다. 학습된 보상 모델을 직접 최적화할 때 평가자·지침·prompt 분포의 사각지대가 정책의 유인이 되는 질문은 공개 배포 뒤 기존 [[자동 평가 지표는 무엇을 보상하는가]]를 보강하는 별도 `content` 작업으로 이어 간다.
+
+검증 결과:
+
+- 번역 스킬 검사는 076 번역·해설 쌍을 `done: true`로 확인했고, source workflow는 두 raw artifact의 원문 URL·역할·SHA-256 일치를 확인했다.
+- 49개 회귀 테스트와 280개 위키 문서 strict lint를 통과했으며 302개 evidence 레코드와 152개 immutable raw artifact를 확인했다.
+- 사이트는 439개 페이지를 빌드해 5,807개 위키 링크와 33,107개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 279개 항목을 포함했다.
+- 공개 source와 기존 concept 보강은 Ouyang et al. 2022의 자료·파이프라인·평가·한계와 OpenAI 공식 공개 글·model card의 배포 범위 안에서 검증했다. 보편적 가치 대표성, 완전한 안전성, 후속 비공개 model의 동일한 훈련 절차와 직접 인과는 입증되지 않은 범위로 남겼다.
+
 ## 관련 항목
 
 - [[index]]
