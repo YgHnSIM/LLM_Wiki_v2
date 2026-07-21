@@ -99,11 +99,12 @@ related:
 - [[066_GPT-3와 문맥 내 학습]] — 125M–175B 모델군의 zero·one·few-shot 문맥 적응을 복원하고 과제별 성능·오염·창발 서사의 범위를 검증한 소스 (근거 2개)
 - [[067_DPR과 검색 증강 생성]] — BERT dual encoder·hard negative·FAISS의 DPR와 DPR–BART 잠재 문서 주변화의 원 RAG를 분리하고 검색·생성·인용의 실제 경계를 검증한 소스 (근거 2개)
 - [[068_전문가 혼합과 희소 활성 스케일링]] — MoE의 1991·2017년 계보와 GShard top-2·Switch top-1을 분리하고 total capacity·active compute·memory·communication의 경계를 검증한 소스 (근거 5개)
-- [[069_CLIP과 대조적 언어-이미지 사전 학습]] — 4억 이미지-텍스트 쌍의 대칭 대조 학습과 class prompt 제로샷 분류를 복원하고 shared embedding·평가·후대 계보의 범위를 검증한 소스 (근거 1개)
+- [[069_CLIP과 대조적 언어-이미지 사전 학습]] — 4억 이미지-텍스트 쌍의 대칭 대조 학습과 class prompt 제로샷 분류를 복원하고 shared embedding·평가·후대 계보의 범위를 검증한 소스 (근거 2개)
 - [[070_Codex와 HumanEval 기반 코드 생성 평가]] — Python 코드 계속학습과 Codex-S를 분리하고 HumanEval·pass@k·실행 선택 및 연구 모델·Copilot production version의 경계를 검증한 소스 (근거 3개)
 - [[071_지시 미세조정과 FLAN의 제로샷 일반화]] — 62개 데이터셋·12개 과제 군집의 FLAN 학습과 군집별 checkpoint·template·규모 절제를 복원하고 최초성·범용성·정렬 계보 과장을 교정한 소스 (근거 5개)
 - [[072_GLaM에서 Mixtral까지의 희소 MoE 확장]] — GLaM의 1.2T/96.6B와 Mixtral의 46.7B/12.9B total·active 장부를 복원하고 2024 단일 돌파·Meta 귀속·제곱 계산·주제 expert·고정 속도 배수 과장을 교정한 소스 (근거 7개)
 - [[073_The Pile과 대규모 언어 모델 학습 말뭉치]] — 22개 영어 중심 component의 825.18 GiB raw·1,254.20 GiB effective mixture를 복원하고 전역 중복 제거·법적 보증·공정 비교·대중화 과장을 교정한 소스 (근거 2개)
+- [[074_DALL·E와 이산 이미지 토큰 생성]] — dVAE 이미지 압축과 12B joint token Transformer, 대조 재순위화를 복원하고 최초성·창의성·제품·후대 계보 과장을 교정한 소스 (근거 3개)
 
 ## 개체
 
@@ -154,7 +155,8 @@ related:
 - [[XLM]] — shared multilingual encoder에서 CLM·MLM과 병렬 문장쌍 TLM을 구분하고 교차 언어 전이를 학습하는 방법군 (근거 1개)
 - [[T5]] — task를 text target으로 통합하고 sentinel span corruption 뒤 과제별 supervised fine-tuning으로 전이하는 encoder–decoder model family (근거 3개)
 - [[The Pile]] — 22개 component·epoch 가중치·BPB 평가를 deduplication·decontamination·underlying rights와 구분하는 825.18 GiB 영어 중심 말뭉치 (근거 2개)
-- [[CLIP]] — 이미지·텍스트 이중 인코더를 대칭 대조 손실로 정렬하고 class prompt를 제로샷 분류기 weight처럼 사용하는 시각-언어 모델 (근거 1개)
+- [[CLIP]] — 이미지·텍스트 이중 인코더를 대칭 대조 손실로 정렬하고 class prompt를 제로샷 분류기 weight처럼 사용하는 시각-언어 모델 (근거 2개)
+- [[DALL·E (2021)]] — 1,024개 이산 이미지 토큰과 최대 256개 텍스트 토큰을 공동 자기회귀 모델링하고 별도 대조 모델로 후보를 재순위화한 2021년 생성 시스템 (근거 3개)
 - [[OpenAI Codex (2021)]] — GPT 계열을 Python 코드 분포로 계속 학습하고 docstring에서 함수 후보를 생성해 unit test로 평가한 2021년 코드 모델군 (근거 3개)
 - [[지시 미세조정]] — 여러 과제의 instruction–target 감독을 weights에 축적하고 현재 과제를 inference instruction으로 지정하는 지도 후학습 방식 (근거 5개)
 - [[N-gram 모델]] — 앞선 n-1개 단위의 빈도와 조건부 확률로 다음 항목을 예측하고 평활화로 미관측 조합을 다루는 언어 모델 (근거 4개)
@@ -275,7 +277,7 @@ related:
 - [[합성곱 신경망]] — 국소 연결과 위치별 가중치 공유로 공간·순서 패턴의 계층적 특징을 학습하는 신경망 (근거 11개)
 - [[Sequence-to-Sequence 학습]] — 입력 시퀀스에 조건화해 길이가 다른 출력 시퀀스의 다음 요소 확률을 공동 학습하는 틀 (근거 3개)
 - [[인코더-디코더]] — 입력 표현을 만드는 인코더와 그 표현에서 출력을 생성하는 디코더를 결합한 구조 (근거 3개)
-- [[자기회귀 생성]] — 이전 출력에 조건화해 다음 요소를 순차적으로 생성하며 학습과 디코딩을 구분하는 방식 (근거 6개)
+- [[자기회귀 생성]] — 이전 출력에 조건화해 다음 요소를 순차적으로 생성하며 학습과 디코딩을 구분하는 방식 (근거 7개)
 - [[메모리 네트워크]] — 읽고 쓸 수 있는 외부 메모리와 입력·갱신·출력·응답 구성 요소를 결합한 학습 틀 (근거 2개)
 - [[외부 메모리]] — 매개변수와 구분되어 문서·사실 항목을 개별적으로 저장·갱신·조회할 수 있는 저장소 (근거 2개)
 - [[다중 홉 검색]] — 한 검색 결과로 다음 질의를 갱신해 여러 supporting facts를 순차적으로 찾는 방식 (근거 2개)

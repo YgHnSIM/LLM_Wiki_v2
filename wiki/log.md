@@ -3008,6 +3008,24 @@ raw 등록 해시:
 - 사이트는 428개 페이지를 빌드해 5,649개 위키 링크와 32,219개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 274개 항목을 포함했다.
 - 네 문헌의 수집·가중·평가 수치와 조건은 1차 자료로 확인했지만, 이를 quality proxy·coverage·weight·evaluation의 네 축으로 묶은 결론은 합성 해석이다. Filter·component·weight의 독립 인과와 모든 언어·domain의 최적 mixture는 입증되지 않았으므로 `verification: partial`을 유지했다.
 
+## [2026-07-21] ingest | DALL·E와 이산 이미지 토큰 생성
+
+변경 내용:
+
+- `074_DALL·E Text-to-Image Generation with Transformer Architectures.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 87개 행, H1/H2/H3 1/6/3과 Markdown link target 15개의 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- [[074_DALL·E와 이산 이미지 토큰 생성]]과 [[DALL·E (2021)]]을 만들고, 256×256 RGB 이미지를 32×32=1,024개 이산 token으로 압축하는 dVAE, 최대 256개 text token과의 1,280-token joint stream, 12B·64층 decoder-only sparse Transformer와 text 1/8·image 7/8 loss를 복원했다.
+- 생성 후보 512개와 CLIP 계열 별도 대조 재순위화를 생성 model의 학습 목적·decoder와 분리했다. [[CLIP]], [[069_CLIP과 대조적 언어-이미지 사전 학습]], [[자기회귀 생성]]에는 생성 확률·표본 수·정렬 점수가 최종 선택에 들어가는 서로 다른 위치를 최소 방향 링크로 보강했다.
+- Ramesh et al. 2021 논문, OpenAI의 2021-01-05 발표 글과 공개 dVAE repository·model card를 evidence 레지스트리에 등록했다. 2.5억 pair, 1,024 V100·430,000 update, MS-COCO 사람 비교의 사실성 90.0%·caption 일치 93.3%, CUB의 약 40 FID 열세, MS-COCO 약 21%·CUB 약 12% image overlap을 조건과 함께 기록했다.
+- Raw의 무조건적인 최초성, text encoder 뒤 image decoder, 8,192 vocabulary와 1,024-token sequence의 혼동, 특정 조합의 완전 미노출, attention이 낳은 인간 수준 이해·창의성, 실제 직업 활용, FID·IS 표준화와 DALL·E 2·Stable Diffusion·Midjourney로 이어지는 공통 architecture 주장을 공개 문서에서 교정했다. 2021년 발표와 전체 model 공개를 구분하고, 전체 12B Transformer가 아니라 dVAE만 공개됐음을 명시했다.
+- 새 analysis 문서는 만들지 않았다. 생성기·대조 정렬기·후속 diffusion의 표현 비교는 084·085의 1차 자료가 갖춰진 뒤 판단한다. 다만 자기회귀 생성 가능도와 CLIP cosine similarity가 같은 후보 선택 pipeline에 들어가도 의미와 정규화 범위가 다르다는 질문은 ingest 배포 뒤 기존 [[확률, 마진, 순위 점수]]를 보강하는 별도 `content` 작업으로 이어 간다.
+
+검증 결과:
+
+- 번역 스킬 검사는 074 번역·해설 쌍을 `done: true`로 확인했고, source workflow는 두 raw artifact의 원문 URL·역할·SHA-256 일치를 확인했다.
+- 49개 회귀 테스트와 277개 위키 문서 strict lint를 통과했으며 301개 evidence 레코드와 148개 immutable raw artifact를 확인했다.
+- 사이트는 432개 페이지를 빌드해 5,696개 위키 링크와 32,520개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 276개 항목을 포함했다.
+- 공개 source·concept와 기존 문서 보강은 Ramesh et al. 2021 본문·부록, OpenAI 발표와 dVAE model card의 직접 구조·학습·평가·공개 범위 안에서 검증했다. 인간과 같은 창의성, 체계적 편향 측정, 실제 산업 생산성, 모든 후속 model의 직접 계보는 별도 근거가 필요한 범위로 남겼다.
+
 ## 관련 항목
 
 - [[index]]

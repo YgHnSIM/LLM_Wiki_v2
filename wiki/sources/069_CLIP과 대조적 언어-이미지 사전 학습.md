@@ -24,8 +24,13 @@ evidence:
   - source_id: radford-et-al-2021-clip
     locator: 'ICML 2021, §§2.1–2.5·3.1–3.4·4–6, Figures 1–5와 Table 1; Supplementary §§A–B·D–E·I, Figures 13–14와 Tables 2·4·8–10·18–20'
     relation: supports
+  - source_id: ramesh-et-al-2021-dalle
+    locator: '§2.6과 Figures 3·6·9(c)의 DALL·E 생성 후보 512개에 대한 별도 대조 모델 재순위화와 sample-pool 효과'
+    relation: supplements
 related:
   - concept.clip
+  - source.074
+  - concept.dall-e-2021
   - concept.transformer
   - concept.합성곱-신경망
   - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
@@ -132,7 +137,7 @@ class당 예제가 적어도 16개 있는 20개 데이터셋의 평균에서는 
 - **이미지 인코더는 Vision Transformer였다:** 연구진은 수정된 ResNet 다섯 개와 ViT 세 개를 모두 학습했다. 가장 좋은 보고 모델이 ViT-L/14@336px였다는 사실을 전체 모델 계열의 단일 아키텍처와 혼동하면 안 된다.
 - **제로샷은 학습 중 보지 못한 개념을 인식한다는 뜻이다:** 논문은 주로 unseen dataset과 task로의 전이라는 더 넓은 의미로 zero-shot을 사용했다. WIT에 class 이름·설명·유사 이미지가 없었다는 조건을 보장하지 않는다.
 - **CLIP 자체가 VQA와 이미지 생성을 수행했다:** CLIP은 후보 이미지와 텍스트의 유사도를 계산하는 dual encoder다. 원 논문은 VQA를 “여기서 연구한 것보다 복잡한 공동 과제”의 관련 연구로 분류했으며, CLIP에 텍스트나 이미지를 생성하는 decoder를 두지 않았다.
-- **CLIP이 DALL·E 계열을 직접 낳았다:** 2021년 CLIP 논문은 DALL·E 또는 DALL·E 2의 설계를 CLIP의 후속 계보로 입증하지 않는다. DALL·E 2가 CLIP latent를 어떻게 사용했는지는 2022년 해당 원 논문으로 별도 확인해야 한다.
+- **CLIP이 DALL·E 계열을 직접 낳았다:** [[074_DALL·E와 이산 이미지 토큰 생성]]의 1차 근거로 확인되는 직접 관계는 DALL·E 1의 자기회귀 생성 후보 512개를 CLIP 계열의 별도 대조 모델로 재순위화한 것이다. CLIP이 생성 backbone이나 image decoder였다는 뜻은 아니며, DALL·E 2의 CLIP latent 사용은 2022년 해당 원 논문으로 별도 확인해야 한다.
 - **Stable Diffusion이 CLIP에서 직접 이어졌다:** 텍스트 encoder 사용과 모델 전체의 직접 계보는 같은 주장이다. 이 관계는 Stable Diffusion·Latent Diffusion의 1차 설계 자료 없이는 이 소스만으로 확정하지 않는다.
 - **GPT-4V는 CLIP의 발상을 확장한 직접 후속이다:** 공개된 CLIP 논문은 후대 GPT-4 계열의 내부 학습 구성이나 직접 영향 관계를 증명할 수 없다. 비슷한 시각-언어 문제를 다룬다는 사실을 아키텍처 계보로 바꾸지 않는다.
 
@@ -169,12 +174,16 @@ CLIP은 class 설명을 텍스트 임베딩으로 바꾸어 사전 학습 지식
 
 - Alec Radford 외, [Learning Transferable Visual Models From Natural Language Supervision](https://proceedings.mlr.press/v139/radford21a.html), ICML 2021, 특히 §§2.1–2.5·3.1–3.4·4–6, Figures 1–5와 Table 1.
 - Alec Radford 외, [Supplementary Material](https://proceedings.mlr.press/v139/radford21a/radford21a-supp.pdf), 특히 §§A–B·D–E·I, Figures 13–14와 Tables 2·4·8–10·18–20.
+- [[074_DALL·E와 이산 이미지 토큰 생성]]
+- Aditya Ramesh 외, [Zero-Shot Text-to-Image Generation](https://proceedings.mlr.press/v139/ramesh21a.html), ICML 2021, §2.6과 Figures 3·6·9(c).
 - 프로젝트 번역·검토 출발 자료: [CLIP: Contrastive Language-Image Pre-training for Multimodal Understanding](https://mbrenndoerfer.com/writing/clip-contrastive-language-image-pretraining-multimodal).
 - 프로젝트 보존 자료: `raw/069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md`, `raw/069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md`.
 
 ## 관련 항목
 
 - [[CLIP]]
+- [[074_DALL·E와 이산 이미지 토큰 생성]]
+- [[DALL·E (2021)]]
 - [[Transformer]]
 - [[합성곱 신경망]]
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]]

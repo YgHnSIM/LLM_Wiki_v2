@@ -1314,3 +1314,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/the-pile-open-source-training-dataset-large-language-models
     sha256: 2833650f8cfb9ae7436b776abcca38087d006f92b97a189ac0390022b7a33559
+  - path: "raw/074_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md"
+    role: translation
+    order_prefix: "074"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/dalle-text-to-image-generation-transformer
+    sha256: 6256193030dc1b2933670f7eb2690e064c18093aa57d970999e8007cfcd48ea7
+  - path: "raw/074_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md"
+    role: commentary
+    order_prefix: "074"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/dalle-text-to-image-generation-transformer
+    sha256: 2a439e911bbc6750ab9527e9bbde87c717a41f056023b86c4ec13313d01dd21c

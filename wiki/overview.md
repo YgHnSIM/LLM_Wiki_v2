@@ -24,7 +24,7 @@ related:
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 73개, concept 149개, entity 29개, analysis 21개를 합친 비메타 문서 272개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 74개, concept 150개, entity 29개, analysis 21개를 합친 비메타 문서 274개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -47,7 +47,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 73개 소스의 범위
+## 74개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -122,6 +122,7 @@ related:
 - [[071_지시 미세조정과 FLAN의 제로샷 일반화]]는 62개 데이터셋·12개 과제 군집을 자연어 지시로 미세조정한 137B FLAN을 복원하고, 군집별 별도 checkpoint·template 선택·모델 규모 효과와 최초 발명·보편적 향상·안전 정렬 주장의 경계를 검증한다.
 - [[072_GLaM에서 Mixtral까지의 희소 MoE 확장]]은 2024년 단일 돌파 서사를 GLaM의 1.2T/96.6B와 Mixtral의 46.7B/12.9B total/active 장부로 교정하고, 공개 가중치·memory·routing·benchmark 비교의 조건을 검증한다.
 - [[073_The Pile과 대규모 언어 모델 학습 말뭉치]]는 22개 영어 중심 component의 825.18 GiB raw·1,254.20 GiB effective mixture를 복원하고, Pile-wide dedupulation 부재·40GB 통제 비교·권리와 동의·재현성의 경계를 검증한다.
+- [[074_DALL·E와 이산 이미지 토큰 생성]]은 256×256 이미지를 1,024개 이산 토큰으로 압축해 text와 공동 자기회귀 모델링한 12B sparse Transformer를 복원하고, 대조 재순위화·MS-COCO/CUB 평가·중복·공개 범위와 인간 창의성·후대 직선 계보의 경계를 검증한다.
 
 ## 현재 핵심 주제
 
@@ -177,6 +178,7 @@ related:
 - [[Mixtral 8x7B]]에서 구분하는 46.7B total·12.9B active parameters, 8개 중 top-2, Apache 2.0 공개 가중치와 topic expert가 아닌 routing locality
 - [[총 매개변수와 활성 계산량은 같은 축인가]]에서 비교하는 dense non-embedding $N$, sparse total·active parameters, FLOPs·memory·communication·wall-clock·data·quality와 논문 안/논문 사이 비교 경계
 - [[CLIP]]에서 구분하는 이미지·텍스트 이중 인코더, 정규화된 shared embedding과 대칭 대조 손실, class prompt로 합성한 zero-shot classifier 및 cross-attention·생성 능력의 부재
+- [[DALL·E (2021)]]에서 구분하는 dVAE의 8,192개 범주 시각 어휘·1,024개 이미지 토큰, 최대 256개 text token과의 공동 자기회귀 분포, 512개 후보 생성과 별도 대조 재순위화
 - [[OpenAI Codex (2021)]]에서 구분하는 연구용 Python 코드 모델군, Codex-S의 함수 분포 지도 미세조정, docstring prompt와 표본 생성·실행 선택 및 현행 동명 제품
 - [[N-gram에서 LLM으로]]에서 비교하는 Katz의 표면 문맥 확률 재분배와 NPLM의 연속 표현 매개변수 공유
 - [[BM25]]의 희소 용어 가중, 문서 내 빈도 포화, 평균 문서 길이 보정과 보정된 관련성 확률이 아닌 순위 점수라는 해석
@@ -236,6 +238,8 @@ related:
 - [[Mixtral 8x7B]]
 - [[073_The Pile과 대규모 언어 모델 학습 말뭉치]]
 - [[The Pile]]
+- [[074_DALL·E와 이산 이미지 토큰 생성]]
+- [[DALL·E (2021)]]
 - [[데이터 품질과 분포 다양성은 같은 축인가]]
 - [[전문가 혼합]]
 - [[총 매개변수와 활성 계산량은 같은 축인가]]
@@ -352,7 +356,9 @@ related:
 
 ## 현재 상태
 
-소스 73개, 개념 149개, 개체 29개, 분석 21개와 메타 문서 3개, 총 275개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 245개는 `verified`, 해석적 문서 27개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 298개 외부 근거와 146개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 74개, 개념 150개, 개체 29개, 분석 21개와 메타 문서 3개, 총 277개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 247개는 `verified`, 해석적 문서 27개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 301개 외부 근거와 148개 불변 raw artifact가 레지스트리에 등록돼 있다.
+
+`074`의 2021년 제품·전체 weight 공개, 텍스트 encoder 뒤 이미지 decoder, 8,192개 image token, 특정 조합의 훈련 중 완전 미노출, attention이 만든 인간 수준 구성 이해·창의성, 광범위한 실제 직업 활용, FID·IS 표준화와 모든 후속 이미지 모델의 공통 architecture 주장을 공개 문서에서 교정했다. DALL·E 1은 8,192개 범주의 시각 어휘에서 1,024개 image token을 만들고 최대 256개 text token과 공동 분포를 학습한 12B·64층 decoder-only sparse Transformer였다. 대표 비교는 512개 후보를 별도 대조 모델로 재순위화했으며, MS-COCO 사람 비교에서는 강했지만 CUB FID는 선행 최고 방법보다 거의 40점 나빴다. 전체 12B 생성 모델은 공개되지 않았고 dVAE만 공개됐다.
 
 [[데이터 품질과 분포 다양성은 같은 축인가]]는 WebText의 Reddit 승인 proxy, C4의 heuristic filter와 domain-aligned corpus 비교, GPT-3의 curated-similarity filter·source weighting, The Pile의 22-component mixture와 40GB 통제 실험을 함께 읽는다. 품질은 형식·중복·출처 proxy·과제 적합성·사실·안전·권리의 벡터이고, 다양성은 domain support와 sampling probability의 설계이므로 한 순위로 합치지 않는다. T5 Table 8과 Pile Table 3의 과제별 순위 변화를 직접 근거로 두되, filter·composition·weight의 단독 인과는 입증되지 않은 범위로 남겼다.
 
@@ -360,7 +366,7 @@ related:
 
 `070`의 2021년 8월 단일 최초 공개, 175B GPT-3의 그대로인 코드 모델, 여러 언어·프레임워크·대규모 저장소 이해, 의미·예외 처리의 일반적 보장, test 작성·교육·온보딩·생산성·오류 감소의 직접 실험, 공개 코드의 license 문제 해결과 수학·과학·법률 특화 모델로의 직접 계보 주장도 공개 문서에서 교정했다. 연구 Codex는 최대 12B, 필터링된 Python 159GB와 1,000억 token 조건이었고 HumanEval은 164개 독립 함수·평균 7.7개 test였다. Table 1의 Codex-12B pass@1 28.81%와 pass@100 72.31%, Codex-S의 단일 표본 37.7%·평균 log-probability 선택 44.5%·unit-test oracle 77.5%를 서로 다른 생성·선택 조건으로 기록했다.
 
-`069`의 일반 멀티모달 이해·ViT 단일 image encoder·학습에서 전혀 보지 않은 class라는 zero-shot 해석, 조합·공간 관계와 VQA·style transfer·generation의 단독 수행, DALL·E·Stable Diffusion·GPT-4V로 이어지는 일괄 직접 계보, fine-grained task의 일률적 실패 및 `256 V100·18일` 계산량 결합도 공개 문서에서 교정했다. CLIP은 수정 ResNet 5종과 ViT 3종, Transformer text encoder를 대칭 대조 손실로 공동 학습하고 class prompt를 분류기 weight처럼 쓴다. ImageNet 76.2%는 원 ResNet-50과의 비교이며, RN50x64는 592 V100·18일, ViT-L/14는 256 V100·12일이었다.
+`069`의 일반 멀티모달 이해·ViT 단일 image encoder·학습에서 전혀 보지 않은 class라는 zero-shot 해석, 조합·공간 관계와 VQA·style transfer·generation의 단독 수행, DALL·E·Stable Diffusion·GPT-4V로 이어지는 일괄 직접 계보, fine-grained task의 일률적 실패 및 `256 V100·18일` 계산량 결합도 공개 문서에서 교정했다. CLIP은 수정 ResNet 5종과 ViT 3종, Transformer text encoder를 대칭 대조 손실로 공동 학습하고 class prompt를 분류기 weight처럼 쓴다. ImageNet 76.2%는 원 ResNet-50과의 비교이며, RN50x64는 592 V100·18일, ViT-L/14는 256 V100·12일이었다. `074`의 1차 근거로 DALL·E 1에서의 직접 관계는 생성 backbone이 아니라 512개 후보의 별도 대조 재순위화였음을 추가로 확인했으며, 후속 diffusion·잠재 공간 계보는 각 후속 논문까지 유보한다.
 
 `067`의 DPR·RAG 단일 발명 서사, BM25를 정확 일치로만 보는 대조, 최소 표지 자료·보편 우월·조건 없는 billion-scale 지연 시간, RAG의 GPT-2 생성기·passage 직접 감독·전체 색인 공동 학습, Sequence/Token 주변화와 비용의 혼동, 실시간 최신성·자동 인용·법률·의료·뉴스·다문서 요약의 직접 검증 주장도 공개 문서에서 교정했다. DPR의 SQuAD 예외, 원 RAG의 BART-large와 고정된 2018 Wikipedia 색인, query encoder만 포함한 검색기 학습, 82개 world-leader hot-swap 및 검색 passage와 claim-level citation의 차이를 함께 기록했다.
 

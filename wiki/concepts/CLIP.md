@@ -21,12 +21,19 @@ verification: verified
 artifacts:
   - 'raw/069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md'
   - 'raw/069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md'
+  - 'raw/074_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md'
+  - 'raw/074_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md'
 evidence:
   - source_id: radford-et-al-2021-clip
     locator: 'PMLR 139, pp. 8748–8763의 §§2.1–2.5·Figures 1–3, §§3–6·Figures 4–7과 supplement §§A–B·D–E·I, Tables 2·4·8–10·18–20의 WIT·dual encoder·대칭 대조 손실·zero-shot classifier·prompt ensemble·dataset·overlap·bias·학습 및 평가 조건'
     relation: supports
+  - source_id: ramesh-et-al-2021-dalle
+    locator: '§2.6과 Figures 3·6·9(c)의 별도 대조 모델을 이용한 512개 생성 후보 재순위화와 sample-pool 크기별 FID·IS 변화'
+    relation: supplements
 related:
   - source.069
+  - source.074
+  - concept.dall-e-2021
   - concept.transformer
   - concept.합성곱-신경망
   - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
@@ -116,6 +123,12 @@ ViT-L/14@336px의 ImageNet zero-shot top-1 accuracy는 76.2%로, ImageNet의 128
 
 27개 suite에서는 zero-shot CLIP이 고정 ResNet-50 특징 위에 학습한 지도 logistic regression보다 16개 데이터셋에서 높았다. 반면 fully supervised linear probe와 zero-shot의 차이는 데이터셋마다 컸고, zero-shot 성능이 같은 CLIP 특징의 4-shot logistic regression과 맞먹었다는 결과는 20개 데이터셋의 평균 비교다.
 
+### DALL·E에서는 생성기가 아니라 후보 재순위기다
+
+[[074_DALL·E와 이산 이미지 토큰 생성]]의 DALL·E 1은 텍스트와 이미지 토큰의 자기회귀 Transformer로 후보를 생성했다. 그 뒤 CLIP과 같은 대조 학습 절차의 별도 모델이 caption과 후보 이미지의 일치 점수를 계산해 512개 가운데 상위 표본을 골랐다.
+
+따라서 대조 임베딩은 생성기의 decoder나 학습 backbone이 아니다. [[DALL·E (2021)]]의 최종 표본 품질에는 생성 분포·표본 수·재순위 점수가 함께 작용하며, CLIP 계열 점수를 사용했다는 사실만으로 CLIP 자체에 이미지 생성 능력이 생기지는 않는다.
+
 ## 검증과 한계
 
 ### ‘제로샷’이 보장하는 것
@@ -152,12 +165,17 @@ Prompt wording과 후보 클래스 설계는 정확도와 편향을 함께 바�
 ## 출처
 
 - [[069_CLIP과 대조적 언어-이미지 사전 학습]]
+- [[074_DALL·E와 이산 이미지 토큰 생성]]
 - Alec Radford 외, [Learning Transferable Visual Models From Natural Language Supervision](https://proceedings.mlr.press/v139/radford21a.html), ICML 2021, PMLR 139:8748–8763, 특히 §§2.1–2.5, Figures 1–3, §§3–6, Figures 4–7과 supplementary §§A–B·D–E·I, Tables 2·4·8–10·18–20.
+- Aditya Ramesh 외, [Zero-Shot Text-to-Image Generation](https://proceedings.mlr.press/v139/ramesh21a.html), ICML 2021, §2.6과 Figures 3·6·9(c).
 - 프로젝트 보존 자료: `raw/069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md`, `raw/069_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md`.
+- 추가 보존 자료: `raw/074_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md`, `raw/074_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md`.
 
 ## 관련 항목
 
 - [[069_CLIP과 대조적 언어-이미지 사전 학습]]
+- [[074_DALL·E와 이산 이미지 토큰 생성]]
+- [[DALL·E (2021)]]
 - [[Transformer]]
 - [[합성곱 신경망]]
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]]

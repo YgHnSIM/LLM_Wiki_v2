@@ -2493,6 +2493,31 @@ sources:
     kind: conference-paper
     url: https://proceedings.mlr.press/v139/radford21a.html
     language: en
+  ramesh-et-al-2021-dalle:
+    title: Zero-Shot Text-to-Image Generation
+    authors: [Aditya Ramesh, Mikhail Pavlov, Gabriel Goh, Scott Gray, Chelsea Voss, Alec Radford, Mark Chen, Ilya Sutskever]
+    published: 2021
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2102.12092
+    url: https://proceedings.mlr.press/v139/ramesh21a.html
+    language: en
+  openai-2021-dalle:
+    title: 'DALL·E: Creating images from text'
+    authors: [OpenAI]
+    published: 2021
+    source_type: primary-release
+    kind: official-blog
+    url: https://openai.com/index/dall-e/
+    language: en
+  openai-2021-dalle-dvae:
+    title: Discrete VAE model and model card for DALL·E
+    authors: [OpenAI]
+    published: 2021
+    source_type: primary-release
+    kind: software-archive
+    url: https://github.com/openai/DALL-E
+    language: en
   chen-et-al-2021-codex:
     title: Evaluating Large Language Models Trained on Code
     authors: [Mark Chen, Jerry Tworek, Heewoo Jun, Qiming Yuan, Henrique Ponde de Oliveira Pinto, Jared Kaplan, Harri Edwards, Yuri Burda, Nicholas Joseph, Greg Brockman, Alex Ray, Raul Puri, Gretchen Krueger, Michael Petrov, Heidy Khlaaf, Girish Sastry, Pamela Mishkin, Brooke Chan, Scott Gray, Nick Ryder, Mikhail Pavlov, Alethea Power, Lukasz Kaiser, Mohammad Bavarian, Clemens Winter, Philippe Tillet, Felipe Petroski Such, Dave Cummings, Matthias Plappert, Fotios Chantzis, Elizabeth Barnes, Ariel Herbert-Voss, William Hebgen Guss, Alex Nichol, Alex Paino, Nikolas Tezak, Jie Tang, Igor Babuschkin, Suchir Balaji, Shantanu Jain, William Saunders, Christopher Hesse, Andrew N. Carr, Jan Leike, Josh Achiam, Vedant Misra, Evan Morikawa, Alec Radford, Matthew Knight, Miles Brundage, Mira Murati, Katie Mayer, Peter Welinder, Bob McGrew, Dario Amodei, Sam McCandlish, Ilya Sutskever, Wojciech Zaremba]
