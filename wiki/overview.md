@@ -427,6 +427,8 @@ related:
 
 [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]]와 [[LLaMA 1]]은 7B·13B의 1.0T token, 33B·65B의 1.4T token 학습을 모든 규모의 보편 20:1 규칙이 아니라 training-compute optimum을 지나 더 작은 inference parameter footprint를 노린 선택으로 복원했다. 실제 token/parameter는 약 149·77·43·21.5이며, RMSNorm·SwiGLU·RoPE는 선행 기법이고 구성요소별 ablation도 없으므로 성능을 어느 하나의 발명·단독 인과로 돌리지 않는다. 최초 weight 배포는 신청 승인과 noncommercial research license가 붙었고, base LLaMA·제한적 LLaMA-I 실험·후속 Llama 2를 서로 다른 artifact와 세대로 구분한다.
 
+[[공개 가중치와 재현 가능성은 같은 축인가]]는 이 배포를 BLOOM·ROOTS·RAIL과 함께 읽어 공개성을 법적·절차적 접근, 검사, 변형, 재배포, 재현, 실행 비용과 거버넌스의 일곱 축으로 확장했다. BLOOM의 RAIL 조건 직접 접근과 LLaMA 1의 신청 승인형 비상업 연구 접근은 모두 weight-level 검증을 열지만, 받을 수 있는 주체·파생물·재배포 권리와 동일 corpus·training pipeline·compute의 재현 범위가 다르다. 13B single-V100 추론을 65B의 1,022,362 GPU-hour 학습이나 전체 개발 1,015 tCO2eq와 같은 접근성 주장으로 합치지 않는다.
+
 [[088_FlashAttention과 IO 인지형 정확 어텐션]]과 [[FlashAttention]]은 dense softmax attention의 수학을 바꾸지 않고 HBM–SRAM 사이의 데이터 이동을 줄이는 실행을 복원했다. 온라인 softmax는 tile별 행 최댓값·정규화 합·출력 누산값을 재조정하고, backward는 저장하지 않은 score·probability block을 다시 계산한다. 표준 구현의 $O(n^2)$ 중간 저장은 $O(n)$ 추가 메모리로 줄지만 $O(n^2d)$ 산술량과 model weight·KV cache는 남으며, `exact`도 부동소수점 bitwise 동일성을 뜻하지 않는다. Figure 2의 더 많은 FLOPs·더 적은 HBM 읽기·쓰기량·더 짧은 시간, kernel 속도와 end-to-end 속도, dense 정확 방식과 별도 block-sparse 근사, FlashAttention 1·2·3의 version 경계를 각각 분리했다.
 
 [[훈련 병렬성과 생성 순차성은 다른 축이다]]는 이 사례를 기존 RNN·WaveNet·Transformer·Transformer-XL 비교에 합성했다. 표현 계산의 위치 의존, teacher forcing, 실제 token sampling의 순차 round와 함께 FLOPs·메모리 capacity·HBM 읽기·쓰기량·wall-clock을 별도 성능 축으로 둔다. NeurIPS 최종본 Figure 2에서 FlashAttention은 66.6→75.2 GFLOPs로 산술을 늘리면서 HBM R/W를 35.3→4.4GB, runtime을 35.1→11.7ms로 줄였으므로, 같은 dense operator에서도 algorithm·kernel·hardware 조건이 성능 장부를 바꾼다는 비교 근거가 된다.

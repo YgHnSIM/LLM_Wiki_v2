@@ -3610,6 +3610,22 @@ raw 등록 해시:
 - `source:ready -- 089`은 96개 회귀 테스트와 307개 Markdown strict lint를 통과해 337개 evidence와 178개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 591개 HTML을 만들고 6,725개 wiki link를 모두 해소했다.
 - 다음 순차 입력은 공식 090 `Open LLM Wave: The Proliferation of High-Quality Open-Source Language Models`다. BLOOM의 공개 weight·RAIL과 LLaMA 1의 신청 승인형 비상업 배포가 재현 가능성의 어떤 서로 다른 층을 여는지는 ingest 원격 반영 뒤 기존 분석에 별도 content 변경으로 합성한다.
 
+## [2026-07-22] content | 승인형 가중치 접근과 재현 가능성의 분리
+
+변경 내용:
+
+- 새 분석 문서를 늘리지 않고 기존 [[공개 가중치와 재현 가능성은 같은 축인가]]를 공식 089까지 확장했다. The Pile·파운데이션 모델 보고서·BLOOM/ROOTS/RAIL·HELM 비교에 LLaMA 1을 추가해 `공개`를 법적·절차적 접근, 검사, 변형, 재배포, 재현, 실행 비용과 거버넌스의 일곱 축으로 나눴다.
+- BLOOM의 RAIL 조건 직접 접근과 LLaMA 1의 신청자별 승인·noncommercial research license를 별도 표로 비교했다. 둘 다 weight-level 연구를 열지만 누가 받을 수 있는지, 상업 이용·파생물·재배포 조건, data·code·환경과 compute가 어디까지 고정되는지는 같지 않다.
+- LLaMA 1의 13B single-V100 inference, 65B 최종 학습 1,022,362 GPU-hour와 전체 개발 1,015 tCO2eq 추정을 같은 실행 장부에 놓았다. 작은 checkpoint의 추론 접근성이 exact pretraining 재현이나 계산 자원 배분을 보장하지 않는다는 경계를 명시했다.
+- Base LLaMA 1, 논문 §4의 제한적 LLaMA-I 실험과 후속 Llama 2의 artifact·license version을 분리했다. 후속 생태계를 LLaMA 1의 직접 인과로 단정하거나 승인 심사가 위험을 실제로 줄였다는 효과는 입증되지 않은 범위로 남겼다.
+- 공식 089 raw 두 파일과 Touvron 등의 논문·Meta 발표 evidence를 분석의 artifacts·evidence·related에 연결하고 [[index]]·[[overview]]의 설명을 동기화했다.
+
+검증 경계:
+
+- Weight 접근은 model identity를 고정해 probing·허용된 adaptation을 돕지만, 동일 corpus snapshot·전체 training pipeline·software/hardware 환경·seed·대규모 compute의 결손을 대신하지 않는다.
+- RAIL의 use restriction과 LLaMA 1의 신청 승인형 비상업 조건을 `open/closed` 한 단어로 순위화하지 않는다. 법적 접근과 실제 실행 능력, 독립 검증 가치와 exact retraining은 각각 다른 성취다.
+- 전체 검증은 96개 회귀 테스트와 307개 Markdown strict lint를 통과해 337개 evidence와 178개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 591개 HTML을 만들고 6,736개 wiki link를 모두 해소했다.
+
 ## 관련 항목
 
 - [[index]]
