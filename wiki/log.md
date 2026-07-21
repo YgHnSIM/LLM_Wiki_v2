@@ -3061,6 +3061,23 @@ raw 등록 해시:
 - 사이트는 436개 페이지를 빌드해 5,764개 위키 링크와 32,864개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 278개 항목을 포함했다.
 - 공개 source·concept는 Bommasani et al. arXiv v3의 정의·생태계·평가·사회 절과 BERT·GPT-3·CLIP 원 논문의 적응 범위 안에서 검증했다. 파운데이션 모델 용어의 후대 정책·투자 인과, 모든 downstream system의 동일한 결함 전파와 보편적 능력은 별도 근거가 필요한 범위로 남겼다.
 
+## [2026-07-21] content | 파운데이션 모델의 적응 층위와 창발 용어
+
+변경 내용:
+
+- 새 analysis를 만들지 않고 기존 [[사전 학습 지식은 과제에 어떻게 도착하는가]]와 [[손실 곡선과 능력 곡선 사이]]를 보강했다. `075`의 질문은 새 비교 문서보다 두 분석의 기존 축을 직접 확장하므로 중복을 피했다.
+- 전이 분석에는 [[파운데이션 모델]]이 열두 번째 adaptation algorithm이나 model-size 구간이 아니라, feature extraction·full fine-tuning·prompt·instruction·class prototype·실행 선택을 공통 기반–적응–배포 관계로 읽게 하는 상위 범주임을 추가했다.
+- Foundation checkpoint, adapted model, deployed system 가운데 성능·실패를 관측한 층과, 적응자가 model-parameter gradient·continuous-input gradient·output-only API 가운데 어느 수준에 접근했는지를 별도 장부로 추가했다. 같은 기반을 사용해도 adaptation data·retrieval·tool·policy·UI에 따라 결과가 달라질 수 있음을 명시했다.
+- 창발 분석에는 [[075_파운데이션 모델 보고서와 AI 생태계]]의 2021년 `emergence`와 Wei et al. 2022의 `emergent ability`를 분리했다. 전자는 행동이 명시적으로 구성되지 않고 학습에서 암묵적으로 유도된다는 넓은 연구 의제이고, 후자는 작은 규모에 없다가 큰 규모에서 관찰되어 작은-model 곡선으로 예측하기 어려운 task-level 판정이다.
+- Bommasani 등은 GPT-3의 in-context learning을 scale과 연결된 창발 사례로 들었지만, parameter 축의 촘촘한 curve·benchmark 불연속·보편 임계 규모를 직접 입증하지 않았다는 경계를 추가했다.
+- 두 분석에 075 raw artifact 쌍과 기존 `bommasani-et-al-2021-foundation-models` evidence를 연결하고, [[index]]와 [[overview]]의 근거 수·설명·현재 상태를 갱신했다.
+
+검증 결과:
+
+- 49개 회귀 테스트와 279개 위키 문서 strict lint를 통과했으며 302개 evidence 레코드와 150개 immutable raw artifact를 확인했다.
+- 사이트는 436개 페이지를 빌드해 5,782개 위키 링크와 32,888개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 278개 항목을 포함했다.
+- 파운데이션 모델의 정의·model/system 경계·adaptation access와 2021년 emergence 용례는 Bommasani et al. v3 §§1–1.2·4.3의 직접 사실이다. 이를 기존 전이 경로의 상위 범주로 읽고 두 창발 정의를 측정 계보로 연결한 부분은 비교를 통한 합성 해석이므로 `verification: partial`을 유지했다.
+
 ## 관련 항목
 
 - [[index]]

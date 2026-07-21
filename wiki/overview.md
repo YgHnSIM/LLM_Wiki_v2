@@ -172,7 +172,7 @@ related:
 - [[데이터 품질과 분포 다양성은 같은 축인가]]에서 분리하는 문서 입장 filter, domain support, sampling weight와 평가 분포 및 quality proxy의 인과 한계
 - [[문맥 내 학습]]에서 구분하는 고정 가중치, instruction·demonstration·query의 입력 조건화, zero·one·few-shot과 가중치를 갱신하는 지시 미세조정의 지속성 차이
 - [[지시 미세조정]]에서 구분하는 여러 과제의 지시–출력 supervision, 평가 군집 보류, 고정된 가중치의 문맥 내 학습 및 선호 기반 RLHF와의 경계
-- [[손실 곡선과 능력 곡선 사이]]에서 분리하는 평균 token cross-entropy, downstream exact match·accuracy, 능력 threshold와 metric·표본·관측 scale, FLAN 규모별 adaptation 효과
+- [[손실 곡선과 능력 곡선 사이]]에서 분리하는 2021년의 암묵적으로 유도된 행동이라는 넓은 창발, 2022년의 규모별 emergent ability, 평균 token cross-entropy·task score·능력 threshold와 metric·표본·관측 scale
 - [[검색은 근거를 찾고 독해는 답을 찾는다]]에서 분리하는 컬렉션→후보 retrieval recall, 후보→답 EM·F1·faithfulness, 답→행동 기권 calibration과 oracle reader 진단
 - [[검색 증강 생성]]에서 구분하는 원 RAG의 DPR–BART 잠재 문서 주변화, 고정 document encoder·색인과 학습되는 query encoder, 검색 provenance와 claim-level citation의 차이
 - [[전문가 혼합]]에서 구분하는 total parameters·token당 active expert, shared Transformer 경로, top-$k$ routing·capacity·load balancing과 memory·all-to-all communication 비용
@@ -212,7 +212,7 @@ related:
 - [[잔차 경로와 정규화는 어디에 놓이는가]]에서 비교하는 ResNet post-/pre-activation과 Transformer Post-/Pre-LN, additive identity path 위에 activation·normalization Jacobian을 둘 때의 최적화 차이
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]]에서 비교하는 RNN hidden-state 의존, WaveNet causal convolution, Transformer masked attention의 teacher-forced 훈련과 실제 sampling 차이
 - [[Transformer-XL]]에서 구분하는 현재 segment 내부 병렬 계산, segment 사이 forward memory 재사용, stop-gradient로 끊긴 학습 경로와 설정된 memory 길이
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]에서 비교하는 ELMo 고정 특징, ULMFiT 영역·분류 적응, BERT·GPT-1 전체 미세조정, GPT-2 입력 cue, XLM 언어 공유, T5 공통 text output, GPT-3 demonstration, FLAN 다과제 지시, CLIP class prompt와 Codex 실행 선택의 과제 명세 위치
+- [[사전 학습 지식은 과제에 어떻게 도착하는가]]에서 비교하는 ELMo 고정 특징, 전체 미세조정, 입력 cue·demonstration, 다과제 지시, CLIP class prompt와 Codex 실행 선택 및 foundation model–adapted model–deployed system의 층위·접근권
 - [[자동 평가 지표는 무엇을 보상하는가]]에서 비교하는 BLEU·ROUGE·METEOR의 참조 중첩과 HumanEval unit test의 기능 정확성, pass@k가 함께 측정하는 모델·표본 예산·선택 oracle
 - [[XLM]]의 monolingual CLM·MLM과 parallel-data TLM, shared BPE·언어 sampling 및 target-language text와 task label을 분리한 zero-shot 조건
 - [[같은 병렬 문장은 무엇을 학습시키는가]]에서 비교하는 SMT의 잠재 단어 정렬, NMT의 target sequence supervision, TLM의 양방향 masked-token 문맥과 서로 다른 alignment 층위
@@ -364,6 +364,8 @@ related:
 
 `075`의 파운데이션 모델을 최소한의 과제별 학습을 쓰는 큰 LLM으로만 정의하는 축약, GPT-4의 2021년 사례 소급, 접근 민주화의 달성, 광범위한 지식·추론의 보편적 보장, 추론 환경비용 누락과 연구·정책·투자에 대한 직접 인과를 공개 문서에서 교정했다. 2021년 보고서의 정의는 광범위한 데이터로 대규모 훈련해 여러 후속 과제에 적응되는 역할을 가리키며, BERT의 전체 미세조정·GPT-3의 prompt·CLIP의 자연어 class 적응처럼 서로 다른 경로를 포함한다. 창발은 암묵적으로 유도된 행동이라는 넓은 뜻이고, 동질화는 공통 기반의 개선과 결함을 여러 응용으로 함께 전파하는 구조다. 보고서 §5.3은 훈련뿐 아니라 반복 추론·배포 energy와 훈련비용 상각도 이미 다뤘다.
 
+[[사전 학습 지식은 과제에 어떻게 도착하는가]]에는 파운데이션 모델이 열두 번째 adaptation algorithm이 아니라 기존 경로를 공통 기반–적응–배포 관계로 읽는 상위 범주라는 점을 추가했다. Model-parameter gradient·continuous-input gradient·output-only API 접근권과 foundation checkpoint·adapted model·deployed system의 관측 층위를 분리했다. [[손실 곡선과 능력 곡선 사이]]에는 Bommasani 등의 2021년 emergence가 암묵적으로 유도된 행동이라는 넓은 연구 의제이고, Wei 등의 2022년 emergent ability는 작은 규모에 없다가 큰 규모에서 관찰되는 task-level 판정이라는 용어 차이를 기록했다.
+
 `074`의 2021년 제품·전체 weight 공개, 텍스트 encoder 뒤 이미지 decoder, 8,192개 image token, 특정 조합의 훈련 중 완전 미노출, attention이 만든 인간 수준 구성 이해·창의성, 광범위한 실제 직업 활용, FID·IS 표준화와 모든 후속 이미지 모델의 공통 architecture 주장을 공개 문서에서 교정했다. DALL·E 1은 8,192개 범주의 시각 어휘에서 1,024개 image token을 만들고 최대 256개 text token과 공동 분포를 학습한 12B·64층 decoder-only sparse Transformer였다. 대표 비교는 512개 후보를 별도 대조 모델로 재순위화했으며, MS-COCO 사람 비교에서는 강했지만 CUB FID는 선행 최고 방법보다 거의 40점 나빴다. 전체 12B 생성 모델은 공개되지 않았고 dVAE만 공개됐다.
 
 [[확률, 마진, 순위 점수]]에는 DALL·E의 다음 image token 조건부분포와 CLIP 계열 scaled cosine 재순위 점수를 추가했다. 전자는 매 위치 8,192개 범주에서 정규화돼 후보 풀을 표본화하고, 후자는 이미 생성된 512개 후보 안의 순서를 정한다. 1/8·7/8은 modality 확률이 아니라 손실 가중치이고, 512는 신뢰도가 아니라 후보 탐색 예산이라는 경계를 기록했다.
@@ -378,7 +380,7 @@ related:
 
 `067`의 DPR·RAG 단일 발명 서사, BM25를 정확 일치로만 보는 대조, 최소 표지 자료·보편 우월·조건 없는 billion-scale 지연 시간, RAG의 GPT-2 생성기·passage 직접 감독·전체 색인 공동 학습, Sequence/Token 주변화와 비용의 혼동, 실시간 최신성·자동 인용·법률·의료·뉴스·다문서 요약의 직접 검증 주장도 공개 문서에서 교정했다. DPR의 SQuAD 예외, 원 RAG의 BART-large와 고정된 2018 Wikipedia 색인, query encoder만 포함한 검색기 학습, 82개 world-leader hot-swap 및 검색 passage와 claim-level citation의 차이를 함께 기록했다.
 
-[[손실 곡선과 능력 곡선 사이]]는 Kaplan의 평균 token cross-entropy, Brown의 task별 GPT-3 곡선, Wei의 창발 정의, Schaeffer의 metric·표본 해상도 반론을 함께 읽는다. 급격한 task score만으로 내부 질적 전환을 확정할 수 없다는 결론과, metric 효과만으로 모든 창발 가능성을 부정할 수도 없다는 한계를 함께 기록했다.
+[[손실 곡선과 능력 곡선 사이]]는 Bommasani의 넓은 emergence, Kaplan의 평균 token cross-entropy, Brown의 task별 GPT-3 곡선, Wei의 emergent ability 정의와 Schaeffer의 metric·표본 해상도 반론을 함께 읽는다. 암묵적으로 유도된 행동에서 benchmark 불연속을 바로 추론하지 않으며, 급격한 task score만으로 내부 질적 전환을 확정할 수도 없고 metric 효과만으로 모든 창발 가능성을 부정할 수도 없다는 한계를 기록했다.
 
 `066`의 GPT-2 대비 10배라는 비교 대상 오류, 문맥 내 학습의 내부 메커니즘 확정, 미세조정 제거와 광범위한 고정밀 성능, 175B에서의 불연속 창발, code benchmark·API 민주화·prompt engineering 산업·구체 훈련비와 후대 모델의 직접 계보 주장도 공개 문서에서 교정했다. zero·one·few-shot의 demonstration 수와 가중치 고정, SuperGLUE 71.8 대 fine-tuned 최고 89.0, TriviaQA 71.2, 자리수별 산술 exact match와 contamination filtering bug를 함께 기록했다.
 
