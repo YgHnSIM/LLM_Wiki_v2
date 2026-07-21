@@ -21,6 +21,8 @@ artifacts:
   - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
   - raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.ko.md
   - raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.commentary.ko.md
+  - raw/079_HELM Holistic Evaluation of Language Models Framework.ko.md
+  - raw/079_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md
 evidence:
   - source_id: turing-1950
     locator: 'pp. 433–460, §§1–7'
@@ -46,6 +48,9 @@ evidence:
   - source_id: bender-koller-2020
     locator: 'pp. 5185–5198, 특히 초록, §§1–2와 §3.1'
     relation: contextualizes
+  - source_id: liang-et-al-2023-helm
+    locator: '초록, §§1.1–1.2·3–8·10–11, Tables 4–6·8·13과 Appendices A·C·F–J의 시나리오·적응·메트릭·평가 범위와 한계'
+    relation: contextualizes
 related:
   - concept.튜링-테스트
   - concept.모방-게임
@@ -59,6 +64,8 @@ related:
   - concept.eliza-효과
   - analysis.eliza에서-llm으로
   - source.016
+  - source.079
+  - concept.helm
   - entity.존-설
 ---
 # 튜링 테스트와 LLM 평가
@@ -116,6 +123,14 @@ Harnad의 1990년 기호 접지 논문은 형식 기호의 해석을 감각적 �
 
 튜링 테스트는 인간 유사성을 평가하지만, 실제 AI 시스템에서는 인간처럼 보이는지보다 어떤 조건에서 믿고 사용할 수 있는지가 더 중요할 수 있다. 따라서 현대 LLM 평가는 대화 자연스러움뿐 아니라 정확성, 근거 제시, 일관성, 안전성, 특정 과업 성능, 도구 사용 능력 등을 함께 봐야 한다.
 
+### HELM이 명시한 평가 조건
+
+Liang 등의 [[079_HELM과 다차원 언어 모델 평가|HELM]]은 평가 단위를 **시나리오–적응–메트릭**으로 구조화했다. 시나리오는 과제·도메인·언어로 사용 조건을 정하고, 적응은 prompt·문맥 예시·답안 형식과 모델 인터페이스를 정한다. 메트릭은 그 조건에서 나온 출력의 정확도·보정·강건성·공정성·편향·독성·효율성 가운데 무엇을 어떤 규칙으로 잴지 정한다.
+
+초기 HELM은 30개 모델을 16개 핵심 시나리오와 26개 표적 시나리오에서 평가했다. 적용 가능한 공통 비교에는 5-shot prompting을 사용했고, 핵심 시나리오와 일곱 메트릭의 가능한 112개 조합 가운데 98개를 측정했다. 이 설계는 서로 다른 prompt와 일부 benchmark 결과를 한 모델의 고정된 능력처럼 비교하는 모호함을 줄이고, 측정된 칸과 빠진 칸을 드러낸다. 공통 적응은 비교 조건을 통제하는 선택이지 각 모델의 최적 사용법을 보장하지 않는다.
+
+이 구조가 직접 측정하는 대상은 정해진 조건에서 관찰한 모델 행동이다. 일곱 메트릭에는 표현이 감각·행동·환경과 연결되는지를 직접 시험하는 접지(grounding), 시스템에 지향성(intentionality, 의도성)을 귀속할 조건, 주관적 의식을 판정하는 항목이 없다. 따라서 HELM은 인간 유사성 하나보다 넓은 행동 증거를 제공하지만, 그 점수만으로 접지·지향성·의식의 존재나 부재를 판정하지 않는다.
+
 ### 데모 성능의 문제
 
 [[003_Georgetown-IBM 기계 번역 시연]]은 AI 평가에서 통제된 시연과 실제 성능을 구분해야 한다는 교훈을 더한다. 미리 선별된 60문장의 번역 성공은 기계 번역의 가능성을 보여주었지만, 일반 문서 번역 능력을 충분히 증명하지는 않았다. 현대 LLM 평가에서도 인상적인 데모와 실제 사용 조건의 신뢰성을 구분하는 일이 중요하다.
@@ -126,6 +141,8 @@ Harnad의 1990년 기호 접지 논문은 형식 기호의 해석을 감각적 �
 
 튜링의 1950년 논문, ELIZA의 규칙 기반 동작, 중국어 방의 논증 구조와 각 현대 평가 결과는 서로 다른 문헌과 프로토콜에 근거한다. 특정 실험의 통과 조건은 그 프로토콜의 범위를 넘어 자동으로 일반화되지 않는다.
 
+초기 HELM은 시나리오·적응·메트릭을 명시하고, 적용 가능한 공통 비교에서 5-shot prompting을 사용했다. 정확도 밖의 여섯 범주를 포함해 일곱 메트릭을 다뤘지만, 논문이 보고한 메트릭 가운데 접지·지향성·의식을 직접 판정하는 항목은 없다.
+
 ### 해석
 
 튜링 테스트는 폐기된 기준이라기보다 역사적 기준점에 가깝다. 이 테스트는 언어가 지능 평가에서 왜 중요한지를 선명하게 보여 주지만, 현대 LLM의 능력과 한계를 모두 설명하기에는 좁다. 오늘날의 핵심 질문은 "인간처럼 보이는가"에서 "어떤 과업과 조건에서 신뢰할 수 있는가"로 확장되고 있다.
@@ -134,9 +151,11 @@ Harnad의 1990년 기호 접지 논문은 형식 기호의 해석을 감각적 �
 
 언어 행동, 과업 일반화, 접지, 지향성, 의식을 별도 층위로 읽는 것은 이 자료들을 결합한 분석 틀이다. 이 구분은 행동 평가의 유용성을 인정하면서 존재론적 결론을 따로 검토하게 한다.
 
+HELM의 시나리오–적응–메트릭 구조는 이 분석 틀에서 행동 평가의 조건을 더 세밀하게 기록하는 방법으로 읽을 수 있다. 이는 “인간처럼 보이는가”라는 한 질문을 여러 과업·위험·비용의 질문으로 나누지만, 행동 측정에서 마음에 관한 결론으로 건너가는 논리적 간극 자체를 없애지는 않는다.
+
 ### 아직 입증되지 않은 계보
 
-튜링 테스트 통과가 곧 일반 지능·이해·의식을 입증한다는 결론도, 중국어 방이 모든 언어 모델의 비이해를 증명한다는 결론도 이 문서의 근거가 보장하지 않는다.
+튜링 테스트 통과가 곧 일반 지능·이해·의식을 입증한다는 결론도, 중국어 방이 모든 언어 모델의 비이해를 증명한다는 결론도 이 문서의 근거가 보장하지 않는다. HELM의 다차원 점수가 높거나 낮다는 사실만으로 모델의 접지·지향성·의식의 존재 또는 부재를 확정하는 결론 역시 보장되지 않는다.
 
 ## 학습 확인
 
@@ -144,11 +163,12 @@ Harnad의 1990년 기호 접지 논문은 형식 기호의 해석을 감각적 �
 
 1. 튜링 테스트가 직접 비교하는 것은 무엇이며 무엇을 모두 판정하지는 않는가?
 2. 언어 행동, 과업 일반화, 접지, 지향성, 의식을 분리해야 하는 이유는 무엇인가?
-3. 특정 LLM의 한 프로토콜 통과를 일반 지능 판정으로 확대할 수 없는 이유는 무엇인가?
+3. HELM의 시나리오–적응–메트릭 구조는 무엇을 더 명확하게 만들며, 무엇을 판정하지는 않는가?
 
 ### 다음 문서
 
 - [[자동 평가 지표는 무엇을 보상하는가]] — 인간 유사성에서 분리한 평가 문제를 실제 자동 지표의 보상 구조로 이어 간다.
+- [[HELM]] — 시나리오·적응·메트릭을 실제 평가 실행과 결과 행렬로 조직하는 방법을 자세히 살핀다.
 
 ## 출처
 
@@ -156,12 +176,14 @@ Harnad의 1990년 기호 접지 논문은 형식 기호의 해석을 감각적 �
 - [[003_Georgetown-IBM 기계 번역 시연]]
 - [[007_ELIZA]]
 - [[016_중국어 방 논증과 강한 AI 논쟁]]
+- [[079_HELM과 다차원 언어 모델 평가]]
 - Alan M. Turing, [Computing Machinery and Intelligence](https://academic.oup.com/mind/article/LIX/236/433/986238), 1950.
 - Cameron R. Jones·Benjamin K. Bergen, [Large language models pass the Turing test](https://doi.org/10.1073/pnas.2524472123), 2026.
 - John R. Searle, [Minds, Brains, and Programs](https://doi.org/10.1017/S0140525X00005756), 1980, pp. 417–424.
 - John R. Searle, [Intrinsic Intentionality](https://doi.org/10.1017/S0140525X00006038), 1980, pp. 450–457.
 - Stevan Harnad, [The Symbol Grounding Problem](https://doi.org/10.1016/0167-2789(90)90087-6), 1990, pp. 335–346, 특히 §§2.1–2.3 및 §§3–5.
 - Emily M. Bender·Alexander Koller, [Climbing towards NLU](https://aclanthology.org/2020.acl-main.463/), 2020, pp. 5185–5198, 특히 초록, §§1–2와 §3.1.
+- Percy Liang et al., [Holistic Evaluation of Language Models](https://openreview.net/forum?id=iO4LZibEqW), 2023, 특히 §§1.1–1.2·3–8·10–11.
 
 ## 관련 항목
 
@@ -177,4 +199,6 @@ Harnad의 1990년 기호 접지 논문은 형식 기호의 해석을 감각적 �
 - [[ELIZA 효과]]
 - [[ELIZA에서 LLM으로]]
 - [[016_중국어 방 논증과 강한 AI 논쟁]]
+- [[079_HELM과 다차원 언어 모델 평가]]
+- [[HELM]]
 - [[존 설]]
