@@ -3005,3 +3005,45 @@ sources:
     doi: 10.18653/v1/2023.emnlp-main.298
     url: https://aclanthology.org/2023.emnlp-main.298/
     language: en
+  dettmers-et-al-2023-qlora:
+    title: 'QLoRA: Efficient Finetuning of Quantized LLMs'
+    authors: [Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, Luke Zettlemoyer]
+    published: 2023
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2305.14314
+    url: https://proceedings.neurips.cc/paper_files/paper/2023/hash/1feb87871436031bdc0f2beaa62a049b-Abstract-Conference.html
+    language: en
+  dettmers-et-al-2023-qlora-repository:
+    title: 'QLoRA Official Repository (2023-07-24 snapshot)'
+    authors: [Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, Luke Zettlemoyer]
+    published: 2023
+    source_type: primary-release
+    kind: software-repository
+    url: https://github.com/artidoro/qlora/tree/7f4e95a68dc076bea9b3a413d2b512eca6d004e5
+    language: en
+  hu-et-al-2022-lora:
+    title: 'LoRA: Low-Rank Adaptation of Large Language Models'
+    authors: [Edward J. Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, Weizhu Chen]
+    published: 2022
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2106.09685
+    url: https://openreview.net/forum?id=nZeVKeeFYf9
+    language: en
+  stanford-crfm-2023-alpaca:
+    title: 'Alpaca: A Strong, Replicable Instruction-Following Model'
+    authors: [Stanford Center for Research on Foundation Models]
+    published: 2023
+    source_type: primary-release
+    kind: official-blog
+    url: https://crfm.stanford.edu/2023/03/13/alpaca.html
+    language: en
+  lmsys-2023-vicuna:
+    title: 'Vicuna: An Open-Source Chatbot Impressing GPT-4 with 90% ChatGPT Quality'
+    authors: [LMSYS Org]
+    published: 2023
+    source_type: primary-release
+    kind: official-blog
+    url: https://lmsys.org/blog/2023-03-30-vicuna/
+    language: en

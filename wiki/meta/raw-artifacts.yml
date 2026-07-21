@@ -1620,3 +1620,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/open-llm-wave-proliferation-high-quality-open-source-language-models
     sha256: fc4efc045e91cfa51a8366d3f49e67e5aa84cac5988848dce06b3054dfd49fe2
+  - path: "raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.ko.md"
+    role: translation
+    order_prefix: "091"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/qlora-efficient-finetuning-quantized-language-models
+    sha256: 50daec8bce7703536d8d0203751ed01dc876e36982884015ace3f5454838cd82
+  - path: "raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.commentary.ko.md"
+    role: commentary
+    order_prefix: "091"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/qlora-efficient-finetuning-quantized-language-models
+    sha256: 22d554cac4b541d0fde3bdebf35d704a3ef9eb614a6694984ec740067ad45e90

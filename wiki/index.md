@@ -120,6 +120,7 @@ related:
 - [[088_FlashAttention과 IO 인지형 정확 어텐션]] — dense softmax attention은 유지하면서 HBM–SRAM 타일링·온라인 softmax·선택적 재계산으로 중간 저장과 메모리 이동을 줄인 I/O 인지형 실행을 검증한 소스 (근거 3개)
 - [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]] — 7B–65B 제품군의 추론 예산 지향 장기 학습과 data·benchmark·hardware 조건을 복원하고 open-source·상업 이용·보편 20:1·후속 세대 혼동을 교정한 소스 (근거 2개)
 - [[090_공개 가중치 LLM 파동과 서로 다른 공개 범위]] — MPT·Falcon·Mistral의 weight·code·data·license·compute 공개 범위를 분리하고 단선 계보·proprietary parity·재현성 과장을 교정한 소스 (근거 15개)
+- [[091_QLoRA와 4비트 양자화 미세조정]] — 동결 NF4 base storage·BF16 compute·all-linear LoRA update를 분리하고 double quantization·paged optimizer·hardware·평가 조건을 검증한 소스 (근거 6개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 
 ## 개체
@@ -162,6 +163,7 @@ related:
 - [[Whisper]] — 30초 log-Mel 음향을 조건으로 전사·X→English 번역·언어·시간·무음을 token sequence로 생성하는 약한 감독 encoder–decoder 계열 (근거 4개)
 - [[FlashAttention]] — dense softmax attention의 수학은 유지하고 SRAM tile·온라인 softmax·backward 재계산으로 HBM I/O와 이차 중간 저장을 줄이는 정확 어텐션 실행 알고리즘 (근거 3개)
 - [[LLaMA 1]] — 7B–65B causal Transformer를 작은 모델의 장기 학습과 제한적 비상업 연구 가중치 배포로 결합하고 base model·LLaMA-I·후속 세대를 구분하는 2023년 모델 제품군 (근거 2개)
+- [[QLoRA]] — 동결한 4-bit NF4 base를 BF16으로 역양자화해 계산하고 저순위 adapter만 학습하며 weight metadata와 peak memory를 별도 기법으로 줄이는 미세조정 방법 (근거 3개)
 - [[Transformer]] — multi-head self-attention과 위치 표현으로 순환 없이 시퀀스 위치를 상호작용시키며 operator·algorithm·kernel의 비용 층위를 구분해야 하는 신경망 구조 (근거 10개)
 - [[Transformer-XL]] — stop-gradient segment memory와 상대 위치 attention으로 고정 길이 경계를 넘어 과거 표현을 재사용하되 dense attention 비용은 남기는 causal Transformer (근거 2개)
 - [[교차 인코더 재순위화]] — 질의와 후보를 공동 부호화해 세밀한 관련성 점수를 내되 first-stage 후보와 후보별 추론 비용에 제약받는 재순위화 방식 (근거 3개)

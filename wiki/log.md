@@ -3664,6 +3664,28 @@ raw 등록 해시:
 - Falcon-40B 학습은 LLaMA 1 발표 전인 2022년 12월 시작됐다. 출시 연표를 LLaMA가 MPT·Falcon·Mistral 개발을 일제히 촉발했다는 단선 계보로 바꾸지 않는다.
 - 전체 검증은 96개 회귀 테스트와 308개 Markdown strict lint를 통과해 352개 evidence와 180개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 594개 HTML을 만들고 6,763개 wiki link를 모두 해소했다.
 
+## [2026-07-22] ingest | QLoRA의 4비트 저장과 저순위 적응
+
+변경 내용:
+
+- 공식 091 `QLoRA: Efficient Fine-Tuning of Quantized Language Models`를 H1·H2·H3와 31개 Markdown link의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 번역은 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않는다.
+- 최종 NeurIPS 판본으로 독립 감사를 거쳐 OASST1 선택 example을 9,846개, memory locator를 Appendix J·Figure 8, 33B·65B full-fine-tuning 한계를 §7로 정정한 뒤 신규 raw를 등록했다. 번역 SHA-256은 `50daec8bce7703536d8d0203751ed01dc876e36982884015ace3f5454838cd82`, 해설은 `22d554cac4b541d0fde3bdebf35d704a3ef9eb614a6694984ec740067ad45e90`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[091_QLoRA와 4비트 양자화 미세조정]]과 [[QLoRA]]를 만들었다. 동결 NF4 base storage, BF16 dequantization·matrix multiplication, all-linear LoRA update, double quantization과 UVM paged optimizer를 weight·metadata·peak-memory의 서로 다른 장부로 분리했다.
+- Dettmers 등의 NeurIPS 논문과 2023-07-24 official repository snapshot, Hu 등의 LoRA 논문, Stanford Alpaca와 LMSYS Vicuna의 선행 공개를 evidence로 등록했다. GPT-3의 175B를 GPT-3.5에 붙인 원문 혼동은 기존 GPT-3 1차 근거로 교정했다.
+- [[index]]와 [[overview]]를 source 91개·concept 165개·비메타 307개, 공식 범위 001–046·048–091·103과 다음 공식 092 Function Calling and Tool Use 기준으로 갱신했다. 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 178개, raw Markdown 183개, 위키 Markdown 310개에서 UI 단락 0개를 확인했고, 번역 정규화 검사는 표준 `원본 출처:` 89개와 변경 필요 0개를 확인했다.
+
+검증 정정과 남은 한계:
+
+- 4-bit는 frozen base의 storage dtype이고 계산은 BF16에서 수행된다. Base weight에는 gradient update가 없고 LoRA adapter만 학습된다. Raw packed 7B weight 약 3.5GB를 scale·adapter·optimizer·activation을 포함한 전체 training memory로 쓰지 않는다.
+- 논문이 consumer GPU라고 명시한 것은 단일 24GB에서 12시간 미만에 학습한 33B다. 65B는 단일 48GB professional GPU에서 약 24시간인 조건이며 정확한 GPU model·구매가·cloud bill은 보고하지 않았다.
+- NF4의 optimality는 zero-centered normal weight와 blockwise scaling 조건에 묶었다. Double quantization은 64-value block의 scale을 FP8·block 256으로 다시 양자화해 0.500에서 0.127 bit/parameter로 줄이며, 0.373 bit/parameter·65B 약 3GB 절감을 total-memory 비율로 확대하지 않는다.
+- All-linear target coverage가 query·value-only 설정보다 중요했고 전체 rank 8–256 grid에서는 뚜렷한 차이가 없었다. 원 웹글의 rank 선택 핵심 서사를 이 특정 ablation과 다른 model·task의 가능성으로 분리했다.
+- LLaMA 7B–65B의 NF4+DQ QLoRA 5-shot MMLU 평균 53.1은 BF16 LoRA 53.0과의 비교다. Full-parameter 16-bit 통제 비교는 3B 이하에 한정됐으므로 33B·65B full-fine-tuning parity로 확대하지 않는다.
+- Guanaco는 OASST1 9,846개 선택 example의 supervised cross-entropy tuning이며 RLHF가 아니다. 65B의 99.3%는 Vicuna 80 prompt에서 GPT-4 judge가 매긴 순서 양방향 상대 점수로, 사람 선호·범용 능력·통계적 동등성을 뜻하지 않는다.
+- Alpaca와 Vicuna는 QLoRA보다 먼저 공개됐다. 의료·저자원 언어·code·창작의 rapid adoption, 수천 달러에서 수백 달러로의 비용 변화와 training carbon 개선은 논문이 측정하지 않았다. Appendix B의 가정 기반 72% inference-energy 추정도 fine-tuning 환경 효과로 바꾸지 않는다.
+- `source:ready -- 091`은 96개 회귀 테스트와 310개 Markdown strict lint를 통과해 357개 evidence와 182개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 598개 HTML을 만들고 6,805개 wiki link를 모두 해소했다.
+- 다음 순차 입력은 공식 092 `Function Calling and Tool Use: Enabling Practical AI Agent Systems`다.
+
 ## 관련 항목
 
 - [[index]]
