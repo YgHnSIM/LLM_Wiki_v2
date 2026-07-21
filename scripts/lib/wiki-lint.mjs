@@ -1,6 +1,6 @@
 import { Lexer } from 'marked';
 
-export const REQUIRE_STAGED_STRUCTURE_FOR_ALL_NON_META = false;
+export const REQUIRE_STAGED_STRUCTURE_FOR_ALL_NON_META = true;
 export const STRICT_STAGED_STRUCTURE_ENV = 'LLM_WIKI_REQUIRE_STAGED_STRUCTURE';
 
 export const STAGED_PAGE_H2_HEADINGS = Object.freeze([

@@ -28,15 +28,16 @@ function stagedPage(headings = STAGED_PAGE_H2_HEADINGS) {
   ].join('\n');
 }
 
-test('legacy pages remain warnings unless policy requires the staged structure', () => {
+test('legacy pages fail once all non-meta pages require the staged structure', () => {
   const legacy = '# 기존 문서\n\n## 배경\n\n설명\n\n## 출처\n\n근거\n\n## 관련 항목\n';
 
-  assert.deepEqual(validateStagedPageStructure(legacy), { staged: false, errors: [] });
-  const required = validateStagedPageStructure(legacy, { requireAll: true });
+  const required = validateStagedPageStructure(legacy);
   assert.equal(required.staged, false);
   assert.ok(required.errors.some((error) => error.includes('학습 안내')));
   assert.ok(required.errors.some((error) => error.includes('1단계 — 먼저 잡을 핵심')));
   assert.ok(required.errors.some((error) => error.includes('unexpected: ## 배경')));
+
+  assert.deepEqual(validateStagedPageStructure(legacy, { requireAll: false }), { staged: false, errors: [] });
 });
 
 test('a migration signal makes the entire staged structure mandatory', () => {
