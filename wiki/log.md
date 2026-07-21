@@ -3499,6 +3499,12 @@ raw 등록 해시:
 - `source:ready -- 086`은 96개 회귀 테스트와 301개 Markdown strict lint를 통과해 328개 evidence와 172개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 579개 HTML을 만들고 6,470개 wiki link를 모두 해소했다.
 - 다음 순차 입력은 공식 087 `Whisper: Large-Scale Multilingual Speech Recognition with Transformer Architecture`다. CLIP class prototype·Flamingo bridge·DALL·E 2 image latent·Stable Diffusion token cross-attention을 함께 읽는 합성은 ingest 원격 반영 뒤 별도 content 변경으로 기존 분석을 보강한다.
 
+## [2026-07-22] fix | LDM 표 2와 GLIDE 비교표의 수치 귀속 분리
+
+- [[086_잠재 확산 모델과 Stable Diffusion v1 공개]]와 [[잠재 확산 모델]]에서 GLIDE FID 12.24를 CVPR LDM 논문 Table 2의 같은 비교처럼 적은 문장을 정정했다. 해당 GLIDE 값은 DALL·E 2 논문의 별도 비교표에 있으며 LDM Table 2에는 없다.
+- CVPR 최종본 Table 2의 MS-COCO FID를 LDM-KL-8-G 12.61, unguided LDM-KL-8 23.35, DALL·E 약 27.50, CogView 27.10, Lafite 26.94로 다시 귀속했다. LDM-KL-8-G가 그 표에서 가장 낮지만, 이를 모든 모델·metric·품질 축의 보편적 우위로 확대하지 않는다.
+- Evidence registry와 raw artifact는 바꾸지 않았다. 두 원 논문을 다시 대조해 서로 다른 표의 model·protocol·수치를 한 문장에 합치지 않는 경계를 복구했다.
+
 ## 관련 항목
 
 - [[index]]

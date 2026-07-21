@@ -124,7 +124,7 @@ Stable Diffusion v1-4만 떼어 “225K 단계로 처음부터 학습했다”�
 
 원 논문은 같은 매개변수 규모·같은 500K iteration·단일 A100 조건에서 압축률을 바꾸어 비조건부 생성을 비교했다. $f=1$은 픽셀 공간에 가까워 느렸고, $f=16$·$32$는 압축으로 세부를 잃었다. $f=4$와 $f=8$이 처리량과 FID의 절충에서 가장 잘 behaved한 구간이었다. 이는 특정 자료·모델·예산의 비교이지, 모든 LDM이 모든 픽셀 확산보다 일정 배수 빠르다는 보편 법칙이 아니다.
 
-텍스트-이미지 Table 2에서 classifier-free guidance를 쓴 LDM-KL-8-G의 MS-COCO FID는 12.61, GLIDE는 12.24였다. LDM은 당시 비교에서 경쟁력 있는 결과를 냈지만 이 표에서 모든 모델을 이긴 것은 아니다. 논문의 strongest state-of-the-art 주장은 인페인팅과 클래스 조건 ImageNet 같은 과제에 묶어 읽어야 한다. 인페인팅 모델의 처리량과 초해상도 결과도 별도 과제 모델의 수치이므로 Stable Diffusion v1 텍스트 체크포인트의 기능·속도로 옮기지 않는다.
+텍스트-이미지 Table 2에서 classifier-free guidance를 쓴 LDM-KL-8-G의 MS-COCO FID는 12.61이었다. 같은 표에는 unguided LDM-KL-8 23.35, DALL·E 약 27.50, CogView 27.10, Lafite 26.94가 실렸고 LDM-KL-8-G가 이 비교의 가장 낮은 FID를 기록했다. GLIDE 12.24는 DALL·E 2 논문의 별도 비교표 수치이므로 이 표에 넣지 않는다. 한 MS-COCO FID 비교를 모든 모델·품질 축의 우위로 확대하지 않으며, 논문의 strongest state-of-the-art 주장은 인페인팅과 클래스 조건 ImageNet 같은 과제에 묶어 읽어야 한다. 인페인팅 모델의 처리량과 초해상도 결과도 별도 과제 모델의 수치이므로 Stable Diffusion v1 텍스트 체크포인트의 기능·속도로 옮기지 않는다.
 
 ### 로컬 추론과 전체 훈련을 분리한다
 
