@@ -2881,6 +2881,23 @@ raw 등록 해시:
 - 사이트는 406개 페이지를 빌드해 5,298개 위키 링크와 30,398개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 262개 항목을 포함했다.
 - 공개 source·concept와 기존 문서 보강은 Jacobs 1991, Shazeer 2017, GShard 2021, Switch 2022와 PaLM 2022의 직접 기술·실험 범위 안에서 검증했다. Expert별 안정된 domain ownership, 일반적인 interpretability와 제품 배포 효율은 별도 근거가 필요한 후속 범위로 남겼다.
 
+## [2026-07-21] content | 총 매개변수와 활성 계산량은 같은 축인가
+
+변경 내용:
+
+- [[총 매개변수와 활성 계산량은 같은 축인가]]를 만들고 Kaplan의 dense non-embedding $N$·$D$·$C$, GPT-3 175B, Shazeer의 고정 nominal expert 연산, GShard의 parameter–TPU-core-year와 Switch의 parameter–FLOPs–fixed-quality 시간을 하나의 규모 장부로 비교했다.
+- Total parameters, token 경로의 active parameters, FLOPs, memory·optimizer state, all-to-all communication, wall-clock·throughput·latency, data와 quality를 분리했다. $C\approx6ND$의 dense 조건과 MoE의 shared·expert·router parameter 장부를 나눠, sparse total parameter를 dense $L(N)$ fit에 그대로 대입하지 않도록 했다.
+- Shazeer Table 7의 8.4M→4.3034B parameters 대 8.4M→8.9M nominal ops, GShard Table 3의 약 37B→600B·6.1→22.4 TPU v3 core-years와 함께 변한 core·batch·wall-clock·BLEU, Switch Table 9의 T5-XXL–Switch-XXL 6.3T FLOPs/sequence match와 별도 Switch-C 1.571T·890B FLOPs/sequence를 조건별로 복원했다.
+- [[065_신경 언어 모델의 스케일링 법칙]], [[066_GPT-3와 문맥 내 학습]], [[068_전문가 혼합과 희소 활성 스케일링]], [[언어 모델 스케일링 법칙]], [[대규모 언어 모델]], [[전문가 혼합]]에서 새 분석으로 가는 방향 링크를 추가했다. 068 source의 GShard 수치도 core·batch·wall-clock·BLEU가 함께 달라졌음을 명시해 sparsity 단독 인과로 읽히지 않도록 보강했다.
+- 이 분석은 [[손실 곡선과 능력 곡선 사이]]의 outcome metric 층을 반복하지 않는다. 기존 문서가 loss→task score→능력 판정을 분리한다면, 새 문서는 architecture-relative resource proxy와 정량 비교 가능성의 경계를 다룬다.
+
+검증 결과:
+
+- 새 analysis는 Kaplan·Brown·Shazeer·GShard·Switch의 기존 1차 evidence 5개와 065·066·068의 immutable raw artifact 6개만 사용했다. `evidence.yml`과 `raw-artifacts.yml`은 변경하지 않았다.
+- 49개 회귀 테스트와 264개 위키 문서 strict lint를 통과했으며 285개 evidence 레코드와 136개 immutable raw artifact를 확인했다.
+- 사이트는 407개 페이지를 빌드해 5,334개 위키 링크와 30,520개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 263개 항목을 포함했다.
+- 문헌별 수치와 비교 조건은 1차 자료로 확인했지만, 다섯 연구를 total·active parameter, FLOPs, memory, communication, wall-clock, data와 quality의 여덟 축으로 묶은 결론은 합성 해석이므로 `verification: partial`을 유지했다.
+
 ## 관련 항목
 
 - [[index]]

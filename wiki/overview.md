@@ -24,7 +24,7 @@ related:
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 68개, concept 144개, entity 29개, analysis 19개를 합친 비메타 문서 260개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 68개, concept 144개, entity 29개, analysis 20개를 합친 비메타 문서 261개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -162,6 +162,7 @@ related:
 - [[검색은 근거를 찾고 독해는 답을 찾는다]]에서 분리하는 컬렉션→후보 retrieval recall, 후보→답 EM·F1·faithfulness, 답→행동 기권 calibration과 oracle reader 진단
 - [[검색 증강 생성]]에서 구분하는 원 RAG의 DPR–BART 잠재 문서 주변화, 고정 document encoder·색인과 학습되는 query encoder, 검색 provenance와 claim-level citation의 차이
 - [[전문가 혼합]]에서 구분하는 total parameters·token당 active expert, shared Transformer 경로, top-$k$ routing·capacity·load balancing과 memory·all-to-all communication 비용
+- [[총 매개변수와 활성 계산량은 같은 축인가]]에서 비교하는 dense non-embedding $N$, sparse total·active parameters, FLOPs·memory·communication·wall-clock·data·quality와 논문 안/논문 사이 비교 경계
 - [[N-gram에서 LLM으로]]에서 비교하는 Katz의 표면 문맥 확률 재분배와 NPLM의 연속 표현 매개변수 공유
 - [[BM25]]의 희소 용어 가중, 문서 내 빈도 포화, 평균 문서 길이 보정과 보정된 관련성 확률이 아닌 순위 점수라는 해석
 - [[스티븐 로버트슨]]·[[캐런 스파크 존스]]·Steve Walker와 Okapi 팀의 서로 다른 기여, BM25와 Dense Passage Retrieval·RAG의 기준선·대체 검색기 관계
@@ -210,6 +211,7 @@ related:
 - [[067_DPR과 검색 증강 생성]]
 - [[068_전문가 혼합과 희소 활성 스케일링]]
 - [[전문가 혼합]]
+- [[총 매개변수와 활성 계산량은 같은 축인가]]
 - [[검색 증강 생성]]
 - [[문맥 내 학습]]
 - [[손실 곡선과 능력 곡선 사이]]
@@ -323,7 +325,7 @@ related:
 
 ## 현재 상태
 
-소스 68개, 개념 144개, 개체 29개, 분석 19개와 메타 문서 3개, 총 263개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 235개는 `verified`, 해석적 문서 25개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 285개 외부 근거와 136개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 68개, 개념 144개, 개체 29개, 분석 20개와 메타 문서 3개, 총 264개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 235개는 `verified`, 해석적 문서 26개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 285개 외부 근거와 136개 불변 raw artifact가 레지스트리에 등록돼 있다.
 
 `067`의 DPR·RAG 단일 발명 서사, BM25를 정확 일치로만 보는 대조, 최소 표지 자료·보편 우월·조건 없는 billion-scale 지연 시간, RAG의 GPT-2 생성기·passage 직접 감독·전체 색인 공동 학습, Sequence/Token 주변화와 비용의 혼동, 실시간 최신성·자동 인용·법률·의료·뉴스·다문서 요약의 직접 검증 주장도 공개 문서에서 교정했다. DPR의 SQuAD 예외, 원 RAG의 BART-large와 고정된 2018 Wikipedia 색인, query encoder만 포함한 검색기 학습, 82개 world-leader hot-swap 및 검색 passage와 claim-level citation의 차이를 함께 기록했다.
 
