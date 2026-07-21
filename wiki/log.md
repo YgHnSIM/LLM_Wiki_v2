@@ -2907,7 +2907,7 @@ raw 등록 해시:
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]]에는 CLIP을 아홉 번째 전이 경로로 추가했다. GPT-3의 input-context demonstration과 CLIP의 class prototype, CLIP zero-shot과 표지 예제로 logistic regression을 학습하는 few-shot linear probe를 구분했다.
 - Radford 등의 ICML 2021 논문과 supplement를 대조해 WIT 4억 쌍·50만 query·query당 최대 2만 쌍, batch 32,768·32 epochs, ImageNet 76.2%, 기본 prompt +1.3 points와 80-template ensemble 추가 +3.5 points, 27개 중 16개 비교 우위와 과제별 편차를 확인했다. RN50x64의 592 V100·18일과 ViT-L/14의 256 V100·12일도 서로 다른 조건으로 복원했다.
 - raw의 일반 멀티모달 이해, ViT 단일 image encoder, 학습에서 전혀 보지 않은 class라는 zero-shot 해석, 조합·공간 관계와 VQA·style transfer·generation의 단독 수행, DALL·E·Stable Diffusion·GPT-4V 일괄 직접 계보 및 fine-grained task의 일률적 실패 주장을 공개 문서에서 교정했다.
-- 새 분석 문서는 만들지 않았다. shared embedding·cross-attention·생성 잠재공간의 차이는 후속 083 Flamingo·084 DALL·E 2·085 Stable Diffusion의 1차 자료까지 검증한 뒤 비교해야 근거가 충분하므로, 현재는 기존 전이 분석을 실질적으로 보강했다.
+- 새 분석 문서는 만들지 않았다. shared embedding·cross-attention·생성 잠재공간의 차이는 후속 공식 084 Flamingo·085 DALL·E 2·086 Stable Diffusion의 1차 자료까지 검증한 뒤 비교해야 근거가 충분하므로, 현재는 기존 전이 분석을 실질적으로 보강했다.
 
 검증 결과:
 
@@ -3440,6 +3440,22 @@ raw 등록 해시:
 - ALIGN·LTIP의 일부 사전 지정 benchmark 중복 제거와 M3W·VTP 미제거를 구분했다. 가장 큰 model의 단일 학습 run, 2,048-token 문맥 한계, hallucination·prompt 민감성·web 자료 bias와 연구용 model card의 사용 제한을 남겼다.
 - 번역·해설 쌍 검사는 `valid_pairs: 1`, 오류 0을 확인했다. `translation:normalize:check -- --expected-count 82`는 표준 원본 출처 82개, 읽기 수준 블록 0개, 변경 필요 0개를 확인했고 레지스트리에만 있는 공식 007을 별도로 보고했다.
 - `source:ready -- 084`은 96개 회귀 테스트와 296개 Markdown strict lint를 통과해 321개 evidence와 168개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 570개 HTML을 만들고 6,320개 wiki link를 모두 해소했다.
+
+## [2026-07-22] content | Flamingo의 학습 bridge와 멀티모달 문맥 적응 연결
+
+변경 내용:
+
+- 새 분석 문서를 만들지 않고 기존 [[사전 학습 지식은 과제에 어떻게 도착하는가]]를 열두 전이 경로로 확장했다. Flamingo에서는 사전 학습 지식이 동결 시각·언어 backbone의 표현, 새로 학습한 Perceiver Resampler·gated cross-attention의 weights, downstream prompt가 만드는 현재 activation이라는 세 위치를 거쳐 과제에 도착한다고 정리했다.
+- [[CLIP]]의 class prompt가 similarity classifier의 후보 prototype을 만드는 경로, GPT-3의 text-only demonstration이 다음-token 분포를 조건화하는 경로, [[Flamingo]]의 multimodal demonstration이 별도 시각 key/value memory를 통해 생성 분포를 조건화하는 경로를 구분했다. 세 연구가 하나의 직접 계보라는 주장은 남기지 않았다.
+- 기반 model을 동결했다는 사실이 새 학습 비용의 부재를 뜻하지 않음을 명시했다. 가장 큰 Flamingo의 약 10B gated block·194M Resampler와 멀티모달 자료 mixture는 사전 학습되고, downstream prompt 평가에서는 전체 weights가 고정된다.
+- Open-ended zero-shot의 text-only 예시 두 개와 close-ended 후보 likelihood 조건을 분리하고, RareAct의 zero-shot-only 행, RICES support 선택·example 순서·2,048-token 학습 길이·scoring 비용을 과제 명세의 일부로 남겼다.
+- 공식 084 raw 쌍과 NeurIPS 논문 evidence를 분석에 연결하고 [[index]]의 근거 수·설명과 [[overview]]의 핵심 주제·현재 분석 설명을 동기화했다.
+- 기존 CLIP ingest 기록에 남아 있던 후속 문서의 임시 번호를 공식 084 Flamingo·085 DALL·E 2·086 Stable Diffusion으로 바로잡았다. Immutable raw에 남은 수집 당시 내부 링크 표기는 수정하지 않았다.
+
+검증 결과와 남은 한계:
+
+- 확인된 architecture·훈련·평가 절차, 여러 자료를 함께 읽은 비교 해석, 입증되지 않은 직접 계보를 분리해 `verification: partial`을 유지했다. 16개 benchmark의 성과를 일반적인 멀티모달 추론 증명으로 확대하지 않는다.
+- 전체 검증은 96개 회귀 테스트와 296개 Markdown strict lint를 통과해 321개 evidence와 168개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 570개 HTML을 만들고 미해결 wiki target 0개를 확인했다.
 
 ## 관련 항목
 
