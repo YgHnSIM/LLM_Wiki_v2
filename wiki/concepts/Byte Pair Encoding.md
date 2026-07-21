@@ -16,6 +16,8 @@ verification: verified
 artifacts:
   - 'raw/049_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md'
   - 'raw/049_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md'
+  - 'raw/061_XLM Cross-lingual Language Model for Multilingual NLP.ko.md'
+  - 'raw/061_XLM Cross-lingual Language Model for Multilingual NLP.commentary.ko.md'
 evidence:
   - source_id: gage-1994-byte-pair-encoding
     locator: '초록과 §1의 빈번한 인접 byte pair를 미사용 byte로 치환하는 압축 알고리즘'
@@ -23,15 +25,20 @@ evidence:
   - source_id: sennrich-haddow-birch-2016-subword-nmt
     locator: '§3.2와 Algorithm 1의 문자·문자열 pair merge, word boundary와 merge-count vocabulary'
     relation: supports
+  - source_id: conneau-lample-2019-xlm
+    locator: '§3.1의 multilingual corpus sampling·shared BPE vocabulary와 공통 문자열 anchor에 대한 설명'
+    relation: contextualizes
 related:
   - source.049
+  - source.061
+  - concept.xlm
 ---
 # Byte Pair Encoding
 
 > [!note] 학습 안내
 > **난이도:** 입문<br>
 > **선수 지식:** [[서브워드 토큰화]]<br>
-> **읽고 나면:** BPE가 빈번한 symbol pair를 병합해 어휘 크기와 시퀀스 길이의 trade-off를 조절하는 방식을 설명할 수 있다.
+> **읽고 나면:** BPE가 빈번한 symbol pair를 병합해 어휘 크기와 시퀀스 길이의 trade-off를 조절하고, 다국어 공유 어휘가 제공하는 것과 보장하지 않는 것을 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
 
@@ -57,6 +64,12 @@ related:
 
 기본 alphabet 또는 byte fallback이 모든 입력을 포괄하는지에 따라 OOV 가능성이 달라진다. BPE라는 이름만으로 임의 Unicode 문자열의 무손실 표현을 보장하지 않는다.
 
+### 다국어 shared BPE의 범위
+
+여러 언어 corpus에서 BPE code를 공유하면 같은 alphabet의 subword, 숫자, 고유명 같은 표면 문자열을 같은 token으로 재사용할 수 있다. [[XLM]]은 이 공통 어휘와 shared Transformer parameter를 교차 언어 사전 학습에 사용했다.
+
+그러나 shared BPE가 번역어 사전을 자동으로 만드는 것은 아니다. 철자가 다른 `dog`·`chien` 같은 단어가 의미상 가까워지는 데에는 공동 학습과 병렬 문장 TLM 같은 추가 신호가 필요하다. 같은 token ID를 공유하는 문자열도 언어별 문맥에서 의미가 다를 수 있다. 어휘 공유와 의미 정렬을 구분해야 한다.
+
 ## 검증과 한계
 
 1994년 byte 치환 압축과 2016년 NMT용 문자·문자열 병합은 같은 핵심 절차를 공유하지만 입력 단위와 목적이 다르다. 현대 byte-level 변형도 원 NMT 설정과 세부 구현이 같지 않으며, BPE 병합이 형태소나 의미 경계를 찾는다는 보장은 없다.
@@ -76,9 +89,13 @@ related:
 ## 출처
 
 - [[049_FastText와 서브워드 표현의 두 경로]]
+- [[061_XLM과 교차 언어 사전 학습]]
 - Philip Gage, [A New Algorithm for Data Compression](https://www.derczynski.com/papers/archive/BPE_Gage.pdf), The C Users Journal 12(2), 1994, pp. 23–38.
 - Rico Sennrich·Barry Haddow·Alexandra Birch, [Neural Machine Translation of Rare Words with Subword Units](https://aclanthology.org/P16-1162/), ACL 2016, §3.2.
+- Alexis Conneau·Guillaume Lample, [Cross-lingual Language Model Pretraining](https://proceedings.neurips.cc/paper_files/paper/2019/hash/c04c19c2c2474dbf5f7ac4372c5b9af1-Abstract.html), NeurIPS 2019, §3.1.
 
 ## 관련 항목
 
 - [[049_FastText와 서브워드 표현의 두 경로]]
+- [[061_XLM과 교차 언어 사전 학습]]
+- [[XLM]]

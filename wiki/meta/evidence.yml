@@ -2263,6 +2263,14 @@ sources:
     kind: conference-paper
     url: https://openreview.net/forum?id=H1eA7AEtvS
     language: en
+  conneau-lample-2019-xlm:
+    title: Cross-lingual Language Model Pretraining
+    authors: [Alexis Conneau, Guillaume Lample]
+    published: 2019
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.neurips.cc/paper_files/paper/2019/hash/c04c19c2c2474dbf5f7ac4372c5b9af1-Abstract.html
+    language: en
   radford-et-al-2019-gpt2:
     title: Language Models are Unsupervised Multitask Learners
     authors: [Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, Ilya Sutskever]

@@ -2704,6 +2704,23 @@ raw 등록 해시:
 - 49개 회귀 테스트와 245개 위키 문서 strict lint를 통과했으며 269개 evidence 레코드와 120개 immutable raw artifact를 확인했다.
 - 사이트는 372개 페이지를 빌드해 4,805개 위키 링크와 27,659개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다.
 
+## [2026-07-21] ingest | XLM과 교차 언어 사전 학습
+
+변경 내용:
+
+- `061_XLM Cross-lingual Language Model for Multilingual NLP.md`를 원문부터 새로 번역·윤문하고 학습 해설을 작성했다. 검증된 쌍을 새 immutable raw artifact로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다.
+- [[061_XLM과 교차 언어 사전 학습]]과 [[XLM]]을 만들고 CLM·MLM·TLM의 입력과 목적을 분리했다. 기존 [[마스크드 언어 모델링]]에는 병렬 문장쌍으로 확장한 TLM을, [[Byte Pair Encoding]]에는 다국어 shared BPE의 역할과 한계를 보강했다.
+- [[사전 학습 지식은 과제에 어떻게 도착하는가]]에 영어 표지 NLI fine-tuning 뒤 target-language label 없이 평가하는 XLM의 전이 경로를 추가했다. 과제 표지의 유무와 target 언어 표지의 유무를 분리해 서로 다른 zero-shot 용법을 비교했다.
+- NeurIPS 원 논문을 대조해 shared BPE 어휘 구성의 sampling 지수 $\alpha=0.5$와 CLM·MLM 학습 batch 선택의 $\alpha=0.7$을 구분했다. XNLI 평균 71.5%·75.1%, TLM의 3.6%p 개선, 기계 번역 BLEU와 네팔어 perplexity를 표·절 locator로 확인했다.
+- raw의 TLM 자기회귀 번역 설명, CLM→TLM 고정 순서, 이탈리아어 QA·few-shot·교차 언어 검색 평가, BPE 자체의 번역쌍 정렬, mBERT 후속 계보, 보편적 계산 절감과 data 우위 주장을 공개 문서에서 교정했다. 교차 언어 과제 전이는 기존 analysis를 실질적으로 보강하는 것으로 처리했고, 병렬 문장의 역할이 SMT·NMT·TLM에서 어떻게 달라지는지는 별도 합성 검토 대상으로 남겼다.
+
+검증 결과:
+
+- 번역 스킬 검사는 061 번역·해설 쌍을 `valid_pairs: 1`로 확인했고, source workflow는 두 raw artifact의 원문 URL·역할·해시 일치를 확인했다.
+- 49개 회귀 테스트와 247개 위키 문서 strict lint를 통과했으며 270개 evidence 레코드와 122개 immutable raw artifact를 확인했다.
+- 사이트는 376개 페이지를 빌드해 4,857개 위키 링크와 27,971개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다.
+- raw 설명 자료는 원 논문에 없는 활용 예시와 과도한 계보를 포함하므로 보존 artifact로만 남겼고, 공개 source·concept·analysis의 핵심 주장은 원 논문의 범위 안에서 검증했다.
+
 ## 관련 항목
 
 - [[index]]

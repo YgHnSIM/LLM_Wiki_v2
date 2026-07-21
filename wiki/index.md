@@ -91,6 +91,7 @@ related:
 - [[058_GPT-1과 GPT-2의 전이 방식 변화]] — GPT-1 지도 미세조정과 GPT-2 cue 기반 zero-shot 수행을 구분한 자기회귀 전이 학습 소스 (근거 3개)
 - [[059_GLUE와 SuperGLUE의 집계 평가]] — GLUE 아홉·SuperGLUE 여덟 과제의 metric·평균·human baseline·포화와 표준화의 경계를 검증한 소스 (근거 3개)
 - [[060_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]] — BERT 이후 개선을 permutation objective·training recipe·parameterization의 세 축으로 분리하고 원문의 효율·성능 과장을 교정한 소스 (근거 4개)
+- [[061_XLM과 교차 언어 사전 학습]] — CLM·MLM·TLM과 target-language label 없는 XNLI 전이를 구분하고 다국어·후속 계보 과장을 교정한 소스 (근거 1개)
 
 ## 개체
 
@@ -131,10 +132,11 @@ related:
 - [[인간 피드백 강화학습]] — 인간의 행동·응답 비교로 보상 신호를 학습하고 정책을 선호에 맞춰 최적화하는 방법 계열 (근거 4개)
 - [[언어 모델 전이 학습]] — 사전 학습 언어 모델의 내부 표현이나 매개변수를 후속 과제에 재사용·적응시키는 방법 계열 (근거 5개)
 - [[BERT]] — 마스크드 언어 모델링으로 깊은 양방향 Transformer encoder를 사전 학습하고 과제별로 전체 미세조정하는 모델 (근거 2개)
-- [[마스크드 언어 모델링]] — 입력 token 일부를 교란하고 좌우 문맥에서 원 token을 복원하는 사전 학습 목적 (근거 3개)
+- [[마스크드 언어 모델링]] — 입력 token 일부를 교란하고 좌우 문맥에서 원 token을 복원하는 사전 학습 목적 (근거 4개)
 - [[GPT-1과 GPT-2]] — causal Transformer의 지도 미세조정과 zero-shot text continuation을 잇는 초기 GPT 모델 계열 (근거 3개)
 - [[GLUE와 SuperGLUE]] — 여러 영어 NLU 과제·metric·test server·leaderboard를 묶어 broad transfer를 비교하는 평가 suite (근거 3개)
 - [[XLNet·RoBERTa·ALBERT]] — BERT 이후의 objective·training recipe·parameterization 개선을 비용 조건과 함께 비교하는 세 모델 묶음 (근거 3개)
+- [[XLM]] — shared multilingual encoder에서 CLM·MLM과 병렬 문장쌍 TLM을 구분하고 교차 언어 전이를 학습하는 방법군 (근거 1개)
 - [[N-gram 모델]] — 앞선 n-1개 단위의 빈도와 조건부 확률로 다음 항목을 예측하고 평활화로 미관측 조합을 다루는 언어 모델 (근거 4개)
 - [[마르코프 가정]] — 다음 항목의 확률을 제한된 최근 문맥으로 근사하는 가정 (근거 3개)
 - [[조건부 확률]] — 문맥이 주어졌을 때 다음 항목이 나타날 확률을 표현하는 수학적 개념 (근거 1개)
@@ -261,11 +263,11 @@ related:
 - [[RMSNorm]] — mean centering 없이 feature의 root mean square로 scale만 정규화하는 LayerNorm 변형 (근거 2개)
 - [[FastText]] — Skip-gram 중심 단어를 완전 단어와 문자 n-gram 벡터의 합으로 표현하는 정적 임베딩 확장 (근거 2개)
 - [[서브워드 토큰화]] — 유한 어휘에서 희귀 문자열을 재사용 조각의 token sequence로 바꾸는 부호화와 어휘·길이 trade-off (근거 3개)
-- [[Byte Pair Encoding]] — 빈번한 인접 symbol pair의 반복 병합으로 subword 어휘를 만드는 압축 기원 분절 알고리즘 (근거 2개)
+- [[Byte Pair Encoding]] — 빈번한 인접 symbol pair의 반복 병합으로 subword 어휘를 만드는 압축 기원 분절 알고리즘 (근거 3개)
 
 ## 분석
 
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — ELMo·ULMFiT·BERT·GPT-1·GPT-2를 고정 특징·영역 적응·전체 미세조정·입력 cue의 전이 경계로 비교한 분석 (근거 5개)
+- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — ELMo·ULMFiT·BERT·GPT·XLM을 고정 특징·영역 적응·전체 미세조정·입력 cue·언어 공유의 전이 경계로 비교한 분석 (근거 6개)
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]] — RNN·WaveNet·Transformer를 표현 계산·teacher forcing·sampling·총연산의 네 축으로 분리한 분석 (근거 4개)
 - [[검색은 근거를 찾고 독해는 답을 찾는다]] — BM25·DSSM/DRMM·SQuAD·DPR/RAG를 검색 재현율·독해 정확도·기권의 세 경계로 분해한 분석 (근거 7개)
 - [[서브워드는 한 벡터의 특징인가 여러 토큰인가]] — 기본 SGNS·FastText·BPE·SentencePiece를 조각의 역할·결합 시점·문맥화·OOV·계산 비용으로 비교한 분석 (근거 6개)

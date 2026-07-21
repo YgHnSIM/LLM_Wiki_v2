@@ -1080,3 +1080,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/xlnet-roberta-albert-bert-refinements
     sha256: d1d199a565902634b705dfe985b7143e44428f31c066e341fe92b8d2f5d26982
+  - path: "raw/061_XLM Cross-lingual Language Model for Multilingual NLP.ko.md"
+    role: translation
+    order_prefix: "061"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/xlm-cross-lingual-language-model-multilingual-nlp
+    sha256: 75e3db0cc40dfc87d2bb49e4216bb189961e4e54edfe0b73725284fce7ea8814
+  - path: "raw/061_XLM Cross-lingual Language Model for Multilingual NLP.commentary.ko.md"
+    role: commentary
+    order_prefix: "061"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/xlm-cross-lingual-language-model-multilingual-nlp
+    sha256: 99e859a36c969bcf6ed8d7c1aa436af0c2490510bddb200fceeda9e9dfe54817
