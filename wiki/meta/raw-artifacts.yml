@@ -1170,3 +1170,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/scaling-laws-neural-language-models-power-law-predictions
     sha256: 759ce51fb834786c629774b76e7ba60bc331404c5d8b56012b9d9c0d87c62117
+  - path: "raw/066_GPT-3 and In-Context Learning Emergent Capabilities from Scale.ko.md"
+    role: translation
+    order_prefix: "066"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/gpt3-in-context-learning-emergent-capabilities-from-scale
+    sha256: ec407d2c1b02e843c3414053c7329d190858dd26d725f6db062109b6d806b500
+  - path: "raw/066_GPT-3 and In-Context Learning Emergent Capabilities from Scale.commentary.ko.md"
+    role: commentary
+    order_prefix: "066"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/gpt3-in-context-learning-emergent-capabilities-from-scale
+    sha256: 1d4b08f6d329a93bb18361108b91e2ad3b754acb7017373a95d18da262d234ae

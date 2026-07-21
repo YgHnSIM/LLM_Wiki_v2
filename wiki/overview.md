@@ -24,7 +24,7 @@ related:
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 65개, concept 141개, entity 29개, analysis 18개를 합친 비메타 문서 253개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 66개, concept 142개, entity 29개, analysis 18개를 합친 비메타 문서 255개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -43,7 +43,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 65개 소스의 범위
+## 66개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -110,6 +110,7 @@ related:
 - [[063_Transformer-XL과 세그먼트 수준 재귀]]는 [[Transformer-XL]]의 stop-gradient memory와 layer-shift recurrence, 상대 위치 attention을 복원하고, memory 길이·dependency·dense attention 비용과 조건부 RECL·평가 속도 수치를 구분한다.
 - [[064_BERT 기반 passage 재순위화]]는 BM25 상위 후보를 BERT 결합 self-attention과 `[CLS]` 분류 점수로 다시 매기는 구조를 복원하고, 후보 recall·512 WordPiece·후보별 계산 비용과 Google 공개 범위를 구분한다.
 - [[065_신경 언어 모델의 스케일링 법칙]]은 WebText2 자기회귀 token loss의 모델·데이터·compute별 조건부 power law와 Kaplan식 0.73/0.27 배분을 복원하고, downstream 능력 예측·보편 법칙·Chinchilla가 처음 균형 문제를 풀었다는 과장을 교정한다.
+- [[066_GPT-3와 문맥 내 학습]]은 125M–175B 여덟 모델의 zero·one·few-shot 조건을 복원하고, 과제별 성능 차이·산술 exact match·benchmark 오염·후대 창발 용어와 내부 메커니즘의 범위를 검증한다.
 
 ## 현재 핵심 주제
 
@@ -154,6 +155,7 @@ related:
 - [[신경 정보 검색]]의 질의·문서 독립 표현과 token interaction, 클릭·음성 표본의 편향, 첫 단계 검색·재순위화 및 sparse·dense 상보성
 - [[교차 인코더 재순위화]]에서 구분하는 질의–후보 공동 부호화, `[CLS]` relevance logit, first-stage 누락 복구 불가와 후보별 추론 비용
 - [[언어 모델 스케일링 법칙]]에서 함께 확인하는 token loss, N·D·compute 병목, 관측 범위 밖 외삽과 Kaplan·Chinchilla compute-optimal 배분의 차이
+- [[문맥 내 학습]]에서 구분하는 고정 가중치, instruction·demonstration·query의 입력 조건화, zero·one·few-shot과 fine-tuning의 지속성 차이
 - [[검색은 근거를 찾고 독해는 답을 찾는다]]에서 분리하는 컬렉션→후보 retrieval recall, 후보→답 EM·F1·faithfulness, 답→행동 기권 calibration과 oracle reader 진단
 - [[N-gram에서 LLM으로]]에서 비교하는 Katz의 표면 문맥 확률 재분배와 NPLM의 연속 표현 매개변수 공유
 - [[BM25]]의 희소 용어 가중, 문서 내 빈도 포화, 평균 문서 길이 보정과 보정된 관련성 확률이 아닌 순위 점수라는 해석
@@ -185,7 +187,7 @@ related:
 - [[잔차 경로와 정규화는 어디에 놓이는가]]에서 비교하는 ResNet post-/pre-activation과 Transformer Post-/Pre-LN, additive identity path 위에 activation·normalization Jacobian을 둘 때의 최적화 차이
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]]에서 비교하는 RNN hidden-state 의존, WaveNet causal convolution, Transformer masked attention의 teacher-forced 훈련과 실제 sampling 차이
 - [[Transformer-XL]]에서 구분하는 현재 segment 내부 병렬 계산, segment 사이 forward memory 재사용, stop-gradient로 끊긴 학습 경로와 설정된 memory 길이
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]에서 비교하는 ELMo 고정 특징, ULMFiT 영역·분류 적응, BERT·GPT-1 전체 미세조정, GPT-2 입력 cue, XLM 언어 공유와 T5 공통 text output의 과제 명세 위치
+- [[사전 학습 지식은 과제에 어떻게 도착하는가]]에서 비교하는 ELMo 고정 특징, ULMFiT 영역·분류 적응, BERT·GPT-1 전체 미세조정, GPT-2 입력 cue, XLM 언어 공유, T5 공통 text output과 GPT-3 demonstration의 과제 명세 위치
 - [[XLM]]의 monolingual CLM·MLM과 parallel-data TLM, shared BPE·언어 sampling 및 target-language text와 task label을 분리한 zero-shot 조건
 - [[같은 병렬 문장은 무엇을 학습시키는가]]에서 비교하는 SMT의 잠재 단어 정렬, NMT의 target sequence supervision, TLM의 양방향 masked-token 문맥과 서로 다른 alignment 층위
 - [[XLNet·RoBERTa·ALBERT]]에서 분리하는 factorization objective, data·batch·masking training recipe, embedding factorization·layer sharing과 parameter 수·FLOPs·latency의 차이
@@ -199,6 +201,8 @@ related:
 ## 주요 진입점
 
 - [[N-gram에서 LLM으로]]
+- [[066_GPT-3와 문맥 내 학습]]
+- [[문맥 내 학습]]
 - [[최고 경로와 기대 통계, 백오프]]
 - [[확률, 마진, 순위 점수]]
 - [[자동 평가 지표는 무엇을 보상하는가]]
@@ -309,7 +313,9 @@ related:
 
 ## 현재 상태
 
-소스 65개, 개념 141개, 개체 29개, 분석 18개와 메타 문서 3개, 총 256개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 229개는 `verified`, 해석적 문서 24개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 277개 외부 근거와 130개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 66개, 개념 142개, 개체 29개, 분석 18개와 메타 문서 3개, 총 258개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 231개는 `verified`, 해석적 문서 24개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 278개 외부 근거와 132개 불변 raw artifact가 레지스트리에 등록돼 있다.
+
+`066`의 GPT-2 대비 10배라는 비교 대상 오류, 문맥 내 학습의 내부 메커니즘 확정, 미세조정 제거와 광범위한 고정밀 성능, 175B에서의 불연속 창발, code benchmark·API 민주화·prompt engineering 산업·구체 훈련비와 후대 모델의 직접 계보 주장도 공개 문서에서 교정했다. zero·one·few-shot의 demonstration 수와 가중치 고정, SuperGLUE 71.8 대 fine-tuned 최고 89.0, TriviaQA 71.2, 자리수별 산술 exact match와 contamination filtering bug를 함께 기록했다.
 
 `065`의 capability 사전 예측, 768 thousand라는 최솟값, architecture·dataset 독립의 근본 법칙, QA·독해 downstream 검증, diminishing returns 부정, Kaplan의 fixed-compute 배분 누락, Chinchilla가 처음 model–data 균형을 다뤘다는 설명, GPT-3·PaLM·GPT-4 규모의 직접 인과와 광범위한 조직 채택·비용 주장도 공개 문서에서 교정했다.
 

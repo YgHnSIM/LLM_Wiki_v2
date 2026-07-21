@@ -96,6 +96,7 @@ related:
 - [[063_Transformer-XL과 세그먼트 수준 재귀]] — bounded segment memory·stop-gradient·상대 위치 attention을 복원하고 RECL·평가 속도·후속 계보 과장을 교정한 소스 (근거 1개)
 - [[064_BERT 기반 passage 재순위화]] — BM25 후보를 BERT 결합 self-attention과 `[CLS]` 분류 점수로 다시 매기고 후보 recall·길이·비용·제품 공개 범위를 구분한 소스 (근거 4개)
 - [[065_신경 언어 모델의 스케일링 법칙]] — WebText2 token loss의 N·D·compute 조건부 power law와 Kaplan식 자원 배분을 복원하고 Chinchilla의 재추정을 구분한 소스 (근거 2개)
+- [[066_GPT-3와 문맥 내 학습]] — 125M–175B 모델군의 zero·one·few-shot 문맥 적응을 복원하고 과제별 성능·오염·창발 서사의 범위를 검증한 소스 (근거 2개)
 
 ## 개체
 
@@ -136,10 +137,11 @@ related:
 - [[Transformer-XL]] — stop-gradient segment memory와 상대 위치 attention으로 고정 길이 경계를 넘어 과거 표현을 재사용하는 causal Transformer (근거 1개)
 - [[교차 인코더 재순위화]] — 질의와 후보를 공동 부호화해 세밀한 관련성 점수를 내되 first-stage 후보와 후보별 추론 비용에 제약받는 재순위화 방식 (근거 3개)
 - [[인간 피드백 강화학습]] — 인간의 행동·응답 비교로 보상 신호를 학습하고 정책을 선호에 맞춰 최적화하는 방법 계열 (근거 4개)
-- [[언어 모델 전이 학습]] — 사전 학습 언어 모델의 내부 표현이나 매개변수를 후속 과제에 재사용·적응시키는 방법 계열 (근거 6개)
+- [[언어 모델 전이 학습]] — 사전 학습 언어 모델의 내부 표현이나 매개변수를 후속 과제에 재사용·적응시키는 방법 계열 (근거 7개)
 - [[BERT]] — 마스크드 언어 모델링으로 깊은 양방향 Transformer encoder를 사전 학습하고 과제별로 전체 미세조정하는 모델 (근거 3개)
 - [[마스크드 언어 모델링]] — 입력 token 일부를 교란하고 좌우 문맥에서 원 token을 복원하는 사전 학습 목적 (근거 5개)
-- [[GPT-1과 GPT-2]] — causal Transformer의 지도 미세조정과 zero-shot text continuation을 잇는 초기 GPT 모델 계열 (근거 3개)
+- [[GPT-1과 GPT-2]] — causal Transformer의 지도 미세조정과 zero-shot text continuation을 잇는 초기 GPT 모델 계열 (근거 4개)
+- [[문맥 내 학습]] — 가중치를 갱신하지 않고 입력 문맥의 instruction·demonstration으로 새 query의 출력 분포를 조건화하는 적응 방식 (근거 2개)
 - [[GLUE와 SuperGLUE]] — 여러 영어 NLU 과제·metric·test server·leaderboard를 묶어 broad transfer를 비교하는 평가 suite (근거 3개)
 - [[XLNet·RoBERTa·ALBERT]] — BERT 이후의 objective·training recipe·parameterization 개선을 비용 조건과 함께 비교하는 세 모델 묶음 (근거 3개)
 - [[XLM]] — shared multilingual encoder에서 CLM·MLM과 병렬 문장쌍 TLM을 구분하고 교차 언어 전이를 학습하는 방법군 (근거 1개)
@@ -161,7 +163,7 @@ related:
 - [[CBOW]] — 주변 문맥 벡터를 합·평균해 중심 단어를 예측하는 Word2Vec 구조 (근거 2개)
 - [[Skip-gram]] — 중심 단어에서 창 안의 문맥 단어별 학습 쌍을 만드는 Word2Vec 구조 (근거 3개)
 - [[GloVe]] — 말뭉치 전체에 집계한 비영 단어–문맥 계수의 로그를 가중 저랭크 회귀로 근사하는 정적 임베딩 방법 (근거 3개)
-- [[대규모 언어 모델]] — 대규모 텍스트의 자기지도 목표로 문맥 표현을 학습하고 대화형 평가·번역·초기 신경망·언어 구조 문제와 연결되는 현대 언어 모델 (근거 15개)
+- [[대규모 언어 모델]] — 대규모 텍스트의 자기지도 목표로 문맥 표현을 학습하고 대화형 평가·번역·초기 신경망·언어 구조 문제와 연결되는 현대 언어 모델 (근거 16개)
 - [[언어 모델 스케일링 법칙]] — 모델·데이터·학습 compute와 token loss 사이의 경험식을 병목·관측 범위·compute-optimal 배분 조건과 함께 읽는 개념 (근거 2개)
 - [[튜링 테스트]] — 텍스트 대화에서 인간과 기계를 구별할 수 있는지를 묻는 기계 지능 평가 사고실험 (근거 3개)
 - [[모방 게임]] — 튜링 테스트의 원래 설정으로, 대화만으로 인간과 기계를 판별하게 하는 실험 구성 (근거 3개)
@@ -276,7 +278,7 @@ related:
 ## 분석
 
 - [[같은 병렬 문장은 무엇을 학습시키는가]] — 병렬 문장쌍이 IBM SMT의 잠재 단어 정렬, seq2seq NMT의 target sequence, XLM TLM의 양방향 masked-token 문맥으로 쓰이는 차이를 비교한 분석 (근거 6개)
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — ELMo·ULMFiT·BERT·GPT·XLM·T5에서 지식 전달 경로와 head·cue·공통 text output의 과제 명세 위치를 비교한 분석 (근거 7개)
+- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — ELMo·ULMFiT·BERT·GPT·XLM·T5에서 지식 전달 경로와 head·cue·demonstration·공통 text output의 과제 명세 위치를 비교한 분석 (근거 8개)
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]] — RNN·WaveNet·Transformer를 표현 계산·teacher forcing·sampling·총연산의 네 축으로 분리한 분석 (근거 5개)
 - [[검색은 근거를 찾고 독해는 답을 찾는다]] — BM25·DSSM/DRMM·SQuAD·DPR/RAG를 검색 재현율·독해 정확도·기권의 세 경계로 분해한 분석 (근거 8개)
 - [[서브워드는 한 벡터의 특징인가 여러 토큰인가]] — 기본 SGNS·FastText·BPE·SentencePiece를 조각의 역할·결합 시점·문맥화·OOV·계산 비용으로 비교한 분석 (근거 6개)

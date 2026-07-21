@@ -2810,6 +2810,24 @@ raw 등록 해시:
 - 사이트는 393개 페이지를 빌드해 5,099개 위키 링크와 29,288개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 255개 항목을 포함했다.
 - 공개 source·concept의 식·지수·범위는 Kaplan 2020과 Hoffmann 2022의 1차 자료로 검증했으며, 관측 범위 밖 외삽과 loss 밖의 능력·안전성은 별도 평가가 필요한 한계로 남겼다.
 
+## [2026-07-21] ingest | GPT-3와 문맥 내 학습
+
+변경 내용:
+
+- `066_GPT-3 and In-Context Learning Emergent Capabilities from Scale.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 67개 본문 블록·6개 H2와 83개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- [[066_GPT-3와 문맥 내 학습]]과 [[문맥 내 학습]]을 만들고, 125M–175B 여덟 모델·300B training token·2,048-token context, zero/one/few-shot의 demonstration 수와 task-specific gradient update가 없는 평가 경계를 정리했다.
+- [[GPT-1과 GPT-2]]와 [[언어 모델 전이 학습]]에는 GPT-2 cue에서 GPT-3 instruction·demonstration으로 과제 명세가 이동한 범위를 보강했다. [[대규모 언어 모델]]에는 model scale·평균 loss·task score를 분리했고, [[사전 학습 지식은 과제에 어떻게 도착하는가]]에는 입력 activation을 통한 일시적 적응을 여덟 번째 전이 경로로 추가했다.
+- Brown 등의 원 논문을 대조해 SuperGLUE few-shot 71.8 대 fine-tuned 최고 89.0, closed-book TriviaQA 64.3/68.0/71.2, 2–5자리 덧셈·뺄셈과 exact-match 산술 곡선, benchmark filtering bug와 13-gram clean subset 분석을 확인했다.
+- raw의 GPT-2 대비 10배라는 비교 대상 오류, 미세조정의 보편적 제거, 여러 과제의 안정적 고정밀 성능, pattern recognition 내부 메커니즘 확정, 175B에서의 불연속 창발, code benchmark·API 민주화·prompt engineering 산업·수백만 달러 비용과 후대 모델 직접 계보를 공개 문서에서 교정했다.
+- Kaplan의 매끄러운 token loss, Brown의 서로 다른 downstream 곡선, 후대 창발 정의와 metric 효과 사이에는 별도 합성 가치가 확인됐다. 066 ingest 배포 뒤 `손실 곡선과 능력 곡선 사이`를 별도 `content` 변경으로 작성한다.
+
+검증 결과:
+
+- 번역 스킬 검사는 066 번역·해설 쌍을 `valid_pairs: 1`로 확인했고, source workflow는 두 raw artifact의 원문 URL·역할·SHA-256 일치를 확인했다.
+- 49개 회귀 테스트와 258개 위키 문서 strict lint를 통과했으며 278개 evidence 레코드와 132개 immutable raw artifact를 확인했다.
+- 사이트는 397개 페이지를 빌드해 5,165개 위키 링크와 29,628개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 257개 항목을 포함했다.
+- 공개 source·concept와 기존 문서 보강은 Brown et al. 2020과 Kaplan et al. 2020의 범위 안에서 검증했다. 문맥 내 학습의 내부 알고리즘과 후대 ‘창발’ 판정은 별도 근거가 필요한 해석 문제로 남겼다.
+
 ## 관련 항목
 
 - [[index]]
