@@ -3575,6 +3575,22 @@ raw 등록 해시:
 - Dense FlashAttention과 별도의 block-sparse approximate extension, 2022년 v1과 후대 FlashAttention-2·3의 설계·hardware 범위를 구분한다. 더 긴 sequence를 실행할 수 있다는 사실을 장거리 추론 품질이나 모든 hardware·head dimension에서의 seamless drop-in으로 확대하지 않는다.
 - `source:ready -- 088`은 96개 회귀 테스트와 305개 Markdown strict lint를 통과해 335개 evidence와 176개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 587개 HTML을 만들고 6,642개 wiki link를 모두 해소했다.
 
+## [2026-07-22] content | FLOPs와 HBM 이동은 다른 효율 축이다
+
+변경 내용:
+
+- 새 분석 문서를 늘리지 않고 기존 [[훈련 병렬성과 생성 순차성은 다른 축이다]]를 공식 088까지 확장했다. RNN hidden-state·WaveNet causal convolution·Transformer teacher-forced attention·Transformer-XL segment memory의 의존성 비교에 FlashAttention의 I/O 인지형 실행을 결합했다.
+- 성능 질문을 표현 계산의 위치 의존, 정답 이력이 있는 훈련, 실제 output sampling, 총 산술량, memory capacity·HBM–SRAM traffic·device communication, algorithm·kernel·hardware별 wall-clock의 여섯 축으로 세분했다.
+- Dense attention의 operator, tile·온라인 softmax·재계산 algorithm, 특정 GPU의 kernel을 구분했다. FlashAttention은 정보 접근 범위와 autoregressive 확률 분해를 바꾸지 않으므로 prefill I/O를 줄여도 token별 decode round·$O(N^2d)$ 산술·model weight·KV cache가 남는다.
+- NeurIPS proceedings 최종본 Figure 2에서 표준 구현과 FlashAttention의 66.6·75.2 GFLOPs, 35.3·4.4GB HBM R/W, 35.1·11.7ms runtime을 같은 조건의 세 장부로 비교했다. FLOPs 증가와 wall-clock 감소가 함께 일어날 수 있어 산술량만으로 속도를 판정하지 않는다.
+- 공식 088 raw 두 파일과 Dao 등의 2022년 논문 evidence, [[088_FlashAttention과 IO 인지형 정확 어텐션]]·[[FlashAttention]]을 분석에 연결하고 [[index]]·[[overview]]의 설명과 근거 수를 동기화했다.
+
+검증 경계:
+
+- 이 합성은 같은 dense operator의 실행 비용을 분석한 것이며 FlashAttention과 Transformer-XL 결합의 직접 실험이나 모든 GPU·attention 변형의 성능 보장을 주장하지 않는다.
+- HBM R/W GB는 Figure 2의 데이터량이고 Theorem 2의 점근적 HBM access 횟수와 같은 단위가 아니다. ArXiv 개정본에 있는 다른 Figure 2 측정값도 NeurIPS 최종본 수치와 합치지 않는다.
+- 전체 검증은 96개 회귀 테스트와 305개 Markdown strict lint를 통과해 335개 evidence와 176개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 587개 HTML을 만들고 6,654개 wiki link를 모두 해소했다.
+
 ## 관련 항목
 
 - [[index]]

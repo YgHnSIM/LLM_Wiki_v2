@@ -251,7 +251,7 @@ related:
 - [[잔차 연결]]의 (I+J_F) 직접 경로와 보장의 경계, [[Degradation problem]]과 기울기 소실·과적합의 구분, [[ResNet]] 원 post-activation과 후속 pre-activation 및 Transformer residual stream
 - [[Layer Normalization]]과 [[Batch Normalization]]의 사례/feature 통계 축, affine 전후 평균·분산의 차이, Post-LN·Pre-LN에서 [[잔차 연결]] identity path가 달라지는 방식과 [[RMSNorm]]의 uncentered second moment
 - [[잔차 경로와 정규화는 어디에 놓이는가]]에서 비교하는 ResNet post-/pre-activation과 Transformer Post-/Pre-LN, additive identity path 위에 activation·normalization Jacobian을 둘 때의 최적화 차이
-- [[훈련 병렬성과 생성 순차성은 다른 축이다]]에서 비교하는 RNN hidden-state 의존, WaveNet causal convolution, Transformer masked attention의 teacher-forced 훈련과 실제 sampling 차이
+- [[훈련 병렬성과 생성 순차성은 다른 축이다]]에서 비교하는 RNN hidden-state 의존, WaveNet causal convolution, Transformer masked attention의 teacher-forced 훈련·실제 sampling과 FlashAttention의 operator–algorithm–kernel·FLOPs–HBM traffic–wall-clock 차이
 - [[Transformer-XL]]에서 구분하는 현재 segment 내부 병렬 계산, segment 사이 forward memory 재사용, stop-gradient로 끊긴 학습 경로와 설정된 memory 길이
 - [[FlashAttention]]에서 구분하는 dense attention operator, 온라인 softmax·타일링·재계산 algorithm, hardware별 kernel과 $O(n^2d)$ 산술량·HBM 이동·$O(n)$ 추가 중간 저장의 서로 다른 비용 축
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]]에서 비교하는 ELMo 고정 특징, 전체 미세조정, 입력 cue·demonstration, 다과제 지시, CLIP class prototype, Flamingo의 동결 백본–학습 bridge–멀티모달 context, DALL·E 2의 CLIP image-embedding target, Stable Diffusion의 text-token 교차 어텐션 조건과 공간 latent, Codex 실행 선택 및 foundation model–adapted model–deployed system의 층위·접근권
@@ -421,7 +421,9 @@ related:
 
 소스 88개, 참고 자료 0개, 개념 163개, 개체 29개, 분석 22개와 메타 문서 3개, 총 305개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 274개는 `verified`, 해석적 문서 28개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 335개 외부 근거와 176개 불변 raw artifact가 레지스트리에 등록돼 있다.
 
-[[088_FlashAttention과 IO 인지형 정확 어텐션]]과 [[FlashAttention]]은 dense softmax attention의 수학을 바꾸지 않고 HBM–SRAM 사이의 데이터 이동을 줄이는 실행을 복원했다. 온라인 softmax는 tile별 행 최댓값·정규화 합·출력 누산값을 재조정하고, backward는 저장하지 않은 score·probability block을 다시 계산한다. 표준 구현의 $O(n^2)$ 중간 저장은 $O(n)$ 추가 메모리로 줄지만 $O(n^2d)$ 산술량과 model weight·KV cache는 남으며, `exact`도 부동소수점 bitwise 동일성을 뜻하지 않는다. Figure 2의 더 많은 FLOPs·더 적은 HBM 접근·더 짧은 시간, kernel 속도와 end-to-end 속도, dense 정확 방식과 별도 block-sparse 근사, FlashAttention 1·2·3의 version 경계를 각각 분리했다.
+[[088_FlashAttention과 IO 인지형 정확 어텐션]]과 [[FlashAttention]]은 dense softmax attention의 수학을 바꾸지 않고 HBM–SRAM 사이의 데이터 이동을 줄이는 실행을 복원했다. 온라인 softmax는 tile별 행 최댓값·정규화 합·출력 누산값을 재조정하고, backward는 저장하지 않은 score·probability block을 다시 계산한다. 표준 구현의 $O(n^2)$ 중간 저장은 $O(n)$ 추가 메모리로 줄지만 $O(n^2d)$ 산술량과 model weight·KV cache는 남으며, `exact`도 부동소수점 bitwise 동일성을 뜻하지 않는다. Figure 2의 더 많은 FLOPs·더 적은 HBM 읽기·쓰기량·더 짧은 시간, kernel 속도와 end-to-end 속도, dense 정확 방식과 별도 block-sparse 근사, FlashAttention 1·2·3의 version 경계를 각각 분리했다.
+
+[[훈련 병렬성과 생성 순차성은 다른 축이다]]는 이 사례를 기존 RNN·WaveNet·Transformer·Transformer-XL 비교에 합성했다. 표현 계산의 위치 의존, teacher forcing, 실제 token sampling의 순차 round와 함께 FLOPs·메모리 capacity·HBM 읽기·쓰기량·wall-clock을 별도 성능 축으로 둔다. NeurIPS 최종본 Figure 2에서 FlashAttention은 66.6→75.2 GFLOPs로 산술을 늘리면서 HBM R/W를 35.3→4.4GB, runtime을 35.1→11.7ms로 줄였으므로, 같은 dense operator에서도 algorithm·kernel·hardware 조건이 성능 장부를 바꾼다는 비교 근거가 된다.
 
 [[087_Whisper와 대규모 약한 감독 음성 인식]]과 [[Whisper]]는 기존 ASR이 만든 자동 transcript를 학습한 자료라는 설명을 뒤집고, 웹에 이미 짝지어진 오디오-전사 쌍에서 기계 생성 transcript를 탐지·제거한 실제 수집 절차를 복원했다. 번역은 X→English로 한정하고, 최초 다섯 규모·아홉 checkpoint와 논문의 Large V2 결과, 평가 dataset 미세조정이 없는 zero-shot, LibriSpeech·MLS·VoxPopuli·CoVoST2·Kincaid46의 서로 다른 결과를 분리했다. 30초 창·text normalizer·장문 decoding heuristic·환각·언어 불균형과 모델·추론 코드 공개 대 전체 학습 자료·코드 미공개도 같은 장부에 기록했다.
 
