@@ -100,6 +100,7 @@ related:
 - [[067_DPR과 검색 증강 생성]] — BERT dual encoder·hard negative·FAISS의 DPR와 DPR–BART 잠재 문서 주변화의 원 RAG를 분리하고 검색·생성·인용의 실제 경계를 검증한 소스 (근거 2개)
 - [[068_전문가 혼합과 희소 활성 스케일링]] — MoE의 1991·2017년 계보와 GShard top-2·Switch top-1을 분리하고 total capacity·active compute·memory·communication의 경계를 검증한 소스 (근거 5개)
 - [[069_CLIP과 대조적 언어-이미지 사전 학습]] — 4억 이미지-텍스트 쌍의 대칭 대조 학습과 class prompt 제로샷 분류를 복원하고 shared embedding·평가·후대 계보의 범위를 검증한 소스 (근거 1개)
+- [[070_Codex와 HumanEval 기반 코드 생성 평가]] — Python 코드 계속학습과 Codex-S를 분리하고 HumanEval·pass@k·실행 선택 및 연구 모델·Copilot production version의 경계를 검증한 소스 (근거 3개)
 
 ## 개체
 
@@ -140,7 +141,7 @@ related:
 - [[Transformer-XL]] — stop-gradient segment memory와 상대 위치 attention으로 고정 길이 경계를 넘어 과거 표현을 재사용하는 causal Transformer (근거 1개)
 - [[교차 인코더 재순위화]] — 질의와 후보를 공동 부호화해 세밀한 관련성 점수를 내되 first-stage 후보와 후보별 추론 비용에 제약받는 재순위화 방식 (근거 3개)
 - [[인간 피드백 강화학습]] — 인간의 행동·응답 비교로 보상 신호를 학습하고 정책을 선호에 맞춰 최적화하는 방법 계열 (근거 4개)
-- [[언어 모델 전이 학습]] — 사전 학습 언어 모델의 내부 표현이나 매개변수를 후속 과제에 재사용·적응시키는 방법 계열 (근거 7개)
+- [[언어 모델 전이 학습]] — 사전 학습 언어 모델의 내부 표현이나 매개변수를 후속 과제에 재사용·적응시키는 방법 계열 (근거 8개)
 - [[BERT]] — 마스크드 언어 모델링으로 깊은 양방향 Transformer encoder를 사전 학습하고 과제별로 전체 미세조정하는 모델 (근거 3개)
 - [[마스크드 언어 모델링]] — 입력 token 일부를 교란하고 좌우 문맥에서 원 token을 복원하는 사전 학습 목적 (근거 5개)
 - [[GPT-1과 GPT-2]] — causal Transformer의 지도 미세조정과 zero-shot text continuation을 잇는 초기 GPT 모델 계열 (근거 4개)
@@ -150,6 +151,7 @@ related:
 - [[XLM]] — shared multilingual encoder에서 CLM·MLM과 병렬 문장쌍 TLM을 구분하고 교차 언어 전이를 학습하는 방법군 (근거 1개)
 - [[T5]] — task를 text target으로 통합하고 sentinel span corruption 뒤 과제별 supervised fine-tuning으로 전이하는 encoder–decoder model family (근거 2개)
 - [[CLIP]] — 이미지·텍스트 이중 인코더를 대칭 대조 손실로 정렬하고 class prompt를 제로샷 분류기 weight처럼 사용하는 시각-언어 모델 (근거 1개)
+- [[OpenAI Codex (2021)]] — GPT 계열을 Python 코드 분포로 계속 학습하고 docstring에서 함수 후보를 생성해 unit test로 평가한 2021년 코드 모델군 (근거 3개)
 - [[N-gram 모델]] — 앞선 n-1개 단위의 빈도와 조건부 확률로 다음 항목을 예측하고 평활화로 미관측 조합을 다루는 언어 모델 (근거 4개)
 - [[마르코프 가정]] — 다음 항목의 확률을 제한된 최근 문맥으로 근사하는 가정 (근거 3개)
 - [[조건부 확률]] — 문맥이 주어졌을 때 다음 항목이 나타날 확률을 표현하는 수학적 개념 (근거 1개)
@@ -285,7 +287,7 @@ related:
 
 - [[총 매개변수와 활성 계산량은 같은 축인가]] — dense $N$과 sparse MoE의 total·active parameters를 분리하고 FLOPs·memory·communication·wall-clock·data·quality 장부로 규모 비교 조건을 정리한 분석 (근거 5개)
 - [[같은 병렬 문장은 무엇을 학습시키는가]] — 병렬 문장쌍이 IBM SMT의 잠재 단어 정렬, seq2seq NMT의 target sequence, XLM TLM의 양방향 masked-token 문맥으로 쓰이는 차이를 비교한 분석 (근거 6개)
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — ELMo·ULMFiT·BERT·GPT·XLM·T5·CLIP에서 지식 전달 경로와 head·cue·demonstration·class prompt·공통 text output의 과제 명세 위치를 비교한 분석 (근거 9개)
+- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — ELMo·ULMFiT·BERT·GPT·XLM·T5·CLIP·Codex에서 지식 전달 경로와 head·cue·demonstration·class prompt·공통 text output·실행 선택의 위치를 비교한 분석 (근거 10개)
 - [[손실 곡선과 능력 곡선 사이]] — 평균 token loss·downstream task score·능력 threshold를 분리하고 metric·표본·관측 scale이 창발 판정에 미치는 영향을 비교한 분석 (근거 4개)
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]] — RNN·WaveNet·Transformer를 표현 계산·teacher forcing·sampling·총연산의 네 축으로 분리한 분석 (근거 5개)
 - [[검색은 근거를 찾고 독해는 답을 찾는다]] — BM25·DSSM/DRMM·SQuAD·DPR/RAG를 검색 재현율·독해 정확도·기권의 세 경계로 분해한 분석 (근거 8개)
@@ -293,7 +295,7 @@ related:
 - [[잔차 경로와 정규화는 어디에 놓이는가]] — ResNet post-/pre-activation과 Transformer Post-/Pre-LN을 additive identity path 위의 Jacobian 배치로 비교한 분석 (근거 5개)
 - [[계수 기반과 예측 기반 단어 표현은 얼마나 다른가]] — LSI·NPLM·SGNS·GloVe를 문맥 단위·통계 집계·가중·저랭크 목적·평가 축으로 비교한 분석 (근거 7개)
 - [[구조화된 의미 자원은 무엇을 노드로 삼는가]] — WordNet synset·FrameNet frame·PropBank roleset과 token·Freebase topic이 선택하는 동일성·관계·근거 단위를 비교한 분석 (근거 6개)
-- [[자동 평가 지표는 무엇을 보상하는가]] — BLEU·ROUGE·METEOR의 분모·대응 단위·순서·집계가 모델 선택에 만드는 유인과 참조 기반 평가의 공통 사각지대를 비교한 분석 (근거 7개)
+- [[자동 평가 지표는 무엇을 보상하는가]] — BLEU·ROUGE·METEOR의 중첩 설계와 HumanEval의 unit-test 기능 평가를 비교하고 pass@k의 표본 예산·선택 oracle을 분석한 문서 (근거 8개)
 - [[N-gram에서 LLM으로]] — 조건부 예측의 공통점과 n-gram 빈도표·Katz 백오프·신경망 어텐션의 기술적 단절을 정리한 분석 (근거 11개)
 - [[최고 경로와 기대 통계, 백오프]] — Viterbi의 최고 경로, 경로합·EM의 기대 통계, Katz의 미관측 확률 추정이 답하는 서로 다른 질문을 구분한 분석 (근거 8개)
 - [[확률, 마진, 순위 점수]] — IBM·Collins의 생성확률, MaxEnt 조건부확률, SVM 결정값과 BM25 순위 점수의 정규화 범위·학습 목표·원점수 해석을 구분한 분석 (근거 6개)

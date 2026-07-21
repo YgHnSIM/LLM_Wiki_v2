@@ -2450,3 +2450,28 @@ sources:
     kind: conference-paper
     url: https://proceedings.mlr.press/v139/radford21a.html
     language: en
+  chen-et-al-2021-codex:
+    title: Evaluating Large Language Models Trained on Code
+    authors: [Mark Chen, Jerry Tworek, Heewoo Jun, Qiming Yuan, Henrique Ponde de Oliveira Pinto, Jared Kaplan, Harri Edwards, Yuri Burda, Nicholas Joseph, Greg Brockman, Alex Ray, Raul Puri, Gretchen Krueger, Michael Petrov, Heidy Khlaaf, Girish Sastry, Pamela Mishkin, Brooke Chan, Scott Gray, Nick Ryder, Mikhail Pavlov, Alethea Power, Lukasz Kaiser, Mohammad Bavarian, Clemens Winter, Philippe Tillet, Felipe Petroski Such, Dave Cummings, Matthias Plappert, Fotios Chantzis, Elizabeth Barnes, Ariel Herbert-Voss, William Hebgen Guss, Alex Nichol, Alex Paino, Nikolas Tezak, Jie Tang, Igor Babuschkin, Suchir Balaji, Shantanu Jain, William Saunders, Christopher Hesse, Andrew N. Carr, Jan Leike, Josh Achiam, Vedant Misra, Evan Morikawa, Alec Radford, Matthew Knight, Miles Brundage, Mira Murati, Katie Mayer, Peter Welinder, Bob McGrew, Dario Amodei, Sam McCandlish, Ilya Sutskever, Wojciech Zaremba]
+    published: 2021
+    source_type: primary
+    kind: research-paper
+    doi: 10.48550/arXiv.2107.03374
+    url: https://arxiv.org/abs/2107.03374
+    language: en
+  github-2021-copilot-preview:
+    title: 'Introducing GitHub Copilot: your AI pair programmer'
+    authors: [Nat Friedman]
+    published: 2021
+    source_type: primary
+    kind: official-blog
+    url: https://github.blog/news-insights/product-news/introducing-github-copilot-ai-pair-programmer/
+    language: en
+  openai-2021-codex:
+    title: OpenAI Codex
+    authors: [Wojciech Zaremba, Greg Brockman]
+    published: 2021
+    source_type: primary
+    kind: official-blog
+    url: https://openai.com/index/openai-codex/
+    language: en

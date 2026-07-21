@@ -2916,6 +2916,25 @@ raw 등록 해시:
 - 사이트는 411개 페이지를 빌드해 5,371개 위키 링크와 30,819개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 265개 항목을 포함했다.
 - 공개 source·concept와 기존 분석 보강은 Radford et al. 2021 본문과 supplement의 직접 구조·학습·평가·편향 범위 안에서 검증했다. 일반 멀티모달 이해, 생성·VQA 능력과 후대 모델의 직접 계보는 각 후속 1차 자료가 필요한 범위로 남겼다.
 
+## [2026-07-21] ingest | Codex와 HumanEval 기반 코드 생성 평가
+
+변경 내용:
+
+- `070_Codex AI-Assisted Code Generation and the Transformation of Software Development.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 63개 의미 블록, H1/H2/H3 1/6/4와 10개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- [[070_Codex와 HumanEval 기반 코드 생성 평가]]와 [[OpenAI Codex (2021)]]을 만들고, 최대 12B 연구 Codex의 Python 코드 계속학습, Codex-S의 독립 함수 지도 미세조정, docstring prompt, HumanEval·pass@k와 생성·선택·검증 단계를 분리했다. 연구 checkpoint, GitHub Copilot용 별도 production version과 현행 동명 Codex도 서로 다른 대상으로 구분했다.
+- [[언어 모델 전이 학습]]과 [[사전 학습 지식은 과제에 어떻게 도착하는가]]에는 코드 분포 weights·함수 과제 weights·입력 명세·sampling budget·외부 검증기에 과제 정보가 나뉘는 경로를 추가했다. [[자동 평가 지표는 무엇을 보상하는가]]에는 BLEU 문자열 중첩과 unit-test 기능 정확성, pass@k의 표본 예산·temperature·test oracle을 비교하는 절을 보강했다.
+- [[066_GPT-3와 문맥 내 학습]]이 남긴 “GPT-3 원 논문은 코드 benchmark를 평가하지 않았다”는 경계를 070의 별도 1차 근거로 연결했다. Chen et al. 논문, GitHub Copilot 2021 technical preview와 OpenAI Codex API 발표를 외부 evidence로 등록했다.
+- raw의 2021년 8월 단일 최초 공개, 175B GPT-3와 같은 연구 모델, 여러 언어·프레임워크·대규모 저장소의 일반적 이해, 의미·예외 처리 보장, test 작성·교육·온보딩·생산성·오류 감소의 직접 실험, 공개 코드의 license 문제 해결과 다른 전문 모델로의 직접 계보 주장을 공개 문서에서 교정했다.
+- Table 1의 Codex-12B pass@1 28.81%·pass@10 46.81%·pass@100 72.31%, 초록의 별도 70.2%, Codex-S 단일 표본 37.7%·평균 log-probability 선택 44.5%·unit-test oracle 77.5%를 locator와 선택 조건별로 분리했다.
+- 새 분석 문서는 만들지 않았다. 코드 영역 적응은 기존 전이 분석, 문자열 대 실행 평가는 기존 자동 지표 분석의 명시적 공백을 직접 채우므로 두 문서를 보강하는 편이 중복 없이 재사용 가치가 높았다. 코드 생성·함수 호출·agent 실행 loop의 별도 비교는 후속 091·103의 1차 자료가 갖춰진 뒤 판단한다.
+
+검증 결과:
+
+- 번역 스킬 검사는 070 번역·해설 쌍을 `done: true`로 확인했고, source workflow는 두 raw artifact의 원문 URL·역할·SHA-256 일치를 확인했다.
+- 49개 회귀 테스트와 268개 위키 문서 strict lint를 통과했으며 289개 evidence 레코드와 140개 immutable raw artifact를 확인했다.
+- 사이트는 415개 페이지를 빌드해 5,433개 위키 링크와 31,166개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 267개 항목을 포함했다.
+- 연구·제품·후대 서사는 Chen et al. 2021, GitHub 2021-06-29와 OpenAI 2021-08-10의 1차 자료 범위로 분리했다. HumanEval 밖의 repository 수준 개발·생산성·안전·license 결론은 별도 근거가 필요한 후속 범위로 남겼다.
+
 ## 관련 항목
 
 - [[index]]

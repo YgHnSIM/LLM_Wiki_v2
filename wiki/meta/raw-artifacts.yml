@@ -1242,3 +1242,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/clip-contrastive-language-image-pretraining-multimodal
     sha256: 65a380843dd36736dd61cc8adaf5b22f83ac1c1ae4a24980b7c9d4bffa14f35c
+  - path: "raw/070_Codex AI-Assisted Code Generation and the Transformation of Software Development.ko.md"
+    role: translation
+    order_prefix: "070"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/codex-ai-assisted-code-generation-transformation-software-development
+    sha256: d2e61a5b7b2a41ad0c46d5e48d783d86652fe922cc0a4eedb430e5e9e2deb373
+  - path: "raw/070_Codex AI-Assisted Code Generation and the Transformation of Software Development.commentary.ko.md"
+    role: commentary
+    order_prefix: "070"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/codex-ai-assisted-code-generation-transformation-software-development
+    sha256: 7687c9cebeb41089b0012a8f222f764dfe6f5f7b02297cfc059a816dee0933d5
