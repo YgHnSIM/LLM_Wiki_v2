@@ -1656,3 +1656,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/function-calling-tool-use-practical-ai-agents
     sha256: 10e5a846450077b8749933c3ff315f189745196f6a7c6a97a949cc31e8fce753
+  - path: "raw/093_Multimodal Large Language Models - Vision-Language Integration That Transformed AI Capabilities.ko.md"
+    role: translation
+    order_prefix: "093"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/multimodal-large-language-models-vision-language-integration-gpt4-2023
+    sha256: 3c754e2885efd2f429352f3b24a4c406fee92d91c904d1d8f7a54a6e8c2dfd80
+  - path: "raw/093_Multimodal Large Language Models - Vision-Language Integration That Transformed AI Capabilities.commentary.ko.md"
+    role: commentary
+    order_prefix: "093"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/multimodal-large-language-models-vision-language-integration-gpt4-2023
+    sha256: 032951f4fad51b0d899640bf5cf406fcec26da3c8c007f957768fc04f6250b13

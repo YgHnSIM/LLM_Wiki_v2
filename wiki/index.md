@@ -122,6 +122,7 @@ related:
 - [[090_공개 가중치 LLM 파동과 서로 다른 공개 범위]] — MPT·Falcon·Mistral의 weight·code·data·license·compute 공개 범위를 분리하고 단선 계보·proprietary parity·재현성 과장을 교정한 소스 (근거 15개)
 - [[091_QLoRA와 4비트 양자화 미세조정]] — 동결 NF4 base storage·BF16 compute·all-linear LoRA update를 분리하고 double quantization·paged optimizer·hardware·평가 조건을 검증한 소스 (근거 6개)
 - [[092_함수 호출과 도구 사용의 모델-실행 경계]] — 2023년 함수 호출을 model의 구조화된 제안과 application의 검증·권한·실행으로 분리하고 parallel calls·JSON mode·strict schema의 후대 경계를 교정한 소스 (근거 5개)
+- [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]] — Frozen·Flamingo·PaLI·BLIP-2·LLaVA·PaLM-E의 서로 다른 시각 bridge와 동결 경계를 비교하고 GPT-4V의 비공개 architecture·배포 chronology·평가·안전 과장을 교정한 소스 (근거 12개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 
 ## 개체
@@ -185,6 +186,7 @@ related:
 - [[The Pile]] — 22개 component·epoch 가중치·BPB 평가를 deduplication·decontamination·underlying rights와 구분하는 825.18 GiB 영어 중심 말뭉치 (근거 2개)
 - [[CLIP]] — 이미지·텍스트 이중 인코더를 대칭 대조 손실로 정렬하고 class prompt를 제로샷 분류기 weight처럼 사용하는 시각-언어 모델 (근거 4개)
 - [[Flamingo]] — 동결 시각·언어 backbone 사이의 64개 시각 token 병목과 gated cross-attention으로 멀티모달 문맥 내 생성을 수행하는 모델 계열 (근거 1개)
+- [[멀티모달 대규모 언어 모델]] — 비언어 입력을 image encoder·bridge·언어 decoder로 연결하되 입력·동결 경계·출력 signature와 공개 수준을 model별로 구분해야 하는 시스템 계열 (근거 9개)
 - [[DALL·E (2021)]] — 1,024개 이산 이미지 토큰과 최대 256개 텍스트 토큰을 공동 자기회귀 모델링하고 별도 대조 모델로 후보를 재순위화한 2021년 생성 시스템 (근거 4개)
 - [[DALL·E 2]] — 동결 CLIP 잠재 공간에서 image embedding을 생성하는 prior와 계층적 확산 decoder를 결합한 2022년 텍스트-이미지 생성 시스템 (근거 3개)
 - [[잠재 확산 모델]] — 지각 오토인코더와 잠재 U-Net을 분리하고 교차 어텐션으로 여러 조건을 연결해 품질·압축·계산을 절충하는 확산 모델 계열 (근거 2개)

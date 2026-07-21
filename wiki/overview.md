@@ -26,13 +26,13 @@ related:
 
 공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism (2015)**이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-21 현재 원문을 제공하지 않는다.
 
-따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 92개는 공식 001–046·048–092·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 093 `Multimodal Large Language Models - Vision-Language Integration That Transformed AI Capabilities`다.
+따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 93개는 공식 001–046·048–093·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 094 `Constitutional AI Principle-Based Alignment Through Self-Critique`다.
 
 숫자 badge는 정규 source의 공식 장 번호에만 쓴다. 비번호 reference가 추가되면 번호 source 뒤에서 `참고`로 표시하며, 목록 위치를 `001` 같은 장 번호로 바꾸지 않는다. 같은 장의 검증 노트·번역·해설은 서로 다른 장이 아니라 하나의 source 묶음에 속한다.
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 92개, reference 0개, concept 166개, entity 29개, analysis 22개를 합친 비메타 문서 309개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 93개, reference 0개, concept 167개, entity 29개, analysis 22개를 합친 비메타 문서 311개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -50,7 +50,7 @@ related:
 | 대화 인터페이스는 모델 능력과 신뢰를 어떻게 바꾸나 | [[007_ELIZA]] | [[077_InstructGPT와 인간 선호 정렬]] → [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]] → [[ChatGPT 연구 미리보기 (2022)]] | [[ELIZA에서 LLM으로]] |
 | 음성 인식에서 학습되는 경계는 어떻게 넓어졌나 | [[013_은닉 마르코프 모델과 통계적 음성 인식]] | [[041_심층 신경망 음향 모델과 DNN-HMM 전환]] → [[087_Whisper와 대규모 약한 감독 음성 인식]] → [[Whisper]] → [[단어 오류율]] | [[규칙 기반 AI에서 데이터 기반 학습으로]] |
 | 프롬프트는 추론 성능을 어떻게 바꾸나 | [[067_GPT-3와 문맥 내 학습]] | [[080_사고 연쇄 프롬프팅과 추론 행동 유도]] → [[사고 연쇄 프롬프팅]] → [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]] → [[079_HELM과 다차원 언어 모델 평가]] | [[손실 곡선과 능력 곡선 사이]] |
-| 이미지·동영상 조건은 생성 모델에 어떻게 들어가나 | [[070_CLIP과 대조적 언어-이미지 사전 학습]] | [[CLIP]] → [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]] → [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] → [[086_잠재 확산 모델과 Stable Diffusion v1 공개]] → [[잠재 확산 모델]] → [[Stable Diffusion]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
+| 이미지·동영상 조건은 생성 모델에 어떻게 들어가나 | [[070_CLIP과 대조적 언어-이미지 사전 학습]] | [[CLIP]] → [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]] → [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]] → [[멀티모달 대규모 언어 모델]] → [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] → [[086_잠재 확산 모델과 Stable Diffusion v1 공개]] → [[잠재 확산 모델]] → [[Stable Diffusion]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
 | 모델 공개는 곧 재현 가능성을 뜻하나 | [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] | [[076_파운데이션 모델 보고서와 AI 생태계]] → [[082_BLOOM과 공개 접근 다국어 LLM]] → [[BLOOM]] → [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]] → [[LLaMA 1]] → [[090_공개 가중치 LLM 파동과 서로 다른 공개 범위]] | [[공개 가중치와 재현 가능성은 같은 축인가]] |
 | 희소 모델의 ‘크기’는 무엇을 뜻하나 | [[069_전문가 혼합과 희소 활성 스케일링]] | [[GLaM에서 Mixtral까지의 희소 MoE 확장]] → [[Mixtral 8x7B]] | [[총 매개변수와 활성 계산량은 같은 축인가]] |
 | 학습 데이터의 양과 구성을 어떻게 읽나 | [[063_T5와 Text-to-Text 통합 프레임워크]] | [[066_신경 언어 모델의 스케일링 법칙]] → [[067_GPT-3와 문맥 내 학습]] → [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] → [[The Pile]] → [[078_Chinchilla와 계산 최적 언어 모델 학습]] → [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]] → [[090_공개 가중치 LLM 파동과 서로 다른 공개 범위]] | [[데이터 품질과 분포 다양성은 같은 축인가]] |
@@ -63,7 +63,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 92개 소스의 범위
+## 93개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -156,6 +156,7 @@ related:
 - [[090_공개 가중치 LLM 파동과 서로 다른 공개 범위]]는 MPT·Falcon·Mistral의 2023년 출시를 하나의 단선 계보가 아니라 weight·code·data·license·compute 공개 범위가 다른 평행 사례로 비교하고, ALiBi·MQA·GQA·SWA·FlashAttention의 병목과 benchmark 조건을 분리한다.
 - [[091_QLoRA와 4비트 양자화 미세조정]]은 동결한 NF4 base storage, BF16 compute와 all-linear LoRA update를 분리하고, double quantization·paged optimizer의 서로 다른 memory 역할과 24GB 33B·48GB 65B·MMLU·Guanaco 평가 조건을 검증한다.
 - [[092_함수 호출과 도구 사용의 모델-실행 경계]]는 2023년 6월 함수 이름·JSON argument 제안, 같은 해 11월 parallel calls·JSON mode와 2024년 `strict: true`를 분리하고, model output·schema·권한·실행·tool result의 서로 다른 신뢰 경계를 검증한다.
+- [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]]는 Frozen·Flamingo·PaLI·BLIP-2·LLaVA·PaLM-E의 서로 다른 bridge와 단계별 동결 경계를 비교하고, GPT-4V의 비공개 architecture·2023년 3월 early access·9월 ChatGPT rollout·11월 API preview 및 시각 평가·안전 경계를 검증한다.
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]]은 GLaM·Mixtral의 total·active parameter와 token별 routing을 복원하고, 2024년 최초성·Meta 귀속·dense 계산의 제곱 증가·깨끗한 domain expert·민주화 과장을 교정한다.
 
 ## 현재 핵심 주제
@@ -223,6 +224,7 @@ related:
 - [[총 매개변수와 활성 계산량은 같은 축인가]]에서 비교하는 dense non-embedding $N$, sparse total·active parameters, FLOPs·memory·communication·wall-clock·data·quality와 논문 안/논문 사이 비교 경계
 - [[CLIP]]에서 구분하는 이미지·텍스트 이중 인코더, 정규화된 shared embedding과 대칭 대조 손실, class prompt로 합성한 zero-shot classifier 및 cross-attention·생성 능력의 부재
 - [[Flamingo]]에서 구분하는 동결 시각·언어 backbone, 64개 시각 token 병목, 0-init gated cross-attention, 고정 weight의 멀티모달 문맥 내 학습과 과제별 fine-tuning의 차이
+- [[멀티모달 대규모 언어 모델]]에서 구분하는 image encoder·bridge·언어 decoder·동결 경계·출력 signature, Frozen의 연속 prefix·Flamingo의 별도 cross-attention memory·PaLI의 encoder-decoder visual token·BLIP-2의 Q-Former·LLaVA의 projection·PaLM-E의 continuous observation token 및 GPT-4V의 비공개 architecture
 - [[DALL·E (2021)]]에서 구분하는 dVAE의 8,192개 범주 시각 어휘·1,024개 이미지 토큰, 최대 256개 text token과의 공동 자기회귀 분포, 512개 후보 생성과 별도 대조 재순위화
 - [[DALL·E 2]]에서 구분하는 동결 CLIP 표현, caption-conditioned image-embedding prior, 64×64 확산 decoder와 두 upsampler, classifier-free guidance 및 논문 unCLIP·Preview 제품의 서로 다른 범위
 - [[잠재 확산 모델]]과 [[Stable Diffusion]]에서 구분하는 두 단계 지각 압축·잠재 확산, 공간 위치 64배와 전체 스칼라 48배 감소, 논문 LDM의 학습 가능한 조건 Transformer와 v1의 동결 CLIP token 교차 어텐션, 공개 weight·제한 면허·대규모 전체 훈련

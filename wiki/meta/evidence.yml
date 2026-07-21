@@ -3079,3 +3079,81 @@ sources:
     kind: official-blog
     url: https://lmsys.org/blog/2023-03-30-vicuna/
     language: en
+  li-et-al-2023-blip2:
+    title: 'BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models'
+    authors: [Junnan Li, Dongxu Li, Silvio Savarese, Steven Hoi]
+    published: 2023
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2301.12597
+    url: https://proceedings.mlr.press/v202/li23q.html
+    language: en
+  tsimpoukelli-et-al-2021-frozen:
+    title: Multimodal Few-Shot Learning with Frozen Language Models
+    authors: [Maria Tsimpoukelli, Jacob L. Menick, Serkan Cabi, S. M. Ali Eslami, Oriol Vinyals, Felix Hill]
+    published: 2021
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.neurips.cc/paper_files/paper/2021/hash/01b7575c38dac42f3cfb7d500438b875-Abstract.html
+    language: en
+  chen-et-al-2023-pali:
+    title: 'PaLI: A Jointly-Scaled Multilingual Language-Image Model'
+    authors: [Xi Chen, Xiao Wang, Soravit Changpinyo, AJ Piergiovanni, Piotr Padlewski, Daniel Salz, Sebastian Goodman, Adam Grycner, Basil Mustafa, Lucas Beyer, Alexander Kolesnikov, Joan Puigcerver, Nan Ding, Keran Rong, Hassan Akbari, Gaurav Mishra, Linting Xue, Ashish Thapliyal, James Bradbury, Weicheng Kuo, Mojtaba Seyedhosseini, Chao Jia, Burcu Karagol Ayan, Carlos Riquelme, Andreas Steiner, Anelia Angelova, Xiaohua Zhai, Neil Houlsby, Radu Soricut]
+    published: 2023
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2209.06794
+    url: https://research.google/pubs/pali-a-jointly-scaled-multilingual-language-image-model/
+    language: en
+  driess-et-al-2023-palm-e:
+    title: 'PaLM-E: An Embodied Multimodal Language Model'
+    authors: [Danny Driess, Fei Xia, Mehdi S. M. Sajjadi, Corey Lynch, Aakanksha Chowdhery, Brian Ichter, Ayzaan Wahid, Jonathan Tompson, Quan Vuong, Tianhe Yu, Wenlong Huang, Yevgen Chebotar, Pierre Sermanet, Daniel Duckworth, Sergey Levine, Vincent Vanhoucke, Karol Hausman, Marc Toussaint, Klaus Greff, Andy Zeng, Igor Mordatch, Pete Florence]
+    published: 2023
+    source_type: primary
+    kind: research-paper
+    doi: 10.48550/arXiv.2303.03378
+    url: https://palm-e.github.io/
+    language: en
+  openai-2023-gpt4-technical-report:
+    title: GPT-4 Technical Report
+    authors: [OpenAI]
+    published: 2023
+    source_type: primary
+    kind: technical-report
+    doi: 10.48550/arXiv.2303.08774
+    url: https://cdn.openai.com/papers/gpt-4.pdf
+    language: en
+  liu-et-al-2023-llava:
+    title: Visual Instruction Tuning
+    authors: [Haotian Liu, Chunyuan Li, Qingyang Wu, Yong Jae Lee]
+    published: 2023
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2304.08485
+    url: https://papers.neurips.cc/paper_files/paper/2023/hash/6dcf277ea32ce3288914faf369fe6de0-Abstract-Conference.html
+    language: en
+  openai-2023-gpt4v-system-card:
+    title: GPT-4V(ision) System Card
+    authors: [OpenAI]
+    published: 2023
+    source_type: primary-release
+    kind: system-card
+    url: https://cdn.openai.com/papers/GPTV_System_Card.pdf
+    language: en
+  openai-2023-chatgpt-vision-rollout:
+    title: ChatGPT can now see, hear, and speak
+    authors: [OpenAI]
+    published: 2023
+    source_type: primary-release
+    kind: official-blog
+    url: https://openai.com/index/chatgpt-can-now-see-hear-and-speak/
+    language: en
+  google-2023-palm2-technical-report:
+    title: PaLM 2 Technical Report
+    authors: [Google]
+    published: 2023
+    source_type: primary
+    kind: technical-report
+    doi: 10.48550/arXiv.2305.10403
+    url: https://ai.google/static/documents/palm2techreport.pdf
+    language: en

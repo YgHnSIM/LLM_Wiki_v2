@@ -3740,6 +3740,28 @@ raw 등록 해시:
 - Model snapshot뿐 아니라 tool catalog·description, orchestrator, identity·policy, external service와 UI가 system 결과를 만든다. 한 component의 점수를 기반 model의 고유 능력으로 귀속하지 않는다.
 - 전체 검증은 96개 회귀 테스트와 312개 Markdown strict lint를 통과해 361개 evidence와 184개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 602개 HTML을 만들고 6,861개 wiki link를 모두 해소했다.
 
+## [2026-07-22] ingest | 멀티모달 LLM의 서로 다른 시각-언어 연결 방식
+
+변경 내용:
+
+- 공식 093 `Multimodal Large Language Models - Vision-Language Integration That Transformed AI Capabilities`를 H1·H2·H3 `1/6/0`과 29개 Markdown link의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 번역은 첫 제목 바로 뒤에 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않는다.
+- 독립 감사를 거친 번역·해설을 신규 raw 두 파일로 등록했다. 번역 SHA-256은 `3c754e2885efd2f429352f3b24a4c406fee92d91c904d1d8f7a54a6e8c2dfd80`, 해설은 `032951f4fad51b0d899640bf5cf406fcec26da3c8c007f957768fc04f6250b13`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]]와 [[멀티모달 대규모 언어 모델]]을 만들었다. CLIP의 전역 대조 embedding, Frozen의 연속 prefix, Flamingo의 별도 gated cross-attention memory, PaLI의 ViT–mT5 encoder-decoder visual token, BLIP-2의 Q-Former, LLaVA의 선형 projection과 PaLM-E의 continuous observation token을 서로 다른 bridge·동결 경계로 분리했다.
+- Frozen·BLIP-2·PaLI·PaLM-E·LLaVA 논문, GPT-4 technical report, GPT-4V system card, ChatGPT image rollout과 PaLM 2 technical report 등 9개 1차 자료를 evidence에 등록하고 기존 CLIP·Flamingo·OpenAI DevDay 근거를 연결했다. 공개 model의 architecture를 GPT-4V 내부에 소급하지 않았다.
+- [[index]]와 [[overview]]를 source 93개·concept 167개·비메타 311개, 공식 범위 001–046·048–093·103과 다음 공식 094 Constitutional AI 기준으로 갱신했다. 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 182개, raw Markdown 187개, 위키 Markdown 314개에서 UI 단락 0개를 확인했고, 번역 정규화 검사는 표준 `원본 출처:` 91개와 변경 필요 0개를 확인했다.
+
+검증 정정과 남은 한계:
+
+- 2023년은 vision-language 결합의 최초가 아니다. CLIP은 2021년 대조 정렬을, Frozen은 같은 해 동결 LM에 image-conditioned continuous prefix를 넣는 방식을, Flamingo와 PaLI는 2022년 각각 삽입형 cross-attention과 encoder-decoder 결합을 공개했다. 2023년의 의미는 여러 bridge·visual instruction tuning과 실제 제품 접근이 빠르게 확장된 데 있다.
+- GPT-4 technical report는 Transformer-style 다음 token 예측과 image-input 사례를 공개했지만 model 크기·구체 architecture·hardware·training compute·dataset construction과 세부 training method를 공개하지 않았다. Generic vision encoder·token·cross-attention 설명을 GPT-4의 확인된 내부 구조로 쓰지 않는다.
+- GPT-4V 훈련은 2022년에 끝났고 2023년 3월에는 제한된 early access가 시작됐다. ChatGPT Plus·Enterprise의 광범위한 image rollout은 9월 25일, 개발자 `gpt-4-vision-preview`는 11월 6일이므로 연구 보고·pilot·소비자 배포·API preview를 하나의 3월 출시로 합치지 않는다.
+- PaLM-E는 PaLM을 embodied observation으로 확장한 별도 연구다. PaLM 2 technical report는 다국어·추론·coding·안전의 language-model 평가를 다루며 image-input architecture를 문서화하지 않으므로 PaLM 2 자체를 같은 vision model로 부르지 않는다.
+- PaLI-17B의 COCO 149.1 CIDEr와 VQAv2 84.3은 과제별 fine-tuning 결과다. BLIP-2는 두 단계 사전 학습에서 양 backbone을 동결하지만 downstream captioning에서는 image encoder를 갱신할 수 있다. PaLM-E의 기본 구성과 562B형은 encoder·projection·PaLM을 end-to-end로 갱신하며 frozen-PaLM은 별도 비교 조건이다. Generalist checkpoint도 VQAv2·OK-VQA·COCO가 각각 0.5%씩 training mixture에 들어갔다. 단일 weight set·task-specific fine-tuning 없음·held-out zero-shot을 같은 조건으로 쓰지 않는다.
+- LLaVA 85.1%는 30개 image·90개 question의 자체 benchmark에서 caption·bounding box를 받은 text-only GPT-4를 reference와 judge에 포함한 상대 점수다. ScienceQA 92.53%는 LLaVA 단독이 아니라 text-only GPT-4와 결합한 조건이다.
+- GPT-4V system card는 hallucination·OCR 오류·근거 없는 인물 추론·image 순서 취약성과 불안정한 의료 image 해석을 기록했다. 당시 version은 어떤 의료 기능이나 전문 조언·진단·치료의 대체에도 적합하지 않으므로 접근성·의료·산업·AGI 가능성을 이미 검증된 영향으로 확대하지 않는다.
+- `source:ready -- 093`은 96개 회귀 테스트와 314개 Markdown strict lint를 통과해 370개 evidence와 186개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 606개 HTML을 만들고 6,907개 wiki link를 모두 해소했다.
+- 다음 순차 입력은 공식 094 `Constitutional AI Principle-Based Alignment Through Self-Critique`다.
+
 ## 관련 항목
 
 - [[index]]
