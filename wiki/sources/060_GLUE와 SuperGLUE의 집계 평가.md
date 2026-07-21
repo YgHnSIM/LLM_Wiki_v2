@@ -46,7 +46,7 @@ related:
 
 ## 1단계 — 먼저 잡을 핵심
 
-059 raw는 GLUE와 SuperGLUE가 표준화된 종합 평가로 언어 AI 모델 비교를 바꿨다고 설명한다. 이 평가는 중요했지만 원문은 GLUE score의 가중 방식, multi-task model 요구, 인간 기준선의 출처, SuperGLUE의 출력 형식과 선행 benchmark 계보를 부정확하게 넓힌다. 공개 문서는 [[GLUE와 SuperGLUE]]가 실제로 표준화한 것과 한 숫자가 숨기는 것을 함께 검증한다.
+원문은 GLUE와 SuperGLUE가 표준화된 종합 평가로 언어 AI 모델 비교를 바꿨다고 설명한다. 이 평가는 중요했지만 원문은 GLUE score의 가중 방식, multi-task model 요구, 인간 기준선의 출처, SuperGLUE의 출력 형식과 선행 benchmark 계보를 부정확하게 넓힌다. 공개 문서는 [[GLUE와 SuperGLUE]]가 실제로 표준화한 것과 한 숫자가 숨기는 것을 함께 검증한다.
 
 ### 핵심 문장
 

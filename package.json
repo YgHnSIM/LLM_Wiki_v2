@@ -8,6 +8,8 @@
     "node": ">=22"
   },
   "scripts": {
+    "translation:normalize": "node scripts/normalize-translation-notes.mjs --write",
+    "translation:normalize:check": "node scripts/normalize-translation-notes.mjs --check",
     "source:status": "node scripts/source-workflow.mjs status",
     "source:copy": "node scripts/source-workflow.mjs copy",
     "source:ready": "node scripts/source-workflow.mjs ready",

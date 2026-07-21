@@ -196,9 +196,10 @@ related:
 
 1. `/lt NNN`의 `NNN`을 공식 장 번호로 사용해 `C:\Vault\ObsidianVault\Assets\LLM_sources`의 단일 원문을 새로 번역하고 해설을 작성한다.
 2. 번역과 해설은 `C:\Vault\ObsidianVault\LLM_ko`에 동일 stem의 `.ko.md`, `.commentary.ko.md` 쌍으로 저장하고 스킬 검사를 통과해야 한다.
-3. `npm run source:status -- NNN`으로 입력·출력·raw·공개 페이지 상태를 확인한다.
-4. `npm run source:copy -- NNN`으로 검증된 쌍을 같은 공식 번호로 `raw/`에 복사하고 `raw-artifacts.yml`에 원문 `source_url`, 같은 `order_prefix`와 SHA-256을 등록한다.
-5. raw 복사 단계에서는 커밋·푸시하지 않는다. 기존 raw와 내용이 다르면 덮어쓰지 않고 중단한다.
+3. 번역본에는 첫 Markdown 제목 바로 뒤에 `원본 출처: <원문 URL>`을 정확히 한 번 기록한다. 웹 페이지의 `읽기 수준`·툴팁 안내 같은 UI 문구는 번역 본문에 포함하지 않는다.
+4. `npm run source:status -- NNN`으로 입력·출력·raw·공개 페이지 상태를 확인한다.
+5. `npm run source:copy -- NNN`으로 검증된 쌍을 같은 공식 번호로 `raw/`에 복사하고 `raw-artifacts.yml`에 원문 `source_url`, 같은 `order_prefix`와 SHA-256을 등록한다.
+6. raw 복사 단계에서는 커밋·푸시하지 않는다. 기존 raw와 내용이 다르면 덮어쓰지 않고 중단한다. 공개 후 외부 번역본의 출처 표기·UI 문구만 정리해 raw와 달라진 경우에는 raw와 레지스트리의 SHA-256 일치를 기준으로 보존 상태를 검증하고, 외부 작업본으로 raw를 다시 동기화하지 않는다.
 
 ### 6.2 공개 소스 처리
 

@@ -72,7 +72,7 @@ Wei 등이 2021년 9월 처음 공개하고 ICLR 2022에 발표한 FLAN은 이 �
 
 ### 2021년을 단일 발명의 해로 쓰지 않는다
 
-071 raw는 Google 연구진이 지시 튜닝을 주로 개척했다고 서술한다. 그러나 FLAN 연구진도 QA 기반 과제 통합과 instruction-following 선행 연구를 명시했다. Mishra 등의 Natural Instructions는 2021년 4월 이미 61개 과제·193k instance의 사람 작성 지시를 사용해 seen task에서 unseen task로의 일반화를 시험했다. 두 연구의 지시 길이·예시 포함·모델·분할은 같지 않지만, FLAN을 아무 선례 없는 유일한 기원으로 부를 수 없다는 점은 분명하다.
+원문은 Google 연구진이 지시 튜닝을 주로 개척했다고 서술한다. 그러나 FLAN 연구진도 QA 기반 과제 통합과 instruction-following 선행 연구를 명시했다. Mishra 등의 Natural Instructions는 2021년 4월 이미 61개 과제·193k instance의 사람 작성 지시를 사용해 seen task에서 unseen task로의 일반화를 시험했다. 두 연구의 지시 길이·예시 포함·모델·분할은 같지 않지만, FLAN을 아무 선례 없는 유일한 기원으로 부를 수 없다는 점은 분명하다.
 
 FLAN의 역사적 공헌은 최초성보다 **큰 모델, 여러 짧은 지시 템플릿, 과제 군집 보류와 절제 실험을 하나의 측정 틀로 묶어 instruction tuning이라는 경로를 널리 정착시킨 것**에 있다.
 

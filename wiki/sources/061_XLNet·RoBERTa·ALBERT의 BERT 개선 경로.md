@@ -48,7 +48,7 @@ related:
 
 ## 1단계 — 먼저 잡을 핵심
 
-060 raw는 2019년 전후의 [[XLNet·RoBERTa·ALBERT]]를 BERT 개선 모델 세 가지로 묶는다. 비교축은 유용하다. XLNet은 예측 순서를, RoBERTa는 훈련 조건을, ALBERT는 매개변수 배치를 주로 바꿨다. 그러나 raw는 BERT의 masking, XLNet의 순열 조건화, RoBERTa의 step 수와 dynamic masking 효과, ALBERT의 성능·계산 효율을 여러 곳에서 과장하거나 잘못 설명한다. 공개 문서는 네 원 논문의 정의와 ablation으로 세 개선 경로를 다시 분리한다.
+원문은 2019년 전후의 [[XLNet·RoBERTa·ALBERT]]를 BERT 개선 모델 세 가지로 묶는다. 비교축은 유용하다. XLNet은 예측 순서를, RoBERTa는 훈련 조건을, ALBERT는 매개변수 배치를 주로 바꿨다. 그러나 raw는 BERT의 masking, XLNet의 순열 조건화, RoBERTa의 step 수와 dynamic masking 효과, ALBERT의 성능·계산 효율을 여러 곳에서 과장하거나 잘못 설명한다. 공개 문서는 네 원 논문의 정의와 ablation으로 세 개선 경로를 다시 분리한다.
 
 ### 핵심 문장
 

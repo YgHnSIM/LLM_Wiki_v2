@@ -71,7 +71,7 @@ related:
 
 ### 이 문서의 범위
 
-023 raw는 Penn Treebank를 1993년에 완성·공개된 100만 단어 Wall Street Journal 구문 말뭉치로 묶고, 그 뒤 통계적 구문 분석과 현대 LLM까지 이어진 하나의 전환점으로 서술한다. 이 공개 문서는 1989–1995년의 구축·배포 단계를 분리하고, 자동 전처리와 인간 교정, Treebank I·II 주석 체계, PARSEVAL과 Collins 파서의 실제 관계를 1차 자료로 복원한다.
+원문은 Penn Treebank를 1993년에 완성·공개된 100만 단어 Wall Street Journal 구문 말뭉치로 묶고, 그 뒤 통계적 구문 분석과 현대 LLM까지 이어진 하나의 전환점으로 서술한다. 이 공개 문서는 1989–1995년의 구축·배포 단계를 분리하고, 자동 전처리와 인간 교정, Treebank I·II 주석 체계, PARSEVAL과 Collins 파서의 실제 관계를 1차 자료로 복원한다.
 
 ### 핵심 요약
 

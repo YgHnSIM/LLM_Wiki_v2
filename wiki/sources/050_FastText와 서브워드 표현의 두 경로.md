@@ -51,7 +51,7 @@ related:
 
 ## 1단계 — 먼저 잡을 핵심
 
-049 raw는 원자적인 word type 임베딩의 희귀어·OOV 한계와 [[FastText]]의 문자 n-gram 합을 설명하고, 이를 [[Byte Pair Encoding|BPE]]·SentencePiece·현대 Transformer 토큰화로 잇는다. 희소성을 더 작은 문자열 단위의 매개변수 공유로 완화한다는 공통점은 맞다. 그러나 **단어 하나의 벡터를 내부 특징에서 합성하는 일**과 **입력 시퀀스 자체를 여러 token으로 분절하는 일**은 모델 인터페이스가 다르다.
+원문은 원자적인 word type 임베딩의 희귀어·OOV 한계와 [[FastText]]의 문자 n-gram 합을 설명하고, 이를 [[Byte Pair Encoding|BPE]]·SentencePiece·현대 Transformer 토큰화로 잇는다. 희소성을 더 작은 문자열 단위의 매개변수 공유로 완화한다는 공통점은 맞다. 그러나 **단어 하나의 벡터를 내부 특징에서 합성하는 일**과 **입력 시퀀스 자체를 여러 token으로 분절하는 일**은 모델 인터페이스가 다르다.
 
 공개 문서는 이 두 경로를 분리하고, 논문 연도·FastText의 실제 식과 hash·BPE의 압축 기원·SentencePiece의 도구 범위·원 논문의 평가 범위를 1차 문헌으로 검증한다.
 

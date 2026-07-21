@@ -70,7 +70,7 @@ related:
 
 ### 이 문서의 범위
 
-030 raw는 [[FrameNet]]을 1998년에 처음 공개된 대규모 계산 자원으로 제시하고, 의미역 표지·정보 추출·질의응답·기계 번역에서 지식 그래프·AMR·BERT·GPT까지 이어지는 혁명적 계보를 서술한다. 이 공개 문서는 **1997년 프로젝트 출범**, **1998년 진행 중 프로젝트 보고**, **사람이 설계하고 말뭉치로 뒷받침한 어휘 의미 데이터베이스**, **문헌으로 확인되는 직접 사용**을 분리한다.
+원문은 [[FrameNet]]을 1998년에 처음 공개된 대규모 계산 자원으로 제시하고, 의미역 표지·정보 추출·질의응답·기계 번역에서 지식 그래프·AMR·BERT·GPT까지 이어지는 혁명적 계보를 서술한다. 이 공개 문서는 **1997년 프로젝트 출범**, **1998년 진행 중 프로젝트 보고**, **사람이 설계하고 말뭉치로 뒷받침한 어휘 의미 데이터베이스**, **문헌으로 확인되는 직접 사용**을 분리한다.
 
 FrameNet의 핵심 성과는 단어 뜻을 동의어 관계만으로 나타내지 않고, 단어의 특정 의미가 환기하는 상황과 그 상황의 참여자·속성을 프레임과 프레임 요소로 기술한 데 있다. 그러나 데이터베이스 자체가 문장을 자동으로 이해하거나 모든 의미역을 완성하는 시스템은 아니다. 프레임 설계와 말뭉치 주석은 사람이 수행했고, 새로운 문장의 프레임과 역할을 찾으려면 별도의 자동 분석 모델이 필요하다.
 
@@ -133,7 +133,7 @@ FrameNet의 핵심 성과는 단어 뜻을 동의어 관계만으로 나타내�
 
 ### `Commerce_buy` 예시의 교정
 
-030 raw는 `buy`, `purchase`, `acquire`, `obtain`, `get`, `buyer`, `buyable`이 모두 `Commerce_buy`를 환기한다고 서술한다. 2024년 회고의 Table 1은 `buy.v`와 `purchase.v`를 **예시**로 들 뿐 완전 목록을 제시하지 않는다. 완전한 버전 자료인 R1.7 XML에서 이 프레임의 LU는 `buy.v`, `purchase.v`, `purchase [act].n`, `buyer.n`, `purchaser.n`, `client.n`이다. 따라서 raw의 `buyer`는 실제 항목에 대응하지만, `acquire.v`·`obtain.v`·`get.v`는 `Getting`에 등록돼 있고 `buyable.a`는 R1.7에 없다.
+원문은 `buy`, `purchase`, `acquire`, `obtain`, `get`, `buyer`, `buyable`이 모두 `Commerce_buy`를 환기한다고 서술한다. 2024년 회고의 Table 1은 `buy.v`와 `purchase.v`를 **예시**로 들 뿐 완전 목록을 제시하지 않는다. 완전한 버전 자료인 R1.7 XML에서 이 프레임의 LU는 `buy.v`, `purchase.v`, `purchase [act].n`, `buyer.n`, `purchaser.n`, `client.n`이다. 따라서 raw의 `buyer`는 실제 항목에 대응하지만, `acquire.v`·`obtain.v`·`get.v`는 `Getting`에 등록돼 있고 `buyable.a`는 R1.7에 없다.
 
 R1.7에서 `Buyer`와 `Goods`는 Core FE다. `Money`·`Seller`뿐 아니라 `Means`·`Rate`·`Unit`·`Place`·`Purpose`·`Time`·`Manner`도 실제 Peripheral FE이며, `Explanation`·`Recipient`·`Period_of_iterations`·`Imposed_purpose`는 Extra-Thematic FE다. 그러므로 raw의 `Place`와 `Time` 자체가 틀린 것은 아니지만, 이를 핵심 FE와 같은 수준에서 “필수”라고 설명하면 coreness와 실제 표면 실현을 혼동한다.
 
@@ -163,9 +163,9 @@ FrameNet의 공개가 [[의미역 표지]] 연구에 중요한 자원을 제공�
 
 [[PropBank]]는 미리 존재한 Penn Treebank 구문 나무에 동사 술어별 논항 구조를 덧붙였다. 역할은 술어의 frameset 안에서 `Arg0`, `Arg1`처럼 번호로 표시되며, 같은 번호의 구체적 뜻은 술어·roleset 정의를 확인해야 한다. 반면 FrameNet은 여러 품사의 LU를 공유 의미 프레임 아래 묶고, `Buyer`, `Goods`처럼 프레임별 이름을 가진 FE를 사용한다.
 
-030 raw는 PropBank가 FrameNet 접근에서 “직접 영감을 받았다”고 서술한다. Palmer 등의 2005년 논문은 두 자원이 의미역 주석이라는 목표를 공유하지만 방법은 상당히 다르며, PropBank의 역할 체계가 주로 VerbNet class에 의존한다고 설명한다. 같은 논문은 Gildea·Jurafsky의 FrameNet 기반 초기 자동 의미역 표지 모델과 특징이 PropBank 실험에 영향을 준 사실도 기록한다. **자동 SRL 방법론의 확인되는 영향**과 **PropBank 말뭉치·역할 체계가 FrameNet에서 직접 파생됐다는 계보**를 구분해야 한다.
+원문은 PropBank가 FrameNet 접근에서 “직접 영감을 받았다”고 서술한다. Palmer 등의 2005년 논문은 두 자원이 의미역 주석이라는 목표를 공유하지만 방법은 상당히 다르며, PropBank의 역할 체계가 주로 VerbNet class에 의존한다고 설명한다. 같은 논문은 Gildea·Jurafsky의 FrameNet 기반 초기 자동 의미역 표지 모델과 특징이 PropBank 실험에 영향을 준 사실도 기록한다. **자동 SRL 방법론의 확인되는 영향**과 **PropBank 말뭉치·역할 체계가 FrameNet에서 직접 파생됐다는 계보**를 구분해야 한다.
 
-030 raw는 CoNLL-2004와 CoNLL-2005가 “FrameNet에서 영감을 받은 주석”을 사용했다고 서술한다. 그러나 2004 shared task 설명은 당시 대표 영어 의미역 말뭉치로 FrameNet과 PropBank를 구분한 뒤, 과제는 **PropBank corpus에 집중한다**고 명시했다. 2005 설명도 학습·개발·시험 자료가 Penn Treebank와 PropBank에서 파생됐다고 적었다. FrameNet 기반 초기 SRL 연구가 넓은 과제 형성에 준 영향과 shared task가 실제로 사용한 PropBank gold annotation을 같은 것으로 부르지 않는다.
+원문은 CoNLL-2004와 CoNLL-2005가 “FrameNet에서 영감을 받은 주석”을 사용했다고 서술한다. 그러나 2004 shared task 설명은 당시 대표 영어 의미역 말뭉치로 FrameNet과 PropBank를 구분한 뒤, 과제는 **PropBank corpus에 집중한다**고 명시했다. 2005 설명도 학습·개발·시험 자료가 Penn Treebank와 PropBank에서 파생됐다고 적었다. FrameNet 기반 초기 SRL 연구가 넓은 과제 형성에 준 영향과 shared task가 실제로 사용한 PropBank gold annotation을 같은 것으로 부르지 않는다.
 
 ### WordNet·AMR·LLM과의 관계
 
@@ -179,13 +179,13 @@ AMR과 FrameNet은 문장을 단어 목록보다 구조적인 의미로 나타�
 
 #### BERT와 GPT
 
-030 raw는 BERT와 GPT가 명시적 학습 없이 프레임과 의미역을 암묵적으로 학습한다는 연구 결과를 일반 사실처럼 제시하지만, 특정 논문·모델 버전·probe·평가 자료를 제시하지 않는다. 언어 모델에서 역할 정보가 어느 정도 복원된다는 개별 실험이 있더라도, 그것은 모델이 FrameNet 데이터 구조를 내부에서 그대로 실행하거나 FrameNet에서 직접 발전했다는 증거가 아니다.
+원문은 BERT와 GPT가 명시적 학습 없이 프레임과 의미역을 암묵적으로 학습한다는 연구 결과를 일반 사실처럼 제시하지만, 특정 논문·모델 버전·probe·평가 자료를 제시하지 않는다. 언어 모델에서 역할 정보가 어느 정도 복원된다는 개별 실험이 있더라도, 그것은 모델이 FrameNet 데이터 구조를 내부에서 그대로 실행하거나 FrameNet에서 직접 발전했다는 증거가 아니다.
 
 FrameNet은 언어 모델을 평가하거나 구조화된 감독을 더하는 자원으로 사용할 수 있다. 다만 이때도 **어떤 FrameNet 버전**, **어떤 frame identification·argument identification·role classification 과제**, **어떤 기준선과 지표**를 사용했는지 밝혀야 한다. “프레임 같은 패턴”이라는 표현만으로 직접 계보를 만들지 않는다.
 
 ### 응용 서술의 범위
 
-프레임 구조는 정보 추출·질의응답·기계 번역에서 유용한 중간 표현이 될 수 있다. 예를 들어 질문이 특정 프레임의 어느 FE를 요구하는지 분석하거나, 사건 참여자를 구조화하거나, 언어 사이에서 역할 대응을 유지하려는 연구가 가능하다. 그러나 030 raw는 구체적인 시스템·데이터셋·성능 비교 없이 이 분야들을 FrameNet이 “혁명적으로 바꿨다”고 묶는다.
+프레임 구조는 정보 추출·질의응답·기계 번역에서 유용한 중간 표현이 될 수 있다. 예를 들어 질문이 특정 프레임의 어느 FE를 요구하는지 분석하거나, 사건 참여자를 구조화하거나, 언어 사이에서 역할 대응을 유지하려는 연구가 가능하다. 그러나 원문은 구체적인 시스템·데이터셋·성능 비교 없이 이 분야들을 FrameNet이 “혁명적으로 바꿨다”고 묶는다.
 
 이 공개 문서는 직접 확인된 2002년 의미역 표지 사용을 핵심 사례로 남기고, 다른 분야는 개별 1차 연구가 확인될 때 확장한다. 어떤 자원이 응용에 사용됐다는 사실, 그 자원이 성능을 높였다는 실험 결과, 분야 전체의 발전을 일으켰다는 역사적 인과는 서로 다른 주장이다.
 

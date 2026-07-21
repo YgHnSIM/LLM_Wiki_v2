@@ -124,7 +124,7 @@ $$
 
 ### BERT 이전 interaction과 CEDR의 다른 경로
 
-064 raw는 2016년 이후 neural IR이 dual encoder 중심이었다고 설명하지만, Nogueira와 Cho의 관련 연구에는 DRMM·KNRM·Co-PACRR·Duet 같은 interaction model도 이미 등장한다. BERT가 질의–문서 상호작용 자체를 처음 발명한 것이 아니다. 새로웠던 점은 대규모 사전학습 encoder를 간단한 랭킹 미세조정에 옮겨 강한 결과를 낸 데 있다.
+원문은 2016년 이후 neural IR이 dual encoder 중심이었다고 설명하지만, Nogueira와 Cho의 관련 연구에는 DRMM·KNRM·Co-PACRR·Duet 같은 interaction model도 이미 등장한다. BERT가 질의–문서 상호작용 자체를 처음 발명한 것이 아니다. 새로웠던 점은 대규모 사전학습 encoder를 간단한 랭킹 미세조정에 옮겨 강한 결과를 낸 데 있다.
 
 같은 해 CEDR는 `[CLS]` 분류 점수만 쓰는 대신 BERT의 layer별 contextual token representation을 PACRR·KNRM·DRMM의 similarity matrix와 결합했다. Robust04와 WebTrack 조건에서 이 결합을 비교하고, 긴 문서를 BERT 입력에 맞춰 자르는 문제와 정적 GloVe보다 훨씬 느린 실행 비용도 분석했다. 따라서 2019년의 BERT IR은 하나의 고정 architecture가 아니라 공동 부호화·기존 interaction ranker 결합·passage aggregation을 함께 탐색한 연구 흐름이었다.
 

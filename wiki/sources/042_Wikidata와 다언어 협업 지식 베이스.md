@@ -50,7 +50,7 @@ related:
 
 ## 1단계 — 먼저 잡을 핵심
 
-042 raw는 2012년 Wikidata가 “사실을 텍스트가 아니라 데이터로” 저장해 기계가 마침내 사실을 이해·추론하게 했고, Wikipedia·검색·가상 비서·번역·추천·RAG의 핵심 인프라가 됐다고 서술한다. 이 공개 문서는 **단순 triple과 실제 [[Wikibase 데이터 모델]]**, **공통 식별자와 모든 언어의 완전한 coverage**, **[[SPARQL]] 패턴 질의와 자동 논리 추론**, **개방 접근과 무제한 live service**, **활용 가능성과 제품별 실제 채택**을 분리한다.
+원문은 2012년 Wikidata가 “사실을 텍스트가 아니라 데이터로” 저장해 기계가 마침내 사실을 이해·추론하게 했고, Wikipedia·검색·가상 비서·번역·추천·RAG의 핵심 인프라가 됐다고 서술한다. 이 공개 문서는 **단순 triple과 실제 [[Wikibase 데이터 모델]]**, **공통 식별자와 모든 언어의 완전한 coverage**, **[[SPARQL]] 패턴 질의와 자동 논리 추론**, **개방 접근과 무제한 live service**, **활용 가능성과 제품별 실제 채택**을 분리한다.
 
 Wikidata의 핵심 성과는 구조 사실을 완전한 진리로 바꾼 데 있지 않다. 언어 중립 Q/P 식별자, 다언어 label·description·alias·sitelink, qualifier·reference·rank가 있는 공동 편집 statement를 Wikimedia 규모에서 운영하고 CC0로 재사용할 수 있게 한 데 있다.
 
@@ -161,7 +161,7 @@ Wikidata Query Service는 RDF 표현 위에서 [[SPARQL]] 그래프 패턴을 �
 
 ### 원문의 P36 방향 오류
 
-042 raw는 “Paris가 France의 수도”라는 사실을 다음 triple로 적는다.
+원문은 “Paris가 France의 수도”라는 사실을 다음 triple로 적는다.
 
 ```text
 (Q90 Paris, P36 capital of, Q142 France)

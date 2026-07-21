@@ -28,7 +28,9 @@ import {
 
 const sourceDir = process.env.LLM_SOURCE_DIR || 'C:\\Vault\\ObsidianVault\\Assets\\LLM_sources';
 const translationDir = process.env.LLM_TRANSLATION_DIR || 'C:\\Vault\\ObsidianVault\\LLM_ko';
-const registryPath = path.join(metaDir, 'raw-artifacts.yml');
+const workflowRawDir = process.env.LLM_RAW_DIR || rawDir;
+const workflowWikiDir = process.env.LLM_WIKI_DIR || wikiDir;
+const registryPath = process.env.LLM_RAW_REGISTRY_PATH || path.join(metaDir, 'raw-artifacts.yml');
 
 function fail(message) {
   throw new Error(message);
@@ -70,8 +72,8 @@ async function loadContext(selection, { requireOriginalUrl = false } = {}) {
     commentaryFilename: filenames.commentary,
     translationPath: path.join(translationDir, filenames.translation),
     commentaryPath: path.join(translationDir, filenames.commentary),
-    rawTranslationPath: path.join(rawDir, filenames.translation),
-    rawCommentaryPath: path.join(rawDir, filenames.commentary),
+    rawTranslationPath: path.join(workflowRawDir, filenames.translation),
+    rawCommentaryPath: path.join(workflowRawDir, filenames.commentary),
   };
 }
 
@@ -118,7 +120,7 @@ function expectedRecords(context, pair) {
 }
 
 async function findPublicSourcePage(prefix) {
-  const sourcePagesDir = path.join(wikiDir, 'sources');
+  const sourcePagesDir = path.join(workflowWikiDir, 'sources');
   const filenames = (await fs.readdir(sourcePagesDir)).filter((name) => name.endsWith('.md'));
   for (const filename of filenames) {
     const content = await fs.readFile(path.join(sourcePagesDir, filename), 'utf8');
@@ -134,6 +136,7 @@ async function inspect(context, { requireRaw = false, requirePage = false } = {}
   const { parsed } = await loadRegistry();
   const rawPaths = [context.rawTranslationPath, context.rawCommentaryPath];
   const problems = [];
+  const warnings = [];
 
   for (let index = 0; index < records.length; index += 1) {
     const expected = records[index];
@@ -144,11 +147,17 @@ async function inspect(context, { requireRaw = false, requirePage = false } = {}
     if (requireRaw && !rawExists) problems.push(`${expected.path} is missing.`);
     if (rawExists) {
       const actualHash = sha256(await fs.readFile(rawPath));
-      if (actualHash !== expected.sha256) problems.push(`${expected.path} differs from the validated translation output.`);
+      if (registered && actualHash !== String(registered.sha256)) {
+        problems.push(`${expected.path} SHA-256 does not match its raw-artifacts.yml record.`);
+      }
+      if (actualHash !== expected.sha256) {
+        warnings.push(`${expected.path} differs from the current external translation output; the immutable raw artifact will not be overwritten.`);
+      }
     }
     if (requireRaw && !registered) problems.push(`${expected.path} is not registered in raw-artifacts.yml.`);
     if (registered) {
-      const mismatched = validateArtifactRecord(registered, expected);
+      const expectedContext = { ...expected, sha256: registered.sha256 };
+      const mismatched = validateArtifactRecord(registered, expectedContext);
       if (mismatched.length) problems.push(`${expected.path} registry fields differ: ${mismatched.join(', ')}.`);
     }
   }
@@ -180,7 +189,13 @@ async function inspect(context, { requireRaw = false, requirePage = false } = {}
       problems.push(`Public source page source.${context.prefix} frontmatter repeats artifact '${artifactPath}'.`);
     }
   }
-  return { pair, records, publicSourcePage, problems };
+  return { pair, records, publicSourcePage, problems, warnings };
+}
+
+function printWarnings(warnings) {
+  if (!warnings.length) return;
+  console.log('- non-fatal preservation warnings:');
+  for (const warning of warnings) console.log(`  - ${warning}`);
 }
 
 async function copyRaw(context) {
@@ -238,6 +253,7 @@ function run(command, args, options = {}) {
 async function ready(context) {
   const inspection = await inspect(context, { requireRaw: true, requirePage: true });
   if (inspection.problems.length) fail(inspection.problems.join('\n'));
+  printWarnings(inspection.warnings);
 
   const branch = run('git', ['branch', '--show-current']).stdout.trim();
   if (branch !== 'main') fail(`Source finalization is allowed only on main; current branch is ${branch || '(detached)'}.`);
@@ -278,8 +294,10 @@ async function status(context) {
     if (inspection.problems.length) {
       console.log('- validation problems:');
       for (const problem of inspection.problems) console.log(`  - ${problem}`);
-    } else {
-      console.log('- translation pair and any existing raw/registry records are consistent');
+    }
+    printWarnings(inspection.warnings);
+    if (!inspection.problems.length) {
+      console.log('- translation pair is valid, and any immutable raw/registry records are internally consistent');
     }
   }
 }

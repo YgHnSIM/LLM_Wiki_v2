@@ -43,7 +43,7 @@ related:
 
 ### 통합의 정확한 범위
 
-062 raw는 [[T5]]를 모든 NLP 과제를 하나로 통합한 획기적 모델로 설명한다. 원 논문의 주안점은 새 architecture 하나의 최초 발명보다 transfer learning의 선택지를 공통 조건에서 비교하는 데 있다. 분류·질의응답·요약·번역을 모두 `input text → output text`로 직렬화하면 같은 [[인코더-디코더]] Transformer, vocabulary와 token likelihood로 학습할 수 있다.
+원문은 [[T5]]를 모든 NLP 과제를 하나로 통합한 획기적 모델로 설명한다. 원 논문의 주안점은 새 architecture 하나의 최초 발명보다 transfer learning의 선택지를 공통 조건에서 비교하는 데 있다. 분류·질의응답·요약·번역을 모두 `input text → output text`로 직렬화하면 같은 [[인코더-디코더]] Transformer, vocabulary와 token likelihood로 학습할 수 있다.
 
 통합된 것은 **입출력 interface·architecture·학습 loss**다. GLUE accuracy·correlation, SQuAD exact match·F1, 요약 ROUGE와 번역 BLEU 같은 성공 기준은 여전히 과제마다 달랐다. 최종 대표 결과도 하나의 고정 weight가 모든 과제를 zero-shot으로 수행한 것이 아니라, 같은 pretrained checkpoint에서 대체로 과제별 fine-tuning을 거쳐 얻었다.
 

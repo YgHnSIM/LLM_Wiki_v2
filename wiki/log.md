@@ -3272,7 +3272,7 @@ raw 등록 해시:
 - 검증된 번역·해설 쌍을 immutable raw 두 파일로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다. [[080_사고 연쇄 프롬프팅과 추론 행동 유도]]와 [[사고 연쇄 프롬프팅]]을 만들고 [[문맥 내 학습]]을 보강했다.
 - Wei 등의 few-shot CoT와 Kojima 등의 2단계 Zero-shot-CoT를 분리했다. PaLM 540B GSM8K 17.9%→56.9%, text-davinci-002 MultiArith 17.7%→78.7%·GSM8K 10.4%→40.7%를 모델·과제·prompt·답 추출 조건과 함께 기록했다.
 - `wei-et-al-2022-chain-of-thought`, `kojima-et-al-2022-zero-shot-reasoners`, `turpin-et-al-2023-unfaithful-cot`, `wang-et-al-2023-self-consistency`, `yao-et-al-2023-tree-of-thoughts`, `yao-et-al-2023-react` 1차 evidence 여섯 개를 등록했다. self-consistency·ToT·ReAct의 확인 가능한 직접 연결은 보존하되 현대 agent·추론 model 전체를 단일 직계 계보로 묶지 않았다.
-- [[index]]와 [[overview]]를 source 80개·concept 154개·비메타 284개 기준으로 갱신했다. 다음 순차 입력은 공식 081 self-consistency prompting이지만, 사용자 요청에 따라 그 전에 원문 노트 표현과 전체 번역본의 읽기 수준·출처 표기를 일괄 정비한다.
+- [[index]]와 [[overview]]를 source 80개·concept 154개·비메타 284개 기준으로 갱신했다. 다음 순차 입력은 공식 081 `ChatGPT Conversational AI Becomes Mainstream`이지만, 사용자 요청에 따라 그 전에 원문 노트 표현과 전체 번역본의 읽기 수준·출처 표기를 일괄 정비한다.
 
 검증 정정과 남은 한계:
 
@@ -3280,6 +3280,23 @@ raw 등록 해시:
 - 고정 모델에서 prompt 조건에 따라 출력 행동과 정확도가 달라졌다는 결과를, 내부에 사람과 같은 추론 모듈이 이미 존재한다는 증명으로 확대하지 않았다. 출력 단계의 타당성·최종 답 정확도·내부 원인에 대한 인과적 충실성을 분리하고, 재훈련이 없어도 중간 token·두 번째 호출·다중 경로가 추론 비용을 만든다는 점을 기록했다.
 - 새 analysis 문서는 만들지 않았다. prompt가 가중치를 바꾸지 않고 관측 행동·답 추출·비용을 바꾸는 연결은 기존 [[문맥 내 학습]]의 보강으로 충분했고, 후속 계보는 source와 concept의 확인 가능한 범위 안에 두었다.
 - `source:ready -- 080`과 최종 검증에서 57개 회귀 테스트와 287개 Markdown strict lint를 통과해 313개 evidence와 160개 immutable raw artifact를 확인했다. 사이트는 99개 legacy redirect를 포함한 553개 HTML을 만들고 6,061개 wiki link를 모두 해소했다.
+
+## [2026-07-21] fix | 번역 작업본과 원문 표기 정규화
+
+변경 내용:
+
+- `wiki/sources/` 48개 문서에서 `018 raw는`처럼 공식 번호와 raw를 본문 주어로 삼던 표현 56곳을 문맥에 맞는 `원문은`으로 바꿨다. 위키 전체에서 `[NNN] raw는` 형태가 더 남지 않았음을 확인했다.
+- 외부 `LLM_ko`의 기존 번역본 78개를 모두 점검해 웹 UI용 `읽기 수준`·툴팁 안내 블록 51개를 제거했다. `출처:` 59개와 `Source:` 11개는 `원본 출처:`로 통일하고, 표기가 없던 8개에는 raw artifact 레지스트리의 원문 URL을 보충했다. 각 번역본은 이제 첫 Markdown 제목 뒤에 정확히 한 번의 표준 원본 출처를 가진다.
+- 일괄 변경 전 번역본 78개를 `C:\tmp\LLM_ko_translation_cleanup_20260721`에 백업했다. 해설 78개의 집계 SHA-256 `839505e471b7a4310813be9b85946af6afbe437635d712a7da984f9c3b93a964`는 작업 전후가 같고, 프로젝트 `raw/`와 `raw-artifacts.yml`은 수정하지 않았다. 외부 작업본에는 없고 레지스트리에만 남은 공식 007 번역 artifact는 보고만 하며 새 파일을 합성하지 않았다.
+- 재사용 가능한 정규화 명령과 안전장치 테스트를 추가했다. 명령은 UTF-8·LF·URL·중복 표기·대상 개수를 먼저 검사하고, 쓰기 모드에서는 별도 백업 경로를 강제하며 검증 실패 시 원본을 복원한다. 기본 검사는 외부 번역본의 모든 번호가 레지스트리와 정확히 대응하는지 확인하고 레지스트리에만 남은 역사 artifact를 구분해 보고한다.
+- 공개 후 출처 표기나 UI 문구만 정리한 외부 작업본이 immutable raw와 달라질 수 있는 경계를 명문화했다. `source:status`·`source:ready`는 raw 실제 SHA-256과 레지스트리가 같으면 이 차이를 비치명적 보존 경고로 처리하지만, `source:copy`는 기존 raw 덮어쓰기를 계속 거부한다.
+- 실제 다음 원문을 다시 대조해 기존의 잘못된 `self-consistency prompting` 표기를 공식 081 `ChatGPT Conversational AI Becomes Mainstream`으로 바로잡았다.
+
+검증 결과:
+
+- `translation:normalize:check -- --expected-count 78`은 표준 원본 출처 78개, 읽기 수준 블록 0개, 변경 필요 0개를 확인했고 레지스트리에만 존재하는 공식 007을 별도로 보고했다.
+- 완료된 079에서 `source:status`는 외부 표현 정비 차이를 비치명적 경고로 표시하면서 raw·레지스트리의 내부 일치를 확인했다. `source:copy`는 같은 차이를 immutable artifact 덮어쓰기 오류로 거부했으며 실행 전후 `raw/` 변경은 0개였다.
+- 86개 회귀 테스트와 287개 Markdown strict lint를 통과해 313개 evidence와 160개 immutable raw artifact를 확인했다. 사이트는 99개 legacy redirect를 포함한 553개 HTML을 만들고 6,061개 wiki link를 모두 해소했다.
 
 ## 관련 항목
 

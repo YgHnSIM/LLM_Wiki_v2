@@ -58,7 +58,7 @@ related:
 
 ColBERT는 질의와 문서를 각각 문맥화된 벡터 **집합**으로 독립 부호화하고, 각 질의 벡터가 가장 가까운 문서 벡터를 고르는 MaxSim 값을 합한다. 문서 표현을 미리 계산하면서도 단일 벡터보다 세밀한 대응을 점수에 남기는 이 구조를 후기 상호작용(late interaction)이라 부른다.
 
-프로젝트의 072 raw는 Michael Brenndoerfer가 2025년 공개한 회고 글이다. 원문은 다중 벡터 검색을 2021년의 발전으로 놓고 ColBERT의 아이디어·응용·영향을 설명한다. 그러나 원 ColBERT는 Stanford의 Omar Khattab과 Matei Zaharia가 2020년 4월 공개하고 SIGIR 2020에 발표한 연구다. 2021년에는 ColBERT-QA와 Baleen이라는 별도 후속 시스템이 개방형·다중 홉 검색으로 적용 범위를 넓혔다.
+프로젝트의 원문은 Michael Brenndoerfer가 2025년 공개한 회고 글이다. 원문은 다중 벡터 검색을 2021년의 발전으로 놓고 ColBERT의 아이디어·응용·영향을 설명한다. 그러나 원 ColBERT는 Stanford의 Omar Khattab과 Matei Zaharia가 2020년 4월 공개하고 SIGIR 2020에 발표한 연구다. 2021년에는 ColBERT-QA와 Baleen이라는 별도 후속 시스템이 개방형·다중 홉 검색으로 적용 범위를 넓혔다.
 
 ### 이 문서가 바로잡는 경계
 
