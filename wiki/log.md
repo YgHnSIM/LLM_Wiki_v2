@@ -3298,6 +3298,22 @@ raw 등록 해시:
 - 완료된 079에서 `source:status`는 외부 표현 정비 차이를 비치명적 경고로 표시하면서 raw·레지스트리의 내부 일치를 확인했다. `source:copy`는 같은 차이를 immutable artifact 덮어쓰기 오류로 거부했으며 실행 전후 `raw/` 변경은 0개였다.
 - 86개 회귀 테스트와 287개 Markdown strict lint를 통과해 313개 evidence와 160개 immutable raw artifact를 확인했다. 사이트는 99개 legacy redirect를 포함한 553개 HTML을 만들고 6,061개 wiki link를 모두 해소했다.
 
+## [2026-07-21] ingest | ChatGPT 연구 미리보기와 대화형 LLM 배포
+
+변경 내용:
+
+- 공식 081 `ChatGPT Conversational AI Becomes Mainstream`을 새로 번역·윤문하고 12절 학습 해설을 작성했다. 번역본은 웹 UI용 `읽기 수준` 안내 없이 첫 제목 뒤에 `원본 출처:`와 공식 원문 URL을 한 번만 기록했으며, translate-llm-sources 쌍 검사를 통과했다.
+- 검증된 번역·해설을 immutable raw 두 파일로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다. [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]]와 [[ChatGPT 연구 미리보기 (2022)]]를 만들고 [[인간 피드백 강화학습]]에 대화형 적용 절차를 보강했다.
+- OpenAI의 2022년 `Introducing ChatGPT`를 `openai-2022-introducing-chatgpt` evidence로 등록했다. 인간 trainer가 사용자·assistant 양쪽을 맡은 대화 시연 SFT, 응답 대안 순위·보상 모델·PPO 반복, 다중 턴 dialogue format, 무료 research preview와 사용자 feedback 순환을 공식 발표 범위에서 복원했다.
+- [[index]]와 [[overview]]를 source 81개·concept 155개·비메타 286개 기준으로 갱신했다. 공식 source 범위는 001–046·048–081·103이며 다음 순차 입력은 공식 082 BLOOM이다.
+
+검증 정정과 남은 한계:
+
+- 초기 ChatGPT를 GPT-3.5 계열에서 미세조정한 InstructGPT의 sibling model로 기록했다. 공식 발표가 정확한 매개변수 수를 공개하지 않았으므로 raw의 175B 단정을 채택하지 않았고, 다중 턴 문맥을 지속 기억으로 확대하지 않았다.
+- 출시 대화 예시와 무료 연구 미리보기는 정확성·안전성·산업 전반의 인과 효과를 입증하는 통제 평가가 아니다. 공식 발표가 직접 열거한 그럴듯한 오답, 입력 표현 민감성, 장황성, 모호한 질의에 대한 추측, 유해·편향 출력과 moderation 오탐·미탐을 함께 남겼으며 이용자 수 수치는 검증 본문에서 제외했다.
+- 새 analysis 문서는 만들지 않았다. 대화 인터페이스가 사용자 귀속과 신뢰를 바꾸는 문제와 공개 예시가 대표 성능 측정을 대신하지 못하는 문제는 기존 [[ELIZA에서 LLM으로]]과 [[AI 시연과 실제 성능]]을 별도 content 변경으로 보강한다.
+- `source:ready -- 081`에서 86개 회귀 테스트와 289개 Markdown strict lint를 통과해 314개 evidence와 162개 immutable raw artifact를 확인했다. 사이트는 99개 legacy redirect를 포함한 557개 HTML을 만들었고 미해결 wiki target은 0개였다.
+
 ## 관련 항목
 
 - [[index]]

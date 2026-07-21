@@ -2677,3 +2677,11 @@ sources:
     kind: conference-paper
     url: https://openreview.net/forum?id=WE_vluYUL-X
     language: en
+  openai-2022-introducing-chatgpt:
+    title: Introducing ChatGPT
+    authors: [OpenAI]
+    published: 2022
+    source_type: primary-release
+    kind: official-blog
+    url: https://openai.com/index/chatgpt/
+    language: en

@@ -1440,3 +1440,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/chain-of-thought-prompting-unlocking-latent-reasoning-language-models
     sha256: eaa041cd036a921a445e4e48bd3532abbccf67cbb6d045e52e658f7889a89396
+  - path: "raw/081_ChatGPT Conversational AI Becomes Mainstream.ko.md"
+    role: translation
+    order_prefix: "081"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/chatgpt-conversational-ai-becomes-mainstream
+    sha256: 8d77cefacc26c8f62735e5e4e775ccce66255ce2f9721946dd30621140e50aa1
+  - path: "raw/081_ChatGPT Conversational AI Becomes Mainstream.commentary.ko.md"
+    role: commentary
+    order_prefix: "081"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/chatgpt-conversational-ai-becomes-mainstream
+    sha256: 9b570a6b74b8d2a8f0c57e2f78f2ada80ffa6fb247a64e7bd8eb51de94df11a3
