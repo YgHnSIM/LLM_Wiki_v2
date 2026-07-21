@@ -238,6 +238,7 @@ related:
 - [[자동 음성 인식]]의 특징·음향 모델·발음 사전·언어 모델·디코더 구성, [[DNN-HMM]] 전환에서 교체된 GMM·유지된 HMM과 [[Whisper]]의 audio-conditioned token 생성 경로
 - [[Whisper]]의 30초 log-Mel·Transformer encoder–decoder, 언어·전사/X→English·timestamp·`nospeech` token과 최초 공개 checkpoint·Large V2 평가·장문 decoding procedure의 버전 경계
 - [[단어 오류율]]의 치환·삭제·삽입, 상대 오류 감소와 퍼센트포인트 차이, text normalization·문자 단위 평가와 평균 WER가 숨기는 환각·언어·화자·잡음별 실패
+- [[규칙 기반 AI에서 데이터 기반 학습으로]]에서 비교하는 HMM의 확률 추정, TDNN의 국소 특징 학습, DNN-HMM의 음향 모델 교체, Whisper의 audio-to-token 공동 학습과 각 단계에 남은 입력·상태·token·평가·decoding 설계
 - [[Wikidata]]의 언어 중립 Q/P 식별자와 다언어 label·sitelink, [[Wikibase 데이터 모델]]의 qualifier·reference·rank·unknown/no value
 - [[SPARQL]]의 triple pattern·join·filter·property path와 자동 추론의 차이, live Wikidata Query Service의 timeout·공유 자원 경계
 - [[Word2Vec]]의 [[CBOW]]·[[Skip-gram]] 예측 방향, hierarchical softmax와 negative sampling의 시기·목적 차이, SGNS와 shifted PMI 행렬 분해의 연결

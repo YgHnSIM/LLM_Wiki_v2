@@ -3542,6 +3542,21 @@ raw 등록 해시:
 - `source:ready -- 087`은 96개 회귀 테스트와 303개 Markdown strict lint를 통과해 332개 evidence와 174개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 583개 HTML을 만들고 6,574개 wiki link를 모두 해소했다.
 - 다음 순차 입력은 공식 088 `FlashAttention: IO-Aware Exact Attention for Long-Context Language Models`다. 음성 인식의 학습 경계가 HMM pipeline에서 joint encoder-decoder로 어떻게 이동했는지는 ingest 원격 반영 뒤 기존 분석에 별도 content 변경으로 합성한다.
 
+## [2026-07-22] content | 음성 인식에서 학습 경계의 확장
+
+변경 내용:
+
+- 새 분석 문서를 기계적으로 만들지 않고 기존 [[규칙 기반 AI에서 데이터 기반 학습으로]]를 공식 041·087까지 확장했다. 같은 ASR 과제에서 학습 가능한 구성요소가 어디까지 넓어지고 고정 설계가 어디로 이동했는지를 기존 분석 질문에 통합했다.
+- HMM pipeline의 전이·관측 확률, 1989년 TDNN의 국소 시간 특징, 2010–2012년 DNN-HMM의 senone 음향 모델, 2022년 Whisper의 audio encoder·autoregressive text decoder와 다중 과제 token을 구분했다.
+- DNN-HMM은 GMM 음향 모델을 교체했지만 HMM 상태·정렬·발음 사전·외부 언어 모델·decoder를 유지했다. Whisper는 별도 발음 사전·HMM 상태열 없이 text token을 생성하지만 16 kHz·30초·80채널 log-Mel 입력, BPE와 task-token 문법, 자료 필터, text normalizer와 장문 decoding heuristic을 사람이 정한다.
+- 공식 041·087 raw 네 파일과 Hinton 등의 2012년 DNN 음향 모델 종합, Radford 등의 Whisper 논문을 분석의 artifacts·evidence·related에 연결했다. 근거 수는 27개에서 29개로 늘었고 [[index]]와 [[overview]]의 설명·학습 경로를 동기화했다.
+
+검증 경계:
+
+- 이 비교는 같은 과제에서 설계와 학습의 경계가 이동한 방식에 대한 합성이다. TDNN→DNN-HMM→Whisper의 직선적 발명 계보, Whisper가 2012년 DNN-HMM에서 직접 파생됐다는 주장은 두 논문이 입증하지 않는다.
+- 학습 범위가 넓어졌다는 사실을 인간 설계나 평가 조건의 소멸로 확대하지 않는다. 특히 Whisper의 장문 결과는 model weight뿐 아니라 beam search·temperature fallback·이전 text 조건·무음과 log-probability threshold·timestamp 제약의 결합이다.
+- 전체 검증은 96개 회귀 테스트와 303개 Markdown strict lint를 통과해 332개 evidence와 174개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 583개 HTML을 만들고 6,591개 wiki link를 모두 해소했다.
+
 ## 관련 항목
 
 - [[index]]
