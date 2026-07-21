@@ -13,7 +13,7 @@ tags:
   - domain/machine-learning
   - domain/optimization
 created: '2026-07-18'
-updated: '2026-07-18'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -39,9 +39,28 @@ related:
 ---
 # Adam 최적화기
 
+> [!note] 학습 안내
+> **난이도:** 심화<br>
+> **선수 지식:** [[경사하강법]], [[역전파]]<br>
+> **읽고 나면:** Adam이 그래디언트의 1차·2차 모멘트 이동 평균으로 좌표별 갱신을 만드는 방식을 설명하고, 기본값·수렴·AdamW의 범위를 구분할 수 있다.
+
+## 1단계 — 먼저 잡을 핵심
+
 Adam(Adaptive Moment Estimation)은 확률적 그래디언트의 1차·2차 raw moment 지수 이동 평균을 이용해 좌표별 갱신을 조절하는 1차 최적화 알고리즘이다. Kingma와 Ba가 2014년 12월 공개하고 ICLR 2015에 발표했다.
 
-## 알고리즘
+## 2단계 — 작동 원리
+
+### 그래디언트에서 갱신까지
+
+Adam은 현재 그래디언트를 이전 단계의 두 이동 평균에 반영한다. 한 평균은 최근 방향을 매끄럽게 하고 다른 평균은 좌표별 그래디언트 크기의 이력을 반영해 최종 갱신을 조절한다.
+
+### 무엇을 추정하는가
+
+$m_t$는 최근 gradient의 지수 평균이고 $v_t$는 최근 squared gradient의 지수 평균이다. $v_t$를 Hessian, curvature, gradient variance 또는 noise의 직접 추정치라고 부르지 않는다. Adam은 층의 의미를 알아서 최적 학습률을 배정하지 않고 관측된 좌표별 gradient 규모와 방향 이력으로 preconditioned update를 만든다.
+
+## 3단계 — 기술과 근거
+
+### 알고리즘
 
 현재 그래디언트 $g_t$에 대해
 
@@ -66,25 +85,31 @@ $$
 
 로 갱신한다. $g_t^2$·나눗셈·제곱근은 좌표별 연산이다.
 
-## 무엇을 추정하는가
-
-$m_t$는 최근 gradient의 지수 평균이고 $v_t$는 최근 squared gradient의 지수 평균이다. $v_t$를 Hessian, curvature, gradient variance 또는 noise의 직접 추정치라고 부르지 않는다. Adam은 층의 의미를 알아서 최적 학습률을 배정하지 않고 관측된 좌표별 gradient 규모와 방향 이력으로 preconditioned update를 만든다.
-
-## 기본값의 지위
+### 기본값의 지위
 
 원 논문의 권장값은 $\alpha=0.001$, $\beta_1=0.9$, $\beta_2=0.999$, $\epsilon=10^{-8}$이다. 여러 과제에서 유용한 출발점이지만 모델·batch·정밀도·loss scale에 무관한 정답은 아니다. 대규모 모델은 warmup·학습률 decay·gradient clipping·weight decay와 함께 조정한다.
 
-## 수렴과 일반화
-
-후속 연구는 간단한 convex 설정에서 Adam이 최적해로 수렴하지 않는 반례와 원래 증명의 문제를 제시했다. AMSGrad는 2차 모멘트의 장기 최대값을 보존해 이 문제를 완화한다. 다른 연구는 adaptive method와 SGD가 훈련 손실이 비슷해도 서로 다른 해·시험 성능을 낼 수 있음을 보였다. 어느 최적화기가 더 잘 일반화하는지는 구조·자료·규제·스케줄에 의존한다.
-
-## AdamW와 weight decay
+### AdamW와 weight decay
 
 손실에 L2 penalty를 더하면 그 gradient가 Adam의 좌표별 스케일링을 받는다. 직접 weight decay와 더 이상 표준 SGD에서처럼 동등하지 않다. AdamW는 loss gradient의 adaptive update와 매개변수 shrinkage를 분리한다. 원 Adam의 필수 일부가 아니라 2019년 정식 발표된 후속 변형이다.
 
-## 역전파·메모리와의 구분
+### 역전파·메모리와의 구분
 
 [[역전파]]는 손실의 그래디언트를 계산하고 [[Adam 최적화기]]는 그 그래디언트로 매개변수를 갱신한다. 매개변수마다 $m,v$ 두 상태를 저장하므로 단순 SGD보다 optimizer-state 메모리가 크다. 실제 총 메모리는 parameter·gradient·activation의 정밀도와 분산 저장에 따라 달라진다.
+
+## 검증과 한계
+
+### 수렴과 일반화
+
+후속 연구는 간단한 convex 설정에서 Adam이 최적해로 수렴하지 않는 반례와 원래 증명의 문제를 제시했다. AMSGrad는 2차 모멘트의 장기 최대값을 보존해 이 문제를 완화한다. 다른 연구는 adaptive method와 SGD가 훈련 손실이 비슷해도 서로 다른 해·시험 성능을 낼 수 있음을 보였다. 어느 최적화기가 더 잘 일반화하는지는 구조·자료·규제·스케줄에 의존한다.
+
+## 학습 확인
+
+1. Adam은 최근 그래디언트에서 어떤 두 종류의 이동 평균을 유지하는가?
+2. 편향 보정한 두 모멘트는 매개변수의 좌표별 갱신에 어떻게 결합되는가?
+3. 논문 기본값이나 빠른 훈련 손실 감소가 보편적 수렴·일반화와 AdamW의 동일성을 보장하지 않는 이유는 무엇인가?
+
+다음에는 [[Transformer]]에서 Adam 계열 최적화가 사용되는 대규모 시퀀스 모델을 보고, [[언어 모델 전이 학습]]에서 사전학습과 과제 적응의 훈련 구성을 살핀다.
 
 ## 출처
 

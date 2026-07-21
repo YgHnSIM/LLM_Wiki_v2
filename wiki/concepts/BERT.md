@@ -12,7 +12,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-20'
-updated: '2026-07-20'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -33,9 +33,24 @@ related:
 ---
 # BERT
 
+> [!note] 학습 안내
+> **난이도:** 중급<br>
+> **선수 지식:** [[Transformer]]<br>
+> **읽고 나면:** BERT가 masked-token 사전 학습과 전체 encoder 미세조정을 연결하는 방식과 표준 생성 모델과의 차이를 설명할 수 있다.
+
+## 1단계 — 먼저 잡을 핵심
+
 [[BERT]](Bidirectional Encoder Representations from Transformers)는 causal mask가 없는 [[Transformer]] encoder를 [[마스크드 언어 모델링]]과 NSP로 사전 학습하고, 후속 과제에서 작은 출력층을 추가해 전체 모델을 미세조정하는 언어 표현 모델이다.
 
-## 구조
+## 2단계 — 작동 원리
+
+### 입력 복원에서 과제 출력까지
+
+BERT는 문장이나 문장쌍의 일부 token을 교란하고 좌우 문맥으로 원 token을 복원하도록 encoder를 학습한다. 후속 과제에서는 sequence·token·span·후보 점수에 맞는 출력층을 붙인다. 과제 손실은 새 출력층뿐 아니라 기반 BERT의 매개변수도 함께 갱신한다.
+
+## 3단계 — 기술과 근거
+
+### 구조
 
 BERT는 Transformer 원 논문의 encoder stack을 사용한다. 입력 각 위치는 같은 층에서 좌우 token 모두에 attention할 수 있다. token·segment·position embedding을 더하고, 문장·문장쌍 앞에 `[CLS]`, 경계에 `[SEP]`를 둔다.
 
@@ -46,13 +61,13 @@ BERT는 Transformer 원 논문의 encoder stack을 사용한다. 입력 각 위�
 
 최대 입력은 512 WordPiece token이었다. BERT가 순환 계산을 제거했어도 self-attention의 sequence 길이 제곱 비용은 남는다.
 
-## 사전 학습 목표
+### 사전 학습 목표
 
 MLM은 선택 token을 좌우 문맥에서 복원한다. NSP는 두 text span이 원문에서 이어지는지 분류한다. 전체 손실은 두 평균 log-likelihood 손실의 합이다.
 
 사전 학습 자료는 BooksCorpus 약 8억 단어와 영어 Wikipedia 약 25억 단어였다. BERT-base와 large는 각각 16·64 TPU chip에서 논문 보고 기준 4일 동안 훈련됐다. 이 계산량은 현재 모델과의 절대 비교보다 당시 재현 비용을 보여 주는 역사적 수치다.
 
-## 후속 과제 적응
+### 후속 과제 적응
 
 BERT는 과제 전용 깊은 구조 대신 출력 인터페이스를 바꿨다.
 
@@ -63,17 +78,19 @@ BERT는 과제 전용 깊은 구조 대신 출력 인터페이스를 바꿨다.
 
 각 경우 기반 BERT도 함께 갱신한다. 이를 ELMo식 고정 특징 사용과 구분한다.
 
-## ‘양방향’의 정확한 뜻
+### ‘양방향’의 정확한 뜻
 
 BERT의 한 위치 표현은 모든 encoder 층에서 왼쪽과 오른쪽 입력에 공동 조건화된다. ELMo는 독립 순·역방향 LSTM의 표현을 연결한다. GPT형 decoder는 위치 $i$가 보통 $i$보다 앞선 token에만 접근한다. 셋 모두 문맥 표현을 만들지만 attention graph와 학습 목적이 다르다.
 
 양방향 조건화는 사람과 같은 이해의 정의가 아니다. BERT가 벤치마크 관계를 높은 정확도로 예측한다는 것과 논리·사실·의도를 일반적으로 이해한다는 것은 별도 주장이다.
 
-## NSP의 후속 평가
+### NSP의 후속 평가
 
 BERT 원 ablation은 NSP가 일부 문장쌍·질의응답 결과에 도움을 준다고 보고했다. RoBERTa는 NSP를 제거하고 더 많은 자료와 긴 학습, 큰 batch, 동적 masking을 사용해 더 강한 결과를 냈다. 후대 모델 다수가 NSP를 쓰지 않지만, 그 사실을 BERT 성과가 MLM 하나에서만 왔다는 완전한 인과 분해로 읽지 않는다.
 
-## 한계
+## 검증과 한계
+
+### 한계
 
 - 표준 BERT는 causal text generator가 아니다.
 - 512 token보다 긴 문서는 자르기·계층화 등 별도 처리가 필요하다.
@@ -81,6 +98,19 @@ BERT 원 ablation은 NSP가 일부 문장쌍·질의응답 결과에 도움을 �
 - 영어 중심 자료의 편향과 영역 coverage가 전이된다.
 - fine-tuning은 작은 자료와 random seed에서 불안정할 수 있다.
 - GLUE·SQuAD 점수는 일반 추론·사실성·공정성을 보장하지 않는다.
+
+## 학습 확인
+
+### 확인 질문
+
+1. BERT는 어떤 Transformer 부분과 사전 학습 목표를 결합한 모델인가?
+2. masked-token 복원에서 후속 과제 전체 미세조정까지 어떤 흐름으로 이어지는가?
+3. BERT의 양방향 조건화와 높은 benchmark 점수가 범용 text 생성이나 일반 이해를 자동 보장하지 않는 이유는 무엇인가?
+
+### 다음 문서
+
+- [[GLUE와 SuperGLUE]] — BERT의 전이 성능이 집계 평가에서 어떻게 비교됐는지 살핀다.
+- [[추출형 질의응답]] — BERT가 span 시작·끝 점수로 적응한 대표 출력 형식을 자세히 본다.
 
 ## 출처
 

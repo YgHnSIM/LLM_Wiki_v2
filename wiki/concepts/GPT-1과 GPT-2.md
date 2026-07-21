@@ -14,7 +14,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-20'
-updated: '2026-07-20'
+updated: '2026-07-21'
 lifecycle: active
 verification: verified
 artifacts:
@@ -39,9 +39,24 @@ related:
 ---
 # GPT-1과 GPT-2
 
+> [!note] 학습 안내
+> **난이도:** 중급<br>
+> **선수 지식:** [[Transformer]], [[언어 모델 전이 학습]]<br>
+> **읽고 나면:** GPT-1의 지도 미세조정과 GPT-2의 zero-shot 조건화가 causal 사전 학습을 서로 다르게 활용하는 방식을 비교할 수 있다.
+
+## 1단계 — 먼저 잡을 핵심
+
 [[GPT-1과 GPT-2]]는 causal [[Transformer]]를 다음 token 예측으로 사전 학습해 여러 자연어 처리 과제에 적용한 초기 Generative Pre-trained Transformer 모델이다. GPT-1은 지도 미세조정, GPT-2는 규모 확대와 zero-shot text continuation에 초점을 맞췄다.
 
-## GPT-1
+## 2단계 — 작동 원리
+
+### 사전 학습 뒤 과제를 제시하는 두 방식
+
+두 모델은 앞선 token을 조건으로 다음 token을 예측하도록 먼저 학습한다. GPT-1은 후속 과제를 token sequence와 출력층으로 바꾼 뒤 표지 자료로 전체 모델을 갱신한다. GPT-2는 모델을 갱신하지 않고 cue와 decoding·scoring으로 과제를 continuation 안에 표현한다.
+
+## 3단계 — 기술과 근거
+
+### GPT-1
 
 GPT-1은 12층·약 117M 매개변수·512 token context를 사용했다. BookCorpus에서 자기회귀 언어 모델을 사전 학습한 뒤 자연어 추론·질의응답·유사도·분류의 구조를 delimiter가 있는 token sequence로 바꿔 전체 모델을 미세조정했다.
 
@@ -53,13 +68,13 @@ $$
 
 $L_2$는 과제 라벨 목적, $L_1$은 보조 언어 모델 목적이다. 후자는 미세조정 중 일반 표현을 유지하는 regularizer 역할을 했다. 12개 평가 중 9개에서 당시 최고 결과를 유의하게 개선했다.
 
-## GPT-2
+### GPT-2
 
 GPT-2는 117M·345M·762/774M·1542M 네 크기를 평가했다. 가장 큰 모델은 48층, hidden size 1600, context 1024였다. WebText 약 8백만 문서와 byte-level BPE를 사용했다.
 
 논문의 목표는 fine-tuning보다 language modeling 안에 자연 발생한 task를 zero-shot으로 꺼낼 수 있는지 시험하는 것이었다. task별 cue와 scoring을 사용했지만 모델 가중치는 바꾸지 않았다.
 
-## 전이 인터페이스의 차이
+### 전이 인터페이스의 차이
 
 | 모델 | 과제 적응 위치 | 표지 과제 학습 | 대표 출력 |
 |---|---|---|---|
@@ -68,21 +83,35 @@ GPT-2는 117M·345M·762/774M·1542M 네 크기를 평가했다. 가장 큰 모�
 
 GPT-2가 GPT-1의 지도 fine-tuning을 폐기했다고 일반화할 수는 없다. GPT-2 논문은 zero-shot 가능성을 연구했고 fine-tuning이 후속 과제 성능을 더 높일 것으로 예상했다.
 
-## zero-shot 결과 읽기
+### zero-shot 결과 읽기
 
 language modeling·LAMBADA·CBT·Winograd에서는 강한 결과가 있었다. 반면 translation·summarization·QA·reading comprehension은 task 형식의 출력을 만들었지만 지도 최고 결과와 큰 차이가 났다. 각 평가의 metric·cue·decoding과 절대 성능을 함께 기록해야 한다.
 
 ‘zero-shot’은 해당 과제의 표지 training set으로 매개변수를 갱신하지 않았다는 설정이다. 사전 학습 corpus에 유사한 문서나 task 형식이 없었다는 보장은 아니며, 오늘날의 instruction following이나 few-shot prompting과 동일하지 않다.
 
-## 생성의 강점과 한계
+## 검증과 한계
+
+### 생성의 강점과 한계
 
 causal LM은 앞 문맥에서 다음 token을 뽑는 자연스러운 생성 인터페이스를 제공한다. 동시에 현재 위치의 표현은 오른쪽 입력을 보지 못한다. 사실 검증 목적도 없으므로 유창하지만 틀린 continuation을 만들 수 있다.
 
 표준 sampling은 token별 순차 과정이다. 훈련 때 여러 정답 위치를 병렬 계산할 수 있다는 것과 긴 출력의 generation latency를 혼동하지 않는다.
 
-## 공개와 안전
+### 공개와 안전
 
 GPT-2 full 1.5B weights는 2019년 2월 즉시 공개되지 않았다. 117M→345M→774M→1.5B 순으로 단계적으로 공개됐다. 이는 합성 text 오용과 탐지 연구를 고려한 공개 실험이었고, 2019년 11월 full release로 끝났다.
+
+## 학습 확인
+
+### 확인 질문
+
+1. GPT-1과 GPT-2가 공유하는 사전 학습 구조와 목적은 무엇인가?
+2. GPT-1의 지도 미세조정과 GPT-2의 cue 기반 zero-shot 평가는 가중치 갱신에서 어떻게 다른가?
+3. GPT-2가 과제 형식의 출력을 만들었다는 사실이 지도 최고 성능이나 사실성을 보장하지 않는 이유는 무엇인가?
+
+### 다음 문서
+
+- [[대규모 언어 모델]] — 초기 causal Transformer의 규모·자료·학습 경로가 후대 모델에서 어떻게 확장됐는지 살핀다.
 
 ## 출처
 

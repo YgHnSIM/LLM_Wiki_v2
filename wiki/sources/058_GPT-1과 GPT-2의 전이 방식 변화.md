@@ -38,9 +38,31 @@ related:
 ---
 # GPT-1과 GPT-2의 전이 방식 변화
 
+> [!note] 학습 안내
+> **난이도:** 중급<br>
+> **선수 지식:** [[Transformer]], [[언어 모델 전이 학습]]<br>
+> **읽고 나면:** GPT-1의 지도 미세조정과 GPT-2의 zero-shot 입력 조건화가 같은 causal 언어 모델을 서로 다르게 전이하는 방식을 비교할 수 있다.
+
+## 1단계 — 먼저 잡을 핵심
+
 058 raw는 GPT-1과 GPT-2가 자기회귀 사전 학습과 전이 학습으로 현대 생성 LLM의 토대를 만들었다고 설명한다. 큰 방향은 맞지만 두 모델의 적응 방식, zero-shot 성능의 강도, 구조 세부, ‘창발’의 후대 용어와 단계적 공개의 결말을 한 서사로 합친다. 공개 문서는 [[GPT-1과 GPT-2]]를 **지도 미세조정에서 입력 조건화로 이동한 두 실험**으로 구분한다.
 
-## 공통 기반: causal Transformer
+### 핵심 문장
+
+- GPT-1은 causal Transformer 사전 학습 뒤 표지 과제의 전체 fine-tuning을 실증했다.
+- GPT-2는 모델·자료·context를 확대하고 과제별 가중치 갱신 없이 text cue로 여러 수행을 평가했다.
+- zero-shot 가능성의 관찰과 지도 최고 성능 달성은 다른 주장이다.
+- 초기 full-model 보류는 staged release였고 2019년 안에 1.5B 모델이 공개됐다.
+
+## 2단계 — 작동 원리
+
+### 두 전이 방식을 읽는 순서
+
+두 모델은 앞선 token에서 다음 token을 예측하는 causal 언어 모델을 먼저 학습한다. GPT-1은 과제별 입력과 출력층을 만든 뒤 표지 자료로 모델을 갱신한다. GPT-2는 가중치를 바꾸지 않고 cue·scoring·decoding으로 과제를 text continuation 안에 배치한다.
+
+## 3단계 — 기술과 근거
+
+### 공통 기반: causal Transformer
 
 두 모델은 sequence 확률을 다음과 같이 분해한다.
 
@@ -52,7 +74,7 @@ causal self-attention은 위치 $i$가 앞 위치에만 접근하게 한다. 정
 
 흔히 decoder-only Transformer라고 부르지만 GPT-1은 원 Transformer decoder의 encoder–decoder attention을 제거한 causal self-attention stack이다. ‘decoder’라는 이름만으로 번역 encoder의 출력을 받는 구조라고 오해하지 않는다.
 
-## GPT-1: 사전 학습 뒤 지도 미세조정
+### GPT-1: 사전 학습 뒤 지도 미세조정
 
 GPT-1은 약 117M 매개변수, 12층 Transformer와 context 512를 사용했다. Toronto BookCorpus의 7천 권이 넘는 미출간 책에서 언어 모델 목적으로 사전 학습했다. 긴 연속 text가 대화·서사의 먼 의존성을 제공한다는 이유였다.
 
@@ -69,7 +91,7 @@ GPT-1은 약 117M 매개변수, 12층 Transformer와 context 512를 사용했다
 
 자연어 추론·질의응답·의미 유사도·분류의 12개 데이터셋 가운데 9개에서 당시 최고 결과를 유의하게 개선했다. zero-shot 분석도 네 언어 현상을 살폈지만 논문의 주 성과는 표지 자료를 사용한 fine-tuning이었다.
 
-## GPT-2: 언어 모델링 안의 과제
+### GPT-2: 언어 모델링 안의 과제
 
 GPT-2는 모델·자료·context를 함께 확대했다.
 
@@ -84,7 +106,7 @@ WebText는 Reddit post에서 karma 3 이상을 받은 외부 link를 출발점�
 
 GPT-2는 byte-level BPE, 1024 token context, pre-normalization에 가까운 layer normalization 배치와 마지막 layer norm을 사용했다. GPT-1 대비 결과를 매개변수 하나만의 효과로 볼 수 없는 이유다.
 
-## zero-shot은 하나의 점수가 아니다
+### zero-shot은 하나의 점수가 아니다
 
 GPT-2 논문은 과제별 fine-tuning 없이 여러 평가를 text continuation으로 바꿨다.
 
@@ -98,25 +120,27 @@ GPT-2 논문은 과제별 fine-tuning 없이 여러 평가를 text continuation�
 
 따라서 ‘번역·요약·질의응답을 zero-shot으로 수행했다’는 것은 해당 출력 형식을 어느 정도 만들었다는 뜻이지 모두 최고 수준으로 해결했다는 뜻이 아니다. 자연어 task description과 여러 demonstration을 일반적으로 따르는 GPT-3 이후 in-context learning도 GPT-2 원 실험에 그대로 소급하지 않는다.
 
-## 규모와 ‘창발’의 범위
+### 규모와 ‘창발’의 범위
 
 GPT-2는 네 model size에서 language modeling과 여러 과제 점수가 대체로 개선되는 경향을 보였다. 이것은 규모 확대의 중요성을 뒷받침했다. 그러나 raw처럼 ‘예상하지 못한 질적 능력이 규모에서 갑자기 출현했다’고 확정하려면 불연속성, 평가 metric, 자료 노출과 모델 크기 효과를 분리해야 한다.
 
 WebText 안에 자연 발생 번역쌍·QA·요약 형식이 있을 수 있다는 것이 논문의 가설이었다. 특정 평가 자료가 사전 학습에 없었더라도 과제 형식 자체를 유사 text에서 학습했을 가능성이 있다. 이를 task를 순수하게 처음 발명해 해결한 것으로 표현하지 않는다.
 
-## 단계적 공개의 실제 경과
+### 단계적 공개의 실제 경과
 
 2019년 2월 OpenAI는 1.5B 모델의 오용 가능성을 이유로 full weights를 즉시 공개하지 않고 117M 모델과 sampling code를 먼저 공개했다. 5월 345M, 8월 774M을 공개했고, 11월에는 1.5B weights와 code를 공개했다.
 
 이 과정은 synthetic text 오용·탐지·공개 규범 논의를 촉발한 staged release 실험이었다. 초기 보류만 기록해 ‘GPT-2는 공개되지 않았다’고 현재 시제로 남기지 않는다. 실제 위험 감소 효과와 공개 정책의 최적성은 별도 연구 문제다.
 
-## BERT와 다른 축
+### BERT와 다른 축
 
 [[BERT]]의 MLM encoder는 입력 각 위치의 좌우 문맥을 함께 사용해 분류·span·token 표현에 맞는다. GPT의 causal LM은 뒤 token을 보지 않아 next-token 생성 분해와 직접 연결된다. 어느 쪽이 보편적으로 우월한 것이 아니라 입력 표현과 출력 생성의 요구가 다르다.
 
 GPT-1과 BERT는 전체 fine-tuning 인터페이스를 공유하지만 사전 학습 목적과 attention graph가 다르다. GPT-2는 여기에 매개변수를 바꾸지 않고 입력 cue로 과제를 표현하는 경로를 시험했다.
 
-## 검증 정정
+## 검증과 한계
+
+### 검증 정정
 
 - **GPT가 NLP 전이 학습을 단독 발명했다**: ELMo·ULMFiT 등 동시기와 더 이른 언어 모델 전이 연구가 있었다.
 - **GPT-1은 과제별 구조·자료가 전혀 필요 없었다**: 표지 자료, 입력 변환과 출력층을 사용했다.
@@ -129,12 +153,18 @@ GPT-1과 BERT는 전체 fine-tuning 인터페이스를 공유하지만 사전 �
 - **1.5B 모델은 안전 우려로 끝내 비공개였다**: 2019년 11월 단계적 공개가 완료됐다.
 - **next-token 예측은 사실 검증과 명시적 추론을 학습한다**: 자연스러운 연속을 예측하는 목적이며 사실성·추론은 별도 평가가 필요하다.
 
-## 핵심 문장
+## 학습 확인
 
-- GPT-1은 causal Transformer 사전 학습 뒤 표지 과제의 전체 fine-tuning을 실증했다.
-- GPT-2는 모델·자료·context를 확대하고 과제별 가중치 갱신 없이 text cue로 여러 수행을 평가했다.
-- zero-shot 가능성의 관찰과 지도 최고 성능 달성은 다른 주장이다.
-- 초기 full-model 보류는 staged release였고 2019년 안에 1.5B 모델이 공개됐다.
+### 확인 질문
+
+1. GPT-1과 GPT-2가 공유하는 causal 사전 학습 기반은 무엇인가?
+2. 두 모델은 후속 과제를 입력과 가중치 갱신의 어느 지점에서 다르게 다루는가?
+3. GPT-2의 zero-shot 수행을 모든 과제의 지도 최고 성능으로 읽을 수 없는 이유는 무엇인가?
+
+### 다음 문서
+
+- [[GPT-1과 GPT-2]] — 두 모델의 크기·전이 인터페이스·생성 한계를 개념별로 다시 비교한다.
+- [[자기회귀 생성]] — causal 사전 학습이 실제 토큰별 생성 과정으로 이어지는 방식을 살핀다.
 
 ## 출처
 
