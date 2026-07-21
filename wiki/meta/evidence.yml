@@ -2771,3 +2771,36 @@ sources:
     kind: system-card
     url: https://github.com/openai/dalle-2-preview/blob/main/system-card.md
     language: en
+  rombach-et-al-2022-ldm:
+    title: High-Resolution Image Synthesis With Latent Diffusion Models
+    authors: [Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Björn Ommer]
+    published: 2022
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2112.10752
+    url: https://openaccess.thecvf.com/content/CVPR2022/html/Rombach_High-Resolution_Image_Synthesis_With_Latent_Diffusion_Models_CVPR_2022_paper.html
+    language: en
+  compvis-2022-stable-diffusion-v1-repository:
+    title: Stable Diffusion
+    authors: [CompVis, Stability AI, Runway]
+    published: 2022
+    source_type: primary-release
+    kind: software-repository
+    url: https://github.com/CompVis/stable-diffusion
+    language: en
+  compvis-2022-stable-diffusion-v1-model-card:
+    title: Stable Diffusion v1-4 Model Card
+    authors: [Robin Rombach, Patrick Esser]
+    published: 2022
+    source_type: primary-release
+    kind: model-card
+    url: https://huggingface.co/CompVis/stable-diffusion-v1-4
+    language: en
+  stability-ai-2022-stable-diffusion-public-release:
+    title: Stable Diffusion Public Release
+    authors: [Stability AI]
+    published: 2022
+    source_type: primary-release
+    kind: official-blog
+    url: https://stability.ai/news-updates/stable-diffusion-public-release
+    language: en

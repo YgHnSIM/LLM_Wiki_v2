@@ -115,6 +115,7 @@ related:
 - [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]] — 540.35B dense architecture·780B token·두 TPU v4 Pod의 Pathways 훈련을 복원하고 sparse attention·공개 weight·일반 추론·다국어·PaLM-Coder 과장을 평가 조건으로 교정한 소스 (근거 1개)
 - [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]] — 동결 시각·언어 backbone을 Resampler와 gated cross-attention으로 연결하고 멀티모달 퓨샷 평가·미세조정·실패·위험의 경계를 검증한 소스 (근거 1개)
 - [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] — 동결 CLIP 표현, image-embedding prior와 계층적 확산 decoder를 복원하고 CLIP gradient guidance·논문 모델·제품 기능의 혼동을 교정한 소스 (근거 3개)
+- [[086_잠재 확산 모델과 Stable Diffusion v1 공개]] — 일반 LDM 연구와 공개 v1 체크포인트를 분리하고 지각 압축·잠재 확산·CLIP token 조건·CFG·계산·면허·안전의 경계를 검증한 소스 (근거 4개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 
 ## 개체
@@ -175,6 +176,8 @@ related:
 - [[Flamingo]] — 동결 시각·언어 backbone 사이의 64개 시각 token 병목과 gated cross-attention으로 멀티모달 문맥 내 생성을 수행하는 모델 계열 (근거 1개)
 - [[DALL·E (2021)]] — 1,024개 이산 이미지 토큰과 최대 256개 텍스트 토큰을 공동 자기회귀 모델링하고 별도 대조 모델로 후보를 재순위화한 2021년 생성 시스템 (근거 4개)
 - [[DALL·E 2]] — 동결 CLIP 잠재 공간에서 image embedding을 생성하는 prior와 계층적 확산 decoder를 결합한 2022년 텍스트-이미지 생성 시스템 (근거 3개)
+- [[잠재 확산 모델]] — 지각 오토인코더와 잠재 U-Net을 분리하고 교차 어텐션으로 여러 조건을 연결해 품질·압축·계산을 절충하는 확산 모델 계열 (근거 2개)
+- [[Stable Diffusion]] — f=8 오토인코더·860M U-Net·동결 CLIP text encoder를 결합하고 code·weight를 제한 면허로 공개한 2022년 v1 체크포인트 계열 (근거 4개)
 - [[파운데이션 모델]] — 광범위한 데이터로 대규모 훈련해 여러 과제의 기반으로 적응되는 모델과 그 훈련·적응·배포 생태계를 구분하는 역할 중심 개념 (근거 7개)
 - [[OpenAI Codex (2021)]] — GPT 계열을 Python 코드 분포로 계속 학습하고 docstring에서 함수 후보를 생성해 unit test로 평가한 2021년 코드 모델군 (근거 3개)
 - [[지시 미세조정]] — 여러 과제의 instruction–target 감독을 weights에 축적하고 현재 과제를 inference instruction으로 지정하는 지도 후학습 방식 (근거 5개)

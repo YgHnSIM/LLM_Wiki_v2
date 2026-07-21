@@ -3478,6 +3478,27 @@ raw 등록 해시:
 - 번역·해설 쌍 검사는 `valid_pairs: 1`, 오류 0을 확인했다. `reading-level:check`는 외부 원문 109개, 번역·해설 166개, raw Markdown 171개, 위키 Markdown 298개에서 UI 단락 0개를 확인했고, 번역 정규화 검사는 표준 `원본 출처:` 83개와 변경 필요 0개를 확인했다.
 - `source:ready -- 085`는 96개 회귀 테스트와 298개 Markdown strict lint를 통과해 324개 evidence와 170개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 574개 HTML을 만들고 6,403개 wiki link를 모두 해소했다.
 
+## [2026-07-22] ingest | 잠재 확산 모델과 Stable Diffusion v1 공개
+
+변경 내용:
+
+- 공식 086 `Stable Diffusion: Latent Diffusion Models for Accessible Text-to-Image Generation`을 새로 번역하고 12절 해설을 작성했다. 번역은 원문 H1·H2·H3와 11개 link의 대상·순서를 보존하고 `원본 출처:`를 정확히 한 번 기록했으며, 번역·해설 모두 읽기 수준 UI 문구·placeholder·문자 깨짐 없이 쌍 검사를 통과했다.
+- 검증된 번역·해설을 raw 두 파일로 등록했다. 번역 SHA-256은 `824f2bed00920e3a891414610e553314a3d1682547aa5868bb971bb7b227ee5c`, 해설은 `513fa4b0a5a0694bc2d8eb78832372ceeda09ee1119834b3c25ea618b8046496`다.
+- [[086_잠재 확산 모델과 Stable Diffusion v1 공개]], [[잠재 확산 모델]], [[Stable Diffusion]]을 만들고, 사전 학습 지각 오토인코더→잠재 U-Net→pixel decoder의 두 단계와 text token 교차 어텐션·classifier-free guidance를 복원했다.
+- Rombach 등의 CVPR 2022 LDM 논문, CompVis 공식 저장소와 v1-4 model card, Stability AI의 2022-08-22 공개 발표 네 건을 evidence로 등록했다. 논문 속 1.45B·LAION-400M·학습 가능한 조건 Transformer와 공개 v1의 860M U-Net·고정 CLIP ViT-L/14·LAION-2B(en) 계열 훈련을 서로 다른 모델 장부로 기록했다.
+- [[index]]와 [[overview]]를 source 86개·concept 161개·비메타 298개, 공식 범위 001–046·048–086·103과 다음 공식 087 Whisper 기준으로 갱신했다. 읽기 수준 전수 검사 inventory도 번역·해설 168개, raw Markdown 173개로 늘렸다.
+
+검증 정정과 남은 한계:
+
+- 512×512×3 image가 64×64×4 latent로 바뀔 때 공간 위치는 64분의 1, channel을 포함한 scalar는 48분의 1이다. 원문의 약 4,000개 latent value와 정확한 64배 compute 주장을 채택하지 않았으며 실제 비용은 U-Net 폭·attention·sampling step과 구현에 조건화했다.
+- LDM의 첫 단계는 손실 압축이고, CVPR의 text-to-image model과 Stable Diffusion v1은 text encoder·data·checkpoint가 다르다. DALL·E 2·Imagen도 저해상도 기본 생성기와 upsampler를 둔 계층형이므로 모든 단계에서 1,024×1,024 pixel을 직접 처리했다는 대조를 교정했다.
+- 2022년 공개 글의 6.9GB VRAM, 원 repository의 최소 10GB와 후대 반정밀도 최적화는 각 구현 조건으로 남겼다. 로컬 추론·재사용의 접근성 향상과 model card의 256 A100 전체 훈련을 분리했다.
+- Code와 weight 공개는 사용 제한을 둔 CreativeML OpenRAIL-M 배포로 기록했다. Safety checker와 invisible watermark는 reference pipeline의 생성 후 구성 요소이며, LAION 자료의 성인물·영어 및 서구 중심 편향·중복 기억과 공개 weight의 개조 가능성을 제거하지 않는다.
+- 예술·게임·마케팅·교육·의료·상업 생산성, 후속 공개 정책과 지배적 architecture에 대한 인과는 네 1차 자료가 직접 평가하지 않았으므로 입증된 성과로 채택하지 않았다.
+- `reading-level:check`는 외부 원문 109개, 번역·해설 168개, raw Markdown 173개와 현재 위키 전체에서 UI 단락 0개를 확인했다. `translation:normalize:check -- --expected-count 84`도 표준 `원본 출처:` 84개와 변경 필요 0개를 확인했다.
+- `source:ready -- 086`은 96개 회귀 테스트와 301개 Markdown strict lint를 통과해 328개 evidence와 172개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 579개 HTML을 만들고 6,470개 wiki link를 모두 해소했다.
+- 다음 순차 입력은 공식 087 `Whisper: Large-Scale Multilingual Speech Recognition with Transformer Architecture`다. CLIP class prototype·Flamingo bridge·DALL·E 2 image latent·Stable Diffusion token cross-attention을 함께 읽는 합성은 ingest 원격 반영 뒤 별도 content 변경으로 기존 분석을 보강한다.
+
 ## 관련 항목
 
 - [[index]]

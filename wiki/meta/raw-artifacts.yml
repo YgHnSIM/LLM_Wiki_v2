@@ -1530,3 +1530,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/dalle2-diffusion-text-to-image-generation-clip-guidance
     sha256: d05c3b28a4fd589b3cee2834b32a93d9825a6d80863c6913ac06139f41c0772c
+  - path: "raw/086_Stable Diffusion Latent Diffusion Models for Accessible Text-to-Image Generation.ko.md"
+    role: translation
+    order_prefix: "086"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/stable-diffusion-latent-diffusion-text-to-image-generation
+    sha256: 824f2bed00920e3a891414610e553314a3d1682547aa5868bb971bb7b227ee5c
+  - path: "raw/086_Stable Diffusion Latent Diffusion Models for Accessible Text-to-Image Generation.commentary.ko.md"
+    role: commentary
+    order_prefix: "086"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/stable-diffusion-latent-diffusion-text-to-image-generation
+    sha256: 513fa4b0a5a0694bc2d8eb78832372ceeda09ee1119834b3c25ea618b8046496
