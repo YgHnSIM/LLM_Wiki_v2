@@ -3686,6 +3686,23 @@ raw 등록 해시:
 - `source:ready -- 091`은 96개 회귀 테스트와 310개 Markdown strict lint를 통과해 357개 evidence와 182개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 598개 HTML을 만들고 6,805개 wiki link를 모두 해소했다.
 - 다음 순차 입력은 공식 092 `Function Calling and Tool Use: Enabling Practical AI Agent Systems`다.
 
+## [2026-07-22] content | 전체 미세조정과 문맥 사이의 QLoRA adapter 경로
+
+변경 내용:
+
+- 새 분석 문서를 늘리지 않고 기존 [[사전 학습 지식은 과제에 어떻게 도착하는가]]를 공식 091까지 확장했다. ELMo 특징·전체 미세조정·prompt·동결 backbone 사이의 bridge 비교에 `동결 base + 학습 adapter`를 추가했다.
+- 과제 적응 지도를 13개 경로로 확장해 QLoRA Guanaco를 배치했다. LLaMA base의 사전 학습 parameter는 NF4로 저장해 동결하고, OASST1 supervision은 all-linear BF16 LoRA adapter를 갱신하며, instruction·conversation은 inference interface로 남는 세 위치를 분리했다.
+- 전이 비교 경계를 16개로 늘렸다. Base storage dtype, BF16 compute dtype과 trainable parameter dtype을 구분하고, 같은 instruction–target data도 전체 weights·adapter·context 가운데 어디에 들어가는지 별도 질문으로 만들었다.
+- QLoRA를 instruction-tuning objective 자체로 보지 않고 parameterization·memory 방법으로 기록했다. FLAN의 137B 전체 미세조정, GPT-3의 context-only adaptation과 비교해 task supervision의 위치가 data 형식과 독립적인 축임을 보였다.
+- 공식 091 raw 두 파일, Dettmers 등의 QLoRA 논문과 Hu 등의 LoRA 논문, [[091_QLoRA와 4비트 양자화 미세조정]]·[[QLoRA]]를 분석에 연결하고 [[index]]·[[overview]]의 설명과 근거 수를 동기화했다. 분석은 기존 16개 근거에 두 locator를 더해 18개를 사용한다.
+
+검증 경계:
+
+- `사전 학습 지식은 base에, 과제 update는 adapter에 있다`는 표현은 update를 받는 parameter 위치를 가리킨다. 특정 사실·능력이 어느 parameter에 인과적으로 저장됐는지 분해했다는 뜻은 아니다.
+- 24GB 33B·48GB 65B는 OASST1 recipe의 실행 조건이고 더 적은 task data나 모든 hardware의 더 빠른 학습을 보장하지 않는다. NF4+DQ 53.1은 BF16 LoRA 53.0과의 5-shot MMLU 평균 비교이며 7B–65B full-parameter parity가 아니다.
+- Adapter를 별도 artifact로 배포할 수 있어도 당시 LLaMA 1 base access·license, target module·rank·scale, NF4 block·compute dtype과 library version이 재현 장부에 남는다.
+- 전체 검증은 96개 회귀 테스트와 310개 Markdown strict lint를 통과해 357개 evidence와 182개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 598개 HTML을 만들고 6,816개 wiki link를 모두 해소했다.
+
 ## 관련 항목
 
 - [[index]]
