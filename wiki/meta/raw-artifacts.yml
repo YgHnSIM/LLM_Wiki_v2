@@ -1386,3 +1386,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/multi-vector-retrievers-fine-grained-token-level-matching-for-neural-information-retrieval
     sha256: f37908699134df9bcd21aad4234e727946f02bf55c154086a26128966b15c376
+  - path: "raw/077_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.ko.md"
+    role: translation
+    order_prefix: "077"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/chinchilla-scaling-laws-compute-optimal-training-resource-allocation
+    sha256: c6bf093e0f01b47405a9ed14fd318e7baf72600eaa8e2492d2a82581f279b7ba
+  - path: "raw/077_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.commentary.ko.md"
+    role: commentary
+    order_prefix: "077"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/chinchilla-scaling-laws-compute-optimal-training-resource-allocation
+    sha256: d4a6c11ac7964371918e30296175a4e0810b2ad9ab7dc1af04c68c8c4e0d2722

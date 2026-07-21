@@ -3150,6 +3150,24 @@ raw 등록 해시:
 - 사이트는 443개 페이지를 빌드해 5,878개 위키 링크와 33,439개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 281개 항목을 포함했다.
 - ColBERT의 독립 부호화·IVFPQ 후보 생성·정확 MaxSim과 MS MARCO 수치는 Khattab·Zaharia 2020의 직접 사실이다. 세 구조를 상호작용 시점과 복구 불가 후보 경계로 묶은 부분은 비교를 통한 합성 해석이므로 `verification: partial`을 유지했다.
 
+## [2026-07-21] ingest | Chinchilla와 계산 최적 언어 모델 학습
+
+변경 내용:
+
+- `077_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 115줄·57개 비공백 block·H1/H2/H3 1/6/4와 Markdown link target 63개의 순서·빈 줄 위치를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- 번역 SHA-256은 `c6bf093e0f01b47405a9ed14fd318e7baf72600eaa8e2492d2a82581f279b7ba`, 해설은 `d4a6c11ac7964371918e30296175a4e0810b2ad9ab7dc1af04c68c8c4e0d2722`다. 번역 스킬 검사는 쌍을 `done: true`로 확인했고 source workflow는 원문 URL·역할·해시 일치를 확인했다.
+- [[077_Chinchilla와 계산 최적 언어 모델 학습]]을 만들고 fixed-compute 세 추정법의 0.50/0.50·0.49/0.51·0.46/0.54 지수, $C\approx6ND$, 70B·1.4T Chinchilla와 280B·300B Gopher의 같은 약 $5.76\times10^{23}$ 훈련 FLOPs를 복원했다.
+- 기존 `hoffmann-et-al-2022-chinchilla` evidence를 NeurIPS 2022 공식 논문으로 정규화하고 §§1·3.1–3.4·4–5, Tables 1–5와 Appendices A·C·D–F의 locator를 연결했다. [[065_신경 언어 모델의 스케일링 법칙]]과 [[언어 모델 스케일링 법칙]]에는 Kaplan의 0.73/0.27과 Chinchilla의 세 재추정값을 함께 기록했다.
+- Raw의 $C^{1/3}$, Kaplan의 fixed-compute 절충 누락, 보편적인 20:1, 175B의 정확한 3.5T 단일값, 과소 훈련 parameter의 기계적 비활성, 훈련비 절감, 여러 downstream task에서의 비율 안정성 및 모든 architecture·domain 일반화를 교정했다. Supplemental의 175B 투영이 약 3.7T·4.3T·12.0T로 벌어지고 $D$는 품질·고유 문서·분포가 아닌 누적 token 노출량임을 명시했다.
+- 새 analysis 문서는 만들지 않았다. Token 수와 data quality·mixture·sampling weight·반복 노출을 분리하는 질문은 기존 [[데이터 품질과 분포 다양성은 같은 축인가]]를 보강하는 별도 `content` 작업으로 이어 간다.
+
+검증 결과:
+
+- 번역 스킬 검사는 077 번역·해설 쌍을 `done: true`로 확인했고, source workflow는 두 raw artifact의 원문 URL·역할·SHA-256 일치를 확인했다.
+- 49개 회귀 테스트와 283개 위키 문서 strict lint를 통과했으며 306개 evidence 레코드와 156개 immutable raw artifact를 확인했다.
+- 사이트는 446개 페이지를 빌드해 5,911개 위키 링크와 33,660개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 282개 항목을 포함했다.
+- 공개 source·concept는 Hoffmann et al. NeurIPS 2022 본문과 supplemental의 fixed-compute 세 방법, Gopher 비교, data mixture·optimizer·tokenizer 차이, 높은 compute 외삽 범위 안에서 검증했다. 20:1의 보편성, parameter 비활성 mechanism, 모든 architecture·domain의 동일 비율과 후대 산업 영향은 입증되지 않은 범위로 남겼다.
+
 ## 관련 항목
 
 - [[index]]

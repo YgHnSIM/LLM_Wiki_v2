@@ -2366,12 +2366,11 @@ sources:
     language: en
   hoffmann-et-al-2022-chinchilla:
     title: 'Training Compute-Optimal Large Language Models'
-    authors: [Jordan Hoffmann, Sebastian Borgeaud, Arthur Mensch, Elena Buchatskaya, Trevor Cai, Eliza Rutherford, Diego de Las Casas, Lisa Anne Hendricks, Johannes Welbl, Aidan Clark, Tom Hennigan, Eric Noland, Katie Millican, George van den Driessche, Bogdan Damoc, Aurelia Guy, Simon Osindero, Karen Simonyan, Erich Elsen, Jack W. Rae, Oriol Vinyals, Laurent Sifre]
+    authors: [Jordan Hoffmann, Sebastian Borgeaud, Arthur Mensch, Elena Buchatskaya, Trevor Cai, Eliza Rutherford, Diego de Las Casas, Lisa Anne Hendricks, Johannes Welbl, Aidan Clark, Thomas Hennigan, Eric Noland, Katherine Millican, George van den Driessche, Bogdan Damoc, Aurelia Guy, Simon Osindero, Karén Simonyan, Erich Elsen, Oriol Vinyals, Jack Rae, Laurent Sifre]
     published: 2022
     source_type: primary
-    kind: preprint
-    doi: 10.48550/arXiv.2203.15556
-    url: https://arxiv.org/abs/2203.15556
+    kind: conference-paper
+    url: https://proceedings.neurips.cc/paper_files/paper/2022/hash/c1e2faff6f588870935f114ebe04a3e5-Abstract-Conference.html
     language: en
   brown-et-al-2020-gpt3:
     title: 'Language Models are Few-Shot Learners'
