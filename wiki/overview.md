@@ -26,13 +26,13 @@ related:
 
 공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism (2015)**이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-21 현재 원문을 제공하지 않는다.
 
-따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 88개는 공식 001–046·048–088·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 089 `LLaMA: Meta's Open Foundation Models That Democratized Language AI Research`다.
+따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 89개는 공식 001–046·048–089·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 090 `Open LLM Wave: The Proliferation of High-Quality Open-Source Language Models`다.
 
 숫자 badge는 정규 source의 공식 장 번호에만 쓴다. 비번호 reference가 추가되면 번호 source 뒤에서 `참고`로 표시하며, 목록 위치를 `001` 같은 장 번호로 바꾸지 않는다. 같은 장의 검증 노트·번역·해설은 서로 다른 장이 아니라 하나의 source 묶음에 속한다.
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 88개, reference 0개, concept 163개, entity 29개, analysis 22개를 합친 비메타 문서 302개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 89개, reference 0개, concept 164개, entity 29개, analysis 22개를 합친 비메타 문서 304개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -49,9 +49,9 @@ related:
 | 음성 인식에서 학습되는 경계는 어떻게 넓어졌나 | [[013_은닉 마르코프 모델과 통계적 음성 인식]] | [[041_심층 신경망 음향 모델과 DNN-HMM 전환]] → [[087_Whisper와 대규모 약한 감독 음성 인식]] → [[Whisper]] → [[단어 오류율]] | [[규칙 기반 AI에서 데이터 기반 학습으로]] |
 | 프롬프트는 추론 성능을 어떻게 바꾸나 | [[067_GPT-3와 문맥 내 학습]] | [[080_사고 연쇄 프롬프팅과 추론 행동 유도]] → [[사고 연쇄 프롬프팅]] → [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]] → [[079_HELM과 다차원 언어 모델 평가]] | [[손실 곡선과 능력 곡선 사이]] |
 | 이미지·동영상 조건은 생성 모델에 어떻게 들어가나 | [[070_CLIP과 대조적 언어-이미지 사전 학습]] | [[CLIP]] → [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]] → [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] → [[086_잠재 확산 모델과 Stable Diffusion v1 공개]] → [[잠재 확산 모델]] → [[Stable Diffusion]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
-| 모델 공개는 곧 재현 가능성을 뜻하나 | [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] | [[076_파운데이션 모델 보고서와 AI 생태계]] → [[082_BLOOM과 공개 접근 다국어 LLM]] → [[BLOOM]] | [[공개 가중치와 재현 가능성은 같은 축인가]] |
+| 모델 공개는 곧 재현 가능성을 뜻하나 | [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] | [[076_파운데이션 모델 보고서와 AI 생태계]] → [[082_BLOOM과 공개 접근 다국어 LLM]] → [[BLOOM]] → [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]] → [[LLaMA 1]] | [[공개 가중치와 재현 가능성은 같은 축인가]] |
 | 희소 모델의 ‘크기’는 무엇을 뜻하나 | [[069_전문가 혼합과 희소 활성 스케일링]] | [[GLaM에서 Mixtral까지의 희소 MoE 확장]] → [[Mixtral 8x7B]] | [[총 매개변수와 활성 계산량은 같은 축인가]] |
-| 학습 데이터의 양과 구성을 어떻게 읽나 | [[063_T5와 Text-to-Text 통합 프레임워크]] | [[066_신경 언어 모델의 스케일링 법칙]] → [[067_GPT-3와 문맥 내 학습]] → [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] → [[The Pile]] → [[078_Chinchilla와 계산 최적 언어 모델 학습]] | [[데이터 품질과 분포 다양성은 같은 축인가]] |
+| 학습 데이터의 양과 구성을 어떻게 읽나 | [[063_T5와 Text-to-Text 통합 프레임워크]] | [[066_신경 언어 모델의 스케일링 법칙]] → [[067_GPT-3와 문맥 내 학습]] → [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] → [[The Pile]] → [[078_Chinchilla와 계산 최적 언어 모델 학습]] → [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]] | [[데이터 품질과 분포 다양성은 같은 축인가]] |
 
 ## 난이도에 따른 읽기 방법
 
@@ -61,7 +61,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 88개 소스의 범위
+## 89개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -150,6 +150,7 @@ related:
 - [[086_잠재 확산 모델과 Stable Diffusion v1 공개]]는 CVPR 2022의 일반 [[잠재 확산 모델]]과 2022년 8월 공개된 [[Stable Diffusion]] v1을 분리하고, 지각 오토인코더·잠재 U-Net·CLIP token 교차 어텐션·classifier-free guidance 및 계산·면허·안전의 조건을 검증한다.
 - [[087_Whisper와 대규모 약한 감독 음성 인식]]은 웹의 오디오-전사 쌍을 기존 ASR 산출물로 새로 만든 자료와 구분하고, 30초 log-Mel encoder–decoder·다중 과제 token·zero-shot 분포 밖 평가를 복원해 번역 방향·언어 수·SOTA·사람 수준·공개 범위의 과장을 교정한다.
 - [[088_FlashAttention과 IO 인지형 정확 어텐션]]은 같은 dense softmax attention을 HBM에 $n\times n$ 중간 행렬로 물질화하지 않는 타일링·온라인 softmax·backward 재계산을 복원하고, 정확성·I/O·FLOPs·추가 메모리·긴 문맥 품질을 서로 다른 축으로 구분한다.
+- [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]]는 6.7B–65.2B family의 1.0T·1.4T-token 장기 학습을 training-compute optimum과 반복 inference budget의 교환으로 복원하고, base LLaMA·LLaMA-I·Llama 2 및 신청 승인형 비상업 연구 weight 배포를 구분한다.
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]]은 GLaM·Mixtral의 total·active parameter와 token별 routing을 복원하고, 2024년 최초성·Meta 귀속·dense 계산의 제곱 증가·깨끗한 domain expert·민주화 과장을 교정한다.
 
 ## 현재 핵심 주제
@@ -197,6 +198,7 @@ related:
 - [[교차 인코더 재순위화]]에서 구분하는 질의–후보 공동 부호화, `[CLS]` relevance logit, first-stage 누락 복구 불가와 후보별 추론 비용
 - [[다중 벡터 검색]]에서 구분하는 독립 문맥화 벡터 집합, MaxSim 후기 상호작용, single-vector·cross-encoder 사이 계산 경계와 색인·ANN·질의 비용
 - [[언어 모델 스케일링 법칙]]에서 함께 확인하는 token loss, N·D·compute 병목, Kaplan의 0.73/0.27과 Chinchilla의 세 가지 약 0.5/0.5 배분, 조건부 20:1 및 관측 범위 밖 외삽의 차이
+- [[LLaMA 1]]에서 구분하는 6.7B·13.0B·32.5B·65.2B 실제 규모, 1.0T·1.4T token 장기 학습, training-compute optimum과 반복 inference parameter footprint의 서로 다른 목적 및 base·LLaMA-I·후속 세대
 - [[The Pile]]에서 구분하는 22개 component의 raw size·epoch 가중 effective size, component deduplication·split leakage·benchmark decontamination과 project license·underlying rights
 - [[데이터 품질과 분포 다양성은 같은 축인가]]에서 분리하는 문서 입장 filter, 고유 token pool, domain support, sampling weight, component별 epoch, 누적 token $D$와 평가 분포 및 quality proxy의 인과 한계
 - [[문맥 내 학습]]에서 구분하는 고정 가중치, instruction·demonstration·query의 입력 조건화, zero·one·few-shot과 가중치를 갱신하는 지시 미세조정의 지속성 차이
@@ -206,7 +208,7 @@ related:
 - [[인간 피드백 강화학습]]에서 구분하는 평가자 시연 SFT, 응답 순위에서 학습한 보상 모델, SFT 정책 기준 KL과 PPO-ptx 사전 학습 혼합 및 선호 대표성의 경계
 - [[ChatGPT 연구 미리보기 (2022)]]에서 구분하는 GPT-3.5 계열 모델, 대화형 RLHF, 다중 턴 인터페이스, moderation·피드백 배포 층과 지속 기억·현재 제품의 시간 경계
 - [[BLOOM]]에서 구분하는 176B decoder-only architecture, ROOTS의 언어·token 분포, 공공 HPC 학습과 문서·weight·code·data·license·실행 자원의 서로 다른 접근 층
-- [[공개 가중치와 재현 가능성은 같은 축인가]]에서 분리하는 검사·변형·재배포·재현·실행 비용·거버넌스 참여, 그리고 추론·평가·학습 재현이 요구하는 서로 다른 artifact와 자원
+- [[공개 가중치와 재현 가능성은 같은 축인가]]에서 분리하는 검사·변형·재배포·재현·실행 비용·거버넌스 참여, 그리고 BLOOM의 공개 weight·RAIL과 LLaMA 1의 신청 승인형 비상업 연구 배포처럼 추론·평가·학습 재현이 요구하는 서로 다른 artifact·license·자원
 - [[손실 곡선과 능력 곡선 사이]]에서 분리하는 2021년의 암묵적으로 유도된 행동이라는 넓은 창발, 2022년의 규모별 emergent ability, PaLM의 세 점 log-linear 외삽 잔차·62B 장기 학습, 평균 token cross-entropy·task score·능력 threshold와 metric·표본·checkpoint·관측 scale
 - [[검색은 근거를 찾고 독해는 답을 찾는다]]에서 분리하는 단일 벡터·후기 상호작용·교차 인코더의 후보 생성/정밀 점수화 경계, retrieval recall, 답 EM·F1·faithfulness와 기권 calibration
 - [[검색 증강 생성]]에서 구분하는 원 RAG의 DPR–BART 잠재 문서 주변화, 고정 document encoder·색인과 학습되는 query encoder, 검색 provenance와 claim-level citation의 차이
@@ -295,6 +297,8 @@ related:
 - [[Whisper]]
 - [[088_FlashAttention과 IO 인지형 정확 어텐션]]
 - [[FlashAttention]]
+- [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]]
+- [[LLaMA 1]]
 - [[076_파운데이션 모델 보고서와 AI 생태계]]
 - [[파운데이션 모델]]
 - [[077_InstructGPT와 인간 선호 정렬]]
@@ -419,7 +423,9 @@ related:
 
 ## 현재 상태
 
-소스 88개, 참고 자료 0개, 개념 163개, 개체 29개, 분석 22개와 메타 문서 3개, 총 305개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 274개는 `verified`, 해석적 문서 28개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 335개 외부 근거와 176개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 89개, 참고 자료 0개, 개념 164개, 개체 29개, 분석 22개와 메타 문서 3개, 총 307개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 276개는 `verified`, 해석적 문서 28개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 337개 외부 근거와 178개 불변 raw artifact가 레지스트리에 등록돼 있다.
+
+[[089_LLaMA 1과 제한적 공개 가중치 연구 배포]]와 [[LLaMA 1]]은 7B·13B의 1.0T token, 33B·65B의 1.4T token 학습을 모든 규모의 보편 20:1 규칙이 아니라 training-compute optimum을 지나 더 작은 inference parameter footprint를 노린 선택으로 복원했다. 실제 token/parameter는 약 149·77·43·21.5이며, RMSNorm·SwiGLU·RoPE는 선행 기법이고 구성요소별 ablation도 없으므로 성능을 어느 하나의 발명·단독 인과로 돌리지 않는다. 최초 weight 배포는 신청 승인과 noncommercial research license가 붙었고, base LLaMA·제한적 LLaMA-I 실험·후속 Llama 2를 서로 다른 artifact와 세대로 구분한다.
 
 [[088_FlashAttention과 IO 인지형 정확 어텐션]]과 [[FlashAttention]]은 dense softmax attention의 수학을 바꾸지 않고 HBM–SRAM 사이의 데이터 이동을 줄이는 실행을 복원했다. 온라인 softmax는 tile별 행 최댓값·정규화 합·출력 누산값을 재조정하고, backward는 저장하지 않은 score·probability block을 다시 계산한다. 표준 구현의 $O(n^2)$ 중간 저장은 $O(n)$ 추가 메모리로 줄지만 $O(n^2d)$ 산술량과 model weight·KV cache는 남으며, `exact`도 부동소수점 bitwise 동일성을 뜻하지 않는다. Figure 2의 더 많은 FLOPs·더 적은 HBM 읽기·쓰기량·더 짧은 시간, kernel 속도와 end-to-end 속도, dense 정확 방식과 별도 block-sparse 근사, FlashAttention 1·2·3의 version 경계를 각각 분리했다.
 
@@ -431,7 +437,7 @@ related:
 
 [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]과 [[DALL·E 2]]는 공식 논문의 unCLIP을 caption-conditioned CLIP image embedding prior와 계층적 확산 decoder로 복원했다. 생성 과정은 매 denoising step에서 CLIP gradient로 중간 이미지를 채점하는 방식이 아니라 동결된 CLIP 잠재 표현과 classifier-free guidance를 사용하며, 논문의 variation·보간 실험과 Preview 제품의 inpainting·안전·접근 통제는 서로 다른 근거 층위로 기록했다.
 
-`078`의 $C^{1/3}$ scaling, Kaplan의 model–data 절충 누락, 보편적인 20 tokens/parameter, 175B model의 단일 정답 3.5T tokens, Gopher보다 낮은 훈련비, 과소 훈련 parameter의 기계적 비활성, 모든 자료·architecture로의 직접 일반화 주장을 공개 문서에서 교정했다. Hoffmann 등의 세 fixed-compute 추정법은 $N$과 $D$에 0.50/0.50·0.49/0.51·0.46/0.54 지수를 주며, Gopher와 Chinchilla는 약 $5.76\times10^{23}$ FLOPs의 같은 사전 학습 compute를 사용했다. 20:1은 특정 dense Transformer·자료 혼합·schedule에 조건화된 근사이고, 175B 외삽은 접근별 약 3.7T·4.3T·12.0T로 벌어진다.
+`078`의 $C^{1/3}$ scaling, Kaplan의 model–data 절충 누락, 보편적인 20 tokens/parameter, 175B model의 단일 정답 3.5T tokens, Gopher보다 낮은 훈련비, 과소 훈련 parameter의 기계적 비활성, 모든 자료·architecture로의 직접 일반화 주장을 공개 문서에서 교정했다. Hoffmann 등의 세 fixed-compute 추정법은 $N$과 $D$에 0.50/0.50·0.49/0.51·0.46/0.54 지수를 주며, Gopher와 Chinchilla는 약 $5.76\times10^{23}$ FLOPs의 같은 사전 학습 compute를 사용했다. 20:1은 특정 dense Transformer·자료 혼합·schedule에 조건화된 근사이고, 175B 외삽은 접근별 약 3.7T·4.3T·12.0T로 벌어진다. [[089_LLaMA 1과 제한적 공개 가중치 연구 배포|LLaMA 1]]의 약 149·77·43·21.5 tokens/parameter는 이 fixed-training-compute 질문을 반박한 보편 법칙이 아니라 반복 inference의 parameter footprint에 다른 비중을 둔 사례다.
 
 [[언어 모델 스케일링 법칙]]에는 Kaplan의 0.73/0.27과 Chinchilla의 세 추정값, $D$가 고유 문서 수나 품질 점수가 아니라 누적 token 노출량이라는 경계를 추가했다. 더 많은 token이 compute frontier에서 중요했다는 결과와 어떤 20N token도 동등하다는 결론을 분리했으며, 품질·분포·반복 노출의 합성 질문은 기존 [[데이터 품질과 분포 다양성은 같은 축인가]]에서 이어 간다.
 

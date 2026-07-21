@@ -1584,3 +1584,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/flashattention-io-aware-exact-attention-long-context-language-models
     sha256: 57e21e5977c488e26bc14dc238816c6d4857278eea0c6ff525fe34eb6acfee01
+  - path: "raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.ko.md"
+    role: translation
+    order_prefix: "089"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/llama-meta-open-foundation-models-democratized-language-ai-research
+    sha256: 808522470bbdbbeb20e5ab20a4aea390939637ef272dda557e5b2f53922b3823
+  - path: "raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.commentary.ko.md"
+    role: commentary
+    order_prefix: "089"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/llama-meta-open-foundation-models-democratized-language-ai-research
+    sha256: c7b5f8896fee8c82db023d8bea57bc071e3cc8483d1edb2f4aa8945dd483ba8d

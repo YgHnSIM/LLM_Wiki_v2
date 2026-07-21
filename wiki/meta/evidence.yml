@@ -2864,3 +2864,20 @@ sources:
     doi: 10.48550/arXiv.2407.08608
     url: https://arxiv.org/abs/2407.08608
     language: en
+  touvron-et-al-2023-llama:
+    title: 'LLaMA: Open and Efficient Foundation Language Models'
+    authors: [Hugo Touvron, Thibaut Lavril, Gautier Izacard, Xavier Martinet, Marie-Anne Lachaux, Timothée Lacroix, Baptiste Rozière, Naman Goyal, Eric Hambro, Faisal Azhar, Aurélien Rodriguez, Armand Joulin, Édouard Grave, Guillaume Lample]
+    published: 2023
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2302.13971
+    url: https://arxiv.org/abs/2302.13971
+    language: en
+  meta-ai-2023-introducing-llama:
+    title: 'Introducing LLaMA: A foundational, 65-billion-parameter large language model'
+    authors: [Meta AI]
+    published: 2023
+    source_type: primary-release
+    kind: official-blog
+    url: https://ai.meta.com/blog/large-language-model-llama-meta-ai/
+    language: en

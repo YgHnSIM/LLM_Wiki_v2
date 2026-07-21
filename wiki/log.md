@@ -3591,6 +3591,25 @@ raw 등록 해시:
 - HBM R/W GB는 Figure 2의 데이터량이고 Theorem 2의 점근적 HBM access 횟수와 같은 단위가 아니다. ArXiv 개정본에 있는 다른 Figure 2 측정값도 NeurIPS 최종본 수치와 합치지 않는다.
 - 전체 검증은 96개 회귀 테스트와 305개 Markdown strict lint를 통과해 335개 evidence와 176개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 587개 HTML을 만들고 6,654개 wiki link를 모두 해소했다.
 
+## [2026-07-22] ingest | LLaMA 1의 추론 지향 장기 학습과 제한적 연구 배포
+
+변경 내용:
+
+- 공식 089 `LLaMA: Meta's Open Foundation Models That Democratized Language AI Research`를 원문 구조와 link 순서에 맞춰 새로 번역하고 12절 해설을 작성했다. 번역은 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않는다.
+- 검증된 번역·해설을 raw 두 파일로 등록했다. 번역 SHA-256은 `808522470bbdbbeb20e5ab20a4aea390939637ef272dda557e5b2f53922b3823`, 해설은 `c7b5f8896fee8c82db023d8bea57bc071e3cc8483d1edb2f4aa8945dd483ba8d`다. 기존 raw artifact는 다시 쓰지 않았다.
+- [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]]와 [[LLaMA 1]]을 만들고, 6.7B·13.0B·32.5B·65.2B 제품군, 1.0T·1.4T token 학습, data mixture·RMSNorm/SwiGLU/RoPE·학습 system, 능력·safety 평가와 hardware·carbon 장부를 복원했다.
+- [[078_Chinchilla와 계산 최적 언어 모델 학습]]과 [[언어 모델 스케일링 법칙]]에는 fixed-training-compute optimum과 반복 inference parameter footprint의 목적 차이 및 실제 약 149·77·43·21.5 tokens/parameter를 연결했다. [[RMSNorm]]에는 LLaMA의 pre-norm 채택과 선행 발명·단독 ablation의 경계를 추가했다.
+- Touvron 등의 LLaMA 논문과 Meta의 2023-02-24 공식 발표를 evidence로 등록하고 [[index]]와 [[overview]]를 source 89개·concept 164개·비메타 304개, 공식 범위 001–046·048–089·103과 다음 공식 090 Open LLM Wave 기준으로 갱신했다. 읽기 수준 전수 검사 inventory는 번역·해설 174개, raw Markdown 179개로 늘었다.
+
+검증 정정과 남은 한계:
+
+- LLaMA 1의 최초 weight 배포는 누구나 자유롭게 쓰는 open-source release가 아니라 신청자별 승인과 noncommercial research license가 붙은 연구 배포였다. Base LLaMA, 논문 안의 제한적 LLaMA-I 실험과 후속 Llama 2를 서로 다른 artifact·세대로 분리했다.
+- 65B는 Chinchilla의 약 20:1에 가깝지만 7B·13B·33B는 훨씬 오래 학습됐다. 논문은 parameter 수를 inference budget의 핵심 대용치로 삼았으며 모든 serving 비용을 직접 측정하거나 네 비율을 새로운 보편 최적 법칙으로 fit한 것은 아니다.
+- RMSNorm·SwiGLU·RoPE는 선행 기법이고 구성요소별 ablation이 없다. 전체 data mixture에 적용한 포괄적 safety filter, 모든 benchmark를 아우르는 contamination audit와 단일 knowledge cutoff도 보고되지 않았으므로 결합 recipe의 결과를 개별 요소·완전한 안전·오염 없는 평가로 확대하지 않는다.
+- MMLU 5-shot의 base LLaMA-65B 63.4와 LLaMA-I 68.9, Chinchilla 67.5·PaLM 69.3을 서로 다른 checkpoint와 조건으로 기록했다. 13B single-V100 inference는 consumer hardware 학습·미세조정의 근거가 아니며, 65B 최종 run의 1,022,362 GPU-hour와 전체 개발 추정 1,015 tCO2eq를 작은 parameter 수와 저렴한 pretraining으로 합치지 않는다.
+- `source:ready -- 089`은 96개 회귀 테스트와 307개 Markdown strict lint를 통과해 337개 evidence와 178개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 591개 HTML을 만들고 6,725개 wiki link를 모두 해소했다.
+- 다음 순차 입력은 공식 090 `Open LLM Wave: The Proliferation of High-Quality Open-Source Language Models`다. BLOOM의 공개 weight·RAIL과 LLaMA 1의 신청 승인형 비상업 배포가 재현 가능성의 어떤 서로 다른 층을 여는지는 ingest 원격 반영 뒤 기존 분석에 별도 content 변경으로 합성한다.
+
 ## 관련 항목
 
 - [[index]]

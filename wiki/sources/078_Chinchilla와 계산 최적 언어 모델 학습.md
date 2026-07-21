@@ -15,7 +15,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-21'
-updated: '2026-07-21'
+updated: '2026-07-22'
 lifecycle: active
 verification: verified
 artifacts:
@@ -25,11 +25,16 @@ evidence:
   - source_id: hoffmann-et-al-2022-chinchilla
     locator: '초록, §§1·3.1–3.4·4–5, Eqs. 1–2, Tables 1–5와 Appendices A·C·D.2–D.4·E–F의 fixed-compute 최적화·세 추정법·Chinchilla–Gopher 비교·데이터와 FLOP 조건'
     relation: supports
+  - source_id: touvron-et-al-2023-llama
+    locator: '§1의 training-compute optimum과 inference budget 구분, Table 2의 6.7B·13.0B·32.5B·65.2B model과 1.0T·1.4T token 학습 조건, Figures 1–2의 추가 token 학습 추이'
+    relation: contextualizes
 related:
   - source.066
   - source.067
   - source.074
+  - source.089
   - concept.언어-모델-스케일링-법칙
+  - concept.llama-1
   - concept.대규모-언어-모델
   - concept.perplexity
   - concept.transformer
@@ -135,6 +140,12 @@ Chinchilla와 Gopher의 training FLOPs는 같았다. 더 작은 Chinchilla의 �
 
 Sparse MoE에서는 total parameter와 token당 active compute가 다시 갈라진다. Dense model의 $C\approx6ND$에서 어떤 $N$을 쓸지 명시하지 않으면 expert weight 전체와 실제 활성 연산을 혼동한다. 이 비교는 [[총 매개변수와 활성 계산량은 같은 축인가]]에서 이어서 다룬다.
 
+### LLaMA 1은 서로 다른 최적화 문제를 보여 준다
+
+[[089_LLaMA 1과 제한적 공개 가중치 연구 배포|LLaMA 1]]은 Chinchilla의 fixed-training-compute 질문을 그대로 재현한 모델이 아니다. Touvron 등은 고정 학습 FLOP의 loss-optimal 모델이 배포 뒤 누적 inference 비용에서도 최적이라는 보장이 없다고 봤다. 실제 학습 장부는 6.7B·13.0B 모델에 1.0T token, 32.5B·65.2B 모델에 1.4T token을 사용해 각각 약 149·77·43·21.5 tokens/parameter였다.
+
+따라서 가장 큰 65B만 Chinchilla의 약 20:1 근사에 가깝고 작은 모델은 훨씬 더 오래 학습했다. 이는 Chinchilla의 훈련-계산 최적 frontier를 폐기했다기보다 **초기 학습 비용과 반복 추론 비용의 비중을 다르게 놓은 목적 함수**로 이동한 사례다. LLaMA 논문은 이 네 비율을 보편 최적 법칙으로 새로 fit하지 않았고, 다른 데이터·tokenizer·recipe의 benchmark 우위를 token 비율 하나의 인과 효과로 분리하지도 않았다.
+
 ## 검증과 한계
 
 ### raw 설명의 검증 정정
@@ -149,7 +160,7 @@ Sparse MoE에서는 total parameter와 token당 active compute가 다시 갈라�
 - **Chinchilla가 training cost도 줄였다:** Gopher와 같은 training FLOPs를 썼다. 추론·미세조정·memory 비용이 낮아졌다.
 - **최적 구성은 더 매끄러운 학습 곡선으로 검증됐다:** 원 논문의 핵심 검증은 FLOP별 loss frontier와 downstream 결과다. 보편적인 곡선 매끄러움은 직접 결론이 아니다.
 - **20:1은 여러 downstream task에서 안정적이었다:** Scaling law는 주로 pretraining loss에 적합했고 downstream 평가는 최종 Chinchilla 한 점을 중심으로 했다.
-- **LLaMA가 계산 최적 원칙을 그대로 따랐다:** Hoffmann 논문은 2023년 후속 모델인 LLaMA를 다루지 않는다. 이 source만으로는 LLaMA의 훈련 선택이나 Chinchilla와의 직접 계보를 확정할 수 없으며, LLaMA 1차 자료를 별도로 검증해야 한다.
+- **LLaMA가 20:1 계산 최적 원칙을 모든 규모에 그대로 따랐다:** LLaMA 1차 논문 §1과 Table 2를 조합하면 실제 비율은 6.7B·13.0B·32.5B·65.2B에서 약 149·77·43·21.5 tokens/parameter다. 작은 모델을 training-compute optimum을 지나 더 학습해 inference 비용을 줄이려는 다른 목적이었다.
 - **업계 표준·민주화·edge 배포·환경 개선을 입증했다:** 후대 adoption·deployment·energy 자료가 필요한 별도 주장이다.
 - **MassiveText의 품질이 균질하다고 가정했다:** 실제로 여러 component의 mixture였다. 품질과 mixture를 독립 변수로 loss 식에 넣지 않았다는 것이 정확한 한계다.
 - **Computer vision·RL에도 같은 비율이 적용된다:** 체계적 frontier 추정 방법은 재사용할 수 있지만 20:1의 직접 일반화는 입증되지 않았다.
@@ -174,6 +185,7 @@ Scaling law의 직접 적합 대상은 평균 pretraining loss다. Reasoning, fa
 
 - [[066_신경 언어 모델의 스케일링 법칙]] — Kaplan 2020의 원래 power law와 0.73/0.27 배분을 먼저 확인한다.
 - [[언어 모델 스케일링 법칙]] — 두 연구의 변수·지수·병목·외삽을 재사용 가능한 개념 장부로 정리한다.
+- [[LLaMA 1]] — training compute 최적점과 반복 inference 비용을 나누고 작은 모델을 더 오래 학습한 사례를 본다.
 - [[데이터 품질과 분포 다양성은 같은 축인가]] — 학습 token 수와 품질·혼합·sampling weight·반복 노출을 분리한다.
 
 ## 출처
@@ -181,6 +193,8 @@ Scaling law의 직접 적합 대상은 평균 pretraining loss다. Reasoning, fa
 - Jordan Hoffmann 외, [Training Compute-Optimal Large Language Models](https://arxiv.org/abs/2203.15556), arXiv:2203.15556, 2022-03-29; NeurIPS 2022, 특히 §§1·3.1–3.4·4–5, Tables 1–5와 Appendices A·C·D–F.
 - [NeurIPS 2022 공식 논문 페이지](https://proceedings.neurips.cc/paper_files/paper/2022/hash/c1e2faff6f588870935f114ebe04a3e5-Abstract-Conference.html)와 [supplemental PDF](https://proceedings.neurips.cc/paper_files/paper/2022/file/c1e2faff6f588870935f114ebe04a3e5-Supplemental-Conference.pdf).
 - [[066_신경 언어 모델의 스케일링 법칙]]
+- [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]]
+- Hugo Touvron 외, [LLaMA: Open and Efficient Foundation Language Models](https://arxiv.org/abs/2302.13971), 2023, §1, Table 2, Figures 1–2.
 - 프로젝트 번역·검토 출발 자료: [Chinchilla Scaling Laws: Compute-Optimal Training and Resource Allocation for Large Language Models](https://mbrenndoerfer.com/writing/chinchilla-scaling-laws-compute-optimal-training-resource-allocation)
 - 프로젝트 보존 자료: `raw/078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.ko.md`, `raw/078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.commentary.ko.md`.
 
@@ -189,7 +203,9 @@ Scaling law의 직접 적합 대상은 평균 pretraining loss다. Reasoning, fa
 - [[066_신경 언어 모델의 스케일링 법칙]]
 - [[067_GPT-3와 문맥 내 학습]]
 - [[074_The Pile과 대규모 언어 모델 학습 말뭉치]]
+- [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]]
 - [[언어 모델 스케일링 법칙]]
+- [[LLaMA 1]]
 - [[대규모 언어 모델]]
 - [[Perplexity]]
 - [[Transformer]]
