@@ -3328,6 +3328,19 @@ raw 등록 해시:
 - 두 문서는 확인된 출시 구조와 공개 한계, 여러 사례를 함께 읽은 비교 해석, 입증되지 않은 직접 계보를 분리한다. 2022년 발표의 선택된 예시를 현재 ChatGPT 제품·정확한 매개변수 수·장기 사회 효과로 소급하지 않는다.
 - 86개 회귀 테스트와 289개 Markdown strict lint를 통과해 314개 evidence와 162개 immutable raw artifact를 확인했다. 사이트는 99개 legacy redirect를 포함한 557개 HTML을 만들었고 미해결 wiki target은 0개였다.
 
+## [2026-07-21] site | 원문 번역본 표시 통일과 본문 출처 줄 숨김
+
+변경 내용:
+
+- Artifact 레지스트리의 `translation`, `translated-essay`, `source-essay` 역할은 내부 경로와 보존 구분을 유지하면서 독자 화면의 명칭을 모두 `원문 번역본`으로 통일했다. 자료 전환 탭, 번역 목록 제목·진입 링크와 독서 화면의 제목·자료 유형에도 같은 명칭을 적용했다.
+- 모든 원문 번역본 독서 화면에서 standalone provenance 줄인 `원본 출처: URL`, `출처: URL`, `Source: URL`을 렌더링할 때만 숨겼다. 일반 문장과 code fence 안의 같은 문자열, 해설 독서 화면은 보존한다.
+- Immutable `raw/` 본문과 `raw-artifacts.yml`은 수정하지 않았다. 원문 URL은 레지스트리와 각 독서 화면 하단의 `원문 출처` 링크에 계속 남으므로 provenance와 원문 이동 경로는 유지된다.
+
+검증 결과:
+
+- 회귀 테스트는 세 legacy 역할의 공통 label, standalone 출처 줄 제거, 본문·code fence·해설 보존과 `원본 출처:` URL 추출을 확인한다.
+- 81개 원문 번역본 artifact page를 다시 생성해 본문 영역에 세 출처 표기가 남지 않았음을 확인했다. 전체 검증은 87개 테스트, 289개 Markdown strict lint, 314개 evidence, 162개 immutable raw artifact와 미해결 wiki target 0개를 확인했다.
+
 ## 관련 항목
 
 - [[index]]

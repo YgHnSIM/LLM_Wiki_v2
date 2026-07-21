@@ -11,10 +11,13 @@ import {
 } from '../lib/artifact-readers.mjs';
 
 test('artifact reader roles preserve legacy distinctions', () => {
-  assert.equal(artifactRoleMetadata('translation').label, '번역본');
+  assert.equal(artifactRoleMetadata('translation').label, '원문 번역본');
+  assert.equal(artifactRoleMetadata('translation').hideSourceMarker, true);
+  assert.equal(artifactRoleMetadata('translated-essay').label, '원문 번역본');
   assert.equal(artifactRoleMetadata('translated-essay').routeRole, 'translation');
-  assert.equal(artifactRoleMetadata('source-essay').label, '한국어 소스 글');
+  assert.equal(artifactRoleMetadata('source-essay').label, '원문 번역본');
   assert.equal(artifactRoleMetadata('source-essay').directory, false);
+  assert.equal(artifactRoleMetadata('commentary').hideSourceMarker, false);
   assert.equal(artifactRoleMetadata('unknown'), null);
 });
 
@@ -49,6 +52,18 @@ test('artifact markdown removes multiline hidden comments outside code fences', 
   assert.equal(normalized, '앞\n뒤');
 });
 
+test('translation readers hide standalone source markers without changing prose or code', () => {
+  const markdown = '# 제목\n\n원본 출처: https://example.com/original\n\n출처: https://example.com/legacy-ko\n\nSource: https://example.com/legacy-en\n\n본문에서 출처: https://example.com/citation 을 설명한다.\n\n```text\n출처: https://example.com/in-code\n```';
+  const normalized = normalizeArtifactMarkdown(markdown, { hideSourceMarker: true });
+  assert.doesNotMatch(normalized, /example\.com\/(?:original|legacy-ko|legacy-en)/);
+  assert.match(normalized, /본문에서 출처: https:\/\/example\.com\/citation 을 설명한다\./);
+  assert.match(normalized, /^출처: https:\/\/example\.com\/in-code$/m);
+  assert.equal(
+    normalizeArtifactMarkdown('출처: https://example.com/commentary'),
+    '출처: https://example.com/commentary',
+  );
+});
+
 test('artifact source origin prefers the recorded source URL', () => {
   assert.equal(
     sourceOriginForArtifact('출처: https://example.org/writing/item\n\n본문'),
@@ -61,5 +76,9 @@ test('artifact source origin prefers the recorded source URL', () => {
   assert.equal(
     sourceUrlForArtifact('출처: https://inline.example/item', 'https://recorded.example/article'),
     'https://recorded.example/article',
+  );
+  assert.equal(
+    sourceUrlForArtifact('원본 출처: https://canonical.example/item'),
+    'https://canonical.example/item',
   );
 });

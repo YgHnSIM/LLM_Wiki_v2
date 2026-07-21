@@ -3,26 +3,30 @@ import path from 'node:path';
 const roleMetadata = Object.freeze({
   translation: Object.freeze({
     routeRole: 'translation',
-    label: '번역본',
+    label: '원문 번역본',
     directory: true,
+    hideSourceMarker: true,
     description: '원문의 흐름을 따라 새로 옮긴 한국어 번역입니다.',
   }),
   'translated-essay': Object.freeze({
     routeRole: 'translation',
-    label: '번역·정리본',
+    label: '원문 번역본',
     directory: true,
+    hideSourceMarker: true,
     description: '초기 수집 과정에서 번역과 정리를 함께 거친 한국어 자료입니다.',
   }),
   'source-essay': Object.freeze({
     routeRole: 'source-essay',
-    label: '한국어 소스 글',
+    label: '원문 번역본',
     directory: false,
-    description: '번역본으로 단정하지 않고 수집 당시 형태를 보존한 한국어 소스 글입니다.',
+    hideSourceMarker: true,
+    description: '수집 당시 형태를 그대로 보존한 한국어 원문 번역 자료입니다.',
   }),
   commentary: Object.freeze({
     routeRole: 'commentary',
     label: '해설',
     directory: false,
+    hideSourceMarker: false,
     description: '번역의 맥락, 용어, 검증 쟁점과 추가 읽을거리를 정리한 해설입니다.',
   }),
 });
@@ -53,7 +57,7 @@ export function resolveRawArtifactPath({ rootDir, rawDir, artifactPath }) {
 export function sourceUrlForArtifact(markdown, recordedSourceUrl = '') {
   const candidates = [
     String(recordedSourceUrl).trim(),
-    String(markdown).match(/(?:^|\n)(?:출처|Source):\s*(https?:\/\/[^\s]+)/i)?.[1] ?? '',
+    String(markdown).match(/(?:^|\n)(?:원본\s+출처|출처|Source):\s*(https?:\/\/[^\s]+)/i)?.[1] ?? '',
   ];
   for (const candidate of candidates) {
     try {
@@ -75,7 +79,7 @@ export function sourceOriginForArtifact(markdown, fallback = 'https://mbrenndoer
   }
 }
 
-export function normalizeArtifactMarkdown(markdown, { sourceOrigin } = {}) {
+export function normalizeArtifactMarkdown(markdown, { sourceOrigin, hideSourceMarker = false } = {}) {
   let removedTitle = false;
   const origin = String(sourceOrigin || sourceOriginForArtifact(markdown)).replace(/\/$/, '');
   let fence = null;
@@ -97,6 +101,9 @@ export function normalizeArtifactMarkdown(markdown, { sourceOrigin } = {}) {
       }
       if (/^\s*<!--/.test(line)) {
         if (!line.includes('-->')) hiddenComment = true;
+        return [];
+      }
+      if (hideSourceMarker && /^\s*(?:원본\s+출처|출처|Source)\s*:\s*<?https?:\/\/\S+>?\s*$/i.test(line)) {
         return [];
       }
       if (/^#\s+/.test(line)) {

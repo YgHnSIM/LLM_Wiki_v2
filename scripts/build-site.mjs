@@ -295,6 +295,7 @@ for (const document of grouped.sources) {
     const sourceUrl = sourceUrlForArtifact(parsed.content, record.source_url);
     const body = normalizeArtifactMarkdown(parsed.content, {
       sourceOrigin: sourceOriginForArtifact(parsed.content, 'https://mbrenndoerfer.com', sourceUrl),
+      hideSourceMarker: role.hideSourceMarker,
     });
     const reader = {
       id: `${document.id}.${role.routeRole}`,
@@ -665,7 +666,7 @@ function layout({ title, description, current = '', body, pageClass = '', script
     <nav class="footer-meta" aria-label="보조 메뉴">
       <span>최근 문서 갱신 ${escapeHtml(latestUpdate)}</span>
       <a href="${sitePath('/search/')}">전체 검색</a>
-      <a href="${sitePath('/translations/')}">번역본 모아보기</a>
+      <a href="${sitePath('/translations/')}">원문 번역본 모아보기</a>
       <a href="${sitePath('/about/')}">위키 안내</a>
       <a href="${sitePath('/log/')}">변경 기록</a>
       ${externalLink(repositoryUrl, 'GitHub 저장소')}
@@ -791,7 +792,7 @@ function renderCategoryPage(key) {
     <header class="listing-hero">
       <p class="eyebrow">${key === 'sources' ? `원문 노트 ${sourceDocuments.length}개 · 참고 자료 ${referenceDocuments.length}개` : `${list.length}개 문서`}</p>
       <div><h1>${escapeHtml(meta.label)}</h1><span class="listing-count">${list.length}</span></div>
-      ${key === 'sources' && translationReaders.length ? `<a class="translation-directory-link" href="${sitePath('/translations/')}"><span>별도 읽기</span><strong>번역본 ${translationReaders.length}개 모아보기</strong><span aria-hidden="true">→</span></a>` : ''}
+      ${key === 'sources' && translationReaders.length ? `<a class="translation-directory-link" href="${sitePath('/translations/')}"><span>별도 읽기</span><strong>원문 번역본 ${translationReaders.length}개 모아보기</strong><span aria-hidden="true">→</span></a>` : ''}
       <p>${escapeHtml(meta.description)}</p>
     </header>
     <section class="directory-tools" aria-label="목록 필터">
@@ -846,15 +847,15 @@ function renderTranslationsPage() {
   const body = `<main id="main-content" class="listing-main translations-main">
     <header class="listing-hero translations-hero">
       <p class="eyebrow">한국어 보존 자료</p>
-      <div><h1>번역본</h1><span class="listing-count">${translationReaders.length}</span></div>
+      <div><h1>원문 번역본</h1><span class="listing-count">${translationReaders.length}</span></div>
       <p>검증·정정을 반영한 원문 노트와 나란히 읽을 수 있도록, 수집 당시의 한국어 번역 자료를 별도 독서 화면으로 제공합니다.</p>
     </header>
-    <div class="translation-directory-heading"><div><p class="eyebrow">번호순 읽기</p><h2>번역 자료 목록</h2></div><a class="text-link" href="${sitePath('/sources/')}">원문 노트로 돌아가기</a></div>
+    <div class="translation-directory-heading"><div><p class="eyebrow">번호순 읽기</p><h2>원문 번역본 목록</h2></div><a class="text-link" href="${sitePath('/sources/')}">원문 노트로 돌아가기</a></div>
     <ol class="translation-directory">${cards}</ol>
   </main>`;
 
   return layout({
-    title: '번역본',
+    title: '원문 번역본',
     description: 'LLM Wiki 원문 노트와 함께 읽는 한국어 번역 자료 모음',
     current: '/sources/',
     body,
@@ -1196,7 +1197,7 @@ function renderArtifactReader(reader) {
       </div>
     </div>
     <section class="artifact-return" aria-labelledby="artifact-return-heading">
-      <div><p class="eyebrow">검증된 설명</p><h2 id="artifact-return-heading">정정과 근거는 원문 노트에서</h2><p>번역본은 원문의 흐름을 읽기 위한 자료입니다. 역사적 사실, 과장된 계보와 후대 평가는 근거 장부가 있는 공개 노트에서 확인할 수 있습니다.</p></div>
+      <div><p class="eyebrow">검증된 설명</p><h2 id="artifact-return-heading">정정과 근거는 원문 노트에서</h2><p>원문 번역본은 원문의 흐름을 읽기 위한 자료입니다. 역사적 사실, 과장된 계보와 후대 평가는 근거 장부가 있는 공개 노트에서 확인할 수 있습니다.</p></div>
       <a class="button-link" href="${sitePath(document.url)}">원문 노트 읽기 <span aria-hidden="true">→</span></a>
     </section>
   </main>`;
