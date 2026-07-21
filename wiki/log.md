@@ -3042,6 +3042,25 @@ raw 등록 해시:
 - 사이트는 432개 페이지를 빌드해 5,714개 위키 링크와 32,542개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 276개 항목을 포함했다.
 - Joint token 분포, 1/8·7/8 손실 가중, N=512 후보 재순위화와 CLIP scaled cosine은 1차 논문의 직접 사실이다. 최종 결과를 생성 분포·유한 후보 집합·재순위 기준의 결합으로 읽고 N을 탐색 예산으로 분류한 부분은 비교를 통한 합성 해석이므로 `verification: partial`을 유지했다.
 
+## [2026-07-21] ingest | 파운데이션 모델 보고서와 AI 생태계
+
+변경 내용:
+
+- `075_Foundation Models Report Defining a New Paradigm in AI.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 119줄·59개 비공백 block·H1/H2 1/10과 Markdown link target 20개의 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- [[075_파운데이션 모델 보고서와 AI 생태계]]와 [[파운데이션 모델]]을 만들고, 광범위한 data로 대규모 훈련한 model을 여러 downstream task에 적응시키는 정의와 창발·동질화·중간 자산의 생태계를 복원했다.
+- 114명 저자의 Bommasani et al. 보고서 arXiv v3를 evidence 레지스트리에 등록했다. Percy Liang·Rishi Bommasani의 집필 공동 주도와 Drew Hudson의 도표 기여, 2021-08-16 초판과 2022-07-12 v3, capabilities·applications·technology·society의 26개 절을 locator에 맞춰 기록했다.
+- BERT의 전체 미세조정, GPT-3의 문맥 내 conditioning, CLIP의 자연어 class 적응을 서로 다른 경로로 구분했다. 파운데이션 모델은 특정 adaptation algorithm이나 LLM의 동의어가 아니라, 공통 기반이 여러 응용에 재사용되는 역할 범주임을 명시했다.
+- Raw의 최소 과제별 학습이 정의 요건이라는 축약, GPT-4의 2021년 사례 소급, deep learning 자체의 새 발명, 광범위한 지식·추론의 보편적 보장, 달성된 민주화와 연구·정책·투자에 대한 직접 인과를 공개 문서에서 교정했다.
+- 보고서가 inference 환경 영향을 놓쳤다는 raw의 평가는 §5.3과 대조해 바로잡았다. 원 보고서는 training뿐 아니라 반복 inference·deployment energy, grid carbon intensity와 여러 사용에 걸친 training cost 상각을 이미 논의했다.
+- 새 analysis 문서는 만들지 않았다. 파운데이션 모델을 적응 방식이 아니라 기반–적응–배포 관계로 읽는 질문과 2021년의 넓은 emergence를 후대 임계점형 능력 정의와 구분하는 질문은 ingest 배포 뒤 기존 [[사전 학습 지식은 과제에 어떻게 도착하는가]]와 [[손실 곡선과 능력 곡선 사이]]를 보강하는 별도 `content` 작업으로 이어 간다.
+
+검증 결과:
+
+- 번역 스킬 검사는 075 번역·해설 쌍을 `done: true`로 확인했고, source workflow는 두 raw artifact의 원문 URL·역할·SHA-256 일치를 확인했다.
+- 49개 회귀 테스트와 279개 위키 문서 strict lint를 통과했으며 302개 evidence 레코드와 150개 immutable raw artifact를 확인했다.
+- 사이트는 436개 페이지를 빌드해 5,764개 위키 링크와 32,864개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 278개 항목을 포함했다.
+- 공개 source·concept는 Bommasani et al. arXiv v3의 정의·생태계·평가·사회 절과 BERT·GPT-3·CLIP 원 논문의 적응 범위 안에서 검증했다. 파운데이션 모델 용어의 후대 정책·투자 인과, 모든 downstream system의 동일한 결함 전파와 보편적 능력은 별도 근거가 필요한 범위로 남겼다.
+
 ## 관련 항목
 
 - [[index]]

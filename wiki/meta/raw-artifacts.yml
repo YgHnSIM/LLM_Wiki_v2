@@ -1332,3 +1332,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/dalle-text-to-image-generation-transformer
     sha256: 2a439e911bbc6750ab9527e9bbde87c717a41f056023b86c4ec13313d01dd21c
+  - path: "raw/075_Foundation Models Report Defining a New Paradigm in AI.ko.md"
+    role: translation
+    order_prefix: "075"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/foundation-models-report-defining-new-paradigm-ai
+    sha256: 65cb3fb0064a73bbf85844d8744db881a6bcead763c7c27ea2446e0abe97e288
+  - path: "raw/075_Foundation Models Report Defining a New Paradigm in AI.commentary.ko.md"
+    role: commentary
+    order_prefix: "075"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/foundation-models-report-defining-new-paradigm-ai
+    sha256: c3054ad9e34b79830dde3574d636efa929b28e7324e9fdac544dd895a4558169
