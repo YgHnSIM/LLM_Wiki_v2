@@ -1206,3 +1206,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/dense-passage-retrieval-retrieval-augmented-generation-rag
     sha256: 4548ac4d3c14fe06c8e4bf3e7eae76d381965e3f24100b993869e433d9a97215
+  - path: "raw/068_Mixture of Experts Sparse Activation for Scaling Language Models.ko.md"
+    role: translation
+    order_prefix: "068"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/mixture-of-experts-sparse-activation
+    sha256: 637b0a630c86b2e53252c4bf293ac0acdc9a544a1c69932d49fdffe2497c8011
+  - path: "raw/068_Mixture of Experts Sparse Activation for Scaling Language Models.commentary.ko.md"
+    role: commentary
+    order_prefix: "068"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/mixture-of-experts-sparse-activation
+    sha256: ef9ba2e6924d192fe1dd75eeaf32f435cce7e712eda4764fa83bcf59c74c6e79

@@ -98,6 +98,7 @@ related:
 - [[065_신경 언어 모델의 스케일링 법칙]] — WebText2 token loss의 N·D·compute 조건부 power law와 Kaplan식 자원 배분을 복원하고 Chinchilla의 재추정을 구분한 소스 (근거 2개)
 - [[066_GPT-3와 문맥 내 학습]] — 125M–175B 모델군의 zero·one·few-shot 문맥 적응을 복원하고 과제별 성능·오염·창발 서사의 범위를 검증한 소스 (근거 2개)
 - [[067_DPR과 검색 증강 생성]] — BERT dual encoder·hard negative·FAISS의 DPR와 DPR–BART 잠재 문서 주변화의 원 RAG를 분리하고 검색·생성·인용의 실제 경계를 검증한 소스 (근거 2개)
+- [[068_전문가 혼합과 희소 활성 스케일링]] — MoE의 1991·2017년 계보와 GShard top-2·Switch top-1을 분리하고 total capacity·active compute·memory·communication의 경계를 검증한 소스 (근거 5개)
 
 ## 개체
 
@@ -134,7 +135,7 @@ related:
 ## 개념
 
 - [[WaveNet]] — 팽창 인과 합성곱으로 양자화 오디오 표본을 순차 생성하는 원시 파형 자기회귀 모델 (근거 2개)
-- [[Transformer]] — multi-head self-attention과 위치 표현으로 순환 없이 시퀀스 위치를 상호작용시키는 신경망 구조 (근거 6개)
+- [[Transformer]] — multi-head self-attention과 위치 표현으로 순환 없이 시퀀스 위치를 상호작용시키는 신경망 구조 (근거 8개)
 - [[Transformer-XL]] — stop-gradient segment memory와 상대 위치 attention으로 고정 길이 경계를 넘어 과거 표현을 재사용하는 causal Transformer (근거 1개)
 - [[교차 인코더 재순위화]] — 질의와 후보를 공동 부호화해 세밀한 관련성 점수를 내되 first-stage 후보와 후보별 추론 비용에 제약받는 재순위화 방식 (근거 3개)
 - [[인간 피드백 강화학습]] — 인간의 행동·응답 비교로 보상 신호를 학습하고 정책을 선호에 맞춰 최적화하는 방법 계열 (근거 4개)
@@ -146,7 +147,7 @@ related:
 - [[GLUE와 SuperGLUE]] — 여러 영어 NLU 과제·metric·test server·leaderboard를 묶어 broad transfer를 비교하는 평가 suite (근거 3개)
 - [[XLNet·RoBERTa·ALBERT]] — BERT 이후의 objective·training recipe·parameterization 개선을 비용 조건과 함께 비교하는 세 모델 묶음 (근거 3개)
 - [[XLM]] — shared multilingual encoder에서 CLM·MLM과 병렬 문장쌍 TLM을 구분하고 교차 언어 전이를 학습하는 방법군 (근거 1개)
-- [[T5]] — task를 text target으로 통합하고 sentinel span corruption 뒤 과제별 supervised fine-tuning으로 전이하는 encoder–decoder model family (근거 1개)
+- [[T5]] — task를 text target으로 통합하고 sentinel span corruption 뒤 과제별 supervised fine-tuning으로 전이하는 encoder–decoder model family (근거 2개)
 - [[N-gram 모델]] — 앞선 n-1개 단위의 빈도와 조건부 확률로 다음 항목을 예측하고 평활화로 미관측 조합을 다루는 언어 모델 (근거 4개)
 - [[마르코프 가정]] — 다음 항목의 확률을 제한된 최근 문맥으로 근사하는 가정 (근거 3개)
 - [[조건부 확률]] — 문맥이 주어졌을 때 다음 항목이 나타날 확률을 표현하는 수학적 개념 (근거 1개)
@@ -164,8 +165,8 @@ related:
 - [[CBOW]] — 주변 문맥 벡터를 합·평균해 중심 단어를 예측하는 Word2Vec 구조 (근거 2개)
 - [[Skip-gram]] — 중심 단어에서 창 안의 문맥 단어별 학습 쌍을 만드는 Word2Vec 구조 (근거 3개)
 - [[GloVe]] — 말뭉치 전체에 집계한 비영 단어–문맥 계수의 로그를 가중 저랭크 회귀로 근사하는 정적 임베딩 방법 (근거 3개)
-- [[대규모 언어 모델]] — 대규모 텍스트의 자기지도 목표로 문맥 표현을 학습하고 대화형 평가·번역·초기 신경망·언어 구조 문제와 연결되는 현대 언어 모델 (근거 16개)
-- [[언어 모델 스케일링 법칙]] — 모델·데이터·학습 compute와 token loss 사이의 경험식을 병목·관측 범위·compute-optimal 배분 조건과 함께 읽는 개념 (근거 2개)
+- [[대규모 언어 모델]] — 대규모 텍스트의 자기지도 목표로 문맥 표현을 학습하고 대화형 평가·번역·초기 신경망·언어 구조 문제와 연결되는 현대 언어 모델 (근거 19개)
+- [[언어 모델 스케일링 법칙]] — 모델·데이터·학습 compute와 token loss 사이의 경험식을 병목·관측 범위·compute-optimal 배분 조건과 함께 읽는 개념 (근거 4개)
 - [[튜링 테스트]] — 텍스트 대화에서 인간과 기계를 구별할 수 있는지를 묻는 기계 지능 평가 사고실험 (근거 3개)
 - [[모방 게임]] — 튜링 테스트의 원래 설정으로, 대화만으로 인간과 기계를 판별하게 하는 실험 구성 (근거 3개)
 - [[행동주의적 지능 기준|행동 기반 지능 기준]] — 내면 상태보다 관찰 가능한 수행을 평가하되 Skinner식 행동주의와 구분하는 접근 (근거 4개)
@@ -254,6 +255,7 @@ related:
 - [[추출형 질의응답]] — 주어진 문맥의 연속 답 구간을 시작·끝 위치로 선택하고 검색·생성·답 없음 판단과 구분하는 과업 (근거 2개)
 - [[신경 정보 검색]] — 질의·문서 표현이나 상호작용·순위 점수를 신경망으로 학습하며 첫 단계 검색과 재순위화를 구분하는 접근군 (근거 6개)
 - [[검색 증강 생성]] — 외부 passage 검색과 생성을 결합하되 원 DPR–BART 잠재 문서 모형과 후대의 넓은 RAG 용례를 구분하는 방식 (근거 2개)
+- [[전문가 혼합]] — 여러 expert와 token router로 일부 FFN만 조건부 활성화하며 total parameters와 active compute·저장·통신을 구분하는 모델 구조 (근거 4개)
 - [[역전파]] — 계산 그래프를 역순으로 순회해 손실의 매개변수별 그래디언트를 구하는 역모드 미분 절차 (근거 8개)
 - [[다층 퍼셉트론]] — 비선형 은닉층을 통해 입력을 단계적으로 다시 표현하는 순방향 신경망 (근거 6개)
 - [[기울기 소실]] — 깊은 층이나 긴 시간 경로에서 역방향 그래디언트가 지나치게 작아지는 조건적 현상 (근거 6개)

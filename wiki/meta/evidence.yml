@@ -2400,3 +2400,45 @@ sources:
     doi: 10.48550/arXiv.2304.15004
     url: https://arxiv.org/abs/2304.15004
     language: en
+  jacobs-et-al-1991-adaptive-mixtures-experts:
+    title: Adaptive Mixtures of Local Experts
+    authors: [Robert A. Jacobs, Michael I. Jordan, Steven J. Nowlan, Geoffrey E. Hinton]
+    published: 1991
+    source_type: primary
+    kind: journal-article
+    doi: 10.1162/neco.1991.3.1.79
+    url: https://doi.org/10.1162/neco.1991.3.1.79
+    language: en
+  shazeer-et-al-2017-sparsely-gated-moe:
+    title: 'Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer'
+    authors: [Noam Shazeer, Azalia Mirhoseini, Krzysztof Maziarz, Andy Davis, Quoc V. Le, Geoffrey E. Hinton, Jeff Dean]
+    published: 2017
+    source_type: primary
+    kind: conference-paper
+    url: https://openreview.net/forum?id=BkFEbNwIg
+    language: en
+  lepikhin-et-al-2021-gshard:
+    title: 'GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding'
+    authors: [Dmitry Lepikhin, HyoukJoong Lee, Yuanzhong Xu, Dehao Chen, Orhan Firat, Yanping Huang, Maxim Krikun, Noam Shazeer, Zhifeng Chen]
+    published: 2021
+    source_type: primary
+    kind: conference-paper
+    url: https://openreview.net/forum?id=qrwe7XHTmYb
+    language: en
+  fedus-et-al-2022-switch-transformer:
+    title: 'Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity'
+    authors: [William Fedus, Barret Zoph, Noam Shazeer]
+    published: 2022
+    source_type: primary
+    kind: journal-article
+    url: https://www.jmlr.org/papers/v23/21-0998.html
+    language: en
+  chowdhery-et-al-2022-palm:
+    title: 'PaLM: Scaling Language Modeling with Pathways'
+    authors: [Aakanksha Chowdhery, Sharan Narang, Jacob Devlin, Maarten Bosma, Gaurav Mishra, Adam Roberts, Paul Barham, Hyung Won Chung, Charles Sutton, Sebastian Gehrmann, Parker Schuh, Kensen Shi, Sasha Tsvyashchenko, Joshua Maynez, Abhishek Rao, Parker Barnes, Yi Tay, Noam Shazeer, Vinodkumar Prabhakaran, Emily Reif, Nan Du, Ben Hutchinson, Reiner Pope, James Bradbury, Jacob Austin, Michael Isard, Guy Gur-Ari, Pengcheng Yin, Toju Duke, Anselm Levskaya, Sanjay Ghemawat, Sunipa Dev, Henryk Michalewski, Xavier Garcia, Vedant Misra, Kevin Robinson, Liam Fedus, Denny Zhou, Daphne Ippolito, David Luan, Hyeontaek Lim, Barret Zoph, Alexander Spiridonov, Ryan Sepassi, David Dohan, Shivani Agrawal, Mark Omernick, Andrew M. Dai, Thanumalayan Sankaranarayana Pillai, Marie Pellat, Aitor Lewkowycz, Erica Moreira, Rewon Child, Oleksandr Polozov, Katherine Lee, Zongwei Zhou, Xuezhi Wang, Brennan Saeta, Mark Diaz, Orhan Firat, Michele Catasta, Jason Wei, Kathy Meier-Hellstern, Douglas Eck, Jeff Dean, Slav Petrov, Noah Fiedel]
+    published: 2022
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2204.02311
+    url: https://research.google/pubs/palm-scaling-language-modeling-with-pathways/
+    language: en

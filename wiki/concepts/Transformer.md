@@ -21,6 +21,8 @@ artifacts:
   - 'raw/054_The Transformer Attention Is All You Need.commentary.ko.md'
   - 'raw/063_Transformer-XL Extending Transformers to Long Sequences.ko.md'
   - 'raw/063_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md'
+  - 'raw/068_Mixture of Experts Sparse Activation for Scaling Language Models.ko.md'
+  - 'raw/068_Mixture of Experts Sparse Activation for Scaling Language Models.commentary.ko.md'
 evidence:
   - source_id: vaswani-et-al-2017-attention
     locator: 'pp. 5998–6008, 특히 §§3–5, Figure 1, Tables 1–3의 encoder–decoder·attention·위치 인코딩·복잡도·번역 평가'
@@ -40,14 +42,22 @@ evidence:
   - source_id: wiegreffe-pinter-2019-attention-explanation
     locator: 'EMNLP-IJCNLP 2019, pp. 11–20의 설명 정의 비판과 네 가지 진단·검증 제안'
     relation: contextualizes
+  - source_id: lepikhin-et-al-2021-gshard
+    locator: 'ICLR 2021, §§2.1–2.2와 Figure 3의 일부 position-wise FFN을 top-2 expert FFN으로 교체한 Transformer MoE'
+    relation: supplements
+  - source_id: fedus-et-al-2022-switch-transformer
+    locator: 'JMLR 23(120), §§2–3과 Figures 1–2의 공유 attention·희소 Switch FFN·top-1 token routing'
+    relation: supplements
 related:
   - source.054
   - source.063
+  - source.068
   - concept.신경망-기계-번역
   - concept.자기회귀-생성
   - concept.잔차-연결
   - concept.layer-normalization
   - concept.transformer-xl
+  - concept.전문가-혼합
 ---
 # Transformer
 
@@ -90,6 +100,12 @@ self-attention이 모든 위치의 정보를 한 번에 섞는다는 말은 순�
 base 모델은 $d_{model}=512$를 8개 head의 64차원 query·key·value 투영으로 나눠 attention을 병렬 계산했다. head 출력을 이어 붙이고 다시 512차원으로 투영한다. 여러 표현 부분공간에서 관계를 학습할 기회를 주지만, 각 head가 문법·의미 같은 해석 가능한 역할 하나씩을 안정적으로 맡는다는 보장은 없다.
 
 각 층의 feed-forward network는 모든 token에 같은 두 층 MLP를 독립 적용한다. base 모델에서는 512차원을 2048차원으로 넓혀 ReLU를 적용한 뒤 다시 512차원으로 줄였다. attention이 위치 사이 정보를 섞고 MLP가 각 위치의 channel 표현을 변환한다.
+
+### 희소 MoE는 attention이 아니라 일부 FFN을 바꾼다
+
+[[068_전문가 혼합과 희소 활성 스케일링]]의 GShard와 Switch Transformer는 보통 self-attention을 여러 expert로 대체하지 않았다. 일부 위치별 FFN sublayer를 여러 expert FFN과 token router로 바꾸고, GShard는 top-2, Switch는 top-1 expert만 실행했다. Attention·embedding·normalization 같은 공유 경로는 계속 계산된다.
+
+따라서 [[전문가 혼합]]을 Transformer 전체가 여러 독립 모델로 갈라지는 ensemble로 이해하지 않는다. 희소화되는 경로, 공유되는 경로와 layer별 routing을 구분해야 total parameters와 token당 active compute를 비교할 수 있다.
 
 ### 위치 인코딩
 
@@ -156,19 +172,24 @@ Wiegreffe·Pinter는 ‘설명’의 정의와 모델 전체를 고려해야 한
 
 - [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]]
 - [[063_Transformer-XL과 세그먼트 수준 재귀]]
+- [[068_전문가 혼합과 희소 활성 스케일링]]
 - Ashish Vaswani 외, [Attention Is All You Need](https://proceedings.neurips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html), NeurIPS 2017, pp. 5998–6008.
 - Zihang Dai 외, [Transformer-XL: Attentive Language Models beyond a Fixed-Length Context](https://aclanthology.org/P19-1285/), ACL 2019, pp. 2978–2988.
 - Alec Radford 외, [Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf), 2018, §2.
 - Jacob Devlin 외, [BERT](https://aclanthology.org/N19-1423/), NAACL 2019, §3.1.
 - Sarthak Jain·Byron C. Wallace, [Attention is not Explanation](https://aclanthology.org/N19-1357/), NAACL 2019, pp. 3543–3556.
 - Sarah Wiegreffe·Yuval Pinter, [Attention is not not Explanation](https://aclanthology.org/D19-1002/), EMNLP-IJCNLP 2019, pp. 11–20.
+- Dmitry Lepikhin 외, [GShard](https://openreview.net/forum?id=qrwe7XHTmYb), ICLR 2021, §§2.1–2.2.
+- William Fedus·Barret Zoph·Noam Shazeer, [Switch Transformers](https://www.jmlr.org/papers/v23/21-0998.html), *JMLR* 23(120), 2022, §§2–3.
 
 ## 관련 항목
 
 - [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]]
 - [[063_Transformer-XL과 세그먼트 수준 재귀]]
+- [[068_전문가 혼합과 희소 활성 스케일링]]
 - [[신경망 기계 번역]]
 - [[자기회귀 생성]]
 - [[잔차 연결]]
 - [[Layer Normalization]]
 - [[Transformer-XL]]
+- [[전문가 혼합]]

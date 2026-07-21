@@ -24,7 +24,7 @@ related:
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 67개, concept 143개, entity 29개, analysis 19개를 합친 비메타 문서 258개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 68개, concept 144개, entity 29개, analysis 19개를 합친 비메타 문서 260개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -43,7 +43,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 67개 소스의 범위
+## 68개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -112,6 +112,7 @@ related:
 - [[065_신경 언어 모델의 스케일링 법칙]]은 WebText2 자기회귀 token loss의 모델·데이터·compute별 조건부 power law와 Kaplan식 0.73/0.27 배분을 복원하고, downstream 능력 예측·보편 법칙·Chinchilla가 처음 균형 문제를 풀었다는 과장을 교정한다.
 - [[066_GPT-3와 문맥 내 학습]]은 125M–175B 여덟 모델의 zero·one·few-shot 조건을 복원하고, 과제별 성능 차이·산술 exact match·benchmark 오염·후대 창발 용어와 내부 메커니즘의 범위를 검증한다.
 - [[067_DPR과 검색 증강 생성]]은 BERT dual encoder·hard negative·FAISS를 사용한 DPR와 DPR query encoder·BART-large·잠재 문서 주변화를 결합한 원 RAG를 분리하고, 고정 문서 색인·평가 과제·hot-swap·인용 충실성의 실제 경계를 검증한다.
+- [[068_전문가 혼합과 희소 활성 스케일링]]은 1991년 adaptive mixture, 2017년 sparsely-gated layer, GShard의 top-2와 Switch의 top-1을 분리하고, total parameters·active compute·memory·communication 및 expert specialization의 증거 경계를 검증한다.
 
 ## 현재 핵심 주제
 
@@ -160,6 +161,7 @@ related:
 - [[손실 곡선과 능력 곡선 사이]]에서 분리하는 평균 token cross-entropy, downstream exact match·accuracy, 능력 threshold와 metric·표본·관측 scale의 영향
 - [[검색은 근거를 찾고 독해는 답을 찾는다]]에서 분리하는 컬렉션→후보 retrieval recall, 후보→답 EM·F1·faithfulness, 답→행동 기권 calibration과 oracle reader 진단
 - [[검색 증강 생성]]에서 구분하는 원 RAG의 DPR–BART 잠재 문서 주변화, 고정 document encoder·색인과 학습되는 query encoder, 검색 provenance와 claim-level citation의 차이
+- [[전문가 혼합]]에서 구분하는 total parameters·token당 active expert, shared Transformer 경로, top-$k$ routing·capacity·load balancing과 memory·all-to-all communication 비용
 - [[N-gram에서 LLM으로]]에서 비교하는 Katz의 표면 문맥 확률 재분배와 NPLM의 연속 표현 매개변수 공유
 - [[BM25]]의 희소 용어 가중, 문서 내 빈도 포화, 평균 문서 길이 보정과 보정된 관련성 확률이 아닌 순위 점수라는 해석
 - [[스티븐 로버트슨]]·[[캐런 스파크 존스]]·Steve Walker와 Okapi 팀의 서로 다른 기여, BM25와 Dense Passage Retrieval·RAG의 기준선·대체 검색기 관계
@@ -206,6 +208,8 @@ related:
 - [[N-gram에서 LLM으로]]
 - [[066_GPT-3와 문맥 내 학습]]
 - [[067_DPR과 검색 증강 생성]]
+- [[068_전문가 혼합과 희소 활성 스케일링]]
+- [[전문가 혼합]]
 - [[검색 증강 생성]]
 - [[문맥 내 학습]]
 - [[손실 곡선과 능력 곡선 사이]]
@@ -319,7 +323,7 @@ related:
 
 ## 현재 상태
 
-소스 67개, 개념 143개, 개체 29개, 분석 19개와 메타 문서 3개, 총 261개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 233개는 `verified`, 해석적 문서 25개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 280개 외부 근거와 134개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 68개, 개념 144개, 개체 29개, 분석 19개와 메타 문서 3개, 총 263개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 235개는 `verified`, 해석적 문서 25개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 285개 외부 근거와 136개 불변 raw artifact가 레지스트리에 등록돼 있다.
 
 `067`의 DPR·RAG 단일 발명 서사, BM25를 정확 일치로만 보는 대조, 최소 표지 자료·보편 우월·조건 없는 billion-scale 지연 시간, RAG의 GPT-2 생성기·passage 직접 감독·전체 색인 공동 학습, Sequence/Token 주변화와 비용의 혼동, 실시간 최신성·자동 인용·법률·의료·뉴스·다문서 요약의 직접 검증 주장도 공개 문서에서 교정했다. DPR의 SQuAD 예외, 원 RAG의 BART-large와 고정된 2018 Wikipedia 색인, query encoder만 포함한 검색기 학습, 82개 world-leader hot-swap 및 검색 passage와 claim-level citation의 차이를 함께 기록했다.
 

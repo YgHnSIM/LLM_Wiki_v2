@@ -2863,6 +2863,24 @@ raw 등록 해시:
 - 사이트는 402개 페이지를 빌드해 5,240개 위키 링크와 30,075개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 260개 항목을 포함했다.
 - 공개 source·concept와 기존 문서 보강은 DPR·RAG 두 2020년 1차 논문의 직접 구현·평가 범위 안에서 검증했다. 현대의 넓은 RAG pipeline, 실시간 운영, claim-level citation과 도메인별 신뢰성은 별도 근거가 필요한 후속 범위로 남겼다.
 
+## [2026-07-21] ingest | 전문가 혼합과 희소 활성 스케일링
+
+변경 내용:
+
+- `068_Mixture of Experts Sparse Activation for Scaling Language Models.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 58개 본문 블록, H1/H2/H3 1/6/4와 57개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- [[068_전문가 혼합과 희소 활성 스케일링]]과 [[전문가 혼합]]을 만들고, 1991년 adaptive mixture·2017년 sparsely-gated LSTM layer·GShard의 top-2 Transformer MoE·Switch의 top-1 routing을 시기와 구조별로 분리했다. Total parameters, token당 active expert, 공유 경로, FLOPs, memory와 all-to-all communication을 서로 다른 비용 축으로 정리했다.
+- [[Transformer]]에는 attention이 아니라 일부 position-wise FFN을 expert FFN으로 교체하는 경계를, [[대규모 언어 모델]]에는 dense와 sparse parameter 규모 비교 기준을, [[언어 모델 스케일링 법칙]]에는 dense $N$ fit과 sparse total capacity의 차이를 보강했다. [[T5]]에는 원 T5와 그 위에서 실험한 후속 Switch architecture를 분리했다.
+- Jacobs·Shazeer·GShard·Switch의 1차 논문을 대조해 1991년 MoE 계보, 2017년 noisy top-k와 최대 137.7B, GShard 600B·2,048 TPU v3 cores·top-2, Switch-C 1.571T·2,048 experts·top-1과 $\alpha N\sum_i f_iP_i$ 보조 손실을 확인했다. PaLM 원 논문의 `densely activated` 설명으로 raw의 MoE 계보 주장도 반박했다.
+- raw의 2021년 단일 발명, expert를 독립 Transformer로 보는 설명, 쉬운 입력이 더 적은 expert를 쓴다는 서술, GShard와 Switch의 capacity·auxiliary loss 이분, 가장 큰 Switch의 128 experts, 광범위한 domain·reasoning specialization과 인과적 해석 가능성, 중간 자원 조직의 거대 모델 민주화, 입력별 nominal FLOPs 변화와 PaLM의 MoE 채택 주장을 공개 문서에서 교정했다.
+- Kaplan의 dense 규모 축과 sparse MoE의 total/active 규모를 함께 읽을 때 별도 합성 가치가 확인됐다. 068 ingest 배포 뒤 `총 매개변수와 활성 계산량은 같은 축인가`를 별도 `content` 변경으로 작성한다.
+
+검증 결과:
+
+- 번역 스킬 검사는 068 번역·해설 쌍을 `done: true`로 확인했고, source workflow는 두 raw artifact의 원문 URL·역할·SHA-256 일치를 확인했다.
+- 49개 회귀 테스트와 263개 위키 문서 strict lint를 통과했으며 285개 evidence 레코드와 136개 immutable raw artifact를 확인했다.
+- 사이트는 406개 페이지를 빌드해 5,298개 위키 링크와 30,398개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 262개 항목을 포함했다.
+- 공개 source·concept와 기존 문서 보강은 Jacobs 1991, Shazeer 2017, GShard 2021, Switch 2022와 PaLM 2022의 직접 기술·실험 범위 안에서 검증했다. Expert별 안정된 domain ownership, 일반적인 interpretability와 제품 배포 효율은 별도 근거가 필요한 후속 범위로 남겼다.
+
 ## 관련 항목
 
 - [[index]]
