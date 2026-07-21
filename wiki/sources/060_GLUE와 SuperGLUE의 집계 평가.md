@@ -30,8 +30,10 @@ evidence:
     relation: supports
 related:
   - concept.glue-superglue
+  - concept.helm
   - concept.bert
   - source.051
+  - source.079
   - analysis.평가-지표와-모델-유인
   - analysis.튜링-테스트와-llm-평가
 ---
@@ -137,6 +139,8 @@ leaderboard는 model·training recipe 개선을 빠르게 드러냈지만 평가
 
 GLUE가 SQuAD 평가 원칙을 만들었다거나 ImageNet·COCO가 GLUE 방식을 채택했다는 raw 계보는 연대가 거꾸로다. SQuAD는 2016년, ImageNet·COCO도 GLUE보다 앞섰다. GLUE의 기여는 선행 benchmark 관행을 영어 NLU 전이 학습 suite에 효과적으로 결합한 데 있다.
 
+후대 [[079_HELM과 다차원 언어 모델 평가|HELM]]은 이 공통 비교 좌표를 범용 생성 모델에 맞춰 넓혔다. GLUE가 과제별 metric을 aggregate로 압축했다면, HELM은 scenario·adaptation·metric을 분리하고 정확도·보정·강건성·공정성·편향·독성·효율성의 절충을 하나의 보편 순위로 자동 합치지 않았다.
+
 ## 검증과 한계
 
 ### 검증 정정
@@ -165,6 +169,7 @@ GLUE가 SQuAD 평가 원칙을 만들었다거나 ImageNet·COCO가 GLUE 방식�
 ### 다음 문서
 
 - [[GLUE와 SuperGLUE]] — 과제 구성·집계·인간 비교를 개념 지도에서 다시 정리한다.
+- [[079_HELM과 다차원 언어 모델 평가]] — 집계 점수에서 시나리오×메트릭 행렬로 평가 단위가 확장된 방식을 비교한다.
 - [[자동 평가 지표는 무엇을 보상하는가]] — 집계 지표가 연구와 모델 선택에 주는 유인을 더 넓게 비교한다.
 
 ## 출처
@@ -172,12 +177,15 @@ GLUE가 SQuAD 평가 원칙을 만들었다거나 ImageNet·COCO가 GLUE 방식�
 - Alex Wang 외, [GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding](https://aclanthology.org/W18-5446/), BlackboxNLP 2018, pp. 353–355.
 - Nikita Nangia·Samuel R. Bowman, [Human vs. Muppet: A Conservative Estimate of Human Performance on the GLUE Benchmark](https://aclanthology.org/P19-1449/), ACL 2019.
 - Alex Wang 외, [SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems](https://proceedings.neurips.cc/paper/2019/hash/4496bf24afe7fab6f046bf4923da8de6-Abstract.html), NeurIPS 2019.
+- [[079_HELM과 다차원 언어 모델 평가]]
 - 프로젝트 번역·검토 출발 자료: [GLUE and SuperGLUE Standardized Evaluation for Language Understanding](https://mbrenndoerfer.com/writing/glue-superglue-standardized-evaluation-language-understanding)
 - 프로젝트 보존 자료: `raw/059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md`, `raw/059_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md`.
 
 ## 관련 항목
 
 - [[GLUE와 SuperGLUE]]
+- [[HELM]]
+- [[079_HELM과 다차원 언어 모델 평가]]
 - [[BERT]]
 - [[051_SQuAD와 추출형 독해 평가]]
 - [[자동 평가 지표는 무엇을 보상하는가]]

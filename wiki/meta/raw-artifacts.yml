@@ -1404,3 +1404,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/mixture-of-experts-at-scale-sparse-activation-dynamic-routing-efficient-scaling
     sha256: 19fadc80b858feeb86be5daff9aff613facf210af4e0529410e93fb80fc2447f
+  - path: "raw/078_HELM Holistic Evaluation of Language Models Framework.ko.md"
+    role: translation
+    order_prefix: "078"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/helm-holistic-evaluation-language-models-framework
+    sha256: c798c700eaf68a096d2b947f3571ed1d5a6742f55a2e75528d9fc8293465481e
+  - path: "raw/078_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md"
+    role: commentary
+    order_prefix: "078"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/helm-holistic-evaluation-language-models-framework
+    sha256: 5dc84f0962cc0562208b1060626d17428c986edc9e0bea4746ba35f237bf61fb

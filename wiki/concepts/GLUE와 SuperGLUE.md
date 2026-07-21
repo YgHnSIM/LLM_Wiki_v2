@@ -32,6 +32,8 @@ evidence:
     relation: supports
 related:
   - source.060
+  - source.079
+  - concept.helm
   - concept.bert
   - source.051
   - analysis.평가-지표와-모델-유인
@@ -106,7 +108,7 @@ human baseline은 annotator expertise, instruction, adjudication, sample에 조�
 
 ### 포화 이후
 
-SuperGLUE는 GLUE 포화에 대한 직접 대응이었다. 후대 BIG-bench·MMLU·HELM·다언어·domain suite는 더 많은 task와 scenario를 추가했다. 그러나 benchmark를 늘리는 것만으로 측정 validity가 자동 개선되지는 않는다. task construction, contamination audit, prompt·scoring와 deployment 조건을 계속 공개해야 한다.
+SuperGLUE는 GLUE 포화에 대한 직접 대응이었다. 후대 BIG-bench·MMLU·[[HELM]]·다언어·domain suite는 더 많은 task와 scenario를 추가했다. 특히 HELM은 prompt와 few-shot 조건을 adaptation으로 분리하고 정확도 밖의 보정·강건성·공정성·편향·독성·효율성을 병렬로 남겼다. 그러나 benchmark를 늘리거나 평가 열을 늘리는 것만으로 측정 validity가 자동 개선되지는 않는다. Task construction, contamination audit, prompt·scoring와 deployment 조건을 계속 공개해야 한다.
 
 ## 학습 확인
 
@@ -118,12 +120,14 @@ SuperGLUE는 GLUE 포화에 대한 직접 대응이었다. 후대 BIG-bench·MML
 
 ### 다음 문서
 
+- [[079_HELM과 다차원 언어 모델 평가]] — 공통 평가 좌표를 시나리오·적응·다중 메트릭으로 확장한 설계를 살핀다.
 - [[자동 평가 지표는 무엇을 보상하는가]] — 하나의 점수가 모델 개발의 선택과 유인을 어떻게 바꾸는지 비교한다.
 - [[튜링 테스트와 LLM 평가]] — 정답형 benchmark와 상호작용 기반 평가의 차이를 더 넓게 살핀다.
 
 ## 출처
 
 - [[060_GLUE와 SuperGLUE의 집계 평가]]
+- [[079_HELM과 다차원 언어 모델 평가]]
 - Alex Wang 외, [GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding](https://aclanthology.org/W18-5446/), BlackboxNLP 2018.
 - Nikita Nangia·Samuel R. Bowman, [Human vs. Muppet](https://aclanthology.org/P19-1449/), ACL 2019.
 - Alex Wang 외, [SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems](https://proceedings.neurips.cc/paper/2019/hash/4496bf24afe7fab6f046bf4923da8de6-Abstract.html), NeurIPS 2019.
@@ -131,6 +135,8 @@ SuperGLUE는 GLUE 포화에 대한 직접 대응이었다. 후대 BIG-bench·MML
 ## 관련 항목
 
 - [[060_GLUE와 SuperGLUE의 집계 평가]]
+- [[HELM]]
+- [[079_HELM과 다차원 언어 모델 평가]]
 - [[BERT]]
 - [[051_SQuAD와 추출형 독해 평가]]
 - [[자동 평가 지표는 무엇을 보상하는가]]

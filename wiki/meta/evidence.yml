@@ -2586,6 +2586,14 @@ sources:
     doi: 10.48550/arXiv.2108.07258
     url: https://crfm.stanford.edu/report
     language: en
+  liang-et-al-2023-helm:
+    title: Holistic Evaluation of Language Models
+    authors: [Percy Liang, Rishi Bommasani, Tony Lee, Dimitris Tsipras, Dilara Soylu, Michihiro Yasunaga, Yian Zhang, Deepak Narayanan, Yuhuai Wu, Ananya Kumar, Benjamin Newman, Binhang Yuan, Bobby Yan, Ce Zhang, Christian Cosgrove, Christopher D. Manning, Christopher Ré, Diana Acosta-Navas, Drew A. Hudson, Eric Zelikman, Esin Durmus, Faisal Ladhak, Frieda Rong, Hongyu Ren, Huaxiu Yao, Jue Wang, Keshav Santhanam, Laurel Orr, Lucia Zheng, Mert Yuksekgonul, Mirac Suzgun, Nathan Kim, Neel Guha, Niladri Chatterji, Omar Khattab, Peter Henderson, Qian Huang, Ryan Chi, Sang Michael Xie, Shibani Santurkar, Surya Ganguli, Tatsunori Hashimoto, Thomas Icard, Tianyi Zhang, Vishrav Chaudhary, William Wang, Xuechen Li, Yifan Mai, Yuhui Zhang, Yuta Koreeda]
+    published: 2023
+    source_type: primary
+    kind: journal-article
+    url: https://openreview.net/forum?id=iO4LZibEqW
+    language: en
   khattab-zaharia-2020-colbert:
     title: 'ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT'
     authors: [Omar Khattab, Matei Zaharia]
