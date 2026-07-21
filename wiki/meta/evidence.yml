@@ -2881,3 +2881,119 @@ sources:
     kind: official-blog
     url: https://ai.meta.com/blog/large-language-model-llama-meta-ai/
     language: en
+  mosaicml-2023-mpt-7b-model-card:
+    title: MPT-7B
+    authors: [MosaicML NLP Team]
+    published: 2023
+    source_type: primary-release
+    kind: model-card
+    url: https://huggingface.co/mosaicml/mpt-7b/blob/main/README.md
+    language: en
+  mosaicml-2023-mpt-30b-model-card:
+    title: MPT-30B
+    authors: [MosaicML NLP Team]
+    published: 2023
+    source_type: primary-release
+    kind: model-card
+    url: https://huggingface.co/mosaicml/mpt-30b/blob/main/README.md
+    language: en
+  mosaicml-2023-mpt-7b-release:
+    title: 'Introducing MPT-7B: A New Standard for Open-Source, Commercially Usable LLMs'
+    authors: [The Databricks AI Research Team]
+    published: 2023
+    source_type: primary-release
+    kind: official-blog
+    url: https://www.databricks.com/blog/mpt-7b
+    language: en
+  press-et-al-2022-alibi:
+    title: 'Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation'
+    authors: [Ofir Press, Noah A. Smith, Mike Lewis]
+    published: 2022
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2108.12409
+    url: https://arxiv.org/abs/2108.12409
+    language: en
+  tii-2023-falcon-40b-model-card:
+    title: Falcon-40B
+    authors: [Technology Innovation Institute]
+    published: 2023
+    source_type: primary-release
+    kind: model-card
+    url: https://huggingface.co/tiiuae/falcon-40b/blob/main/README.md
+    language: en
+  tii-2023-falcon-7b-model-card:
+    title: Falcon-7B
+    authors: [Technology Innovation Institute]
+    published: 2023
+    source_type: primary-release
+    kind: model-card
+    url: https://huggingface.co/tiiuae/falcon-7b/blob/main/README.md
+    language: en
+  tii-2023-falcon-apache-release:
+    title: "UAE's Falcon 40B is now Royalty Free"
+    authors: [Technology Innovation Institute]
+    published: 2023
+    source_type: primary-release
+    kind: official-news
+    url: https://www.tii.ae/news/uaes-falcon-40b-now-royalty-free
+    language: en
+  tii-2023-falcon-7b-apache-commit:
+    title: Falcon-7B README Apache 2.0 License Update
+    authors: [Technology Innovation Institute]
+    published: 2023
+    source_type: primary-release
+    kind: software-repository
+    url: https://huggingface.co/tiiuae/falcon-7b/commit/21be5530bfb30f627a7035ab7194c92284af59b4
+    language: en
+  penedo-et-al-2023-refinedweb:
+    title: 'The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only'
+    authors: [Guilherme Penedo, Quentin Malartic, Daniel Hesslow, Ruxandra Cojocaru, Alessandro Cappelli, Hamza Alobeidli, Baptiste Pannier, Ebtesam Almazrouei, Julien Launay]
+    published: 2023
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2306.01116
+    url: https://arxiv.org/abs/2306.01116
+    language: en
+  tii-2023-refinedweb-dataset-card:
+    title: Falcon RefinedWeb Dataset Card
+    authors: [Technology Innovation Institute]
+    published: 2023
+    source_type: primary-release
+    kind: dataset-release
+    url: https://huggingface.co/datasets/tiiuae/falcon-refinedweb/blob/main/README.md
+    language: en
+  mistral-ai-2023-mistral-7b-release:
+    title: Mistral 7B
+    authors: [Mistral AI Team]
+    published: 2023
+    source_type: primary-release
+    kind: official-blog
+    url: https://mistral.ai/news/announcing-mistral-7b/
+    language: en
+  mistral-ai-2023-mistral-7b-config:
+    title: Mistral-7B-v0.1 config.json
+    authors: [Mistral AI]
+    published: 2023
+    source_type: primary-release
+    kind: software-repository
+    url: https://huggingface.co/mistralai/Mistral-7B-v0.1/blob/main/config.json
+    language: en
+  jiang-et-al-2023-mistral-7b:
+    title: Mistral 7B
+    authors: [Albert Q. Jiang, Alexandre Sablayrolles, Arthur Mensch, Chris Bamford, Devendra Singh Chaplot, Diego de las Casas, Florian Bressand, Gianna Lengyel, Guillaume Lample, Lucile Saulnier, Lélio Renard Lavaud, Marie-Anne Lachaux, Pierre Stock, Teven Le Scao, Thibaut Lavril, Thomas Wang, Timothée Lacroix, William El Sayed]
+    published: 2023
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2310.06825
+    url: https://arxiv.org/abs/2310.06825
+    language: en
+  ainslie-et-al-2023-gqa:
+    title: 'GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints'
+    authors: [Joshua Ainslie, James Lee-Thorp, Michiel de Jong, Yury Zemlyanskiy, Federico Lebron, Sumit Sanghai]
+    published: 2023
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/2023.emnlp-main.298
+    url: https://aclanthology.org/2023.emnlp-main.298/
+    language: en

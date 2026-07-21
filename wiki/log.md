@@ -3626,6 +3626,26 @@ raw 등록 해시:
 - RAIL의 use restriction과 LLaMA 1의 신청 승인형 비상업 조건을 `open/closed` 한 단어로 순위화하지 않는다. 법적 접근과 실제 실행 능력, 독립 검증 가치와 exact retraining은 각각 다른 성취다.
 - 전체 검증은 96개 회귀 테스트와 307개 Markdown strict lint를 통과해 337개 evidence와 178개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 591개 HTML을 만들고 6,736개 wiki link를 모두 해소했다.
 
+## [2026-07-22] ingest | 공개 가중치 LLM 파동의 서로 다른 공개 범위
+
+변경 내용:
+
+- 공식 090 `Open LLM Wave: The Proliferation of High-Quality Open-Source Language Models`를 원문 구조와 link 순서에 맞춰 새로 번역하고 12절 해설을 작성했다. 번역은 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않는다.
+- 검증된 번역·해설을 raw 두 파일로 등록했다. 번역 SHA-256은 `86c4a496926279d69513bb7bce5c51635f63101ad6c32f291d967f53c7e21994`, 해설은 `fc4efc045e91cfa51a8366d3f49e67e5aa84cac5988848dce06b3054dfd49fe2`다. 기존 raw artifact는 다시 쓰지 않았다.
+- [[090_공개 가중치 LLM 파동과 서로 다른 공개 범위]]를 만들고 MPT-7B·30B, Falcon-7B·40B와 Mistral 7B를 release chronology, weight·code·data·license·compute, architecture와 benchmark 조건의 별도 장부로 비교했다. 이름을 기계적으로 늘리지 않고 별도 concept는 만들지 않았다.
+- MPT·Falcon model card와 공식 발표·license commit, ALiBi·RefinedWeb·GQA·Mistral 7B 논문, RefinedWeb dataset card와 Mistral 설정 파일 등 14개 1차 자료를 evidence로 등록했다. [[index]]와 [[overview]]는 source 90개·concept 164개·비메타 305개, 공식 범위 001–046·048–090·103과 다음 공식 091 QLoRA 기준으로 갱신했다.
+- 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 176개, raw Markdown 181개, 위키 Markdown 308개에서 UI 단락 0개를 확인했다. 번역 정규화 검사는 표준 `원본 출처:` 88개와 변경 필요 0개를 확인했다.
+
+검증 정정과 남은 한계:
+
+- MPT·Falcon·Mistral을 같은 의미의 `open-source`로 묶지 않았다. MPT base와 Instruct·Chat의 서로 다른 license, Falcon의 2023-05-31 Apache 2.0 전환, Mistral의 Apache weight·reference code와 공개되지 않은 training corpus·token·compute를 artifact와 version별로 분리했다.
+- Falcon-40B 학습은 2022년 12월 시작됐고 MPT도 LLaMA 1 발표 이전부터 개발 중이었다. 출시 연표를 LLaMA가 모든 개발을 촉발했다는 단선 인과나 조직 간 coordination의 증거로 바꾸지 않았다.
+- RefinedWeb의 약 5T-token 처리 pool·약 600B-token 공개 extract와 books·conversation·code 등이 섞인 production Falcon 학습 mixture를 구분했다. Filtering, 고유 pool 규모, sampling mixture와 누적 exposure token을 `quality over quantity` 한 문장으로 합치지 않는다.
+- ALiBi의 fixed distance penalty, Falcon의 MQA, Mistral의 GQA·4,096-token sliding window와 FlashAttention kernel을 서로 다른 병목의 기법으로 분리했다. Mistral의 최대 position 32,768, rolling-cache 실험과 각 layer의 직접 window를 같은 dense 32K attention으로 쓰지 않았다.
+- Mistral의 Llama 계열 비교는 대부분 항목에서 우세했지만 NaturalQuestions 28.8 대 29.0이라는 반례가 있다. 이 표를 proprietary frontier parity·multilingual 성능·consumer hardware 접근성이나 광범위한 산업 채택의 근거로 확대하지 않았다.
+- `source:ready -- 090`은 96개 회귀 테스트와 308개 Markdown strict lint를 통과해 351개 evidence와 180개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 594개 HTML을 만들고 6,760개 wiki link를 모두 해소했다.
+- 다음 순차 입력은 공식 091 `QLoRA: Efficient Fine-Tuning of Quantized Language Models`다.
+
 ## 관련 항목
 
 - [[index]]

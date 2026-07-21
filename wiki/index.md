@@ -119,6 +119,7 @@ related:
 - [[087_Whisper와 대규모 약한 감독 음성 인식]] — 68만 시간 약한 감독·audio-conditioned Transformer·다중 과제 token을 복원하고 자동 전사 자료·번역 방향·SOTA·언어 수·사람 수준·공개 범위 과장을 교정한 소스 (근거 4개)
 - [[088_FlashAttention과 IO 인지형 정확 어텐션]] — dense softmax attention은 유지하면서 HBM–SRAM 타일링·온라인 softmax·선택적 재계산으로 중간 저장과 메모리 이동을 줄인 I/O 인지형 실행을 검증한 소스 (근거 3개)
 - [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]] — 7B–65B 제품군의 추론 예산 지향 장기 학습과 data·benchmark·hardware 조건을 복원하고 open-source·상업 이용·보편 20:1·후속 세대 혼동을 교정한 소스 (근거 2개)
+- [[090_공개 가중치 LLM 파동과 서로 다른 공개 범위]] — MPT·Falcon·Mistral의 weight·code·data·license·compute 공개 범위를 분리하고 단선 계보·proprietary parity·재현성 과장을 교정한 소스 (근거 14개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 
 ## 개체

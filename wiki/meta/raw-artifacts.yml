@@ -1602,3 +1602,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/llama-meta-open-foundation-models-democratized-language-ai-research
     sha256: c7b5f8896fee8c82db023d8bea57bc071e3cc8483d1edb2f4aa8945dd483ba8d
+  - path: "raw/090_Open LLM Wave The Proliferation of High-Quality Open-Source Language Models.ko.md"
+    role: translation
+    order_prefix: "090"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/open-llm-wave-proliferation-high-quality-open-source-language-models
+    sha256: 86c4a496926279d69513bb7bce5c51635f63101ad6c32f291d967f53c7e21994
+  - path: "raw/090_Open LLM Wave The Proliferation of High-Quality Open-Source Language Models.commentary.ko.md"
+    role: commentary
+    order_prefix: "090"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/open-llm-wave-proliferation-high-quality-open-source-language-models
+    sha256: fc4efc045e91cfa51a8366d3f49e67e5aa84cac5988848dce06b3054dfd49fe2
