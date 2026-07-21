@@ -176,7 +176,7 @@ related:
 - [[지시 미세조정]]에서 구분하는 여러 과제의 지시–출력 supervision, 평가 군집 보류, 고정된 가중치의 문맥 내 학습 및 선호 기반 RLHF와의 경계
 - [[인간 피드백 강화학습]]에서 구분하는 평가자 시연 SFT, 응답 순위에서 학습한 보상 모델, SFT 정책 기준 KL과 PPO-ptx 사전 학습 혼합 및 선호 대표성의 경계
 - [[손실 곡선과 능력 곡선 사이]]에서 분리하는 2021년의 암묵적으로 유도된 행동이라는 넓은 창발, 2022년의 규모별 emergent ability, 평균 token cross-entropy·task score·능력 threshold와 metric·표본·관측 scale
-- [[검색은 근거를 찾고 독해는 답을 찾는다]]에서 분리하는 컬렉션→후보 retrieval recall, 후보→답 EM·F1·faithfulness, 답→행동 기권 calibration과 oracle reader 진단
+- [[검색은 근거를 찾고 독해는 답을 찾는다]]에서 분리하는 단일 벡터·후기 상호작용·교차 인코더의 후보 생성/정밀 점수화 경계, retrieval recall, 답 EM·F1·faithfulness와 기권 calibration
 - [[검색 증강 생성]]에서 구분하는 원 RAG의 DPR–BART 잠재 문서 주변화, 고정 document encoder·색인과 학습되는 query encoder, 검색 provenance와 claim-level citation의 차이
 - [[전문가 혼합]]에서 구분하는 total parameters·token당 active expert, shared Transformer 경로, top-$k$ routing·capacity·load balancing과 memory·all-to-all communication 비용
 - [[Mixtral 8x7B]]에서 구분하는 46.7B total·12.9B active parameters, 8개 중 top-2, Apache 2.0 공개 가중치와 topic expert가 아닌 routing locality

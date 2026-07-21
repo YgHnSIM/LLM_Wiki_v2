@@ -3133,6 +3133,23 @@ raw 등록 해시:
 - 사이트는 443개 페이지를 빌드해 5,867개 위키 링크와 33,424개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 281개 항목을 포함했다.
 - 공개 source·concept의 핵심 수식·표 수치·연도·소속·색인 크기·후속 응용 범위는 네 1차 논문과 대조했다. MaxSim 정렬의 인과적 설명 가능성, 광범위한 production 표준화, 장문·다언어·정확 문자열 질의 일반화는 입증되지 않은 범위로 남겼다.
 
+## [2026-07-21] content | 검색 상호작용 시점과 후보 경계
+
+변경 내용:
+
+- 새 analysis를 만들지 않고 기존 [[검색은 근거를 찾고 독해는 답을 찾는다]]를 보강했다. 072의 질문은 이 문서가 이미 다루던 첫 단계 후보 누락·재순위화·reader 오류 분해를 상호작용 시점까지 확장하므로 별도 문서를 만들면 비교축이 중복된다.
+- DPR식 단일 벡터, ColBERT 후기 상호작용, BERT 교차 인코더를 문서 사전 계산, full-corpus 후보 생성, 정밀 점수화, 최초의 복구 불가 누락 위치로 비교했다. 모델 이름의 고정 품질 서열이 아니라 문서 압축·상호작용·후보 범위·비용을 배치하는 서로 다른 설계로 정리했다.
+- ColBERT의 질의 벡터별 IVFPQ 후보 문서 합집합과 후보별 정확 MaxSim을 분리했다. 후기 상호작용은 후보 경계를 없애는 것이 아니라 retriever 내부로 옮기며, ANN 합집합에서 빠진 passage는 정확 MaxSim으로 복구할 수 없음을 명시했다.
+- 평가 장부에는 ANN 후보 합집합의 gold-support recall, MaxSim 뒤 MRR·nDCG, 질의 지연, 색인 크기를 분리했다. MS MARCO end-to-end의 ColBERT 458ms와 BM25 62ms를 함께 적어 품질 향상을 보편적 속도 향상으로 읽지 않았다.
+- Token-level MaxSim alignment는 순위 점수 기여를 보여 주지만 exact 문자열·phrase 순서·주장 지지·citation 충실성을 보장하지 않는다고 구분했다. 검색기 내부의 세밀한 정렬과 reader·generator의 답 선택·provenance는 별도 평가 경계로 남겼다.
+- Analysis에 072 raw artifact 쌍과 `khattab-zaharia-2020-colbert` evidence, [[072_ColBERT와 다중 벡터 검색]], [[다중 벡터 검색]] 관계를 연결하고 [[index]]와 [[overview]]의 설명·근거 수를 갱신했다.
+
+검증 결과:
+
+- 49개 회귀 테스트와 282개 위키 문서 strict lint를 통과했으며 306개 evidence 레코드와 154개 immutable raw artifact를 확인했다.
+- 사이트는 443개 페이지를 빌드해 5,878개 위키 링크와 33,439개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 281개 항목을 포함했다.
+- ColBERT의 독립 부호화·IVFPQ 후보 생성·정확 MaxSim과 MS MARCO 수치는 Khattab·Zaharia 2020의 직접 사실이다. 세 구조를 상호작용 시점과 복구 불가 후보 경계로 묶은 부분은 비교를 통한 합성 해석이므로 `verification: partial`을 유지했다.
+
 ## 관련 항목
 
 - [[index]]
