@@ -24,14 +24,14 @@ related:
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 64개, concept 140개, entity 29개, analysis 18개를 합친 비메타 문서 251개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 65개, concept 141개, entity 29개, analysis 18개를 합친 비메타 문서 253개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
 | 언어 모델은 어떻게 발전했나 | [[001_섀넌의 N-gram 모델]] | [[N-gram 모델]] → [[019_Katz 백오프와 희소 데이터 확률 추정]] → [[035_신경 확률 언어 모형과 분산 단어 표현]] → [[자기회귀 생성]] | [[N-gram에서 LLM으로]] |
 | 기계의 언어 행동을 어떻게 평가하나 | [[002_튜링 테스트]] | [[033_BLEU와 기계 번역 자동 평가]] → [[050_SQuAD와 추출형 독해 평가]] → [[059_GLUE와 SuperGLUE의 집계 평가]] | [[튜링 테스트와 LLM 평가]] |
 | 규칙에서 학습으로 무엇이 바뀌었나 | [[003_Georgetown-IBM 기계 번역 시연]] | [[012_상징 규칙에서 통계 학습으로]] → [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[규칙 기반 AI에서 데이터 기반 학습으로]] |
-| 현대 Transformer 계열은 어디서 왔나 | [[018_역전파와 다층 신경망 학습]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]] → [[063_Transformer-XL과 세그먼트 수준 재귀]] → [[060_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]] | [[062_T5와 Text-to-Text 통합 프레임워크]] |
+| 현대 Transformer 계열은 어디서 왔나 | [[018_역전파와 다층 신경망 학습]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[054_Transformer와 자기어텐션 기반 시퀀스 모델링]] → [[063_Transformer-XL과 세그먼트 수준 재귀]] → [[060_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]] | [[065_신경 언어 모델의 스케일링 법칙]] |
 | 한 언어의 지식은 다른 언어로 어떻게 옮겨지나 | [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[061_XLM과 교차 언어 사전 학습]] → [[XLM]] | [[같은 병렬 문장은 무엇을 학습시키는가]] |
 | 검색과 외부 지식은 어떻게 연결되나 | [[010_벡터 공간 모델과 TF-IDF]] | [[024_BM25와 확률적 정보 검색]] → [[039_Freebase와 협업형 지식 그래프]] → [[051_신경 정보 검색과 의미 대응]] → [[064_BERT 기반 passage 재순위화]] | [[검색은 근거를 찾고 독해는 답을 찾는다]] |
 
@@ -43,7 +43,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 64개 소스의 범위
+## 65개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -109,6 +109,7 @@ related:
 - [[062_T5와 Text-to-Text 통합 프레임워크]]는 [[T5]]의 공통 text input/output, sentinel span corruption, C4와 task별 fine-tuning을 복원하고, metric·checkpoint·instruction·번역·QA·계산량·직접 후속 계보의 과장을 교정한다.
 - [[063_Transformer-XL과 세그먼트 수준 재귀]]는 [[Transformer-XL]]의 stop-gradient memory와 layer-shift recurrence, 상대 위치 attention을 복원하고, memory 길이·dependency·dense attention 비용과 조건부 RECL·평가 속도 수치를 구분한다.
 - [[064_BERT 기반 passage 재순위화]]는 BM25 상위 후보를 BERT 결합 self-attention과 `[CLS]` 분류 점수로 다시 매기는 구조를 복원하고, 후보 recall·512 WordPiece·후보별 계산 비용과 Google 공개 범위를 구분한다.
+- [[065_신경 언어 모델의 스케일링 법칙]]은 WebText2 자기회귀 token loss의 모델·데이터·compute별 조건부 power law와 Kaplan식 0.73/0.27 배분을 복원하고, downstream 능력 예측·보편 법칙·Chinchilla가 처음 균형 문제를 풀었다는 과장을 교정한다.
 
 ## 현재 핵심 주제
 
@@ -152,6 +153,7 @@ related:
 - [[추출형 질의응답]]의 시작·끝 구간 선택, 검색·생성 단계와의 경계, EM·토큰 F1 및 SQuAD 2.0의 기권 판단
 - [[신경 정보 검색]]의 질의·문서 독립 표현과 token interaction, 클릭·음성 표본의 편향, 첫 단계 검색·재순위화 및 sparse·dense 상보성
 - [[교차 인코더 재순위화]]에서 구분하는 질의–후보 공동 부호화, `[CLS]` relevance logit, first-stage 누락 복구 불가와 후보별 추론 비용
+- [[언어 모델 스케일링 법칙]]에서 함께 확인하는 token loss, N·D·compute 병목, 관측 범위 밖 외삽과 Kaplan·Chinchilla compute-optimal 배분의 차이
 - [[검색은 근거를 찾고 독해는 답을 찾는다]]에서 분리하는 컬렉션→후보 retrieval recall, 후보→답 EM·F1·faithfulness, 답→행동 기권 calibration과 oracle reader 진단
 - [[N-gram에서 LLM으로]]에서 비교하는 Katz의 표면 문맥 확률 재분배와 NPLM의 연속 표현 매개변수 공유
 - [[BM25]]의 희소 용어 가중, 문서 내 빈도 포화, 평균 문서 길이 보정과 보정된 관련성 확률이 아닌 순위 점수라는 해석
@@ -307,7 +309,9 @@ related:
 
 ## 현재 상태
 
-소스 64개, 개념 140개, 개체 29개, 분석 18개와 메타 문서 3개, 총 254개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 227개는 `verified`, 해석적 문서 24개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 275개 외부 근거와 128개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 65개, 개념 141개, 개체 29개, 분석 18개와 메타 문서 3개, 총 256개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 229개는 `verified`, 해석적 문서 24개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 277개 외부 근거와 130개 불변 raw artifact가 레지스트리에 등록돼 있다.
+
+`065`의 capability 사전 예측, 768 thousand라는 최솟값, architecture·dataset 독립의 근본 법칙, QA·독해 downstream 검증, diminishing returns 부정, Kaplan의 fixed-compute 배분 누락, Chinchilla가 처음 model–data 균형을 다뤘다는 설명, GPT-3·PaLM·GPT-4 규모의 직접 인과와 광범위한 조직 채택·비용 주장도 공개 문서에서 교정했다.
 
 `064`의 초기 neural IR을 dual encoder 하나로 축약한 역사, encoder–decoder cross-attention과 BERT 결합 self-attention의 혼동, attention weight와 `[CLS]` 분류 점수의 동일시, 대표 학습을 pairwise·listwise로 묶은 설명, BERT가 전체 컬렉션 first-stage retrieval과 자연 길이 장문을 직접 처리한다는 주장, 조건 없는 100–1,000개 후보·광범위한 산업 배포·Google 내부 구조·ColBERT 계보도 공개 문서에서 교정했다.
 

@@ -1152,3 +1152,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/bert-information-retrieval-transformer-ranking-semantic-search
     sha256: c61274340eec160a7f66926453f1188e073cc037bf98ff66bdccb7da04e41f69
+  - path: "raw/065_Scaling Laws for Neural Language Models Predicting Performance from Scale.ko.md"
+    role: translation
+    order_prefix: "065"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/scaling-laws-neural-language-models-power-law-predictions
+    sha256: 2ceec3472d89817592f21e956103ed1f6c19183aecee63efa2b4bd09c63f5d40
+  - path: "raw/065_Scaling Laws for Neural Language Models Predicting Performance from Scale.commentary.ko.md"
+    role: commentary
+    order_prefix: "065"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/scaling-laws-neural-language-models-power-law-predictions
+    sha256: 759ce51fb834786c629774b76e7ba60bc331404c5d8b56012b9d9c0d87c62117

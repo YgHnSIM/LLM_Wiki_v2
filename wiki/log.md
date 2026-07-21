@@ -2792,6 +2792,24 @@ raw 등록 해시:
 - 사이트는 389개 페이지를 빌드해 5,042개 위키 링크와 28,979개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 253개 항목을 포함했다.
 - raw 설명 자료는 원 논문과 공식 제품 공지보다 역사·방법·배포 범위를 넓혔으므로 보존 artifact로만 남겼고, 공개 source·concept·analysis의 핵심 주장은 BERT·Nogueira–Cho·CEDR·Google 2019 자료 범위 안에서 검증했다.
 
+## [2026-07-21] ingest | 신경 언어 모델의 스케일링 법칙
+
+변경 내용:
+
+- `065_Scaling Laws for Neural Language Models Predicting Performance from Scale.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 검증된 쌍을 새 immutable raw artifact로 보존하고 원문 URL과 SHA-256을 `raw-artifacts.yml`에 등록했다.
+- [[065_신경 언어 모델의 스케일링 법칙]]과 [[언어 모델 스케일링 법칙]]을 만들고, WebText2 decoder-only Transformer의 token cross-entropy가 비임베딩 매개변수 $N$, 데이터 token $D$, 최적 배분 compute $C_{min}$과 이루는 조건부 power law를 정리했다.
+- [[대규모 언어 모델]]에는 model·data·compute 공동 병목을, [[Perplexity]]에는 token loss와 downstream 능력의 평가 경계를, [[N-gram에서 LLM으로]]에는 조건부 예측 과업의 연속성과 현대 규모 실험의 차이를 보강했다. [[035_신경 확률 언어 모형과 분산 단어 표현]]의 기존 scaling-law 경계도 새 source·concept로 연결했다.
+- Kaplan 등의 원 논문을 대조해 768–1.5B non-embedding parameters, 22M–23B tokens, $\alpha_N\approx0.076$·$\alpha_D\approx0.095$·$\alpha_C^{min}\approx0.050$, fixed-compute의 $N_{opt}\propto C^{0.73}$·$D_{opt}\propto C^{0.27}$을 확인했다.
+- Hoffmann 등의 Chinchilla 연구는 빈 문제를 처음 푼 작업이 아니라 Kaplan의 compute 배분을 model·token 각각 약 $C^{0.5}$로 재추정한 근거로 사용했다. 066 GPT-3가 바로 다음 소스이므로 GPT-3 규모·in-context 능력과 loss scaling의 관계는 그 1차 자료까지 처리한 뒤 의미 기반 analysis 필요성을 판단한다.
+- raw의 capability 사전 예측, 768 thousand라는 최솟값, architecture·dataset 독립의 근본 법칙, QA·독해 downstream 검증, diminishing returns 부정, Kaplan의 fixed-compute 배분 누락, Chinchilla가 처음 균형 문제를 풀었다는 설명, GPT-3·PaLM·GPT-4의 직접 인과와 조직 채택·비용 주장을 공개 문서에서 교정했다.
+
+검증 결과:
+
+- 번역 스킬 검사는 065 번역·해설 쌍을 `valid_pairs: 1`로 확인했고, 별도 구조 대조는 원문 60개 본문 블록·6개 H2와 60개 Markdown link URL 순서를 보존했음을 확인했다. source workflow는 두 raw artifact의 원문 URL·역할·해시 일치를 확인했다.
+- 49개 회귀 테스트와 256개 위키 문서 strict lint를 통과했으며 277개 evidence 레코드와 130개 immutable raw artifact를 확인했다.
+- 사이트는 393개 페이지를 빌드해 5,099개 위키 링크와 29,288개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 255개 항목을 포함했다.
+- 공개 source·concept의 식·지수·범위는 Kaplan 2020과 Hoffmann 2022의 1차 자료로 검증했으며, 관측 범위 밖 외삽과 loss 밖의 능력·안전성은 별도 평가가 필요한 한계로 남겼다.
+
 ## 관련 항목
 
 - [[index]]
