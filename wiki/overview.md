@@ -129,7 +129,7 @@ related:
 - [[N-gram 모델]], [[조건부 확률]], [[데이터 희소성]], [[Smoothing]], [[Perplexity]]
 - [[019_Katz 백오프와 희소 데이터 확률 추정|Katz 백오프]]의 빈도별 할인, 미관측 사건에만 적용하는 α 정규화, 보간법과의 구분
 - [[최고 경로와 기대 통계, 백오프]]에서 구분하는 Viterbi `argmax`, 순방향 경로합, Baum–Welch·IBM EM의 사후 기대 계수, Katz의 미관측 확률 재분배
-- [[확률, 마진, 순위 점수]]에서 구분하는 생성·조건부 확률의 정규화 범위, SVM 결정값, BM25 순위 점수와 경험적 보정의 차이
+- [[확률, 마진, 순위 점수]]에서 구분하는 생성·조건부 확률의 정규화 범위, SVM 결정값, BM25·CLIP 계열 순위 점수, DALL·E의 후보 생성 분포와 512개 후보 재순위화 및 경험적 보정의 차이
 - [[튜링 테스트]], [[행동주의적 지능 기준|행동 기반 지능 기준]], [[중국어 방 논증]], [[강한 AI]]
 - 약 250개 어휘와 6개 연산으로 수행한 초기 [[기계 번역]] 시연과 [[지식 공학 병목]]
 - [[통계적 기계 번역]]의 언어 모델·번역 모델 분해, 잠재 단어 정렬과 EM, IBM Models 1–5, 구 기반 SMT와 [[신경망 기계 번역]]의 경계
@@ -359,6 +359,8 @@ related:
 소스 74개, 개념 150개, 개체 29개, 분석 21개와 메타 문서 3개, 총 277개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 247개는 `verified`, 해석적 문서 27개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 301개 외부 근거와 148개 불변 raw artifact가 레지스트리에 등록돼 있다.
 
 `074`의 2021년 제품·전체 weight 공개, 텍스트 encoder 뒤 이미지 decoder, 8,192개 image token, 특정 조합의 훈련 중 완전 미노출, attention이 만든 인간 수준 구성 이해·창의성, 광범위한 실제 직업 활용, FID·IS 표준화와 모든 후속 이미지 모델의 공통 architecture 주장을 공개 문서에서 교정했다. DALL·E 1은 8,192개 범주의 시각 어휘에서 1,024개 image token을 만들고 최대 256개 text token과 공동 분포를 학습한 12B·64층 decoder-only sparse Transformer였다. 대표 비교는 512개 후보를 별도 대조 모델로 재순위화했으며, MS-COCO 사람 비교에서는 강했지만 CUB FID는 선행 최고 방법보다 거의 40점 나빴다. 전체 12B 생성 모델은 공개되지 않았고 dVAE만 공개됐다.
+
+[[확률, 마진, 순위 점수]]에는 DALL·E의 다음 image token 조건부분포와 CLIP 계열 scaled cosine 재순위 점수를 추가했다. 전자는 매 위치 8,192개 범주에서 정규화돼 후보 풀을 표본화하고, 후자는 이미 생성된 512개 후보 안의 순서를 정한다. 1/8·7/8은 modality 확률이 아니라 손실 가중치이고, 512는 신뢰도가 아니라 후보 탐색 예산이라는 경계를 기록했다.
 
 [[데이터 품질과 분포 다양성은 같은 축인가]]는 WebText의 Reddit 승인 proxy, C4의 heuristic filter와 domain-aligned corpus 비교, GPT-3의 curated-similarity filter·source weighting, The Pile의 22-component mixture와 40GB 통제 실험을 함께 읽는다. 품질은 형식·중복·출처 proxy·과제 적합성·사실·안전·권리의 벡터이고, 다양성은 domain support와 sampling probability의 설계이므로 한 순위로 합치지 않는다. T5 Table 8과 Pile Table 3의 과제별 순위 변화를 직접 근거로 두되, filter·composition·weight의 단독 인과는 입증되지 않은 범위로 남겼다.
 
