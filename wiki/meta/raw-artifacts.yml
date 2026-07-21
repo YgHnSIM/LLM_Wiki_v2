@@ -1566,3 +1566,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/whisper-large-scale-multilingual-speech-recognition-with-transformer-architecture
     sha256: 33c0d53dcbe95ccbf65a3063b35c57c240e60ab580e80cc62386194ffa68f9c3
+  - path: "raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md"
+    role: translation
+    order_prefix: "088"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/flashattention-io-aware-exact-attention-long-context-language-models
+    sha256: 4b8c489bb32b228af4acbdd7f1954863f32aa8955d9f7e7eb4051e7a0023b26c
+  - path: "raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md"
+    role: commentary
+    order_prefix: "088"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/flashattention-io-aware-exact-attention-long-context-language-models
+    sha256: 57e21e5977c488e26bc14dc238816c6d4857278eea0c6ff525fe34eb6acfee01

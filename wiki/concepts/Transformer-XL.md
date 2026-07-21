@@ -13,19 +13,26 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-21'
-updated: '2026-07-21'
+updated: '2026-07-22'
 lifecycle: active
 verification: verified
 artifacts:
   - 'raw/064_Transformer-XL Extending Transformers to Long Sequences.ko.md'
   - 'raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md'
+  - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md'
+  - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md'
 evidence:
   - source_id: dai-et-al-2019-transformer-xl
     locator: 'pp. 2980–2986, 특히 §§3.2–3.3와 Figures 1–2의 state reuse·stop-gradient·layer shift·relative positional attention, §§4.2–4.5와 Tables 6–9의 ablation·RECL·평가 속도 조건'
     relation: supports
+  - source_id: dao-et-al-2022-flashattention
+    locator: '§§2.2–3.2와 Algorithms 0–1의 동일 dense attention을 위한 HBM–SRAM 타일링·온라인 softmax·추가 메모리와 이차 산술량의 구분'
+    relation: contextualizes
 related:
   - source.064
+  - source.088
   - concept.transformer
+  - concept.flashattention
   - concept.자기회귀-생성
   - concept.xlnet-roberta-albert
   - analysis.훈련-병렬성과-생성-순차성은-다른-축이다
@@ -80,6 +87,14 @@ Transformer-XL은 고정 길이 세그먼트로 언어 모델을 훈련하되 �
 
 논문의 최대 1,874배는 한 GPU에서 attention 길이 3,800인 per-token 평가와 특정 vanilla Transformer 재계산 baseline 사이의 값이다. 이 수치는 훈련, batch 크기, hardware와 serving 방식이 달라져도 유지되는 상수가 아니다.
 
+### 긴 문맥 병목을 푸는 서로 다른 층위
+
+Transformer-XL과 [[FlashAttention]]은 모두 더 긴 문맥을 실용적으로 다루지만 바꾸는 층위가 다르다. Transformer-XL은 이전 segment의 hidden state를 stop-gradient memory로 재사용하고 상대 위치 attention을 도입한 **model architecture**다. FlashAttention은 같은 dense softmax attention을 HBM–SRAM tile schedule과 backward 재계산으로 실행하는 **algorithm·kernel**이다.
+
+둘을 함께 사용해도 현재 $L$개 query와 $M+L$개 key 사이 score 수는 대략 $L(M+L)$로 남는다. 지원되는 구현에 FlashAttention의 원리를 적용한다면 이 dense 연산의 $L(M+L)$ 중간 행렬 저장과 HBM 이동을 줄일 수 있지만, Transformer-XL의 memory 상한·stop-gradient·세그먼트 순차 의존을 바꾸지는 않는다고 추론할 수 있다. 반대로 Transformer-XL의 상태 재사용은 같은 창 안 attention kernel의 I/O 비용을 자동으로 최적화하지 않는다. 두 기법의 결합 자체는 두 원 논문의 직접 실험 결과가 아니다.
+
+따라서 “긴 문맥”을 architecture가 제공하는 정보 경로, attention operator의 산술량, kernel의 중간 저장·대역폭, 모델이 실제 장거리 정보를 활용하는 품질로 나누어 읽는다.
+
 ### 실험으로 확인된 범위
 
 Transformer-XL은 다섯 word·character 언어 모델 자료에서 perplexity 또는 bpc를 평가했다. WikiText-103 18.3 perplexity와 enwik8 0.99 bpc가 대표 결과다. recurrence·위치 표현 ablation, RECL, 평가 속도와 정성적 장문 생성도 보고됐다.
@@ -120,11 +135,15 @@ memory를 늘리면 더 긴 과거를 직접 읽는 대신 계산량과 저장�
 - [[064_Transformer-XL과 세그먼트 수준 재귀]]
 - Zihang Dai 외, [Transformer-XL: Attentive Language Models beyond a Fixed-Length Context](https://aclanthology.org/P19-1285/), ACL 2019, pp. 2978–2988. 특히 §§3.2–3.3, Figures 1–2, Tables 6–9.
 - 프로젝트 보존 자료: `raw/064_Transformer-XL Extending Transformers to Long Sequences.ko.md`, `raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md`.
+- Tri Dao 외, [FlashAttention](https://proceedings.neurips.cc/paper_files/paper/2022/hash/67d57c32e20fd0a7a302cb81d36e40d5-Abstract.html), NeurIPS 2022, §§2.2–3.2와 Algorithms 0–1.
+- [[088_FlashAttention과 IO 인지형 정확 어텐션]]
 
 ## 관련 항목
 
 - [[064_Transformer-XL과 세그먼트 수준 재귀]]
+- [[088_FlashAttention과 IO 인지형 정확 어텐션]]
 - [[Transformer]]
+- [[FlashAttention]]
 - [[자기회귀 생성]]
 - [[XLNet·RoBERTa·ALBERT]]
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]]

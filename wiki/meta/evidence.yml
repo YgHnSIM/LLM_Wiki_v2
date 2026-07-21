@@ -2837,3 +2837,30 @@ sources:
     kind: model-card
     url: https://github.com/openai/whisper/blob/25e5c364e0a21ddefee46adb674c591f1ba610ba/model-card.md
     language: en
+  dao-et-al-2022-flashattention:
+    title: 'FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness'
+    authors: [Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher Ré]
+    published: 2022
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2205.14135
+    url: https://proceedings.neurips.cc/paper_files/paper/2022/hash/67d57c32e20fd0a7a302cb81d36e40d5-Abstract.html
+    language: en
+  dao-2023-flashattention-2:
+    title: 'FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning'
+    authors: [Tri Dao]
+    published: 2023
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2307.08691
+    url: https://arxiv.org/abs/2307.08691
+    language: en
+  shah-et-al-2024-flashattention-3:
+    title: 'FlashAttention-3: Fast and Accurate Attention with Asynchrony and Low-precision'
+    authors: [Jay Shah, Ganesh Bikshandi, Ying Zhang, Vijay Thakkar, Pradeep Ramani, Tri Dao]
+    published: 2024
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2407.08608
+    url: https://arxiv.org/abs/2407.08608
+    language: en

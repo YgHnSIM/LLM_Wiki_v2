@@ -117,6 +117,7 @@ related:
 - [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] — 동결 CLIP 표현, image-embedding prior와 계층적 확산 decoder를 복원하고 CLIP gradient guidance·논문 모델·제품 기능의 혼동을 교정한 소스 (근거 3개)
 - [[086_잠재 확산 모델과 Stable Diffusion v1 공개]] — 일반 LDM 연구와 공개 v1 체크포인트를 분리하고 지각 압축·잠재 확산·CLIP token 조건·CFG·계산·면허·안전의 경계를 검증한 소스 (근거 4개)
 - [[087_Whisper와 대규모 약한 감독 음성 인식]] — 68만 시간 약한 감독·audio-conditioned Transformer·다중 과제 token을 복원하고 자동 전사 자료·번역 방향·SOTA·언어 수·사람 수준·공개 범위 과장을 교정한 소스 (근거 4개)
+- [[088_FlashAttention과 IO 인지형 정확 어텐션]] — dense softmax attention은 유지하면서 HBM–SRAM 타일링·온라인 softmax·선택적 재계산으로 중간 저장과 메모리 이동을 줄인 I/O 인지형 실행을 검증한 소스 (근거 3개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 
 ## 개체
@@ -157,8 +158,9 @@ related:
 - [[PaLM]] — 540.35B dense decoder-only Transformer, Pathways 분산 학습과 CoT·다국어·code 평가 조건 및 model access 한계를 구분하는 개념 (근거 1개)
 - [[WaveNet]] — 팽창 인과 합성곱으로 양자화 오디오 표본을 순차 생성하는 원시 파형 자기회귀 모델 (근거 2개)
 - [[Whisper]] — 30초 log-Mel 음향을 조건으로 전사·X→English 번역·언어·시간·무음을 token sequence로 생성하는 약한 감독 encoder–decoder 계열 (근거 4개)
-- [[Transformer]] — multi-head self-attention과 위치 표현으로 순환 없이 시퀀스 위치를 상호작용시키는 신경망 구조 (근거 9개)
-- [[Transformer-XL]] — stop-gradient segment memory와 상대 위치 attention으로 고정 길이 경계를 넘어 과거 표현을 재사용하는 causal Transformer (근거 1개)
+- [[FlashAttention]] — dense softmax attention의 수학은 유지하고 SRAM tile·온라인 softmax·backward 재계산으로 HBM I/O와 이차 중간 저장을 줄이는 정확 어텐션 실행 알고리즘 (근거 3개)
+- [[Transformer]] — multi-head self-attention과 위치 표현으로 순환 없이 시퀀스 위치를 상호작용시키며 operator·algorithm·kernel의 비용 층위를 구분해야 하는 신경망 구조 (근거 10개)
+- [[Transformer-XL]] — stop-gradient segment memory와 상대 위치 attention으로 고정 길이 경계를 넘어 과거 표현을 재사용하되 dense attention 비용은 남기는 causal Transformer (근거 2개)
 - [[교차 인코더 재순위화]] — 질의와 후보를 공동 부호화해 세밀한 관련성 점수를 내되 first-stage 후보와 후보별 추론 비용에 제약받는 재순위화 방식 (근거 3개)
 - [[인간 피드백 강화학습]] — 인간의 행동·응답 비교로 보상 신호를 학습하고 정책을 선호에 맞춰 최적화하는 방법 계열 (근거 5개)
 - [[ChatGPT 연구 미리보기 (2022)]] — GPT-3.5 계열 모델·대화형 RLHF·다중 턴 UI·사용자 피드백을 묶고 지속 기억·현재 제품과 구분하는 2022년 배포 체계 (근거 2개)

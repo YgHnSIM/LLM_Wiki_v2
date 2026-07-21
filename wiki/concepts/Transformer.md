@@ -25,6 +25,8 @@ artifacts:
   - 'raw/069_Mixture of Experts Sparse Activation for Scaling Language Models.commentary.ko.md'
   - 'raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.ko.md'
   - 'raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.commentary.ko.md'
+  - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md'
+  - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md'
 evidence:
   - source_id: vaswani-et-al-2017-attention
     locator: 'pp. 5998–6008, 특히 §§3–5, Figure 1, Tables 1–3의 encoder–decoder·attention·위치 인코딩·복잡도·번역 평가'
@@ -53,12 +55,17 @@ evidence:
   - source_id: radford-et-al-2022-whisper
     locator: '§§2.2–2.4와 Figure 1의 log-Mel·합성곱 stem·Transformer encoder–decoder·교차 어텐션·다중 과제 token 구성'
     relation: supplements
+  - source_id: dao-et-al-2022-flashattention
+    locator: '§§2.2–3.2, Algorithms 0–1, Theorems 1–2와 Figure 2의 dense attention 산술량·중간 저장·HBM 접근·타일링·backward 재계산'
+    relation: supplements
 related:
   - source.055
   - source.064
   - source.069
   - source.087
+  - source.088
   - concept.whisper
+  - concept.flashattention
   - concept.신경망-기계-번역
   - concept.자기회귀-생성
   - concept.잔차-연결
@@ -134,7 +141,15 @@ $$
 
 원 논문의 층별 비교에서 self-attention은 $O(n^2d)$ 연산, $O(1)$ 순차 연산, 최대 경로 길이 $O(1)$을 갖는다. recurrent layer는 $O(nd^2)$ 연산, $O(n)$ 순차 연산과 경로 길이를 갖는다. 따라서 시퀀스 길이 $n$이 표현 차원 $d$보다 작을 때 self-attention의 계산 장점이 특히 분명하고, 먼 두 위치 사이 정보 경로도 짧다.
 
-반대로 $n$이 매우 커지면 모든 위치 쌍의 점수와 $n\times n$ 행렬이 병목이 된다. ‘병렬화 가능’은 총연산량이 항상 작다는 뜻이 아니다. FlashAttention은 정확한 attention의 메모리 이동을 개선하고, sparse·linear attention은 다른 구조적 trade-off를 택하는 후속 연구다.
+반대로 $n$이 매우 커지면 모든 위치 쌍의 점수 계산과 표준 구현이 물질화하는 $n\times n$ 중간 행렬이 병목이 된다. ‘병렬화 가능’은 총연산량·중간 저장·메모리 대역폭이 항상 작다는 뜻이 아니다. Dense attention의 operator와 이를 실행하는 algorithm·kernel도 구분해야 한다.
+
+### 같은 dense attention, 다른 HBM 이동
+
+[[FlashAttention]]은 attention 식이나 위치별 정보 접근 범위를 바꾸지 않고 score·probability matrix를 HBM에 저장하지 않도록 계산 순서를 바꾼다. Query·key·value를 SRAM tile로 처리하고 온라인 softmax로 행별 통계와 출력을 누적하며, backward에서는 필요한 attention block을 재계산한다.
+
+그 결과 attention 중간 추가 저장은 시퀀스 길이에 대해 $O(n)$으로 줄지만 산술량은 $O(n^2d)$로 남는다. NeurIPS proceedings 최종본 Figure 2의 A100 forward+backward 예에서는 재계산 때문에 66.6보다 많은 75.2 GFLOPs를 사용했지만 HBM 읽기·쓰기량은 35.3GB에서 4.4GB, 시간은 35.1ms에서 11.7ms로 줄었다. FLOPs가 더 많아도 메모리 이동이 줄면 더 빨라질 수 있다는 사례다.
+
+이는 sparse·linear attention처럼 operator를 근사하거나 정보 접근 pattern을 제한하는 방법과 다르다. 또한 한 attention 호출의 I/O를 줄일 뿐 [[자기회귀 생성]]의 token-by-token 의존성이나 극장문에서 남는 이차 산술량을 없애지 않는다.
 
 ### 세그먼트 내부 병렬성과 세그먼트 사이 상태 재사용
 
@@ -196,6 +211,8 @@ Wiegreffe·Pinter는 ‘설명’의 정의와 모델 전체를 고려해야 한
 - William Fedus·Barret Zoph·Noam Shazeer, [Switch Transformers](https://www.jmlr.org/papers/v23/21-0998.html), *JMLR* 23(120), 2022, §§2–3.
 - Alec Radford 외, [Robust Speech Recognition via Large-Scale Weak Supervision](https://arxiv.org/abs/2212.04356), 2022, §§2.2–2.4와 Figure 1.
 - [[087_Whisper와 대규모 약한 감독 음성 인식]]
+- Tri Dao 외, [FlashAttention](https://proceedings.neurips.cc/paper_files/paper/2022/hash/67d57c32e20fd0a7a302cb81d36e40d5-Abstract.html), NeurIPS 2022, §§2.2–3.2, Algorithms 0–1, Theorems 1–2와 Figure 2.
+- [[088_FlashAttention과 IO 인지형 정확 어텐션]]
 
 ## 관련 항목
 
@@ -203,7 +220,9 @@ Wiegreffe·Pinter는 ‘설명’의 정의와 모델 전체를 고려해야 한
 - [[064_Transformer-XL과 세그먼트 수준 재귀]]
 - [[069_전문가 혼합과 희소 활성 스케일링]]
 - [[087_Whisper와 대규모 약한 감독 음성 인식]]
+- [[088_FlashAttention과 IO 인지형 정확 어텐션]]
 - [[Whisper]]
+- [[FlashAttention]]
 - [[신경망 기계 번역]]
 - [[자기회귀 생성]]
 - [[잔차 연결]]

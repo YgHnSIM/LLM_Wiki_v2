@@ -3557,6 +3557,24 @@ raw 등록 해시:
 - 학습 범위가 넓어졌다는 사실을 인간 설계나 평가 조건의 소멸로 확대하지 않는다. 특히 Whisper의 장문 결과는 model weight뿐 아니라 beam search·temperature fallback·이전 text 조건·무음과 log-probability threshold·timestamp 제약의 결합이다.
 - 전체 검증은 96개 회귀 테스트와 303개 Markdown strict lint를 통과해 332개 evidence와 174개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 583개 HTML을 만들고 6,591개 wiki link를 모두 해소했다.
 
+## [2026-07-22] ingest | FlashAttention과 I/O 인지형 정확 어텐션
+
+변경 내용:
+
+- 공식 088 `FlashAttention: IO-Aware Exact Attention for Long-Context Language Models`를 원문 구조와 link 순서에 맞춰 새로 번역하고 12절 해설을 작성했다. 번역은 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않는다.
+- 검증된 번역·해설을 raw 두 파일로 등록했다. 번역 SHA-256은 `4b8c489bb32b228af4acbdd7f1954863f32aa8955d9f7e7eb4051e7a0023b26c`, 해설은 `57e21e5977c488e26bc14dc238816c6d4857278eea0c6ff525fe34eb6acfee01`이다. 기존 raw artifact는 다시 쓰지 않았다.
+- [[088_FlashAttention과 IO 인지형 정확 어텐션]]과 [[FlashAttention]]을 만들고, dense softmax attention의 operator는 유지하면서 Q·K·V tile을 SRAM으로 읽고 온라인 softmax 통계와 출력을 누적하며 backward에서 score·probability block을 재계산하는 실행을 복원했다.
+- [[Transformer]]와 [[Transformer-XL]]을 보강해 architecture가 만드는 정보 경로, attention operator의 산술량, algorithm·kernel의 중간 저장과 HBM 대역폭을 분리했다. Transformer-XL의 segment memory와 FlashAttention의 I/O 절감은 긴 문맥의 서로 다른 병목을 다룬다.
+- Dao 등의 NeurIPS 2022 공식 논문과 2023년 FlashAttention-2, Shah 등의 2024년 FlashAttention-3 논문을 evidence로 등록하고 [[index]]와 [[overview]]를 source 88개·concept 163개·비메타 302개, 공식 범위 001–046·048–088·103과 다음 공식 089 LLaMA 기준으로 갱신했다. 읽기 수준 전수 검사 inventory도 번역·해설 172개, raw Markdown 177개로 늘렸다.
+
+검증 정정과 남은 한계:
+
+- `exact`는 같은 dense softmax attention operator를 계산한다는 뜻이지 floating-point bitwise 동일성을 보장한다는 뜻이 아니다. 기여도 타일링 자체의 발명으로 축약하지 않고 I/O 인지형 schedule·정확한 온라인 softmax·선택적 재계산·fused CUDA kernel·I/O 분석·실험의 결합으로 기록했다.
+- 추가 중간 저장은 시퀀스 길이에 대해 $O(n)$으로 줄지만 산술량 $O(n^2d)$는 남는다. 논문의 HBM 접근량 $\Theta(n^2d^2/M)$도 고정 SRAM 크기 $M$에서 $n$에 대해 선형이 아니며, model weight와 autoregressive KV cache를 없애지 않는다.
+- NeurIPS proceedings 최종본 Figure 2의 GPT-2 medium A100 forward+backward 예에서는 66.6에서 75.2 GFLOPs로 재계산이 늘었지만 HBM 읽기·쓰기량이 35.3GB에서 4.4GB, 시간이 35.1ms에서 11.7ms로 줄었다. arXiv 개정본의 다른 측정값, attention kernel의 2–4배와 BERT·GPT end-to-end 결과를 한 속도 향상으로 합치지 않는다.
+- Dense FlashAttention과 별도의 block-sparse approximate extension, 2022년 v1과 후대 FlashAttention-2·3의 설계·hardware 범위를 구분한다. 더 긴 sequence를 실행할 수 있다는 사실을 장거리 추론 품질이나 모든 hardware·head dimension에서의 seamless drop-in으로 확대하지 않는다.
+- `source:ready -- 088`은 96개 회귀 테스트와 305개 Markdown strict lint를 통과해 335개 evidence와 176개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 587개 HTML을 만들고 6,642개 wiki link를 모두 해소했다.
+
 ## 관련 항목
 
 - [[index]]
