@@ -2935,6 +2935,25 @@ raw 등록 해시:
 - 사이트는 415개 페이지를 빌드해 5,433개 위키 링크와 31,166개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 267개 항목을 포함했다.
 - 연구·제품·후대 서사는 Chen et al. 2021, GitHub 2021-06-29와 OpenAI 2021-08-10의 1차 자료 범위로 분리했다. HumanEval 밖의 repository 수준 개발·생산성·안전·license 결론은 별도 근거가 필요한 후속 범위로 남겼다.
 
+## [2026-07-21] ingest | 지시 미세조정과 FLAN의 제로샷 일반화
+
+변경 내용:
+
+- `071_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.md`를 원문부터 새로 번역·윤문하고 12절 학습 해설을 작성했다. 원문의 50개 의미 블록, H1/H2 1/6과 24개 Markdown link target 순서를 보존한 쌍을 새 immutable raw artifact로 등록했다.
+- [[071_지시 미세조정과 FLAN의 제로샷 일반화]]와 [[지시 미세조정]]을 만들고, 여러 과제의 지시–출력 supervision으로 weights를 갱신하는 방식과 inference 시 weights를 고정한 채 instruction·demonstration을 넣는 [[문맥 내 학습]], task-specific fine-tuning 및 선호 기반 RLHF를 구분했다.
+- [[언어 모델 전이 학습]]과 [[사전 학습 지식은 과제에 어떻게 도착하는가]]에는 FLAN의 다과제 지시 mixture를 과제 명세의 별도 경로로 추가했다. [[T5]]에는 원 FLAN이 T5가 아니라 137B decoder-only LaMDA-PT에 대한 전체 미세조정이었다는 경계를, [[문맥 내 학습]]에는 지시 미세조정과의 결합 가능성을 보강했다.
+- [[손실 곡선과 능력 곡선 사이]]에는 같은 지시 개입이 422M·2B·8B 보류 과제 평균을 낮추고 68B·137B에서는 높인 규모별 결과를 추가했다. 이를 보편적인 phase transition이나 내부 능력의 단일 임계값으로 확대하지 않도록 adaptation·평가 metric·관측 scale을 분리했다.
+- Wei et al. FLAN, Google Research 공개 기록, Mishra et al. Natural Instructions와 Wang et al. Self-Instruct의 1차 자료를 새 evidence로 등록하고, 기존 InstructGPT 근거를 재사용했다. FLAN의 62개 데이터셋·12개 과제 군집·데이터셋당 10개 수동 template, 평가 군집별 별도 checkpoint와 best-dev template 조건의 20/25 zero-shot GPT-3 비교를 locator에 맞춰 기록했다.
+- raw의 단일 최초 발명, 수백 개 과제·단일 universal checkpoint·모든 규모에서의 일관된 향상, 입력 instruction만으로 weights가 바뀐다는 설명, safety·RLHF·제품 배포의 직접 검증과 현대 모델로의 단일 계보 주장을 공개 문서에서 교정했다. Natural Instructions의 2021년 선행 공개와 InstructGPT의 SFT–선호 순위–보상 모델–PPO 경로를 별도 계보로 구분했다.
+- 새 분석 문서는 만들지 않았다. 과제 정보가 weights·입력·출력·검증기 중 어디에 놓이는지는 기존 [[사전 학습 지식은 과제에 어떻게 도착하는가]], 규모별 개입 효과와 능력 판정은 기존 [[손실 곡선과 능력 곡선 사이]]의 핵심 질문을 직접 보강하므로 두 문서를 확장하는 편이 중복 없이 재사용 가치가 높았다.
+
+검증 결과:
+
+- 번역 스킬 검사는 071 번역·해설 쌍을 `done: true`로 확인했고, source workflow는 두 raw artifact의 원문 URL·역할·SHA-256 일치를 확인했다.
+- 49개 회귀 테스트와 270개 위키 문서 strict lint를 통과했으며 293개 evidence 레코드와 142개 immutable raw artifact를 확인했다.
+- 사이트는 419개 페이지를 빌드해 5,509개 위키 링크와 31,506개 로컬 참조를 검사했으며 미해결 위키 대상은 0개였다. 검색 색인은 269개 항목을 포함했다.
+- 공개 source·concept와 기존 문서 보강은 Wei et al. FLAN 본문·부록, Google Research 공개 기록, Mishra et al. Natural Instructions, Wang et al. Self-Instruct와 Ouyang et al. InstructGPT의 직접 기술·평가 범위 안에서 검증했다. 후대 대화형 모델의 제품 동작, 안전성·선호 정렬과 보편적인 규모 임계값은 별도 근거가 필요한 범위로 남겼다.
+
 ## 관련 항목
 
 - [[index]]

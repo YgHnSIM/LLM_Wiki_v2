@@ -1260,3 +1260,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/codex-ai-assisted-code-generation-transformation-software-development
     sha256: 7687c9cebeb41089b0012a8f222f764dfe6f5f7b02297cfc059a816dee0933d5
+  - path: "raw/071_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.ko.md"
+    role: translation
+    order_prefix: "071"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/instruction-tuning-adapting-language-models-to-follow-explicit-instructions
+    sha256: 09258cfc095790b0659853b0446ec39a12ea63ffa4e38c2f0e04ca73beb57701
+  - path: "raw/071_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.commentary.ko.md"
+    role: commentary
+    order_prefix: "071"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/instruction-tuning-adapting-language-models-to-follow-explicit-instructions
+    sha256: 3e9235956e5eef513607b71a8ce68f30d184655b8e3e88aaa719d4f6326713da

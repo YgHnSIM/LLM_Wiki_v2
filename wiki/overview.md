@@ -24,7 +24,7 @@ related:
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 70개, concept 146개, entity 29개, analysis 20개를 합친 비메타 문서 265개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 71개, concept 147개, entity 29개, analysis 20개를 합친 비메타 문서 267개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -35,6 +35,7 @@ related:
 | 한 언어의 지식은 다른 언어로 어떻게 옮겨지나 | [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[061_XLM과 교차 언어 사전 학습]] → [[XLM]] | [[같은 병렬 문장은 무엇을 학습시키는가]] |
 | 검색과 외부 지식은 어떻게 연결되나 | [[010_벡터 공간 모델과 TF-IDF]] | [[024_BM25와 확률적 정보 검색]] → [[051_신경 정보 검색과 의미 대응]] → [[064_BERT 기반 passage 재순위화]] → [[067_DPR과 검색 증강 생성]] | [[검색은 근거를 찾고 독해는 답을 찾는다]] |
 | 자연어 명세는 어떻게 실행 코드가 되나 | [[066_GPT-3와 문맥 내 학습]] | [[070_Codex와 HumanEval 기반 코드 생성 평가]] → [[OpenAI Codex (2021)]] | [[자동 평가 지표는 무엇을 보상하는가]] |
+| 자연어 지시는 언제 가중치에 들어가나 | [[062_T5와 Text-to-Text 통합 프레임워크]] | [[066_GPT-3와 문맥 내 학습]] → [[071_지시 미세조정과 FLAN의 제로샷 일반화]] → [[지시 미세조정]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
 
 ## 난이도에 따른 읽기 방법
 
@@ -44,7 +45,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 70개 소스의 범위
+## 71개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -116,6 +117,7 @@ related:
 - [[068_전문가 혼합과 희소 활성 스케일링]]은 1991년 adaptive mixture, 2017년 sparsely-gated layer, GShard의 top-2와 Switch의 top-1을 분리하고, total parameters·active compute·memory·communication 및 expert specialization의 증거 경계를 검증한다.
 - [[069_CLIP과 대조적 언어-이미지 사전 학습]]은 4억 image–text pair의 대칭 대조 학습, 수정 ResNet·ViT 이중 인코더와 class prompt 기반 zero-shot 분류를 복원하고, shared embedding과 일반 멀티모달 이해·생성·VQA의 경계를 검증한다.
 - [[070_Codex와 HumanEval 기반 코드 생성 평가]]는 최대 12B 연구 Codex의 Python 코드 계속학습과 Codex-S 추가 미세조정을 분리하고, HumanEval·pass@k·unit-test oracle 및 GitHub Copilot production version의 경계를 검증한다.
+- [[071_지시 미세조정과 FLAN의 제로샷 일반화]]는 62개 데이터셋·12개 과제 군집을 자연어 지시로 미세조정한 137B FLAN을 복원하고, 군집별 별도 checkpoint·template 선택·모델 규모 효과와 최초 발명·보편적 향상·안전 정렬 주장의 경계를 검증한다.
 
 ## 현재 핵심 주제
 
@@ -160,8 +162,9 @@ related:
 - [[신경 정보 검색]]의 질의·문서 독립 표현과 token interaction, 클릭·음성 표본의 편향, 첫 단계 검색·재순위화 및 sparse·dense 상보성
 - [[교차 인코더 재순위화]]에서 구분하는 질의–후보 공동 부호화, `[CLS]` relevance logit, first-stage 누락 복구 불가와 후보별 추론 비용
 - [[언어 모델 스케일링 법칙]]에서 함께 확인하는 token loss, N·D·compute 병목, 관측 범위 밖 외삽과 Kaplan·Chinchilla compute-optimal 배분의 차이
-- [[문맥 내 학습]]에서 구분하는 고정 가중치, instruction·demonstration·query의 입력 조건화, zero·one·few-shot과 fine-tuning의 지속성 차이
-- [[손실 곡선과 능력 곡선 사이]]에서 분리하는 평균 token cross-entropy, downstream exact match·accuracy, 능력 threshold와 metric·표본·관측 scale의 영향
+- [[문맥 내 학습]]에서 구분하는 고정 가중치, instruction·demonstration·query의 입력 조건화, zero·one·few-shot과 가중치를 갱신하는 지시 미세조정의 지속성 차이
+- [[지시 미세조정]]에서 구분하는 여러 과제의 지시–출력 supervision, 평가 군집 보류, 고정된 가중치의 문맥 내 학습 및 선호 기반 RLHF와의 경계
+- [[손실 곡선과 능력 곡선 사이]]에서 분리하는 평균 token cross-entropy, downstream exact match·accuracy, 능력 threshold와 metric·표본·관측 scale, FLAN 규모별 adaptation 효과
 - [[검색은 근거를 찾고 독해는 답을 찾는다]]에서 분리하는 컬렉션→후보 retrieval recall, 후보→답 EM·F1·faithfulness, 답→행동 기권 calibration과 oracle reader 진단
 - [[검색 증강 생성]]에서 구분하는 원 RAG의 DPR–BART 잠재 문서 주변화, 고정 document encoder·색인과 학습되는 query encoder, 검색 provenance와 claim-level citation의 차이
 - [[전문가 혼합]]에서 구분하는 total parameters·token당 active expert, shared Transformer 경로, top-$k$ routing·capacity·load balancing과 memory·all-to-all communication 비용
@@ -198,12 +201,12 @@ related:
 - [[잔차 경로와 정규화는 어디에 놓이는가]]에서 비교하는 ResNet post-/pre-activation과 Transformer Post-/Pre-LN, additive identity path 위에 activation·normalization Jacobian을 둘 때의 최적화 차이
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]]에서 비교하는 RNN hidden-state 의존, WaveNet causal convolution, Transformer masked attention의 teacher-forced 훈련과 실제 sampling 차이
 - [[Transformer-XL]]에서 구분하는 현재 segment 내부 병렬 계산, segment 사이 forward memory 재사용, stop-gradient로 끊긴 학습 경로와 설정된 memory 길이
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]에서 비교하는 ELMo 고정 특징, ULMFiT 영역·분류 적응, BERT·GPT-1 전체 미세조정, GPT-2 입력 cue, XLM 언어 공유, T5 공통 text output, GPT-3 demonstration, CLIP class prompt와 Codex 실행 선택의 과제 명세 위치
+- [[사전 학습 지식은 과제에 어떻게 도착하는가]]에서 비교하는 ELMo 고정 특징, ULMFiT 영역·분류 적응, BERT·GPT-1 전체 미세조정, GPT-2 입력 cue, XLM 언어 공유, T5 공통 text output, GPT-3 demonstration, FLAN 다과제 지시, CLIP class prompt와 Codex 실행 선택의 과제 명세 위치
 - [[자동 평가 지표는 무엇을 보상하는가]]에서 비교하는 BLEU·ROUGE·METEOR의 참조 중첩과 HumanEval unit test의 기능 정확성, pass@k가 함께 측정하는 모델·표본 예산·선택 oracle
 - [[XLM]]의 monolingual CLM·MLM과 parallel-data TLM, shared BPE·언어 sampling 및 target-language text와 task label을 분리한 zero-shot 조건
 - [[같은 병렬 문장은 무엇을 학습시키는가]]에서 비교하는 SMT의 잠재 단어 정렬, NMT의 target sequence supervision, TLM의 양방향 masked-token 문맥과 서로 다른 alignment 층위
 - [[XLNet·RoBERTa·ALBERT]]에서 분리하는 factorization objective, data·batch·masking training recipe, embedding factorization·layer sharing과 parameter 수·FLOPs·latency의 차이
-- [[T5]]의 task prefix·encoder–decoder·sentinel span corruption과 shared interface, shared pretrained checkpoint, task별 fine-tuned weights의 구분
+- [[T5]]의 task prefix·encoder–decoder·sentinel span corruption과 shared interface, shared pretrained checkpoint, task별 fine-tuned weights의 구분 및 원 FLAN의 LaMDA-PT decoder-only 기반이라는 경계
 - [[조지 밀러]]와 공동 연구진의 1985–1998년 WordNet 구축·공개 단계, 심리언어학적 설계 동기와 인간 기억 모형이라는 실증 주장의 구분
 - [[Lesk 알고리즘]], [[단어 의미 중의성 해소]], WordNet 의미 목록, 사전 글로스의 정확 중첩과 후대 문맥–글로스 비교 방법의 구분
 - [[증강 전이망]], [[파싱]], 재귀 호출, 레지스터·조건·구조 구축 동작을 통한 절차적 문법 공학
@@ -220,6 +223,8 @@ related:
 - [[CLIP]]
 - [[070_Codex와 HumanEval 기반 코드 생성 평가]]
 - [[OpenAI Codex (2021)]]
+- [[071_지시 미세조정과 FLAN의 제로샷 일반화]]
+- [[지시 미세조정]]
 - [[전문가 혼합]]
 - [[총 매개변수와 활성 계산량은 같은 축인가]]
 - [[검색 증강 생성]]
@@ -335,7 +340,9 @@ related:
 
 ## 현재 상태
 
-소스 70개, 개념 146개, 개체 29개, 분석 20개와 메타 문서 3개, 총 268개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 239개는 `verified`, 해석적 문서 26개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 289개 외부 근거와 140개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 71개, 개념 147개, 개체 29개, 분석 20개와 메타 문서 3개, 총 270개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 241개는 `verified`, 해석적 문서 26개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 293개 외부 근거와 142개 불변 raw artifact가 레지스트리에 등록돼 있다.
+
+`071`의 지시 미세조정을 단일 연구가 처음 발명했다는 서사, 수백 개 과제·단일 universal checkpoint·모든 규모에서의 일관된 향상, 지시 문장을 입력에 붙이는 것만으로 weights가 바뀐다는 설명, safety·RLHF·제품 배포까지 직접 검증했다는 주장도 공개 문서에서 교정했다. 원 FLAN은 62개 데이터셋을 12개 과제 군집으로 나누고 평가 군집마다 그 군집을 제외한 별도 137B LaMDA-PT checkpoint를 학습했다. 각 데이터셋에 10개 수동 template를 두었고 best-dev template 조건에서 zero-shot GPT-3보다 20/25 데이터셋에서 높았지만, 422M·2B·8B에서는 지시 미세조정 뒤 보류 과제 평균이 오히려 낮아졌다. Natural Instructions의 선행 2021년 공개와 InstructGPT의 SFT–선호 순위–보상 모델–PPO 경로도 별도 계보로 기록했다.
 
 `070`의 2021년 8월 단일 최초 공개, 175B GPT-3의 그대로인 코드 모델, 여러 언어·프레임워크·대규모 저장소 이해, 의미·예외 처리의 일반적 보장, test 작성·교육·온보딩·생산성·오류 감소의 직접 실험, 공개 코드의 license 문제 해결과 수학·과학·법률 특화 모델로의 직접 계보 주장도 공개 문서에서 교정했다. 연구 Codex는 최대 12B, 필터링된 Python 159GB와 1,000억 token 조건이었고 HumanEval은 164개 독립 함수·평균 7.7개 test였다. Table 1의 Codex-12B pass@1 28.81%와 pass@100 72.31%, Codex-S의 단일 표본 37.7%·평균 log-probability 선택 44.5%·unit-test oracle 77.5%를 서로 다른 생성·선택 조건으로 기록했다.
 
