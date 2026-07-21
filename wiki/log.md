@@ -3762,6 +3762,21 @@ raw 등록 해시:
 - `source:ready -- 093`은 96개 회귀 테스트와 314개 Markdown strict lint를 통과해 370개 evidence와 186개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 606개 HTML을 만들고 6,907개 wiki link를 모두 해소했다.
 - 다음 순차 입력은 공식 094 `Constitutional AI Principle-Based Alignment Through Self-Critique`다.
 
+## [2026-07-22] content | 멀티모달 bridge와 parameter update 경계
+
+변경 내용:
+
+- 새 분석 문서를 늘리지 않고 기존 [[사전 학습 지식은 과제에 어떻게 도착하는가]]를 공식 093까지 확장했다. 시각 표현을 언어 계산으로 운반하는 bridge와 실제 gradient가 도착한 parameter 범위를 독립적인 두 축으로 분리했다.
+- [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]]와 [[멀티모달 대규모 언어 모델]]을 연결해 Frozen의 continuous prefix, Flamingo의 별도 visual memory, PaLI의 encoder–decoder visual token, BLIP-2의 Q-Former, PaLM-E의 continuous observation token과 LLaVA의 projection을 한 표에서 비교했다.
+- 각 model의 pretraining·task fine-tuning·visual instruction tuning·generalist mixture checkpoint를 구분했다. 동결 backbone이라는 공통 표현만으로 bridge 학습 비용이나 downstream update 경계를 지우지 않았고, GPT-4V는 공개 입출력과 안전 평가에서 내부 architecture를 역추론하지 않았다.
+- 공식 093 raw 두 파일과 Frozen·PaLI·BLIP-2·PaLM-E·LLaVA·GPT-4·GPT-4V의 locator를 분석에 연결했다. 분석 근거는 18개에서 25개로 늘었으며 `index.md`와 `overview.md`의 설명·근거 수를 동기화했다.
+
+검증 경계:
+
+- Prefix·cross-attention·query bottleneck·projected token은 일렬의 발전 단계가 아니다. 같은 `image + text → text` 입출력도 LM 동결, bridge-only 학습, 단계별 LLM 갱신과 end-to-end 학습 가운데 어느 경계를 사용했는지 자동으로 알려 주지 않는다.
+- PaLI의 대표 COCO·VQAv2 수치는 downstream fine-tuning, BLIP-2의 양 backbone 동결은 2단계 pretraining, PaLM-E의 frozen-PaLM은 별도 비교 조건이다. 평가 수치를 공통 zero-shot checkpoint의 능력으로 합치지 않는다.
+- 전체 검증은 96개 회귀 테스트와 314개 Markdown strict lint를 통과해 370개 evidence와 186개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 606개 HTML을 만들고 6,917개 wiki link를 모두 해소했다.
+
 ## 관련 항목
 
 - [[index]]
