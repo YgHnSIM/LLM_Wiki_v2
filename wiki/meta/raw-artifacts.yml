@@ -1548,3 +1548,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/stable-diffusion-latent-diffusion-text-to-image-generation
     sha256: 513fa4b0a5a0694bc2d8eb78832372ceeda09ee1119834b3c25ea618b8046496
+  - path: "raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.ko.md"
+    role: translation
+    order_prefix: "087"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/whisper-large-scale-multilingual-speech-recognition-with-transformer-architecture
+    sha256: 2be239530d0c7c2b9ea5f96bffa256b342dc7a16d3df8c8f158be174dbb18c6a
+  - path: "raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.commentary.ko.md"
+    role: commentary
+    order_prefix: "087"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/whisper-large-scale-multilingual-speech-recognition-with-transformer-architecture
+    sha256: 33c0d53dcbe95ccbf65a3063b35c57c240e60ab580e80cc62386194ffa68f9c3

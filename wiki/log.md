@@ -3521,6 +3521,27 @@ raw 등록 해시:
 - 동결 백본은 새 학습의 부재를 뜻하지 않는다. Flamingo의 Resampler·약 10B gated block, DALL·E 2의 prior·decoder·upsampler, Stable Diffusion의 latent U-Net 학습 비용과 현재 prompt·sampling rule을 각각 남겼다.
 - 전체 검증에서 96개 회귀 테스트, 301개 Markdown 문서, 328개 evidence record, 172개 raw artifact, 579개 HTML과 6,487개 위키 링크를 확인했고 미해결 링크는 0개였다.
 
+## [2026-07-22] ingest | Whisper와 대규모 약한 감독 음성 인식
+
+변경 내용:
+
+- 공식 087 `Whisper: Large-Scale Multilingual Speech Recognition with Transformer Architecture`를 새로 번역하고 12절 해설을 작성했다. 번역은 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않는다.
+- 검증된 번역·해설을 raw 두 파일로 등록했다. 번역 SHA-256은 `2be239530d0c7c2b9ea5f96bffa256b342dc7a16d3df8c8f158be174dbb18c6a`, 해설은 `33c0d53dcbe95ccbf65a3063b35c57c240e60ab580e80cc62386194ffa68f9c3`다.
+- [[087_Whisper와 대규모 약한 감독 음성 인식]]과 [[Whisper]]를 만들고, 30초 log-Mel 입력, 오디오 encoder·text decoder, 언어·과제·timestamp token으로 ASR·영어 번역·언어 식별·음성 구간 판정을 하나의 sequence-to-sequence interface에 넣는 구조를 정리했다.
+- [[자동 음성 인식]], [[단어 오류율]], [[Transformer]], [[인코더-디코더]], [[음성 활동 감지]]를 보강해 zero-shot의 범위, 긴 오디오 decoding heuristic, text normalization과 WER, `nospeech` token의 역할을 기존 개념과 연결했다.
+- Whisper 논문, OpenAI 공개 발표, 2022-09-21 repository 고정 스냅샷, 2024-09-30 model card 고정 스냅샷을 evidence로 등록했다. 변동 가능한 GitHub `main`으로 최초 공개와 후대 `large-v3`·`turbo` 상태가 섞이지 않게 분리했다. [[index]]와 [[overview]]는 source 87개·concept 162개·비메타 300개, 공식 범위 001–046·048–087·103과 다음 공식 088 FlashAttention 기준으로 갱신했다.
+- 새 쌍을 포함하도록 읽기 수준 전수 검사 inventory를 번역·해설 170개, raw Markdown 175개로 늘렸다. 기존 raw artifact는 다시 쓰지 않았다.
+
+검증 정정과 남은 한계:
+
+- 원문 웹 글의 “기존 ASR이 자동 전사한 68만 시간” 설명을 채택하지 않았다. 논문은 웹에서 audio–transcript 쌍을 수집하고 기계 생성 전사를 탐지·제거하려 했으며, Figure 11의 합계는 영어 ASR 438,218시간, 영어 번역 125,739시간, 다국어 ASR 117,113시간인 681,070시간이다.
+- Whisper의 번역은 임의 언어 쌍이 아니라 비영어 음성에서 영어 text로의 X→English 과제다. 공개 범위도 model weight와 inference code이지 전체 학습 자료·학습 code의 공개가 아니다.
+- LibriSpeech·MLS·VoxPopuli·CoVoST2·Fleurs의 서로 다른 지표와 비교 대상을 분리했다. Whisper는 여러 분포 밖 자료에서 강했지만 모든 benchmark의 당시 최고 성능이나 모든 언어의 균등한 성능을 보인 것은 아니다.
+- 2022년 최초 공개의 Tiny·Base·Small·Medium·Large 계열과 논문 결과에 사용된 Large V2를 구분했다. 논문의 96개 다른 언어, 99개 언어 token, ASR 훈련 자료가 있는 75개 언어, 2024-09-30 model card 스냅샷의 98개 비영어 언어도 하나의 수치로 합치지 않았다.
+- “human-level”은 Kincaid46의 25개 recording과 특정 computer-assisted transcription service 비교에 한정했다. 환각·반복·문장 경계 누락, 언어·억양·인구집단별 격차, 30초 창과 long-form heuristic, native streaming 부재를 남은 한계로 기록했다.
+- `source:ready -- 087`은 96개 회귀 테스트와 303개 Markdown strict lint를 통과해 332개 evidence와 174개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 583개 HTML을 만들고 6,574개 wiki link를 모두 해소했다.
+- 다음 순차 입력은 공식 088 `FlashAttention: IO-Aware Exact Attention for Long-Context Language Models`다. 음성 인식의 학습 경계가 HMM pipeline에서 joint encoder-decoder로 어떻게 이동했는지는 ingest 원격 반영 뒤 기존 분석에 별도 content 변경으로 합성한다.
+
 ## 관련 항목
 
 - [[index]]

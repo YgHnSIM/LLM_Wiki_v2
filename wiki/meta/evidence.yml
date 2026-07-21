@@ -2804,3 +2804,36 @@ sources:
     kind: official-blog
     url: https://stability.ai/news-updates/stable-diffusion-public-release
     language: en
+  radford-et-al-2022-whisper:
+    title: Robust Speech Recognition via Large-Scale Weak Supervision
+    authors: [Alec Radford, Jong Wook Kim, Tao Xu, Greg Brockman, Christine McLeavey, Ilya Sutskever]
+    published: 2022
+    source_type: primary
+    kind: research-paper
+    doi: 10.48550/arXiv.2212.04356
+    url: https://arxiv.org/abs/2212.04356
+    language: en
+  openai-2022-whisper-release:
+    title: Introducing Whisper
+    authors: [OpenAI]
+    published: 2022
+    source_type: primary-release
+    kind: official-blog
+    url: https://openai.com/index/whisper/
+    language: en
+  openai-2022-whisper-repository:
+    title: Whisper
+    authors: [OpenAI]
+    published: 2022
+    source_type: primary-release
+    kind: software-repository
+    url: https://github.com/openai/whisper/tree/45fc3d43c19e9185b16666c01234ac14e7accfd7
+    language: en
+  openai-2024-whisper-model-card:
+    title: 'Model Card: Whisper (2024-09-30 snapshot)'
+    authors: [OpenAI]
+    published: 2024
+    source_type: primary-release
+    kind: model-card
+    url: https://github.com/openai/whisper/blob/25e5c364e0a21ddefee46adb674c591f1ba610ba/model-card.md
+    language: en

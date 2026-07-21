@@ -13,7 +13,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-19'
-updated: '2026-07-21'
+updated: '2026-07-22'
 lifecycle: active
 verification: verified
 artifacts:
@@ -23,6 +23,8 @@ artifacts:
   - 'raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md'
   - 'raw/069_Mixture of Experts Sparse Activation for Scaling Language Models.ko.md'
   - 'raw/069_Mixture of Experts Sparse Activation for Scaling Language Models.commentary.ko.md'
+  - 'raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.ko.md'
+  - 'raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.commentary.ko.md'
 evidence:
   - source_id: vaswani-et-al-2017-attention
     locator: 'pp. 5998–6008, 특히 §§3–5, Figure 1, Tables 1–3의 encoder–decoder·attention·위치 인코딩·복잡도·번역 평가'
@@ -48,10 +50,15 @@ evidence:
   - source_id: fedus-et-al-2022-switch-transformer
     locator: 'JMLR 23(120), §§2–3과 Figures 1–2의 공유 attention·희소 Switch FFN·top-1 token routing'
     relation: supplements
+  - source_id: radford-et-al-2022-whisper
+    locator: '§§2.2–2.4와 Figure 1의 log-Mel·합성곱 stem·Transformer encoder–decoder·교차 어텐션·다중 과제 token 구성'
+    relation: supplements
 related:
   - source.055
   - source.064
   - source.069
+  - source.087
+  - concept.whisper
   - concept.신경망-기계-번역
   - concept.자기회귀-생성
   - concept.잔차-연결
@@ -147,6 +154,12 @@ GPT는 masked self-attention decoder 계열을 단일 token stream의 다음 tok
 
 대규모 언어 모델의 성립에는 이 블록 외에도 서브워드 토큰화, 대규모 사전학습 자료, optimizer·schedule, 저정밀 계산, 데이터·텐서·파이프라인 병렬화와 하드웨어가 필요했다. Transformer가 확장의 중요한 구조적 조건이었다는 사실과 현대 능력의 단일 원인이었다는 주장을 구분한다.
 
+### 음성을 조건으로 생성하는 Whisper
+
+[[Whisper]]는 원 번역 Transformer의 encoder–decoder 역할 분리를 오디오→텍스트에 적용한다. Encoder는 30초 log-Mel spectrogram을 합성곱 stem 뒤에서 문맥화하고, 자기회귀 decoder는 음향 표현에 교차 어텐션해 언어·과제·timestamp와 text token을 생성한다. 입력 단위가 text embedding이 아니어도 Transformer block을 사용할 수 있음을 보여 주지만, 80채널 음향 특징·30초 창·BPE·long-form decoding rule까지 Transformer가 자동으로 결정했다는 뜻은 아니다.
+
+논문은 새 attention 구조의 우월성을 검증하려 한 것이 아니라 이미 검증된 구조를 고정하고 68만 시간 규모의 약한 감독 자료가 만드는 zero-shot 견고성을 연구했다. 따라서 Whisper 성과 전체를 Transformer architecture의 단독 효과로 귀속하지 않는다.
+
 ## 검증과 한계
 
 ### attention weight는 설명인가
@@ -181,12 +194,16 @@ Wiegreffe·Pinter는 ‘설명’의 정의와 모델 전체를 고려해야 한
 - Sarah Wiegreffe·Yuval Pinter, [Attention is not not Explanation](https://aclanthology.org/D19-1002/), EMNLP-IJCNLP 2019, pp. 11–20.
 - Dmitry Lepikhin 외, [GShard](https://openreview.net/forum?id=qrwe7XHTmYb), ICLR 2021, §§2.1–2.2.
 - William Fedus·Barret Zoph·Noam Shazeer, [Switch Transformers](https://www.jmlr.org/papers/v23/21-0998.html), *JMLR* 23(120), 2022, §§2–3.
+- Alec Radford 외, [Robust Speech Recognition via Large-Scale Weak Supervision](https://arxiv.org/abs/2212.04356), 2022, §§2.2–2.4와 Figure 1.
+- [[087_Whisper와 대규모 약한 감독 음성 인식]]
 
 ## 관련 항목
 
 - [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]]
 - [[064_Transformer-XL과 세그먼트 수준 재귀]]
 - [[069_전문가 혼합과 희소 활성 스케일링]]
+- [[087_Whisper와 대규모 약한 감독 음성 인식]]
+- [[Whisper]]
 - [[신경망 기계 번역]]
 - [[자기회귀 생성]]
 - [[잔차 연결]]

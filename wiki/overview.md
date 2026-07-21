@@ -26,13 +26,13 @@ related:
 
 공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism (2015)**이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-21 현재 원문을 제공하지 않는다.
 
-따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 86개는 공식 001–046·048–086·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 087 `Whisper: Large-Scale Multilingual Speech Recognition with Transformer Architecture`다.
+따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 87개는 공식 001–046·048–087·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 088 `FlashAttention: IO-Aware Exact Attention for Long-Context Language Models`다.
 
 숫자 badge는 정규 source의 공식 장 번호에만 쓴다. 비번호 reference가 추가되면 번호 source 뒤에서 `참고`로 표시하며, 목록 위치를 `001` 같은 장 번호로 바꾸지 않는다. 같은 장의 검증 노트·번역·해설은 서로 다른 장이 아니라 하나의 source 묶음에 속한다.
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 86개, reference 0개, concept 161개, entity 29개, analysis 22개를 합친 비메타 문서 298개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 87개, reference 0개, concept 162개, entity 29개, analysis 22개를 합친 비메타 문서 300개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -45,6 +45,7 @@ related:
 | 자연어 명세는 어떻게 실행 코드가 되나 | [[067_GPT-3와 문맥 내 학습]] | [[071_Codex와 HumanEval 기반 코드 생성 평가]] → [[OpenAI Codex (2021)]] | [[자동 평가 지표는 무엇을 보상하는가]] |
 | 자연어 지시는 언제 가중치에 들어가나 | [[063_T5와 Text-to-Text 통합 프레임워크]] | [[067_GPT-3와 문맥 내 학습]] → [[072_지시 미세조정과 FLAN의 제로샷 일반화]] → [[077_InstructGPT와 인간 선호 정렬]] → [[인간 피드백 강화학습]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
 | 대화 인터페이스는 모델 능력과 신뢰를 어떻게 바꾸나 | [[007_ELIZA]] | [[077_InstructGPT와 인간 선호 정렬]] → [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]] → [[ChatGPT 연구 미리보기 (2022)]] | [[ELIZA에서 LLM으로]] |
+| 음성 인식에서 학습되는 경계는 어떻게 넓어졌나 | [[013_은닉 마르코프 모델과 통계적 음성 인식]] | [[041_심층 신경망 음향 모델과 DNN-HMM 전환]] → [[087_Whisper와 대규모 약한 감독 음성 인식]] → [[Whisper]] → [[단어 오류율]] | [[규칙 기반 AI에서 데이터 기반 학습으로]] |
 | 프롬프트는 추론 성능을 어떻게 바꾸나 | [[067_GPT-3와 문맥 내 학습]] | [[080_사고 연쇄 프롬프팅과 추론 행동 유도]] → [[사고 연쇄 프롬프팅]] → [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]] → [[079_HELM과 다차원 언어 모델 평가]] | [[손실 곡선과 능력 곡선 사이]] |
 | 이미지·동영상 조건은 생성 모델에 어떻게 들어가나 | [[070_CLIP과 대조적 언어-이미지 사전 학습]] | [[CLIP]] → [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]] → [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] → [[086_잠재 확산 모델과 Stable Diffusion v1 공개]] → [[잠재 확산 모델]] → [[Stable Diffusion]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
 | 모델 공개는 곧 재현 가능성을 뜻하나 | [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] | [[076_파운데이션 모델 보고서와 AI 생태계]] → [[082_BLOOM과 공개 접근 다국어 LLM]] → [[BLOOM]] | [[공개 가중치와 재현 가능성은 같은 축인가]] |
@@ -146,6 +147,7 @@ related:
 - [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]]은 동결 NFNet-F6·언어 모델 사이에 64개 시각 token의 Perceiver Resampler와 0-init gated cross-attention을 연결한 구조를 복원하고, 퓨샷 문맥 조건화와 미세조정·gate 학습을 구분하며 16개 과제·자료 mixture·실패 양상·연구용 한계를 검증한다.
 - [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]은 동결 [[CLIP]] 표현에서 image embedding을 생성하는 prior와 계층적 확산 decoder·upsampler를 복원하고, classifier-free guidance와 CLIP gradient guidance, 논문 unCLIP과 Preview 제품 기능, 품질·다양성 평가 축을 구분한다.
 - [[086_잠재 확산 모델과 Stable Diffusion v1 공개]]는 CVPR 2022의 일반 [[잠재 확산 모델]]과 2022년 8월 공개된 [[Stable Diffusion]] v1을 분리하고, 지각 오토인코더·잠재 U-Net·CLIP token 교차 어텐션·classifier-free guidance 및 계산·면허·안전의 조건을 검증한다.
+- [[087_Whisper와 대규모 약한 감독 음성 인식]]은 웹의 오디오-전사 쌍을 기존 ASR 산출물로 새로 만든 자료와 구분하고, 30초 log-Mel encoder–decoder·다중 과제 token·zero-shot 분포 밖 평가를 복원해 번역 방향·언어 수·SOTA·사람 수준·공개 범위의 과장을 교정한다.
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]]은 GLaM·Mixtral의 total·active parameter와 token별 routing을 복원하고, 2024년 최초성·Meta 귀속·dense 계산의 제곱 증가·깨끗한 domain expert·민주화 과장을 교정한다.
 
 ## 현재 핵심 주제
@@ -233,8 +235,9 @@ related:
 - [[개방 영역 질의응답]]에서 구분하는 주제 폭, 시험 중 자료 접근, 입력 양식, 답 단위, 근거 반환, 정확도·답변률·시간·calibration 평가 조건
 - [[AI 시연과 실제 성능]]에서 비교하는 Georgetown·ELIZA·SHRDLU·Watson·2022년 ChatGPT의 입력 인터페이스, 통제된 과업 경계, 반복 평가·선택된 출시 예시와 관객이 본 공개 효과
 - [[ELIZA에서 LLM으로]]에서 비교하는 DOCTOR의 역할 규칙과 ChatGPT의 모델·대화형 RLHF·다중 턴 UI·피드백 순환, 사용자 귀속과 직접 기술 계보의 차이
-- [[자동 음성 인식]]의 특징·음향 모델·발음 사전·언어 모델·디코더 구성과 [[DNN-HMM]] 전환에서 교체된 GMM·유지된 HMM의 역할
-- [[단어 오류율]]의 치환·삭제·삽입, 상대 오류 감소와 퍼센트포인트 차이, 평균 WER가 숨기는 화자·잡음·중요 단어별 실패
+- [[자동 음성 인식]]의 특징·음향 모델·발음 사전·언어 모델·디코더 구성, [[DNN-HMM]] 전환에서 교체된 GMM·유지된 HMM과 [[Whisper]]의 audio-conditioned token 생성 경로
+- [[Whisper]]의 30초 log-Mel·Transformer encoder–decoder, 언어·전사/X→English·timestamp·`nospeech` token과 최초 공개 checkpoint·Large V2 평가·장문 decoding procedure의 버전 경계
+- [[단어 오류율]]의 치환·삭제·삽입, 상대 오류 감소와 퍼센트포인트 차이, text normalization·문자 단위 평가와 평균 WER가 숨기는 환각·언어·화자·잡음별 실패
 - [[Wikidata]]의 언어 중립 Q/P 식별자와 다언어 label·sitelink, [[Wikibase 데이터 모델]]의 qualifier·reference·rank·unknown/no value
 - [[SPARQL]]의 triple pattern·join·filter·property path와 자동 추론의 차이, live Wikidata Query Service의 timeout·공유 자원 경계
 - [[Word2Vec]]의 [[CBOW]]·[[Skip-gram]] 예측 방향, hierarchical softmax와 negative sampling의 시기·목적 차이, SGNS와 shifted PMI 행렬 분해의 연결
@@ -284,6 +287,8 @@ related:
 - [[086_잠재 확산 모델과 Stable Diffusion v1 공개]]
 - [[잠재 확산 모델]]
 - [[Stable Diffusion]]
+- [[087_Whisper와 대규모 약한 감독 음성 인식]]
+- [[Whisper]]
 - [[076_파운데이션 모델 보고서와 AI 생태계]]
 - [[파운데이션 모델]]
 - [[077_InstructGPT와 인간 선호 정렬]]
@@ -408,7 +413,9 @@ related:
 
 ## 현재 상태
 
-소스 86개, 참고 자료 0개, 개념 161개, 개체 29개, 분석 22개와 메타 문서 3개, 총 301개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 270개는 `verified`, 해석적 문서 28개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 328개 외부 근거와 172개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 87개, 참고 자료 0개, 개념 162개, 개체 29개, 분석 22개와 메타 문서 3개, 총 303개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 272개는 `verified`, 해석적 문서 28개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 332개 외부 근거와 174개 불변 raw artifact가 레지스트리에 등록돼 있다.
+
+[[087_Whisper와 대규모 약한 감독 음성 인식]]과 [[Whisper]]는 기존 ASR이 만든 자동 transcript를 학습한 자료라는 설명을 뒤집고, 웹에 이미 짝지어진 오디오-전사 쌍에서 기계 생성 transcript를 탐지·제거한 실제 수집 절차를 복원했다. 번역은 X→English로 한정하고, 최초 다섯 규모·아홉 checkpoint와 논문의 Large V2 결과, 평가 dataset 미세조정이 없는 zero-shot, LibriSpeech·MLS·VoxPopuli·CoVoST2·Kincaid46의 서로 다른 결과를 분리했다. 30초 창·text normalizer·장문 decoding heuristic·환각·언어 불균형과 모델·추론 코드 공개 대 전체 학습 자료·코드 미공개도 같은 장부에 기록했다.
 
 [[086_잠재 확산 모델과 Stable Diffusion v1 공개]], [[잠재 확산 모델]], [[Stable Diffusion]]은 일반 LDM 논문과 공개 v1 체크포인트를 분리했다. 512×512×3에서 64×64×4로 옮기는 변화는 공간 위치 64배와 전체 스칼라 48배 감소로 구분하고, 실제 연산 절감률을 고정 배수로 단정하지 않는다. 논문 모델의 학습 가능한 조건 Transformer와 v1의 동결 CLIP ViT-L/14, 공개 code·weight와 CreativeML OpenRAIL-M 제한, 로컬 추론 메모리 조건과 256개 A100 전체 훈련도 서로 다른 장부로 기록했다.
 
