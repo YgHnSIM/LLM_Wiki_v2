@@ -9,7 +9,7 @@ aliases:
 tags:
   - type/meta
 created: '2026-05-07'
-updated: '2026-07-21'
+updated: '2026-07-22'
 lifecycle: active
 verification: verified
 artifacts: []
@@ -3407,6 +3407,20 @@ raw 등록 해시:
 - 번역·해설 스킬 검사는 `valid_pairs: 1`, 오류 0을 확인했고, 원문–번역 H1/H2·본문 block·27개 link의 대상과 순서가 일치했다. 두 결과 파일은 UTF-8·LF·BOM 없음·끝줄 개행이며 `Reading Level`·`읽기 수준` UI 단락은 없다.
 - 1차 근거는 PaLM 논문의 architecture·data·distributed training·evaluation·memorization·contamination·bias/toxicity·model card와 Appendix B·F에 한정했다. 논문은 weight release를 보고하지 않으므로, publication 공개를 공개 weight로 확대하지 않는다.
 - `source:ready -- 083`은 96개 회귀 테스트와 294개 Markdown strict lint를 통과해 320개 evidence와 166개 raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 566개 HTML을 만들고 6,253개 wiki link를 모두 해소했다. 별도 `reading-level:check`도 외부 원문 109개, 번역·해설 162개, raw Markdown 167개, 위키 Markdown 294개에서 UI 단락 0개를 확인했고, 번역 정규화 검사는 표준 `원본 출처:` 81개와 변경 필요 0개를 확인했다.
+
+## [2026-07-22] content | PaLM 세 규모 외삽과 창발 판정 보강
+
+변경 내용:
+
+- [[손실 곡선과 능력 곡선 사이]]에 PaLM 8B·62B·540B의 BIG-bench 5-shot `discontinuity` 정의를 추가했다. 이는 수학적 불연속을 직접 관측한 값이 아니라 8B→62B 두 점의 log-linear 변화로 외삽한 540B 값과 실제 normalized preferred metric의 잔차다.
+- `logical_sequence`의 13%→25%→87%, 예측 약 37%와 실제 값의 약 +50%p 차이, 150개 text task 중 잔차 +10%p 초과 25%·+20%p 초과 15%를 원 논문 Figure 5에 묶어 기록했다.
+- 8B·540B의 780B-token checkpoint와 선택 실수로 795B token을 쓴 62B 평가를 구분했다. Appendix F의 795B-token baseline과, 600B checkpoint에서 갱신·조정한 data mixture로 재개해 1.325T까지 학습한 62B variant의 비교는 token·FLOP·mixture가 함께 바뀐 대조이며, 일부 checkpoint의 비단조성과 540B과의 잔여 격차를 함께 남겼다.
+- PaLM 결과를 기존 Kaplan·GPT-3·FLAN·Bommasani·Wei·Schaeffer 비교에 넣어, 특정 두 점 외삽의 실패와 내부 알고리즘 상전이 판정을 분리했다. [[index]]와 [[overview]]의 근거 수·핵심 주제도 갱신했다.
+
+검증 결과와 남은 한계:
+
+- PaLM의 세 규모 비교는 같은 architecture family·vocabulary·shuffled mixture를 사용하지만, 관측 규모가 세 개뿐이고 62B의 training token이 15B 더 많다. 따라서 변화가 시작된 규모와 곡선의 연속성은 식별할 수 없다.
+- 분석은 확인된 수치와 이 위키의 합성 해석을 분리해 `verification: partial`을 유지한다. 전체 검증은 96개 회귀 테스트와 294개 Markdown strict lint를 통과해 320개 evidence와 166개 raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 566개 HTML을 만들고 6,260개 wiki link를 모두 해소했다.
 
 ## 관련 항목
 

@@ -9,7 +9,7 @@ aliases:
 tags:
   - type/meta
 created: '2026-05-07'
-updated: '2026-07-21'
+updated: '2026-07-22'
 lifecycle: active
 verification: verified
 artifacts: []
@@ -199,7 +199,7 @@ related:
 - [[ChatGPT 연구 미리보기 (2022)]]에서 구분하는 GPT-3.5 계열 모델, 대화형 RLHF, 다중 턴 인터페이스, moderation·피드백 배포 층과 지속 기억·현재 제품의 시간 경계
 - [[BLOOM]]에서 구분하는 176B decoder-only architecture, ROOTS의 언어·token 분포, 공공 HPC 학습과 문서·weight·code·data·license·실행 자원의 서로 다른 접근 층
 - [[공개 가중치와 재현 가능성은 같은 축인가]]에서 분리하는 검사·변형·재배포·재현·실행 비용·거버넌스 참여, 그리고 추론·평가·학습 재현이 요구하는 서로 다른 artifact와 자원
-- [[손실 곡선과 능력 곡선 사이]]에서 분리하는 2021년의 암묵적으로 유도된 행동이라는 넓은 창발, 2022년의 규모별 emergent ability, 평균 token cross-entropy·task score·능력 threshold와 metric·표본·관측 scale
+- [[손실 곡선과 능력 곡선 사이]]에서 분리하는 2021년의 암묵적으로 유도된 행동이라는 넓은 창발, 2022년의 규모별 emergent ability, PaLM의 세 점 log-linear 외삽 잔차·62B 장기 학습, 평균 token cross-entropy·task score·능력 threshold와 metric·표본·checkpoint·관측 scale
 - [[검색은 근거를 찾고 독해는 답을 찾는다]]에서 분리하는 단일 벡터·후기 상호작용·교차 인코더의 후보 생성/정밀 점수화 경계, retrieval recall, 답 EM·F1·faithfulness와 기권 calibration
 - [[검색 증강 생성]]에서 구분하는 원 RAG의 DPR–BART 잠재 문서 주변화, 고정 document encoder·색인과 학습되는 query encoder, 검색 provenance와 claim-level citation의 차이
 - [[전문가 혼합]]에서 구분하는 total parameters·token당 active expert, shared Transformer 경로, top-$k$ routing·capacity·load balancing과 memory·all-to-all communication 비용
@@ -420,7 +420,7 @@ related:
 
 `067`의 DPR·RAG 단일 발명 서사, BM25를 정확 일치로만 보는 대조, 최소 표지 자료·보편 우월·조건 없는 billion-scale 지연 시간, RAG의 GPT-2 생성기·passage 직접 감독·전체 색인 공동 학습, Sequence/Token 주변화와 비용의 혼동, 실시간 최신성·자동 인용·법률·의료·뉴스·다문서 요약의 직접 검증 주장도 공개 문서에서 교정했다. DPR의 SQuAD 예외, 원 RAG의 BART-large와 고정된 2018 Wikipedia 색인, query encoder만 포함한 검색기 학습, 82개 world-leader hot-swap 및 검색 passage와 claim-level citation의 차이를 함께 기록했다.
 
-[[손실 곡선과 능력 곡선 사이]]는 Bommasani의 넓은 emergence, Kaplan의 평균 token cross-entropy, Brown의 task별 GPT-3 곡선, Wei의 emergent ability 정의와 Schaeffer의 metric·표본 해상도 반론을 함께 읽는다. 암묵적으로 유도된 행동에서 benchmark 불연속을 바로 추론하지 않으며, 급격한 task score만으로 내부 질적 전환을 확정할 수도 없고 metric 효과만으로 모든 창발 가능성을 부정할 수도 없다는 한계를 기록했다.
+[[손실 곡선과 능력 곡선 사이]]는 Bommasani의 넓은 emergence, Kaplan의 평균 token cross-entropy, Brown의 task별 GPT-3 곡선, FLAN의 규모별 개입 효과, PaLM의 세 점 BIG-bench 외삽 잔차·62B 장기 학습, Wei의 emergent ability 정의와 Schaeffer의 metric·표본 해상도 반론을 함께 읽는다. 암묵적으로 유도된 행동이나 특정 두 점 외삽의 실패에서 내부 상전이를 바로 추론하지 않으며, 급격한 task score만으로 내부 질적 전환을 확정할 수도 없고 metric 효과만으로 모든 창발 가능성을 부정할 수도 없다는 한계를 기록했다.
 
 `066`의 GPT-2 대비 10배라는 비교 대상 오류, 문맥 내 학습의 내부 메커니즘 확정, 미세조정 제거와 광범위한 고정밀 성능, 175B에서의 불연속 창발, code benchmark·API 민주화·prompt engineering 산업·구체 훈련비와 후대 모델의 직접 계보 주장도 공개 문서에서 교정했다. zero·one·few-shot의 demonstration 수와 가중치 고정, SuperGLUE 71.8 대 fine-tuned 최고 89.0, TriviaQA 71.2, 자리수별 산술 exact match와 contamination filtering bug를 함께 기록했다.
 
