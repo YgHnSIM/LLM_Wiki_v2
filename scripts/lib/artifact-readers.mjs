@@ -17,14 +17,15 @@ const roleMetadata = Object.freeze({
   }),
   'source-essay': Object.freeze({
     routeRole: 'source-essay',
-    label: '원문 번역본',
+    label: '원문',
     directory: false,
     hideSourceMarker: true,
-    description: '수집 당시 형태를 그대로 보존한 한국어 원문 번역 자료입니다.',
+    description: '수집 당시 형태를 그대로 보존한 한국어 원문 자료입니다.',
   }),
   'editorial-reconstruction': Object.freeze({
     routeRole: 'reconstruction',
     label: '편집부 재구성',
+    switcherLabel: '원문',
     directory: false,
     hideSourceMarker: false,
     description: 'Upstream 원문이 없는 공식 장을 1차 문헌으로 재구성한 문서이며 원문 번역이 아닙니다.',

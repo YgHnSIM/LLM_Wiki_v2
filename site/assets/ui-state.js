@@ -12,6 +12,24 @@ export function normalizeText(value) {
     .trim();
 }
 
+export function publicationYear(value) {
+  const parsed = Number.parseInt(String(value ?? '').trim(), 10);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+export function publicationDecade(value) {
+  const year = publicationYear(value);
+  return year === null ? null : Math.floor(year / 10) * 10;
+}
+
+export function comparePublicationYears(leftValue, rightValue) {
+  const left = publicationYear(leftValue);
+  const right = publicationYear(rightValue);
+  if (left === null && right !== null) return 1;
+  if (left !== null && right === null) return -1;
+  return (left ?? 0) - (right ?? 0);
+}
+
 export function hasSearchScope(state = {}) {
   return ['q', 'category', 'verification', 'tag']
     .some((key) => normalizeText(state[key]));
@@ -87,4 +105,3 @@ export function primaryEvidence(evidence = []) {
     ?? entries.find((entry) => entry?.source?.published)
     ?? null;
 }
-

@@ -2,10 +2,12 @@ import {
   DIRECTORY_PAGE_SIZE,
   SEARCH_PAGE_SIZE,
   cleanDisplayAliases,
+  comparePublicationYears,
   hasSearchScope,
   nextPageSize,
   normalizeText,
   parseUiState,
+  publicationDecade,
   remainingCount,
   serializeUiState,
 } from './ui-state.js';
@@ -667,7 +669,12 @@ for (const filterGrid of document.querySelectorAll('[data-filter-grid]')) {
   const sortedCards = () => {
     const list = [...cards];
     const mode = sort?.value || 'default';
-    if (mode === 'title' || mode === 'title-asc') list.sort((a, b) => collator.compare(titleValue(a), titleValue(b)));
+    if (mode === 'chronological') {
+      list.sort((a, b) => {
+        return comparePublicationYears(a.dataset.publicationYear, b.dataset.publicationYear)
+          || originalOrder.get(a) - originalOrder.get(b);
+      });
+    } else if (mode === 'title' || mode === 'title-asc') list.sort((a, b) => collator.compare(titleValue(a), titleValue(b)));
     else if (mode === 'title-desc') list.sort((a, b) => collator.compare(titleValue(b), titleValue(a)));
     else if (mode === 'updated' || mode === 'updated-desc') list.sort((a, b) => dateValue(b) - dateValue(a) || collator.compare(titleValue(a), titleValue(b)));
     else if (mode === 'connections') list.sort((a, b) => numberValue(b, 'connections') - numberValue(a, 'connections') || collator.compare(titleValue(a), titleValue(b)));
@@ -700,10 +707,10 @@ for (const filterGrid of document.querySelectorAll('[data-filter-grid]')) {
     for (const label of eraLabels) label.remove();
     eraLabels.length = 0;
   };
-  const appendEraLabel = (year) => {
+  const appendEraLabel = (decade) => {
     const label = document.createElement('div');
     label.className = 'directory-era-label';
-    label.innerHTML = `<span>${year ? `${year}년대` : '연도 미상'}</span>`;
+    label.innerHTML = `<span>${decade === null ? '연도 미상' : `${decade}년대`}</span>`;
     eraLabels.push(label);
     filterGrid.append(label);
   };
@@ -721,15 +728,15 @@ for (const filterGrid of document.querySelectorAll('[data-filter-grid]')) {
     const visible = matching.slice(0, shownCount);
     const visibleSet = new Set(visible);
     clearEraLabels();
-    let previousEra = null;
-    const showEraLabels = isSourceDirectory && (sort?.value || 'default') === 'default';
+    let previousEra = Symbol('unset');
+    const showEraLabels = isSourceDirectory && (sort?.value || 'default') === 'chronological';
     for (const card of sorted) {
       const isMatch = matching.includes(card);
       if (showEraLabels && isMatch && visibleSet.has(card)) {
-        const year = card.dataset.publicationYear || '';
-        if (year !== previousEra) {
-          appendEraLabel(year);
-          previousEra = year;
+        const decade = publicationDecade(card.dataset.publicationYear);
+        if (decade !== previousEra) {
+          appendEraLabel(decade);
+          previousEra = decade;
         }
       }
       filterGrid.append(card);

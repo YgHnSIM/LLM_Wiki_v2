@@ -15,9 +15,10 @@ test('artifact reader roles preserve legacy distinctions', () => {
   assert.equal(artifactRoleMetadata('translation').hideSourceMarker, true);
   assert.equal(artifactRoleMetadata('translated-essay').label, '원문 번역본');
   assert.equal(artifactRoleMetadata('translated-essay').routeRole, 'translation');
-  assert.equal(artifactRoleMetadata('source-essay').label, '원문 번역본');
+  assert.equal(artifactRoleMetadata('source-essay').label, '원문');
   assert.equal(artifactRoleMetadata('source-essay').directory, false);
   assert.equal(artifactRoleMetadata('editorial-reconstruction').label, '편집부 재구성');
+  assert.equal(artifactRoleMetadata('editorial-reconstruction').switcherLabel, '원문');
   assert.equal(artifactRoleMetadata('editorial-reconstruction').routeRole, 'reconstruction');
   assert.equal(artifactRoleMetadata('editorial-commentary').routeRole, 'commentary');
   assert.equal(artifactRoleMetadata('commentary').hideSourceMarker, false);

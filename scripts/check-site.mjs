@@ -200,6 +200,13 @@ if (!heroSourceAllLink || fileForUrl(heroSourceAllLink) !== fileForUrl(siteUrl('
   errors.push('Home hero must include an all-sources link to /sources/.');
 }
 
+const sourcesFile = fileForUrl(siteUrl('/sources/'));
+const sourcesHtml = htmlCache.get(sourcesFile) ?? await fs.readFile(sourcesFile, 'utf8');
+const sourceSortControl = sourcesHtml.match(/<select id="sort-sources"[\s\S]*?<\/select>/i)?.[0] ?? '';
+if (!sourceSortControl.includes('<option value="chronological">연대순</option>')) {
+  errors.push('Source directory must expose the chronological sort option.');
+}
+
 const searchIndex = JSON.parse(await fs.readFile(path.join(distDir, 'search-index.json'), 'utf8'));
 const expectedHeroSourceNumbers = searchIndex
   .filter((entry) => entry.sourceNumber)

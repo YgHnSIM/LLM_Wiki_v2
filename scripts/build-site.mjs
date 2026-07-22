@@ -311,6 +311,7 @@ for (const document of grouped.sources) {
       sourceUrl,
       routeRole: role.routeRole,
       label: role.label,
+      switcherLabel: role.switcherLabel ?? role.label,
       description: role.description,
       directory: role.directory,
     };
@@ -836,7 +837,8 @@ function renderCategoryPage(key) {
       <div class="directory-select-control">
         <label for="sort-${key}">정렬</label>
         <select id="sort-${key}" data-filter-sort>
-          <option value="default">기본순</option>
+          <option value="default">${key === 'sources' ? '번호순' : '기본순'}</option>
+          ${key === 'sources' ? '<option value="chronological">연대순</option>' : ''}
           <option value="title">제목순</option>
           <option value="updated">최근 갱신순</option>
           <option value="connections">연결 많은순</option>
@@ -995,7 +997,7 @@ function renderArtifactSwitcher(document, activeRole = 'note') {
     <span class="reading-switcher-label">자료 보기</span>
     <div class="reading-switcher-links">${destinations.map((destination, index) => {
       const active = destination.routeRole === activeRole;
-      return `<a class="reading-switcher-link reading-switcher-link--${index + 1}" href="${sitePath(destination.url)}"${active ? ' aria-current="page"' : ''}><span>${String(index + 1).padStart(2, '0')}</span><strong>${escapeHtml(destination.label)}</strong></a>`;
+      return `<a class="reading-switcher-link reading-switcher-link--${index + 1}" href="${sitePath(destination.url)}"${active ? ' aria-current="page"' : ''}><span>${String(index + 1).padStart(2, '0')}</span><strong>${escapeHtml(destination.switcherLabel ?? destination.label)}</strong></a>`;
     }).join('')}</div>
   </nav>`;
 }

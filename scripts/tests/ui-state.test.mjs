@@ -4,9 +4,12 @@ import {
   DIRECTORY_PAGE_SIZE,
   SEARCH_PAGE_SIZE,
   cleanDisplayAliases,
+  comparePublicationYears,
   hasSearchScope,
   nextPageSize,
   parseUiState,
+  publicationDecade,
+  publicationYear,
   primaryEvidence,
   remainingCount,
   serializeUiState,
@@ -30,6 +33,21 @@ test('search and directory URL state keeps meaningful values only', () => {
   const directory = parseUiState('?q=shannon&verification=verified&view=cards', { directory: true });
   assert.equal(directory.view, 'cards');
   assert.equal(serializeUiState(directory, { directory: true }).toString(), 'q=shannon&verification=verified&view=cards');
+
+  const chronological = parseUiState('?sort=chronological', { directory: true });
+  assert.equal(chronological.sort, 'chronological');
+  assert.equal(serializeUiState(chronological, { directory: true }).toString(), 'sort=chronological');
+});
+
+test('publication years normalize to decade buckets and keep unknown years separate', () => {
+  assert.equal(publicationYear('1948'), 1948);
+  assert.equal(publicationYear(''), null);
+  assert.equal(publicationDecade('1948'), 1940);
+  assert.equal(publicationDecade('2000'), 2000);
+  assert.equal(publicationDecade('unknown'), null);
+  assert.ok(comparePublicationYears('1948', '1960') < 0);
+  assert.ok(comparePublicationYears('unknown', '1960') > 0);
+  assert.equal(comparePublicationYears('', 'unknown'), 0);
 });
 
 test('blank search is gated while a filter creates a valid scope', () => {
@@ -63,4 +81,3 @@ test('primary evidence prefers supporting published records', () => {
   assert.equal(primaryEvidence([context, supplement]).sourceId, 'context');
   assert.equal(primaryEvidence([{ sourceId: 'missing', relation: 'supports', source: null }]), null);
 });
-
