@@ -4062,6 +4062,30 @@ raw 등록 해시:
 - `source:ready -- 104`는 96개 회귀 테스트와 333개 Markdown strict lint를 통과해 408개 evidence와 206개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 645개 HTML을 만들고 7,497개 wiki link를 모두 해소했으며, 42,481개 local reference와 검색 항목 332개를 검사했다.
 - 다음 순차 입력은 공식 105 `Multimodal Integration Unified Architectures for Cross-Modal AI Understanding`다.
 
+## [2026-07-22] ingest | 통합 멀티모달 아키텍처의 공유 범위와 입출력 경계
+
+변경 내용:
+
+- 공식 105 `Multimodal Integration Unified Architectures for Cross-Modal AI Understanding`를 원문과 같은 113행, H1 1개·H2 6개와 Markdown link 10개의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 첫 제목 바로 뒤에 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않았다.
+- 검증된 번역·해설을 신규 raw 두 파일로 등록했다. 번역 SHA-256은 `16de8c3bb17d206cbe8126c7a900e82b8fc32d1ecc009e01a300f533ab35dbed`, 해설은 `8f0f548133884dde7c54a89448712b99a632295754c01f66b4af5689694d093f`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]]를 만들었다. ‘통합’을 joint embedding·공통 sequence·shared core·공동 objective·checkpoint·제품 interface로 분해하고, training modality·input·output·실제 rollout을 별도 장부로 정리했다.
+- 기존 [[멀티모달 대규모 언어 모델]]을 보강했다. Encoder–bridge–decoder 계열에 ImageBind·Unified-IO 2·Gemini 1.0·GPT-4o·Chameleon·Emu3를 연결하고, shared Transformer core가 modality tokenizer·encoder·decoder의 제거를 뜻하지 않는다는 계산 경계를 추가했다.
+- 기존 [[사전 학습 지식은 과제에 어떻게 도착하는가]]를 보강했다. Joint embedding, modular bridge, shared encoder-decoder와 early-fusion autoregressive core에서 사전 학습 지식과 gradient가 과제에 도착하는 위치를 비교했다. 기존 분석이 새 질문을 수용하므로 별도 분석 문서는 만들지 않았다.
+- ImageBind·Unified-IO 2·Gemini 1.0·GPT-4o·Chameleon·Emu3 논문과 Emu3 공식 model release 1차 근거 일곱 건을 등록하고 기존 CLIP·Flamingo·GPT-4 근거를 재사용했다. [[index]]와 [[overview]]를 source 104개·concept 176개·entity 29개·analysis 22개·비메타 331개·전체 334개, 공식 범위 001–046·048–105와 다음 공식 106 DeepSeek R1 기준으로 갱신했다.
+- 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 204개, raw Markdown 209개, 위키 Markdown 334개에서 UI 단락 0개를 확인했다. 번역 정규화 검사는 번역 102개와 표준 `원본 출처:` 102개, 변경 필요 0개를 확인했다.
+
+검증 정정과 남은 한계:
+
+- 원 웹글의 실제 게시일은 2025-09-15이고 2024는 책의 사건 연도 표지다. 2024년 동시대 기록이 아니라 후대 회고로 취급한다.
+- 통합 멀티모달 architecture는 2024년에 처음 등장하지 않았다. CLIP은 2021년 joint embedding, Flamingo는 2022년 gated cross-attention, ImageBind는 2023년 여섯 modality embedding을 공개했고 Gemini 1.0과 Unified-IO 2도 2023년 12월에 공개됐다. 2024년은 GPT-4o·Chameleon·Emu3처럼 서로 다른 통합 전략이 분화·제품화된 시점으로 기록한다.
+- GPT-4V의 architecture는 비공개이므로 별도 경로의 후기 융합 pipeline이라고 단정하지 않는다. Gemini 1.0은 pretrained family report의 native interleaved text·image output과 post-trained API·Apps Model Card의 generated-text output을 분리하고, GPT-4o도 공개된 joint training·입출력·rollout 범위만 기록해 tokenizer·bridge·layer·loss의 빈칸을 추측하지 않는다.
+- Unified-IO 2는 single encoder-decoder core를 쓰지만 pretrained ViT·AST와 VQ-GAN tokenizer를, Chameleon·Emu3는 별도 visual tokenizer를 사용한다. Shared core·discrete token·end-to-end를 raw pixel·waveform부터 모든 component가 하나라는 주장으로 확대하지 않는다.
+- Dense attention weight는 정보 혼합 계수이며 token이나 expert 계산을 자동으로 건너뛰는 compute routing이 아니다. 통합 model의 효율은 modality token 수, encoder·decoder, attention pattern, hardware·latency와 동일 품질 조건에서 따로 측정한다.
+- ImageBind의 joint embedding은 기본적으로 retrieval·classification·composition을 지원하지만 자체 open-ended generator는 아니다. Emu3도 공통 8B architecture family와 별개로 공개 post-training weight가 understanding용 Chat과 image generation용 Gen으로 나뉜다. Model마다 input·output 방향과 checkpoint가 다르므로 text·image·audio·video를 모두 같은 checkpoint가 이해·생성한다고 일반화하지 않는다.
+- 원 웹글의 human-level fluency와 교육·접근성·의료·robotics·자율주행·smart-home 변혁은 task·dataset·metric·사용자·안전·배포 자료가 없다. 유망한 사용례와 검증된 현장 효과를 구분한다.
+- `source:ready -- 105`는 96개 회귀 테스트와 334개 Markdown strict lint를 통과해 415개 evidence와 208개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 648개 HTML을 만들고 7,538개 wiki link를 모두 해소했으며, 42,719개 local reference와 검색 항목 333개를 검사했다.
+- 다음 순차 입력은 공식 106 `DeepSeek R1 Architectural Innovation in Reasoning Models`다.
+
 ## 관련 항목
 
 - [[index]]

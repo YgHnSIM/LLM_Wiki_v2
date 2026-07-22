@@ -26,13 +26,13 @@ related:
 
 공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism (2015)**이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-21 현재 원문을 제공하지 않는다.
 
-따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 103개는 공식 001–046·048–104를 다룬다. [[104_LLM 에이전트의 추론-행동 루프와 자율성 경계]]까지 공개했으며, 다음 순차 입력은 공식 105 `Multimodal Integration Unified Architectures for Cross-Modal AI Understanding`다.
+따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 104개는 공식 001–046·048–105를 다룬다. [[105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]]까지 공개했으며, 다음 순차 입력은 공식 106 `DeepSeek R1 Architectural Innovation in Reasoning Models`다.
 
 숫자 badge는 정규 source의 공식 장 번호에만 쓴다. 비번호 reference가 추가되면 번호 source 뒤에서 `참고`로 표시하며, 목록 위치를 `001` 같은 장 번호로 바꾸지 않는다. 같은 장의 검증 노트·번역·해설은 서로 다른 장이 아니라 하나의 source 묶음에 속한다.
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 103개, reference 0개, concept 176개, entity 29개, analysis 22개를 합친 비메타 문서 330개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 104개, reference 0개, concept 176개, entity 29개, analysis 22개를 합친 비메타 문서 331개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -54,7 +54,7 @@ related:
 | 대화 인터페이스는 모델 능력과 신뢰를 어떻게 바꾸나 | [[007_ELIZA]] | [[077_InstructGPT와 인간 선호 정렬]] → [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]] → [[ChatGPT 연구 미리보기 (2022)]] | [[ELIZA에서 LLM으로]] |
 | 음성 인식에서 학습되는 경계는 어떻게 넓어졌나 | [[013_은닉 마르코프 모델과 통계적 음성 인식]] | [[041_심층 신경망 음향 모델과 DNN-HMM 전환]] → [[087_Whisper와 대규모 약한 감독 음성 인식]] → [[Whisper]] → [[단어 오류율]] | [[규칙 기반 AI에서 데이터 기반 학습으로]] |
 | 프롬프트는 추론 성능을 어떻게 바꾸나 | [[067_GPT-3와 문맥 내 학습]] | [[080_사고 연쇄 프롬프팅과 추론 행동 유도]] → [[사고 연쇄 프롬프팅]] → [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]] → [[079_HELM과 다차원 언어 모델 평가]] | [[손실 곡선과 능력 곡선 사이]] |
-| 이미지·동영상 조건은 생성 모델에 어떻게 들어가나 | [[070_CLIP과 대조적 언어-이미지 사전 학습]] | [[CLIP]] → [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]] → [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]] → [[멀티모달 대규모 언어 모델]] → [[096_GPT-4의 멀티모달 공개·시험 성능·안전 경계]] → [[GPT-4]] → [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] → [[086_잠재 확산 모델과 Stable Diffusion v1 공개]] → [[잠재 확산 모델]] → [[Stable Diffusion]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
+| 이미지·동영상 조건은 생성 모델에 어떻게 들어가나 | [[070_CLIP과 대조적 언어-이미지 사전 학습]] | [[CLIP]] → [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]] → [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]] → [[멀티모달 대규모 언어 모델]] → [[105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]] → [[096_GPT-4의 멀티모달 공개·시험 성능·안전 경계]] → [[GPT-4]] → [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] → [[086_잠재 확산 모델과 Stable Diffusion v1 공개]] → [[잠재 확산 모델]] → [[Stable Diffusion]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
 | 모델 공개는 곧 재현 가능성을 뜻하나 | [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] | [[076_파운데이션 모델 보고서와 AI 생태계]] → [[082_BLOOM과 공개 접근 다국어 LLM]] → [[BLOOM]] → [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]] → [[LLaMA 1]] → [[090_공개 가중치 LLM 파동과 서로 다른 공개 범위]] | [[공개 가중치와 재현 가능성은 같은 축인가]] |
 | 희소 모델의 ‘크기’는 무엇을 뜻하나 | [[069_전문가 혼합과 희소 활성 스케일링]] | [[097_Mixtral의 생산 배포 효율 주장과 증거 경계]] → [[GLaM에서 Mixtral까지의 희소 MoE 확장]] → [[Mixtral 8x7B]] | [[총 매개변수와 활성 계산량은 같은 축인가]] |
 | 학습 데이터의 양과 구성을 어떻게 읽나 | [[063_T5와 Text-to-Text 통합 프레임워크]] | [[066_신경 언어 모델의 스케일링 법칙]] → [[067_GPT-3와 문맥 내 학습]] → [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] → [[The Pile]] → [[078_Chinchilla와 계산 최적 언어 모델 학습]] → [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]] → [[090_공개 가중치 LLM 파동과 서로 다른 공개 범위]] | [[데이터 품질과 분포 다양성은 같은 축인가]] |
@@ -67,7 +67,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 103개 소스의 범위
+## 104개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -172,6 +172,7 @@ related:
 - [[102_지속 사전 학습의 연표와 지식 갱신 경계]]는 2025년 최초성 서사를 DAPT·lifelong pretraining·continual knowledge learning·CPT의 2020–2022년 계보로 바로잡고, [[지속 사전 학습]]의 새 분포 적응·이전 능력 보존·지식 교정과 PEFT·RAG·RLHF·배포 운영의 경계를 검증한다.
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]]은 GLaM·Mixtral의 total·active parameter와 token별 routing을 복원하고, 2024년 최초성·Meta 귀속·dense 계산의 제곱 증가·깨끗한 domain expert·민주화 과장을 교정한다.
 - [[104_LLM 에이전트의 추론-행동 루프와 자율성 경계]]는 ReAct·Toolformer·Reflexion·Generative Agents의 2022–2023년 선행 계보와 2024년 WebArena·SWE-bench·OSWorld·ToolEmu의 평가 범위를 복원하고, model·orchestrator·tool·state·policy를 분리해 자율성·memory·학습·안전·응용 성과의 과장을 교정한다.
+- [[105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]]는 2025년 9월에 게시된 2024년 회고를 CLIP·Flamingo·ImageBind·Gemini 1.0·Unified-IO 2의 2021–2023년 선행 경로와 GPT-4o·Chameleon·Emu3의 2024년 분화에 대조하고, shared embedding·core·token·objective·checkpoint·제품 interface 및 학습·입력·출력·rollout 범위를 분리한다.
 
 ## 현재 핵심 주제
 
@@ -240,6 +241,7 @@ related:
 - [[100_희소·밀집 검색의 결합과 다단계 순위화]]와 [[하이브리드 검색]]에서 구분하는 병렬 후보 합집합, sparse-first cascade, 융합 뒤 cross-encoder, 점수 정규화·RRF와 단계별 candidate recall·latency·index cost
 - [[101_LoRA 이후 PEFT 변형의 설계 축과 연표]]와 [[저순위 적응]]에서 구분하는 task objective의 위치와 adapter 내부 rank allocation·magnitude/direction·random basis sharing·rank scaling·quantization initialization
 - [[102_지속 사전 학습의 연표와 지식 갱신 경계]]와 [[지속 사전 학습]]에서 구분하는 시간순 비표지 corpus·LM loss, 새 분포 적응·이전 능력 보존·지식 교정, replay·distillation·규제·parameter 확장과 PEFT·RAG·RLHF·배포 운영의 서로 다른 위치
+- [[105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]]와 [[멀티모달 대규모 언어 모델]]에서 구분하는 joint embedding·modular bridge·shared encoder-decoder·early-fusion token core, modality tokenizer·decoder 경계와 model I/O·제품 rollout
 - [[전문가 혼합]]에서 구분하는 total parameters·token당 active expert, shared Transformer 경로, top-$k$ routing·capacity·load balancing과 memory·all-to-all communication 비용
 - [[097_Mixtral의 생산 배포 효율 주장과 증거 경계]]와 [[Mixtral 8x7B]]에서 구분하는 2023년 12월 공개, 46.7B total·12.9B active parameters, 고정 top-2, Apache 2.0 공개 가중치·추론 경로와 workload별 production SLO, topic expert가 아닌 routing locality
 - [[총 매개변수와 활성 계산량은 같은 축인가]]에서 비교하는 dense non-embedding $N$, sparse total·active parameters, FLOPs·memory·communication·wall-clock·data·quality와 논문 안/논문 사이 비교 경계

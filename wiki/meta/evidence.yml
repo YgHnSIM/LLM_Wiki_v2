@@ -3488,3 +3488,63 @@ sources:
     doi: 10.1073/pnas.1611835114
     url: https://www.pnas.org/doi/10.1073/pnas.1611835114
     language: en
+  girdhar-et-al-2023-imagebind:
+    title: 'ImageBind: One Embedding Space To Bind Them All'
+    authors: [Rohit Girdhar, Alaaeldin El-Nouby, Zhuang Liu, Mannat Singh, Kalyan Vasudev Alwala, Armand Joulin, Ishan Misra]
+    published: 2023
+    source_type: primary
+    kind: conference-paper
+    url: https://openaccess.thecvf.com/content/CVPR2023/html/Girdhar_ImageBind_One_Embedding_Space_To_Bind_Them_All_CVPR_2023_paper.html
+    language: en
+  lu-et-al-2023-unified-io-2:
+    title: 'Unified-IO 2: Scaling Autoregressive Multimodal Models with Vision, Language, Audio, and Action'
+    authors: [Jiasen Lu, Christopher Clark, Sangho Lee, Zichen Zhang, Savya Khosla, Ryan Marten, Derek Hoiem, Aniruddha Kembhavi]
+    published: 2023
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2312.17172
+    url: https://arxiv.org/abs/2312.17172
+    language: en
+  gemini-team-2023-gemini-1:
+    title: 'Gemini: A Family of Highly Capable Multimodal Models'
+    authors: [Gemini Team]
+    published: 2023
+    source_type: primary
+    kind: technical-report
+    doi: 10.48550/arXiv.2312.11805
+    url: https://arxiv.org/abs/2312.11805v1
+    language: en
+  openai-2024-gpt4o-release:
+    title: Hello GPT-4o
+    authors: [OpenAI]
+    published: 2024
+    source_type: primary-release
+    kind: official-blog
+    url: https://openai.com/index/hello-gpt-4o/
+    language: en
+  chameleon-team-2024-chameleon:
+    title: 'Chameleon: Mixed-Modal Early-Fusion Foundation Models'
+    authors: [Chameleon Team]
+    published: 2024
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2405.09818
+    url: https://arxiv.org/abs/2405.09818v1
+    language: en
+  wang-et-al-2024-emu3:
+    title: 'Emu3: Next-Token Prediction is All You Need'
+    authors: [Xinlong Wang, Xiaosong Zhang, Zhengxiong Luo, Quan Sun, Yufeng Cui, Jinsheng Wang, Fan Zhang, Yueze Wang, Zhen Li, Qiying Yu, Yingli Zhao, Yulong Ao, Xuebin Min, Tao Li, Boya Wu, Bo Zhao, Bowen Zhang, Liangdong Wang, Guang Liu, Zheqi He, Xi Yang, Jingjing Liu, Yonghua Lin, Tiejun Huang, Zhongyuan Wang]
+    published: 2024
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2409.18869
+    url: https://arxiv.org/abs/2409.18869
+    language: en
+  baai-2024-emu3-release:
+    title: 'Emu3: Next-Token Prediction is All You Need — Official Repository and Model Releases'
+    authors: [BAAI Emu3 Team]
+    published: 2024
+    source_type: primary-release
+    kind: software-repository
+    url: https://github.com/baaivision/Emu3
+    language: en

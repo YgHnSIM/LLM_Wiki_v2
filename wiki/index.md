@@ -134,6 +134,7 @@ related:
 - [[102_지속 사전 학습의 연표와 지식 갱신 경계]] — 2025년 최초성 서사를 바로잡고 순차 corpus의 새 분포 적응·이전 능력 보존·지식 교정과 PEFT·RAG·RLHF·배포 운영의 경계를 검증한 소스 (근거 10개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 - [[104_LLM 에이전트의 추론-행동 루프와 자율성 경계]] — 2024년 기원설을 선행 tool-use·memory 연구와 장기 benchmark로 교정하고 model·runtime·권한·학습·안전 경계를 검증한 소스 (근거 10개)
+- [[105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]] — 2024년 단일 돌파 서사를 2021–2024년 joint embedding·bridge·shared core·early-fusion 경로로 교정하고 입출력·학습·제품 rollout·평가 경계를 검증한 소스 (근거 10개)
 
 ## 개체
 
@@ -203,7 +204,7 @@ related:
 - [[The Pile]] — 22개 component·epoch 가중치·BPB 평가를 deduplication·decontamination·underlying rights와 구분하는 825.18 GiB 영어 중심 말뭉치 (근거 2개)
 - [[CLIP]] — 이미지·텍스트 이중 인코더를 대칭 대조 손실로 정렬하고 class prompt를 제로샷 분류기 weight처럼 사용하는 시각-언어 모델 (근거 4개)
 - [[Flamingo]] — 동결 시각·언어 backbone 사이의 64개 시각 token 병목과 gated cross-attention으로 멀티모달 문맥 내 생성을 수행하는 모델 계열 (근거 1개)
-- [[멀티모달 대규모 언어 모델]] — 비언어 입력을 image encoder·bridge·언어 decoder로 연결하되 입력·동결 경계·출력 signature와 공개 수준을 model별로 구분해야 하는 시스템 계열 (근거 9개)
+- [[멀티모달 대규모 언어 모델]] — 비언어 입력을 image encoder·bridge·언어 decoder로 연결하되 입력·동결 경계·출력 signature와 공개 수준을 model별로 구분해야 하는 시스템 계열 (근거 16개)
 - [[GPT-4]] — base·post-training·multimodal interface·제품 snapshot을 분리하고 공개 입출력·시험 protocol·UBE percentile·안전 결과와 비공개 architecture의 경계를 기록한 모델 계열 (근거 7개)
 - [[DALL·E (2021)]] — 1,024개 이산 이미지 토큰과 최대 256개 텍스트 토큰을 공동 자기회귀 모델링하고 별도 대조 모델로 후보를 재순위화한 2021년 생성 시스템 (근거 4개)
 - [[DALL·E 2]] — 동결 CLIP 잠재 공간에서 image embedding을 생성하는 prior와 계층적 확산 decoder를 결합한 2022년 텍스트-이미지 생성 시스템 (근거 3개)
@@ -352,7 +353,7 @@ related:
 - [[데이터 품질과 분포 다양성은 같은 축인가]] — WebText·C4·GPT-3·The Pile·Chinchilla를 비교해 품질 proxy·고유 pool·분포·sampling·반복·누적 token과 인과 한계를 분리한 분석 (근거 5개)
 - [[총 매개변수와 활성 계산량은 같은 축인가]] — dense $N$과 sparse MoE의 total·active parameters를 분리하고 FLOPs·memory·communication·wall-clock·data·quality 장부로 규모 비교 조건을 정리한 분석 (근거 8개)
 - [[같은 병렬 문장은 무엇을 학습시키는가]] — 병렬 문장쌍이 IBM SMT의 잠재 단어 정렬, seq2seq NMT의 target sequence, XLM TLM의 양방향 masked-token 문맥으로 쓰이는 차이를 비교한 분석 (근거 6개)
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 특징·전체 미세조정·저순위 adapter·시간순 base 갱신·외부 기억·prompt와 멀티모달 bridge–parameter update의 두 축을 비교하고 foundation–adapted–deployed 층위를 분리한 분석 (근거 35개)
+- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 특징·전체 미세조정·저순위 adapter·시간순 base 갱신·외부 기억·prompt와 멀티모달 bridge–parameter update의 두 축을 비교하고 foundation–adapted–deployed 층위를 분리한 분석 (근거 42개)
 - [[손실 곡선과 능력 곡선 사이]] — 평균 token loss·task score·능력 threshold와 PaLM의 세 점 외삽 잔차를 metric·표본·checkpoint·관측 scale로 구분한 분석 (근거 7개)
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]] — RNN·WaveNet·Transformer·FlashAttention을 표현 계산·sampling과 FLOPs·capacity·HBM traffic·wall-clock의 서로 다른 축으로 분리한 분석 (근거 6개)
 - [[검색은 근거를 찾고 독해는 답을 찾는다]] — 단일 벡터·후기 상호작용·교차 인코더의 후보 경계와 검색 재현율·독해 정확도·기권을 분리한 분석 (근거 11개)

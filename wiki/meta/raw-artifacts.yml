@@ -1854,3 +1854,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/agentic-ai-systems-autonomous-agents-reasoning-planning-tool-use
     sha256: aac606cff19fb8dec730d610ac8da629859e5bcb27c5e5db6fc2b52d2a30057a
+  - path: "raw/105_Multimodal Integration Unified Architectures for Cross-Modal AI Understanding.ko.md"
+    role: translation
+    order_prefix: "105"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/multimodal-integration-unified-architectures-cross-modal-ai-understanding
+    sha256: 16de8c3bb17d206cbe8126c7a900e82b8fc32d1ecc009e01a300f533ab35dbed
+  - path: "raw/105_Multimodal Integration Unified Architectures for Cross-Modal AI Understanding.commentary.ko.md"
+    role: commentary
+    order_prefix: "105"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/multimodal-integration-unified-architectures-cross-modal-ai-understanding
+    sha256: 8f0f548133884dde7c54a89448712b99a632295754c01f66b4af5689694d093f
