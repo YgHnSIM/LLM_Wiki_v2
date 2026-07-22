@@ -4367,6 +4367,522 @@ details.toc-card > nav > ol {
   }
 }
 
+/* Density and navigation improvements — keep the Lo-Fi archive register legible. */
+.directory-source-list[data-view='compact'] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  padding-top: 10px;
+  gap: 8px;
+}
+
+.listing-page .listing-hero h1 {
+  font-size: clamp(56px, 8vw, 96px);
+  line-height: 0.86;
+}
+
+.search-page .search-hero h1,
+.search-page .search-page-hero h1 {
+  font-size: clamp(50px, 7vw, 82px);
+  line-height: 0.92;
+}
+
+.article-page .article-title-block h1 {
+  font-size: clamp(48px, 6vw, 78px);
+  line-height: 0.9;
+}
+
+.directory-source-list[data-view='compact']::before {
+  display: none;
+}
+
+.directory-source-list[data-view='compact'] .source-card {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  min-height: 0;
+  margin: 0;
+  gap: 12px;
+  transform: none;
+}
+
+.directory-source-list[data-view='compact'] .source-number {
+  width: 58px;
+  min-height: 58px;
+  font-size: 29px;
+  letter-spacing: -0.09em;
+  -webkit-text-stroke-width: 1px;
+  text-shadow: 2px 0 var(--pink), -2px 0 var(--cyan);
+}
+
+.directory-source-list[data-view='compact'] .source-number::before {
+  inset: 5px -2px 3px 2px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.directory-source-list[data-view='compact'] .source-card-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  min-width: 0;
+  padding: 12px 15px;
+  border-width: 1px;
+  box-shadow: 3px 3px 0 rgb(23 23 17 / 18%);
+  gap: 5px 12px;
+  transform: none;
+}
+
+.directory-source-list[data-view='compact'] .source-card .card-meta {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 10px;
+}
+
+.directory-source-list[data-view='compact'] .source-card h2,
+.directory-source-list[data-view='compact'] .source-card h3 {
+  min-width: 0;
+  font-size: clamp(18px, 2.2vw, 24px);
+  line-height: 1.08;
+}
+
+.directory-source-list[data-view='compact'] .source-card-body > p,
+.directory-source-list[data-view='compact'] .source-card-body > .tag-list {
+  display: none;
+}
+
+.source-card-compact-meta {
+  display: none;
+}
+
+.directory-source-list[data-view='compact'] .source-card-compact-meta {
+  display: block;
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.directory-grid[data-view='compact'] {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+}
+
+.directory-grid[data-view='compact'] .note-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  min-height: 0;
+  padding: 15px 17px;
+  gap: 8px 14px;
+}
+
+.directory-grid[data-view='compact'] .note-card .card-meta,
+.directory-grid[data-view='compact'] .note-card > p,
+.directory-grid[data-view='compact'] .note-card .note-card-footer {
+  grid-column: 1 / -1;
+}
+
+.directory-grid[data-view='compact'] .note-card > p {
+  display: none;
+}
+
+.directory-grid[data-view='compact'] .note-card h2,
+.directory-grid[data-view='compact'] .note-card h3 {
+  font-size: clamp(19px, 2.3vw, 27px);
+}
+
+.directory-grid[data-view='compact'] .note-card .note-card-footer {
+  display: none;
+}
+
+.directory-era-label {
+  grid-column: 1 / -1;
+  padding: 18px 0 5px;
+  border-bottom: 1px solid var(--ink);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.directory-era-label:first-child {
+  padding-top: 4px;
+}
+
+.directory-era-label span::before {
+  display: inline-block;
+  width: 18px;
+  height: 2px;
+  margin: 0 7px 3px 0;
+  background: var(--pink);
+  content: '';
+  transform: rotate(-2deg);
+}
+
+.directory-view-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 44px;
+  gap: 5px;
+}
+
+.directory-tools > .directory-view-toggle {
+  display: inline-flex;
+  grid-template-columns: none;
+  border: 0;
+}
+
+.directory-view-toggle > span {
+  margin-right: 4px;
+}
+
+.directory-view-toggle button,
+.directory-load-more,
+.search-load-more {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  background: var(--paper-light);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.directory-view-toggle button[aria-pressed='true'] {
+  background: var(--cyan);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.directory-load-more,
+.search-load-more {
+  display: block;
+  margin: 18px auto 86px;
+  background: var(--yellow);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.directory-load-more:hover,
+.directory-load-more:focus-visible,
+.search-load-more:hover,
+.search-load-more:focus-visible {
+  background: var(--cyan);
+}
+
+.directory-load-more[hidden],
+.search-load-more[hidden] {
+  display: none;
+}
+
+.search-page-filters-panel {
+  border-bottom: 1px solid var(--ink);
+}
+
+.search-page-filters-panel > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  padding: 8px 0;
+  cursor: pointer;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.search-page-filters-panel > summary span {
+  color: var(--ink);
+}
+
+.search-page-filters-panel > .search-page-filters {
+  padding: 12px 0 18px;
+}
+
+.search-message--entry {
+  grid-column: 1 / -1;
+  min-height: 160px;
+  padding: 55px 20px;
+  border: 1px dashed var(--ink);
+  margin: 0;
+  text-align: center;
+}
+
+.search-result.is-active,
+.search-result[aria-selected='true'] {
+  outline: 0;
+  background: var(--cyan);
+}
+
+.breadcrumbs {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.breadcrumbs ol {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  gap: 8px;
+  list-style: none;
+}
+
+.breadcrumbs li {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.breadcrumbs li + li::before {
+  padding-right: 8px;
+  color: var(--muted);
+  content: '/';
+}
+
+.breadcrumbs .breadcrumb-current {
+  max-width: min(48ch, 52%);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.breadcrumbs .breadcrumb-current span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.article-page .article-title-block--long h1 {
+  font-size: clamp(48px, 6.4vw, 82px);
+}
+
+.article-page .article-title-block--very-long h1 {
+  font-size: clamp(42px, 5.5vw, 70px);
+}
+
+.article-details {
+  max-width: 760px;
+  border-top: 1px dashed rgb(23 23 17 / 45%);
+  margin-top: 18px;
+}
+
+.article-details > summary {
+  min-height: 40px;
+  padding: 8px 0;
+  cursor: pointer;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.article-details .aliases {
+  margin: 0 0 10px;
+}
+
+.article-secondary-facts {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0 0 10px;
+  gap: 8px 18px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.article-secondary-facts div {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.article-secondary-facts dt {
+  color: var(--muted);
+}
+
+.article-secondary-facts dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.article-facts dd {
+  max-width: 18ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.toc-card {
+  max-height: none;
+  overflow: visible;
+}
+
+.toc-card [data-toc-current] {
+  display: block;
+  overflow: hidden;
+  max-width: 100%;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.toc-card .toc-sublist {
+  padding: 0 0 0 12px;
+  margin: 0;
+  list-style: none;
+}
+
+.toc-card .toc-depth-3[hidden] {
+  display: none;
+}
+
+.reading-progress {
+  position: sticky;
+  z-index: 90;
+  top: 82px;
+  height: 4px;
+  overflow: hidden;
+  border: 1px solid var(--ink);
+  background: var(--paper-light);
+}
+
+.reading-progress span {
+  display: block;
+  width: var(--reading-progress, 0%);
+  height: 100%;
+  background: repeating-linear-gradient(90deg, var(--pink) 0 18px, var(--cyan) 18px 31px, var(--ink) 31px 33px);
+  transition: width 100ms linear;
+}
+
+.back-to-top {
+  position: fixed;
+  z-index: 95;
+  right: 22px;
+  bottom: 22px;
+  min-width: 82px;
+  min-height: 46px;
+  padding: 8px 12px;
+  border: var(--border);
+  background: var(--yellow);
+  box-shadow: 4px 4px 0 var(--ink);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  background: var(--cyan);
+}
+
+@media (max-width: 820px) {
+  .listing-hero {
+    padding: 62px 0 48px;
+  }
+
+  .listing-page .listing-hero h1 {
+    font-size: clamp(54px, 15vw, 94px);
+  }
+
+  .article-hero {
+    padding: 38px 0 44px;
+    gap: 38px;
+  }
+
+  .article-page .article-title-block h1 {
+    font-size: clamp(45px, 12vw, 76px);
+  }
+
+  .article-page .article-title-block--long h1 {
+    font-size: clamp(40px, 10vw, 62px);
+  }
+
+  .article-page .article-title-block--very-long h1 {
+    font-size: clamp(36px, 9vw, 54px);
+  }
+
+  .directory-tools {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .directory-view-toggle,
+  .directory-result-count {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+
+  .search-page-filters-panel:not([open]) > .search-page-filters {
+    display: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .listing-page .listing-hero h1 {
+    font-size: clamp(42px, 14vw, 58px);
+  }
+
+  .search-page .search-hero h1,
+  .search-page .search-page-hero h1 {
+    font-size: clamp(42px, 14vw, 58px);
+  }
+
+  .directory-source-list[data-view='compact'] .source-card {
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .directory-source-list[data-view='compact'] .source-number {
+    width: 48px;
+    min-height: 52px;
+    font-size: 24px;
+  }
+
+  .directory-source-list[data-view='compact'] .source-card-body {
+    padding: 10px 11px;
+    gap: 4px 8px;
+  }
+
+  .directory-source-list[data-view='compact'] .source-card h2,
+  .directory-source-list[data-view='compact'] .source-card h3 {
+    font-size: 18px;
+  }
+
+  .directory-source-list[data-view='compact'] .source-card-compact-meta {
+    font-size: 9px;
+  }
+
+  .breadcrumbs .breadcrumb-current {
+    max-width: 18ch;
+  }
+
+  .reading-progress {
+    top: 70px;
+  }
+
+  .back-to-top {
+    right: 14px;
+    bottom: 14px;
+  }
+}
+
+@media (forced-colors: active) {
+  .directory-view-toggle button[aria-pressed='true'],
+  .directory-load-more,
+  .search-load-more,
+  .back-to-top {
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .reading-progress span {
+    background: Highlight;
+  }
+}
+
 /* Relationship explorer — site-native Lo-Fi reading cards */
 .relationship-preview {
   padding: clamp(34px, 6vw, 62px) 0;

@@ -1,8 +1,16 @@
-const normalize = (value) => String(value ?? '')
-  .normalize('NFKC')
-  .toLocaleLowerCase('ko')
-  .replace(/\s+/g, ' ')
-  .trim();
+import {
+  DIRECTORY_PAGE_SIZE,
+  SEARCH_PAGE_SIZE,
+  cleanDisplayAliases,
+  hasSearchScope,
+  nextPageSize,
+  normalizeText,
+  parseUiState,
+  remainingCount,
+  serializeUiState,
+} from './ui-state.js';
+
+const normalize = normalizeText;
 
 const asArray = (value) => (Array.isArray(value) ? value : []);
 const collator = new Intl.Collator('ko', { numeric: true, sensitivity: 'base' });
@@ -181,22 +189,29 @@ for (const form of document.querySelectorAll('[data-site-search]')) {
   const indexUrl = form.dataset.indexUrl;
   if (!input || !results || !indexUrl) continue;
 
-  results.removeAttribute('role');
-  input.removeAttribute('aria-autocomplete');
-  input.removeAttribute('aria-expanded');
+  results.setAttribute('role', 'listbox');
+  results.setAttribute('aria-label', '검색 자동완성 결과');
+  input.setAttribute('role', 'combobox');
+  input.setAttribute('aria-autocomplete', 'list');
+  input.setAttribute('aria-expanded', 'false');
   let requestNumber = 0;
   let currentResults = [];
+  let activeIndex = -1;
 
   const announce = (message) => {
     if (externalStatus) externalStatus.textContent = message;
   };
   const openResults = () => {
     results.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
   };
   const closeResults = ({ invalidate = true } = {}) => {
     if (invalidate) requestNumber += 1;
     currentResults = [];
+    activeIndex = -1;
     results.hidden = true;
+    input.setAttribute('aria-expanded', 'false');
+    input.removeAttribute('aria-activedescendant');
     announce('');
   };
   const showLoading = () => {
@@ -208,6 +223,7 @@ for (const form of document.querySelectorAll('[data-site-search]')) {
   const renderResults = (ranked, query) => {
     results.replaceChildren();
     currentResults = ranked.map(({ entry }) => entry);
+    activeIndex = -1;
     const total = currentResults.length;
     announce(total ? `총 ${total}개 문서를 찾았습니다.` : '일치하는 문서가 없습니다.');
 
@@ -218,10 +234,13 @@ for (const form of document.querySelectorAll('[data-site-search]')) {
     }
 
     appendStatus(results, `총 ${total}개 문서`, { visuallyHidden: true, live: !externalStatus });
-    for (const entry of currentResults.slice(0, 8)) {
+    for (const [index, entry] of currentResults.slice(0, 8).entries()) {
       const link = document.createElement('a');
       link.className = 'search-result';
       link.href = entry.url;
+      link.id = `${input.id}-option-${index}`;
+      link.setAttribute('role', 'option');
+      link.setAttribute('aria-selected', 'false');
 
       const meta = document.createElement('span');
       meta.textContent = [entry.category, entry.verificationLabel || verificationLabel(entry.verification)]
@@ -237,9 +256,35 @@ for (const form of document.querySelectorAll('[data-site-search]')) {
     const allResults = document.createElement('a');
     allResults.className = 'search-all-results';
     allResults.href = searchPageUrl(query, form);
+    allResults.id = `${input.id}-option-all`;
+    allResults.setAttribute('role', 'option');
+    allResults.setAttribute('aria-selected', 'false');
     allResults.textContent = `전체 ${total}개 결과 보기`;
     results.append(allResults);
     openResults();
+  };
+
+  const options = () => [...results.querySelectorAll('[role="option"]')];
+  const setActiveOption = (index) => {
+    const items = options();
+    if (!items.length) return;
+    activeIndex = Math.max(-1, Math.min(index, items.length - 1));
+    for (const [itemIndex, item] of items.entries()) {
+      const active = itemIndex === activeIndex;
+      item.setAttribute('aria-selected', String(active));
+      item.classList.toggle('is-active', active);
+    }
+    if (activeIndex < 0) input.removeAttribute('aria-activedescendant');
+    else input.setAttribute('aria-activedescendant', items[activeIndex].id);
+  };
+  const moveActiveOption = (delta) => {
+    const items = options();
+    if (!items.length) return;
+    const next = activeIndex < 0
+      ? (delta > 0 ? 0 : items.length - 1)
+      : (activeIndex + delta + items.length) % items.length;
+    setActiveOption(next);
+    items[next].scrollIntoView({ block: 'nearest' });
   };
 
   const runSearch = async (query, thisRequest) => {
@@ -283,29 +328,30 @@ for (const form of document.querySelectorAll('[data-site-search]')) {
       closeResults();
       input.focus();
     } else if (event.key === 'ArrowDown' && !results.hidden) {
-      const firstLink = results.querySelector('a[href]');
-      if (firstLink) {
+      event.preventDefault();
+      moveActiveOption(1);
+    } else if (event.key === 'ArrowUp' && !results.hidden) {
+      event.preventDefault();
+      moveActiveOption(-1);
+    } else if (event.key === 'Home' && !results.hidden) {
+      event.preventDefault();
+      setActiveOption(0);
+    } else if (event.key === 'End' && !results.hidden) {
+      event.preventDefault();
+      setActiveOption(options().length - 1);
+    } else if (event.key === 'Enter' && activeIndex >= 0 && !results.hidden) {
+      const item = options()[activeIndex];
+      if (item) {
         event.preventDefault();
-        firstLink.focus();
+        window.location.assign(item.href);
       }
     }
   });
 
-  results.addEventListener('keydown', (event) => {
-    const links = [...results.querySelectorAll('a[href]')];
-    const current = links.indexOf(document.activeElement);
-    if (event.key === 'ArrowDown' && current >= 0 && current < links.length - 1) {
-      event.preventDefault();
-      links[current + 1].focus();
-    } else if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      if (current <= 0) input.focus();
-      else links[current - 1].focus();
-    } else if (event.key === 'Escape') {
-      event.preventDefault();
-      closeResults();
-      input.focus();
-    }
+  results.addEventListener('mousemove', (event) => {
+    const option = event.target.closest('[role="option"]');
+    if (!option) return;
+    setActiveOption(options().indexOf(option));
   });
 
   form.addEventListener('submit', (event) => {
@@ -333,6 +379,8 @@ if (searchPage) {
 
   if (input && results && status) {
     let requestNumber = 0;
+    let rankedResults = [];
+    let shownCount = SEARCH_PAGE_SIZE;
 
     const setSelectFromUrl = (control, value, fallback = '') => {
       if (!control) return;
@@ -340,26 +388,24 @@ if (searchPage) {
       control.value = [...control.options].some((option) => option.value === wanted) ? wanted : fallback;
     };
     const readUrl = () => {
-      const params = new URLSearchParams(window.location.search);
-      input.value = params.get('q') ?? '';
-      setSelectFromUrl(category, params.get('category'));
-      setSelectFromUrl(verification, params.get('verification'));
-      setSelectFromUrl(tag, params.get('tag'));
-      setSelectFromUrl(sort, params.get('sort'), 'relevance');
+      const state = parseUiState(window.location.search);
+      input.value = state.q;
+      setSelectFromUrl(category, state.category);
+      setSelectFromUrl(verification, state.verification);
+      setSelectFromUrl(tag, state.tag);
+      setSelectFromUrl(sort, state.sort, 'relevance');
     };
     const syncUrl = () => {
       const url = new URL(window.location.href);
-      const values = {
+      const params = serializeUiState({
         q: input.value.trim(),
         category: category?.value,
         verification: verification?.value,
         tag: tag?.value,
-        sort: sort?.value === 'relevance' ? '' : sort?.value,
-      };
-      for (const [key, value] of Object.entries(values)) {
-        if (value) url.searchParams.set(key, value);
-        else url.searchParams.delete(key);
-      }
+        sort: sort?.value,
+      });
+      for (const key of ['q', 'category', 'verification', 'tag', 'sort']) url.searchParams.delete(key);
+      for (const [key, value] of params.entries()) url.searchParams.set(key, value);
       window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
     };
     const matchesChoice = (selected, values) => {
@@ -396,19 +442,55 @@ if (searchPage) {
         } else element.append(document.createTextNode(part));
       }
     };
+    const loadMore = searchPage.querySelector('[data-search-load-more]') || (() => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'search-load-more';
+      button.dataset.searchLoadMore = '';
+      button.textContent = '더 보기';
+      results.after(button);
+      return button;
+    })();
+    const updateFilterSummary = () => {
+      const active = [input.value, category?.value, verification?.value, tag?.value]
+        .filter((value) => normalize(value)).length;
+      const filterCount = searchPage.querySelector('[data-search-filter-count]');
+      if (filterCount) filterCount.textContent = active ? `${active}개 적용` : '';
+      const panel = searchPage.querySelector('[data-search-filter-panel]');
+      if (panel && window.matchMedia('(max-width: 620px)').matches && !active) panel.open = false;
+    };
     const renderPageResults = (ranked) => {
       results.replaceChildren();
       const query = input.value.trim();
+      const scoped = hasSearchScope({
+        q: query,
+        category: category?.value,
+        verification: verification?.value,
+        tag: tag?.value,
+      });
+      if (!scoped) {
+        const empty = document.createElement('p');
+        empty.className = 'search-message search-message--entry';
+        empty.textContent = '검색어나 필터를 입력하면 결과가 표시됩니다.';
+        results.append(empty);
+        loadMore.hidden = true;
+        status.textContent = '검색어나 필터를 입력하면 결과가 표시됩니다.';
+        updateFilterSummary();
+        return;
+      }
       if (!ranked.length) {
         const empty = document.createElement('p');
         empty.className = 'search-message';
         empty.textContent = '조건에 맞는 문서가 없습니다.';
         results.append(empty);
         status.textContent = '검색 결과 0개';
+        loadMore.hidden = true;
+        updateFilterSummary();
         return;
       }
 
-      for (const { entry } of ranked) {
+      const visible = ranked.slice(0, shownCount);
+      for (const { entry } of visible) {
         const card = document.createElement('article');
         card.className = 'search-result-card';
         const meta = document.createElement('div');
@@ -416,6 +498,12 @@ if (searchPage) {
         const categoryText = document.createElement('span');
         categoryText.textContent = entry.category;
         meta.append(categoryText);
+        if (entry.publicationLabel) {
+          const publication = document.createElement('span');
+          publication.className = 'card-publication';
+          publication.textContent = entry.publicationLabel;
+          meta.append(publication);
+        }
         const verificationText = entry.verificationLabel || verificationLabel(entry.verification);
         if (verificationText) {
           const badge = document.createElement('span');
@@ -454,28 +542,41 @@ if (searchPage) {
         }
         results.append(card);
       }
-      status.textContent = `검색 결과 ${ranked.length}개`;
+      const remaining = remainingCount(visible.length, ranked.length);
+      loadMore.hidden = remaining === 0;
+      loadMore.textContent = remaining ? `더 보기 · ${Math.min(SEARCH_PAGE_SIZE, remaining)}개` : '모든 결과를 표시했습니다.';
+      status.textContent = `검색 결과 ${ranked.length}개 중 ${visible.length}개 표시`;
+      updateFilterSummary();
     };
     const applySearch = async ({ updateUrl = true } = {}) => {
       requestNumber += 1;
       const thisRequest = requestNumber;
       if (updateUrl) syncUrl();
+      shownCount = SEARCH_PAGE_SIZE;
       status.textContent = '검색 중…';
       try {
         const index = await getSearchIndex(indexUrl);
         if (thisRequest !== requestNumber) return;
-        let ranked = rankEntries(index, input.value);
+        const scoped = hasSearchScope({
+          q: input.value,
+          category: category?.value,
+          verification: verification?.value,
+          tag: tag?.value,
+        });
+        let ranked = scoped ? rankEntries(index, input.value) : [];
         ranked = ranked.filter(({ entry }) => (
           matchesChoice(category?.value, [entry.categoryKey, entry.category])
           && matchesChoice(verification?.value, [entry.verification, entry.verificationLabel])
           && matchesChoice(tag?.value, [...asArray(entry.tagKeys), ...asArray(entry.tags)])
         ));
-        renderPageResults(sortRanked(ranked));
+        rankedResults = sortRanked(ranked);
+        renderPageResults(rankedResults);
       } catch {
         if (thisRequest !== requestNumber) return;
         results.replaceChildren();
         appendStatus(results, '검색 색인을 불러오지 못했습니다. 조건을 바꾸면 다시 시도합니다.');
         status.textContent = '검색 색인을 불러오지 못했습니다.';
+        loadMore.hidden = true;
       }
     };
 
@@ -515,6 +616,13 @@ if (searchPage) {
       applySearch();
       input.focus();
     });
+    loadMore.addEventListener('click', () => {
+      shownCount = nextPageSize(shownCount, rankedResults.length, SEARCH_PAGE_SIZE);
+      renderPageResults(rankedResults);
+      loadMore.focus();
+    });
+    const filterPanel = searchPage.querySelector('[data-search-filter-panel]');
+    filterPanel?.addEventListener('toggle', updateFilterSummary);
     window.addEventListener('popstate', () => {
       readUrl();
       applySearch({ updateUrl: false });
@@ -534,6 +642,20 @@ for (const filterGrid of document.querySelectorAll('[data-filter-grid]')) {
   const empty = filterGrid.querySelector('[data-filter-empty]');
   const cards = [...filterGrid.querySelectorAll('[data-card]')];
   const originalOrder = new Map(cards.map((card, index) => [card, index]));
+  const pageSize = DIRECTORY_PAGE_SIZE;
+  const loadMore = scope.querySelector('[data-filter-more]') || (() => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'directory-load-more';
+    button.dataset.filterMore = '';
+    button.textContent = '더 보기';
+    filterGrid.after(button);
+    return button;
+  })();
+  const viewButtons = [...scope.querySelectorAll('[data-directory-view]')];
+  const isSourceDirectory = filterGrid.classList.contains('directory-source-list');
+  const eraLabels = [];
+  let shownCount = pageSize;
 
   if (count) {
     count.setAttribute('role', 'status');
@@ -552,28 +674,100 @@ for (const filterGrid of document.querySelectorAll('[data-filter-grid]')) {
     else list.sort((a, b) => originalOrder.get(a) - originalOrder.get(b));
     return list;
   };
-  const applyFilter = () => {
+  const readUrl = () => {
+    const state = parseUiState(window.location.search, { directory: true });
+    filterInput.value = state.q;
+    if (verification && [...verification.options].some((option) => option.value === state.verification)) verification.value = state.verification;
+    if (sort && [...sort.options].some((option) => option.value === state.sort)) sort.value = state.sort;
+    const view = state.view === 'cards' ? 'cards' : 'compact';
+    filterGrid.dataset.view = view;
+    filterGrid.closest('.listing-main')?.classList.toggle('directory-view--cards', view === 'cards');
+    for (const button of viewButtons) button.setAttribute('aria-pressed', String(button.dataset.directoryView === view));
+  };
+  const syncUrl = () => {
+    const url = new URL(window.location.href);
+    const params = serializeUiState({
+      q: filterInput.value.trim(),
+      verification: verification?.value,
+      sort: sort?.value,
+      view: filterGrid.dataset.view || 'compact',
+    }, { directory: true });
+    for (const key of ['q', 'verification', 'sort', 'view']) url.searchParams.delete(key);
+    for (const [key, value] of params.entries()) url.searchParams.set(key, value);
+    window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+  };
+  const clearEraLabels = () => {
+    for (const label of eraLabels) label.remove();
+    eraLabels.length = 0;
+  };
+  const appendEraLabel = (year) => {
+    const label = document.createElement('div');
+    label.className = 'directory-era-label';
+    label.innerHTML = `<span>${year ? `${year}년대` : '연도 미상'}</span>`;
+    eraLabels.push(label);
+    filterGrid.append(label);
+  };
+  const applyFilter = ({ updateUrl = true, reset = true } = {}) => {
+    if (updateUrl) syncUrl();
+    if (reset) shownCount = pageSize;
     const terms = normalize(filterInput.value).split(' ').filter(Boolean);
     const verificationValue = normalize(verification?.value);
-    let visible = 0;
-    for (const card of sortedCards()) {
-      filterGrid.append(card);
+    const sorted = sortedCards();
+    const matching = sorted.filter((card) => {
       const textMatches = terms.every((term) => normalize(card.dataset.filterValue || card.textContent).includes(term));
       const verificationMatches = !verificationValue || normalize(card.dataset.verification) === verificationValue;
-      card.hidden = !(textMatches && verificationMatches);
-      if (!card.hidden) visible += 1;
+      return textMatches && verificationMatches;
+    });
+    const visible = matching.slice(0, shownCount);
+    const visibleSet = new Set(visible);
+    clearEraLabels();
+    let previousEra = null;
+    const showEraLabels = isSourceDirectory && (sort?.value || 'default') === 'default';
+    for (const card of sorted) {
+      const isMatch = matching.includes(card);
+      if (showEraLabels && isMatch && visibleSet.has(card)) {
+        const year = card.dataset.publicationYear || '';
+        if (year !== previousEra) {
+          appendEraLabel(year);
+          previousEra = year;
+        }
+      }
+      filterGrid.append(card);
+      card.hidden = !visibleSet.has(card);
     }
     if (empty) {
-      empty.hidden = visible !== 0;
+      empty.hidden = matching.length !== 0;
       filterGrid.append(empty);
     }
-    if (count) count.textContent = `${visible}개 문서`;
+    const remaining = remainingCount(visible.length, matching.length);
+    loadMore.hidden = remaining === 0;
+    loadMore.textContent = remaining ? `더 보기 · ${Math.min(pageSize, remaining)}개` : '모든 문서를 표시했습니다.';
+    if (count) count.textContent = matching.length ? `${matching.length}개 중 ${visible.length}개 표시` : '0개 문서';
   };
 
-  filterInput.addEventListener('input', applyFilter);
-  verification?.addEventListener('change', applyFilter);
-  sort?.addEventListener('change', applyFilter);
-  applyFilter();
+  filterInput.addEventListener('input', () => applyFilter());
+  verification?.addEventListener('change', () => applyFilter());
+  sort?.addEventListener('change', () => applyFilter());
+  loadMore.addEventListener('click', () => {
+    shownCount = nextPageSize(shownCount, cards.length, pageSize);
+    applyFilter({ updateUrl: false, reset: false });
+    loadMore.focus();
+  });
+  for (const button of viewButtons) {
+    button.addEventListener('click', () => {
+      const view = button.dataset.directoryView === 'cards' ? 'cards' : 'compact';
+      filterGrid.dataset.view = view;
+      filterGrid.closest('.listing-main')?.classList.toggle('directory-view--cards', view === 'cards');
+      for (const item of viewButtons) item.setAttribute('aria-pressed', String(item === button));
+      syncUrl();
+    });
+  }
+  window.addEventListener('popstate', () => {
+    readUrl();
+    applyFilter({ updateUrl: false });
+  });
+  readUrl();
+  applyFilter({ updateUrl: false });
 }
 
 /* Reading font preference */
@@ -648,7 +842,8 @@ if (tocLinks.length) {
   const linkedHeadings = tocLinks.map((link) => {
     let id = link.hash.slice(1);
     try { id = decodeURIComponent(id); } catch { /* Use the literal hash. */ }
-    return { link, heading: document.getElementById(id) };
+    const depth = Number(link.closest('li')?.dataset.tocDepth || 2);
+    return { link, heading: document.getElementById(id), depth };
   }).filter(({ heading }) => heading);
   let activeLink;
   let scheduled = false;
@@ -667,6 +862,19 @@ if (tocLinks.length) {
     }
     active.link.classList.add('is-active');
     active.link.setAttribute('aria-current', 'location');
+    const activeIndex = linkedHeadings.indexOf(active);
+    const activeSection = active.depth === 2
+      ? active
+      : linkedHeadings.slice(0, activeIndex + 1).reverse().find((item) => item.depth === 2);
+    for (const item of linkedHeadings) {
+      if (item.depth !== 3) continue;
+      const itemIndex = linkedHeadings.indexOf(item);
+      const parent = linkedHeadings.slice(0, itemIndex).reverse().find((candidate) => candidate.depth === 2);
+      const visible = Boolean(parent && activeSection && parent.link === activeSection.link);
+      item.link.closest('li')?.toggleAttribute('hidden', !visible);
+    }
+    const currentLabel = activeSection?.link.textContent?.trim() || active.link.textContent?.trim() || '';
+    for (const current of document.querySelectorAll('[data-toc-current]')) current.textContent = currentLabel;
     activeLink = active.link;
   };
   const scheduleTocUpdate = () => {
@@ -678,4 +886,30 @@ if (tocLinks.length) {
   window.addEventListener('resize', scheduleTocUpdate, { passive: true });
   for (const { link } of linkedHeadings) link.addEventListener('click', scheduleTocUpdate);
   updateActiveToc();
+}
+
+/* Reading progress and return-to-top control */
+const progressBar = document.querySelector('[data-reading-progress]');
+const topButton = document.querySelector('[data-back-to-top]');
+if (progressBar || topButton) {
+  let scheduled = false;
+  const updateReadingProgress = () => {
+    scheduled = false;
+    const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const ratio = Math.min(1, Math.max(0, window.scrollY / scrollable));
+    if (progressBar) progressBar.style.setProperty('--reading-progress', `${ratio * 100}%`);
+    if (topButton) topButton.hidden = window.scrollY < window.innerHeight * 1.25;
+  };
+  const scheduleReadingProgress = () => {
+    if (scheduled) return;
+    scheduled = true;
+    window.requestAnimationFrame(updateReadingProgress);
+  };
+  window.addEventListener('scroll', scheduleReadingProgress, { passive: true });
+  window.addEventListener('resize', scheduleReadingProgress, { passive: true });
+  topButton?.addEventListener('click', () => window.scrollTo({
+    top: 0,
+    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+  }));
+  updateReadingProgress();
 }

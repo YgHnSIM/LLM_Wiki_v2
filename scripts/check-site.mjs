@@ -107,7 +107,9 @@ for (const htmlFile of htmlFiles) {
     errors.push(`${relativeHtmlPath} retains the retired graph data attribute.`);
   }
 
-  if (/\brole="(?:listbox|option)"/i.test(html)) {
+  const usesListboxSemantics = /\brole="(?:listbox|option)"/i.test(html);
+  const hasComboboxContract = /\brole="combobox"[^>]*\baria-autocomplete="list"[^>]*\baria-expanded="(?:true|false)"[^>]*\baria-controls="[^"]+"/i.test(html);
+  if (usesListboxSemantics && !hasComboboxContract) {
     errors.push(`${relativeHtmlPath} uses listbox semantics without a complete combobox contract.`);
   }
 
