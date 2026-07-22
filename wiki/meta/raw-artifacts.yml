@@ -1944,3 +1944,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/ai-co-scientist-systems-autonomous-research-scientific-discovery
     sha256: 615238e4a47b1803074513e293bdb64c8923ef9aaf5ab7df2ed12b3115a532bf
+  - path: "raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.ko.md"
+    role: translation
+    order_prefix: "110"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/specialized-llms-low-resource-languages-ai-equity-global-accessibility
+    sha256: d93a9989fb8e0025d6a08201025b0c2680b44bb9aeaf3819a9c4d69e226e8173
+  - path: "raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.commentary.ko.md"
+    role: commentary
+    order_prefix: "110"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/specialized-llms-low-resource-languages-ai-equity-global-accessibility
+    sha256: 4fb25081973024867aa2d8f0858494c4728ad4cb1d4ef3a40c9c0e05f6006a26

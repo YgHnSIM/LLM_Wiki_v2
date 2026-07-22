@@ -15,12 +15,14 @@ tags:
   - domain/machine-learning
   - domain/academia
 created: '2026-07-21'
-updated: '2026-07-21'
+updated: '2026-07-22'
 lifecycle: active
 verification: verified
 artifacts:
   - 'raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.ko.md'
   - 'raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.commentary.ko.md'
+  - 'raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.ko.md'
+  - 'raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.commentary.ko.md'
 evidence:
   - source_id: bigscience-workshop-2022-bloom
     locator: '초록, §§2.2·3.1–3.5·4.2–4.9·5와 Tables 1·3의 model 정의, ROOTS, 구조·tokenizer·학습량, 평가 범위'
@@ -40,8 +42,15 @@ evidence:
   - source_id: meta-2022-opt-175b-release
     locator: '2022-05-03 OPT-175B 연구용 공개 발표로 확인하는 동시대 공개 model의 선행 사례'
     relation: contextualizes
+  - source_id: joshi-et-al-2020-linguistic-diversity
+    locator: 'pp. 6282–6293의 언어별 자원 등급·연구 및 자원 분포와 화자 수의 비동일성'
+    relation: contextualizes
+  - source_id: blasi-et-al-2022-systematic-inequalities
+    locator: 'pp. 5486–5505의 세계 언어별 MT·NLU·QA·TTS 등 기술 효용 격차와 사회·학술 요인 분석'
+    relation: contextualizes
 related:
   - source.082
+  - source.110
   - source.062
   - source.074
   - source.076
@@ -49,6 +58,7 @@ related:
   - concept.대규모-언어-모델
   - concept.말뭉치-기반-학습
   - concept.transformer
+  - concept.저자원-언어
   - analysis.데이터-품질과-분포-다양성은-같은-축인가
 ---
 # BLOOM
@@ -104,6 +114,8 @@ Tokenizer는 byte-level BPE다. 모든 byte를 기초 단위로 삼아 unknown t
 ROOTS는 498개 구성 dataset, 약 1.61TB의 text로 이뤄졌다. 46개 자연어와 13개 programming language라는 범주는 **training corpus의 구성**을 말한다. Model card의 350B unique token, 논문의 약 341B corpus token은 집계 표현이 다르며, 최종 model은 반복 data 25B를 더해 총 366B token을 처리했다.
 
 각 언어의 비중은 균등하지 않다. 따라서 “BLOOM이 46개 언어를 지원한다”보다 “46개 자연어가 training data에 포함됐다”고 먼저 말하는 편이 정확하다. 실제 지원 수준은 언어·과제·prompt별 evaluation으로 확인해야 한다.
+
+46개 자연어가 목록에 들어 있다는 사실은 corpus **coverage**를 말한다. 언어별 byte·token 비중, tokenizer fertility, prompt·과제별 점수, weight를 실행할 compute, data·평가·governance에 대한 공동체의 권한은 별도 장부다. 그러므로 언어 수와 checkpoint 공개만으로 [[저자원 언어]]의 형평성이 달성됐다고 판정할 수 없다.
 
 ### Jean Zay에서의 분산 학습
 
@@ -193,6 +205,9 @@ BLOOM의 1차 자료가 직접 지지하는 것은 checkpoint와 code·문서에
 - BigScience, [BigScience RAIL License v1.0](https://huggingface.co/spaces/bigscience/license/raw/main/BLOOMLICENSE.txt), 2022; Preamble, §I.2·6, §§II–III, Attachment A.
 - Christopher Akiki 외, [BigScience: A Case Study in the Social Construction of a Multilingual Large Language Model](https://arxiv.org/abs/2212.04960), 2022; §3, Figure 1.
 - Meta AI, [Democratizing access to large-scale language models with OPT-175B](https://ai.meta.com/blog/democratizing-access-to-large-scale-language-models-with-opt-175b/), 2022-05-03.
+- Pratik Joshi 외, [The State and Fate of Linguistic Diversity and Inclusion in the NLP World](https://aclanthology.org/2020.acl-main.560/), ACL 2020, pp. 6282–6293.
+- Damián Blasi·Antonios Anastasopoulos·Graham Neubig, [Systematic Inequalities in Language Technology Performance across the World’s Languages](https://aclanthology.org/2022.acl-long.376/), ACL 2022, pp. 5486–5505.
+- [[110_저자원 언어 LLM의 성능 격차와 전이·평가 경계]]
 - 프로젝트 보존 자료: `raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.ko.md`, `raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.commentary.ko.md`.
 
 ## 관련 항목
@@ -206,3 +221,5 @@ BLOOM의 1차 자료가 직접 지지하는 것은 checkpoint와 code·문서에
 - [[말뭉치 기반 학습]]
 - [[Transformer]]
 - [[데이터 품질과 분포 다양성은 같은 축인가]]
+- [[저자원 언어]]
+- [[110_저자원 언어 LLM의 성능 격차와 전이·평가 경계]]

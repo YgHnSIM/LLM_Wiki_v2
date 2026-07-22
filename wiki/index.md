@@ -139,6 +139,7 @@ related:
 - [[107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]] — 2024년 공개일, 단일 신경망 end-to-end 공표와 비공개 내부 구조, audio 지연·평가, 출시 기능과 후속 voice·video·image rollout의 경계를 검증한 소스 (근거 6개)
 - [[108_V-JEPA 2의 잠재 예측과 로봇 계획 실험 경계]] — action-free 마스크 잠재 예측, 별도 V-JEPA 2-AC 행동 후학습·image-goal MPC와 LLM 정렬을 분리하고 두 연구실 로봇 실험·평가·응용 주장의 경계를 검증한 소스 (근거 4개)
 - [[109_AI 공동 과학자의 가설 생성과 자율 연구 경계]] — Google의 scientist-in-the-loop 가설 탐색을 Boiko의 장비 연동 Coscientist와 Sakana의 계산형 원고 생성에서 분리하고, Elo·전문가 선택·인간 wet-lab·출판 주장의 경계를 검증한 소스 (근거 7개)
+- [[110_저자원 언어 LLM의 성능 격차와 전이·평가 경계]] — 사람 번역 평가·합성 code-switch·합성 기계 번역의 서로 다른 2025년 연구를 분리하고 단일 돌파·범용 near-English·사회적 배포 효과 과장을 교정한 소스 (근거 11개)
 
 ## 개체
 
@@ -174,7 +175,7 @@ related:
 
 ## 개념
 
-- [[BLOOM]] — 176B decoder-only Transformer, ROOTS 다국어 말뭉치, 공공 compute와 서로 다른 weight·code·data 공개 조건을 한 모델 장부로 구분하는 개념 (근거 6개)
+- [[BLOOM]] — 176B decoder-only Transformer, ROOTS 다국어 말뭉치, 공공 compute와 서로 다른 weight·code·data 공개 조건을 한 모델 장부로 구분하는 개념 (근거 8개)
 - [[PaLM]] — 540.35B dense decoder-only Transformer, Pathways 분산 학습과 CoT·다국어·code 평가 조건 및 model access 한계를 구분하는 개념 (근거 1개)
 - [[WaveNet]] — 팽창 인과 합성곱으로 양자화 오디오 표본을 순차 생성하는 원시 파형 자기회귀 모델 (근거 2개)
 - [[Whisper]] — 30초 log-Mel 음향을 조건으로 전사·X→English 번역·언어·시간·무음을 token sequence로 생성하는 약한 감독 encoder–decoder 계열 (근거 4개)
@@ -204,7 +205,7 @@ related:
 - [[BIG-bench와 MMLU]] — MMLU의 과목별 객관식 정확도와 BIG-bench의 task별 preferred metric 정규화 평균을 분리하고 subset·prompt·shot·scoring·오염·사람 기준을 점수의 일부로 기록하는 종합 평가 benchmark (근거 5개)
 - [[HELM]] — 시나리오·적응·메트릭·실행을 분리해 언어 모델의 정확도·위험·비용을 같은 조건과 원시 출력으로 비교하는 다차원 평가 프레임워크 (근거 1개)
 - [[XLNet·RoBERTa·ALBERT]] — BERT 이후의 objective·training recipe·parameterization 개선을 비용 조건과 함께 비교하는 세 모델 묶음 (근거 3개)
-- [[XLM]] — shared multilingual encoder에서 CLM·MLM과 병렬 문장쌍 TLM을 구분하고 교차 언어 전이를 학습하는 방법군 (근거 1개)
+- [[XLM]] — shared multilingual encoder에서 CLM·MLM과 병렬 문장쌍 TLM을 구분하고 교차 언어 전이를 학습하는 방법군 (근거 2개)
 - [[T5]] — task를 text target으로 통합하고 sentinel span corruption 뒤 과제별 supervised fine-tuning으로 전이하는 encoder–decoder model family (근거 3개)
 - [[The Pile]] — 22개 component·epoch 가중치·BPB 평가를 deduplication·decontamination·underlying rights와 구분하는 825.18 GiB 영어 중심 말뭉치 (근거 2개)
 - [[CLIP]] — 이미지·텍스트 이중 인코더를 대칭 대조 손실로 정렬하고 class prompt를 제로샷 분류기 weight처럼 사용하는 시각-언어 모델 (근거 4개)
@@ -222,7 +223,8 @@ related:
 - [[N-gram 모델]] — 앞선 n-1개 단위의 빈도와 조건부 확률로 다음 항목을 예측하고 평활화로 미관측 조합을 다루는 언어 모델 (근거 4개)
 - [[마르코프 가정]] — 다음 항목의 확률을 제한된 최근 문맥으로 근사하는 가정 (근거 3개)
 - [[조건부 확률]] — 문맥이 주어졌을 때 다음 항목이 나타날 확률을 표현하는 수학적 개념 (근거 1개)
-- [[데이터 희소성]] — 가능한 n-gram 조합에 비해 관측 자료가 부족해 0 확률과 불안정한 추정이 생기는 문제 (근거 3개)
+- [[데이터 희소성]] — 가능한 n-gram 조합에 비해 관측 자료가 부족해 0 확률과 불안정한 추정이 생기는 문제 (근거 4개)
+- [[저자원 언어]] — 화자 수가 아니라 말뭉치·표현 도구·학습 노출·평가·배포·거버넌스가 과제별로 부족한 상태를 구분하는 진단 개념 (근거 9개)
 - [[Smoothing]] — 관측 확률을 조정하고 미관측 사건에 질량을 배분하며 백오프와 보간을 구분하는 확률 추정 기법 (근거 2개)
 - [[Perplexity]] — 평균 음의 로그확률을 지수화해 언어 모델을 평가하며 0 확률의 영향을 드러내는 지표 (근거 4개)
 - [[BLEU]] — 후보와 참조의 수정 n-gram 정밀도와 짧은 출력 벌점을 결합하는 말뭉치 단위 기계 번역 평가 지표 (근거 3개)
@@ -350,7 +352,7 @@ related:
 - [[Batch Normalization]] — 같은 feature의 mini-batch 통계와 running statistics를 사용하는 정규화 및 작동 원리 논쟁 (근거 2개)
 - [[RMSNorm]] — mean centering 없이 feature의 root mean square로 scale만 정규화하는 LayerNorm 변형 (근거 3개)
 - [[FastText]] — Skip-gram 중심 단어를 완전 단어와 문자 n-gram 벡터의 합으로 표현하는 정적 임베딩 확장 (근거 2개)
-- [[서브워드 토큰화]] — 유한 어휘에서 희귀 문자열을 재사용 조각의 token sequence로 바꾸는 부호화와 어휘·길이 trade-off (근거 3개)
+- [[서브워드 토큰화]] — 유한 어휘에서 희귀 문자열을 재사용 조각의 token sequence로 바꾸는 부호화와 어휘·길이 trade-off (근거 4개)
 - [[Byte Pair Encoding]] — 빈번한 인접 symbol pair의 반복 병합으로 subword 어휘를 만드는 압축 기원 분절 알고리즘 (근거 3개)
 
 ## 분석

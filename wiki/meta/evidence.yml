@@ -3725,3 +3725,93 @@ sources:
     doi: 10.1038/s41586-026-10644-y
     url: https://doi.org/10.1038/s41586-026-10644-y
     language: en
+  alhanai-et-al-2025-low-resource-african-languages:
+    title: 'Bridging the Gap: Enhancing LLM Performance for Low-Resource African Languages with New Benchmarks, Fine-Tuning, and Cultural Adjustments'
+    authors: [Tuka Alhanai, Adam Kasumovic, Mohammad M. Ghassemi, Aven Zitzelberger, Jessica M. Lundin, Guillaume Chabot-Couture]
+    published: 2025
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1609/aaai.v39i27.34996
+    url: https://ojs.aaai.org/index.php/AAAI/article/view/34996
+    language: en
+  nagar-et-al-2025-equitable-multilingual-performance:
+    title: 'Breaking Language Barriers: Equitable Performance in Multilingual Language Models'
+    authors: [Tanay Nagar, Grigorii Khvatskii, Anna Sokol, Nitesh V. Chawla]
+    published: 2025
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2508.12662
+    url: https://arxiv.org/abs/2508.12662v1
+    language: en
+  de-gibert-et-al-2025-synthetic-low-resource-mt:
+    title: Scaling Low-Resource MT via Synthetic Data Generation with LLMs
+    authors: [Ona de Gibert, Joseph Attieh, Teemu Vahtola, Mikko Aulamo, Zihao Li, Raúl Vázquez, Tiancheng Hu, Jörg Tiedemann]
+    published: 2025
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2505.14423
+    url: https://arxiv.org/abs/2505.14423v1
+    language: en
+  joshi-et-al-2020-linguistic-diversity:
+    title: The State and Fate of Linguistic Diversity and Inclusion in the NLP World
+    authors: [Pratik Joshi, Sebastin Santy, Amar Budhiraja, Kalika Bali, Monojit Choudhury]
+    published: 2020
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/2020.acl-main.560
+    url: https://aclanthology.org/2020.acl-main.560/
+    language: en
+  blasi-et-al-2022-systematic-inequalities:
+    title: Systematic Inequalities in Language Technology Performance across the World’s Languages
+    authors: [Damian Blasi, Antonios Anastasopoulos, Graham Neubig]
+    published: 2022
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/2022.acl-long.376
+    url: https://aclanthology.org/2022.acl-long.376/
+    language: en
+  rust-et-al-2021-tokenizer:
+    title: How Good is Your Tokenizer? On the Monolingual Performance of Multilingual Language Models
+    authors: [Phillip Rust, Jonas Pfeiffer, Ivan Vulić, Sebastian Ruder, Iryna Gurevych]
+    published: 2021
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/2021.acl-long.243
+    url: https://aclanthology.org/2021.acl-long.243/
+    language: en
+  nllb-team-et-al-2022-no-language-left-behind:
+    title: 'No Language Left Behind: Scaling Human-Centered Machine Translation'
+    authors: [NLLB Team, Marta R. Costa-jussà, James Cross, Onur Çelebi, Maha Elbayad, Kenneth Heafield, Kevin Heffernan, Elahe Kalbassi, Janice Lam, Daniel Licht, Jean Maillard, Anna Sun, Skyler Wang, Guillaume Wenzek, Al Youngblood, Bapi Akula, Loic Barrault, Gabriel Mejia Gonzalez, Prangthip Hansanti, John Hoffman, Semarley Jarrett, Kaushik Ram Sadagopan, Dirk Rowe, Shannon Spruit, Chau Tran, Pierre Andrews, Necip Fazil Ayan, Shruti Bhosale, Sergey Edunov, Angela Fan, Cynthia Gao, Vedanuj Goswami, Francisco Guzmán, Philipp Koehn, Alexandre Mourachko, Christophe Ropers, Safiyyah Saleem, Holger Schwenk, Jeff Wang]
+    published: 2022
+    source_type: primary
+    kind: technical-report
+    doi: 10.48550/arXiv.2207.04672
+    url: https://arxiv.org/abs/2207.04672v3
+    language: en
+  lin-et-al-2024-mala-500:
+    title: 'MaLA-500: Massive Language Adaptation of Large Language Models'
+    authors: [Peiqin Lin, Shaoxiong Ji, Jörg Tiedemann, André F. T. Martins, Hinrich Schütze]
+    published: 2024
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2401.13303
+    url: https://arxiv.org/abs/2401.13303v2
+    language: en
+  ustun-et-al-2024-aya-model:
+    title: 'Aya Model: An Instruction Finetuned Open-Access Multilingual Language Model'
+    authors: [Ahmet Üstün, Viraat Aryabumi, Zheng Yong, Wei-Yin Ko, Daniel D’souza, Gbemileke Onilude, Neel Bhandari, Shivalika Singh, Hui-Lee Ooi, Amr Kayid, Freddie Vargus, Phil Blunsom, Shayne Longpre, Niklas Muennighoff, Marzieh Fadaee, Julia Kreutzer, Sara Hooker]
+    published: 2024
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/2024.acl-long.845
+    url: https://aclanthology.org/2024.acl-long.845/
+    language: en
+  xuan-et-al-2025-mmlu-prox:
+    title: 'MMLU-ProX: A Multilingual Benchmark for Advanced Large Language Model Evaluation'
+    authors: [Weihao Xuan, Rui Yang, Heli Qi, Qingcheng Zeng, Yunze Xiao, Yun Xing, Junjue Wang, Huitao Li, Xin Li, Kunyu Yu, Nan Liu, Qingyu Chen, Douglas Teodoro, Edison Marrese-Taylor, Shijian Lu, Yusuke Iwasawa, Yutaka Matsuo, Irene Li]
+    published: 2025
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2503.10497
+    url: https://arxiv.org/abs/2503.10497v1
+    language: en

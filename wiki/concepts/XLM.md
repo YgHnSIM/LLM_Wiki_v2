@@ -13,22 +13,29 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-21'
-updated: '2026-07-21'
+updated: '2026-07-22'
 lifecycle: active
 verification: verified
 artifacts:
   - 'raw/062_XLM Cross-lingual Language Model for Multilingual NLP.ko.md'
   - 'raw/062_XLM Cross-lingual Language Model for Multilingual NLP.commentary.ko.md'
+  - 'raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.ko.md'
+  - 'raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.commentary.ko.md'
 evidence:
   - source_id: conneau-lample-2019-xlm
     locator: '§§3.1–3.5와 Figure 1의 language sampling·shared BPE·CLM/MLM/TLM, §§4–5와 Tables 1–5의 전이 protocol·평가 결과'
     relation: supports
+  - source_id: joshi-et-al-2020-linguistic-diversity
+    locator: 'pp. 6282–6293의 언어별 자원 분포와 언어 불가지론적 방법의 평가 경계'
+    relation: contextualizes
 related:
   - source.062
+  - source.110
   - concept.마스크드-언어-모델링
   - concept.byte-pair-encoding
   - concept.언어-모델-전이-학습
   - concept.신경망-기계-번역
+  - concept.저자원-언어
   - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
   - analysis.같은-병렬-문장은-무엇을-학습시키는가
 ---
@@ -96,6 +103,8 @@ shared BPE는 같은 문자열 조각, 숫자, 고유명 같은 anchor를 공유
 - 한 encoder의 언어 공유가 언어별 동등한 성능이나 낮은 deployment cost를 보장하지 않는다.
 - 후속 multilingual model을 모두 XLM의 직접 계보로 묶으려면 각 논문의 설계·인용 근거가 필요하다.
 
+작은 corpus 언어의 sampling을 평탄화하면 학습 batch에서 그 언어가 관측될 기회는 늘지만, 존재하지 않는 corpus·label·native evaluation이 생기지는 않는다. XNLI target 언어의 unlabeled text는 pretraining에 포함됐고 TLM은 영어와 짝지은 병렬 자료에 의존했다. 따라서 XLM은 교차 언어 전이 기제의 증거이지 [[저자원 언어]]의 품질·비용·형평성이 해결됐다는 증거가 아니다.
+
 ## 학습 확인
 
 ### 확인 질문
@@ -113,6 +122,8 @@ shared BPE는 같은 문자열 조각, 숫자, 고유명 같은 anchor를 공유
 
 - [[062_XLM과 교차 언어 사전 학습]]
 - Alexis Conneau·Guillaume Lample, [Cross-lingual Language Model Pretraining](https://proceedings.neurips.cc/paper_files/paper/2019/hash/c04c19c2c2474dbf5f7ac4372c5b9af1-Abstract.html), NeurIPS 2019, 특히 §§3–5.
+- Pratik Joshi 외, [The State and Fate of Linguistic Diversity and Inclusion in the NLP World](https://aclanthology.org/2020.acl-main.560/), ACL 2020, pp. 6282–6293.
+- [[110_저자원 언어 LLM의 성능 격차와 전이·평가 경계]]
 
 ## 관련 항목
 
@@ -123,3 +134,5 @@ shared BPE는 같은 문자열 조각, 숫자, 고유명 같은 anchor를 공유
 - [[신경망 기계 번역]]
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]]
 - [[같은 병렬 문장은 무엇을 학습시키는가]]
+- [[저자원 언어]]
+- [[110_저자원 언어 LLM의 성능 격차와 전이·평가 경계]]

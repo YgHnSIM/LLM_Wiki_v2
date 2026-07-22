@@ -4178,6 +4178,29 @@ raw 등록 해시:
 - `source:ready -- 109`는 96개 회귀 테스트와 340개 Markdown strict lint를 통과해 436개 evidence와 216개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 662개 HTML을 만들고 7,750개 wiki link를 모두 해소했으며, 43,871개 local reference와 검색 항목 339개를 검사했다.
 - 다음 순차 입력은 공식 110 `Specialized LLMs for Low-Resource Languages`다.
 
+## [2026-07-22] ingest | 저자원 언어 LLM의 성능 격차와 전이·평가 경계
+
+변경 내용:
+
+- 공식 110 `Specialized LLMs for Low-Resource Languages: Complete Guide to AI Equity and Global Accessibility`를 원문과 같은 H1 1개·H2 6개, 37개 본문 단락과 Markdown link 16개의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 첫 제목 바로 뒤에 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않았다.
+- 검증된 번역·해설을 신규 raw 두 파일로 등록했다. 번역 SHA-256은 `d93a9989fb8e0025d6a08201025b0c2680b44bb9aeaf3819a9c4d69e226e8173`, 해설은 `4fb25081973024867aa2d8f0858494c4728ad4cb1d4ef3a40c9c0e05f6006a26`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[110_저자원 언어 LLM의 성능 격차와 전이·평가 경계]]를 만들었다. 2025년의 사람 번역 African-language 평가, 합성 Hindi–English code-switch, 합성 Europarl 기계 번역을 서로 다른 언어·과제·metric으로 복원하고, 2019–2024년 XLM·NLLB·BLOOM·Aya·MaLA 선행 계보와 분리했다.
+- [[저자원 언어]]를 만들었다. 화자 수가 아니라 말뭉치·표현 도구·tokenizer·학습 노출·평가·배포·governance의 과제별 자원 상태를 구분하고, 자료량 증가와 언어 형평성을 같은 축으로 보지 않는 여섯 장부를 제시했다.
+- [[데이터 희소성]], [[XLM]], [[BLOOM]], [[서브워드 토큰화]]를 보강했다. 희소 확률 추정과 언어 자원 배분, multilingual pretraining과 target-language 평가, 공개 접근과 언어별 노출, tokenizer 교체 효과의 서로 다른 병목을 공식 110의 검증 결과와 연결했다.
+- Alhanai·Nagar·de Gibert의 2025년 연구, Joshi·Blasi·Rust의 언어 불균등·tokenizer 연구, NLLB·MaLA-500·Aya·MMLU-ProX의 1차 근거 열 건을 등록하고 기존 XLM·BLOOM 근거를 재사용했다. [[index]]와 [[overview]]를 source 109개·concept 179개·entity 29개·analysis 22개·비메타 339개·전체 342개, 공식 범위 001–046·048–110과 upstream 원문 결손 047 기준으로 갱신했다.
+- 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 214개, raw Markdown 219개, 위키 Markdown 342개에서 UI 단락 0개를 확인했다. 번역 정규화 검사는 번역 107개와 표준 `원본 출처:` 107개, 변경 필요 0개를 확인했다. Raw 레지스트리에는 번역본이 없는 legacy prefix 007을 포함해 translation prefix 108개가 등록돼 있다.
+
+검증 정정과 남은 한계:
+
+- 원 웹글은 2025년 8월 28일 공개됐지만 특정 model·논문·dataset·언어 목록·metric을 밝히지 않은 종합 서술이다. ‘2025년 단일 돌파’의 실증 근거로 사용하지 않고 문제 제기와 후속 검증 출발점으로만 보존한다.
+- Alhanai 연구는 사람 번역 8개와 기존 3개를 합친 11개 African language, WinoGrande·MMLU 일부와 약 100만 단어 fine-tuning에 한정된다. 단일 언어 fine-tuning 평균 `+5.6` percentage points와 교차 언어 평균 `+2.9`에도 GPT-4o의 영어 대비 11개 언어 평균 격차는 12.0–19.9 points 남았으므로 범용 near-English 성능으로 확대하지 않는다.
+- Nagar의 CMI2 결과 90.4% English·85.6% Hindi와 4.8-point 격차는 English answer option을 둔 Hindi–English 합성 code-switch CommonSenseQA 한 조건이다. Non-archival work-in-progress이고 논문과 repository 설정도 불일치하므로 여러 언어·과제의 일반 형평성으로 일반화하지 않는다.
+- de Gibert 연구는 GPT-4o로 만든 Europarl 합성 병렬 자료의 기계 번역 실험이다. 일부 방향은 개선됐지만 Finnish–Ukrainian OPUS-MT는 하락했고 Georgian 사람 평가의 약 40%는 unacceptable이었으므로 합성 자료가 문법·문화 적합성을 자동 보장한다고 보지 않는다.
+- XLM 2019, NLLB·BLOOM 2022, Aya·MaLA-500 2024는 2025년보다 앞선 multilingual pretraining·번역·공개 접근·tokenizer 계보다. 언어 수, training token, model weight 공개, 번역 방향과 downstream 성능을 하나의 coverage 수로 합치지 않는다.
+- 교육·의료·기업 활용, 문화 보존, 포용과 격차 해소는 원문과 세 연구에 실제 deployment·사용자 outcome·오류 피해·세대 간 언어 전승 자료가 없다. Benchmark 개선과 사회적 접근성·권리·현장 효과를 별도 증거층으로 남긴다.
+- `source:ready -- 110`은 96개 회귀 테스트와 342개 Markdown strict lint를 통과해 446개 evidence와 218개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 666개 HTML을 만들고 7,821개 wiki link를 모두 해소했으며, 44,215개 local reference와 검색 항목 341개를 검사했다.
+- 공식 목차에서 실제 원문이 있는 110번까지 공개 처리를 마쳤다. 다음 순차 입력은 없으며, upstream 원문 결손은 공식 047 `Attention Mechanism` 한 건으로 유지한다.
+
 ## 관련 항목
 
 - [[index]]
