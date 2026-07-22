@@ -4038,6 +4038,30 @@ raw 등록 해시:
 - `source:ready -- 102`는 96개 회귀 테스트와 331개 Markdown strict lint를 통과해 402개 evidence와 204개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 641개 HTML을 만들고 7,443개 wiki link를 모두 해소했다.
 - 다음 순차 입력은 공식 104 `Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use`다.
 
+## [2026-07-22] ingest | LLM 에이전트의 추론-행동 루프와 자율성 경계
+
+변경 내용:
+
+- 공식 104 `Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use`를 원문과 같은 H1 1개·H2 6개, 전체 65개 본문 블록과 34개 Markdown link의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 첫 제목 바로 뒤에 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않았다.
+- 검증된 번역·해설을 신규 raw 두 파일로 등록했다. 번역 SHA-256은 `dd95a47a9fa7fb99bde39506e85ef2b052a6d0ce7b4535df6667c37f6c8e1f92`, 해설은 `aac606cff19fb8dec730d610ac8da629859e5bcb27c5e5db6fc2b52d2a30057a`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[104_LLM 에이전트의 추론-행동 루프와 자율성 경계]]와 [[LLM 에이전트]]를 만들었다. Agent를 model 하나가 아니라 orchestrator·tool/environment·state/memory·identity/policy·evaluator가 결합된 system으로 정의하고, reasoning text·실행 plan·trace, call proposal·authorized execution, 외부 memory·weight learning을 분리했다.
+- 기존 [[함수 호출과 도구 사용]]을 장기 agent loop로 확장해 반복되는 schema·semantic·authorization·execution·grounding 관문과 전체 goal postcondition·trajectory·cost·side effect 평가를 연결했다.
+- 기존 [[자동 평가 지표는 무엇을 보상하는가]]를 보강해 직렬 tool 관문이 여러 step의 조건부 episode로 누적되는 구조, component·end-to-end 분모, 안전한 중단·복구·환경 version·retry budget 장부를 추가했다. 기존 분석이 새 비교 질문을 충분히 수용하므로 별도 분석 문서는 만들지 않았다.
+- Reflexion·Generative Agents·WebArena·SWE-bench·OSWorld·ToolEmu 1차 근거 여섯 건을 등록하고 기존 사고 연쇄·ReAct·Toolformer·Function Calling 근거를 재사용했다. [[index]]와 [[overview]]를 source 103개·concept 176개·비메타 330개·전체 333개, 공식 범위 001–046·048–104와 다음 공식 105 Multimodal Integration 기준으로 갱신했다.
+- 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 202개, raw Markdown 207개, 위키 Markdown 333개에서 UI 단락 0개를 확인했다. 번역 정규화 검사는 표준 `원본 출처:` 101개와 변경 필요 0개를 확인했다.
+
+검증 정정과 남은 한계:
+
+- 에이전트형 AI가 2024년에 처음 등장했다는 연표를 유지하지 않는다. ReAct는 2022년 공개·2023년 게재, Toolformer·Reflexion·Generative Agents는 2023년 연구이며, 2024년은 WebArena·SWE-bench·OSWorld처럼 더 현실적인 장기 과제 평가가 두드러진 시기다.
+- 사고 연쇄 text가 정확하고 충실한 planning module이라는 보장은 없다. Dependency·precondition·resource·승인·종료 조건이 있는 실행 plan과 실제 call·observation·state change trace로 따로 검증한다.
+- Model이 함수 이름과 argument를 출력하는 것은 action proposal이다. 인증·권한·업무 의미·사용자 확인·transaction·idempotency·sandbox와 실제 실행은 application runtime의 책임이다.
+- Reflexion은 verbal feedback을 episodic memory에 넣지만 weight를 갱신하지 않는다. Context 적응·외부 state 갱신·online fine-tuning 또는 reinforcement learning을 같은 지속 학습으로 합치지 않는다.
+- WebArena의 최고 GPT-4 기반 agent 14.41% 대 인간 78.24%, OSWorld의 최고 model 12.24% 대 인간 72.36%, SWE-bench 최초 Claude 2 1.96%는 당시 model·harness·environment의 baseline이다. 후대 agent의 고정 성능으로 일반화하지 않되, 한 번의 tool-call 정확도가 장기 goal success를 보장하지 않는 근거로 사용한다.
+- ToolEmu의 23.9% failure는 LM-emulated tool과 자동 evaluator를 쓴 36개 고위험 toolkit·144개 test case의 결과다. 실제 사고율로 바꾸지 않으며, sandbox가 목표·권한·민감 정보·외부 부작용을 자동 해결한다는 근거로도 쓰지 않는다.
+- 원 웹글의 코딩·연구 논문 투고·여행·의료·교육·기업 workflow와 robotics·자율주행차·smart home 영향은 system·version·baseline·사람 개입·안전 결과가 제시되지 않았다. 가능한 응용과 검증된 반복 성과·production deployment를 구분한다.
+- `source:ready -- 104`는 96개 회귀 테스트와 333개 Markdown strict lint를 통과해 408개 evidence와 206개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 645개 HTML을 만들고 7,497개 wiki link를 모두 해소했으며, 42,481개 local reference와 검색 항목 332개를 검사했다.
+- 다음 순차 입력은 공식 105 `Multimodal Integration Unified Architectures for Cross-Modal AI Understanding`다.
+
 ## 관련 항목
 
 - [[index]]

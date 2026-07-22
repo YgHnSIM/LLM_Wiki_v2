@@ -1836,3 +1836,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/continuous-post-training-incremental-model-updates-dynamic-language-models
     sha256: e5ff19724eb8e1971fed905b3c37aee03dc14a9c44f547a47ec9ce0c954f9fbc
+  - path: "raw/104_Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use.ko.md"
+    role: translation
+    order_prefix: "104"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/agentic-ai-systems-autonomous-agents-reasoning-planning-tool-use
+    sha256: dd95a47a9fa7fb99bde39506e85ef2b052a6d0ce7b4535df6667c37f6c8e1f92
+  - path: "raw/104_Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use.commentary.ko.md"
+    role: commentary
+    order_prefix: "104"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/agentic-ai-systems-autonomous-agents-reasoning-planning-tool-use
+    sha256: aac606cff19fb8dec730d610ac8da629859e5bcb27c5e5db6fc2b52d2a30057a

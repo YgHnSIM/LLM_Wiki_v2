@@ -2694,6 +2694,56 @@ sources:
     kind: conference-paper
     url: https://proceedings.neurips.cc/paper_files/paper/2023/hash/d842425e4bf79ba039352da0f658a906-Abstract-Conference.html
     language: en
+  shinn-et-al-2023-reflexion:
+    title: 'Reflexion: Language Agents with Verbal Reinforcement Learning'
+    authors: [Noah Shinn, Federico Cassano, Ashwin Gopinath, Karthik Narasimhan, Shunyu Yao]
+    published: 2023
+    source_type: primary
+    kind: conference-paper
+    url: https://papers.neurips.cc/paper_files/paper/2023/hash/1b44b878bb782e6954cd888628510e90-Abstract-Conference.html
+    language: en
+  park-et-al-2023-generative-agents:
+    title: 'Generative Agents: Interactive Simulacra of Human Behavior'
+    authors: [Joon Sung Park, Joseph C. O'Brien, Carrie J. Cai, Meredith Ringel Morris, Percy Liang, Michael S. Bernstein]
+    published: 2023
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1145/3586183.3606763
+    url: https://research.google/pubs/generative-agents-interactive-simulacra-of-human-behavior/
+    language: en
+  zhou-et-al-2024-webarena:
+    title: 'WebArena: A Realistic Web Environment for Building Autonomous Agents'
+    authors: [Shuyan Zhou, Frank F. Xu, Hao Zhu, Xuhui Zhou, Robert Lo, Abishek Sridhar, Xianyi Cheng, Tianyue Ou, Yonatan Bisk, Daniel Fried, Uri Alon, Graham Neubig]
+    published: 2024
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.iclr.cc/paper_files/paper/2024/hash/4410c0711e9154a7a2d26f9b3816d1ef-Abstract-Conference.html
+    language: en
+  jimenez-et-al-2024-swebench:
+    title: 'SWE-bench: Can Language Models Resolve Real-world GitHub Issues?'
+    authors: [Carlos E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir Press, Karthik Narasimhan]
+    published: 2024
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.iclr.cc/paper_files/paper/2024/hash/edac78c3e300629acfe6cbe9ca88fb84-Abstract-Conference.html
+    language: en
+  xie-et-al-2024-osworld:
+    title: 'OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments'
+    authors: [Tianbao Xie, Danyang Zhang, Jixuan Chen, Xiaochuan Li, Siheng Zhao, Ruisheng Cao, Toh Jing Hua, Zhoujun Cheng, Dongchan Shin, Fangyu Lei, Yitao Liu, Yiheng Xu, Shuyan Zhou, Silvio Savarese, Caiming Xiong, Victor Zhong, Tao Yu]
+    published: 2024
+    source_type: primary
+    kind: conference-paper
+    doi: 10.52202/079017-1650
+    url: https://papers.nips.cc/paper_files/paper/2024/hash/5d413e48f84dc61244b6be550f1cd8f5-Abstract-Datasets_and_Benchmarks_Track.html
+    language: en
+  ruan-et-al-2024-toolemu:
+    title: Identifying the Risks of LM Agents with an LM-Emulated Sandbox
+    authors: [Yangjun Ruan, Honghua Dong, Andrew Wang, Silviu Pitis, Yongchao Zhou, Jimmy Ba, Yann Dubois, Chris Maddison, Tatsunori Hashimoto]
+    published: 2024
+    source_type: primary
+    kind: conference-paper
+    url: https://proceedings.iclr.cc/paper_files/paper/2024/hash/7274ed909a312d4d869cc328ad1c5f04-Abstract-Conference.html
+    language: en
   openai-2023-function-calling-api-update:
     title: Function calling and other API updates
     authors: [OpenAI]
