@@ -1674,3 +1674,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/multimodal-large-language-models-vision-language-integration-gpt4-2023
     sha256: 032951f4fad51b0d899640bf5cf406fcec26da3c8c007f957768fc04f6250b13
+  - path: "raw/094_Constitutional AI Principle-Based Alignment Through Self-Critique.ko.md"
+    role: translation
+    order_prefix: "094"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/constitutional-ai-principle-based-alignment-through-self-critique
+    sha256: 306fb525104bb2a888dc2388e20ba1b1490a7aa20b69204a5cb0dbef1f1fd6dd
+  - path: "raw/094_Constitutional AI Principle-Based Alignment Through Self-Critique.commentary.ko.md"
+    role: commentary
+    order_prefix: "094"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/constitutional-ai-principle-based-alignment-through-self-critique
+    sha256: e5c443380f181bdb966958c8e560039facd4ea946ca90af38420f2c8704ae9da

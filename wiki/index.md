@@ -123,6 +123,7 @@ related:
 - [[091_QLoRA와 4비트 양자화 미세조정]] — 동결 NF4 base storage·BF16 compute·all-linear LoRA update를 분리하고 double quantization·paged optimizer·hardware·평가 조건을 검증한 소스 (근거 6개)
 - [[092_함수 호출과 도구 사용의 모델-실행 경계]] — 2023년 함수 호출을 model의 구조화된 제안과 application의 검증·권한·실행으로 분리하고 parallel calls·JSON mode·strict schema의 후대 경계를 교정한 소스 (근거 5개)
 - [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]] — Frozen·Flamingo·PaLI·BLIP-2·LLaVA·PaLM-E의 서로 다른 시각 bridge와 동결 경계를 비교하고 GPT-4V의 비공개 architecture·배포 chronology·평가·안전 과장을 교정한 소스 (근거 12개)
+- [[094_헌법적 AI와 자기비평·AI 피드백 정렬]] — 2022년 SL-CAI의 자기비평·수정과 RL-CAI의 AI 유해성 선호–사람 유용성 선호 혼합을 복원하고 2023년 Claude 헌법·Collective CAI와 인간 감독 제거·내면 윤리·확장성 과장을 교정한 소스 (근거 3개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 
 ## 개체
@@ -170,7 +171,8 @@ related:
 - [[Transformer]] — multi-head self-attention과 위치 표현으로 순환 없이 시퀀스 위치를 상호작용시키며 operator·algorithm·kernel의 비용 층위를 구분해야 하는 신경망 구조 (근거 10개)
 - [[Transformer-XL]] — stop-gradient segment memory와 상대 위치 attention으로 고정 길이 경계를 넘어 과거 표현을 재사용하되 dense attention 비용은 남기는 causal Transformer (근거 2개)
 - [[교차 인코더 재순위화]] — 질의와 후보를 공동 부호화해 세밀한 관련성 점수를 내되 first-stage 후보와 후보별 추론 비용에 제약받는 재순위화 방식 (근거 3개)
-- [[인간 피드백 강화학습]] — 인간의 행동·응답 비교로 보상 신호를 학습하고 정책을 선호에 맞춰 최적화하는 방법 계열 (근거 5개)
+- [[인간 피드백 강화학습]] — 인간의 행동·응답 비교로 보상 신호를 학습하고 정책을 선호에 맞춰 최적화하는 방법 계열 (근거 6개)
+- [[헌법적 AI]] — 자연어 원칙을 SL-CAI의 비평·수정 자료와 RL-CAI의 AI 유해성 선호로 변환하되 사람 유용성 피드백·가치 선택·대리 보상 한계를 남기는 정렬 방법 계열 (근거 3개)
 - [[ChatGPT 연구 미리보기 (2022)]] — GPT-3.5 계열 모델·대화형 RLHF·다중 턴 UI·사용자 피드백을 묶고 지속 기억·현재 제품과 구분하는 2022년 배포 체계 (근거 2개)
 - [[언어 모델 전이 학습]] — 사전 학습 언어 모델의 내부 표현이나 매개변수를 후속 과제에 재사용·적응시키는 방법 계열 (근거 9개)
 - [[BERT]] — 마스크드 언어 모델링으로 깊은 양방향 Transformer encoder를 사전 학습하고 과제별로 전체 미세조정하는 모델 (근거 3개)

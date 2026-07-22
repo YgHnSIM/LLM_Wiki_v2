@@ -26,13 +26,13 @@ related:
 
 공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism (2015)**이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-21 현재 원문을 제공하지 않는다.
 
-따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 93개는 공식 001–046·048–093·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 094 `Constitutional AI Principle-Based Alignment Through Self-Critique`다.
+따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 94개는 공식 001–046·048–094·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 095 `BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models`다.
 
 숫자 badge는 정규 source의 공식 장 번호에만 쓴다. 비번호 reference가 추가되면 번호 source 뒤에서 `참고`로 표시하며, 목록 위치를 `001` 같은 장 번호로 바꾸지 않는다. 같은 장의 검증 노트·번역·해설은 서로 다른 장이 아니라 하나의 source 묶음에 속한다.
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 93개, reference 0개, concept 167개, entity 29개, analysis 22개를 합친 비메타 문서 311개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 94개, reference 0개, concept 168개, entity 29개, analysis 22개를 합친 비메타 문서 313개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -46,6 +46,7 @@ related:
 | 자연어 명세는 어떻게 실행 코드가 되나 | [[067_GPT-3와 문맥 내 학습]] | [[071_Codex와 HumanEval 기반 코드 생성 평가]] → [[OpenAI Codex (2021)]] | [[자동 평가 지표는 무엇을 보상하는가]] |
 | 모델의 제안은 언제 실제 행동이 되나 | [[080_사고 연쇄 프롬프팅과 추론 행동 유도]] | [[092_함수 호출과 도구 사용의 모델-실행 경계]] → [[함수 호출과 도구 사용]] → [[OpenAI Codex (2021)]] | [[자동 평가 지표는 무엇을 보상하는가]] |
 | 자연어 지시는 언제 가중치에 들어가나 | [[063_T5와 Text-to-Text 통합 프레임워크]] | [[067_GPT-3와 문맥 내 학습]] → [[072_지시 미세조정과 FLAN의 제로샷 일반화]] → [[077_InstructGPT와 인간 선호 정렬]] → [[인간 피드백 강화학습]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
+| 인간의 가치 판단은 AI 피드백으로 대체되는가 | [[056_RLHF 토대와 인간 선호 기반 보상 학습]] | [[077_InstructGPT와 인간 선호 정렬]] → [[인간 피드백 강화학습]] → [[094_헌법적 AI와 자기비평·AI 피드백 정렬]] → [[헌법적 AI]] | [[자동 평가 지표는 무엇을 보상하는가]] |
 | 큰 모델을 제한된 GPU memory에서 어떻게 적응시키나 | [[057_ELMo와 ULMFiT의 두 전이 학습 경로]] | [[언어 모델 전이 학습]] → [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]] → [[091_QLoRA와 4비트 양자화 미세조정]] → [[QLoRA]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
 | 대화 인터페이스는 모델 능력과 신뢰를 어떻게 바꾸나 | [[007_ELIZA]] | [[077_InstructGPT와 인간 선호 정렬]] → [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]] → [[ChatGPT 연구 미리보기 (2022)]] | [[ELIZA에서 LLM으로]] |
 | 음성 인식에서 학습되는 경계는 어떻게 넓어졌나 | [[013_은닉 마르코프 모델과 통계적 음성 인식]] | [[041_심층 신경망 음향 모델과 DNN-HMM 전환]] → [[087_Whisper와 대규모 약한 감독 음성 인식]] → [[Whisper]] → [[단어 오류율]] | [[규칙 기반 AI에서 데이터 기반 학습으로]] |
@@ -63,7 +64,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 93개 소스의 범위
+## 94개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -157,6 +158,7 @@ related:
 - [[091_QLoRA와 4비트 양자화 미세조정]]은 동결한 NF4 base storage, BF16 compute와 all-linear LoRA update를 분리하고, double quantization·paged optimizer의 서로 다른 memory 역할과 24GB 33B·48GB 65B·MMLU·Guanaco 평가 조건을 검증한다.
 - [[092_함수 호출과 도구 사용의 모델-실행 경계]]는 2023년 6월 함수 이름·JSON argument 제안, 같은 해 11월 parallel calls·JSON mode와 2024년 `strict: true`를 분리하고, model output·schema·권한·실행·tool result의 서로 다른 신뢰 경계를 검증한다.
 - [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]]는 Frozen·Flamingo·PaLI·BLIP-2·LLaVA·PaLM-E의 서로 다른 bridge와 단계별 동결 경계를 비교하고, GPT-4V의 비공개 architecture·2023년 3월 early access·9월 ChatGPT rollout·11월 API preview 및 시각 평가·안전 경계를 검증한다.
+- [[094_헌법적 AI와 자기비평·AI 피드백 정렬]]은 2022년 SL-CAI의 고정 자기비평·수정과 RL-CAI의 AI 유해성 선호→선호 모델→강화학습을 분리하고, 사람 유용성 피드백·원칙 작성·평가가 남는 혼합 경계와 2023년 Claude 헌법·Collective CAI의 별도 chronology를 검증한다.
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]]은 GLaM·Mixtral의 total·active parameter와 token별 routing을 복원하고, 2024년 최초성·Meta 귀속·dense 계산의 제곱 증가·깨끗한 domain expert·민주화 과장을 교정한다.
 
 ## 현재 핵심 주제
@@ -213,6 +215,7 @@ related:
 - [[PaLM]]에서 구분하는 540.35B dense architecture, 780B-token mixture, 두 TPU v4 Pod의 model/data parallelism, few-shot·CoT·PaLM-Coder·다국어 평가 조건과 연구용 model 접근 한계
 - [[지시 미세조정]]에서 구분하는 여러 과제의 지시–출력 supervision, 평가 군집 보류, 고정된 가중치의 문맥 내 학습 및 선호 기반 RLHF와의 경계
 - [[인간 피드백 강화학습]]에서 구분하는 평가자 시연 SFT, 응답 순위에서 학습한 보상 모델, SFT 정책 기준 KL과 PPO-ptx 사전 학습 혼합 및 선호 대표성의 경계
+- [[헌법적 AI]]에서 구분하는 자연어 원칙, SL-CAI의 비평·수정 합성 자료, RL-CAI의 AI 유해성 선호와 사람 유용성 선호, feedback model·preference model·policy의 서로 다른 역할 및 연구 헌법·제품 헌법·참여형 헌법의 버전 경계
 - [[ChatGPT 연구 미리보기 (2022)]]에서 구분하는 GPT-3.5 계열 모델, 대화형 RLHF, 다중 턴 인터페이스, moderation·피드백 배포 층과 지속 기억·현재 제품의 시간 경계
 - [[BLOOM]]에서 구분하는 176B decoder-only architecture, ROOTS의 언어·token 분포, 공공 HPC 학습과 문서·weight·code·data·license·실행 자원의 서로 다른 접근 층
 - [[공개 가중치와 재현 가능성은 같은 축인가]]에서 분리하는 법적 접근·검사·변형·재배포·재현·실행 비용·거버넌스 참여, 그리고 BLOOM·LLaMA 1·MPT·Falcon·Mistral처럼 weight 면허와 training data·log·compute 공개가 서로 다르게 움직이는 artifact·version 장부

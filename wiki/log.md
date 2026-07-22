@@ -3777,6 +3777,26 @@ raw 등록 해시:
 - PaLI의 대표 COCO·VQAv2 수치는 downstream fine-tuning, BLIP-2의 양 backbone 동결은 2단계 pretraining, PaLM-E의 frozen-PaLM은 별도 비교 조건이다. 평가 수치를 공통 zero-shot checkpoint의 능력으로 합치지 않는다.
 - 전체 검증은 96개 회귀 테스트와 314개 Markdown strict lint를 통과해 370개 evidence와 186개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 606개 HTML을 만들고 6,917개 wiki link를 모두 해소했다.
 
+## [2026-07-22] ingest | 헌법적 AI의 자기비평과 AI 피드백 정렬
+
+변경 내용:
+
+- 공식 094 `Constitutional AI: Principle-Based Alignment Through Self-Critique`를 H1·H2·H3 `1/7/0`과 43개 Markdown link의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 번역은 첫 제목 바로 뒤에 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않는다.
+- 독립 감사를 거친 번역·해설을 신규 raw 두 파일로 등록했다. 번역 SHA-256은 `306fb525104bb2a888dc2388e20ba1b1490a7aa20b69204a5cb0dbef1f1fd6dd`, 해설은 `e5c443380f181bdb966958c8e560039facd4ea946ca90af38420f2c8704ae9da`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[094_헌법적 AI와 자기비평·AI 피드백 정렬]]과 [[헌법적 AI]]를 만들었다. SL-CAI의 고정된 네 차례 자기비평·수정, RL-CAI의 AI 유해성 비교와 사람 유용성 비교 혼합, 선호 모델·정책 최적화의 서로 다른 역할을 분리했다.
+- Bai 등의 2022년 CAI 논문, Anthropic의 2023년 Claude 헌법과 Collective CAI 보고를 evidence에 등록하고 [[인간 피드백 강화학습]]을 보강했다. 자연어 원칙이 사람의 가치 선택과 감독을 없애는 대신 어떤 피드백을 확장하는지 드러냈다.
+- [[index]]와 [[overview]]를 source 94개·concept 168개·비메타 313개, 공식 범위 001–046·048–094·103과 다음 공식 095 BIG-bench·MMLU 기준으로 갱신했다. 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 184개, raw Markdown 189개, 위키 Markdown 316개에서 UI 단락 0개를 확인했고, 번역 정규화 검사는 표준 `원본 출처:` 92개와 변경 필요 0개를 확인했다.
+
+검증 정정과 남은 한계:
+
+- 원 논문은 2022년 12월 공개됐으며, 2023년 Claude 헌법은 후대의 갱신된 원칙 집합이다. 세계인권선언 등 2023년 목록을 2022년 논문의 두 16개 원칙 집합에 소급하지 않는다.
+- CAI는 사람 피드백을 제거하지 않았다. 초기 helpful-only RLHF 모델, 사람 유용성 비교 135,296개, 사람이 작성한 red-team prompt와 원칙·few-shot 예시, crowdworker 평가가 남고 AI가 대체한 핵심은 유해성 비교 label이다.
+- SL-CAI는 모델이 만족할 때까지 반복한 절차가 아니라 prompt마다 고정된 네 critique–revision 쌍을 생성했다. RL-CAI의 preference model은 사람 유용성 비교 135,296개와 AI 유해성 비교 182,831개를 함께 학습했다.
+- 논문의 원칙은 연구진이 임의로 고른 두 16개 집합이었다. Collective CAI의 약 1,000명 미국 참가자·1,127개 진술·38,252표는 별도 실험이며 연구진의 군집화·편집·중재를 포함한다.
+- 자기비평은 부정확하거나 과장될 수 있고 52B 조건에서는 직접 수정과 차이가 작았다. 과도한 보상 최적화는 상투적·거친 응답을 낳았으므로 원칙 기반 AI 피드백도 대리 보상·분포 이동·Goodharting을 피하지 못한다.
+- `source:ready -- 094`는 96개 회귀 테스트와 316개 Markdown strict lint를 통과해 373개 evidence와 188개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 610개 HTML을 만들고 6,964개 wiki link를 모두 해소했다.
+- 다음 순차 입력은 공식 095 `BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models`다.
+
 ## 관련 항목
 
 - [[index]]
