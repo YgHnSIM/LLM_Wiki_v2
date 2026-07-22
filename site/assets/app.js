@@ -17,6 +17,21 @@ const normalize = normalizeText;
 const asArray = (value) => (Array.isArray(value) ? value : []);
 const collator = new Intl.Collator('ko', { numeric: true, sensitivity: 'base' });
 
+function restoreLoadMoreFocus(button, container, previousCount, itemSelector, focusSelector) {
+  if (!button.hidden) {
+    button.focus();
+    return;
+  }
+
+  const visibleItems = [...container.querySelectorAll(itemSelector)]
+    .filter((item) => !item.hidden && getComputedStyle(item).display !== 'none');
+  const nextItem = visibleItems[previousCount];
+  const target = nextItem?.querySelector(focusSelector) || nextItem;
+  if (!target) return;
+  if (!target.matches('a[href], button, input, select, textarea, [tabindex]')) target.tabIndex = -1;
+  target.focus();
+}
+
 function debounce(callback, delay = 160) {
   let timer;
   const debounced = (...args) => {
@@ -444,7 +459,7 @@ if (searchPage) {
         } else element.append(document.createTextNode(part));
       }
     };
-    const loadMore = searchPage.querySelector('[data-search-load-more]') || (() => {
+    const loadMore = document.querySelector('[data-search-load-more]') || (() => {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'search-load-more';
@@ -619,9 +634,10 @@ if (searchPage) {
       input.focus();
     });
     loadMore.addEventListener('click', () => {
+      const previousCount = Math.min(shownCount, rankedResults.length);
       shownCount = nextPageSize(shownCount, rankedResults.length, SEARCH_PAGE_SIZE);
       renderPageResults(rankedResults);
-      loadMore.focus();
+      restoreLoadMoreFocus(loadMore, results, previousCount, '.search-result-card', 'a[href]');
     });
     const filterPanel = searchPage.querySelector('[data-search-filter-panel]');
     filterPanel?.addEventListener('toggle', updateFilterSummary);
@@ -721,7 +737,8 @@ for (const filterGrid of document.querySelectorAll('[data-filter-grid]')) {
     const verificationValue = normalize(verification?.value);
     const sorted = sortedCards();
     const matching = sorted.filter((card) => {
-      const textMatches = terms.every((term) => normalize(card.dataset.filterValue || card.textContent).includes(term));
+      const searchableText = normalize(`${card.dataset.filterValue || ''} ${card.textContent || ''}`);
+      const textMatches = terms.every((term) => searchableText.includes(term));
       const verificationMatches = !verificationValue || normalize(card.dataset.verification) === verificationValue;
       return textMatches && verificationMatches;
     });
@@ -758,9 +775,10 @@ for (const filterGrid of document.querySelectorAll('[data-filter-grid]')) {
   verification?.addEventListener('change', () => applyFilter());
   sort?.addEventListener('change', () => applyFilter());
   loadMore.addEventListener('click', () => {
+    const previousCount = filterGrid.querySelectorAll('[data-card]:not([hidden])').length;
     shownCount = nextPageSize(shownCount, cards.length, pageSize);
     applyFilter({ updateUrl: false, reset: false });
-    loadMore.focus();
+    restoreLoadMoreFocus(loadMore, filterGrid, previousCount, '[data-card]', 'a[href]');
   });
   for (const button of viewButtons) {
     button.addEventListener('click', () => {

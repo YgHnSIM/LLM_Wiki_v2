@@ -42,6 +42,8 @@ function elementMarkupForHook(html, hook) {
 
 const requiredOutputFiles = [
   'relationship-data.json',
+  'search-index.json',
+  'search-suggestions.json',
   'search/index.html',
   'translations/index.html',
   'assets/relationship-explorer.js',
@@ -233,6 +235,13 @@ for (const key of ['sources', 'concepts', 'entities', 'analyses']) {
 }
 
 const searchIndex = JSON.parse(await fs.readFile(path.join(distDir, 'search-index.json'), 'utf8'));
+const searchSuggestions = JSON.parse(await fs.readFile(path.join(distDir, 'search-suggestions.json'), 'utf8'));
+if (searchSuggestions.length !== searchIndex.length) {
+  errors.push(`Search suggestions must contain ${searchIndex.length} entries, found ${searchSuggestions.length}.`);
+}
+if (searchSuggestions.some((entry) => 'text' in entry)) {
+  errors.push('Search suggestions must not contain full document text.');
+}
 const expectedHeroSourceNumbers = searchIndex
   .filter((entry) => entry.sourceNumber)
   .sort((a, b) => String(a.sourceNumber).localeCompare(String(b.sourceNumber)))

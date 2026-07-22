@@ -606,7 +606,7 @@ class RelationshipExplorer {
   }
 }
 
-function bindRelationshipDialogs() {
+function bindRelationshipDialogs(initialize) {
   const dialog = document.querySelector('[data-relationship-dialog]');
   if (!dialog) return;
   for (const trigger of document.querySelectorAll('[data-open-relationship-dialog]')) {
@@ -614,6 +614,7 @@ function bindRelationshipDialogs() {
       event.preventDefault();
       if (!dialog.open) dialog.showModal();
       dialog.querySelector('[data-close-relationship-dialog]')?.focus();
+      void initialize();
     });
   }
   dialog.querySelector('[data-close-relationship-dialog]')?.addEventListener('click', () => dialog.close());
@@ -622,18 +623,28 @@ function bindRelationshipDialogs() {
   });
 }
 
-export async function initializeRelationshipExplorers() {
-  bindRelationshipDialogs();
+export function initializeRelationshipExplorers() {
   const roots = [...document.querySelectorAll('[data-relationship-explorer]')];
-  await Promise.all(roots.map(async (root) => {
-    try {
-      const data = await loadGraph(root.dataset.relationshipUrl);
-      new RelationshipExplorer(root, data);
-    } catch (error) {
-      root.replaceChildren(element('p', 'relationship-results__empty', '연결 데이터를 불러오지 못했습니다. 전체 검색을 이용해 주세요.'));
-      console.error(error);
-    }
-  }));
+  let initialization;
+  const initialize = () => {
+    if (initialization) return initialization;
+    let failed = false;
+    initialization = Promise.all(roots.map(async (root) => {
+      try {
+        const data = await loadGraph(root.dataset.relationshipUrl);
+        new RelationshipExplorer(root, data);
+      } catch (error) {
+        failed = true;
+        root.replaceChildren(element('p', 'relationship-results__empty', '연결 데이터를 불러오지 못했습니다. 전체 검색을 이용해 주세요.'));
+        console.error(error);
+      }
+    })).then(() => {
+      if (failed) initialization = undefined;
+    });
+    return initialization;
+  };
+  bindRelationshipDialogs(initialize);
+  return initialization;
 }
 
 if (typeof document !== 'undefined') void initializeRelationshipExplorers();

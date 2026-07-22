@@ -613,7 +613,7 @@ function renderMarkdown(document, { artifact = false } = {}) {
 
 function renderSearch(id, { large = false, label = '위키 검색' } = {}) {
   return `
-    <form class="site-search${large ? ' site-search--large' : ''}" data-site-search data-index-url="${sitePath('/search-index.json')}" data-search-page-url="${sitePath('/search/')}" role="search" aria-label="${escapeHtml(label)}" action="${sitePath('/search/')}" method="get">
+    <form class="site-search${large ? ' site-search--large' : ''}" data-site-search data-index-url="${sitePath('/search-suggestions.json')}" data-search-page-url="${sitePath('/search/')}" role="search" aria-label="${escapeHtml(label)}" action="${sitePath('/search/')}" method="get">
       <label class="sr-only" for="${id}">${escapeHtml(label)}</label>
       <div class="search-control">
         <input id="${id}" name="q" type="search" autocomplete="off" placeholder="위키 검색" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="${id}-results" aria-describedby="${id}-status">
@@ -709,7 +709,7 @@ function sourceDisplayNumber(document) {
 
 function cardDataAttributes(document) {
   const publication = publicationMeta(document);
-  return `data-card data-category="${escapeHtml(document.category)}" data-verification="${escapeHtml(document.verification)}" data-tags="${escapeHtml(publicTags(document).join(' '))}" data-title="${escapeHtml(document.title)}" data-sort-title="${escapeHtml(document.title)}" data-updated="${escapeHtml(document.updated)}" data-connections="${meaningfulConnectionCount(document)}" data-publication-year="${escapeHtml(publication.year)}" data-filter-value="${escapeHtml([document.title, ...document.aliases, ...document.tags, document.excerpt].join(' '))}"`;
+  return `data-card data-category="${escapeHtml(document.category)}" data-verification="${escapeHtml(document.verification)}" data-title="${escapeHtml(document.title)}" data-updated="${escapeHtml(document.updated)}" data-connections="${meaningfulConnectionCount(document)}" data-publication-year="${escapeHtml(publication.year)}" data-filter-value="${escapeHtml([...document.aliases, ...document.tags].join(' '))}"`;
 }
 
 function sourceCard(document, index, { headingLevel = 3, hidden = false } = {}) {
@@ -1348,6 +1348,8 @@ const searchIndex = documents
     };
   });
 
+const searchSuggestions = searchIndex.map(({ text: _text, ...entry }) => entry);
+
 const buildReport = {
   generatedAt: new Date().toISOString(),
   basePath,
@@ -1401,6 +1403,7 @@ async function buildInto(outputDir) {
   await fs.writeFile(path.join(outputDir, '.nojekyll'), '', 'utf8');
   await fs.writeFile(path.join(outputDir, 'relationship-data.json'), JSON.stringify(graphData), 'utf8');
   await fs.writeFile(path.join(outputDir, 'search-index.json'), JSON.stringify(searchIndex), 'utf8');
+  await fs.writeFile(path.join(outputDir, 'search-suggestions.json'), JSON.stringify(searchSuggestions), 'utf8');
   await fs.writeFile(path.join(outputDir, 'build-report.json'), JSON.stringify(buildReport, null, 2), 'utf8');
 }
 

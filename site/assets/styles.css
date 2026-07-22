@@ -62,6 +62,11 @@ html[data-reading-font='d2coding'] {
   box-sizing: border-box;
 }
 
+/* Preserve the HTML hidden contract even when a component view sets display. */
+[hidden] {
+  display: none !important;
+}
+
 html {
   max-width: 100%;
   overflow-x: clip;

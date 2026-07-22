@@ -5,3 +5,5 @@ dist/
 dist.backup-*/
 output/playwright/
 .playwright-cli/
+test-results/
+playwright-report/
