@@ -816,7 +816,7 @@ function renderCategoryPage(key) {
     <header class="listing-hero">
       <p class="eyebrow">${key === 'sources' ? `원문 노트 ${sourceDocuments.length}개 · 참고 자료 ${referenceDocuments.length}개` : `${list.length}개 문서`}</p>
       <div><h1>${escapeHtml(meta.label)}</h1><span class="listing-count">${list.length}</span></div>
-      ${key === 'sources' && translationReaders.length ? `<a class="translation-directory-link" href="${sitePath('/translations/')}"><span>별도 읽기</span><strong>원문 번역본 ${translationReaders.length}개 모아보기</strong><span aria-hidden="true">→</span></a>` : ''}
+      ${key === 'sources' && sourceDocuments.length ? `<a class="source-directory-link" href="#directory-sources"><span>전체 목록</span><strong>원문 ${sourceDocuments.length}개 모아보기</strong><span aria-hidden="true">→</span></a>` : ''}
       <p>${escapeHtml(meta.description)}</p>
     </header>
     <section class="directory-tools" aria-label="목록 필터">

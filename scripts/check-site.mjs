@@ -206,6 +206,11 @@ const sourceSortControl = sourcesHtml.match(/<select id="sort-sources"[\s\S]*?<\
 if (!sourceSortControl.includes('<option value="chronological">연대순</option>')) {
   errors.push('Source directory must expose the chronological sort option.');
 }
+const sourceDirectoryLink = sourcesHtml.match(/<a class="source-directory-link" href="([^"]+)"[^>]*>[\s\S]*?<strong>([^<]+)<\/strong>/i);
+const expectedSourceCount = report.counts?.sources ?? 0;
+if (!sourceDirectoryLink || sourceDirectoryLink[1] !== '#directory-sources' || sourceDirectoryLink[2] !== `원문 ${expectedSourceCount}개 모아보기`) {
+  errors.push(`Source directory CTA must link to the ${expectedSourceCount}-item original list.`);
+}
 
 const searchIndex = JSON.parse(await fs.readFile(path.join(distDir, 'search-index.json'), 'utf8'));
 const expectedHeroSourceNumbers = searchIndex
