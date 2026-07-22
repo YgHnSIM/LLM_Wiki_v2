@@ -26,13 +26,13 @@ related:
 
 공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism (2015)**이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-21 현재 원문을 제공하지 않는다.
 
-따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 106개는 공식 001–046·048–107을 다룬다. [[107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]]까지 공개했으며, 다음 순차 입력은 공식 108 `V-JEPA 2 Vision-Based World Modeling for Embodied AI`다.
+따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 107개는 공식 001–046·048–108을 다룬다. [[108_V-JEPA 2의 잠재 예측과 로봇 계획 실험 경계]]까지 공개했으며, 다음 순차 입력은 공식 109 `AI Co-Scientist Systems Autonomous Research and Scientific Discovery`다.
 
 숫자 badge는 정규 source의 공식 장 번호에만 쓴다. 비번호 reference가 추가되면 번호 source 뒤에서 `참고`로 표시하며, 목록 위치를 `001` 같은 장 번호로 바꾸지 않는다. 같은 장의 검증 노트·번역·해설은 서로 다른 장이 아니라 하나의 source 묶음에 속한다.
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 106개, reference 0개, concept 177개, entity 29개, analysis 22개를 합친 비메타 문서 334개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 107개, reference 0개, concept 178개, entity 29개, analysis 22개를 합친 비메타 문서 336개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -54,7 +54,7 @@ related:
 | 대화 인터페이스는 모델 능력과 신뢰를 어떻게 바꾸나 | [[007_ELIZA]] | [[077_InstructGPT와 인간 선호 정렬]] → [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]] → [[ChatGPT 연구 미리보기 (2022)]] | [[ELIZA에서 LLM으로]] |
 | 음성 인식에서 학습되는 경계는 어떻게 넓어졌나 | [[013_은닉 마르코프 모델과 통계적 음성 인식]] | [[041_심층 신경망 음향 모델과 DNN-HMM 전환]] → [[087_Whisper와 대규모 약한 감독 음성 인식]] → [[Whisper]] → [[단어 오류율]] | [[규칙 기반 AI에서 데이터 기반 학습으로]] |
 | 프롬프트는 추론 성능을 어떻게 바꾸나 | [[067_GPT-3와 문맥 내 학습]] | [[080_사고 연쇄 프롬프팅과 추론 행동 유도]] → [[사고 연쇄 프롬프팅]] → [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]] → [[106_DeepSeek-R1의 강화학습 파이프라인과 증류 경계]] → [[그룹 상대 정책 최적화]] → [[079_HELM과 다차원 언어 모델 평가]] | [[손실 곡선과 능력 곡선 사이]] |
-| 이미지·동영상 조건은 생성 모델에 어떻게 들어가나 | [[070_CLIP과 대조적 언어-이미지 사전 학습]] | [[CLIP]] → [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]] → [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]] → [[멀티모달 대규모 언어 모델]] → [[105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]] → [[107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]] → [[096_GPT-4의 멀티모달 공개·시험 성능·안전 경계]] → [[GPT-4]] → [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] → [[086_잠재 확산 모델과 Stable Diffusion v1 공개]] → [[잠재 확산 모델]] → [[Stable Diffusion]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
+| 이미지·동영상 조건은 생성·예측 모델에 어떻게 들어가나 | [[070_CLIP과 대조적 언어-이미지 사전 학습]] | [[CLIP]] → [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]] → [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]] → [[멀티모달 대규모 언어 모델]] → [[105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]] → [[107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]] → [[108_V-JEPA 2의 잠재 예측과 로봇 계획 실험 경계]] → [[학습된 세계 모델]] → [[096_GPT-4의 멀티모달 공개·시험 성능·안전 경계]] → [[GPT-4]] → [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] → [[086_잠재 확산 모델과 Stable Diffusion v1 공개]] → [[잠재 확산 모델]] → [[Stable Diffusion]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
 | 모델 공개는 곧 재현 가능성을 뜻하나 | [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] | [[076_파운데이션 모델 보고서와 AI 생태계]] → [[082_BLOOM과 공개 접근 다국어 LLM]] → [[BLOOM]] → [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]] → [[LLaMA 1]] → [[090_공개 가중치 LLM 파동과 서로 다른 공개 범위]] | [[공개 가중치와 재현 가능성은 같은 축인가]] |
 | 희소 모델의 ‘크기’는 무엇을 뜻하나 | [[069_전문가 혼합과 희소 활성 스케일링]] | [[097_Mixtral의 생산 배포 효율 주장과 증거 경계]] → [[GLaM에서 Mixtral까지의 희소 MoE 확장]] → [[Mixtral 8x7B]] → [[106_DeepSeek-R1의 강화학습 파이프라인과 증류 경계]] | [[총 매개변수와 활성 계산량은 같은 축인가]] |
 | 학습 데이터의 양과 구성을 어떻게 읽나 | [[063_T5와 Text-to-Text 통합 프레임워크]] | [[066_신경 언어 모델의 스케일링 법칙]] → [[067_GPT-3와 문맥 내 학습]] → [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] → [[The Pile]] → [[078_Chinchilla와 계산 최적 언어 모델 학습]] → [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]] → [[090_공개 가중치 LLM 파동과 서로 다른 공개 범위]] | [[데이터 품질과 분포 다양성은 같은 축인가]] |
@@ -67,7 +67,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 106개 소스의 범위
+## 107개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -175,6 +175,7 @@ related:
 - [[105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]]는 2025년 9월에 게시된 2024년 회고를 CLIP·Flamingo·ImageBind·Gemini 1.0·Unified-IO 2의 2021–2023년 선행 경로와 GPT-4o·Chameleon·Emu3의 2024년 분화에 대조하고, shared embedding·core·token·objective·checkpoint·제품 interface 및 학습·입력·출력·rollout 범위를 분리한다.
 - [[106_DeepSeek-R1의 강화학습 파이프라인과 증류 경계]]는 2025년 9월 웹글의 회고를 2025년 1월 R1 v1 공개와 구분하고, 671B total·37B active의 V3-Base MoE, R1-Zero의 규칙 보상 GRPO, 정식 R1의 두 SFT·두 RL 단계와 여섯 dense 증류본을 분리한다. [[그룹 상대 정책 최적화]]는 critic 절약과 group rollout 비용, token-level clipped update·직접 KL, completion reward의 credit assignment와 verifier 경계를 복원한다.
 - [[107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]]는 원 웹글의 2025년 출시 연표를 2024년 5월 13일 공식 발표로 교정하고, text·vision·audio를 한 신경망에서 end-to-end로 학습했다는 공표와 비공개 tokenizer·encoder·attention·memory 구조를 분리한다. Audio 응답 232ms 최저·320ms 평균의 측정 경계, 출시 당일 text·image 입력→text 출력과 후속 voice·video·image rollout, TTS·transcript 중심 안전 평가와 음향 위험을 별도 장부로 둔다.
+- [[108_V-JEPA 2의 잠재 예측과 로봇 계획 실험 경계]]는 공식 공개일을 2025년 6월 11일로 교정하고, action-free 마스크 잠재 L1 예측과 DROID 62시간 미만 자료로 후학습한 300M V-JEPA 2-AC를 분리한다. Frozen probe·Llama 3.1 정렬 VidQA·goal-image CEM planning의 서로 다른 평가 경로, 두 Franka 연구실의 zero-shot 범위와 16초/action·camera·subgoal 한계를 보존하며 자율주행·AR 배포 과장을 교정한다.
 
 ## 현재 핵심 주제
 
@@ -464,9 +465,11 @@ related:
 
 ## 현재 상태
 
-소스 106개, 참고 자료 0개, 개념 177개, 개체 29개, 분석 22개와 메타 문서 3개, 총 337개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 306개는 `verified`, 해석적 문서 28개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 425개 외부 근거와 212개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 107개, 참고 자료 0개, 개념 178개, 개체 29개, 분석 22개와 메타 문서 3개, 총 339개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 307개는 `verified`, 해석적 문서 29개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 429개 외부 근거와 214개 불변 raw artifact가 레지스트리에 등록돼 있다.
 
 [[107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]]는 2024년 5월의 model announcement, launch surface와 후속 제품 rollout을 분리한다. 공식 자료가 지지하는 것은 한 신경망의 end-to-end multimodal training 공표이지 통합 tokenizer·특수 attention·별도 encoder 제거·내부 memory module의 공개 명세가 아니다. [[멀티모달 대규모 언어 모델]]과 [[105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]]는 input·output·scoring modality를 분리하고, [[자동 평가 지표는 무엇을 보상하는가]]는 TTS와 transcriber도 평가 oracle을 구성한다는 비교축을 추가한다.
+
+[[108_V-JEPA 2의 잠재 예측과 로봇 계획 실험 경계]]는 base video encoder, action-conditioned predictor, LLM-aligned VidQA와 외부 MPC를 하나의 능력으로 합치지 않는다. [[학습된 세계 모델]]은 관측 표현·행동 동역학·planner/control loop를 세 층으로 나누고, [[사전 학습 지식은 과제에 어떻게 도착하는가]]는 같은 frozen representation이 task probe·language alignment·robot predictor로 갈라지는 downstream 경로를 비교한다.
 
 [[106_DeepSeek-R1의 강화학습 파이프라인과 증류 경계]]와 [[그룹 상대 정책 최적화]]는 R1의 성과를 새 attention·memory·추론 module이나 작은 model의 승리로 설명하지 않는다. 671B/37B V3-Base 구조와 후훈련을 분리하고, R1-Zero의 SFT 없는 규칙 보상 RL, 정식 R1의 콜드 스타트·추론 RL·거부 샘플링 SFT·일반 정렬 RL, 작은 dense checkpoint의 출력 자료 증류를 별도 단계로 둔다. GRPO는 critic을 생략하지만 질문당 여러 rollout을 요구하며, 최종 답·형식 보상은 중간 추론의 진실성이나 완전한 재현 가능성을 보장하지 않는다.
 

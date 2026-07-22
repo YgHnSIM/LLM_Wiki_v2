@@ -4131,6 +4131,30 @@ raw 등록 해시:
 - `source:ready -- 107`은 96개 회귀 테스트와 337개 Markdown strict lint를 통과해 425개 evidence와 212개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 655개 HTML을 만들고 7,657개 wiki link를 모두 해소했으며, 43,317개 local reference와 검색 항목 336개를 검사했다.
 - 다음 순차 입력은 공식 108 `V-JEPA 2 Vision-Based World Modeling for Embodied AI`다.
 
+## [2026-07-22] ingest | V-JEPA 2의 잠재 예측과 로봇 계획 실험 경계
+
+변경 내용:
+
+- 공식 108 `V-JEPA 2 Vision-Based World Modeling for Embodied AI`를 원문과 같은 H1 1개·H2 7개, 30개 본문 단락과 Markdown link 3개의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 첫 제목 바로 뒤에 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않았다.
+- 검증된 번역·해설을 신규 raw 두 파일로 등록했다. 번역 SHA-256은 `66a5b140087adfcebc88751bbe548ff8349f4bdd7e80e7c2b263eeec05d578c0`, 해설은 `660085a7a4c755cd19fb057c38921029d3ce6509825a0137c2c118bc1974fee8`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[108_V-JEPA 2의 잠재 예측과 로봇 계획 실험 경계]]를 만들었다. Action-free 마스크 잠재 L1 예측, 별도 300M V-JEPA 2-AC 후학습, frozen probe, LLM-aligned VidQA와 goal-image CEM 기반 robot MPC를 서로 다른 data·loss·output·평가 경로로 분리했다.
+- [[학습된 세계 모델]]을 만들었다. SHRDLU식 설계된 symbolic world state와 범위를 구분하고, 관측 표현·행동 조건부 동역학·planner/control loop를 세 층으로 나눠 저자 명명과 일반 물리·인과 이해의 증거를 분리했다.
+- 기존 [[멀티모달 대규모 언어 모델]]과 [[사전 학습 지식은 과제에 어떻게 도착하는가]]를 보강했다. 언어 감독 없이 사전 학습한 encoder가 VidQA system이 되려면 projector·LLM·18M 또는 88.5M 정렬 sample이 필요하다는 점과, 같은 frozen 표현이 attentive probe·language alignment·DROID 기반 action predictor로 갈라지고 실제 행동 선택은 외부 MPC에 남는다는 경계를 추가했다. 기존 분석이 새 비교 질문을 수용하므로 별도 분석 문서는 만들지 않았다.
+- V-JEPA 2 논문 v1, Meta 공식 발표, official repository와 ViT-g/16 384 model card의 1차 근거 네 건을 등록했다. [[index]]와 [[overview]]를 source 107개·concept 178개·entity 29개·analysis 22개·비메타 336개·전체 339개, 공식 범위 001–046·048–108과 다음 공식 109 AI Co-Scientist Systems 기준으로 갱신했다.
+- 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 210개, raw Markdown 215개, 위키 Markdown 339개에서 UI 단락 0개를 확인했다. 번역 정규화 검사는 번역 105개와 표준 `원본 출처:` 105개, 변경 필요 0개를 확인했다. Raw 레지스트리에는 번역본이 없는 legacy prefix 007을 포함해 translation prefix 106개가 등록돼 있다.
+
+검증 정정과 남은 한계:
+
+- 원 웹글은 2025년 9월 1일 게시된 회고이며 Meta 공식 발표와 arXiv v1은 2025년 6월 11일, repository release 기록은 6월 25일이다. 원문의 ‘2025년 4월 공개’는 공식 기록과 맞지 않는다.
+- Base V-JEPA 2는 action 없이 clip 안의 가린 space-time tubelet에 대응하는 EMA teacher latent를 L1로 예측한다. Negative pair를 쓰는 contrastive learning이나 raw-pixel next-frame 생성, action-conditioned causal rollout로 바꾸어 설명하지 않는다.
+- Meta 발표의 1.2B 요약, 논문의 최대 1B encoder와 별도 22M pretraining predictor, V-JEPA 2-AC의 별도 300M predictor는 counting boundary가 다르다. 수치를 임의로 합산하거나 하나의 동일 model parameter로 취급하지 않는다.
+- V-JEPA 2-AC는 frozen encoder 위에서 DROID 23K trajectory·62시간 미만 video와 action·end-effector state로 후학습됐다. ‘Zero-shot’은 deployment한 두 lab robot·환경 data와 task-specific training·reward가 없다는 뜻이지 robot interaction data가 0이라는 뜻이 아니다.
+- SSv2 77.3과 EK100 39.7은 학습된 attentive probe와 1초·kitchen·closed vocabulary 조건에 묶인다. Qwen2-7B-Instruct+18M의 frozen-encoder 통제 비교와 Llama 3.1 8B+88.5M의 최종 VidQA 결과도 별도 설정이므로 순수 encoder의 일반 물리·언어 이해 점수로 합치지 않는다.
+- Robot 실험은 두 연구실의 Franka arm, 고정 monocular RGB camera, cup·box와 reach·grasp·reach-with-object·pick-and-place, cell당 lab별 10회로 제한된다. Pick-and-place에는 사람이 준비한 image subgoal과 고정 전환 schedule이 필요했고, RTX 4090 비교에서 action당 약 16초가 걸렸다. Camera 위치 민감성·rollout 오차·action search·image-goal 의존성이 남는다.
+- 공식 자료는 autonomous vehicle·AR·navigation deployment나 safety improvement를 평가하지 않았다. 표현·probe·좁은 tabletop closed loop의 성과를 명시적 물리 법칙·반사실 인과·범용 robot 지능이나 검증된 현장 효과로 확대하지 않는다.
+- `source:ready -- 108`은 96개 회귀 테스트와 339개 Markdown strict lint를 통과해 429개 evidence와 214개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 659개 HTML을 만들고 7,721개 wiki link를 모두 해소했으며, 43,655개 local reference와 검색 항목 338개를 검사했다.
+- 다음 순차 입력은 공식 109 `AI Co-Scientist Systems Autonomous Research and Scientific Discovery`다.
+
 ## 관련 항목
 
 - [[index]]
