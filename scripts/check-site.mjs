@@ -3,6 +3,7 @@ import path from 'node:path';
 import { distDir } from './lib/project-paths.mjs';
 import { outputFileForUrl, safeDecode, withBasePath } from './lib/site-paths.mjs';
 import { walkFiles } from './lib/wiki-utils.mjs';
+import { DIRECTORY_PAGE_SIZE } from '../site/assets/ui-state.js';
 
 const report = JSON.parse(await fs.readFile(path.join(distDir, 'build-report.json'), 'utf8'));
 const basePath = report.basePath ?? '';
@@ -210,6 +211,25 @@ const sourceDirectoryLink = sourcesHtml.match(/<a class="translation-directory-l
 const expectedSourceCount = report.counts?.sources ?? 0;
 if (!sourceDirectoryLink || sourceDirectoryLink[1] !== '#directory-sources' || sourceDirectoryLink[2] !== `원문 ${expectedSourceCount}개 모아보기`) {
   errors.push(`Source directory CTA must link to the ${expectedSourceCount}-item original list.`);
+}
+
+for (const key of ['sources', 'concepts', 'entities', 'analyses']) {
+  const directoryFile = fileForUrl(siteUrl(`/${key}/`));
+  const directoryHtml = htmlCache.get(directoryFile) ?? await fs.readFile(directoryFile, 'utf8');
+  htmlCache.set(directoryFile, directoryHtml);
+  const cards = [...directoryHtml.matchAll(/<article\b[^>]*\bdata-card(?:\s|=|>)[^>]*>/gi)].map((match) => match[0]);
+  const visibleCards = cards.filter((card) => !/\bdata-filter-value="[^"]*"\s+hidden(?:\s|>)/i.test(card));
+  const expectedCount = report.counts?.[key] ?? 0;
+  const expectedVisibleCount = Math.min(DIRECTORY_PAGE_SIZE, expectedCount);
+  if (visibleCards.length !== expectedVisibleCount) {
+    errors.push(`${key} directory must render ${expectedVisibleCount} visible card(s) initially, found ${visibleCards.length}.`);
+  }
+  const loadMoreButton = directoryHtml.match(/<button\b[^>]*\bdata-filter-more(?:\s|=|>)[^>]*>/i)?.[0] ?? '';
+  const hasRemainingCards = expectedCount > expectedVisibleCount;
+  const buttonHidden = /\bhidden(?:\s|=|>)/i.test(loadMoreButton);
+  if (hasRemainingCards === buttonHidden) {
+    errors.push(`${key} directory load-more visibility does not match its initial card count.`);
+  }
 }
 
 const searchIndex = JSON.parse(await fs.readFile(path.join(distDir, 'search-index.json'), 'utf8'));

@@ -27,7 +27,7 @@ import {
   markdownBeforeFinalH2,
   slugify,
 } from './lib/wiki-utils.mjs';
-import { cleanDisplayAliases, primaryEvidence } from '../site/assets/ui-state.js';
+import { DIRECTORY_PAGE_SIZE, cleanDisplayAliases, primaryEvidence } from '../site/assets/ui-state.js';
 
 const repositoryUrl = 'https://github.com/YgHnSIM/LLM_Wiki_v2';
 const basePath = normalizeBasePath(process.env.BASE_PATH ?? '');
@@ -712,11 +712,11 @@ function cardDataAttributes(document) {
   return `data-card data-category="${escapeHtml(document.category)}" data-verification="${escapeHtml(document.verification)}" data-tags="${escapeHtml(publicTags(document).join(' '))}" data-title="${escapeHtml(document.title)}" data-sort-title="${escapeHtml(document.title)}" data-updated="${escapeHtml(document.updated)}" data-connections="${meaningfulConnectionCount(document)}" data-publication-year="${escapeHtml(publication.year)}" data-filter-value="${escapeHtml([document.title, ...document.aliases, ...document.tags, document.excerpt].join(' '))}"`;
 }
 
-function sourceCard(document, index, { headingLevel = 3 } = {}) {
+function sourceCard(document, index, { headingLevel = 3, hidden = false } = {}) {
   const number = sourceDisplayNumber(document);
   const numberClass = document.pageType === 'reference' ? ' source-number--reference' : '';
   const publication = publicationMeta(document);
-  return `<article class="source-card source-card--${(index % 4) + 1}" ${cardDataAttributes(document)}>
+  return `<article class="source-card source-card--${(index % 4) + 1}" ${cardDataAttributes(document)}${hidden ? ' hidden' : ''}>
     <span class="source-number${numberClass}" aria-hidden="true">${escapeHtml(number)}</span>
     <div class="source-card-body">
       <div class="card-meta">${verificationBadge(document)}${publication.label ? `<span class="card-publication">${escapeHtml(publication.label)}</span>` : ''}<span>연결 ${meaningfulConnectionCount(document)}</span></div>
@@ -728,8 +728,8 @@ function sourceCard(document, index, { headingLevel = 3 } = {}) {
   </article>`;
 }
 
-function noteCard(document, { headingLevel = 3 } = {}) {
-  return `<article class="note-card" ${cardDataAttributes(document)}>
+function noteCard(document, { headingLevel = 3, hidden = false } = {}) {
+  return `<article class="note-card" ${cardDataAttributes(document)}${hidden ? ' hidden' : ''}>
     <div class="card-meta"><span>${escapeHtml(categoryMeta[document.category].singular)}</span>${verificationBadge(document)}<span>${document.minutes}분 읽기</span></div>
     <h${headingLevel}><a href="${sitePath(document.url)}">${escapeHtml(document.title)}</a></h${headingLevel}>
     <p>${escapeHtml(document.excerpt)}</p>
@@ -810,8 +810,9 @@ function renderCategoryPage(key) {
   const meta = categoryMeta[key];
   const list = grouped[key];
   const cards = key === 'sources'
-    ? list.map((document, index) => sourceCard(document, index, { headingLevel: 2 })).join('')
-    : list.map((document) => noteCard(document, { headingLevel: 2 })).join('');
+    ? list.map((document, index) => sourceCard(document, index, { headingLevel: 2, hidden: index >= DIRECTORY_PAGE_SIZE })).join('')
+    : list.map((document, index) => noteCard(document, { headingLevel: 2, hidden: index >= DIRECTORY_PAGE_SIZE })).join('');
+  const initialRemaining = Math.max(0, list.length - DIRECTORY_PAGE_SIZE);
   const body = `<main id="main-content" class="listing-main">
     <header class="listing-hero">
       <p class="eyebrow">${key === 'sources' ? `원문 노트 ${sourceDocuments.length}개 · 참고 자료 ${referenceDocuments.length}개` : `${list.length}개 문서`}</p>
@@ -855,7 +856,7 @@ function renderCategoryPage(key) {
       ${cards}
       <p class="empty-filter" data-filter-empty hidden>일치하는 문서가 없습니다.</p>
     </section>
-    <button class="directory-load-more" type="button" data-filter-more hidden>더 보기</button>
+    <button class="directory-load-more" type="button" data-filter-more${initialRemaining ? '' : ' hidden'}>${initialRemaining ? `더 보기 · ${Math.min(DIRECTORY_PAGE_SIZE, initialRemaining)}개` : '더 보기'}</button>
   </main>`;
 
   return layout({

@@ -707,12 +707,12 @@ for (const filterGrid of document.querySelectorAll('[data-filter-grid]')) {
     for (const label of eraLabels) label.remove();
     eraLabels.length = 0;
   };
-  const appendEraLabel = (decade) => {
+  const createEraLabel = (decade) => {
     const label = document.createElement('div');
     label.className = 'directory-era-label';
     label.innerHTML = `<span>${decade === null ? '연도 미상' : `${decade}년대`}</span>`;
     eraLabels.push(label);
-    filterGrid.append(label);
+    return label;
   };
   const applyFilter = ({ updateUrl = true, reset = true } = {}) => {
     if (updateUrl) syncUrl();
@@ -730,22 +730,24 @@ for (const filterGrid of document.querySelectorAll('[data-filter-grid]')) {
     clearEraLabels();
     let previousEra = Symbol('unset');
     const showEraLabels = isSourceDirectory && (sort?.value || 'default') === 'chronological';
+    const orderedChildren = [];
     for (const card of sorted) {
-      const isMatch = matching.includes(card);
-      if (showEraLabels && isMatch && visibleSet.has(card)) {
+      const isVisible = visibleSet.has(card);
+      if (showEraLabels && isVisible) {
         const decade = publicationDecade(card.dataset.publicationYear);
         if (decade !== previousEra) {
-          appendEraLabel(decade);
+          orderedChildren.push(createEraLabel(decade));
           previousEra = decade;
         }
       }
-      filterGrid.append(card);
-      card.hidden = !visibleSet.has(card);
+      orderedChildren.push(card);
+      card.hidden = !isVisible;
     }
     if (empty) {
       empty.hidden = matching.length !== 0;
-      filterGrid.append(empty);
+      orderedChildren.push(empty);
     }
+    filterGrid.replaceChildren(...orderedChildren);
     const remaining = remainingCount(visible.length, matching.length);
     loadMore.hidden = remaining === 0;
     loadMore.textContent = remaining ? `더 보기 · ${Math.min(pageSize, remaining)}개` : '모든 문서를 표시했습니다.';
