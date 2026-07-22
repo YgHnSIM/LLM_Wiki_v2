@@ -3834,6 +3834,22 @@ raw 등록 해시:
 - `source:ready -- 095`는 96개 회귀 테스트와 318개 Markdown strict lint를 통과해 375개 evidence와 190개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 614개 HTML을 만들고 7,027개 wiki link를 모두 해소했다.
 - 다음 순차 입력은 공식 096 `GPT-4 Multimodal Language Models Reach Human-Level Performance`다.
 
+## [2026-07-22] content | Benchmark 평균의 투표권과 환율
+
+변경 내용:
+
+- 새 분석 문서를 늘리지 않고 기존 [[자동 평가 지표는 무엇을 보상하는가]]를 공식 095까지 확장했다. 참조 중첩·실행 test·사람·AI 선호 보상·HELM 병렬 장부·도구 호출 직렬 관문에 benchmark suite의 집계 규칙을 추가했다.
+- [[095_BIG-bench와 MMLU의 평가 범위·집계 경계]]와 [[BIG-bench와 MMLU]]를 연결해 MMLU의 문항 가중 정확도와 과목 macro가 서로 다른 단위에 투표권을 주고, BIG-bench의 low/high 정규화가 task별 raw metric을 공통 점수로 바꾸는 환율이 된다는 비교축을 만들었다.
+- MMLU의 문항 가중·과목 macro 식과 BIG-bench의 task 정규화·부분집합 평균 식을 명시했다. BBL 24개·공통 58개·150개 text task·전체 204개를 서로 다른 모집단 $R$로 보존하고, 같은 benchmark 이름만으로 aggregate를 직접 비교하지 않았다.
+- HELM은 여러 시나리오–메트릭 셀과 빈칸을 남겨 단일 평균의 압축을 줄이지만 어떤 열·절충을 배포 판단에 쓸지는 가치 선택으로 남는다고 구분했다. BIG-bench의 불연속 score와 내부 능력 변화는 기존 [[손실 곡선과 능력 곡선 사이]]의 범위를 중복하지 않고 연결만 했다.
+- MMLU·BIG-bench 1차 근거와 공식 095 raw 두 파일을 분석에 추가했다. 분석의 evidence는 14개에서 16개로 늘었고 [[index]]·[[overview]]의 설명과 근거 수를 동기화했다.
+
+검증 경계:
+
+- 문항·과목·task에 동일 가중치를 주는 선택도 중립적이지 않다. 무엇을 한 표로 보는지, low/high 간격과 포함 subset이 한 단위 개선의 aggregate 가치를 정한다.
+- Benchmark aggregate 상승과 가장 약한 과목·task·언어·위험 영역의 개선은 별개다. MMLU·BIG-bench가 HELM을 직접 낳은 단일 계보도 이 비교만으로 주장하지 않는다.
+- 전체 검증은 96개 회귀 테스트와 318개 Markdown strict lint를 통과해 375개 evidence와 190개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 614개 HTML을 만들고 7,042개 wiki link를 모두 해소했다.
+
 ## 관련 항목
 
 - [[index]]
