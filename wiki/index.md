@@ -359,6 +359,7 @@ related:
 
 - [[공개 가중치와 재현 가능성은 같은 축인가]] — The Pile·BLOOM·LLaMA 1·MPT·Falcon·Mistral·HELM을 함께 읽어 일곱 공개 축을 분리하고 permissive 면허와 학습 재현 장부의 비대칭을 비교한 분석 (근거 24개)
 - [[데이터 품질과 분포 다양성은 같은 축인가]] — WebText·C4·GPT-3·The Pile·Chinchilla를 비교해 품질 proxy·고유 pool·분포·sampling·반복·누적 token과 인과 한계를 분리한 분석 (근거 5개)
+- [[언어 수와 언어 형평성은 같은 축인가]] — XLM·BLOOM·NLLB·MaLA·Aya와 2025년 저자원 언어 평가의 서로 다른 count 분모를 나누고 coverage와 성능·비용·안전·권한의 일곱 관문을 비교한 분석 (근거 12개)
 - [[총 매개변수와 활성 계산량은 같은 축인가]] — dense $N$과 sparse MoE의 total·active parameters를 분리하고 FLOPs·memory·communication·wall-clock·data·quality 장부로 규모 비교 조건을 정리한 분석 (근거 8개)
 - [[같은 병렬 문장은 무엇을 학습시키는가]] — 병렬 문장쌍이 IBM SMT의 잠재 단어 정렬, seq2seq NMT의 target sequence, XLM TLM의 양방향 masked-token 문맥으로 쓰이는 차이를 비교한 분석 (근거 6개)
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 특징·전체 미세조정·저순위 adapter·시간순 base 갱신·외부 기억·prompt와 멀티모달 bridge–parameter update의 두 축을 비교하고 foundation–adapted–deployed 층위를 분리한 분석 (근거 43개)

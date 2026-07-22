@@ -4201,6 +4201,24 @@ raw 등록 해시:
 - `source:ready -- 110`은 96개 회귀 테스트와 342개 Markdown strict lint를 통과해 446개 evidence와 218개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 666개 HTML을 만들고 7,821개 wiki link를 모두 해소했으며, 44,215개 local reference와 검색 항목 341개를 검사했다.
 - 공식 목차에서 실제 원문이 있는 110번까지 공개 처리를 마쳤다. 다음 순차 입력은 없으며, upstream 원문 결손은 공식 047 `Attention Mechanism` 한 건으로 유지한다.
 
+## [2026-07-22] content | 언어 수와 언어 형평성은 같은 축인가
+
+변경 내용:
+
+- [[언어 수와 언어 형평성은 같은 축인가]]를 만들었다. XLM의 XNLI 15개 평가 언어, BLOOM의 46개 자연어, NLLB의 약 200개 MT 언어, MaLA-500의 534개 language-script 단위, Aya의 101개 tuning 언어와 2025년 평가 연구를 서로 다른 count 분모로 복원하고 하나의 coverage 순위표로 합치지 않았다.
+- [[저자원 언어]]의 일곱 자원 장부를 목록·입력, data, tokenizer, shared capacity·transfer, 평가, 접근·비용·안전, 공동체 권한·outcome의 일곱 형평성 관문으로 재배열했다. 목록 수는 시작 범위를 보여 주지만 성능·오류·비용·권한의 분배 결과를 대신하지 않는다는 비교 틀을 제시했다.
+- Alhanai의 8개 신규 인간 번역·11개 평가 언어와 영어 대비 12.0–19.9-point 격차, Nagar의 Hindi–English 한 쌍·CMI 2 90.4/85.6%, MMLU-ProX v1의 13개 언어·25개 model 5-shot CoT와 7개 model zero-shot을 판본·과제·answer 언어·비용 조건과 함께 기록했다.
+- 독립 사실 감사에서 Alhanai 문화 적합성 +3.0 points를 영어의 적합–부적합 상승폭으로 보정한 값으로 고쳤고, Blasi의 약 6,500개 언어 결과를 모든 과제 직접 측정이 아니라 가용 성능·수요 가정 기반 기술 효용 추정으로 좁혔다. MMLU-ProX v1은 공식 110 공개 시점의 최신 범위를 대표하지 않고 후속 29언어판과 수치를 섞지 않는다고 명시했다.
+- [[110_저자원 언어 LLM의 성능 격차와 전이·평가 경계]]도 재검토해 de Gibert 사람 평가가 평가자를 확보한 5개 언어에서 각 100문장이고 Scottish Gaelic·Somali가 빠졌음을 반영했다. Bicleaner-AI–사람 평가 상관과 CometKiwi–사람 평가 상관을 구분해 기존의 포괄적인 0.26 미만 표현을 바로잡았다.
+- [[XLM]], [[BLOOM]], [[서브워드 토큰화]], [[데이터 품질과 분포 다양성은 같은 축인가]]와 source 110·저자원 언어 개념에 방향성 링크를 추가했다. [[index]]와 [[overview]]를 source 109개·concept 179개·entity 29개·analysis 23개·비메타 340개·전체 343개로 동기화했다. 새 evidence는 만들지 않고 실제 본문에서 사용한 기존 12개 1차 근거와 062·082·110 raw 여섯 파일만 연결했다.
+
+검증 경계:
+
+- 개별 서지·수치와 판본은 1차 자료로 확인했지만 일곱 관문과 종합 결론은 여러 자료를 함께 읽어 만든 비교 해석이므로 `verification: partial`을 유지한다.
+- 지원 언어 수 확대가 자동으로 형평성을 만들거나 반대로 shared capacity를 필연적으로 악화한다는 인과는 입증하지 않는다. 같은 architecture·compute·data 조건에서 언어 수·sampling을 바꾸는 통제 실험과 실제 이용 비용·안전·공동체 결과가 더 필요하다.
+- MMLU-ProX는 검증된 v1 snapshot을 판본 고정 사례로 사용한다. 후속 29언어 확장판과 혼합하지 않으며, text benchmark의 결과를 음성·수어·OCR·교육·임상·경제·언어 유지 outcome으로 확대하지 않는다.
+- 전체 검증은 96개 회귀 테스트와 343개 Markdown strict lint를 통과해 446개 evidence와 218개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 667개 HTML을 만들고 7,861개 wiki link를 모두 해소했으며, 44,347개 local reference와 검색 항목 342개를 검사했다.
+
 ## 관련 항목
 
 - [[index]]
