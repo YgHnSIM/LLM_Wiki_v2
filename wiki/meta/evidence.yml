@@ -3071,6 +3071,51 @@ sources:
     doi: 10.48550/arXiv.2106.09685
     url: https://openreview.net/forum?id=nZeVKeeFYf9
     language: en
+  zhang-et-al-2023-adalora:
+    title: 'Adaptive Budget Allocation for Parameter-Efficient Fine-Tuning'
+    authors: [Qingru Zhang, Minshuo Chen, Alexander Bukharin, Pengcheng He, Yu Cheng, Weizhu Chen, Tuo Zhao]
+    published: 2023
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2303.10512
+    url: https://openreview.net/forum?id=lq62uWRJjiY
+    language: en
+  liu-et-al-2024-dora:
+    title: 'DoRA: Weight-Decomposed Low-Rank Adaptation'
+    authors: [Shih-Yang Liu, Chien-Yi Wang, Hongxu Yin, Pavlo Molchanov, Yu-Chiang Frank Wang, Kwang-Ting Cheng, Min-Hung Chen]
+    published: 2024
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2402.09353
+    url: https://proceedings.mlr.press/v235/liu24bn.html
+    language: en
+  kopiczko-et-al-2024-vera:
+    title: 'VeRA: Vector-based Random Matrix Adaptation'
+    authors: [Dawid J. Kopiczko, Tijmen Blankevoort, Yuki M. Asano]
+    published: 2024
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2310.11454
+    url: https://openreview.net/forum?id=NjNfLdxr3A
+    language: en
+  kalajdzievski-2023-rslora:
+    title: 'A Rank Stabilization Scaling Factor for Fine-Tuning with LoRA'
+    authors: [Damjan Kalajdzievski]
+    published: 2023
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2312.03732
+    url: https://arxiv.org/abs/2312.03732
+    language: en
+  li-et-al-2024-loftq:
+    title: 'LoftQ: LoRA-Fine-Tuning-aware Quantization for Large Language Models'
+    authors: [Yixiao Li, Yifan Yu, Chen Liang, Nikos Karampatziakis, Pengcheng He, Weizhu Chen, Tuo Zhao]
+    published: 2024
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2310.08659
+    url: https://openreview.net/forum?id=LzPWWPAdY4
+    language: en
   stanford-crfm-2023-alpaca:
     title: 'Alpaca: A Strong, Replicable Instruction-Following Model'
     authors: [Stanford Center for Research on Foundation Models]

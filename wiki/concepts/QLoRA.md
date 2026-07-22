@@ -22,6 +22,8 @@ verification: verified
 artifacts:
   - 'raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.ko.md'
   - 'raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.commentary.ko.md'
+  - 'raw/101_PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques.ko.md'
+  - 'raw/101_PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques.commentary.ko.md'
 evidence:
   - source_id: dettmers-et-al-2023-qlora
     locator: '초록과 §§2–4의 frozen 4-bit base·BF16 compute·NF4·double quantization·paged optimizer·all-linear LoRA, Tables 3–4와 Appendices A·C·I·J의 rank·정규성·품질·memory 조건'
@@ -32,8 +34,13 @@ evidence:
   - source_id: hu-et-al-2022-lora
     locator: '초록과 §§1–4의 pretrained weight 동결, 저순위 update와 trainable parameter·optimizer memory 절감'
     relation: contextualizes
+  - source_id: li-et-al-2024-loftq
+    locator: 'ICLR 2024, §§2.3·3.1–3.3, Eqs. 4–9와 Algorithm 1의 alternating quantization·저순위 초기화 및 이후 frozen backbone 경계'
+    relation: contextualizes
 related:
   - source.091
+  - source.101
+  - concept.저순위-적응
   - source.089
   - concept.llama-1
   - concept.언어-모델-전이-학습
@@ -139,6 +146,12 @@ QLoRA 논문의 LLaMA 7B Alpaca ablation에서는 query·value projection만 대
 
 이는 rank가 언제나 무관하다는 뜻이 아니다. Model architecture, dataset, target module, rank 범위와 metric이 고정된 실험 결과다. 새로운 task에서는 layer coverage와 rank를 각각 절제해야 한다.
 
+### QLoRA와 LoftQ는 결합 단계가 다르다
+
+[[101_LoRA 이후 PEFT 변형의 설계 축과 연표]]가 다루는 LoftQ도 quantization과 low-rank adaptation을 결합하지만 QLoRA와 같은 recipe는 아니다. QLoRA는 frozen base를 NF4로 저장하고 사용할 때 BF16으로 역양자화하면서 all-linear LoRA adapter를 학습한다. LoftQ는 fine-tuning을 시작하기 전에 quantized matrix와 low-rank residual이 원 weight를 잘 근사하도록 quantization과 truncated SVD를 번갈아 수행해 adapter를 초기화한다.
+
+초기화가 끝나면 LoftQ도 quantized backbone을 동결하고 low-rank factor만 학습한다. 따라서 QLoRA는 **학습 중 base 저장·계산·optimizer의 memory 경계**, LoftQ는 **quantization error를 adapter의 시작점에 나누는 경계**를 주로 바꾼다고 구분할 수 있다.
+
 ### 품질 주장의 범위
 
 LLaMA 7B–65B와 두 instruction dataset을 합친 5-shot MMLU 평균에서 BF16 LoRA는 53.0, FP4+double-quantization LoRA는 52.2, NF4+double-quantization QLoRA는 53.1이었다. 이는 NF4 조건이 해당 BF16 LoRA 평균을 보존했다는 근거다.
@@ -185,6 +198,8 @@ VRAM 문턱이 낮아진 것은 논문이 직접 보인 결과다. 그러나 har
 ### 다음 문서
 
 - [[091_QLoRA와 4비트 양자화 미세조정]] — 원 논문의 hardware·MMLU·Guanaco 평가와 원 웹글의 정정을 확인한다.
+- [[101_LoRA 이후 PEFT 변형의 설계 축과 연표]] — LoftQ와 QLoRA의 결합 단계, AdaLoRA·DoRA·VeRA·rsLoRA의 서로 다른 설계 축을 비교한다.
+- [[저순위 적응]] — Target module·rank allocation·parameterization·sharing·scaling·initialization을 하나의 지도에 놓는다.
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 전체 parameter update, frozen feature와 adapter update를 같은 적응 지도에서 비교한다.
 - [[공개 가중치와 재현 가능성은 같은 축인가]] — 작은 adapter와 별도 base artifact의 공개·license 경계를 살펴본다.
 
@@ -198,6 +213,8 @@ VRAM 문턱이 낮아진 것은 논문이 직접 보인 결과다. 그러나 har
 ## 관련 항목
 
 - [[091_QLoRA와 4비트 양자화 미세조정]]
+- [[101_LoRA 이후 PEFT 변형의 설계 축과 연표]]
+- [[저순위 적응]]
 - [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]]
 - [[LLaMA 1]]
 - [[언어 모델 전이 학습]]

@@ -3981,6 +3981,29 @@ raw 등록 해시:
 - `source:ready -- 100`과 최종 `npm run verify`는 96개 회귀 테스트와 327개 Markdown strict lint를 통과해 391개 evidence와 200개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 633개 HTML을 만들고 7,322개 wiki link를 모두 해소했다.
 - 다음 순차 입력은 공식 101 `PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques`다.
 
+## [2026-07-22] ingest | LoRA 이후 PEFT 변형의 설계 축과 연표
+
+변경 내용:
+
+- 공식 101 `PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques`를 H1·H2·H3 `1/6/7`, 42개 본문 문단을 포함한 전체 58개 블록과 24개 Markdown link의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 원문의 중복 렌더링 수식은 같은 문단 안에서 표준 LaTeX로 정리했으며, 첫 제목 바로 뒤에 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않았다.
+- 검증된 번역·해설을 신규 raw 두 파일로 등록했다. 번역 SHA-256은 `533ca59fab7afc5d55fb4e66539305b78d46cce3740416ef38102094954dada6`, 해설은 `df98ebfca8d06594c871a1bc490aa17b2b56cfff7edb597465a42040ec8f05bf`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[101_LoRA 이후 PEFT 변형의 설계 축과 연표]]와 [[저순위 적응]]을 만들었다. AdaLoRA·DoRA·VeRA·rsLoRA·LoftQ를 단일 고급 세대가 아니라 rank allocation·magnitude/direction parameterization·random-basis sharing·rank scaling·quantization-aware initialization의 다섯 설계 축으로 분리했다.
+- [[QLoRA]]에 LoftQ와의 결합 단계 차이를 보강했다. QLoRA는 frozen NF4 base의 저장·BF16 계산·adapter 학습을 결합한 memory recipe이고, LoftQ는 fine-tuning 전 quantization residual을 low-rank factor의 시작점에 나누는 초기화다.
+- 기존 [[사전 학습 지식은 과제에 어떻게 도착하는가]]를 보강했다. 같은 task supervision이 동결 base 옆 adapter에 놓여도 AdaLoRA·DoRA·VeRA·rsLoRA·LoftQ는 update subspace의 capacity·좌표·basis·scale·시작점을 다르게 만든다는 비교 표와 재현 장부를 추가했다. 별도 분석 문서는 만들지 않았다.
+- AdaLoRA·DoRA·VeRA·rsLoRA·LoftQ 1차 근거 다섯 건을 등록하고 기존 LoRA·QLoRA 근거를 재사용했다. [[index]]와 [[overview]]를 source 101개·concept 174개·비메타 326개·전체 329개, 공식 범위 001–046·048–101·103과 다음 공식 102 Continuous Post-Training 기준으로 갱신했다.
+- 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 198개, raw Markdown 203개, 위키 Markdown 329개에서 UI 단락 0개를 확인했다. 번역 정규화 검사는 표준 `원본 출처:` 99개와 변경 필요 0개를 확인했다.
+
+검증 정정과 남은 한계:
+
+- 원 웹글은 2025년 9월 공개된 2024년 회고다. AdaLoRA는 ICLR 2023, VeRA·LoftQ는 2023년 10월 preprint, rsLoRA는 2023년 11월 preprint이며, 주요 다섯 방법 가운데 처음 공개가 2024년인 것은 DoRA다.
+- LoRA는 선택한 weight matrix에 적용할 수 있고 layer마다 같은 rank를 쓰도록 수학적으로 강제하지 않는다. AdaLoRA의 기여는 높은 초기 총 budget을 cubic schedule로 줄이면서 SVD형 singular triplet의 중요도에 따라 자동 재배분한 것이다. 중요도는 단순 gradient magnitude가 아니라 sensitivity의 EMA와 uncertainty를 결합한다.
+- DoRA는 update만이 아니라 pretrained weight를 열별 magnitude와 unit direction으로 분해하고 direction에 LoRA를 적용한다. 학습 중 추가 graph 비용은 있지만 최종 weight에 병합할 수 있으므로 원문의 필수 inference normalization overhead 주장을 유지하지 않는다.
+- VeRA의 정확한 식에는 layer별 scaling vector `b`, `d` 두 개가 있다. RoBERTa-large GLUE에서는 LoRA와 같은 평균을 냈지만 base에서는 낮았고, LLaMA-7B rank 64에서 trainable parameter 약 100배 감소가 학습 시간·전체 GPU memory의 같은 비율 감소로 이어지지 않았다.
+- rsLoRA의 핵심은 초기화·learning rate로 유효 rank pruning을 막는 것이 아니라 `alpha/sqrt(r)` scaling으로 높은 rank의 gradient를 유지하는 것이다. LoftQ의 alternating quantization·SVD는 fine-tuning 전 초기화이고 이후 quantized backbone은 동결된다.
+- 원 논문들은 법률·의료·과학 배포, 기업의 즉각적 채택, 인프라 비용과 에너지·탄소 효과를 조사하지 않았다. Trainable parameter, adapter storage, training VRAM·time과 inference latency를 별도 장부로 유지한다.
+- `source:ready -- 101`은 96개 회귀 테스트와 329개 Markdown strict lint를 통과해 396개 evidence와 202개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 637개 HTML을 만들고 7,379개 wiki link를 모두 해소했다.
+- 다음 순차 입력은 공식 102 `Continuous Post-Training Keeping Language Models Up-to-Date`다.
+
 ## 관련 항목
 
 - [[index]]

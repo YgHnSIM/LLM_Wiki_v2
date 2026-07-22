@@ -130,6 +130,7 @@ related:
 - [[098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계]] — LWM과 Gemini 1.5의 서로 다른 공개·구현 경로를 복원하고 명목 입력 창·계산 가능성·single/multi-needle·복합 추론·제품 가용성의 경계를 검증한 소스 (근거 10개)
 - [[099_구조화 출력의 스키마 준수와 의미 정확성 경계]] — 2023년 함수 호출·JSON mode와 2024년 strict schema를 분리하고 구문·스키마·의미·권한 보장 및 provider·framework 경계를 검증한 소스 (근거 4개)
 - [[100_희소·밀집 검색의 결합과 다단계 순위화]] — 병렬 희소·밀집 후보 융합, 희소 우선 재순위화와 융합 후보 뒤 교차 인코더를 분리하고 품질·후보·비용 경계를 검증한 소스 (근거 8개)
+- [[101_LoRA 이후 PEFT 변형의 설계 축과 연표]] — AdaLoRA·DoRA·VeRA·rsLoRA·LoftQ의 공개 연표를 바로잡고 rank 배분·weight 분해·basis 공유·scaling·양자화 초기화를 서로 다른 PEFT 설계 축으로 검증한 소스 (근거 7개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 
 ## 개체
@@ -172,7 +173,8 @@ related:
 - [[Whisper]] — 30초 log-Mel 음향을 조건으로 전사·X→English 번역·언어·시간·무음을 token sequence로 생성하는 약한 감독 encoder–decoder 계열 (근거 4개)
 - [[FlashAttention]] — dense softmax attention의 수학은 유지하고 SRAM tile·온라인 softmax·backward 재계산으로 HBM I/O와 이차 중간 저장을 줄이는 정확 어텐션 실행 알고리즘 (근거 4개)
 - [[LLaMA 1]] — 7B–65B causal Transformer를 작은 모델의 장기 학습과 제한적 비상업 연구 가중치 배포로 결합하고 base model·LLaMA-I·후속 세대를 구분하는 2023년 모델 제품군 (근거 2개)
-- [[QLoRA]] — 동결한 4-bit NF4 base를 BF16으로 역양자화해 계산하고 저순위 adapter만 학습하며 weight metadata와 peak memory를 별도 기법으로 줄이는 미세조정 방법 (근거 3개)
+- [[QLoRA]] — 동결한 4-bit NF4 base를 BF16으로 역양자화해 계산하고 저순위 adapter만 학습하며 weight metadata와 peak memory를 별도 기법으로 줄이는 미세조정 방법 (근거 4개)
+- [[저순위 적응]] — 동결 base 옆의 저순위 update를 target module·rank allocation·weight parameterization·basis sharing·scaling·quantization initialization으로 나눠 비교하는 PEFT 방법군 (근거 7개)
 - [[함수 호출과 도구 사용]] — model의 call proposal, schema·semantic validation, authorization·side effect 실행과 tool-result grounding을 별도 신뢰 경계로 두는 model–runtime protocol (근거 5개)
 - [[Transformer]] — multi-head self-attention과 위치 표현으로 순환 없이 시퀀스 위치를 상호작용시키며 operator·algorithm·kernel의 비용 층위를 구분해야 하는 신경망 구조 (근거 10개)
 - [[Transformer-XL]] — stop-gradient segment memory와 상대 위치 attention으로 고정 길이 경계를 넘어 과거 표현을 재사용하되 dense attention 비용은 남기는 causal Transformer (근거 3개)
@@ -346,7 +348,7 @@ related:
 - [[데이터 품질과 분포 다양성은 같은 축인가]] — WebText·C4·GPT-3·The Pile·Chinchilla를 비교해 품질 proxy·고유 pool·분포·sampling·반복·누적 token과 인과 한계를 분리한 분석 (근거 5개)
 - [[총 매개변수와 활성 계산량은 같은 축인가]] — dense $N$과 sparse MoE의 total·active parameters를 분리하고 FLOPs·memory·communication·wall-clock·data·quality 장부로 규모 비교 조건을 정리한 분석 (근거 8개)
 - [[같은 병렬 문장은 무엇을 학습시키는가]] — 병렬 문장쌍이 IBM SMT의 잠재 단어 정렬, seq2seq NMT의 target sequence, XLM TLM의 양방향 masked-token 문맥으로 쓰이는 차이를 비교한 분석 (근거 6개)
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 특징·전체 미세조정·저순위 adapter·prompt·지시·class prototype과 멀티모달 bridge–parameter update의 두 축, 생성 목표 잠재·교차 어텐션 조건·실행 선택을 비교하고 foundation–adapted–deployed 층위를 분리한 분석 (근거 25개)
+- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 특징·전체 미세조정·저순위 adapter·prompt·지시·class prototype과 멀티모달 bridge–parameter update의 두 축, 생성 목표 잠재·교차 어텐션 조건·실행 선택을 비교하고 foundation–adapted–deployed 층위를 분리한 분석 (근거 30개)
 - [[손실 곡선과 능력 곡선 사이]] — 평균 token loss·task score·능력 threshold와 PaLM의 세 점 외삽 잔차를 metric·표본·checkpoint·관측 scale로 구분한 분석 (근거 7개)
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]] — RNN·WaveNet·Transformer·FlashAttention을 표현 계산·sampling과 FLOPs·capacity·HBM traffic·wall-clock의 서로 다른 축으로 분리한 분석 (근거 6개)
 - [[검색은 근거를 찾고 독해는 답을 찾는다]] — 단일 벡터·후기 상호작용·교차 인코더의 후보 경계와 검색 재현율·독해 정확도·기권을 분리한 분석 (근거 11개)

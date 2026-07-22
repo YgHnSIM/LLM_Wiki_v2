@@ -1800,3 +1800,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/hybrid-retrieval-combining-sparse-dense-methods-effective-information-retrieval
     sha256: 0a431de189efafd68f72825e2333d35877afb0462691fa7ce1a8e006ac18676c
+  - path: "raw/101_PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques.ko.md"
+    role: translation
+    order_prefix: "101"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/peft-beyond-lora-advanced-parameter-efficient-finetuning-techniques
+    sha256: 533ca59fab7afc5d55fb4e66539305b78d46cce3740416ef38102094954dada6
+  - path: "raw/101_PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques.commentary.ko.md"
+    role: commentary
+    order_prefix: "101"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/peft-beyond-lora-advanced-parameter-efficient-finetuning-techniques
+    sha256: df98ebfca8d06594c871a1bc490aa17b2b56cfff7edb597465a42040ec8f05bf
