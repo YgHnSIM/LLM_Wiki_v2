@@ -3850,6 +3850,28 @@ raw 등록 해시:
 - Benchmark aggregate 상승과 가장 약한 과목·task·언어·위험 영역의 개선은 별개다. MMLU·BIG-bench가 HELM을 직접 낳은 단일 계보도 이 비교만으로 주장하지 않는다.
 - 전체 검증은 96개 회귀 테스트와 318개 Markdown strict lint를 통과해 375개 evidence와 190개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 614개 HTML을 만들고 7,042개 wiki link를 모두 해소했다.
 
+## [2026-07-22] ingest | GPT-4의 멀티모달 공개·시험 성능·안전 경계
+
+변경 내용:
+
+- 공식 096 `GPT-4 Multimodal Language Models Reach Human-Level Performance`를 H1·H2·H3 `1/6/0`, 45개 본문 블록과 15개 Markdown link의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 번역은 첫 제목 바로 뒤에 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않는다.
+- 독립 번역 감사에서 `addressing`을 완전한 해결로 강화한 표현, `implications`를 이미 실현된 영향으로 바꾼 표현, `accessible primarily`를 개발 참여 독점으로 바꾼 표현을 원문 강도에 맞게 교정했다. 해설도 별도 감사에서 3월 text 공개·9월 vision rollout, 비공개 architecture, 시험 protocol·백분위·오염, UBE 재평가와 시각·안전 한계를 확인했다.
+- 검증된 번역·해설을 신규 raw 두 파일로 등록했다. 번역 SHA-256은 `f6b085e8558786005eb08d583745fd216a4eb19f0d1c93e1ddcf5ca614efc54b`, 해설은 `5992e317f138aed1a5c3c9333083d4e4c3d4da230e8b9947f6f6cd87dc29c1b9`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[096_GPT-4의 멀티모달 공개·시험 성능·안전 경계]]와 [[GPT-4]]를 만들었다. Base·post-training·image+text→text interface·ChatGPT/API 제품을 분리하고, model snapshot·prompt·shot·temperature·scoring·grader·오염과 UBE 비교 모집단을 점수의 조건으로 기록했다.
+- OpenAI의 GPT-4 출시 자료, Katz 등의 UBE 재현 연구와 Martínez의 percentile·essay scoring 재평가를 evidence에 등록하고 기존 GPT-4 technical report·GPT-4V system card·vision rollout·MMLU 근거를 연결했다. [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]]와 [[멀티모달 대규모 언어 모델]]에는 새 source·concept 탐색 경로만 보강해 bridge 설명의 중복을 피했다.
+- [[index]]와 [[overview]]를 source 96개·concept 170개·비메타 317개, 공식 범위 001–046·048–096·103과 다음 공식 097 Mixtral 기준으로 갱신했다. 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 188개, raw Markdown 193개, 위키 Markdown 320개에서 UI 단락 0개를 확인했고, 번역 정규화 검사는 표준 `원본 출처:` 94개와 변경 필요 0개를 확인했다.
+
+검증 정정과 남은 한계:
+
+- 2023년 3월 14일에는 ChatGPT Plus·API waitlist의 text 입력이 공개됐고 image 입력은 research preview·limited alpha였다. GPT-4V 훈련은 2022년에 끝났으며 제한 early access 뒤 Plus·Enterprise의 광범위한 image rollout은 2023년 9월 25일 발표됐다.
+- GPT-4 보고서는 Transformer-style next-token pretraining, public·licensed data와 RLHF라는 높은 수준만 공개했다. Parameter 수, dense/MoE 여부, vision encoder·bridge, hardware·compute·dataset construction을 외부 행동에서 역추론하지 않는다.
+- OpenAI의 simulated UBE 298점·약 90백분위와 LSAT 88백분위는 시험 protocol과 응시자 분포에 조건화된다. NCBE의 공식 UBE percentile은 없으며 후속 재평가는 같은 점수를 7월 전체 약 68백분위, 첫 응시자 약 62백분위, 합격자 약 45–48백분위로 추정했다. 합격과 현업 변호사 역량도 같은 주장이 아니다.
+- GPT-4의 시험 결과는 객관식 few-shot·temperature 0.3, free response temperature 0.6, 서로 다른 snapshot·외부 채점과 일부 code mismatch를 포함한다. MMLU 86.4%는 base GPT-4 5-shot이고 BIG-bench는 training contamination 때문에 결과를 생략했다.
+- 특정 내부 평가에서 금지 요청 응답 82% 감소, 민감 요청 policy 준수 29% 증가와 factuality·toxicity 개선이 보고됐지만 jailbreak·환각·과잉 거절·calibration 저하가 남았다. GPT-4V도 OCR·공간·색·순서·의료 image·근거 없는 추론·multimodal jailbreak에서 한계를 보였다.
+- 일부 시험·multimodal interface는 AGI, 범용 전문가 능력, 광범위한 산업 변혁이나 후속 model의 직접 architecture 계보를 입증하지 않는다.
+- `source:ready -- 096`은 96개 회귀 테스트와 320개 Markdown strict lint를 통과해 378개 evidence와 192개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 618개 HTML을 만들고 7,102개 wiki link를 모두 해소했다.
+- 다음 순차 입력은 공식 097 `Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts`다.
+
 ## 관련 항목
 
 - [[index]]

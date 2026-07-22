@@ -1710,3 +1710,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/big-bench-mmlu-comprehensive-evaluation-benchmarks-large-language-models
     sha256: 9fe25382150bf4601802b6bf7d06f3effc1262683896718dfb07dbd09d7fa1b6
+  - path: "raw/096_GPT-4 Multimodal Language Models Reach Human-Level Performance.ko.md"
+    role: translation
+    order_prefix: "096"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/gpt4-multimodal-language-models-reach-human-level-performance
+    sha256: f6b085e8558786005eb08d583745fd216a4eb19f0d1c93e1ddcf5ca614efc54b
+  - path: "raw/096_GPT-4 Multimodal Language Models Reach Human-Level Performance.commentary.ko.md"
+    role: commentary
+    order_prefix: "096"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/gpt4-multimodal-language-models-reach-human-level-performance
+    sha256: 5992e317f138aed1a5c3c9333083d4e4c3d4da230e8b9947f6f6cd87dc29c1b9

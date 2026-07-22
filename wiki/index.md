@@ -125,6 +125,7 @@ related:
 - [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]] — Frozen·Flamingo·PaLI·BLIP-2·LLaVA·PaLM-E의 서로 다른 시각 bridge와 동결 경계를 비교하고 GPT-4V의 비공개 architecture·배포 chronology·평가·안전 과장을 교정한 소스 (근거 12개)
 - [[094_헌법적 AI와 자기비평·AI 피드백 정렬]] — 2022년 SL-CAI의 자기비평·수정과 RL-CAI의 AI 유해성 선호–사람 유용성 선호 혼합을 복원하고 2023년 Claude 헌법·Collective CAI와 인간 감독 제거·내면 윤리·확장성 과장을 교정한 소스 (근거 3개)
 - [[095_BIG-bench와 MMLU의 평가 범위·집계 경계]] — MMLU 57개 객관식 과목과 BIG-bench 204개 이질적 과제·BBL 24개의 연도·prompt·metric·정규화·사람 기준·오염 경계를 복원하고 일반 추론·전문 활용·산업 표준 과장을 교정한 소스 (근거 6개)
+- [[096_GPT-4의 멀티모달 공개·시험 성능·안전 경계]] — 2023년 3월 text 공개와 9월 GPT-4V rollout, 비공개 architecture, 시험 protocol·UBE percentile 모집단·오염·안전 경계를 분리하고 인간 전문가·AGI·범용 안전 과장을 교정한 소스 (근거 8개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 
 ## 개체
@@ -191,6 +192,7 @@ related:
 - [[CLIP]] — 이미지·텍스트 이중 인코더를 대칭 대조 손실로 정렬하고 class prompt를 제로샷 분류기 weight처럼 사용하는 시각-언어 모델 (근거 4개)
 - [[Flamingo]] — 동결 시각·언어 backbone 사이의 64개 시각 token 병목과 gated cross-attention으로 멀티모달 문맥 내 생성을 수행하는 모델 계열 (근거 1개)
 - [[멀티모달 대규모 언어 모델]] — 비언어 입력을 image encoder·bridge·언어 decoder로 연결하되 입력·동결 경계·출력 signature와 공개 수준을 model별로 구분해야 하는 시스템 계열 (근거 9개)
+- [[GPT-4]] — base·post-training·multimodal interface·제품 snapshot을 분리하고 공개 입출력·시험 protocol·UBE percentile·안전 결과와 비공개 architecture의 경계를 기록한 모델 계열 (근거 7개)
 - [[DALL·E (2021)]] — 1,024개 이산 이미지 토큰과 최대 256개 텍스트 토큰을 공동 자기회귀 모델링하고 별도 대조 모델로 후보를 재순위화한 2021년 생성 시스템 (근거 4개)
 - [[DALL·E 2]] — 동결 CLIP 잠재 공간에서 image embedding을 생성하는 prior와 계층적 확산 decoder를 결합한 2022년 텍스트-이미지 생성 시스템 (근거 3개)
 - [[잠재 확산 모델]] — 지각 오토인코더와 잠재 U-Net을 분리하고 교차 어텐션으로 여러 조건을 연결해 품질·압축·계산을 절충하는 확산 모델 계열 (근거 2개)

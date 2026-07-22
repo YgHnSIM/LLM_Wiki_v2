@@ -3200,3 +3200,29 @@ sources:
     doi: 10.48550/arXiv.2206.04615
     url: https://arxiv.org/abs/2206.04615
     language: en
+  openai-2023-gpt4-research:
+    title: GPT-4
+    authors: [OpenAI]
+    published: 2023
+    source_type: primary-release
+    kind: official-blog
+    url: https://openai.com/index/gpt-4-research/
+    language: en
+  katz-et-al-2024-gpt4-bar-exam:
+    title: GPT-4 Passes the Bar Exam
+    authors: [Daniel Martin Katz, Michael James Bommarito, Shang Gao, Pablo Arredondo]
+    published: 2024
+    source_type: primary
+    kind: journal-article
+    doi: 10.1098/rsta.2023.0254
+    url: https://doi.org/10.1098/rsta.2023.0254
+    language: en
+  martinez-2024-gpt4-bar-exam:
+    title: Re-evaluating GPT-4’s Bar Exam Performance
+    authors: [Eric H. Martinez]
+    published: 2024
+    source_type: primary
+    kind: journal-article
+    doi: 10.1007/s10506-024-09396-9
+    url: https://doi.org/10.1007/s10506-024-09396-9
+    language: en
