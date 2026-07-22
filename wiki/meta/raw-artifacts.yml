@@ -1746,3 +1746,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/mixtral-sparse-moe-production-ready-efficient-language-models
     sha256: 8bc14457fb8636f5c26d9a246834220db324db50bfe141c6d47b337e7ff0d3de
+  - path: "raw/098_Long Context Models Processing Million-Token Sequences in Language AI.ko.md"
+    role: translation
+    order_prefix: "098"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/long-context-models-processing-million-token-sequences-language-ai
+    sha256: d10e70eca89fb6376801005a9b2a811ea49e83bb0dbfec44e0e3a05f7427f7c2
+  - path: "raw/098_Long Context Models Processing Million-Token Sequences in Language AI.commentary.ko.md"
+    role: commentary
+    order_prefix: "098"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/long-context-models-processing-million-token-sequences-language-ai
+    sha256: 01f823e0d2e066fef0086af1234c33e07052e4da550c14afc58db3534939d9cd

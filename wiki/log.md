@@ -3911,6 +3911,29 @@ raw 등록 해시:
 - `source:ready -- 097`은 96개 회귀 테스트와 321개 Markdown strict lint를 통과해 378개 evidence와 194개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 621개 HTML을 만들고 7,138개 wiki link를 모두 해소했다.
 - 다음 순차 입력은 공식 098 `Long Context Models Processing Million-Token Sequences in Language AI`다.
 
+## [2026-07-22] ingest | 백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계
+
+변경 내용:
+
+- 공식 098 `Long Context Models Processing Million-Token Sequences in Language AI`를 H1·H2·H3 `1/6/0`, 43개 본문 블록과 17개 Markdown link의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 번역은 첫 제목 바로 뒤에 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않는다.
+- 번역 전수 감사에서 `might` 조건성, 일부 모델만 1M 이상이라는 범위, hypothetical 분할 손실, local context·synthesis 용어와 문장 인과를 교정했다. 원문의 서로 다른 긴 문맥 기술 통합, 위치 편향 방향과 광범위한 응용 주장은 번역에서 임의로 바꾸지 않고 해설·공개 소스의 검증 정정에서 분리했다.
+- 검증된 번역·해설을 신규 raw 두 파일로 등록했다. 번역 SHA-256은 `d10e70eca89fb6376801005a9b2a811ea49e83bb0dbfec44e0e3a05f7427f7c2`, 해설은 `01f823e0d2e066fef0086af1234c33e07052e4da550c14afc58db3534939d9cd`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계]]와 [[긴 문맥 언어 모델]]을 만들었다. LWM의 공개 7B 구현과 Gemini 1.5의 제한된 구조·제품 공개를 분리하고, 명목 입력 한도·학습 길이·attention 연결·계산·정보 접근·복합 추론을 별도 증거 축으로 정리했다.
+- [[Transformer-XL]], [[FlashAttention]], [[검색 증강 생성]]을 최소 보강했다. Recurrent memory, 분산 exact attention, HBM I/O 최적화와 외부 retrieval이 서로 다른 병목을 바꾸며, 긴 창과 RAG는 검색 누락·내부 활용 실패·비용 조건에 따라 경쟁하고 보완한다.
+- LWM·RingAttention·Gemini 1.5 보고서와 공식 발표·2M 공개·Claude 3 발표·*Lost in the Middle*·RULER 등 1차 근거 여덟 건을 등록하고, 기존 FlashAttention·ALiBi·Transformer-XL·RAG 근거와 연결했다. [[index]]와 [[overview]]를 source 98개·concept 171개·비메타 320개, 공식 범위 001–046·048–098·103과 다음 공식 099 Structured Outputs 기준으로 갱신했다.
+- 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 192개, raw Markdown 197개, 위키 Markdown 323개에서 UI 단락 0개를 확인했다. 번역 정규화 검사는 표준 `원본 출처:` 96개와 변경 필요 0개를 확인했다.
+
+검증 정정과 남은 한계:
+
+- 2024년은 긴 문맥 모델의 최초 등장보다 100만 토큰급 공개 연구 모델과 제한적 상용 preview가 가시화된 시점이다. LWM은 2024년 2월 13일 공개됐고 Gemini 1.5 Pro는 이틀 뒤 표준 128K·제한 고객용 1M private preview로 발표됐다.
+- LWM은 RingAttention·FlashAttention·RoPE scaling을 결합하고 Llama 2 7B(4K)에서 초기화한 뒤 32K→128K→256K→512K→1M의 다섯 학습 단계로 확장했다. Gemini 보고서는 sparse MoE와 광범위한 architecture·data·optimization·systems 변경만 밝혔으므로 같은 recipe나 계층 memory·재귀 retrieval을 귀속하지 않는다.
+- FlashAttention은 exact dense attention의 큰 중간 저장과 HBM I/O를 줄이지만 $O(N^2d)$ pairwise 산술량을 선형으로 바꾸지 않는다. RingAttention은 query block을 장치별로 두고 key·value block을 순환하는 분산 방식이며 sparse attention이 아니다.
+- Gemini 1.5 v1의 single needle recall은 1M까지 99.7%를 넘었지만 100-needle은 1M에서 60%를 조금 넘었다. RULER의 13개 과제·17개 모델은 명목 창과 과제별 유효 창이 다를 수 있음을 보여 주므로 단일 needle을 전체 문서 이해로 확대하지 않는다.
+- 원문의 위치 효과는 방향이 반대다. *Lost in the Middle*의 대표 경향은 관련 정보가 시작·끝에 있을 때 높고 가운데에 있을 때 낮았으며, model·task·prompt별 예외 가능성을 함께 남긴다.
+- 10M Gemini 평가는 연구 실험이고 1M은 당시 제한 preview였다. 법률·의료·codebase 전체 분석은 잠재 응용이며, 입력 비용·prefill latency·KV cache·권한·민감 정보·citation 정확도와 domain별 안전 검증이 별도로 필요하다.
+- `source:ready -- 098`은 96개 회귀 테스트와 323개 Markdown strict lint를 통과해 386개 evidence와 196개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 625개 HTML을 만들고 7,203개 wiki link를 모두 해소했다.
+- 다음 순차 입력은 공식 099 `Structured Outputs Reliable Schema-Validated Data Extraction from Language Models`다.
+
 ## 관련 항목
 
 - [[index]]

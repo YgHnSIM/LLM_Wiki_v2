@@ -3226,3 +3226,72 @@ sources:
     doi: 10.1007/s10506-024-09396-9
     url: https://doi.org/10.1007/s10506-024-09396-9
     language: en
+  liu-et-al-2024-lwm:
+    title: World Model on Million-Length Video And Language With RingAttention
+    authors: [Hao Liu, Wilson Yan, Matei Zaharia, Pieter Abbeel]
+    published: 2024
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2402.08268
+    url: https://arxiv.org/abs/2402.08268v1
+    language: en
+  liu-et-al-2023-ring-attention:
+    title: Ring Attention with Blockwise Transformers for Near-Infinite Context
+    authors: [Hao Liu, Matei Zaharia, Pieter Abbeel]
+    published: 2023
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2310.01889
+    url: https://arxiv.org/abs/2310.01889
+    language: en
+  gemini-team-2024-gemini-15:
+    title: 'Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context'
+    authors: [Gemini Team]
+    published: 2024
+    source_type: primary
+    kind: technical-report
+    doi: 10.48550/arXiv.2403.05530
+    url: https://arxiv.org/abs/2403.05530v1
+    language: en
+  google-2024-gemini-15-release:
+    title: 'Our next-generation model: Gemini 1.5'
+    authors: [Sundar Pichai, Demis Hassabis]
+    published: 2024
+    source_type: primary-release
+    kind: official-blog
+    url: https://blog.google/innovation-and-ai/products/google-gemini-next-generation-model-february-2024/
+    language: en
+  google-2024-gemini-15-2m-release:
+    title: 'Gemini 1.5 Pro 2M context window, code execution capabilities, and Gemma 2 are available today'
+    authors: [Logan Kilpatrick, Shrestha Basu Mallick, Ronen Kofman]
+    published: 2024
+    source_type: primary-release
+    kind: official-blog
+    url: https://developers.googleblog.com/en/new-features-for-the-gemini-api-and-google-ai-studio/
+    language: en
+  anthropic-2024-claude-3-release:
+    title: Introducing the next generation of Claude
+    authors: [Anthropic]
+    published: 2024
+    source_type: primary-release
+    kind: official-blog
+    url: https://www.anthropic.com/news/claude-3-family
+    language: en
+  liu-et-al-2024-lost-in-the-middle:
+    title: 'Lost in the Middle: How Language Models Use Long Contexts'
+    authors: [Nelson F. Liu, Kevin Lin, John Hewitt, Ashwin Paranjape, Michele Bevilacqua, Fabio Petroni, Percy Liang]
+    published: 2024
+    source_type: primary
+    kind: journal-article
+    doi: 10.1162/tacl_a_00638
+    url: https://aclanthology.org/2024.tacl-1.9/
+    language: en
+  hsieh-et-al-2024-ruler:
+    title: 'RULER: What’s the Real Context Size of Your Long-Context Language Models?'
+    authors: [Cheng-Ping Hsieh, Simeng Sun, Samuel Kriman, Shantanu Acharya, Dima Rekesh, Fei Jia, Yang Zhang, Boris Ginsburg]
+    published: 2024
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2404.06654
+    url: https://arxiv.org/abs/2404.06654
+    language: en

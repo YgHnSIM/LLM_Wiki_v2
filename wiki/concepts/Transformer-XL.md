@@ -21,6 +21,8 @@ artifacts:
   - 'raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md'
   - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md'
   - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md'
+  - 'raw/098_Long Context Models Processing Million-Token Sequences in Language AI.ko.md'
+  - 'raw/098_Long Context Models Processing Million-Token Sequences in Language AI.commentary.ko.md'
 evidence:
   - source_id: dai-et-al-2019-transformer-xl
     locator: 'pp. 2980–2986, 특히 §§3.2–3.3와 Figures 1–2의 state reuse·stop-gradient·layer shift·relative positional attention, §§4.2–4.5와 Tables 6–9의 ablation·RECL·평가 속도 조건'
@@ -28,11 +30,16 @@ evidence:
   - source_id: dao-et-al-2022-flashattention
     locator: '§§2.2–3.2와 Algorithms 0–1의 동일 dense attention을 위한 HBM–SRAM 타일링·온라인 softmax·추가 메모리와 이차 산술량의 구분'
     relation: contextualizes
+  - source_id: liu-et-al-2024-lwm
+    locator: 'arXiv v1 §§2–3.2와 Figure 3·Table 1의 RingAttention+FlashAttention·RoPE scaling·Llama 2 7B(4K) 초기화 뒤 32K→128K→256K→512K→1M의 5-stage 확장; Transformer-XL recurrence와 다른 1M 경로'
+    relation: contextualizes
 related:
   - source.064
   - source.088
+  - source.098
   - concept.transformer
   - concept.flashattention
+  - concept.긴-문맥-언어-모델
   - concept.자기회귀-생성
   - concept.xlnet-roberta-albert
   - analysis.훈련-병렬성과-생성-순차성은-다른-축이다
@@ -95,6 +102,8 @@ Transformer-XL과 [[FlashAttention]]은 모두 더 긴 문맥을 실용적으로
 
 따라서 “긴 문맥”을 architecture가 제공하는 정보 경로, attention operator의 산술량, kernel의 중간 저장·대역폭, 모델이 실제 장거리 정보를 활용하는 품질로 나누어 읽는다.
 
+2024년 [[098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계|백만 토큰 문맥 사례]]인 LWM은 Transformer-XL의 recurrence를 단순 연장하지 않았다. Llama 2 7B(4K)에서 초기화한 뒤 RingAttention과 [[FlashAttention]]을 결합하고 RoPE scale을 조정해 32K·128K·256K·512K·1M의 다섯 학습 단계로 길이를 확장했다. 따라서 백만 토큰 지원을 Transformer-XL 계보 하나로 환원하지 않고, recurrent memory·분산 exact attention·kernel I/O·위치 표현·장문 학습을 별도 설계 축으로 구분한다.
+
 ### 실험으로 확인된 범위
 
 Transformer-XL은 다섯 word·character 언어 모델 자료에서 perplexity 또는 bpc를 평가했다. WikiText-103 18.3 perplexity와 enwik8 0.99 bpc가 대표 결과다. recurrence·위치 표현 ablation, RECL, 평가 속도와 정성적 장문 생성도 보고됐다.
@@ -137,13 +146,18 @@ memory를 늘리면 더 긴 과거를 직접 읽는 대신 계산량과 저장�
 - 프로젝트 보존 자료: `raw/064_Transformer-XL Extending Transformers to Long Sequences.ko.md`, `raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md`.
 - Tri Dao 외, [FlashAttention](https://proceedings.neurips.cc/paper_files/paper/2022/hash/67d57c32e20fd0a7a302cb81d36e40d5-Abstract.html), NeurIPS 2022, §§2.2–3.2와 Algorithms 0–1.
 - [[088_FlashAttention과 IO 인지형 정확 어텐션]]
+- [[098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계]]
+- Hao Liu 외, [World Model on Million-Length Video And Language With RingAttention](https://arxiv.org/abs/2402.08268v1), 2024, §§2–3.2, Figure 3과 Table 1.
+- 프로젝트 보존 자료: `raw/098_Long Context Models Processing Million-Token Sequences in Language AI.ko.md`, `raw/098_Long Context Models Processing Million-Token Sequences in Language AI.commentary.ko.md`.
 
 ## 관련 항목
 
 - [[064_Transformer-XL과 세그먼트 수준 재귀]]
 - [[088_FlashAttention과 IO 인지형 정확 어텐션]]
+- [[098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계]]
 - [[Transformer]]
 - [[FlashAttention]]
+- [[긴 문맥 언어 모델]]
 - [[자기회귀 생성]]
 - [[XLNet·RoBERTa·ALBERT]]
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]]

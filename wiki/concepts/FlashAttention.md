@@ -20,6 +20,8 @@ verification: verified
 artifacts:
   - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md'
   - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md'
+  - 'raw/098_Long Context Models Processing Million-Token Sequences in Language AI.ko.md'
+  - 'raw/098_Long Context Models Processing Million-Token Sequences in Language AI.commentary.ko.md'
 evidence:
   - source_id: dao-et-al-2022-flashattention
     locator: '§§2.2–3.3과 Algorithms 0–1의 online softmax·타일링·재계산, Theorems 1–2와 Proposition 3의 공간·I/O 복잡도, §§4–5와 Tables 1–6의 성능·한계'
@@ -30,12 +32,17 @@ evidence:
   - source_id: shah-et-al-2024-flashattention-3
     locator: '초록과 §§2–3의 Hopper 비동기 실행·warp specialization·matmul–softmax 중첩·FP8 경로'
     relation: contextualizes
+  - source_id: liu-et-al-2024-lwm
+    locator: 'arXiv v1 §§2–3.2와 Figure 3·Table 1의 RingAttention과 FlashAttention 결합, RoPE scaling, Llama 2 7B(4K) 초기화 뒤 32K→128K→256K→512K→1M의 5-stage 확장'
+    relation: contextualizes
 related:
   - source.088
+  - source.098
   - source.055
   - source.064
   - concept.transformer
   - concept.transformer-xl
+  - concept.긴-문맥-언어-모델
   - concept.대규모-언어-모델
   - analysis.훈련-병렬성과-생성-순차성은-다른-축이다
 ---
@@ -112,6 +119,8 @@ Attention kernel의 2~4배 향상과 전체 model 학습의 향상은 다르다.
 
 2022년 논문에서 exact Path-X 모델은 16K였고 64K Path-256은 approximate block-sparse 확장이었다. 별도 2023년 논문의 FlashAttention-2는 non-matmul FLOPs·single-head sequence 병렬화·warp 작업 분배를 개선했고, 별도 2024년 논문의 FlashAttention-3는 Hopper의 비동기 Tensor Core·TMA, warp specialization, matmul–softmax 중첩과 FP8 경로를 추가했다. 현재 구현의 성능과 지원 범위를 v1에 소급하지 않는다.
 
+2024년 [[098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계|LWM 사례]]는 FlashAttention을 RingAttention의 분산 sequence parallelism과 결합해 1M 문맥 모델을 훈련했다. 이는 FlashAttention 단독이 백만 토큰 창을 만든 사례가 아니다. 분산 장치, RoPE scaling, Llama 2 7B(4K) 초기화 뒤 32K→128K→256K→512K→1M으로 늘린 다섯 학습 단계와 장문 자료가 함께 필요했고, attention의 dense pairwise 산술량은 남았다.
+
 ## 검증과 한계
 
 ### 확인된 사실
@@ -146,14 +155,19 @@ FlashAttention은 자기회귀 생성의 token-by-token 의존성도 없애지 �
 - Tri Dao, [FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691), 2023, 초록과 §§2–3.
 - Jay Shah 외, [FlashAttention-3: Fast and Accurate Attention with Asynchrony and Low-precision](https://arxiv.org/abs/2407.08608), 2024, 초록과 §§2–3.
 - [[088_FlashAttention과 IO 인지형 정확 어텐션]]
+- [[098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계]]
+- Hao Liu 외, [World Model on Million-Length Video And Language With RingAttention](https://arxiv.org/abs/2402.08268v1), 2024, §§2–3.2, Figure 3과 Table 1.
 - 프로젝트 보존 자료: `raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md`, `raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/098_Long Context Models Processing Million-Token Sequences in Language AI.ko.md`, `raw/098_Long Context Models Processing Million-Token Sequences in Language AI.commentary.ko.md`.
 
 ## 관련 항목
 
 - [[088_FlashAttention과 IO 인지형 정확 어텐션]]
+- [[098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계]]
 - [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]]
 - [[064_Transformer-XL과 세그먼트 수준 재귀]]
 - [[Transformer]]
 - [[Transformer-XL]]
+- [[긴 문맥 언어 모델]]
 - [[대규모 언어 모델]]
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]]
