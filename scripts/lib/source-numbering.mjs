@@ -1,5 +1,5 @@
 export const OFFICIAL_SOURCE_COUNT = 110;
-export const MISSING_OFFICIAL_SOURCE_PREFIX = '047';
+export const EDITORIALLY_RECONSTRUCTED_SOURCE_PREFIX = '047';
 
 function threeDigitPrefix(value, label) {
   const prefix = String(value ?? '').trim();
@@ -17,17 +17,15 @@ function formatPrefix(value) {
  * Validate a History of Language AI official chapter number.
  *
  * Every selector, source filename, translated artifact, public source ID,
- * and commit number uses this same official prefix. Chapter 047 is reserved in
- * the official table of contents, but its upstream original is unavailable.
+ * and commit number uses this same official prefix. Chapter 047 has no upstream
+ * original, but the public wiki now uses the official number for a transparently
+ * labelled editorial reconstruction.
  */
 export function officialSourcePrefix(value) {
   const prefix = threeDigitPrefix(value, 'Official source prefix');
   const number = Number(prefix);
   if (number < 1 || number > OFFICIAL_SOURCE_COUNT) {
     throw new Error(`Official source prefix must be between 001 and ${formatPrefix(OFFICIAL_SOURCE_COUNT)}.`);
-  }
-  if (prefix === MISSING_OFFICIAL_SOURCE_PREFIX) {
-    throw new Error(`Official source ${MISSING_OFFICIAL_SOURCE_PREFIX} is unavailable because its upstream original is missing.`);
   }
   return prefix;
 }

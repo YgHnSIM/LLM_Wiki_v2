@@ -22,11 +22,11 @@
 
 명령행의 `NNN`은 **공식 책 목차 장 번호**다. 외부 원문·번역·raw 파일명, `raw-artifacts.yml`의 `order_prefix`, 공개 `source.NNN`, `wiki/sources/` 파일명, 위키 링크, 사이트 URL과 ingest 커밋이 모두 같은 번호를 사용한다. 예를 들어 `source:ready -- 080`은 `080` Chain-of-Thought 원문·번역·raw와 공개 `source.080`을 검사한다.
 
-공식 047은 upstream 원문이 없는 결손 장이다. 원문·번역·raw·source 페이지를 만들거나 다른 문서에 재사용하지 않고 `wiki/meta/source-gaps.yml`에 기록한다. 근거·예외·미래 처리 규칙은 [소스 번호 체계](source-numbering.md)를 따른다.
+공식 047은 upstream 원문이 없는 결손 장이며 표준 번역 흐름의 예외다. 외부 원문·번역본 없이 1차 문헌 기반 `editorial-reconstruction`·`editorial-commentary` raw와 `source.047`을 공개했고, `wiki/meta/source-gaps.yml`에 원문 결손과 재구성 상태를 함께 기록한다. `/lt 047`과 `source:* -- 047`은 적용하지 않는다. 근거·예외·미래 처리 규칙은 [소스 번호 체계](source-numbering.md)를 따른다.
 
 ## 중단 뒤 재개
 
-새 세션에서 `하던 작업 계속 진행`이라고 입력하면 외부 원문 목록에서 실제 원문이 있는 첫 미완료 **공식 번호**를 찾고 이 문서의 기존 절차를 한 번에 하나씩 그대로 적용한다. 현재 다음 입력 대상은 공식 081 `ChatGPT Conversational AI Becomes Mainstream`이다. 먼저 `git status --short --branch`와 `npm run source:status -- NNN`으로 상태를 확인하고, 새 번호라면 기존 번역본을 무시한 채 `/lt NNN`부터 다시 시작한다. 완료된 단계를 중복하지 않으며 별도 브랜치·상태 파일·재개 명령은 만들지 않는다.
+새 세션에서 `하던 작업 계속 진행`이라고 입력하면 외부 원문 목록에서 실제 원문이 있는 첫 미완료 **공식 번호**를 찾고 이 문서의 기존 절차를 한 번에 하나씩 그대로 적용한다. 현재 upstream 원문 109개와 공식 047 편집부 재구성까지 공개를 마쳐 다음 순차 입력은 없다. 새 upstream 장이 생기면 먼저 `git status --short --branch`와 `npm run source:status -- NNN`으로 상태를 확인하고, 기존 번역본을 무시한 채 `/lt NNN`부터 다시 시작한다. 완료된 단계를 중복하지 않으며 별도 브랜치·상태 파일·재개 명령은 만들지 않는다.
 
 ## 1. 번역 대상 선택
 

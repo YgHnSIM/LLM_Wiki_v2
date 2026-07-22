@@ -9,7 +9,7 @@ aliases:
 tags:
   - type/meta
 created: '2026-05-07'
-updated: '2026-07-22'
+updated: '2026-07-23'
 lifecycle: active
 verification: verified
 artifacts: []
@@ -77,6 +77,7 @@ related:
 - [[044_GloVe와 Adam의 서로 다른 2014년 전환]] — GloVe의 희소 전역 계수 회귀와 Adam의 적응형 갱신을 분리하고 수렴·일반화·계보 과장을 교정한 소스 (근거 5개)
 - [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] — RNN 인코더-디코더의 조건부 생성을 복원하고 2014년 두 시스템·어텐션·GNMT·LLM 계보를 구분한 소스 (근거 5개)
 - [[046_메모리 네트워크와 외부 지식 접근]] — 외부 메모리의 I·G·O·R 인터페이스와 hard 다중 홉 선택을 복원하고 End-To-End MemNN·bAbI·RAG를 구분한 소스 (근거 4개)
+- [[047_어텐션 메커니즘과 동적 정렬]] — upstream 원문 결손을 명시한 편집부 재구성으로 출력별 soft alignment·global/local attention과 Transformer·설명 가능성의 경계를 검증한 소스 (근거 4개)
 - [[048_잔차 학습과 매우 깊은 신경망]] — 깊은 plain net의 degradation과 잔차 parameterization을 복원하고 Highway·pre-activation·Transformer 연결을 구분한 소스 (근거 4개)
 - [[049_층 정규화와 시퀀스 모델의 배치 독립성]] — BatchNorm·LayerNorm의 통계 축과 train/inference 차이를 복원하고 Post/Pre-LN·RMSNorm을 구분한 소스 (근거 6개)
 - [[050_FastText와 서브워드 표현의 두 경로]] — FastText 문자 n-gram 벡터 합과 BPE sequence 분절을 구분하고 hash·OOV·SentencePiece·현대 토큰화 계보를 검증한 소스 (근거 6개)
@@ -341,6 +342,7 @@ related:
 - [[합성곱 신경망]] — 국소 연결과 위치별 가중치 공유로 공간·순서 패턴의 계층적 특징을 학습하는 신경망 (근거 11개)
 - [[Sequence-to-Sequence 학습]] — 입력 시퀀스에 조건화해 길이가 다른 출력 시퀀스의 다음 요소 확률을 공동 학습하는 틀 (근거 3개)
 - [[인코더-디코더]] — 텍스트 번역과 Whisper 음성 조건 생성에서 입력 표현을 만드는 인코더와 출력을 생성하는 디코더를 결합한 구조 (근거 4개)
+- [[어텐션 메커니즘]] — query와 후보 표현의 관련성을 점수화하고 정규화된 가중 합으로 정보를 읽으며 점수·출처·범위·head 축을 구분하는 연산 (근거 4개)
 - [[자기회귀 생성]] — 이전 출력에 조건화해 다음 요소를 순차적으로 생성하며 학습과 디코딩을 구분하는 방식 (근거 7개)
 - [[메모리 네트워크]] — 읽고 쓸 수 있는 외부 메모리와 입력·갱신·출력·응답 구성 요소를 결합한 학습 틀 (근거 2개)
 - [[외부 메모리]] — 매개변수와 구분되어 문서·사실 항목을 개별적으로 저장·갱신·조회할 수 있는 저장소 (근거 2개)

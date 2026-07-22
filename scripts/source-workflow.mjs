@@ -5,6 +5,7 @@ import yaml from 'js-yaml';
 import matter from 'gray-matter';
 import { metaDir, rawDir, rootDir, wikiDir } from './lib/project-paths.mjs';
 import {
+  EDITORIALLY_RECONSTRUCTED_SOURCE_PREFIX,
   officialSourcePrefix,
   sourcePageNumberingErrors,
 } from './lib/source-numbering.mjs';
@@ -56,6 +57,9 @@ async function readSourceInventory(prefix) {
 
 async function loadContext(selection, { requireOriginalUrl = false } = {}) {
   const prefix = officialSourcePrefix(normalizeSourceSelection(selection));
+  if (prefix === EDITORIALLY_RECONSTRUCTED_SOURCE_PREFIX) {
+    fail(`Official source ${prefix} has no upstream original. Its public page is an editorial reconstruction, so the translation workflow does not apply.`);
+  }
   const sourceFilename = await readSourceInventory(prefix);
   const filenames = derivePairFilenames(sourceFilename);
   const sourcePath = path.join(sourceDir, sourceFilename);
@@ -314,7 +318,7 @@ Commands:
   ready   Require raw registration and the same-numbered official source.NNN, then run npm verify on main. Never runs Git writes.
 
 NNN is the official source number used by the original, translation, raw artifact, and public page.
-Official source 047 is reserved but unavailable because its upstream original is missing.`);
+Official source 047 has no upstream original; its public page is a separately managed editorial reconstruction.`);
 }
 
 const [command, selection] = process.argv.slice(2);

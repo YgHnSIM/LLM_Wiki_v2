@@ -375,7 +375,7 @@ test('registry prefixes dynamically define the complete translation set', async 
     }
   });
 
-  await t.test('known missing official chapter cannot enter either set', async () => {
+  await t.test('editorial reconstruction cannot enter the translation note or translation registry set', async () => {
     const fixture = await makeFixture({
       notes: {
         '047_gap.ko.md': '# 제목\n\n원본 출처: https://example.com/source-047\n',
@@ -386,7 +386,7 @@ test('registry prefixes dynamically define the complete translation set', async 
       await assert.rejects(planTranslationNormalization({
         translationDir: fixture.translationDir,
         registryPath: fixture.registryPath,
-      }), /Official source 047 is unavailable/);
+      }), /Official source 047 is an editorial reconstruction, not a translation input/);
     } finally {
       await fixture.cleanup();
     }

@@ -9,7 +9,7 @@ aliases:
 tags:
   - type/meta
 created: '2026-05-07'
-updated: '2026-07-22'
+updated: '2026-07-23'
 lifecycle: active
 verification: verified
 artifacts: []
@@ -22,27 +22,27 @@ related:
 
 이 위키는 언어 모델링, 기계 지능 평가, 초기 기계 번역, 신경망 학습, 형식언어, 대화형 AI의 역사를 1차 문헌과 함께 연결한다. 수집 당시의 번역·해설은 `raw/`에 보존하고, 공개 문서는 locator가 있는 근거로 검증한다.
 
-## 공식 장 번호와 원문 결손
+## 공식 장 번호와 편집부 재구성
 
-공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism (2015)**이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-21 현재 원문을 제공하지 않는다.
+공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism (2015)**이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-23 현재 원문을 제공하지 않는다.
 
-따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 109개는 공식 001–046·048–110을 다룬다. Upstream에 실제 원문이 있는 109개 장의 공개 처리를 완료했고, 공식 047만 `source-gaps.yml`의 원문 결손으로 남는다. 다음 순차 입력은 없다.
+공식 047은 [[047_어텐션 메커니즘과 동적 정렬]]과 [[어텐션 메커니즘]]으로 채웠다. 다만 upstream 원문을 찾았거나 번역한 것으로 표시하지 않는다. 연결 raw 두 파일은 Bahdanau 2015·Luong 2015·Vaswani 2017을 토대로 위키가 새로 쓴 `editorial-reconstruction`과 `editorial-commentary`이며, `wiki/meta/source-gaps.yml`은 upstream 결손과 재구성 공개를 동시에 기록한다. 외부 원문 목록은 계속 001–046·048–110의 109개이고, 공개 source는 공식 001–110의 110개다. 다음 순차 입력은 없다.
 
 숫자 badge는 정규 source의 공식 장 번호에만 쓴다. 비번호 reference가 추가되면 번호 source 뒤에서 `참고`로 표시하며, 목록 위치를 `001` 같은 장 번호로 바꾸지 않는다. 같은 장의 검증 노트·번역·해설은 서로 다른 장이 아니라 하나의 source 묶음에 속한다.
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 109개, reference 0개, concept 179개, entity 29개, analysis 23개를 합친 비메타 문서 340개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 110개, reference 0개, concept 180개, entity 29개, analysis 23개를 합친 비메타 문서 342개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
 | 언어 모델은 어떻게 발전했나 | [[001_섀넌의 N-gram 모델]] | [[N-gram 모델]] → [[019_Katz 백오프와 희소 데이터 확률 추정]] → [[035_신경 확률 언어 모형과 분산 단어 표현]] → [[자기회귀 생성]] | [[N-gram에서 LLM으로]] |
 | 기계의 언어 행동을 어떻게 평가하나 | [[002_튜링 테스트]] | [[033_BLEU와 기계 번역 자동 평가]] → [[051_SQuAD와 추출형 독해 평가]] → [[060_GLUE와 SuperGLUE의 집계 평가]] → [[095_BIG-bench와 MMLU의 평가 범위·집계 경계]] → [[BIG-bench와 MMLU]] → [[079_HELM과 다차원 언어 모델 평가]] → [[HELM]] | [[튜링 테스트와 LLM 평가]] |
 | 규칙에서 학습으로 무엇이 바뀌었나 | [[003_Georgetown-IBM 기계 번역 시연]] | [[012_상징 규칙에서 통계 학습으로]] → [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[규칙 기반 AI에서 데이터 기반 학습으로]] |
-| 현대 Transformer 계열은 어디서 왔나 | [[018_역전파와 다층 신경망 학습]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]] → [[064_Transformer-XL과 세그먼트 수준 재귀]] → [[061_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]] | [[066_신경 언어 모델의 스케일링 법칙]] |
+| 현대 Transformer 계열은 어디서 왔나 | [[018_역전파와 다층 신경망 학습]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[047_어텐션 메커니즘과 동적 정렬]] → [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]] → [[064_Transformer-XL과 세그먼트 수준 재귀]] → [[061_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]] | [[066_신경 언어 모델의 스케일링 법칙]] |
 | 같은 dense attention을 더 적은 메모리 이동으로 어떻게 실행하나 | [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]] | [[088_FlashAttention과 IO 인지형 정확 어텐션]] → [[FlashAttention]] → [[Transformer-XL]] | [[훈련 병렬성과 생성 순차성은 다른 축이다]] |
 | 최대 문맥 길이는 실제 이해 길이와 같은가 | [[064_Transformer-XL과 세그먼트 수준 재귀]] | [[088_FlashAttention과 IO 인지형 정확 어텐션]] → [[098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계]] → [[긴 문맥 언어 모델]] → [[검색 증강 생성]] | [[검색은 근거를 찾고 독해는 답을 찾는다]] |
-| 한 언어의 지식은 다른 언어로 어떻게 옮겨지나 | [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[062_XLM과 교차 언어 사전 학습]] → [[XLM]] | [[같은 병렬 문장은 무엇을 학습시키는가]] |
+| 한 언어의 지식은 다른 언어로 어떻게 옮겨지나 | [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[047_어텐션 메커니즘과 동적 정렬]] → [[062_XLM과 교차 언어 사전 학습]] → [[XLM]] | [[같은 병렬 문장은 무엇을 학습시키는가]] |
 | 다언어 지원은 곧 언어 형평성인가 | [[062_XLM과 교차 언어 사전 학습]] | [[082_BLOOM과 공개 접근 다국어 LLM]] → [[110_저자원 언어 LLM의 성능 격차와 전이·평가 경계]] → [[저자원 언어]] | [[언어 수와 언어 형평성은 같은 축인가]] |
 | 검색과 외부 지식은 어떻게 연결되나 | [[010_벡터 공간 모델과 TF-IDF]] | [[024_BM25와 확률적 정보 검색]] → [[052_신경 정보 검색과 의미 대응]] → [[065_BERT 기반 passage 재순위화]] → [[068_DPR과 검색 증강 생성]] → [[073_ColBERT와 다중 벡터 검색]] → [[100_희소·밀집 검색의 결합과 다단계 순위화]] → [[하이브리드 검색]] | [[검색은 근거를 찾고 독해는 답을 찾는다]] |
 | 자연어 명세는 어떻게 실행 코드가 되나 | [[067_GPT-3와 문맥 내 학습]] | [[071_Codex와 HumanEval 기반 코드 생성 평가]] → [[OpenAI Codex (2021)]] | [[자동 평가 지표는 무엇을 보상하는가]] |
@@ -68,7 +68,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 109개 소스의 범위
+## 110개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -116,6 +116,7 @@ related:
 - [[044_GloVe와 Adam의 서로 다른 2014년 전환]]은 [[GloVe]]의 국소 창·전역 희소 계수·가중 log-bilinear 회귀와 [[Adam 최적화기]]의 모멘트·편향 보정·후속 수렴 및 AdamW를 독립 연구로 검증한다.
 - [[045_Sequence-to-Sequence 학습과 신경 기계 번역]]은 [[Sequence-to-Sequence 학습]]의 조건부 생성 인터페이스와 [[인코더-디코더]]·[[자기회귀 생성]]을 복원하고, Sutskever·Cho 시스템의 역할 차이와 어텐션·GNMT·현대 LLM 계보의 범위를 검증한다.
 - [[046_메모리 네트워크와 외부 지식 접근]]은 [[메모리 네트워크]]의 I·G·O·R와 hard supporting-fact 선택·강한 감독을 복원하고, [[외부 메모리]]·[[다중 홉 검색]]에서 End-To-End MemNN·bAbI·RAG로 이어지는 단계의 범위를 검증한다.
+- [[047_어텐션 메커니즘과 동적 정렬]]은 upstream 원문 결손을 숨기지 않는 편집부 재구성이다. Bahdanau식 출력별 soft alignment와 Luong식 global/local attention을 복원하고, 단어 정렬·Transformer self-attention·설명 가능성의 경계를 검증한다.
 - [[048_잔차 학습과 매우 깊은 신경망]]은 [[ResNet]]의 [[Degradation problem]]과 (F(x)+x) [[잔차 연결]]을 복원하고, 기울기 소실·Highway Network·pre-activation·Transformer residual stream을 구분한다.
 - [[049_층 정규화와 시퀀스 모델의 배치 독립성]]은 [[Batch Normalization]]과 [[Layer Normalization]]의 통계 공유 축·훈련/추론 상태를 복원하고, token별 hidden 정규화·Post/Pre-LN·[[RMSNorm]]의 범위를 검증한다.
 - [[050_FastText와 서브워드 표현의 두 경로]]는 [[FastText]]의 문자 n-gram 합·hash·정적 OOV 근사와 [[Byte Pair Encoding|BPE]]의 sequence 분절을 구분하고, [[서브워드 토큰화]]·SentencePiece·현대 Transformer 연결의 범위를 검증한다.
@@ -421,6 +422,8 @@ related:
 - [[메모리 네트워크]]
 - [[외부 메모리]]
 - [[다중 홉 검색]]
+- [[047_어텐션 메커니즘과 동적 정렬]]
+- [[어텐션 메커니즘]]
 - [[048_잔차 학습과 매우 깊은 신경망]]
 - [[잔차 연결]]
 - [[ResNet]]
@@ -468,7 +471,9 @@ related:
 
 ## 현재 상태
 
-소스 109개, 참고 자료 0개, 개념 179개, 개체 29개, 분석 23개와 메타 문서 3개, 총 343개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 310개는 `verified`, 해석적 문서 30개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 446개 외부 근거와 218개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 110개, 참고 자료 0개, 개념 180개, 개체 29개, 분석 23개와 메타 문서 3개, 총 345개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 312개는 `verified`, 해석적 문서 30개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 447개 외부 근거와 220개 불변 raw artifact가 레지스트리에 등록돼 있다.
+
+[[047_어텐션 메커니즘과 동적 정렬]]은 공식 번호의 빈자리를 upstream 번역으로 위장하지 않고 편집부 재구성으로 채운다. [[어텐션 메커니즘]]은 Bahdanau식 additive soft alignment, Luong식 global/local 범위, Transformer의 self/cross·multi-head 변형을 서로 다른 축으로 정리하고, attention weight와 정답 정렬·충실한 설명을 구분한다.
 
 [[110_저자원 언어 LLM의 성능 격차와 전이·평가 경계]]는 원문이 지목하지 않은 2025년 단일 돌파구를 서로 다른 세 연구로 분해한다. Alhanai의 11개 아프리카 언어 평가에는 영어 대비 12.0–19.9%p 격차가 남았고, Nagar의 4.8%p 격차는 힌디어–영어 code-switch CommonSenseQA 한 조건이며, de Gibert의 합성 자료 성과는 7개 언어 기계번역에 한정된다. [[저자원 언어]]는 이 문제를 화자 수가 아니라 corpus·주석·tokenizer·평가·계산·배포·공동체 거버넌스의 상대적 자원 묶음으로 정의하고, [[데이터 희소성]]의 미관측 n-gram 문제와 분리한다.
 

@@ -13,7 +13,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-19'
-updated: '2026-07-21'
+updated: '2026-07-23'
 lifecycle: active
 verification: verified
 artifacts:
@@ -37,8 +37,10 @@ evidence:
     relation: contextualizes
 related:
   - concept.transformer
+  - concept.어텐션-메커니즘
   - concept.신경망-기계-번역
   - concept.자기회귀-생성
+  - source.047
   - source.054
 ---
 # Transformer와 자기어텐션 기반 시퀀스 모델링
@@ -50,7 +52,7 @@ related:
 
 ## 1단계 — 먼저 잡을 핵심
 
-원문은 2017년 [[Transformer]]의 self-attention·multi-head·위치 인코딩을 설명하고 현대 LLM까지의 영향을 서술한다. 구조 입문은 유용하지만 원 번역 실험, 2018년 이후 사전학습, 2020년대 대규모 시스템의 성과를 하나의 직접 결과처럼 합친다. 공개 문서는 원 논문이 실제로 비교한 복잡도·BLEU·훈련 비용과 후속 계보를 나누어 검증한다.
+원문은 2017년 [[Transformer]]의 self-attention·multi-head·위치 인코딩을 설명하고 현대 LLM까지의 영향을 서술한다. 구조 입문은 유용하지만 원 번역 실험, 2018년 이후 사전학습, 2020년대 대규모 시스템의 성과를 하나의 직접 결과처럼 합친다. 공개 문서는 [[047_어텐션 메커니즘과 동적 정렬|2015년 RNN 번역 어텐션]]과 순환을 제거한 Transformer의 차이, 원 논문이 실제로 비교한 복잡도·BLEU·훈련 비용과 후속 계보를 나누어 검증한다.
 
 ### 핵심 문장
 
@@ -170,6 +172,8 @@ Wiegreffe·Pinter는 설명의 정의와 모델 전체 맥락을 고려해야 �
 ## 관련 항목
 
 - [[Transformer]]
+- [[047_어텐션 메커니즘과 동적 정렬]]
+- [[어텐션 메커니즘]]
 - [[신경망 기계 번역]]
 - [[자기회귀 생성]]
 - [[054_WaveNet과 표본 단위 신경 오디오 생성]]

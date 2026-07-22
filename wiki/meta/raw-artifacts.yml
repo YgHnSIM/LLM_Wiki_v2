@@ -828,6 +828,24 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/memory-networks
     sha256: b457361eb94b9c3f2f633b230cc5adc9262a4042d71dbd43355168ca83af6c68
+  - path: "raw/047_Attention Mechanism Editorial Reconstruction.ko.md"
+    role: editorial-reconstruction
+    order_prefix: "047"
+    language: ko
+    source_type: derivative
+    provenance: editorial-reconstruction-from-primary-sources
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment
+    sha256: 6ea72268b8212638f6ec7d3d0959cebe56f41473dc55c63945c73c1a5db8ce4e
+  - path: "raw/047_Attention Mechanism Editorial Reconstruction.commentary.ko.md"
+    role: editorial-commentary
+    order_prefix: "047"
+    language: ko
+    source_type: derivative
+    provenance: editorial-reconstruction-from-primary-sources
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment
+    sha256: 7a778e87c94ff4f4e3e470bf5545ec79b463c3a65fb481042e3e8cefe53375a7
   - path: "raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md"
     role: translation
     order_prefix: "048"

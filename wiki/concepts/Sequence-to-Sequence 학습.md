@@ -10,7 +10,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-18'
-updated: '2026-07-21'
+updated: '2026-07-23'
 lifecycle: active
 verification: verified
 artifacts:
@@ -28,9 +28,11 @@ evidence:
     relation: contextualizes
 related:
   - source.045
+  - source.047
   - concept.인코더-디코더
   - concept.자기회귀-생성
   - concept.신경망-기계-번역
+  - concept.어텐션-메커니즘
 ---
 # Sequence-to-Sequence 학습
 
@@ -69,7 +71,7 @@ Sutskever 등의 대표 실험은 4층 LSTM, 원문 순서 역전, 제한 어휘
 
 ### 고정 벡터 이후
 
-초기 고정 벡터는 입력 전체에 대한 단일 접근점이었다. Bahdanau 등의 어텐션은 출력 시점마다 입력 위치별 상태의 가중 조합을 만들어 이 병목을 완화했다. 뒤의 Transformer 인코더-디코더도 seq2seq 조건부 생성 틀을 유지하지만 순환 상태 대신 self-attention과 위치 표현을 쓴다.
+초기 고정 벡터는 입력 전체에 대한 단일 접근점이었다. Bahdanau 등의 [[어텐션 메커니즘]]은 출력 시점마다 입력 위치별 상태의 가중 조합을 만들어 이 병목을 완화했다. 뒤의 Transformer 인코더-디코더도 seq2seq 조건부 생성 틀을 유지하지만 순환 상태 대신 self-attention과 위치 표현을 쓴다.
 
 번역에서 Transformer로 이어지는 구조적 계보는 분명하지만, 자기회귀 언어 모델·GPT·BERT의 모든 발상을 seq2seq가 발명했다고 보지 않는다.
 
@@ -85,7 +87,7 @@ Sutskever 등의 대표 실험은 4층 LSTM, 원문 순서 역전, 제한 어휘
 2. 디코더가 이전 출력과 입력 표현에 조건화해 다음 요소를 만드는 과정은 어떻게 반복되는가?
 3. 종단간 학습과 Transformer 계보가 자료·탐색 선택이나 모든 언어 모델 발상을 자동 설명하지 않는 이유는 무엇인가?
 
-다음에는 [[인코더-디코더]]에서 두 구성요소의 역할을 자세히 보고, [[신경망 기계 번역]]에서 이 구조가 번역 과업에 적용된 조건을 살핀다.
+다음에는 [[인코더-디코더]]에서 두 구성요소의 역할을 자세히 보고, [[047_어텐션 메커니즘과 동적 정렬]]에서 고정 벡터 이후의 입력 접근을 살핀다.
 
 ## 출처
 
@@ -97,6 +99,8 @@ Sutskever 등의 대표 실험은 4층 LSTM, 원문 순서 역전, 제한 어휘
 ## 관련 항목
 
 - [[045_Sequence-to-Sequence 학습과 신경 기계 번역]]
+- [[047_어텐션 메커니즘과 동적 정렬]]
+- [[어텐션 메커니즘]]
 - [[인코더-디코더]]
 - [[자기회귀 생성]]
 - [[신경망 기계 번역]]

@@ -4219,6 +4219,25 @@ raw 등록 해시:
 - MMLU-ProX는 검증된 v1 snapshot을 판본 고정 사례로 사용한다. 후속 29언어 확장판과 혼합하지 않으며, text benchmark의 결과를 음성·수어·OCR·교육·임상·경제·언어 유지 outcome으로 확대하지 않는다.
 - 전체 검증은 96개 회귀 테스트와 343개 Markdown strict lint를 통과해 446개 evidence와 218개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 667개 HTML을 만들고 7,861개 wiki link를 모두 해소했으며, 44,347개 local reference와 검색 항목 342개를 검사했다.
 
+## [2026-07-23] content | 공식 047 어텐션 메커니즘 편집부 재구성
+
+변경 내용:
+
+- 공식 책 목차의 유일한 upstream 결손 047 `Attention Mechanism (2015)`을 [[047_어텐션 메커니즘과 동적 정렬]]로 채웠다. 다만 연결 주소가 2026-07-23에도 본문을 제공하지 않고 외부 원문 목록에도 파일이 없으므로, upstream 번역이나 추정 복원이 아니라 Bahdanau·Cho·Bengio(2015), Luong·Pham·Manning(2015), Vaswani 외(2017)의 1차 문헌을 토대로 위키가 새로 쓴 편집부 재구성임을 첫머리·출처·검증 절에 반복해 명시했다.
+- `raw/047_Attention Mechanism Editorial Reconstruction.ko.md`와 대응 해설을 새로 작성해 `editorial-reconstruction`·`editorial-commentary` 역할로 등록했다. 두 SHA-256은 각각 `6ea72268b8212638f6ec7d3d0959cebe56f41473dc55c63945c73c1a5db8ce4e`, `7a778e87c94ff4f4e3e470bf5545ec79b463c3a65fb481042e3e8cefe53375a7`이다. `원본 출처`나 `원문 번역본`으로 표시하지 않았고, 등록 뒤에는 일반 raw와 같은 불변 규칙을 적용한다.
+- [[어텐션 메커니즘]]을 만들었다. score→softmax normalization→weighted sum의 공통 연산을 설명하고 additive/dot, self/cross, global/local/sparse, single/multi-head, soft/hard를 서로 다른 분류 축으로 분리했다. Query-key-value라는 후대 일반화를 2015년 논문의 원래 용어로 소급하지 않았다.
+- Bahdanau 논문의 2014-09-01 공개와 ICLR 2015 발표를 구분하고, 출력별 문맥 벡터·긴 문장 비교·알려진 단어 조건을 locator와 함께 기록했다. Luong의 최대 `+5.0 BLEU`와 WMT15 영어→독일어 앙상블 `25.9 BLEU`를 설정별 결과로 한정하고, BLEU와 AER의 순위가 일치하지 않았다는 결과로 번역 가중치와 gold 단어 정렬의 목적 차이를 설명했다.
+- [[045_Sequence-to-Sequence 학습과 신경 기계 번역]], [[Sequence-to-Sequence 학습]], [[신경망 기계 번역]], [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]]에 새 source·개념 연결을 추가했다. 기존 문서 보강으로 고정 벡터→동적 cross-attention→self-attention의 계보와 차이가 충분히 보존돼 별도 analysis 문서는 만들지 않았다.
+- 번호 검사는 047을 공식 번호로 허용하되 표준 `/lt`·`source:*` 번역 흐름과 번역 정규화에서는 편집부 재구성이라는 이유로 계속 제외하도록 바꿨다. `source-gaps.yml`은 `upstream_status: unavailable`과 `status: editorial-reconstruction-published`를 함께 기록한다. artifact reader에는 번역과 혼동되지 않는 `편집부 재구성` 탭을 추가했고 과거 source.048의 legacy 047 URL은 별도 정적 리다이렉트로 유지했다.
+- [[index]]와 [[overview]]를 source 110개·concept 180개·entity 29개·analysis 23개·비메타 342개·전체 345개로 갱신했다. 외부 원문은 109개로 유지되며 공개 source만 공식 001–110을 모두 채운다. evidence는 Luong 2015 한 건을 추가해 447개, raw artifact는 두 건을 추가해 220개가 됐다.
+
+검증 경계:
+
+- 재구성의 수식·실험·연대는 1차 문헌으로 검증했지만, 존재하지 않는 upstream 글의 문장·구성·예시·저자 의도는 추정하지 않았다. 공식 URL에 원문이 나중에 게시되면 별도 비교·이관 판단이 필요하며 현재 재구성을 소급해 번역으로 바꾸지 않는다.
+- 2015년 NMT attention은 RNN 인코더·디코더를 유지한 cross-attention 계열이다. Transformer의 순환 제거·self-attention·multi-head와 같은 사건으로 합치지 않고, attention weight도 gold alignment나 충실한 인과 설명으로 자동 해석하지 않는다.
+- 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 214개, raw Markdown 221개, 위키 Markdown 345개에서 UI 단락 0개를 확인했다. 번역 정규화 검사는 기존 번역 107개와 표준 `원본 출처:` 107개, 변경 필요 0개를 확인했으며 047 재구성은 번역 집합에 들어가지 않는다.
+- 전체 검증은 96개 회귀 테스트와 345개 Markdown strict lint를 통과해 447개 evidence와 220개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 671개 HTML을 만들고 7,927개 wiki link를 모두 해소했으며, 44,643개 local reference와 검색 항목 344개를 검사했다.
+
 ## 관련 항목
 
 - [[index]]

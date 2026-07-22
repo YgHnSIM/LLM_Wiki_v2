@@ -4,7 +4,10 @@ import process from 'node:process';
 import { TextDecoder } from 'node:util';
 import { fileURLToPath } from 'node:url';
 import yaml from 'js-yaml';
-import { officialSourcePrefix } from './lib/source-numbering.mjs';
+import {
+  EDITORIALLY_RECONSTRUCTED_SOURCE_PREFIX,
+  officialSourcePrefix,
+} from './lib/source-numbering.mjs';
 
 const scriptPath = fileURLToPath(import.meta.url);
 const projectRoot = path.resolve(path.dirname(scriptPath), '..');
@@ -130,6 +133,9 @@ function registryRecordsByPrefix(registryText) {
     const prefix = String(artifact?.order_prefix ?? '').trim();
     try {
       officialSourcePrefix(prefix);
+      if (prefix === EDITORIALLY_RECONSTRUCTED_SOURCE_PREFIX) {
+        throw new Error(`Official source ${prefix} is an editorial reconstruction, not a translation input.`);
+      }
     } catch (error) {
       throw new TranslationNormalizationError(`translation registry record '${artifact?.path ?? ''}': ${error.message}`);
     }
@@ -249,6 +255,9 @@ export async function planTranslationNormalization({
     }
     try {
       officialSourcePrefix(prefix);
+      if (prefix === EDITORIALLY_RECONSTRUCTED_SOURCE_PREFIX) {
+        throw new Error(`Official source ${prefix} is an editorial reconstruction, not a translation input.`);
+      }
     } catch (error) {
       errors.push(`${filename}: ${error.message}`);
       continue;

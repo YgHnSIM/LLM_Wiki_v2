@@ -43,7 +43,7 @@ LLM_Wiki_v2/
 │       ├── tags.yml             # 허용 태그 사전
 │       ├── evidence.yml         # 외부 근거 레지스트리
 │       ├── raw-artifacts.yml    # raw 역할·출처 상태·해시
-│       ├── source-gaps.yml      # 공식 목차의 원문 결손 장
+│       ├── source-gaps.yml      # 공식 목차의 upstream 결손과 편집부 재구성 상태
 │       └── red-links.yml        # 의도적으로 허용한 미작성 링크
 ├── scripts/
 │   ├── lib/                     # 문서·링크·경로·빌드 공통 모듈
@@ -182,9 +182,9 @@ related:
 
 ### 6.0 중단 작업 재개 (`하던 작업 계속 진행`)
 
-새 세션에서 사용자가 정확히 `하던 작업 계속 진행`이라고 입력하면, 별도의 복구 체계를 만들지 않고 **외부 원문 목록에서 실제 원문이 있는 첫 미완료 공식 번호를 찾아 6.1–6.3의 기존 워크플로를 한 번에 하나씩 그대로 적용한다.** 현재 체크포인트는 공식 079 HELM 공개 처리까지 완료된 상태이므로 다음 입력 대상은 공식 080 Chain-of-Thought Prompting이다.
+새 세션에서 사용자가 정확히 `하던 작업 계속 진행`이라고 입력하면, 별도의 복구 체계를 만들지 않고 **외부 원문 목록에서 실제 원문이 있는 첫 미완료 공식 번호를 찾아 6.1–6.3의 기존 워크플로를 한 번에 하나씩 그대로 적용한다.** 현재 upstream 원문이 있는 공식 001–046·048–110과 편집부 재구성 047의 공개 처리가 모두 완료돼 다음 순차 입력은 없다.
 
-모든 단계는 하나의 **공식 책 목차 장 번호**를 사용한다. `/lt NNN`, `source:* -- NNN`, 외부 원문·번역·raw 파일명, `raw-artifacts.yml`의 `order_prefix`, `wiki/sources/` 파일명, `source.NNN`, 위키 링크, 공개 URL과 ingest 커밋 번호가 모두 같아야 한다. 공식 047 Attention Mechanism은 upstream 원문이 없는 알려진 결손이므로 파일·raw·source 페이지를 만들거나 다른 문서에 번호를 재사용하지 않고 `wiki/meta/source-gaps.yml`에 기록한다. 전체 규칙은 `docs/source-numbering.md`를 따른다.
+모든 단계는 하나의 **공식 책 목차 장 번호**를 사용한다. `/lt NNN`, `source:* -- NNN`, 외부 원문·번역·raw 파일명, `raw-artifacts.yml`의 `order_prefix`, `wiki/sources/` 파일명, `source.NNN`, 위키 링크, 공개 URL과 ingest 커밋 번호가 모두 같아야 한다. 공식 047 Attention Mechanism은 upstream 원문이 없는 알려진 결손이다. 표준 `/lt`·`source:*` 번역 흐름에는 넣지 않으며, `source.047`과 raw는 1차 문헌을 토대로 위키가 새로 쓴 **편집부 재구성**임을 눈에 띄게 표시한다. 원문 결손과 재구성 공개 상태는 `wiki/meta/source-gaps.yml`에 함께 기록한다. 전체 규칙은 `docs/source-numbering.md`를 따른다.
 
 1. `git status --short --branch`와 `npm run source:status -- NNN`으로 대상과 중단 지점을 확인한다.
 2. 새 번호는 기존 번역본을 무시하고 `/lt NNN`부터 새로 번역한다. 이번 작업에서 이미 검증까지 마친 단계가 있다면 그 다음 단계부터 잇는다.
@@ -200,6 +200,8 @@ related:
 4. `npm run source:status -- NNN`으로 입력·출력·raw·공개 페이지 상태를 확인한다.
 5. `npm run source:copy -- NNN`으로 검증된 쌍을 같은 공식 번호로 `raw/`에 복사하고 `raw-artifacts.yml`에 원문 `source_url`, 같은 `order_prefix`와 SHA-256을 등록한다.
 6. raw 복사 단계에서는 커밋·푸시하지 않는다. 기존 raw와 내용이 다르면 덮어쓰지 않고 중단한다. 공개 후 외부 번역본의 출처 표기·UI 문구만 정리해 raw와 달라진 경우에는 raw와 레지스트리의 SHA-256 일치를 기준으로 보존 상태를 검증하고, 외부 작업본으로 raw를 다시 동기화하지 않는다.
+
+공식 047은 이 절의 번역·복사 절차를 적용하지 않는 예외다. 외부 원문·외부 번역본을 만들지 않으며, `editorial-reconstruction`과 `editorial-commentary` 역할의 신규 raw를 등록한 뒤에는 다른 artifact와 같은 불변 규칙을 적용한다.
 
 ### 6.2 공개 소스 처리
 
@@ -236,7 +238,7 @@ related:
 - `wiki/meta/page.schema.json`에 대한 frontmatter 구조·타입·enum 검증
 - 폴더·`page_type`·`type/*` 일치
 - ID 중복, H1·title 불일치
-- source 페이지·raw 경로·`order_prefix`의 공식 장 번호 불일치와 결손 047의 오사용
+- source 페이지·raw 경로·`order_prefix`의 공식 장 번호 불일치와 047 재구성을 번역으로 오표기한 경우
 - 허용되지 않은 태그
 - 존재하지 않거나 해시가 달라진 raw artifact
 - 존재하지 않는 evidence ID, 빈 locator

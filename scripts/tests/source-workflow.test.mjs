@@ -239,7 +239,7 @@ test('source:status uses the official selector unchanged and accepts chapter 110
   }
 });
 
-test('every source workflow command rejects official chapter 047 as a known upstream gap', () => {
+test('the translation workflow excludes the editorial reconstruction for official chapter 047', () => {
   for (const command of ['status', 'copy', 'ready']) {
     const result = spawnSync(process.execPath, ['scripts/source-workflow.mjs', command, '047'], {
       cwd: process.cwd(),
@@ -248,7 +248,7 @@ test('every source workflow command rejects official chapter 047 as a known upst
     assert.notEqual(result.status, 0, `${command} unexpectedly accepted official source 047`);
     assert.match(
       result.stderr,
-      /Official source 047 is unavailable because its upstream original is missing/,
+      /Official source 047 has no upstream original.*editorial reconstruction/s,
     );
   }
 });

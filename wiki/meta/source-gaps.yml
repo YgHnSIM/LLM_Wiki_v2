@@ -2,7 +2,11 @@ schema_version: 1
 gaps:
   - source_number: "047"
     title: Attention Mechanism (2015)
-    status: upstream-original-unavailable
+    status: editorial-reconstruction-published
+    upstream_status: unavailable
+    replacement_kind: editorial-reconstruction
     source_url: https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment
-    last_checked: '2026-07-21'
-    note: 공식 책 목차에는 장이 있으나 연재 카테고리와 로컬 원문 목록에는 게시물이 없고 연결 주소도 Content Not Found를 반환한다.
+    source_page_id: source.047
+    reconstructed_on: '2026-07-23'
+    last_checked: '2026-07-23'
+    note: 공식 책 목차에는 장이 있으나 연재 카테고리와 로컬 원문 목록에는 게시물이 없고 연결 주소도 Content Not Found를 반환한다. 공개 source.047과 raw 두 파일은 Bahdanau 2015·Luong 2015·Vaswani 2017을 토대로 위키 편집부가 새로 쓴 재구성이며 upstream 원문의 번역이 아니다.
