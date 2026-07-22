@@ -3797,6 +3797,22 @@ raw 등록 해시:
 - `source:ready -- 094`는 96개 회귀 테스트와 316개 Markdown strict lint를 통과해 373개 evidence와 188개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 610개 HTML을 만들고 6,964개 wiki link를 모두 해소했다.
 - 다음 순차 입력은 공식 095 `BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models`다.
 
+## [2026-07-22] content | 헌법 원칙에서 정책 보상까지의 평가자 연쇄
+
+변경 내용:
+
+- 새 분석 문서를 늘리지 않고 기존 [[자동 평가 지표는 무엇을 보상하는가]]를 공식 094까지 확장했다. 고정 참조 지표·실행 test·사람 선호 보상·HELM 병렬 장부·Function Calling 직렬 관문에 헌법적 AI의 원칙 조건화 평가자 연쇄를 추가했다.
+- [[094_헌법적 AI와 자기비평·AI 피드백 정렬]]과 [[헌법적 AI]]를 연결해 `원칙 → feedback model → AI 유해성 비교 → 사람 유용성·AI 유해성 혼합 preference model → RL 정책`을 서로 다른 감사 경계로 분리했다.
+- InstructGPT와 RL-CAI를 피드백 출처와 최적화 골격의 두 축에서 비교했다. RL-CAI는 AI 유해성 비교 182,831개를 사람 유용성 비교 135,296개와 혼합했으며, feedback model과 preference model을 같은 역할로 합치거나 사람 피드백이 전면 제거됐다고 서술하지 않았다.
+- 과도한 RL에서 관찰된 가혹한 반응·반복적 위로 문구를 당시 model·원칙·prompt 분포·최적화 강도에 조건화된 Goodharting 사례로 배치했다. 이를 모든 RLAIF의 일반적 실패율이나 후대 Claude의 행동으로 확대하지 않았다.
+- 공식 094 raw 두 파일과 Bai 등의 2022년 논문 locator를 분석에 추가했다. 분석의 evidence는 13개에서 14개로 늘었고 [[index]]·[[overview]]의 설명과 근거 수를 동기화했다.
+
+검증 경계:
+
+- 자연어 헌법은 사람이 선택한 목표와 data lineage를 더 읽기 쉽게 만들지만, AI 비교 레이블의 정확성·preference model의 분포 밖 타당성·정책 최적화 뒤의 실제 사람 선호를 자동 보장하지 않는다.
+- 피드백 출처를 사람에서 AI로 바꾸는 것과 쌍대 비교를 스칼라 보상 모델에 압축해 RL로 최적화하는 것은 독립적인 축이다. 전자를 바꿨다고 후자의 proxy와 분포 이동 문제가 사라지지 않는다.
+- 전체 검증은 96개 회귀 테스트와 316개 Markdown strict lint를 통과해 373개 evidence와 188개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 610개 HTML을 만들고 6,975개 wiki link를 모두 해소했다.
+
 ## 관련 항목
 
 - [[index]]

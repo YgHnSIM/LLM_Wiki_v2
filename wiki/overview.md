@@ -193,7 +193,7 @@ related:
 - [[조건부 무작위장]]의 전역 정규화, MEMM label bias, 상태·전이 특징, forward-backward·Viterbi 계산과 neural CRF에서 달라지는 볼록성
 - [[BLEU]]의 참조별 최대 횟수 clipping, 1–4-gram 기하평균, brevity penalty와 말뭉치 단위 해석, 참조·토큰화·시험 집합에 따른 점수 조건
 - [[ROUGE]]의 참조 측 n-gram recall과 LCS·skip-bigram F-measure, [[METEOR]]의 일대일 unigram 정렬·recall 가중·어순 단편화 및 평가 지표의 과제별 유인
-- [[자동 평가 지표는 무엇을 보상하는가]]에서 비교하는 BLEU·ROUGE·METEOR의 분모·대응 단위·집계 방식, HumanEval 실행 검사와 InstructGPT 보상 모델, HELM의 시나리오×메트릭 장부 및 다중 지표에도 남는 프록시·가중치·가치 판단
+- [[자동 평가 지표는 무엇을 보상하는가]]에서 비교하는 BLEU·ROUGE·METEOR의 분모·대응 단위·집계 방식, HumanEval 실행 검사, InstructGPT 사람 선호 보상, HELM의 시나리오×메트릭 장부와 RL-CAI의 헌법→AI 유해성 피드백→사람 유용성·AI 유해성 혼합 선호 보상 연쇄 및 각 단계에 남는 프록시·가중치·가치 판단
 - [[HELM]]의 시나리오–적응–메트릭–실행 구조, 16개 핵심·26개 표적 시나리오와 정확도·보정·강건성·공정성·편향·독성·효율성의 다차원 평가 및 보편 순위의 한계
 - [[구 기반 통계적 기계 번역]]의 양방향 단어 정렬 대칭화, 통사 constituent가 아닌 일관 문자열 구, 짧은 구·lexical weighting·언어 모형과 beam search 결합
 - [[최소 오류율 훈련]]의 piecewise-constant 개발 오류, 후보 점수 교점의 line optimization, 반복 n-best 갱신과 metric overfitting
@@ -268,7 +268,7 @@ related:
 - [[Transformer-XL]]에서 구분하는 현재 segment 내부 병렬 계산, segment 사이 forward memory 재사용, stop-gradient로 끊긴 학습 경로와 설정된 memory 길이
 - [[FlashAttention]]에서 구분하는 dense attention operator, 온라인 softmax·타일링·재계산 algorithm, hardware별 kernel과 $O(n^2d)$ 산술량·HBM 이동·$O(n)$ 추가 중간 저장의 서로 다른 비용 축
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]]에서 비교하는 ELMo 고정 특징, 전체 미세조정, QLoRA의 NF4 동결 base–BF16 계산–학습 adapter, 입력 cue·demonstration, 다과제 지시, CLIP class prototype, Frozen·Flamingo·PaLI·BLIP-2·LLaVA·PaLM-E의 서로 다른 시각 bridge와 parameter-update 경계, DALL·E 2의 CLIP image-embedding target, Stable Diffusion의 text-token 교차 어텐션 조건과 공간 latent, Codex 실행 선택 및 foundation model–adapted model–deployed system의 층위·접근권
-- [[자동 평가 지표는 무엇을 보상하는가]]에서 비교하는 BLEU·ROUGE·METEOR의 참조 중첩, HumanEval unit test, InstructGPT 보상 모델, HELM의 다차원 행렬과 Function Calling의 JSON→schema→의미→권한→실행→grounding 직렬 관문 및 분모·pass@k·평가 지침·prompt 분포·누락된 조합이 점수 유인에 들어가는 서로 다른 위치
+- [[자동 평가 지표는 무엇을 보상하는가]]에서 비교하는 BLEU·ROUGE·METEOR의 참조 중첩, HumanEval unit test, InstructGPT 사람 선호 보상, HELM의 다차원 행렬, Function Calling의 JSON→schema→의미→권한→실행→grounding 관문과 RL-CAI의 원칙→feedback model→AI 유해성 비교→혼합 preference model→정책 연쇄 및 분모·pass@k·평가 지침·피드백 출처·prompt 분포가 점수 유인에 들어가는 서로 다른 위치
 - [[함수 호출과 도구 사용]]에서 분리하는 model의 call proposal, JSON·schema·semantic validation, 사용자·resource authorization, side-effect execution과 tool-result grounding 및 2023년 function calling–JSON mode–parallel calls–2024년 strict schema의 version 경계
 - [[XLM]]의 monolingual CLM·MLM과 parallel-data TLM, shared BPE·언어 sampling 및 target-language text와 task label을 분리한 zero-shot 조건
 - [[같은 병렬 문장은 무엇을 학습시키는가]]에서 비교하는 SMT의 잠재 단어 정렬, NMT의 target sequence supervision, TLM의 양방향 masked-token 문맥과 서로 다른 alignment 층위
