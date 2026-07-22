@@ -1872,3 +1872,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/multimodal-integration-unified-architectures-cross-modal-ai-understanding
     sha256: 8f0f548133884dde7c54a89448712b99a632295754c01f66b4af5689694d093f
+  - path: "raw/106_DeepSeek R1 Architectural Innovation in Reasoning Models.ko.md"
+    role: translation
+    order_prefix: "106"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/deepseek-r1-architectural-innovation-reasoning-models
+    sha256: b930cfab05daa235c7633356749ba18d234dd9d0714793b7c1a256e1663d60b6
+  - path: "raw/106_DeepSeek R1 Architectural Innovation in Reasoning Models.commentary.ko.md"
+    role: commentary
+    order_prefix: "106"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/deepseek-r1-architectural-innovation-reasoning-models
+    sha256: 1d6d3803a1669791fdb0803df7d15e7e04e6860f3a49c1476430ebd88ef8c70e

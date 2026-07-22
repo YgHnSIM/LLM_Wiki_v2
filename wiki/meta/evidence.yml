@@ -3548,3 +3548,46 @@ sources:
     kind: software-repository
     url: https://github.com/baaivision/Emu3
     language: en
+  shao-et-al-2024-deepseekmath:
+    title: 'DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models'
+    authors: [Zhihong Shao, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Xiao Bi, Haowei Zhang, Mingchuan Zhang, Y. K. Li, Y. Wu, Daya Guo]
+    published: 2024
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2402.03300
+    url: https://arxiv.org/abs/2402.03300v3
+    language: en
+  deepseek-ai-2024-v3:
+    title: DeepSeek-V3 Technical Report
+    authors: [DeepSeek-AI]
+    published: 2024
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2412.19437
+    url: https://arxiv.org/abs/2412.19437v1
+    language: en
+  deepseek-ai-2025-r1:
+    title: 'DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning'
+    authors: [DeepSeek-AI]
+    published: 2025
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2501.12948
+    url: https://arxiv.org/abs/2501.12948v1
+    language: en
+  deepseek-ai-2025-r1-release:
+    title: DeepSeek-R1 Release
+    authors: [DeepSeek-AI]
+    published: 2025
+    source_type: primary-release
+    kind: official-blog
+    url: https://api-docs.deepseek.com/news/news250120/
+    language: en
+  deepseek-ai-2025-r1-repository:
+    title: DeepSeek-R1 Official Repository and Model Releases
+    authors: [DeepSeek-AI]
+    published: 2025
+    source_type: primary-release
+    kind: software-repository
+    url: https://github.com/deepseek-ai/DeepSeek-R1
+    language: en

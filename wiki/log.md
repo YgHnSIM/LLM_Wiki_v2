@@ -4086,6 +4086,28 @@ raw 등록 해시:
 - `source:ready -- 105`는 96개 회귀 테스트와 334개 Markdown strict lint를 통과해 415개 evidence와 208개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 648개 HTML을 만들고 7,538개 wiki link를 모두 해소했으며, 42,719개 local reference와 검색 항목 333개를 검사했다.
 - 다음 순차 입력은 공식 106 `DeepSeek R1 Architectural Innovation in Reasoning Models`다.
 
+## [2026-07-22] ingest | DeepSeek-R1의 강화학습 파이프라인과 증류 경계
+
+변경 내용:
+
+- 공식 106 `DeepSeek R1 Architectural Innovation in Reasoning Models`를 원문과 같은 H1 1개·H2 6개와 Markdown link 2개의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 첫 제목 바로 뒤에 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않았다.
+- 검증된 번역·해설을 신규 raw 두 파일로 등록했다. 번역 SHA-256은 `b930cfab05daa235c7633356749ba18d234dd9d0714793b7c1a256e1663d60b6`, 해설은 `1d6d3803a1669791fdb0803df7d15e7e04e6860f3a49c1476430ebd88ef8c70e`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[106_DeepSeek-R1의 강화학습 파이프라인과 증류 경계]]와 [[그룹 상대 정책 최적화]]를 만들었다. V3-Base의 671B total·37B active MoE, SFT 없는 R1-Zero, 정식 R1의 두 SFT·두 RL 단계와 여섯 dense 증류본을 분리하고, GRPO의 group-relative advantage·token-level clipped ratio·직접 KL과 critic 절약·rollout 비용·credit assignment 경계를 복원했다.
+- [[사고 연쇄 프롬프팅]], [[인간 피드백 강화학습]], [[전문가 혼합]], [[자동 평가 지표는 무엇을 보상하는가]]를 보강했다. Prompt로 유도한 CoT와 후훈련된 추론 행동, feedback source와 optimizer, V3 MoE와 R1 post-training, 학습된 reward model과 규칙 기반 verifier oracle을 각각 분리했다. 새 별도 분석을 늘리지 않고 기존 평가 분석의 비교 축을 확장했다.
+- DeepSeekMath·DeepSeek-V3·DeepSeek-R1 논문, R1 공식 release와 repository의 1차 근거 다섯 건을 등록했다. [[index]]와 [[overview]]를 source 105개·concept 177개·entity 29개·analysis 22개·비메타 333개·전체 336개, 공식 범위 001–046·048–106과 다음 공식 107 GPT-4o 기준으로 갱신했다.
+- 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 206개, raw Markdown 211개, 위키 Markdown 336개에서 UI 단락 0개를 확인했다. 번역 정규화 검사는 번역 103개와 표준 `원본 출처:` 103개, 변경 필요 0개를 확인했다. Raw 레지스트리에는 번역본이 없는 legacy prefix 007을 포함해 translation prefix 104개가 등록돼 있다.
+
+검증 정정과 남은 한계:
+
+- 원 웹글의 실제 게시일은 2025-09-07이고 R1 공식 release는 2025-01-20이다. 사건 연도와 후대 회고의 게시 시점을 구분하며, R1의 중심 기여를 새 attention·memory·specialized reasoning module이 아니라 V3-Base 위의 GRPO와 다단계 post-training으로 기록한다.
+- R1과 R1-Zero는 총 671B·token당 활성 37B의 DeepSeek-V3-Base MoE를 사용한다. 작은 모델 결과는 Qwen·Llama 기반 1.5B–70B dense checkpoint에 약 800K 선별 응답을 SFT한 증류 실험이며, R1 본체의 parameter 축소나 동일 architecture 이식을 뜻하지 않는다.
+- R1-Zero는 규칙 기반 정확도·`<think>` 형식 보상과 GRPO를 사용했고 neural process·outcome reward model은 쓰지 않았다. 정식 R1 전체에는 cold-start SFT, reasoning RL, DeepSeek-V3 판정이 일부 들어간 rejection sampling, 약 600K reasoning·200K non-reasoning SFT와 규칙·선호 보상을 섞은 final RL이 있으므로 ‘순수 RL’이나 ‘보상 모델 없음’을 전체 checkpoint에 확대하지 않는다.
+- GRPO는 별도 critic의 parameter·activation·optimizer state를 줄이지만 질문마다 여러 completion을 생성한다. Completion reward를 token마다 공유하므로 어느 중간 단계가 정답을 만들었는지 식별하지 못하고, group reward가 모두 같으면 수치 안정화 장치가 있어도 보상에서 오는 상대 신호는 생기지 않는다.
+- R1과 o1-1217의 결과는 AIME·MATH·LiveCodeBench에서는 R1이 높고 GPQA·MMLU·Codeforces·Aider·SimpleQA에서는 o1이 높은 혼합 결과다. 최대 32,768 token, temperature 0.6, top-p 0.95, 질문당 4–64개 sample과 AIME cons@64 조건을 보존하고 모든 과제·제품 성능의 동등성으로 일반화하지 않는다.
+- Weight·paper·여섯 distill checkpoint·API 공개는 강하지만 약 800K 선별 자료, post-training code와 완전한 compute budget은 공개되지 않았다. MIT R1 weight 조건과 Qwen·Llama 기반 distill의 원 base license를 함께 확인하며 공개 가중치를 전체 학습 재현 가능성과 같게 보지 않는다.
+- `source:ready -- 106`은 96개 회귀 테스트와 336개 Markdown strict lint를 통과해 420개 evidence와 210개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 652개 HTML을 만들고 7,614개 wiki link를 모두 해소했으며, 43,078개 local reference와 검색 항목 335개를 검사했다.
+- 다음 순차 입력은 공식 107 `GPT-4o Unified Multimodal AI with Real-Time Speech, Vision, and Text`다.
+
 ## 관련 항목
 
 - [[index]]
