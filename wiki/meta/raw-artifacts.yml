@@ -98,7 +98,7 @@ artifacts:
     provenance: incomplete
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-madaline-neural-network-adaptive-learning
-    sha256: 306d8ee73ed76be26b5ea1b9ca3bc94484bddcf6a682bb33a7eed4628c59491b
+    sha256: 747adf93e09a4444a413fd35dbf0902ab3ba226531c2f48ecf5cbf2a2028c98a
   - path: raw/006_1962_위드로-호프_MADALINE_해설.md
     role: commentary
     order_prefix: "006"
@@ -152,7 +152,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-shrdlu-language-understanding-blocks-world
-    sha256: 6e4ac98163310f783f6d6db1483e1acf17f64e7f590a4cb4c02bf0fe9e948494
+    sha256: e073b1495cafd7641bf22bd26dfc940728788e0feeef12fe44948cab423bf00b
   - path: "raw/009_SHRDLU - Understanding Language Through Action.commentary.ko.md"
     role: commentary
     order_prefix: "009"
@@ -314,7 +314,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-backpropagation-deep-learning-training
-    sha256: fba7b7f982429d3f1c35a483ae5960bbd43a4391e0bb0e47f60a53d079892351
+    sha256: 19aae868c26471354abadcfa8ed37be5c45773879994a513422609b2e47365d8
   - path: "raw/018_Backpropagation - Training Deep Neural Networks.commentary.ko.md"
     role: commentary
     order_prefix: "018"
@@ -350,7 +350,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-tdnn-time-delay-neural-networks
-    sha256: 673f4846ccfef47644de1d0ed79f0906683adce6e7508f4da035c0b229233cb1
+    sha256: fa6534a82bd93f9e9179c753b0ee1b203d46b2751e921be605ef0664234420af
   - path: "raw/020_Time Delay Neural Networks - Processing Sequential Data with Temporal Convolutions.commentary.ko.md"
     role: commentary
     order_prefix: "020"
@@ -368,7 +368,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-cnn-convolutional-neural-networks
-    sha256: 16530ffdbc342111599d956f68d8025a5d9c5e699212d6f0954445b2c140af12
+    sha256: 9d9acf31f476d6b1e6b88cf7a3cbcfcbabbc3c50f654a04b85f6c13420acfd89
   - path: "raw/021_Convolutional Neural Networks - Revolutionizing Feature Learning.commentary.ko.md"
     role: commentary
     order_prefix: "021"
@@ -440,7 +440,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-wordnet-semantic-network
-    sha256: 602ba94abe08ee1a6ec231b4b3bca50821d2045ab7a50a0880323ef844d268ea
+    sha256: b3340263f4080efd7edf9100c9ccc0cb8cf6d7530aec45bf637f2bace21cc355
   - path: "raw/025_WordNet - A Semantic Network for Language Understanding.commentary.ko.md"
     role: commentary
     order_prefix: "025"
@@ -458,7 +458,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-rnn-recurrent-neural-networks
-    sha256: d4a261b61415b8c205e57b4423c6f390a39b662f6884247454e14cbd8957a67a
+    sha256: c38522d4821fa348c7c9f2e072ceb56b5c799b4576e52260cf31ec767d010783
   - path: "raw/026_Recurrent Neural Networks - Machines That Remember.commentary.ko.md"
     role: commentary
     order_prefix: "026"
@@ -494,7 +494,7 @@ artifacts:
     provenance: external-original-used
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/history-lstm-long-short-term-memory
-    sha256: dcb2982399a6f17a8e92a74fd04c652768e6737d42534c60d3461ac13125ec9c
+    sha256: 2492c5f5452210eee241552e69f56f61b8ffc4c753f949ef8d6349be6cb886ce
   - path: "raw/028_Long Short-Term Memory - Solving the Memory Problem.commentary.ko.md"
     role: commentary
     order_prefix: "028"

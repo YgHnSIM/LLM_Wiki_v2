@@ -850,7 +850,6 @@ function renderCategoryPage(key) {
         <button type="button" data-directory-view="compact" aria-pressed="true">간략</button>
         <button type="button" data-directory-view="cards" aria-pressed="false">카드</button>
       </div>
-      <span class="directory-result-count" data-filter-count role="status" aria-live="polite">${list.length}개 문서</span>
     </section>
     <section id="directory-${key}" class="${key === 'sources' ? 'source-timeline directory-source-list' : 'note-grid directory-grid'}" data-filter-grid data-directory-key="${key}" data-view="compact">
       ${cards}

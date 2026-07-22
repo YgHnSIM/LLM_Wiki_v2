@@ -109,6 +109,9 @@ for (const htmlFile of htmlFiles) {
   if (/data-graph-url/i.test(html)) {
     errors.push(`${relativeHtmlPath} retains the retired graph data attribute.`);
   }
+  if (/<p>\s*(?:loading\s+component|구성\s*요소\s*(?:불러오는|로딩)\s*중)(?:\.{3}|…)?\s*<\/p>/i.test(html)) {
+    errors.push(`${relativeHtmlPath} exposes a component-loading placeholder as body content.`);
+  }
 
   const usesListboxSemantics = /\brole="(?:listbox|option)"/i.test(html);
   const hasComboboxContract = /\brole="combobox"[^>]*\baria-autocomplete="list"[^>]*\baria-expanded="(?:true|false)"[^>]*\baria-controls="[^"]+"/i.test(html);
@@ -219,6 +222,9 @@ for (const key of ['sources', 'concepts', 'entities', 'analyses']) {
   const directoryFile = fileForUrl(siteUrl(`/${key}/`));
   const directoryHtml = htmlCache.get(directoryFile) ?? await fs.readFile(directoryFile, 'utf8');
   htmlCache.set(directoryFile, directoryHtml);
+  if (/data-filter-count|directory-result-count/i.test(directoryHtml)) {
+    errors.push(`${key} directory must not render a redundant result-count label.`);
+  }
   const cards = [...directoryHtml.matchAll(/<article\b[^>]*\bdata-card(?:\s|=|>)[^>]*>/gi)].map((match) => match[0]);
   const visibleCards = cards.filter((card) => !/\bdata-filter-value="[^"]*"\s+hidden(?:\s|>)/i.test(card));
   const expectedCount = report.counts?.[key] ?? 0;

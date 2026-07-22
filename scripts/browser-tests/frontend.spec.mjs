@@ -19,7 +19,7 @@ test('compact directories show one page and chronological labels match visible s
 
   expect(total).toBeGreaterThan(30);
   await expect(visibleCards).toHaveCount(30);
-  await expect(page.locator('[data-filter-count]')).toHaveText(`${total}개 중 30개 표시`);
+  await expect(page.locator('[data-filter-count], .directory-result-count')).toHaveCount(0);
   await expect(page.locator('.directory-era-label span')).toHaveText(await visibleDecades(page));
 
   const more = page.locator('[data-filter-more]');

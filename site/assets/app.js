@@ -656,7 +656,6 @@ for (const filterGrid of document.querySelectorAll('[data-filter-grid]')) {
   if (!filterInput) continue;
   const verification = scope.querySelector('[data-filter-verification]');
   const sort = scope.querySelector('[data-filter-sort]');
-  const count = scope.querySelector('[data-filter-count]');
   const empty = filterGrid.querySelector('[data-filter-empty]');
   const cards = [...filterGrid.querySelectorAll('[data-card]')];
   const originalOrder = new Map(cards.map((card, index) => [card, index]));
@@ -675,10 +674,6 @@ for (const filterGrid of document.querySelectorAll('[data-filter-grid]')) {
   const eraLabels = [];
   let shownCount = pageSize;
 
-  if (count) {
-    count.setAttribute('role', 'status');
-    count.setAttribute('aria-live', 'polite');
-  }
   const numberValue = (card, key) => Number.parseFloat(card.dataset[key]) || 0;
   const dateValue = (card) => Date.parse(card.dataset.updated) || 0;
   const titleValue = (card) => card.dataset.sortTitle || card.dataset.title || card.querySelector('h2, h3')?.textContent || '';
@@ -768,7 +763,6 @@ for (const filterGrid of document.querySelectorAll('[data-filter-grid]')) {
     const remaining = remainingCount(visible.length, matching.length);
     loadMore.hidden = remaining === 0;
     loadMore.textContent = remaining ? `더 보기 · ${Math.min(pageSize, remaining)}개` : '모든 문서를 표시했습니다.';
-    if (count) count.textContent = matching.length ? `${matching.length}개 중 ${visible.length}개 표시` : '0개 문서';
   };
 
   filterInput.addEventListener('input', () => applyFilter());

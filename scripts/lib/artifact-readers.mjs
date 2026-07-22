@@ -121,6 +121,9 @@ export function normalizeArtifactMarkdown(markdown, { sourceOrigin, hideSourceMa
       if (hideSourceMarker && /^\s*(?:원본\s+출처|출처|Source)\s*:\s*<?https?:\/\/\S+>?\s*$/i.test(line)) {
         return [];
       }
+      if (/^\s*(?:>\s*)?(?:loading\s+component|구성\s*요소\s*(?:불러오는|로딩)\s*중)(?:\.{3}|…)?\s*$/i.test(line)) {
+        return [];
+      }
       if (/^#\s+/.test(line)) {
         if (!removedTitle) {
           removedTitle = true;

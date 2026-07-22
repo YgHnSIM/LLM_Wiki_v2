@@ -2876,18 +2876,6 @@ details.toc-card > nav > ol {
   box-shadow: none;
 }
 
-.directory-result-count {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 7px 10px;
-  border: 1px solid var(--ink);
-  background: var(--yellow);
-  color: var(--ink);
-  white-space: nowrap;
-}
-
 .search-main,
 .search-page-main {
   width: min(calc(100% - 40px), var(--content));
@@ -3753,8 +3741,7 @@ details.toc-card > nav > ol {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .directory-search-control,
-  .directory-result-count {
+  .directory-search-control {
     grid-column: 1 / -1;
   }
 
@@ -4814,8 +4801,7 @@ details.toc-card > nav > ol {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .directory-view-toggle,
-  .directory-result-count {
+  .directory-view-toggle {
     grid-column: 1 / -1;
     justify-content: flex-start;
   }

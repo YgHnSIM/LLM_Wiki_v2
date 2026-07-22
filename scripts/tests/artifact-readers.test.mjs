@@ -56,6 +56,29 @@ test('artifact markdown removes multiline hidden comments outside code fences', 
   assert.equal(normalized, '앞\n뒤');
 });
 
+test('artifact readers remove standalone component-loading placeholders only', () => {
+  const markdown = [
+    '앞',
+    '구성요소 로딩 중...',
+    '구성 요소 불러오는 중…',
+    'Loading component...',
+    '원문에는 `Loading component...`가 남아 있다.',
+    '```text',
+    '구성요소 로딩 중...',
+    '```',
+    '뒤',
+  ].join('\n');
+  const normalized = normalizeArtifactMarkdown(markdown);
+  assert.equal(normalized, [
+    '앞',
+    '원문에는 `Loading component...`가 남아 있다.',
+    '```text',
+    '구성요소 로딩 중...',
+    '```',
+    '뒤',
+  ].join('\n'));
+});
+
 test('translation readers hide standalone source markers without changing prose or code', () => {
   const markdown = '# 제목\n\n원본 출처: https://example.com/original\n\n출처: https://example.com/legacy-ko\n\nSource: https://example.com/legacy-en\n\n본문에서 출처: https://example.com/citation 을 설명한다.\n\n```text\n출처: https://example.com/in-code\n```';
   const normalized = normalizeArtifactMarkdown(markdown, { hideSourceMarker: true });
