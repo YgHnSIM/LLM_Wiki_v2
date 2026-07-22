@@ -26,6 +26,22 @@ sources:
     kind: technical-report
     url: https://dash.harvard.edu/handle/1/25104739
     language: en
+  mit-ocw-6-012-lecture-1-2018:
+    title: 'Introduction to Probability: Lecture 1: Probability Models and Axioms'
+    authors: [John Tsitsiklis, Patrick Jaillet]
+    published: 2018
+    source_type: official-secondary
+    kind: course-notes
+    url: https://ocw.mit.edu/courses/res-6-012-introduction-to-probability-spring-2018/resources/lecture-1-probability-models-and-axioms/
+    language: en
+  mit-ocw-6-012-lecture-2-2018:
+    title: "Introduction to Probability: Lecture 2: Conditioning and Bayes' Rule"
+    authors: [John Tsitsiklis, Patrick Jaillet]
+    published: 2018
+    source_type: official-secondary
+    kind: course-notes
+    url: https://ocw.mit.edu/courses/res-6-012-introduction-to-probability-spring-2018/resources/lecture-2-conditioning-and-bayes-rule/
+    language: en
   turing-1950:
     title: Computing Machinery and Intelligence
     authors: [Alan M. Turing]

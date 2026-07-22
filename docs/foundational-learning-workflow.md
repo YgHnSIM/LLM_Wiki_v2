@@ -454,6 +454,7 @@ $$
 
 ### 10.1 1차 — 선수 지식과 수식 감사
 
+- 먼저 `npm run learning:audit`를 실행한다. 이 명령은 `docs/foundational-learning-audit.md`에 비메타 문서 수, 난이도·선수 지식 표기, 블록 수식 수, 서술 본문 유입 링크와 새 학습 구조 표지를 기록한다. 이 보고서는 후보 우선순위를 좁히는 기계적 기준선이며, 교육적 가치나 숨은 선수 지식의 최종 판정은 아니다.
 - 모든 비메타 문서의 `선수 지식`, 최초 전문용어와 핵심 수식을 목록화한다.
 - 미정의 용어, 순환 선수 관계, 계산 예가 없는 수식과 표기 충돌을 찾는다.
 - 여러 문서가 반복해서 요구하는 기초 개념을 우선순위 후보로 모은다.
@@ -531,6 +532,8 @@ $$
 일반 내용 작업은 다음 검사를 수행한다.
 
 ```powershell
+npm run learning:audit
+npm run learning:audit:check
 npm run sync:index
 npm run lint:wiki
 npm run build:site

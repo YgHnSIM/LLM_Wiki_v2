@@ -17,6 +17,8 @@
     "source:status": "node scripts/source-workflow.mjs status",
     "source:copy": "node scripts/source-workflow.mjs copy",
     "source:ready": "node scripts/source-workflow.mjs ready",
+    "learning:audit": "node scripts/audit-foundational-learning.mjs --write",
+    "learning:audit:check": "node scripts/audit-foundational-learning.mjs --check",
     "sync:index": "node scripts/sync-index.mjs",
     "lint:wiki": "node scripts/lint-wiki.mjs",
     "build:site": "node scripts/build-site.mjs",
