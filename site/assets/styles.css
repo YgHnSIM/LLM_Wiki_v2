@@ -974,7 +974,7 @@ a {
   font-size: 22px;
 }
 
-.source-directory-link {
+.translation-directory-link {
   display: inline-grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
@@ -990,7 +990,7 @@ a {
   transform: rotate(-0.4deg);
 }
 
-.source-directory-link > span:first-child {
+.translation-directory-link > span:first-child {
   padding: 4px 7px;
   border: 1px solid var(--ink);
   background: var(--cyan);
@@ -999,12 +999,12 @@ a {
   text-transform: uppercase;
 }
 
-.source-directory-link strong {
+.translation-directory-link strong {
   font-size: 13px;
 }
 
-.source-directory-link:hover,
-.source-directory-link:focus-visible {
+.translation-directory-link:hover,
+.translation-directory-link:focus-visible {
   box-shadow: 2px 2px 0 var(--ink);
   transform: translate(3px, 3px) rotate(-0.4deg);
 }
@@ -4172,7 +4172,7 @@ details.toc-card > nav > ol {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .source-directory-link {
+  .translation-directory-link {
     width: 100%;
     grid-template-columns: auto minmax(0, 1fr) auto;
   }
