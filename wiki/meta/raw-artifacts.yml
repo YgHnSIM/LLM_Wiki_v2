@@ -1818,3 +1818,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/peft-beyond-lora-advanced-parameter-efficient-finetuning-techniques
     sha256: df98ebfca8d06594c871a1bc490aa17b2b56cfff7edb597465a42040ec8f05bf
+  - path: "raw/102_Continuous Post-Training Incremental Model Updates for Dynamic Language Models.ko.md"
+    role: translation
+    order_prefix: "102"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/continuous-post-training-incremental-model-updates-dynamic-language-models
+    sha256: c2a114a3f36b057e95294a50cbbbdf5c8240b4a05b29ab21e47b5cb7706c201d
+  - path: "raw/102_Continuous Post-Training Incremental Model Updates for Dynamic Language Models.commentary.ko.md"
+    role: commentary
+    order_prefix: "102"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/continuous-post-training-incremental-model-updates-dynamic-language-models
+    sha256: e5ff19724eb8e1971fed905b3c37aee03dc14a9c44f547a47ec9ce0c954f9fbc

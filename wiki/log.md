@@ -4016,6 +4016,28 @@ raw 등록 해시:
 - Markdown 표 안의 `alpha/sqrt(r)` KaTeX SVG가 행으로 오인되는 사이트 변환 결함을 피하도록 source 표 두 곳과 연결 분석 표 한 곳을 `α/√r` 텍스트로 바꿨다. 본문 수식과 의미는 그대로 유지했다.
 - VeRA의 $A,B$는 작은 factor dimension을 사용하지만 논문 표현상 반드시 low-rank일 필요가 없는 동결 random factor matrix이므로, 표의 `random low-rank basis` 표현을 바로잡았다.
 
+## [2026-07-22] ingest | 지속 사전 학습의 연표와 지식 갱신 경계
+
+변경 내용:
+
+- 공식 102 `Continuous Post-Training Incremental Model Updates for Dynamic Language Models`를 H1·H2·H3 `1/7/0`, 전체 64개 본문 블록과 24개 Markdown link의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 번역 감사에서 replay·held-out evaluation·operational validation·rank 용어와 원문의 유보 표현을 교정했으며, 첫 제목 바로 뒤에 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않았다.
+- 검증된 번역·해설을 신규 raw 두 파일로 등록했다. 번역 SHA-256은 `c2a114a3f36b057e95294a50cbbbdf5c8240b4a05b29ab21e47b5cb7706c201d`, 해설은 `e5ff19724eb8e1971fed905b3c37aee03dc14a9c44f547a47ec9ce0c954f9fbc`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[102_지속 사전 학습의 연표와 지식 갱신 경계]]와 [[지속 사전 학습]]을 만들었다. 한 번의 DAPT·TAPT와 시간·영역 순서의 continual pre-training을 구분하고, 새 분포 적응·이전 능력 보존·전이·불변/갱신/신규 지식 평가를 별도 축으로 정리했다.
+- 기존 [[사전 학습 지식은 과제에 어떻게 도착하는가]]를 보강했다. 시간순 base update, 동결 base 옆 adapter, 외부 RAG index, 지도·선호 사후 학습과 versioning·A/B test·rollback을 서로 다른 지식·행동·운영 위치로 비교했다. 이 기존 분석이 새 비교 질문을 충분히 수용하므로 별도 분석 문서는 만들지 않았다.
+- DAPT·CPT·lifelong pretraining·continual knowledge learning·대규모 continual pretraining·EWC 1차 근거 여섯 건을 등록하고 기존 ULMFiT·LoRA·RAG·InstructGPT 근거를 재사용했다. [[index]]와 [[overview]]를 source 102개·concept 175개·비메타 328개·전체 331개, 공식 범위 001–046·048–103과 다음 공식 104 Agentic AI Systems 기준으로 갱신했다.
+- 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 200개, raw Markdown 205개, 위키 Markdown 331개에서 UI 단락 0개를 확인했다. 번역 정규화 검사는 표준 `원본 출처:` 100개와 변경 필요 0개를 확인했다.
+
+검증 정정과 남은 한계:
+
+- 지속 사후 학습은 2025년에 처음 등장하지 않았다. ULMFiT의 목표 영역 LM 적응은 2018년, DAPT·TAPT는 2020년, lifelong pretraining·continual knowledge learning·CPT는 2022년에 공개됐다. 2025년은 원 웹글의 공개 시점이다.
+- 전통적 fine-tuning은 기존 checkpoint에서 시작하며 모든 사전 학습 자료로 처음부터 재학습하는 retraining과 다르다. 현재 checkpoint를 서비스하면서 새 checkpoint를 별도로 학습·평가할 수 있으므로 학습 중 필수 서비스 중단도 일반화하지 않는다.
+- LoRA는 학습 parameter와 adapter artifact를 줄이는 매개변수화다. 순차 자료, replay, 지식 교정, 망각 방지나 adapter 병합의 안전성을 자동으로 제공하지 않는다. EWC의 원 실험도 permuted MNIST와 Atari였으므로 현대 LLM의 표준 해법으로 소급하지 않는다.
+- 2024년 learning-rate re-warming·re-decay·replay 결과는 405M의 영어→영어·영어→독일어, 10B의 약한 영어→영어 이동과 특정 final loss·LM benchmark에 묶인다. 수천억 parameter production model의 빈번한 사실 교체·장기 무망각·무중단 배포 근거로 확대하지 않는다.
+- RAG는 외부 index, RLHF는 응답 정책, versioning·A/B test·rollback은 배포 통제를 바꾼다. 최신 corpus 학습이나 index 교체가 사실의 진실성·출처 추적·상충 해결·안전 회귀를 보장하지 않는다.
+- 원 웹글의 OpenAI·Anthropic·Google DeepMind와 법률·의료·금융·뉴스 배포 주장은 구체적 system·version·평가 자료가 없어 검증된 채택 사례로 유지하지 않는다. 비용·접근성·탄소 효과도 token·hardware·replay·평가·serving 자료가 필요하다.
+- `source:ready -- 102`는 96개 회귀 테스트와 331개 Markdown strict lint를 통과해 402개 evidence와 204개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 641개 HTML을 만들고 7,443개 wiki link를 모두 해소했다.
+- 다음 순차 입력은 공식 104 `Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use`다.
+
 ## 관련 항목
 
 - [[index]]

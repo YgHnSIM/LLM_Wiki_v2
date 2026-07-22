@@ -26,13 +26,13 @@ related:
 
 공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism (2015)**이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-21 현재 원문을 제공하지 않는다.
 
-따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 101개는 공식 001–046·048–101·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 102 `Continuous Post-Training Keeping Language Models Up-to-Date`다.
+따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 102개는 공식 001–046·048–103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 104 `Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use`다.
 
 숫자 badge는 정규 source의 공식 장 번호에만 쓴다. 비번호 reference가 추가되면 번호 source 뒤에서 `참고`로 표시하며, 목록 위치를 `001` 같은 장 번호로 바꾸지 않는다. 같은 장의 검증 노트·번역·해설은 서로 다른 장이 아니라 하나의 source 묶음에 속한다.
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 101개, reference 0개, concept 174개, entity 29개, analysis 22개를 합친 비메타 문서 326개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 102개, reference 0개, concept 175개, entity 29개, analysis 22개를 합친 비메타 문서 328개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -48,6 +48,7 @@ related:
 | 모델의 제안은 언제 실제 행동이 되나 | [[080_사고 연쇄 프롬프팅과 추론 행동 유도]] | [[092_함수 호출과 도구 사용의 모델-실행 경계]] → [[함수 호출과 도구 사용]] → [[OpenAI Codex (2021)]] | [[자동 평가 지표는 무엇을 보상하는가]] |
 | 모델의 JSON은 언제 신뢰할 수 있나 | [[파싱]] | [[092_함수 호출과 도구 사용의 모델-실행 경계]] → [[099_구조화 출력의 스키마 준수와 의미 정확성 경계]] → [[구조화 출력]] → [[문맥자유문법]] | [[자동 평가 지표는 무엇을 보상하는가]] |
 | 자연어 지시는 언제 가중치에 들어가나 | [[063_T5와 Text-to-Text 통합 프레임워크]] | [[067_GPT-3와 문맥 내 학습]] → [[072_지시 미세조정과 FLAN의 제로샷 일반화]] → [[077_InstructGPT와 인간 선호 정렬]] → [[인간 피드백 강화학습]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
+| 모델 지식은 어떻게 최신 상태를 유지하나 | [[057_ELMo와 ULMFiT의 두 전이 학습 경로]] | [[102_지속 사전 학습의 연표와 지식 갱신 경계]] → [[지속 사전 학습]] → [[068_DPR과 검색 증강 생성]] → [[검색 증강 생성]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
 | 인간의 가치 판단은 AI 피드백으로 대체되는가 | [[056_RLHF 토대와 인간 선호 기반 보상 학습]] | [[077_InstructGPT와 인간 선호 정렬]] → [[인간 피드백 강화학습]] → [[094_헌법적 AI와 자기비평·AI 피드백 정렬]] → [[헌법적 AI]] | [[자동 평가 지표는 무엇을 보상하는가]] |
 | 큰 모델을 제한된 GPU memory에서 어떻게 적응시키나 | [[057_ELMo와 ULMFiT의 두 전이 학습 경로]] | [[언어 모델 전이 학습]] → [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]] → [[091_QLoRA와 4비트 양자화 미세조정]] → [[QLoRA]] → [[101_LoRA 이후 PEFT 변형의 설계 축과 연표]] → [[저순위 적응]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
 | 대화 인터페이스는 모델 능력과 신뢰를 어떻게 바꾸나 | [[007_ELIZA]] | [[077_InstructGPT와 인간 선호 정렬]] → [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]] → [[ChatGPT 연구 미리보기 (2022)]] | [[ELIZA에서 LLM으로]] |
@@ -66,7 +67,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 101개 소스의 범위
+## 102개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -168,6 +169,7 @@ related:
 - [[099_구조화 출력의 스키마 준수와 의미 정확성 경계]]는 2023년 function calling·JSON mode와 2024년 `strict: true`를 분리하고, valid JSON·schema conformity·semantic validation·권한의 직렬 관문 및 CFG token masking·Pydantic·framework 경계를 검증한다.
 - [[100_희소·밀집 검색의 결합과 다단계 순위화]]는 병렬 sparse+dense 후보 융합, BM25 우선 교차 인코더 캐스케이드와 결합 후보 뒤의 재순위화를 분리하고, RRF·DPR·CLEAR·Pyserini·BEIR의 자료별 품질·후보·비용 경계를 검증한다.
 - [[101_LoRA 이후 PEFT 변형의 설계 축과 연표]]는 AdaLoRA·DoRA·VeRA·rsLoRA·LoftQ의 실제 공개 연표를 복원하고, rank 배분·weight 분해·basis 공유·scaling·양자화 초기화를 서로 다른 [[저순위 적응]] 설계 축으로 검증한다.
+- [[102_지속 사전 학습의 연표와 지식 갱신 경계]]는 2025년 최초성 서사를 DAPT·lifelong pretraining·continual knowledge learning·CPT의 2020–2022년 계보로 바로잡고, [[지속 사전 학습]]의 새 분포 적응·이전 능력 보존·지식 교정과 PEFT·RAG·RLHF·배포 운영의 경계를 검증한다.
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]]은 GLaM·Mixtral의 total·active parameter와 token별 routing을 복원하고, 2024년 최초성·Meta 귀속·dense 계산의 제곱 증가·깨끗한 domain expert·민주화 과장을 교정한다.
 
 ## 현재 핵심 주제
@@ -236,6 +238,7 @@ related:
 - [[099_구조화 출력의 스키마 준수와 의미 정확성 경계]]와 [[구조화 출력]]에서 구분하는 prompt 기반 JSON 요청, JSON mode의 구문 유효성, 지원 schema의 constrained decoding, field 의미·사실 검증과 refusal·중단·provider strategy
 - [[100_희소·밀집 검색의 결합과 다단계 순위화]]와 [[하이브리드 검색]]에서 구분하는 병렬 후보 합집합, sparse-first cascade, 융합 뒤 cross-encoder, 점수 정규화·RRF와 단계별 candidate recall·latency·index cost
 - [[101_LoRA 이후 PEFT 변형의 설계 축과 연표]]와 [[저순위 적응]]에서 구분하는 task objective의 위치와 adapter 내부 rank allocation·magnitude/direction·random basis sharing·rank scaling·quantization initialization
+- [[102_지속 사전 학습의 연표와 지식 갱신 경계]]와 [[지속 사전 학습]]에서 구분하는 시간순 비표지 corpus·LM loss, 새 분포 적응·이전 능력 보존·지식 교정, replay·distillation·규제·parameter 확장과 PEFT·RAG·RLHF·배포 운영의 서로 다른 위치
 - [[전문가 혼합]]에서 구분하는 total parameters·token당 active expert, shared Transformer 경로, top-$k$ routing·capacity·load balancing과 memory·all-to-all communication 비용
 - [[097_Mixtral의 생산 배포 효율 주장과 증거 경계]]와 [[Mixtral 8x7B]]에서 구분하는 2023년 12월 공개, 46.7B total·12.9B active parameters, 고정 top-2, Apache 2.0 공개 가중치·추론 경로와 workload별 production SLO, topic expert가 아닌 routing locality
 - [[총 매개변수와 활성 계산량은 같은 축인가]]에서 비교하는 dense non-embedding $N$, sparse total·active parameters, FLOPs·memory·communication·wall-clock·data·quality와 논문 안/논문 사이 비교 경계
@@ -456,7 +459,9 @@ related:
 
 ## 현재 상태
 
-소스 101개, 참고 자료 0개, 개념 174개, 개체 29개, 분석 22개와 메타 문서 3개, 총 329개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 298개는 `verified`, 해석적 문서 28개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 396개 외부 근거와 202개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 102개, 참고 자료 0개, 개념 175개, 개체 29개, 분석 22개와 메타 문서 3개, 총 331개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 300개는 `verified`, 해석적 문서 28개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 402개 외부 근거와 204개 불변 raw artifact가 레지스트리에 등록돼 있다.
+
+[[102_지속 사전 학습의 연표와 지식 갱신 경계]]와 [[지속 사전 학습]]은 2025년을 새 알고리즘의 탄생 연도로 두지 않는다. ULMFiT·DAPT/TAPT의 한 번의 영역 적응과 2022년 lifelong pretraining·continual knowledge learning·CPT의 순차 설정을 구분하고, 2024년 learning-rate re-warming·re-decay·replay 결과를 405M·10B와 제한된 분포 이동 조건에 묶는다. LoRA는 update parameterization, RAG는 외부 기억, RLHF는 응답 정책, versioning·A/B test·rollback은 배포 통제이므로 같은 지속학습 알고리즘으로 합치지 않는다. 새 corpus loss·과거 성능·불변/갱신/신규 지식·자료 권리·계산 비용을 별도 장부로 남긴다.
 
 [[101_LoRA 이후 PEFT 변형의 설계 축과 연표]]와 [[저순위 적응]]은 PEFT를 trainable parameter 수 하나로 비교하지 않는다. AdaLoRA의 총 rank budget 재배분, DoRA의 magnitude–direction weight 분해, VeRA의 공유 frozen random basis와 layer별 두 scale, rsLoRA의 alpha/sqrt(r) scaling, LoftQ의 fine-tuning 전 quantization-aware 초기화를 서로 다른 설계 축으로 둔다. AdaLoRA·VeRA·LoftQ·rsLoRA의 2023년 최초 공개를 복원하고, DoRA의 merge 가능한 inference, QLoRA와 LoftQ의 결합 단계, parameter storage와 전체 VRAM·시간·추론 latency의 장부를 분리한다. 법률·의료 배포, 기업 채택·비용과 환경 효과는 원 알고리즘 논문이 측정하지 않은 범위로 남긴다.
 

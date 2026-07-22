@@ -3384,3 +3384,57 @@ sources:
     doi: 10.48550/arXiv.2104.08663
     url: https://arxiv.org/abs/2104.08663
     language: en
+  gururangan-et-al-2020-dapt:
+    title: "Don't Stop Pretraining: Adapt Language Models to Domains and Tasks"
+    authors: [Suchin Gururangan, Ana Marasović, Swabha Swayamdipta, Kyle Lo, Iz Beltagy, Doug Downey, Noah A. Smith]
+    published: 2020
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/2020.acl-main.740
+    url: https://aclanthology.org/2020.acl-main.740/
+    language: en
+  ke-et-al-2022-continual-posttraining:
+    title: Continual Training of Language Models for Few-Shot Learning
+    authors: [Zixuan Ke, Haowei Lin, Yijia Shao, Hu Xu, Lei Shu, Bing Liu]
+    published: 2022
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/2022.emnlp-main.695
+    url: https://aclanthology.org/2022.emnlp-main.695/
+    language: en
+  jin-et-al-2022-lifelong-pretraining:
+    title: 'Lifelong Pretraining: Continually Adapting Language Models to Emerging Corpora'
+    authors: [Xisen Jin, Dejiao Zhang, Henghui Zhu, Wei Xiao, Shang-Wen Li, Xiaokai Wei, Andrew Arnold, Xiang Ren]
+    published: 2022
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/2022.naacl-main.351
+    url: https://aclanthology.org/2022.naacl-main.351/
+    language: en
+  jang-et-al-2022-continual-knowledge-learning:
+    title: Towards Continual Knowledge Learning of Language Models
+    authors: [Joel Jang, Seonghyeon Ye, Sohee Yang, Joongbo Shin, Janghoon Han, Gyeonghun Kim, Stanley Jungkyu Choi, Minjoon Seo]
+    published: 2022
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2110.03215
+    url: https://openreview.net/forum?id=vfsRB5MImo9
+    language: en
+  ibrahim-et-al-2024-continual-pretraining:
+    title: Simple and Scalable Strategies to Continually Pre-train Large Language Models
+    authors: [Adam Ibrahim, Benjamin Thérien, Kshitij Gupta, Mats L. Richter, Quentin Anthony, Timothée Lesort, Eugene Belilovsky, Irina Rish]
+    published: 2024
+    source_type: primary
+    kind: journal-article
+    doi: 10.48550/arXiv.2403.08763
+    url: https://openreview.net/forum?id=DimPeeCxKO
+    language: en
+  kirkpatrick-et-al-2017-ewc:
+    title: Overcoming catastrophic forgetting in neural networks
+    authors: [James Kirkpatrick, Razvan Pascanu, Neil Rabinowitz, Joel Veness, Guillaume Desjardins, Andrei A. Rusu, Kieran Milan, John Quan, Tiago Ramalho, Agnieszka Grabska-Barwińska, Demis Hassabis, Claudia Clopath, Dharshan Kumaran, Raia Hadsell]
+    published: 2017
+    source_type: primary
+    kind: journal-article
+    doi: 10.1073/pnas.1611835114
+    url: https://www.pnas.org/doi/10.1073/pnas.1611835114
+    language: en
