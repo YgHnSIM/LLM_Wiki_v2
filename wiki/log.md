@@ -4238,6 +4238,21 @@ raw 등록 해시:
 - 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 214개, raw Markdown 221개, 위키 Markdown 345개에서 UI 단락 0개를 확인했다. 번역 정규화 검사는 기존 번역 107개와 표준 `원본 출처:` 107개, 변경 필요 0개를 확인했으며 047 재구성은 번역 집합에 들어가지 않는다.
 - 전체 검증은 96개 회귀 테스트와 345개 Markdown strict lint를 통과해 447개 evidence와 220개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 671개 HTML을 만들고 7,927개 wiki link를 모두 해소했으며, 44,643개 local reference와 검색 항목 344개를 검사했다.
 
+## [2026-07-23] fix | 리팩터링 잔재와 임시 산출물 정리
+
+변경 내용:
+
+- 완료된 스키마 v2 전환에만 쓰이던 `scripts/migrate-schema-v2.mjs`와 `migrate:schema` 명령을 제거했다.
+- 폐기된 WebGL 그래프 구현이 남긴 미사용 `esbuild` 의존성과 lockfile 항목을 제거하고, 로컬의 미등록 `three` 패키지를 정리했다.
+- 이미 내용이 있는 위키 하위 폴더의 불필요한 `.gitkeep` 5개를 제거했다. 불변 보존 영역인 `raw/`는 변경하지 않았다.
+- `dist/`, `dist.backup-*`, `.playwright-cli/`, `output/`, `tmp/`, `work/`, `.agents/`의 빌드 산출물·로그·스크린샷·빈 임시 폴더를 제거했다. 사용자 Obsidian 설정과 현재 실행에 필요한 선언 의존성은 보존했다.
+
+검증 결과:
+
+- `npm run verify`에서 테스트 96개와 위키 Markdown 345개 검사를 통과했고, evidence 447건과 immutable raw artifact 220건을 확인했다.
+- 정적 사이트 671페이지와 로컬 참조 44,645건을 검사했으며, 검증 뒤 재생성된 `dist/`도 다시 제거했다.
+- 최종 감사에서 미추적 파일과 임시·백업·로그 파일은 남지 않았다.
+
 ## 관련 항목
 
 - [[index]]
