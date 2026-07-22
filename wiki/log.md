@@ -3887,6 +3887,30 @@ raw 등록 해시:
 - NCBE가 공식 UBE percentile을 제공하지 않고 MEE·MPT의 rubric·grader training·blind calibration이 충분히 공개되지 않았으므로, 보고된 백분위를 전국 표준이나 변호사 실무 성과 분포로 확대하지 않는다.
 - 전체 검증은 96개 회귀 테스트와 320개 Markdown strict lint를 통과해 378개 evidence와 192개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 618개 HTML을 만들고 7,111개 wiki link를 모두 해소했다.
 
+## [2026-07-22] ingest | Mixtral의 생산 배포 효율 주장과 증거 경계
+
+변경 내용:
+
+- 공식 097 `Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts`를 H1·H2·H3 `1/6/0`, 42개 본문 블록과 82개 Markdown link의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 번역은 첫 제목 바로 뒤에 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않는다.
+- 번역 전수 감사에서 `had shown promise`를 입증으로 강화한 표현, `become available`을 공개로 좁힌 표현, `could introduce`를 단정한 표현과 serving 용어를 원문 강도에 맞게 교정했다. 원문의 잘못된 2024년 말 연대와 미검증 기술 주장은 번역에서 임의로 고치지 않고 해설·공개 소스의 검증 정정에서 분리했다.
+- 검증된 번역·해설을 신규 raw 두 파일로 등록했다. 번역 SHA-256은 `cd945225700a60f8966e0e715adf0374da191774ce5b59c50ae4436d23ea5eac`, 해설은 `8bc14457fb8636f5c26d9a246834220db324db50bfe141c6d47b337e7ff0d3de`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[097_Mixtral의 생산 배포 효율 주장과 증거 경계]]를 만들고 [[Mixtral 8x7B]]를 보강했다. 46.7B total·12.9B active parameters, 모든 token·layer의 고정 top-2, 전체 weight memory와 workload별 runtime 비용을 분리하고 `production-ready`를 model·runtime·hardware·traffic·운영 정책의 시스템 검증 주장으로 정의했다.
+- 새 근거 레코드는 만들지 않고 Mixtral 논문·Mistral 공식 발표와 Shazeer·GShard·Switch·GLaM 1차 근거 여섯 건을 재사용했다. [[index]]와 [[overview]]를 source 97개·concept 170개·비메타 318개, 공식 범위 001–046·048–097·103과 다음 공식 098 Long Context 기준으로 갱신했다.
+- 최종 사실 감사에서 기존 [[Mixtral 8x7B]]의 multilingual data와 open Web 출처 귀속, Llama 재평가 protocol, routing 분석의 본문 3개 layer·Appendix 전체 layer 범위를 바로잡았다. 재사용한 Shazeer 등의 2017년 논문도 evidence 레지스트리와 관련 문서의 OpenReview 주소를 정식 forum ID `B1ckMDqlg`로 통일했다.
+- 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 190개, raw Markdown 195개, 위키 Markdown 321개에서 UI 단락 0개를 확인했다. 번역 정규화 검사는 표준 `원본 출처:` 95개와 변경 필요 0개를 확인했다.
+
+검증 정정과 남은 한계:
+
+- Mixtral 8x7B 공개일은 2023년 12월 11일이고 논문 v1은 2024년 1월 8일이다. 2024년 말에 희소 MoE가 처음 실용화됐다는 연대는 유지하지 않는다.
+- `8x7B`는 8개의 완전한 7B 언어 모델을 뜻하지 않는다. 32개 Transformer layer의 FFN을 8개 SwiGLU expert로 바꾸고 token마다 두 개를 선택하며, shared path를 포함한 공식 수치는 46.7B total·12.9B active다.
+- Top-$k=2$는 과제 난이도에 따라 expert 수를 바꾸지 않는다. 어느 expert를 고르는지는 달라도 명목 expert 산술량은 고정이고, 실제 latency·throughput은 routing imbalance·batch·memory·communication·kernel에 조건화된다.
+- Capacity limit·token dropping·auxiliary load-balancing loss는 Switch Transformer에서 확인되지만 Mixtral 논문·발표는 실제 사용 여부와 세부를 밝히지 않았다. 다른 MoE의 일반 관행을 Mixtral 학습 recipe로 옮기지 않는다.
+- Mixtral의 routing 분석은 뚜렷한 과학·code·대화 topic별 expert를 찾지 못했고 syntax·연속 token locality를 관찰했다. Router 선택을 사람이 이름 붙인 지식 module이나 충실한 인과 설명으로 확대하지 않는다.
+- Llama 2 70B와의 비교는 MMLU·HumanEval·MATH처럼 높은 항목과 HellaSwag·WinoGrande·TriviaQA처럼 낮은 항목이 함께 있다. 동일 data·recipe의 dense ablation이 없으므로 차이를 sparse routing 하나의 인과 효과로 돌리지 않는다.
+- Apache 2.0 weight·vLLM 변경·SkyPilot·beta endpoint는 실행 가능성의 근거지만 전체 training data·recipe·compute 재현이나 특정 workload의 비용·tail latency·가용성·안전 SLO를 입증하지 않는다.
+- `source:ready -- 097`은 96개 회귀 테스트와 321개 Markdown strict lint를 통과해 378개 evidence와 194개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 621개 HTML을 만들고 7,138개 wiki link를 모두 해소했다.
+- 다음 순차 입력은 공식 098 `Long Context Models Processing Million-Token Sequences in Language AI`다.
+
 ## 관련 항목
 
 - [[index]]

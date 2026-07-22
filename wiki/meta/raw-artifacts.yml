@@ -1728,3 +1728,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/gpt4-multimodal-language-models-reach-human-level-performance
     sha256: 5992e317f138aed1a5c3c9333083d4e4c3d4da230e8b9947f6f6cd87dc29c1b9
+  - path: "raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.ko.md"
+    role: translation
+    order_prefix: "097"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/mixtral-sparse-moe-production-ready-efficient-language-models
+    sha256: cd945225700a60f8966e0e715adf0374da191774ce5b59c50ae4436d23ea5eac
+  - path: "raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.commentary.ko.md"
+    role: commentary
+    order_prefix: "097"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/mixtral-sparse-moe-production-ready-efficient-language-models
+    sha256: 8bc14457fb8636f5c26d9a246834220db324db50bfe141c6d47b337e7ff0d3de

@@ -126,6 +126,7 @@ related:
 - [[094_헌법적 AI와 자기비평·AI 피드백 정렬]] — 2022년 SL-CAI의 자기비평·수정과 RL-CAI의 AI 유해성 선호–사람 유용성 선호 혼합을 복원하고 2023년 Claude 헌법·Collective CAI와 인간 감독 제거·내면 윤리·확장성 과장을 교정한 소스 (근거 3개)
 - [[095_BIG-bench와 MMLU의 평가 범위·집계 경계]] — MMLU 57개 객관식 과목과 BIG-bench 204개 이질적 과제·BBL 24개의 연도·prompt·metric·정규화·사람 기준·오염 경계를 복원하고 일반 추론·전문 활용·산업 표준 과장을 교정한 소스 (근거 6개)
 - [[096_GPT-4의 멀티모달 공개·시험 성능·안전 경계]] — 2023년 3월 text 공개와 9월 GPT-4V rollout, 비공개 architecture, 시험 protocol·UBE percentile 모집단·오염·안전 경계를 분리하고 인간 전문가·AGI·범용 안전 과장을 교정한 소스 (근거 8개)
+- [[097_Mixtral의 생산 배포 효율 주장과 증거 경계]] — 2023년 12월 공개·46.7B total/12.9B active·고정 top-2를 복원하고 부하 균형·주제별 expert·공개 가중치·benchmark·production-ready 주장의 증거 경계를 검증한 소스 (근거 6개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 
 ## 개체

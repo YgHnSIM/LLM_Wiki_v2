@@ -15,12 +15,14 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-21'
-updated: '2026-07-21'
+updated: '2026-07-22'
 lifecycle: active
 verification: verified
 artifacts:
   - 'raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md'
   - 'raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md'
+  - 'raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.ko.md'
+  - 'raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.commentary.ko.md'
 evidence:
   - source_id: jiang-et-al-2024-mixtral
     locator: 'arXiv submission history, 초록, §§1–6, Tables 1–3·5와 Figures 1·7–8의 2024-01-08 v1·architecture·rounded total/active parameters·32K context·SFT와 DPO·평가 조건·memory와 routing 분석'
@@ -29,6 +31,7 @@ evidence:
     locator: '2023-12-11 공개일, Apache 2.0 공개 가중치, architecture·46.7B total·12.9B active와 공식 비교 주장'
     relation: supports
 related:
+  - source.097
   - source.103
   - source.069
   - concept.전문가-혼합
@@ -48,6 +51,8 @@ related:
 ### 이름은 매개변수 장부가 아니다
 
 Mixtral 8x7B는 Mistral AI가 2023년 12월 11일 공개한 decoder-only sparse [[전문가 혼합|Mixture of Experts(MoE)]] 언어 모델이다. Mistral 7B 계열의 공유 Transformer 경로를 유지하면서 각 layer의 FFN을 8개 expert로 바꾸고, token마다 두 개를 선택한다.
+
+[[097_Mixtral의 생산 배포 효율 주장과 증거 경계]]는 이 구조의 공개와 `production-ready` 주장을 분리한다. Apache 2.0 weight·vLLM 변경·배포 경로는 실행 가능성의 근거지만, 특정 workload의 비용·tail latency·가용성·안전 목표를 자동으로 입증하지 않는다.
 
 `8x7B`를 56B dense model이나 token당 14B model이라는 정확한 산술식으로 읽으면 안 된다. Shared attention·embedding 등의 weight는 한 번만 존재한다. 공식 보고값은 다음과 같다.
 
@@ -94,7 +99,7 @@ Mixtral 논문은 active parameter가 inference arithmetic의 유용한 proxy라
 
 ### 공개 가중치와 학습 공개 범위를 구분한다
 
-Base와 Instruct checkpoint는 Apache 2.0으로 공개돼 academic·commercial reuse 장벽을 낮췄다. 이는 weight license에 관한 강한 공개 범위다. 그러나 논문은 pretraining data를 multilingual data와 open Web 정도로 설명하며 자세한 corpus mixture, 전체 training token, 완전한 recipe를 제공하지 않는다. 따라서 공개 가중치를 data·training pipeline까지 완전히 재현되는 ‘open source’와 자동으로 동일시하지 않는다.
+Base와 Instruct checkpoint는 Apache 2.0으로 공개돼 academic·commercial reuse 장벽을 낮췄다. 이는 weight license에 관한 강한 공개 범위다. 논문은 pretraining data를 multilingual data로 설명하고, 2023년 공식 발표는 open Web에서 추출한 자료라고 밝혔다. 그러나 자세한 corpus mixture, 전체 training token, 완전한 recipe는 제공하지 않는다. 따라서 공개 가중치를 data·training pipeline까지 완전히 재현되는 ‘open source’와 자동으로 동일시하지 않는다.
 
 Instruct model은 base checkpoint에 supervised fine-tuning을 하고 paired feedback data로 Direct Preference Optimization을 적용했다. Base의 pretraining 능력과 Instruct의 대화·선호 적응 결과를 같은 checkpoint 단계로 합치지 않는다.
 
@@ -111,7 +116,7 @@ Mixtral 연구진은 Llama 계열을 자체 pipeline으로 다시 평가했다. 
 | MATH | 28.4 | 13.8 | Mixtral 높음 |
 | TriviaQA | 71.5 | 73.0 | Llama 높음 |
 
-논문은 code·mathematics·multilingual benchmark의 강한 결과를 보고했고 대부분의 metric에서 Llama 2 70B·GPT-3.5와 맞먹거나 앞섰다. 그러나 shot 수, prompt, metric과 evaluation implementation이 다르며 모든 항목에서 우세하지 않았다. 같은 data와 recipe의 dense counterpart가 없으므로 이 차이를 sparsity 하나의 인과 효과로 분리할 수 없다.
+논문은 code·mathematics·multilingual benchmark의 강한 결과를 보고했고 대부분의 metric에서 Llama 2 70B·GPT-3.5와 맞먹거나 앞섰다. Benchmark마다 shot·metric 조건이 다르고, MBPP·TriviaQA는 Llama 2 논문에 보고된 protocol과 차이가 있었으며 모든 항목에서 우세하지 않았다. 같은 data와 recipe의 dense counterpart가 없으므로 이 차이를 sparsity 하나의 인과 효과로 분리할 수 없다.
 
 ### Router는 뚜렷한 주제별 expert를 만들지 않았다
 
@@ -131,12 +136,13 @@ Mixtral 연구진은 Llama 계열을 자체 pipeline으로 다시 평가했다. 
 - **Expert가 domain별로 전문화됐다:** 논문 §5는 뚜렷한 topic pattern을 찾지 못했다.
 - **Llama 2 70B보다 모든 benchmark에서 높다:** HellaSwag·WinoGrande·TriviaQA 등 낮은 항목이 있다.
 - **Open source이므로 학습을 완전히 재현할 수 있다:** Apache 2.0 weight 공개와 training data·recipe 공개는 별개다.
+- **공개와 benchmark만으로 production-ready가 입증됐다:** Model weight·runtime과 특정 hardware·traffic·SLO에서의 시스템 검증은 별개다.
 
 ### 남는 한계
 
 논문은 강한 benchmark와 routing 관찰을 제공하지만 pretraining corpus와 전체 학습 계산을 자세히 공개하지 않았다. 비교 대상과 동일한 data·tokenizer·training budget의 dense ablation도 없다. Active parameter와 benchmark quality만으로 training cost, single-request latency, energy, factuality와 safety를 함께 판정할 수 없다.
 
-Routing 분석도 세 layer와 정한 data subset의 관찰이다. 다른 seed·checkpoint·layer에서 같은 pattern이 재현되는지, expert 제거가 특정 기능을 선택적으로 손상하는지는 별도 실험이 필요하다.
+본문의 topic·locality 비교는 layer 0·15·31에 집중했고 Appendix Figure 10은 모든 layer의 expert frequency를 제공한다. 다른 seed·checkpoint·data에서 같은 pattern이 재현되는지, expert 제거가 특정 기능을 선택적으로 손상하는지는 별도 실험이 필요하다.
 
 ## 학습 확인
 
@@ -148,6 +154,7 @@ Routing 분석도 세 layer와 정한 data subset의 관찰이다. 다른 seed·
 
 ### 다음 문서
 
+- [[097_Mixtral의 생산 배포 효율 주장과 증거 경계]] — 공개 가중치·benchmark·추론 경로가 입증하는 범위와 실제 운영 검증에 더 필요한 측정을 구분한다.
 - [[GLaM에서 Mixtral까지의 희소 MoE 확장]] — GLaM의 내부 통제 비교와 Mixtral 공개를 역사·증거 수준별로 연결한다.
 - [[총 매개변수와 활성 계산량은 같은 축인가]] — Total·active parameter, FLOPs, memory와 communication을 하나의 장부로 비교한다.
 
@@ -155,11 +162,14 @@ Routing 분석도 세 layer와 정한 data subset의 관찰이다. 다른 seed·
 
 - Albert Q. Jiang 외, [Mixtral of Experts](https://arxiv.org/abs/2401.04088), arXiv:2401.04088, 2024, §§1–6과 Tables 1–5.
 - Mistral AI, [Mixtral of experts](https://mistral.ai/news/mixtral-of-experts/), 2023-12-11.
+- [[097_Mixtral의 생산 배포 효율 주장과 증거 경계]]
 - [[GLaM에서 Mixtral까지의 희소 MoE 확장]]
+- 프로젝트 보존 자료: `raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.ko.md`, `raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.commentary.ko.md`.
 - 프로젝트 보존 자료: `raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md`, `raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md`.
 
 ## 관련 항목
 
+- [[097_Mixtral의 생산 배포 효율 주장과 증거 경계]]
 - [[GLaM에서 Mixtral까지의 희소 MoE 확장]]
 - [[069_전문가 혼합과 희소 활성 스케일링]]
 - [[전문가 혼합]]

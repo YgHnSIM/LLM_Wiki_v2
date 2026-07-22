@@ -2414,7 +2414,7 @@ sources:
     published: 2017
     source_type: primary
     kind: conference-paper
-    url: https://openreview.net/forum?id=BkFEbNwIg
+    url: https://openreview.net/forum?id=B1ckMDqlg
     language: en
   lepikhin-et-al-2021-gshard:
     title: 'GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding'
