@@ -62,7 +62,7 @@ related:
 
 ### 2024년의 한 발명보다 2023–2024년의 설계 분화
 
-Michael Brenndoerfer의 원 웹글은 AdaLoRA, DoRA, VeRA, rsLoRA와 LoftQ를 “2024년에 등장한 고급 PEFT”로 묶는다. 실제 연표는 다르다. AdaLoRA는 ICLR 2023 연구이고, VeRA·LoftQ는 2023년 10월, rsLoRA는 2023년 11월에 처음 공개됐다. DoRA가 2024년 2월에 처음 공개돼 ICML 2024에 실렸다. 2025년 9월의 원 웹글은 이 여러 시점을 하나의 2024년 회고로 압축했다.
+Michael Brenndoerfer의 원 웹글은 AdaLoRA, DoRA, VeRA, rsLoRA와 LoftQ를 “2024년에 등장한 고급 PEFT”로 묶는다. 실제 연표는 다르다. arXiv v1 기준 AdaLoRA는 2023년 3월, LoftQ·VeRA는 2023년 10월, rsLoRA는 2023년 11월에 공개됐다. AdaLoRA는 ICLR 2023, LoftQ·VeRA는 ICLR 2024에 실렸고, DoRA는 2024년 2월 공개 뒤 ICML 2024에 실렸다. 2025년 9월의 원 웹글은 이 여러 시점을 하나의 2024년 회고로 압축했다.
 
 이 자료의 재사용 가능한 통찰은 최초성보다 **LoRA의 어느 설계 선택을 바꾸었는가**에 있다.
 
@@ -70,8 +70,8 @@ Michael Brenndoerfer의 원 웹글은 AdaLoRA, DoRA, VeRA, rsLoRA와 LoftQ를 �
 | --- | --- | --- |
 | AdaLoRA | 총 rank budget을 singular triplet 사이에 재배분 | 동결 base 옆의 저순위 update |
 | DoRA | Weight를 magnitude와 direction으로 분해 | Direction update에는 LoRA factor 사용 |
-| VeRA | Frozen random low-rank basis를 layer 사이에 공유 | Layer별 두 scaling vector는 학습 |
-| rsLoRA | Rank에 따른 update scaling을 $\alpha/\sqrt r$로 변경 | Target module과 low-rank factor 선택 |
+| VeRA | 동결 random factor matrix 한 쌍을 같은 shape의 layer 사이에 공유 | Layer별 두 scaling vector는 학습 |
+| rsLoRA | Rank에 따른 update scaling을 `α/√r`로 변경 | Target module과 low-rank factor 선택 |
 | LoftQ | Quantization residual을 반영해 adapter를 초기화 | Fine-tuning에서는 quantized base 동결 |
 
 ### LoRA를 먼저 정확히 한정한다
@@ -102,7 +102,7 @@ $$
 
 원 웹글은 LoRA가 주로 direction만 바꾼다고 설명하지만 DoRA 논문의 분석은 다르다. LoRA에서는 magnitude와 direction 변화가 함께 움직이며 full fine-tuning과 다른 상관 패턴을 보였다. DoRA는 이를 direction-only update와 별도 magnitude 학습으로 재매개변수화한다. 학습 중 normalization과 graph overhead는 있지만 최종 weight에 병합할 수 있으므로 논문은 추가 inference latency가 없다고 명시한다.
 
-### VeRA: 한 쌍의 random basis와 layer별 두 scale
+### VeRA: 한 쌍의 random factor matrix와 layer별 두 scale
 
 VeRA의 정확한 update는 scaling vector 하나가 아니라 두 개를 포함한다.
 
@@ -128,14 +128,14 @@ $$
 
 ### 실제 공개 연표
 
-| 방법 | 최초 공개와 발표 | 확인되는 핵심 |
+| 방법 | arXiv v1 공개일·학회 | 확인되는 핵심 |
 | --- | --- | --- |
-| LoRA | arXiv 2021, ICLR 2022 | 동결 base와 저순위 additive update |
-| AdaLoRA | ICLR 2023 | SVD형 triplet 중요도와 budget schedule |
-| LoftQ | arXiv 2023-10-12, ICLR 2024 | 양자화와 low-rank 초기화의 alternating optimization |
-| VeRA | arXiv 2023-10-17, ICLR 2024 | 공유 frozen random matrix와 두 layer별 scale |
-| rsLoRA | arXiv 2023-11-28 | $\alpha/\sqrt r$ rank stabilization |
-| DoRA | arXiv 2024-02-14, ICML 2024 | Magnitude–direction weight decomposition |
+| LoRA | 2021-06-17 · ICLR 2022 | 동결 base와 저순위 additive update |
+| AdaLoRA | 2023-03-18 · ICLR 2023 | SVD형 triplet 중요도와 budget schedule |
+| LoftQ | 2023-10-12 · ICLR 2024 | 양자화와 low-rank 초기화의 alternating optimization |
+| VeRA | 2023-10-17 · ICLR 2024 | 동결 random factor matrix 한 쌍의 공유와 layer별 두 scaling vector |
+| rsLoRA | 2023-11-28 · 학회 표기 없음 | `α/√r` rank stabilization |
+| DoRA | 2024-02-14 · ICML 2024 | Magnitude–direction weight decomposition |
 
 따라서 “2024년 내내 모두 새로 개발됐다”는 원문의 연표를 유지하지 않는다. 학회연도와 최초 공개일도 구분한다.
 
@@ -145,14 +145,16 @@ AdaLoRA의 DeBERTaV3-base GLUE Table 1에서 1.27M parameter의 평균은 89.31�
 
 DoRA의 LLaMA-7B 8개 commonsense reasoning task 평균은 78.4, 비교한 LoRA는 74.7이었다. 원 논문이 평가한 것은 commonsense, visual instruction, image/video-text와 제한적 image personalization이지 법률·의료·과학 domain deployment가 아니다.
 
-VeRA의 GLUE Table 2에서 RoBERTa-large는 VeRA 61K와 LoRA 800K가 모두 87.8이었지만 RoBERTa-base는 VeRA 43K가 85.2, LoRA 300K가 86.6이었다. 같은 rank 64 LLaMA-7B의 Appendix Table 12에서는 VeRA의 trainable parameter가 약 100배 적었어도 학습 시간은 578분 대 568분, GPU memory는 21.69GB 대 23.42GB였다. “Parameter 100배 절감”을 전체 시간·memory 100배 절감으로 바꿀 수 없다.
+VeRA v2의 GLUE Table 2에서 RoBERTa-large는 VeRA 61K와 LoRA 800K가 모두 87.8이었지만 RoBERTa-base는 VeRA 43K가 85.2, LoRA 300K가 86.6이었다. 이 수치는 분류 head를 제외한 trainable parameter이며, VeRA가 base에서는 LoRA보다 낮고 large에서는 같은 평균을 낸 조건부 결과다.
+
+LLaMA 계열 instruction tuning의 Table 4는 서로 다른 rank 설정(LoRA 64, VeRA 1024)에서 LLaMA-7B 기준 159.9M 대 1.6M trainable parameter와 MT-Bench 5.03 대 4.77을 보고했다. 반면 Appendix Table 12는 **두 방법을 같은 rank 64로 맞춘 별도 비용 실험**이다. 여기서는 VeRA와 LoRA의 학습 시간이 578분 대 568분, GPU memory가 21.69GB 대 23.42GB였다. 따라서 Table 4의 “약 100배 적은 trainable parameter”와 Table 12의 시간·memory 수치를 하나의 동일 설정으로 합치거나, parameter 절감률을 전체 시간·memory 절감률로 바꿀 수 없다.
 
 ### 네 비용 장부
 
 | 장부 | 무엇을 센 것인가 | 자동으로 따라오지 않는 결과 |
 | --- | --- | --- |
-| Trainable parameter | Gradient·optimizer가 필요한 작은 update | Frozen base와 activation 감소 |
-| Adapter storage | Task별 추가 artifact 크기 | 학습 중 peak VRAM 감소 |
+| Trainable parameter | Gradient·optimizer state가 필요한 update 수 | Base checkpoint 저장량·activation memory·forward compute 감소 |
+| Adapter storage | Task별 추가 artifact 크기 | 학습 중 peak VRAM·wall-clock 감소 |
 | Training compute·time | Forward·backward와 추가 계산 | Inference latency 감소 |
 | Inference graph | 병합 여부와 실행 kernel | Training memory 감소 |
 
