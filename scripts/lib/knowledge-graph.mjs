@@ -4,6 +4,10 @@ const GRAPH_DEPTH = 900;
 const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
 const NODE_SPIRAL_STEP = 68;
 const NODE_COLLISION_GAP = 28;
+// Coordinates are persisted with 0.1px precision. Keep a small extra buffer
+// while relaxing so a later center shift and serialization cannot turn an
+// almost-separated pair into a visible marker collision.
+const NODE_COLLISION_SERIALIZATION_BUFFER = 1;
 const COMMUNITY_GAP = 220;
 const GRAPH_MARGIN = 260;
 const NETWORK_LAYOUT_ITERATIONS = 240;
@@ -213,7 +217,7 @@ function placeCommunityCenters(communities) {
 }
 
 function relaxNodeCollisions(nodes, community) {
-  const padding = NODE_COLLISION_GAP;
+  const padding = NODE_COLLISION_GAP + NODE_COLLISION_SERIALIZATION_BUFFER;
   for (let pass = 0; pass < 120; pass += 1) {
     let largestOverlap = 0;
     for (let leftIndex = 0; leftIndex < nodes.length; leftIndex += 1) {
@@ -290,7 +294,7 @@ function relaxGlobalNodeCollisions(nodes, { passes = 180 } = {}) {
         let dx = right.x - left.x;
         let dy = right.y - left.y;
         let distance = Math.hypot(dx, dy);
-        const minimum = left.radius + right.radius + NODE_COLLISION_GAP;
+        const minimum = left.radius + right.radius + NODE_COLLISION_GAP + NODE_COLLISION_SERIALIZATION_BUFFER;
         if (distance >= minimum) continue;
         if (distance < 1e-6) {
           const angle = (stableHash(`collision:${left.id}:${right.id}`) % 360) * Math.PI / 180;

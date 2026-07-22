@@ -247,6 +247,24 @@ test('dense community layout keeps node markers from overlapping', () => {
   for (const layout of graph.layouts) assertLayoutHasNoMarkerOverlaps(graph, layout.id, members);
 });
 
+test('large uneven community keeps serialized community markers apart', () => {
+  const hub = page('concept.large-hub');
+  const leaves = Array.from(
+    { length: 112 },
+    (_, index) => page(`concept.large-leaf-${String(index).padStart(3, '0')}`),
+  );
+  hub.outgoing = leaves;
+  hub.relatedDocuments = leaves;
+  for (const [index, leaf] of leaves.entries()) {
+    leaf.outgoing = [hub, leaves[(index + 1) % leaves.length]];
+    leaf.relatedDocuments = [hub];
+  }
+
+  const graph = buildKnowledgeGraph([hub, ...leaves]);
+  assert.equal(graph.communities.length, 1, 'the hub-and-ring fixture should remain one community');
+  assertLayoutHasNoMarkerOverlaps(graph, 'community');
+});
+
 test('center-periphery layout places the most connected node inside isolated documents', () => {
   const hub = page('concept.hub');
   const leaves = Array.from({ length: 8 }, (_, index) => page(`concept.leaf-${index}`));
