@@ -26,18 +26,18 @@ related:
 
 공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism (2015)**이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-21 현재 원문을 제공하지 않는다.
 
-따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 94개는 공식 001–046·048–094·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 095 `BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models`다.
+따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 95개는 공식 001–046·048–095·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 096 `GPT-4 Multimodal Language Models Reach Human-Level Performance`다.
 
 숫자 badge는 정규 source의 공식 장 번호에만 쓴다. 비번호 reference가 추가되면 번호 source 뒤에서 `참고`로 표시하며, 목록 위치를 `001` 같은 장 번호로 바꾸지 않는다. 같은 장의 검증 노트·번역·해설은 서로 다른 장이 아니라 하나의 source 묶음에 속한다.
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 94개, reference 0개, concept 168개, entity 29개, analysis 22개를 합친 비메타 문서 313개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 95개, reference 0개, concept 169개, entity 29개, analysis 22개를 합친 비메타 문서 315개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
 | 언어 모델은 어떻게 발전했나 | [[001_섀넌의 N-gram 모델]] | [[N-gram 모델]] → [[019_Katz 백오프와 희소 데이터 확률 추정]] → [[035_신경 확률 언어 모형과 분산 단어 표현]] → [[자기회귀 생성]] | [[N-gram에서 LLM으로]] |
-| 기계의 언어 행동을 어떻게 평가하나 | [[002_튜링 테스트]] | [[033_BLEU와 기계 번역 자동 평가]] → [[051_SQuAD와 추출형 독해 평가]] → [[060_GLUE와 SuperGLUE의 집계 평가]] → [[079_HELM과 다차원 언어 모델 평가]] → [[HELM]] | [[튜링 테스트와 LLM 평가]] |
+| 기계의 언어 행동을 어떻게 평가하나 | [[002_튜링 테스트]] | [[033_BLEU와 기계 번역 자동 평가]] → [[051_SQuAD와 추출형 독해 평가]] → [[060_GLUE와 SuperGLUE의 집계 평가]] → [[095_BIG-bench와 MMLU의 평가 범위·집계 경계]] → [[BIG-bench와 MMLU]] → [[079_HELM과 다차원 언어 모델 평가]] → [[HELM]] | [[튜링 테스트와 LLM 평가]] |
 | 규칙에서 학습으로 무엇이 바뀌었나 | [[003_Georgetown-IBM 기계 번역 시연]] | [[012_상징 규칙에서 통계 학습으로]] → [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[규칙 기반 AI에서 데이터 기반 학습으로]] |
 | 현대 Transformer 계열은 어디서 왔나 | [[018_역전파와 다층 신경망 학습]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]] → [[064_Transformer-XL과 세그먼트 수준 재귀]] → [[061_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]] | [[066_신경 언어 모델의 스케일링 법칙]] |
 | 같은 dense attention을 더 적은 메모리 이동으로 어떻게 실행하나 | [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]] | [[088_FlashAttention과 IO 인지형 정확 어텐션]] → [[FlashAttention]] → [[Transformer-XL]] | [[훈련 병렬성과 생성 순차성은 다른 축이다]] |
@@ -64,7 +64,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 94개 소스의 범위
+## 95개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -159,6 +159,7 @@ related:
 - [[092_함수 호출과 도구 사용의 모델-실행 경계]]는 2023년 6월 함수 이름·JSON argument 제안, 같은 해 11월 parallel calls·JSON mode와 2024년 `strict: true`를 분리하고, model output·schema·권한·실행·tool result의 서로 다른 신뢰 경계를 검증한다.
 - [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]]는 Frozen·Flamingo·PaLI·BLIP-2·LLaVA·PaLM-E의 서로 다른 bridge와 단계별 동결 경계를 비교하고, GPT-4V의 비공개 architecture·2023년 3월 early access·9월 ChatGPT rollout·11월 API preview 및 시각 평가·안전 경계를 검증한다.
 - [[094_헌법적 AI와 자기비평·AI 피드백 정렬]]은 2022년 SL-CAI의 고정 자기비평·수정과 RL-CAI의 AI 유해성 선호→선호 모델→강화학습을 분리하고, 사람 유용성 피드백·원칙 작성·평가가 남는 혼합 경계와 2023년 Claude 헌법·Collective CAI의 별도 chronology를 검증한다.
+- [[095_BIG-bench와 MMLU의 평가 범위·집계 경계]]는 MMLU의 2020년 공개·57개 객관식 과목·5-shot weighted accuracy와 BIG-bench의 2022년 공개·204개 JSON/programmatic 과제·BBL 24개·preferred metric 정규화를 분리하고, task subset·사람 기준·prompt·오염·일반 능력 과장을 검증한다.
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]]은 GLaM·Mixtral의 total·active parameter와 token별 routing을 복원하고, 2024년 최초성·Meta 귀속·dense 계산의 제곱 증가·깨끗한 domain expert·민주화 과장을 교정한다.
 
 ## 현재 핵심 주제
@@ -195,6 +196,7 @@ related:
 - [[ROUGE]]의 참조 측 n-gram recall과 LCS·skip-bigram F-measure, [[METEOR]]의 일대일 unigram 정렬·recall 가중·어순 단편화 및 평가 지표의 과제별 유인
 - [[자동 평가 지표는 무엇을 보상하는가]]에서 비교하는 BLEU·ROUGE·METEOR의 분모·대응 단위·집계 방식, HumanEval 실행 검사, InstructGPT 사람 선호 보상, HELM의 시나리오×메트릭 장부와 RL-CAI의 헌법→AI 유해성 피드백→사람 유용성·AI 유해성 혼합 선호 보상 연쇄 및 각 단계에 남는 프록시·가중치·가치 판단
 - [[HELM]]의 시나리오–적응–메트릭–실행 구조, 16개 핵심·26개 표적 시나리오와 정확도·보정·강건성·공정성·편향·독성·효율성의 다차원 평가 및 보편 순위의 한계
+- [[BIG-bench와 MMLU]]에서 구분하는 MMLU 57과목의 선택지 확률·5-shot·문항 가중 accuracy, BIG-bench 204개 task의 preferred metric·low/high 정규화·과제 평균, BBL 24개·공통 58개·150개 text task·전체 집합 및 prompt·오염·사람 기준의 서로 다른 분모
 - [[구 기반 통계적 기계 번역]]의 양방향 단어 정렬 대칭화, 통사 constituent가 아닌 일관 문자열 구, 짧은 구·lexical weighting·언어 모형과 beam search 결합
 - [[최소 오류율 훈련]]의 piecewise-constant 개발 오류, 후보 점수 교점의 line optimization, 반복 n-best 갱신과 metric overfitting
 - [[신경 확률 언어 모형]]의 lookup–concatenation–tanh–softmax 구조, 단어 feature와 확률 함수의 공동 학습, 고정 창과 전체 어휘 계산 비용

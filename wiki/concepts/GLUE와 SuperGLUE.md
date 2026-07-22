@@ -14,12 +14,14 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-20'
-updated: '2026-07-21'
+updated: '2026-07-22'
 lifecycle: active
 verification: verified
 artifacts:
   - 'raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md'
   - 'raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md'
+  - 'raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.ko.md'
+  - 'raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.commentary.ko.md'
 evidence:
   - source_id: wang-et-al-2018-glue
     locator: 'pp. 353–355와 Table 1의 아홉 task·metric·domain·자료량·private test와 diagnostic platform'
@@ -30,10 +32,18 @@ evidence:
   - source_id: wang-et-al-2019-superglue
     locator: '§§1–3과 Tables 1–3의 여덟 task·metric·human baseline·toolkit·leaderboard rule'
     relation: supports
+  - source_id: hendrycks-et-al-2021-mmlu
+    locator: '§§1·3–5와 Table 1·Appendices A–B의 GLUE·SuperGLUE 포화 문제, 57개 학술·전문 과목·5-shot·객관식 집계와 prompt·오염 한계'
+    relation: contextualizes
+  - source_id: big-bench-authors-2023
+    locator: '§§1–3·6의 204개 JSON/programmatic task, task별 preferred metric 정규화, BBL 24개와 prompt·coverage·오염 한계'
+    relation: contextualizes
 related:
   - source.060
   - source.079
+  - source.095
   - concept.helm
+  - concept.big-bench-mmlu
   - concept.bert
   - source.051
   - analysis.평가-지표와-모델-유인
@@ -108,7 +118,9 @@ human baseline은 annotator expertise, instruction, adjudication, sample에 조�
 
 ### 포화 이후
 
-SuperGLUE는 GLUE 포화에 대한 직접 대응이었다. 후대 BIG-bench·MMLU·[[HELM]]·다언어·domain suite는 더 많은 task와 scenario를 추가했다. 특히 HELM은 prompt와 few-shot 조건을 adaptation으로 분리하고 정확도 밖의 보정·강건성·공정성·편향·독성·효율성을 병렬로 남겼다. 그러나 benchmark를 늘리거나 평가 열을 늘리는 것만으로 측정 validity가 자동 개선되지는 않는다. Task construction, contamination audit, prompt·scoring와 deployment 조건을 계속 공개해야 한다.
+SuperGLUE는 GLUE 포화에 대한 직접 대응이었다. 후대 [[BIG-bench와 MMLU]]·[[HELM]]·다언어·domain suite는 서로 다른 방식으로 범위를 넓혔다. MMLU는 57개 학술·전문 과목을 같은 사지선다 형식과 최대 5-shot prompt에 놓았고, BIG-bench는 204개 이상의 JSON·programmatic task에 서로 다른 preferred metric을 허용한 뒤 low/high 정규화 평균을 만들었다. `더 많은 과목`과 `더 다양한 task API`는 같은 확장이 아니다.
+
+HELM은 다시 prompt와 few-shot 조건을 adaptation으로 분리하고 정확도 밖의 보정·강건성·공정성·편향·독성·효율성을 병렬로 남겼다. 이 계보는 GLUE→SuperGLUE→MMLU/BIG-bench→HELM이라는 단일 교체 순서가 아니다. Benchmark를 늘리거나 평가 열을 늘리는 것만으로 측정 validity가 자동 개선되지는 않으며 task construction, subset, human baseline, contamination audit, prompt·scoring와 deployment 조건을 계속 공개해야 한다.
 
 ## 학습 확인
 
@@ -121,6 +133,7 @@ SuperGLUE는 GLUE 포화에 대한 직접 대응이었다. 후대 BIG-bench·MML
 ### 다음 문서
 
 - [[079_HELM과 다차원 언어 모델 평가]] — 공통 평가 좌표를 시나리오·적응·다중 메트릭으로 확장한 설계를 살핀다.
+- [[095_BIG-bench와 MMLU의 평가 범위·집계 경계]] — 과목 수를 늘린 MMLU와 task·metric 형식을 넓힌 BIG-bench의 서로 다른 확장을 비교한다.
 - [[자동 평가 지표는 무엇을 보상하는가]] — 하나의 점수가 모델 개발의 선택과 유인을 어떻게 바꾸는지 비교한다.
 - [[튜링 테스트와 LLM 평가]] — 정답형 benchmark와 상호작용 기반 평가의 차이를 더 넓게 살핀다.
 
@@ -128,15 +141,20 @@ SuperGLUE는 GLUE 포화에 대한 직접 대응이었다. 후대 BIG-bench·MML
 
 - [[060_GLUE와 SuperGLUE의 집계 평가]]
 - [[079_HELM과 다차원 언어 모델 평가]]
+- [[095_BIG-bench와 MMLU의 평가 범위·집계 경계]]
 - Alex Wang 외, [GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding](https://aclanthology.org/W18-5446/), BlackboxNLP 2018.
 - Nikita Nangia·Samuel R. Bowman, [Human vs. Muppet](https://aclanthology.org/P19-1449/), ACL 2019.
 - Alex Wang 외, [SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems](https://proceedings.neurips.cc/paper/2019/hash/4496bf24afe7fab6f046bf4923da8de6-Abstract.html), NeurIPS 2019.
+- Dan Hendrycks 외, [Measuring Massive Multitask Language Understanding](https://arxiv.org/abs/2009.03300), arXiv 2020; ICLR 2021, §§1·3–5.
+- BIG-bench authors, [Beyond the Imitation Game](https://arxiv.org/abs/2206.04615), arXiv 2022; TMLR 2023, §§1–3·6.
 
 ## 관련 항목
 
 - [[060_GLUE와 SuperGLUE의 집계 평가]]
 - [[HELM]]
 - [[079_HELM과 다차원 언어 모델 평가]]
+- [[095_BIG-bench와 MMLU의 평가 범위·집계 경계]]
+- [[BIG-bench와 MMLU]]
 - [[BERT]]
 - [[051_SQuAD와 추출형 독해 평가]]
 - [[자동 평가 지표는 무엇을 보상하는가]]

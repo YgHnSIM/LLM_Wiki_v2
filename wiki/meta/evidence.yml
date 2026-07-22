@@ -3182,3 +3182,21 @@ sources:
     kind: official-blog
     url: https://www.anthropic.com/news/collective-constitutional-ai-aligning-a-language-model-with-public-input
     language: en
+  hendrycks-et-al-2021-mmlu:
+    title: Measuring Massive Multitask Language Understanding
+    authors: [Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn Song, Jacob Steinhardt]
+    published: 2021
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2009.03300
+    url: https://arxiv.org/abs/2009.03300
+    language: en
+  big-bench-authors-2023:
+    title: 'Beyond the Imitation Game: Quantifying and Extrapolating the Capabilities of Language Models'
+    authors: [BIG-bench authors]
+    published: 2023
+    source_type: primary
+    kind: journal-article
+    doi: 10.48550/arXiv.2206.04615
+    url: https://arxiv.org/abs/2206.04615
+    language: en

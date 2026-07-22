@@ -124,6 +124,7 @@ related:
 - [[092_함수 호출과 도구 사용의 모델-실행 경계]] — 2023년 함수 호출을 model의 구조화된 제안과 application의 검증·권한·실행으로 분리하고 parallel calls·JSON mode·strict schema의 후대 경계를 교정한 소스 (근거 5개)
 - [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]] — Frozen·Flamingo·PaLI·BLIP-2·LLaVA·PaLM-E의 서로 다른 시각 bridge와 동결 경계를 비교하고 GPT-4V의 비공개 architecture·배포 chronology·평가·안전 과장을 교정한 소스 (근거 12개)
 - [[094_헌법적 AI와 자기비평·AI 피드백 정렬]] — 2022년 SL-CAI의 자기비평·수정과 RL-CAI의 AI 유해성 선호–사람 유용성 선호 혼합을 복원하고 2023년 Claude 헌법·Collective CAI와 인간 감독 제거·내면 윤리·확장성 과장을 교정한 소스 (근거 3개)
+- [[095_BIG-bench와 MMLU의 평가 범위·집계 경계]] — MMLU 57개 객관식 과목과 BIG-bench 204개 이질적 과제·BBL 24개의 연도·prompt·metric·정규화·사람 기준·오염 경계를 복원하고 일반 추론·전문 활용·산업 표준 과장을 교정한 소스 (근거 6개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 
 ## 개체
@@ -180,7 +181,8 @@ related:
 - [[GPT-1과 GPT-2]] — causal Transformer의 지도 미세조정과 zero-shot text continuation을 잇는 초기 GPT 모델 계열 (근거 4개)
 - [[문맥 내 학습]] — 가중치를 갱신하지 않고 입력 문맥의 instruction·demonstration으로 새 query의 출력 분포를 조건화하는 적응 방식 (근거 6개)
 - [[사고 연쇄 프롬프팅]] — 중간 풀이 token을 답 앞에 생성하도록 유도하되 few-shot·zero-shot 절차, 조건부 성능·비용과 출력 타당성·답 정확도·인과적 충실성을 구분하는 prompting 방법 (근거 6개)
-- [[GLUE와 SuperGLUE]] — 여러 영어 NLU 과제·metric·test server·leaderboard를 묶어 broad transfer를 비교하는 평가 suite (근거 3개)
+- [[GLUE와 SuperGLUE]] — 여러 영어 NLU 과제·metric·test server·leaderboard를 묶어 broad transfer를 비교하는 평가 suite (근거 5개)
+- [[BIG-bench와 MMLU]] — MMLU의 과목별 객관식 정확도와 BIG-bench의 task별 preferred metric 정규화 평균을 분리하고 subset·prompt·shot·scoring·오염·사람 기준을 점수의 일부로 기록하는 종합 평가 benchmark (근거 5개)
 - [[HELM]] — 시나리오·적응·메트릭·실행을 분리해 언어 모델의 정확도·위험·비용을 같은 조건과 원시 출력으로 비교하는 다차원 평가 프레임워크 (근거 1개)
 - [[XLNet·RoBERTa·ALBERT]] — BERT 이후의 objective·training recipe·parameterization 개선을 비용 조건과 함께 비교하는 세 모델 묶음 (근거 3개)
 - [[XLM]] — shared multilingual encoder에서 CLM·MLM과 병렬 문장쌍 TLM을 구분하고 교차 언어 전이를 학습하는 방법군 (근거 1개)

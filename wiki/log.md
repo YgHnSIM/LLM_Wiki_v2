@@ -3813,6 +3813,27 @@ raw 등록 해시:
 - 피드백 출처를 사람에서 AI로 바꾸는 것과 쌍대 비교를 스칼라 보상 모델에 압축해 RL로 최적화하는 것은 독립적인 축이다. 전자를 바꿨다고 후자의 proxy와 분포 이동 문제가 사라지지 않는다.
 - 전체 검증은 96개 회귀 테스트와 316개 Markdown strict lint를 통과해 373개 evidence와 188개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 610개 HTML을 만들고 6,975개 wiki link를 모두 해소했다.
 
+## [2026-07-22] ingest | BIG-bench와 MMLU의 평가 범위·집계 경계
+
+변경 내용:
+
+- 공식 095 `BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models`를 H1·H2·H3 `1/6/3`, 53개 본문 블록과 27개 Markdown link의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 번역은 첫 제목 바로 뒤에 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않는다.
+- 독립 감사를 거친 번역·해설을 신규 raw 두 파일로 등록했다. 번역 SHA-256은 `513f6effec2ecdbb9bd3f76df162d3c22e6aa3efa300de8a19d685c0420793a3`, 해설은 `9fe25382150bf4601802b6bf7d06f3effc1262683896718dfb07dbd09d7fa1b6`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[095_BIG-bench와 MMLU의 평가 범위·집계 경계]]와 [[BIG-bench와 MMLU]]를 만들고 [[GLUE와 SuperGLUE]]를 보강했다. MMLU의 57개 과목·최대 5-shot·선택지 확률·문항 가중 accuracy와 BIG-bench의 task별 preferred metric·low/high 정규화·task 평균을 서로 다른 집계 설계로 분리했다.
+- MMLU와 BIG-bench 논문을 evidence에 등록하고 기존 SuperGLUE·PaLM·GPT-4·HELM 근거를 연결했다. BBL 24개, 공통 58개, PaLM의 150개 text task와 전체 204개 task를 같은 분모로 합치지 않았다.
+- [[index]]와 [[overview]]를 source 95개·concept 169개·비메타 315개, 공식 범위 001–046·048–095·103과 다음 공식 096 GPT-4 기준으로 갱신했다. 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 186개, raw Markdown 191개, 위키 Markdown 318개에서 UI 단락 0개를 확인했고, 번역 정규화 검사는 표준 `원본 출처:` 93개와 변경 필요 0개를 확인했다.
+
+검증 정정과 남은 한계:
+
+- MMLU는 2020년 9월 공개·ICLR 2021, BIG-bench는 2022년 6월 공개·TMLR 2023이다. 두 benchmark가 모두 2023년에 등장했다는 연대는 유지하지 않는다.
+- MMLU 논문은 15,908문항을 보고하지만 dev 285·validation 1,540·test 14,079의 명시된 split 합은 15,904다. GPT-3 175B 5-shot 43.9%, random 25%, AMT 비전문가 34.5%와 구성된 expert estimate 89.8%는 서로 다른 기준이며, 전문가 집단 하나가 전체 시험을 치른 결과로 읽지 않는다.
+- 원 MMLU의 GPT-3 평가는 과목별 최대 5개 예시와 A/B/C/D 확률을 사용했다. 당시 aggregate는 문항의 영향을 받는 평균이고, 후대 harness의 subject macro·prompt·tokenization·choice normalization 차이를 같은 점수로 합치지 않는다. 원 논문의 최저 영역은 STEM 36.7%였으므로 STEM이 최고였다는 서술도 교정했다.
+- BIG-bench 최종 논문은 204개 task·450명 저자·132개 기관과 약 80% JSON·20% programmatic 구성을 보고한다. Task별 preferred metric을 low/high 기준으로 정규화한 뒤 과제 평균을 내므로 원 점수·정규화 점수·task subset이 달라지면 같은 모델도 다른 aggregate를 얻는다.
+- 원 BIG-bench의 strongest aggregate는 사람 기준의 20% 미만이었고, 사람 평가는 인터넷·도구 사용과 task subsampling을 포함했다. 약 5% breakthrough task와 PaLM·BIG-bench의 불연속성 정의도 metric·prompt·subset에 민감하므로 일반적인 인간 수준·전문 직무 수행·산업 표준 또는 단일한 emergent-law 증거로 확대하지 않는다.
+- GPT-4 technical report는 MMLU 5-shot 86.4%를 보고하지만 BIG-bench는 training contamination을 확인해 결과를 생략했다. MMLU contamination 표본 추정 약 0.6%도 contamination-free 재평가 점수가 아니며, canary나 공개 시점만으로 간접 오염 가능성이 사라지지 않는다.
+- `source:ready -- 095`는 96개 회귀 테스트와 318개 Markdown strict lint를 통과해 375개 evidence와 190개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 614개 HTML을 만들고 7,027개 wiki link를 모두 해소했다.
+- 다음 순차 입력은 공식 096 `GPT-4 Multimodal Language Models Reach Human-Level Performance`다.
+
 ## 관련 항목
 
 - [[index]]

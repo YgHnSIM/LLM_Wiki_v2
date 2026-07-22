@@ -1692,3 +1692,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/constitutional-ai-principle-based-alignment-through-self-critique
     sha256: e5c443380f181bdb966958c8e560039facd4ea946ca90af38420f2c8704ae9da
+  - path: "raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.ko.md"
+    role: translation
+    order_prefix: "095"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/big-bench-mmlu-comprehensive-evaluation-benchmarks-large-language-models
+    sha256: 513f6effec2ecdbb9bd3f76df162d3c22e6aa3efa300de8a19d685c0420793a3
+  - path: "raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.commentary.ko.md"
+    role: commentary
+    order_prefix: "095"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/big-bench-mmlu-comprehensive-evaluation-benchmarks-large-language-models
+    sha256: 9fe25382150bf4601802b6bf7d06f3effc1262683896718dfb07dbd09d7fa1b6
