@@ -3958,6 +3958,29 @@ raw 등록 해시:
 - `source:ready -- 099`는 96개 회귀 테스트와 325개 Markdown strict lint를 통과해 387개 evidence와 198개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 629개 HTML을 만들고 7,264개 wiki link를 모두 해소했다.
 - 다음 순차 입력은 공식 100 `Hybrid Retrieval Combining Sparse and Dense Methods for Effective Information Retrieval`이다.
 
+## [2026-07-22] ingest | 희소·밀집 검색의 결합과 다단계 순위화
+
+변경 내용:
+
+- 공식 100 `Hybrid Retrieval Combining Sparse and Dense Methods for Effective Information Retrieval`을 H1·H2·H3 `1/6/0`, 51개 본문 블록과 38개 Markdown link의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 번역은 첫 제목 바로 뒤에 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않는다.
+- 번역 감사에서 exact match·candidate recall·retrieved document·label·cascade·embedding·indexing 용어와 조건 표현을 다듬었다. 원문의 2024년 최초성, bi-encoder와 cross-encoder 혼합, 보편적 성능·지연·저장량 주장은 번역에서 임의로 고치지 않고 해설·공개 소스의 검증 정정에서 분리했다.
+- 검증된 번역·해설을 신규 raw 두 파일로 등록했다. 번역 SHA-256은 `c95b6f14733b6e76edeb98ffd7985487131296b572fa7468c90dbe4e8e465374`, 해설은 `0a431de189efafd68f72825e2333d35877afb0462691fa7ce1a8e006ac18676c`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[100_희소·밀집 검색의 결합과 다단계 순위화]]와 [[하이브리드 검색]]을 만들었다. 병렬 sparse+dense 후보 융합, BM25 우선 cross-encoder cascade, 융합 후보 뒤의 cross-encoder라는 세 구조를 구분하고 candidate recall·융합·재순위화·생성 답의 실패 경계를 단계별로 정리했다.
+- 기존 [[검색은 근거를 찾고 독해는 답을 찾는다]]를 보강했다. 세 결합 구조의 후보 경계 표를 추가하고 원점수 직접 합산, RRF의 $k$·후보 깊이, 동일 corpus·chunk·hardware 비교 조건을 연결했다. 별도 분석 문서는 만들지 않았다.
+- RRF·CLEAR·Pyserini·BEIR 1차 근거 네 건을 등록하고 기존 BM25·BERT 재순위화·DPR·RAG 근거를 재사용했다. [[index]]와 [[overview]]를 source 100개·concept 173개·비메타 324개, 공식 범위 001–046·048–100·103과 다음 공식 101 PEFT Beyond LoRA 기준으로 갱신했다.
+- 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 196개, raw Markdown 201개, 위키 Markdown 327개에서 UI 단락 0개를 확인했다. 번역 정규화 검사는 표준 `원본 출처:` 98개와 변경 필요 0개를 확인했다.
+
+검증 정정과 남은 한계:
+
+- 하이브리드 검색은 2024년에 처음 등장하지 않았다. RRF는 2009년, BM25 후보의 BERT 재순위화는 2019년, DPR·CLEAR의 병렬 sparse+dense 결합은 2020–2021년, Pyserini의 도구 지원은 2021년에 확인된다.
+- Dense bi-encoder는 질의·문서를 독립 부호화해 전체 corpus를 검색할 수 있고 cross-encoder는 후보마다 둘을 함께 읽는다. 두 구조를 모두 “밀집 재순위화”로 묶지 않는다.
+- Sparse-first reranker는 BM25 후보 밖 문서를 복구하지 못한다. 병렬 후보 합집합은 한쪽 누락을 다른 쪽이 보완할 수 있지만 두 검색기가 모두 놓친 문서는 되살리지 못한다.
+- DPR Table 2에서 hybrid가 DPR보다 낮은 자료도 있었으므로 결합의 우위를 보편화하지 않는다. CLEAR·BEIR의 품질·비용도 자료·표지·후보 깊이·hardware 조건에 묶인다.
+- RRF는 원점수 calibration을 피하지만 $k$와 목록 cutoff에서 자유롭지 않다. 희소 posting과 dense vector의 저장량도 같은 크기가 아니므로 이중 색인의 비용을 정확히 두 배라고 일반화하지 않는다.
+- 원 RAG는 DPR 계열 밀집 검색을 사용했다. Hybrid retrieval은 현대 RAG에서 선택할 수 있는 검색 설계이며, 검색 품질이 생성 답의 사실성·claim-level citation을 자동 보장하지 않는다.
+- `source:ready -- 100`과 최종 `npm run verify`는 96개 회귀 테스트와 327개 Markdown strict lint를 통과해 391개 evidence와 200개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 633개 HTML을 만들고 7,322개 wiki link를 모두 해소했다.
+- 다음 순차 입력은 공식 101 `PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques`다.
+
 ## 관련 항목
 
 - [[index]]

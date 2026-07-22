@@ -3303,3 +3303,39 @@ sources:
     doi: 10.48550/arXiv.2404.06654
     url: https://arxiv.org/abs/2404.06654
     language: en
+  cormack-clarke-buettcher-2009-rrf:
+    title: Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods
+    authors: [Gordon V. Cormack, Charles L. A. Clarke, Stefan Büttcher]
+    published: 2009
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1145/1571941.1572114
+    url: https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf
+    language: en
+  gao-et-al-2021-clear:
+    title: Complement Lexical Retrieval Model with Semantic Residual Embeddings
+    authors: [Luyu Gao, Zhuyun Dai, Tongfei Chen, Zhen Fan, Benjamin Van Durme, Jamie Callan]
+    published: 2021
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1007/978-3-030-72113-8_10
+    url: https://www.cs.cmu.edu/~callan/Papers/ecir21-Luyu-Gao-a.pdf
+    language: en
+  lin-et-al-2021-pyserini:
+    title: 'Pyserini: An Easy-to-Use Python Toolkit to Support Replicable IR Research with Sparse and Dense Representations'
+    authors: [Jimmy Lin, Xueguang Ma, Sheng-Chieh Lin, Jheng-Hong Yang, Ronak Pradeep, Rodrigo Nogueira]
+    published: 2021
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1145/3404835.3463238
+    url: https://arxiv.org/abs/2102.10073
+    language: en
+  thakur-et-al-2021-beir:
+    title: 'BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models'
+    authors: [Nandan Thakur, Nils Reimers, Andreas Rücklé, Abhishek Srivastava, Iryna Gurevych]
+    published: 2021
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2104.08663
+    url: https://arxiv.org/abs/2104.08663
+    language: en

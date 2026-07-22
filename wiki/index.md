@@ -129,6 +129,7 @@ related:
 - [[097_Mixtral의 생산 배포 효율 주장과 증거 경계]] — 2023년 12월 공개·46.7B total/12.9B active·고정 top-2를 복원하고 부하 균형·주제별 expert·공개 가중치·benchmark·production-ready 주장의 증거 경계를 검증한 소스 (근거 6개)
 - [[098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계]] — LWM과 Gemini 1.5의 서로 다른 공개·구현 경로를 복원하고 명목 입력 창·계산 가능성·single/multi-needle·복합 추론·제품 가용성의 경계를 검증한 소스 (근거 10개)
 - [[099_구조화 출력의 스키마 준수와 의미 정확성 경계]] — 2023년 함수 호출·JSON mode와 2024년 strict schema를 분리하고 구문·스키마·의미·권한 보장 및 provider·framework 경계를 검증한 소스 (근거 4개)
+- [[100_희소·밀집 검색의 결합과 다단계 순위화]] — 병렬 희소·밀집 후보 융합, 희소 우선 재순위화와 융합 후보 뒤 교차 인코더를 분리하고 품질·후보·비용 경계를 검증한 소스 (근거 8개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 
 ## 개체
@@ -312,6 +313,7 @@ related:
 - [[추출형 질의응답]] — 주어진 문맥의 연속 답 구간을 시작·끝 위치로 선택하고 검색·생성·답 없음 판단과 구분하는 과업 (근거 2개)
 - [[신경 정보 검색]] — 질의·문서 표현이나 상호작용·순위 점수를 신경망으로 학습하며 첫 단계 검색과 재순위화를 구분하는 접근군 (근거 7개)
 - [[다중 벡터 검색]] — 질의·문서를 문맥화된 벡터 집합으로 독립 부호화한 뒤 MaxSim 후기 상호작용으로 점수화하는 검색 방식 (근거 4개)
+- [[하이브리드 검색]] — 희소·밀집 검색을 병렬·직렬로 결합하되 후보 합집합·점수/순위 융합·교차 인코더 재순위화의 경계를 구분하는 검색 설계 (근거 7개)
 - [[검색 증강 생성]] — 외부 passage 검색과 생성을 결합하되 원 DPR–BART 잠재 문서 모형과 후대의 넓은 RAG 용례를 구분하는 방식 (근거 3개)
 - [[전문가 혼합]] — 여러 expert와 token router로 일부 FFN만 조건부 활성화하며 total parameters와 active compute·저장·통신을 구분하는 모델 구조 (근거 7개)
 - [[Mixtral 8x7B]] — 8개 FFN 중 top-2를 쓰는 46.7B total·12.9B active 공개 가중치 모델과 memory·평가·routing 조건을 정리한 개념 (근거 2개)
@@ -347,7 +349,7 @@ related:
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 특징·전체 미세조정·저순위 adapter·prompt·지시·class prototype과 멀티모달 bridge–parameter update의 두 축, 생성 목표 잠재·교차 어텐션 조건·실행 선택을 비교하고 foundation–adapted–deployed 층위를 분리한 분석 (근거 25개)
 - [[손실 곡선과 능력 곡선 사이]] — 평균 token loss·task score·능력 threshold와 PaLM의 세 점 외삽 잔차를 metric·표본·checkpoint·관측 scale로 구분한 분석 (근거 7개)
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]] — RNN·WaveNet·Transformer·FlashAttention을 표현 계산·sampling과 FLOPs·capacity·HBM traffic·wall-clock의 서로 다른 축으로 분리한 분석 (근거 6개)
-- [[검색은 근거를 찾고 독해는 답을 찾는다]] — 단일 벡터·후기 상호작용·교차 인코더의 후보 경계와 검색 재현율·독해 정확도·기권을 분리한 분석 (근거 9개)
+- [[검색은 근거를 찾고 독해는 답을 찾는다]] — 단일 벡터·후기 상호작용·교차 인코더의 후보 경계와 검색 재현율·독해 정확도·기권을 분리한 분석 (근거 11개)
 - [[서브워드는 한 벡터의 특징인가 여러 토큰인가]] — 기본 SGNS·FastText·BPE·SentencePiece를 조각의 역할·결합 시점·문맥화·OOV·계산 비용으로 비교한 분석 (근거 6개)
 - [[잔차 경로와 정규화는 어디에 놓이는가]] — ResNet post-/pre-activation과 Transformer Post-/Pre-LN을 additive identity path 위의 Jacobian 배치로 비교한 분석 (근거 5개)
 - [[계수 기반과 예측 기반 단어 표현은 얼마나 다른가]] — LSI·NPLM·SGNS·GloVe를 문맥 단위·통계 집계·가중·저랭크 목적·평가 축으로 비교한 분석 (근거 7개)

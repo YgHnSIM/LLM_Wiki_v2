@@ -1782,3 +1782,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/structured-outputs-schema-validated-data-extraction-language-models
     sha256: 2146c23c6a4b11aeba4853b0e328da6c3d02abb013ba69b24439daa2307adb91
+  - path: "raw/100_Hybrid Retrieval Combining Sparse and Dense Methods for Effective Information Retrieval.ko.md"
+    role: translation
+    order_prefix: "100"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/hybrid-retrieval-combining-sparse-dense-methods-effective-information-retrieval
+    sha256: c95b6f14733b6e76edeb98ffd7985487131296b572fa7468c90dbe4e8e465374
+  - path: "raw/100_Hybrid Retrieval Combining Sparse and Dense Methods for Effective Information Retrieval.commentary.ko.md"
+    role: commentary
+    order_prefix: "100"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/hybrid-retrieval-combining-sparse-dense-methods-effective-information-retrieval
+    sha256: 0a431de189efafd68f72825e2333d35877afb0462691fa7ce1a8e006ac18676c

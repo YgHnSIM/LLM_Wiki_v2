@@ -19,8 +19,8 @@ export const DEFAULT_PATHS = Object.freeze({
 
 export const PRODUCTION_COUNTS = Object.freeze({
   sourceFiles: 109,
-  translationFiles: 194,
-  rawFiles: 199,
+  translationFiles: 196,
+  rawFiles: 201,
   sourceBlocks: 98,
   rawBlocks: 51,
 });

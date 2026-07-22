@@ -26,13 +26,13 @@ related:
 
 공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism (2015)**이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-21 현재 원문을 제공하지 않는다.
 
-따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 99개는 공식 001–046·048–099·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 100 `Hybrid Retrieval Combining Sparse and Dense Methods for Effective Information Retrieval`이다.
+따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 100개는 공식 001–046·048–100·103을 다룬다. [[GLaM에서 Mixtral까지의 희소 MoE 확장]]의 원문·번역·raw도 공식 103으로 통일했으며, 다음 순차 입력은 공식 101 `PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques`이다.
 
 숫자 badge는 정규 source의 공식 장 번호에만 쓴다. 비번호 reference가 추가되면 번호 source 뒤에서 `참고`로 표시하며, 목록 위치를 `001` 같은 장 번호로 바꾸지 않는다. 같은 장의 검증 노트·번역·해설은 서로 다른 장이 아니라 하나의 source 묶음에 속한다.
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 99개, reference 0개, concept 172개, entity 29개, analysis 22개를 합친 비메타 문서 322개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 100개, reference 0개, concept 173개, entity 29개, analysis 22개를 합친 비메타 문서 324개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -43,7 +43,7 @@ related:
 | 같은 dense attention을 더 적은 메모리 이동으로 어떻게 실행하나 | [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]] | [[088_FlashAttention과 IO 인지형 정확 어텐션]] → [[FlashAttention]] → [[Transformer-XL]] | [[훈련 병렬성과 생성 순차성은 다른 축이다]] |
 | 최대 문맥 길이는 실제 이해 길이와 같은가 | [[064_Transformer-XL과 세그먼트 수준 재귀]] | [[088_FlashAttention과 IO 인지형 정확 어텐션]] → [[098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계]] → [[긴 문맥 언어 모델]] → [[검색 증강 생성]] | [[검색은 근거를 찾고 독해는 답을 찾는다]] |
 | 한 언어의 지식은 다른 언어로 어떻게 옮겨지나 | [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[062_XLM과 교차 언어 사전 학습]] → [[XLM]] | [[같은 병렬 문장은 무엇을 학습시키는가]] |
-| 검색과 외부 지식은 어떻게 연결되나 | [[010_벡터 공간 모델과 TF-IDF]] | [[024_BM25와 확률적 정보 검색]] → [[052_신경 정보 검색과 의미 대응]] → [[065_BERT 기반 passage 재순위화]] → [[068_DPR과 검색 증강 생성]] → [[073_ColBERT와 다중 벡터 검색]] | [[검색은 근거를 찾고 독해는 답을 찾는다]] |
+| 검색과 외부 지식은 어떻게 연결되나 | [[010_벡터 공간 모델과 TF-IDF]] | [[024_BM25와 확률적 정보 검색]] → [[052_신경 정보 검색과 의미 대응]] → [[065_BERT 기반 passage 재순위화]] → [[068_DPR과 검색 증강 생성]] → [[073_ColBERT와 다중 벡터 검색]] → [[100_희소·밀집 검색의 결합과 다단계 순위화]] → [[하이브리드 검색]] | [[검색은 근거를 찾고 독해는 답을 찾는다]] |
 | 자연어 명세는 어떻게 실행 코드가 되나 | [[067_GPT-3와 문맥 내 학습]] | [[071_Codex와 HumanEval 기반 코드 생성 평가]] → [[OpenAI Codex (2021)]] | [[자동 평가 지표는 무엇을 보상하는가]] |
 | 모델의 제안은 언제 실제 행동이 되나 | [[080_사고 연쇄 프롬프팅과 추론 행동 유도]] | [[092_함수 호출과 도구 사용의 모델-실행 경계]] → [[함수 호출과 도구 사용]] → [[OpenAI Codex (2021)]] | [[자동 평가 지표는 무엇을 보상하는가]] |
 | 모델의 JSON은 언제 신뢰할 수 있나 | [[파싱]] | [[092_함수 호출과 도구 사용의 모델-실행 경계]] → [[099_구조화 출력의 스키마 준수와 의미 정확성 경계]] → [[구조화 출력]] → [[문맥자유문법]] | [[자동 평가 지표는 무엇을 보상하는가]] |
@@ -66,7 +66,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 96개 소스의 범위
+## 100개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -166,6 +166,7 @@ related:
 - [[097_Mixtral의 생산 배포 효율 주장과 증거 경계]]는 2023년 12월 공개와 2024년 1월 논문을 구분하고, 46.7B total·12.9B active parameters·고정 top-2를 복원해 공개 가중치·benchmark·serving 경로와 workload별 production SLO를 분리한다.
 - [[098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계]]는 LWM의 공개 RingAttention·FlashAttention·RoPE scaling·점진 학습과 Gemini 1.5의 제한된 구조·제품 공개 범위를 분리하고, 명목 입력 창·single/multi-needle·복합 추론·비용을 별도 증거 축으로 검증한다.
 - [[099_구조화 출력의 스키마 준수와 의미 정확성 경계]]는 2023년 function calling·JSON mode와 2024년 `strict: true`를 분리하고, valid JSON·schema conformity·semantic validation·권한의 직렬 관문 및 CFG token masking·Pydantic·framework 경계를 검증한다.
+- [[100_희소·밀집 검색의 결합과 다단계 순위화]]는 병렬 sparse+dense 후보 융합, BM25 우선 교차 인코더 캐스케이드와 결합 후보 뒤의 재순위화를 분리하고, RRF·DPR·CLEAR·Pyserini·BEIR의 자료별 품질·후보·비용 경계를 검증한다.
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]]은 GLaM·Mixtral의 total·active parameter와 token별 routing을 복원하고, 2024년 최초성·Meta 귀속·dense 계산의 제곱 증가·깨끗한 domain expert·민주화 과장을 교정한다.
 
 ## 현재 핵심 주제
@@ -232,6 +233,7 @@ related:
 - [[검색 증강 생성]]에서 구분하는 원 RAG의 DPR–BART 잠재 문서 주변화, 고정 document encoder·색인과 학습되는 query encoder, 검색 provenance와 claim-level citation의 차이
 - [[098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계]]와 [[긴 문맥 언어 모델]]에서 구분하는 명목 입력 한도, 학습·평가 길이, attention 연결 범위, prefill·KV cache 비용, 위치별 검색과 복합 추론의 유효 길이
 - [[099_구조화 출력의 스키마 준수와 의미 정확성 경계]]와 [[구조화 출력]]에서 구분하는 prompt 기반 JSON 요청, JSON mode의 구문 유효성, 지원 schema의 constrained decoding, field 의미·사실 검증과 refusal·중단·provider strategy
+- [[100_희소·밀집 검색의 결합과 다단계 순위화]]와 [[하이브리드 검색]]에서 구분하는 병렬 후보 합집합, sparse-first cascade, 융합 뒤 cross-encoder, 점수 정규화·RRF와 단계별 candidate recall·latency·index cost
 - [[전문가 혼합]]에서 구분하는 total parameters·token당 active expert, shared Transformer 경로, top-$k$ routing·capacity·load balancing과 memory·all-to-all communication 비용
 - [[097_Mixtral의 생산 배포 효율 주장과 증거 경계]]와 [[Mixtral 8x7B]]에서 구분하는 2023년 12월 공개, 46.7B total·12.9B active parameters, 고정 top-2, Apache 2.0 공개 가중치·추론 경로와 workload별 production SLO, topic expert가 아닌 routing locality
 - [[총 매개변수와 활성 계산량은 같은 축인가]]에서 비교하는 dense non-embedding $N$, sparse total·active parameters, FLOPs·memory·communication·wall-clock·data·quality와 논문 안/논문 사이 비교 경계
