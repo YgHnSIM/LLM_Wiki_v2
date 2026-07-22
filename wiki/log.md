@@ -4108,6 +4108,29 @@ raw 등록 해시:
 - `source:ready -- 106`은 96개 회귀 테스트와 336개 Markdown strict lint를 통과해 420개 evidence와 210개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 652개 HTML을 만들고 7,614개 wiki link를 모두 해소했으며, 43,078개 local reference와 검색 항목 335개를 검사했다.
 - 다음 순차 입력은 공식 107 `GPT-4o Unified Multimodal AI with Real-Time Speech, Vision, and Text`다.
 
+## [2026-07-22] ingest | GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계
+
+변경 내용:
+
+- 공식 107 `GPT-4o Unified Multimodal AI with Real-Time Speech, Vision, and Text`를 원문과 같은 H1 1개·H2 6개, 43개 본문 블록과 Markdown link 9개의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 첫 제목 바로 뒤에 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않았다.
+- 검증된 번역·해설을 신규 raw 두 파일로 등록했다. 번역 SHA-256은 `eb9219cd9f17622684557ffa1851c223b2327e5c950c700b1cf7461e6200112a`, 해설은 `9f1e05274d9940fee014a0f0d174e1534fd4781dc7a77f1ae402adfeb1440894`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]]를 만들었다. 2024년 5월 13일의 단일 신경망 end-to-end 공표, model I/O, 232ms 최저·320ms 평균 audio 응답과 출시 당일 제품 surface를 기록하고, 비공개 tokenizer·encoder·attention·memory와 후속 voice·video·image rollout을 별도 장부로 분리했다.
+- [[멀티모달 대규모 언어 모델]], [[GPT-4]], [[105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]]를 보강했다. GPT-4o를 GPT-4의 2023년 snapshot이나 공개 architecture 명세로 소급하지 않고, training claim·announced I/O·launch surface·later surface와 input·output·scoring modality를 분리했다.
+- [[자동 평가 지표는 무엇을 보상하는가]]를 보강했다. Text 안전 과제→Voice Engine TTS→audio 응답→transcript 채점 경로에서 TTS·전사기·text scorer가 새 evaluation oracle을 구성하며, transcript 점수와 억양·잡음·말 끊김·voice identity의 음향 안전 평가를 서로 대체할 수 없음을 추가했다. 기존 분석이 이 비교축을 충분히 수용하므로 별도 분석 문서는 만들지 않았다.
+- GPT-4o System Card, Advanced Voice release notes, Realtime API, ChatGPT video·screen-share release notes, 4o image generation의 공식 근거 다섯 건을 등록하고 기존 Hello GPT-4o 근거를 재사용했다. [[index]]와 [[overview]]를 source 106개·concept 177개·entity 29개·analysis 22개·비메타 334개·전체 337개, 공식 범위 001–046·048–107과 다음 공식 108 V-JEPA 2 기준으로 갱신했다.
+- 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 208개, raw Markdown 213개, 위키 Markdown 337개에서 UI 단락 0개를 확인했다. 번역 정규화 검사는 번역 104개와 표준 `원본 출처:` 104개, 변경 필요 0개를 확인했다. Raw 레지스트리에는 번역본이 없는 legacy prefix 007을 포함해 translation prefix 105개가 등록돼 있다.
+
+검증 정정과 남은 한계:
+
+- 원 웹글은 2025년 9월 9일 게시된 회고이며 GPT-4o 공개를 2025년 5월로 잘못 적었다. 공식 발표일은 2024년 5월 13일이므로 사건 연도와 후대 회고의 게시 시점을 구분한다.
+- OpenAI가 확인한 것은 text·vision·audio를 한 신경망에서 end-to-end로 학습했다는 고수준 공표다. 모든 modality의 단일 tokenizer·공유 vocabulary, 별도 encoder·codec 제거, 특정 cross-modal attention, 장기 memory module, parameter·layer·training recipe는 공개되지 않았다.
+- 최저 232ms·평균 320ms는 audio input에 대한 보고 응답 지표다. Network·device·capture·streaming·playback을 포함한 모든 사용자 환경의 end-to-end SLA나 인간과 구별되지 않는 상호작용의 증거로 확대하지 않는다.
+- 2024년 5월 출시 당일에는 text·image input과 text output이 먼저 배포됐다. Advanced Voice, Realtime API audio, video·screen share와 native image generation은 2024년 하반기부터 2025년 3월까지 별도로 rollout됐으므로 model capability와 제품 시점을 합치지 않는다.
+- System Card의 여러 audio 평가는 text benchmark를 TTS로 변환하고 출력 audio의 transcript를 주로 채점했다. 100명이 넘는 external red teamer·45개 언어·29개국, preset voice와 classifier 결과도 당시 snapshot·내부 표본·보조 완화책에 묶이며 모든 언어·잡음·공격과 제품의 안전 인증이 아니다.
+- 원 웹글의 인간과 구별되지 않는 의사소통, 인간 같은 이해·일반 지능, 교육·의료·robotics·자율주행·smart-home 변혁 주장은 blinded study·임상 검증·system version·baseline·deployment 자료가 없어 가능성과 검증된 효과를 구분한다.
+- `source:ready -- 107`은 96개 회귀 테스트와 337개 Markdown strict lint를 통과해 425개 evidence와 212개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 655개 HTML을 만들고 7,657개 wiki link를 모두 해소했으며, 43,317개 local reference와 검색 항목 336개를 검사했다.
+- 다음 순차 입력은 공식 108 `V-JEPA 2 Vision-Based World Modeling for Embodied AI`다.
+
 ## 관련 항목
 
 - [[index]]

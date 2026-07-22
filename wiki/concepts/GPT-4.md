@@ -43,8 +43,12 @@ evidence:
   - source_id: martinez-2024-gpt4-bar-exam
     locator: 'Abstract·§§2–5와 Tables 1–5의 UBE percentile 재산정·MBE 복제·essay scoring 비판'
     relation: disputes
+  - source_id: openai-2024-gpt4o-release
+    locator: '2024-05-13 Model capabilities·Model availability의 GPT-4o 별도 공표, 단일 신경망 end-to-end claim과 단계적 rollout'
+    relation: contextualizes
 related:
   - source.096
+  - source.107
   - source.067
   - source.077
   - source.081
@@ -172,6 +176,8 @@ GPT-4V는 여기에 OCR·공간·색·순서·의료 image 오류와 visual prom
 
 초기 API는 `gpt-4-0314` 같은 snapshot pinning, 8,192-token context와 제한된 32,768-token version을 제공했다. 이후 같은 제품명 아래 context·tool·vision·policy가 달라질 수 있다. 2023년 결과를 후대 GPT-4 Turbo나 다른 provider model의 사양으로 소급하지 않는다.
 
+GPT-4o도 GPT-4의 이름만 바꾼 2023년 snapshot으로 소급하지 않는다. OpenAI는 2024년 5월 13일 GPT-4o를 text·vision·audio를 한 신경망에서 end-to-end로 학습한 별도 omni model로 공표했다. 따라서 GPT-4·GPT-4V의 2023년 시험·vision rollout·안전 결과와 GPT-4o의 latency·audio·System Card 결과는 서로 자동 상속되지 않으며, 각각 model family·snapshot·modality·제품 날짜를 붙여 인용한다.
+
 ### 시각 능력은 고위험 사용 승인이 아니다
 
 GPT-4V system card는 의료 image 해석의 불안정성과 image 순서·작은 문자·수학 기호·비로마자 OCR 문제를 기록했다. 당시 version은 의료 기능이나 진단·치료·전문가 판단의 대체에 적합하지 않았다. 접근성 pilot의 유용성과 독립된 사람 확인 경로가 함께 존재한 이유다.
@@ -191,6 +197,7 @@ GPT-4 공개가 멀티모달 제품·시험 평가·AI 안전 논의를 넓힌 �
 ### 다음 문서
 
 - [[096_GPT-4의 멀티모달 공개·시험 성능·안전 경계]] — 원 웹글의 주장과 1차 자료·후속 재평가를 대조한다.
+- [[107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]] — GPT-4와 구분되는 2024년 omni model 공표와 audio·rollout 평가 경계를 살핀다.
 - [[멀티모달 대규모 언어 모델]] — 공개 model의 여러 bridge와 입출력 signature를 비교한다.
 - [[BIG-bench와 MMLU]] — benchmark 집계·prompt·오염의 평가 경계를 살핀다.
 - [[인간 피드백 강화학습]] — base 능력과 post-training 행동을 구분한다.
@@ -198,11 +205,13 @@ GPT-4 공개가 멀티모달 제품·시험 평가·AI 안전 논의를 넓힌 �
 ## 출처
 
 - [[096_GPT-4의 멀티모달 공개·시험 성능·안전 경계]]
+- [[107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]]
 - OpenAI, [*GPT-4 Technical Report*](https://cdn.openai.com/papers/gpt-4.pdf), 2023, Abstract·§§1–2·4–6와 Appendices A·C–D·G.
 - OpenAI, [*GPT-4*](https://openai.com/index/gpt-4-research/), 2023-03-14.
 - OpenAI, [*GPT-4V(ision) System Card*](https://cdn.openai.com/papers/GPTV_System_Card.pdf), 2023, pp. 1–13과 §§2.1–2.4.
 - OpenAI, [*ChatGPT can now see, hear, and speak*](https://openai.com/index/chatgpt-can-now-see-hear-and-speak/), 2023-09-25.
 - OpenAI, [*New models and developer products announced at DevDay*](https://openai.com/index/new-models-and-developer-products-announced-at-devday/), 2023-11-06, “New modalities in the API”.
+- OpenAI, [*Hello GPT-4o*](https://openai.com/index/hello-gpt-4o/), 2024-05-13, Model capabilities·Model availability.
 - Daniel Martin Katz 외, [*GPT-4 Passes the Bar Exam*](https://doi.org/10.1098/rsta.2023.0254), *Philosophical Transactions of the Royal Society A* 382, 2024.
 - Eric H. Martinez, [*Re-evaluating GPT-4’s Bar Exam Performance*](https://doi.org/10.1007/s10506-024-09396-9), *Artificial Intelligence and Law* 32, 2024.
 - 프로젝트 보존 자료: `raw/096_GPT-4 Multimodal Language Models Reach Human-Level Performance.ko.md`, `raw/096_GPT-4 Multimodal Language Models Reach Human-Level Performance.commentary.ko.md`.
@@ -210,6 +219,7 @@ GPT-4 공개가 멀티모달 제품·시험 평가·AI 안전 논의를 넓힌 �
 ## 관련 항목
 
 - [[096_GPT-4의 멀티모달 공개·시험 성능·안전 경계]]
+- [[107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]]
 - [[067_GPT-3와 문맥 내 학습|GPT-3]]
 - [[077_InstructGPT와 인간 선호 정렬]]
 - [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]]

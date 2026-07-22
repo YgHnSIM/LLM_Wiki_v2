@@ -1890,3 +1890,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/deepseek-r1-architectural-innovation-reasoning-models
     sha256: 1d6d3803a1669791fdb0803df7d15e7e04e6860f3a49c1476430ebd88ef8c70e
+  - path: "raw/107_GPT-4o Unified Multimodal AI with Real-Time Speech, Vision, and Text.ko.md"
+    role: translation
+    order_prefix: "107"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/gpt4o-unified-multimodal-ai-real-time-speech-vision-text
+    sha256: eb9219cd9f17622684557ffa1851c223b2327e5c950c700b1cf7461e6200112a
+  - path: "raw/107_GPT-4o Unified Multimodal AI with Real-Time Speech, Vision, and Text.commentary.ko.md"
+    role: commentary
+    order_prefix: "107"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/gpt4o-unified-multimodal-ai-real-time-speech-vision-text
+    sha256: 9f1e05274d9940fee014a0f0d174e1534fd4781dc7a77f1ae402adfeb1440894

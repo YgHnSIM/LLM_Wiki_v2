@@ -3522,6 +3522,46 @@ sources:
     kind: official-blog
     url: https://openai.com/index/hello-gpt-4o/
     language: en
+  openai-2024-gpt4o-system-card:
+    title: GPT-4o System Card
+    authors: [OpenAI]
+    published: 2024
+    source_type: primary-release
+    kind: system-card
+    url: https://cdn.openai.com/gpt-4o-system-card.pdf
+    language: en
+  openai-2024-advanced-voice-release-notes:
+    title: Model Release Notes
+    authors: [OpenAI]
+    published: 2024
+    source_type: primary-release
+    kind: official-blog
+    url: https://help.openai.com/en/articles/9624314-model-release-notes
+    language: en
+  openai-2024-realtime-api:
+    title: Introducing the Realtime API
+    authors: [OpenAI]
+    published: 2024
+    source_type: primary-release
+    kind: official-blog
+    url: https://openai.com/index/introducing-the-realtime-api/
+    language: en
+  openai-2024-chatgpt-video-screen-share:
+    title: ChatGPT — Release Notes
+    authors: [OpenAI]
+    published: 2024
+    source_type: primary-release
+    kind: official-blog
+    url: https://help.openai.com/en/articles/6825453-chatgpt-release-notes
+    language: en
+  openai-2025-4o-image-generation:
+    title: Introducing 4o Image Generation
+    authors: [OpenAI]
+    published: 2025
+    source_type: primary-release
+    kind: official-blog
+    url: https://openai.com/index/introducing-4o-image-generation/
+    language: en
   chameleon-team-2024-chameleon:
     title: 'Chameleon: Mixed-Modal Early-Fusion Foundation Models'
     authors: [Chameleon Team]

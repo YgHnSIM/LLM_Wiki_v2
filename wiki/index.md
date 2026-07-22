@@ -134,8 +134,9 @@ related:
 - [[102_지속 사전 학습의 연표와 지식 갱신 경계]] — 2025년 최초성 서사를 바로잡고 순차 corpus의 새 분포 적응·이전 능력 보존·지식 교정과 PEFT·RAG·RLHF·배포 운영의 경계를 검증한 소스 (근거 10개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 - [[104_LLM 에이전트의 추론-행동 루프와 자율성 경계]] — 2024년 기원설을 선행 tool-use·memory 연구와 장기 benchmark로 교정하고 model·runtime·권한·학습·안전 경계를 검증한 소스 (근거 10개)
-- [[105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]] — 2024년 단일 돌파 서사를 2021–2024년 joint embedding·bridge·shared core·early-fusion 경로로 교정하고 입출력·학습·제품 rollout·평가 경계를 검증한 소스 (근거 10개)
+- [[105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]] — 2024년 단일 돌파 서사를 2021–2024년 joint embedding·bridge·shared core·early-fusion 경로로 교정하고 입출력·학습·제품 rollout·평가 경계를 검증한 소스 (근거 11개)
 - [[106_DeepSeek-R1의 강화학습 파이프라인과 증류 경계]] — V3-Base의 671B/37B MoE와 R1-Zero·정식 R1·여섯 dense 증류본을 분리하고 GRPO·보상·다단계 후훈련·평가·공개 범위를 검증한 소스 (근거 5개)
+- [[107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]] — 2024년 공개일, 단일 신경망 end-to-end 공표와 비공개 내부 구조, audio 지연·평가, 출시 기능과 후속 voice·video·image rollout의 경계를 검증한 소스 (근거 6개)
 
 ## 개체
 
@@ -206,8 +207,8 @@ related:
 - [[The Pile]] — 22개 component·epoch 가중치·BPB 평가를 deduplication·decontamination·underlying rights와 구분하는 825.18 GiB 영어 중심 말뭉치 (근거 2개)
 - [[CLIP]] — 이미지·텍스트 이중 인코더를 대칭 대조 손실로 정렬하고 class prompt를 제로샷 분류기 weight처럼 사용하는 시각-언어 모델 (근거 4개)
 - [[Flamingo]] — 동결 시각·언어 backbone 사이의 64개 시각 token 병목과 gated cross-attention으로 멀티모달 문맥 내 생성을 수행하는 모델 계열 (근거 1개)
-- [[멀티모달 대규모 언어 모델]] — 비언어 입력을 image encoder·bridge·언어 decoder로 연결하되 입력·동결 경계·출력 signature와 공개 수준을 model별로 구분해야 하는 시스템 계열 (근거 16개)
-- [[GPT-4]] — base·post-training·multimodal interface·제품 snapshot을 분리하고 공개 입출력·시험 protocol·UBE percentile·안전 결과와 비공개 architecture의 경계를 기록한 모델 계열 (근거 7개)
+- [[멀티모달 대규모 언어 모델]] — 비언어 입력을 image encoder·bridge·언어 decoder로 연결하되 입력·동결 경계·출력 signature와 공개 수준을 model별로 구분해야 하는 시스템 계열 (근거 17개)
+- [[GPT-4]] — base·post-training·multimodal interface·제품 snapshot을 분리하고 공개 입출력·시험 protocol·UBE percentile·안전 결과와 비공개 architecture의 경계를 기록한 모델 계열 (근거 8개)
 - [[DALL·E (2021)]] — 1,024개 이산 이미지 토큰과 최대 256개 텍스트 토큰을 공동 자기회귀 모델링하고 별도 대조 모델로 후보를 재순위화한 2021년 생성 시스템 (근거 4개)
 - [[DALL·E 2]] — 동결 CLIP 잠재 공간에서 image embedding을 생성하는 prior와 계층적 확산 decoder를 결합한 2022년 텍스트-이미지 생성 시스템 (근거 3개)
 - [[잠재 확산 모델]] — 지각 오토인코더와 잠재 U-Net을 분리하고 교차 어텐션으로 여러 조건을 연결해 품질·압축·계산을 절충하는 확산 모델 계열 (근거 2개)
@@ -363,7 +364,7 @@ related:
 - [[잔차 경로와 정규화는 어디에 놓이는가]] — ResNet post-/pre-activation과 Transformer Post-/Pre-LN을 additive identity path 위의 Jacobian 배치로 비교한 분석 (근거 5개)
 - [[계수 기반과 예측 기반 단어 표현은 얼마나 다른가]] — LSI·NPLM·SGNS·GloVe를 문맥 단위·통계 집계·가중·저랭크 목적·평가 축으로 비교한 분석 (근거 7개)
 - [[구조화된 의미 자원은 무엇을 노드로 삼는가]] — WordNet synset·FrameNet frame·PropBank roleset과 token·Freebase topic이 선택하는 동일성·관계·근거 단위를 비교한 분석 (근거 6개)
-- [[자동 평가 지표는 무엇을 보상하는가]] — 참조 중첩·실행 test·사람·AI 선호 보상에 MMLU 문항 가중·BIG-bench 정규화 task 평균·UBE 점수–백분위 비교 모집단·HELM 병렬 장부·도구 호출 직렬 관문을 함께 놓아 분모·투표권·환율·비교 집단·proxy 최적화의 유인을 분석한 문서 (근거 24개)
+- [[자동 평가 지표는 무엇을 보상하는가]] — 참조 중첩·실행 test·사람·AI 선호 보상에 MMLU 문항 가중·BIG-bench 정규화 task 평균·UBE 점수–백분위 비교 모집단·HELM 병렬 장부·도구 호출 직렬 관문을 함께 놓아 분모·투표권·환율·비교 집단·proxy 최적화의 유인을 분석한 문서 (근거 25개)
 - [[N-gram에서 LLM으로]] — 조건부 예측의 공통점과 n-gram 빈도표·Katz 백오프·신경망 어텐션의 기술적 단절을 정리한 분석 (근거 11개)
 - [[최고 경로와 기대 통계, 백오프]] — Viterbi의 최고 경로, 경로합·EM의 기대 통계, Katz의 미관측 확률 추정이 답하는 서로 다른 질문을 구분한 분석 (근거 8개)
 - [[확률, 마진, 순위 점수]] — 생성·조건부 확률, SVM 결정값, BM25 점수와 DALL·E의 이미지 token 분포·대조 재순위 점수에서 정규화 범위·후보 집합·원점수 해석을 구분한 분석 (근거 8개)
