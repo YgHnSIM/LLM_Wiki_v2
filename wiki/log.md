@@ -3872,6 +3872,21 @@ raw 등록 해시:
 - `source:ready -- 096`은 96개 회귀 테스트와 320개 Markdown strict lint를 통과해 378개 evidence와 192개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 618개 HTML을 만들고 7,102개 wiki link를 모두 해소했다.
 - 다음 순차 입력은 공식 097 `Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts`다.
 
+## [2026-07-22] content | 시험 백분위의 비교 모집단 경계
+
+변경 내용:
+
+- 새 분석 문서를 늘리지 않고 기존 [[자동 평가 지표는 무엇을 보상하는가]]를 공식 096까지 확장했다. MMLU·BIG-bench의 집계 규칙 뒤에 `모델 응답 → MBE·MEE·MPT raw score → scaled UBE score → 선택한 인간 비교 모집단 → percentile → 전문 역량 주장`의 변환 연쇄를 추가했다.
+- [[096_GPT-4의 멀티모달 공개·시험 성능·안전 경계]]를 연결해 GPT-4의 약 297–298점대 UBE 결과가 여러 관할의 합격선을 넘는다는 주장, 선택한 응시자 집단 안의 상대 순위, 실제 변호사 실무 능력을 서로 다른 타당성 층으로 분리했다.
+- 약 90백분위가 NCBE의 공식 전국 통계가 아님을 밝히고, 후속 재평가의 7월 전체 약 68·첫 응시자 약 62·합격자 약 45–48백분위를 비교 모집단 $G$의 변화로 설명했다. 원 model 응답과 scaled score가 고정돼도 $F_G$가 달라지면 백분위가 달라진다.
+- Katz 등의 합격·채점 연구와 Martínez의 비교 모집단·essay 채점 재평가를 분석 근거로 추가했다. 공식 096 raw 두 파일을 참조하고 evidence는 16개에서 18개로 늘렸으며 [[index]]·[[overview]]의 설명을 동기화했다.
+
+검증 경계:
+
+- 비교 모집단을 바꾸는 일은 모델 답안을 개선하거나 악화시키지 않는다. 합격선 통과가 유지되어도 특정 백분위와 현업 전문 역량은 별도의 주장이며, 후자에는 사건 처리·최신 법률 조사·의뢰인 상호작용·책임 있는 판단을 재는 현장 평가가 필요하다.
+- NCBE가 공식 UBE percentile을 제공하지 않고 MEE·MPT의 rubric·grader training·blind calibration이 충분히 공개되지 않았으므로, 보고된 백분위를 전국 표준이나 변호사 실무 성과 분포로 확대하지 않는다.
+- 전체 검증은 96개 회귀 테스트와 320개 Markdown strict lint를 통과해 378개 evidence와 192개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 618개 HTML을 만들고 7,111개 wiki link를 모두 해소했다.
+
 ## 관련 항목
 
 - [[index]]
