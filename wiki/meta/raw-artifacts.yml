@@ -1764,3 +1764,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/long-context-models-processing-million-token-sequences-language-ai
     sha256: 01f823e0d2e066fef0086af1234c33e07052e4da550c14afc58db3534939d9cd
+  - path: "raw/099_Structured Outputs Reliable Schema-Validated Data Extraction from Language Models.ko.md"
+    role: translation
+    order_prefix: "099"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/structured-outputs-schema-validated-data-extraction-language-models
+    sha256: e37b2abbf9b0e5dd9d6742b23813cc79043f88ab8157389b33489fd1700f37d2
+  - path: "raw/099_Structured Outputs Reliable Schema-Validated Data Extraction from Language Models.commentary.ko.md"
+    role: commentary
+    order_prefix: "099"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/structured-outputs-schema-validated-data-extraction-language-models
+    sha256: 2146c23c6a4b11aeba4853b0e328da6c3d02abb013ba69b24439daa2307adb91

@@ -128,6 +128,7 @@ related:
 - [[096_GPT-4의 멀티모달 공개·시험 성능·안전 경계]] — 2023년 3월 text 공개와 9월 GPT-4V rollout, 비공개 architecture, 시험 protocol·UBE percentile 모집단·오염·안전 경계를 분리하고 인간 전문가·AGI·범용 안전 과장을 교정한 소스 (근거 8개)
 - [[097_Mixtral의 생산 배포 효율 주장과 증거 경계]] — 2023년 12월 공개·46.7B total/12.9B active·고정 top-2를 복원하고 부하 균형·주제별 expert·공개 가중치·benchmark·production-ready 주장의 증거 경계를 검증한 소스 (근거 6개)
 - [[098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계]] — LWM과 Gemini 1.5의 서로 다른 공개·구현 경로를 복원하고 명목 입력 창·계산 가능성·single/multi-needle·복합 추론·제품 가용성의 경계를 검증한 소스 (근거 10개)
+- [[099_구조화 출력의 스키마 준수와 의미 정확성 경계]] — 2023년 함수 호출·JSON mode와 2024년 strict schema를 분리하고 구문·스키마·의미·권한 보장 및 provider·framework 경계를 검증한 소스 (근거 4개)
 - [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]] — 공식 103장의 MoE 회고를 GLaM·Mixtral의 total·active parameter와 계산·메모리·통신 장부로 검증한 소스 (근거 7개)
 
 ## 개체
@@ -175,6 +176,7 @@ related:
 - [[Transformer]] — multi-head self-attention과 위치 표현으로 순환 없이 시퀀스 위치를 상호작용시키며 operator·algorithm·kernel의 비용 층위를 구분해야 하는 신경망 구조 (근거 10개)
 - [[Transformer-XL]] — stop-gradient segment memory와 상대 위치 attention으로 고정 길이 경계를 넘어 과거 표현을 재사용하되 dense attention 비용은 남기는 causal Transformer (근거 3개)
 - [[긴 문맥 언어 모델]] — 최대 입력 길이와 학습·연결·계산·정보 접근·추론 품질을 분리해 과제별 유효 문맥 길이를 평가하는 모델·시스템 개념 (근거 8개)
+- [[구조화 출력]] — 자유 형식 text·valid JSON·strict schema를 구분하고 constrained decoding 뒤에도 의미·사실·권한 검증이 남는 출력 계약 개념 (근거 4개)
 - [[교차 인코더 재순위화]] — 질의와 후보를 공동 부호화해 세밀한 관련성 점수를 내되 first-stage 후보와 후보별 추론 비용에 제약받는 재순위화 방식 (근거 3개)
 - [[인간 피드백 강화학습]] — 인간의 행동·응답 비교로 보상 신호를 학습하고 정책을 선호에 맞춰 최적화하는 방법 계열 (근거 6개)
 - [[헌법적 AI]] — 자연어 원칙을 SL-CAI의 비평·수정 자료와 RL-CAI의 AI 유해성 선호로 변환하되 사람 유용성 피드백·가치 선택·대리 보상 한계를 남기는 정렬 방법 계열 (근거 3개)

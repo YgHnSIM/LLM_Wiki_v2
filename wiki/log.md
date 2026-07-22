@@ -3934,6 +3934,30 @@ raw 등록 해시:
 - `source:ready -- 098`은 96개 회귀 테스트와 323개 Markdown strict lint를 통과해 386개 evidence와 196개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 625개 HTML을 만들고 7,203개 wiki link를 모두 해소했다.
 - 다음 순차 입력은 공식 099 `Structured Outputs Reliable Schema-Validated Data Extraction from Language Models`다.
 
+## [2026-07-22] ingest | 구조화 출력의 스키마 준수와 의미 정확성 경계
+
+변경 내용:
+
+- 공식 099 `Structured Outputs Reliable Schema-Validated Data Extraction from Language Models`를 H1·H2·H3 `1/6/0`, 48개 본문 블록과 40개 Markdown link의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 번역은 첫 제목 바로 뒤에 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않는다.
+- 번역 전수 감사에서 schema-validated 수식 관계, operations chaining, content moderation, platform consistency, multimodal 용어와 사실 오류 표현을 교정했다. 원문의 JSON·XML 일반화, provider 표준화와 production-ready 평가는 번역에서 임의로 바꾸지 않고 해설·공개 소스의 검증 정정에서 분리했다.
+- 검증된 번역·해설을 신규 raw 두 파일로 등록했다. 번역 SHA-256은 `e37b2abbf9b0e5dd9d6742b23813cc79043f88ab8157389b33489fd1700f37d2`, 해설은 `2146c23c6a4b11aeba4853b0e328da6c3d02abb013ba69b24439daa2307adb91`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[099_구조화 출력의 스키마 준수와 의미 정확성 경계]]와 [[구조화 출력]]을 만들었다. Prompt로 JSON 요청·JSON mode·strict schema를 구분하고 구문·schema·의미·권한·실행의 직렬 관문, JSON Schema→CFG 전처리와 동적 token masking을 정리했다.
+- [[092_함수 호출과 도구 사용의 모델-실행 경계]]와 [[함수 호출과 도구 사용]]을 보강했다. 일반 `json_schema` 응답은 추출·분류 data이고 function call object는 외부 action 후보이므로 후자에 authorization·side effect·execution 관문이 추가됨을 연결했다.
+- 별도 분석은 만들지 않았다. 기존 [[자동 평가 지표는 무엇을 보상하는가]]가 JSON·schema·의미·권한·실행의 직렬 관문과 서로 다른 평가 분모를 이미 충분히 합성하므로, 이번 자료의 재사용 가능한 새 설명은 source와 concept 보강으로 보존했다.
+- OpenAI의 2023년 function calling·JSON mode와 2024년 Structured Outputs 근거를 재사용하고 LangChain의 2024년 structured-output interface RFC 한 건을 등록했다. [[index]]와 [[overview]]를 source 99개·concept 172개·비메타 322개, 공식 범위 001–046·048–099·103과 다음 공식 100 Hybrid Retrieval 기준으로 갱신했다.
+- 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 194개, raw Markdown 199개, 위키 Markdown 325개에서 UI 단락 0개를 확인했다. 번역 정규화 검사는 표준 `원본 출처:` 97개와 변경 필요 0개를 확인했다.
+
+검증 정정과 남은 한계:
+
+- 원 웹글은 2025년 9월 17일 공개된 2024년 회고다. 공식 chronology는 2023년 6월 function calling, 11월 JSON mode, 2024년 8월 `strict: true`와 `json_schema`이며 JSON mode의 valid JSON과 exact schema를 합치지 않는다.
+- OpenAI가 공개한 구현은 JSON Schema를 CFG로 전처리·cache하고 각 생성 단계에서 문법상 무효한 token의 확률을 0으로 masking한다. 유효 token을 단순히 선호한다는 설명과 Pydantic 자체가 token-level decoding을 강제한다는 설명을 유지하지 않는다.
+- Complex-schema 내부 평가의 100%는 schema conformity다. 같은 발표가 model training만으로 93%, constrained decoding 결합으로 100%를 설명했지만 올바른 field value·추출 완전성·권한·외부 실행을 보장하지 않는다.
+- Safety refusal·token 중단은 정상 schema object와 다른 경로이고 2024년 발표 당시 parallel function calls와 strict schema에는 제한이 있었다. JSON Schema 전체·XML DTD·모든 provider에 같은 보장을 확대하지 않는다.
+- 구조화 출력은 취약한 ad-hoc natural-language parsing을 줄이지만 JSON decoding·schema validation·semantic rule·error handling을 없애지 않는다. 새 schema의 첫 요청 전처리 latency는 확인되지만 token·API cost가 항상 증가한다는 원문 일반화는 유지하지 않는다.
+- 원문에 정보가 없는데 모든 field를 채우게 하면 schema-valid hallucination이 생길 수 있다. `unknown`·`null`·빈 배열·근거 span 같은 결손 표현과 field precision·recall을 schema pass rate와 별도로 설계한다.
+- `source:ready -- 099`는 96개 회귀 테스트와 325개 Markdown strict lint를 통과해 387개 evidence와 198개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 629개 HTML을 만들고 7,264개 wiki link를 모두 해소했다.
+- 다음 순차 입력은 공식 100 `Hybrid Retrieval Combining Sparse and Dense Methods for Effective Information Retrieval`이다.
+
 ## 관련 항목
 
 - [[index]]

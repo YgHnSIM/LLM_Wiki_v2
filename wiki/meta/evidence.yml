@@ -2718,6 +2718,14 @@ sources:
     kind: official-blog
     url: https://openai.com/index/introducing-structured-outputs-in-the-api/
     language: en
+  langchain-2024-structured-output-rfc:
+    title: 'RFC: LLM Structured Output Interface'
+    authors: [LangChain]
+    published: 2024
+    source_type: primary-release
+    kind: software-rfc
+    url: https://github.com/langchain-ai/langchain/discussions/18154
+    language: en
   openai-2022-introducing-chatgpt:
     title: Introducing ChatGPT
     authors: [OpenAI]
