@@ -26,13 +26,13 @@ related:
 
 공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism (2015)**이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-21 현재 원문을 제공하지 않는다.
 
-따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 107개는 공식 001–046·048–108을 다룬다. [[108_V-JEPA 2의 잠재 예측과 로봇 계획 실험 경계]]까지 공개했으며, 다음 순차 입력은 공식 109 `AI Co-Scientist Systems Autonomous Research and Scientific Discovery`다.
+따라서 공식 047은 다른 문서로 채우지 않고 `wiki/meta/source-gaps.yml`에 upstream 원문 결손으로 남긴다. 외부 원문·번역·raw 파일명, raw 레지스트리 `order_prefix`, 공개 파일명·`source.NNN`·링크·URL은 모두 같은 공식 번호를 쓴다. 로컬 원문 목록은 001–046·048–110이며 047 파일은 없다. 현재 source 108개는 공식 001–046·048–109를 다룬다. [[109_AI 공동 과학자의 가설 생성과 자율 연구 경계]]까지 공개했으며, 다음 순차 입력은 공식 110 `Specialized LLMs for Low-Resource Languages`다.
 
 숫자 badge는 정규 source의 공식 장 번호에만 쓴다. 비번호 reference가 추가되면 번호 source 뒤에서 `참고`로 표시하며, 목록 위치를 `001` 같은 장 번호로 바꾸지 않는다. 같은 장의 검증 노트·번역·해설은 서로 다른 장이 아니라 하나의 source 묶음에 속한다.
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 107개, reference 0개, concept 178개, entity 29개, analysis 22개를 합친 비메타 문서 336개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 108개, reference 0개, concept 178개, entity 29개, analysis 22개를 합친 비메타 문서 337개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 기존 문서 전면 단계화가 완료됐고 신규 source에도 같은 구조를 처음부터 적용한다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -45,7 +45,7 @@ related:
 | 한 언어의 지식은 다른 언어로 어떻게 옮겨지나 | [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[062_XLM과 교차 언어 사전 학습]] → [[XLM]] | [[같은 병렬 문장은 무엇을 학습시키는가]] |
 | 검색과 외부 지식은 어떻게 연결되나 | [[010_벡터 공간 모델과 TF-IDF]] | [[024_BM25와 확률적 정보 검색]] → [[052_신경 정보 검색과 의미 대응]] → [[065_BERT 기반 passage 재순위화]] → [[068_DPR과 검색 증강 생성]] → [[073_ColBERT와 다중 벡터 검색]] → [[100_희소·밀집 검색의 결합과 다단계 순위화]] → [[하이브리드 검색]] | [[검색은 근거를 찾고 독해는 답을 찾는다]] |
 | 자연어 명세는 어떻게 실행 코드가 되나 | [[067_GPT-3와 문맥 내 학습]] | [[071_Codex와 HumanEval 기반 코드 생성 평가]] → [[OpenAI Codex (2021)]] | [[자동 평가 지표는 무엇을 보상하는가]] |
-| 모델의 제안은 언제 실제 행동이 되나 | [[080_사고 연쇄 프롬프팅과 추론 행동 유도]] | [[092_함수 호출과 도구 사용의 모델-실행 경계]] → [[함수 호출과 도구 사용]] → [[104_LLM 에이전트의 추론-행동 루프와 자율성 경계]] → [[LLM 에이전트]] | [[자동 평가 지표는 무엇을 보상하는가]] |
+| 모델의 제안은 언제 실제 행동이 되나 | [[080_사고 연쇄 프롬프팅과 추론 행동 유도]] | [[092_함수 호출과 도구 사용의 모델-실행 경계]] → [[함수 호출과 도구 사용]] → [[104_LLM 에이전트의 추론-행동 루프와 자율성 경계]] → [[LLM 에이전트]] → [[109_AI 공동 과학자의 가설 생성과 자율 연구 경계]] | [[자동 평가 지표는 무엇을 보상하는가]] |
 | 모델의 JSON은 언제 신뢰할 수 있나 | [[파싱]] | [[092_함수 호출과 도구 사용의 모델-실행 경계]] → [[099_구조화 출력의 스키마 준수와 의미 정확성 경계]] → [[구조화 출력]] → [[문맥자유문법]] | [[자동 평가 지표는 무엇을 보상하는가]] |
 | 자연어 지시는 언제 가중치에 들어가나 | [[063_T5와 Text-to-Text 통합 프레임워크]] | [[067_GPT-3와 문맥 내 학습]] → [[072_지시 미세조정과 FLAN의 제로샷 일반화]] → [[077_InstructGPT와 인간 선호 정렬]] → [[인간 피드백 강화학습]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
 | 모델 지식은 어떻게 최신 상태를 유지하나 | [[057_ELMo와 ULMFiT의 두 전이 학습 경로]] | [[102_지속 사전 학습의 연표와 지식 갱신 경계]] → [[지속 사전 학습]] → [[068_DPR과 검색 증강 생성]] → [[검색 증강 생성]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
@@ -67,7 +67,7 @@ related:
 
 전체 페이지를 유형별로 찾으려면 [[index]]를, 최근 변경과 남은 제한을 확인하려면 [[log]]를 사용한다.
 
-## 107개 소스의 범위
+## 108개 소스의 범위
 
 - [[001_섀넌의 N-gram 모델]]은 1948년 확률적 통신원과 문자·단어 연속 근사를 후대 [[N-gram 모델]]과 연결하되, smoothing과 현대 평가 관행은 후대 발전으로 구분한다.
 - [[002_튜링 테스트]]는 1950년의 성별 [[모방 게임]]과 오늘날 표준화된 인간 대 기계 텍스트 시험의 차이를 설명한다.
@@ -176,6 +176,7 @@ related:
 - [[106_DeepSeek-R1의 강화학습 파이프라인과 증류 경계]]는 2025년 9월 웹글의 회고를 2025년 1월 R1 v1 공개와 구분하고, 671B total·37B active의 V3-Base MoE, R1-Zero의 규칙 보상 GRPO, 정식 R1의 두 SFT·두 RL 단계와 여섯 dense 증류본을 분리한다. [[그룹 상대 정책 최적화]]는 critic 절약과 group rollout 비용, token-level clipped update·직접 KL, completion reward의 credit assignment와 verifier 경계를 복원한다.
 - [[107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]]는 원 웹글의 2025년 출시 연표를 2024년 5월 13일 공식 발표로 교정하고, text·vision·audio를 한 신경망에서 end-to-end로 학습했다는 공표와 비공개 tokenizer·encoder·attention·memory 구조를 분리한다. Audio 응답 232ms 최저·320ms 평균의 측정 경계, 출시 당일 text·image 입력→text 출력과 후속 voice·video·image rollout, TTS·transcript 중심 안전 평가와 음향 위험을 별도 장부로 둔다.
 - [[108_V-JEPA 2의 잠재 예측과 로봇 계획 실험 경계]]는 공식 공개일을 2025년 6월 11일로 교정하고, action-free 마스크 잠재 L1 예측과 DROID 62시간 미만 자료로 후학습한 300M V-JEPA 2-AC를 분리한다. Frozen probe·Llama 3.1 정렬 VidQA·goal-image CEM planning의 서로 다른 평가 경로, 두 Franka 연구실의 zero-shot 범위와 16초/action·camera·subgoal 한계를 보존하며 자율주행·AR 배포 과장을 교정한다.
+- [[109_AI 공동 과학자의 가설 생성과 자율 연구 경계]]는 Google의 2025년 scientist-in-the-loop 가설 탐색을 Boiko의 장비 연동 화학 Coscientist 및 Sakana의 계산형 논문 생성과 분리한다. Gemini 2.0의 Supervisor·여섯 전문 에이전트·Elo tournament, 전문가 후보 선택과 사람이 수행한 AML·간 오가노이드 실험, AI보다 먼저 끝난 cf-PICI wet-lab을 별도 trace로 두며 독립 연구자·자동 투고·저널 수락·임상 돌파 주장을 교정한다.
 
 ## 현재 핵심 주제
 
@@ -465,7 +466,9 @@ related:
 
 ## 현재 상태
 
-소스 107개, 참고 자료 0개, 개념 178개, 개체 29개, 분석 22개와 메타 문서 3개, 총 339개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 307개는 `verified`, 해석적 문서 29개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 429개 외부 근거와 214개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 108개, 참고 자료 0개, 개념 178개, 개체 29개, 분석 22개와 메타 문서 3개, 총 340개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 308개는 `verified`, 해석적 문서 29개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 436개 외부 근거와 216개 불변 raw artifact가 레지스트리에 등록돼 있다.
+
+[[109_AI 공동 과학자의 가설 생성과 자율 연구 경계]]는 Google AI co-scientist가 과학자 지정 목표 안에서 가설·연구 제안·protocol을 생성·비판·순위화한 범위와 인간의 후보 선택·wet-lab을 분리한다. [[LLM 에이전트]]는 Meta-review의 context feedback을 weight learning과 구분하고, [[자동 평가 지표는 무엇을 보상하는가]]는 탐색을 지휘한 Elo·전문가 판단·선택된 후보의 물리 실험을 서로 다른 분모와 oracle을 가진 검증층으로 기록한다.
 
 [[107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]]는 2024년 5월의 model announcement, launch surface와 후속 제품 rollout을 분리한다. 공식 자료가 지지하는 것은 한 신경망의 end-to-end multimodal training 공표이지 통합 tokenizer·특수 attention·별도 encoder 제거·내부 memory module의 공개 명세가 아니다. [[멀티모달 대규모 언어 모델]]과 [[105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]]는 input·output·scoring modality를 분리하고, [[자동 평가 지표는 무엇을 보상하는가]]는 TTS와 transcriber도 평가 oracle을 구성한다는 비교축을 추가한다.
 

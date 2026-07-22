@@ -1926,3 +1926,21 @@ artifacts:
     original_in_repository: false
     source_url: https://mbrenndoerfer.com/writing/v-jepa-2-vision-based-world-modeling-embodied-ai
     sha256: 660085a7a4c755cd19fb057c38921029d3ce6509825a0137c2c118bc1974fee8
+  - path: "raw/109_AI Co-Scientist Systems Autonomous Research and Scientific Discovery.ko.md"
+    role: translation
+    order_prefix: "109"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/ai-co-scientist-systems-autonomous-research-scientific-discovery
+    sha256: 8341b63394a53a0a48cb955b468c80875dc1d7b2dc2c964b1369b224a8f4d310
+  - path: "raw/109_AI Co-Scientist Systems Autonomous Research and Scientific Discovery.commentary.ko.md"
+    role: commentary
+    order_prefix: "109"
+    language: ko
+    source_type: derivative
+    provenance: external-original-used
+    original_in_repository: false
+    source_url: https://mbrenndoerfer.com/writing/ai-co-scientist-systems-autonomous-research-scientific-discovery
+    sha256: 615238e4a47b1803074513e293bdb64c8923ef9aaf5ab7df2ed12b3115a532bf

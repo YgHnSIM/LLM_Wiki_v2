@@ -4155,6 +4155,29 @@ raw 등록 해시:
 - `source:ready -- 108`은 96개 회귀 테스트와 339개 Markdown strict lint를 통과해 429개 evidence와 214개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 659개 HTML을 만들고 7,721개 wiki link를 모두 해소했으며, 43,655개 local reference와 검색 항목 338개를 검사했다.
 - 다음 순차 입력은 공식 109 `AI Co-Scientist Systems Autonomous Research and Scientific Discovery`다.
 
+## [2026-07-22] ingest | AI 공동 과학자의 가설 생성과 자율 연구 경계
+
+변경 내용:
+
+- 공식 109 `AI Co-Scientist Systems Autonomous Research and Scientific Discovery`를 원문과 같은 H1 1개·H2 6개, 42개 본문 단락과 Markdown link 8개의 대상·순서를 보존해 새로 번역하고 12절 해설을 작성했다. 첫 제목 바로 뒤에 표준 `원본 출처:`를 정확히 한 번 기록하고 읽기 수준·툴팁 UI 문구를 포함하지 않았다.
+- 검증된 번역·해설을 신규 raw 두 파일로 등록했다. 번역 SHA-256은 `8341b63394a53a0a48cb955b468c80875dc1d7b2dc2c964b1369b224a8f4d310`, 해설은 `615238e4a47b1803074513e293bdb64c8923ef9aaf5ab7df2ed12b3115a532bf`이며 기존 raw artifact는 다시 쓰지 않았다.
+- [[109_AI 공동 과학자의 가설 생성과 자율 연구 경계]]를 만들었다. Google의 2025년 AI co-scientist를 과학자가 목표·제약을 정하고 가설·연구 제안·protocol을 생성·비판·Elo 순위화하는 scientist-in-the-loop system으로 복원하고, Boiko의 장비 연동 화학 Coscientist와 Sakana의 계산형 ML 원고 생성·인간 제출을 분리했다.
+- [[LLM 에이전트]]를 보강했다. Supervisor와 여섯 전문 agent의 context feedback을 weight learning과 구분하고, `가설 tournament→전문가 선택→인간 wet-lab`에서 model proposal·decision gate·physical executor를 별도 주체와 trace로 기록했다.
+- [[자동 평가 지표는 무엇을 보상하는가]]를 보강했다. 탐색을 지휘한 내부 Elo를 같은 탐색의 향상 근거로 다시 쓰는 순환성을 명시하고, GPQA 정답·작은 전문가 표본·사람이 수행한 선택적 wet-lab을 서로 다른 분모와 oracle을 가진 검증층으로 나눴다. 기존 분석이 새 질문을 수용하므로 별도 분석 문서는 만들지 않았다.
+- 2025년 v1·Google 발표, Boiko Coscientist, Sakana AI Scientist v1·v2와 공식 심사 경과, 2026년 Nature 후속판의 1차 근거 일곱 건을 등록했다. [[index]]와 [[overview]]를 source 108개·concept 178개·entity 29개·analysis 22개·비메타 337개·전체 340개, 공식 범위 001–046·048–109와 다음 공식 110 Specialized LLMs for Low-Resource Languages 기준으로 갱신했다.
+- 읽기 수준 전수 검사는 외부 원문 109개, 번역·해설 212개, raw Markdown 217개, 위키 Markdown 340개에서 UI 단락 0개를 확인했다. 번역 정규화 검사는 번역 106개와 표준 `원본 출처:` 106개, 변경 필요 0개를 확인했다. Raw 레지스트리에는 번역본이 없는 legacy prefix 007을 포함해 translation prefix 107개가 등록돼 있다.
+
+검증 정정과 남은 한계:
+
+- 원 웹글은 2025년 9월 3일 공개된 회고다. Google 공식 발표는 2025년 2월 19일, *Towards an AI co-scientist* v1은 2월 26일이며 2026년 Nature 확대판과 arXiv v2의 제목·저자·실험 범위를 2025년 사건에 소급하지 않는다.
+- Google 2025 시스템의 핵심 산출물은 과학자가 정한 목표 아래의 가설·연구 제안·실험 protocol이다. Wet-lab 장비의 자율 폐루프 제어와 전체 논문 자동 작성·투고는 보고되지 않았으며, 후자는 별도 Sakana 계열의 계산형 ML 연구다.
+- Boiko의 Coscientist는 Opentrons·Emerald Cloud Lab API를 사용한 물리 화학 실험 계열이지만 Nature 원고는 인간 저자들이 작성했다. Sakana v2에서도 인간이 생성물 중 3편을 골라 워크숍에 제출했고, 한 편의 6·7·6점은 수락선 위였으나 사전 계획대로 철회·자동 desk reject되어 meta-review·출판이 없었다. 저널 수락 사례가 아니다.
+- Elo는 후보 쌍을 평가하는 내부 지표이면서 후속 탐색·계산 배분을 지휘했다. GPQA top-1 78.4%, 15개 목표 중 11개의 전문가 평가와 세 생의학 사례는 서로 다른 검증층이며, 내부 Elo 상승을 독립 과학 타당성이나 인간 연구와 동등한 품질로 바꾸지 않는다.
+- AML에서는 KIRA6가 세 세포주에서 13·517·817 nM IC50을 보인 초기 in-vitro 결과였고, 간 섬유화는 전문가가 고른 3개 중 2개 표적 관련 약물의 인간 오가노이드 활성이다. Cf-PICI는 AI 실행 전에 인간 팀이 이미 얻은 비공개 wet-lab 결론을 이틀 안에 재구성한 사례다. 임상 효능·자율 실험·AI가 먼저 한 발견으로 일반화하지 않는다.
+- 1,200개 적대 목표 전부 거부 결과는 40개 주제의 미공개 예비 benchmark다. 공개 문헌·음성 결과 결손, LLM 사실 오류, 작은 전문가·실험 표본, multimodal·tool·실험실 폐루프 부재와 선택 편향을 남은 한계로 기록한다.
+- `source:ready -- 109`는 96개 회귀 테스트와 340개 Markdown strict lint를 통과해 436개 evidence와 216개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 662개 HTML을 만들고 7,750개 wiki link를 모두 해소했으며, 43,871개 local reference와 검색 항목 339개를 검사했다.
+- 다음 순차 입력은 공식 110 `Specialized LLMs for Low-Resource Languages`다.
+
 ## 관련 항목
 
 - [[index]]

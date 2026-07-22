@@ -22,6 +22,8 @@ verification: verified
 artifacts:
   - 'raw/104_Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use.ko.md'
   - 'raw/104_Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use.commentary.ko.md'
+  - 'raw/109_AI Co-Scientist Systems Autonomous Research and Scientific Discovery.ko.md'
+  - 'raw/109_AI Co-Scientist Systems Autonomous Research and Scientific Discovery.commentary.ko.md'
 evidence:
   - source_id: wei-et-al-2022-chain-of-thought
     locator: '초록과 §§1–4, Figures 1–6의 intermediate reasoning text·few-shot prompting과 과제별 성능 범위'
@@ -53,8 +55,12 @@ evidence:
   - source_id: ruan-et-al-2024-toolemu
     locator: '초록과 §§3–5의 LM-emulated tool sandbox, 고위험 case와 helpfulness·safety evaluator'
     relation: supports
+  - source_id: gottweis-et-al-2025-ai-co-scientist
+    locator: 'arXiv:2502.18864v1의 §§1·3.1–3.5·4와 Figure 2: scientist-in-the-loop 범위, Supervisor·전문 에이전트·context feedback, 전문가 후보 선택과 인간 wet-lab 실행 경계'
+    relation: supplements
 related:
   - source.104
+  - source.109
   - source.092
   - source.080
   - source.071
@@ -207,6 +213,23 @@ Generative Agents는 observation memory를 reflection·planning에 재사용했�
 
 첫 세 항목은 inference loop 안에서 fixed model을 사용할 수 있다. “실패 뒤 다른 행동을 했다”는 관찰만으로 네 번째가 일어났다고 결론 내리지 않는다.
 
+### 과학 에이전트에서도 제안·선택·실행 주체를 다시 나눈다
+
+[[109_AI 공동 과학자의 가설 생성과 자율 연구 경계]]의 Google AI co-scientist는 과학자가 정한 목표 안에서 Supervisor가 Generation·Reflection·Ranking·Proximity·Evolution·Meta-review 에이전트를 비동기 작업으로 배치하고, 가설을 생성·비판·Elo 순위화·개선했다. Meta-review가 반복 피드백을 다음 cycle의 prompt 문맥에 넣는 것은 **context feedback**이지 model weight를 갱신하는 optimizer-based learning이 아니다.
+
+보고된 실행 경계는 다음과 같다.
+
+$$
+\text{과학자의 목표·제약}
+\rightarrow \text{agent 가설 tournament}
+\rightarrow \text{실험 protocol 제안}
+\rightarrow \text{전문가 후보 선택}
+\rightarrow \text{인간 연구자의 wet-lab}
+\rightarrow \text{결과 검증}.
+$$
+
+AML 세포주와 간 오가노이드 실험은 협력 연구자가 수행했고, cf-PICI의 wet-lab 발견은 AI가 질문을 받기 전에 이미 끝나 있었다. 따라서 protocol 생성은 action proposal, 전문가의 승인·선택은 decision gate, 장비에서 이뤄진 물리 실험과 관찰은 별도 executor·trace로 기록해야 한다. `scientist-in-the-loop`라는 이름만으로 안전성과 과학적 타당성이 생기는 것도 아니다. 어느 단계에서 어떤 전문가가 무엇을 승인하고 검증했는지를 밝혀야 한다.
+
 ## 3단계 — 기술과 근거
 
 ### 선행 연구가 보여 준 서로 다른 조합
@@ -304,12 +327,13 @@ LLM agent 연구에는 capability와 safety가 빠르게 변하는 model·framew
 
 ### 다음 문서
 
-- [[104_LLM 에이전트의 추론-행동 루프와 자율성 경계]] — 2024년 기원설과 자율성·learning·응용 성과를 2022–2024년 연구·benchmark로 검증한다.
+- [[109_AI 공동 과학자의 가설 생성과 자율 연구 경계]] — 가설 tournament, 전문가 선택과 인간 wet-lab을 나눠 과학 agent의 실제 위임 범위를 살핀다.
 - [[자동 평가 지표는 무엇을 보상하는가]] — 조건부 component와 전체 요청 분모, 비용·side effect가 model 선택 유인에 미치는 영향을 비교한다.
 
 ## 출처
 
 - [[104_LLM 에이전트의 추론-행동 루프와 자율성 경계]]
+- [[109_AI 공동 과학자의 가설 생성과 자율 연구 경계]]
 - Jason Wei 외, [Chain-of-Thought Prompting Elicits Reasoning in Large Language Models](https://papers.neurips.cc/paper_files/paper/2022/hash/9d5609613524ecf4f15af0f7b31abca4-Abstract-Conference.html), NeurIPS 2022, §§1–4.
 - Shunyu Yao 외, [ReAct: Synergizing Reasoning and Acting in Language Models](https://openreview.net/forum?id=WE_vluYUL-X), ICLR 2023, §§1–4와 Figure 1.
 - Timo Schick 외, [Toolformer: Language Models Can Teach Themselves to Use Tools](https://proceedings.neurips.cc/paper_files/paper/2023/hash/d842425e4bf79ba039352da0f658a906-Abstract-Conference.html), NeurIPS 2023, §§1–3.
@@ -320,11 +344,14 @@ LLM agent 연구에는 capability와 safety가 빠르게 변하는 model·framew
 - Carlos E. Jimenez 외, [SWE-bench: Can Language Models Resolve Real-World GitHub Issues?](https://proceedings.iclr.cc/paper_files/paper/2024/hash/edac78c3e300629acfe6cbe9ca88fb84-Abstract-Conference.html), ICLR 2024, §§2–5.
 - Tianbao Xie 외, [OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments](https://papers.nips.cc/paper_files/paper/2024/hash/5d413e48f84dc61244b6be550f1cd8f5-Abstract-Datasets_and_Benchmarks_Track.html), NeurIPS 2024, §§3–5.
 - Yangjun Ruan 외, [ToolEmu: Identifying the Risks of LM Agents with an LM-Emulated Sandbox](https://proceedings.iclr.cc/paper_files/paper/2024/hash/7274ed909a312d4d869cc328ad1c5f04-Abstract-Conference.html), ICLR 2024, §§3–5.
+- Juraj Gottweis 외, [*Towards an AI co-scientist*](https://arxiv.org/pdf/2502.18864v1), arXiv:2502.18864v1, 2025, §§1·3.1–3.5·4와 Figure 2.
 - 프로젝트 보존 자료: `raw/104_Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use.ko.md`, `raw/104_Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use.commentary.ko.md`.
+- 프로젝트 보존 자료: `raw/109_AI Co-Scientist Systems Autonomous Research and Scientific Discovery.ko.md`, `raw/109_AI Co-Scientist Systems Autonomous Research and Scientific Discovery.commentary.ko.md`.
 
 ## 관련 항목
 
 - [[104_LLM 에이전트의 추론-행동 루프와 자율성 경계]]
+- [[109_AI 공동 과학자의 가설 생성과 자율 연구 경계]]
 - [[092_함수 호출과 도구 사용의 모델-실행 경계]]
 - [[함수 호출과 도구 사용]]
 - [[080_사고 연쇄 프롬프팅과 추론 행동 유도]]

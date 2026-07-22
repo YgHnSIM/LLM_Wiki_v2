@@ -138,6 +138,7 @@ related:
 - [[106_DeepSeek-R1의 강화학습 파이프라인과 증류 경계]] — V3-Base의 671B/37B MoE와 R1-Zero·정식 R1·여섯 dense 증류본을 분리하고 GRPO·보상·다단계 후훈련·평가·공개 범위를 검증한 소스 (근거 5개)
 - [[107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]] — 2024년 공개일, 단일 신경망 end-to-end 공표와 비공개 내부 구조, audio 지연·평가, 출시 기능과 후속 voice·video·image rollout의 경계를 검증한 소스 (근거 6개)
 - [[108_V-JEPA 2의 잠재 예측과 로봇 계획 실험 경계]] — action-free 마스크 잠재 예측, 별도 V-JEPA 2-AC 행동 후학습·image-goal MPC와 LLM 정렬을 분리하고 두 연구실 로봇 실험·평가·응용 주장의 경계를 검증한 소스 (근거 4개)
+- [[109_AI 공동 과학자의 가설 생성과 자율 연구 경계]] — Google의 scientist-in-the-loop 가설 탐색을 Boiko의 장비 연동 Coscientist와 Sakana의 계산형 원고 생성에서 분리하고, Elo·전문가 선택·인간 wet-lab·출판 주장의 경계를 검증한 소스 (근거 7개)
 
 ## 개체
 
@@ -183,7 +184,7 @@ related:
 - [[저순위 적응]] — 동결 base 옆의 저순위 update를 target module·rank allocation·weight parameterization·basis sharing·scaling·quantization initialization으로 나눠 비교하는 PEFT 방법군 (근거 7개)
 - [[지속 사전 학습]] — 시간·영역 순서의 비표지 corpus에서 LM 목적을 이어 학습하며 새 분포 적응·이전 능력 보존·전이·지식 교정을 함께 평가하는 연구 설정 (근거 10개)
 - [[함수 호출과 도구 사용]] — model의 call proposal, schema·semantic validation, authorization·side effect 실행과 tool-result grounding을 별도 신뢰 경계로 두는 model–runtime protocol (근거 7개)
-- [[LLM 에이전트]] — 목표·상태에서 model이 제안한 행동을 orchestrator·policy·tool·memory·evaluator가 검증·실행·관찰하는 장기 반복 시스템 (근거 10개)
+- [[LLM 에이전트]] — 목표·상태에서 model이 제안한 행동을 orchestrator·policy·tool·memory·evaluator가 검증·실행·관찰하는 장기 반복 시스템 (근거 11개)
 - [[Transformer]] — multi-head self-attention과 위치 표현으로 순환 없이 시퀀스 위치를 상호작용시키며 operator·algorithm·kernel의 비용 층위를 구분해야 하는 신경망 구조 (근거 10개)
 - [[Transformer-XL]] — stop-gradient segment memory와 상대 위치 attention으로 고정 길이 경계를 넘어 과거 표현을 재사용하되 dense attention 비용은 남기는 causal Transformer (근거 3개)
 - [[긴 문맥 언어 모델]] — 최대 입력 길이와 학습·연결·계산·정보 접근·추론 품질을 분리해 과제별 유효 문맥 길이를 평가하는 모델·시스템 개념 (근거 8개)
@@ -366,7 +367,7 @@ related:
 - [[잔차 경로와 정규화는 어디에 놓이는가]] — ResNet post-/pre-activation과 Transformer Post-/Pre-LN을 additive identity path 위의 Jacobian 배치로 비교한 분석 (근거 5개)
 - [[계수 기반과 예측 기반 단어 표현은 얼마나 다른가]] — LSI·NPLM·SGNS·GloVe를 문맥 단위·통계 집계·가중·저랭크 목적·평가 축으로 비교한 분석 (근거 7개)
 - [[구조화된 의미 자원은 무엇을 노드로 삼는가]] — WordNet synset·FrameNet frame·PropBank roleset과 token·Freebase topic이 선택하는 동일성·관계·근거 단위를 비교한 분석 (근거 6개)
-- [[자동 평가 지표는 무엇을 보상하는가]] — 참조 중첩·실행 test·사람·AI 선호 보상에 MMLU 문항 가중·BIG-bench 정규화 task 평균·UBE 점수–백분위 비교 모집단·HELM 병렬 장부·도구 호출 직렬 관문을 함께 놓아 분모·투표권·환율·비교 집단·proxy 최적화의 유인을 분석한 문서 (근거 25개)
+- [[자동 평가 지표는 무엇을 보상하는가]] — 참조 중첩·실행 test·사람·AI 선호 보상에 MMLU 문항 가중·BIG-bench 정규화 task 평균·UBE 점수–백분위 비교 모집단·HELM 병렬 장부·도구 호출 직렬 관문을 함께 놓아 분모·투표권·환율·비교 집단·proxy 최적화의 유인을 분석한 문서 (근거 26개)
 - [[N-gram에서 LLM으로]] — 조건부 예측의 공통점과 n-gram 빈도표·Katz 백오프·신경망 어텐션의 기술적 단절을 정리한 분석 (근거 11개)
 - [[최고 경로와 기대 통계, 백오프]] — Viterbi의 최고 경로, 경로합·EM의 기대 통계, Katz의 미관측 확률 추정이 답하는 서로 다른 질문을 구분한 분석 (근거 8개)
 - [[확률, 마진, 순위 점수]] — 생성·조건부 확률, SVM 결정값, BM25 점수와 DALL·E의 이미지 token 분포·대조 재순위 점수에서 정규화 범위·후보 집합·원점수 해석을 구분한 분석 (근거 8개)
