@@ -4446,6 +4446,27 @@ raw 등록 해시:
 - 벡터·mask·확률 예시는 수식 재현을 위한 편집부 설명용 수치이며, 원 2017년 번역 실험의 활성값·attention map·성능을 재현하지 않는다.
 - 이 경로는 원 Transformer와 공개 후속 자료의 범위만 다룬다. 비공개 현대 모델의 세부 구조를 2017년 논문으로 확정하지 않는다.
 
+## [2026-07-23] content | Transformer-XL 재귀·상대 위치 수식 경로
+
+변경 내용:
+
+- [[Transformer-XL]]과 [[064_Transformer-XL과 세그먼트 수준 재귀]]에 token·hidden state·memory·KV cache와 순전파 문맥·역전파 경계의 차이를 명시했다.
+- $M,L,d$의 역할과 shape, stop-gradient의 순전파 항등·역전파 0 미분, 현재 query와 확장 문맥 key·value의 분리를 $M=L=d=2$ 설명용 계산으로 풀었다.
+- 원 논문의 네 항 상대 위치 점수 $(a)$–$(d)$를 기호·shape·연산 이유와 작은 후보 비교로 설명하고, fixed sinusoid $R$과 학습되는 투영·편향을 구분했다.
+- score 개수 $L(M+L)$와 head 차원을 포함한 dense attention 산술량 $O(L(M+L)d_k)$, state reuse가 줄이는 sliding-window 재계산과 남는 dense score 행렬을 분리했다.
+- 수식 블록을 목록 밖의 하위 제목으로 옮겨 HTML 경계가 깨지던 렌더링 문제를 수정했다.
+
+검증 결과:
+
+- ACL 2019 원 논문 §§3.1–3.3, Tables 1–9와 대조했다.
+- `npm run learning:audit`, `npm run learning:audit:check`, `npm run sync:index`, `npm run verify`로 구조·링크·raw 해시·사이트·회귀 검사를 확인한다.
+- 실제 브라우저에서 두 문서의 콘솔 오류와 KaTeX 수식, 모바일 폭의 수식·표 가로 넘침을 확인한다.
+
+남은 제한:
+
+- 벡터·상대 거리·softmax 수치는 수식 재현을 위한 편집부 설명용 값이며, 원 논문의 hidden activation이나 attention map이 아니다.
+- 논문의 relative positional encoding은 Transformer-XL의 특정 재매개변수화다. 이후 모든 상대 위치 방식이나 현대 KV cache의 일반 정의로 확대하지 않는다.
+
 ## 관련 항목
 
 - [[index]]
