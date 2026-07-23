@@ -49,6 +49,11 @@ related:
   - concept.경사하강법
   - concept.확률변수-확률분포-기대값-분산
   - concept.adam-최적화기
+  - concept.특이값-분해와-저랭크-근사
+  - concept.활성화-함수
+  - concept.계산-복잡도와-비용-모델
+  - concept.표본추출-온도-top-k-top-p
+  - concept.rlhf
   - concept.transformer
   - concept.대규모-언어-모델
   - source.035
@@ -252,6 +257,11 @@ $$
 | gradient→update | [[역전파]], [[경사하강법]] | $\partial J/\partial b_3$를 계산하고 $\eta$를 곱해 한 좌표를 갱신한다. |
 | finite-precision logit | [[수치 안정성과 log-sum-exp]] | 이 toy의 작은 logit에는 보이지 않는 max shift·log-softmax·mask row의 수치 경계를 맡는다. |
 | 실제 batch·optimizer | [[확률변수·확률분포·기대값·분산]], [[Adam 최적화기]] | 평균·분산의 대상과 Adam state를 구분한다. toy는 한 예·한 SGD update만 계산한다. |
+| 저랭크 표현·적응 | [[특이값 분해와 저랭크 근사]] | 행렬 복원에서의 절단 SVD와 task loss로 학습하는 LoRA update를 구분한다. |
+| position-wise 비선형성 | [[활성화 함수]] | affine 층 사이의 ReLU·GELU가 feature를 어떻게 바꾸며 무엇을 보장하지 않는지 맡는다. |
+| 실행 비용 | [[계산 복잡도와 비용 모델]] | 점근 산술량, FLOPs, memory, I/O, 통신과 wall-clock을 한 값으로 합치지 않는다. |
+| 다음 token 선택 | [[표본추출·온도·top-k·top-p]] | softmax 확률에서 temperature·candidate truncation·sampling과 argmax를 구분한다. |
+| 선호 기반 후훈련 | [[인간 피드백 강화학습]] | 비교 라벨·reward model·reference KL·policy optimizer의 서로 다른 역할을 구분한다. |
 
 2003년 Bengio 등은 분산 word feature, 다음 단어 확률을 위한 softmax와 penalized log-likelihood 학습을 함께 제시했다. 2017년 Vaswani 등은 scaled dot-product attention과 residual connection을 Transformer의 sublayer에 배치했다. Rumelhart·Hinton·Williams의 1986년 설명은 합성된 오차 함수에서 가중치 변화율을 계산하는 신경망 학습의 중요한 근거다. 이 문서의 toy 계산은 이 자료들의 실제 차원·실험·훈련 조건을 복제하지 않는다.
 
@@ -313,6 +323,11 @@ $$
 - [[경사하강법]]
 - [[확률변수·확률분포·기대값·분산]]
 - [[Adam 최적화기]]
+- [[특이값 분해와 저랭크 근사]]
+- [[활성화 함수]]
+- [[계산 복잡도와 비용 모델]]
+- [[표본추출·온도·top-k·top-p]]
+- [[인간 피드백 강화학습]]
 - [[Transformer]]
 - [[대규모 언어 모델]]
 - [[035_신경 확률 언어 모형과 분산 단어 표현]]

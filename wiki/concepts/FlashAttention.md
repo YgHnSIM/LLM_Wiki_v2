@@ -45,6 +45,7 @@ related:
   - concept.수치-안정성과-log-sum-exp
   - concept.긴-문맥-언어-모델
   - concept.대규모-언어-모델
+  - concept.계산-복잡도와-비용-모델
   - analysis.훈련-병렬성과-생성-순차성은-다른-축이다
 ---
 # FlashAttention
@@ -118,6 +119,8 @@ Backward에서는 저장한 출력과 정규화 통계를 사용해 필요한 sc
 
 메모리 선형화는 모델 전체를 뜻하지 않는다. Parameter, 다른 layer activation, optimizer state와 autoregressive inference의 KV cache는 별도 장부다. 또한 $M$이 고정되면 HBM 접근 식도 시퀀스 길이에 대해 이차다.
 
+이 표의 산술량·추가 메모리·I/O는 서로 다른 비용 축이다. $O(\cdot)$, FLOPs, memory capacity, bandwidth와 wall-clock을 비교하는 공통 기준은 [[계산 복잡도와 비용 모델]]에서 맡고, 여기서는 FlashAttention kernel의 정확한 경계만 다룬다.
+
 ### 왜 재계산이 빨라질 수 있는가
 
 NeurIPS proceedings 최종본 Figure 2의 A100 forward+backward 예에서 FlashAttention은 표준 경로보다 FLOPs가 66.6에서 75.2 GFLOPs로 늘었다. 그러나 HBM 읽기·쓰기량은 35.3GB에서 4.4GB로 줄고 시간은 35.1ms에서 11.7ms로 짧아졌다. GPU가 산술보다 메모리 대역폭에 막힌 구간에서는 비싼 저장·읽기를 더 싼 재계산으로 바꾸는 편이 유리할 수 있다. ArXiv 개정본의 다른 Figure 2 측정값과 합치지 않는다.
@@ -183,4 +186,5 @@ FlashAttention은 자기회귀 생성의 token-by-token 의존성도 없애지 �
 - [[수치 안정성과 log-sum-exp]]
 - [[긴 문맥 언어 모델]]
 - [[대규모 언어 모델]]
+- [[계산 복잡도와 비용 모델]]
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]]

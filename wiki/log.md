@@ -4692,7 +4692,25 @@ raw 등록 해시:
 
 - 확률·정규화·Adam·softmax 예의 수치는 정의와 구현 경계를 보이는 편집부 계산이며, 특정 학습 run·실제 LLM activation·하드웨어 전체의 수치 오차를 재현하지 않는다.
 - max shift와 online softmax는 overflow·underflow 위험을 줄이지만 모든 finite-precision 오차, invalid mask row, 모델 보정·일반화·사실성 문제를 해결하지 않는다.
-- 다음 advanced-extensions는 계획상 deferred다. 저랭크·활성화·비용·sampling·강화학습 목적 배치는 별도 범위 선택 없이 자동 시작하지 않는다.
+
+## [2026-07-24] content | Advanced LLM math extensions
+
+변경 내용:
+
+- [[특이값 분해와 저랭크 근사]]·[[활성화 함수]]·[[계산 복잡도와 비용 모델]]·[[표본추출·온도·top-k·top-p]]을 새 concept owner로 만들었다. 각각 절단 SVD와 LoRA update, affine 합성과 비선형성, 산술·메모리·I/O·시간의 비용 축, decoding 분포 변형·후보 절단·무작위 표본을 구분한다.
+- [[잠재 의미 분석]]·[[저순위 적응]]·[[다층 퍼셉트론]]·[[Transformer]]·[[FlashAttention]]·[[전문가 혼합]]·[[자기회귀 생성]]·[[대규모 언어 모델]]에는 현재 기호·shape·역할·한계와 owner 링크만 추가했다. [[LLM을 만든 수학]]에는 이 다섯 확장 질문을 toy 계산의 다음 경로로 배치했다.
+- [[인간 피드백 강화학습]]에는 쌍대 선호 보상, 정책 목적과 reference KL을 추가하고, [[그룹 상대 정책 최적화]]에는 reward source·score·old/reference policy·optimizer를 분리하는 경계를 연결했다.
+- Eckart–Young 1936, GELU 2016, nucleus sampling 2020의 1차 근거를 evidence 레지스트리에 등록했다. raw/와 기존 보존 artifact는 변경하지 않았다.
+
+검증 결과:
+
+- $\operatorname{diag}(3,1)$의 rank-1 근사 잔차 제곱은 1, $z=(0,1,2)$의 $T=0.5,1,2$ softmax는 각각 $(0.0159,0.1173,0.8668)$, $(0.0900,0.2447,0.6652)$, $(0.1863,0.3072,0.5065)$임을 재계산했다. 점수 차 0.9의 선호 확률과 손실은 0.710950, 0.341154이고, $n=4,d=2$ dense attention의 두 행렬곱은 64회 곱셈이다.
+- `npm run learning:audit`, `npm run sync:index`, `npm run lint:wiki`, `npm run math:check`와 `BASE_PATH='' npm run verify`를 통과했다. 365 Markdown·458 evidence·220 immutable raw artifact, Node 회귀 122개, 691 HTML·47,159 local reference와 Chromium 회귀 4개를 확인했고 KaTeX error 표지는 0개다.
+
+남은 제한:
+
+- 이 예의 rank·온도·보상·비용 수치는 수식과 경계를 보여 주는 편집부 계산이다. 특정 LLM 학습 run·API decoding 기본값·하드웨어 비용·보편적 인간 선호를 재현하지 않는다.
+- 현재 원장의 25개 수식 계열과 6개 배치는 모두 ready/complete다. 새 확장은 독립 학습 질문과 근거가 확인되고 사용자가 범위를 정한 경우에만 추가한다.
 
 ## 관련 항목
 

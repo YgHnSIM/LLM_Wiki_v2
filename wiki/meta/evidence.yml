@@ -1827,6 +1827,15 @@ sources:
     doi: '10.1002/(SICI)1097-4571(199009)41:6<391::AID-ASI1>3.0.CO;2-9'
     url: https://doi.org/10.1002/(SICI)1097-4571(199009)41:6%3C391::AID-ASI1%3E3.0.CO;2-9
     language: en
+  eckart-young-1936:
+    title: The Approximation of One Matrix by Another of Lower Rank
+    authors: [Carl Eckart, Gale Young]
+    published: 1936
+    source_type: primary
+    kind: journal-article
+    doi: 10.1007/BF02288367
+    url: https://doi.org/10.1007/BF02288367
+    language: en
   landauer-foltz-laham-1998-lsa:
     title: An Introduction to Latent Semantic Analysis
     authors: [Thomas K. Landauer, Peter W. Foltz, Darrell Laham]
@@ -1998,6 +2007,15 @@ sources:
     kind: conference-paper
     doi: 10.1109/ICASSP.2013.6639346
     url: https://www.cs.utoronto.ca/~hinton/absps/georgerectified.pdf
+    language: en
+  hendrycks-gimpel-2016-gelu:
+    title: Gaussian Error Linear Units (GELUs)
+    authors: [Dan Hendrycks, Kevin Gimpel]
+    published: 2016
+    source_type: primary
+    kind: research-paper
+    doi: 10.48550/arXiv.1606.08415
+    url: https://arxiv.org/abs/1606.08415
     language: en
   vrandecic-krotzsch-2014-wikidata:
     title: "Wikidata: A Free Collaborative Knowledgebase"
@@ -3890,4 +3908,12 @@ sources:
     kind: preprint
     doi: 10.48550/arXiv.2503.10497
     url: https://arxiv.org/abs/2503.10497v1
+    language: en
+  holtzman-et-al-2020-neural-text-degeneration:
+    title: The Curious Case of Neural Text Degeneration
+    authors: [Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, Yejin Choi]
+    published: 2020
+    source_type: primary
+    kind: conference-paper
+    url: https://arxiv.org/abs/1904.09751
     language: en

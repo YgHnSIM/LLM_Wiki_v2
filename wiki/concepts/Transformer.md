@@ -13,7 +13,7 @@ tags:
   - domain/nlp
   - domain/machine-learning
 created: '2026-07-19'
-updated: '2026-07-23'
+updated: '2026-07-24'
 lifecycle: active
 verification: verified
 artifacts:
@@ -68,6 +68,8 @@ related:
   - concept.내적-행렬곱과-선형변환
   - concept.어텐션-메커니즘
   - concept.소프트맥스
+  - concept.활성화-함수
+  - concept.계산-복잡도와-비용-모델
   - concept.다층-퍼셉트론
   - concept.미분-편미분-그래디언트
   - concept.연쇄-법칙과-계산-그래프
@@ -252,6 +254,8 @@ $$
 
 첫 선형 변환은 feature를 넓은 내부 공간으로 옮기고, ReLU는 음수를 0으로 만들어 비선형성을 넣으며, 둘째 선형 변환은 다시 residual stream 차원으로 돌린다. ReLU가 없다면 두 선형 변환과 bias의 합성은 하나의 선형 변환으로 합칠 수 있어 두 층을 쓴 목적이 줄어든다. FFN은 위치 사이 정보를 섞지 않는다. 그 역할은 앞선 attention이 맡는다.
 
+여기서 ReLU는 각 $(b,t)$ 위치의 $d_{\mathrm{ff}}$ feature에 성분별로 적용되며 softmax처럼 위치나 후보 축을 정규화하지 않는다. affine 합성이 왜 줄어드는지와 ReLU·GELU의 gradient·포화 경계는 [[활성화 함수]]에서, 이 문서에서는 FFN이 token 간 정보 혼합이 아닌 위치 안의 비선형 변환이라는 역할만 다룬다.
+
 훈련 때 최종 token 손실 $J$는 FFN의 $W_1,b_1,W_2,b_2$뿐 아니라 attention 투영과 embedding에도 의존한다. [[역전파]]는 순전파에서 저장한 각 위치·head의 중간값을 사용해 $J$의 편미분을 역순으로 누적한다. 같은 residual stream이 shortcut과 sublayer 두 경로로 쓰이면 그 기울기 기여도 더한다. 이 계산은 [[연쇄 법칙과 계산 그래프]]의 규칙을 block의 실제 shape에 적용한 것이며, 기울기를 얻은 뒤의 갱신은 별도의 optimizer가 맡는다.
 
 ### residual과 LayerNorm: block을 연결하는 규칙
@@ -302,6 +306,8 @@ $W_{\mathrm{out}}$의 열은 어휘 후보, $z_t$의 각 성분은 정규화 전
 | kernel 폭 $k$ convolution | $O(knd^2)$ | $O(1)$ | $O(\log_k n)$ 또는 $O(n/k)$ |
 
 따라서 시퀀스 길이 $n$이 표현 차원 $d$보다 작을 때 self-attention의 계산 장점이 특히 분명하고, 먼 두 위치 사이 신호 경로도 짧다. 반대로 $n$이 매우 커지면 모든 위치 쌍의 점수와 표준 구현이 물질화하는 $n\times n$ 중간 행렬이 병목이 된다. “병렬화 가능”은 총연산량·중간 저장·메모리 대역폭이 항상 작다는 뜻이 아니다.
+
+이 표의 $O(n^2d)$는 층별 산술 성장률이다. 특정 batch·dtype·hardware에서의 FLOPs, peak memory, HBM 이동, device 간 통신과 wall-clock을 어떻게 따로 세는지는 [[계산 복잡도와 비용 모델]]에서 정리한다.
 
 ### 원 구조 이후의 변형과 시스템
 
@@ -389,6 +395,8 @@ Wiegreffe·Pinter는 ‘설명’의 정의와 모델 전체를 고려해야 한
 - [[내적·행렬곱과 선형변환]]
 - [[어텐션 메커니즘]]
 - [[소프트맥스]]
+- [[활성화 함수]]
+- [[계산 복잡도와 비용 모델]]
 - [[다층 퍼셉트론]]
 - [[미분·편미분·그래디언트]]
 - [[연쇄 법칙과 계산 그래프]]

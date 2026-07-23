@@ -10,47 +10,40 @@ initiative:
     stage: complete
   current_batch: null
   next_action: >-
-    npm run math:status로 완료 상태를 확인한다. advanced-extensions의
-    low-rank-svd·activation-functions·complexity-cost-models·sampling-temperature·reinforcement-learning-objectives는
-    wiki/concepts/특이값 분해와 저랭크 근사.md를 포함해 계획상 deferred이므로
-    명시적인 범위 선택 전에는 시작하지 않는다.
+    새 수식 계열 후보가 생기면 npm run math:check를 실행하고 wiki/concepts/특이값 분해와 저랭크 근사.md의 low-rank-svd owner와
+    겹치지 않는 독립 학습 질문·ready 선수 관계·대표 소비 문서를 docs/llm-math-network.yml에 먼저 제안한 뒤 사용자 범위 확인으로 새 배치를 시작한다.
   blockers: []
   handoff:
     updated: '2026-07-24'
-    baseline_commit: 732da8a44e7ca7e68ded72e55fb6dea4636ca59c
-    last_completed_gate: statistics-and-stability-g7-verified
+    baseline_commit: 8c9bebe6bee26a6ad71862faba2c47e968498257
+    last_completed_gate: advanced-extensions-g7-verified
     validation:
       - command: npm run math:check
-        result: 6개 배치·25개 수식 계열의 구조·owner·선수 관계와 statistics-and-stability 완료 상태 검증 통과
+        result: 6개 배치·25개 수식 계열의 구조·owner·선수 관계와 advanced-extensions 완료 상태 검증 통과
       - command: npm run learning:audit
-        result: 361개 Markdown·358개 비메타 문서, 블록 수식 668개로 기준선 갱신
+        result: 365개 Markdown·362개 비메타 문서, 블록 수식 689개로 기준선 갱신
       - command: npm run learning:audit:check
         result: 기초 학습 감사 기준선이 현재 wiki와 일치함을 확인
       - command: npm run sync:index
-        result: statistics-and-stability의 새 owner·변경 문서 evidence 수와 목록을 index에 동기화
+        result: advanced-extensions의 새 owner·변경 문서 evidence 수와 목록을 index에 동기화
       - command: npm run lint:wiki
-        result: Markdown 361개·evidence 455건·immutable raw artifact 220개 검증 통과
-      - command: BASE_PATH='' npm run build
-        result: site build·check에서 687페이지와 unresolved target 0개를 통과
-      - command: BASE_PATH='' npm run test:browser
-        result: Chromium 디렉터리·검색·관계 탐색·390px 모바일 navigation 회귀 4개를 통과
+        result: Markdown 365개·evidence 458건·immutable raw artifact 220개 검증 통과
       - command: BASE_PATH='' npm run verify
-        result: math 원장, Node 회귀, wiki lint·site build/check와 Chromium 회귀를 통과
+        result: math 원장, Node 회귀 122개, wiki lint·691 HTML build/check·Chromium 회귀 4개를 통과
     notes: >-
-      기준 branch는 main이다. statistics-and-stability는 확률변수·분포·기대값·분산과
-      수치 안정성·log-sum-exp owner를 새로 만들고, Layer Normalization·RMSNorm·Adam
-      최적화기·소프트맥스·FlashAttention·그룹 상대 정책 최적화·대규모 언어 모델·허브의
-      국소 설명을 연결했다. $R\in\{0,1\}$, $P(R=1)=3/4$에서 E[R]=3/4,
-      Var(R)=3/16; z=(1000,999,997)의 stable softmax; h=(2,4,6)의 LayerNorm·RMSNorm;
-      Adam 첫 update의 mhat=2, vhat=4를 수동 확인했다. raw는 바꾸지 않았다.
+      기준 branch는 main이다. advanced-extensions는 특이값 분해와 저랭크 근사·활성화 함수·계산 복잡도와 비용 모델·표본추출·온도·top-k·top-p owner를 새로 만들고,
+      잠재 의미 분석·저순위 적응·다층 퍼셉트론·Transformer·FlashAttention·전문가 혼합·자기회귀 생성·대규모 언어 모델의 국소 설명을 연결했다.
+      인간 피드백 강화학습에는 비교 보상·정책 목적·reference KL을, 그룹 상대 정책 최적화에는 그 owner 경계를 보강했다.
+      $\operatorname{diag}(3,1)$의 rank-1 잔차 제곱 1, $z=(0,1,2)$의 온도별 softmax, 선호 점수 차 0.9의 확률 0.710950·손실 0.341154,
+      $n=4,d=2$ attention 두 행렬곱의 64회 곱셈을 수동 확인했다. raw는 바꾸지 않았다.
 
 baseline:
   recorded_on: '2026-07-24'
   source: docs/foundational-learning-audit.md
-  wiki_documents: 361
-  non_meta_documents: 358
-  formula_documents: 179
-  formula_blocks: 668
+  wiki_documents: 365
+  non_meta_documents: 362
+  formula_documents: 183
+  formula_blocks: 689
 
 batches:
   - id: linear-algebra-foundations
@@ -140,7 +133,7 @@ batches:
 
   - id: advanced-extensions
     title: 저랭크·활성화·비용·생성과 정렬
-    stage: deferred
+    stage: complete
     families:
       - low-rank-svd
       - activation-functions
@@ -472,7 +465,7 @@ families:
   - id: low-rank-svd
     title: 특이값 분해와 저랭크 근사
     domain: linear-algebra
-    coverage: deferred
+    coverage: ready
     owner:
       path: wiki/concepts/특이값 분해와 저랭크 근사.md
       id: concept.특이값-분해와-저랭크-근사
@@ -486,7 +479,7 @@ families:
   - id: activation-functions
     title: 활성화 함수
     domain: neural-networks
-    coverage: deferred
+    coverage: ready
     owner:
       path: wiki/concepts/활성화 함수.md
       id: concept.활성화-함수
@@ -500,7 +493,7 @@ families:
   - id: complexity-cost-models
     title: 계산 복잡도와 비용 모델
     domain: algorithms
-    coverage: deferred
+    coverage: ready
     owner:
       path: wiki/concepts/계산 복잡도와 비용 모델.md
       id: concept.계산-복잡도와-비용-모델
@@ -514,7 +507,7 @@ families:
   - id: sampling-temperature
     title: 표본추출·온도·top-k·top-p
     domain: inference
-    coverage: deferred
+    coverage: ready
     owner:
       path: wiki/concepts/표본추출·온도·top-k·top-p.md
       id: concept.표본추출-온도-top-k-top-p
@@ -530,7 +523,7 @@ families:
   - id: reinforcement-learning-objectives
     title: 선호 보상·정책비·KL 제약
     domain: reinforcement-learning
-    coverage: deferred
+    coverage: ready
     owner:
       path: wiki/concepts/인간 피드백 강화학습.md
       id: concept.rlhf

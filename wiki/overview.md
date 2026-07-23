@@ -40,6 +40,7 @@ related:
 | LLM의 표현과 변환은 어떤 수학을 쓰나 | [[벡터·행렬·텐서와 shape]] | [[내적·행렬곱과 선형변환]] → [[단어 임베딩]] → [[어텐션 메커니즘]] → [[잔차 연결]] → [[Transformer]] | Transformer block의 입력·출력 흐름 |
 | LLM은 손실로 가중치를 어떻게 배우나 | [[미분·편미분·그래디언트]] | [[연쇄 법칙과 계산 그래프]] → [[역전파]] → [[경사하강법]] → [[다층 퍼셉트론]] → [[Transformer]] → [[대규모 언어 모델]] | 계산한 gradient와 실제 갱신의 구분 |
 | toy LLM 계산과 실제 학습의 차이는 무엇인가 | [[LLM을 만든 수학]] | [[수치 안정성과 log-sum-exp]] → [[확률변수·확률분포·기대값·분산]] → [[Layer Normalization]] → [[RMSNorm]] → [[Adam 최적화기]] → [[대규모 언어 모델]] | 한 SGD 예와 batch·정규화·수치·optimizer 경계 |
+| LLM의 압축·비선형성·실행·생성·정렬은 무엇을 따로 선택하나 | [[LLM을 만든 수학]] | [[특이값 분해와 저랭크 근사]] → [[저순위 적응]] / [[활성화 함수]] → [[Transformer]] / [[계산 복잡도와 비용 모델]] → [[FlashAttention]] / [[표본추출·온도·top-k·top-p]] → [[자기회귀 생성]] / [[인간 피드백 강화학습]] → [[그룹 상대 정책 최적화]] | 복원·표현·시스템·decoding·피드백을 한 효율 또는 한 정렬 주장으로 합치지 않기 |
 | 기계의 언어 행동을 어떻게 평가하나 | [[002_튜링 테스트]] | [[033_BLEU와 기계 번역 자동 평가]] → [[051_SQuAD와 추출형 독해 평가]] → [[060_GLUE와 SuperGLUE의 집계 평가]] → [[095_BIG-bench와 MMLU의 평가 범위·집계 경계]] → [[BIG-bench와 MMLU]] → [[079_HELM과 다차원 언어 모델 평가]] → [[HELM]] | [[튜링 테스트와 LLM 평가]] |
 | 규칙에서 학습으로 무엇이 바뀌었나 | [[003_Georgetown-IBM 기계 번역 시연]] | [[012_상징 규칙에서 통계 학습으로]] → [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] | [[규칙 기반 AI에서 데이터 기반 학습으로]] |
 | 현대 Transformer 계열은 어디서 왔나 | [[벡터·행렬·텐서와 shape]] | [[내적·행렬곱과 선형변환]] → [[다층 퍼셉트론]] → [[소프트맥스]] → [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] → [[047_어텐션 메커니즘과 동적 정렬]] → [[어텐션 메커니즘]] → [[잔차 연결]] → [[Transformer]] → [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]] → [[064_Transformer-XL과 세그먼트 수준 재귀]] → [[061_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]] | [[066_신경 언어 모델의 스케일링 법칙]] |
@@ -474,9 +475,9 @@ related:
 
 ## 현재 상태
 
-소스 110개, 참고 자료 0개, 개념 191개, 개체 29개, 분석 28개와 메타 문서 3개, 총 361개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 323개는 `verified`, 해석적 문서 35개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 455개 외부 근거와 220개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 110개, 참고 자료 0개, 개념 195개, 개체 29개, 분석 28개와 메타 문서 3개, 총 365개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 327개는 `verified`, 해석적 문서 35개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 458개 외부 근거와 220개 불변 raw artifact가 레지스트리에 등록돼 있다.
 
-[[LLM을 만든 수학]]은 4-token·2차원 toy causal attention에서 ID lookup, attention·잔차, 4개 logit의 softmax·NLL, 출력 bias 하나의 역전파와 SGD 갱신을 한 계산으로 연결한다. [[수치 안정성과 log-sum-exp]]은 toy에 없는 finite-precision softmax·mask·online 누적 경계를, [[확률변수·확률분포·기대값·분산]]은 분포·표본 통계와 tensor 축의 구분을 맡는다. [[Layer Normalization]]·[[RMSNorm]]은 feature 축의 정규화와 scale을, [[Adam 최적화기]]는 확률적 gradient의 raw moment update를 맡는다. 이 허브는 이 모든 실제 LLM 요소를 복제하지 않으며, 각 owner가 그 생략한 조건을 따로 드러낸다.
+[[LLM을 만든 수학]]은 4-token·2차원 toy causal attention에서 ID lookup, attention·잔차, 4개 logit의 softmax·NLL, 출력 bias 하나의 역전파와 SGD 갱신을 한 계산으로 연결한다. [[수치 안정성과 log-sum-exp]]은 toy에 없는 finite-precision softmax·mask·online 누적 경계를, [[확률변수·확률분포·기대값·분산]]은 분포·표본 통계와 tensor 축의 구분을 맡는다. [[Layer Normalization]]·[[RMSNorm]]은 feature 축의 정규화와 scale을, [[Adam 최적화기]]는 확률적 gradient의 raw moment update를 맡는다. 확장 경로에서는 [[특이값 분해와 저랭크 근사]]가 절단 SVD와 LoRA update를, [[활성화 함수]]가 position-wise 비선형성을, [[계산 복잡도와 비용 모델]]이 산술·메모리·I/O·시간의 구분을, [[표본추출·온도·top-k·top-p]]가 decoding 선택을, [[인간 피드백 강화학습]]이 선호 보상·reference KL·optimizer의 경계를 맡는다. 이 허브는 이 모든 실제 LLM 요소를 복제하지 않으며, 각 owner가 그 생략한 조건을 따로 드러낸다.
 
 비교 읽기는 이번 보강으로 27편이 됐다. 새 분석은 [[문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리]], [[생성은 무엇을 한 단계씩 고르는가 — 파형·이미지 토큰·잠재 잡음]], [[같은 벡터 공간은 무엇을 보장하는가 — 공기·대조·생성의 경계]], [[음성을 텍스트로 옮기는 경계에서 무엇이 사라지는가 — 인식·합성·네이티브 오디오]]다. 각각 같은 ‘저장·생성·공유 표현·음성’이라는 말이 가리기 쉬운 관측 단위, 상태 경계, 조건화와 평가의 차이를 비교한다.
 
