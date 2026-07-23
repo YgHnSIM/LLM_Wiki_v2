@@ -176,6 +176,8 @@ related:
 
 ## 개념
 
+- [[벡터·행렬·텐서와 shape]] — 스칼라·벡터·행렬·텐서의 축과 shape, 성분별 연산·브로드캐스팅을 LLM 표현의 입력 규약으로 읽는 기초 개념 (근거 2개)
+- [[내적·행렬곱과 선형변환]] — 내적·가중합·행렬곱과 bias를 구분해 feature 투영, attention 점수와 affine 변환의 shape를 계산하는 기초 개념 (근거 2개)
 - [[BLOOM]] — 176B decoder-only Transformer, ROOTS 다국어 말뭉치, 공공 compute와 서로 다른 weight·code·data 공개 조건을 한 모델 장부로 구분하는 개념 (근거 8개)
 - [[PaLM]] — 540.35B dense decoder-only Transformer, Pathways 분산 학습과 CoT·다국어·code 평가 조건 및 model access 한계를 구분하는 개념 (근거 1개)
 - [[WaveNet]] — 팽창 인과 합성곱으로 양자화 오디오 표본을 순차 생성하는 원시 파형 자기회귀 모델 (근거 2개)

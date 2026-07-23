@@ -64,6 +64,8 @@ related:
   - source.069
   - source.087
   - source.088
+  - concept.벡터-행렬-텐서와-shape
+  - concept.내적-행렬곱과-선형변환
   - concept.어텐션-메커니즘
   - concept.소프트맥스
   - concept.다층-퍼셉트론
@@ -100,6 +102,8 @@ related:
 - **residual connection과 LayerNorm**: 이전 표현을 보존·보정하고 수치 분포를 조절하는 block 연결 방식이다.
 
 Transformer를 이해할 때 “어텐션이 모든 것을 한다”와 “병렬이므로 항상 싸다”를 함께 피해야 한다. attention은 위치 사이 정보를 섞고, MLP는 각 위치 안의 feature를 변환하며, residual·정규화는 깊은 block을 연결한다. 모든 위치 쌍을 보는 dense attention은 길이에 따라 제곱 비용도 낸다.
+
+이 문서의 $n\times d_{\mathrm{model}}$ 표에서 행은 token 위치, 열은 feature다. 축·shape와 잔차 덧셈 조건은 [[벡터·행렬·텐서와 shape]], $XW_Q$·$QK^{\mathsf T}$·출력 투영이 만드는 가중합은 [[내적·행렬곱과 선형변환]]에서 완전하게 설명한다. 여기서는 이 연산들이 Transformer block 안에서 어떤 순서와 정보 흐름을 이루는지에 집중한다.
 
 ### 한 block의 핵심 흐름
 
@@ -376,6 +380,8 @@ Wiegreffe·Pinter는 ‘설명’의 정의와 모델 전체를 고려해야 한
 - [[069_전문가 혼합과 희소 활성 스케일링]]
 - [[087_Whisper와 대규모 약한 감독 음성 인식]]
 - [[088_FlashAttention과 IO 인지형 정확 어텐션]]
+- [[벡터·행렬·텐서와 shape]]
+- [[내적·행렬곱과 선형변환]]
 - [[어텐션 메커니즘]]
 - [[소프트맥스]]
 - [[다층 퍼셉트론]]

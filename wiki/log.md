@@ -4596,6 +4596,27 @@ raw 등록 해시:
 - 낮은 NLL이나 높은 후보 점수는 정한 문맥·후보 집합 안에서의 확률적 기준일 뿐, 사실성·안전성·공정성·긴 출력의 품질을 자동으로 보장하지 않는다.
 - GPT-3 원 논문은 task별 prompt와 scoring rule을 썼다. 이 문서의 일반식은 그 구조를 설명하며 모든 benchmark의 세부 채점·후속 모델의 배포 조건을 대체하지 않는다.
 
+## [2026-07-23] content | LLM 선형대수 기초 경로
+
+변경 내용:
+
+- [[벡터·행렬·텐서와 shape]]와 [[내적·행렬곱과 선형변환]]을 새 기준 concept owner로 만들었다. 전자는 축·인덱스·shape·브로드캐스팅을, 후자는 내적·가중합·행렬곱·affine 변환과 bias의 구분을 맡긴다.
+- 두 문서에서 `(batch, token, feature)` 배열의 성분별 덧셈, $(1,2)(2,2)$ 행렬곱과 bias를 설명용 숫자로 끝까지 계산하고, shape 조건·대안 표기·축 혼동·padding·수치 범위를 분리했다.
+- [[단어 임베딩]], [[어텐션 메커니즘]], [[잔차 연결]], [[Transformer]]에 새 owner로 가는 국소 shape·행렬곱 설명과 큐레이션된 관계를 추가했다. 각 소비 문서는 현재 계산의 역할을 남기고 완전한 유도만 owner에 맡긴다.
+- `domain/mathematics` 태그를 등록하고 [[index]], [[overview]], 기초 학습 감사와 수학 원장을 새 두 문서·완료 배치·다음 확률·정보 배치에 맞췄다.
+
+검증 결과:
+
+- 편집부 예를 손으로 재계산했다. $(2,3)+(3,)\to(2,3)$의 각 성분은 $(1.1,1.8,-0.7)$·$(0.1,2.8,4.3)$이고, $(2,-1)\begin{bmatrix}1&3\\2&-1\end{bmatrix}+(0.5,-0.5)=(0.5,6.5)$다.
+- `npm run math:check`, `npm run learning:audit`, `npm run learning:audit:check`, `npm run sync:index`, `npm run lint:wiki`, 사이트 빌드·검사, `npm test`, `npm run test:browser`를 통과했다. wiki lint는 Markdown 354개·evidence 451건·immutable raw artifact 220개를, browser 회귀는 디렉터리·검색·관계 탐색·390px navigation 4개를 확인했다.
+- `BASE_PATH='' npm run verify`는 122개 단위·회귀 테스트, 680개 HTML 페이지·45,988개 로컬 참조, Chromium 회귀 4개를 다시 통과했다.
+
+남은 제한:
+
+- 작은 배열과 수치는 shape·가중합을 재현하기 위한 편집부 예이며, Bengio 2003이나 Vaswani 2017의 activation·실험 결과를 재현하지 않는다.
+- 선형대수의 일반적 수학 형성과 특정 LLM 구조의 직접 발명 계보를 동일시하지 않는다. 이 배치는 논문에서 확인되는 행렬 연산의 현재 역할만 연결한다.
+- `LLM을 만든 수학` 허브는 확률·로그·정보량과 미분·최적화 owner가 준비될 때까지 공개하지 않는다. 다음 실행은 `probability-information-foundations`의 기존 owner 감사다.
+
 ## 관련 항목
 
 - [[index]]

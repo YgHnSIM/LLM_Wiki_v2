@@ -45,6 +45,9 @@ tags:
   domain/machine-learning:
     kind: domain
     description: 기계 학습
+  domain/mathematics:
+    kind: domain
+    description: 수학적 개념·표기·유도와 그 계산적 사용
   domain/nlp:
     kind: domain
     description: 자연어 처리

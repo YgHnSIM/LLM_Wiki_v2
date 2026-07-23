@@ -8,52 +8,56 @@ initiative:
     id: analysis.llm을-만든-수학
     batch: hub-publication
     stage: planned
-  current_batch: linear-algebra-foundations
+  current_batch: probability-information-foundations
   next_action: >-
-    npm run math:status를 실행한 뒤 vectors-matrices-tensors와
-    dot-matrix-linear-transform의 owner 경계를 확정하기 위해
-    wiki/concepts/단어 임베딩.md, wiki/concepts/어텐션 메커니즘.md,
-    wiki/concepts/Transformer.md의 최소 예·기호·shape를 감사한다.
+    npm run math:status를 실행한 뒤 probability-information-foundations의
+    exponential-logarithm·entropy-cross-entropy-kl owner 경계를 확정하기 위해
+    wiki/concepts/확률.md, wiki/concepts/조건부 확률.md,
+    wiki/concepts/소프트맥스.md, wiki/concepts/로그가능도.md,
+    wiki/concepts/Perplexity.md의 최소 예·기호·정규화 설명을 감사한다.
   blockers: []
   handoff:
     updated: '2026-07-23'
-    baseline_commit: 6d8ab4ec7ee4cd4510b6ad6b7e049e0db84e2c35
-    last_completed_gate: framework-verified
+    baseline_commit: 0b4d7824109fb9d4c48f63bc7aa03fc022f32355
+    last_completed_gate: linear-algebra-foundations-g7-verified
     validation:
       - command: npm run math:check
-        result: 6개 배치와 25개 수식 계열의 구조·owner·선수 관계 검증 통과
-      - command: node --test scripts/tests/math-network-status.test.mjs
-        result: 상태·경로·owner·선수 순서·lifecycle·baseline·handoff 검사 16개 통과
-      - command: >-
-          $skillValidator = Join-Path $env:USERPROFILE
-          '.codex\skills\.system\skill-creator\scripts\quick_validate.py';
-          uv run --with pyyaml python -X utf8 $skillValidator
-          .agents\skills\build-llm-math-network
-        result: 프로젝트 로컬 스킬 구조와 frontmatter 검증 통과
-      - command: npm test
-        result: 저장소 단위·회귀 테스트 122개 통과
-      - command: npm run verify
-        result: >-
-          math 원장, 테스트 122개, wiki 352문서·evidence 451건·raw 220개,
-          site 678페이지·로컬 참조 45,770개와 Chromium 회귀 4개 통과
+        result: 6개 배치·25개 수식 계열의 구조·owner·선수 관계와 완료 배치 상태 검증 통과
+      - command: npm run learning:audit
+        result: 354개 Markdown·351개 비메타 문서, 블록 수식 580개로 기준선 갱신
       - command: npm run learning:audit:check
         result: 기초 학습 감사 기준선이 현재 wiki와 일치함을 확인
+      - command: npm run sync:index
+        result: 두 새 concept의 evidence 수와 목록을 index에 동기화
+      - command: npm run lint:wiki
+        result: Markdown 354개·evidence 451건·immutable raw artifact 220개 검증 통과
+      - command: node scripts/build-site.mjs
+        result: 354개 wiki 문서에서 680개 사이트 페이지와 8,253개 해소된 위키 링크 생성
+      - command: npm test
+        result: 저장소 단위·회귀 테스트 122개 통과
+      - command: npm run test:browser
+        result: 디렉터리·검색·관계 탐색·390px 모바일 navigation 회귀 4개 통과
+      - command: BASE_PATH='' npm run verify
+        result: >-
+          math 원장, 테스트 122개, Markdown 354개·evidence 451건·raw 220개,
+          site 680페이지·로컬 참조 45,988개와 Chromium 회귀 4개를 통과
     notes: >-
-      기준 branch는 main이다. 재사용 프레임만 구축했으며 공개 허브와 신규 수학 concept
-      배치는 아직 시작하지 않았다.
+      기준 branch는 main이다. linear-algebra-foundations는 새 owner 두 개와
+      임베딩·어텐션·잔차·Transformer의 국소 설명을 연결해 완료했다. raw는 바꾸지
+      않았고, 공개 허브는 다음 필수 owner 배치가 준비될 때까지 planned 상태다.
 
 baseline:
   recorded_on: '2026-07-23'
   source: docs/foundational-learning-audit.md
-  wiki_documents: 352
-  non_meta_documents: 349
-  formula_documents: 168
-  formula_blocks: 569
+  wiki_documents: 354
+  non_meta_documents: 351
+  formula_documents: 170
+  formula_blocks: 580
 
 batches:
   - id: linear-algebra-foundations
     title: 표현과 선형 연산의 기초
-    stage: planned
+    stage: complete
     families:
       - vectors-matrices-tensors
       - dot-matrix-linear-transform
@@ -157,7 +161,7 @@ families:
   - id: vectors-matrices-tensors
     title: 벡터·행렬·텐서와 shape
     domain: linear-algebra
-    coverage: planned
+    coverage: ready
     owner:
       path: wiki/concepts/벡터·행렬·텐서와 shape.md
       id: concept.벡터-행렬-텐서와-shape
@@ -167,12 +171,14 @@ families:
       - wiki/concepts/어텐션 메커니즘.md
       - wiki/concepts/Transformer.md
       - wiki/concepts/Layer Normalization.md
-    notes: 스칼라·벡터·행렬·텐서, 축, 인덱스, shape와 broadcasting의 경계를 맡는다.
+    notes: >-
+      스칼라·벡터·행렬·텐서, 축, 인덱스, shape와 broadcasting의 경계를 맡는다.
+      내적·가중합·행렬곱·bias는 dot-matrix-linear-transform owner로 넘긴다.
 
   - id: dot-matrix-linear-transform
     title: 내적·행렬곱과 선형변환
     domain: linear-algebra
-    coverage: planned
+    coverage: ready
     owner:
       path: wiki/concepts/내적·행렬곱과 선형변환.md
       id: concept.내적-행렬곱과-선형변환
@@ -184,12 +190,14 @@ families:
       - wiki/concepts/어텐션 메커니즘.md
       - wiki/concepts/Transformer.md
       - wiki/concepts/저순위 적응.md
-    notes: 가중합·내적·행렬곱·선형변환과 bias의 서로 다른 역할을 맡는다.
+    notes: >-
+      가중합·내적·행렬곱·선형변환과 bias의 서로 다른 역할을 맡는다.
+      객체 종류·축·shape와 broadcasting의 정의는 vectors-matrices-tensors owner를 전제로 한다.
 
   - id: embeddings
     title: 임베딩 조회와 연속 표현
     domain: representation
-    coverage: established
+    coverage: ready
     owner:
       path: wiki/concepts/단어 임베딩.md
       id: concept.단어-임베딩
@@ -198,7 +206,7 @@ families:
     downstream:
       - wiki/concepts/신경 확률 언어 모형.md
       - wiki/concepts/Transformer.md
-    notes: 새 선형대수 기준 문서가 생기면 현재의 국소 정의를 유지하면서 심화 유도만 연결한다.
+    notes: 새 선형대수 기준 문서와 연결했고, 현재의 ID 조회·행렬 shape·정적 표현 설명은 국소 책임으로 유지한다.
 
   - id: probability
     title: 확률과 확률모형
@@ -310,7 +318,7 @@ families:
   - id: attention
     title: scaled dot-product attention
     domain: architecture
-    coverage: established
+    coverage: ready
     owner:
       path: wiki/concepts/어텐션 메커니즘.md
       id: concept.어텐션-메커니즘
@@ -320,7 +328,7 @@ families:
     downstream:
       - wiki/concepts/Transformer.md
       - wiki/concepts/FlashAttention.md
-    notes: Q·K·V, scaling, mask, softmax와 가중합의 각각 다른 역할을 맡는다.
+    notes: Q·K·V, scaling, mask, softmax와 가중합의 각각 다른 역할을 맡으며 선형 투영·내적 owner를 국소 설명과 함께 연결했다.
 
   - id: derivative-partial-gradient
     title: 미분·편미분·그래디언트
@@ -411,7 +419,7 @@ families:
   - id: residual-connections
     title: 잔차 덧셈과 항등 경로
     domain: architecture
-    coverage: established
+    coverage: ready
     owner:
       path: wiki/concepts/잔차 연결.md
       id: concept.잔차-연결
@@ -420,7 +428,7 @@ families:
     downstream:
       - wiki/concepts/Transformer.md
       - wiki/concepts/Layer Normalization.md
-    notes: shape가 같은 항등 경로와 학습 branch의 덧셈, Jacobian 해석의 범위를 맡는다.
+    notes: shape가 같은 항등 경로와 학습 branch의 덧셈, Jacobian 해석의 범위를 맡으며 shape·투영 owner를 국소 설명과 함께 연결했다.
 
   - id: normalization-statistics
     title: 평균·분산과 특징 정규화
