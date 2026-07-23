@@ -17,6 +17,8 @@
     "source:status": "node scripts/source-workflow.mjs status",
     "source:copy": "node scripts/source-workflow.mjs copy",
     "source:ready": "node scripts/source-workflow.mjs ready",
+    "math:status": "node scripts/math-network-status.mjs",
+    "math:check": "node scripts/math-network-status.mjs --check",
     "learning:audit": "node scripts/audit-foundational-learning.mjs --write",
     "learning:audit:check": "node scripts/audit-foundational-learning.mjs --check",
     "sync:index": "node scripts/sync-index.mjs",
@@ -26,7 +28,7 @@
     "test:browser": "playwright test",
     "test": "node --test scripts/tests/*.test.mjs",
     "build": "npm run lint:wiki && npm run build:site && npm run check:site",
-    "verify": "npm run test && npm run build && npm run test:browser",
+    "verify": "npm run math:check && npm run test && npm run build && npm run test:browser",
     "check": "npm run verify"
   },
   "dependencies": {

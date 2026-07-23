@@ -1,0 +1,4 @@
+interface:
+  display_name: "LLM 수학 문서망 구축"
+  short_description: "LLM 수학 문서망을 배치별로 구축하고 검증합니다."
+  default_prompt: "$build-llm-math-network를 사용해 ‘LLM을 만든 수학’ 문서망의 다음 의존성 완료 배치를 재개하고 검증해 주세요."

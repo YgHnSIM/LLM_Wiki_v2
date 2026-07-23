@@ -251,6 +251,18 @@ related:
 - 검증된 문서의 해결되지 않은 경고
 - 출처 없는 인용문 형식
 
+### 6.6 `LLM을 만든 수학` 문서망
+
+사용자가 `$build-llm-math-network`, `LLM 수학 문서망 계속`, `LLM을 만든 수학 작업 계속`, 수식 계열·owner 감사나 해당 배치 구현을 요청하면 프로젝트 로컬 스킬 `.agents/skills/build-llm-math-network/SKILL.md`를 사용한다.
+
+1. `docs/llm-math-network-plan.md`와 `docs/llm-math-network.yml`을 읽고 `npm run math:status`, `npm run math:check`로 현재 배치·owner·다음 행동을 확인한다.
+2. 수식 계열의 완전한 설명은 concept owner 하나가 맡고, 소비 문서는 현재 기호·shape·역할·가정과 한계를 국소적으로 설명한다.
+3. 선수 의존 경로 하나를 owner → 소비 문서 → 허브 순서로 완결한다. 새 page type·수학 폴더·기계적 상호 링크를 만들지 않는다.
+4. 작업 전후에 원장의 batch stage, family coverage, next action과 blockers를 실제 상태에 맞게 갱신한다.
+5. 정규 source 번호와 `raw/`를 건드리지 않으며, 공개 위키 변경은 `content:` 경계와 기존 검증 절차를 따른다.
+
+사용자가 정확히 `하던 작업 계속 진행`이라고만 입력한 경우에는 이 절이 아니라 6.0의 정규 source 재개 규칙이 계속 우선한다.
+
 ## 7. 특수 문서
 
 ### 7.1 index.md

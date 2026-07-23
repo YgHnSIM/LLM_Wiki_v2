@@ -1,0 +1,356 @@
+{
+  "skill": {
+    "skill_id": "build-llm-math-network",
+    "skill_name": "Build LLM Math Network",
+    "skill_goal": "Plan, audit, resume, implement, validate, and hand off the LLM Wiki v2 mathematics learning network.",
+    "intent_signature": [
+      "LLM을 만든 수학",
+      "LLM 수학 문서망 계속",
+      "수식 소유권을 정해",
+      "validate the math-network batch"
+    ],
+    "tags": [
+      "llm-wiki",
+      "mathematics",
+      "formula-ownership",
+      "learning-path",
+      "evidence"
+    ],
+    "top_pattern": "AUDIT_ASSIGN_IMPLEMENT_VALIDATE_HANDOFF",
+    "expected_inputs": [
+      {
+        "name": "repo_root",
+        "type": "path"
+      },
+      {
+        "name": "user_request",
+        "type": "str"
+      },
+      {
+        "name": "network_ledger",
+        "type": "path"
+      }
+    ],
+    "expected_outputs": [
+      {
+        "name": "inspected_or_changed_pages",
+        "type": "list[path]"
+      },
+      {
+        "name": "ledger_state",
+        "type": "path"
+      },
+      {
+        "name": "validation_report",
+        "type": "str"
+      },
+      {
+        "name": "handoff",
+        "type": "str"
+      }
+    ],
+    "dependencies": [
+      {
+        "type": "file",
+        "value": "AGENTS.md"
+      },
+      {
+        "type": "file",
+        "value": "docs/llm-math-network-plan.md"
+      },
+      {
+        "type": "file",
+        "value": "docs/llm-math-network.yml"
+      },
+      {
+        "type": "file",
+        "value": "docs/foundational-learning-workflow.md"
+      },
+      {
+        "type": "file",
+        "value": "docs/learning-structure-style-guide.md"
+      },
+      {
+        "type": "file",
+        "value": "docs/foundational-learning-audit.md"
+      },
+      {
+        "type": "file",
+        "value": ".agents/skills/build-llm-math-network/references/formula-owner-rubric.md"
+      },
+      {
+        "type": "script",
+        "value": "npm run math:status"
+      },
+      {
+        "type": "script",
+        "value": "npm run math:check"
+      },
+      {
+        "type": "script",
+        "value": "npm run learning:audit"
+      },
+      {
+        "type": "script",
+        "value": "npm run sync:index"
+      },
+      {
+        "type": "script",
+        "value": "npm run verify"
+      }
+    ],
+    "control_flow_features": {
+      "has_branch": true,
+      "has_loop": true,
+      "has_tool_call": true,
+      "touches_sensitive_resources": true
+    },
+    "entry_scene_id": "S_PREPARE",
+    "subscenes": [
+      "S_PREPARE",
+      "S_ACQUIRE",
+      "S_REASON",
+      "S_ACT",
+      "S_VERIFY",
+      "S_FINALIZE"
+    ]
+  },
+  "scenes": [
+    {
+      "scene_id": "S_PREPARE",
+      "scene_name": "Prepare or resume",
+      "scene_type": "PREPARE",
+      "scene_goal": "Load authority, preserve unrelated work, validate the ledger, and select a bounded mode.",
+      "entry_logic_step_id": "L_PREPARE",
+      "contained_logic_steps": [
+        "L_PREPARE"
+      ],
+      "next_scene_rules": [
+        {
+          "condition": "scope and state are valid",
+          "target": "S_ACQUIRE"
+        },
+        {
+          "condition": "material user authority is missing",
+          "target": "END_FAIL"
+        }
+      ]
+    },
+    {
+      "scene_id": "S_ACQUIRE",
+      "scene_name": "Acquire formulas and evidence",
+      "scene_type": "ACQUIRE",
+      "scene_goal": "Read selected paths and collect formula occurrences, prerequisites, and source-grounded evidence.",
+      "entry_logic_step_id": "L_ACQUIRE",
+      "contained_logic_steps": [
+        "L_ACQUIRE"
+      ],
+      "next_scene_rules": [
+        {
+          "condition": "the corpus is sufficient",
+          "target": "S_REASON"
+        },
+        {
+          "condition": "central evidence is unavailable",
+          "target": "END_FAIL"
+        }
+      ]
+    },
+    {
+      "scene_id": "S_REASON",
+      "scene_name": "Choose owners and batch",
+      "scene_type": "REASON",
+      "scene_goal": "Assign one owner per family, remove prerequisite cycles, and bound one dependency-complete batch.",
+      "entry_logic_step_id": "L_REASON",
+      "contained_logic_steps": [
+        "L_REASON"
+      ],
+      "next_scene_rules": [
+        {
+          "condition": "implement or resume mode has coherent owners and batch",
+          "target": "S_ACT"
+        },
+        {
+          "condition": "validate mode has a bounded existing batch",
+          "target": "S_VERIFY"
+        },
+        {
+          "condition": "plan or audit mode has a complete read-only finding",
+          "target": "S_FINALIZE"
+        },
+        {
+          "condition": "more evidence or page context is needed",
+          "target": "S_ACQUIRE"
+        }
+      ]
+    },
+    {
+      "scene_id": "S_ACT",
+      "scene_name": "Implement one batch",
+      "scene_type": "ACT",
+      "scene_goal": "Persist in-progress state and implement owners, occurrence explanations, hub paths, evidence, and links.",
+      "entry_logic_step_id": "L_ACT",
+      "contained_logic_steps": [
+        "L_ACT"
+      ],
+      "next_scene_rules": [
+        {
+          "condition": "the batch is ready for review",
+          "target": "S_VERIFY"
+        },
+        {
+          "condition": "owner reasoning is invalidated",
+          "target": "S_REASON"
+        }
+      ]
+    },
+    {
+      "scene_id": "S_VERIFY",
+      "scene_name": "Verify content and repository",
+      "scene_type": "VERIFY",
+      "scene_goal": "Run manual mathematical review, ledger checks, wiki validation, site rendering, and tests.",
+      "entry_logic_step_id": "L_VERIFY",
+      "contained_logic_steps": [
+        "L_VERIFY"
+      ],
+      "next_scene_rules": [
+        {
+          "condition": "all required gates pass",
+          "target": "S_FINALIZE"
+        },
+        {
+          "condition": "current-batch repair is possible",
+          "target": "S_ACT"
+        },
+        {
+          "condition": "owner or evidence basis fails",
+          "target": "S_REASON"
+        }
+      ]
+    },
+    {
+      "scene_id": "S_FINALIZE",
+      "scene_name": "Finalize and hand off",
+      "scene_type": "FINALIZE",
+      "scene_goal": "Make any authorized durable state match actual results, preserve state in read-only modes, and issue a self-contained next-session handoff.",
+      "entry_logic_step_id": "L_FINALIZE",
+      "contained_logic_steps": [
+        "L_FINALIZE"
+      ],
+      "next_scene_rules": [
+        {
+          "condition": "completion or blocker is recorded",
+          "target": "END_SUCCESS"
+        },
+        {
+          "condition": "durable state cannot be reconciled",
+          "target": "END_FAIL"
+        }
+      ]
+    }
+  ],
+  "logic_steps": [
+    {
+      "logic_step_id": "L_PREPARE",
+      "scene_id": "S_PREPARE",
+      "act_type": "CALL_TOOL",
+      "resource_scope": "CODEBASE",
+      "operation": "Read governance and plan files, inspect Git, run math:status and math:check, and select a mode.",
+      "next_step_rules": [
+        {
+          "condition": "prepared",
+          "target": "YIELD_SUCCESS"
+        },
+        {
+          "condition": "invalid or unauthorized",
+          "target": "YIELD_FAIL"
+        }
+      ]
+    },
+    {
+      "logic_step_id": "L_ACQUIRE",
+      "scene_id": "S_ACQUIRE",
+      "act_type": "READ",
+      "resource_scope": "CODEBASE",
+      "operation": "Read owner, prerequisite, downstream, evidence, and source documents completely.",
+      "next_step_rules": [
+        {
+          "condition": "acquired",
+          "target": "YIELD_SUCCESS"
+        },
+        {
+          "condition": "insufficient",
+          "target": "YIELD_FAIL"
+        }
+      ]
+    },
+    {
+      "logic_step_id": "L_REASON",
+      "scene_id": "S_REASON",
+      "act_type": "SELECT",
+      "resource_scope": "MEMORY",
+      "operation": "Cluster formula families, select canonical owners, and choose one dependency-complete batch.",
+      "next_step_rules": [
+        {
+          "condition": "coherent",
+          "target": "YIELD_SUCCESS"
+        },
+        {
+          "condition": "cycle or ambiguity remains",
+          "target": "YIELD_FAIL"
+        }
+      ]
+    },
+    {
+      "logic_step_id": "L_ACT",
+      "scene_id": "S_ACT",
+      "act_type": "WRITE",
+      "resource_scope": "CODEBASE",
+      "operation": "Update ledger, owners, occurrence pages, completed hub paths, evidence, links, and metadata without editing raw.",
+      "next_step_rules": [
+        {
+          "condition": "implemented",
+          "target": "YIELD_SUCCESS"
+        },
+        {
+          "condition": "scope or dependency fails",
+          "target": "YIELD_FAIL"
+        }
+      ]
+    },
+    {
+      "logic_step_id": "L_VERIFY",
+      "scene_id": "S_VERIFY",
+      "act_type": "VALIDATE",
+      "resource_scope": "PROCESS",
+      "operation": "Reproduce mathematics, inspect evidence and rendering, and run project validation commands.",
+      "next_step_rules": [
+        {
+          "condition": "passed",
+          "target": "YIELD_SUCCESS"
+        },
+        {
+          "condition": "failed",
+          "target": "YIELD_FAIL"
+        }
+      ]
+    },
+    {
+      "logic_step_id": "L_FINALIZE",
+      "scene_id": "S_FINALIZE",
+      "act_type": "TRANSFER",
+      "resource_scope": "CODEBASE",
+      "operation": "For write modes, update coverage, batch stage, next action, and blockers; for read-only modes, preserve the ledger; then inspect scope and report the handoff.",
+      "next_step_rules": [
+        {
+          "condition": "handed off",
+          "target": "YIELD_SUCCESS"
+        },
+        {
+          "condition": "state mismatch remains",
+          "target": "YIELD_FAIL"
+        }
+      ]
+    }
+  ]
+}
