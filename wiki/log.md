@@ -4617,6 +4617,24 @@ raw 등록 해시:
 - 선형대수의 일반적 수학 형성과 특정 LLM 구조의 직접 발명 계보를 동일시하지 않는다. 이 배치는 논문에서 확인되는 행렬 연산의 현재 역할만 연결한다.
 - `LLM을 만든 수학` 허브는 확률·로그·정보량과 미분·최적화 owner가 준비될 때까지 공개하지 않는다. 다음 실행은 `probability-information-foundations`의 기존 owner 감사다.
 
+## [2026-07-23] content | LLM 확률·정보량 기초 경로
+
+변경 내용:
+
+- [[지수와 로그]]와 [[엔트로피·교차 엔트로피·KL 발산]]을 새 concept owner로 만들었다. 전자는 역함수·정의역·로그의 곱→합 변환과 softmax의 양수화를, 후자는 엔트로피·교차 엔트로피·KL의 관계와 one-hot 정답에서 NLL이 되는 조건을 맡는다.
+- [[확률]], [[조건부 확률]], [[소프트맥스]], [[로그가능도]], [[Perplexity]]에 현재 확률축·로짓·가능도·평가의 국소 설명을 남기고 완전한 함수·정보량 유도는 새 owner로 연결했다. [[CLIP]], [[인간 피드백 강화학습]], [[그룹 상대 정책 최적화]]에는 각각 대조 목적·기준 정책 이탈·직접 KL 항의 현재 분포와 owner 경계를 보강했다.
+- Kullback·Leibler의 1951년 원 논문을 evidence 레지스트리에 등록하고, [[index]], [[overview]], 기초 학습 감사와 수학 원장을 새 두 문서·완료 배치·다음 미분·최적화 배치에 맞췄다.
+
+검증 결과:
+
+- 설명용 분포 $p=(1/2,1/4,1/4)$와 $q=(1/2,3/8,1/8)$를 손으로 계산해 $H(p)=1.5$ bit, $H(p,q)\approx1.604$ bit, $D_{\mathrm{KL}}(p\Vert q)\approx0.104$ bit와 각 분포의 합 1을 확인했다.
+- `npm run math:check`, `npm run learning:audit`, `npm run learning:audit:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run verify`를 통과했다. verify는 단위·회귀 122개, Markdown 356개·evidence 452건·immutable raw artifact 220개, HTML 682개·로컬 참조 46,206개와 Chromium 390px 회귀 4개를 포함한다.
+
+남은 제한:
+
+- 지수·로그·정보량 예의 수치는 함수와 분포 관계를 보이는 편집부 계산이며, Shannon·Kullback–Leibler·Bengio 등의 실험 결과를 재현하지 않는다.
+- 낮은 교차 엔트로피·KL 또는 perplexity가 사실성·안전성·인간 선호·강화학습 보상의 적절성을 자동으로 보장하지 않는다. 허브는 미분·계산 그래프·갱신 owner가 준비될 때까지 planned 상태를 유지한다.
+
 ## 관련 항목
 
 - [[index]]

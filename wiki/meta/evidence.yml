@@ -9,6 +9,15 @@ sources:
     doi: 10.1002/j.1538-7305.1948.tb01338.x
     url: https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf
     language: en
+  kullback-leibler-1951:
+    title: On Information and Sufficiency
+    authors: [Solomon Kullback, Richard A. Leibler]
+    published: 1951
+    source_type: primary
+    kind: journal-article
+    doi: 10.1214/aoms/1177729694
+    url: https://projecteuclid.org/journals/annals-of-mathematical-statistics/volume-22/issue-1/On-Informationand-Sufficiency/10.1214/aoms/1177729694.full
+    language: en
   katz-1987:
     title: Estimation of Probabilities from Sparse Data for the Language Model Component of a Speech Recognizer
     authors: [Slava M. Katz]

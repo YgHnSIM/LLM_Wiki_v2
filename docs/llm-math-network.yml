@@ -8,51 +8,45 @@ initiative:
     id: analysis.llm을-만든-수학
     batch: hub-publication
     stage: planned
-  current_batch: probability-information-foundations
+  current_batch: calculus-optimization-foundations
   next_action: >-
-    npm run math:status를 실행한 뒤 probability-information-foundations의
-    exponential-logarithm·entropy-cross-entropy-kl owner 경계를 확정하기 위해
-    wiki/concepts/확률.md, wiki/concepts/조건부 확률.md,
-    wiki/concepts/소프트맥스.md, wiki/concepts/로그가능도.md,
-    wiki/concepts/Perplexity.md의 최소 예·기호·정규화 설명을 감사한다.
+    npm run math:status를 실행한 뒤 calculus-optimization-foundations의
+    derivative-partial-gradient·chain-rule-computation-graph owner 경계를 확정하기 위해
+    wiki/concepts/경사하강법.md, wiki/concepts/역전파.md,
+    wiki/concepts/다층 퍼셉트론.md, wiki/concepts/Transformer.md의 최소 scalar 예·기울기 표기·계산 그래프 설명을 감사한다.
   blockers: []
   handoff:
     updated: '2026-07-23'
-    baseline_commit: 0b4d7824109fb9d4c48f63bc7aa03fc022f32355
-    last_completed_gate: linear-algebra-foundations-g7-verified
+    baseline_commit: 60f14ca60b7a1823b76fdb209b4df0e6102b5600
+    last_completed_gate: probability-information-foundations-g7-verified
     validation:
       - command: npm run math:check
         result: 6개 배치·25개 수식 계열의 구조·owner·선수 관계와 완료 배치 상태 검증 통과
       - command: npm run learning:audit
-        result: 354개 Markdown·351개 비메타 문서, 블록 수식 580개로 기준선 갱신
+        result: 356개 Markdown·353개 비메타 문서, 블록 수식 593개로 기준선 갱신
       - command: npm run learning:audit:check
         result: 기초 학습 감사 기준선이 현재 wiki와 일치함을 확인
       - command: npm run sync:index
         result: 두 새 concept의 evidence 수와 목록을 index에 동기화
       - command: npm run lint:wiki
-        result: Markdown 354개·evidence 451건·immutable raw artifact 220개 검증 통과
-      - command: node scripts/build-site.mjs
-        result: 354개 wiki 문서에서 680개 사이트 페이지와 8,253개 해소된 위키 링크 생성
-      - command: npm test
-        result: 저장소 단위·회귀 테스트 122개 통과
-      - command: npm run test:browser
-        result: 디렉터리·검색·관계 탐색·390px 모바일 navigation 회귀 4개 통과
-      - command: BASE_PATH='' npm run verify
+        result: Markdown 356개·evidence 452건·immutable raw artifact 220개 검증 통과
+      - command: npm run verify
         result: >-
-          math 원장, 테스트 122개, Markdown 354개·evidence 451건·raw 220개,
-          site 680페이지·로컬 참조 45,988개와 Chromium 회귀 4개를 통과
+          math 원장, 테스트 122개, Markdown 356개·evidence 452건·raw 220개,
+          site 682페이지·로컬 참조 46,206개와 Chromium 회귀 4개를 통과
     notes: >-
-      기준 branch는 main이다. linear-algebra-foundations는 새 owner 두 개와
-      임베딩·어텐션·잔차·Transformer의 국소 설명을 연결해 완료했다. raw는 바꾸지
-      않았고, 공개 허브는 다음 필수 owner 배치가 준비될 때까지 planned 상태다.
+      기준 branch는 main이다. probability-information-foundations는 지수·로그와
+      엔트로피·교차 엔트로피·KL owner를 새로 만들고, 확률·조건부확률·softmax·
+      로그가능도·Perplexity와 CLIP·RLHF·GRPO의 국소 설명을 연결해 완료했다.
+      raw는 바꾸지 않았고, 공개 허브는 미분·최적화 owner가 준비될 때까지 planned 상태다.
 
 baseline:
   recorded_on: '2026-07-23'
   source: docs/foundational-learning-audit.md
-  wiki_documents: 354
-  non_meta_documents: 351
-  formula_documents: 170
-  formula_blocks: 580
+  wiki_documents: 356
+  non_meta_documents: 353
+  formula_documents: 172
+  formula_blocks: 593
 
 batches:
   - id: linear-algebra-foundations
@@ -74,7 +68,7 @@ batches:
 
   - id: probability-information-foundations
     title: 확률·로그·정보량의 기초
-    stage: planned
+    stage: complete
     families:
       - probability
       - conditional-chain-rule
@@ -211,7 +205,7 @@ families:
   - id: probability
     title: 확률과 확률모형
     domain: probability
-    coverage: established
+    coverage: ready
     owner:
       path: wiki/concepts/확률.md
       id: concept.확률
@@ -225,7 +219,7 @@ families:
   - id: conditional-chain-rule
     title: 조건부확률과 자기회귀 연쇄
     domain: probability
-    coverage: established
+    coverage: ready
     owner:
       path: wiki/concepts/조건부 확률.md
       id: concept.조건부-확률
@@ -240,7 +234,7 @@ families:
   - id: exponential-logarithm
     title: 지수와 로그
     domain: elementary-functions
-    coverage: planned
+    coverage: ready
     owner:
       path: wiki/concepts/지수와 로그.md
       id: concept.지수와-로그
@@ -254,7 +248,7 @@ families:
   - id: softmax
     title: 로짓을 범주형 확률분포로 바꾸는 softmax
     domain: probability
-    coverage: established
+    coverage: ready
     owner:
       path: wiki/concepts/소프트맥스.md
       id: concept.소프트맥스
@@ -270,7 +264,7 @@ families:
   - id: log-likelihood
     title: 로그가능도와 음의 로그가능도
     domain: statistics
-    coverage: established
+    coverage: ready
     owner:
       path: wiki/concepts/로그가능도.md
       id: concept.로그-가능도
@@ -286,7 +280,7 @@ families:
   - id: entropy-cross-entropy-kl
     title: 엔트로피·교차 엔트로피·KL 발산
     domain: information-theory
-    coverage: planned
+    coverage: ready
     owner:
       path: wiki/concepts/엔트로피·교차 엔트로피·KL 발산.md
       id: concept.엔트로피-교차-엔트로피-kl-발산
@@ -298,12 +292,13 @@ families:
       - wiki/concepts/CLIP.md
       - wiki/concepts/인간 피드백 강화학습.md
       - wiki/concepts/그룹 상대 정책 최적화.md
-    notes: 정보량, 기대 부호 길이 해석, NLL과의 조건부 동일성, 분포 간 차이의 범위를 맡는다.
+    notes: 정보량·평균 부호 길이 해석·교차 엔트로피·KL을 한 owner에 둔다.
+      one-hot 정답에서의 NLL 일치와 서로 다른 분포·지원집합에서의 해석 한계를 맡는다.
 
   - id: perplexity
     title: 평균 로그손실의 지수 변환과 Perplexity
     domain: evaluation
-    coverage: established
+    coverage: ready
     owner:
       path: wiki/concepts/Perplexity.md
       id: concept.perplexity

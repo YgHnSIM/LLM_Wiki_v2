@@ -48,6 +48,7 @@ related:
   - concept.dall-e-2021
   - concept.dall-e-2
   - concept.flamingo
+  - concept.엔트로피-교차-엔트로피-kl-발산
   - concept.transformer
   - concept.합성곱-신경망
   - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
@@ -95,6 +96,8 @@ s_{ij}=\exp(t)\,v_i^\top t_j,
 $$
 
 여기서 $t$는 logit의 척도를 조절하도록 log-parameterization으로 직접 학습되는 logit-scale parameter다. CLIP은 각 이미지가 정답 텍스트를 고르는 행 방향 교차 엔트로피와 각 텍스트가 정답 이미지를 고르는 열 방향 교차 엔트로피를 평균한다.
+
+이 문서에서는 두 방향 대조 목적의 입력 축과 정답 쌍을 설명한다. one-hot 정답에서 교차 엔트로피가 음의 로그확률이 되는 이유, 분포형 label과 KL의 구분은 [[엔트로피·교차 엔트로피·KL 발산]]에서 완전하게 다룬다.
 
 $$
 \mathcal{L}_{\mathrm{CLIP}}
@@ -207,6 +210,7 @@ Prompt wording과 후보 클래스 설계는 정확도와 편향을 함께 바�
 
 ## 관련 항목
 
+- [[엔트로피·교차 엔트로피·KL 발산]]
 - [[070_CLIP과 대조적 언어-이미지 사전 학습]]
 - [[075_DALL·E와 이산 이미지 토큰 생성]]
 - [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]]
