@@ -4467,6 +4467,28 @@ raw 등록 해시:
 - 벡터·상대 거리·softmax 수치는 수식 재현을 위한 편집부 설명용 값이며, 원 논문의 hidden activation이나 attention map이 아니다.
 - 논문의 relative positional encoding은 Transformer-XL의 특정 재매개변수화다. 이후 모든 상대 위치 방식이나 현대 KV cache의 일반 정의로 확대하지 않는다.
 
+## [2026-07-23] content | BERT 개선 세 축의 확률·훈련량·parameter 계산
+
+변경 내용:
+
+- [[XLNet·RoBERTa·ALBERT]]와 [[061_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]]에 BERT MLM의 $-\sum\log p$ 기준식, 15%·80/10/10 입력 recipe와 설명용 손실 계산을 추가했다.
+- XLNet에는 순열 결합확률·기대 로그가능도, $z=(2,1,3)$의 세 조건부확률, 실제 partial prediction의 $c,K$ 근사, two-stream attention의 $Q/KV$ mask와 target-aware softmax를 넣었다. 설명용 세 후보 softmax와 stable-softmax 이유도 함께 적었다.
+- RoBERTa에는 dynamic masking을 재표집 일정으로 구분하고, $N_{\mathrm{seq}}=S\times B$로 BERT 2.56억 회와 RoBERTa 40억 회를 계산했다. 실제 token 노출은 $\ell_{s,b}$와 $B_s$를 더해야 하며 같은 sequence 횟수가 같은 token·FLOPs가 아님을 명시했다.
+- ALBERT에는 $V\times H\rightarrow V\times E+E\times H$의 one-hot·projection shape, $V=30{,}000,H=768,E=128$ 산술, cross-layer sharing의 저장량과 반복 계산 분리, SOP 이진 손실을 보강했다.
+- 표 안의 $\widetilde{x}$가 KaTeX SVG 경로 텍스트로 깨지는 렌더링을 발견해, 같은 뜻의 입력 표기 $x^{\mathrm{in}}$로 바꾸고 기호표·손실식·본문을 함께 동기화했다.
+- BERT·XLNet·RoBERTa·ALBERT 1차 논문을 다시 대조하고, [[index]]의 concept 근거 수와 기초 학습 감사 보고서를 동기화했다.
+
+검증 결과:
+
+- `npm run learning:audit`, `npm run learning:audit:check`, `npm run sync:index`, `npm run verify`로 수식·근거·링크·raw 해시·사이트 산출물·브라우저 회귀를 확인했다.
+- 대표 개념·소스 페이지는 실제 브라우저에서 KaTeX 오류와 desktop·mobile 수식·표 가로 넘침을 별도로 점검했다.
+
+남은 제한:
+
+- 순열·softmax·손실·embedding 산술의 작은 벡터와 확률은 편집부 설명용 값이며, 원 논문의 activation·학습 log·benchmark 수치를 재현하지 않는다.
+- $S\times B$는 sequence 제시 횟수이고, corpus의 고유 예시 수·실제 token 수·동일 hardware FLOPs를 확정하지 않는다.
+- $VE+EH$는 token embedding 부분만의 parameter 식이다. 전체 성능·latency·현대 배포 적합성을 그 식 하나나 2019년 benchmark로 일반화하지 않는다.
+
 ## 관련 항목
 
 - [[index]]

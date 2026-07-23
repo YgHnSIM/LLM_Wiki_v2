@@ -205,7 +205,7 @@ related:
 - [[GLUE와 SuperGLUE]] — 여러 영어 NLU 과제·metric·test server·leaderboard를 묶어 broad transfer를 비교하는 평가 suite (근거 5개)
 - [[BIG-bench와 MMLU]] — MMLU의 과목별 객관식 정확도와 BIG-bench의 task별 preferred metric 정규화 평균을 분리하고 subset·prompt·shot·scoring·오염·사람 기준을 점수의 일부로 기록하는 종합 평가 benchmark (근거 5개)
 - [[HELM]] — 시나리오·적응·메트릭·실행을 분리해 언어 모델의 정확도·위험·비용을 같은 조건과 원시 출력으로 비교하는 다차원 평가 프레임워크 (근거 1개)
-- [[XLNet·RoBERTa·ALBERT]] — BERT 이후의 objective·training recipe·parameterization 개선을 비용 조건과 함께 비교하는 세 모델 묶음 (근거 3개)
+- [[XLNet·RoBERTa·ALBERT]] — BERT 이후의 objective·training recipe·parameterization 개선을 비용 조건과 함께 비교하는 세 모델 묶음 (근거 4개)
 - [[XLM]] — shared multilingual encoder에서 CLM·MLM과 병렬 문장쌍 TLM을 구분하고 교차 언어 전이를 학습하는 방법군 (근거 2개)
 - [[T5]] — task를 text target으로 통합하고 sentinel span corruption 뒤 과제별 supervised fine-tuning으로 전이하는 encoder–decoder model family (근거 3개)
 - [[The Pile]] — 22개 component·epoch 가중치·BPB 평가를 deduplication·decontamination·underlying rights와 구분하는 825.18 GiB 영어 중심 말뭉치 (근거 2개)
