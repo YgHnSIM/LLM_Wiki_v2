@@ -4489,6 +4489,29 @@ raw 등록 해시:
 - $S\times B$는 sequence 제시 횟수이고, corpus의 고유 예시 수·실제 token 수·동일 hardware FLOPs를 확정하지 않는다.
 - $VE+EH$는 token embedding 부분만의 parameter 식이다. 전체 성능·latency·현대 배포 적합성을 그 식 하나나 2019년 benchmark로 일반화하지 않는다.
 
+## [2026-07-23] content | XLM 다국어 사전 학습의 수식·전이 경계
+
+변경 내용:
+
+- [[XLM]]에 token·position·language embedding의 합과 shape, shared BPE sampling의 $p_i\rightarrow q_i$ 계산, 100:25 corpus의 $\alpha=0.5$ 손계산을 추가했다. BPE 어휘 구성의 $\alpha=0.5$와 CLM·MLM batch 언어 선택의 $\alpha=0.7$을 분리했다.
+- CLM·MLM·TLM의 음의 log-likelihood를 정답 token·문맥·mask 집합별로 풀고, 정답 확률 0.8·0.2의 loss와 15%·80/10/10 mask recipe를 작은 예로 계산했다.
+- 병렬 문장쌍의 양쪽 mask를 합산하는 TLM loss와 target sequence 전체를 생성하는 NMT loss를 나란히 제시해, 번역문이 출력 정답이 아니라 추가 복원 문맥이라는 경계를 명시했다.
+- 영어 NLI fine-tuning의 encoder·선형 classifier·softmax 경로와 target-language label 없는 XNLI zero-shot 조건을 자료·label·채점의 세 단계로 나눴다. 75.1−71.5=3.6%p가 TLM objective만의 보편 인과가 아니라 parallel data를 포함한 해당 설정의 비교임도 기록했다.
+- [[062_XLM과 교차 언어 사전 학습]]에는 같은 설명을 원 논문의 data·구현·평가 조건에 맞춰 독립적으로 정리하고, frontmatter 관계에 [[같은 병렬 문장은 무엇을 학습시키는가]]를 동기화했다.
+- 확인 질문 안의 inline subscript 수식이 Markdown 강조와 충돌하는 실제 렌더링 문제를 발견해 평문 loss 명칭으로 바꾸고, 본문 display 수식은 유지했다.
+
+검증 결과:
+
+- Conneau·Lample의 NeurIPS 2019 원 논문 §§3.1–3.5, Figure 1, §§4–5와 Tables 1–5를 다시 대조했다.
+- npm run learning:audit, npm run learning:audit:check, npm run sync:index, npm run verify를 통과했다. verify는 단위 테스트 106개, Markdown 351개·evidence 449건·immutable raw artifact 220개, HTML 677개·로컬 참조 45,563개, Chromium 회귀 4개를 포함한다.
+- 실제 browser에서 개념 문서 desktop과 소스 문서 mobile의 수식·표를 확인했다. 가로 넘침, 콘솔 메시지, KaTeX parse error는 없었다.
+
+남은 제한:
+
+- $p_i$, $q_i$, 확률·loss·문장쌍의 작은 수치 예는 수식 재현을 위한 편집부 설명용 값이며, 원 XLM 훈련의 BPE 표본·activation·attention map이 아니다.
+- XNLI·MT·Nepali perplexity·word similarity는 서로 다른 data와 지표의 결과다. 하나의 범용 다국어 능력·언어 형평성·배포 비용 점수로 합치지 않는다.
+- TLM이 없는 언어, 병렬 data의 품질, shared capacity의 언어별 간섭과 native evaluation은 이 논문 한 편의 평균 결과만으로 해소되지 않는다.
+
 ## 관련 항목
 
 - [[index]]
