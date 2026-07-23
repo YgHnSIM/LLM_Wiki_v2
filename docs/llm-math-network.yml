@@ -8,45 +8,53 @@ initiative:
     id: analysis.llm을-만든-수학
     batch: hub-publication
     stage: planned
-  current_batch: calculus-optimization-foundations
+  current_batch: hub-publication
   next_action: >-
-    npm run math:status를 실행한 뒤 calculus-optimization-foundations의
-    derivative-partial-gradient·chain-rule-computation-graph owner 경계를 확정하기 위해
-    wiki/concepts/경사하강법.md, wiki/concepts/역전파.md,
-    wiki/concepts/다층 퍼셉트론.md, wiki/concepts/Transformer.md의 최소 scalar 예·기울기 표기·계산 그래프 설명을 감사한다.
+    npm run math:status를 실행한 뒤 hub-publication의 embeddings·attention·
+    conditional-chain-rule·softmax·log-likelihood·backpropagation·gradient-descent·
+    residual-connections owner 경로를 감사하고,
+    wiki/analyses/LLM을 만든 수학.md에서 token ID부터 한 번의 SGD update까지의
+    작은 예를 설계한다.
   blockers: []
   handoff:
     updated: '2026-07-23'
-    baseline_commit: 60f14ca60b7a1823b76fdb209b4df0e6102b5600
-    last_completed_gate: probability-information-foundations-g7-verified
+    baseline_commit: 1398f9391d7d2528770db2b3641b7cbe44f46c45
+    last_completed_gate: calculus-optimization-foundations-g7-verified
     validation:
       - command: npm run math:check
-        result: 6개 배치·25개 수식 계열의 구조·owner·선수 관계와 완료 배치 상태 검증 통과
+        result: 6개 배치·25개 수식 계열의 구조·owner·선수 관계와 calculus 완료 상태 검증 통과
       - command: npm run learning:audit
-        result: 356개 Markdown·353개 비메타 문서, 블록 수식 593개로 기준선 갱신
+        result: 358개 Markdown·355개 비메타 문서, 블록 수식 620개로 기준선 갱신
       - command: npm run learning:audit:check
         result: 기초 학습 감사 기준선이 현재 wiki와 일치함을 확인
       - command: npm run sync:index
-        result: 두 새 concept의 evidence 수와 목록을 index에 동기화
+        result: 두 새 calculus concept의 evidence 수와 목록을 index에 동기화
       - command: npm run lint:wiki
-        result: Markdown 356개·evidence 452건·immutable raw artifact 220개 검증 통과
-      - command: npm run verify
+        result: Markdown 358개·evidence 452건·immutable raw artifact 220개 검증 통과
+      - command: BASE_PATH='' npm run build
         result: >-
-          math 원장, 테스트 122개, Markdown 356개·evidence 452건·raw 220개,
-          site 682페이지·로컬 참조 46,206개와 Chromium 회귀 4개를 통과
+          site 684페이지·로컬 참조 46,432개, unresolved target 0개를 통과
+      - command: BASE_PATH='' npm run test:browser
+        result: Chromium 디렉터리·검색·관계 탐색·390px 모바일 navigation 회귀 4개를 통과
+      - command: BASE_PATH='' npm run verify
+        result: >-
+          math 원장, 122개 Node 회귀, Markdown 358개·evidence 452건·raw 220개,
+          site 684페이지·로컬 참조 46,432개와 Chromium 회귀 4개를 통과
     notes: >-
-      기준 branch는 main이다. probability-information-foundations는 지수·로그와
-      엔트로피·교차 엔트로피·KL owner를 새로 만들고, 확률·조건부확률·softmax·
-      로그가능도·Perplexity와 CLIP·RLHF·GRPO의 국소 설명을 연결해 완료했다.
-      raw는 바꾸지 않았고, 공개 허브는 미분·최적화 owner가 준비될 때까지 planned 상태다.
+      기준 branch는 main이다. calculus-optimization-foundations는
+      미분·편미분·그래디언트와 연쇄 법칙·계산 그래프 owner를 새로 만들고,
+      경사하강법·역전파의 scalar 예와 matrix shape를 보강했다.
+      Adam·다층 퍼셉트론·Transformer·순환 신경망·대규모 언어 모델에는 필요한
+      국소 표기와 owner 링크만 남겼다. raw는 바꾸지 않았고,
+      다음 hub-publication은 이 준비된 경로를 작은 token-to-update 예로 합성한다.
 
 baseline:
   recorded_on: '2026-07-23'
   source: docs/foundational-learning-audit.md
-  wiki_documents: 356
-  non_meta_documents: 353
-  formula_documents: 172
-  formula_blocks: 593
+  wiki_documents: 358
+  non_meta_documents: 355
+  formula_documents: 176
+  formula_blocks: 620
 
 batches:
   - id: linear-algebra-foundations
@@ -88,7 +96,7 @@ batches:
 
   - id: calculus-optimization-foundations
     title: 변화율·역전파·최적화의 기초
-    stage: planned
+    stage: complete
     families:
       - derivative-partial-gradient
       - chain-rule-computation-graph
@@ -328,7 +336,7 @@ families:
   - id: derivative-partial-gradient
     title: 미분·편미분·그래디언트
     domain: calculus
-    coverage: planned
+    coverage: ready
     owner:
       path: wiki/concepts/미분·편미분·그래디언트.md
       id: concept.미분-편미분-그래디언트
@@ -337,12 +345,15 @@ families:
       - wiki/concepts/경사하강법.md
       - wiki/concepts/역전파.md
       - wiki/concepts/Adam 최적화기.md
-    notes: 함수·합성함수의 최소 정의를 포함하고 도함수·편미분·방향·그래디언트를 구분한다.
+    notes: >-
+      한 변수 변화율, 편미분, 방향미분과 그래디언트의 정의·shape·국소 근사를 맡는다.
+      해석적 기울기 8과 중심 차분 8의 일치를 확인했다.
+      합성 경로를 따라 미분을 곱하고 합치는 규칙은 chain-rule-computation-graph owner로 넘긴다.
 
   - id: chain-rule-computation-graph
     title: 연쇄 법칙과 계산 그래프
     domain: calculus
-    coverage: planned
+    coverage: ready
     owner:
       path: wiki/concepts/연쇄 법칙과 계산 그래프.md
       id: concept.연쇄-법칙과-계산-그래프
@@ -351,12 +362,15 @@ families:
     downstream:
       - wiki/concepts/역전파.md
       - wiki/concepts/순환 신경망.md
-    notes: 합성함수의 국소 도함수, 여러 경로의 합과 역모드 누적을 맡는다.
+    notes: >-
+      합성함수의 국소 도함수, 재사용 노드로 들어오는 여러 경로의 합, 역모드 누적을 맡는다.
+      $a=wx+b$, $J=(a-y)^2$와 재사용 노드 예를 손으로 검증했다.
+      도함수·편미분·그래디언트의 정의와 방향 해석은 derivative-partial-gradient owner를 전제로 한다.
 
   - id: gradient-descent
     title: 그래디언트 기반 매개변수 갱신
     domain: optimization
-    coverage: needs_upgrade
+    coverage: ready
     owner:
       path: wiki/concepts/경사하강법.md
       id: concept.경사하강법
@@ -365,12 +379,14 @@ families:
     downstream:
       - wiki/concepts/Adam 최적화기.md
       - wiki/concepts/대규모 언어 모델.md
-    notes: 현재 문서에 명시적 갱신식, 숫자 예, 경계값과 대안 비교를 추가해야 한다.
+    notes: >-
+      명시적 갱신식, $J(w)=(2w-1)^2$의 한 걸음, 중심 차분 확인,
+      batch·SGD·Adam의 역할 차이와 비볼록·학습률 한계를 보강했다.
 
   - id: backpropagation
     title: 역모드 자동미분과 역전파
     domain: calculus
-    coverage: needs_upgrade
+    coverage: ready
     owner:
       path: wiki/concepts/역전파.md
       id: concept.역전파
@@ -380,7 +396,9 @@ families:
       - wiki/concepts/다층 퍼셉트론.md
       - wiki/concepts/Transformer.md
       - wiki/concepts/순환 신경망.md
-    notes: 현재 문서에 연쇄 법칙의 생략 없는 scalar 유도와 shape가 있는 예를 추가해야 한다.
+    notes: >-
+      연쇄 법칙의 생략 없는 scalar 유도와
+      $W\in\mathbb R^{r\times d}$의 outer-product gradient shape 예를 추가했다.
 
   - id: adam
     title: 모멘트 추정과 Adam 갱신

@@ -69,6 +69,9 @@ related:
   - concept.어텐션-메커니즘
   - concept.소프트맥스
   - concept.다층-퍼셉트론
+  - concept.미분-편미분-그래디언트
+  - concept.연쇄-법칙과-계산-그래프
+  - concept.역전파
   - concept.whisper
   - concept.flashattention
   - concept.신경망-기계-번역
@@ -249,6 +252,8 @@ $$
 
 첫 선형 변환은 feature를 넓은 내부 공간으로 옮기고, ReLU는 음수를 0으로 만들어 비선형성을 넣으며, 둘째 선형 변환은 다시 residual stream 차원으로 돌린다. ReLU가 없다면 두 선형 변환과 bias의 합성은 하나의 선형 변환으로 합칠 수 있어 두 층을 쓴 목적이 줄어든다. FFN은 위치 사이 정보를 섞지 않는다. 그 역할은 앞선 attention이 맡는다.
 
+훈련 때 최종 token 손실 $J$는 FFN의 $W_1,b_1,W_2,b_2$뿐 아니라 attention 투영과 embedding에도 의존한다. [[역전파]]는 순전파에서 저장한 각 위치·head의 중간값을 사용해 $J$의 편미분을 역순으로 누적한다. 같은 residual stream이 shortcut과 sublayer 두 경로로 쓰이면 그 기울기 기여도 더한다. 이 계산은 [[연쇄 법칙과 계산 그래프]]의 규칙을 block의 실제 shape에 적용한 것이며, 기울기를 얻은 뒤의 갱신은 별도의 optimizer가 맡는다.
+
 ### residual과 LayerNorm: block을 연결하는 규칙
 
 원 Transformer의 각 sublayer는 Post-LN으로 연결됐다.
@@ -385,6 +390,9 @@ Wiegreffe·Pinter는 ‘설명’의 정의와 모델 전체를 고려해야 한
 - [[어텐션 메커니즘]]
 - [[소프트맥스]]
 - [[다층 퍼셉트론]]
+- [[미분·편미분·그래디언트]]
+- [[연쇄 법칙과 계산 그래프]]
+- [[역전파]]
 - [[Whisper]]
 - [[FlashAttention]]
 - [[신경망 기계 번역]]

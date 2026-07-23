@@ -11,9 +11,10 @@ tags:
   - type/concept
   - domain/ai
   - domain/machine-learning
+  - domain/mathematics
   - domain/optimization
 created: '2026-07-18'
-updated: '2026-07-21'
+updated: '2026-07-23'
 lifecycle: active
 verification: verified
 artifacts:
@@ -34,6 +35,7 @@ evidence:
     relation: contextualizes
 related:
   - source.044
+  - concept.미분-편미분-그래디언트
   - concept.경사하강법
   - concept.역전파
 ---
@@ -41,7 +43,7 @@ related:
 
 > [!note] 학습 안내
 > **난이도:** 심화<br>
-> **선수 지식:** [[경사하강법]], [[역전파]]<br>
+> **선수 지식:** [[미분·편미분·그래디언트]], [[경사하강법]], [[역전파]]<br>
 > **읽고 나면:** Adam이 그래디언트의 1차·2차 모멘트 이동 평균으로 좌표별 갱신을 만드는 방식을 설명하고, 기본값·수렴·AdamW의 범위를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -54,6 +56,8 @@ Adam(Adaptive Moment Estimation)은 확률적 그래디언트의 1차·2차 raw 
 
 Adam은 현재 그래디언트를 이전 단계의 두 이동 평균에 반영한다. 한 평균은 최근 방향을 매끄럽게 하고 다른 평균은 좌표별 그래디언트 크기의 이력을 반영해 최종 갱신을 조절한다.
 
+현재 gradient $g_t=\nabla_\theta J_t$는 $\theta$와 같은 shape이고, $m_t,v_t$도 그 각 좌표에 대응하는 같은 shape의 상태다. 따라서 Adam은 그래디언트가 어디서 계산됐는지를 바꾸지 않는다. 도함수·그래디언트의 국소 뜻은 [[미분·편미분·그래디언트]], 가장 단순한 음의 그래디언트 갱신은 [[경사하강법]]이 맡고, Adam은 그 뒤의 좌표별 update rule을 정한다.
+
 ### 무엇을 추정하는가
 
 $m_t$는 최근 gradient의 지수 평균이고 $v_t$는 최근 squared gradient의 지수 평균이다. $v_t$를 Hessian, curvature, gradient variance 또는 noise의 직접 추정치라고 부르지 않는다. Adam은 층의 의미를 알아서 최적 학습률을 배정하지 않고 관측된 좌표별 gradient 규모와 방향 이력으로 preconditioned update를 만든다.
@@ -65,7 +69,7 @@ $m_t$는 최근 gradient의 지수 평균이고 $v_t$는 최근 squared gradient
 현재 그래디언트 $g_t$에 대해
 
 $$
-m_t=\beta_1m_{t-1}+(1-\beta_1)g_t,qquad
+m_t=\beta_1m_{t-1}+(1-\beta_1)g_t,\qquad
 v_t=\beta_2v_{t-1}+(1-\beta_2)g_t^2
 $$
 
@@ -122,5 +126,6 @@ $$
 ## 관련 항목
 
 - [[044_GloVe와 Adam의 서로 다른 2014년 전환]]
+- [[미분·편미분·그래디언트]]
 - [[경사하강법]]
 - [[역전파]]

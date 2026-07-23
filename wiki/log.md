@@ -4635,6 +4635,26 @@ raw 등록 해시:
 - 지수·로그·정보량 예의 수치는 함수와 분포 관계를 보이는 편집부 계산이며, Shannon·Kullback–Leibler·Bengio 등의 실험 결과를 재현하지 않는다.
 - 낮은 교차 엔트로피·KL 또는 perplexity가 사실성·안전성·인간 선호·강화학습 보상의 적절성을 자동으로 보장하지 않는다. 허브는 미분·계산 그래프·갱신 owner가 준비될 때까지 planned 상태를 유지한다.
 
+## [2026-07-23] content | LLM 미분·최적화 기초 경로
+
+변경 내용:
+
+- [[미분·편미분·그래디언트]]와 [[연쇄 법칙과 계산 그래프]]를 새 concept owner로 만들었다. 전자는 도함수·편미분·그래디언트의 shape와 국소 방향을, 후자는 합성 경로의 국소 도함수 곱·재사용 노드의 기울기 합산·역모드 누적을 맡는다.
+- [[경사하강법]]과 [[역전파]]에는 명시적 update, 생략 없는 scalar 미분, 행렬 가중치·편향 gradient shape를 추가했다. [[Adam 최적화기]], [[다층 퍼셉트론]], [[Transformer]], [[순환 신경망]], [[대규모 언어 모델]]에는 현재 계산의 기호·shape·가정과 완전한 owner 유도 링크만 보강했다.
+- [[index]]와 [[overview]]에 손실에서 가중치 갱신으로 가는 학습 경로를 추가하고, 기초 학습 감사와 수학 원장을 완료 배치와 다음 허브 작업에 맞췄다.
+
+검증 결과:
+
+- 편집부 예를 손으로 재계산했다. $J(w)=(2w-1)^2$, $w=1.5$에서 해석적 $dJ/dw=8$과 중심 차분 $(J(1.501)-J(1.499))/0.002=8$이 일치하며, $\eta=0.1$ 갱신 뒤 $w=0.7$, $J=0.16$이다. $a=Wx+b$의 $\partial J/\partial W=\bar a x^{\mathsf T}$는 $r\times d$ shape를 보존한다.
+- npm run math:check, npm run learning:audit, npm run learning:audit:check, npm run sync:index, npm run lint:wiki, root BASE_PATH의 사이트 build·검사와 122개 Node 회귀를 통과했다. 사이트는 684페이지·46,432개 로컬 참조·미해결 target 0개를 확인했다.
+- 새 두 owner 페이지는 정적 HTML에서 KaTeX error 표지 0개와 각각 38개 KaTeX 수식 표지를 보였고, root BASE_PATH Chromium 회귀는 검색·관계 탐색·390px mobile navigation을 포함한 4개를 통과했다.
+
+남은 제한:
+
+- 수식의 숫자는 변화율·연쇄 법칙·갱신 구조를 재현하는 편집부 예이며, 특정 논문의 학습 run이나 대규모 모델의 optimizer state를 재현하지 않는다.
+- 미분과 연쇄 법칙의 수학적 형성 전체나 단일 발명 계보는 이 배치의 evidence로 주장하지 않는다. 등록 근거는 수치·기계학습 도입과 현재 LLM 계산의 역할을 구분해 지지한다.
+- 다음 hub-publication은 준비된 owner를 token ID부터 한 번의 parameter update까지 이어지는 작은 예로 합성한다.
+
 ## 관련 항목
 
 - [[index]]
