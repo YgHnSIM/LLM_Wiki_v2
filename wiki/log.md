@@ -4655,6 +4655,24 @@ raw 등록 해시:
 - 미분과 연쇄 법칙의 수학적 형성 전체나 단일 발명 계보는 이 배치의 evidence로 주장하지 않는다. 등록 근거는 수치·기계학습 도입과 현재 LLM 계산의 역할을 구분해 지지한다.
 - 다음 hub-publication은 준비된 owner를 token ID부터 한 번의 parameter update까지 이어지는 작은 예로 합성한다.
 
+## [2026-07-23] content | LLM을 만든 수학 허브
+
+변경 내용:
+
+- [[LLM을 만든 수학]]에서 4-token·2차원 toy causal attention을 통해 ID lookup, causal mask, attention 가중합, residual 덧셈, 4개 출력 logit, softmax 조건부확률, NLL, 출력 bias 한 좌표의 역전파와 SGD 갱신을 한 흐름으로 연결했다.
+- 완전한 유도는 [[단어 임베딩]], [[어텐션 메커니즘]], [[잔차 연결]], [[소프트맥스]], [[조건부 확률]], [[로그가능도]], [[역전파]], [[경사하강법]] owner에 남기고, 허브에는 각 단계의 현재 shape·입력·출력·설계 단순화와 owner 경로를 함께 기록했다.
+- [[index]]와 [[overview]]에 허브 진입점과 현재 범위를 반영했고, 다음 배치를 통계·정규화·수치 안정성 owner 감사로 넘겼다.
+
+검증 결과:
+
+- 둘째 attention 행은 $(0.330238,0.669762)$, residual 표현은 $(0.330238,1.669762)$, 출력 확률은 $(0.035746,0.049734,0.189844,0.724676)$로 재계산했고 합이 1임을 확인했다. $b_3$의 해석적 gradient $-0.275324$와 중심 차분이 일치하며, $\eta=0.1$ 갱신 뒤 정답 확률은 약 $0.730136$, NLL은 $0.322030$에서 $0.314525$로 줄었다.
+- npm run math:check, npm run learning:audit, npm run learning:audit:check, npm run sync:index, npm run lint:wiki와 root BASE_PATH의 전체 verify를 통과했다. 정적 허브 HTML은 KaTeX error 표지 0개와 KaTeX 수식 표지 62개를 보였다.
+
+남은 제한:
+
+- 이 숫자는 실제 LLM의 activation·훈련 run이 아니라 연산 경로를 재현하는 편집부 예다. LayerNorm·FFN·다층·batch 평균·Adam state·분산 실행은 의도적으로 생략했다.
+- attention weight, 낮은 NLL, 한 bias 갱신을 설명·사실성·일반화·안전성의 자동 증거로 읽지 않는다. 수학의 형성·수치 계산·기계학습 도입·현대 LLM 사용도 단일 직접 계보로 합치지 않는다.
+
 ## 관련 항목
 
 - [[index]]

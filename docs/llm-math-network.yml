@@ -7,54 +7,54 @@ initiative:
     path: wiki/analyses/LLM을 만든 수학.md
     id: analysis.llm을-만든-수학
     batch: hub-publication
-    stage: planned
-  current_batch: hub-publication
+    stage: complete
+  current_batch: statistics-and-stability
   next_action: >-
-    npm run math:status를 실행한 뒤 hub-publication의 embeddings·attention·
-    conditional-chain-rule·softmax·log-likelihood·backpropagation·gradient-descent·
-    residual-connections owner 경로를 감사하고,
-    wiki/analyses/LLM을 만든 수학.md에서 token ID부터 한 번의 SGD update까지의
-    작은 예를 설계한다.
+    npm run math:status를 실행한 뒤 statistics-and-stability의
+    random-variable-expectation-variance·normalization-statistics·numerical-stability·adam
+    owner 경계를 정하기 위해 wiki/concepts/Layer Normalization.md,
+    wiki/concepts/RMSNorm.md, wiki/concepts/Adam 최적화기.md,
+    wiki/concepts/소프트맥스.md, wiki/concepts/FlashAttention.md를 감사한다.
   blockers: []
   handoff:
     updated: '2026-07-23'
-    baseline_commit: 1398f9391d7d2528770db2b3641b7cbe44f46c45
-    last_completed_gate: calculus-optimization-foundations-g7-verified
+    baseline_commit: 1c39e2cd61c8c9b3e60c49b81e613c69f349cd66
+    last_completed_gate: hub-publication-g7-verified
     validation:
       - command: npm run math:check
         result: 6개 배치·25개 수식 계열의 구조·owner·선수 관계와 calculus 완료 상태 검증 통과
       - command: npm run learning:audit
-        result: 358개 Markdown·355개 비메타 문서, 블록 수식 620개로 기준선 갱신
+        result: 359개 Markdown·356개 비메타 문서, 블록 수식 633개로 기준선 갱신
       - command: npm run learning:audit:check
         result: 기초 학습 감사 기준선이 현재 wiki와 일치함을 확인
       - command: npm run sync:index
-        result: 두 새 calculus concept의 evidence 수와 목록을 index에 동기화
+        result: LLM 수학 허브의 evidence 수와 목록을 index에 동기화
       - command: npm run lint:wiki
-        result: Markdown 358개·evidence 452건·immutable raw artifact 220개 검증 통과
+        result: Markdown 359개·evidence 452건·immutable raw artifact 220개 검증 통과
       - command: BASE_PATH='' npm run build
         result: >-
-          site 684페이지·로컬 참조 46,432개, unresolved target 0개를 통과
+          site 685페이지·로컬 참조 46,549개, unresolved target 0개를 통과
       - command: BASE_PATH='' npm run test:browser
         result: Chromium 디렉터리·검색·관계 탐색·390px 모바일 navigation 회귀 4개를 통과
       - command: BASE_PATH='' npm run verify
         result: >-
-          math 원장, 122개 Node 회귀, Markdown 358개·evidence 452건·raw 220개,
-          site 684페이지·로컬 참조 46,432개와 Chromium 회귀 4개를 통과
+          math 원장, 122개 Node 회귀, Markdown 359개·evidence 452건·raw 220개,
+          site 685페이지·로컬 참조 46,549개와 Chromium 회귀 4개를 통과
     notes: >-
-      기준 branch는 main이다. calculus-optimization-foundations는
-      미분·편미분·그래디언트와 연쇄 법칙·계산 그래프 owner를 새로 만들고,
-      경사하강법·역전파의 scalar 예와 matrix shape를 보강했다.
-      Adam·다층 퍼셉트론·Transformer·순환 신경망·대규모 언어 모델에는 필요한
-      국소 표기와 owner 링크만 남겼다. raw는 바꾸지 않았고,
-      다음 hub-publication은 이 준비된 경로를 작은 token-to-update 예로 합성한다.
+      기준 branch는 main이다. hub-publication은 4-token·2차원 toy causal attention으로
+      ID lookup, attention·residual, 4개 logit의 softmax·NLL, 출력 bias 한 좌표의
+      역전파·SGD update를 한 흐름으로 공개했다. 해석적 gradient -0.275324와 중심 차분이
+      일치하고 update 뒤 NLL은 0.322030에서 0.314525로 줄었다.
+      raw는 바꾸지 않았고, 다음 statistics-and-stability는 확률변수·정규화·수치 안정성·Adam
+      owner와 현재 소비 문서를 감사하는 것부터 시작한다.
 
 baseline:
   recorded_on: '2026-07-23'
   source: docs/foundational-learning-audit.md
-  wiki_documents: 358
-  non_meta_documents: 355
-  formula_documents: 176
-  formula_blocks: 620
+  wiki_documents: 359
+  non_meta_documents: 356
+  formula_documents: 177
+  formula_blocks: 633
 
 batches:
   - id: linear-algebra-foundations
@@ -110,7 +110,7 @@ batches:
 
   - id: hub-publication
     title: LLM을 만든 수학 허브 공개
-    stage: planned
+    stage: complete
     families:
       - embeddings
       - attention
