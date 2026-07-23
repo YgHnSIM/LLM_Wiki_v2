@@ -4512,6 +4512,28 @@ raw 등록 해시:
 - XNLI·MT·Nepali perplexity·word similarity는 서로 다른 data와 지표의 결과다. 하나의 범용 다국어 능력·언어 형평성·배포 비용 점수로 합치지 않는다.
 - TLM이 없는 언어, 병렬 data의 품질, shared capacity의 언어별 간섭과 native evaluation은 이 논문 한 편의 평균 결과만으로 해소되지 않는다.
 
+## [2026-07-23] content | T5 통합 생성과 span corruption 기초 수식
+
+변경 내용:
+
+- [[T5]]에 입력·정답 token 열, task prefix의 역할과 한계, teacher forcing과 실제 생성의 조건 차이, encoder–decoder cross-attention·softmax·음의 로그가능도 경로를 추가했다.
+- 후보 확률·정답 열 확률·손실의 각 기호와 shape, 지수·정규화·로그를 쓰는 이유를 설명하고, 확률 0.8·0.5·0.25의 token 손실과 500×15%=75, 75÷25=3의 span 길이를 손으로 계산했다.
+- sentinel이 빈 구간과 복원 조각을 잇는 방식, 입력 약 450개·target 약 101개가 되는 이유, decoder 순차 단계와 전체 계산 비용의 차이를 분리했다.
+- [[063_T5와 Text-to-Text 통합 프레임워크]]에는 원 논문의 text-to-text 비교 범위, C4 filtering, multi-task pretraining 뒤 task별 fine-tuning, 18/24 결과와 WMT English→German 32.1 대 33.8 BLEU의 경계를 독립적으로 정리했다.
+- 모바일에서 긴 조건부 확률식이 수식 상자 안에서 가로 스크롤되는 것을 발견해, 자리별 확률을 $q_t$·$r_t$·$p_t(v)$로 먼저 정의하고 손실·mixture 식을 짧게 재표기했다. 의미와 조건은 본문에서 모두 풀어 썼다.
+
+검증 결과:
+
+- Raffel 외의 JMLR 2020 원 논문 §§2.1–2.4, §§3.1.4·3.2–3.7, Tables 2·11–15와 대조했다.
+- npm run learning:audit, npm run learning:audit:check, npm run sync:index, npm run verify를 통과했다. verify는 단위 테스트 106개, Markdown 351개·evidence 449건·immutable raw artifact 220개, HTML 677개·로컬 참조 45,578개, Chromium 회귀 4개를 포함한다.
+- 실제 browser에서 [[T5]]의 desktop과 [[063_T5와 Text-to-Text 통합 프레임워크]]의 mobile을 확인했다. 수정 뒤 콘솔 메시지·렌더링된 KaTeX error markup·페이지 가로 넘침은 없었다.
+
+남은 제한:
+
+- 확률·attention·손실의 작은 수치와 문장 예는 수식 재현을 위한 편집부 설명용 값이며, 원 T5 훈련의 activation·attention map·학습 log나 benchmark 결과를 재현하지 않는다.
+- 500 token·15%·25 span·평균 길이 3은 논문의 비교 설정을 풀어 쓴 값이다. 실제 tokenization, special token, batch·hardware와 attention 비용에 따라 정확한 길이와 wall-clock time은 달라진다.
+- text-to-text의 공통 interface는 공통 metric·label 의미·zero-shot 일반화·모든 과제에서의 최저 비용을 보장하지 않는다. T5-11B 결과의 원인을 prefix나 multi-task 학습 한 항으로 환원하지 않는다.
+
 ## 관련 항목
 
 - [[index]]
