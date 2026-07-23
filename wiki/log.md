@@ -4534,6 +4534,28 @@ raw 등록 해시:
 - 500 token·15%·25 span·평균 길이 3은 논문의 비교 설정을 풀어 쓴 값이다. 실제 tokenization, special token, batch·hardware와 attention 비용에 따라 정확한 길이와 wall-clock time은 달라진다.
 - text-to-text의 공통 interface는 공통 metric·label 의미·zero-shot 일반화·모든 과제에서의 최저 비용을 보장하지 않는다. T5-11B 결과의 원인을 prefix나 multi-task 학습 한 항으로 환원하지 않는다.
 
+## [2026-07-23] content | Likelihood foundations and GPT transfer paths
+
+변경 내용:
+
+- [[로그가능도]]를 새 기초 개념 문서로 만들었다. 확률과 가능도가 같은 확률식을 어느 쪽을 고정해 읽는지, Bernoulli 관측의 MLE·미분, 로그가 곱을 합으로 바꾸면서 argmax를 보존하는 이유, Bayes 사후확률과의 차이, 기대 NLL·교차 엔트로피·KL 분해, 자기회귀 언어 모델의 조건부 연쇄를 한 흐름으로 설명했다.
+- Fisher의 1922년 likelihood 정의, Bengio 외의 신경 확률 언어 모형, GPT-1의 로그가능도 목적을 evidence로 연결했다. 동전 네 번과 확률 수치는 수식의 의미를 보이는 편집부 계산임을 분리해 밝혔다.
+- [[GPT-1과 GPT-2]]와 [[059_GPT-1과 GPT-2의 전이 방식 변화]]에 $L_1$, $L_2$, $L_3$의 최대화 대상·각 기호·결합 이유를 보강하고, GPT-2의 WebText 구성, zero-shot 후보 채점, 규모 표와 1.5B 최종 공개의 범위를 공식 자료에 맞춰 정리했다.
+- 긴 원문 조건부확률은 본문에서 보존하되 현재 정답 확률을 $q_i$로 먼저 정의해 휴대폰에서도 계산식을 읽을 수 있게 했다. 로그가능도 문서의 긴 유도식은 관측별 항·정규화 상수·기대값·KL 항을 세로 단계로 나누어, 가로 스크롤 없이 각 계산의 이유를 따라가게 했다.
+- [[index]], [[overview]], 기초 학습 감사와 evidence 레지스트리를 새 문서·근거 수에 맞춰 동기화했다.
+
+검증 결과:
+
+- Fisher 1922년 논문 p. 310의 likelihood 정의와 p. 323의 maximum-likelihood 논의, Bengio 외 JMLR 2003 pp. 1141–1143, GPT-1 §2 Eqs. (1)–(3), GPT-2 원 논문과 OpenAI의 1.5B 최종 공개 기록을 대조했다.
+- npm run learning:audit, npm run learning:audit:check, npm run sync:index, npm run verify를 통과했다. verify는 단위 테스트 106개, Markdown 352개·evidence 451건·immutable raw artifact 220개, HTML 678개·로컬 참조 45,706개, Chromium 회귀 4개를 포함한다.
+- 실제 browser에서 새 [[로그가능도]]와 두 GPT 문서의 모바일 390px 수식 상자를 확인했다. 페이지·수식 상자의 가로 넘침, 콘솔 메시지, 렌더링된 KaTeX error markup은 없었다.
+
+남은 제한:
+
+- 동전 관측·확률·미분 수치는 가능도와 NLL의 구조를 보이는 편집부 예다. 실제 GPT 학습의 activation, batch 통계, parameter 경로를 재현하지 않는다.
+- 최대가능도는 정한 확률모형과 자료 안에서 높은 확률을 주는 모수를 고르는 기준이다. 자료 대표성, 모형 family, 사실성·안전성·공정성 또는 사용자 선호를 자동으로 보장하지 않는다.
+- GPT-2의 2019년 공개·평가 범위는 당시 보고의 맥락이다. 이후 모델의 성능·안전성·배포 조건으로 일반화하지 않는다.
+
 ## 관련 항목
 
 - [[index]]
