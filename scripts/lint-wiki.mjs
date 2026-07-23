@@ -25,6 +25,7 @@ import {
   pageRequiresStagedStructure,
   REQUIRE_STAGED_STRUCTURE_FOR_ALL_NON_META,
   strictStagedStructureEnabled,
+  terminalDisplayMathPeriodLines,
   validateStagedPageStructure,
 } from './lib/wiki-lint.mjs';
 
@@ -167,6 +168,9 @@ for (const document of documents) {
   if (data.verification === 'verified' && /\[!WARNING\]/i.test(document.body)) errors.push(`${document.relativePath}: verified page contains an unresolved WARNING callout.`);
   if (/^## 인용할 만한 구절\s*$/m.test(document.body)) errors.push(`${document.relativePath}: generated quote section must be converted to 핵심 문장 or sourced quotes.`);
   if (data.page_type !== 'meta' && /^>\s*[“"']/m.test(document.body)) errors.push(`${document.relativePath}: quote block lacks the structured citation format.`);
+  for (const lineNumber of terminalDisplayMathPeriodLines(document.body)) {
+    errors.push(`${document.relativePath}: display math block ends with a period at line ${lineNumber}; move sentence punctuation outside the formula.`);
+  }
 
 }
 

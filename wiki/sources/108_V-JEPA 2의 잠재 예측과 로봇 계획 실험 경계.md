@@ -87,7 +87,7 @@ $$
 \left\|
 P_\phi(E_\theta(x_{\setminus M}),M)_i
 -\operatorname{sg}(E_{\bar\theta}(x)_i)
-\right\|_1.
+\right\|_1
 $$
 
 $\operatorname{sg}$는 target 쪽 gradient를 막고, $\bar\theta$는 $\theta$의 EMA로 갱신된다. 이 objective는 pixel을 정확히 재구성하는 대신 teacher가 보존한 예측 가능한 표현에 맞춘다. 또한 negative sample을 분모에 두는 [[CLIP]]식 contrastive loss가 아니다. 원 웹글의 ‘맞는 future는 가깝게, 틀린 future는 멀게’라는 설명은 공식 objective를 바꾼다.
@@ -115,7 +115,7 @@ a_{t:t+H-1}^{*}
 =\arg\min_{a_{t:t+H-1}}
 \left\|
 \widehat z_{t+H}(z_t,a_{t:t+H-1})-z_{\text{goal}}
-\right\|_1.
+\right\|_1
 $$
 
 이 최적화는 cross-entropy method(CEM)로 근사한다. 한 번에 계획한 sequence의 첫 action만 실행하고 새 camera frame을 받은 뒤 다시 계획하는 receding-horizon control이다. 따라서 [[학습된 세계 모델|‘world model’]]은 정적인 scene embedding만이 아니라 action에 따른 latent transition을 제공하지만, 이 능력은 V-JEPA 2-AC와 DROID 후학습에 속한다.

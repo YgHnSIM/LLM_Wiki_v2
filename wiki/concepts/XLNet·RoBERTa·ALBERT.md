@@ -97,7 +97,7 @@ BERT와 RoBERTa가 공유하는 MLM의 핵심은 “가려진 위치의 원래 t
 
 $$
 \mathcal{L}_{\mathrm{MLM}}(\theta;x,M)
-=-\sum_{i\in M}\log p_\theta(x_i\mid x^{\mathrm{in}}).
+=-\sum_{i\in M}\log p_\theta(x_i\mid x^{\mathrm{in}})
 $$
 
 | 기호 | 뜻 | 종류·값의 범위 |
@@ -124,7 +124,7 @@ p_\theta(x\mid z)
 \max_\theta\;
 \mathbb{E}_{z\sim Z_T}
 \left[\sum_{t=1}^{T}\log p_\theta
-\left(x_{z_t}\mid x_{z_{<t}}\right)\right].
+\left(x_{z_t}\mid x_{z_{<t}}\right)\right]
 $$
 
 | 기호·연산 | 현재 식에서의 의미 |
@@ -143,7 +143,7 @@ $$
 p_\theta(x\mid z)
 =p_\theta(x_2)\,
 p_\theta(x_1\mid x_2)\,
-p_\theta(x_3\mid x_2,x_1).
+p_\theta(x_3\mid x_2,x_1)
 $$
 
 첫 항은 이미 공개된 token 내용이 없으므로 $x_2$ 자체의 분포를, 둘째·셋째 항은 순열상 앞선 내용에 조건부인 분포를 뜻한다. 이 예는 각 target이 항상 양방향 문맥을 모두 본다는 뜻이 아니다. **순열을 바꾸어 반복 학습하기 때문에** 같은 물리적 오른쪽 token도 어떤 target에는 먼저 공개된 문맥이 될 수 있다는 뜻이다.
@@ -158,7 +158,7 @@ $$
 \left[
 \sum_{t=c+1}^{T}
 \log p_\theta(x_{z_t}\mid x_{z_{<t}})
-\right].
+\right]
 $$
 
 $z_{\le c}$는 예측하지 않고 문맥으로 제공되는 앞부분, $z_{>c}$는 실제 target인 뒷부분이다. 뒤쪽 target일수록 해당 순열에서 이미 공개된 문맥이 길다. 논문은 대략 $1/K$의 token을 예측하도록 $T/(T-c)\approx K$를 두고, XLNet-Large에는 $K=6$을 사용했다. 이는 모든 항을 더하는 정의를 부정하는 것이 아니라, 그 기대값을 계산 가능한 방식으로 근사하는 공학적 선택이다.
@@ -207,7 +207,7 @@ p_\theta(X_{z_t}=v\mid x_{z_{<t}})
 }{
 \sum_{v'\in\mathcal{V}}
 \exp\!\left(e(v')^\top g_\theta(x_{z_{<t}},z_t)\right)
-}.
+}
 $$
 
 여기서 대문자 $X_{z_t}$는 아직 정해지지 않은 확률변수, 소문자 $x_{z_t}$는 실제 정답 token이다. 내적 $e(v)^\top g$은 후보 $v$와 현재 위치·문맥 표현의 궁합 점수(logit)를 만든다. 지수함수 $\exp$는 점수를 양수로 만들고, 분모는 모든 후보의 양수 점수를 더해 확률 합이 1이 되도록 정규화한다. $z_t$가 식 안에 있으므로 같은 앞선 내용이라도 예측할 위치가 다르면 다른 분포를 낼 수 있다.
@@ -240,14 +240,14 @@ $$
 한 optimization step에 넣는 sequence 수를 $B$, step 수를 $S$라고 하면 모델에 제시한 sequence 횟수는 우선 다음처럼 셀 수 있다.
 
 $$
-N_{\mathrm{seq}}=S\times B.
+N_{\mathrm{seq}}=S\times B
 $$
 
 RoBERTa 논문의 비교 표에서 BERT 기준선은 $S=1{,}000{,}000$, $B=256$이므로 $256{,}000{,}000$회다. 최종 RoBERTa 설정은 $S=500{,}000$, $B=8{,}000$이므로 $4{,}000{,}000{,}000$회다.
 
 $$
 \frac{4{,}000{,}000{,}000}{256{,}000{,}000}
-=15.625.
+=15.625
 $$
 
 따라서 500K가 1M보다 작다는 사실만으로 더 짧은 훈련이라고 말할 수 없다. 다만 $N_{\mathrm{seq}}$는 **고유 문장 수**도, 정확한 token 수나 FLOPs도 아니다. step마다 실제 batch가 $B_s$, 그 안의 $b$번째 sequence 실제 길이가 $\ell_{s,b}$, 최대 길이가 $T$라 하면 actual non-padding token 수는
@@ -255,7 +255,7 @@ $$
 $$
 N_{\mathrm{token}}
 =\sum_{s=1}^{S}\sum_{b=1}^{B_s}\ell_{s,b}
-\le T\sum_{s=1}^{S}B_s.
+\le T\sum_{s=1}^{S}B_s
 $$
 
 모든 step이 같은 $B$개 sequence를 쓸 때에만 이 상한이 $SBT$가 된다. 문장 길이·padding·special token·gradient accumulation·corpus 재사용이 다르면 같은 $S\times B$라도 token 노출과 비용은 달라진다.
@@ -265,7 +265,7 @@ dynamic masking은 “새 손실함수”가 아니라 target 위치를 다시 �
 $$
 m_i^{(r)}\sim\operatorname{Bernoulli}(0.15),
 \qquad
-P(m_i^{(r)}=1)=0.15.
+P(m_i^{(r)}=1)=0.15
 $$
 
 조건부로 target이 되면 BERT의 원 recipe는 80%를 `[MASK]`, 10%를 무작위 token, 10%를 원 token으로 입력한다. 같은 위치를 $r$번 독립적으로 제시한다고 단순화할 때 적어도 한 번 target이 될 확률은 $1-0.85^r$이고, $r=10$이면 약 $0.803$이다. 이 계산은 mask를 다시 뽑으면 가능한 관측 조합이 늘어난다는 뜻일 뿐, dynamic masking 하나가 benchmark 향상을 만들었다는 인과 증명은 아니다. 실제 논문의 통제 비교도 static과 dynamic의 차이를 비슷하거나 소폭 우수한 정도로 보고한다.
@@ -285,7 +285,7 @@ e_i=o_iA\in\mathbb{R}^{1\times E}
 \xrightarrow{\;P\;}
 h_i^{(0)}=e_iP\in\mathbb{R}^{1\times H},
 \qquad
-VH\;\longrightarrow\;VE+EH.
+VH\;\longrightarrow\;VE+EH
 $$
 
 | 항 | 왜 필요한가 |
@@ -317,7 +317,7 @@ $$
 $$
 \text{ALBERT의 all-sharing:}\quad
 Z^{(\ell+1)}=f_{\phi_{\mathrm{shared}}}(Z^{(\ell)}),
-\qquad \ell=0,\ldots,L-1.
+\qquad \ell=0,\ldots,L-1
 $$
 
 일반 구조는 block parameter $P_{\mathrm{block}}$을 layer마다 $L P_{\mathrm{block}}$개 저장하지만, all-sharing은 $\phi_{\mathrm{shared}}$ 하나만 저장한다. 그러나 둘 다 $f$를 $L$번 적용해 서로 다른 $Z^{(0)},Z^{(1)},\ldots$를 만든다. 그래서 parameter가 줄어도 깊이 방향의 attention·feed-forward FLOPs와 latency가 같은 비율로 사라지지 않는다. 공유는 필연적 수식 변형이 아니라 memory·통신 비용과 capacity 사이의 trade-off다.

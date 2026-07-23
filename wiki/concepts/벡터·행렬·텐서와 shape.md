@@ -73,7 +73,7 @@ X=
 1 & 2 & -1\\
 0 & 3 & 4
 \end{bmatrix}
-\in\mathbb R^{2\times3}.
+\in\mathbb R^{2\times3}
 $$
 
 따라서 $X_{1,2}=2$는 첫째 token의 둘째 feature이고, $X_{2,3}=4$는 둘째 token의 셋째 feature다. 여기서는 사람이 읽기 쉽게 인덱스를 1부터 썼다. 실제 프로그램이 0부터 세는지는 별도 구현 관례이며, 수학식의 인덱스 범위와 혼동하지 않는다.
@@ -86,7 +86,7 @@ Y=X+p
 \begin{bmatrix}
 1.1 & 1.8 & -0.7\\
 0.1 & 2.8 & 4.3
-\end{bmatrix}.
+\end{bmatrix}
 $$
 
 $X$의 shape는 $(2,3)$, $p$의 shape는 $(3,)$이고, 결과 $Y$의 shape는 다시 $(2,3)$다. $p$의 세 성분을 두 행에 각각 복사해 더한 것이 아니라, 뒤 축이 맞을 때 그 축을 따라 같은 값을 적용하라는 **브로드캐스팅(broadcasting)** 규칙으로 해석한 것이다.
@@ -114,7 +114,7 @@ batch 시퀀스 표현을 다음처럼 쓴다.
 
 $$
 X\in\mathbb R^{B\times T\times d},\qquad
-X_{b,t,j}\in\mathbb R.
+X_{b,t,j}\in\mathbb R
 $$
 
 | 기호 | 현재 문서에서의 의미 | 종류·shape | 값의 출처 |
@@ -136,7 +136,7 @@ $$
 
 $$
 Y=X+P,\qquad
-Y_{b,t,j}=X_{b,t,j}+P_{t,j}.
+Y_{b,t,j}=X_{b,t,j}+P_{t,j}
 $$
 
 #### 가정과 기호·shape

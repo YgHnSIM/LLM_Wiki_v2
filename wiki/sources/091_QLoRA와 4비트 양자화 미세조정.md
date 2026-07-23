@@ -91,7 +91,7 @@ LoRA는 pretrained matrix $W$를 직접 갱신하지 않고 update를 낮은 ran
 $$
 \Delta W = \frac{\alpha}{r}BA,
 \qquad
-y = \widehat{W}x + \frac{\alpha}{r}BAx.
+y = \widehat{W}x + \frac{\alpha}{r}BAx
 $$
 
 $A\in\mathbb{R}^{r\times d_{in}}$, $B\in\mathbb{R}^{d_{out}\times r}$이고 $r$은 원래 차원보다 작다. QLoRA의 $\widehat{W}$는 packed 4-bit code로 바로 곱해지는 수학적 실수 행렬이 아니라, NF4 code와 scale에서 **계산 dtype인 BF16으로 역양자화한 값**이다. Gradient는 이 계산 graph를 지나 $A$와 $B$로 흐르지만 동결된 base $W$에는 update를 적용하지 않는다.
@@ -107,7 +107,7 @@ NF4는 zero-centered normal distribution의 quantile을 사용해 16개 대표�
 $$
 \frac{32}{64}=0.500\ \text{bit/parameter}
 \quad\longrightarrow\quad
-\frac{8}{64}+\frac{32}{64\times256}\approx0.127\ \text{bit/parameter}.
+\frac{8}{64}+\frac{32}{64\times256}\approx0.127\ \text{bit/parameter}
 $$
 
 절감량은 평균 0.373 bit/parameter, 65B에서 약 3GB다. 이는 model weight metadata의 절감이며 activation·adapter·optimizer·allocator를 포함한 전체 training memory가 같은 비율로 감소한다는 뜻이 아니다.

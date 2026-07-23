@@ -50,7 +50,7 @@ related:
 
 $$
 \operatorname{LSE}(z)=\log\sum_{j=1}^{q}\exp(z_j),
-\qquad z\in\mathbb R^q.
+\qquad z\in\mathbb R^q
 $$
 
 여기서 $q$는 후보 수이고 $z_j$는 $j$번째 로짓이다. LSE는 [[소프트맥스]]의 분모와 음의 로그가능도에 들어간다. 수치 안정성의 목표는 수학적 함수를 다른 근사로 바꾸는 것이 아니라, 같은 함수를 현재 dtype의 표현 범위에서 최대한 믿을 수 있게 계산하는 것이다.
@@ -61,7 +61,7 @@ $$
 
 $$
 \operatorname{LSE}(z)
-=m+\log\sum_{j=1}^{q}\exp(z_j-m).
+=m+\log\sum_{j=1}^{q}\exp(z_j-m)
 $$
 
 마찬가지로 stable softmax는
@@ -88,7 +88,7 @@ $$
 $$
 s=\exp(0)+\exp(-1)+\exp(-3)
 \approx1+0.367879+0.049787
-=1.417667.
+=1.417667
 $$
 
 따라서
@@ -101,7 +101,7 @@ $$
 
 $$
 \operatorname{softmax}(z)
-\approx(0.705385,\;0.259496,\;0.035119).
+\approx(0.705385,\;0.259496,\;0.035119)
 $$
 
 모든 확률은 양수이고 반올림 전 합은 1이다. 중요한 점은 $1000$을 빼서 첫 번째 후보의 확률을 높인 것이 아니라, 세 후보에서 **같은 상수**를 빼어 계산을 가능하게 했다는 것이다.
@@ -120,7 +120,7 @@ $$
 $$
 \frac{\exp(z_i)}{\sum_j\exp(z_j)}
 =\frac{\exp(m)\exp(z_i-m)}
-{\exp(m)\sum_j\exp(z_j-m)}.
+{\exp(m)\sum_j\exp(z_j-m)}
 $$
 
 $\exp(m)>0$이므로 공통 인자를 약분할 수 있다. 이 증명은 실수 연산의 항등식이다. 실제 부동소수점 결과가 bitwise로 같다는 보장은 없지만, 큰 양수의 overflow를 피하고 harmful underflow 가능성을 줄이는 이유가 된다.
@@ -138,7 +138,7 @@ $$
 
 $$
 -\log p_y
-=-(z_y-m)+\log\sum_j\exp(z_j-m).
+=-(z_y-m)+\log\sum_j\exp(z_j-m)
 $$
 
 두 식의 모든 $z_j-m$은 0 이하이므로 최대 지수값은 1이다. $m$은 후보 축마다 따로 계산해야 한다. 예를 들어 shape가 $(B,T,V)$인 decoder 로짓에서는 batch $B$, 위치 $T$, 어휘 $V$ 중 **어휘 축 $V$**를 따라 각 $(b,t)$마다 $m_{b,t}=\max_vz_{b,t,v}$를 구한다. batch 전체 또는 문장 전체의 단일 최댓값을 빼면 확률 축의 정의가 달라진다.
@@ -167,7 +167,7 @@ $$
 
 $$
 \ell
-=\exp(m_A-m)\ell_A+\exp(m_B-m)\ell_B.
+=\exp(m_A-m)\ell_A+\exp(m_B-m)\ell_B
 $$
 
 그러면 전체 LSE는 $m+\log\ell$이다. 새 최댓값이 생기면 이전 block의 합도 새 기준으로 재스케일해야 한다. [[FlashAttention]]은 이 원리를 query 행과 key/value tile에 적용해, 전체 attention probability matrix를 저장하지 않고도 동일한 softmax 정의를 누적한다. 여기서 owner는 안정적인 합치기 식까지이고, GPU tile schedule·I/O 복잡도·backward 재계산은 FlashAttention 문서가 맡는다.

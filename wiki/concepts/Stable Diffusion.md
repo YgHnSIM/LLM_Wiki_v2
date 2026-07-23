@@ -94,7 +94,7 @@ v1-3와 v1-4는 훈련 예제의 10%에서 텍스트 조건을 제거했다. 이
 $$
 \epsilon_{\mathrm{cfg}}
 =\epsilon_{\mathrm{uncond}}
-+s\left(\epsilon_{\mathrm{cond}}-\epsilon_{\mathrm{uncond}}\right).
++s\left(\epsilon_{\mathrm{cond}}-\epsilon_{\mathrm{uncond}}\right)
 $$
 
 이 방식을 **분류기 없는 유도(classifier-free guidance, CFG)**라고 한다. $s$를 높이면 프롬프트 조건을 강하게 따르는 경향이 있지만 다양성이 줄고 색·형태가 과장될 수 있다. 별도 이미지 분류기의 기울기를 쓰는 classifier guidance나 외부 CLIP gradient guidance와 구분해야 한다.

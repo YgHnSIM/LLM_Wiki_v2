@@ -94,7 +94,7 @@ $$
 +\text{tools/environment}
 +\text{state/memory}
 +\text{identity/policy}
-+\text{evaluation/monitoring}.
++\text{evaluation/monitoring}
 $$
 
 이 합성 경계를 보존하면 “모델이 계획했다”, “에이전트가 실행했다”, “시스템이 학습했다”라는 문장에서 실제 주체와 보장 범위를 찾을 수 있다.
@@ -129,7 +129,7 @@ $$
 $$
 \text{memory를 다시 읽음}
 \ne
-\text{weight가 학습됨}.
+\text{weight가 학습됨}
 $$
 
 첫 구분은 그럴듯한 설명과 실제 dependency·precondition을, 둘째는 model과 application의 신뢰 경계를, 셋째는 inference-time state update와 optimizer-based learning을 분리한다.
@@ -157,7 +157,7 @@ a_t=\Pi(\hat a_t,i_t,P_t),
 \quad
 o_{t+1}=E(a_t),
 \quad
-s_{t+1}=U(s_t,o_{t+1}).
+s_{t+1}=U(s_t,o_{t+1})
 $$
 
 Model $M_\theta$는 action proposal $\hat a_t$를 낸다. Policy gate $\Pi$가 실행할 $a_t$를 결정하고 executor $E$가 environment를 바꾼다. State updater $U$가 observation을 저장한다. Maximum step·time·cost와 stop condition은 model prompt가 아니라 orchestrator가 강제해야 한다.
@@ -225,7 +225,7 @@ $$
 \rightarrow \text{실험 protocol 제안}
 \rightarrow \text{전문가 후보 선택}
 \rightarrow \text{인간 연구자의 wet-lab}
-\rightarrow \text{결과 검증}.
+\rightarrow \text{결과 검증}
 $$
 
 AML 세포주와 간 오가노이드 실험은 협력 연구자가 수행했고, cf-PICI의 wet-lab 발견은 AI가 질문을 받기 전에 이미 끝나 있었다. 따라서 protocol 생성은 action proposal, 전문가의 승인·선택은 decision gate, 장비에서 이뤄진 물리 실험과 관찰은 별도 executor·trace로 기록해야 한다. `scientist-in-the-loop`라는 이름만으로 안전성과 과학적 타당성이 생기는 것도 아니다. 어느 단계에서 어떤 전문가가 무엇을 승인하고 검증했는지를 밝혀야 한다.
@@ -249,7 +249,7 @@ OpenAI의 2023년 Function Calling은 model이 함수 이름과 JSON argument를
 $$
 P(\text{episode success})
 =
-\prod_{t=1}^{n} P(S_t\mid S_{<t}).
+\prod_{t=1}^{n} P(S_t\mid S_{<t})
 $$
 
 Step 성공이 독립이라는 뜻이 아니다. 오히려 앞선 observation 오류가 뒤의 상태와 action 분포를 바꾸므로 조건부 확률을 기록해야 한다. 개별 tool call이 95% 정확해도 긴 episode에서 오류가 누적될 수 있고, retry가 성공률을 높이는 대신 cost·latency·중복 side effect를 늘릴 수 있다.

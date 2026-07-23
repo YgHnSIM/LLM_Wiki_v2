@@ -70,7 +70,7 @@ Radford 등은 2021년 논문에서 자연어로 시각 표현을 학습하는 �
 CLIP은 모든 $N\times N$ 조합의 점수 행렬을 만든다. 학습되는 logit scale을 $\exp(t)$라고 하면 점수는 다음처럼 쓸 수 있다.
 
 $$
-s_{ij}=\exp(t)u_i^{\mathsf T}v_j.
+s_{ij}=\exp(t)u_i^{\mathsf T}v_j
 $$
 
 $u_i$와 $v_j$가 정규화되어 있으므로 내적은 cosine similarity다. 대각선 $s_{ii}$는 실제로 관측된 짝이고, 같은 배치의 나머지 $N^2-N$개 조합은 이 학습 단계에서 짝이 아닌 후보가 된다.
@@ -84,7 +84,7 @@ $$
 =\frac{1}{2}\left[
 \operatorname{CE}_{\text{image}\rightarrow\text{text}}(S)
 +\operatorname{CE}_{\text{text}\rightarrow\text{image}}(S)
-\right].
+\right]
 $$
 
 이 **대칭 대조 손실(symmetric contrastive loss)**은 실제 짝의 점수를 두 방향 모두에서 높이도록 한다. 다만 배치 안의 다른 텍스트가 해당 이미지와 의미상 전혀 관련 없다는 사실까지 보장하지는 않는다. 이들은 수집 데이터의 관측된 짝이 아니라는 이유로 학습상 음성 후보가 된다.

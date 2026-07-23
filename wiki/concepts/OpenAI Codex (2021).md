@@ -105,7 +105,7 @@ $$
 =\mathbb{E}_{\text{problems}}
 \left[
 1-\frac{\binom{n-c}{k}}{\binom{n}{k}}
-\right].
+\right]
 $$
 
 논문의 주 평가는 문제마다 $n=200$개를 생성하고 $k\leq100$을 계산했다. $k$가 커질수록 다양한 후보가 유리해지므로, Codex 계열 분석은 pass@1에 temperature 0.2, pass@100에 0.8을 사용했다. 서로 다른 $k$의 최고값은 고정 decoding 조건에서 나온 단일 정확도 곡선이 아니다.

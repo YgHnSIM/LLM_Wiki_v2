@@ -10,10 +10,19 @@ import {
   sourceNumberRequiresStagedStructure,
   STAGED_PAGE_H2_HEADINGS,
   strictStagedStructureEnabled,
+  terminalDisplayMathPeriodLines,
   unexpectedArtifactPaths,
   validateStagedPageStructure,
   verificationEnvironmentForSource,
 } from '../lib/wiki-lint.mjs';
+
+test('display math terminal periods are rejected while continuing commas remain valid', () => {
+  const invalid = ['$$', 'P(A) = 0.7.', '$$', '', '\\[', 'x = y.', '\\]', ''].join('\n');
+  assert.deepEqual(terminalDisplayMathPeriodLines(invalid), [2, 6]);
+
+  const continuing = ['$$', 'Q = XW_Q,\\qquad K = XW_K,', '$$', '', '```latex', '$$', 'P(A) = 0.7.', '$$', '```', ''].join('\n');
+  assert.deepEqual(terminalDisplayMathPeriodLines(continuing), []);
+});
 
 function stagedPage(headings = STAGED_PAGE_H2_HEADINGS) {
   return [

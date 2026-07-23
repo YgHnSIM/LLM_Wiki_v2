@@ -78,7 +78,7 @@ Colin Raffel 외의 2020년 T5 논문은 NLP transfer learning의 여러 선택�
 encoder가 입력 전체를 읽어 만든 표현을 $H$라고 하면 다음과 같다.
 
 \[
-H=\operatorname{Enc}_\theta(s).
+H=\operatorname{Enc}_\theta(s)
 \]
 
 $y_{<t}$는 $t$보다 앞선 목표 토큰들이다. $\theta$는 학습되는 가중치 전체다. 현재 정답 자리의 확률을 $q_t=p_\theta(y_t\mid y_{<t},H)$라고 줄여 부르겠다. encoder는 앞뒤 입력 문맥을 함께 볼 수 있고, causal decoder는 목표의 앞부분과 $H$를 보고 다음 자리 하나를 예측한다. 그러므로 같은 수식 안에서도 입력 역할과 목표 역할은 대칭이 아니다.
@@ -110,7 +110,7 @@ $y_{<t}$는 $t$보다 앞선 목표 토큰들이다. $\theta$는 학습되는 �
 \[
 p_\theta(y\mid s)
 =\prod_{t=1}^{n}
-q_t.
+q_t
 \]
 
 각 인수는 한 위치의 정답 확률이다. 곱셈을 쓰는 이유는 앞 토큰이 주어진 조건에서 다음 토큰이 맞는 사건을 계속 이어 붙이기 때문이다. 하지만 $0$과 $1$ 사이의 작은 확률을 많이 곱하면 값이 매우 작아진다. 로그는 곱을 합으로 바꾸므로, 그 값을 안정적으로 더해 학습할 수 있다.
@@ -118,7 +118,7 @@ q_t.
 \[
 \mathcal{L}_{\mathrm{T5}}
 =-\sum_{t=1}^{n}
-\log q_t.
+\log q_t
 \]
 
 합의 인덱스 $t$는 목표 열의 자리, $q_t$는 그 자리의 정답 확률이다. 음수는 ‘확률을 크게’라는 목표를 ‘손실을 작게’라는 최적화 문제로 바꾼다. $\log q_t$는 $q_t=1$일 때 0이고, $q_t$가 0에 가까울수록 매우 작은 음수가 된다. 그래서 음의 로그는 정답에 낮은 확률을 준 위치를 크게 벌한다.
@@ -128,7 +128,7 @@ q_t.
 \[
 -\log(0.9)-\log(0.2)
 \approx0.105+1.609
-=1.714.
+=1.714
 \]
 
 둘째 토큰 하나가 불확실한 것이 손실 대부분을 만든다. 평균 손실은 $1.714/2=0.857$이다. 이 숫자는 논문의 실제 확률이나 성능 수치가 아니라 로그 손실의 역할을 보이는 편집부 계산이다. 확률을 반올림해 정확히 0으로 만들면 로그가 정의되지 않으므로, 구현은 수치적으로 안정된 log-softmax를 이용한다.
@@ -142,7 +142,7 @@ decoder의 현재 상태를 $\mathbf h_t\in\mathbb{R}^{d}$, 어휘 집합을 $V$
 \qquad
 W\in\mathbb{R}^{|V|\times d},
 \qquad
-\mathbf b\in\mathbb{R}^{|V|}.
+\mathbf b\in\mathbb{R}^{|V|}
 \]
 
 $\mathbf h_t$는 길이 $d$의 상태 벡터이고, $W$의 각 행은 후보 토큰 하나에 대응한다. 그래서 $\mathbf z_t$는 후보 수만큼의 실수 점수다. 현재 문맥을 고정한 후보 $v$의 확률을 $p_t(v)$로 줄여 쓰면, 점수는 softmax로 양수이고 합이 1인 분포가 된다.
@@ -150,7 +150,7 @@ $\mathbf h_t$는 길이 $d$의 상태 벡터이고, $W$의 각 행은 후보 토
 \[
 p_t(v)
 =\frac{\exp(z_{t,v})}
-{\sum_{u\in V}\exp(z_{t,u})}.
+{\sum_{u\in V}\exp(z_{t,u})}
 \]
 
 $v$는 지금 확인할 후보 하나, $u$는 분모에서 훑는 모든 후보다. 지수 함수는 음수 logit도 양수로 만들고, 분모는 그 전체를 정규화한다. 이 정규화가 있어야 다른 어휘 크기나 다른 시점의 점수도 ‘정답에 얼마나 큰 확률을 주었는가’로 비교할 수 있다.
@@ -170,7 +170,7 @@ sentinel은 일반 단어를 가리는 기호가 아니라, 어느 빈 구간의
 \[
 K=rL,
 \qquad
-\bar{\ell}=\frac{K}{J}.
+\bar{\ell}=\frac{K}{J}
 \]
 
 $K=rL$은 전체에서 몇 token을 숨길지 정한다. $\bar{\ell}=K/J$는 숨긴 token을 몇 개의 연속 덩어리로 나누었는지의 평균이다. 논문의 설명에서 $L=500$, $r=0.15$이면 $K=75$이고, $J=25$이면 $\bar{\ell}=75/25=3$이다.
@@ -195,7 +195,7 @@ L_{\mathrm{target}}&\approx K+J+1.
 \[
 \mathcal{L}_{\mathrm{span}}(\theta)
 =-\sum_{t=1}^{n'}
-\log r_t.
+\log r_t
 \]
 
 $n'$은 교란 target의 길이다. $r_t$의 조건에는 $y^{\mathrm{span}}_{<t}$와 $\operatorname{Enc}_\theta(\mathbf x^{\mathrm{corrupt}})$가 들어간다. 이 식은 앞의 supervised task 손실과 구조가 같다. 정답이 분류 label·번역문인지, 빠진 span인지가 달라질 뿐, decoder는 언제나 이전 정답과 encoder 문맥을 보고 다음 정답 token 확률을 높인다. 그래서 T5의 통일은 단순한 문자열 모양이 아니라 학습 목적의 통일이기도 하다.
@@ -214,7 +214,7 @@ C4(Colossal Clean Crawled Corpus)는 2019년 4월 Common Crawl snapshot에서 En
 
 \[
 \mathcal{L}_{\mathrm{mix}}(\theta)
-=\sum_{j=1}^{J}w_j\ell_j.
+=\sum_{j=1}^{J}w_j\ell_j
 \]
 
 $D_j$는 $j$번째 과제의 예 분포이고, $w_j$는 그 과제의 비중이다. $w_j\ge0$와 $\sum_jw_j=1$은 가중치가 음수가 아니고 전체 비중이 한 단위가 되게 한다. $\ell_j$는 $D_j$에서 뽑은 $(s,y)$ 예의 $\mathcal{L}_{\mathrm{T5}}$를 평균 낸 값이며, 확률 표기에서는 $\mathbb{E}_{(s,y)\sim D_j}[\mathcal{L}_{\mathrm{T5}}]$와 같다. 이 식은 논문의 모든 sampler 설정을 재현한 코드는 아니며, 서로 다른 크기의 과제를 섞을 때 왜 비중 선택이 필요한지 보이는 공통 표기다.
@@ -224,7 +224,7 @@ $D_j$는 $j$번째 과제의 예 분포이고, $w_j$는 그 과제의 비중이�
 최종 설정은 24개 과제 중 18개에서 당시 최고 결과를 냈다.
 
 \[
-\frac{18}{24}=0.75.
+\frac{18}{24}=0.75
 \]
 
 이 75%는 논문 표에 포함된 과제 수의 비율일 뿐, 모든 NLP 과제·언어·배포 조건에서의 범용 점수가 아니다. 특히 Table 14에서 WMT English→German은 32.1 BLEU였고 표에 제시된 prior best 33.8보다 낮았다. 번역도 English→German·French·Romanian 방향에 한정되어 있었다.

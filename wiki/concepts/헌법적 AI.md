@@ -86,7 +86,7 @@ CAI는 원칙 기반의 비평·수정 지도 학습과 AI 선호 기반 강화 
 $$
 q_i=\operatorname{Critique}(x,y_{i-1},c_i),
 \qquad
-y_i=\operatorname{Revise}(x,y_{i-1},q_i,c_i).
+y_i=\operatorname{Revise}(x,y_{i-1},q_i,c_i)
 $$
 
 수정 응답 $y_i$는 다시 같은 형식의 입력이 되므로 다른 원칙으로 과정을 반복할 수 있다. 2022년 실험은 각 레드팀 프롬프트에서 네 개의 비평-수정 쌍을 샘플링했다. 수정 응답만 모으면 모델이 안전하지만 덜 유용해질 수 있으므로, 사람이 작성한 유용성 프롬프트에 helpful RLHF 모델이 답한 자료도 함께 넣어 사전 학습 모델을 지도 미세 조정했다. 이 결과가 RL 단계의 시작 정책인 SL-CAI다.
@@ -100,7 +100,7 @@ SL-CAI 정책이 만든 후보 $y_A,y_B$와 원칙 $c$를 피드백 모델에 �
 $$
 (y_A,y_B)\sim\pi_{\mathrm{SL}}(\cdot\mid x),
 \qquad
-p_F(A\succ B\mid x,c)=F(x,y_A,y_B,c).
+p_F(A\succ B\mid x,c)=F(x,y_A,y_B,c)
 $$
 
 피드백 모델이 선택지 A와 B에 부여한 정규화 확률은 유해성에 관한 소프트 선호 라벨이 된다. 이 자료를 사람의 유용성 비교 자료와 합쳐 선호 모델을 학습한다.
@@ -110,7 +110,7 @@ D_{\mathrm{PM}}
 =D_{\mathrm{human}}^{\mathrm{helpful}}
 \cup D_{\mathrm{AI}}^{\mathrm{harmless}},
 \qquad
-r_\phi\leftarrow\operatorname{TrainPM}(D_{\mathrm{PM}}).
+r_\phi\leftarrow\operatorname{TrainPM}(D_{\mathrm{PM}})
 $$
 
 마지막으로 SL-CAI 정책을 $r_\phi$의 점수가 높아지도록 강화 학습해 RL-CAI 정책을 얻는다. 헌법 원문이 매 RL 갱신마다 직접 보상을 계산하는 것이 아니라, **헌법을 해석한 AI 비교가 선호 모델로 증류되고 그 모델이 대리 보상을 제공한다**는 순서가 중요하다.

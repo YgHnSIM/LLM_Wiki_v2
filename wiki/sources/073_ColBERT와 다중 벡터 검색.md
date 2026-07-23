@@ -74,14 +74,14 @@ ColBERT는 질의와 문서를 각각 문맥화된 벡터 **집합**으로 독�
 
 $$
 E_q=f_Q(q)\in\mathbb{R}^{N_q\times m},\qquad
-E_d=f_D(d)\in\mathbb{R}^{N_d\times m}.
+E_d=f_D(d)\in\mathbb{R}^{N_d\times m}
 $$
 
 문서 행렬 $E_d$는 질의가 오기 전에 계산해 색인할 수 있다. 질의가 들어오면 다음 점수를 계산한다.
 
 $$
 S(q,d)=\sum_{i=1}^{N_q}\max_{j=1}^{N_d}
-E_{q,i}E_{d,j}^{\mathsf T}.
+E_{q,i}E_{d,j}^{\mathsf T}
 $$
 
 각 벡터는 L2 정규화돼 내적이 코사인 유사도와 같다. 각 질의 embedding은 가장 높은 유사도의 문서 embedding 하나를 선택한다. 여러 질의 embedding이 같은 문서 embedding을 고를 수 있고 위치·순서는 직접 보존하지 않는다.

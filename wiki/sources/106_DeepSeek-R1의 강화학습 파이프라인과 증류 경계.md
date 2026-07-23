@@ -96,7 +96,7 @@ R1의 핵심 질문은 architecture를 새로 만들었는가가 아니다. 이�
 
 $$
 A_i=\frac{r_i-\operatorname{mean}(r_1,\ldots,r_G)}
-{\operatorname{std}(r_1,\ldots,r_G)}.
+{\operatorname{std}(r_1,\ldots,r_G)}
 $$
 
 절대 점수를 예측하는 별도 critic model 대신 같은 질문의 후보보다 상대적으로 나은 응답에 양의 advantage를 준다. Policy update에는 PPO 계열의 clipped ratio와 reference policy에서 너무 멀어지지 않게 하는 KL penalty가 들어간다. 이 선택은 critic이 policy와 비슷한 크기여야 할 때 드는 비용을 줄이지만, 671B base model의 대규모 RL 자체를 저비용으로 만든다는 뜻은 아니다.
@@ -132,7 +132,7 @@ J_{\mathrm{GRPO}}(\theta)=
 \min\!\left(\rho_{i,t}A_i,\operatorname{clip}(\rho_{i,t},1-\epsilon,1+\epsilon)A_i\right)
 -\beta D_{\mathrm{KL},i,t}
 \right)
-\right].
+\right]
 $$
 
 $\epsilon$은 한 번의 update가 너무 커지지 않게 하는 clipping 범위이고, $\beta$는 reference policy에서 벗어나는 정도에 부여하는 penalty의 세기다. Group-relative advantage는 응답 group 안의 순위를 학습 신호로 바꾸지만, completion reward 하나를 모든 token에 공유하므로 어느 단계가 성공을 만들었는지는 식별하지 않는다. 모든 후보의 reward가 같아 표준편차가 0이면 구현의 수치 안정화 장치는 오류만 막을 뿐 비교 신호를 만들지 못한다. 정답과 형식을 만족하는 우회 전략도 높은 reward를 받을 수 있으므로 [[자동 평가 지표는 무엇을 보상하는가|평가 지표와 model 유인]]을 함께 봐야 한다.

@@ -69,7 +69,7 @@ X \leftarrow X + \operatorname{Attention}(Q=X,\;K=V=[X_f;X]),
 $$
 
 $$
-X \leftarrow X + \operatorname{FFN}(X).
+X \leftarrow X + \operatorname{FFN}(X)
 $$
 
 이 출력을 여러 층에 걸쳐 갱신하면 입력 해상도나 frame 수와 무관한 64개 시각 token을 얻는다. 고정 병목은 긴 영상의 교차 어텐션 비용을 제어하지만, 입력의 모든 세부를 손실 없이 보존한다는 보장은 아니다.
@@ -83,7 +83,7 @@ Y' = Y + \tanh(\alpha_{x})\operatorname{CrossAttn}(Q=Y,K=V=X),
 $$
 
 $$
-Y'' = Y' + \tanh(\alpha_{f})\operatorname{FFN}(Y').
+Y'' = Y' + \tanh(\alpha_{f})\operatorname{FFN}(Y')
 $$
 
 $\alpha_x$와 $\alpha_f$는 층마다 있는 학습 가능한 scalar이며 0으로 초기화된다. 처음에는 $\tanh(0)=0$이므로 새 branch가 건너뛰어지고, 학습되면서 시각 신호가 잔차 stream에 들어온다. 이 설계는 기존 언어 모델의 weight를 바꾸지 않으면서도 새 연결부에 충분한 표현력을 준다. 최종 논문 Table 3의 절제 실험에서는 0-init `tanh` gate를 빼면 전체 score가 70.7에서 66.5로 4.2점 낮아지고 학습 불안정이 나타났다.

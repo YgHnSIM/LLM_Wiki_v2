@@ -77,7 +77,7 @@ G(x)=\operatorname{softmax}(\operatorname{TopK}(xW_g,2)),
 $$
 
 $$
-y(x)=\sum_{i=1}^{8}G(x)_iE_i(x).
+y(x)=\sum_{i=1}^{8}G(x)_iE_i(x)
 $$
 
 선택되지 않은 expert의 $G(x)_i$는 0이므로 해당 FFN 출력은 계산하지 않는다. 선택 expert는 token과 layer마다 달라질 수 있지만, top-$k$는 항상 2다. 어려운 입력에 expert 수를 자동으로 더 주는 구조가 아니다.

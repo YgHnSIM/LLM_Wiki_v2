@@ -88,7 +88,7 @@ G(x)=\operatorname{softmax}(\operatorname{TopK}(xW_g,2)),
 $$
 
 $$
-y(x)=\sum_{i=1}^{8}G(x)_iE_i(x).
+y(x)=\sum_{i=1}^{8}G(x)_iE_i(x)
 $$
 
 선택되지 않은 expert의 $G(x)_i$는 0이고 선택된 두 FFN 출력은 router weight로 합쳐진다. Attention·embedding·normalization 같은 공유 경로는 계속 실행된다. 같은 token도 layer마다 다른 expert를 선택할 수 있지만 $k=2$는 고정이다.

@@ -87,7 +87,7 @@ Token 표현 $x$에 대해 router가 expert별 logit을 만들고 상위 두 개
 
 $$
 y(x)=\sum_{i\in T_2(x)}
-\operatorname{softmax}(W_rx)_iE_i(x).
+\operatorname{softmax}(W_rx)_iE_i(x)
 $$
 
 $E_i$는 GLaM과 Mixtral에서 FFN expert다. 같은 sequence 안에서도 token마다, 같은 token도 layer마다 expert 선택이 달라질 수 있다. 그러나 shared attention과 그 밖의 dense block은 계속 실행되므로 `2/64` 또는 `2/8`을 전체 모델의 활성 비율로 바로 사용하지 않는다.

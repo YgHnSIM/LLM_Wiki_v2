@@ -121,7 +121,7 @@ encoder self-attention에서는 Q·K·V가 모두 encoder의 이전 층에서 �
 $$
 \operatorname{Attention}(Q,K,V)
 =\operatorname{softmax}_{\mathrm{row}}
-\left(\frac{QK^{\mathsf T}}{\sqrt{d_k}}+M\right)V.
+\left(\frac{QK^{\mathsf T}}{\sqrt{d_k}}+M\right)V
 $$
 
 원 논문의 식 (1)은 mask를 별도 항으로 적지 않았고, §3.2.3에서 decoder의 불법 연결 score를 softmax 입력에서 $-\infty$로 설정한다고 설명한다. 위 식의 $M$은 그 설명을 한 줄로 나타낸 표기다.
@@ -147,7 +147,7 @@ multi-head attention은 $d_{\mathrm{model}}$차원 Q·K·V 하나를 그대로 �
 위치별 FFN은 각 token에 독립·동일하게 적용하는 두 선형 변환과 ReLU다.
 
 $$
-\operatorname{FFN}(x)=\max(0,xW_1+b_1)W_2+b_2.
+\operatorname{FFN}(x)=\max(0,xW_1+b_1)W_2+b_2
 $$
 
 attention이 token 사이 정보를 섞는다면 FFN은 한 위치 안의 channel 표현을 바꾼다. ReLU가 없다면 두 선형 변환은 하나의 선형 변환으로 합쳐질 수 있으므로, 중간 비선형성은 두 층 구조가 더 풍부한 변환을 하게 하는 핵심이다.

@@ -80,7 +80,7 @@ GPT-2 논문은 질문을 바꿨다. 비표지 text만의 다음-token 예측을
 p_\theta(x_{1:T})
 =
 \prod_{t=1}^{T}
-p_\theta(x_t\mid x_{<t}).
+p_\theta(x_t\mid x_{<t})
 \]
 
 각 인수는 “앞 문맥이 주어졌을 때, 실제 다음 token $x_t$가 나올 확률”이다. 전체 열이 나올 확률은 token 순서대로 조건을 붙인 확률의 곱이 된다. 이 곱은 token들이 독립이라는 가정이 아니라, 결합확률을 조건부확률로 나누는 연쇄 법칙이다. causal Transformer는 현재 위치가 미래 token을 볼 수 없게 해 이 방향을 구현한다.
@@ -91,7 +91,7 @@ p_\theta(x_t\mid x_{<t}).
 \ell_\theta(x_{1:T})
 =
 \sum_{t=1}^{T}
-\log p_\theta(x_t\mid x_{<t}).
+\log p_\theta(x_t\mid x_{<t})
 \]
 
 $\ell_\theta$는 이 한 text 열의 로그가능도다. 확률이 높을수록 각 로그 항은 0에 가까워져 합이 커진다. 논문은 이 값을 최대화하는 방식으로 적었고, 현대 코드에서는 $-\ell_\theta$를 손실로 최소화하는 경우가 많다. 확률과 가능도의 방향, 로그·음수·평균이 필요한 이유는 [[로그가능도]]에서 동전 예와 함께 더 자세히 다룬다.
@@ -143,7 +143,7 @@ GPT-1 원 논문은 비표지 token 열 $U=(u_1,\ldots,u_N)$에 대해 사전 �
 L_1(U)
 =
 \sum_i
-\log q_i.
+\log q_i
 \]
 
 | 기호 | 의미 | 종류와 출처 |
@@ -166,7 +166,7 @@ GPT-1은 약 117M 매개변수, 12층 causal Transformer, 512-token context를 �
 L_2(\mathcal C)
 =
 \sum_{(x,y)\in\mathcal C}
-\log P_\Theta(y\mid x).
+\log P_\Theta(y\mid x)
 \]
 
 사전 학습 목적을 보조 항으로 남긴 결합 목적은 다음이다.
@@ -176,7 +176,7 @@ L_3(\mathcal C)
 =
 L_2(\mathcal C)
 +
-\lambda L_1(\mathcal C).
+\lambda L_1(\mathcal C)
 \]
 
 $L_2$는 지도 label에 맞는 class를 고르게 하는 조건부 로그가능도다. $L_1(\mathcal C)$는 미세조정 입력 열에서도 다음-token 예측을 계속 하게 하는 보조 로그가능도다. $\lambda\ge0$는 두 항의 상대 비중을 정하는 hyperparameter이며 GPT-1의 보고된 설정은 $\lambda=0.5$다.
@@ -188,7 +188,7 @@ L_3
 =
 -0.40+0.5\times(-0.80)
 =
--0.80.
+-0.80
 \]
 
 이 값은 최대화한다. 더 높은 정답 확률은 로그 항을 덜 음수로 만들어 $L_3$을 올린다. $L_3$은 가중치 크기에 직접 벌점을 주는 고전적 규제가 아니라, 미세조정 중에도 language-modeling을 수행하게 하는 보조 목적이다. 지도 목적만 쓰기, 본체를 고정하기, 다른 규제를 쓰기는 가능한 대안이며, 이 결합식이 모든 과제에서 유일한 선택은 아니다.
@@ -219,7 +219,7 @@ GPT-2는 50,257개 어휘의 byte-level BPE와 1024-token context를 사용했�
 \[
 r_j
 =
-p_\theta(a_j\mid h,a_{<j}).
+p_\theta(a_j\mid h,a_{<j})
 \]
 
 후보 전체의 로그 점수와 선택은 다음처럼 쓸 수 있다.
@@ -233,7 +233,7 @@ S(a;h)
 \hat a
 =
 \underset{a\in\mathcal A}{\operatorname{argmax}}
-S(a;h).
+S(a;h)
 \]
 
 $h$는 질문·앞 문장처럼 고정한 문맥, $\mathcal A$는 비교할 후보 집합, $m$은 현재 후보의 token 수다. $S$는 확률이 아니라 로그확률을 더한 점수이고, $\hat a$는 점수값이 아니라 가장 큰 점수의 후보다. 로그 합을 쓰는 이유는 후보 token 확률의 곱을 작은 수로 직접 계산하지 않기 위해서다.

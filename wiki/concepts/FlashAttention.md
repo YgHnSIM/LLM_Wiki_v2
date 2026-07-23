@@ -67,7 +67,7 @@ related:
 
 $$
 \operatorname{Attention}(Q,K,V)
-=\operatorname{softmax}(QK^{\mathsf T})V.
+=\operatorname{softmax}(QK^{\mathsf T})V
 $$
 
 달라지는 것은 이 식을 실행하는 순서다. 전체 score·probability matrix를 HBM에 보관하지 않고 작은 tile을 계산하면서 softmax 통계와 value 가중합을 누적한다. 이 때문에 기존 dense checkpoint의 attention 정의를 유지할 수 있지만, 산술량까지 선형으로 바뀌지는 않는다.

@@ -73,7 +73,7 @@ $$
 H(p)
 =-\sum_i p_i\log_2p_i
 =\frac12\cdot1+\frac14\cdot2+\frac14\cdot2
-=1.5\text{ bit}.
+=1.5\text{ bit}
 $$
 
 이제 모델 분포가 $q=(1/2,3/8,1/8)$이라고 하자. 실제 분포 $p$에서 나온 결과를 모델 $q$로 읽는 평균 벌점은 다음이다.
@@ -83,7 +83,7 @@ H(p,q)
 =-\frac12\log_2\frac12
 -\frac14\log_2\frac38
 -\frac14\log_2\frac18
-\approx1.604\text{ bit}.
+\approx1.604\text{ bit}
 $$
 
 $q$가 $p$와 다르므로 $H(p,q)$는 $H(p)$보다 약 $0.104$ bit 크다. 그 차이가 $D_{\mathrm{KL}}(p\Vert q)$다.
@@ -103,7 +103,7 @@ $q$가 $p$와 다르므로 $H(p,q)$는 $H(p)$보다 약 $0.104$ bit 크다. 그 
 $$
 H(p,q)
 =-\sum_i\mathbf1[i=y]\log q_i
-=-\log q_y.
+=-\log q_y
 $$
 
 따라서 한 정답에 대한 softmax 교차 엔트로피는 음의 로그가능도와 같은 식이다. 이는 one-hot 정답과 모델의 범주형 확률이라는 조건에서의 동일성이지, 모든 엔트로피·NLL 용어가 언제나 같은 뜻이라는 말은 아니다.
@@ -134,7 +134,7 @@ $$
 
 $$
 D_{\mathrm{KL}}(p\Vert q)
-=\sum_{i\in V}p_i\log\frac{p_i}{q_i}.
+=\sum_{i\in V}p_i\log\frac{p_i}{q_i}
 $$
 
 첫 식의 $p_i$는 실제 결과가 $i$일 비중이고, $-\log p_i$는 그 결과의 정보량이다. 둘째 식은 결과를 고르는 비중은 계속 $p_i$로 두되, 모델 $q$가 준 확률의 로그 벌점을 평균 낸다. 셋째 식은 두 로그의 차이를 평균 내어, $q$ 때문에 생긴 추가 벌점을 직접 쓴다.

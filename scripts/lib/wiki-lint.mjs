@@ -25,6 +25,44 @@ function linesOf(markdown = '') {
   return String(markdown).split(/\r?\n/);
 }
 
+export function terminalDisplayMathPeriodLines(markdown = '') {
+  const lines = linesOf(markdown);
+  const violations = [];
+  let fence = null;
+  let closingDelimiter = null;
+  let lastNonBlankLine = null;
+
+  for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+    const line = lines[lineIndex];
+    const fenceMatch = line.match(/^\s*(`{3,}|~{3,})/);
+    if (fenceMatch) {
+      const marker = fenceMatch[1];
+      if (!fence) fence = { character: marker[0], length: marker.length };
+      else if (marker[0] === fence.character && marker.length >= fence.length) fence = null;
+      continue;
+    }
+    if (fence) continue;
+
+    const trimmed = line.trim();
+    if (!closingDelimiter) {
+      if (trimmed === '$$') closingDelimiter = '$$';
+      else if (trimmed === '\\[') closingDelimiter = '\\]';
+      continue;
+    }
+    if (trimmed === closingDelimiter) {
+      if (lastNonBlankLine !== null && /\.\s*$/.test(lines[lastNonBlankLine])) {
+        violations.push(lastNonBlankLine + 1);
+      }
+      closingDelimiter = null;
+      lastNonBlankLine = null;
+      continue;
+    }
+    if (trimmed) lastNonBlankLine = lineIndex;
+  }
+
+  return violations;
+}
+
 function withoutHtmlComments(markdown = '') {
   return String(markdown).replace(/<!--[\s\S]*?(?:-->|$)/g, (comment) => comment.replace(/[^\r\n]/g, ' '));
 }

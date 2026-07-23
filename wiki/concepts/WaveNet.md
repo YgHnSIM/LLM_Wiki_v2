@@ -55,7 +55,7 @@ related:
 오디오 파형을 $x_1,\ldots,x_T$라 하면 WaveNet은 결합분포를 다음처럼 분해한다.
 
 $$
-p(x)=\prod_{t=1}^{T}p(x_t\mid x_{<t}).
+p(x)=\prod_{t=1}^{T}p(x_t\mid x_{<t})
 $$
 
 원 모델은 연속 진폭을 그대로 회귀하지 않았다. 16비트 PCM을 μ-law companding으로 8비트 256개 값에 양자화하고, 다음 값의 categorical distribution을 softmax로 예측했다. 최종 산출물이 원시 파형이라는 의미의 ‘직접 생성’과 확률 출력이 이산 양자화 값이었다는 사실을 함께 기록한다.

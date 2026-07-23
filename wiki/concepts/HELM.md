@@ -96,7 +96,7 @@ HELM의 평가 단위는 다음 네 요소로 나눌 수 있다.
 이를 간단히 쓰면 다음과 같다.
 
 $$
-O=\operatorname{Run}(M,S,A), \qquad R_j=m_j(O,S).
+O=\operatorname{Run}(M,S,A), \qquad R_j=m_j(O,S)
 $$
 
 이 식의 요점은 모델 점수가 $M$만의 고정 속성이 아니라는 데 있다. 시나리오 $S$, prompt와 예시를 정하는 $A$, 측정 규칙 $m_j$가 달라지면 같은 모델의 결과도 달라진다.

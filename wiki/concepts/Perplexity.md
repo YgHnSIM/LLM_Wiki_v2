@@ -96,7 +96,7 @@ perplexity는 확률 그 자체도, 정확도 백분율도 아니다. 평가열�
 $$
 \frac{0.6931+1.3863+2.0794}{3}
 =1.3863
-=\ln4.
+=\ln4
 $$
 
 마지막으로 지수화하면 perplexity를 얻는다.
@@ -104,7 +104,7 @@ $$
 $$
 \operatorname{PPL}
 =\exp(\ln4)
-=4.
+=4
 $$
 
 이 예에서 확률이 작아질수록 해당 토큰의 벌점이 커지고, 평균 벌점이 커지면 perplexity도 커진다. 숫자는 계산을 위한 예이며 특정 모델의 실제 평가 결과가 아니다.
@@ -125,7 +125,7 @@ $$
 $$
 \operatorname{PPL}(w_{1:N})
 =\exp\left(-\frac1N\sum_{i=1}^{N}\ln p_i\right)
-=\left(\prod_{i=1}^{N}p_i\right)^{-1/N}.
+=\left(\prod_{i=1}^{N}p_i\right)^{-1/N}
 $$
 
 오른쪽의 $\left(\prod_i p_i\right)^{1/N}$는 토큰별 확률의 기하평균이다. perplexity는 그 역수다. 즉 각 토큰에 꾸준히 높은 확률을 준 모델은 기하평균이 커져 perplexity가 작아진다.
@@ -155,7 +155,7 @@ $$
 $$
 \operatorname{PPL}(w_{1:N})
 =\exp\left(-\frac{1}{N}\sum_{i=1}^{N}
-\ln P(w_i\mid w_{<i})\right).
+\ln P(w_i\mid w_{<i})\right)
 $$
 
 #### 가정과 요구 조건

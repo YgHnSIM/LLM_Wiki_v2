@@ -87,7 +87,7 @@ related:
 
 $$
 L=-\sum_{j\in J_{pos}}\log s_j
-  -\sum_{j\in J_{neg}}\log(1-s_j).
+  -\sum_{j\in J_{neg}}\log(1-s_j)
 $$
 
 한 질의의 후보를 동시에 비교하는 순위 손실이 아니라 각 쌍의 binary classification loss를 합한다. 평가 때는 후보별 확률을 서로 비교해 순서를 만든다. 분류 확률이라고 해도 서로 다른 질의 사이에서 자동으로 calibration된 신뢰도라는 뜻은 아니다.

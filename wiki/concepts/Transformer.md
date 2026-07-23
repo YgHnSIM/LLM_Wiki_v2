@@ -134,7 +134,7 @@ $$
 길이 $n=3$, 모델 차원 $d_{\mathrm{model}}=4$인 설명용 encoder 입력 행렬을 생각해 보자. 세 행은 세 토큰 위치, 네 열은 각 위치의 feature다.
 
 $$
-X\in\mathbb R^{3\times4}.
+X\in\mathbb R^{3\times4}
 $$
 
 각 행에 위치 표현을 더한 뒤, 한 head가 $d_k=d_v=2$를 쓴다면 학습 행렬로 다음을 만든다.
@@ -161,7 +161,7 @@ M=
 0 & -\infty & -\infty\\
 0 & 0 & -\infty\\
 0 & 0 & 0
-\end{bmatrix}.
+\end{bmatrix}
 $$
 
 이를 attention score에 더한 뒤 softmax를 적용하면 첫 행은 첫 위치만, 둘째 행은 첫·둘째 위치만, 셋째 행은 세 위치 모두를 볼 수 있다. $-\infty$는 softmax 뒤 가중치 0을 뜻하는 수학적 표기다. 실제 구현은 충분히 작은 유한값을 쓰는 경우가 많다.
@@ -205,7 +205,7 @@ $$
 $$
 A=\operatorname{softmax}_{\mathrm{row}}
 \left(\frac{QK^{\mathsf T}}{\sqrt{d_k}}+M\right),\qquad
-O=AV.
+O=AV
 $$
 
 encoder self-attention에서는 $M$이 없거나 padding만 가린다. decoder masked self-attention에서는 causal mask를 더한다. encoder–decoder attention에서는 decoder 표현으로 $Q$를, encoder 출력으로 $K,V$를 만든다.
@@ -247,7 +247,7 @@ $X_Q,X_{KV}$는 self-attention에서는 같은 이전 층 출력이고, cross-at
 
 $$
 \operatorname{FFN}(x)
-=\max(0,xW_1+b_1)W_2+b_2.
+=\max(0,xW_1+b_1)W_2+b_2
 $$
 
 한 위치 표현 $x$가 길이 $d_{\mathrm{model}}$인 행벡터라면 $W_1$은 $d_{\mathrm{model}}\times d_{\mathrm{ff}}$, $b_1$은 길이 $d_{\mathrm{ff}}$, $W_2$는 $d_{\mathrm{ff}}\times d_{\mathrm{model}}$, $b_2$는 길이 $d_{\mathrm{model}}$이다. 원 base 모델은 $512\rightarrow2048\rightarrow512$를 사용했다.
@@ -263,7 +263,7 @@ $$
 원 Transformer의 각 sublayer는 Post-LN으로 연결됐다.
 
 $$
-y=\operatorname{LayerNorm}\bigl(x+\operatorname{Sublayer}(x)\bigr).
+y=\operatorname{LayerNorm}\bigl(x+\operatorname{Sublayer}(x)\bigr)
 $$
 
 $x$와 $\operatorname{Sublayer}(x)$의 마지막 차원이 모두 $d_{\mathrm{model}}$이어야 성분별 덧셈이 가능하다. shortcut은 기존 표현을 직접 전달하고, sublayer는 그 위에 학습된 갱신을 더한다. 그 뒤 LayerNorm은 한 위치 표현의 feature 통계를 사용해 정규화한다.
@@ -290,7 +290,7 @@ decoder의 마지막 위치 표현 $h_t$는 선형 변환으로 어휘별 logit 
 $$
 z_t=h_tW_{\mathrm{out}}+b_{\mathrm{out}},\qquad
 P(w_t\mid w_{<t},\text{source})
-=\operatorname{softmax}(z_t)_{w_t}.
+=\operatorname{softmax}(z_t)_{w_t}
 $$
 
 $W_{\mathrm{out}}$의 열은 어휘 후보, $z_t$의 각 성분은 정규화 전 점수다. softmax가 후보 전체를 합 1인 분포로 바꾸므로 학습은 실제 정답 토큰에 높은 확률을 주도록 이 매개변수를 조정할 수 있다. 원 논문은 입력·출력 embedding과 pre-softmax 선형 변환 사이에 같은 가중치 행렬을 공유했다.

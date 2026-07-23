@@ -81,7 +81,7 @@ $$
 e_t
 =E_{\mathrm{tok}}[v_t]
 +E_{\mathrm{pos}}[r_t]
-+E_{\mathrm{lang}}[\ell_t].
++E_{\mathrm{lang}}[\ell_t]
 $$
 
 - $v_t$는 $t$번째 token의 vocabulary 번호다. $E_{\mathrm{tok}}$에서 그 번호의 행 하나를 꺼낸다.
@@ -100,7 +100,7 @@ TLM에서 번역문 쪽 position을 다시 0부터 시작한 것도 같은 이�
 $$
 p_i=\frac{n_i}{\sum_j n_j},
 \qquad
-q_i=\frac{p_i^{\alpha}}{\sum_j p_j^{\alpha}}.
+q_i=\frac{p_i^{\alpha}}{\sum_j p_j^{\alpha}}
 $$
 
 - $p_i$는 원자료의 비율이다. 큰 Wikipedia를 가진 언어는 보통 이 값도 크다.
@@ -114,7 +114,7 @@ q_A=\frac{\sqrt{0.8}}{\sqrt{0.8}+\sqrt{0.2}}
 =\frac{0.894}{0.894+0.447}
 \approx0.667,
 \qquad
-q_B\approx0.333.
+q_B\approx0.333
 $$
 
 B의 원자료 비중은 20%였지만 BPE 학습 표본에서는 약 33%가 된다. $\alpha=1$이면 원자료 비율을 그대로 쓰고, $0<\alpha<1$이면 작은 corpus의 비중을 올리며, 양의 비율만 있을 때 $\alpha=0$이면 모든 언어를 같은 확률로 만든다. XLM은 **BPE 어휘를 만들 때** $\alpha=0.5$, CLM·MLM 학습 batch 언어를 뽑을 때는 $\alpha=0.7$을 사용했다. 숫자가 둘인 것은 같은 설정을 두 번 적은 오류가 아니라, 서로 다른 두 샘플링 단계이기 때문이다.
@@ -127,7 +127,7 @@ B의 원자료 비중은 20%였지만 BPE 학습 표본에서는 약 33%가 된�
 
 $$
 \mathcal{L}
-=-\sum_{i\in M}\log p_\theta(x_i\mid\text{context}_i).
+=-\sum_{i\in M}\log p_\theta(x_i\mid\text{context}_i)
 $$
 
 - $x_i$는 원래 문장의 $i$번째 정답 token이다.
@@ -145,7 +145,7 @@ $$
 $$
 \mathcal{L}_{\mathrm{CLM}}(x)
 =-\sum_{t=1}^{T}
-\log p_\theta(x_t\mid x_{<t},\ell).
+\log p_\theta(x_t\mid x_{<t},\ell)
 $$
 
 - $x_{<t}=(x_1,\ldots,x_{t-1})$는 현재 위치보다 왼쪽의 token들이다.
@@ -163,7 +163,7 @@ x^{\mathrm{in}}=\operatorname{corrupt}(x,M),
 \qquad
 \mathcal{L}_{\mathrm{MLM}}(x)
 =-\sum_{i\in M}
-\log p_\theta(x_i\mid x^{\mathrm{in}},\ell).
+\log p_\theta(x_i\mid x^{\mathrm{in}},\ell)
 $$
 
 $x^{\mathrm{in}}$은 모델이 실제로 읽는 입력이고, $x_i$는 숨겨 둔 원래 정답이다. 입력의 가린 자리와 loss의 정답을 분리해서 써야 모델이 자기 입력의 [MASK]를 답으로 외운다고 오해하지 않는다.
@@ -185,7 +185,7 @@ $$
 \mathcal{L}_{\mathrm{TLM}}(x,y)
 =
 -\sum_{i\in M_x}\log p_\theta(x_i\mid z^{\mathrm{in}})
--\sum_{j\in M_y}\log p_\theta(y_j\mid z^{\mathrm{in}}).
+-\sum_{j\in M_y}\log p_\theta(y_j\mid z^{\mathrm{in}})
 $$
 
 첫 합은 $x$ 언어에서 가린 token의 벌점, 둘째 합은 $y$ 언어에서 가린 token의 벌점이다. 두 합을 더하는 이유는 어느 쪽 문장이 source이고 어느 쪽이 target이라는 고정 역할 없이 **양쪽 빈칸**을 모두 맞히게 하기 때문이다. 예를 들어 영어 ‘blue’가 가려졌을 때 영어 주변 문맥뿐 아니라 가리지 않은 프랑스어 ‘bleu’도 attention으로 읽을 수 있다. 반대로 프랑스어 쪽을 가렸을 때도 영어가 문맥이 된다.
@@ -199,7 +199,7 @@ $$
 $$
 \mathcal{L}_{\mathrm{NMT}}(x,y)
 =-\sum_{t=1}^{n}
-\log p_\theta(y_t\mid y_{<t},x).
+\log p_\theta(y_t\mid y_{<t},x)
 $$
 
 NMT의 $y_{<t}$는 이미 생성한 target 앞부분이고, $y_t$는 이번에 반드시 출력해야 하는 다음 target token이다. 그래서 decoder에는 미래 target을 못 보게 하는 causal mask가 필요하다. 반면 TLM은 양쪽 문장을 encoder 문맥으로 읽고 선택된 빈칸만 복원한다. TLM의 $x$와 $y$는 차례로 생성해야 할 source·target이 아니라 서로 돕는 관측 문맥이다. 병렬 자료를 쓴다는 공통점만으로 두 loss를 서로 바꾸어 쓸 수 없는 이유다.
@@ -211,7 +211,7 @@ XLM의 MLM+TLM 설정은 monolingual MLM batch와 parallel TLM batch를 교대�
 $$
 \mathbb{E}[\mathcal{L}_{\mathrm{batch}}]
 =r\,\mathbb{E}[\mathcal{L}_{\mathrm{MLM}}]
-+(1-r)\,\mathbb{E}[\mathcal{L}_{\mathrm{TLM}}].
++(1-r)\,\mathbb{E}[\mathcal{L}_{\mathrm{TLM}}]
 $$
 
 이 식의 $r$은 교대 schedule을 읽기 위한 일반 표기이며, 논문이 특정한 한 숫자 $r$을 보고했다는 뜻은 아니다. 핵심은 한 batch에서 두 loss를 반드시 같은 비율로 계산한다는 뜻이 아니라, monolingual data와 parallel data가 서로 다른 batch로 optimizer에 들어간다는 점이다.
@@ -225,7 +225,7 @@ XNLI fine-tuning을 단순화하면, 문장쌍 $s$를 encoder가 벡터 $h_\thet
 $$
 a=Wh_\theta(s)+b,
 \qquad
-p(c\mid s)=\operatorname{softmax}(a)_c.
+p(c\mid s)=\operatorname{softmax}(a)_c
 $$
 
 - $W\in\mathbb{R}^{C\times d}$와 $b\in\mathbb{R}^{C}$는 $C$개 class를 위한 분류기 parameter다.
@@ -239,7 +239,7 @@ $$
 원 논문의 XNLI 15개 언어 평균은 MLM 71.5, MLM+TLM 75.1 accuracy였다.
 
 $$
-75.1\%-71.5\%=3.6\%\text{p}.
+75.1\%-71.5\%=3.6\%\text{p}
 $$
 
 이것은 3.6 **퍼센트포인트** 상승이다. 71.5를 기준으로 한 상대 변화율과는 다른 단위다. 또 MLM+TLM은 TLM objective만 더한 것이 아니라 parallel data도 함께 쓴 설정이다. 따라서 이 비교는 그 논문·data·학습 recipe 안에서 추가 병렬 TLM 설정의 효과를 보여 주며, TLM만의 순수하고 보편적인 인과 효과를 모든 언어·과제에 확정하지는 않는다.

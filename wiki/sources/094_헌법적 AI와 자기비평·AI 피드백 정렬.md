@@ -97,7 +97,7 @@ p(A\succ B\mid x,c)
 \xrightarrow{\text{preference model}}
 r_\phi(x,y)
 \xrightarrow{\text{RL}}
-\pi_\theta.
+\pi_\theta
 $$
 
 $x$는 프롬프트, $y_A,y_B$는 SL-CAI가 만든 두 후보 응답, $c$는 RL 후보 비교용 16개 원칙 중 무작위로 고른 하나다. Feedback model은 어느 응답이 원칙에 더 잘 맞는지 객관식으로 판정하고, 두 선택지에 부여한 정규화 확률을 소프트 유해성 선호 레이블로 저장한다. 이 AI 유해성 레이블을 사람의 유용성 선호 레이블과 섞어 preference model $r_\phi$를 학습한 뒤, SL-CAI에서 시작한 정책 $\pi_\theta$가 그 대리 점수를 높이도록 강화학습한다.

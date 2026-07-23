@@ -82,7 +82,7 @@ CLIP은 이미지와 텍스트를 직접 생성하지 않는다. 시각 질문 �
 
 $$
 v_i=\operatorname{normalize}(W_I f_\theta(I_i)),\qquad
-t_i=\operatorname{normalize}(W_T g_\phi(T_i)).
+t_i=\operatorname{normalize}(W_T g_\phi(T_i))
 $$
 
 정규화된 두 벡터의 내적은 코사인 유사도와 같다. 따라서 $v_i^\top t_j$는 이미지 $i$와 텍스트 $j$가 얼마나 잘 대응하는지 나타내는 학습 점수이며, 확률·사실성·사람의 이해 정도와 같은 값은 아니다.
@@ -105,7 +105,7 @@ $$
 \operatorname{CE}_{\mathrm{image\to text}}(S)
 +
 \operatorname{CE}_{\mathrm{text\to image}}(S)
-\right].
+\right]
 $$
 
 배치가 크면 한 예시는 한 번의 update에서 많은 오답 후보와 비교된다. 그러나 의미가 비슷한 다른 이미지·문장도 우연히 음성으로 들어갈 수 있으므로, 이 손실은 모든 의미 관계를 완전하게 부호화하기보다 관측된 쌍을 상대적으로 식별하도록 학습한다.

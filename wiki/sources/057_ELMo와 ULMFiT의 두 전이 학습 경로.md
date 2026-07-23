@@ -77,7 +77,7 @@ ELMo의 양방향 언어 모델은 순방향과 역방향을 별도 LSTM으로 �
 $$
 \operatorname{ELMo}^{task}_k
 =\gamma^{task}\sum_{j=0}^{L}s^{task}_j\mathbf{h}^{LM}_{k,j},
-\qquad \sum_j s^{task}_j=1.
+\qquad \sum_j s^{task}_j=1
 $$
 
 $s_j$는 과제별 softmax-normalized 층 가중치이고 $\gamma$는 전체 크기다. 한 최상위 층만 가져오는 것이 아니라 과제가 여러 내부 층을 섞게 한 점이 핵심이다. 원 논문 분석에서는 위층이 문맥 의존 의미에, 아래층이 품사 같은 구문 정보에 상대적으로 강한 경향을 보였다. 이를 각 층에 언어 기능이 완전히 분리돼 저장된다는 법칙으로 확대하지 않는다.

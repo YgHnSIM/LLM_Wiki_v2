@@ -79,7 +79,7 @@ v1에서 512×512×3 이미지는 64×64×4 잠재가 된다. 가로와 세로�
 $$
 z_t=\sqrt{\bar{\alpha}_t}z_0+\sqrt{1-\bar{\alpha}_t}\epsilon,
 \qquad
-\mathcal{L}=\mathbb{E}\left[\lVert\epsilon-\epsilon_\theta(z_t,t,c)\rVert_2^2\right].
+\mathcal{L}=\mathbb{E}\left[\lVert\epsilon-\epsilon_\theta(z_t,t,c)\rVert_2^2\right]
 $$
 
 생성 때는 무작위 잠재 잡음에서 시작해 U-Net을 여러 차례 호출하고, 마지막 잠재만 디코더로 픽셀 이미지로 바꾼다. 잠재 공간은 각 호출의 공간 비용을 줄이지만 확산 표본화의 순차성 자체를 없애지는 않는다.
@@ -89,7 +89,7 @@ $$
 원 LDM은 조건 인코더 $\tau_\theta(y)$가 만든 토큰 표현을 U-Net의 교차 어텐션에 넣는 일반 인터페이스를 제시했다. U-Net의 평탄화된 중간 시각 특징이 질의 $Q$가 되고, 조건 토큰의 투영이 키 $K$와 값 $V$가 된다.
 
 $$
-\operatorname{Attention}(Q,K,V)=\operatorname{softmax}\left(\frac{QK^\top}{\sqrt d}\right)V.
+\operatorname{Attention}(Q,K,V)=\operatorname{softmax}\left(\frac{QK^\top}{\sqrt d}\right)V
 $$
 
 Stable Diffusion v1에서는 동결된 CLIP ViT-L/14 텍스트 인코더의 **비풀링 토큰 출력**이 조건이 된다. 이는 [[DALL·E 2]]의 사전 모델이 CLIP 이미지 임베딩을 먼저 생성하고 확산 디코더가 그 임베딩을 복원하는 구조와 다르다. 또한 생성 중인 이미지를 CLIP 이미지 인코더로 매 단계 채점해 기울기를 되돌리는 CLIP gradient guidance도 아니다.
@@ -99,7 +99,7 @@ Stable Diffusion v1에서는 동결된 CLIP ViT-L/14 텍스트 인코더의 **�
 v1-3와 v1-4는 훈련 예제의 10%에서 텍스트 조건을 버려 같은 U-Net이 조건부·무조건부 잡음 예측을 모두 배우게 했다. 생성 때 두 예측의 차이를 확대한다.
 
 $$
-\epsilon_{\mathrm{cfg}}=\epsilon_{\mathrm{uncond}}+s\left(\epsilon_{\mathrm{cond}}-\epsilon_{\mathrm{uncond}}\right).
+\epsilon_{\mathrm{cfg}}=\epsilon_{\mathrm{uncond}}+s\left(\epsilon_{\mathrm{cond}}-\epsilon_{\mathrm{uncond}}\right)
 $$
 
 공식 reference script의 기본값은 512×512, 50 PLMS 단계와 guidance scale 7.5였다. $s$를 높이면 프롬프트 조건을 강하게 따르는 경향이 있지만 다양성이 줄거나 형태·색이 과장될 수 있다. 이 절충은 별도 이미지 분류기를 학습하는 classifier guidance와도 구분한다.

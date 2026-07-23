@@ -84,7 +84,7 @@ BERT의 NSP는 text span A 뒤에 실제로 이어지는 B와 corpus에서 무�
 
 $$
 \mathcal{L}_{\mathrm{MLM}}(\theta;x,M)
-=-\sum_{i\in M}\log p_\theta(x_i\mid x^{\mathrm{in}}).
+=-\sum_{i\in M}\log p_\theta(x_i\mid x^{\mathrm{in}})
 $$
 
 | 기호 | 원 자료를 읽을 때의 뜻 |
@@ -109,7 +109,7 @@ p_\theta(x\mid z)
 \qquad
 \max_\theta\;\mathbb{E}_{z\sim Z_T}
 \left[\sum_{t=1}^{T}\log p_\theta
-\left(x_{z_t}\mid x_{z_{<t}}\right)\right].
+\left(x_{z_t}\mid x_{z_{<t}}\right)\right]
 $$
 
 | 기호·연산 | 이 식에서의 뜻 |
@@ -129,7 +129,7 @@ $$
 p_\theta(x\mid z)
 =p_\theta(x_2)\,
 p_\theta(x_1\mid x_2)\,
-p_\theta(x_3\mid x_2,x_1).
+p_\theta(x_3\mid x_2,x_1)
 $$
 
 입력은 여전히 위치 1의 비, 위치 2의 가, 위치 3의 온다다. 첫 target은 다른 token **내용**이 없는 상태에서 위치 2를, 둘째는 $x_2$를 문맥으로, 셋째는 $x_2,x_1$을 문맥으로 예측한다. 다른 순열도 함께 표본화하므로 한 위치가 학습 전체에서는 물리적으로 오른쪽에 있던 token도 문맥으로 경험할 수 있다.
@@ -142,7 +142,7 @@ $$
 \left[
 \sum_{t=c+1}^{T}
 \log p_\theta(x_{z_t}\mid x_{z_{<t}})
-\right].
+\right]
 $$
 
 뒤쪽 target은 해당 순열에서 더 긴 문맥을 가지므로 최적화가 덜 어렵고, query stream을 만들 target 수가 줄어 memory와 속도에도 도움이 된다. 논문은 약 $1/K$의 token만 예측하도록 $T/(T-c)\approx K$를 두며, XLNet-Large에는 $K=6$을 썼다. 따라서 전체 목표는 개념을 설명하는 출발점이고, 실제 계산은 그 목표의 표본·부분 예측 근사까지 포함한다.
@@ -181,7 +181,7 @@ $$
 p_\theta(X_{z_t}=v\mid x_{z_{<t}})
 =
 \frac{\exp(e(v)^\top g_\theta(x_{z_{<t}},z_t))}
-{\sum_{v'\in\mathcal V}\exp(e(v')^\top g_\theta(x_{z_{<t}},z_t))}.
+{\sum_{v'\in\mathcal V}\exp(e(v')^\top g_\theta(x_{z_{<t}},z_t))}
 $$
 
 내적 $e(v)^\top g$은 후보와 현재 위치·문맥의 궁합 점수(logit)를 만들고, $\exp$는 점수를 양수로, 분모는 후보 전체 합이 1이 되게 확률로 바꾼다. $z_t$가 식 안에 있으므로 같은 공개 문맥이어도 target 위치가 다르면 다른 분포를 낼 수 있다. 설명용으로 세 후보의 logit이 $(1.2,0.5,-1.7)$이면 지수값 합은 $3.3201+1.6487+0.1827=5.1515$이고 확률은 약 $(0.6445,0.3200,0.0355)$다. 둘째 후보가 정답이면 벌점은 $-\log(0.3200)\approx1.139$다. 실제 구현은 overflow를 막기 위해 모든 logit에서 최댓값을 빼는 stable softmax를 쓴다.
@@ -252,7 +252,7 @@ e_i=o_iA\in\mathbb{R}^{1\times E}
 \xrightarrow{\;P\;}
 h_i^{(0)}=e_iP\in\mathbb{R}^{1\times H},
 \qquad
-VH\quad\longrightarrow\quad VE+EH.
+VH\quad\longrightarrow\quad VE+EH
 $$
 
 | 항 | 크기와 역할 |
@@ -280,7 +280,7 @@ $$
 Z^{(\ell+1)}=f_{\phi^{(\ell)}}(Z^{(\ell)}),
 \qquad
 \text{all-shared ALBERT:}\quad
-Z^{(\ell+1)}=f_{\phi_{\mathrm{shared}}}(Z^{(\ell)}).
+Z^{(\ell+1)}=f_{\phi_{\mathrm{shared}}}(Z^{(\ell)})
 $$
 
 일반 구조는 $L$개 layer에 대해 $L$개의 block parameter 묶음을 저장하고, all-sharing은 하나의 $\phi_{\mathrm{shared}}$만 저장한다. 하지만 두 경우 모두 block $f$를 $L$번 계산해 서로 다른 중간 상태를 만든다. 그래서 parameter 저장량은 크게 줄어도 FLOPs·latency가 같은 비율로 줄지는 않는다.

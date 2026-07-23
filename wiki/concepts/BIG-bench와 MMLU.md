@@ -81,7 +81,7 @@ Benchmark 결과를 다음 함수로 생각하면 비교 오류가 줄어든다.
 $$
 \text{score}
 =f(\text{model checkpoint},\text{task version},\text{prompt},
-\text{shots},\text{decoding},\text{metric},\text{aggregation},\text{data boundary}).
+\text{shots},\text{decoding},\text{metric},\text{aggregation},\text{data boundary})
 $$
 
 Model 이름과 숫자만 적으면 나머지 입력이 사라진다. 특히 base와 instruction-tuned model, zero-shot과 5-shot, direct answer와 CoT, 전체와 경량 subset, task macro와 example-weighted average는 같은 실험이 아니다.
@@ -93,7 +93,7 @@ Model 이름과 숫자만 적으면 나머지 입력이 사라진다. 특히 bas
 원 논문은 각 subject에 5개의 고정 개발 예시를 두었다. GPT-3 few-shot prompt는 과목 이름을 알리는 instruction, 최대 5개의 question–answer demonstration, 새 문항과 `Answer:`를 이어 붙였다. Model의 `A`·`B`·`C`·`D` token 확률 가운데 최대를 선택했다.
 
 $$
-\hat y=\arg\max_{c\in\{A,B,C,D\}}p_\theta(c\mid I_s,D_s,x).
+\hat y=\arg\max_{c\in\{A,B,C,D\}}p_\theta(c\mid I_s,D_s,x)
 $$
 
 $I_s$는 과목 instruction, $D_s$는 고정 few-shot 예시다. 이 정의는 설명을 생성하는 능력이나 정답 근거의 충실성을 채점하지 않는다. 같은 정답이어도 추론이 틀렸을 수 있고, 지식이 있어도 answer token format을 놓치면 오답이 된다.
@@ -107,7 +107,7 @@ JSON task는 input–target 예시와 표준 metric을 선언한다. Programmati
 Task $t$의 preferred raw metric $m_t$, 저·고 기준 $l_t,h_t$가 있으면 aggregate용 점수는 다음과 같다.
 
 $$
-s_t=100\frac{m_t-l_t}{h_t-l_t}.
+s_t=100\frac{m_t-l_t}{h_t-l_t}
 $$
 
 저 기준보다 못하면 0 미만, 고 기준을 넘으면 100 초과도 가능하다. 전체 aggregate는 $s_t$의 task 평균이다. 이 변환은 exact match, multiple-choice grade, ROUGE 같은 서로 다른 metric을 같은 축에 표시하지만, 각 task의 구성 타당성이나 low/high 선택을 같게 만들지는 않는다.

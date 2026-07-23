@@ -70,7 +70,7 @@ BERT는 GPT처럼 최소한의 출력층만 새로 두고 전체 모델을 미�
 
 $$
 \mathcal{L}_{\mathrm{MLM}}
-=-\sum_{i\in M}\log p_\theta(x_i\mid \tilde{x}).
+=-\sum_{i\in M}\log p_\theta(x_i\mid \tilde{x})
 $$
 
 encoder에는 causal mask가 없으므로 선택 위치의 예측은 왼쪽과 오른쪽 입력 모두를 사용할 수 있다. 이 의미에서 ‘양방향’이다. 모든 token을 차례로 생성하는 확률 분해가 아니며, 선택되지 않은 85% 위치를 정답으로 채점하지 않는다.

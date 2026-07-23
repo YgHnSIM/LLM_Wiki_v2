@@ -108,7 +108,7 @@ $$
 \operatorname{LN}(h)_i
 =\gamma_i\frac{h_i-\mu(h)}{\sqrt{\sigma^2(h)+\epsilon}}
 +\beta_i
-\qquad(i=1,\ldots,D).
+\qquad(i=1,\ldots,D)
 $$
 
 | 기호 | 현재 식에서의 의미 | 종류·shape | 값의 범위·출처 |
@@ -129,7 +129,7 @@ $\epsilon$은 variance에 더하므로 단위는 $h$의 제곱과 맞아야 한�
 원 2017년 [[Transformer]]의 각 sublayer는 다음 Post-LN 형태였다.
 
 $$
-y=\operatorname{LN}\bigl(x+\operatorname{Sublayer}(x)\bigr).
+y=\operatorname{LN}\bigl(x+\operatorname{Sublayer}(x)\bigr)
 $$
 
 $x$와 $\operatorname{Sublayer}(x)$가 마지막 축에서 같은 $D$를 가져야 residual 덧셈이 가능하다. Pre-LN 변형은 보통

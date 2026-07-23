@@ -50,7 +50,7 @@ related:
 언어 모델은 token열 $x=(x_1,\ldots,x_T)$의 결합확률을 다음 token 조건부확률의 곱으로 쓴다.
 
 $$
-P(x)=\prod_{t=1}^{T}P(x_t\mid x_{<t}).
+P(x)=\prod_{t=1}^{T}P(x_t\mid x_{<t})
 $$
 
 $x_{<t}$는 $t$보다 앞선 모든 token, $P(x_t\mid x_{<t})$는 그 문맥에서 다음 token $x_t$가 나올 확률이다. Transformer는 이 조건부확률을 만들기 위해 각 위치를 벡터로 바꾸고 [[어텐션 메커니즘|attention]]으로 과거 위치를 가중합한다. 하지만 실제 GPU memory 안에서 긴 문서를 한 번에 처리하기 어렵기 때문에, 당시 vanilla Transformer 언어 모델은 길이 $L$의 segment로 잘라 독립적으로 학습했다.
@@ -80,7 +80,7 @@ $x_{<t}$는 $t$보다 앞선 모든 token, $P(x_t\mid x_{<t})$는 그 문맥에�
 
 $$
 \widetilde h_{\tau}^{n-1}
-=\left[\operatorname{SG}\!\left(m_{\tau}^{n-1}\right)\,\Vert\,h_{\tau}^{n-1}\right].
+=\left[\operatorname{SG}\!\left(m_{\tau}^{n-1}\right)\,\Vert\,h_{\tau}^{n-1}\right]
 $$
 
 $\Vert$는 성분별 곱이나 덧셈이 아니라 **길이 축 연결(concatenation)**이다. 따라서 $m_{\tau}^{n-1}\in\mathbb{R}^{M\times d}$, $h_{\tau}^{n-1}\in\mathbb{R}^{L\times d}$이면 $\widetilde h_{\tau}^{n-1}\in\mathbb{R}^{(M+L)\times d}$가 된다. stop-gradient는 순전파 값은 유지하고 역전파 경로만 끊는다.
@@ -89,7 +89,7 @@ $$
 \operatorname{SG}(z)=z\quad\text{(순전파)},
 \qquad
 \frac{\partial\operatorname{SG}(z)}{\partial z}=0
-\quad\text{(역전파)}.
+\quad\text{(역전파)}
 $$
 
 논문 표기를 행렬의 shape와 함께 쓰면 query는 현재 $L$행에서만, key·value는 확장 문맥 $M+L$행에서 만든다.
@@ -208,7 +208,7 @@ masked softmax는 각 query가 읽을 수 있는 후보를 적어도 하나 가�
 $$
 \operatorname{softmax}(s)_j
 =\frac{\exp(s_j-c)}{\sum_r\exp(s_r-c)},
-\qquad c=\max_r s_r.
+\qquad c=\max_r s_r
 $$
 
 이는 분자·분모에 같은 $\exp(-c)$를 곱한 것이라 정확한 실수 연산에서는 원래 비율을 바꾸지 않는다. $-\infty$ mask도 실제 부동소수점 구현에서는 큰 음수로 근사될 수 있다. 따라서 논문의 수식은 memory·상대 거리의 구조를 정의하지만, dtype·mask 값·hardware memory까지 자동으로 해결하는 완전한 구현 명세는 아니다.

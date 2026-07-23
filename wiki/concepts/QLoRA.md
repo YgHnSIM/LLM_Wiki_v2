@@ -91,7 +91,7 @@ $$
 \qquad
 A\in\mathbb{R}^{r\times d_{in}},
 \quad
-B\in\mathbb{R}^{d_{out}\times r}.
+B\in\mathbb{R}^{d_{out}\times r}
 $$
 
 QLoRA의 forward는 개념적으로 다음과 같다.
@@ -116,7 +116,7 @@ Double quantization은 weight code를 한 번 더 양자화하는 것이 아니�
 
 $$
 0.500-\left(\frac{8}{64}+\frac{32}{64\times256}\right)
-\approx0.373\ \text{bit/parameter}.
+\approx0.373\ \text{bit/parameter}
 $$
 
 65B model에서는 약 3GB 절감이다. 이 수치는 quantization metadata 장부의 값이며 activation과 adapter까지 포함한 total memory 감소율이 아니다.

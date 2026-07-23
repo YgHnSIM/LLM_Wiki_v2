@@ -71,7 +71,7 @@ The Pile은 EleutherAI가 대규모 언어 모델 학습과 교차 영역 평가
 Component $i$의 raw size를 $B_i$, 한 Pile epoch에서의 반복 횟수를 $e_i$라 하면 effective-size 장부는 다음과 같다.
 
 $$
-B_i^{\mathrm{effective}}\approx B_i e_i.
+B_i^{\mathrm{effective}}\approx B_i e_i
 $$
 
 Wikipedia는 $e_i=3$, PubMed Central·OpenWebText2·arXiv는 $e_i=2$, Books3·FreeLaw는 $e_i=1.5$다. 작은 고품질 자료를 반복하면 raw 크기보다 학습 비중이 커진다. 이 선택은 단순한 저장 최적화가 아니라 모델이 어떤 분포를 더 자주 보는지 정하는 modeling decision이다.

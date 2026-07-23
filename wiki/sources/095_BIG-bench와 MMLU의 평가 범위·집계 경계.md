@@ -104,7 +104,7 @@ MMLU는 STEM·인문학·사회과학·기타의 네 상위 범주 아래 57개 
 $$
 \hat y
 =\arg\max_{c\in\{A,B,C,D\}}
-p_\theta(c\mid \text{subject instruction},D_{\mathrm{dev}},x).
+p_\theta(c\mid \text{subject instruction},D_{\mathrm{dev}},x)
 $$
 
 따라서 ‘MMLU 70’ 같은 숫자에는 model만 아니라 prompt 문구, 시연 수와 선택, answer token 처리, 과목별 또는 문항별 집계가 들어간다. 원 논문은 모든 예시와 과제의 분류 정확도를 보고했고, 후대 구현은 과목별 accuracy의 macro average 등 다른 집계를 쓸 수 있으므로 evaluation harness를 함께 적어야 한다.
@@ -118,7 +118,7 @@ BIG-bench의 JSON 과제는 입력과 target 예시를 선언하고, text 생성
 $$
 s_t=100\frac{m_t-l_t}{h_t-l_t},
 \qquad
-S=\frac{1}{|T|}\sum_{t\in T}s_t.
+S=\frac{1}{|T|}\sum_{t\in T}s_t
 $$
 
 이 식은 서로 다른 단위를 한 그래프에 올릴 수 있게 하지만, low/high의 의미와 task weight를 자연법칙으로 만들지 않는다. `S`가 같아도 어떤 과제에서 성공했는지는 전혀 다를 수 있다.

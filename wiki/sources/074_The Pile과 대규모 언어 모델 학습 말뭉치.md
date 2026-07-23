@@ -87,7 +87,7 @@ Table 1의 상위·대표 구성요소를 보면 raw 크기와 학습 비중의 
 구성요소 $i$의 raw byte를 $B_i$, 반복 횟수를 $e_i$라 하면 Table 1의 effective byte는 대략 다음 장부다.
 
 $$
-B_i^{\mathrm{effective}}\approx B_i e_i.
+B_i^{\mathrm{effective}}\approx B_i e_i
 $$
 
 실제 문서 sampling은 문서 수와 원하는 epoch 수를 이용하므로, byte 표와 정확히 같은 확률식은 아니다. Tokenizer도 byte를 서로 다른 token 수로 바꾼다. 그래서 `825 GiB`를 곧바로 고정 token budget으로 환산하지 않는다.

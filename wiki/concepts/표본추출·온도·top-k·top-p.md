@@ -45,7 +45,7 @@ related:
 자기회귀 모델은 문맥 $c$에서 다음 token 후보 $i\in\{1,\ldots,q\}$의 로짓 $z_i$를 만들고 softmax로 분포 $p$를 만든다.
 
 $$
-p_i=\frac{\exp(z_i)}{\sum_{j=1}^{q}\exp(z_j)}.
+p_i=\frac{\exp(z_i)}{\sum_{j=1}^{q}\exp(z_j)}
 $$
 
 이 분포를 만든 사실만으로 어떤 token을 출력할지는 정해지지 않는다. argmax는 가장 큰 $p_i$ 하나를 항상 택한다. sampling은 확률분포에서 난수를 한 번 뽑는다. 온도와 top-$k$·top-$p$는 sampling 전에 분포나 후보 집합을 바꾸는 decoding 규칙이다. 이들은 모델 weight를 다시 학습하거나, 모델의 factuality·안전성을 보장하는 장치가 아니다.

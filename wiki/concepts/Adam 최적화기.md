@@ -119,7 +119,7 @@ $$
 $$
 \hat m_1=\frac{0.2}{1-0.9}=2,
 \qquad
-\hat v_1=\frac{0.004}{1-0.999}=4.
+\hat v_1=\frac{0.004}{1-0.999}=4
 $$
 
 따라서 $\epsilon$을 무시해 읽으면 첫 parameter update는

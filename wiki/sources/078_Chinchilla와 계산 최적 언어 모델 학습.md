@@ -72,13 +72,13 @@ $$
 (N_\mathrm{opt},D_\mathrm{opt})
 =\underset{N,D}{\arg\min}\;L(N,D)
 \quad\text{subject to}\quad
-\operatorname{FLOPs}(N,D)=C.
+\operatorname{FLOPs}(N,D)=C
 $$
 
 $N$은 모델 크기, $D$는 학습 중 본 누적 token 수, $C$는 훈련 계산 예산이다. Dense decoder의 거친 연산 장부에서는 다음 근사를 쓴다.
 
 $$
-C\approx6ND.
+C\approx6ND
 $$
 
 같은 $C$에서 $N$을 늘리면 처리할 수 있는 $D$가 줄고, $D$를 늘리면 사용할 수 있는 $N$이 줄어든다. 계산 최적점은 한 축을 최대화하는 값이 아니라 이 제약 위에서 loss가 가장 낮은 조합이다.
@@ -100,7 +100,7 @@ $$
 Chinchilla의 실제 비율은 다음과 같다.
 
 $$
-\frac{1.4\text{T tokens}}{70\text{B parameters}}=20.
+\frac{1.4\text{T tokens}}{70\text{B parameters}}=20
 $$
 
 Approach 1의 Supplemental Table A3도 여러 규모에서 대략 20대 초반 token/parameter를 투영했다. 따라서 20:1은 당시 dense Transformer·tokenizer·objective·data mixture·schedule에 조건화된 유용한 경험 근사다. 모든 architecture와 domain에 적용되는 자연 상수나 최소 data floor가 아니다.

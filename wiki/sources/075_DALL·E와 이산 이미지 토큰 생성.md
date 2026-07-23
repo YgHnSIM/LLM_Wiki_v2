@@ -77,7 +77,7 @@ Caption은 소문자 [[서브워드 토큰화|BPE]]로 최대 256개 토큰이 �
 학습은 텍스트와 이미지 양쪽의 다음 토큰 손실을 계산한다. 각 손실을 정규화한 뒤 텍스트에 1/8, 이미지에 7/8을 가중하므로 목적함수는 다음처럼 요약할 수 있다.
 
 $$
-\mathcal{L}=\frac{1}{8}\mathcal{L}_{\text{text}}+\frac{7}{8}\mathcal{L}_{\text{image}}.
+\mathcal{L}=\frac{1}{8}\mathcal{L}_{\text{text}}+\frac{7}{8}\mathcal{L}_{\text{image}}
 $$
 
 따라서 DALL·E를 “텍스트를 읽은 뒤 다음 이미지 토큰만 예측하는 모델”이라고 쓰면 텍스트 토큰까지 함께 모델링한 목적의 일부가 빠진다.

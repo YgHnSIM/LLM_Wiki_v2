@@ -115,7 +115,7 @@ Post-training은 사용자의 지시와 정책에 맞는 응답을 선호하도�
 공식 GPT-4 interface는 interspersed image와 text를 입력받아 natural language·code 같은 text를 출력했다.
 
 $$
-(I_1,T_1,I_2,T_2,\ldots)\longrightarrow T_{\mathrm{out}}.
+(I_1,T_1,I_2,T_2,\ldots)\longrightarrow T_{\mathrm{out}}
 $$
 
 이는 image를 생성하는 decoder나 특정 fusion architecture를 뜻하지 않는다. [[멀티모달 대규모 언어 모델]]은 같은 signature를 continuous prefix, cross-attention memory, query bottleneck과 projected visual token 등 서로 다른 구조로 구현할 수 있다. GPT-4 내부 구조는 그 표의 ‘비공개’ 칸에 남긴다.

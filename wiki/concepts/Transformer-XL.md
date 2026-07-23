@@ -86,7 +86,7 @@ h_\tau^{n-1}=
 0.7 & 0.2\\
 0.2 & 0.8
 \end{bmatrix}
-\in\mathbb{R}^{2\times2}.
+\in\mathbb{R}^{2\times2}
 $$
 
 각 행은 한 위치의 길이 2 벡터다. $\tau$는 지금 처리하는 segment, $n-1$은 아직 attention을 통과하기 전의 바로 아래 층을 뜻한다. 첫 행렬의 값은 과거에서 왔고 둘째 행렬의 값은 새 segment에서 왔다.
@@ -105,7 +105,7 @@ $$
 0.7 & 0.2\\
 0.2 & 0.8
 \end{bmatrix}
-\in\mathbb{R}^{4\times2}.
+\in\mathbb{R}^{4\times2}
 $$
 
 $\Vert$는 벡터 성분을 더한다는 뜻이 아니라 **행을 위아래로 이어 길이를 $M+L=4$로 늘리는 연결**이다. $\operatorname{SG}$는 순전파에서는 입력값을 그대로 내보내지만, 역전파에서는 그 입력에 대한 미분을 0으로 만드는 자동미분 연산이다.
@@ -114,7 +114,7 @@ $$
 \operatorname{SG}(z)=z\quad\text{(순전파)},
 \qquad
 \frac{\partial\operatorname{SG}(z)}{\partial z}=0
-\quad\text{(역전파)}.
+\quad\text{(역전파)}
 $$
 
 따라서 위 숫자는 사라지지 않는다. 다만 지금 segment의 loss가 과거 segment의 파라미터 갱신까지 직접 바꾸지는 못한다.
@@ -126,7 +126,7 @@ $$
 $$
 Q=h_\tau^{n-1}I_2\in\mathbb{R}^{2\times2},
 \qquad
-K=V=\widetilde h_\tau^{n-1}I_2\in\mathbb{R}^{4\times2}.
+K=V=\widetilde h_\tau^{n-1}I_2\in\mathbb{R}^{4\times2}
 $$
 
 #### 3. 점수를 확률과 출력으로 바꾼다
@@ -134,7 +134,7 @@ $$
 현재 segment의 두 번째 위치를 읽는 query $q=(0.2,0.8)$를 보자. 이 위치는 두 과거 위치와 현재의 앞 위치, 그리고 자기 위치를 읽을 수 있다고 가정한다. 네 key와의 내적 점수는 $s_j=q^\mathsf{T}k_j$다. 내적은 같은 feature끼리 곱해 더하므로, 이 query와 어느 key가 함께 클 때 점수가 커지는 간단한 관련도 점수다.
 
 $$
-s=(0.16,\;0.50,\;0.30,\;0.68).
+s=(0.16,\;0.50,\;0.30,\;0.68)
 $$
 
 이 점수는 아직 확률이 아니다. 후보별 기여를 양수이고 합이 1인 가중치로 바꾸기 위해 [[소프트맥스]]를 적용한다. 분모는 이 query가 읽을 수 있는 모든 위치의 지수값을 더한다.
@@ -144,7 +144,7 @@ $$
 \frac{\exp(s_j)}{\sum_{r=1}^{4}\exp(s_r)},
 \qquad
 \sum_{r=1}^{4}\exp(s_r)
-\approx 6.145.
+\approx 6.145
 $$
 
 | 읽는 위치 $j$ | score $s_j$ | $\exp(s_j)$ | weight $\alpha_j$ | $\alpha_jv_j$ |
@@ -307,7 +307,7 @@ softmax는 점수가 아주 크거나 작을 때 $\exp(s)$가 overflow·underflo
 
 $$
 \operatorname{softmax}(s)_j
-=\frac{\exp(s_j-c)}{\sum_r\exp(s_r-c)}.
+=\frac{\exp(s_j-c)}{\sum_r\exp(s_r-c)}
 $$
 
 분자와 분모에 같은 양수 $\exp(-c)$를 곱한 것이라 정확한 실수 연산에서는 원래 softmax와 값이 같다. 다만 mask로 모든 후보를 가려 버리면 분모가 0이 되어 확률을 만들 수 없으므로, causal language model의 각 query에는 적어도 자기 위치 또는 과거 위치 하나가 남아야 한다. 실제 구현은 $-\infty$를 저장 가능한 큰 음수로 근사할 수 있어, mask·dtype·길이 제한도 결과의 공학적 조건이 된다.

@@ -95,7 +95,7 @@ $$
 \operatorname{RMSNorm}_{\epsilon}(h)_i
 =\gamma_i\frac{h_i}
 {\sqrt{\frac1D\sum_{j=1}^{D}h_j^2+\epsilon}}
-\qquad(i=1,\ldots,D).
+\qquad(i=1,\ldots,D)
 $$
 
 | 기호 | 현재 식에서의 의미 | 종류·shape | 값의 범위·출처 |

@@ -91,7 +91,7 @@ FLAN의 학습·평가 흐름은 다음과 같다.
 지시를 $I$, 입력을 $x$, 출력 token sequence를 $y=(y_1,\ldots,y_T)$라고 하면 지도 목표는 다음 조건부 생성 가능도를 높이는 것이다.
 
 $$
-p_\theta(y\mid I,x)=\prod_{t=1}^{T}p_\theta(y_t\mid I,x,y_{<t}).
+p_\theta(y\mid I,x)=\prod_{t=1}^{T}p_\theta(y_t\mid I,x,y_{<t})
 $$
 
 raw의 `III`, `xxx`, `yyy`와 세 번 겹친 확률식은 웹 수식 렌더링 흔적이다. 세 확률을 곱하는 새 목적이 아니라 하나의 $p(y\mid I,x)$를 뜻한다.
