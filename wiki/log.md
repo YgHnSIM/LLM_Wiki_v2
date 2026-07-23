@@ -4390,6 +4390,23 @@ raw 등록 해시:
 
 - `BASE_PATH=/LLM_Wiki_v2 npm run verify`에서 단위 테스트 106개, Chromium 회귀 테스트 4개, raw artifact 220개 해시 검사와 672개 HTML 산출물 검사를 통과했다.
 
+## [2026-07-23] content | 비교 읽기 확장과 평가 경계 보강
+
+변경 내용:
+
+- [[문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리]]에서 Memory Network, Transformer-XL, Gemini 1.5, RAG, agent state를 보존·갱신·접근·근거 추적의 네 축으로 나눴다.
+- [[생성은 무엇을 한 단계씩 고르는가 — 파형·이미지 토큰·잠재 잡음]]에서 WaveNet 표본, DALL·E 1의 이산 code, unCLIP image embedding, latent diffusion의 반복 갱신을 출력 단위와 평가 장부로 비교했다.
+- [[같은 벡터 공간은 무엇을 보장하는가 — 공기·대조·생성의 경계]]와 [[음성을 텍스트로 옮기는 경계에서 무엇이 사라지는가 — 인식·합성·네이티브 오디오]]를 추가해 공유 embedding과 speech-to-text 경계가 각각 유사도·후보 판정·생성, 인식·합성·speech-to-speech 평가와 같지 않음을 정리했다.
+- [[자동 평가 지표는 무엇을 보상하는가]]에는 형식적으로 유효한 도구 호출과 과제 후조건·부작용 없는 완료의 차이, 피드백 출처와 재현 가능한 판정 가능성의 독립 축을 보강했다.
+
+검증 결과:
+
+- `npm.cmd run learning:audit`, `npm.cmd run learning:audit:check`, `npm.cmd run verify`를 통과했다. verify는 단위 테스트 106개, Markdown 351개·evidence 449건·immutable raw artifact 220개 검사, HTML 677개·로컬 참조 45,412개 검사, Chromium 회귀 4개를 포함한다.
+
+남은 제한:
+
+- 네 분석은 직접 계보를 선언하지 않는다. 각 문서는 공통 질문 아래의 관측 단위·학습 목표·평가 경계를 비교하며, 인과적 영향은 해당 1차 자료가 명시한 범위에서만 다룬다.
+
 ## 관련 항목
 
 - [[index]]
