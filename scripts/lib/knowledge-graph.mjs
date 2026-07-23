@@ -7,7 +7,7 @@ const NODE_COLLISION_GAP = 28;
 // Coordinates are persisted with 0.1px precision. Keep a small extra buffer
 // while relaxing so a later center shift and serialization cannot turn an
 // almost-separated pair into a visible marker collision.
-const NODE_COLLISION_SERIALIZATION_BUFFER = 1;
+const NODE_COLLISION_SERIALIZATION_BUFFER = 2;
 const COMMUNITY_GAP = 220;
 const GRAPH_MARGIN = 260;
 const NETWORK_LAYOUT_ITERATIONS = 240;
