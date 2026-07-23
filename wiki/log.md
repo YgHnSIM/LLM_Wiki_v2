@@ -4673,6 +4673,27 @@ raw 등록 해시:
 - 이 숫자는 실제 LLM의 activation·훈련 run이 아니라 연산 경로를 재현하는 편집부 예다. LayerNorm·FFN·다층·batch 평균·Adam state·분산 실행은 의도적으로 생략했다.
 - attention weight, 낮은 NLL, 한 bias 갱신을 설명·사실성·일반화·안전성의 자동 증거로 읽지 않는다. 수학의 형성·수치 계산·기계학습 도입·현대 LLM 사용도 단일 직접 계보로 합치지 않는다.
 
+## [2026-07-24] content | Statistics, normalization, and numerical stability
+
+변경 내용:
+
+- [[확률변수·확률분포·기대값·분산]]과 [[수치 안정성과 log-sum-exp]]을 새 owner로 만들었다. 전자는 결과·확률변수·분포·기대값·분산과 관측 group 통계의 경계를, 후자는 max shift·log-softmax·online softmax와 dtype·mask 경계를 맡는다.
+- [[Layer Normalization]]·[[RMSNorm]]은 feature 축·shape·$\epsilon$·affine·centered variance와 raw second moment의 차이를 숫자 예로 보강했다. [[Adam 최적화기]]은 첫 좌표 update·편향 보정과 $v_t$가 variance가 아닌 이유를 분리했다.
+- [[소프트맥스]]·[[FlashAttention]]·[[그룹 상대 정책 최적화]]·[[대규모 언어 모델]]·[[LLM을 만든 수학]]에는 각 owner로 가는 국소 설명만 추가했다. 완전한 유도·수치 경계·표본 해석은 새 owner에 남겼다.
+- [[index]]·[[overview]]·기초 학습 감사·수학 원장을 361개 문서, 통계·안정성 배치 완료 상태와 다음 deferred 확장 경계에 맞췄다. raw/는 바꾸지 않았다.
+
+검증 결과:
+
+- $R\in\{0,1\}$, $P(R=1)=3/4$에서 $\mathbb E[R]=3/4$, $\operatorname{Var}(R)=3/16$, 표준편차 약 $0.433013$을 재계산했다. $h=(2,4,6)$의 feature 평균·분산은 $4,8/3$, RMS는 약 $4.320494$이고, Adam 첫 step의 편향 보정값은 $\hat m_1=2$, $\hat v_1=4$임을 확인했다.
+- $z=(1000,999,997)$의 직접 $\exp(1000)$는 JavaScript 수치에서 유한값이 아니며, max shift 뒤 $\operatorname{LSE}(z)\approx1000.349012$, softmax는 약 $(0.705385,0.259496,0.035119)$이고 합은 1임을 확인했다.
+- npm run math:check, npm run learning:audit, npm run learning:audit:check, npm run sync:index, npm run lint:wiki, root BASE_PATH=''의 site build·check와 npm run verify를 통과했다. 새 owner와 허브 HTML의 KaTeX error 표지는 없었다.
+
+남은 제한:
+
+- 확률·정규화·Adam·softmax 예의 수치는 정의와 구현 경계를 보이는 편집부 계산이며, 특정 학습 run·실제 LLM activation·하드웨어 전체의 수치 오차를 재현하지 않는다.
+- max shift와 online softmax는 overflow·underflow 위험을 줄이지만 모든 finite-precision 오차, invalid mask row, 모델 보정·일반화·사실성 문제를 해결하지 않는다.
+- 다음 advanced-extensions는 계획상 deferred다. 저랭크·활성화·비용·sampling·강화학습 목적 배치는 별도 범위 선택 없이 자동 시작하지 않는다.
+
 ## 관련 항목
 
 - [[index]]

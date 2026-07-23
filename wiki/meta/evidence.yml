@@ -51,6 +51,22 @@ sources:
     kind: course-notes
     url: https://ocw.mit.edu/courses/res-6-012-introduction-to-probability-spring-2018/resources/lecture-2-conditioning-and-bayes-rule/
     language: en
+  mit-ocw-6-012-lecture-5-2018:
+    title: 'Introduction to Probability: Lecture 5: Discrete Random Variables Part I'
+    authors: [John Tsitsiklis, Patrick Jaillet]
+    published: 2018
+    source_type: official-secondary
+    kind: course-notes
+    url: https://ocw.mit.edu/courses/res-6-012-introduction-to-probability-spring-2018/resources/lecture-5-discrete-random-variables-part-i/
+    language: en
+  mit-ocw-6-012-lecture-6-2018:
+    title: 'Introduction to Probability: Lecture 6: Discrete Random Variables Part II'
+    authors: [John Tsitsiklis, Patrick Jaillet]
+    published: 2018
+    source_type: official-secondary
+    kind: course-notes
+    url: https://ocw.mit.edu/courses/res-6-012-introduction-to-probability-spring-2018/resources/lecture-6-discrete-random-variables-part-ii/
+    language: en
   turing-1950:
     title: Computing Machinery and Intelligence
     authors: [Alan M. Turing]
@@ -2175,6 +2191,15 @@ sources:
     kind: conference-paper
     doi: 10.48550/arXiv.2002.04745
     url: https://arxiv.org/abs/2002.04745
+    language: en
+  blanchard-higham-higham-2021-logsumexp-softmax:
+    title: Accurately Computing the Log-Sum-Exp and Softmax Functions
+    authors: [Pierre Blanchard, Desmond J. Higham, Nicholas J. Higham]
+    published: 2021
+    source_type: primary
+    kind: journal-article
+    doi: 10.1093/imanum/draa038
+    url: https://academic.oup.com/imajna/article/41/4/2311/5893596
     language: en
   gage-1994-byte-pair-encoding:
     title: A New Algorithm for Data Compression

@@ -8,53 +8,49 @@ initiative:
     id: analysis.llm을-만든-수학
     batch: hub-publication
     stage: complete
-  current_batch: statistics-and-stability
+  current_batch: null
   next_action: >-
-    npm run math:status를 실행한 뒤 statistics-and-stability의
-    random-variable-expectation-variance·normalization-statistics·numerical-stability·adam
-    owner 경계를 정하기 위해 wiki/concepts/Layer Normalization.md,
-    wiki/concepts/RMSNorm.md, wiki/concepts/Adam 최적화기.md,
-    wiki/concepts/소프트맥스.md, wiki/concepts/FlashAttention.md를 감사한다.
+    npm run math:status로 완료 상태를 확인한다. advanced-extensions의
+    low-rank-svd·activation-functions·complexity-cost-models·sampling-temperature·reinforcement-learning-objectives는
+    wiki/concepts/특이값 분해와 저랭크 근사.md를 포함해 계획상 deferred이므로
+    명시적인 범위 선택 전에는 시작하지 않는다.
   blockers: []
   handoff:
-    updated: '2026-07-23'
-    baseline_commit: 1c39e2cd61c8c9b3e60c49b81e613c69f349cd66
-    last_completed_gate: hub-publication-g7-verified
+    updated: '2026-07-24'
+    baseline_commit: 732da8a44e7ca7e68ded72e55fb6dea4636ca59c
+    last_completed_gate: statistics-and-stability-g7-verified
     validation:
       - command: npm run math:check
-        result: 6개 배치·25개 수식 계열의 구조·owner·선수 관계와 calculus 완료 상태 검증 통과
+        result: 6개 배치·25개 수식 계열의 구조·owner·선수 관계와 statistics-and-stability 완료 상태 검증 통과
       - command: npm run learning:audit
-        result: 359개 Markdown·356개 비메타 문서, 블록 수식 633개로 기준선 갱신
+        result: 361개 Markdown·358개 비메타 문서, 블록 수식 668개로 기준선 갱신
       - command: npm run learning:audit:check
         result: 기초 학습 감사 기준선이 현재 wiki와 일치함을 확인
       - command: npm run sync:index
-        result: LLM 수학 허브의 evidence 수와 목록을 index에 동기화
+        result: statistics-and-stability의 새 owner·변경 문서 evidence 수와 목록을 index에 동기화
       - command: npm run lint:wiki
-        result: Markdown 359개·evidence 452건·immutable raw artifact 220개 검증 통과
+        result: Markdown 361개·evidence 455건·immutable raw artifact 220개 검증 통과
       - command: BASE_PATH='' npm run build
-        result: >-
-          site 685페이지·로컬 참조 46,549개, unresolved target 0개를 통과
+        result: site build·check에서 687페이지와 unresolved target 0개를 통과
       - command: BASE_PATH='' npm run test:browser
         result: Chromium 디렉터리·검색·관계 탐색·390px 모바일 navigation 회귀 4개를 통과
       - command: BASE_PATH='' npm run verify
-        result: >-
-          math 원장, 122개 Node 회귀, Markdown 359개·evidence 452건·raw 220개,
-          site 685페이지·로컬 참조 46,549개와 Chromium 회귀 4개를 통과
+        result: math 원장, Node 회귀, wiki lint·site build/check와 Chromium 회귀를 통과
     notes: >-
-      기준 branch는 main이다. hub-publication은 4-token·2차원 toy causal attention으로
-      ID lookup, attention·residual, 4개 logit의 softmax·NLL, 출력 bias 한 좌표의
-      역전파·SGD update를 한 흐름으로 공개했다. 해석적 gradient -0.275324와 중심 차분이
-      일치하고 update 뒤 NLL은 0.322030에서 0.314525로 줄었다.
-      raw는 바꾸지 않았고, 다음 statistics-and-stability는 확률변수·정규화·수치 안정성·Adam
-      owner와 현재 소비 문서를 감사하는 것부터 시작한다.
+      기준 branch는 main이다. statistics-and-stability는 확률변수·분포·기대값·분산과
+      수치 안정성·log-sum-exp owner를 새로 만들고, Layer Normalization·RMSNorm·Adam
+      최적화기·소프트맥스·FlashAttention·그룹 상대 정책 최적화·대규모 언어 모델·허브의
+      국소 설명을 연결했다. $R\in\{0,1\}$, $P(R=1)=3/4$에서 E[R]=3/4,
+      Var(R)=3/16; z=(1000,999,997)의 stable softmax; h=(2,4,6)의 LayerNorm·RMSNorm;
+      Adam 첫 update의 mhat=2, vhat=4를 수동 확인했다. raw는 바꾸지 않았다.
 
 baseline:
-  recorded_on: '2026-07-23'
+  recorded_on: '2026-07-24'
   source: docs/foundational-learning-audit.md
-  wiki_documents: 359
-  non_meta_documents: 356
-  formula_documents: 177
-  formula_blocks: 633
+  wiki_documents: 361
+  non_meta_documents: 358
+  formula_documents: 179
+  formula_blocks: 668
 
 batches:
   - id: linear-algebra-foundations
@@ -128,7 +124,7 @@ batches:
 
   - id: statistics-and-stability
     title: 통계·정규화·수치 안정성
-    stage: planned
+    stage: complete
     families:
       - random-variable-expectation-variance
       - normalization-statistics
@@ -403,7 +399,7 @@ families:
   - id: adam
     title: 모멘트 추정과 Adam 갱신
     domain: optimization
-    coverage: needs_upgrade
+    coverage: ready
     owner:
       path: wiki/concepts/Adam 최적화기.md
       id: concept.adam-최적화기
@@ -412,12 +408,12 @@ families:
       - random-variable-expectation-variance
     downstream:
       - wiki/concepts/대규모 언어 모델.md
-    notes: 지수이동평균, bias correction, 좌표별 scaling과 수렴 한계를 분리한다.
+    notes: 지수이동평균, bias correction, 좌표별 scaling과 수렴 한계를 분리하고 one-coordinate 첫 update와 raw second moment·분산 경계를 확인했다.
 
   - id: random-variable-expectation-variance
     title: 확률변수·확률분포·기대값·분산
     domain: statistics
-    coverage: planned
+    coverage: ready
     owner:
       path: wiki/concepts/확률변수·확률분포·기대값·분산.md
       id: concept.확률변수-확률분포-기대값-분산
@@ -427,7 +423,7 @@ families:
       - wiki/concepts/Layer Normalization.md
       - wiki/concepts/Adam 최적화기.md
       - wiki/concepts/그룹 상대 정책 최적화.md
-    notes: 관측 평균·모집단 기대값·분산·표준편차와 축 선택을 구분한다.
+    notes: 관측 평균·모집단 기대값·분산·표준편차와 축 선택을 구분하고 LayerNorm·Adam·GRPO의 현재 역할을 연결했다.
 
   - id: residual-connections
     title: 잔차 덧셈과 항등 경로
@@ -446,7 +442,7 @@ families:
   - id: normalization-statistics
     title: 평균·분산과 특징 정규화
     domain: statistics
-    coverage: needs_upgrade
+    coverage: ready
     owner:
       path: wiki/concepts/Layer Normalization.md
       id: concept.layer-normalization
@@ -456,12 +452,12 @@ families:
     downstream:
       - wiki/concepts/RMSNorm.md
       - wiki/concepts/Transformer.md
-    notes: 정규화 축, affine 복원, epsilon과 Post-LN·Pre-LN의 구조 차이를 맡는다.
+    notes: 정규화 축, affine 복원, epsilon과 Post-LN·Pre-LN의 구조 차이를 맡고 RMSNorm·Transformer의 국소 설명을 연결했다.
 
   - id: numerical-stability
     title: 수치 안정성과 log-sum-exp
     domain: numerical-computing
-    coverage: planned
+    coverage: ready
     owner:
       path: wiki/concepts/수치 안정성과 log-sum-exp.md
       id: concept.수치-안정성과-log-sum-exp
@@ -471,7 +467,7 @@ families:
     downstream:
       - wiki/concepts/소프트맥스.md
       - wiki/concepts/FlashAttention.md
-    notes: 실수 연산의 범위, overflow·underflow, max shift와 온라인 softmax를 연결한다.
+    notes: 실수 연산의 범위, overflow·underflow, max shift와 온라인 softmax를 연결하고 소프트맥스·FlashAttention의 국소 설명을 연결했다.
 
   - id: low-rank-svd
     title: 특이값 분해와 저랭크 근사

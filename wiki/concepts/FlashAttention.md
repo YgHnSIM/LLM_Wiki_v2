@@ -14,7 +14,7 @@ tags:
   - domain/machine-learning
   - domain/nlp
 created: '2026-07-22'
-updated: '2026-07-22'
+updated: '2026-07-24'
 lifecycle: active
 verification: verified
 artifacts:
@@ -42,6 +42,7 @@ related:
   - source.064
   - concept.transformer
   - concept.transformer-xl
+  - concept.수치-안정성과-log-sum-exp
   - concept.긴-문맥-언어-모델
   - concept.대규모-언어-모델
   - analysis.훈련-병렬성과-생성-순차성은-다른-축이다
@@ -50,7 +51,7 @@ related:
 
 > [!note] 학습 안내
 > **난이도:** 심화<br>
-> **선수 지식:** [[Transformer]]의 query·key·value와 softmax attention<br>
+> **선수 지식:** [[Transformer]]의 query·key·value와 softmax attention, [[수치 안정성과 log-sum-exp]]의 max shift<br>
 > **읽고 나면:** FlashAttention의 온라인 softmax·타일링·재계산을 설명하고, exact·선형 추가 메모리·이차 계산량이라는 세 표현을 동시에 정확히 사용할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -81,6 +82,16 @@ $$
 - $O$: 정규화 중인 value 가중합
 
 새 block의 최댓값이 더 크면 이전 $\ell$과 $O$를 새 최댓값 기준으로 줄여 다시 스케일한다. 이어 새 block의 지수합과 value 기여를 더한다. 이 재스케일이 있어야 여러 block이 하나의 전체 softmax 분포가 된다.
+
+두 score block $A,B$의 최댓값과 이동한 지수합을 $(m_A,\ell_A)$, $(m_B,\ell_B)$로 저장했다고 하자. $m=\max(m_A,m_B)$로 옮기면 전체 지수합은
+
+$$
+\ell=
+\exp(m_A-m)\ell_A+
+\exp(m_B-m)\ell_B
+$$
+
+가 된다. 각 block의 이전 합을 새 최댓값 기준으로 다시 줄여야 한다는 점이 핵심이다. 이 문서는 그 상태를 attention tile의 output 누적에 쓰는 알고리즘을 설명한다. 항등식·log-sum-exp·mask와 dtype의 수치 경계는 [[수치 안정성과 log-sum-exp]]가 owner다.
 
 ### SRAM tile의 처리 흐름
 
@@ -148,6 +159,7 @@ FlashAttention은 자기회귀 생성의 token-by-token 의존성도 없애지 �
 
 - [[088_FlashAttention과 IO 인지형 정확 어텐션]] — 논문의 I/O 정리와 실제 BERT·GPT-2·장문 실험, 원문 정정을 함께 확인한다.
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]] — 메모리 이동과 자기회귀 생성 의존성을 포함한 여러 효율 축을 비교한다.
+- [[수치 안정성과 log-sum-exp]] — online softmax가 공유하는 max shift·block 재스케일의 수치적 근거를 본다.
 
 ## 출처
 
@@ -168,6 +180,7 @@ FlashAttention은 자기회귀 생성의 token-by-token 의존성도 없애지 �
 - [[064_Transformer-XL과 세그먼트 수준 재귀]]
 - [[Transformer]]
 - [[Transformer-XL]]
+- [[수치 안정성과 log-sum-exp]]
 - [[긴 문맥 언어 모델]]
 - [[대규모 언어 모델]]
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]]

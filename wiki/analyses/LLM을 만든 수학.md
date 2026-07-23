@@ -14,7 +14,7 @@ tags:
   - domain/machine-learning
   - domain/mathematics
 created: '2026-07-23'
-updated: '2026-07-23'
+updated: '2026-07-24'
 lifecycle: active
 verification: partial
 artifacts:
@@ -42,10 +42,13 @@ related:
   - concept.어텐션-메커니즘
   - concept.잔차-연결
   - concept.소프트맥스
+  - concept.수치-안정성과-log-sum-exp
   - concept.조건부-확률
   - concept.로그-가능도
   - concept.역전파
   - concept.경사하강법
+  - concept.확률변수-확률분포-기대값-분산
+  - concept.adam-최적화기
   - concept.transformer
   - concept.대규모-언어-모델
   - source.035
@@ -247,6 +250,8 @@ $$
 | logit→분포 | [[소프트맥스]] | 4개 logit을 양수이고 합이 1인 후보 분포로 바꾼다. |
 | 문맥과 손실 | [[조건부 확률]], [[로그가능도]] | $p_\theta(w_t\mid w_{<t})$와 $-\ln p_\theta$의 목적을 구분한다. |
 | gradient→update | [[역전파]], [[경사하강법]] | $\partial J/\partial b_3$를 계산하고 $\eta$를 곱해 한 좌표를 갱신한다. |
+| finite-precision logit | [[수치 안정성과 log-sum-exp]] | 이 toy의 작은 logit에는 보이지 않는 max shift·log-softmax·mask row의 수치 경계를 맡는다. |
+| 실제 batch·optimizer | [[확률변수·확률분포·기대값·분산]], [[Adam 최적화기]] | 평균·분산의 대상과 Adam state를 구분한다. toy는 한 예·한 SGD update만 계산한다. |
 
 2003년 Bengio 등은 분산 word feature, 다음 단어 확률을 위한 softmax와 penalized log-likelihood 학습을 함께 제시했다. 2017년 Vaswani 등은 scaled dot-product attention과 residual connection을 Transformer의 sublayer에 배치했다. Rumelhart·Hinton·Williams의 1986년 설명은 합성된 오차 함수에서 가중치 변화율을 계산하는 신경망 학습의 중요한 근거다. 이 문서의 toy 계산은 이 자료들의 실제 차원·실험·훈련 조건을 복제하지 않는다.
 
@@ -263,7 +268,7 @@ $$
 - attention의 내부 가중치 $A$는 value를 섞는 비율이지 사람의 설명이나 인과적 중요도의 자동 증거가 아니다.
 - $p_3\approx0.725$는 이 toy 모델이 둔 조건부확률일 뿐, 실제 세계에서 문장이 참일 확률이나 모델의 보정된 신뢰도는 아니다.
 - 한 bias의 NLL이 줄었다고 전체 자료의 평균 손실·일반화·사실성·안전성도 좋아진다는 결론은 나오지 않는다.
-- 실제 Transformer의 multi-head 투영, 위치 표현, FFN, LayerNorm, batch 평균, Adam state, mixed precision과 분산 실행은 생략했다. 그 요소는 같은 계산 흐름에 추가 조건·shape·수치 문제를 만든다.
+- 실제 Transformer의 multi-head 투영, 위치 표현, FFN, LayerNorm, batch 평균, Adam state, mixed precision과 분산 실행은 생략했다. 그 요소는 같은 계산 흐름에 추가 조건·shape·수치 문제를 만든다. 특히 [[수치 안정성과 log-sum-exp]]의 max shift와 [[확률변수·확률분포·기대값·분산]]의 표본 통계는 이 작은 수에서 생략한 구현·학습 경계다.
 
 ## 학습 확인
 
@@ -281,7 +286,8 @@ $$
 
 ### 다음 문서
 
-- [[Layer Normalization]] — 정규화 축·epsilon·affine 복원이 이 단순 경로에서 생략한 수치 안정성의 한 부분을 어떻게 다루는지 이어서 본다.
+- [[수치 안정성과 log-sum-exp]] — softmax·NLL을 finite precision에서 계산할 때의 max shift·mask·blockwise 누적을 이어서 본다.
+- [[Adam 최적화기]] — toy SGD 한 번과 달리, 실제 확률적 gradient의 이동평균으로 좌표별 update를 만드는 방법을 본다.
 - [[대규모 언어 모델]] — toy 계산을 넘어 자료·구조·계산·평가가 함께 바꾸는 실제 LLM 범위를 이어서 본다.
 
 ## 출처
@@ -300,10 +306,13 @@ $$
 - [[어텐션 메커니즘]]
 - [[잔차 연결]]
 - [[소프트맥스]]
+- [[수치 안정성과 log-sum-exp]]
 - [[조건부 확률]]
 - [[로그가능도]]
 - [[역전파]]
 - [[경사하강법]]
+- [[확률변수·확률분포·기대값·분산]]
+- [[Adam 최적화기]]
 - [[Transformer]]
 - [[대규모 언어 모델]]
 - [[035_신경 확률 언어 모형과 분산 단어 표현]]
