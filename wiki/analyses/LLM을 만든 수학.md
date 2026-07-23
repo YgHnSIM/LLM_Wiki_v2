@@ -79,11 +79,12 @@ related:
 
 | 항목 | 이 예에서의 값 | shape 또는 범위 | 역할과 한계 |
 | --- | --- | --- | --- |
-| 어휘 $V$ | <BOS>, 오늘, 비가, 온다의 4개 token | $|V|=4$ | 실제 어휘의 축소판이며, 후보의 언어적 자연스러움을 평가하지 않는다. |
+| 어휘 $\mathcal V$ | `<BOS>`, 오늘, 비가, 온다의 4개 token | $\lvert\mathcal V\rvert=4$ | 실제 어휘의 축소판이며, 후보의 언어적 자연스러움을 평가하지 않는다. |
 | 문맥 | 오늘, 비가 | 길이 $n=2$ | 이 문맥 뒤의 실제 다음 token을 온다로 둔다. |
 | 임베딩 폭 | $d=d_k=d_v=2$ | 양의 정수 | 계산을 손으로 하기 위한 선택이다. |
-| attention | 한 causal self-attention head | $Q,K,V\in\mathbb R^{2\times2}$ | $W_Q,W_K,W_V$를 항등행렬로 고정해 attention의 흐름만 보인다. |
+| attention | 한 causal self-attention head | $Q,K,V\in\mathbb R^{2\times2}$ | 여기서 $V$는 어휘 $\mathcal V$와 다른 value 행렬이다. $W_Q,W_K,W_V$를 항등행렬로 고정해 attention의 흐름만 보인다. |
 | 잔차 경로 | $R=X+O$ | $2\times2$ | LayerNorm·FFN은 생략한다. 실제 Transformer block 전체와 같지 않다. |
+| 출력 | 다음 token 분포 $p$ | $p\in[0,1]^4$, $\sum_{i=0}^{3}p_i=1$ | 이 예에서는 온다 좌표 $p_3$를 정답 확률로 사용한다. |
 | 학습 대상 | 출력 bias의 온다 좌표 $b_3$ 하나 | 스칼라 | 한 update를 끝까지 계산하기 위한 제한이다. 실제 학습은 모든 가중치의 gradient를 함께 계산한다. |
 
 그래서 이 문서는 “Transformer 하나면 LLM이 된다”거나 1960년·1986년·2003년·2017년의 연구가 단선적으로 서로를 발명했다고 주장하지 않는다. 여기서 연결하는 것은 현재 LLM 훈련에서 함께 작동하는 계산 경로다. 각 단계의 완전한 정의·유도·한계는 아래 owner 문서가 맡는다.
