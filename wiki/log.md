@@ -2256,7 +2256,7 @@ raw 등록 해시:
 
 - base 모델의 encoder·decoder 각 6층, 512 hidden, 8 heads, head당 64차원, 2048 feed-forward와 원 Post-LN 배치를 복원했다.
 - self-attention의 $O(n^2d)$ 계산·$O(1)$ 순차 연산·$O(1)$ 최대 경로를 recurrent layer와 비교하고 $n<d$ 조건을 명시했다.
-- 최종 NeurIPS 논문의 WMT14 영어→독일어 BLEU 28.4, 영어→프랑스어 41.8과 8개 P100 기준 base 12시간·big 3.5일을 기록했다.
+- 최종 NeurIPS 논문의 WMT14 영어→독일어 BLEU 28.4, 영어→프랑스어 41.0과 8개 P100 기준 base 12시간·big 3.5일을 기록했다.
 - 사인파 위치 인코딩의 긴 길이 외삽은 선택 동기이지 보장된 실험 결론이 아니라고 교정했다.
 - causal mask 아래 teacher-forced 훈련의 위치 병렬성과 자기회귀 추론의 토큰별 순차성을 분리했다.
 - attention weight는 분석 가능한 내부 신호지만 충실한 설명 여부는 Jain–Wallace와 Wiegreffe–Pinter의 실험·반론처럼 별도 검증이 필요한 논쟁이라고 기록했다.
@@ -4426,6 +4426,25 @@ raw 등록 해시:
 남은 제한:
 
 - 네 분석은 직접 계보를 선언하지 않는다. 각 문서는 공통 질문 아래의 관측 단위·학습 목표·평가 경계를 비교하며, 인과적 영향은 해당 1차 자료가 명시한 범위에서만 다룬다.
+
+## [2026-07-23] content | 어텐션·Transformer 기초 수식 경로
+
+변경 내용:
+
+- [[어텐션 메커니즘]]에 query·key·value의 역할, $d_k=2$인 두 후보 계산, 행별 softmax·mask·shape 표, $\sqrt{d_k}$ scaling의 분산 직관, multi-head 투영의 입력 출처를 추가했다.
+- [[잔차 연결]]에는 항등·투영 shortcut의 shape 조건과 수치 예, $J_F(x)+I$의 Jacobian 및 연쇄 법칙, Post-LN·Pre-LN의 residual 경로 차이를 보강했다.
+- [[Transformer]]와 [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]]에는 attention·FFN·위치 인코딩·output softmax의 항별 해설, teacher-forced 훈련과 자기회귀 생성의 차이, 원 논문의 실험 범위를 연결했다.
+- 최종 NeurIPS 원 논문의 WMT14 영어→프랑스어 Transformer-big BLEU를 41.0으로 정정했다. 기존 41.8 표기는 abstract와 Table 2의 1차 기록과 맞지 않는다.
+- [[overview]]의 Transformer 경로를 다층 퍼셉트론·softmax·어텐션·잔차·Transformer의 의존 순서로 확장했다.
+
+검증 결과:
+
+- npm run learning:audit, npm run learning:audit:check, npm run sync:index, npm run verify로 새 수식 표기·frontmatter·링크·raw 해시·사이트 산출물·브라우저 회귀를 확인한다.
+
+남은 제한:
+
+- 벡터·mask·확률 예시는 수식 재현을 위한 편집부 설명용 수치이며, 원 2017년 번역 실험의 활성값·attention map·성능을 재현하지 않는다.
+- 이 경로는 원 Transformer와 공개 후속 자료의 범위만 다룬다. 비공개 현대 모델의 세부 구조를 2017년 논문으로 확정하지 않는다.
 
 ## 관련 항목
 
