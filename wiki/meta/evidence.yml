@@ -4015,3 +4015,28 @@ sources:
     doi: 10.1145/2408776.2408794
     url: https://research.google/pubs/the-tail-at-scale/
     language: en
+  grattan-guinness-2003-computation-factory:
+    title: 'The Computation Factory: de Prony''s Project for Making Tables in the 1790s'
+    authors: [Ivor Grattan-Guinness]
+    published: 2003
+    source_type: secondary
+    kind: book-chapter
+    doi: 10.1093/acprof:oso/9780198508410.003.0005
+    url: https://academic.oup.com/book/4975/chapter/147436585
+    language: en
+  babbage-1822-astronomical-tables:
+    title: A Note respecting the Application of Machinery to the Calculation of Astronomical Tables
+    authors: [Charles Babbage]
+    published: 1822
+    source_type: primary
+    kind: historical-paper
+    url: https://en.wikisource.org/wiki/Page%3AMemoirs_of_Royal_Astronomical_Society_Volume_01.djvu/332
+    language: en
+  nist-2022-math-tables-project:
+    title: 'Prehistory: The Math Tables Project'
+    authors: [National Institute of Standards and Technology]
+    published: 2022
+    source_type: primary-release
+    kind: official-history
+    url: https://www.nist.gov/mathematics-statistics/prehistory-math-tables-project
+    language: en

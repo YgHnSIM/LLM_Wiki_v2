@@ -4949,6 +4949,25 @@ raw 등록 해시:
 - 논문 속 speedup은 당시 model·hardware·runtime·workload·baseline에 한정했다. 최신 serving engine 순위나 특정 상용 API의 현재 가격·uptime으로 읽지 않는다.
 - Security·privacy·multi-region 복구와 전체 시설 energy는 별도 운영 자료가 필요하다. `raw/`와 CS_WIKI는 변경하지 않았다.
 
+## [2026-07-24] content | Pre-machine computing capability
+
+변경 내용:
+
+- [[기계 이전의 계산은 어떻게 능력이 되었나]]를 추가해 수학 표, 인간 계산 조직, 작업표, 검산과 출판을 전자 장치 이전 계산 능력의 실행 구조로 설명했다.
+- 드 프로니 계산 공장, 배비지의 1822년 차분 기계·자동 조판 구상, NIST Mathematical Tables Project의 1차·연구 근거를 evidence 레지스트리에 추가했다.
+- 직접 계산 1,000분과 표 제작·조회·검산 350분의 예로 비용이 사라지는 것이 아니라 제작 시점과 중앙 조직으로 이동함을 보였고, raw 처리량과 검산 통과 처리량을 분리했다.
+- 수학 표와 N-gram count·embedding lookup의 비교를 후대 유추로 한정하고, CS_WIKI는 외부 컴퓨터사 맥락으로만 연결했다.
+
+검증 결과:
+
+- `npm run history:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run learning:audit`, `npm run math:check`, `npm run verify`로 원장, 학습 골격, 근거·링크·수식 표기, 정적 사이트와 브라우저 동작을 검증했다.
+- $20\cdot50\cdot1=1{,}000$분과 $100\cdot1+20\cdot50\cdot0.05+200=350$분을 독립 계산해 본문의 비용 장부와 일치함을 확인했다.
+
+남은 제한:
+
+- 고대·근대 수학 표 전체와 계산 노동의 성별·계급·식민·군사 조건을 포괄하지 않는다. 수학 표에서 model parameter로의 직접 계보도 주장하지 않는다.
+- 다음 본편은 Turing machine·통신 이론·저장 프로그램을 서로 다른 문제의 해법으로 구분한다. `raw/`와 CS_WIKI는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]
