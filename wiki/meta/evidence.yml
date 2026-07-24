@@ -4235,3 +4235,38 @@ sources:
     kind: technical-standard
     url: https://www.unicode.org/reports/tr29/tr29-47.html
     language: en
+  rfc-8259-json:
+    title: 'RFC 8259: The JavaScript Object Notation (JSON) Data Interchange Format'
+    authors: [Tim Bray]
+    published: 2017
+    source_type: primary
+    kind: technical-standard
+    doi: 10.17487/RFC8259
+    url: https://www.rfc-editor.org/rfc/rfc8259
+    language: en
+  json-schema-2020-12-validation:
+    title: 'JSON Schema Validation: A Vocabulary for Structural Validation of JSON'
+    authors: [Austin Wright, Henry Andrews, Ben Hutton]
+    published: 2022
+    source_type: primary
+    kind: technical-specification
+    url: https://json-schema.org/draft/2020-12/json-schema-validation
+    language: en
+  nist-sp-800-63-4:
+    title: 'Digital Identity Guidelines (NIST SP 800-63-4)'
+    authors: [National Institute of Standards and Technology]
+    published: 2025
+    source_type: primary
+    kind: technical-standard
+    doi: 10.6028/NIST.SP.800-63-4
+    url: https://pages.nist.gov/800-63-4/sp800-63.html
+    language: en
+  nist-sp-800-207-zero-trust:
+    title: 'Zero Trust Architecture (NIST SP 800-207)'
+    authors: [Scott Rose, Oliver Borchert, Stuart Mitchell, Sean Connelly]
+    published: 2020
+    source_type: primary
+    kind: technical-standard
+    doi: 10.6028/NIST.SP.800-207
+    url: https://doi.org/10.6028/NIST.SP.800-207
+    language: en

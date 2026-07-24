@@ -3,10 +3,10 @@ schema_version: 1
 initiative:
   id: llm-system-boundary-network
   title: LLM 시스템 경계 확장
-  current_batch: authority-bridge
+  current_batch: safe-effects
   next_action: >-
-    npm run boundary:resume으로 재개 상태를 확인한 뒤, authority-bridge 배치에서
-    byte에서 JSON·schema·의미 검증·authorization까지의 관문을 연결·검증한다.
+    npm run boundary:resume으로 재개 상태를 확인한 뒤, safe-effects 배치에서
+    proposed → structurally validated → semantically validated → authorized → confirmed → committed / failed / unknown 상태 기계와 외부 효과의 복구 경계를 보강·검증한다.
   blockers: []
   hub:
     path: wiki/meta/LLM 시스템 경계 확장 지도.md
@@ -15,9 +15,9 @@ initiative:
     stage: planned
   handoff:
     updated: '2026-07-25'
-    baseline_commit: 291154275979154c4141c2b400c629de6a45aa08
-    last_completed_batch: encoding-owner
-    last_completed_gate: text-encoding-normalization-owner-verified
+    baseline_commit: 52dbd062f2c275656e7c44c70536dd2cf9008398
+    last_completed_batch: authority-bridge
+    last_completed_gate: text-to-execution-authority-bridge-verified
     validation:
       - boundary:check
       - history:check
@@ -29,7 +29,7 @@ initiative:
       - npm run boundary:check
       - git status --short --branch
     notes: >-
-      memory-bridge 뒤 encoding-owner를 검증해 완료했고, 다음 유일한 행동은 authority-bridge다.
+      encoding-owner 뒤 authority-bridge를 검증해 완료했고, 다음 유일한 행동은 safe-effects다.
       이 원장이 세션 전환·문맥 압축 뒤에도 배치 순서와 다음 행동을 복원하는 단일 기준이다.
       raw/, C:/Vault/CS_Wiki와 사용자 첨부 파일은 수정하거나 staging하지 않는다.
 
@@ -123,7 +123,7 @@ bridges:
     page_id: analysis.text-to-execution-authority
     page_type: analysis
     action: create
-    stage: planned
+    stage: complete
     required_by: [authority-bridge]
   - id: text-to-realtime-multimodal-systems
     title: 텍스트 모델에서 실시간 멀티모달 시스템까지
@@ -172,7 +172,7 @@ tracks:
     priority: 4
     title: 문자에서 실행 권한까지
     primary_title: 문자 인코딩과 정규화
-    stage: planned
+    stage: complete
     owners: [text-encoding-normalization]
     bridges: [text-to-execution-authority]
     primary_path: wiki/concepts/문자 인코딩과 정규화.md
@@ -360,7 +360,7 @@ batches:
   - id: authority-bridge
     order: 7
     title: 문자에서 실행 권한까지 연결
-    stage: planned
+    stage: complete
     depends_on: [encoding-owner]
     commit_message: 'content: bridge_text_to_execution_authority'
     deliverables:

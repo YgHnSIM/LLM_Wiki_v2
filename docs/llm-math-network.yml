@@ -74,8 +74,8 @@ initiative:
 baseline:
   recorded_on: '2026-07-25'
   source: docs/foundational-learning-audit.md
-  wiki_documents: 389
-  non_meta_documents: 385
+  wiki_documents: 390
+  non_meta_documents: 386
   formula_documents: 203
   formula_blocks: 816
 

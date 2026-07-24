@@ -5245,6 +5245,24 @@ raw 등록 해시:
 - UTF-8 validation과 Unicode normalization은 JSON parsing, schema·의미 검증, authentication·authorization, 외부 실행의 안전성이나 복구를 보장하지 않는다. 다음 배치에서 이 관문을 `문자에서 실행 권한까지` 연결로 분리한다.
 - `raw/`, CS_WIKI와 `.codex-remote-attachments/`는 변경하지 않았다.
 
+## [2026-07-25] content | Bridge text to execution authority
+
+변경 내용:
+
+- [[문자에서 실행 권한까지]]를 추가해 byte·UTF-8 decode, JSON parse, schema, domain·현재 상태 의미 검증, authentication, authorization·필요한 approval이 각각 다른 사실을 확인하는 관문임을 하나의 trace로 연결했다.
+- RFC 8259, JSON Schema 2020-12 Validation, NIST SP 800-63-4와 SP 800-207을 evidence 레지스트리에 추가했다. JSON의 duplicate key·parser 한계, structure와 meaning의 차이, authenticator 기반 identity 확인과 policy decision·enforcement의 분리를 그 자료의 범위에서 기록했다.
+- [[함수 호출과 도구 사용]]에는 action candidate가 runtime에 도달하기 전의 표현·형식·의미·identity·policy 계약을 새 analysis로 연결하는 국소 설명과 링크를 추가했다. 실제 실행·idempotency·partial failure·compensation·postcondition은 다음 safe-effects 배치로 남겼다.
+
+검증 결과:
+
+- `npm run learning:audit`, `npm run sync:index`, `npm run lint:wiki`, `npm run math:check`, `npm run history:check`, `npm run boundary:check`, `npm run learning:audit:check`, `npm run verify`, `git diff --check`를 통과했다.
+- Playwright Chromium에서 새 analysis를 desktop과 390×844 viewport로 확인하고, 가로 overflow와 console error가 없음을 확인했다.
+
+남은 제한:
+
+- 이 trace는 payload 해석과 policy decision의 감사 순서이지 모든 product의 유일한 runtime 순서가 아니다. authorization은 executor의 성공·commit·rollback을 보장하지 않는다.
+- `raw/`, C:/Vault/CS_Wiki와 `.codex-remote-attachments/`는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]
