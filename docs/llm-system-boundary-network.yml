@@ -3,10 +3,10 @@ schema_version: 1
 initiative:
   id: llm-system-boundary-network
   title: LLM 시스템 경계 확장
-  current_batch: data-bridge
+  current_batch: memory-bridge
   next_action: >-
-    npm run boundary:resume으로 재개 상태를 확인한 뒤, data-bridge 배치에서
-    데이터의 양에서 권리와 책임까지 분석을 작성·검증한다.
+    npm run boundary:resume으로 재개 상태를 확인한 뒤, memory-bridge 배치에서
+    문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리 분석을 보강·검증한다.
   blockers: []
   hub:
     path: wiki/meta/LLM 시스템 경계 확장 지도.md
@@ -15,9 +15,9 @@ initiative:
     stage: planned
   handoff:
     updated: '2026-07-25'
-    baseline_commit: e8ddfbe8bc1bd6b6aff0accf3a992008a6c4e050
-    last_completed_batch: data-owner
-    last_completed_gate: training-data-lifecycle-owner-verified
+    baseline_commit: 3b2f8c970184a067fa012bfbaade20fa7616cc4a
+    last_completed_batch: data-bridge
+    last_completed_gate: data-scale-rights-bridge-verified
     validation:
       - boundary:check
       - history:check
@@ -29,7 +29,7 @@ initiative:
       - npm run boundary:check
       - git status --short --branch
     notes: >-
-      energy-bridge 뒤 data-owner를 검증해 완료했고, 다음 유일한 행동은 data-bridge다.
+      data-owner 뒤 data-bridge를 검증해 완료했고, 다음 유일한 행동은 memory-bridge다.
       이 원장이 세션 전환·문맥 압축 뒤에도 배치 순서와 다음 행동을 복원하는 단일 기준이다.
       raw/, C:/Vault/CS_Wiki와 사용자 첨부 파일은 수정하거나 staging하지 않는다.
 
@@ -107,7 +107,7 @@ bridges:
     page_id: analysis.data-scale-to-rights
     page_type: analysis
     action: create
-    stage: planned
+    stage: complete
     required_by: [data-bridge]
   - id: physical-semantic-memory
     title: 문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리
@@ -150,7 +150,7 @@ tracks:
     priority: 2
     title: 데이터 생애주기와 권리
     primary_title: 학습 데이터 생애주기와 출처 추적
-    stage: in_progress
+    stage: complete
     owners: [training-data-lifecycle-provenance]
     bridges: [data-scale-to-rights]
     primary_path: wiki/concepts/학습 데이터 생애주기와 출처 추적.md
@@ -296,7 +296,7 @@ batches:
   - id: data-bridge
     order: 4
     title: 데이터 규모와 권리 연결
-    stage: planned
+    stage: complete
     depends_on: [data-owner]
     commit_message: 'content: bridge_data_scale_to_rights'
     deliverables:
@@ -334,6 +334,7 @@ batches:
       - wiki/log.md
       - docs/llm-system-boundary-network.yml
       - docs/foundational-learning-audit.md
+      - docs/llm-math-network.yml
   - id: encoding-owner
     order: 6
     title: 문자 인코딩과 정규화 owner

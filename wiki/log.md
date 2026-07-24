@@ -5190,6 +5190,24 @@ raw 등록 해시:
 - 이 owner는 자료의 공개성이나 문서화만으로 이용 권한·동의·공정성·개별 item의 실제 노출·완전한 unlearning을 결론 내리지 않는다. 관할·시점·원문 조건·downstream run 기록이 별도로 필요하다.
 - 다음 배치는 **데이터의 양에서 권리와 책임까지**에서 규모·다양성·품질의 수치와 권리·책임의 해석 범위를 연결한다. `raw/`, CS_WIKI와 `.codex-remote-attachments/`는 변경하지 않았다.
 
+## [2026-07-25] content | Bridge data scale to rights
+
+변경 내용:
+
+- [[데이터의 양에서 권리와 책임까지]]를 추가해 GPT-3·Chinchilla의 token·component·누적 학습 token 장부와 The Pile·ROOTS·BLOOM RAIL의 문서화·권리·동의·재현·구제 증거 범위를 함께 비교했다.
+- 규모·품질·문서화·권리·동의·재현·책임을 하나의 점수나 자동 인과로 합치지 않고, 각각에 필요한 기록과 아직 알 수 없는 항목을 분리했다.
+- [[언어 수와 언어 형평성은 같은 축인가]]의 data 관문에 snapshot·version·provenance·license/terms 확인 상태를 넣고, 언어 token 수나 URL 수만으로 이용 권한·동의·책임을 판단할 수 없음을 연결했다. MMLU-ProX v1의 전문가 검증은 완료가 아니라 진행 중이었음을 명시했다.
+
+검증 결과:
+
+- `npm run learning:audit`, `npm run sync:index`, `npm run lint:wiki`, `npm run math:check`, `npm run history:check`, `npm run boundary:check`, `npm run learning:audit:check`, `npm run verify`, `git diff --check`를 통과했다.
+- Playwright Chromium에서 새 분석 문서를 desktop과 390×844 viewport로 확인하고, 가로 overflow와 console error가 없음을 확인했다.
+
+남은 제한:
+
+- 이 분석은 개별 dataset·항목의 이용 허가, 동의, 관할별 적법성이나 실제 학습 노출을 판정하지 않는다. 원문 조건·시점·downstream run 기록과 별도 법률 검토가 필요하다.
+- 다음 배치는 **문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리**에서 물리적 저장 경로와 의미적 메모리의 보장 경계를 보강한다. `raw/`, CS_WIKI와 `.codex-remote-attachments/`는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]
