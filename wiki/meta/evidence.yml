@@ -4073,3 +4073,12 @@ sources:
     kind: technical-report
     url: https://web.mit.edu/sts.035/www/PDFs/edvac.pdf
     language: en
+  brants-et-al-2007-large-language-models:
+    title: Large Language Models in Machine Translation
+    authors: [Thorsten Brants, Ashok C. Popat, Peng Xu, Franz J. Och, Jeffrey Dean]
+    published: 2007
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/D07-1090
+    url: https://aclanthology.org/D07-1090/
+    language: en

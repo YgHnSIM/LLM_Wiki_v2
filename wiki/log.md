@@ -5006,6 +5006,25 @@ raw 등록 해시:
 - 서로 다른 초기 hardware의 속도·memory가 같은 단위로 보고되지 않아 장치 순위를 만들지 않는다. XOR 하나를 neural network 연구 침체의 단일 원인으로도 사용하지 않는다.
 - 다음 본편은 corpus count·N-gram·HMM·search가 확률적 언어 처리를 실제 계산 workload로 바꾼 과정을 다룬다. `raw/`와 CS_WIKI는 변경하지 않았다.
 
+## [2026-07-24] content | Statistical language model computing infrastructure
+
+변경 내용:
+
+- [[확률적 언어 모델은 어떤 계산 인프라를 요구했나]]를 추가해 corpus scan·sparse count·smoothing·HMM dynamic programming·hypothesis search와 distributed lookup을 하나의 실행 경로로 연결했다.
+- Vocabulary 50,000의 theoretical trigram 125조 개와 관측 tuple만 저장하는 sparse model을 비교하고, HMM의 $S^T$ path를 $O(TS^2)$ recurrence로 줄이는 계산을 설명했다.
+- Brants 등의 2007년 2조 token·3천억 n-gram·1.8TB·1,500 machines 사례를 training time, model byte, query·network latency와 BLEU·coverage로 분리했다.
+- 기존 001·013·019 source와 Brown Corpus·Jelinek·Katz 근거를 재사용하고 2007년 분산 language-model 논문만 evidence에 추가했다.
+
+검증 결과:
+
+- `npm run history:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run learning:audit`, `npm run math:check`, `npm run verify`로 원장, 학습 구조, 근거·링크·수식과 사이트·브라우저 회귀를 검증했다.
+- $50{,}000^3=125{,}000{,}000{,}000{,}000$과 $T=100,S=100$에서 $TS^2=1{,}000{,}000$ transition score를 독립 계산해 대조했다.
+
+남은 제한:
+
+- 서로 다른 시대의 machine 속도·energy를 직접 순위화하지 않는다. 2007년 “large language model”은 sparse 5-gram이며 현대 neural LLM의 parameter count와 같은 단위가 아니다.
+- 다음 본편은 sparse table·CPU 군집에서 dense matrix·GPU·CUDA·framework로 workload와 programming interface가 바뀐 과정을 다룬다. `raw/`와 CS_WIKI는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

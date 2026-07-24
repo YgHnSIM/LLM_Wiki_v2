@@ -400,6 +400,7 @@ related:
 - [[기계 이전의 계산은 어떻게 능력이 되었나]] — 수학 표·인간 계산 조직·작업표·검산·출판을 계산 능력의 실행 구조로 읽고 N-gram·embedding과의 제한된 후대 비교를 제시한 분석 (근거 3개)
 - [[언어와 계산을 기계적 절차로 만들다]] — 불 대수·relay·Turing machine·stored program·확률적 message source를 서로 다른 기호·실행 계약으로 구분한 분석 (근거 5개)
 - [[학습 규칙이 있어도 왜 규모화되지 못했나]] — 규칙 기반 번역·퍼셉트론·ADALINE을 고정 요소·학습 신호·표현·자료·연산·평가 조건으로 비교한 분석 (근거 6개)
+- [[확률적 언어 모델은 어떤 계산 인프라를 요구했나]] — Corpus count·sparse N-gram·HMM dynamic programming·search에서 분산 5-gram serving까지 계산 장부를 연결한 분석 (근거 6개)
 - [[검색은 근거를 찾고 독해는 답을 찾는다]] — 단일 벡터·후기 상호작용·교차 인코더의 후보 경계와 검색 재현율·독해 정확도·기권을 분리한 분석 (근거 11개)
 - [[서브워드는 한 벡터의 특징인가 여러 토큰인가]] — 기본 SGNS·FastText·BPE·SentencePiece를 조각의 역할·결합 시점·문맥화·OOV·계산 비용으로 비교한 분석 (근거 6개)
 - [[잔차 경로와 정규화는 어디에 놓이는가]] — ResNet post-/pre-activation과 Transformer Post-/Pre-LN을 additive identity path 위의 Jacobian 배치로 비교한 분석 (근거 5개)
