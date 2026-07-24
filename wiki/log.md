@@ -4968,6 +4968,25 @@ raw 등록 해시:
 - 고대·근대 수학 표 전체와 계산 노동의 성별·계급·식민·군사 조건을 포괄하지 않는다. 수학 표에서 model parameter로의 직접 계보도 주장하지 않는다.
 - 다음 본편은 Turing machine·통신 이론·저장 프로그램을 서로 다른 문제의 해법으로 구분한다. `raw/`와 CS_WIKI는 변경하지 않았다.
 
+## [2026-07-24] content | Language and computation as mechanical procedure
+
+변경 내용:
+
+- [[언어와 계산을 기계적 절차로 만들다]]를 추가해 논리식, Turing transition table, stored instruction과 확률적 message source가 각각 조건·동작·program·불확실성을 표현한다는 차이를 설명했다.
+- Boole 1854, Turing 1936, Shannon 1938과 EDVAC 1945 원문을 evidence 레지스트리에 추가하고 Shannon 1948의 기존 근거와 연결했다.
+- Relay의 0·1 의미, universal machine의 description, EDVAC의 arithmetic·control·memory·I/O, LLM의 program·weight·token·확률분포를 자립형 숫자·표 예제로 구분했다.
+- CS_WIKI의 EDVAC 문서는 외부 컴퓨터사 맥락으로만 연결하고 stored-program 개념의 집단 기여와 여러 “최초” 기준을 보존했다.
+
+검증 결과:
+
+- `npm run history:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run learning:audit`, `npm run math:check`, `npm run verify`로 원장, 고정 학습 구조, 근거·링크·수식 표기, 사이트와 브라우저 회귀를 검증했다.
+- $(c_X,c_Y)=(1,0)$에서 직렬 0·병렬 1이 되는지, bit inversion transition과 stored-program의 $3+5=8$ trace를 독립적으로 대조했다.
+
+남은 제한:
+
+- Turing machine의 formal universality를 실제 hardware의 무한 memory나 효율, LLM의 일반 능력으로 확대하지 않는다. Shannon의 1938년 switching 연구와 1948년 통신 이론도 한 결과로 합치지 않는다.
+- 다음 본편은 초기 학습 규칙의 존재와 자료·memory·연산·평가 조건에서의 규모화 가능성을 구분한다. `raw/`와 CS_WIKI는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

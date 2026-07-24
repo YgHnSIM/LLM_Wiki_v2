@@ -4040,3 +4040,36 @@ sources:
     kind: official-history
     url: https://www.nist.gov/mathematics-statistics/prehistory-math-tables-project
     language: en
+  boole-1854-laws-of-thought:
+    title: An Investigation of the Laws of Thought
+    authors: [George Boole]
+    published: 1854
+    source_type: primary
+    kind: book
+    url: https://www.gutenberg.org/ebooks/15114
+    language: en
+  turing-1936-computable-numbers:
+    title: On Computable Numbers, with an Application to the Entscheidungsproblem
+    authors: [Alan M. Turing]
+    published: 1936
+    source_type: primary
+    kind: journal-article
+    doi: 10.1112/plms/s2-42.1.230
+    url: https://londmathsoc.onlinelibrary.wiley.com/doi/10.1112/plms/s2-42.1.230
+    language: en
+  shannon-1938-relay-switching:
+    title: A Symbolic Analysis of Relay and Switching Circuits
+    authors: [Claude E. Shannon]
+    published: 1938
+    source_type: primary
+    kind: journal-article
+    url: https://tubes.mit.edu/6S917/_static/2025/resources/shannon38.pdf
+    language: en
+  von-neumann-1945-edvac:
+    title: First Draft of a Report on the EDVAC
+    authors: [John von Neumann]
+    published: 1945
+    source_type: primary
+    kind: technical-report
+    url: https://web.mit.edu/sts.035/www/PDFs/edvac.pdf
+    language: en

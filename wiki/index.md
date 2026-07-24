@@ -398,6 +398,7 @@ related:
 - [[연산보다 데이터 이동이 비싸질 때]] — memory wall·Roofline에서 mixed precision·FlashAttention·MoE·QLoRA까지를 적은 bit·재사용·희소 실행·quantized storage의 다른 비용 장부로 연결한 분석 (근거 6개)
 - [[모델 능력에서 서비스 능력으로]] — model benchmark·공개 weight·fine-tuning memory와 runtime·KV cache·traffic·tail latency·energy·가용성·실행 접근성을 네 측정 경계로 구분한 분석 (근거 7개)
 - [[기계 이전의 계산은 어떻게 능력이 되었나]] — 수학 표·인간 계산 조직·작업표·검산·출판을 계산 능력의 실행 구조로 읽고 N-gram·embedding과의 제한된 후대 비교를 제시한 분석 (근거 3개)
+- [[언어와 계산을 기계적 절차로 만들다]] — 불 대수·relay·Turing machine·stored program·확률적 message source를 서로 다른 기호·실행 계약으로 구분한 분석 (근거 5개)
 - [[검색은 근거를 찾고 독해는 답을 찾는다]] — 단일 벡터·후기 상호작용·교차 인코더의 후보 경계와 검색 재현율·독해 정확도·기권을 분리한 분석 (근거 11개)
 - [[서브워드는 한 벡터의 특징인가 여러 토큰인가]] — 기본 SGNS·FastText·BPE·SentencePiece를 조각의 역할·결합 시점·문맥화·OOV·계산 비용으로 비교한 분석 (근거 6개)
 - [[잔차 경로와 정규화는 어디에 놓이는가]] — ResNet post-/pre-activation과 Transformer Post-/Pre-LN을 additive identity path 위의 Jacobian 배치로 비교한 분석 (근거 5개)

@@ -14,13 +14,13 @@ initiative:
   blockers: []
   handoff:
     updated: '2026-07-24'
-    baseline_commit: 0ad4559f7ab4fe2d3f549ad609d2d450e316ba6a
+    baseline_commit: 7f2da1ceb5285a14076faa23b94a80760dacf79a
     last_completed_gate: integrated-capstone-g7-verified
     validation:
       - command: npm run math:check
         result: 13개 배치·25개 수식 계열의 구조·owner·선수 관계와 integrated-capstone 완료 상태 검증 통과
       - command: npm run learning:audit
-        result: 376개 Markdown·373개 비메타 문서, 블록 수식 문서 193개·블록 수식 781개로 기준선 갱신
+        result: 377개 Markdown·374개 비메타 문서, 블록 수식 문서 194개·블록 수식 786개로 기준선 갱신
       - command: npm run learning:audit:check
         result: 기초 학습 감사 기준선이 현재 wiki와 일치함을 확인
       - command: npm run sync:index
@@ -39,6 +39,8 @@ initiative:
         result: 역사 시리즈 통합 뒤에도 25개 수식 owner, Node 회귀 146개·Markdown 375개·701 HTML·위키 링크 8883개·로컬 참조 48312개·Chromium 회귀 4개 통과
       - command: npm run verify
         result: 역사 시리즈 1장 통합 뒤에도 25개 수식 owner·Node 회귀 146개·Markdown 376개·evidence 472건·702 HTML·위키 링크 8899개·로컬 참조 48402개·Chromium 회귀 4개 통과
+      - command: npm run verify
+        result: 역사 시리즈 2장 통합 뒤에도 25개 수식 owner·Node 회귀 146개·Markdown 377개·evidence 476건·703 HTML·위키 링크 8919개·로컬 참조 48504개·Chromium 회귀 4개 통과
     notes: >-
       기준 branch는 main이다. LLM·컴퓨팅 능력 공진화 시리즈의 신규 문서를 학습 감사 기준선에 포함했으며 기존 25개 수식 owner와 배치 완료 상태는 바꾸지 않았다.
       integrated-capstone에서 새 숫자로 lookup·attention·residual·LayerNorm·FFN·softmax NLL·전체 출력 gradient를 연결하고,
@@ -48,10 +50,10 @@ initiative:
 baseline:
   recorded_on: '2026-07-24'
   source: docs/foundational-learning-audit.md
-  wiki_documents: 376
-  non_meta_documents: 373
-  formula_documents: 193
-  formula_blocks: 781
+  wiki_documents: 377
+  non_meta_documents: 374
+  formula_documents: 194
+  formula_blocks: 786
 
 batches:
   - id: linear-algebra-foundations
