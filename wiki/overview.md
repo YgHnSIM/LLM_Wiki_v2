@@ -25,6 +25,8 @@ related:
 
 언어 모델 발전과 인간 계산·stored program·GPU·분산 학습·memory·serving의 역사를 함께 읽으려면 [[LLM과 컴퓨팅 능력의 공진화]]에서 시작한다. 시대순 아홉 본편과 세 횡단 연결고리, 종합편이 “빨라졌다”를 계산 가능성·실현 성능·확장성·효율·신뢰성으로 나누어 안내한다. 표현 workload는 [[N-gram에서 LLM으로]], software 추상화는 [[저장 프로그램에서 학습 프레임워크까지]], silicon과 실제 가속 사이의 조건은 [[집적도 증가에서 가속기까지 무엇이 더 필요했나]]가 맡는다.
 
+모델 밖의 시스템 경계를 따라 읽으려면 [[LLM 추론 에너지 지표]]에서 시작한다. 이 경로는 전력계의 J를 token 수 하나로 환산하지 않고, prefill·decode·idle·retry와 품질·deadline을 포함한 서비스 결과 계약으로 확장한다. 데이터·메모리·문자·권한·실시간 상호작용의 후속 경로는 별도 근거와 owner를 갖춘 뒤 같은 지도에 연결한다.
+
 ## 공식 장 번호와 편집부 재구성
 
 공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism (2015)**이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-23 현재 원문을 제공하지 않는다.
@@ -35,7 +37,7 @@ related:
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 110개, reference 0개, concept 200개, entity 29개, analysis 41개를 합친 비메타 문서 380개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 핵심 수학 경로는 완전 풀이를 읽는 데서 끝내지 않고 `부분 완성 → 새 수치 전이 → 오류 진단 → 해설과 채점 기준`으로 도움을 줄여 독립 계산을 확인하는 방향으로 보강 중이다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 110개, reference 0개, concept 201개, entity 29개, analysis 41개를 합친 비메타 문서 381개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 핵심 수학 경로는 완전 풀이를 읽는 데서 끝내지 않고 `부분 완성 → 새 수치 전이 → 오류 진단 → 해설과 채점 기준`으로 도움을 줄여 독립 계산을 확인하는 방향으로 보강 중이다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |

@@ -5134,6 +5134,25 @@ raw 등록 해시:
 - 서로 다른 시대의 속도·품질 수치는 직접 환산하지 않는다. Supply chain·fabrication·packaging·전력·냉각·자본·환경과 data 노동·권리는 후속 독립 근거가 필요한 범위다.
 - `raw/`, CS_WIKI와 `.codex-remote-attachments/`는 변경하지 않았다.
 
+## [2026-07-25] content | Define LLM inference energy metrics
+
+변경 내용:
+
+- [[LLM 추론 에너지 지표]]를 추가해 W와 J, GPU·node·service 측정 경계, prefill·decode, token·request·good request 분모를 분리했다.
+- timeout과 retry가 있는 수치 예로 낮은 마지막 attempt 에너지와 실제 성공 결과당 에너지가 다를 수 있음을 보였다.
+- energy-proportional computing, MLPerf Inference v5.1, TokenPowerBench 근거를 evidence 레지스트리에 추가하고, 탄소 배출은 시간·지역·시설 경계 자료 없이 J에서 자동 환산하지 않는 제한을 명시했다.
+- [[언어 모델 추론 서빙]]에 energy/request 비교에서 장치 경계·분모·실패 처리 규칙을 공개해야 한다는 소비자 설명을 추가했다.
+
+검증 결과:
+
+- `npm run boundary:check`, `npm run history:check`, `npm run math:check`, `npm run learning:audit`, `npm run sync:index`, `npm run verify`와 `git diff --check`를 실행해 원장·학습 구조·근거·링크·사이트·브라우저 회귀를 확인했다.
+- 새 owner의 일곱 경계 장부와 `J/good request` 예시의 분자·분모를 독립 대조했다.
+
+남은 제한:
+
+- 이 owner는 carbon accounting, facility PUE, 제조 단계 영향의 완결 설명을 맡지 않는다. 그 주장은 별도 시간·지역·시설·lifecycle 자료가 있어야 한다.
+- 다음 배치는 **전력에서 서비스 결과 계약까지 무엇을 세어야 하나**에서 quality·traffic·SLO와 에너지 장부를 연결한다. `raw/`, CS_WIKI와 `.codex-remote-attachments/`는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

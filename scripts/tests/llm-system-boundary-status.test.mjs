@@ -5,6 +5,7 @@ import yaml from 'js-yaml';
 import {
   BOUNDARY_SLOTS,
   buildBoundaryStatus,
+  classifyResumeChanges,
   normalizeRepoRelativePath,
   parseBoundaryStatusArguments,
   renderBoundaryStatus,
@@ -155,6 +156,21 @@ test('planned ledger identifies the first incomplete batch as the only resume ta
   assert.equal(status.current_batch.id, 'batch-1');
   assert.equal(status.progress.batches.complete, 1);
   assert.match(renderBoundaryStatus(status), /Current batch: batch-1/);
+});
+
+test('resume classification keeps a just-completed batch separate from unrelated local work', () => {
+  const ledger = validLedger();
+  const classification = classifyResumeChanges(ledger, [
+    'wiki/analyses/배치 0.md',
+    'wiki/analyses/배치 1.md',
+    'user-note.md',
+  ]);
+
+  assert.equal(classification.current.id, 'batch-1');
+  assert.equal(classification.pendingHandoff.id, 'batch-0');
+  assert.deepEqual(classification.pendingHandoffChanges, ['wiki/analyses/배치 0.md']);
+  assert.deepEqual(classification.matchingChanges, ['wiki/analyses/배치 1.md']);
+  assert.deepEqual(classification.unrelatedChanges, ['user-note.md']);
 });
 
 test('schema, slots, order, dependency, and current batch cannot drift', () => {

@@ -4074,6 +4074,32 @@ sources:
     doi: 10.1145/2408776.2408794
     url: https://research.google/pubs/the-tail-at-scale/
     language: en
+  barroso-holzle-2007-energy-proportional:
+    title: The Case for Energy-Proportional Computing
+    authors: [Luiz André Barroso, Urs Hölzle]
+    published: 2007
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/MC.2007.443
+    url: https://research.google/pubs/the-case-for-energy-proportional-computing/
+    language: en
+  mlcommons-2025-mlperf-inference-v5-1:
+    title: MLPerf Inference Benchmark Suite v5.1
+    authors: [MLCommons]
+    published: 2025
+    source_type: primary-release
+    kind: software-repository
+    url: https://github.com/mlcommons/inference/tree/v5.1
+    language: en
+  niu-et-al-2026-tokenpowerbench:
+    title: 'TokenPowerBench: Benchmarking the Power Consumption of LLM Inference'
+    authors: [Chenxu Niu, Wei Zhang, Jie Li, Yongjian Zhao, Tongyang Wang, Xi Wang, Yong Chen]
+    published: 2026
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1609/aaai.v40i38.40535
+    url: https://ojs.aaai.org/index.php/AAAI/article/view/40535
+    language: en
   grattan-guinness-2003-computation-factory:
     title: 'The Computation Factory: de Prony''s Project for Making Tables in the 1790s'
     authors: [Ivor Grattan-Guinness]

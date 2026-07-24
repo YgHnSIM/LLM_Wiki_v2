@@ -188,6 +188,7 @@ related:
 - [[분산 학습과 집단 통신]] — data·tensor·pipeline·expert parallelism과 ZeRO/FSDP state sharding을 무엇을 나누고 어떤 collective를 쓰는지로 구분하는 시스템 개념 (근거 4개)
 - [[수치 형식·혼합 정밀도·양자화]] — 저장·연산·누산·갱신 형식을 분리하고 mixed precision·일반 양자화·QLoRA의 memory·속도·품질 계약을 구분하는 수치 시스템 개념 (근거 4개)
 - [[언어 모델 추론 서빙]] — prefill·decode·KV cache·iteration-level batching·PagedAttention·speculative decoding을 요청 생애 주기와 TTFT·TPOT·tail·가용성 장부로 설명하는 시스템 개념 (근거 4개)
+- [[LLM 추론 에너지 지표]] — 전력·에너지, GPU·node·service 경계, prefill·decode와 token·request·good request 분모를 분리해 LLM 추론 효율을 비교하는 시스템 개념 (근거 5개)
 - [[표본추출·온도·top-k·top-p]] — 다음 token 분포의 온도 변환·후보 절단·재정규화·무작위 표본추출을 argmax와 구분하는 decoding 개념 (근거 2개)
 - [[BLOOM]] — 176B decoder-only Transformer, ROOTS 다국어 말뭉치, 공공 compute와 서로 다른 weight·code·data 공개 조건을 한 모델 장부로 구분하는 개념 (근거 8개)
 - [[PaLM]] — 540.35B dense decoder-only Transformer, Pathways 분산 학습과 CoT·다국어·code 평가 조건 및 model access 한계를 구분하는 개념 (근거 1개)

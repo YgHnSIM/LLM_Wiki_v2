@@ -452,20 +452,45 @@ async function runGit(args, cwd) {
   return stdout.trim();
 }
 
-export async function inspectResumeState(ledger, { projectRoot = rootDir } = {}) {
+export function classifyResumeChanges(ledger, changedPaths) {
   const current = ledger.batches.find((batch) => batch.id === ledger.initiative.current_batch) ?? null;
+  const pendingHandoff = ledger.batches.find((batch) => batch.id === ledger.initiative.handoff.last_completed_batch) ?? null;
+  const expectedPaths = new Set((current?.expected_paths ?? []).map((entry) => entry.replaceAll('\\', '/')));
+  const pendingOnlyPaths = new Set(
+    (pendingHandoff?.expected_paths ?? [])
+      .map((entry) => entry.replaceAll('\\', '/'))
+      .filter((entry) => !expectedPaths.has(entry)),
+  );
+  const matchingChanges = changedPaths.filter((entry) => expectedPaths.has(entry));
+  const pendingHandoffChanges = changedPaths.filter((entry) => pendingOnlyPaths.has(entry));
+  const unrelatedChanges = changedPaths.filter((entry) => !expectedPaths.has(entry) && !pendingOnlyPaths.has(entry));
+
+  return {
+    current,
+    pendingHandoff,
+    matchingChanges,
+    pendingHandoffChanges,
+    unrelatedChanges,
+  };
+}
+
+export async function inspectResumeState(ledger, { projectRoot = rootDir } = {}) {
   const [branch, changes, untracked, counts] = await Promise.all([
     runGit(['branch', '--show-current'], projectRoot),
-    runGit(['diff', '--name-only'], projectRoot),
-    runGit(['ls-files', '--others', '--exclude-standard'], projectRoot),
+    runGit(['-c', 'core.quotepath=false', 'diff', '--name-only'], projectRoot),
+    runGit(['-c', 'core.quotepath=false', 'ls-files', '--others', '--exclude-standard'], projectRoot),
     runGit(['rev-list', '--left-right', '--count', 'HEAD...origin/main'], projectRoot),
   ]);
   const changedPaths = [...changes.split(/\r?\n/), ...untracked.split(/\r?\n/)]
     .map((entry) => entry.trim().replaceAll('\\', '/'))
     .filter(Boolean);
-  const expectedPaths = new Set((current?.expected_paths ?? []).map((entry) => entry.replaceAll('\\', '/')));
-  const matchingChanges = changedPaths.filter((entry) => expectedPaths.has(entry));
-  const unrelatedChanges = changedPaths.filter((entry) => !expectedPaths.has(entry));
+  const {
+    current,
+    pendingHandoff,
+    matchingChanges,
+    pendingHandoffChanges,
+    unrelatedChanges,
+  } = classifyResumeChanges(ledger, changedPaths);
   const [aheadRaw = '0', behindRaw = '0'] = counts.split(/\s+/);
   const ahead = Number(aheadRaw);
   const behind = Number(behindRaw);
@@ -477,6 +502,8 @@ export async function inspectResumeState(ledger, { projectRoot = rootDir } = {})
     action = 'Push pending: push origin main before starting another batch.';
   } else if (behind > 0) {
     action = 'Stop: origin/main is ahead or diverged; fetch and inspect before editing.';
+  } else if (pendingHandoffChanges.length > 0) {
+    action = `Complete pending '${pendingHandoff.id}' commit/push before ${current ? `starting or resuming '${current.id}'` : 'the final verification'}.`;
   } else if (!current) {
     action = 'All batches are complete; run the final verification and inspect the handoff.';
   } else if (matchingChanges.length > 0) {
@@ -490,7 +517,9 @@ export async function inspectResumeState(ledger, { projectRoot = rootDir } = {})
     ahead,
     behind,
     current,
+    pendingHandoff,
     matchingChanges,
+    pendingHandoffChanges,
     unrelatedChanges,
     action,
   };
@@ -503,6 +532,7 @@ export function renderResumeState(resume) {
     `Remote delta: ahead=${resume.ahead}, behind=${resume.behind}`,
     `Current batch: ${resume.current ? `${resume.current.id} — ${resume.current.title}` : 'none'}`,
     `Expected paths: ${expected.length > 0 ? expected.join(', ') : 'none'}`,
+    `Pending completed-batch changes: ${resume.pendingHandoffChanges?.length > 0 ? `${resume.pendingHandoff?.id ?? 'unknown'} — ${resume.pendingHandoffChanges.join(', ')}` : 'none'}`,
     `Matching local changes: ${resume.matchingChanges.length > 0 ? resume.matchingChanges.join(', ') : 'none'}`,
     `Unrelated local changes: ${resume.unrelatedChanges.length > 0 ? resume.unrelatedChanges.join(', ') : 'none'}`,
     `Action: ${resume.action}`,

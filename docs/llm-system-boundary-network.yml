@@ -3,10 +3,10 @@ schema_version: 1
 initiative:
   id: llm-system-boundary-network
   title: LLM 시스템 경계 확장
-  current_batch: energy-owner
+  current_batch: energy-bridge
   next_action: >-
     npm run boundary:resume으로 재개 상태를 확인한 뒤, energy-owner 배치에서
-    LLM 추론 에너지 지표 owner와 근거를 작성·검증한다.
+    전력에서 서비스 결과 계약까지 무엇을 세어야 하나 analysis를 작성·검증한다.
   blockers: []
   hub:
     path: wiki/meta/LLM 시스템 경계 확장 지도.md
@@ -15,10 +15,15 @@ initiative:
     stage: planned
   handoff:
     updated: '2026-07-25'
-    baseline_commit: c6d66c057120099b5f0ce98b77d175bff6ea2a7c
-    last_completed_batch: framework
-    last_completed_gate: boundary-framework-verified
-    validation: []
+    baseline_commit: a6d08f3f0cfa7e27d8877c19a9c9d79ff50084f2
+    last_completed_batch: energy-owner
+    last_completed_gate: energy-owner-verified
+    validation:
+      - boundary:check
+      - history:check
+      - math:check
+      - learning:audit:check
+      - verify
     recovery:
       - npm run boundary:resume
       - npm run boundary:check
@@ -43,7 +48,7 @@ owners:
     page_id: concept.llm-inference-energy-metrics
     page_type: concept
     action: create
-    stage: planned
+    stage: complete
     required_by: [energy-owner, energy-bridge]
   - id: training-data-lifecycle-provenance
     title: 학습 데이터 생애주기와 출처 추적
@@ -133,7 +138,7 @@ tracks:
     priority: 1
     title: 에너지·전력에서 서비스 결과 계약까지
     primary_title: LLM 추론 에너지 지표
-    stage: planned
+    stage: in_progress
     owners: [llm-inference-energy-metrics]
     bridges: [power-to-service-outcomes]
     primary_path: wiki/concepts/LLM 추론 에너지 지표.md
@@ -220,7 +225,7 @@ batches:
   - id: energy-owner
     order: 1
     title: LLM 추론 에너지 지표 owner
-    stage: planned
+    stage: complete
     depends_on: [framework]
     commit_message: 'content: define_llm_inference_energy_metrics'
     deliverables:
@@ -237,7 +242,10 @@ batches:
       - wiki/overview.md
       - wiki/log.md
       - docs/llm-system-boundary-network.yml
+      - docs/llm-math-network.yml
       - docs/foundational-learning-audit.md
+      - scripts/llm-system-boundary-status.mjs
+      - scripts/tests/llm-system-boundary-status.test.mjs
   - id: energy-bridge
     order: 2
     title: 전력과 서비스 결과 연결
@@ -259,6 +267,7 @@ batches:
       - wiki/overview.md
       - wiki/log.md
       - docs/llm-system-boundary-network.yml
+      - docs/llm-math-network.yml
       - docs/foundational-learning-audit.md
   - id: data-owner
     order: 3
