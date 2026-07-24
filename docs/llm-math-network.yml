@@ -10,29 +10,28 @@ initiative:
     stage: complete
   current_batch: null
   next_action: >-
-    npm run math:check를 실행한 뒤, 새 허브 접근성 요청이 있으면 wiki/analyses/LLM을 만든 수학.md에서 attention과 softmax의 국소 설명 책임을 겹치지 않는 독립 학습 질문·최소 예·대표 owner 문서로 먼저 판정하고 사용자 범위에 맞는 한 배치를 제안한다.
+    npm run math:check를 실행한 뒤 embeddings, dot-matrix-linear-transform, attention, residual-connections owner와 wiki/analyses/LLM을 만든 수학.md의 표현·attention 구간을 읽고 attention-transfer-mastery 한 배치를 in_progress로 등록한다.
   blockers: []
   handoff:
     updated: '2026-07-24'
-    baseline_commit: 607d86944d4f670192db94589bfed8304517a917
-    last_completed_gate: hub-narrative-accessibility-g7-verified
+    baseline_commit: df536ca66e4acb089c30b389d20f2cbd66c8a155
+    last_completed_gate: prediction-head-mastery-g7-verified
     validation:
       - command: npm run math:check
-        result: 8개 배치·25개 수식 계열의 구조·owner·선수 관계와 허브 계산 흐름 입문 보강 배치 완료 상태 검증 통과
+        result: 9개 배치·25개 수식 계열의 구조·owner·선수 관계와 prediction-head-mastery 완료 상태 검증 통과
       - command: npm run learning:audit
-        result: 365개 Markdown·362개 비메타 문서, 블록 수식 691개로 기준선 갱신
+        result: 365개 Markdown·362개 비메타 문서, 블록 수식 699개와 마스터리 표지 4개로 기준선 갱신
       - command: npm run learning:audit:check
         result: 기초 학습 감사 기준선이 현재 wiki와 일치함을 확인
       - command: npm run sync:index
         result: 변경 문서의 evidence 수와 목록을 index에 동기화
       - command: npm run lint:wiki
         result: Markdown 365개·evidence 458건·immutable raw artifact 220개 검증 통과
-      - command: BASE_PATH='' npm run verify
-        result: math 원장, Node 회귀 123개, wiki lint·691 HTML build/check·Chromium 회귀 4개를 통과
+      - command: npm run verify
+        result: math 원장, Node 회귀 123개, wiki lint·691 HTML build/check·Chromium 회귀 4개와 KaTeX error 0개를 통과
     notes: >-
-      기준 branch는 main이다. 허브에는 token 문맥→벡터→attention 문맥→residual 표현→logit→확률→손실→bias 갱신의 화살표 지도를 추가했다.
-      다섯 계산 단계에는 입력·질문·출력 안내를 두고, attention 내부 비율과 다음 token 확률, logit과 확률, 정답 표지와 현재 확률을 분리해 설명했다.
-      생성 HTML에서 KaTeX error 표지 0개·새 입력 안내 5개를 확인했고, Chromium mobile overflow 회귀도 통과했다. raw는 바꾸지 않았다.
+      기준 branch는 main이다. prediction-head-mastery에서 softmax·로그가능도·경사하강법과 허브 출력단의 도움 감소형 전이 연습·오답 교정·숙달 판정을 완결했다.
+      자동 감사에 마스터리 연습 표지를 추가했고 새 수치를 수동 재계산했다. 다음 배치는 표현·attention·mask·잔차 전이를 맡는다. raw와 기존 첨부 파일은 건드리지 않았다.
 
 baseline:
   recorded_on: '2026-07-24'
@@ -40,7 +39,7 @@ baseline:
   wiki_documents: 365
   non_meta_documents: 362
   formula_documents: 183
-  formula_blocks: 691
+  formula_blocks: 699
 
 batches:
   - id: linear-algebra-foundations
@@ -169,6 +168,24 @@ batches:
       - gradient-descent
     deliverables:
       - wiki/analyses/LLM을 만든 수학.md
+      - wiki/overview.md
+      - wiki/log.md
+
+  - id: prediction-head-mastery
+    title: 출력 확률·손실·갱신 마스터리
+    stage: complete
+    families:
+      - softmax
+      - log-likelihood
+      - gradient-descent
+    deliverables:
+      - wiki/concepts/소프트맥스.md
+      - wiki/concepts/로그가능도.md
+      - wiki/concepts/경사하강법.md
+      - wiki/analyses/LLM을 만든 수학.md
+      - docs/foundational-learning-workflow.md
+      - docs/learning-structure-style-guide.md
+      - scripts/audit-foundational-learning.mjs
       - wiki/overview.md
       - wiki/log.md
 

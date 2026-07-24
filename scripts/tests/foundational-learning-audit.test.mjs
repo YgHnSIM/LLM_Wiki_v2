@@ -37,6 +37,18 @@ test('foundational audit resolves narrative links and excludes sources and relat
       '',
       '$$P(A)=0.5$$',
       '',
+      '## 학습 확인',
+      '',
+      '### 마스터리 연습',
+      '',
+      '#### 부분 완성',
+      '',
+      '#### 새 수치 전이',
+      '',
+      '#### 오류 진단',
+      '',
+      '### 해설과 채점 기준',
+      '',
       '## 출처',
       '',
       '[[출처에만 있는 링크]]',
@@ -79,5 +91,11 @@ test('foundational audit resolves narrative links and excludes sources and relat
   assert.equal(audit.formulaDocumentCount, 1);
   assert.equal(probability.incomingNarrativeLinks, 1);
   assert.equal(probability.formulaBlocks, 1);
+  assert.equal(audit.masteryPracticeHeadingCount, 1);
+  assert.equal(audit.fadedPracticeHeadingCount, 1);
+  assert.equal(audit.transferPracticeHeadingCount, 1);
+  assert.equal(audit.errorDiagnosisHeadingCount, 1);
+  assert.equal(audit.solutionRubricHeadingCount, 1);
   assert.match(renderFoundationalLearningAudit(audit), /\[\[확률\]\]/);
+  assert.match(renderFoundationalLearningAudit(audit), /마스터리 연습/);
 });

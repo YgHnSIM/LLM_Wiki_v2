@@ -4780,6 +4780,25 @@ raw 등록 해시:
 - 이 문서는 여전히 hand-calculation용 toy 모델이다. 실제 LLM의 다층·multi-head·FFN·LayerNorm·batch 평균·Adam state·분산 학습을 재현하지 않는다.
 - 새 설명은 계산 순서와 현재 수식의 해석을 쉽게 하는 보강이며, attention 비율을 인과·설명·사실성의 증거로 만들지 않는다.
 
+## [2026-07-24] content | Prediction head mastery
+
+변경 내용:
+
+- [[소프트맥스]], [[로그가능도]], [[경사하강법]]과 [[LLM을 만든 수학]]의 출력단 학습 확인을 `완전 풀이 → 부분 완성 → 새 수치 전이 → 오류 진단 → 해설과 채점 기준`으로 확장했다. 본문과 다른 logit·관측·학습률을 사용하고, 확률 축·가능도 해석·gradient 부호를 치명적 오류로 따로 판정한다.
+- 허브에는 출력단 시작 진단과 $z=(0,\ln2,\ln3,\ln4)$의 전이 문제를 추가했다. 네 bias를 함께 갱신할 때 모든 후보의 gradient가 $p-e_y$에 참여한다는 점과 한 예의 손실 감소가 일반화를 보장하지 않는다는 경계를 명시했다.
+- 기초 학습 워크플로와 구조 가이드에 도움 감소형 연습, 오답 피드백, 80%·치명적 오류 0개 기준을 반영했다. 자동 감사는 마스터리·부분 완성·새 수치·오류 진단·채점 표지의 문서 수를 새로 집계한다.
+
+검증 결과:
+
+- 새 softmax 예는 $(1,1,2)/4$, NLL $\ln2\approx0.693147$로, 새 가능도 예는 $\hat\theta=0.4$와 총 NLL $2.302585$로, 큰 학습률 예는 $w_{\mathrm{new}}=5.8$, 손실 $7.84$로 재계산했다.
+- 허브의 새 출력단 예에서 $p=(0.1,0.2,0.3,0.4)$, $g_z=(0.1,0.2,-0.7,0.4)$, 새 정답 확률 약 $0.321395$, NLL 약 $1.135085$를 독립 계산했다.
+- `npm run math:check`, `npm run learning:audit`, `npm run learning:audit:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run verify`를 통과했다. 검증은 365 Markdown·458 evidence·220 immutable raw artifact, 블록 수식 699개, Node 회귀 123개, HTML 691개·8,648개 위키 링크·47,249개 로컬 참조와 Chromium 회귀 4개를 확인했다. 생성 HTML의 KaTeX error 표지는 0개다.
+
+남은 제한:
+
+- 이 배치는 출력 확률·손실·한 update의 전이에 집중한다. attention·mask 전이, 전체 출력 가중치와 upstream gradient, 실제 batch·multi-head shape와 종합 capstone은 뒤 배치에서 완결한다.
+- 자동 감사는 연습 절의 존재를 세지만 문제의 실제 난이도와 학습자의 숙달을 자동 판정하지 않는다. raw는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]
