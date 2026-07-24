@@ -61,6 +61,10 @@ initiative:
         result: 역사 시리즈 5장 통합 뒤에도 25개 수식 owner·Node 회귀 146개·Markdown 380개·evidence 479건·706 HTML·위키 링크 8996개·로컬 참조 48831개·Chromium 회귀 4개 통과
       - command: npm run verify
         result: 역사 시리즈 허브·종합편 통합 뒤에도 25개 수식 owner·Node 회귀 146개·Markdown 382개·evidence 479건·708 HTML·위키 링크 9084개·로컬 참조 49075개·Chromium 회귀 4개 통과
+      - command: npm run math:check
+        result: 역사 연결고리 최종 통합 뒤에도 13개 배치·25개 수식 owner와 384·380·200·810 감사 기준선 검증 통과
+      - command: npm run verify
+        result: 역사 연결고리 최종 통합 뒤 25개 수식 owner·Node 회귀 149개·Markdown 384개·evidence 484건·710 HTML·위키 링크 9177개·로컬 참조 49348개·Chromium 회귀 4개 통과
     notes: >-
       기준 branch는 main이다. LLM·컴퓨팅 능력 공진화 시리즈의 신규 문서를 학습 감사 기준선에 포함했으며 기존 25개 수식 owner와 배치 완료 상태는 바꾸지 않았다.
       integrated-capstone에서 새 숫자로 lookup·attention·residual·LayerNorm·FFN·softmax NLL·전체 출력 gradient를 연결하고,
