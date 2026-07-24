@@ -135,7 +135,7 @@ function validatePublicRecord(record, label, errors) {
 export function validateHistoryLedgerStructure(ledger) {
   const errors = [];
   if (!isRecord(ledger)) return ['ledger must be an object.'];
-  if (ledger.schema_version !== 1) errors.push('schema_version must be 1.');
+  if (ledger.schema_version !== 2) errors.push('schema_version must be 2.');
 
   const initiative = ledger.initiative;
   if (!isRecord(initiative)) {
@@ -243,6 +243,40 @@ export function validateHistoryLedgerStructure(ledger) {
   for (const field of ['batch', 'title', 'path', 'page_id']) {
     for (const duplicate of duplicateValues(chapters.map((chapter) => chapter?.[field]).filter(nonemptyString))) {
       errors.push(`chapters has duplicate ${field} '${duplicate}'.`);
+    }
+  }
+
+  const chapterBatchSet = new Set(chapters.map((chapter) => chapter?.batch).filter(nonemptyString));
+  const bridges = Array.isArray(ledger.bridges) ? ledger.bridges : [];
+  if (!Array.isArray(ledger.bridges)) errors.push('bridges must be an array.');
+  bridges.forEach((bridge, index) => {
+    const label = `bridges[${index}]`;
+    if (!isRecord(bridge)) {
+      errors.push(`${label} must be an object.`);
+      return;
+    }
+    for (const field of ['id', 'title', 'page_id']) {
+      if (!nonemptyString(bridge[field])) errors.push(`${label}.${field} must be a nonempty string.`);
+    }
+    validatePath(bridge.path, `${label}.path`, errors);
+    validateStage(bridge.stage, `${label}.stage`, errors);
+    const connects = validateStringArray(bridge.connects, `${label}.connects`, errors);
+    if (connects.length < 2) errors.push(`${label}.connects must contain at least 2 chapter batch ids.`);
+    connects.forEach((chapterBatch) => {
+      if (!chapterBatchSet.has(chapterBatch)) {
+        errors.push(`${label}.connects references unknown chapter batch '${chapterBatch}'.`);
+      }
+    });
+    validateStringArray(
+      bridge.capability_layers,
+      `${label}.capability_layers`,
+      errors,
+      { allowed: capabilityLayerSet },
+    );
+  });
+  for (const field of ['id', 'title', 'path', 'page_id']) {
+    for (const duplicate of duplicateValues(bridges.map((bridge) => bridge?.[field]).filter(nonemptyString))) {
+      errors.push(`bridges has duplicate ${field} '${duplicate}'.`);
     }
   }
 
@@ -376,6 +410,10 @@ export async function validateHistoryLedger(
     ledger.chapters.map((chapter, index) =>
       validateCompletePage(chapter, `chapters[${index}]`, 'analysis')),
   );
+  await Promise.all(
+    ledger.bridges.map((bridge, index) =>
+      validateCompletePage(bridge, `bridges[${index}]`, 'analysis')),
+  );
   await validateCompletePage(
     { ...ledger.initiative.hub, title: ledger.initiative.title },
     'initiative.hub',
@@ -421,6 +459,7 @@ export function buildHistoryStatus(ledger) {
     progress: {
       batches: countStages(ledger.batches),
       chapters: countStages(ledger.chapters),
+      bridges: countStages(ledger.bridges),
       owners: countStages(ledger.owners),
     },
     handoff: ledger.initiative.handoff,
@@ -436,6 +475,7 @@ export function renderHistoryStatus(status) {
     `Blockers: ${status.blockers.length > 0 ? status.blockers.join('; ') : 'none'}`,
     `Batches: ${summarize(status.progress.batches)}`,
     `Chapters: ${summarize(status.progress.chapters)}`,
+    `Bridges: ${summarize(status.progress.bridges)}`,
     `Owners: ${summarize(status.progress.owners)}`,
     `Handoff: ${status.handoff.updated} · baseline ${status.handoff.baseline_commit.slice(0, 8)} · last gate ${status.handoff.last_completed_gate ?? 'none'}`,
   ];

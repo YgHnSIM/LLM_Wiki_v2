@@ -23,7 +23,7 @@ function validLedger() {
     capability_layers: ['computability'],
   }));
   return {
-    schema_version: 1,
+    schema_version: 2,
     initiative: {
       id: 'llm-computing-history',
       title: 'LLM과 컴퓨팅 능력의 공진화',
@@ -74,6 +74,17 @@ function validLedger() {
       },
     ],
     chapters,
+    bridges: [
+      {
+        id: 'bridge',
+        title: '연결고리',
+        path: 'wiki/analyses/연결고리.md',
+        page_id: 'analysis.bridge',
+        stage: 'planned',
+        connects: ['chapter-1', 'chapter-2'],
+        capability_layers: ['programmability', 'realized-performance'],
+      },
+    ],
     batches: [
       {
         id: 'framework',
@@ -153,20 +164,48 @@ test('valid planned ledger produces a concise status', () => {
   const status = buildHistoryStatus(ledger);
   assert.equal(status.current_batch.id, 'framework');
   assert.equal(status.progress.chapters.planned, 9);
+  assert.equal(status.progress.bridges.planned, 1);
   assert.match(renderHistoryStatus(status), /Current batch: framework/);
   assert.match(renderHistoryStatus(status), /Blockers: none/);
+  assert.match(renderHistoryStatus(status), /Bridges: planned=1/);
 });
 
-test('chapter order, capability vocabulary, current batch, and safe paths are enforced', () => {
+test('schema, chapter order, capability vocabulary, current batch, and safe paths are enforced', () => {
   const ledger = validLedger();
+  ledger.schema_version = 1;
   ledger.chapters[0].order = 2;
   ledger.chapters[1].capability_layers = ['speed'];
   ledger.initiative.current_batch = 'chapter-1';
   ledger.owners[0].path = '../outside.md';
   const errors = validateHistoryLedgerStructure(ledger);
+  assert.ok(errors.some((error) => error.includes('schema_version must be 2')));
   assert.ok(errors.some((error) => error.includes('chapters[0].order must be 1')));
   assert.ok(errors.some((error) => error.includes("unsupported value 'speed'")));
   assert.ok(errors.some((error) => error.includes('exactly initiative.current_batch')));
+  assert.ok(errors.some((error) => error.includes('safe repo-relative path')));
+});
+
+test('bridge connections must name at least two known chapter batches', () => {
+  const ledger = validLedger();
+  ledger.bridges[0].connects = ['chapter-1'];
+  let errors = validateHistoryLedgerStructure(ledger);
+  assert.ok(errors.some((error) => error.includes('must contain at least 2 chapter batch ids')));
+
+  ledger.bridges[0].connects = ['chapter-1', 'unknown-chapter'];
+  errors = validateHistoryLedgerStructure(ledger);
+  assert.ok(errors.some((error) => error.includes("unknown chapter batch 'unknown-chapter'")));
+});
+
+test('bridge ids, titles, paths, and page ids are unique and paths stay inside the repository', () => {
+  const ledger = validLedger();
+  ledger.bridges.push({
+    ...ledger.bridges[0],
+    path: '../outside.md',
+  });
+  const errors = validateHistoryLedgerStructure(ledger);
+  assert.ok(errors.some((error) => error.includes('bridges has duplicate id')));
+  assert.ok(errors.some((error) => error.includes('bridges has duplicate title')));
+  assert.ok(errors.some((error) => error.includes('bridges has duplicate page_id')));
   assert.ok(errors.some((error) => error.includes('safe repo-relative path')));
 });
 
@@ -188,6 +227,35 @@ test('completed chapter must exist and contain the learning, measurement, and ca
   });
   const errors = await validateHistoryLedger(ledger, { projectRoot, ...brokenFiles });
   assert.ok(errors.some((error) => error.includes("measurement ledger label '결과 계약'")));
+});
+
+test('completed bridge must exist and contain the same analysis contract as a chapter', async () => {
+  const ledger = validLedger();
+  ledger.bridges[0].stage = 'complete';
+  const projectRoot = path.resolve('virtual-history-bridge-project');
+  const good = completeAnalysis({
+    id: ledger.bridges[0].page_id,
+    title: ledger.bridges[0].title,
+  });
+  const goodFiles = virtualFiles(projectRoot, {
+    [ledger.bridges[0].path]: good,
+  });
+  assert.deepEqual(await validateHistoryLedger(ledger, { projectRoot, ...goodFiles }), []);
+
+  const missingErrors = await validateHistoryLedger(ledger, {
+    projectRoot,
+    ...virtualFiles(projectRoot, {}),
+  });
+  assert.ok(missingErrors.some((error) => error.includes('bridges[0] is complete')));
+
+  const brokenFiles = virtualFiles(projectRoot, {
+    [ledger.bridges[0].path]: good
+      .replace('page_type: analysis', 'page_type: concept')
+      .replace('직접 영향', '영향'),
+  });
+  const brokenErrors = await validateHistoryLedger(ledger, { projectRoot, ...brokenFiles });
+  assert.ok(brokenErrors.some((error) => error.includes("expected page_type 'analysis'")));
+  assert.ok(brokenErrors.some((error) => error.includes("causal relation label '직접 영향'")));
 });
 
 test('completed batch requires every declared deliverable', async () => {
