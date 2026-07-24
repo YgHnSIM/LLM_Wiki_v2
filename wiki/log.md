@@ -9,7 +9,7 @@ aliases:
 tags:
   - type/meta
 created: '2026-05-07'
-updated: '2026-07-24'
+updated: '2026-07-25'
 lifecycle: active
 verification: verified
 artifacts: []
@@ -5063,6 +5063,23 @@ raw 등록 해시:
 
 - 이 종합은 semiconductor 공급망·전력·냉각·자본·data 노동과 권리를 포괄하지 않는다. 서로 다른 시대의 성능 수치도 하나의 환율로 직접 순위화하지 않는다.
 - 계획된 시리즈 배치는 모두 완료했다. 다음 보강은 실제 학습자 오답·탐색 기록이나 새 1차 근거가 들어왔을 때 정한다. `raw/`와 CS_WIKI는 변경하지 않았다.
+
+## [2026-07-25] content | Sparse counts to learned representations
+
+변경 내용:
+
+- 기존 [[N-gram에서 LLM으로]]을 새 문서로 복제하지 않고, Katz back-off → NPLM → Word2Vec → RNN → seq2seq → Transformer의 여섯 단계 횡단 연결고리로 보강했다.
+- Word2Vec의 계층적 softmax·negative sampling이 완전한 언어 모델과 다른 표현 학습 계약임을 밝히고, 본편 4·5·6과 시리즈 허브에서 연결했다.
+- 여섯 항목 측정 장부와 직접 영향·가능 조건·병행 맥락·후대 유추 표를 추가해 “n-gram이 커져 LLM이 됐다”는 직선 계보를 제한했다.
+
+검증 결과:
+
+- `npm run history:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run learning:audit`, `npm run math:check`, `npm run verify`로 원장, 색인, 근거·링크·학습 구조·수식과 사이트 회귀를 검증했다.
+
+남은 제한:
+
+- 서로 다른 corpus·어휘·hardware·평가 지표를 한 속도나 품질 순위로 환산하지 않는다. 다음 배치는 저장 프로그램부터 TensorFlow까지의 프로그래밍 추상화 연결을 보강한다.
+- `raw/`와 CS_WIKI는 변경하지 않았다.
 
 ## 관련 항목
 

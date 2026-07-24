@@ -14,7 +14,7 @@ tags:
   - domain/machine-learning
   - domain/computer-science
 created: '2026-07-24'
-updated: '2026-07-24'
+updated: '2026-07-25'
 lifecycle: active
 verification: partial
 artifacts:
@@ -45,6 +45,7 @@ related:
   - concept.accelerator-matrix-compute
   - concept.memory-hierarchy-data-movement
   - analysis.훈련-병렬성과-생성-순차성은-다른-축이다
+  - analysis.n-gram에서-llm으로
 ---
 # Transformer는 무엇을 병렬화했고 무엇을 남겼나
 
@@ -195,6 +196,8 @@ Transformer 원 논문의 대표 훈련 수치는 다음 조건에서만 읽는�
 
 다음 본편 **규모는 언제 연구 변수가 되었나**에서는 위치 병렬성이 model·data·device 규모를 키우는 조건과 만나면서, FLOP budget이 연구 설계 변수로 바뀐 과정을 본다.
 
+횡단 연결 [[N-gram에서 LLM으로]]은 이 구조 전환을 Katz의 sparse count부터 NPLM·Word2Vec·RNN·seq2seq를 거친 **표현과 과업의 변화** 안에 놓는다. 따라서 Transformer를 n-gram의 단순 대형화나 GPU의 자동 산물로 설명하지 않는다.
+
 ### 시리즈 탐색
 
 이전 [[행렬곱 가속은 딥러닝을 어떻게 현실화했나]] · [[LLM과 컴퓨팅 능력의 공진화|시리즈 허브]] · 다음 [[규모는 언제 연구 변수가 되었나]]
@@ -216,3 +219,4 @@ Transformer 원 논문의 대표 훈련 수치는 다음 조건에서만 읽는�
 - [[가속기와 행렬 계산]] — 같은 tensor 수학이 장치에서 실행되는 층을 구분한다.
 - [[메모리 계층과 데이터 이동]] — 높은 연산 처리량 뒤에 드러난 I/O 병목을 설명한다.
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]] — 여러 model 계열의 표현 계산과 sampling 의존성을 비교한다.
+- [[N-gram에서 LLM으로]] — 다음 항목 예측의 연속성과 계산 표현의 단절을 함께 읽는다.

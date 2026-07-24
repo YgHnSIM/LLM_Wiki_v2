@@ -10,7 +10,7 @@ aliases:
 tags:
   - type/meta
 created: '2026-07-24'
-updated: '2026-07-24'
+updated: '2026-07-25'
 lifecycle: active
 verification: verified
 artifacts: []
@@ -26,6 +26,7 @@ related:
   - analysis.when-data-movement-dominates
   - analysis.model-capability-to-service-capability
   - analysis.llm-capability-model-or-system
+  - analysis.n-gram에서-llm으로
 ---
 # LLM과 컴퓨팅 능력의 공진화
 
@@ -58,6 +59,8 @@ related:
 4. [[LLM 능력은 모델의 속성인가 시스템의 속성인가]] — 아홉 시대를 같은 능력·측정 장부로 비교한다.
 
 시간이 3시간이라면 아홉 본편에서 `학습 안내` → `1단계` → `검증과 한계` → `학습 확인` 순서로 읽는다. 완전 경로에서는 각 편의 `2단계` 계산과 `3단계` 1차 근거를 확인하고, 마지막 종합편의 전이 과제를 푼다.
+
+본편 4–6 사이에서 “빈도표가 어떻게 학습 표현과 Transformer workload로 바뀌었는가”가 궁금하면 횡단 연결 [[N-gram에서 LLM으로]]을 끼워 읽는다.
 
 ## 시대순 본편 아홉 편
 
@@ -161,3 +164,4 @@ related:
 - [[연산보다 데이터 이동이 비싸질 때]]
 - [[모델 능력에서 서비스 능력으로]]
 - [[LLM 능력은 모델의 속성인가 시스템의 속성인가]]
+- [[N-gram에서 LLM으로]]

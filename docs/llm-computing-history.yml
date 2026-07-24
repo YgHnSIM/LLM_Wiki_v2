@@ -3,10 +3,10 @@ schema_version: 2
 initiative:
   id: llm-computing-history
   title: LLM과 컴퓨팅 능력의 공진화
-  current_batch: bridge-representation-workloads
+  current_batch: bridge-programming-abstraction
   next_action: >-
-    bridge-representation-workloads 배치에서 기존 「N-gram에서 LLM으로」를
-    희소 계수에서 학습 표현으로 이어지는 횡단 연결고리 계약에 맞게 보강한다.
+    bridge-programming-abstraction 배치에서 저장 프로그램·Fortran·BLAS·자동미분·
+    CUDA·cuDNN·TensorFlow가 학습 프레임워크로 쌓인 추상화 연결고리를 작성한다.
   blockers: []
   hub:
     path: wiki/meta/LLM과 컴퓨팅 능력의 공진화.md
@@ -19,8 +19,10 @@ initiative:
   handoff:
     updated: '2026-07-25'
     baseline_commit: 12a04ff1253aa2d481458b41e9d8d0462560fee2
-    last_completed_gate: bridge-ledger-v2-verified
+    last_completed_gate: bridge-representation-workloads-verified
     validation:
+      - command: npm run verify
+        result: 희소 계수→학습 표현 연결고리와 본편 4·5·6·허브 링크의 전체 회귀 통과
       - command: npm run history:check
         result: schema v2의 3개 연결고리·본편 연결·능력층·상태·안전 경로 검증 통과
       - command: node --test scripts/tests/llm-computing-history-status.test.mjs
@@ -175,7 +177,7 @@ bridges:
     title: N-gram에서 LLM으로
     path: wiki/analyses/N-gram에서 LLM으로.md
     page_id: analysis.n-gram에서-llm으로
-    stage: planned
+    stage: complete
     connects: [chapter-04-statistical-models, chapter-05-gpu-deep-learning, chapter-06-transformer-parallelism]
     capability_layers: [complexity, programmability, realized-performance]
   - id: bridge-programming-abstraction
@@ -273,12 +275,12 @@ batches:
       - scripts/tests/llm-computing-history-status.test.mjs
   - id: bridge-representation-workloads
     title: 희소 계수에서 학습 표현으로
-    stage: in_progress
+    stage: complete
     deliverables:
       - wiki/analyses/N-gram에서 LLM으로.md
   - id: bridge-programming-abstraction
     title: 저장 프로그램에서 학습 프레임워크까지
-    stage: planned
+    stage: in_progress
     deliverables:
       - wiki/analyses/저장 프로그램에서 학습 프레임워크까지.md
   - id: bridge-silicon-acceleration

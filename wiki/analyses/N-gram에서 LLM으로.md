@@ -11,7 +11,7 @@ tags:
   - type/analysis
   - domain/ai
 created: '2026-05-07'
-updated: '2026-07-21'
+updated: '2026-07-25'
 lifecycle: active
 verification: partial
 artifacts:
@@ -29,6 +29,12 @@ artifacts:
   - raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md
   - raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.ko.md
   - raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.commentary.ko.md
+  - raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.ko.md
+  - raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.commentary.ko.md
+  - raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.ko.md
+  - raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.commentary.ko.md
+  - raw/055_The Transformer Attention Is All You Need.ko.md
+  - raw/055_The Transformer Attention Is All You Need.commentary.ko.md
   - raw/066_Scaling Laws for Neural Language Models Predicting Performance from Scale.ko.md
   - raw/066_Scaling Laws for Neural Language Models Predicting Performance from Scale.commentary.ko.md
 evidence:
@@ -56,6 +62,18 @@ evidence:
   - source_id: bengio-et-al-2003-nplm
     locator: 'JMLR 3, pp. 1137–1155, 특히 §§1.1·2의 연속 표현 일반화와 §4의 n-gram 비교'
     relation: supports
+  - source_id: mikolov-et-al-2013-word-representations
+    locator: 'arXiv:1301.3781, 초록과 §§1–3, 특히 §2의 계산 복잡도와 §3의 CBOW·Skip-gram'
+    relation: supports
+  - source_id: mikolov-et-al-2013-negative-sampling
+    locator: 'NeurIPS 2013, pp. 3111–3119, 특히 §§2.1–2.3의 계층적 softmax·negative sampling·subsampling'
+    relation: supports
+  - source_id: sutskever-vinyals-le-2014-seq2seq
+    locator: 'NeurIPS 2014, pp. 3104–3112, 특히 §§1–3·5와 Figure 1의 recurrent encoder–decoder·조건부 생성'
+    relation: supports
+  - source_id: vaswani-et-al-2017-attention
+    locator: 'NeurIPS 2017, §§1·3–5와 Table 1의 recurrence 제거·self-attention·위치별 순차 연산 비교'
+    relation: supports
   - source_id: gpt-2018
     locator: '§3.1, eqs. (1)–(2), and §4.1'
     relation: contextualizes
@@ -70,6 +88,9 @@ related:
   - source.002
   - source.019
   - source.035
+  - source.043
+  - source.045
+  - source.055
   - source.066
   - concept.언어-모델-스케일링-법칙
   - concept.신경-확률-언어-모형
@@ -88,13 +109,20 @@ related:
   - analysis.촘스키에서-llm으로
   - source.026
   - concept.순환-신경망
+  - concept.word2vec
+  - concept.sequence-to-sequence
+  - concept.transformer
+  - analysis.statistical-language-model-computing-infrastructure
+  - analysis.matrix-acceleration-deep-learning
+  - analysis.transformer-parallelism-and-sequentiality
+  - meta.llm-computing-coevolution
 ---
 # N-gram에서 LLM으로
 
 > [!note] 학습 안내
-> **난이도:** 중급<br>
-> **선수 지식:** [[N-gram 모델]]과 [[단어 임베딩]]의 기본 뜻<br>
-> **읽고 나면:** n-gram과 LLM의 공통 문제, 표현·문맥·학습 방식의 단절, “n-gram이 커져 LLM이 됐다”는 설명의 한계를 근거와 함께 말할 수 있다.
+> **난이도:** 입문 → 중급<br>
+> **선수 지식:** 없음 — 빈도표, 임베딩, softmax, 순환 상태와 attention을 작은 예부터 정의한다.<br>
+> **읽고 나면:** n-gram과 LLM의 공통 문제를 보존하면서, 희소 계수 → 연속 표현 → 재사용 임베딩 → 순환 상태 → 조건부 생성 → Transformer라는 작업 전환을 설명하고 “n-gram이 커져 LLM이 됐다”는 설명의 한계를 근거와 함께 말할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
 
@@ -124,6 +152,19 @@ N-gram은 [[마르코프 가정]]에 따라 표면 토큰 조합을 직접 세�
 | 핵심 병목 | 조합 폭증과 미관측 빈도 | 계산·메모리 비용과 긴 문맥 활용의 별도 검증 |
 | 출력 | 다음 항목의 조건부확률 | 다음 토큰의 조건부확률 |
 
+### 중간 다섯 칸을 건너뛰면 역사가 직선처럼 보인다
+
+N-gram과 LLM만 양 끝에 놓으면 “빈도표가 아주 커져서 신경망이 됐다”는 오해가 생긴다. 실제로는 **무엇을 저장하고, 무엇을 예측하며, 어떤 계산을 재사용하는가**가 여러 번 바뀌었다.
+
+1. **Katz back-off — 희소 계수의 재분배:** 정확한 표면 n-gram을 보지 못하면 더 짧은 표면 문맥으로 후퇴한다.
+2. **2003 NPLM — 연속 표현을 포함한 완전한 언어 모델:** 단어 lookup 벡터, 공유 다층 퍼셉트론과 전체 어휘 softmax를 함께 학습해 다음 단어 확률분포를 만든다.
+3. **2013 Word2Vec — 표현 학습을 완전한 언어 모델에서 분리:** CBOW·Skip-gram은 국소 단어–문맥 예측에 집중한다. 계층적 softmax와 negative sampling은 매번 전체 어휘 확률을 정확히 정규화하는 비용을 피하거나 줄여, 재사용할 정적 단어 벡터를 대규모로 학습하게 했다. 이 벡터 자체는 문장 전체의 확률분포가 아니다.
+4. **RNN — 시간축 매개변수 공유:** 같은 transition을 위치마다 재사용하며 이전 hidden state에 문맥을 누적한다. 고정 n-gram 길이를 넘을 구조는 얻지만, 긴 경로의 gradient와 위치별 순차 계산이 새 병목이 된다.
+5. **2014 seq2seq — 입력에 조건화된 가변 길이 생성:** encoder가 입력열을 상태로 바꾸고 decoder가 그 상태와 앞선 출력에 조건화해 목표열을 생성한다. “다음 단어 확률”이 번역처럼 입력과 출력 길이가 다른 종단간 과업의 인터페이스가 된다.
+6. **2017 Transformer — 훈련 위치 의존성의 재배치:** recurrence를 self-attention과 위치별 feed-forward 연산으로 바꿔 정답열을 아는 훈련에서 여러 위치의 표현을 함께 계산한다. 그러나 자기회귀 생성은 실제 앞 토큰을 기다리므로 여전히 순차적이다.
+
+이 여섯 단계는 서로를 단순 교체한 목록이 아니다. NPLM과 Word2Vec은 모두 연속 표현을 쓰지만 **완전한 다음 단어 분포**와 **표현 학습용 국소 예측**이라는 결과 계약이 다르다. Seq2seq와 Transformer도 모두 조건부 생성을 다루지만, 위치 사이 표현 계산의 의존성이 다르다.
+
 ### 역사적 압력
 
 N-gram의 [[데이터 희소성]]은 [[Smoothing]]과 back-off의 직접 동기였다. [[019_Katz 백오프와 희소 데이터 확률 추정|Katz back-off]]는 관측된 저빈도 사건의 확률을 할인하고, 미관측 조합이면 더 짧은 **표면 문맥**으로 내려가 남은 확률 질량을 배분한다.
@@ -150,6 +191,19 @@ Attention은 입력에 따라 여러 위치의 표현을 결합하는 학습된 
 ### 예측 과업의 연속성과 현대 규모 실험의 차이
 
 N-gram, 2003년 NPLM과 decoder-only LLM은 앞 문맥에서 다음 항목의 조건부확률을 예측한다는 과업을 공유한다. 그러나 Kaplan 등의 [[066_신경 언어 모델의 스케일링 법칙|2020년 실험]]은 빈도표의 차수를 키운 연구가 아니라, 학습된 표현을 쓰는 Transformer에서 비임베딩 매개변수 $N$, 데이터 token 수 $D$, 학습 compute $C$를 통제하며 token 교차 엔트로피를 측정한 규모 실험이다. 그러므로 확인되는 연속성은 예측 질문과 확률 평가에 있고, 현대 [[언어 모델 스케일링 법칙]]의 실험 대상은 표현 학습·최적화·계산 배분까지 포함한다.
+
+### 여섯 항목 측정 장부
+
+| 항목 | 이 연결고리에서 기록할 것 |
+| --- | --- |
+| 작업 | Katz·NPLM의 다음 단어 언어 모델링, Word2Vec의 국소 표현 학습, seq2seq·Transformer의 조건부 sequence 생성 |
+| 규모 | 어휘·corpus·문맥 길이·sequence 길이·parameter·device 수를 각각 기록하며 서로 대신하지 않는다. |
+| 결과 계약 | 정규화된 다음 단어 확률과 perplexity, 단어 벡터 유추, 번역 품질처럼 단계마다 다른 성공 조건을 분리한다. |
+| 시스템 경계 | 확률 추정기, 표현 학습기, encoder–decoder model, accelerator를 포함한 훈련 실행 가운데 어디까지 측정했는지 밝힌다. |
+| 고정 조건 | corpus·어휘·tokenization·architecture·hardware·precision이 논문마다 달라 단순 속도 순위를 만들지 않는다. |
+| 지표 | Perplexity, 벡터 과제 정확도, BLEU, 학습 시간·계산 복잡도는 같은 단위가 아니므로 별도 열에 둔다. |
+
+이 장부의 핵심은 “더 좋은 표현”과 “더 좋은 언어 모델”, “더 빠른 훈련”을 한 점수로 합치지 않는 것이다. Word2Vec의 negative sampling 목적은 효율적인 표현 학습 계약이며, 정규화된 전체 어휘 언어 모델 likelihood와 동일하지 않다.
 
 ### 평가 축과의 접점
 
@@ -191,6 +245,15 @@ N-gram은 현대 LLM의 축소판이 아니다. Shannon의 1948년 논문은 확
 - **흔한 오해:** dropout·가중치 감쇠는 매개변수 학습에 작용하는 정규화이며 Katz back-off와 같은 확률 재분배가 아니다. 미관측 n-gram과 어휘 밖 단어를 하위 단위로 표현하는 토큰화 문제도 다르다.
 - **범위:** 이 분석은 계산 방식과 연구 질문을 비교하며, 현대 LLM의 의미 이해 여부를 확정 판정하지 않는다.
 
+### 네 종류로 다시 적은 연결
+
+| 인과 표지 | 이 문서에서 허용하는 주장 |
+| --- | --- |
+| 직접 영향 | Bengio 등은 n-gram의 차원의 저주를 문제로 명시하고 연속 표현과 공유 신경망을 대안으로 설계했다. Vaswani 등은 recurrent sequence model의 순차 계산을 명시적으로 비교하며 recurrence 없는 구조를 제안했다. |
+| 가능 조건 | 효율적 출력 계산, 큰 행렬 연산과 accelerator는 더 큰 표현 학습·sequence model을 실행 가능하게 했지만 아이디어의 단일 원인은 아니다. |
+| 병행 맥락 | Katz와 NPLM은 미관측 문자열에 확률을 주는 공통 문제를 서로 다른 정보 공유 단위로 다뤘다. 함께 비교할 수 있지만 Katz가 NPLM을 직접 낳았다고 쓰지 않는다. |
+| 후대 유추 | 색인 카드와 학습된 기하를 대비하는 비유, 여섯 단계를 하나의 workload 전환으로 묶는 것은 이 위키의 회고적 분석이다. 당시 연구자들의 공동 roadmap이 아니다. |
+
 ## 학습 확인
 
 1. n-gram과 자기회귀 LLM이 공유하는 것은 모델 구조인가, 예측 과업인가?
@@ -198,6 +261,8 @@ N-gram은 현대 LLM의 축소판이 아니다. Shannon의 1948년 논문은 확
 3. “희소성이 해결됐다”보다 “희소성의 처리 위치가 이동했다”는 설명이 더 정확한 이유는 무엇인가?
 
 먼저 [[019_Katz 백오프와 희소 데이터 확률 추정]]에서 표면 확률 재분배를 읽는다. 이어서 [[035_신경 확률 언어 모형과 분산 단어 표현]]에서 공유 표현으로의 전환을 확인한다.
+
+횡단 역사 경로로는 [[확률적 언어 모델은 어떤 계산 인프라를 요구했나]] → 이 문서 → [[행렬곱 가속은 딥러닝을 어떻게 현실화했나]] → [[Transformer는 무엇을 병렬화했고 무엇을 남겼나]] 순서로 읽는다.
 
 ## 출처
 
@@ -208,10 +273,17 @@ N-gram은 현대 LLM의 축소판이 아니다. Shannon의 1948년 논문은 확
 - [[005_촘스키의 통사 구조]]
 - [[019_Katz 백오프와 희소 데이터 확률 추정]]
 - [[035_신경 확률 언어 모형과 분산 단어 표현]]
+- [[043_Word2Vec와 효율적 정적 단어 임베딩]]
+- [[045_Sequence-to-Sequence 학습과 신경 기계 번역]]
+- [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]]
 - [[066_신경 언어 모델의 스케일링 법칙]]
 - Slava M. Katz, [Estimation of Probabilities from Sparse Data for the Language Model Component of a Speech Recognizer](https://doi.org/10.1109/TASSP.1987.1165125), 1987, pp. 400–401.
 - Stanley F. Chen·Joshua Goodman, [An Empirical Study of Smoothing Techniques for Language Modeling](https://dash.harvard.edu/handle/1/25104739), 1998, §§2.3–2.4·5.2.4.
 - Yoshua Bengio·Réjean Ducharme·Pascal Vincent·Christian Jauvin, [A Neural Probabilistic Language Model](https://www.jmlr.org/papers/v3/bengio03a.html), 2003, pp. 1137–1155.
+- Tomas Mikolov 외, [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/abs/1301.3781), 2013, §§1–3.
+- Tomas Mikolov 외, [Distributed Representations of Words and Phrases and their Compositionality](https://proceedings.neurips.cc/paper/2013/hash/9aa42b31882ec039965f3c4923ce901b-Abstract.html), 2013, §§2.1–2.3.
+- Ilya Sutskever·Oriol Vinyals·Quoc V. Le, [Sequence to Sequence Learning with Neural Networks](https://proceedings.neurips.cc/paper_files/paper/2014/hash/5a18e133cbf9f257297f410bb7eca942-Abstract.html), 2014, §§1–3·5.
+- Ashish Vaswani 외, [Attention Is All You Need](https://proceedings.neurips.cc/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html), 2017, §§1·3–5와 Table 1.
 - Alec Radford 외, [Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf), 2018, §§3.1·4.1.
 - Jacob Devlin 외, [BERT](https://aclanthology.org/N19-1423/), 2019, §3.
 - Jared Kaplan 외, [Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361), 2020, §§1.1–1.3·2–3·8.
@@ -222,6 +294,9 @@ N-gram은 현대 LLM의 축소판이 아니다. Shannon의 1948년 논문은 확
 - [[002_튜링 테스트]]
 - [[019_Katz 백오프와 희소 데이터 확률 추정]]
 - [[035_신경 확률 언어 모형과 분산 단어 표현]]
+- [[043_Word2Vec와 효율적 정적 단어 임베딩]]
+- [[045_Sequence-to-Sequence 학습과 신경 기계 번역]]
+- [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]]
 - [[066_신경 언어 모델의 스케일링 법칙]]
 - [[언어 모델 스케일링 법칙]]
 - [[신경 확률 언어 모형]]
@@ -240,3 +315,10 @@ N-gram은 현대 LLM의 축소판이 아니다. Shannon의 1948년 논문은 확
 - [[촘스키에서 LLM으로]]
 - [[026_순환 신경망과 시간적 문맥 학습]]
 - [[순환 신경망]]
+- [[Word2Vec]]
+- [[Sequence-to-Sequence 학습]]
+- [[Transformer]]
+- [[확률적 언어 모델은 어떤 계산 인프라를 요구했나]]
+- [[행렬곱 가속은 딥러닝을 어떻게 현실화했나]]
+- [[Transformer는 무엇을 병렬화했고 무엇을 남겼나]]
+- [[LLM과 컴퓨팅 능력의 공진화]]
