@@ -3,24 +3,23 @@ schema_version: 1
 initiative:
   id: llm-system-boundary-network
   title: LLM 시스템 경계 확장
-  current_batch: integration
+  current_batch: null
   next_action: >-
-    npm run boundary:resume으로 재개 상태를 확인한 뒤, integration 배치에서
-    LLM 시스템 경계 확장 지도를 만들고, 기존 LLM 능력은 모델의 속성인가 시스템의 속성인가,
-    LLM을 만든 수학, LLM과 컴퓨팅 능력의 공진화 허브를 여섯 경계의 owner·bridge·학습 경로와
-    연결한다. 완료된 수학·컴퓨팅 역사 owner를 다시 열지 않고, handoff와 학습 감사 baseline만
-    실제 상태에 맞게 갱신한다.
+    계획된 여섯 시스템 경계 owner·bridge·탐색 지도와 기존 수학·컴퓨팅 역사 허브 통합은 모두
+    완료됐다. npm run boundary:check와 npm run verify로 상태를 확인하고, 새 1차 근거·실제 학습자
+    오답·재현 가능한 운영 trace가 생겨 기존 owner에 남는 연결 공백이 확인될 때만 다음 보강 배치를 정한다.
   blockers: []
   hub:
     path: wiki/meta/LLM 시스템 경계 확장 지도.md
     page_id: meta.llm-system-boundary-map
     title: LLM 시스템 경계 확장 지도
-    stage: planned
+    page_type: meta
+    stage: complete
   handoff:
     updated: '2026-07-25'
-    baseline_commit: 7aa1b62571b8fa31c5f5e4e4e30b0e4dff8904e2
-    last_completed_batch: realtime-bridge
-    last_completed_gate: text-to-realtime-multimodal-bridge-verified
+    baseline_commit: a858643e57fbe7c7d55c87cc0b99f894738245a4
+    last_completed_batch: integration
+    last_completed_gate: system-boundaries-integration-verified
     validation:
       - boundary:check
       - history:check
@@ -32,10 +31,10 @@ initiative:
       - npm run boundary:check
       - git status --short --branch
     notes: >-
-      realtime-bridge에서 text token serving, ASR→text→LLM→TTS 또는 공표된 native audio model I/O,
-      media runtime의 서로 다른 결과 계약과 측정 장부를 연결해 완료했다. model output·turn·presentation,
-      VAD·ASR·turn policy, token latency·capture-to-first-presentation의 범위를 분리했고,
-      다음 유일한 행동은 integration이다.
+      integration에서 LLM 시스템 경계 확장 지도를 공개하고, model 내부 수학·컴퓨팅 역사·관찰된
+      model/runtime/service 능력 종합편을 여섯 boundary owner·bridge의 탐색 경로로 연결해 완료했다.
+      지도는 여섯 경계를 하나의 pipeline이나 직접 계보로 만들지 않고, 공통 일곱 칸 장부와
+      책임 경계를 통해 다음 문서를 고르게 한다.
       이 원장이 세션 전환·문맥 압축 뒤에도 배치 순서와 다음 행동을 복원하는 단일 기준이다.
       raw/, C:/Vault/CS_Wiki와 사용자 첨부 파일은 수정하거나 staging하지 않는다.
 
@@ -456,7 +455,7 @@ batches:
   - id: integration
     order: 11
     title: 시스템 경계 전체 허브 통합
-    stage: planned
+    stage: complete
     depends_on: [realtime-bridge]
     commit_message: 'content: integrate_llm_system_boundaries'
     deliverables:

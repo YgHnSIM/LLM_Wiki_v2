@@ -5324,6 +5324,26 @@ raw 등록 해시:
 - RTP·Streams·product event는 각각 transport, flow-control 추상화, 특정 API 범위의 근거다. 외부 write의 commit·unknown·reconciliation과 보상은 [[함수 호출과 도구 사용]]의 owner에 남긴다.
 - 다음 배치는 **LLM 시스템 경계 확장 지도**에서 여섯 경계의 owner·bridge·학습 경로를 기존 수학·컴퓨팅 역사 허브와 통합한다. raw/, C:/Vault/CS_Wiki와 .codex-remote-attachments/는 변경하지 않았다.
 
+## [2026-07-25] content | Integrate LLM system boundaries
+
+변경 내용:
+
+- [[LLM 시스템 경계 확장 지도]]를 추가해 에너지·service 결과, data 생애주기·권리, memory·상태, 문자·실행 권한, 안전한 외부 효과, 실시간 멀티모달 상호작용의 여섯 track을 질문별 owner·bridge로 안내했다. 이 지도는 새 architecture나 순차 pipeline이 아니라, input·state·result·failure·responsibility를 어디서 확인할지 고르는 meta 허브다.
+- 같은 state, success, latency, provenance, input이라는 말이 track마다 다른 대상을 가리킨다는 점을 공통 일곱 칸 장부로 정리했다. token 생성·schema 통과·authorization·committed effect·media presentation과 KV cache·RAG index·event log·training data lineage를 같은 완료 또는 같은 memory로 묶지 않게 했다.
+- [[LLM 능력은 모델의 속성인가 시스템의 속성인가]]에는 능력 감사 장부와 여섯 system 경계의 관계를, [[LLM을 만든 수학]]에는 model 내부 계산과 provenance·authorization·presentation 계약의 차이를, [[LLM과 컴퓨팅 능력의 공진화]]에는 역사적 능력층과 현재 system owner의 탐색 관계를 각각 한 연결로 보강했다. 완료된 수학·컴퓨팅 역사 owner와 batch는 다시 열지 않았다.
+- 시스템 경계 원장은 모든 12개 batch·여섯 track·hub를 완료 상태로 전환했다. 수학·컴퓨팅 역사 원장은 현재 완료 상태를 유지한 채 handoff baseline과 학습 감사 기준선만 통합 시점에 맞췄다.
+
+검증 결과:
+
+- npm run learning:audit, npm run sync:index, npm run lint:wiki, npm run boundary:check, npm run history:check, npm run math:check, npm run learning:audit:check, npm run verify, git diff --check를 통과했다.
+- Playwright Chromium에서 새 지도와 세 기존 허브 연결을 desktop과 390×844 viewport로 확인했다. page-level 가로 overflow와 console error가 없었고, 경로 표는 작은 화면에서 scroll container 안에 남았다.
+
+남은 제한:
+
+- 탐색 지도는 새 1차 사실, product 동작, history의 직접 계보를 주장하지 않는다. 그런 근거가 필요하면 해당 owner·bridge에 locator가 있는 자료를 먼저 보강해야 한다.
+- 이 지도는 data → model → tool → realtime이라는 단일 실행 순서를 만들지 않는다. 각 경계의 수명·authority·failure model은 다르며, owner별 근거와 결과 계약을 따로 확인해야 한다.
+- 계획된 시스템 경계 확장 milestone은 완료됐다. 다음 보강은 새 1차 근거, 실제 학습자 오답 또는 재현 가능한 운영 trace가 기존 owner에 남는 공백을 보일 때만 정한다. raw/, C:/Vault/CS_Wiki와 .codex-remote-attachments/는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

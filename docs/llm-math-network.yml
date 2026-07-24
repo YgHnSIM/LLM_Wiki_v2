@@ -14,7 +14,7 @@ initiative:
   blockers: []
   handoff:
     updated: '2026-07-25'
-    baseline_commit: fdeb940b2d147efc6bc482abee155653051ec770
+    baseline_commit: a858643e57fbe7c7d55c87cc0b99f894738245a4
     last_completed_gate: history-bridges-integration-verified
     validation:
       - command: npm run math:check
@@ -69,12 +69,13 @@ initiative:
       기준 branch는 main이다. LLM·컴퓨팅 능력 공진화 시리즈의 신규 문서를 학습 감사 기준선에 포함했으며 기존 25개 수식 owner와 배치 완료 상태는 바꾸지 않았다.
       integrated-capstone에서 새 숫자로 lookup·attention·residual·LayerNorm·FFN·softmax NLL·전체 출력 gradient를 연결하고,
       무도움 문제·정답·20점 채점표·오류별 복습 경로와 실행 코드 일치를 완결했다. 계획한 권장 구현 순서는 모두 완료됐고,
-      다음 배치는 실제 학습자 오답 근거로 정한다. raw와 기존 첨부 파일은 건드리지 않았다.
+      다음 배치는 실제 학습자 오답 근거로 정한다. 시스템 경계 최종 통합에서는 기존 25개 수식 owner와 완료 batch를 다시 열지 않고,
+      LLM 시스템 경계 확장 지도와 학습 감사 baseline에 연결되는 handoff만 갱신했다. raw와 기존 첨부 파일은 건드리지 않았다.
 
 baseline:
   recorded_on: '2026-07-25'
   source: docs/foundational-learning-audit.md
-  wiki_documents: 392
+  wiki_documents: 393
   non_meta_documents: 388
   formula_documents: 204
   formula_blocks: 818

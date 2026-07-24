@@ -19,7 +19,7 @@ initiative:
     stage: complete
   handoff:
     updated: '2026-07-25'
-    baseline_commit: fdeb940b2d147efc6bc482abee155653051ec770
+    baseline_commit: a858643e57fbe7c7d55c87cc0b99f894738245a4
     last_completed_gate: history-bridges-integrated-verified
     validation:
       - command: npm run history:check
@@ -70,7 +70,8 @@ initiative:
       기준 branch는 main이다. 아홉 본편 위에 표현 workload·software abstraction·
       silicon-to-system의 세 횡단 연결고리와 data·평가 교차 경로를 통합했다.
       .codex-remote-attachments/는 사용자 첨부이므로 보존하고, raw와
-      C:/Vault/CS_Wiki는 수정하지 않았다.
+      C:/Vault/CS_Wiki는 수정하지 않았다. 시스템 경계 최종 통합에서는 완료된 아홉 본편·세 연결고리·다섯 owner를 다시 열지 않고,
+      LLM 시스템 경계 확장 지도와 이어지는 hub handoff만 갱신했다.
 
 capability_layers:
   - computability

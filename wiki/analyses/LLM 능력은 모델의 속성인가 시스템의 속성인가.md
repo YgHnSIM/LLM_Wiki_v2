@@ -62,6 +62,7 @@ related:
   - analysis.n-gram에서-llm으로
   - analysis.stored-program-to-learning-framework
   - analysis.silicon-scaling-to-accelerators
+  - meta.llm-system-boundary-map
 ---
 # LLM 능력은 모델의 속성인가 시스템의 속성인가
 
@@ -280,6 +281,12 @@ FlashAttention과 vLLM은 model weight를 바꾸지 않고도 실행 능력이 �
 
 서로 다른 시대의 수치를 한 순위표로 만들기보다 같은 여섯 질문을 던진다. 이 방법은 “얼마나 빨라졌나”보다 “무엇을 같은 것으로 고정했을 때 어떤 능력층이 달라졌나”를 답하게 한다.
 
+### 여섯 시스템 경계로 service 결과를 더 세밀하게 읽기
+
+이 종합편의 model·학습 system·실행 runtime·service·평가 경계는 “능력” 주장을 감사하는 큰 지도다. 그러나 실제 service 결과를 기록할 때는 energy의 분모, training data의 lineage, memory의 수명, text가 action으로 넘어가는 권한, 외부 effect의 reconciliation, media의 turn·presentation처럼 더 좁은 책임이 남는다.
+
+[[LLM 시스템 경계 확장 지도]]는 이 여섯 질문을 새 능력 점수나 model architecture로 만들지 않는다. 같은 checkpoint·runtime·service 비교가 어느 data·state·authority·media 계약을 가정하는지 찾아, 해당 owner와 bridge로 이동시키는 탐색 노드다. 따라서 일곱 능력층과 여섯 항목 측정 장부를 대체하지 않고, 비어 있는 system 경계를 드러낸다.
+
 ## 검증과 한계
 
 이 종합은 아홉 편의 1차 자료를 하나의 분석 틀로 연결한 것이므로 `verification: partial`이다. 각 논문이 “공진화”라는 동일한 역사 이론을 주장한 것은 아니다. 직접 확인된 사실, 가능 조건과 이 문서의 후대 비교를 분리했다.
@@ -340,3 +347,4 @@ FlashAttention과 vLLM은 model weight를 바꾸지 않고도 실행 능력이 �
 - [[N-gram에서 LLM으로]]
 - [[저장 프로그램에서 학습 프레임워크까지]]
 - [[집적도 증가에서 가속기까지 무엇이 더 필요했나]]
+- [[LLM 시스템 경계 확장 지도]] — 능력 주장을 data·memory·authority·media까지 어떤 owner에서 감사할지 고른다.

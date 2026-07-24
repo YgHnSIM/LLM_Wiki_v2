@@ -60,6 +60,7 @@ related:
   - source.035
   - source.018
   - source.055
+  - meta.llm-system-boundary-map
 ---
 # LLM을 만든 수학
 
@@ -456,6 +457,12 @@ head를 결합한 attention 출력과 FFN의 둘째 투영은 모두 $(B,T,D)$�
 - 한 bias의 NLL이 줄었다고 전체 자료의 평균 손실·일반화·사실성·안전성도 좋아진다는 결론은 나오지 않는다.
 - 실제 Transformer의 multi-head·FFN·LayerNorm은 shape만 확장해 추적했으며 그 큰 tensor의 실제 수치 연산, 위치 표현, batch 평균 손실, Adam state, mixed precision과 분산 실행은 생략했다. 그 요소는 같은 계산 흐름에 추가 조건·shape·수치 문제를 만든다. 특히 [[수치 안정성과 log-sum-exp]]의 max shift와 [[확률변수·확률분포·기대값·분산]]의 표본 통계는 이 작은 수에서 생략한 구현·학습 경계다.
 
+### 계산 완결성과 system 결과는 다르다
+
+이 toy 계산은 한 model 내부에서 token ID, tensor, 조건부확률, loss와 gradient가 어떻게 이어지는지 설명한다. 그러나 어떤 data가 그 weight를 만들었는지, 어떤 memory가 어느 수명으로 남는지, text가 언제 권한 있는 action이 되는지, 사용자가 언제 media output을 실제로 받는지는 식 하나의 결론이 아니다.
+
+그 질문은 [[LLM 시스템 경계 확장 지도]]에서 data·memory·문자·외부 효과·실시간 owner로 나뉜다. 이 링크는 수학 owner를 다시 열거나 수식의 의미를 바꾸지 않는다. 계산이 정확하다는 주장과 system의 provenance·authorization·presentation·recovery 계약을 구분하기 위한 다음 탐색점이다.
+
 ## 학습 확인
 
 ### 개념 확인
@@ -683,3 +690,4 @@ $$
 - [[035_신경 확률 언어 모형과 분산 단어 표현]]
 - [[018_역전파와 다층 신경망 학습]]
 - [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]]
+- [[LLM 시스템 경계 확장 지도]] — model 내부 계산이 system 결과 계약과 만나는 다음 질문을 고른다.

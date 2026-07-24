@@ -32,6 +32,7 @@ related:
   - analysis.stored-program-to-learning-framework
   - analysis.silicon-scaling-to-accelerators
   - analysis.문맥은-저장소인가-상태-재사용-검색-에이전트-메모리
+  - meta.llm-system-boundary-map
 ---
 # LLM과 컴퓨팅 능력의 공진화
 
@@ -161,6 +162,12 @@ related:
 
 텍스트 token의 빠른 생성만 보지 않고, GPU·node·service 중 어디의 J인지, 어떤 품질·deadline·traffic 아래 유효 결과가 되었는지, timeout·retry 비용을 어디에 넣었는지를 같은 장부에서 확인한다.
 
+### 모델 밖의 system 경계를 보고 싶다면
+
+[[LLM 시스템 경계 확장 지도]]는 이 시리즈의 능력층·측정 장부를 대체하지 않는다. 대신 현재 system을 읽을 때 data lineage·memory 수명·문자와 authorization·외부 effect·media presentation처럼, history의 큰 병목 서술만으로는 owner를 고르기 어려운 질문을 여섯 경계로 안내한다.
+
+이 경로는 기술의 실제 실행 순서나 직접 역사 계보가 아니다. 하나의 product 주장을 읽을 때 어떤 input·state·result·failure·responsibility를 더 확인해야 하는지 고르는 후속 탐색 지도다.
+
 ### 물리 상태와 의미 상태를 함께 보고 싶다면
 
 물리 상태 경로는 [[메모리 계층과 데이터 이동]] → [[언어 모델 추론 서빙]]으로 읽는다. 이 경로는 HBM·device memory·KV cache의 byte 이동, 요청별 할당과 회수를 다룬다. 의미 상태 경로는 [[외부 메모리]] → [[검색 증강 생성]] → [[LLM 에이전트]]으로 읽는다. 이 경로는 문서·색인·event log를 다음 답이나 action에 다시 넣는 방법을 다룬다.
@@ -185,7 +192,7 @@ Corpus가 커졌다는 말에서 출발해 quality proxy·분포·sampling·반�
 
 ## 이 허브 다음에 할 일
 
-[[LLM 능력은 모델의 속성인가 시스템의 속성인가]]에서 같은 checkpoint도 runtime·precision·context·scheduler·service contract에 따라 관찰되는 능력이 달라지는 이유를 정리한다. 그 문서의 마지막 전이 과제에서는 새로운 “더 큰 모델” 또는 “더 빠른 accelerator” 주장을 이 허브의 일곱 능력층과 여섯 항목 장부로 직접 감사한다.
+[[LLM 능력은 모델의 속성인가 시스템의 속성인가]]에서 같은 checkpoint도 runtime·precision·context·scheduler·service contract에 따라 관찰되는 능력이 달라지는 이유를 정리한다. 그 문서의 마지막 전이 과제에서는 새로운 “더 큰 모델” 또는 “더 빠른 accelerator” 주장을 이 허브의 일곱 능력층과 여섯 항목 장부로 직접 감사한다. 그 뒤 [[LLM 시스템 경계 확장 지도]]에서 data·memory·authority·media의 owner를 골라, 능력 주장에 빠진 system 결과 계약을 이어서 검사한다.
 
 ## 관련 항목
 
@@ -205,3 +212,4 @@ Corpus가 커졌다는 말에서 출발해 quality proxy·분포·sampling·반�
 - [[저장 프로그램에서 학습 프레임워크까지]]
 - [[집적도 증가에서 가속기까지 무엇이 더 필요했나]]
 - [[문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리]]
+- [[LLM 시스템 경계 확장 지도]] — 역사적 능력층을 현재 system의 여섯 책임 경계로 이어 읽는다.
