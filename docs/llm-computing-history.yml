@@ -3,10 +3,10 @@ schema_version: 2
 initiative:
   id: llm-computing-history
   title: LLM과 컴퓨팅 능력의 공진화
-  current_batch: bridge-programming-abstraction
+  current_batch: bridge-silicon-acceleration
   next_action: >-
-    bridge-programming-abstraction 배치에서 저장 프로그램·Fortran·BLAS·자동미분·
-    CUDA·cuDNN·TensorFlow가 학습 프레임워크로 쌓인 추상화 연결고리를 작성한다.
+    bridge-silicon-acceleration 배치에서 Moore의 집적도 관찰·Dennard scaling·전력과
+    memory wall·병렬 전환·CUDA·TPU를 실제 가속기 성능의 조건으로 연결한다.
   blockers: []
   hub:
     path: wiki/meta/LLM과 컴퓨팅 능력의 공진화.md
@@ -19,8 +19,10 @@ initiative:
   handoff:
     updated: '2026-07-25'
     baseline_commit: 12a04ff1253aa2d481458b41e9d8d0462560fee2
-    last_completed_gate: bridge-representation-workloads-verified
+    last_completed_gate: bridge-programming-abstraction-verified
     validation:
+      - command: npm run verify
+        result: 저장 프로그램→학습 프레임워크 연결고리와 본편 2·5·6·허브 링크의 전체 회귀 통과
       - command: npm run verify
         result: 희소 계수→학습 표현 연결고리와 본편 4·5·6·허브 링크의 전체 회귀 통과
       - command: npm run history:check
@@ -184,7 +186,7 @@ bridges:
     title: 저장 프로그램에서 학습 프레임워크까지
     path: wiki/analyses/저장 프로그램에서 학습 프레임워크까지.md
     page_id: analysis.stored-program-to-learning-framework
-    stage: planned
+    stage: complete
     connects: [chapter-02-computation-language, chapter-05-gpu-deep-learning, chapter-06-transformer-parallelism]
     capability_layers: [programmability, realized-performance]
   - id: bridge-silicon-acceleration
@@ -280,12 +282,12 @@ batches:
       - wiki/analyses/N-gram에서 LLM으로.md
   - id: bridge-programming-abstraction
     title: 저장 프로그램에서 학습 프레임워크까지
-    stage: in_progress
+    stage: complete
     deliverables:
       - wiki/analyses/저장 프로그램에서 학습 프레임워크까지.md
   - id: bridge-silicon-acceleration
     title: 집적도 증가에서 가속기까지
-    stage: planned
+    stage: in_progress
     deliverables:
       - wiki/analyses/집적도 증가에서 가속기까지 무엇이 더 필요했나.md
   - id: bridge-integration

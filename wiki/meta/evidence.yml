@@ -1039,6 +1039,24 @@ sources:
     kind: conference-paper
     url: https://www.usenix.org/conference/osdi16/technical-sessions/presentation/abadi
     language: en
+  backus-et-al-1957-fortran:
+    title: The FORTRAN Automatic Coding System
+    authors: [John W. Backus, Robert J. Beeber, Sheldon Best, Richard Goldberg, Lois M. Haibt, Harlan L. Herrick, Robert A. Nelson, David Sayre, Peter B. Sheridan, Harold Stern, Irving Ziller, Ruth A. Hughes, Roy Nutt]
+    published: 1957
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1145/1455567.1455599
+    url: https://archive.computerhistory.org/resources/text/Fortran/102663113.05.01.acc.pdf
+    language: en
+  lawson-et-al-1979-blas:
+    title: Basic Linear Algebra Subprograms for Fortran Usage
+    authors: [C. L. Lawson, R. J. Hanson, D. R. Kincaid, F. T. Krogh]
+    published: 1979
+    source_type: primary
+    kind: journal-article
+    doi: 10.1145/355841.355847
+    url: https://ntrs.nasa.gov/api/citations/19780018835/downloads/19780018835.pdf
+    language: en
   ioffe-szegedy-2015-batch-normalization:
     title: 'Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift'
     authors: [Sergey Ioffe, Christian Szegedy]

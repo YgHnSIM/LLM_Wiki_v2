@@ -13,10 +13,14 @@ initiative:
     npm run math:check를 실행한 뒤 실제 학습자 풀이·오답 자료가 들어오면 embeddings, attention, residual-connections, normalization-statistics, activation-functions, softmax, log-likelihood, backpropagation, gradient-descent owner와 wiki/analyses/LLM 수학 종합 실습.md의 rubric을 대조해 가장 반복되는 치명적 오류부터 다음 배치를 정한다.
   blockers: []
   handoff:
-    updated: '2026-07-24'
-    baseline_commit: 01f4e1734a202a5abf6e4c41f35fd774ae48c371
-    last_completed_gate: integrated-capstone-g7-verified
+    updated: '2026-07-25'
+    baseline_commit: b502394d37abd0ae0c29a3b42c5de7ca54f70b6a
+    last_completed_gate: history-bridge-programming-math-baseline-synced
     validation:
+      - command: npm run learning:audit
+        result: 역사 연결고리 추가 뒤 383개 Markdown·379개 비메타 문서·블록 수식 문서 199개·블록 수식 807개로 기준선 갱신
+      - command: npm run math:check
+        result: 갱신된 감사 기준선과 13개 배치·25개 수식 계열의 owner·선수 관계 검증 통과
       - command: npm run math:check
         result: 13개 배치·25개 수식 계열의 구조·owner·선수 관계와 integrated-capstone 완료 상태 검증 통과
       - command: npm run learning:audit
@@ -56,12 +60,12 @@ initiative:
       다음 배치는 실제 학습자 오답 근거로 정한다. raw와 기존 첨부 파일은 건드리지 않았다.
 
 baseline:
-  recorded_on: '2026-07-24'
+  recorded_on: '2026-07-25'
   source: docs/foundational-learning-audit.md
-  wiki_documents: 382
-  non_meta_documents: 378
-  formula_documents: 198
-  formula_blocks: 806
+  wiki_documents: 383
+  non_meta_documents: 379
+  formula_documents: 199
+  formula_blocks: 807
 
 batches:
   - id: linear-algebra-foundations

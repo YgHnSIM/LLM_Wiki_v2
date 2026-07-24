@@ -27,6 +27,7 @@ related:
   - analysis.model-capability-to-service-capability
   - analysis.llm-capability-model-or-system
   - analysis.n-gram에서-llm으로
+  - analysis.stored-program-to-learning-framework
 ---
 # LLM과 컴퓨팅 능력의 공진화
 
@@ -61,6 +62,8 @@ related:
 시간이 3시간이라면 아홉 본편에서 `학습 안내` → `1단계` → `검증과 한계` → `학습 확인` 순서로 읽는다. 완전 경로에서는 각 편의 `2단계` 계산과 `3단계` 1차 근거를 확인하고, 마지막 종합편의 전이 과제를 푼다.
 
 본편 4–6 사이에서 “빈도표가 어떻게 학습 표현과 Transformer workload로 바뀌었는가”가 궁금하면 횡단 연결 [[N-gram에서 LLM으로]]을 끼워 읽는다.
+
+본편 2·5·6 사이에서 “저장된 instruction이 어떻게 tensor graph와 자동 gradient 실행으로 이어졌는가”가 궁금하면 [[저장 프로그램에서 학습 프레임워크까지]]를 읽는다.
 
 ## 시대순 본편 아홉 편
 
@@ -165,3 +168,4 @@ related:
 - [[모델 능력에서 서비스 능력으로]]
 - [[LLM 능력은 모델의 속성인가 시스템의 속성인가]]
 - [[N-gram에서 LLM으로]]
+- [[저장 프로그램에서 학습 프레임워크까지]]

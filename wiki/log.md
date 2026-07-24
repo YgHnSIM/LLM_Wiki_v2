@@ -5081,6 +5081,23 @@ raw 등록 해시:
 - 서로 다른 corpus·어휘·hardware·평가 지표를 한 속도나 품질 순위로 환산하지 않는다. 다음 배치는 저장 프로그램부터 TensorFlow까지의 프로그래밍 추상화 연결을 보강한다.
 - `raw/`와 CS_WIKI는 변경하지 않았다.
 
+## [2026-07-25] content | Stored program to learning framework
+
+변경 내용:
+
+- [[저장 프로그램에서 학습 프레임워크까지]]를 추가해 stored instruction → Fortran compiler → BLAS → 역모드 자동미분 → CUDA·cuDNN → TensorFlow의 추상화 층을 연결했다.
+- $x=(2,3)$, $w=(4,5)$의 내적을 loop·library call·tensor operator·autodiff graph로 다시 써, 각 층이 감추는 구현과 남기는 의미·shape·수치·성능 계약을 비교했다.
+- FORTRAN과 BLAS의 1차 근거를 evidence 레지스트리에 추가하고, 직접 영향은 cuDNN 논문이 명시한 BLAS analogy로 한정했다.
+
+검증 결과:
+
+- `npm run history:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run learning:audit`, `npm run math:check`, `npm run verify`로 원장, 새 근거·링크·학습 구조·수식과 정적 사이트 회귀를 검증했다.
+
+남은 제한:
+
+- Fortran에서 TensorFlow로 이어지는 단일 문헌 계보를 주장하지 않으며 compiler·primitive·graph·end-to-end 성능을 하나의 배율로 합치지 않는다.
+- 다음 배치는 집적도 증가가 실제 accelerator 성능으로 이어지기 위해 필요했던 전력·memory·병렬 프로그래밍·도메인 특화 조건을 보강한다. `raw/`와 CS_WIKI는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]
