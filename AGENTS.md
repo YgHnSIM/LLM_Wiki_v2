@@ -263,6 +263,20 @@ related:
 
 사용자가 정확히 `하던 작업 계속 진행`이라고만 입력한 경우에는 이 절이 아니라 6.0의 정규 source 재개 규칙이 계속 우선한다.
 
+### 6.7 `LLM과 컴퓨팅 능력의 공진화` 시리즈
+
+사용자가 `LLM과 컴퓨팅 능력 발전사 계속`, `LLM과 컴퓨팅 능력의 공진화 계속`, 해당 시리즈의 본편·owner·원장 작업을 요청하면 `docs/llm-computing-history-plan.md`와 `docs/llm-computing-history.yml`을 사용한다.
+
+1. `npm run history:status`와 `npm run history:check`로 `initiative.current_batch`, `next_action`, owner 의존성, 본편 상태를 확인한다.
+2. LLM_Wiki를 정본으로 유지한다. `C:\Vault\CS_Wiki`는 읽기와 외부 맥락 링크에만 사용하며 수정하지 않는다.
+3. 컴퓨팅 역사 주장은 CS_WIKI 문서가 아니라 LLM_Wiki의 evidence 레지스트리에 등록한 1차 자료와 locator로 뒷받침한다.
+4. 각 본편은 일곱 능력층, 여섯 항목 측정 장부, 직접 영향·가능 조건·병행 맥락·후대 유추의 인과 구분을 적용한다.
+5. 반복 설명은 owner concept 하나가 맡고 본편은 현재 시대의 조건과 실제 사용만 국소적으로 설명한다.
+6. 배치 전후에 원장의 stage, `next_action`, blockers와 handoff를 실제 상태로 갱신한다. `raw/`와 정규 source 번호는 건드리지 않는다.
+7. 관련 파일만 `content:` 커밋으로 `main`에 커밋하고 `origin/main`에 푸시한다. 공개 문서가 없는 계획·검사기 배치는 `docs:`를 사용한다.
+
+사용자가 정확히 `하던 작업 계속 진행`이라고만 쓴 경우에는 이 절이 아니라 6.0의 정규 source 재개 규칙이 계속 우선한다.
+
 ## 7. 특수 문서
 
 ### 7.1 index.md

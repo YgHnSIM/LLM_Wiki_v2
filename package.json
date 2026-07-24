@@ -22,6 +22,8 @@
     "math:toy": "node scripts/llm-math-toy.mjs",
     "math:shapes": "node scripts/llm-math-shapes.mjs",
     "math:capstone": "node scripts/llm-math-capstone.mjs",
+    "history:status": "node scripts/llm-computing-history-status.mjs",
+    "history:check": "node scripts/llm-computing-history-status.mjs --check",
     "learning:audit": "node scripts/audit-foundational-learning.mjs --write",
     "learning:audit:check": "node scripts/audit-foundational-learning.mjs --check",
     "sync:index": "node scripts/sync-index.mjs",
