@@ -54,7 +54,7 @@
 - 데이터 owner는 snapshot, 수집 조건, 동의·license 상태, 주석·번역 노동, 정제, sampling, 공개, 정정·철회, downstream lineage를 하나의 장부로 연결한다. 법률 결론 대신 관할·시점·문서화된 조건·unknown을 구분한다.
 - 메모리 연결은 HBM·KV cache·RAG index·event log·parametric memory를 물리 위치, 수명, 갱신, provenance, 실패·복구 보장으로 비교한다.
 - 문자 owner는 byte, UTF-8, Unicode code point, grapheme cluster, normalization, tokenizer를 구분한다. 권한 연결은 byte에서 JSON·schema·의미 검증·authorization까지의 관문을 분리한다.
-- 안전한 외부 효과는 `proposed → structurally validated → semantically validated → authorized → confirmed → committed / failed / unknown` 상태 기계, idempotency, partial failure, compensation, postcondition, audit를 기존 owner에 보강한다.
+- 안전한 외부 효과는 `proposed → structurally validated → semantically validated → authorized → confirmed → [execution attempt] → committed / failed / unknown` 상태 기계, idempotency, partial failure, compensation, postcondition, audit를 기존 owner에 보강한다. 여기서 partial effect는 네 번째 terminal state가 아니라 `failed` 또는 `unknown`에 남기는 증거·잔여 효과다.
 - 실시간 멀티모달 owner는 architecture가 아니라 media clock, frame·chunk, buffer, turn detection, incremental output, A/V sync, interrupt·cancel, backpressure, full-duplex와 복구를 소유한다.
 
 ## 5. 품질과 Git 경계

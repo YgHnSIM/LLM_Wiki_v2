@@ -5263,6 +5263,28 @@ raw 등록 해시:
 - 이 trace는 payload 해석과 policy decision의 감사 순서이지 모든 product의 유일한 runtime 순서가 아니다. authorization은 executor의 성공·commit·rollback을 보장하지 않는다.
 - `raw/`, C:/Vault/CS_Wiki와 `.codex-remote-attachments/`는 변경하지 않았다.
 
+## [2026-07-25] content | Harden safe external effects
+
+변경 내용:
+
+- [[함수 호출과 도구 사용]]을 action의 `proposed → structurally validated → semantically validated → authorized → confirmed → [execution attempt] → committed / failed / unknown` 상태 계약의 owner로 보강했다. proposal·실행 시도·외부 효과·관측 결과를 분리하고, `unknown`은 새 key·payload를 만드는 자동 재시도 대신 action ID·권위 있는 상태·idempotency record로 reconciliation해야 하는 지식의 공백으로 기록했다.
+- partial effect는 네 번째 terminal state가 아니라 `failed` 또는 `unknown`의 증거·잔여 효과로 남기게 했다. postcondition 확인, 기록된 confirmation waiver, compensation의 별도 authorization·확인·idempotency와 audit를 한 action의 일곱 칸 장부에 넣었다.
+- [[LLM 에이전트]]의 loop와 평가 장부에 confirmation/waiver, execution attempt, reconciliation, durable trace, pending unknown과 partial-effect rate를 추가했다. 미확정 효과를 model memory의 성공·실패 사실로 쓰지 않도록 경계를 밝혔다.
+- [[모델 능력에서 서비스 능력으로]]에는 외부 write가 있는 서비스에서 응답 성공률만으로 유효 결과를 세지 않고 committed·failed·unknown, reconciliation 시간과 postcondition 확인률을 별도 회계해야 한다는 소비자 관점을 연결했다.
+- RFC 9110, AWS Builders’ Library, Google AIP-151·155·194, Sagas, NIST SP 800-53 Rev. 5를 evidence 레지스트리에 등록했다. AWS·Google의 request/retry pattern은 해당 interface의 계약이지 일반적인 exactly-once 보장으로 확대하지 않았다.
+- 시스템 경계 실행 계획과 원장을 B8 완료·B9 realtime-owner 재개 상태로 갱신했다.
+
+검증 결과:
+
+- `npm run learning:audit`, `npm run sync:index`, `npm run lint:wiki`, `npm run boundary:check`, `npm run math:check`, `npm run history:check`, `npm run learning:audit:check`, `npm run verify`, `git diff --check`를 실행해 학습 구조·근거·원장·사이트·브라우저 회귀를 확인했다.
+- Playwright Chromium에서 보강한 owner와 소비 문서를 desktop·390×844 viewport로 확인하고, 가로 overflow와 console error가 없음을 대조했다.
+
+남은 제한:
+
+- HTTP의 method 의미나 accepted 응답, provider별 request ID는 업무 postcondition을 자동으로 증명하지 않는다. downstream interface의 key 보존 기간·payload 동일성·권위 있는 상태 조회·사람 escalation 조건이 별도로 필요하다.
+- compensation은 새 완화 action이지 모든 외부 효과를 지우는 rollback이 아니다. 이미 사람·다른 service·물리 세계에 퍼진 효과에는 residual effect 기록과 domain별 절차가 필요하다.
+- 다음 배치는 **실시간 멀티모달 상호작용** owner에서 media clock·frame/chunk·buffer·turn detection·incremental output·A/V sync·interrupt·cancel·backpressure·full-duplex의 경계를 다룬다. `raw/`, C:/Vault/CS_Wiki와 `.codex-remote-attachments/`는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

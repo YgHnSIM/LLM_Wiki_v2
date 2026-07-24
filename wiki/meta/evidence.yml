@@ -4270,3 +4270,62 @@ sources:
     doi: 10.6028/NIST.SP.800-207
     url: https://doi.org/10.6028/NIST.SP.800-207
     language: en
+  rfc-9110-http-semantics:
+    title: 'RFC 9110: HTTP Semantics'
+    authors: [Roy T. Fielding, Mark Nottingham, Julian Reschke]
+    published: 2022
+    source_type: primary
+    kind: technical-standard
+    doi: 10.17487/RFC9110
+    url: https://www.rfc-editor.org/rfc/rfc9110
+    language: en
+  aws-featonby-idempotent-apis-2020:
+    title: Making retries safe with idempotent APIs
+    authors: [Malcolm Featonby]
+    published: 2020
+    source_type: primary-release
+    kind: technical-report
+    url: https://d1.awsstatic.com/builderslibrary/pdfs/making-retries-safe-with-idempotent-apis-malcolm-featonby.pdf
+    language: en
+  google-aip-155-request-identification:
+    title: 'AIP-155: Request identification'
+    authors: [Google]
+    published: 2019
+    source_type: primary
+    kind: technical-specification
+    url: https://google.aip.dev/155
+    language: en
+  google-aip-194-automatic-retry:
+    title: 'AIP-194: Automatic retry configuration'
+    authors: [Google]
+    published: 2019
+    source_type: primary
+    kind: technical-specification
+    url: https://google.aip.dev/194
+    language: en
+  google-aip-151-long-running-operations:
+    title: 'AIP-151: Long-running operations'
+    authors: [Google]
+    published: 2019
+    source_type: primary
+    kind: technical-specification
+    url: https://google.aip.dev/151
+    language: en
+  garcia-molina-salem-1987-sagas:
+    title: Sagas
+    authors: [Hector Garcia-Molina, Kenneth Salem]
+    published: 1987
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1145/38713.38742
+    url: https://www.cs.princeton.edu/research/techreps/598
+    language: en
+  nist-sp800-53r5-audit-controls:
+    title: 'Security and Privacy Controls for Information Systems and Organizations (NIST SP 800-53 Rev. 5)'
+    authors: [Joint Task Force]
+    published: 2020
+    source_type: primary
+    kind: technical-standard
+    doi: 10.6028/NIST.SP.800-53r5
+    url: https://doi.org/10.6028/NIST.SP.800-53r5
+    language: en

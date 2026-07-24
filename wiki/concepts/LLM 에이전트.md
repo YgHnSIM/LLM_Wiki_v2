@@ -16,7 +16,7 @@ tags:
   - domain/machine-learning
   - domain/nlp
 created: '2026-07-22'
-updated: '2026-07-22'
+updated: '2026-07-25'
 lifecycle: active
 verification: verified
 artifacts:
@@ -58,6 +58,24 @@ evidence:
   - source_id: gottweis-et-al-2025-ai-co-scientist
     locator: 'arXiv:2502.18864v1의 §§1·3.1–3.5·4와 Figure 2: scientist-in-the-loop 범위, Supervisor·전문 에이전트·context feedback, 전문가 후보 선택과 인간 wet-lab 실행 경계'
     relation: supplements
+  - source_id: rfc-9110-http-semantics
+    locator: '§9.2.2의 idempotent method 범위와 §15.3.3의 accepted response와 완료 처리의 구분'
+    relation: contextualizes
+  - source_id: google-aip-155-request-identification
+    locator: 'Guidance와 Stale success responses의 request ID·중복 제거·재시도·감사 및 유한 보존 조건'
+    relation: supplements
+  - source_id: google-aip-194-automatic-retry
+    locator: 'Guidance와 Generally non-retryable codes의 side effect·transaction·UNKNOWN 자동 재시도 경계'
+    relation: supplements
+  - source_id: google-aip-151-long-running-operations
+    locator: 'Guidance와 Errors의 operation status·partial failure·terminal response/error 구분'
+    relation: contextualizes
+  - source_id: garcia-molina-salem-1987-sagas
+    locator: 'Abstract의 부분 실행·compensating transaction 경계'
+    relation: contextualizes
+  - source_id: nist-sp800-53r5-audit-controls
+    locator: 'AU-3, AU-5, AU-12의 action·주체·시각·결과·상관 기록과 logging failure 대응'
+    relation: supplements
 related:
   - source.104
   - source.109
@@ -68,6 +86,8 @@ related:
   - concept.사고-연쇄-프롬프팅
   - concept.구조화-출력
   - concept.openai-codex-2021
+  - analysis.text-to-execution-authority
+  - analysis.model-capability-to-service-capability
   - analysis.평가-지표와-모델-유인
   - analysis.ai-시연과-실제-성능
 ---
@@ -76,7 +96,7 @@ related:
 > [!note] 학습 안내
 > **난이도:** 중급<br>
 > **선수 지식:** [[대규모 언어 모델]], [[함수 호출과 도구 사용]], [[사고 연쇄 프롬프팅]]<br>
-> **읽고 나면:** LLM agent의 목표–상태–행동–관찰 loop를 설명하고, model의 제안과 runtime 실행, 외부 memory와 weight learning, sandbox와 authorization, component 평가와 end-to-end 평가를 분리해 설계할 수 있다.
+> **읽고 나면:** LLM agent의 목표–상태–행동–관찰 loop를 설명하고, model의 제안과 runtime 실행·reconciliation, 외부 memory와 weight learning, sandbox와 authorization, component 평가와 end-to-end 평가를 분리해 설계할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
 
@@ -142,11 +162,13 @@ Agent runtime은 보통 다음 상태를 반복한다.
 
 1. **Observe:** 사용자 요청, 이전 tool result, environment state를 읽는다.
 2. **Propose:** Model이 답·plan·tool call·중단 후보를 생성한다.
-3. **Validate:** Parser·schema·domain rule로 후보를 검사한다.
-4. **Authorize:** Identity·resource·action·risk policy에 따라 허가·거절·사용자 확인을 결정한다.
-5. **Execute:** Sandbox·timeout·idempotency·transaction 조건에서 tool을 실행한다.
-6. **Update:** Result·error·cost·state change를 memory와 trace에 기록한다.
-7. **Evaluate:** Goal postcondition, 위험, budget과 종료 조건을 검사한다.
+3. **Validate:** Parser·schema와 domain rule로 후보를 형식·의미 차례로 검사한다.
+4. **Authorize:** Identity·resource·action·risk policy에 따라 허가·거절을 결정한다.
+5. **Confirm:** policy가 confirmation을 요구하면 정확한 action·parameter·resource version·만료 시각을 preview로 제시하고 confirmation을 묶는다. 불필요한 risk tier라면 면제 결정과 근거를 기록한다. action·resource·parameter·version이 바뀌면 confirmation 또는 면제를 다시 평가한다.
+6. **Execute attempt:** action ID와 해당 interface의 idempotency key·contract를 붙여 sandbox·timeout·budget 조건에서 tool을 시도한다.
+7. **Reconcile:** write action의 응답·상태 조회·event를 대조해 committed·failed·unknown을 판정하고, partial effect는 failed 또는 unknown의 증거·잔여 효과로 기록한다. unknown이면 새 후보를 생성하기 전에 상태 조회·사람 escalation·계약상 허용된 같은 ID 재시도를 선택한다.
+8. **Update:** committed·failed의 확인된 outcome 또는 `unknown`이라는 미확정 상태, action ID·관측 근거·pending reconciliation, 남은 효과, cost와 policy decision을 durable state·memory·trace에 기록한다. unknown 효과를 성공·실패 사실처럼 memory에 쓰지 않는다.
+9. **Evaluate:** Goal postcondition, 위험, budget과 종료 조건을 검사한다.
 
 이를 단순화하면 다음과 같다.
 
@@ -161,6 +183,8 @@ s_{t+1}=U(s_t,o_{t+1})
 $$
 
 Model $M_\theta$는 action proposal $\hat a_t$를 낸다. Policy gate $\Pi$가 실행할 $a_t$를 결정하고 executor $E$가 environment를 바꾼다. State updater $U$가 observation을 저장한다. Maximum step·time·cost와 stop condition은 model prompt가 아니라 orchestrator가 강제해야 한다.
+
+이 식의 $E(a_t)$는 “성공이 확인된 결과”라는 뜻이 아니다. executor가 응답을 잃거나 일부 service만 바꿨다면 orchestrator는 action ID·idempotency record·권위 있는 상태 조회를 묶어 outcome을 따로 판정해야 한다. model이 같은 tool call을 다시 생성해도, 같은 논리적 intent를 재시도할지·기다릴지·중단할지는 runtime의 상태 기계가 정한다.
 
 ### Plan은 text보다 강한 계약이다
 
@@ -186,12 +210,15 @@ Chain-of-thought prompting은 일부 과제에서 중간 text와 정답 성능�
 | Semantic validation | 실제 존재하는 ID·날짜·단위이며 업무 규칙에 맞는가? |
 | Identity | 요청 주체와 credential은 누구의 것인가? |
 | Authorization | 이 주체가 이 resource에 이 action을 할 수 있는가? |
-| Confirmation | 되돌리기 어려운 부작용을 사용자가 확인했는가? |
+| Confirmation | policy가 요구하면 사용자가 확인했거나, 요구하지 않음·waiver 결정과 근거가 기록됐는가? |
 | Execution | Timeout·중복·부분 실패를 안전하게 다루는가? |
-| Postcondition | 의도한 상태 변화가 한 번만 일어났는가? |
+| Outcome reconciliation | 응답 유실 뒤에도 action ID와 권위 있는 상태로 committed·failed·unknown을 구분했는가? |
+| Postcondition | 의도한 상태 변화가 계약된 범위에서 확인됐는가? |
 | Grounding | Agent의 후속 답이 실제 result와 일치하는가? |
 
 Tool output도 신뢰하지 않은 입력이다. Web page·email·document 속 text가 더 높은 권한의 instruction처럼 처리되면 간접 prompt injection이 된다. Data provenance를 표시하고, untrusted content를 읽는 action과 write action 사이에 policy gate를 둔다.
+
+특히 write action이 unknown이면 agent가 같은 문장을 다시 생성해도 새 call을 바로 보내지 않는다. action·resource·parameter가 바뀌었다면 authorization과 필요한 confirmation 또는 waiver 결정을 다시 평가하고, 바뀌지 않았다면 operation record·상태 조회·event를 대조한다. partial effect를 발견하면 plan text가 아니라 관측된 trace를 바탕으로 멈춤·compensation 제안·사람 escalation 중 하나를 선택한다. compensation은 새 action이므로 자동으로 실행·승인·성공했다고 가정하지 않는다.
 
 ### Memory의 네 층
 
@@ -276,15 +303,16 @@ ToolEmu는 36개 고위험 toolkit과 144개 test case를 LM-emulated sandbox에
 | --- | --- | --- |
 | Model proposal | Tool selection·argument accuracy·plan constraint | 실제 실행·권한 |
 | Runtime gate | Allow·deny precision, confirmation coverage | Model의 숨은 잘못된 의도 |
-| Execution | Success·timeout·retry·duplicate·rollback | Goal 달성 여부 |
-| Trajectory | Step count·loop·recovery·policy violation | 최종 결과의 품질 |
+| Execution·outcome | Success·timeout·retry·duplicate, committed·failed·unknown 비율과 failed/unknown 안의 partial-effect rate | Goal 달성 여부와 잔여 외부 효과 |
+| Recovery | Reconciliation 시간·postcondition 확인률·compensation 성공·residual effect | 보상이 원래 상태를 완전히 되돌렸는지 |
+| Trajectory | Step count·loop·recovery·policy violation·action ID 연결률 | 최종 결과의 품질 |
 | End-to-end | Goal postcondition·task success | 위험한 경로·과도한 비용 |
-| Safety·security | Unauthorized side effect·data leak·injection success | 희귀한 미표집 공격 |
+| Safety·security | Unauthorized side effect·data leak·injection success·audit completeness | 희귀한 미표집 공격 |
 | Operations | Latency·token·tool cost·reproducibility | 사용자 효용 전체 |
 
-Component metric은 실패 위치를 진단하고 end-to-end metric은 실제 요청의 결과를 보여 준다. 전체 요청을 분모로 한 성공률과 앞 관문을 통과한 case만의 조건부 성공률을 함께 보고한다. 위험한 write action은 성공률이 높더라도 unauthorized action이 한 번이라도 발생했는지 별도 기록한다.
+Component metric은 실패 위치를 진단하고 end-to-end metric은 실제 요청의 결과를 보여 준다. 전체 요청을 분모로 한 성공률과 앞 관문을 통과한 case만의 조건부 성공률을 함께 보고한다. 위험한 write action은 성공률이 높더라도 unauthorized action이 한 번이라도 발생했는지, unknown outcome이 얼마나 오래 남는지, partial effect가 어떤 compensation 또는 사람 결정으로 끝났는지를 별도 기록한다.
 
-Offline에서는 deterministic fixture와 recorded tool result로 model regression을 비교할 수 있다. Staging에서는 sandboxed executor와 postcondition oracle을 사용한다. Production에서는 versioned model·prompt·tool·policy, identity, 승인과 state change를 audit하되 민감 data를 최소 보존한다.
+Offline에서는 duplicate 같은 ID, 같은 ID의 다른 payload, confirmation 만료, lost response, partial two-step effect, retry budget 소진과 prompt injection 뒤 write 거절 fixture를 고정해 model regression을 비교할 수 있다. Staging에서는 sandboxed executor와 postcondition oracle을 사용한다. Production에서는 versioned model·prompt·tool·policy, identity, 승인, action·trace ID, state change와 outcome을 audit하되 민감 data를 최소 보존한다.
 
 ## 검증과 한계
 
@@ -298,6 +326,8 @@ Offline에서는 deterministic fixture와 recorded tool result로 model regressi
 - **Feedback loop는 reinforcement learning이다:** Error를 prompt에 다시 넣는 retry와 optimizer update를 구분한다.
 - **Sandbox가 있으면 안전하다:** 격리는 피해 범위를 줄이지만 goal·identity·권한·data flow·외부 부작용은 별도 통제다.
 - **Human-in-the-loop면 안전하다:** 확인 요청이 너무 많거나 맥락이 부족하면 사용자가 기계적으로 승인할 수 있다. 위험에 맞는 정보와 빈도로 설계한다.
+- **Timeout은 action이 실패했다는 뜻이다:** 응답 유실 뒤에는 unknown을 기록하고 reconciliation한 뒤에만 다음 plan을 정한다.
+- **Compensation은 agent의 자동 되돌리기 주문이다:** compensation도 domain별 새 action이며, 별도 authorization·confirmation·실패·잔여 효과가 있다.
 - **더 많은 tool과 더 긴 horizon은 항상 더 유능하다:** Capability와 함께 선택 혼동·비용·오류 누적·attack surface도 늘어난다.
 - **한 성공 demo가 자율성을 입증한다:** 성공 case 선택, 숨은 사람 개입, environment 고정과 retry budget을 공개해야 반복 가능성을 판단할 수 있다.
 
@@ -321,13 +351,13 @@ LLM agent 연구에는 capability와 safety가 빠르게 변하는 model·framew
 
 ### 확인 질문
 
-1. LLM agent의 model, orchestrator, policy gate와 executor는 각각 무엇을 출력하며 어느 주체가 외부 state를 실제로 바꾸는가?
-2. Reasoning text·plan object·execution trace와 context·episodic·artifact·parametric memory는 왜 각각 구분해야 하는가?
-3. Component tool-call accuracy와 end-to-end goal success, side effect·cost·recovery·security를 함께 측정해야 하는 이유는 무엇인가?
+1. Reasoning text가 곧 action이 아니도록 설계해야 하는 이유는 무엇인가?
+2. 쓰기 action이 timeout 뒤 `unknown`이면, 왜 새 action을 바로 생성하지 않고 reconciliation을 먼저 하는가?
+3. Component-level metric과 end-to-end metric을 함께 보되, 외부 효과까지 장부에 넣어야 하는 이유는 무엇인가?
 
 ### 다음 문서
 
-- [[109_AI 공동 과학자의 가설 생성과 자율 연구 경계]] — 가설 tournament, 전문가 선택과 인간 wet-lab을 나눠 과학 agent의 실제 위임 범위를 살핀다.
+- [[함수 호출과 도구 사용]] — 한 action의 proposed·confirmed·committed·failed·unknown 경계와 postcondition·compensation 계약을 완결한다.
 - [[자동 평가 지표는 무엇을 보상하는가]] — 조건부 component와 전체 요청 분모, 비용·side effect가 model 선택 유인에 미치는 영향을 비교한다.
 
 ## 출처
@@ -345,6 +375,12 @@ LLM agent 연구에는 capability와 safety가 빠르게 변하는 model·framew
 - Tianbao Xie 외, [OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments](https://papers.nips.cc/paper_files/paper/2024/hash/5d413e48f84dc61244b6be550f1cd8f5-Abstract-Datasets_and_Benchmarks_Track.html), NeurIPS 2024, §§3–5.
 - Yangjun Ruan 외, [ToolEmu: Identifying the Risks of LM Agents with an LM-Emulated Sandbox](https://proceedings.iclr.cc/paper_files/paper/2024/hash/7274ed909a312d4d869cc328ad1c5f04-Abstract-Conference.html), ICLR 2024, §§3–5.
 - Juraj Gottweis 외, [*Towards an AI co-scientist*](https://arxiv.org/pdf/2502.18864v1), arXiv:2502.18864v1, 2025, §§1·3.1–3.5·4와 Figure 2.
+- Roy T. Fielding·Mark Nottingham·Julian Reschke, [RFC 9110: HTTP Semantics](https://www.rfc-editor.org/rfc/rfc9110), 2022, §§9.2.2·15.3.3.
+- Google, [AIP-155: Request identification](https://google.aip.dev/155), 2019, Guidance와 Stale success responses.
+- Google, [AIP-194: Automatic retry configuration](https://google.aip.dev/194), 2019, Guidance와 Retryable·Generally non-retryable codes.
+- Google, [AIP-151: Long-running operations](https://google.aip.dev/151), 2019, Guidance와 Errors.
+- Hector Garcia-Molina·Kenneth Salem, [Sagas](https://www.cs.princeton.edu/research/techreps/598), 1987, Abstract.
+- Joint Task Force, [NIST SP 800-53 Rev. 5](https://doi.org/10.6028/NIST.SP.800-53r5), 2020, AU-3·AU-5·AU-12.
 - 프로젝트 보존 자료: `raw/104_Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use.ko.md`, `raw/104_Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use.commentary.ko.md`.
 - 프로젝트 보존 자료: `raw/109_AI Co-Scientist Systems Autonomous Research and Scientific Discovery.ko.md`, `raw/109_AI Co-Scientist Systems Autonomous Research and Scientific Discovery.commentary.ko.md`.
 
@@ -359,5 +395,7 @@ LLM agent 연구에는 capability와 safety가 빠르게 변하는 model·framew
 - [[구조화 출력]]
 - [[071_Codex와 HumanEval 기반 코드 생성 평가]]
 - [[OpenAI Codex (2021)]]
+- [[문자에서 실행 권한까지]]
+- [[모델 능력에서 서비스 능력으로]]
 - [[자동 평가 지표는 무엇을 보상하는가]]
 - [[AI 시연과 실제 성능]]
