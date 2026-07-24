@@ -4873,6 +4873,25 @@ raw 등록 해시:
 - 종합 실습은 LayerNorm보다 앞선 전체 attention gradient, padding loss mask, batch reduction, optimizer state, mixed precision·분산 실행을 계산하지 않는다.
 - 통과 점수는 현재 학습 경로의 독립 계산 기준이지 실제 모델 훈련 자격이나 일반화·안전성 보장이 아니다. `raw/`는 변경하지 않았다.
 
+## [2026-07-24] content | Transformer parallelism in computing context
+
+변경 내용:
+
+- [[가속기와 행렬 계산]]을 추가해 CPU·GPU·TPU를 속도 서열로 놓지 않고 같은 행렬 계산의 병렬 단위·tile·memory path·수치 형식과 peak·달성 성능으로 구분했다.
+- [[메모리 계층과 데이터 이동]]을 추가해 용량·지연·대역폭, memory wall, Roofline의 operational intensity와 FlashAttention의 HBM–SRAM 장부를 한 개념 경로로 연결했다.
+- [[Transformer는 무엇을 병렬화했고 무엇을 남겼나]]를 시리즈 표본 본편으로 추가했다. RNN state 의존, teacher-forced 훈련의 위치 병렬성, 자기회귀 생성 순차성, 8개 P100 가능 조건과 후대 FlashAttention의 memory 대응을 직접 영향·가능 조건·병행 맥락·후대 유추로 분리했다.
+- CUDA, memory wall, Roofline과 1세대 TPU의 1차 자료를 evidence 레지스트리에 추가하고, CS_WIKI의 관련 문서는 외부 맥락 독서로만 연결했다.
+
+검증 결과:
+
+- `npm run history:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run verify`로 원장 상태, 문서 스키마, 근거·링크·사이트와 브라우저 동작을 검증한다.
+- Transformer 원 논문의 base 12시간·big 3.5일·8개 P100 조건과 FlashAttention Figure 2의 FLOPs 증가·HBM traffic 감소·wall-clock 감소가 서로 다른 측정 장부임을 재확인했다.
+
+남은 제한:
+
+- 이 배치는 단일·소수 accelerator에서 보이는 모델 의존성과 memory 경계에 집중한다. 수천 장치의 data·tensor·pipeline parallelism과 compute budget 배분은 다음 본편이 맡는다.
+- 가속기의 가격·공급망·환경 비용과 실제 inference service의 KV cache·tail latency는 뒤 배치에서 다룬다. `raw/`와 CS_WIKI는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

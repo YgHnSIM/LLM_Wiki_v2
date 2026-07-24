@@ -3,11 +3,11 @@ schema_version: 1
 initiative:
   id: llm-computing-history
   title: LLM과 컴퓨팅 능력의 공진화
-  current_batch: chapter-06-transformer-parallelism
+  current_batch: chapter-07-scale-distribution
   next_action: >-
-    wiki/concepts/가속기와 행렬 계산.md와 wiki/concepts/메모리 계층과 데이터 이동.md를
-    1차 근거로 작성한 뒤 wiki/analyses/Transformer는 무엇을 병렬화했고 무엇을 남겼나.md에서
-    훈련 위치 병렬성·자기회귀 생성 순차성·장치 실행 병목을 하나의 측정 장부로 연결한다.
+    wiki/concepts/분산 학습과 집단 통신.md를 1차 근거로 작성한 뒤
+    wiki/analyses/규모는 언제 연구 변수가 되었나.md에서 Kaplan·Chinchilla의 compute budget과
+    BLOOM·PaLM의 data·tensor·pipeline parallelism을 품질·통신·wall-clock 장부로 연결한다.
   blockers: []
   hub:
     path: wiki/meta/LLM과 컴퓨팅 능력의 공진화.md
@@ -19,8 +19,8 @@ initiative:
     stage: planned
   handoff:
     updated: '2026-07-24'
-    baseline_commit: f7a635fa608fc456e0b0be41f49910e443b203ca
-    last_completed_gate: framework-verified
+    baseline_commit: f0db598d018d14127a660d5c39df8590bf92efc9
+    last_completed_gate: chapter-06-transformer-parallelism-verified
     validation:
       - command: npm run history:check
         result: 11개 배치·9개 본편·5개 owner와 상태·경로·의존성 검증 통과
@@ -28,6 +28,8 @@ initiative:
         result: 원장 구조·완료 파일·학습 골격·측정 장부·인과 표지 회귀 5개 통과
       - command: npm run verify
         result: Node 회귀 146개, wiki lint, 사이트 692쪽과 Chromium 회귀 4개 통과
+      - command: npm run lint:wiki
+        result: Markdown 369개·evidence 462건·immutable raw artifact 220개 검증 통과
     notes: >-
       main은 origin/main과 일치한다. .codex-remote-attachments/는 사용자 첨부이므로 보존하고,
       raw와 C:/Vault/CS_Wiki는 수정하지 않는다.
@@ -52,13 +54,13 @@ owners:
     title: 가속기와 행렬 계산
     path: wiki/concepts/가속기와 행렬 계산.md
     page_id: concept.accelerator-matrix-compute
-    stage: planned
+    stage: complete
     required_by: [chapter-05-gpu-deep-learning, chapter-06-transformer-parallelism, chapter-07-scale-distribution]
   - id: memory-hierarchy-data-movement
     title: 메모리 계층과 데이터 이동
     path: wiki/concepts/메모리 계층과 데이터 이동.md
     page_id: concept.memory-hierarchy-data-movement
-    stage: planned
+    stage: complete
     required_by: [chapter-06-transformer-parallelism, chapter-08-data-movement]
   - id: distributed-training-collectives
     title: 분산 학습과 집단 통신
@@ -120,7 +122,7 @@ chapters:
     title: Transformer는 무엇을 병렬화했고 무엇을 남겼나
     path: wiki/analyses/Transformer는 무엇을 병렬화했고 무엇을 남겼나.md
     page_id: analysis.transformer-parallelism-and-sequentiality
-    stage: planned
+    stage: complete
     capability_layers: [complexity, realized-performance, scalability]
   - order: 7
     batch: chapter-07-scale-distribution
@@ -157,14 +159,14 @@ batches:
       - package.json
   - id: chapter-06-transformer-parallelism
     title: Transformer 병렬성과 생성 순차성
-    stage: in_progress
+    stage: complete
     deliverables:
       - wiki/concepts/가속기와 행렬 계산.md
       - wiki/concepts/메모리 계층과 데이터 이동.md
       - wiki/analyses/Transformer는 무엇을 병렬화했고 무엇을 남겼나.md
   - id: chapter-07-scale-distribution
     title: 스케일링 법칙과 분산 학습
-    stage: planned
+    stage: in_progress
     deliverables:
       - wiki/concepts/분산 학습과 집단 통신.md
       - wiki/analyses/규모는 언제 연구 변수가 되었나.md
