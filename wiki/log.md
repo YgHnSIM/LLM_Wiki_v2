@@ -5044,6 +5044,26 @@ raw 등록 해시:
 - AlexNet은 GPU만 바꾼 통제 실험이 아니므로 error 개선의 단일 인과 효과를 추정하지 않는다. cuDNN의 1.36배와 AlexNet의 전체 훈련 시간도 측정 경계가 달라 직접 환산하지 않는다.
 - 다음 배치는 아홉 본편을 허브·종합편에서 한 능력층 장부로 연결한다. `raw/`와 CS_WIKI는 변경하지 않았다.
 
+## [2026-07-24] content | LLM and computing capability coevolution series
+
+변경 내용:
+
+- [[LLM과 컴퓨팅 능력의 공진화]] 허브를 추가해 기계 이전 계산부터 LLM service까지 아홉 본편을 시대순 경로, 30분·3시간 독서 경로와 주제별 교차 경로로 연결했다.
+- [[LLM 능력은 모델의 속성인가 시스템의 속성인가]]를 추가해 model·학습 system·runtime·service·평가 체계를 분리하고, 같은 checkpoint의 관찰 결과가 달라지는 조건을 자립형 가상 예로 설명했다.
+- 아홉 본편에 이전·허브·다음 또는 종합편 탐색을 추가하고, 각 시대의 병목→대응→새 능력→남은 제약을 일곱 능력층·여섯 항목 측정 장부·네 인과 표지로 종합했다.
+- Overview와 index에 시리즈 진입점을 추가하고 역사 원장의 허브·종합 배치를 완료 상태로 전환했다.
+
+검증 결과:
+
+- `npm run history:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run learning:audit`, `npm run math:check`, `npm run verify`로 완료 원장, 학습 골격, 근거·링크·수식, 정적 사이트와 mobile browser 회귀를 검증했다.
+- 허브의 아홉 본편 순서와 각 본편의 이전·다음 탐색을 원장 `order`와 대조하고, 종합편의 seven-layer·six-field·four-causality 표지를 확인했다.
+- Playwright Chromium에서 허브 desktop과 종합편 390×844 mobile을 렌더링했으며, mobile document width가 viewport 390px를 넘지 않음을 확인했다.
+
+남은 제한:
+
+- 이 종합은 semiconductor 공급망·전력·냉각·자본·data 노동과 권리를 포괄하지 않는다. 서로 다른 시대의 성능 수치도 하나의 환율로 직접 순위화하지 않는다.
+- 계획된 시리즈 배치는 모두 완료했다. 다음 보강은 실제 학습자 오답·탐색 기록이나 새 1차 근거가 들어왔을 때 정한다. `raw/`와 CS_WIKI는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

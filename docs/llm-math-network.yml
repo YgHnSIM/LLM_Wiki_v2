@@ -14,7 +14,7 @@ initiative:
   blockers: []
   handoff:
     updated: '2026-07-24'
-    baseline_commit: 853bae51f9ef8b161064ad201a89daedc02e0d46
+    baseline_commit: 01f4e1734a202a5abf6e4c41f35fd774ae48c371
     last_completed_gate: integrated-capstone-g7-verified
     validation:
       - command: npm run math:check
@@ -47,6 +47,8 @@ initiative:
         result: 역사 시리즈 4장 통합 뒤에도 25개 수식 owner·Node 회귀 146개·Markdown 379개·evidence 477건·705 HTML·위키 링크 8975개·로컬 참조 48724개·Chromium 회귀 4개 통과
       - command: npm run verify
         result: 역사 시리즈 5장 통합 뒤에도 25개 수식 owner·Node 회귀 146개·Markdown 380개·evidence 479건·706 HTML·위키 링크 8996개·로컬 참조 48831개·Chromium 회귀 4개 통과
+      - command: npm run verify
+        result: 역사 시리즈 허브·종합편 통합 뒤에도 25개 수식 owner·Node 회귀 146개·Markdown 382개·evidence 479건·708 HTML·위키 링크 9084개·로컬 참조 49075개·Chromium 회귀 4개 통과
     notes: >-
       기준 branch는 main이다. LLM·컴퓨팅 능력 공진화 시리즈의 신규 문서를 학습 감사 기준선에 포함했으며 기존 25개 수식 owner와 배치 완료 상태는 바꾸지 않았다.
       integrated-capstone에서 새 숫자로 lookup·attention·residual·LayerNorm·FFN·softmax NLL·전체 출력 gradient를 연결하고,
@@ -56,10 +58,10 @@ initiative:
 baseline:
   recorded_on: '2026-07-24'
   source: docs/foundational-learning-audit.md
-  wiki_documents: 380
-  non_meta_documents: 377
-  formula_documents: 197
-  formula_blocks: 803
+  wiki_documents: 382
+  non_meta_documents: 378
+  formula_documents: 198
+  formula_blocks: 806
 
 batches:
   - id: linear-algebra-foundations
