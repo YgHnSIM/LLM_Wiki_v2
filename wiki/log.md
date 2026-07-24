@@ -4911,6 +4911,25 @@ raw 등록 해시:
 - 분산 통신의 topology·collective 구현별 정확 byte와 장애 복구·checkpoint storage는 개별 cluster에 따라 달라 이 배치가 보편 수치로 제시하지 않는다.
 - Memory traffic·낮은 정밀도·희소 expert가 같은 FLOPs의 실행 비용을 바꾸는 과정은 다음 배치가 맡는다. `raw/`와 CS_WIKI는 변경하지 않았다.
 
+## [2026-07-24] content | Data movement precision and sparse execution
+
+변경 내용:
+
+- [[수치 형식·혼합 정밀도·양자화]]를 추가해 weight·activation·gradient·optimizer의 저장 형식, matrix 입력·누산·master weight와 전송 형식을 분리했다. Mixed precision, affine quantization과 QLoRA의 frozen NF4 base·dequantized compute·LoRA update를 같은 “저정밀도”로 합치지 않는다.
+- [[연산보다 데이터 이동이 비싸질 때]]를 추가해 memory wall·Roofline을 mixed precision, FlashAttention, sparse MoE, QLoRA의 서로 다른 대응과 연결했다.
+- FlashAttention의 추가 FLOPs·HBM traffic 감소, MoE의 total/active parameter·AllToAll, QLoRA의 checkpoint·peak memory·dequantization을 각각 별도 측정 장부로 고정했다.
+- Mixed Precision Training의 1차 자료를 evidence 레지스트리에 추가하고 CS_WIKI의 낮은 정밀도·전력 장벽 분석은 외부 맥락 독서로만 연결했다.
+
+검증 결과:
+
+- `npm run history:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run verify`로 원장 상태, 스키마·근거·링크·사이트와 브라우저 동작을 검증한다.
+- FlashAttention Figure 2의 약 13% 추가 FLOPs·약 8배 적은 HBM R/W·약 3배 짧은 시간과 QLoRA의 65B·단일 48GB 조건을 서로 다른 결과 계약으로 확인했다.
+
+남은 제한:
+
+- 최신 FP8·새 quantizer·후속 FlashAttention·MoE routing의 결과를 최초 논문에 소급하지 않았다. Energy·carbon은 직접 측정이 없는 경우 추정하지 않는다.
+- 학습과 kernel 중심의 비용 장부를 prefill·decode·KV cache·batching·tail latency·가용성으로 확장하는 일은 다음 배치가 맡는다. `raw/`와 CS_WIKI는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

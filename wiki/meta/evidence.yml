@@ -3971,3 +3971,12 @@ sources:
     doi: 10.1109/SC41405.2020.00024
     url: https://doi.org/10.1109/SC41405.2020.00024
     language: en
+  micikevicius-et-al-2018-mixed-precision:
+    title: Mixed Precision Training
+    authors: [Paulius Micikevicius, Sharan Narang, Jonah Alben, Gregory Diamos, Erich Elsen, David Garcia, Boris Ginsburg, Michael Houston, Oleksii Kuchaiev, Ganesh Venkatesh, Hao Wu]
+    published: 2018
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.1710.03740
+    url: https://openreview.net/forum?id=r1gs9JgRZ
+    language: en
