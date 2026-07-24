@@ -4892,6 +4892,25 @@ raw 등록 해시:
 - 이 배치는 단일·소수 accelerator에서 보이는 모델 의존성과 memory 경계에 집중한다. 수천 장치의 data·tensor·pipeline parallelism과 compute budget 배분은 다음 본편이 맡는다.
 - 가속기의 가격·공급망·환경 비용과 실제 inference service의 KV cache·tail latency는 뒤 배치에서 다룬다. `raw/`와 CS_WIKI는 변경하지 않았다.
 
+## [2026-07-24] content | Scale as a research variable
+
+변경 내용:
+
+- [[분산 학습과 집단 통신]]을 추가해 data·tensor·pipeline·expert parallelism과 ZeRO/FSDP를 batch·weight·layer·state 가운데 무엇을 나누는지, AllReduce·AllGather·ReduceScatter·AllToAll 중 무엇을 요구하는지로 구분했다.
+- [[규모는 언제 연구 변수가 되었나]]를 추가해 Kaplan의 0.73/0.27 배분과 Chinchilla의 약 0.5/0.5 재추정을 같은 fixed-compute 질문의 다른 경험적 답으로 연결했다.
+- 추상 $C\approx6ND$와 실제 BLOOM 384개 A100·PaLM 6,144개 TPU v4 실행을 GPU-hour·token/s·utilization·communication·memory·wall-clock 장부로 분리했다.
+- Megatron-LM과 ZeRO의 1차 자료를 evidence 레지스트리에 추가하고 CS_WIKI의 병렬 확장성·일곱 능력층은 외부 맥락 독서로 연결했다.
+
+검증 결과:
+
+- `npm run history:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run verify`로 원장, 문서 구조·근거·링크, 정적 사이트와 브라우저 동작을 검증한다.
+- BLOOM의 176,247,271,424 parameter·366B 누적 token·1,082,990 GPU-hours와 PaLM의 540.35B·780B token·238.3k token/s·46.2% model FLOPs utilization이 서로 다른 시스템 경계임을 확인했다.
+
+남은 제한:
+
+- 분산 통신의 topology·collective 구현별 정확 byte와 장애 복구·checkpoint storage는 개별 cluster에 따라 달라 이 배치가 보편 수치로 제시하지 않는다.
+- Memory traffic·낮은 정밀도·희소 expert가 같은 FLOPs의 실행 비용을 바꾸는 과정은 다음 배치가 맡는다. `raw/`와 CS_WIKI는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

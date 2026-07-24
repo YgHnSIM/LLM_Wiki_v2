@@ -3953,3 +3953,21 @@ sources:
     doi: 10.1145/3079856.3080246
     url: https://research.google/pubs/in-datacenter-performance-analysis-of-a-tensor-processing-unit/
     language: en
+  shoeybi-et-al-2019-megatron-lm:
+    title: 'Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism'
+    authors: [Mohammad Shoeybi, Mostofa Patwary, Raul Puri, Patrick LeGresley, Jared Casper, Bryan Catanzaro]
+    published: 2019
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.1909.08053
+    url: https://arxiv.org/abs/1909.08053
+    language: en
+  rajbhandari-et-al-2020-zero:
+    title: 'ZeRO: Memory Optimizations Toward Training Trillion Parameter Models'
+    authors: [Samyam Rajbhandari, Jeff Rasley, Olatunji Ruwase, Yuxiong He]
+    published: 2020
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1109/SC41405.2020.00024
+    url: https://doi.org/10.1109/SC41405.2020.00024
+    language: en

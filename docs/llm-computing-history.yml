@@ -3,11 +3,11 @@ schema_version: 1
 initiative:
   id: llm-computing-history
   title: LLM과 컴퓨팅 능력의 공진화
-  current_batch: chapter-07-scale-distribution
+  current_batch: chapter-08-data-movement
   next_action: >-
-    wiki/concepts/분산 학습과 집단 통신.md를 1차 근거로 작성한 뒤
-    wiki/analyses/규모는 언제 연구 변수가 되었나.md에서 Kaplan·Chinchilla의 compute budget과
-    BLOOM·PaLM의 data·tensor·pipeline parallelism을 품질·통신·wall-clock 장부로 연결한다.
+    wiki/concepts/수치 형식·혼합 정밀도·양자화.md를 1차 근거로 작성한 뒤
+    wiki/analyses/연산보다 데이터 이동이 비싸질 때.md에서 memory wall·Roofline·mixed precision·
+    FlashAttention·MoE의 FLOPs·byte·active compute·통신·품질 장부를 연결한다.
   blockers: []
   hub:
     path: wiki/meta/LLM과 컴퓨팅 능력의 공진화.md
@@ -19,8 +19,8 @@ initiative:
     stage: planned
   handoff:
     updated: '2026-07-24'
-    baseline_commit: f0db598d018d14127a660d5c39df8590bf92efc9
-    last_completed_gate: chapter-06-transformer-parallelism-verified
+    baseline_commit: 06d2eb57bde9fb58cdef276c42ed5176dc276668
+    last_completed_gate: chapter-07-scale-distribution-verified
     validation:
       - command: npm run history:check
         result: 11개 배치·9개 본편·5개 owner와 상태·경로·의존성 검증 통과
@@ -30,6 +30,8 @@ initiative:
         result: Node 회귀 146개, wiki lint, 사이트 692쪽과 Chromium 회귀 4개 통과
       - command: npm run lint:wiki
         result: Markdown 369개·evidence 462건·immutable raw artifact 220개 검증 통과
+      - command: npm run lint:wiki
+        result: Markdown 371개·evidence 464건·immutable raw artifact 220개 검증 통과
     notes: >-
       main은 origin/main과 일치한다. .codex-remote-attachments/는 사용자 첨부이므로 보존하고,
       raw와 C:/Vault/CS_Wiki는 수정하지 않는다.
@@ -66,7 +68,7 @@ owners:
     title: 분산 학습과 집단 통신
     path: wiki/concepts/분산 학습과 집단 통신.md
     page_id: concept.distributed-training-collectives
-    stage: planned
+    stage: complete
     required_by: [chapter-07-scale-distribution, chapter-08-data-movement]
   - id: numerical-formats-precision-quantization
     title: 수치 형식·혼합 정밀도·양자화
@@ -129,7 +131,7 @@ chapters:
     title: 규모는 언제 연구 변수가 되었나
     path: wiki/analyses/규모는 언제 연구 변수가 되었나.md
     page_id: analysis.scale-as-research-variable
-    stage: planned
+    stage: complete
     capability_layers: [scalability, resource-efficiency, reliable-results]
   - order: 8
     batch: chapter-08-data-movement
@@ -166,13 +168,13 @@ batches:
       - wiki/analyses/Transformer는 무엇을 병렬화했고 무엇을 남겼나.md
   - id: chapter-07-scale-distribution
     title: 스케일링 법칙과 분산 학습
-    stage: in_progress
+    stage: complete
     deliverables:
       - wiki/concepts/분산 학습과 집단 통신.md
       - wiki/analyses/규모는 언제 연구 변수가 되었나.md
   - id: chapter-08-data-movement
     title: 데이터 이동·정밀도·희소 실행
-    stage: planned
+    stage: in_progress
     deliverables:
       - wiki/concepts/수치 형식·혼합 정밀도·양자화.md
       - wiki/analyses/연산보다 데이터 이동이 비싸질 때.md
