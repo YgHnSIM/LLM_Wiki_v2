@@ -10,17 +10,17 @@ initiative:
     stage: complete
   current_batch: null
   next_action: >-
-    npm run math:check를 실행한 뒤 real-transformer-shapes 배치를 시작해 vectors-matrices-tensors, attention, residual-connections, probability-distribution-expectation-variance, layer-normalization, activation-functions, backpropagation owner와 wiki/analyses/LLM을 만든 수학.md에 batch·sequence·multi-head·FFN·normalization의 실제 shape 추적 문제를 구현한다.
+    npm run math:check를 실행한 뒤 integrated-capstone 배치를 시작해 embeddings, attention, residual-connections, softmax, log-likelihood, backpropagation, normalization-statistics owner 경로와 wiki/analyses/LLM을 만든 수학.md를 연결하는 무도움 종합 문제·정답·채점표·오류별 복습 경로와 실행 검증을 구현한다.
   blockers: []
   handoff:
     updated: '2026-07-24'
-    baseline_commit: 0b5a4ed7a5ee39e59ce3e03c74a7e0048e7569cf
-    last_completed_gate: full-backprop-verification-g7-verified
+    baseline_commit: 3e6bbfbe15d13ed26e853ea4daa589b809a363c4
+    last_completed_gate: real-transformer-shapes-g7-verified
     validation:
       - command: npm run math:check
-        result: 11개 배치·25개 수식 계열의 구조·owner·선수 관계와 full-backprop-verification 완료 상태 검증 통과
+        result: 12개 배치·25개 수식 계열의 구조·owner·선수 관계와 real-transformer-shapes 완료 상태 검증 통과
       - command: npm run learning:audit
-        result: 365개 Markdown·362개 비메타 문서, 블록 수식 722개와 마스터리 표지 12개로 기준선 갱신
+        result: 365개 Markdown·362개 비메타 문서, 블록 수식 733개와 마스터리 표지 16개로 기준선 갱신
       - command: npm run learning:audit:check
         result: 기초 학습 감사 기준선이 현재 wiki와 일치함을 확인
       - command: npm run sync:index
@@ -29,11 +29,13 @@ initiative:
         result: Markdown 365개·evidence 458건·immutable raw artifact 220개 검증 통과
       - command: node --test scripts/tests/llm-math-toy.test.mjs
         result: stable softmax·허브 수치·gradient shape·중심 차분·SGD 손실 감소 신규 회귀 6개 통과
+      - command: node --test scripts/tests/llm-math-shapes.test.mjs
+        result: head 분할·residual·LayerNorm 축·parameter gradient shape·sequence 성장 신규 회귀 6개 통과
       - command: npm run verify
-        result: math 원장, Node 회귀 129개, wiki lint·691 HTML·위키 링크 8671개·로컬 참조 47336개·Chromium 회귀 4개와 KaTeX error 0개 통과
+        result: math 원장, Node 회귀 135개, wiki lint·691 HTML·위키 링크 8688개·로컬 참조 47384개·Chromium 회귀 4개와 KaTeX error 0개 통과
     notes: >-
-      기준 branch는 main이다. full-backprop-verification에서 p-y 전체 logit gradient, 출력 weight·bias·hidden gradient,
-      residual 분기 합과 유한차분·실행 코드 일치를 완결했다. 다음은 real-transformer-shapes이며 raw와 기존 첨부 파일은 건드리지 않는다.
+      기준 branch는 main이다. real-transformer-shapes에서 B·T·d_model·H·d_head·d_ff·|V| 축,
+      head 분할·결합, FFN·LayerNorm·residual과 gradient shape를 완결했다. 다음은 integrated-capstone이며 raw와 기존 첨부 파일은 건드리지 않는다.
 
 baseline:
   recorded_on: '2026-07-24'
@@ -41,7 +43,7 @@ baseline:
   wiki_documents: 365
   non_meta_documents: 362
   formula_documents: 183
-  formula_blocks: 722
+  formula_blocks: 733
 
 batches:
   - id: linear-algebra-foundations
@@ -227,6 +229,29 @@ batches:
       - wiki/analyses/LLM을 만든 수학.md
       - scripts/llm-math-toy.mjs
       - scripts/tests/llm-math-toy.test.mjs
+      - package.json
+      - wiki/overview.md
+      - wiki/log.md
+
+  - id: real-transformer-shapes
+    title: 실제 Transformer 축과 shape 추적
+    stage: complete
+    families:
+      - vectors-matrices-tensors
+      - attention
+      - residual-connections
+      - random-variable-expectation-variance
+      - normalization-statistics
+      - activation-functions
+      - backpropagation
+    deliverables:
+      - wiki/concepts/확률변수·확률분포·기대값·분산.md
+      - wiki/concepts/Layer Normalization.md
+      - wiki/concepts/활성화 함수.md
+      - wiki/concepts/Transformer.md
+      - wiki/analyses/LLM을 만든 수학.md
+      - scripts/llm-math-shapes.mjs
+      - scripts/tests/llm-math-shapes.test.mjs
       - package.json
       - wiki/overview.md
       - wiki/log.md

@@ -180,6 +180,8 @@ $$
 
 | 기호 | 현재 문서에서의 의미 | shape 또는 범위 | 역할 |
 | --- | --- | --- | --- |
+| $B$ | 한 번에 처리하는 시퀀스 수 | 양의 정수 | batch 축 |
+| $T$ | padding을 포함한 현재 시퀀스 길이 | 양의 정수 | batched tensor의 token 축 |
 | $n$ | 한 시퀀스의 토큰 수 | 양의 정수 | attention 행렬의 행·열 수 |
 | $d_{\mathrm{model}}$ | block을 지나는 표현의 공통 차원 | 원 base 모델에서는 512 | residual addition이 가능하게 하는 폭 |
 | $h$ | attention head 수 | 원 base 모델에서는 8 | 병렬 투영 공간 수 |
@@ -191,6 +193,40 @@ $$
 | $M$ | attention mask | $n\times n$ | 금지된 연결을 softmax 전에 차단 |
 
 원 base 모델은 $d_{\mathrm{model}}=512$, $h=8$, $d_k=d_v=64$, FFN 내부 차원 $d_{\mathrm{ff}}=2048$을 썼다. $8\times64=512$이므로 각 head 출력을 이어 붙인 뒤 다시 512차원으로 투영할 수 있다.
+
+### batch를 포함한 한 block의 shape 추적
+
+앞의 $n\times d_{\mathrm{model}}$ 표기는 한 시퀀스만 본 것이다. 실제 구현에 가까운 설명용 설정을
+
+$$
+(B,T,D,H,D_h,D_{\mathrm{ff}},|\mathcal V|)
+=(2,4,8,2,4,16,10)
+$$
+
+으로 두자. 여기서 $D=d_{\mathrm{model}}=H D_h$다. library마다 head 축 순서가 $(B,H,T,D_h)$ 또는 $(B,T,H,D_h)$일 수 있지만, 전치·reshape 전후에 어떤 축인지 명시하면 같은 계산이다. 이 문서는 score의 마지막 두 축을 query·key로 읽기 쉬운 $(B,H,T,D_h)$ 관례를 쓴다.
+
+| 단계 | 연산 | 출력 shape | 보존·변경되는 축 |
+| --- | --- | --- | --- |
+| token ID | 입력 | $(2,4)$ | batch·token |
+| embedding | lookup | $(2,4,8)$ | feature $D$ 추가 |
+| packed QKV | $XW_{QKV}+b$ | $(2,4,24)$ | 마지막 축을 $3D$로 투영 |
+| head 분할 | reshape·transpose | $(2,2,4,4)$ | $D\to(H,D_h)$ |
+| score | $QK^{\mathsf T}/\sqrt{D_h}+M$ | $(2,2,4,4)$ | 마지막 두 축은 query $T$·key $T$ |
+| 가중합 | $\operatorname{softmax}_{key}(\text{score})V$ | $(2,2,4,4)$ | head별 value 폭 $D_h$ |
+| head 결합 | transpose·concat | $(2,4,8)$ | $(H,D_h)\to D$ |
+| 출력 투영 | $\operatorname{Concat}(\text{head})W^O$ | $(2,4,8)$ | residual 폭 복원 |
+| 첫 residual·norm | add, LayerNorm | $(2,4,8)$ | 두 항 shape 일치, 마지막 $D$만 정규화 |
+| FFN 확장 | $XW_1+b_1$ | $(2,4,16)$ | $D\to D_{\mathrm{ff}}$ |
+| activation | ReLU·GELU 등 | $(2,4,16)$ | 성분별 적용, shape 보존 |
+| FFN 축소 | $HW_2+b_2$ | $(2,4,8)$ | $D_{\mathrm{ff}}\to D$ |
+| 둘째 residual·norm | add, LayerNorm | $(2,4,8)$ | block 출력 |
+| 어휘 투영 | $XW_{\mathrm{out}}+b$ | $(2,4,10)$ | $D\to|\mathcal V|$ |
+
+LayerNorm의 평균·분산은 각 $(b,t)$마다 마지막 $D$축만 줄이므로, 축을 유지해 저장하면 통계 shape는 $(2,4,1)$이다. FFN activation은 $(B,T,D_{\mathrm{ff}})$의 각 성분에 독립 적용되고, 출력 softmax는 $(B,T,|\mathcal V|)$의 마지막 **어휘 후보 축**을 정규화한다. 둘 다 마지막 축을 다룬다는 이유로 같은 연산은 아니다.
+
+역전파에서 매개변수 gradient는 원 매개변수와 같은 shape다. 예를 들어 $W_{QKV}\in\mathbb R^{8\times24}$이면 $\partial J/\partial W_{QKV}$도 $8\times24$, $W_1\in\mathbb R^{8\times16}$이면 $\partial J/\partial W_1$도 $8\times16$, $W_{\mathrm{out}}\in\mathbb R^{8\times10}$이면 그 gradient도 $8\times10$이다. activation gradient와 residual branch gradient는 대응하는 중간 tensor shape를 보존한다.
+
+이 표는 `npm run math:shapes`로 실행할 수 있다. 이 검사는 head 분할 가능성, residual shape, LayerNorm 통계 축, 매개변수와 gradient shape, $T$를 두 배로 할 때 attention score 원소 수가 네 배가 되는지를 회귀 테스트로 확인한다. shape 검사가 값·mask 의미·수치 안정성까지 자동 검증하는 것은 아니다.
 
 ### 핵심 수식: scaled dot-product attention
 
@@ -347,19 +383,61 @@ Wiegreffe·Pinter는 ‘설명’의 정의와 모델 전체를 고려해야 한
 
 ## 학습 확인
 
-### 확인 질문과 답
+### 마스터리 연습
 
-1. Transformer block에서 self-attention과 위치별 MLP가 각각 바꾸는 것은 무엇인가?
+#### 완전 풀이 확인
 
-   **답:** self-attention은 위치 사이에서 어떤 value를 읽을지 정해 정보를 섞고, MLP는 그 뒤 각 위치 벡터 안의 feature를 같은 비선형 함수로 변환한다.
+`batch를 포함한 한 block의 shape 추적` 표를 가리고 $(B,T,D,H,D_h,D_{\mathrm{ff}},|\mathcal V|)=(2,4,8,2,4,16,10)$의 모든 shape를 다시 적어라. 각 단계에서 token·head·feature·candidate 중 어느 축을 바꾸거나 줄이는지도 표시한다.
 
-2. decoder의 causal mask와 위치 표현은 왜 서로 다른 장치인가?
+#### 부분 완성
 
-   **답:** mask는 미래 위치로의 정보 흐름을 막고, 위치 표현은 토큰이 어느 순서·위치에 있는지 알린다. 하나만으로 다른 하나의 역할을 대신할 수 없다.
+다음 빈칸을 채워라.
 
-3. 훈련에서 decoder 위치를 병렬 계산할 수 있는데 생성은 왜 순차적인가?
+$$
+X:(2,4,8)
+\xrightarrow{W_{QKV}:(8,24)}
+\square
+\xrightarrow{\text{split heads}}
+\square
+$$
 
-   **답:** 훈련에는 정답 이전 토큰이 이미 주어져 있지만, 생성에서는 모델이 방금 만든 token이 다음 위치의 조건이 되므로 그 결과를 기다려야 한다.
+$$
+\text{scores}:\square,
+\quad
+\text{concat}:\square,
+\quad
+XW_1:\square,
+\quad
+\text{logits}:\square
+$$
+
+#### 새 수치 전이
+
+새 설정을
+
+$$
+(B,T,D,H,D_h,D_{\mathrm{ff}},|\mathcal V|)
+=(3,5,12,3,4,48,32000)
+$$
+
+으로 둔다. QKV packed, head별 Q·K·V, attention score, head 결합, FFN 중간값, block 출력, logits의 shape를 계산하라. score 원소 수와 logit 원소 수도 구하고, 두 tensor가 각각 어느 축 때문에 커지는지 설명한다.
+
+#### 오류 진단
+
+다음 구현 설명에서 오류를 찾아 고쳐라.
+
+1. $D=10,H=3$을 그대로 reshape해 각 head 폭을 $10/3$으로 둔다.
+2. attention score를 $(B,T,H,T)$로 만들고 마지막 축이 head라고 설명한다.
+3. head 출력을 concat한 $(B,T,D)$에 $W^O$를 곱한 뒤 $(B,T,D/2)$를 residual 입력에 broadcasting으로 더한다.
+4. LayerNorm은 $(B,T,D)$ 전체에서 평균 하나를 계산하고, FFN은 $T$축을 $D_{\mathrm{ff}}$로 바꾼다.
+
+### 해설과 채점 기준
+
+1. **부분 완성:** packed QKV는 $(2,4,24)$, head 분할 뒤 각 Q·K·V는 $(2,2,4,4)$다. score는 $(2,2,4,4)$, concat은 $(2,4,8)$, FFN 중간값은 $(2,4,16)$, logits는 $(2,4,10)$이다.
+2. **새 수치 전이:** packed QKV $(3,5,36)$, head별 Q·K·V $(3,3,5,4)$, score $(3,3,5,5)$, concat과 block 출력 $(3,5,12)$, FFN 중간값 $(3,5,48)$, logits $(3,5,32000)$이다. score 원소 수는 $3\cdot3\cdot5\cdot5=225$, logit 원소 수는 $3\cdot5\cdot32000=480000$이다. 전자는 query·key 위치 쌍, 후자는 token별 어휘 후보 때문에 커진다.
+3. **오류 진단:** head 분할은 $D$가 $H$로 나뉘어야 한다. $(B,H,T,T)$ 관례에서는 둘째 축이 head이고 마지막 두 축이 query·key다. residual 출력 폭은 입력과 같은 $D$로 투영해야 한다. LayerNorm은 각 $(b,t)$의 $D$만 줄이고 FFN은 $B,T$를 보존한 채 마지막 feature 폭만 바꾼다.
+
+각 문제는 0–3점이다. 모든 축·shape·원소 수를 맞히면 3점, 핵심은 맞고 산술 오류 하나가 있으면 2점, shape만 맞고 축 의미를 설명하지 못하면 1점, head 분할·residual·정규화 축을 잘못 두면 0점이다. 총 7점 이상이면서 **head·query/key·residual·LayerNorm 축 오류가 없어야** 통과다. 미달이면 `batch를 포함한 한 block의 shape 추적`을 다시 읽고 $(B,T,D,H,D_{\mathrm{ff}},|\mathcal V|)=(1,6,16,4,64,100)$로 재시도한다.
 
 ### 다음 문서
 

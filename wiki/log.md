@@ -4836,6 +4836,24 @@ raw 등록 해시:
 - 이 배치는 출력층과 잔차 분기까지의 역방향 규칙을 검증한다. attention의 $W_Q,W_K,W_V$ 전체 야코비안과 실제 batch·multi-head·FFN·정규화 shape는 다음 배치에서 다룬다.
 - 유한차분 일치는 국소 gradient 구현 점검이지 전체 학습·일반화의 증명이 아니다. `raw/`는 변경하지 않았다.
 
+## [2026-07-24] content | Real Transformer shapes
+
+변경 내용:
+
+- [[확률변수·확률분포·기대값·분산]], [[Layer Normalization]], [[활성화 함수]], [[Transformer]]에 본문과 다른 tensor shape의 완전 풀이·부분 완성·새 수치·오류 진단·채점 기준을 추가했다. 평균의 대상, 마지막 feature 정규화 축, position-wise FFN, head·query/key 축을 독립적으로 판정한다.
+- [[Transformer]]와 [[LLM을 만든 수학]]에 $(B,T,D,H,D_h,D_{\mathrm{ff}},|\mathcal V|)=(2,4,8,2,4,16,10)$인 shape 사다리를 추가했다. packed QKV, head 분할·score·결합, residual·LayerNorm, FFN, vocabulary logits와 매개변수 gradient의 shape를 한 흐름으로 연결했다.
+- `scripts/llm-math-shapes.mjs`와 `npm run math:shapes`를 추가했다. 실행 검사는 head 분할 가능성, residual 일치, LayerNorm 통계 $(B,T,1)$, 매개변수/gradient shape, sequence 길이에 따른 score의 제곱 성장과 logit의 선형 성장을 확인한다. 자동 감사의 완전한 마스터리 표지 문서는 12개에서 16개로 늘었다.
+
+검증 결과:
+
+- 기본 설정에서 Q·K·V $(2,2,4,4)$, score $(2,2,4,4)$, concat·residual $(2,4,8)$, FFN activation $(2,4,16)$, logits $(2,4,10)$을 재계산했다.
+- 새 전이 설정 $(3,5,12,3,4,48,32000)$에서 score 원소 225개와 logit 원소 480,000개를 확인했다. `node --test scripts/tests/llm-math-shapes.test.mjs`의 신규 회귀 6개와 `npm run math:check`, `npm run learning:audit:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run verify`를 통과했다. 전체 Node 회귀는 135개, 사이트 산출물은 HTML 691개·위키 링크 8,688개·로컬 참조 47,384개이며 Chromium 회귀 4개와 KaTeX error 0개를 확인했다.
+
+남은 제한:
+
+- 이 배치는 실제에 가까운 축과 shape를 추적하지만 큰 tensor의 값, attention projection의 전체 수치 gradient, padding loss mask, mixed precision·분산 layout은 계산하지 않는다.
+- shape 일치는 연산 의미·mask 방향·수치 안정성·학습 품질의 충분조건이 아니다. 종합 capstone에서 독립 문제와 누적 오류 진단을 이어간다. `raw/`는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

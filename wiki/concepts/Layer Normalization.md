@@ -159,19 +159,49 @@ $$
 
 ## 학습 확인
 
-### 확인 질문과 답
+### 마스터리 연습
 
-1. shape가 $(B,T,D)$인 Transformer hidden state에서 일반적인 LayerNorm은 평균·분산을 어느 축에서 계산하는가?
+#### 완전 풀이 확인
 
-   **답:** 보통 각 $(b,t,:)$를 고정하고 마지막 feature 축 $D$에서 계산한다. batch와 token 위치를 함께 평균내지 않는다.
+본문의 $h=(1,2,3)$ 예를 가리고 평균·분산·표준화·$\gamma,\beta$ 적용을 다시 계산하라. $\epsilon$을 넣기 전후의 분산이 왜 정확히 같은 값이 아닐 수 있는지와 일반 $\gamma,\beta$ 뒤 평균 0·분산 1이 보장되지 않는 이유도 설명한다.
 
-2. $\gamma,\beta$를 적용하기 전 표준화한 feature 벡터의 평균·분산은 무엇인가?
+#### 부분 완성
 
-   **답:** $\epsilon$을 무시하고 분산이 양수라면 feature 축 평균은 0, 분산은 1이다. 일반 $\gamma,\beta$ 뒤 출력에는 이 성질이 남지 않을 수 있다.
+$h=(1,1,3,3)$, $\epsilon=0$, $\gamma=(1,1,1,1)$, $\beta=(0,0,0,0)$라고 하자.
 
-3. Post-LN과 Pre-LN은 residual 덧셈과 정규화의 순서가 어떻게 다른가?
+$$
+\mu=\square,
+\qquad
+\sigma^2=\square,
+\qquad
+\operatorname{LN}(h)=\square
+$$
 
-   **답:** Post-LN은 $x+\operatorname{Sublayer}(x)$를 정규화하고, Pre-LN은 정규화한 $x$를 sublayer에 넣은 뒤 원래 $x$와 더한다.
+#### 새 수치 전이
+
+$H\in\mathbb R^{2\times2\times4}$의 네 token 벡터가
+
+$$
+(1,2,3,4),\quad(2,2,2,2),\quad(-1,1,-1,1),\quad(0,2,4,6)
+$$
+
+일 때 각 token의 $\mu,\sigma^2$를 계산하라. 통계 tensor를 마지막 차원을 유지해 저장하면 shape가 $(2,2,1)$이고, 정규화 출력은 $(2,2,4)$인 이유를 적는다. 둘째 token처럼 분산이 0일 때 $\epsilon>0$이 분모를 정의하지만 새 정보나 퍼짐을 만들지는 않는다는 점도 설명한다.
+
+#### 오류 진단
+
+다음 구현 오류를 고쳐라.
+
+1. shape $(B,T,D)$ 전체에서 스칼라 평균 하나를 계산해 모든 batch와 token에 공유했다.
+2. $\gamma,\beta$ 적용 뒤에도 출력 feature 평균은 반드시 0이고 분산은 반드시 1이라고 단정했다.
+3. Post-LN residual에서 $x\in\mathbb R^{B\times T\times D}$와 sublayer 출력 $\mathbb R^{B\times T\times D/2}$를 broadcasting으로 더했다.
+
+### 해설과 채점 기준
+
+1. **부분 완성:** $\mu=2$, $\sigma^2=1$, 표준화 결과는 $(-1,-1,1,1)$이다.
+2. **새 수치 전이:** 평균은 $(2.5,2,0,3)$, 분산은 $(1.25,0,1,5)$다. 각 $(b,t)$가 자기 통계를 가지므로 $(B,T,1)$이고, 정규화는 feature별 값을 다시 내므로 $(B,T,D)$를 보존한다. 상수 벡터는 중심화하면 모두 0이므로 $\epsilon$은 0으로 나누는 문제만 막는다.
+3. **오류 진단:** 기본 Transformer LayerNorm은 마지막 feature 축만 줄인다. 학습 가능한 feature별 affine 변환은 표준화 직후의 평균·분산 성질을 바꿀 수 있다. residual 두 항은 같은 $(B,T,D)$여야 하며, 폭이 다르면 명시적 projection으로 맞춰야 한다.
+
+각 문제는 0–3점이다. 수치·축·shape·affine 경계를 모두 맞히면 3점, 핵심은 맞고 산술 오류 하나가 있으면 2점, 결과만 맞고 축을 설명하지 못하면 1점, batch/token을 섞거나 residual broadcasting을 허용하면 0점이다. 총 7점 이상이면서 **정규화 축과 residual shape 오류가 없어야** 통과다. 미달이면 `정의, shape, 기호`를 다시 읽고 shape $(3,5,8)$에서 평균·분산 원소 수와 출력 shape를 재시도한다.
 
 ### 다음 문서
 

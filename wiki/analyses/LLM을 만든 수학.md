@@ -410,6 +410,32 @@ $$
 
 한 단계 더 앞에서는 $r=X_2+O_2$였으므로 $\partial J/\partial r$은 덧셈 노드에서 직접 $X_2$ 경로와 $O_2$ 경로로 각각 전달된다. 다만 $O_2$도 $X$에서 계산됐기 때문에 최종 $\partial J/\partial X$는 shortcut 기여와 attention 경로 기여를 **더해야** 한다. 잔차 연결이 있다고 해서 전체 입력 gradient가 단순히 $\partial J/\partial r$ 하나와 같아지는 것은 아니다. 이 경로 곱과 분기 합은 [[연쇄 법칙과 계산 그래프]], 실제 매개변수별 누적은 [[역전파]]의 책임이다.
 
+### 손계산 toy에서 실제 Transformer shape로 옮기기
+
+지금까지는 batch 없이 $T=2,D=2,H=1,|\mathcal V|=4$인 아주 작은 계산을 사용했다. 실제 block에 가까운 shape로 옮겨도 연산의 역할은 같지만 축이 더 생긴다. 다음 설정은 큰 모델의 성능을 흉내 내는 값이 아니라, head 분할과 FFN 확장을 손으로 추적할 수 있게 고른 두 번째 toy다.
+
+$$
+(B,T,D,H,D_h,D_{\mathrm{ff}},|\mathcal V|)
+=(2,4,8,2,4,16,10)
+$$
+
+| 현재 허브의 단순화 | shape 확장 | 그대로 유지되는 규칙 |
+| --- | --- | --- |
+| ID $(T)$ | ID $(B,T)=(2,4)$ | ID는 embedding 표의 행을 고른다. |
+| $X:(T,D)=(2,2)$ | $X:(B,T,D)=(2,4,8)$ | 마지막 축은 residual stream feature다. |
+| 한 head $Q,K,V:(T,D)$ | $(B,H,T,D_h)=(2,2,4,4)$ | head마다 query와 key를 내적한다. |
+| score $A:(T,T)$ | $(B,H,T,T)=(2,2,4,4)$ | 각 $(b,h,\text{query})$의 key 축을 softmax한다. |
+| head 출력 $(T,D)$ | concat 뒤 $(B,T,H D_h)=(2,4,8)$ | $H D_h=D$여야 residual 폭으로 돌아온다. |
+| FFN 생략 | $(2,4,8)\to(2,4,16)\to(2,4,8)$ | $B,T$는 보존하고 feature만 넓혔다 줄인다. |
+| LayerNorm 생략 | 입력·출력 $(2,4,8)$, 통계 $(2,4,1)$ | 각 token의 마지막 $D$축만 평균·분산 계산한다. |
+| 마지막 위치 logit $(|\mathcal V|)$ | 모든 위치 logit $(B,T,|\mathcal V|)=(2,4,10)$ | 마지막 어휘 후보 축이 softmax·NLL의 축이다. |
+
+head를 결합한 attention 출력과 FFN의 둘째 투영은 모두 $(B,T,D)$로 돌아와야 shortcut과 더할 수 있다. LayerNorm 통계의 $(B,T,1)$은 batch·token마다 평균과 분산이 따로 있다는 뜻이다. activation은 $(B,T,D_{\mathrm{ff}})$ shape를 유지한 성분별 비선형 연산이고, softmax는 어휘 또는 key 후보 축의 합을 1로 만드는 정규화다.
+
+역전파 때 $W_{QKV}:(D,3D)=(8,24)$, $W^O:(D,D)=(8,8)$, $W_1:(D,D_{\mathrm{ff}})=(8,16)$, $W_2:(D_{\mathrm{ff}},D)=(16,8)$, $W_{\mathrm{out}}:(D,|\mathcal V|)=(8,10)$은 각각 같은 shape의 gradient를 받는다. residual branch의 중간 gradient도 $(B,T,D)$에서 합쳐진다.
+
+`npm run math:shapes`는 이 전체 표를 JSON으로 출력하고, $D$가 $H$로 정확히 나뉘는지, residual 양쪽 shape가 같은지, LayerNorm이 마지막 축만 줄이는지, 매개변수와 gradient shape가 같은지 검사한다. $T$를 4에서 8로 두 배 늘릴 때 attention score 원소 수는 네 배지만 logit 원소 수는 두 배가 되는 것도 확인한다. 이는 [[Transformer]]의 $T^2$ 위치쌍과 $T|\mathcal V|$ 후보 점수가 서로 다른 성장 원인임을 보여 준다.
+
 2003년 Bengio 등은 분산 word feature, 다음 단어 확률을 위한 softmax와 penalized log-likelihood 학습을 함께 제시했다. 2017년 Vaswani 등은 scaled dot-product attention과 residual connection을 Transformer의 sublayer에 배치했다. Rumelhart·Hinton·Williams의 1986년 설명은 합성된 오차 함수에서 가중치 변화율을 계산하는 신경망 학습의 중요한 근거다. 이 문서의 toy 계산은 이 자료들의 실제 차원·실험·훈련 조건을 복제하지 않는다.
 
 ### 수학적 귀결과 설계 선택
@@ -425,7 +451,7 @@ $$
 - attention의 내부 가중치 $A$는 value를 섞는 비율이지 사람의 설명이나 인과적 중요도의 자동 증거가 아니다.
 - $p_3\approx0.725$는 이 toy 모델이 둔 조건부확률일 뿐, 실제 세계에서 문장이 참일 확률이나 모델의 보정된 신뢰도는 아니다.
 - 한 bias의 NLL이 줄었다고 전체 자료의 평균 손실·일반화·사실성·안전성도 좋아진다는 결론은 나오지 않는다.
-- 실제 Transformer의 multi-head 투영, 위치 표현, FFN, LayerNorm, batch 평균, Adam state, mixed precision과 분산 실행은 생략했다. 그 요소는 같은 계산 흐름에 추가 조건·shape·수치 문제를 만든다. 특히 [[수치 안정성과 log-sum-exp]]의 max shift와 [[확률변수·확률분포·기대값·분산]]의 표본 통계는 이 작은 수에서 생략한 구현·학습 경계다.
+- 실제 Transformer의 multi-head·FFN·LayerNorm은 shape만 확장해 추적했으며 그 큰 tensor의 실제 수치 연산, 위치 표현, batch 평균 손실, Adam state, mixed precision과 분산 실행은 생략했다. 그 요소는 같은 계산 흐름에 추가 조건·shape·수치 문제를 만든다. 특히 [[수치 안정성과 log-sum-exp]]의 max shift와 [[확률변수·확률분포·기대값·분산]]의 표본 통계는 이 작은 수에서 생략한 구현·학습 경계다.
 
 ## 학습 확인
 
@@ -526,6 +552,27 @@ lookup한 $X\in\mathbb R^{2\times2}$를 적는다. 이어 $Q=K=0$, $V=X$이고 c
 3. 둘째 행·넷째 열의 가중치를 $\epsilon=10^{-4}$만큼 양쪽으로 움직인 중심 차분과 해석적 gradient를 비교한다.
 4. 잔차 $r=X_2+O_2$에서 직접 경로와 attention 경로가 최종 $X$ gradient에 어떻게 합쳐지는지 말로 설명한다.
 
+#### 실제 Transformer shape 전이
+
+다음 새 설정에서 각 빈칸을 채우고, softmax·LayerNorm·activation이 각각 어느 축을 다루는지 적어라.
+
+$$
+(B,T,D,H,D_h,D_{\mathrm{ff}},|\mathcal V|)
+=(3,5,12,3,4,48,32000)
+$$
+
+| tensor | shape |
+| --- | --- |
+| packed QKV | $\square$ |
+| head별 Q·K·V | $\square$ |
+| attention score·weight | $\square$ |
+| concat·출력 투영·residual | $\square$ |
+| LayerNorm 통계 | $\square$ |
+| FFN activation | $\square$ |
+| logits | $\square$ |
+
+$T$만 10으로 늘리면 attention score와 logit의 원소 수가 각각 몇 배가 되는지도 계산한다.
+
 ### 해설과 채점 기준
 
 시작 진단의 답은 차례로 **logit**, $0.25$인 경우, **커진다**, **서로 다른 단계다**이다.
@@ -578,6 +625,8 @@ $$
 
 전체 출력층 문제의 답은 본문의 $g_z$, $2\times4$ 가중치 gradient, $1\times4$ bias gradient, $1\times2$ 표현 gradient와 같다. $W_{\mathrm{out}}[1,3]$의 중심 차분은 약 $-0.459725$로 해석값과 일치한다. 잔차 덧셈은 upstream gradient를 두 branch에 보내고, attention branch가 다시 $X$에 의존하므로 최종 $X$ gradient는 shortcut과 attention 경로의 기여 합이다.
 
+실제 Transformer shape 전이의 답은 packed QKV $(3,5,36)$, head별 Q·K·V와 score가 각각 $(3,3,5,4)$와 $(3,3,5,5)$, concat·출력 투영·residual $(3,5,12)$, LayerNorm 통계 $(3,5,1)$, FFN activation $(3,5,48)$, logits $(3,5,32000)$이다. softmax는 score의 key 축 또는 logit의 어휘 후보 축, LayerNorm은 마지막 model feature 축, activation은 FFN feature의 각 성분을 다룬다. $T$가 5에서 10으로 두 배가 되면 score 원소는 네 배, logit 원소는 두 배다.
+
 | 평가 항목 | 2점 | 1점 | 0점 |
 | --- | --- | --- | --- |
 | 종류·shape 구분 | logit·확률·손실·gradient·update를 모두 구분 | 한 쌍을 혼동 | 여러 종류를 같은 값으로 취급 |
@@ -587,8 +636,9 @@ $$
 | 표현·shape | ID lookup과 token·feature 축을 정확히 기록 | 값 또는 축 하나만 맞음 | ID를 연속 크기로 취급 |
 | attention·residual | mask, 행별 합 1, 가중합과 같은-shape 덧셈을 모두 검산 | 산술 오류 하나 | 미래 누출·열 정규화·잘못된 broadcasting |
 | 전체 역전파 | $g_z$, 세 gradient shape, 유한차분과 분기 합을 모두 검산 | 값·shape·경로 중 하나 누락 | 전치를 뒤집거나 shortcut 경로만 계산 |
+| 실제 block shape | batch·head·query/key·FFN·vocab 축과 성장률을 모두 구분 | shape 또는 축 하나 누락 | head 분할·정규화·residual 축을 혼동 |
 
-총 14점 중 12점 이상이고, **확률 축·causal mask·shape·target 위치·gradient 부호·분기 합산 오류가 하나도 없어야** 현재 순전파와 출력단을 통과한다. 미달이면 각 오류에 대응하는 [[단어 임베딩]], [[어텐션 메커니즘]], [[잔차 연결]], [[미분·편미분·그래디언트]], [[연쇄 법칙과 계산 그래프]], [[역전파]], [[소프트맥스]], [[로그가능도]], [[경사하강법]]의 마스터리 연습을 풀고 새 ID 순서와 $z=(\ln4,\ln3,\ln2,0)$, $y=1$로 재시도한다.
+총 16점 중 14점 이상이고, **확률 축·causal mask·shape·target 위치·gradient 부호·분기 합산·head 분할 오류가 하나도 없어야** 현재 순전파와 출력단을 통과한다. 미달이면 각 오류에 대응하는 [[벡터·행렬·텐서와 shape]], [[단어 임베딩]], [[어텐션 메커니즘]], [[잔차 연결]], [[확률변수·확률분포·기대값·분산]], [[Layer Normalization]], [[활성화 함수]], [[Transformer]], [[미분·편미분·그래디언트]], [[연쇄 법칙과 계산 그래프]], [[역전파]], [[소프트맥스]], [[로그가능도]], [[경사하강법]]의 마스터리 연습을 풀고 새 ID 순서와 $z=(\ln4,\ln3,\ln2,0)$, $y=1$로 재시도한다.
 
 ### 다음 문서
 
