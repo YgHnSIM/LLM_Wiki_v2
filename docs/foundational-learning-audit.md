@@ -77,7 +77,7 @@
 | 4 | [[XLNet·RoBERTa·ALBERT]] | `concept` | 4 | 16 | 중급 | [[BERT]], [[마스크드 언어 모델링]] |
 | 5 | [[Transformer]] | `concept` | 58 | 15 | 중급 | [[어텐션 메커니즘]]의 Q·K·V와 softmax, [[잔차 연결]]의 shortcut과 shape 조건 |
 | 6 | [[061_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]] | `source` | 0 | 14 | 심화 | [[BERT]], [[마스크드 언어 모델링]] |
-| 7 | [[자동 평가 지표는 무엇을 보상하는가]] | `analysis` | 24 | 13 | 심화 | [[BLEU]], [[ROUGE]] |
+| 7 | [[자동 평가 지표는 무엇을 보상하는가]] | `analysis` | 25 | 13 | 심화 | [[BLEU]], [[ROUGE]] |
 | 8 | [[T5]] | `concept` | 6 | 13 | 기초 → 중급 | 없음 — 토큰, 확률, encoder와 decoder의 역할을 이 문서에서 먼저 만든다. |
 | 9 | [[수치 안정성과 log-sum-exp]] | `concept` | 5 | 13 | 중급 | [[지수와 로그]]의 $\exp$·$\log$, [[소프트맥스]]의 후보 축 정규화 |
 | 10 | [[미분·편미분·그래디언트]] | `concept` | 8 | 12 | 기초 → 중급 | 없음 — 스칼라·벡터와 shape는 본문에서 필요한 만큼 정의한다. |

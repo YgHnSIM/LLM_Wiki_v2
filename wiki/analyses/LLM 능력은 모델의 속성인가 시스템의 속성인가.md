@@ -14,7 +14,7 @@ tags:
   - domain/machine-learning
   - domain/computer-science
 created: '2026-07-24'
-updated: '2026-07-24'
+updated: '2026-07-25'
 lifecycle: active
 verification: partial
 artifacts:
@@ -59,6 +59,9 @@ related:
   - analysis.scale-as-research-variable
   - analysis.when-data-movement-dominates
   - analysis.model-capability-to-service-capability
+  - analysis.n-gram에서-llm으로
+  - analysis.stored-program-to-learning-framework
+  - analysis.silicon-scaling-to-accelerators
 ---
 # LLM 능력은 모델의 속성인가 시스템의 속성인가
 
@@ -134,6 +137,18 @@ System B의 raw throughput이 더 높다고 가정해도 긴 input을 잘라내�
 | 서비스 | Checkpoint benchmark 중심 | KV cache·batching·quantization·scheduler | 반복 요청의 latency·throughput 제공 | Tail·failure·access·cost |
 
 각 행은 앞선 능력을 폐기하지 않고 그 위에 새 실행 조건을 더한다. 오늘의 LLM service에도 검산, formal procedure, probability, gradient, matrix kernel과 network scheduling이 동시에 들어 있다.
+
+### 세 연결고리가 추가한 중간 층
+
+아홉 시대만 순서대로 읽으면 장과 장 사이의 변환을 한 문장으로 압축하기 쉽다. 세 연결고리는 이 압축을 다음처럼 풀었다.
+
+| 연결고리 | 종합편에 추가한 구분 | 막는 오해 |
+| --- | --- | --- |
+| [[N-gram에서 LLM으로]] | Sparse probability 재분배, 완전한 neural LM, 표현 학습, 조건부 생성과 Transformer training workload | N-gram 표가 커져 그대로 LLM이 됐다. |
+| [[저장 프로그램에서 학습 프레임워크까지]] | Instruction, compiler, numeric primitive, reverse-mode AD, accelerator library와 graph runtime | 저장 프로그램이 곧 현대 framework였거나 고수준 tensor code만으로 실행이 설명된다. |
+| [[집적도 증가에서 가속기까지 무엇이 더 필요했나]] | Component density, device scaling, power·memory wall, parallel programming과 domain specialization | Moore의 법칙이 GPU·TPU·LLM 성능을 직접 만들었다. |
+
+이 보강으로 model–system 경계는 hardware와 model 사이의 한 선이 아니라, **표현할 workload, 번역할 software, 공급할 data, 실행할 silicon·memory, 측정할 결과 계약**이 연결되는 여러 interface가 된다.
 
 ### 병목은 사라지기보다 지배 항이 바뀐다
 
@@ -269,10 +284,10 @@ FlashAttention과 vLLM은 model weight를 바꾸지 않고도 실행 능력이 �
 
 이 종합은 아홉 편의 1차 자료를 하나의 분석 틀로 연결한 것이므로 `verification: partial`이다. 각 논문이 “공진화”라는 동일한 역사 이론을 주장한 것은 아니다. 직접 확인된 사실, 가능 조건과 이 문서의 후대 비교를 분리했다.
 
-다음 범위는 충분히 다루지 않는다.
+세 연결고리를 추가해도 다음 범위는 충분히 다루지 않는다.
 
-- Semiconductor supply chain, 자본·전력·냉각·환경 비용과 노동
-- Dataset 저작권·언어 대표성·annotation 노동과 접근 권한
+- Semiconductor supply chain, fabrication yield·packaging, 자본·전력·냉각과 환경 비용
+- Dataset 수집·정제·annotation 노동, 저작권·권리, 언어 대표성과 접근 권한
 - Compiler·network·storage·database의 더 세밀한 계보
 - Safety, 보안, privacy와 사회적 유용성을 하나의 능력 metric으로 정의하는 문제
 - 비공개 system의 재현 불가능한 training·serving 조건
@@ -322,3 +337,6 @@ FlashAttention과 vLLM은 model weight를 바꾸지 않고도 실행 능력이 �
 - [[규모는 언제 연구 변수가 되었나]]
 - [[연산보다 데이터 이동이 비싸질 때]]
 - [[모델 능력에서 서비스 능력으로]]
+- [[N-gram에서 LLM으로]]
+- [[저장 프로그램에서 학습 프레임워크까지]]
+- [[집적도 증가에서 가속기까지 무엇이 더 필요했나]]

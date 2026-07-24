@@ -3,10 +3,11 @@ schema_version: 2
 initiative:
   id: llm-computing-history
   title: LLM과 컴퓨팅 능력의 공진화
-  current_batch: bridge-integration
+  current_batch: null
   next_action: >-
-    bridge-integration 배치에서 세 연결고리를 허브의 핵심 연결고리 지도, 본편의 횡단
-    연결, 종합편의 보강된 system 해석과 data·평가 교차 경로로 통합한다.
+    계획된 아홉 본편·세 연결고리·다섯 owner·허브·종합편은 모두 완료됐다.
+    npm run history:check와 npm run verify로 상태를 확인하고, 새 1차 근거나 실제
+    학습자 오답·탐색 로그가 생길 때 반복되는 연결 공백만 다음 보강 배치로 정한다.
   blockers: []
   hub:
     path: wiki/meta/LLM과 컴퓨팅 능력의 공진화.md
@@ -18,9 +19,15 @@ initiative:
     stage: complete
   handoff:
     updated: '2026-07-25'
-    baseline_commit: 12a04ff1253aa2d481458b41e9d8d0462560fee2
-    last_completed_gate: bridge-silicon-acceleration-verified
+    baseline_commit: fdeb940b2d147efc6bc482abee155653051ec770
+    last_completed_gate: history-bridges-integrated-verified
     validation:
+      - command: npm run history:check
+        result: 16개 배치·9개 본편·3개 연결고리·5개 owner의 완료 상태와 경로·내용 계약 검증 통과
+      - command: npm run verify
+        result: 25개 수식 owner·Node 회귀 149개·Markdown 384개·evidence 484건·710 HTML과 Chromium 회귀 4개 통과
+      - command: Playwright Chromium visual QA
+        result: 허브와 세 연결고리를 390x844에서 확인하고 page-level 가로 overflow 없음
       - command: npm run verify
         result: 집적도→가속기 연결고리와 본편 2·5·8·owner·허브 링크의 전체 회귀 통과
       - command: npm run verify
@@ -60,9 +67,10 @@ initiative:
       - command: Playwright Chromium visual QA
         result: 허브 desktop과 종합편 390x844 mobile 렌더 확인, document width 390px로 page-level 가로 overflow 없음
     notes: >-
-      기준 branch는 main이다. 기존 아홉 본편은 유지하고 세 횡단 연결고리로 생략된
-      표현·소프트웨어·반도체 전환을 보강한다. .codex-remote-attachments/는 사용자
-      첨부이므로 보존하고, raw와 C:/Vault/CS_Wiki는 수정하지 않는다.
+      기준 branch는 main이다. 아홉 본편 위에 표현 workload·software abstraction·
+      silicon-to-system의 세 횡단 연결고리와 data·평가 교차 경로를 통합했다.
+      .codex-remote-attachments/는 사용자 첨부이므로 보존하고, raw와
+      C:/Vault/CS_Wiki는 수정하지 않았다.
 
 capability_layers:
   - computability
@@ -294,7 +302,7 @@ batches:
       - wiki/analyses/집적도 증가에서 가속기까지 무엇이 더 필요했나.md
   - id: bridge-integration
     title: 연결고리 허브·본편·종합편 통합
-    stage: in_progress
+    stage: complete
     deliverables:
       - wiki/meta/LLM과 컴퓨팅 능력의 공진화.md
       - wiki/analyses/LLM 능력은 모델의 속성인가 시스템의 속성인가.md

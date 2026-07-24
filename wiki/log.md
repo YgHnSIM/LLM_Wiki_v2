@@ -5116,6 +5116,24 @@ raw 등록 해시:
 - Semiconductor 공급망·yield·packaging·냉각·전력망·자본 비용과 환경 영향은 종합편의 제외 범위로 남긴다. 서로 다른 chip·workload의 성능 배수도 직접 환산하지 않는다.
 - 다음 배치는 세 연결고리를 허브·본편·종합편의 횡단 경로로 통합한다. `raw/`와 CS_WIKI는 변경하지 않았다.
 
+## [2026-07-25] content | Integrate history bridges
+
+변경 내용:
+
+- [[LLM과 컴퓨팅 능력의 공진화]]에 `핵심 연결고리` 지도를 추가해 아홉 본편 위에 표현 workload·software abstraction·silicon-to-system의 세 횡단 경로를 겹쳤다.
+- 본편 2·4·5·6·8의 `학습 확인`에 시대순 이전·다음과 분리된 `횡단 연결`을 두고, data 축은 4장 → [[데이터 품질과 분포 다양성은 같은 축인가]] → 7장, 측정 축은 1장 → [[자동 평가 지표는 무엇을 보상하는가]] → 9장으로 연결했다.
+- [[LLM 능력은 모델의 속성인가 시스템의 속성인가]]에 세 연결고리가 막는 직선 계보를 통합하고 semiconductor 공급망·energy·cooling·capital과 data 노동·권리를 제외 범위로 보존했다.
+
+검증 결과:
+
+- `npm run history:check`, `npm run learning:audit:check`, `npm run math:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run verify`로 9개 본편·3개 연결고리·5개 owner, 근거·링크·학습 구조·수식과 사이트 회귀를 검증했다.
+- Playwright Chromium 390×844에서 세 연결고리 문서와 허브를 확인하고 page-level 가로 overflow가 없음을 검증했다.
+
+남은 제한:
+
+- 서로 다른 시대의 속도·품질 수치는 직접 환산하지 않는다. Supply chain·fabrication·packaging·전력·냉각·자본·환경과 data 노동·권리는 후속 독립 근거가 필요한 범위다.
+- `raw/`, CS_WIKI와 `.codex-remote-attachments/`는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

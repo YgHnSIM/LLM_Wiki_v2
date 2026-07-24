@@ -197,7 +197,9 @@ Transformer 원 논문의 대표 훈련 수치는 다음 조건에서만 읽는�
 
 다음 본편 **규모는 언제 연구 변수가 되었나**에서는 위치 병렬성이 model·data·device 규모를 키우는 조건과 만나면서, FLOP budget이 연구 설계 변수로 바뀐 과정을 본다.
 
-횡단 연결 [[N-gram에서 LLM으로]]은 이 구조 전환을 Katz의 sparse count부터 NPLM·Word2Vec·RNN·seq2seq를 거친 **표현과 과업의 변화** 안에 놓는다. 따라서 Transformer를 n-gram의 단순 대형화나 GPU의 자동 산물로 설명하지 않는다.
+### 횡단 연결
+
+[[N-gram에서 LLM으로]]은 이 구조 전환을 Katz의 sparse count부터 NPLM·Word2Vec·RNN·seq2seq를 거친 **표현과 과업의 변화** 안에 놓는다. 따라서 Transformer를 n-gram의 단순 대형화나 GPU의 자동 산물로 설명하지 않는다.
 
 [[저장 프로그램에서 학습 프레임워크까지]]은 같은 수학식이 compiler·수치 library·자동미분·kernel·graph runtime을 거쳐 accelerator에서 실행되는 소프트웨어 경로를 보충한다.
 
