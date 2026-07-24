@@ -10,32 +10,30 @@ initiative:
     stage: complete
   current_batch: null
   next_action: >-
-    새 수식 계열 후보가 생기면 npm run math:check를 실행하고 wiki/concepts/특이값 분해와 저랭크 근사.md의 low-rank-svd owner와
-    겹치지 않는 독립 학습 질문·ready 선수 관계·대표 소비 문서를 docs/llm-math-network.yml에 먼저 제안한 뒤 사용자 범위 확인으로 새 배치를 시작한다.
+    npm run math:check를 실행한 뒤, 다음 접근성 보강 후보가 생기면 wiki/concepts/확률.md의 probability와 wiki/concepts/조건부 확률.md의 conditional-chain-rule owner의 설명 책임을 겹치지 않는 독립 학습 질문·최소 예·대표 소비 문서로 먼저 판정하고 사용자 범위에 맞는 한 배치를 제안한다.
   blockers: []
   handoff:
     updated: '2026-07-24'
-    baseline_commit: 8c9bebe6bee26a6ad71862faba2c47e968498257
-    last_completed_gate: advanced-extensions-g7-verified
+    baseline_commit: de9b3c0188b2d95717fab18eade56ad116eeeaf9
+    last_completed_gate: probability-notation-accessibility-g7-verified
     validation:
       - command: npm run math:check
-        result: 6개 배치·25개 수식 계열의 구조·owner·선수 관계와 advanced-extensions 완료 상태 검증 통과
+        result: 7개 배치·25개 수식 계열의 구조·owner·선수 관계와 확률 표기 보강 배치 완료 상태 검증 통과
       - command: npm run learning:audit
-        result: 365개 Markdown·362개 비메타 문서, 블록 수식 689개로 기준선 갱신
+        result: 365개 Markdown·362개 비메타 문서, 블록 수식 691개로 기준선 갱신
       - command: npm run learning:audit:check
         result: 기초 학습 감사 기준선이 현재 wiki와 일치함을 확인
       - command: npm run sync:index
-        result: advanced-extensions의 새 owner·변경 문서 evidence 수와 목록을 index에 동기화
+        result: 변경 문서의 evidence 수와 목록을 index에 동기화
       - command: npm run lint:wiki
         result: Markdown 365개·evidence 458건·immutable raw artifact 220개 검증 통과
       - command: BASE_PATH='' npm run verify
-        result: math 원장, Node 회귀 122개, wiki lint·691 HTML build/check·Chromium 회귀 4개를 통과
+        result: math 원장, Node 회귀 123개, wiki lint·691 HTML build/check·Chromium 회귀 4개를 통과
     notes: >-
-      기준 branch는 main이다. advanced-extensions는 특이값 분해와 저랭크 근사·활성화 함수·계산 복잡도와 비용 모델·표본추출·온도·top-k·top-p owner를 새로 만들고,
-      잠재 의미 분석·저순위 적응·다층 퍼셉트론·Transformer·FlashAttention·전문가 혼합·자기회귀 생성·대규모 언어 모델의 국소 설명을 연결했다.
-      인간 피드백 강화학습에는 비교 보상·정책 목적·reference KL을, 그룹 상대 정책 최적화에는 그 owner 경계를 보강했다.
-      $\operatorname{diag}(3,1)$의 rank-1 잔차 제곱 1, $z=(0,1,2)$의 온도별 softmax, 선호 점수 차 0.9의 확률 0.710950·손실 0.341154,
-      $n=4,d=2$ attention 두 행렬곱의 64회 곱셈을 수동 확인했다. raw는 바꾸지 않았다.
+      기준 branch는 main이다. probability owner에는 집합 원소 수를 실제 카드 목록으로 세고 $\lvert\cdot\rvert$의 의미를 구별하는 단계를,
+      conditional-chain-rule owner에는 후보 범위를 먼저 $B$로 줄인 뒤 다시 세는 단계를 추가했다.
+      허브에는 $\mathcal V$ 집합·$V$ value 행렬·출력 확률 벡터 $p$를 구별하는 세 질문을 추가했고 overview에는 같은 입문 경로를 기록했다.
+      생성 HTML의 세 변경 페이지에서 KaTeX error 표지 0개와 새 안내 문구를 확인했고, Chromium mobile overflow 회귀도 통과했다. raw는 바꾸지 않았다.
 
 baseline:
   recorded_on: '2026-07-24'
@@ -43,7 +41,7 @@ baseline:
   wiki_documents: 365
   non_meta_documents: 362
   formula_documents: 183
-  formula_blocks: 689
+  formula_blocks: 691
 
 batches:
   - id: linear-algebra-foundations
@@ -147,6 +145,17 @@ batches:
       - wiki/concepts/표본추출·온도·top-k·top-p.md
       - wiki/concepts/인간 피드백 강화학습.md
       - wiki/concepts/그룹 상대 정책 최적화.md
+
+  - id: probability-notation-accessibility
+    title: 확률·조건부확률 입문 표기 보강
+    stage: complete
+    families:
+      - probability
+      - conditional-chain-rule
+    deliverables:
+      - wiki/concepts/확률.md
+      - wiki/concepts/조건부 확률.md
+      - wiki/analyses/LLM을 만든 수학.md
 
 families:
   - id: vectors-matrices-tensors

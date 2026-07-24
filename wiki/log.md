@@ -4744,6 +4744,24 @@ raw 등록 해시:
 
 - 이 표는 손계산용 toy 설정만 설명한다. 실제 Transformer의 전체 어휘·다층 구조·다중 head·정규화·FFN·batch 학습을 재현하지 않는다.
 
+## [2026-07-24] content | Probability notation reading path
+
+변경 내용:
+
+- [[확률]]에 카드 목록을 직접 세어 $\lvert A\rvert$와 $\lvert\Omega\rvert$를 읽는 단계를 추가했다. 같은 세로줄이 실수에서는 절댓값, 집합에서는 원소 수가 된다는 구분과, 같은 가능성 가정의 범위는 유지했다.
+- [[조건부 확률]]에는 전체 12장 → 파란 카드 6장 → 파란 별 3장이라는 후보 좁히기 순서를 추가하고, $\mid$가 나눗셈이 아니라 “조건이 주어짐”을 뜻한다는 표기 행을 더했다.
+- [[LLM을 만든 수학]]과 [[overview]]에는 어휘 집합 $\mathcal V$, attention value 행렬 $V$, 다음 token 확률 벡터 $p$를 입력·출력 질문으로 구분하는 입문 경로를 기록했다. `raw/`는 바꾸지 않았다.
+
+검증 결과:
+
+- `npm run math:check`, `npm run learning:audit`, `npm run learning:audit:check`, `npm run sync:index`, `npm run lint:wiki`, `BASE_PATH='' npm run verify`를 통과했다. 검증은 365 Markdown·458 evidence·220 immutable raw artifact, 블록 수식 691개, Node 회귀 123개, HTML 691개·8,633개 위키 링크·47,198개 로컬 참조, Chromium 회귀 4개를 확인했다.
+- 생성된 [[확률]], [[조건부 확률]], [[LLM을 만든 수학]] HTML에서 새 안내 문구가 있고 KaTeX error 표지가 0개임을 확인했다. 모바일 navigation·directory overflow 브라우저 회귀도 통과했다.
+
+남은 제한:
+
+- 카드 수와 token 4개 예는 표기와 계산 순서를 보이는 편집부 예다. 실제 LLM의 어휘 크기·확률 추정·학습 run을 재현하지 않는다.
+- $\lvert A\rvert/\lvert\Omega\rvert$는 유한하고 같은 가능성인 결과에만 쓰며, 조건부확률의 $\mid$는 인과관계를 뜻하지 않는다.
+
 ## 관련 항목
 
 - [[index]]
