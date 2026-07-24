@@ -5098,6 +5098,24 @@ raw 등록 해시:
 - Fortran에서 TensorFlow로 이어지는 단일 문헌 계보를 주장하지 않으며 compiler·primitive·graph·end-to-end 성능을 하나의 배율로 합치지 않는다.
 - 다음 배치는 집적도 증가가 실제 accelerator 성능으로 이어지기 위해 필요했던 전력·memory·병렬 프로그래밍·도메인 특화 조건을 보강한다. `raw/`와 CS_WIKI는 변경하지 않았다.
 
+## [2026-07-25] content | Silicon scaling to accelerators
+
+변경 내용:
+
+- [[집적도 증가에서 가속기까지 무엇이 더 필요했나]]를 추가해 Moore의 1965년 component·cost 관찰, Dennard scaling, power·memory wall, parallel shift, CUDA와 TPU specialization을 연결했다.
+- 전체 시간 100 가운데 연산 80만 2배 가속하면 새 시간은 60이고 전체 speedup은 약 1.67이라는 예로 peak arithmetic과 end-to-end 시간의 차이를 설명했다.
+- Moore·Dennard·Berkeley parallel view 1차 근거를 evidence 레지스트리에 추가하고, “Moore의 법칙이 GPU·LLM을 낳았다”는 단일 원인 문장을 명시적으로 금지했다.
+
+검증 결과:
+
+- `npm run history:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run learning:audit`, `npm run math:check`, `npm run verify`로 원장, 근거·링크·수식·학습 구조와 사이트 회귀를 검증했다.
+- $80/2+20=60$, $100/60\approx1.67$을 독립 계산해 본문과 대조했다.
+
+남은 제한:
+
+- Semiconductor 공급망·yield·packaging·냉각·전력망·자본 비용과 환경 영향은 종합편의 제외 범위로 남긴다. 서로 다른 chip·workload의 성능 배수도 직접 환산하지 않는다.
+- 다음 배치는 세 연결고리를 허브·본편·종합편의 횡단 경로로 통합한다. `raw/`와 CS_WIKI는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

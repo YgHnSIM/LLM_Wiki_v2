@@ -3,10 +3,10 @@ schema_version: 2
 initiative:
   id: llm-computing-history
   title: LLM과 컴퓨팅 능력의 공진화
-  current_batch: bridge-silicon-acceleration
+  current_batch: bridge-integration
   next_action: >-
-    bridge-silicon-acceleration 배치에서 Moore의 집적도 관찰·Dennard scaling·전력과
-    memory wall·병렬 전환·CUDA·TPU를 실제 가속기 성능의 조건으로 연결한다.
+    bridge-integration 배치에서 세 연결고리를 허브의 핵심 연결고리 지도, 본편의 횡단
+    연결, 종합편의 보강된 system 해석과 data·평가 교차 경로로 통합한다.
   blockers: []
   hub:
     path: wiki/meta/LLM과 컴퓨팅 능력의 공진화.md
@@ -19,8 +19,10 @@ initiative:
   handoff:
     updated: '2026-07-25'
     baseline_commit: 12a04ff1253aa2d481458b41e9d8d0462560fee2
-    last_completed_gate: bridge-programming-abstraction-verified
+    last_completed_gate: bridge-silicon-acceleration-verified
     validation:
+      - command: npm run verify
+        result: 집적도→가속기 연결고리와 본편 2·5·8·owner·허브 링크의 전체 회귀 통과
       - command: npm run verify
         result: 저장 프로그램→학습 프레임워크 연결고리와 본편 2·5·6·허브 링크의 전체 회귀 통과
       - command: npm run verify
@@ -193,7 +195,7 @@ bridges:
     title: 집적도 증가에서 가속기까지 무엇이 더 필요했나
     path: wiki/analyses/집적도 증가에서 가속기까지 무엇이 더 필요했나.md
     page_id: analysis.silicon-scaling-to-accelerators
-    stage: planned
+    stage: complete
     connects: [chapter-02-computation-language, chapter-05-gpu-deep-learning, chapter-08-data-movement]
     capability_layers: [realized-performance, scalability, resource-efficiency]
 
@@ -287,12 +289,12 @@ batches:
       - wiki/analyses/저장 프로그램에서 학습 프레임워크까지.md
   - id: bridge-silicon-acceleration
     title: 집적도 증가에서 가속기까지
-    stage: in_progress
+    stage: complete
     deliverables:
       - wiki/analyses/집적도 증가에서 가속기까지 무엇이 더 필요했나.md
   - id: bridge-integration
     title: 연결고리 허브·본편·종합편 통합
-    stage: planned
+    stage: in_progress
     deliverables:
       - wiki/meta/LLM과 컴퓨팅 능력의 공진화.md
       - wiki/analyses/LLM 능력은 모델의 속성인가 시스템의 속성인가.md

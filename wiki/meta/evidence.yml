@@ -3960,6 +3960,31 @@ sources:
     doi: 10.1145/216585.216588
     url: https://doi.org/10.1145/216585.216588
     language: en
+  moore-1965-cramming-components:
+    title: Cramming More Components onto Integrated Circuits
+    authors: [Gordon E. Moore]
+    published: 1965
+    source_type: primary
+    kind: journal-article
+    url: https://www.cs.cmu.edu/~18742/papers/Moore1965.pdf
+    language: en
+  dennard-et-al-1974-mosfet-scaling:
+    title: Design of Ion-Implanted MOSFET's with Very Small Physical Dimensions
+    authors: [Robert H. Dennard, Fritz H. Gaensslen, Hwa-Nien Yu, V. Leo Rideout, Ernest Bassous, Andre R. LeBlanc]
+    published: 1974
+    source_type: primary
+    kind: journal-article
+    doi: 10.1109/JSSC.1974.1050511
+    url: https://research.ibm.com/publications/design-of-ion-implanted-mosfets-with-very-small-physical-dimensions
+    language: en
+  asanovic-et-al-2006-berkeley-view:
+    title: 'The Landscape of Parallel Computing Research: A View from Berkeley'
+    authors: [Krste Asanović, Ras Bodik, Bryan Christopher Catanzaro, Joseph James Gebis, Parry Husbands, Kurt Keutzer, David A. Patterson, William Lester Plishker, John Shalf, Samuel Webb Williams, Katherine A. Yelick]
+    published: 2006
+    source_type: primary
+    kind: technical-report
+    url: https://people.eecs.berkeley.edu/~krste/papers/BerkeleyView.pdf
+    language: en
   williams-waterman-patterson-2009-roofline:
     title: 'Roofline: An Insightful Visual Performance Model for Multicore Architectures'
     authors: [Samuel Williams, Andrew Waterman, David Patterson]

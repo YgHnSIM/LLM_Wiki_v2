@@ -28,6 +28,7 @@ related:
   - analysis.llm-capability-model-or-system
   - analysis.n-gram에서-llm으로
   - analysis.stored-program-to-learning-framework
+  - analysis.silicon-scaling-to-accelerators
 ---
 # LLM과 컴퓨팅 능력의 공진화
 
@@ -64,6 +65,8 @@ related:
 본편 4–6 사이에서 “빈도표가 어떻게 학습 표현과 Transformer workload로 바뀌었는가”가 궁금하면 횡단 연결 [[N-gram에서 LLM으로]]을 끼워 읽는다.
 
 본편 2·5·6 사이에서 “저장된 instruction이 어떻게 tensor graph와 자동 gradient 실행으로 이어졌는가”가 궁금하면 [[저장 프로그램에서 학습 프레임워크까지]]를 읽는다.
+
+본편 2·5·8 사이에서 “집적도 증가가 왜 곧바로 program speed가 아니며, CUDA GPU와 TPU까지 무엇이 더 필요했는가”가 궁금하면 [[집적도 증가에서 가속기까지 무엇이 더 필요했나]]를 읽는다.
 
 ## 시대순 본편 아홉 편
 
@@ -169,3 +172,4 @@ related:
 - [[LLM 능력은 모델의 속성인가 시스템의 속성인가]]
 - [[N-gram에서 LLM으로]]
 - [[저장 프로그램에서 학습 프레임워크까지]]
+- [[집적도 증가에서 가속기까지 무엇이 더 필요했나]]
