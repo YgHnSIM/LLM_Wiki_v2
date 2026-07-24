@@ -3,12 +3,13 @@ schema_version: 1
 initiative:
   id: llm-system-boundary-network
   title: LLM 시스템 경계 확장
-  current_batch: realtime-bridge
+  current_batch: integration
   next_action: >-
-    npm run boundary:resume으로 재개 상태를 확인한 뒤, realtime-bridge 배치에서
-    텍스트 모델에서 실시간 멀티모달 시스템까지 분석을 만들고, 새 runtime owner와
-    기존 음성 인식·합성·네이티브 오디오 비교를 text token 생성·audio pipeline·사용자 경험의
-    서로 다른 책임과 측정 경계로 연결한다.
+    npm run boundary:resume으로 재개 상태를 확인한 뒤, integration 배치에서
+    LLM 시스템 경계 확장 지도를 만들고, 기존 LLM 능력은 모델의 속성인가 시스템의 속성인가,
+    LLM을 만든 수학, LLM과 컴퓨팅 능력의 공진화 허브를 여섯 경계의 owner·bridge·학습 경로와
+    연결한다. 완료된 수학·컴퓨팅 역사 owner를 다시 열지 않고, handoff와 학습 감사 baseline만
+    실제 상태에 맞게 갱신한다.
   blockers: []
   hub:
     path: wiki/meta/LLM 시스템 경계 확장 지도.md
@@ -17,9 +18,9 @@ initiative:
     stage: planned
   handoff:
     updated: '2026-07-25'
-    baseline_commit: 0bf536bec06153399c1c9dfeaa251a970e276a02
-    last_completed_batch: realtime-owner
-    last_completed_gate: realtime-multimodal-owner-verified
+    baseline_commit: 7aa1b62571b8fa31c5f5e4e4e30b0e4dff8904e2
+    last_completed_batch: realtime-bridge
+    last_completed_gate: text-to-realtime-multimodal-bridge-verified
     validation:
       - boundary:check
       - history:check
@@ -31,10 +32,10 @@ initiative:
       - npm run boundary:check
       - git status --short --branch
     notes: >-
-      realtime-owner에서 실시간 멀티모달 상호작용을 model architecture와 분리해,
-      media clock·frame/chunk/packet/token/turn·buffer·backpressure·A/V sync·interrupt/cancel·복구의
-      runtime 계약으로 검증해 완료했다. RFC·browser runtime·대화 모델 근거의 적용 범위를 분리했고,
-      다음 유일한 행동은 realtime-bridge다.
+      realtime-bridge에서 text token serving, ASR→text→LLM→TTS 또는 공표된 native audio model I/O,
+      media runtime의 서로 다른 결과 계약과 측정 장부를 연결해 완료했다. model output·turn·presentation,
+      VAD·ASR·turn policy, token latency·capture-to-first-presentation의 범위를 분리했고,
+      다음 유일한 행동은 integration이다.
       이 원장이 세션 전환·문맥 압축 뒤에도 배치 순서와 다음 행동을 복원하는 단일 기준이다.
       raw/, C:/Vault/CS_Wiki와 사용자 첨부 파일은 수정하거나 staging하지 않는다.
 
@@ -136,7 +137,7 @@ bridges:
     page_id: analysis.text-to-realtime-multimodal-systems
     page_type: analysis
     action: create
-    stage: planned
+    stage: complete
     required_by: [realtime-bridge]
 
 tracks:
@@ -199,7 +200,7 @@ tracks:
     priority: 6
     title: 텍스트 모델에서 실시간 멀티모달 시스템까지
     primary_title: 실시간 멀티모달 상호작용
-    stage: in_progress
+    stage: complete
     owners: [realtime-multimodal-interaction]
     bridges: [text-to-realtime-multimodal-systems]
     primary_path: wiki/concepts/실시간 멀티모달 상호작용.md
@@ -433,7 +434,7 @@ batches:
   - id: realtime-bridge
     order: 10
     title: 텍스트에서 실시간 멀티모달로 연결
-    stage: planned
+    stage: complete
     depends_on: [realtime-owner]
     commit_message: 'content: bridge_text_to_realtime_multimodal_systems'
     deliverables:

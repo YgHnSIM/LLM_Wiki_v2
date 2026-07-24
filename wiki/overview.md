@@ -25,7 +25,7 @@ related:
 
 언어 모델 발전과 인간 계산·stored program·GPU·분산 학습·memory·serving의 역사를 함께 읽으려면 [[LLM과 컴퓨팅 능력의 공진화]]에서 시작한다. 시대순 아홉 본편과 세 횡단 연결고리, 종합편이 “빨라졌다”를 계산 가능성·실현 성능·확장성·효율·신뢰성으로 나누어 안내한다. 표현 workload는 [[N-gram에서 LLM으로]], software 추상화는 [[저장 프로그램에서 학습 프레임워크까지]], silicon과 실제 가속 사이의 조건은 [[집적도 증가에서 가속기까지 무엇이 더 필요했나]]가 맡는다.
 
-모델 밖의 시스템 경계를 따라 읽으려면 [[LLM 추론 에너지 지표]]에서 시작해 [[전력에서 서비스 결과 계약까지 무엇을 세어야 하나]]로 간다. 이 경로는 전력계의 J를 token 수 하나로 환산하지 않고, prefill·decode·idle·retry와 품질·deadline·traffic을 포함한 서비스 결과 계약으로 확장한다. 학습 자료 쪽에서는 [[학습 데이터 생애주기와 출처 추적]]이 snapshot·변환·release·training run을 잇고, [[데이터의 양에서 권리와 책임까지]]가 규모 숫자와 권리·동의·재현·구제를 같은 주장으로 섞지 않게 한다. [[언어 수와 언어 형평성은 같은 축인가]]는 이 장부를 언어별 자료·비용·권한의 분배 질문으로 이어 간다. 메모리 쪽에서는 [[문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리]]가 요청마다 사라지는 KV cache, 지속 RAG 색인, agent event log와 parameter checkpoint를 물리 위치·수명·갱신·근거·복구 경계로 나눈다. 문자 쪽에서는 [[문자 인코딩과 정규화]]가 byte·UTF-8·Unicode code point·grapheme cluster·normalization·tokenizer를 구분해, 화면의 같은 글자와 모델의 같은 입력 ID를 혼동하지 않게 한다. [[문자에서 실행 권한까지]]는 그 표현을 JSON·schema·업무 의미·인증·인가의 서로 다른 관문으로 이어, allowed proposal을 실행 성공과 섞지 않게 한다. [[함수 호출과 도구 사용]]은 그 뒤 한 write action의 proposed·confirmed·committed·failed·unknown을 분리하고, 응답 유실을 blind retry가 아니라 reconciliation·postcondition·감사 기록으로 다룬다. [[LLM 에이전트]]는 이 결과 상태가 여러 step의 plan·memory·중단 조건으로 전파되는 loop를 맡는다. [[실시간 멀티모달 상호작용]]은 media clock·frame/chunk·buffer·turn detection·incremental output·A/V sync·interrupt/cancel을 model architecture와 분리해 같은 지도에 연결한다.
+모델 밖의 시스템 경계를 따라 읽으려면 [[LLM 추론 에너지 지표]]에서 시작해 [[전력에서 서비스 결과 계약까지 무엇을 세어야 하나]]로 간다. 이 경로는 전력계의 J를 token 수 하나로 환산하지 않고, prefill·decode·idle·retry와 품질·deadline·traffic을 포함한 서비스 결과 계약으로 확장한다. 학습 자료 쪽에서는 [[학습 데이터 생애주기와 출처 추적]]이 snapshot·변환·release·training run을 잇고, [[데이터의 양에서 권리와 책임까지]]가 규모 숫자와 권리·동의·재현·구제를 같은 주장으로 섞지 않게 한다. [[언어 수와 언어 형평성은 같은 축인가]]는 이 장부를 언어별 자료·비용·권한의 분배 질문으로 이어 간다. 메모리 쪽에서는 [[문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리]]가 요청마다 사라지는 KV cache, 지속 RAG 색인, agent event log와 parameter checkpoint를 물리 위치·수명·갱신·근거·복구 경계로 나눈다. 문자 쪽에서는 [[문자 인코딩과 정규화]]가 byte·UTF-8·Unicode code point·grapheme cluster·normalization·tokenizer를 구분해, 화면의 같은 글자와 모델의 같은 입력 ID를 혼동하지 않게 한다. [[문자에서 실행 권한까지]]는 그 표현을 JSON·schema·업무 의미·인증·인가의 서로 다른 관문으로 이어, allowed proposal을 실행 성공과 섞지 않게 한다. [[함수 호출과 도구 사용]]은 그 뒤 한 write action의 proposed·confirmed·committed·failed·unknown을 분리하고, 응답 유실을 blind retry가 아니라 reconciliation·postcondition·감사 기록으로 다룬다. [[LLM 에이전트]]는 이 결과 상태가 여러 step의 plan·memory·중단 조건으로 전파되는 loop를 맡는다. [[실시간 멀티모달 상호작용]]은 media clock·frame/chunk·buffer·turn detection·incremental output·A/V sync·interrupt/cancel을 model architecture와 분리해 같은 지도에 연결한다. [[텍스트 모델에서 실시간 멀티모달 시스템까지]]는 text token 생성·음성 표현 경로·media runtime이 같은 사용자 경험에서 만날 때, 어느 latency·품질·복구 지표가 어느 층에 속하는지 비교한다.
 
 ## 공식 장 번호와 편집부 재구성
 
@@ -37,7 +37,7 @@ related:
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 110개, reference 0개, concept 204개, entity 29개, analysis 44개를 합친 비메타 문서 387개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 핵심 수학 경로는 완전 풀이를 읽는 데서 끝내지 않고 `부분 완성 → 새 수치 전이 → 오류 진단 → 해설과 채점 기준`으로 도움을 줄여 독립 계산을 확인하는 방향으로 보강 중이다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 110개, reference 0개, concept 204개, entity 29개, analysis 45개를 합친 비메타 문서 388개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 핵심 수학 경로는 완전 풀이를 읽는 데서 끝내지 않고 `부분 완성 → 새 수치 전이 → 오류 진단 → 해설과 채점 기준`으로 도움을 줄여 독립 계산을 확인하는 방향으로 보강 중이다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |

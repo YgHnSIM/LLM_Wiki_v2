@@ -5304,6 +5304,26 @@ raw 등록 해시:
 - RTP·WebRTC·Streams와 OpenAI event reference는 각각 transport, browser/runtime, 특정 product interface 범위의 근거다. 어느 하나도 모든 LLM 서비스의 model chunk 크기·turn policy·A/V 허용 오차·사용자 경험 SLO를 정하지 않는다.
 - 다음 B10 분석은 text token 생성, ASR→text model→TTS, native audio model과 이 runtime owner를 비교하되, 단일 latency나 benchmark score를 전체 대화 품질·privacy·외부 effect 안전성으로 확대하지 않는다. `raw/`, C:/Vault/CS_Wiki와 `.codex-remote-attachments/`는 변경하지 않았다.
 
+## [2026-07-25] content | Bridge text to realtime multimodal systems
+
+변경 내용:
+
+- [[텍스트 모델에서 실시간 멀티모달 시스템까지]]를 추가해 text request의 token 생성, ASR→text→언어 모델→TTS 또는 공표된 native audio model I/O, media runtime이 서로 대체되지 않는 세 결과 계약임을 비교했다. first token, turn 결정, first presentation, cancel·recovery를 하나의 완료 event나 하나의 latency로 부르지 않게 했다.
+- [[음성을 텍스트로 옮기는 경계에서 무엇이 사라지는가 — 인식·합성·네이티브 오디오]]에는 표현·평가 경로와 실시간 실행 계약의 차이를 짧게 보강했다. WER·MOS·speech-to-speech 평가는 표현 장부로, capture·clock·buffer·turn·presentation은 runtime 장부로 남기고 새 analysis와 owner로 이어지게 했다.
+- 기존 Orca·vLLM·Whisper·WaveNet·GPT-4o·RTP/RTCP·VAD·Streams·incremental dialogue·Realtime API·full-duplex benchmark 근거를 재사용했다. native audio의 비공개 내부 구조, 보편 지연 SLO, 모든 환경의 성능 우열은 새 사실로 주장하지 않았다.
+- 시스템 경계 원장은 realtime-bridge와 실시간 멀티모달 track을 완료하고, B11 시스템 경계 지도·기존 허브 통합을 다음 유일한 작업으로 지정했다. 수학 원장의 학습 감사 baseline은 문서 수 변화만 동기화했다.
+
+검증 결과:
+
+- npm run learning:audit, npm run sync:index, npm run lint:wiki, npm run boundary:check, npm run history:check, npm run math:check, npm run learning:audit:check, npm run verify, git diff --check를 통과했다.
+- Playwright Chromium에서 새 analysis와 보강한 음성 analysis를 desktop과 390×844 viewport로 확인했다. page-level 가로 overflow와 console error가 없었고, 넓은 비교 표는 작은 화면에서 scroll container 안에 남았다.
+
+남은 제한:
+
+- 이 비교는 ASR→text→TTS와 native audio model의 동일 조건 end-to-end 우열이나 모든 언어·device·network에서의 UX 우열을 판정하지 않는다. 공개된 model response 수치를 microphone capture부터 사용자의 청취까지의 보편 지연으로 읽지 않는다.
+- RTP·Streams·product event는 각각 transport, flow-control 추상화, 특정 API 범위의 근거다. 외부 write의 commit·unknown·reconciliation과 보상은 [[함수 호출과 도구 사용]]의 owner에 남긴다.
+- 다음 배치는 **LLM 시스템 경계 확장 지도**에서 여섯 경계의 owner·bridge·학습 경로를 기존 수학·컴퓨팅 역사 허브와 통합한다. raw/, C:/Vault/CS_Wiki와 .codex-remote-attachments/는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]
