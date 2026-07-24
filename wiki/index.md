@@ -398,6 +398,7 @@ related:
 - [[규모는 언제 연구 변수가 되었나]] — Kaplan·Chinchilla의 fixed-compute model–data 배분과 BLOOM·PaLM의 분산 실행을 loss·FLOPs·통신·memory·wall-clock 장부로 연결한 분석 (근거 6개)
 - [[연산보다 데이터 이동이 비싸질 때]] — memory wall·Roofline에서 mixed precision·FlashAttention·MoE·QLoRA까지를 적은 bit·재사용·희소 실행·quantized storage의 다른 비용 장부로 연결한 분석 (근거 6개)
 - [[모델 능력에서 서비스 능력으로]] — model benchmark·공개 weight·fine-tuning memory와 runtime·KV cache·traffic·tail latency·energy·가용성·실행 접근성을 네 측정 경계로 구분한 분석 (근거 7개)
+- [[전력에서 서비스 결과 계약까지 무엇을 세어야 하나]] — J의 측정 경계를 품질·deadline·traffic·retry가 포함된 유효 결과 계약으로 연결하고 J/good request 회계의 조건과 한계를 분리한 분석 (근거 7개)
 - [[기계 이전의 계산은 어떻게 능력이 되었나]] — 수학 표·인간 계산 조직·작업표·검산·출판을 계산 능력의 실행 구조로 읽고 N-gram·embedding과의 제한된 후대 비교를 제시한 분석 (근거 3개)
 - [[언어와 계산을 기계적 절차로 만들다]] — 불 대수·relay·Turing machine·stored program·확률적 message source를 서로 다른 기호·실행 계약으로 구분한 분석 (근거 5개)
 - [[학습 규칙이 있어도 왜 규모화되지 못했나]] — 규칙 기반 번역·퍼셉트론·ADALINE을 고정 요소·학습 신호·표현·자료·연산·평가 조건으로 비교한 분석 (근거 6개)

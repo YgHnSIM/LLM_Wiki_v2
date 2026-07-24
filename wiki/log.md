@@ -5153,6 +5153,24 @@ raw 등록 해시:
 - 이 owner는 carbon accounting, facility PUE, 제조 단계 영향의 완결 설명을 맡지 않는다. 그 주장은 별도 시간·지역·시설·lifecycle 자료가 있어야 한다.
 - 다음 배치는 **전력에서 서비스 결과 계약까지 무엇을 세어야 하나**에서 quality·traffic·SLO와 에너지 장부를 연결한다. `raw/`, CS_WIKI와 `.codex-remote-attachments/`는 변경하지 않았다.
 
+## [2026-07-25] content | Connect power to service outcomes
+
+변경 내용:
+
+- [[전력에서 서비스 결과 계약까지 무엇을 세어야 하나]]를 추가해 낮은 J·J/token을 서비스 개선으로 읽기 전에 품질·안전·deadline·traffic·retry와 계측 경계를 함께 계약해야 함을 설명했다.
+- `J/good request`를 보편 표준이 아닌 비교 회계 예시로 두고, timeout·retry·shared batch·idle replica의 분자 배분과 quality oracle·deadline의 분모 조건을 분리했다.
+- [[모델 능력에서 서비스 능력으로]], [[LLM과 컴퓨팅 능력의 공진화]], [[overview]]의 서비스 경로를 energy owner → 결과 계약 → 서비스 능력으로 연결했다.
+
+검증 결과:
+
+- `npm run boundary:check`, `npm run history:check`, `npm run math:check`, `npm run learning:audit`, `npm run sync:index`, `npm run verify`와 `git diff --check`로 원장·학습 구조·근거·링크·사이트·브라우저 회귀를 확인한다.
+- 새 분석의 수치 예가 동일한 model·출력 계약에서는 총 J와 유효 결과당 J가 다른 순서를 보일 수 있음을 독립 계산으로 대조한다.
+
+남은 제한:
+
+- `J/good request`는 LLM 서비스의 단일 표준이나 탄소 지표가 아니다. grid mix·facility·내재 탄소와 task별 품질 oracle은 별도 근거가 필요하다.
+- 다음 배치는 학습 데이터의 snapshot·수집·변환·sampling·공개 version·정정/철회 계보를 보강한다. `raw/`, CS_WIKI와 `.codex-remote-attachments/`는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

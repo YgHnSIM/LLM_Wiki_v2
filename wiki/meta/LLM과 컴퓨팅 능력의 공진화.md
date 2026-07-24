@@ -25,6 +25,8 @@ related:
   - analysis.scale-as-research-variable
   - analysis.when-data-movement-dominates
   - analysis.model-capability-to-service-capability
+  - concept.llm-inference-energy-metrics
+  - analysis.power-to-service-outcomes
   - analysis.llm-capability-model-or-system
   - analysis.n-gram에서-llm으로
   - analysis.stored-program-to-learning-framework
@@ -154,7 +156,9 @@ related:
 
 ### 실제 서비스 능력을 보고 싶다면
 
-[[훈련 병렬성과 생성 순차성은 다른 축이다]] → [[수치 형식·혼합 정밀도·양자화]] → [[언어 모델 추론 서빙]] → [[모델 능력에서 서비스 능력으로]]
+[[훈련 병렬성과 생성 순차성은 다른 축이다]] → [[수치 형식·혼합 정밀도·양자화]] → [[언어 모델 추론 서빙]] → [[LLM 추론 에너지 지표]] → [[전력에서 서비스 결과 계약까지 무엇을 세어야 하나]] → [[모델 능력에서 서비스 능력으로]]
+
+텍스트 token의 빠른 생성만 보지 않고, GPU·node·service 중 어디의 J인지, 어떤 품질·deadline·traffic 아래 유효 결과가 되었는지, timeout·retry 비용을 어디에 넣었는지를 같은 장부에서 확인한다.
 
 ### 데이터 축을 보고 싶다면
 
@@ -187,6 +191,8 @@ Corpus가 커졌다는 말에서 출발해 quality proxy·분포·sampling·반�
 - [[규모는 언제 연구 변수가 되었나]]
 - [[연산보다 데이터 이동이 비싸질 때]]
 - [[모델 능력에서 서비스 능력으로]]
+- [[LLM 추론 에너지 지표]]
+- [[전력에서 서비스 결과 계약까지 무엇을 세어야 하나]]
 - [[LLM 능력은 모델의 속성인가 시스템의 속성인가]]
 - [[N-gram에서 LLM으로]]
 - [[저장 프로그램에서 학습 프레임워크까지]]

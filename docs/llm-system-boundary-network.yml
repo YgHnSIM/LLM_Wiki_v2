@@ -3,10 +3,10 @@ schema_version: 1
 initiative:
   id: llm-system-boundary-network
   title: LLM 시스템 경계 확장
-  current_batch: energy-bridge
+  current_batch: data-owner
   next_action: >-
-    npm run boundary:resume으로 재개 상태를 확인한 뒤, energy-owner 배치에서
-    전력에서 서비스 결과 계약까지 무엇을 세어야 하나 analysis를 작성·검증한다.
+    npm run boundary:resume으로 재개 상태를 확인한 뒤, data-owner 배치에서
+    학습 데이터 생애주기와 출처 추적 owner를 작성·검증한다.
   blockers: []
   hub:
     path: wiki/meta/LLM 시스템 경계 확장 지도.md
@@ -15,9 +15,9 @@ initiative:
     stage: planned
   handoff:
     updated: '2026-07-25'
-    baseline_commit: a6d08f3f0cfa7e27d8877c19a9c9d79ff50084f2
-    last_completed_batch: energy-owner
-    last_completed_gate: energy-owner-verified
+    baseline_commit: 00fe3ed5f98c1e89083aec10abcd79588ff45def
+    last_completed_batch: energy-bridge
+    last_completed_gate: energy-service-contract-verified
     validation:
       - boundary:check
       - history:check
@@ -98,7 +98,7 @@ bridges:
     page_id: analysis.power-to-service-outcomes
     page_type: analysis
     action: create
-    stage: planned
+    stage: complete
     required_by: [energy-bridge]
   - id: data-scale-to-rights
     title: 데이터의 양에서 권리와 책임까지
@@ -138,7 +138,7 @@ tracks:
     priority: 1
     title: 에너지·전력에서 서비스 결과 계약까지
     primary_title: LLM 추론 에너지 지표
-    stage: in_progress
+    stage: complete
     owners: [llm-inference-energy-metrics]
     bridges: [power-to-service-outcomes]
     primary_path: wiki/concepts/LLM 추론 에너지 지표.md
@@ -249,7 +249,7 @@ batches:
   - id: energy-bridge
     order: 2
     title: 전력과 서비스 결과 연결
-    stage: planned
+    stage: complete
     depends_on: [energy-owner]
     commit_message: 'content: bridge_power_to_service_outcomes'
     deliverables:
@@ -269,6 +269,7 @@ batches:
       - docs/llm-system-boundary-network.yml
       - docs/llm-math-network.yml
       - docs/foundational-learning-audit.md
+      - scripts/lib/knowledge-graph.mjs
   - id: data-owner
     order: 3
     title: 학습 데이터 생애주기 owner
@@ -290,6 +291,7 @@ batches:
       - wiki/log.md
       - docs/llm-system-boundary-network.yml
       - docs/foundational-learning-audit.md
+      - docs/llm-math-network.yml
   - id: data-bridge
     order: 4
     title: 데이터 규모와 권리 연결

@@ -675,7 +675,10 @@ export function buildKnowledgeGraph(documents, {
   }
   // Large real-world communities can need more than the radial layout's short
   // cleanup pass after their resized centers are repacked near a graph edge.
-  relaxGlobalNodeCollisions(nodes, { passes: 180 });
+  // A newly connected real-world community can put several markers against a
+  // graph edge at once. Give the deterministic pairwise settle enough passes
+  // to resolve the last sub-pixel conflict after those communities are repacked.
+  relaxGlobalNodeCollisions(nodes, { passes: 480 });
 
   saveNodeLayout(nodes, 'community');
   placeNetworkLayout(nodes, undirectedEdges);
