@@ -10,15 +10,15 @@ initiative:
     stage: complete
   current_batch: null
   next_action: >-
-    npm run math:check를 실행한 뒤, 다음 접근성 보강 후보가 생기면 wiki/concepts/확률.md의 probability와 wiki/concepts/조건부 확률.md의 conditional-chain-rule owner의 설명 책임을 겹치지 않는 독립 학습 질문·최소 예·대표 소비 문서로 먼저 판정하고 사용자 범위에 맞는 한 배치를 제안한다.
+    npm run math:check를 실행한 뒤, 새 허브 접근성 요청이 있으면 wiki/analyses/LLM을 만든 수학.md에서 attention과 softmax의 국소 설명 책임을 겹치지 않는 독립 학습 질문·최소 예·대표 owner 문서로 먼저 판정하고 사용자 범위에 맞는 한 배치를 제안한다.
   blockers: []
   handoff:
     updated: '2026-07-24'
-    baseline_commit: de9b3c0188b2d95717fab18eade56ad116eeeaf9
-    last_completed_gate: probability-notation-accessibility-g7-verified
+    baseline_commit: 607d86944d4f670192db94589bfed8304517a917
+    last_completed_gate: hub-narrative-accessibility-g7-verified
     validation:
       - command: npm run math:check
-        result: 7개 배치·25개 수식 계열의 구조·owner·선수 관계와 확률 표기 보강 배치 완료 상태 검증 통과
+        result: 8개 배치·25개 수식 계열의 구조·owner·선수 관계와 허브 계산 흐름 입문 보강 배치 완료 상태 검증 통과
       - command: npm run learning:audit
         result: 365개 Markdown·362개 비메타 문서, 블록 수식 691개로 기준선 갱신
       - command: npm run learning:audit:check
@@ -30,10 +30,9 @@ initiative:
       - command: BASE_PATH='' npm run verify
         result: math 원장, Node 회귀 123개, wiki lint·691 HTML build/check·Chromium 회귀 4개를 통과
     notes: >-
-      기준 branch는 main이다. probability owner에는 집합 원소 수를 실제 카드 목록으로 세고 $\lvert\cdot\rvert$의 의미를 구별하는 단계를,
-      conditional-chain-rule owner에는 후보 범위를 먼저 $B$로 줄인 뒤 다시 세는 단계를 추가했다.
-      허브에는 $\mathcal V$ 집합·$V$ value 행렬·출력 확률 벡터 $p$를 구별하는 세 질문을 추가했고 overview에는 같은 입문 경로를 기록했다.
-      생성 HTML의 세 변경 페이지에서 KaTeX error 표지 0개와 새 안내 문구를 확인했고, Chromium mobile overflow 회귀도 통과했다. raw는 바꾸지 않았다.
+      기준 branch는 main이다. 허브에는 token 문맥→벡터→attention 문맥→residual 표현→logit→확률→손실→bias 갱신의 화살표 지도를 추가했다.
+      다섯 계산 단계에는 입력·질문·출력 안내를 두고, attention 내부 비율과 다음 token 확률, logit과 확률, 정답 표지와 현재 확률을 분리해 설명했다.
+      생성 HTML에서 KaTeX error 표지 0개·새 입력 안내 5개를 확인했고, Chromium mobile overflow 회귀도 통과했다. raw는 바꾸지 않았다.
 
 baseline:
   recorded_on: '2026-07-24'
@@ -156,6 +155,22 @@ batches:
       - wiki/concepts/확률.md
       - wiki/concepts/조건부 확률.md
       - wiki/analyses/LLM을 만든 수학.md
+
+  - id: hub-narrative-accessibility
+    title: LLM 수학 허브 계산 흐름 입문 보강
+    stage: complete
+    families:
+      - embeddings
+      - attention
+      - residual-connections
+      - softmax
+      - log-likelihood
+      - backpropagation
+      - gradient-descent
+    deliverables:
+      - wiki/analyses/LLM을 만든 수학.md
+      - wiki/overview.md
+      - wiki/log.md
 
 families:
   - id: vectors-matrices-tensors

@@ -4762,6 +4762,24 @@ raw 등록 해시:
 - 카드 수와 token 4개 예는 표기와 계산 순서를 보이는 편집부 예다. 실제 LLM의 어휘 크기·확률 추정·학습 run을 재현하지 않는다.
 - $\lvert A\rvert/\lvert\Omega\rvert$는 유한하고 같은 가능성인 결과에만 쓰며, 조건부확률의 $\mid$는 인과관계를 뜻하지 않는다.
 
+## [2026-07-24] content | LLM math hub narrative path
+
+변경 내용:
+
+- [[LLM을 만든 수학]]에 token 문맥에서 bias 한 번 갱신까지 이어지는 화살표 지도를 추가했다. 각 계산 단계는 수식보다 먼저 입력·질문·출력으로 읽을 수 있게 했다.
+- attention 내부 비율과 다음 token 확률, logit과 확률, 정답 표지와 현재 확률을 분리해 설명했다. 후보별 logit 표와 gradient의 부호를 자연어로 읽는 표를 추가했으며 기존 수식·수치·근거와 owner 경계는 유지했다.
+- [[overview]]에 허브를 처음 읽을 때의 권장 순서를 추가했다. `raw/`와 수식 family owner는 바꾸지 않았다.
+
+검증 결과:
+
+- `npm run math:check`, `npm run learning:audit`, `npm run learning:audit:check`, `npm run sync:index`, `npm run lint:wiki`, `BASE_PATH='' npm run verify`를 통과했다.
+- 생성된 허브 HTML에서 새 계산 지도·입력·질문·출력 안내와 KaTeX 렌더를 확인했고, Chromium 모바일 overflow 회귀를 통과했다.
+
+남은 제한:
+
+- 이 문서는 여전히 hand-calculation용 toy 모델이다. 실제 LLM의 다층·multi-head·FFN·LayerNorm·batch 평균·Adam state·분산 학습을 재현하지 않는다.
+- 새 설명은 계산 순서와 현재 수식의 해석을 쉽게 하는 보강이며, attention 비율을 인과·설명·사실성의 증거로 만들지 않는다.
+
 ## 관련 항목
 
 - [[index]]
