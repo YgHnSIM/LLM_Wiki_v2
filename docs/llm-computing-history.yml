@@ -3,11 +3,11 @@ schema_version: 1
 initiative:
   id: llm-computing-history
   title: LLM과 컴퓨팅 능력의 공진화
-  current_batch: chapter-05-gpu-deep-learning
+  current_batch: hub-synthesis
   next_action: >-
-    wiki/analyses/행렬곱 가속은 딥러닝을 어떻게 현실화했나.md를 GPU·CUDA·cuDNN·
-    deep-learning framework의 programming·kernel·memory 조건으로 작성해 peak 연산률과
-    end-to-end training 가능성을 구분한다.
+    wiki/meta/LLM과 컴퓨팅 능력의 공진화.md와 wiki/analyses/LLM 능력은 모델의 속성인가
+    시스템의 속성인가.md를 작성하고, 아홉 본편의 이전·다음 탐색과 전체 능력층·측정 장부
+    비교를 완결한다.
   blockers: []
   hub:
     path: wiki/meta/LLM과 컴퓨팅 능력의 공진화.md
@@ -19,8 +19,8 @@ initiative:
     stage: planned
   handoff:
     updated: '2026-07-24'
-    baseline_commit: 92f82c2ec1019e160b98fe888ff721612e769665
-    last_completed_gate: chapter-04-statistical-models-verified
+    baseline_commit: 853bae51f9ef8b161064ad201a89daedc02e0d46
+    last_completed_gate: chapter-05-gpu-deep-learning-verified
     validation:
       - command: npm run history:check
         result: 11개 배치·9개 본편·5개 owner와 상태·경로·의존성 검증 통과
@@ -44,6 +44,8 @@ initiative:
         result: 3장 통합 뒤에도 25개 수식 owner·Node 회귀 146개·Markdown 378개·evidence 476건·704 HTML·위키 링크 8949개·로컬 참조 48614개·Chromium 회귀 4개 통과
       - command: npm run verify
         result: 4장 통합 뒤에도 25개 수식 owner·Node 회귀 146개·Markdown 379개·evidence 477건·705 HTML·위키 링크 8975개·로컬 참조 48724개·Chromium 회귀 4개 통과
+      - command: npm run verify
+        result: 5장 통합 뒤에도 25개 수식 owner·Node 회귀 146개·Markdown 380개·evidence 479건·706 HTML·위키 링크 8996개·로컬 참조 48831개·Chromium 회귀 4개 통과
     notes: >-
       main은 origin/main과 일치한다. .codex-remote-attachments/는 사용자 첨부이므로 보존하고,
       raw와 C:/Vault/CS_Wiki는 수정하지 않는다.
@@ -129,7 +131,7 @@ chapters:
     title: 행렬곱 가속은 딥러닝을 어떻게 현실화했나
     path: wiki/analyses/행렬곱 가속은 딥러닝을 어떻게 현실화했나.md
     page_id: analysis.matrix-acceleration-deep-learning
-    stage: planned
+    stage: complete
     capability_layers: [realized-performance, scalability, resource-efficiency]
   - order: 6
     batch: chapter-06-transformer-parallelism
@@ -218,12 +220,12 @@ batches:
       - wiki/analyses/확률적 언어 모델은 어떤 계산 인프라를 요구했나.md
   - id: chapter-05-gpu-deep-learning
     title: 행렬 가속과 딥러닝
-    stage: in_progress
+    stage: complete
     deliverables:
       - wiki/analyses/행렬곱 가속은 딥러닝을 어떻게 현실화했나.md
   - id: hub-synthesis
     title: 허브·종합편·전체 탐색
-    stage: planned
+    stage: in_progress
     deliverables:
       - wiki/meta/LLM과 컴퓨팅 능력의 공진화.md
       - wiki/analyses/LLM 능력은 모델의 속성인가 시스템의 속성인가.md

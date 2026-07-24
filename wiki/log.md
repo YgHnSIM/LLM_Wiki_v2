@@ -5025,6 +5025,25 @@ raw 등록 해시:
 - 서로 다른 시대의 machine 속도·energy를 직접 순위화하지 않는다. 2007년 “large language model”은 sparse 5-gram이며 현대 neural LLM의 parameter count와 같은 단위가 아니다.
 - 다음 본편은 sparse table·CPU 군집에서 dense matrix·GPU·CUDA·framework로 workload와 programming interface가 바뀐 과정을 다룬다. `raw/`와 CS_WIKI는 변경하지 않았다.
 
+## [2026-07-24] content | Matrix acceleration and deep-learning execution stack
+
+변경 내용:
+
+- [[행렬곱 가속은 딥러닝을 어떻게 현실화했나]]를 추가해 역전파·CNN, CUDA, cuDNN과 TensorFlow를 계산 그래프→병렬 프로그래밍→재사용 kernel→framework 실행의 네 층으로 구분했다.
+- $128\times784$ input과 $784\times256$ weight의 forward·두 backward 행렬곱을 계산해 batch가 만드는 25,690,112회와 세 행렬곱 77,070,336회의 scalar multiplication을 shape와 함께 설명했다.
+- AlexNet의 1.2 million images·60 million parameters·두 GTX 580 3GB·5–6일 훈련을 peak 장치 성능이 아니라 전체 실험 조건으로 기록했다.
+- cuDNN과 TensorFlow 1차 근거를 evidence 레지스트리에 추가하고, GPU는 학습법의 단일 원인이 아니라 실행 가능 조건임을 네 인과 표지로 한정했다.
+
+검증 결과:
+
+- `npm run history:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run learning:audit`, `npm run math:check`, `npm run verify`로 원장, 학습 구조, 근거·링크·수식과 사이트·브라우저 회귀를 검증했다.
+- $128\cdot784\cdot256=25{,}690{,}112$와 그 세 배 $77{,}070{,}336$을 독립 계산해 본문과 대조했다.
+
+남은 제한:
+
+- AlexNet은 GPU만 바꾼 통제 실험이 아니므로 error 개선의 단일 인과 효과를 추정하지 않는다. cuDNN의 1.36배와 AlexNet의 전체 훈련 시간도 측정 경계가 달라 직접 환산하지 않는다.
+- 다음 배치는 아홉 본편을 허브·종합편에서 한 능력층 장부로 연결한다. `raw/`와 CS_WIKI는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

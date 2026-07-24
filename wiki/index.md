@@ -401,6 +401,7 @@ related:
 - [[언어와 계산을 기계적 절차로 만들다]] — 불 대수·relay·Turing machine·stored program·확률적 message source를 서로 다른 기호·실행 계약으로 구분한 분석 (근거 5개)
 - [[학습 규칙이 있어도 왜 규모화되지 못했나]] — 규칙 기반 번역·퍼셉트론·ADALINE을 고정 요소·학습 신호·표현·자료·연산·평가 조건으로 비교한 분석 (근거 6개)
 - [[확률적 언어 모델은 어떤 계산 인프라를 요구했나]] — Corpus count·sparse N-gram·HMM dynamic programming·search에서 분산 5-gram serving까지 계산 장부를 연결한 분석 (근거 6개)
+- [[행렬곱 가속은 딥러닝을 어떻게 현실화했나]] — 역전파·CNN에서 CUDA·cuDNN·TensorFlow로 이어지는 실행 스택과 peak·kernel·step·time-to-quality 경계를 구분한 분석 (근거 5개)
 - [[검색은 근거를 찾고 독해는 답을 찾는다]] — 단일 벡터·후기 상호작용·교차 인코더의 후보 경계와 검색 재현율·독해 정확도·기권을 분리한 분석 (근거 11개)
 - [[서브워드는 한 벡터의 특징인가 여러 토큰인가]] — 기본 SGNS·FastText·BPE·SentencePiece를 조각의 역할·결합 시점·문맥화·OOV·계산 비용으로 비교한 분석 (근거 6개)
 - [[잔차 경로와 정규화는 어디에 놓이는가]] — ResNet post-/pre-activation과 Transformer Post-/Pre-LN을 additive identity path 위의 Jacobian 배치로 비교한 분석 (근거 5개)

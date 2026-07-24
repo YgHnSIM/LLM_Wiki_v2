@@ -1023,6 +1023,22 @@ sources:
     kind: conference-paper
     url: https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf
     language: en
+  chetlur-et-al-2014-cudnn:
+    title: 'cuDNN: Efficient Primitives for Deep Learning'
+    authors: [Sharan Chetlur, Cliff Woolley, Philippe Vandermersch, Jonathan Cohen, John Tran, Bryan Catanzaro, Evan Shelhamer]
+    published: 2014
+    source_type: primary
+    kind: technical-report
+    url: https://arxiv.org/abs/1410.0759
+    language: en
+  abadi-et-al-2016-tensorflow:
+    title: 'TensorFlow: A System for Large-Scale Machine Learning'
+    authors: [Martín Abadi, Paul Barham, Jianmin Chen, Zhifeng Chen, Andy Davis, Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Geoffrey Irving, Michael Isard, Manjunath Kudlur, Josh Levenberg, Rajat Monga, Sherry Moore, Derek G. Murray, Benoit Steiner, Paul Tucker, Vijay Vasudevan, Pete Warden, Martin Wicke, Yuan Yu, Xiaoqiang Zheng]
+    published: 2016
+    source_type: primary
+    kind: conference-paper
+    url: https://www.usenix.org/conference/osdi16/technical-sessions/presentation/abadi
+    language: en
   ioffe-szegedy-2015-batch-normalization:
     title: 'Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift'
     authors: [Sergey Ioffe, Christian Szegedy]
