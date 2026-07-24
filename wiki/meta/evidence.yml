@@ -3980,3 +3980,38 @@ sources:
     doi: 10.48550/arXiv.1710.03740
     url: https://openreview.net/forum?id=r1gs9JgRZ
     language: en
+  yu-et-al-2022-orca:
+    title: 'Orca: A Distributed Serving System for Transformer-Based Generative Models'
+    authors: [Gyeong-In Yu, Joo Seong Jeong, Geon-Woo Kim, Soojeong Kim, Byung-Gon Chun]
+    published: 2022
+    source_type: primary
+    kind: conference-paper
+    url: https://www.usenix.org/conference/osdi22/presentation/yu
+    language: en
+  kwon-et-al-2023-vllm:
+    title: Efficient Memory Management for Large Language Model Serving with PagedAttention
+    authors: [Woosuk Kwon, Zhuohan Li, Siyuan Zhuang, Ying Sheng, Lianmin Zheng, Cody Hao Yu, Joseph E. Gonzalez, Hao Zhang, Ion Stoica]
+    published: 2023
+    source_type: primary
+    kind: conference-paper
+    doi: 10.1145/3600006.3613165
+    url: https://arxiv.org/abs/2309.06180
+    language: en
+  leviathan-et-al-2023-speculative-decoding:
+    title: Fast Inference from Transformers via Speculative Decoding
+    authors: [Yaniv Leviathan, Matan Kalman, Yossi Matias]
+    published: 2023
+    source_type: primary
+    kind: conference-paper
+    doi: 10.48550/arXiv.2211.17192
+    url: https://proceedings.mlr.press/v202/leviathan23a.html
+    language: en
+  dean-barroso-2013-tail-at-scale:
+    title: The Tail at Scale
+    authors: [Jeffrey Dean, Luiz André Barroso]
+    published: 2013
+    source_type: primary
+    kind: journal-article
+    doi: 10.1145/2408776.2408794
+    url: https://research.google/pubs/the-tail-at-scale/
+    language: en

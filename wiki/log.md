@@ -4922,13 +4922,32 @@ raw 등록 해시:
 
 검증 결과:
 
-- `npm run history:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run verify`로 원장 상태, 스키마·근거·링크·사이트와 브라우저 동작을 검증한다.
+- `npm run history:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run verify`로 원장 상태, 스키마·근거·링크·사이트와 브라우저 동작을 검증했다.
 - FlashAttention Figure 2의 약 13% 추가 FLOPs·약 8배 적은 HBM R/W·약 3배 짧은 시간과 QLoRA의 65B·단일 48GB 조건을 서로 다른 결과 계약으로 확인했다.
 
 남은 제한:
 
 - 최신 FP8·새 quantizer·후속 FlashAttention·MoE routing의 결과를 최초 논문에 소급하지 않았다. Energy·carbon은 직접 측정이 없는 경우 추정하지 않는다.
 - 학습과 kernel 중심의 비용 장부를 prefill·decode·KV cache·batching·tail latency·가용성으로 확장하는 일은 다음 배치가 맡는다. `raw/`와 CS_WIKI는 변경하지 않았다.
+
+## [2026-07-24] content | Model capability to service capability
+
+변경 내용:
+
+- [[언어 모델 추론 서빙]]을 추가해 요청의 queue·prefill·decode·종료 생애 주기, KV cache byte 식, 정적·iteration-level batching, PagedAttention block 관리와 speculative decoding의 분포 보존 조건을 연결했다.
+- [[모델 능력에서 서비스 능력으로]]를 추가해 model benchmark·공개 weight·fine-tuning memory와 실행·서비스·운영 접근을 네 경계로 분리했다.
+- Orca·vLLM·speculative decoding·The Tail at Scale의 1차 자료를 evidence 레지스트리에 추가하고, TPU의 99백분위 추론 평가에서 현대 LLM serving의 scheduler·cache·decode 최적화까지 측정 경계가 넓어진 흐름을 정리했다.
+- CS_WIKI의 평균·꼬리 지연과 가용성 분석은 외부 컴퓨터사 맥락으로 연결하고, LLM 고유의 TTFT·TPOT·KV cache·token streaming은 현재 위키 안에서 자립적으로 설명했다.
+
+검증 결과:
+
+- `npm run history:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run verify`로 원장 상태, 스키마·근거·링크·사이트와 브라우저 동작을 검증했다.
+- KV cache 예시 $2\cdot32\cdot2048\cdot8\cdot128\cdot2=268{,}435{,}456$ bytes를 손으로 재계산하고 speculative sampling의 두 token 예가 target 분포 $(0.3,0.7)$을 복원함을 확인했다.
+
+남은 제한:
+
+- 논문 속 speedup은 당시 model·hardware·runtime·workload·baseline에 한정했다. 최신 serving engine 순위나 특정 상용 API의 현재 가격·uptime으로 읽지 않는다.
+- Security·privacy·multi-region 복구와 전체 시설 energy는 별도 운영 자료가 필요하다. `raw/`와 CS_WIKI는 변경하지 않았다.
 
 ## 관련 항목
 

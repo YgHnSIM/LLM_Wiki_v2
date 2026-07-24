@@ -3,11 +3,11 @@ schema_version: 1
 initiative:
   id: llm-computing-history
   title: LLM과 컴퓨팅 능력의 공진화
-  current_batch: chapter-09-serving
+  current_batch: chapter-01-pre-machine
   next_action: >-
-    wiki/concepts/언어 모델 추론 서빙.md를 PagedAttention·continuous batching·speculative decoding·
-    tail latency 근거로 작성한 뒤 wiki/analyses/모델 능력에서 서비스 능력으로.md에서
-    prefill·decode·KV cache·throughput·지연·에너지·가용성·실행 접근성을 연결한다.
+    wiki/analyses/기계 이전의 계산은 어떻게 능력이 되었나.md를 수학표·인간 계산 조직·
+    검산·수치 결과 계약의 1차 근거로 작성해 계산 능력이 기계의 속도 이전에도
+    절차·표현·분업·검증의 결합이었음을 설명한다.
   blockers: []
   hub:
     path: wiki/meta/LLM과 컴퓨팅 능력의 공진화.md
@@ -19,8 +19,8 @@ initiative:
     stage: planned
   handoff:
     updated: '2026-07-24'
-    baseline_commit: d589d7f0f353c03d3723bb34acbf9a9206e9a15c
-    last_completed_gate: chapter-08-data-movement-verified
+    baseline_commit: 255ef48cad2b7af35d627dcfb821327745416597
+    last_completed_gate: chapter-09-serving-verified
     validation:
       - command: npm run history:check
         result: 11개 배치·9개 본편·5개 owner와 상태·경로·의존성 검증 통과
@@ -34,6 +34,8 @@ initiative:
         result: Markdown 371개·evidence 464건·immutable raw artifact 220개 검증 통과
       - command: npm run lint:wiki
         result: Markdown 373개·evidence 465건·immutable raw artifact 220개 검증 통과
+      - command: npm run verify
+        result: 25개 수식 owner·Node 회귀 146개·Markdown 375개·evidence 469건·701 HTML·위키 링크 8883개·로컬 참조 48312개·Chromium 회귀 4개 통과
     notes: >-
       main은 origin/main과 일치한다. .codex-remote-attachments/는 사용자 첨부이므로 보존하고,
       raw와 C:/Vault/CS_Wiki는 수정하지 않는다.
@@ -82,7 +84,7 @@ owners:
     title: 언어 모델 추론 서빙
     path: wiki/concepts/언어 모델 추론 서빙.md
     page_id: concept.llm-inference-serving
-    stage: planned
+    stage: complete
     required_by: [chapter-09-serving]
 
 chapters:
@@ -147,7 +149,7 @@ chapters:
     title: 모델 능력에서 서비스 능력으로
     path: wiki/analyses/모델 능력에서 서비스 능력으로.md
     page_id: analysis.model-capability-to-service-capability
-    stage: planned
+    stage: complete
     capability_layers: [realized-performance, resource-efficiency, reliable-results]
 
 batches:
@@ -182,13 +184,13 @@ batches:
       - wiki/analyses/연산보다 데이터 이동이 비싸질 때.md
   - id: chapter-09-serving
     title: 추론 서비스의 능력
-    stage: in_progress
+    stage: complete
     deliverables:
       - wiki/concepts/언어 모델 추론 서빙.md
       - wiki/analyses/모델 능력에서 서비스 능력으로.md
   - id: chapter-01-pre-machine
     title: 기계 이전 계산의 사전사
-    stage: planned
+    stage: in_progress
     deliverables:
       - wiki/analyses/기계 이전의 계산은 어떻게 능력이 되었나.md
   - id: chapter-02-computation-language
