@@ -3,10 +3,10 @@ schema_version: 1
 initiative:
   id: llm-system-boundary-network
   title: LLM 시스템 경계 확장
-  current_batch: data-owner
+  current_batch: data-bridge
   next_action: >-
-    npm run boundary:resume으로 재개 상태를 확인한 뒤, data-owner 배치에서
-    학습 데이터 생애주기와 출처 추적 owner를 작성·검증한다.
+    npm run boundary:resume으로 재개 상태를 확인한 뒤, data-bridge 배치에서
+    데이터의 양에서 권리와 책임까지 분석을 작성·검증한다.
   blockers: []
   hub:
     path: wiki/meta/LLM 시스템 경계 확장 지도.md
@@ -15,9 +15,9 @@ initiative:
     stage: planned
   handoff:
     updated: '2026-07-25'
-    baseline_commit: 00fe3ed5f98c1e89083aec10abcd79588ff45def
-    last_completed_batch: energy-bridge
-    last_completed_gate: energy-service-contract-verified
+    baseline_commit: e8ddfbe8bc1bd6b6aff0accf3a992008a6c4e050
+    last_completed_batch: data-owner
+    last_completed_gate: training-data-lifecycle-owner-verified
     validation:
       - boundary:check
       - history:check
@@ -29,6 +29,7 @@ initiative:
       - npm run boundary:check
       - git status --short --branch
     notes: >-
+      energy-bridge 뒤 data-owner를 검증해 완료했고, 다음 유일한 행동은 data-bridge다.
       이 원장이 세션 전환·문맥 압축 뒤에도 배치 순서와 다음 행동을 복원하는 단일 기준이다.
       raw/, C:/Vault/CS_Wiki와 사용자 첨부 파일은 수정하거나 staging하지 않는다.
 
@@ -56,7 +57,7 @@ owners:
     page_id: concept.training-data-lifecycle-provenance
     page_type: concept
     action: create
-    stage: planned
+    stage: complete
     required_by: [data-owner, data-bridge]
   - id: text-encoding-normalization
     title: 문자 인코딩과 정규화
@@ -149,7 +150,7 @@ tracks:
     priority: 2
     title: 데이터 생애주기와 권리
     primary_title: 학습 데이터 생애주기와 출처 추적
-    stage: planned
+    stage: in_progress
     owners: [training-data-lifecycle-provenance]
     bridges: [data-scale-to-rights]
     primary_path: wiki/concepts/학습 데이터 생애주기와 출처 추적.md
@@ -273,7 +274,7 @@ batches:
   - id: data-owner
     order: 3
     title: 학습 데이터 생애주기 owner
-    stage: planned
+    stage: complete
     depends_on: [energy-bridge]
     commit_message: 'content: define_training_data_lifecycle'
     deliverables:
@@ -313,6 +314,7 @@ batches:
       - wiki/log.md
       - docs/llm-system-boundary-network.yml
       - docs/foundational-learning-audit.md
+      - docs/llm-math-network.yml
   - id: memory-bridge
     order: 5
     title: 물리 메모리와 의미 메모리 연결

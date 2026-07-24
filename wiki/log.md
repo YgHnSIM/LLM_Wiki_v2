@@ -5171,6 +5171,25 @@ raw 등록 해시:
 - `J/good request`는 LLM 서비스의 단일 표준이나 탄소 지표가 아니다. grid mix·facility·내재 탄소와 task별 품질 oracle은 별도 근거가 필요하다.
 - 다음 배치는 학습 데이터의 snapshot·수집·변환·sampling·공개 version·정정/철회 계보를 보강한다. `raw/`, CS_WIKI와 `.codex-remote-attachments/`는 변경하지 않았다.
 
+## [2026-07-25] content | Define training data lifecycle
+
+변경 내용:
+
+- [[학습 데이터 생애주기와 출처 추적]]을 추가해 source snapshot → 수집·변환 → mixture·sampling → release → training run → 정정·철회 상태를 하나의 versioned lineage로 정리했다.
+- 출처 URL·dataset card·hash가 license·terms·consent·실제 training 노출·checkpoint 영향 제거의 증명과 같지 않음을 표와 `unknown` 상태로 분리했다.
+- [[말뭉치 기반 학습]]에는 snapshot·처리 release·training run의 세 줄 장부만 보강하고, rights/provenance의 반복 설명은 새 owner에 남겼다.
+- Datasheets for Datasets, Data Statements, C4 문서화, PROV-O를 evidence 레지스트리에 등록해 documentation과 provenance 모델링의 근거를 보강했다.
+
+검증 결과:
+
+- `npm run learning:audit`, `npm run sync:index`, `npm run lint:wiki`, `npm run math:check`, `npm run history:check`, `npm run boundary:check`, `npm run learning:audit:check`, `npm run verify`와 `git diff --check`를 실행해 원장·학습 구조·근거·링크·사이트·브라우저 회귀를 확인했다.
+- Playwright Chromium에서 새 owner를 데스크톱과 390×844 viewport로 확인했고, `scrollWidth = clientWidth`와 console error 0을 대조했다.
+
+남은 제한:
+
+- 이 owner는 자료의 공개성이나 문서화만으로 이용 권한·동의·공정성·개별 item의 실제 노출·완전한 unlearning을 결론 내리지 않는다. 관할·시점·원문 조건·downstream run 기록이 별도로 필요하다.
+- 다음 배치는 **데이터의 양에서 권리와 책임까지**에서 규모·다양성·품질의 수치와 권리·책임의 해석 범위를 연결한다. `raw/`, CS_WIKI와 `.codex-remote-attachments/`는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

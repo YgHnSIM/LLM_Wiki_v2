@@ -2603,6 +2603,41 @@ sources:
     doi: 10.48550/arXiv.2201.07311
     url: https://arxiv.org/abs/2201.07311
     language: en
+  gebru-et-al-2018-datasheets:
+    title: Datasheets for Datasets
+    authors: [Timnit Gebru, Jamie Morgenstern, Briana Vecchione, Jennifer Wortman Vaughan, Hanna Wallach, Hal Daumé III, Kate Crawford]
+    published: 2018
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.1803.09010
+    url: https://arxiv.org/abs/1803.09010
+    language: en
+  bender-friedman-2018-data-statements:
+    title: 'Data Statements for Natural Language Processing: Toward Mitigating System Bias and Enabling Better Science'
+    authors: [Emily M. Bender, Batya Friedman]
+    published: 2018
+    source_type: primary
+    kind: journal-article
+    doi: 10.1162/tacl_a_00041
+    url: https://aclanthology.org/Q18-1041/
+    language: en
+  dodge-et-al-2021-documenting-c4:
+    title: 'Documenting Large Webtext Corpora: A Case Study on the Colossal Clean Crawled Corpus'
+    authors: [Jesse Dodge, Maarten Sap, Ana Marasović, William Agnew, Gabriel Ilharco, Dirk Groeneveld, Margaret Mitchell, Matt Gardner]
+    published: 2021
+    source_type: primary
+    kind: conference-paper
+    doi: 10.18653/v1/2021.emnlp-main.98
+    url: https://aclanthology.org/2021.emnlp-main.98/
+    language: en
+  w3c-2013-prov-o:
+    title: 'PROV-O: The PROV Ontology'
+    authors: [Timothy Lebo, Satya Sahoo, Deborah McGuinness]
+    published: 2013
+    source_type: primary
+    kind: technical-standard
+    url: https://www.w3.org/TR/2013/REC-prov-o-20130430/
+    language: en
   chowdhery-et-al-2022-palm:
     title: 'PaLM: Scaling Language Modeling with Pathways'
     authors: [Aakanksha Chowdhery, Sharan Narang, Jacob Devlin, Maarten Bosma, Gaurav Mishra, Adam Roberts, Paul Barham, Hyung Won Chung, Charles Sutton, Sebastian Gehrmann, Parker Schuh, Kensen Shi, Sasha Tsvyashchenko, Joshua Maynez, Abhishek Rao, Parker Barnes, Yi Tay, Noam Shazeer, Vinodkumar Prabhakaran, Emily Reif, Nan Du, Ben Hutchinson, Reiner Pope, James Bradbury, Jacob Austin, Michael Isard, Guy Gur-Ari, Pengcheng Yin, Toju Duke, Anselm Levskaya, Sanjay Ghemawat, Sunipa Dev, Henryk Michalewski, Xavier Garcia, Vedant Misra, Kevin Robinson, Liam Fedus, Denny Zhou, Daphne Ippolito, David Luan, Hyeontaek Lim, Barret Zoph, Alexander Spiridonov, Ryan Sepassi, David Dohan, Shivani Agrawal, Mark Omernick, Andrew M. Dai, Thanumalayan Sankaranarayana Pillai, Marie Pellat, Aitor Lewkowycz, Erica Moreira, Rewon Child, Oleksandr Polozov, Katherine Lee, Zongwei Zhou, Xuezhi Wang, Brennan Saeta, Mark Diaz, Orhan Firat, Michele Catasta, Jason Wei, Kathy Meier-Hellstern, Douglas Eck, Jeff Dean, Slav Petrov, Noah Fiedel]
