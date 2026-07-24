@@ -112,6 +112,27 @@ related:
 
 글자 모양이 비슷해도 $\mathcal V$와 $V$는 다른 대상이다. $\mathcal V$는 token들의 집합이고, attention 행의 $V$는 각 token 표현에서 만든 value **행렬**이다. 따라서 같은 기호를 보았을 때는 먼저 글꼴과 표의 `shape 또는 범위` 칸을 확인한다.
 
+### 행·열벡터와 축을 읽는 공통 약속
+
+이 허브의 token 표현은 **한 token이 한 행**인 행벡터 관례를 쓴다. 따라서 $X$는 `(token, feature)`, 출력 가중치는 `(input feature, candidate)`, $z=rW_{\mathrm{out}}$은 `(1,d)(d,\lvert\mathcal V\rvert)\to(1,\lvert\mathcal V\rvert)`로 읽는다.
+
+다른 owner가 one-hot이나 gradient를 열벡터로 쓰더라도 계산 자체가 충돌하는 것은 아니다. 행벡터 $r$과 열벡터 $h=r^{\mathsf T}$는 다음처럼 전치하면 같은 선형변환을 나타낸다.
+
+$$
+z=rW
+\quad\Longleftrightarrow\quad
+z^{\mathsf T}=W^{\mathsf T}h
+$$
+
+한 식 안에서 행·열 관례를 섞지 않고, 전치할 때 곱의 순서와 모든 shape를 함께 바꾸는 것이 규칙이다.
+
+| 축 | 이 허브의 뜻 | 뒤 배치의 실제 모델 표기 |
+| --- | --- | --- |
+| $T$ 또는 $n$ | token 위치 수 | batch가 붙으면 두 번째 축 |
+| $D$ 또는 $d$ | 위치마다 가진 feature 수 | head를 나누기 전 hidden 폭 |
+| $\lvert\mathcal V\rvert$ | 다음 token 후보 수 | 출력 logit의 마지막 축 |
+| attention의 마지막 축 | 한 query가 비교할 key 위치 | 이 축에서 softmax |
+
 ### 시작 진단: 출력단을 읽을 준비가 되었는가
 
 계산을 시작하기 전에 답을 보지 않고 다음 네 문항에 답한다.
@@ -413,6 +434,35 @@ $$
 2. “logit 네 개에 각각 sigmoid를 적용하면 다음 token 확률의 합은 자동으로 1이다.”
 3. “한 예의 NLL이 한 번 줄었으므로 전체 데이터의 일반화 성능도 좋아졌다.”
 
+#### 표현·attention 부분 완성
+
+새 설명용 임베딩 표와 문맥 ID를 다음처럼 둔다.
+
+$$
+E=
+\begin{bmatrix}
+0&0\\
+1&1\\
+1&-1\\
+-1&1
+\end{bmatrix},
+\qquad
+\text{IDs}=(2,1)
+$$
+
+lookup한 $X\in\mathbb R^{2\times2}$를 적는다. 이어 $Q=K=0$, $V=X$이고 causal mask가 있다고 하자. 허용된 score가 모두 0일 때 attention 가중치 $A$, 출력 $O=AV$, 잔차 결과 $R=X+O$를 계산한다.
+
+#### 표현·attention 새 수치 전이
+
+앞 문제의 token 순서를 IDs $(1,2)$로 바꿔 같은 계산을 다시 한다. 첫 위치의 출력이 왜 순서 교환 전과 단순히 같을 수 없는지, causal mask가 허용하는 value 집합으로 설명한다.
+
+#### mask·잔차 오류 진단
+
+다음 두 오류를 고쳐라.
+
+1. $A$를 key별 열 방향으로 정규화해 각 query 행의 합이 1이 아니게 됐다.
+2. $X$의 shape가 $(2,2)$인데 branch 출력 $O$를 $(2,1)$로 만든 뒤 broadcasting으로 $R=X+O$를 계산했다.
+
 ### 해설과 채점 기준
 
 시작 진단의 답은 차례로 **logit**, $0.25$인 경우, **커진다**, **서로 다른 단계다**이다.
@@ -431,14 +481,48 @@ gradient의 네 성분 합은 0이다. 새 bias를 더하면 정답 확률은 �
 
 오류 진단의 핵심은 세 가지다. softmax NLL에서는 모든 후보가 $p_i-\mathbf1[i=y]$의 gradient를 가진다. 서로 배타적인 다음 token 후보는 후보 축 softmax로 합 1을 만들며 독립 sigmoid는 그 합을 보장하지 않는다. 마지막으로 훈련 예 하나의 손실 감소는 평균 훈련 손실·검증 손실·일반화를 대신하지 않는다.
 
+표현·attention 부분 완성의 답은 다음과 같다.
+
+$$
+X=
+\begin{bmatrix}
+1&-1\\
+1&1
+\end{bmatrix},
+\qquad
+A=
+\begin{bmatrix}
+1&0\\
+1/2&1/2
+\end{bmatrix}
+$$
+
+$$
+O=
+\begin{bmatrix}
+1&-1\\
+1&0
+\end{bmatrix},
+\qquad
+R=
+\begin{bmatrix}
+2&-2\\
+2&1
+\end{bmatrix}
+$$
+
+순서를 $(1,2)$로 바꾸면 $X'=\begin{bmatrix}1&1\\1&-1\end{bmatrix}$, $O'=\begin{bmatrix}1&1\\1&0\end{bmatrix}$, $R'=\begin{bmatrix}2&2\\2&-1\end{bmatrix}$다. causal mask 아래 첫 행의 후보 집합은 언제나 첫 위치 하나뿐이므로, token 순서를 바꾸면 첫 출력도 그 새 value로 바뀐다. attention은 행별 key 축에서 정규화해야 하며, residual의 두 항은 같은 `(token, feature)` shape에서 같은 feature끼리 더해야 한다.
+
 | 평가 항목 | 2점 | 1점 | 0점 |
 | --- | --- | --- | --- |
 | 종류·shape 구분 | logit·확률·손실·gradient·update를 모두 구분 | 한 쌍을 혼동 | 여러 종류를 같은 값으로 취급 |
 | 확률·손실 계산 | 새 수치와 합 1, NLL을 정확히 검산 | 산술 오류 하나 | 잘못된 축 또는 logit을 확률로 읽음 |
 | gradient·update | 네 성분과 부호, 합 0을 설명 | 정답 성분만 맞음 | gradient와 update를 혼동 |
 | 한계 판정 | 한 예의 감소와 일반화를 구분 | 결론만 말함 | 일반화가 보장된다고 주장 |
+| 표현·shape | ID lookup과 token·feature 축을 정확히 기록 | 값 또는 축 하나만 맞음 | ID를 연속 크기로 취급 |
+| attention·residual | mask, 행별 합 1, 가중합과 같은-shape 덧셈을 모두 검산 | 산술 오류 하나 | 미래 누출·열 정규화·잘못된 broadcasting |
 
-총 8점 중 7점 이상이고, **확률 축·target 위치·gradient 부호 오류가 하나도 없어야** 출력단을 통과한다. 미달이면 각 오류에 대응하는 [[소프트맥스]], [[로그가능도]], [[경사하강법]]의 마스터리 연습을 풀고 $z=(\ln4,\ln3,\ln2,0)$, $y=1$로 재시도한다.
+총 12점 중 10점 이상이고, **확률 축·causal mask·shape·target 위치·gradient 부호 오류가 하나도 없어야** 현재 순전파와 출력단을 통과한다. 미달이면 각 오류에 대응하는 [[단어 임베딩]], [[어텐션 메커니즘]], [[잔차 연결]], [[소프트맥스]], [[로그가능도]], [[경사하강법]]의 마스터리 연습을 풀고 새 ID 순서와 $z=(\ln4,\ln3,\ln2,0)$, $y=1$로 재시도한다.
 
 ### 다음 문서
 

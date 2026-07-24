@@ -4799,6 +4799,25 @@ raw 등록 해시:
 - 이 배치는 출력 확률·손실·한 update의 전이에 집중한다. attention·mask 전이, 전체 출력 가중치와 upstream gradient, 실제 batch·multi-head shape와 종합 capstone은 뒤 배치에서 완결한다.
 - 자동 감사는 연습 절의 존재를 세지만 문제의 실제 난이도와 학습자의 숙달을 자동 판정하지 않는다. raw는 변경하지 않았다.
 
+## [2026-07-24] content | Attention transfer mastery
+
+변경 내용:
+
+- [[벡터·행렬·텐서와 shape]], [[내적·행렬곱과 선형변환]], [[단어 임베딩]], [[어텐션 메커니즘]], [[잔차 연결]]에 본문과 다른 shape·ID·행렬·mask·shortcut 문제와 해설·재시도 기준을 추가했다.
+- [[LLM을 만든 수학]]에는 행벡터 $z=rW$와 열벡터 $z^{\mathsf T}=W^{\mathsf T}r^{\mathsf T}$의 대응, token·feature·candidate·key 축 표와 ID 순서를 바꾼 causal attention 전이 문제를 추가했다.
+- 핵심 통과 조건은 token과 feature 축 구분, 행·열 관례 일관성, ID lookup, query별 key 축 정규화, mask 선적용, 같은-shape residual 덧셈이다. 자동 감사에서 완전한 마스터리 표지 문서는 4개에서 9개로 늘었다.
+
+검증 결과:
+
+- 새 행렬 예의 $xW+b=(-2.5,2)$, 반복 ID lookup의 $X\in\mathbb R^{3\times3}$, 0-score causal attention의 행별 출력 $(1,0)$·$(1/2,1/2)$·$(2/3,2/3)$, projection shortcut의 $y=(1.5,1.5,0)^{\mathsf T}$를 독립 재계산했다.
+- 허브의 새 ID $(2,1)$ 예에서 $X$, $A$, $O$, $R$을 각각 $2\times2$로 계산하고, ID 순서를 바꿨을 때 causal 첫 행이 새 첫 value만 본다는 결과를 확인했다.
+- `npm run math:check`, `npm run learning:audit`, `npm run learning:audit:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run verify`를 통과했다. 365 Markdown·458 evidence·220 immutable raw artifact, 블록 수식 711개, Node 회귀 123개, HTML 691개, 미해결 링크 0개, Chromium 회귀 4개와 KaTeX error 0개를 확인했다.
+
+남은 제한:
+
+- 이 배치는 한 head의 순전파와 residual 전이에 집중한다. 모든 출력 가중치·hidden state·attention 투영으로 이어지는 전체 gradient와 유한차분 검산은 다음 배치가 맡는다.
+- 실제 batch·multi-head·FFN·정규화 shape와 독립 종합 capstone은 뒤 배치에서 이어진다. raw는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

@@ -13,7 +13,7 @@ tags:
   - domain/machine-learning
   - domain/ai
 created: '2026-07-23'
-updated: '2026-07-23'
+updated: '2026-07-24'
 lifecycle: active
 verification: verified
 artifacts:
@@ -178,19 +178,49 @@ Bengio 등의 신경 확률 언어 모형은 어휘 행렬 $C$의 행을 단어 
 
 ## 학습 확인
 
-### 확인 질문과 답
+### 마스터리 연습
 
-1. $X\in\mathbb R^{2\times3}$에서 $X_{2,3}$는 무엇을 가리키는가?
+#### 완전 풀이 확인
 
-   **답:** 둘째 행, 셋째 열의 하나의 스칼라다. 행과 열이 어떤 대상 축인지는 식을 쓰기 전에 정해야 한다. `가장 작은 구체적 예`을 확인한다.
+본문의 $X\in\mathbb R^{2\times3}$와 $p\in\mathbb R^3$를 다시 계산하고, 각 축을 `(token, feature)`로 소리 내어 읽는다. $X_{2,3}$과 $Y_{1,2}$가 어느 값을 가리키는지도 확인한다.
 
-2. $(B,T,d)$ shape의 배열에 $(T,d)$ 신호를 더하면 왜 결과가 다시 $(B,T,d)$가 되는가?
+#### 부분 완성
 
-   **답:** 신호에 없는 batch 축을 각 batch에 공유하고, token·feature 축을 대응시켜 성분별로 더하기 때문이다. `핵심 식: 성분별 덧셈과 브로드캐스팅`을 확인한다.
+batch 2개, token 2개, feature 3개를 담은 $X\in\mathbb R^{2\times2\times3}$가 있다. 위치별 신호 $P\in\mathbb R^{2\times3}$를 모든 batch에 공유해 $Y=X+P$를 만든다. 다음을 채워라.
 
-3. shape가 맞아도 모델 계산이 틀릴 수 있는 경우는 무엇인가?
+$$
+X_{b,t,j}+P_{t,j}=Y_{\square,\square,\square},
+\qquad
+\operatorname{shape}(Y)=\square
+$$
 
-   **답:** 축 순서를 잘못 읽거나 padding mask를 다른 축에 적용하면, 라이브러리는 연산을 허용해도 다른 정보를 섞는다. `LLM에서 shape가 보장하는 것과 보장하지 않는 것`을 확인한다.
+$P$에 없는 축과 덧셈 뒤 남는 축을 각각 적는다.
+
+#### 새 수치 전이
+
+$$
+X=
+\begin{bmatrix}
+1&2&3\\
+4&5&6
+\end{bmatrix},
+\qquad
+p=(10,20,30)
+$$
+
+에서 $X+p$를 계산한다. 이어 $p$를 열벡터 $(3,1)$로 바꾸어 같은 기호 $X+p$를 쓰면 왜 같은 연산이 아니며 일반적으로 허용되지 않는지 설명한다.
+
+#### 오류 진단
+
+shape가 $(B,T,D)=(4,5,8)$인 hidden state에서 token mask의 shape를 `(8,)`로 만들고 마지막 축에 적용한 구현이 있다. 이 mask가 feature를 가리는 이유와, token 위치를 가리려면 최소한 어느 두 축 $(B,T)$에 대응해야 하는지 고쳐 쓴다.
+
+### 해설과 채점 기준
+
+1. **부분 완성:** $Y_{b,t,j}=X_{b,t,j}+P_{t,j}$이고 shape는 $(2,2,3)$이다. $P$에는 batch 축 $b$가 없으므로 두 batch에 공유되고, $b,t,j$가 모두 남는다.
+2. **새 수치 전이:** 결과는 $\begin{bmatrix}11&22&33\\14&25&36\end{bmatrix}$다. $(3,)$은 마지막 feature 축과 대응하지만 $(3,1)$은 두 축 배열이라 $(2,3)$과 끝축 정렬이 맞지 않는다.
+3. **오류 진단:** `(8,)`은 feature 축 $D$에 대응한다. token mask는 보통 $(B,T)=(4,5)$에서 유효 위치를 표시하고, attention이나 손실의 요구 shape에 맞춰 길이 1 축을 명시적으로 추가한다.
+
+각 문제는 0–3점이다. 축 이름·shape·값을 모두 맞히면 3점, 산술 실수만 있으면 2점, shape만 맞히면 1점이다. 총 7점 이상이면서 **token 축과 feature 축을 바꾸는 오류가 없어야** 통과다. 미달이면 `shape를 따라 읽는 순서`를 복습한 뒤 $(B,T,D)=(2,3,4)$와 $P\in\mathbb R^{3\times4}$로 재시도한다.
 
 ### 다음 문서
 

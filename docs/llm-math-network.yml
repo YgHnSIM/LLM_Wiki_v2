@@ -10,17 +10,17 @@ initiative:
     stage: complete
   current_batch: null
   next_action: >-
-    npm run math:check를 실행한 뒤 embeddings, dot-matrix-linear-transform, attention, residual-connections owner와 wiki/analyses/LLM을 만든 수학.md의 표현·attention 구간을 읽고 attention-transfer-mastery 한 배치를 in_progress로 등록한다.
+    npm run math:check를 실행한 뒤 derivative-partial-gradient, chain-rule-computation-graph, backpropagation owner와 wiki/analyses/LLM을 만든 수학.md의 출력층·residual 경로를 읽고 full-backprop-verification 한 배치를 in_progress로 등록한다.
   blockers: []
   handoff:
     updated: '2026-07-24'
-    baseline_commit: df536ca66e4acb089c30b389d20f2cbd66c8a155
-    last_completed_gate: prediction-head-mastery-g7-verified
+    baseline_commit: d30545c5113ea025ee619cac81ccc67e4d568116
+    last_completed_gate: attention-transfer-mastery-g7-verified
     validation:
       - command: npm run math:check
-        result: 9개 배치·25개 수식 계열의 구조·owner·선수 관계와 prediction-head-mastery 완료 상태 검증 통과
+        result: 10개 배치·25개 수식 계열의 구조·owner·선수 관계와 attention-transfer-mastery 완료 상태 검증 통과
       - command: npm run learning:audit
-        result: 365개 Markdown·362개 비메타 문서, 블록 수식 699개와 마스터리 표지 4개로 기준선 갱신
+        result: 365개 Markdown·362개 비메타 문서, 블록 수식 711개와 마스터리 표지 9개로 기준선 갱신
       - command: npm run learning:audit:check
         result: 기초 학습 감사 기준선이 현재 wiki와 일치함을 확인
       - command: npm run sync:index
@@ -30,8 +30,8 @@ initiative:
       - command: npm run verify
         result: math 원장, Node 회귀 123개, wiki lint·691 HTML build/check·Chromium 회귀 4개와 KaTeX error 0개를 통과
     notes: >-
-      기준 branch는 main이다. prediction-head-mastery에서 softmax·로그가능도·경사하강법과 허브 출력단의 도움 감소형 전이 연습·오답 교정·숙달 판정을 완결했다.
-      자동 감사에 마스터리 연습 표지를 추가했고 새 수치를 수동 재계산했다. 다음 배치는 표현·attention·mask·잔차 전이를 맡는다. raw와 기존 첨부 파일은 건드리지 않았다.
+      기준 branch는 main이다. attention-transfer-mastery에서 ID lookup, 행렬·shape, causal mask, attention 가중합과 residual의 도움 감소형 전이 연습을 다섯 owner와 허브에 완결했다.
+      행·열벡터 관례 대응과 치명적 축·mask·broadcasting 오류를 통과 기준에 포함했다. 다음 배치는 출력층 전체와 upstream 경로의 gradient·유한차분을 맡는다. raw와 기존 첨부 파일은 건드리지 않았다.
 
 baseline:
   recorded_on: '2026-07-24'
@@ -39,7 +39,7 @@ baseline:
   wiki_documents: 365
   non_meta_documents: 362
   formula_documents: 183
-  formula_blocks: 699
+  formula_blocks: 711
 
 batches:
   - id: linear-algebra-foundations
@@ -186,6 +186,25 @@ batches:
       - docs/foundational-learning-workflow.md
       - docs/learning-structure-style-guide.md
       - scripts/audit-foundational-learning.mjs
+      - wiki/overview.md
+      - wiki/log.md
+
+  - id: attention-transfer-mastery
+    title: 표현·attention·mask·잔차 전이 마스터리
+    stage: complete
+    families:
+      - vectors-matrices-tensors
+      - dot-matrix-linear-transform
+      - embeddings
+      - attention
+      - residual-connections
+    deliverables:
+      - wiki/concepts/벡터·행렬·텐서와 shape.md
+      - wiki/concepts/내적·행렬곱과 선형변환.md
+      - wiki/concepts/단어 임베딩.md
+      - wiki/concepts/어텐션 메커니즘.md
+      - wiki/concepts/잔차 연결.md
+      - wiki/analyses/LLM을 만든 수학.md
       - wiki/overview.md
       - wiki/log.md
 
