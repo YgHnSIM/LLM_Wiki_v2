@@ -31,6 +31,7 @@ related:
   - analysis.n-gram에서-llm으로
   - analysis.stored-program-to-learning-framework
   - analysis.silicon-scaling-to-accelerators
+  - analysis.문맥은-저장소인가-상태-재사용-검색-에이전트-메모리
 ---
 # LLM과 컴퓨팅 능력의 공진화
 
@@ -160,6 +161,12 @@ related:
 
 텍스트 token의 빠른 생성만 보지 않고, GPU·node·service 중 어디의 J인지, 어떤 품질·deadline·traffic 아래 유효 결과가 되었는지, timeout·retry 비용을 어디에 넣었는지를 같은 장부에서 확인한다.
 
+### 물리 상태와 의미 상태를 함께 보고 싶다면
+
+물리 상태 경로는 [[메모리 계층과 데이터 이동]] → [[언어 모델 추론 서빙]]으로 읽는다. 이 경로는 HBM·device memory·KV cache의 byte 이동, 요청별 할당과 회수를 다룬다. 의미 상태 경로는 [[외부 메모리]] → [[검색 증강 생성]] → [[LLM 에이전트]]으로 읽는다. 이 경로는 문서·색인·event log를 다음 답이나 action에 다시 넣는 방법을 다룬다.
+
+[[문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리]]는 두 경로를 하나의 직접 발명 계보로 만들지 않는다. 대신 같은 `memory`라는 말 아래 request 수명의 실행 state, 지속 색인·log, model checkpoint가 물리 위치·수명·갱신·근거·복구에서 어떻게 갈라지는지 비교한다.
+
 ### 데이터 축을 보고 싶다면
 
 [[확률적 언어 모델은 어떤 계산 인프라를 요구했나]] → [[데이터 품질과 분포 다양성은 같은 축인가]] → [[규모는 언제 연구 변수가 되었나]]
@@ -197,3 +204,4 @@ Corpus가 커졌다는 말에서 출발해 quality proxy·분포·sampling·반�
 - [[N-gram에서 LLM으로]]
 - [[저장 프로그램에서 학습 프레임워크까지]]
 - [[집적도 증가에서 가속기까지 무엇이 더 필요했나]]
+- [[문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리]]

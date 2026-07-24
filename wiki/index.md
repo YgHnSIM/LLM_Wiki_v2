@@ -388,7 +388,7 @@ related:
 - [[총 매개변수와 활성 계산량은 같은 축인가]] — dense $N$과 sparse MoE의 total·active parameters를 분리하고 FLOPs·memory·communication·wall-clock·data·quality 장부로 규모 비교 조건을 정리한 분석 (근거 8개)
 - [[같은 병렬 문장은 무엇을 학습시키는가]] — 병렬 문장쌍이 IBM SMT의 잠재 단어 정렬, seq2seq NMT의 target sequence, XLM TLM의 양방향 masked-token 문맥으로 쓰이는 차이를 비교한 분석 (근거 6개)
 - [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 특징·전체 미세조정·저순위 adapter·시간순 base 갱신·외부 기억·prompt와 멀티모달 bridge–parameter update의 두 축을 비교하고 foundation–adapted–deployed 층위를 분리한 분석 (근거 43개)
-- [[문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리]] — Memory Network의 사실 슬롯, Transformer-XL의 detached state, 긴 입력, RAG 색인, agent 실행 state를 보존·갱신·접근·근거 추적의 네 축으로 구분한 분석 (근거 6개)
+- [[문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리]] — 요청별 KV cache·긴 입력·RAG 색인·agent log·parameter checkpoint를 물리 위치·수명·갱신·근거·복구 경계로 구분한 분석 (근거 8개)
 - [[생성은 무엇을 한 단계씩 고르는가 — 파형·이미지 토큰·잠재 잡음]] — WaveNet 표본, DALL·E 1의 이산 image code, unCLIP의 CLIP image embedding과 잠재 확산의 반복 갱신을 출력 단위·조건·선택·평가 장부로 비교한 분석 (근거 5개)
 - [[같은 벡터 공간은 무엇을 보장하는가 — 공기·대조·생성의 경계]] — LSA·Word2Vec·GloVe·CLIP·unCLIP을 공기·대조·prior·decoder의 역할로 나누어 shared embedding이 유사도·후보 판정·생성을 각각 어디까지 보장하는지 비교한 분석 (근거 6개)
 - [[LLM을 만든 수학]] — 4-token·2차원 toy causal attention으로 임베딩·잔차·softmax NLL·출력 bias의 한 SGD update를 끝까지 연결한 수학 허브 (근거 4개)
@@ -429,7 +429,7 @@ related:
 
 - [[overview]] — 위키의 현재 범위와 핵심 연결 구조
 - [[log]] — 작업 시간순 기록
-- [[LLM과 컴퓨팅 능력의 공진화]] — 언어 모델과 컴퓨팅 능력 발전사를 잇는 아홉 본편·세 횡단 연결고리·종합편 탐색 허브
+- [[LLM과 컴퓨팅 능력의 공진화]] — 언어 모델과 컴퓨팅 능력 발전사를 잇는 아홉 본편·세 횡단 연결고리·종합편과 물리·의미 상태 비교 경로의 탐색 허브
 
 ## 관련 항목
 

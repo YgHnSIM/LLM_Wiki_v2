@@ -3,10 +3,10 @@ schema_version: 1
 initiative:
   id: llm-system-boundary-network
   title: LLM 시스템 경계 확장
-  current_batch: memory-bridge
+  current_batch: encoding-owner
   next_action: >-
-    npm run boundary:resume으로 재개 상태를 확인한 뒤, memory-bridge 배치에서
-    문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리 분석을 보강·검증한다.
+    npm run boundary:resume으로 재개 상태를 확인한 뒤, encoding-owner 배치에서
+    문자 인코딩과 정규화 owner를 작성·검증한다.
   blockers: []
   hub:
     path: wiki/meta/LLM 시스템 경계 확장 지도.md
@@ -15,9 +15,9 @@ initiative:
     stage: planned
   handoff:
     updated: '2026-07-25'
-    baseline_commit: 3b2f8c970184a067fa012bfbaade20fa7616cc4a
-    last_completed_batch: data-bridge
-    last_completed_gate: data-scale-rights-bridge-verified
+    baseline_commit: 23c6f4f3d6d6cf3f200e2bc3f6e78fa85cb62f25
+    last_completed_batch: memory-bridge
+    last_completed_gate: physical-semantic-memory-bridge-verified
     validation:
       - boundary:check
       - history:check
@@ -29,7 +29,7 @@ initiative:
       - npm run boundary:check
       - git status --short --branch
     notes: >-
-      data-owner 뒤 data-bridge를 검증해 완료했고, 다음 유일한 행동은 memory-bridge다.
+      data-bridge 뒤 memory-bridge를 검증해 완료했고, 다음 유일한 행동은 encoding-owner다.
       이 원장이 세션 전환·문맥 압축 뒤에도 배치 순서와 다음 행동을 복원하는 단일 기준이다.
       raw/, C:/Vault/CS_Wiki와 사용자 첨부 파일은 수정하거나 staging하지 않는다.
 
@@ -115,7 +115,7 @@ bridges:
     page_id: analysis.문맥은-저장소인가-상태-재사용-검색-에이전트-메모리
     page_type: analysis
     action: extend
-    stage: planned
+    stage: complete
     required_by: [memory-bridge]
   - id: text-to-execution-authority
     title: 문자에서 실행 권한까지
@@ -161,7 +161,7 @@ tracks:
     priority: 3
     title: 메모리는 어디에 있고 무엇을 보장하는가
     primary_title: 문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리
-    stage: planned
+    stage: complete
     owners: []
     bridges: [physical-semantic-memory]
     primary_path: wiki/analyses/문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리.md
@@ -318,7 +318,7 @@ batches:
   - id: memory-bridge
     order: 5
     title: 물리 메모리와 의미 메모리 연결
-    stage: planned
+    stage: complete
     depends_on: [data-bridge]
     commit_message: 'content: connect_physical_and_semantic_memory'
     deliverables:
@@ -356,6 +356,7 @@ batches:
       - wiki/log.md
       - docs/llm-system-boundary-network.yml
       - docs/foundational-learning-audit.md
+      - docs/llm-math-network.yml
   - id: authority-bridge
     order: 7
     title: 문자에서 실행 권한까지 연결
@@ -377,6 +378,7 @@ batches:
       - wiki/log.md
       - docs/llm-system-boundary-network.yml
       - docs/foundational-learning-audit.md
+      - docs/llm-math-network.yml
   - id: safe-effects
     order: 8
     title: 안전한 외부 효과 보강
@@ -421,6 +423,7 @@ batches:
       - wiki/log.md
       - docs/llm-system-boundary-network.yml
       - docs/foundational-learning-audit.md
+      - docs/llm-math-network.yml
   - id: realtime-bridge
     order: 10
     title: 텍스트에서 실시간 멀티모달로 연결
@@ -442,6 +445,7 @@ batches:
       - wiki/log.md
       - docs/llm-system-boundary-network.yml
       - docs/foundational-learning-audit.md
+      - docs/llm-math-network.yml
   - id: integration
     order: 11
     title: 시스템 경계 전체 허브 통합

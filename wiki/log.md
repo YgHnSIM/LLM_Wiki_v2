@@ -5208,6 +5208,24 @@ raw 등록 해시:
 - 이 분석은 개별 dataset·항목의 이용 허가, 동의, 관할별 적법성이나 실제 학습 노출을 판정하지 않는다. 원문 조건·시점·downstream run 기록과 별도 법률 검토가 필요하다.
 - 다음 배치는 **문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리**에서 물리적 저장 경로와 의미적 메모리의 보장 경계를 보강한다. `raw/`, CS_WIKI와 `.codex-remote-attachments/`는 변경하지 않았다.
 
+## [2026-07-25] content | Connect physical and semantic memory
+
+변경 내용:
+
+- [[문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리]]를 요청별 KV cache, 긴 입력, RAG 색인, agent log와 parameter checkpoint의 물리 위치·수명·갱신·근거·복구 계약을 비교하는 일곱 경계 장부로 보강했다.
+- vLLM의 logical sequence–physical KV block, 동적 할당·공유·회수를 추가해 KV cache를 request 수명의 실행 state로 좁혔다. HBM–SRAM I/O는 [[메모리 계층과 데이터 이동]] owner가 맡는 물리 맥락으로만 연결했다.
+- [[LLM과 컴퓨팅 능력의 공진화]]에 물리 상태와 의미 상태의 병렬 경로를 넣었다. HBM·device memory·KV cache와 문서·색인·event log를 직접 발명 계보로 묶지 않고, [[언어 모델 추론 서빙]]과 [[검색 증강 생성]]의 서로 다른 보장으로 읽게 했다.
+
+검증 결과:
+
+- `npm run learning:audit`, `npm run sync:index`, `npm run lint:wiki`, `npm run math:check`, `npm run history:check`, `npm run boundary:check`, `npm run learning:audit:check`, `npm run verify`, `git diff --check`를 통과했다.
+- Playwright Chromium에서 보강한 분석을 desktop과 390×844 viewport로 확인하고, 가로 overflow와 console error가 없음을 확인했다.
+
+남은 제한:
+
+- KV block의 정상 반환은 crash durability가 아니며, 이 문서가 일반적인 atomic update·access control·deletion propagation·외부 write의 안전한 완료를 보장하지 않는다. 필요한 version·policy·recovery contract는 별도 운영 근거가 필요하다.
+- 다음 배치는 **문자 인코딩과 정규화** owner에서 byte·UTF-8·Unicode·grapheme cluster·normalization과 tokenizer 경계를 보강한다. `raw/`, CS_WIKI와 `.codex-remote-attachments/`는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]
