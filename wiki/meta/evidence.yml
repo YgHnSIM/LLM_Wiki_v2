@@ -4329,3 +4329,89 @@ sources:
     doi: 10.6028/NIST.SP.800-53r5
     url: https://doi.org/10.6028/NIST.SP.800-53r5
     language: en
+  rfc-3550-rtp:
+    title: 'RFC 3550: RTP: A Transport Protocol for Real-Time Applications'
+    authors: [H. Schulzrinne, S. Casner, R. Frederick, V. Jacobson]
+    published: 2003
+    source_type: primary
+    kind: technical-standard
+    doi: 10.17487/RFC3550
+    url: https://www.rfc-editor.org/rfc/rfc3550
+    language: en
+  rfc-7273-rtp-clock-source:
+    title: 'RFC 7273: RTP Clock Source Signalling'
+    authors: [A. Williams, K. Gross, R. van Brandenburg, H. Stokking]
+    published: 2014
+    source_type: primary
+    kind: technical-standard
+    doi: 10.17487/RFC7273
+    url: https://www.rfc-editor.org/rfc/rfc7273
+    language: en
+  rfc-3611-rtcp-xr:
+    title: 'RFC 3611: RTP Control Protocol Extended Reports (RTCP XR)'
+    authors: [T. Friedman, R. Caceres, A. Clark]
+    published: 2003
+    source_type: primary
+    kind: technical-standard
+    doi: 10.17487/RFC3611
+    url: https://www.rfc-editor.org/rfc/rfc3611
+    language: en
+  rfc-6464-audio-level-vad:
+    title: 'RFC 6464: A Real-time Transport Protocol (RTP) Header Extension for Client-to-Mixer Audio Level Indication'
+    authors: [J. Lennox, E. Ivov, E. Marocco]
+    published: 2011
+    source_type: primary
+    kind: technical-standard
+    doi: 10.17487/RFC6464
+    url: https://www.rfc-editor.org/rfc/rfc6464
+    language: en
+  w3c-webrtc-1-0-2025:
+    title: 'WebRTC: Real-Time Communication in Browsers'
+    authors: [World Wide Web Consortium]
+    published: 2025
+    source_type: primary
+    kind: technical-standard
+    url: https://www.w3.org/TR/webrtc/
+    language: en
+  whatwg-streams-standard-2026:
+    title: Streams Standard
+    authors: [WHATWG]
+    published: 2026
+    source_type: primary
+    kind: technical-standard
+    url: https://streams.spec.whatwg.org/commit-snapshots/29997074ffcfbe5b72a4451775398a54cef5b297/
+    language: en
+  openai-realtime-api-reference-2026:
+    title: Realtime API Reference
+    authors: [OpenAI]
+    published: 2026
+    source_type: primary-release
+    kind: api-reference
+    url: https://platform.openai.com/docs/api-reference/realtime?lang=javascript
+    language: en
+  chiba-higashinaka-2025-incremental-vap:
+    title: 'Investigating the Impact of Incremental Processing and Voice Activity Projection on Spoken Dialogue Systems'
+    authors: [Yuya Chiba, Ryuichiro Higashinaka]
+    published: 2025
+    source_type: primary
+    kind: conference-paper
+    url: https://aclanthology.org/2025.coling-main.249/
+    language: en
+  defossez-et-al-2024-moshi:
+    title: 'Moshi: a speech-text foundation model for real-time dialogue'
+    authors: [Alexandre Défossez, Laurent Mazaré, Manu Orsini, Amélie Royer, Patrick Pérez, Hervé Jégou, Edouard Grave, Neil Zeghidour]
+    published: 2024
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2410.00037
+    url: https://arxiv.org/abs/2410.00037
+    language: en
+  lin-et-al-2025-full-duplex-bench:
+    title: 'Full-Duplex-Bench: A Benchmark to Evaluate Full-duplex Spoken Dialogue Models on Turn-taking Capabilities'
+    authors: [Guan-Ting Lin, Jiachen Lian, Tingle Li, Qirui Wang, Gopala Anumanchipalli, Alexander H. Liu, Hung-yi Lee]
+    published: 2025
+    source_type: primary
+    kind: preprint
+    doi: 10.48550/arXiv.2503.04721
+    url: https://arxiv.org/abs/2503.04721
+    language: en

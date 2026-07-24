@@ -25,7 +25,7 @@ related:
 
 언어 모델 발전과 인간 계산·stored program·GPU·분산 학습·memory·serving의 역사를 함께 읽으려면 [[LLM과 컴퓨팅 능력의 공진화]]에서 시작한다. 시대순 아홉 본편과 세 횡단 연결고리, 종합편이 “빨라졌다”를 계산 가능성·실현 성능·확장성·효율·신뢰성으로 나누어 안내한다. 표현 workload는 [[N-gram에서 LLM으로]], software 추상화는 [[저장 프로그램에서 학습 프레임워크까지]], silicon과 실제 가속 사이의 조건은 [[집적도 증가에서 가속기까지 무엇이 더 필요했나]]가 맡는다.
 
-모델 밖의 시스템 경계를 따라 읽으려면 [[LLM 추론 에너지 지표]]에서 시작해 [[전력에서 서비스 결과 계약까지 무엇을 세어야 하나]]로 간다. 이 경로는 전력계의 J를 token 수 하나로 환산하지 않고, prefill·decode·idle·retry와 품질·deadline·traffic을 포함한 서비스 결과 계약으로 확장한다. 학습 자료 쪽에서는 [[학습 데이터 생애주기와 출처 추적]]이 snapshot·변환·release·training run을 잇고, [[데이터의 양에서 권리와 책임까지]]가 규모 숫자와 권리·동의·재현·구제를 같은 주장으로 섞지 않게 한다. [[언어 수와 언어 형평성은 같은 축인가]]는 이 장부를 언어별 자료·비용·권한의 분배 질문으로 이어 간다. 메모리 쪽에서는 [[문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리]]가 요청마다 사라지는 KV cache, 지속 RAG 색인, agent event log와 parameter checkpoint를 물리 위치·수명·갱신·근거·복구 경계로 나눈다. 문자 쪽에서는 [[문자 인코딩과 정규화]]가 byte·UTF-8·Unicode code point·grapheme cluster·normalization·tokenizer를 구분해, 화면의 같은 글자와 모델의 같은 입력 ID를 혼동하지 않게 한다. [[문자에서 실행 권한까지]]는 그 표현을 JSON·schema·업무 의미·인증·인가의 서로 다른 관문으로 이어, allowed proposal을 실행 성공과 섞지 않게 한다. [[함수 호출과 도구 사용]]은 그 뒤 한 write action의 proposed·confirmed·committed·failed·unknown을 분리하고, 응답 유실을 blind retry가 아니라 reconciliation·postcondition·감사 기록으로 다룬다. [[LLM 에이전트]]는 이 결과 상태가 여러 step의 plan·memory·중단 조건으로 전파되는 loop를 맡는다. 실시간 상호작용은 별도 근거와 owner를 갖춘 뒤 같은 지도에 연결한다.
+모델 밖의 시스템 경계를 따라 읽으려면 [[LLM 추론 에너지 지표]]에서 시작해 [[전력에서 서비스 결과 계약까지 무엇을 세어야 하나]]로 간다. 이 경로는 전력계의 J를 token 수 하나로 환산하지 않고, prefill·decode·idle·retry와 품질·deadline·traffic을 포함한 서비스 결과 계약으로 확장한다. 학습 자료 쪽에서는 [[학습 데이터 생애주기와 출처 추적]]이 snapshot·변환·release·training run을 잇고, [[데이터의 양에서 권리와 책임까지]]가 규모 숫자와 권리·동의·재현·구제를 같은 주장으로 섞지 않게 한다. [[언어 수와 언어 형평성은 같은 축인가]]는 이 장부를 언어별 자료·비용·권한의 분배 질문으로 이어 간다. 메모리 쪽에서는 [[문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리]]가 요청마다 사라지는 KV cache, 지속 RAG 색인, agent event log와 parameter checkpoint를 물리 위치·수명·갱신·근거·복구 경계로 나눈다. 문자 쪽에서는 [[문자 인코딩과 정규화]]가 byte·UTF-8·Unicode code point·grapheme cluster·normalization·tokenizer를 구분해, 화면의 같은 글자와 모델의 같은 입력 ID를 혼동하지 않게 한다. [[문자에서 실행 권한까지]]는 그 표현을 JSON·schema·업무 의미·인증·인가의 서로 다른 관문으로 이어, allowed proposal을 실행 성공과 섞지 않게 한다. [[함수 호출과 도구 사용]]은 그 뒤 한 write action의 proposed·confirmed·committed·failed·unknown을 분리하고, 응답 유실을 blind retry가 아니라 reconciliation·postcondition·감사 기록으로 다룬다. [[LLM 에이전트]]는 이 결과 상태가 여러 step의 plan·memory·중단 조건으로 전파되는 loop를 맡는다. [[실시간 멀티모달 상호작용]]은 media clock·frame/chunk·buffer·turn detection·incremental output·A/V sync·interrupt/cancel을 model architecture와 분리해 같은 지도에 연결한다.
 
 ## 공식 장 번호와 편집부 재구성
 
@@ -37,7 +37,7 @@ related:
 
 ## 처음 읽는 사람을 위한 길잡이
 
-처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 110개, reference 0개, concept 202개, entity 29개, analysis 42개를 합친 비메타 문서 383개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 핵심 수학 경로는 완전 풀이를 읽는 데서 끝내지 않고 `부분 완성 → 새 수치 전이 → 오류 진단 → 해설과 채점 기준`으로 도움을 줄여 독립 계산을 확인하는 방향으로 보강 중이다.
+처음부터 모든 문서를 순서대로 읽을 필요는 없다. source 110개, reference 0개, concept 204개, entity 29개, analysis 44개를 합친 비메타 문서 387개는 모두 쉬운 핵심, 작동 원리, 기술과 근거의 세 단계로 구성됐다. 모르는 수식이 나오면 1단계와 2단계만 읽고 관련 개념으로 이동한 뒤 돌아와도 된다. 핵심 수학 경로는 완전 풀이를 읽는 데서 끝내지 않고 `부분 완성 → 새 수치 전이 → 오류 진단 → 해설과 채점 기준`으로 도움을 줄여 독립 계산을 확인하는 방향으로 보강 중이다.
 
 | 관심 | 권장 시작 | 이어 읽기 | 도착점 |
 | --- | --- | --- | --- |
@@ -81,6 +81,7 @@ related:
 | 음성 인식에서 학습되는 경계는 어떻게 넓어졌나 | [[013_은닉 마르코프 모델과 통계적 음성 인식]] | [[041_심층 신경망 음향 모델과 DNN-HMM 전환]] → [[087_Whisper와 대규모 약한 감독 음성 인식]] → [[Whisper]] → [[단어 오류율]] | [[규칙 기반 AI에서 데이터 기반 학습으로]] |
 | 프롬프트는 추론 성능을 어떻게 바꾸나 | [[067_GPT-3와 문맥 내 학습]] | [[080_사고 연쇄 프롬프팅과 추론 행동 유도]] → [[사고 연쇄 프롬프팅]] → [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]] → [[106_DeepSeek-R1의 강화학습 파이프라인과 증류 경계]] → [[그룹 상대 정책 최적화]] → [[079_HELM과 다차원 언어 모델 평가]] | [[손실 곡선과 능력 곡선 사이]] |
 | 이미지·동영상 조건은 생성·예측 모델에 어떻게 들어가나 | [[070_CLIP과 대조적 언어-이미지 사전 학습]] | [[CLIP]] → [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]] → [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]] → [[멀티모달 대규모 언어 모델]] → [[105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]] → [[107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]] → [[108_V-JEPA 2의 잠재 예측과 로봇 계획 실험 경계]] → [[학습된 세계 모델]] → [[096_GPT-4의 멀티모달 공개·시험 성능·안전 경계]] → [[GPT-4]] → [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] → [[086_잠재 확산 모델과 Stable Diffusion v1 공개]] → [[잠재 확산 모델]] → [[Stable Diffusion]] | [[사전 학습 지식은 과제에 어떻게 도착하는가]] |
+| 말·화면이 계속 도착할 때 model은 무엇을 더 책임져야 하나 | [[실시간 멀티모달 상호작용]] | [[멀티모달 대규모 언어 모델]] → [[음성 활동 감지]] → [[언어 모델 추론 서빙]] | media clock·buffer·turn·incremental playout·A/V sync·cancel을 model I/O와 분리하기 |
 | 모델 공개는 곧 재현 가능성을 뜻하나 | [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] | [[076_파운데이션 모델 보고서와 AI 생태계]] → [[082_BLOOM과 공개 접근 다국어 LLM]] → [[BLOOM]] → [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]] → [[LLaMA 1]] → [[090_공개 가중치 LLM 파동과 서로 다른 공개 범위]] | [[공개 가중치와 재현 가능성은 같은 축인가]] |
 | 희소 모델의 ‘크기’는 무엇을 뜻하나 | [[069_전문가 혼합과 희소 활성 스케일링]] | [[097_Mixtral의 생산 배포 효율 주장과 증거 경계]] → [[GLaM에서 Mixtral까지의 희소 MoE 확장]] → [[Mixtral 8x7B]] → [[106_DeepSeek-R1의 강화학습 파이프라인과 증류 경계]] | [[총 매개변수와 활성 계산량은 같은 축인가]] |
 | 학습 데이터의 양과 구성을 어떻게 읽나 | [[063_T5와 Text-to-Text 통합 프레임워크]] | [[066_신경 언어 모델의 스케일링 법칙]] → [[067_GPT-3와 문맥 내 학습]] → [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] → [[The Pile]] → [[078_Chinchilla와 계산 최적 언어 모델 학습]] → [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]] → [[090_공개 가중치 LLM 파동과 서로 다른 공개 범위]] | [[데이터 품질과 분포 다양성은 같은 축인가]] |
@@ -500,7 +501,7 @@ related:
 
 ## 현재 상태
 
-소스 110개, 참고 자료 0개, 개념 195개, 개체 29개, 분석 29개와 메타 문서 3개, 총 366개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 327개는 `verified`, 해석적 문서 36개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 458개 외부 근거와 220개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 110개, 참고 자료 0개, 개념 204개, 개체 29개, 분석 44개와 메타 문서 4개, 총 391개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 337개는 `verified`, 해석적 문서 51개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 516개 외부 근거와 220개 불변 raw artifact가 레지스트리에 등록돼 있다.
 
 [[LLM을 만든 수학]]은 4-token·2차원 toy causal attention에서 ID lookup, attention·잔차, 4개 logit의 softmax·NLL, 출력 bias 하나의 SGD 갱신을 한 계산으로 연결한다. 이어 같은 upstream gradient를 출력 가중치·전체 bias·문맥 표현으로 역전파하고, 실행 가능한 toy 코드에서 해석적 gradient와 중심 차분이 일치하는지 검산한다. 두 번째 shape toy는 이를 $(B,T,D,H,D_h,D_{\mathrm{ff}},|\mathcal V|)$로 확장해 head 분할·결합, residual, LayerNorm 통계, FFN, logits와 매개변수 gradient를 `npm run math:shapes`로 추적한다. [[수치 안정성과 log-sum-exp]]은 toy에 없는 finite-precision softmax·mask·online 누적 경계를, [[확률변수·확률분포·기대값·분산]]은 분포·표본 통계와 tensor 축의 구분을 맡는다. [[Layer Normalization]]·[[RMSNorm]]은 feature 축의 정규화와 scale을, [[Adam 최적화기]]는 확률적 gradient의 raw moment update를 맡는다. 확장 경로에서는 [[특이값 분해와 저랭크 근사]]가 절단 SVD와 LoRA update를, [[활성화 함수]]가 position-wise 비선형성을, [[계산 복잡도와 비용 모델]]이 산술·메모리·I/O·시간의 구분을, [[표본추출·온도·top-k·top-p]]가 decoding 선택을, [[인간 피드백 강화학습]]이 선호 보상·reference KL·optimizer의 경계를 맡는다. 이 허브는 이 모든 실제 LLM 요소를 복제하지 않으며, 각 owner가 그 생략한 조건을 따로 드러낸다.
 

@@ -228,6 +228,7 @@ related:
 - [[CLIP]] — 이미지·텍스트 이중 인코더를 대칭 대조 손실로 정렬하고 class prompt를 제로샷 분류기 weight처럼 사용하는 시각-언어 모델 (근거 4개)
 - [[Flamingo]] — 동결 시각·언어 backbone 사이의 64개 시각 token 병목과 gated cross-attention으로 멀티모달 문맥 내 생성을 수행하는 모델 계열 (근거 1개)
 - [[멀티모달 대규모 언어 모델]] — 비언어 입력을 image encoder·bridge·언어 decoder로 연결하되 입력·동결 경계·출력 signature와 공개 수준을 model별로 구분해야 하는 시스템 계열 (근거 18개)
+- [[실시간 멀티모달 상호작용]] — 계속 도착하는 음성·영상·text를 media clock·frame/chunk·buffer·turn·incremental playout·A/V sync·cancel의 runtime 계약으로 다루는 시스템 개념 (근거 10개)
 - [[학습된 세계 모델]] — 관측 표현, 행동 조건부 동역학과 planner·control loop를 분리하고 모델 명칭과 일반 물리·인과 이해의 증거를 구분하는 학습 모델 범주 (근거 3개)
 - [[GPT-4]] — base·post-training·multimodal interface·제품 snapshot을 분리하고 공개 입출력·시험 protocol·UBE percentile·안전 결과와 비공개 architecture의 경계를 기록한 모델 계열 (근거 8개)
 - [[DALL·E (2021)]] — 1,024개 이산 이미지 토큰과 최대 256개 텍스트 토큰을 공동 자기회귀 모델링하고 별도 대조 모델로 후보를 재순위화한 2021년 생성 시스템 (근거 4개)

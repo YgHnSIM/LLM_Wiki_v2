@@ -5285,6 +5285,25 @@ raw 등록 해시:
 - compensation은 새 완화 action이지 모든 외부 효과를 지우는 rollback이 아니다. 이미 사람·다른 service·물리 세계에 퍼진 효과에는 residual effect 기록과 domain별 절차가 필요하다.
 - 다음 배치는 **실시간 멀티모달 상호작용** owner에서 media clock·frame/chunk·buffer·turn detection·incremental output·A/V sync·interrupt·cancel·backpressure·full-duplex의 경계를 다룬다. `raw/`, C:/Vault/CS_Wiki와 `.codex-remote-attachments/`는 변경하지 않았다.
 
+## [2026-07-25] content | Define realtime multimodal interaction
+
+변경 내용:
+
+- [[실시간 멀티모달 상호작용]]을 추가해 실시간성을 model architecture가 아니라 media clock·frame/encoded chunk/transport packet/model token/conversation turn, buffer·backpressure·turn policy·incremental playout·A/V sync·interrupt/cancel·reconnect의 runtime 계약으로 정리했다.
+- RTP/RTCP clock·delay reporting, WebRTC·Streams의 browser/runtime 범위, OpenAI Realtime의 product event 예, incremental turn 연구와 full-duplex benchmark를 evidence 레지스트리에 등록했다. VAD와 turn transfer, 양방향 전송과 대화적 full-duplex, generation cancel·queued media discard·이미 presentation된 output을 서로 다른 상태로 분리했다.
+- [[멀티모달 대규모 언어 모델]]에는 encoder·bridge·training/model I/O 책임과 capture·transport·buffer·turn·playout 책임이 다르다는 국소 경계만 추가했다. [[index]]와 [[overview]]에는 새 owner와 읽기 경로를 연결했고, 학습 감사 기준선에 맞춰 수학 원장의 문서·수식 집계만 동기화했다.
+- 시스템 경계 원장은 realtime-owner를 완료하고 B10 **텍스트 모델에서 실시간 멀티모달 시스템까지** 분석을 다음 유일한 작업으로 지정했다.
+
+검증 결과:
+
+- `npm run learning:audit`, `npm run sync:index`, `npm run lint:wiki`, `npm run boundary:check`, `npm run math:check`, `npm run history:check`, `npm run learning:audit:check`, `npm run verify`, `git diff --check`를 통과했다. `verify`는 Node test 154개, 717개 page build·50,071개 local reference 검사, browser test 4개를 포함했다.
+- Playwright Chromium에서 새 owner와 보강한 MLLM 문서를 desktop·390×844 viewport로 확인했다. 페이지 가로 overflow와 console error가 없었고, 작은 화면의 넓은 비교 표는 page width를 넘기지 않는 scroll container 안에서 확인했다.
+
+남은 제한:
+
+- RTP·WebRTC·Streams와 OpenAI event reference는 각각 transport, browser/runtime, 특정 product interface 범위의 근거다. 어느 하나도 모든 LLM 서비스의 model chunk 크기·turn policy·A/V 허용 오차·사용자 경험 SLO를 정하지 않는다.
+- 다음 B10 분석은 text token 생성, ASR→text model→TTS, native audio model과 이 runtime owner를 비교하되, 단일 latency나 benchmark score를 전체 대화 품질·privacy·외부 effect 안전성으로 확대하지 않는다. `raw/`, C:/Vault/CS_Wiki와 `.codex-remote-attachments/`는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

@@ -3,10 +3,12 @@ schema_version: 1
 initiative:
   id: llm-system-boundary-network
   title: LLM 시스템 경계 확장
-  current_batch: realtime-owner
+  current_batch: realtime-bridge
   next_action: >-
-    npm run boundary:resume으로 재개 상태를 확인한 뒤, realtime-owner 배치에서
-    실시간 멀티모달 상호작용 owner를 만들고 media clock·frame/chunk·buffer·turn detection·incremental output·A/V sync·interrupt·cancel·backpressure·full-duplex의 경계를 근거와 함께 완결한다.
+    npm run boundary:resume으로 재개 상태를 확인한 뒤, realtime-bridge 배치에서
+    텍스트 모델에서 실시간 멀티모달 시스템까지 분석을 만들고, 새 runtime owner와
+    기존 음성 인식·합성·네이티브 오디오 비교를 text token 생성·audio pipeline·사용자 경험의
+    서로 다른 책임과 측정 경계로 연결한다.
   blockers: []
   hub:
     path: wiki/meta/LLM 시스템 경계 확장 지도.md
@@ -15,9 +17,9 @@ initiative:
     stage: planned
   handoff:
     updated: '2026-07-25'
-    baseline_commit: 309909569bd2ae5ccab822d6ea2fdfb67fd77d40
-    last_completed_batch: safe-effects
-    last_completed_gate: safe-external-effects-verified
+    baseline_commit: 0bf536bec06153399c1c9dfeaa251a970e276a02
+    last_completed_batch: realtime-owner
+    last_completed_gate: realtime-multimodal-owner-verified
     validation:
       - boundary:check
       - history:check
@@ -29,9 +31,10 @@ initiative:
       - npm run boundary:check
       - git status --short --branch
     notes: >-
-      safe-effects에서 함수 호출과 agent의 action 상태 기계, unknown reconciliation,
-      partial effect·compensation·postcondition·audit 경계를 검증해 완료했고,
-      다음 유일한 행동은 realtime-owner다.
+      realtime-owner에서 실시간 멀티모달 상호작용을 model architecture와 분리해,
+      media clock·frame/chunk/packet/token/turn·buffer·backpressure·A/V sync·interrupt/cancel·복구의
+      runtime 계약으로 검증해 완료했다. RFC·browser runtime·대화 모델 근거의 적용 범위를 분리했고,
+      다음 유일한 행동은 realtime-bridge다.
       이 원장이 세션 전환·문맥 압축 뒤에도 배치 순서와 다음 행동을 복원하는 단일 기준이다.
       raw/, C:/Vault/CS_Wiki와 사용자 첨부 파일은 수정하거나 staging하지 않는다.
 
@@ -91,7 +94,7 @@ owners:
     page_id: concept.realtime-multimodal-interaction
     page_type: concept
     action: create
-    stage: planned
+    stage: complete
     required_by: [realtime-owner, realtime-bridge]
 
 bridges:
@@ -196,7 +199,7 @@ tracks:
     priority: 6
     title: 텍스트 모델에서 실시간 멀티모달 시스템까지
     primary_title: 실시간 멀티모달 상호작용
-    stage: planned
+    stage: in_progress
     owners: [realtime-multimodal-interaction]
     bridges: [text-to-realtime-multimodal-systems]
     primary_path: wiki/concepts/실시간 멀티모달 상호작용.md
@@ -408,7 +411,7 @@ batches:
   - id: realtime-owner
     order: 9
     title: 실시간 멀티모달 상호작용 owner
-    stage: planned
+    stage: complete
     depends_on: [safe-effects]
     commit_message: 'content: define_realtime_multimodal_interaction'
     deliverables:
