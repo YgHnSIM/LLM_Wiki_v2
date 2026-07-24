@@ -38,6 +38,7 @@ evidence:
     locator: 'Adaptive Switching Circuits의 제곱오차 적응 갱신'
     relation: contextualizes
 related:
+  - analysis.llm-수학-종합-실습
   - concept.단어-임베딩
   - concept.어텐션-메커니즘
   - concept.잔차-연결
@@ -65,7 +66,7 @@ related:
 > [!note] 학습 안내
 > **난이도:** 기초 → 심화<br>
 > **선수 지식:** 없음 — token ID, 벡터, 확률, 손실과 gradient를 이 작은 계산 안에서 차례로 정의한다.<br>
-> **읽고 나면:** 두 token의 문맥이 attention과 residual을 거쳐 다음 token 확률이 되고, 그 확률의 NLL에서 출력 bias 하나를 한 번 SGD 갱신하는 전 과정을 손으로 재현할 수 있다.
+> **읽고 나면:** 두 token의 문맥이 attention·residual·정규화·FFN을 거쳐 다음 token 확률이 되고, NLL의 전체 출력층 gradient와 실제 Transformer shape로 확장되는 과정을 설명한 뒤 [[LLM 수학 종합 실습]]으로 독립 전이할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
 
@@ -74,6 +75,8 @@ related:
 대규모 언어 모델(LLM)은 이미 읽은 token 열을 입력으로 받아 다음 token 후보 전체의 조건부확률을 만든다. 학습에서는 실제 다음 token에 준 확률이 커지도록 손실을 줄이고, 생성에서는 학습된 가중치를 고정한 채 그 분포에서 다음 token을 고른다.
 
 이 허브는 그 흐름을 한 번에 보이기 위해 **4개 token과 2차원 벡터**만 쓰는 계산을 만든다. 실제 LLM은 수만 개 이상 후보, 많은 층·head, batch, 정규화·optimizer state와 분산 실행을 쓴다. 아래 숫자는 어느 공개 모델의 activation이나 학습 기록이 아니라, 각 수학이 어느 입력을 받아 무엇을 내는지 보이는 편집부 예다.
+
+처음 읽을 때는 아래 다섯 단계를 따라가고, owner별 마스터리 연습을 푼 뒤에는 [[LLM 수학 종합 실습]]으로 이동한다. 종합 실습은 이 문서와 다른 어휘·행렬·target을 사용하므로, 본문 숫자를 암기했는지보다 새 계산을 연결하는지를 확인한다.
 
 ### 먼저 계산 이야기를 한 문장으로 읽기
 
@@ -642,6 +645,7 @@ $$
 
 ### 다음 문서
 
+- [[LLM 수학 종합 실습]] — 새 숫자에서 lookup부터 gradient·실제 shape까지 무도움으로 연결하고 오류별 복습 경로를 판정한다.
 - [[수치 안정성과 log-sum-exp]] — softmax·NLL을 finite precision에서 계산할 때의 max shift·mask·blockwise 누적을 이어서 본다.
 - [[대규모 언어 모델]] — toy 계산을 넘어 자료·구조·계산·평가가 함께 바꾸는 실제 LLM 범위를 이어서 본다.
 
@@ -657,6 +661,7 @@ $$
 
 ## 관련 항목
 
+- [[LLM 수학 종합 실습]]
 - [[단어 임베딩]]
 - [[어텐션 메커니즘]]
 - [[잔차 연결]]

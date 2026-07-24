@@ -10,17 +10,17 @@ initiative:
     stage: complete
   current_batch: null
   next_action: >-
-    npm run math:check를 실행한 뒤 integrated-capstone 배치를 시작해 embeddings, attention, residual-connections, softmax, log-likelihood, backpropagation, normalization-statistics owner 경로와 wiki/analyses/LLM을 만든 수학.md를 연결하는 무도움 종합 문제·정답·채점표·오류별 복습 경로와 실행 검증을 구현한다.
+    npm run math:check를 실행한 뒤 실제 학습자 풀이·오답 자료가 들어오면 embeddings, attention, residual-connections, normalization-statistics, activation-functions, softmax, log-likelihood, backpropagation, gradient-descent owner와 wiki/analyses/LLM 수학 종합 실습.md의 rubric을 대조해 가장 반복되는 치명적 오류부터 다음 배치를 정한다.
   blockers: []
   handoff:
     updated: '2026-07-24'
-    baseline_commit: 3e6bbfbe15d13ed26e853ea4daa589b809a363c4
-    last_completed_gate: real-transformer-shapes-g7-verified
+    baseline_commit: ec302eef7a955a511843a996846cf7067ba7069b
+    last_completed_gate: integrated-capstone-g7-verified
     validation:
       - command: npm run math:check
-        result: 12개 배치·25개 수식 계열의 구조·owner·선수 관계와 real-transformer-shapes 완료 상태 검증 통과
+        result: 13개 배치·25개 수식 계열의 구조·owner·선수 관계와 integrated-capstone 완료 상태 검증 통과
       - command: npm run learning:audit
-        result: 365개 Markdown·362개 비메타 문서, 블록 수식 733개와 마스터리 표지 16개로 기준선 갱신
+        result: 366개 Markdown·363개 비메타 문서, 블록 수식 751개와 마스터리 표지 17개로 기준선 갱신
       - command: npm run learning:audit:check
         result: 기초 학습 감사 기준선이 현재 wiki와 일치함을 확인
       - command: npm run sync:index
@@ -31,19 +31,22 @@ initiative:
         result: stable softmax·허브 수치·gradient shape·중심 차분·SGD 손실 감소 신규 회귀 6개 통과
       - command: node --test scripts/tests/llm-math-shapes.test.mjs
         result: head 분할·residual·LayerNorm 축·parameter gradient shape·sequence 성장 신규 회귀 6개 통과
+      - command: node --test scripts/tests/llm-math-capstone.test.mjs
+        result: lookup·causal attention·LayerNorm·FFN·softmax NLL·전체 출력 gradient·SGD 종합 회귀 6개 통과
       - command: npm run verify
-        result: math 원장, Node 회귀 135개, wiki lint·691 HTML·위키 링크 8688개·로컬 참조 47384개·Chromium 회귀 4개와 KaTeX error 0개 통과
+        result: math 원장, Node 회귀 141개, wiki lint·692 HTML·위키 링크 8730개·로컬 참조 47502개·Chromium 회귀 4개와 KaTeX error 0개 통과
     notes: >-
-      기준 branch는 main이다. real-transformer-shapes에서 B·T·d_model·H·d_head·d_ff·|V| 축,
-      head 분할·결합, FFN·LayerNorm·residual과 gradient shape를 완결했다. 다음은 integrated-capstone이며 raw와 기존 첨부 파일은 건드리지 않는다.
+      기준 branch는 main이다. integrated-capstone에서 새 숫자로 lookup·attention·residual·LayerNorm·FFN·softmax NLL·전체 출력 gradient를 연결하고,
+      무도움 문제·정답·20점 채점표·오류별 복습 경로와 실행 코드 일치를 완결했다. 계획한 권장 구현 순서는 모두 완료됐고,
+      다음 배치는 실제 학습자 오답 근거로 정한다. raw와 기존 첨부 파일은 건드리지 않았다.
 
 baseline:
   recorded_on: '2026-07-24'
   source: docs/foundational-learning-audit.md
-  wiki_documents: 365
-  non_meta_documents: 362
-  formula_documents: 183
-  formula_blocks: 733
+  wiki_documents: 366
+  non_meta_documents: 363
+  formula_documents: 184
+  formula_blocks: 751
 
 batches:
   - id: linear-algebra-foundations
@@ -253,6 +256,29 @@ batches:
       - scripts/llm-math-shapes.mjs
       - scripts/tests/llm-math-shapes.test.mjs
       - package.json
+      - wiki/overview.md
+      - wiki/log.md
+
+  - id: integrated-capstone
+    title: LLM 수학 무도움 종합 실습
+    stage: complete
+    families:
+      - embeddings
+      - attention
+      - residual-connections
+      - normalization-statistics
+      - activation-functions
+      - softmax
+      - log-likelihood
+      - backpropagation
+      - gradient-descent
+    deliverables:
+      - wiki/analyses/LLM 수학 종합 실습.md
+      - wiki/analyses/LLM을 만든 수학.md
+      - scripts/llm-math-capstone.mjs
+      - scripts/tests/llm-math-capstone.test.mjs
+      - package.json
+      - wiki/index.md
       - wiki/overview.md
       - wiki/log.md
 

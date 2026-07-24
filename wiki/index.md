@@ -384,6 +384,7 @@ related:
 - [[생성은 무엇을 한 단계씩 고르는가 — 파형·이미지 토큰·잠재 잡음]] — WaveNet 표본, DALL·E 1의 이산 image code, unCLIP의 CLIP image embedding과 잠재 확산의 반복 갱신을 출력 단위·조건·선택·평가 장부로 비교한 분석 (근거 5개)
 - [[같은 벡터 공간은 무엇을 보장하는가 — 공기·대조·생성의 경계]] — LSA·Word2Vec·GloVe·CLIP·unCLIP을 공기·대조·prior·decoder의 역할로 나누어 shared embedding이 유사도·후보 판정·생성을 각각 어디까지 보장하는지 비교한 분석 (근거 6개)
 - [[LLM을 만든 수학]] — 4-token·2차원 toy causal attention으로 임베딩·잔차·softmax NLL·출력 bias의 한 SGD update를 끝까지 연결한 수학 허브 (근거 4개)
+- [[LLM 수학 종합 실습]] — 새 숫자에서 lookup·causal attention·residual·LayerNorm·FFN·softmax NLL·전체 출력 gradient와 실제 shape를 독립 계산하는 무도움 종합 평가 (근거 3개)
 - [[음성을 텍스트로 옮기는 경계에서 무엇이 사라지는가 — 인식·합성·네이티브 오디오]] — DNN-HMM·WaveNet·Whisper·GPT-4o를 음향 표현·text 중간층·파형 합성·speech-to-speech 평가의 서로 다른 경계로 비교한 분석 (근거 5개)
 - [[손실 곡선과 능력 곡선 사이]] — 평균 token loss·task score·능력 threshold와 PaLM의 세 점 외삽 잔차를 metric·표본·checkpoint·관측 scale로 구분한 분석 (근거 7개)
 - [[훈련 병렬성과 생성 순차성은 다른 축이다]] — RNN·WaveNet·Transformer·FlashAttention을 표현 계산·sampling과 FLOPs·capacity·HBM traffic·wall-clock의 서로 다른 축으로 분리한 분석 (근거 6개)

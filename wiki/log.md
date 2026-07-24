@@ -4854,6 +4854,25 @@ raw 등록 해시:
 - 이 배치는 실제에 가까운 축과 shape를 추적하지만 큰 tensor의 값, attention projection의 전체 수치 gradient, padding loss mask, mixed precision·분산 layout은 계산하지 않는다.
 - shape 일치는 연산 의미·mask 방향·수치 안정성·학습 품질의 충분조건이 아니다. 종합 capstone에서 독립 문제와 누적 오류 진단을 이어간다. `raw/`는 변경하지 않았다.
 
+## [2026-07-24] content | Integrated LLM math capstone
+
+변경 내용:
+
+- [[LLM 수학 종합 실습]]을 추가했다. 허브와 다른 3-token·2-feature 설정에서 ID lookup, causal attention, 두 residual, token별 LayerNorm, position-wise ReLU FFN, softmax NLL, 전체 출력층 gradient와 실제 Transformer shape를 무도움으로 연결한다.
+- 20점 rubric은 lookup, mask, residual·정규화, FFN, 확률·손실, 전체 gradient, 분기 합, update, 새 target, 실제 shape 전이를 각각 판정한다. 17점 이상과 causal mask·확률 축·residual shape·LayerNorm 축·target·gradient 부호·분기 합 오류 0개를 동시에 요구하고, 실패 행을 owner 문서로 되돌리는 복습 지도를 제공한다.
+- `scripts/llm-math-capstone.mjs`와 `npm run math:capstone`을 추가했다. [[LLM을 만든 수학]], [[overview]], [[index]]에는 종합 실습 진입점을 연결했다. 자동 감사의 완전한 마스터리 표지 문서는 16개에서 17개로 늘었다.
+
+검증 결과:
+
+- 새 문맥 `오늘, 비가`에서 $A=\begin{bmatrix}1&0\\1/2&1/2\end{bmatrix}$, 마지막 정규화 표현 $(-1,1)$, FFN residual 뒤 표현 $(-1,2)$를 재계산했다.
+- logits $(\ln4,\ln2,0)$, target `온다` 확률 $4/7$, NLL $\ln(7/4)\approx0.559616$, $g_z=(-3/7,2/7,1/7)$과 출력층 전체 gradient를 확인했다. 출력층 SGD 한 걸음 뒤 확률은 약 $0.665268$, NLL은 약 $0.407566$이다.
+- `node --test scripts/tests/llm-math-capstone.test.mjs`의 신규 회귀 6개와 `npm run math:check`, `npm run learning:audit:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run verify`를 통과했다. 전체 Node 회귀는 141개, 사이트 산출물은 HTML 692개·위키 링크 8,730개·로컬 참조 47,502개이며 Chromium 회귀 4개와 KaTeX error 0개를 확인했다.
+
+남은 제한:
+
+- 종합 실습은 LayerNorm보다 앞선 전체 attention gradient, padding loss mask, batch reduction, optimizer state, mixed precision·분산 실행을 계산하지 않는다.
+- 통과 점수는 현재 학습 경로의 독립 계산 기준이지 실제 모델 훈련 자격이나 일반화·안전성 보장이 아니다. `raw/`는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]
