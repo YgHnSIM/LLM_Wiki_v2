@@ -1,0 +1,453 @@
+schema_version: 1
+
+initiative:
+  id: llm-system-boundary-network
+  title: LLM 시스템 경계 확장
+  current_batch: energy-owner
+  next_action: >-
+    npm run boundary:resume으로 재개 상태를 확인한 뒤, energy-owner 배치에서
+    LLM 추론 에너지 지표 owner와 근거를 작성·검증한다.
+  blockers: []
+  hub:
+    path: wiki/meta/LLM 시스템 경계 확장 지도.md
+    page_id: meta.llm-system-boundary-map
+    title: LLM 시스템 경계 확장 지도
+    stage: planned
+  handoff:
+    updated: '2026-07-25'
+    baseline_commit: c6d66c057120099b5f0ce98b77d175bff6ea2a7c
+    last_completed_batch: framework
+    last_completed_gate: boundary-framework-verified
+    validation: []
+    recovery:
+      - npm run boundary:resume
+      - npm run boundary:check
+      - git status --short --branch
+    notes: >-
+      이 원장이 세션 전환·문맥 압축 뒤에도 배치 순서와 다음 행동을 복원하는 단일 기준이다.
+      raw/, C:/Vault/CS_Wiki와 사용자 첨부 파일은 수정하거나 staging하지 않는다.
+
+boundary_slots:
+  - 입력·대상
+  - 변환 경로
+  - 시간·상태·자원
+  - 결과 계약
+  - 지표·평가 기준
+  - 실패·복구 경계
+  - 권한·책임·출처 추적
+
+owners:
+  - id: llm-inference-energy-metrics
+    title: LLM 추론 에너지 지표
+    path: wiki/concepts/LLM 추론 에너지 지표.md
+    page_id: concept.llm-inference-energy-metrics
+    page_type: concept
+    action: create
+    stage: planned
+    required_by: [energy-owner, energy-bridge]
+  - id: training-data-lifecycle-provenance
+    title: 학습 데이터 생애주기와 출처 추적
+    path: wiki/concepts/학습 데이터 생애주기와 출처 추적.md
+    page_id: concept.training-data-lifecycle-provenance
+    page_type: concept
+    action: create
+    stage: planned
+    required_by: [data-owner, data-bridge]
+  - id: text-encoding-normalization
+    title: 문자 인코딩과 정규화
+    path: wiki/concepts/문자 인코딩과 정규화.md
+    page_id: concept.text-encoding-normalization
+    page_type: concept
+    action: create
+    stage: planned
+    required_by: [encoding-owner, authority-bridge]
+  - id: function-calling-tools
+    title: 함수 호출과 도구 사용
+    path: wiki/concepts/함수 호출과 도구 사용.md
+    page_id: concept.함수-호출과-도구-사용
+    page_type: concept
+    action: extend
+    stage: planned
+    required_by: [safe-effects]
+  - id: llm-agent
+    title: LLM 에이전트
+    path: wiki/concepts/LLM 에이전트.md
+    page_id: concept.llm-에이전트
+    page_type: concept
+    action: extend
+    stage: planned
+    required_by: [safe-effects]
+  - id: realtime-multimodal-interaction
+    title: 실시간 멀티모달 상호작용
+    path: wiki/concepts/실시간 멀티모달 상호작용.md
+    page_id: concept.realtime-multimodal-interaction
+    page_type: concept
+    action: create
+    stage: planned
+    required_by: [realtime-owner, realtime-bridge]
+
+bridges:
+  - id: power-to-service-outcomes
+    title: 전력에서 서비스 결과 계약까지 무엇을 세어야 하나
+    path: wiki/analyses/전력에서 서비스 결과 계약까지 무엇을 세어야 하나.md
+    page_id: analysis.power-to-service-outcomes
+    page_type: analysis
+    action: create
+    stage: planned
+    required_by: [energy-bridge]
+  - id: data-scale-to-rights
+    title: 데이터의 양에서 권리와 책임까지
+    path: wiki/analyses/데이터의 양에서 권리와 책임까지.md
+    page_id: analysis.data-scale-to-rights
+    page_type: analysis
+    action: create
+    stage: planned
+    required_by: [data-bridge]
+  - id: physical-semantic-memory
+    title: 문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리
+    path: wiki/analyses/문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리.md
+    page_id: analysis.문맥은-저장소인가-상태-재사용-검색-에이전트-메모리
+    page_type: analysis
+    action: extend
+    stage: planned
+    required_by: [memory-bridge]
+  - id: text-to-execution-authority
+    title: 문자에서 실행 권한까지
+    path: wiki/analyses/문자에서 실행 권한까지.md
+    page_id: analysis.text-to-execution-authority
+    page_type: analysis
+    action: create
+    stage: planned
+    required_by: [authority-bridge]
+  - id: text-to-realtime-multimodal-systems
+    title: 텍스트 모델에서 실시간 멀티모달 시스템까지
+    path: wiki/analyses/텍스트 모델에서 실시간 멀티모달 시스템까지.md
+    page_id: analysis.text-to-realtime-multimodal-systems
+    page_type: analysis
+    action: create
+    stage: planned
+    required_by: [realtime-bridge]
+
+tracks:
+  - id: energy-service-contract
+    priority: 1
+    title: 에너지·전력에서 서비스 결과 계약까지
+    primary_title: LLM 추론 에너지 지표
+    stage: planned
+    owners: [llm-inference-energy-metrics]
+    bridges: [power-to-service-outcomes]
+    primary_path: wiki/concepts/LLM 추론 에너지 지표.md
+    primary_page_id: concept.llm-inference-energy-metrics
+    primary_page_type: concept
+    batches: [energy-owner, energy-bridge]
+  - id: data-lifecycle-rights
+    priority: 2
+    title: 데이터 생애주기와 권리
+    primary_title: 학습 데이터 생애주기와 출처 추적
+    stage: planned
+    owners: [training-data-lifecycle-provenance]
+    bridges: [data-scale-to-rights]
+    primary_path: wiki/concepts/학습 데이터 생애주기와 출처 추적.md
+    primary_page_id: concept.training-data-lifecycle-provenance
+    primary_page_type: concept
+    batches: [data-owner, data-bridge]
+  - id: memory-location-guarantees
+    priority: 3
+    title: 메모리는 어디에 있고 무엇을 보장하는가
+    primary_title: 문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리
+    stage: planned
+    owners: []
+    bridges: [physical-semantic-memory]
+    primary_path: wiki/analyses/문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리.md
+    primary_page_id: analysis.문맥은-저장소인가-상태-재사용-검색-에이전트-메모리
+    primary_page_type: analysis
+    batches: [memory-bridge]
+  - id: text-to-authority
+    priority: 4
+    title: 문자에서 실행 권한까지
+    primary_title: 문자 인코딩과 정규화
+    stage: planned
+    owners: [text-encoding-normalization]
+    bridges: [text-to-execution-authority]
+    primary_path: wiki/concepts/문자 인코딩과 정규화.md
+    primary_page_id: concept.text-encoding-normalization
+    primary_page_type: concept
+    batches: [encoding-owner, authority-bridge]
+  - id: safe-external-effects
+    priority: 5
+    title: 모델 출력에서 안전한 외부 효과까지
+    primary_title: 함수 호출과 도구 사용
+    stage: planned
+    owners: [function-calling-tools, llm-agent]
+    bridges: []
+    primary_path: wiki/concepts/함수 호출과 도구 사용.md
+    primary_page_id: concept.함수-호출과-도구-사용
+    primary_page_type: concept
+    batches: [safe-effects]
+  - id: realtime-multimodal-systems
+    priority: 6
+    title: 텍스트 모델에서 실시간 멀티모달 시스템까지
+    primary_title: 실시간 멀티모달 상호작용
+    stage: planned
+    owners: [realtime-multimodal-interaction]
+    bridges: [text-to-realtime-multimodal-systems]
+    primary_path: wiki/concepts/실시간 멀티모달 상호작용.md
+    primary_page_id: concept.realtime-multimodal-interaction
+    primary_page_type: concept
+    batches: [realtime-owner, realtime-bridge]
+
+batches:
+  - id: framework
+    order: 0
+    title: 지속 가능한 원장과 재개 검사기
+    stage: complete
+    depends_on: []
+    commit_message: 'docs: track_llm_system_boundaries'
+    deliverables:
+      - docs/llm-system-boundary-network-plan.md
+      - docs/llm-system-boundary-network.yml
+      - scripts/llm-system-boundary-status.mjs
+      - scripts/tests/llm-system-boundary-status.test.mjs
+      - package.json
+      - AGENTS.md
+    expected_paths:
+      - docs/llm-system-boundary-network-plan.md
+      - docs/llm-system-boundary-network.yml
+      - scripts/llm-system-boundary-status.mjs
+      - scripts/tests/llm-system-boundary-status.test.mjs
+      - package.json
+      - AGENTS.md
+  - id: energy-owner
+    order: 1
+    title: LLM 추론 에너지 지표 owner
+    stage: planned
+    depends_on: [framework]
+    commit_message: 'content: define_llm_inference_energy_metrics'
+    deliverables:
+      - wiki/concepts/LLM 추론 에너지 지표.md
+      - wiki/meta/evidence.yml
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+    expected_paths:
+      - wiki/concepts/LLM 추론 에너지 지표.md
+      - wiki/concepts/언어 모델 추론 서빙.md
+      - wiki/meta/evidence.yml
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+      - docs/llm-system-boundary-network.yml
+      - docs/foundational-learning-audit.md
+  - id: energy-bridge
+    order: 2
+    title: 전력과 서비스 결과 연결
+    stage: planned
+    depends_on: [energy-owner]
+    commit_message: 'content: bridge_power_to_service_outcomes'
+    deliverables:
+      - wiki/analyses/전력에서 서비스 결과 계약까지 무엇을 세어야 하나.md
+      - wiki/meta/evidence.yml
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+    expected_paths:
+      - wiki/analyses/전력에서 서비스 결과 계약까지 무엇을 세어야 하나.md
+      - wiki/analyses/모델 능력에서 서비스 능력으로.md
+      - wiki/meta/LLM과 컴퓨팅 능력의 공진화.md
+      - wiki/meta/evidence.yml
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+      - docs/llm-system-boundary-network.yml
+      - docs/foundational-learning-audit.md
+  - id: data-owner
+    order: 3
+    title: 학습 데이터 생애주기 owner
+    stage: planned
+    depends_on: [energy-bridge]
+    commit_message: 'content: define_training_data_lifecycle'
+    deliverables:
+      - wiki/concepts/학습 데이터 생애주기와 출처 추적.md
+      - wiki/meta/evidence.yml
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+    expected_paths:
+      - wiki/concepts/학습 데이터 생애주기와 출처 추적.md
+      - wiki/concepts/말뭉치 기반 학습.md
+      - wiki/meta/evidence.yml
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+      - docs/llm-system-boundary-network.yml
+      - docs/foundational-learning-audit.md
+  - id: data-bridge
+    order: 4
+    title: 데이터 규모와 권리 연결
+    stage: planned
+    depends_on: [data-owner]
+    commit_message: 'content: bridge_data_scale_to_rights'
+    deliverables:
+      - wiki/analyses/데이터의 양에서 권리와 책임까지.md
+      - wiki/meta/evidence.yml
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+    expected_paths:
+      - wiki/analyses/데이터의 양에서 권리와 책임까지.md
+      - wiki/analyses/언어 수와 언어 형평성은 같은 축인가.md
+      - wiki/meta/evidence.yml
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+      - docs/llm-system-boundary-network.yml
+      - docs/foundational-learning-audit.md
+  - id: memory-bridge
+    order: 5
+    title: 물리 메모리와 의미 메모리 연결
+    stage: planned
+    depends_on: [data-bridge]
+    commit_message: 'content: connect_physical_and_semantic_memory'
+    deliverables:
+      - wiki/analyses/문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리.md
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+    expected_paths:
+      - wiki/analyses/문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리.md
+      - wiki/meta/LLM과 컴퓨팅 능력의 공진화.md
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+      - docs/llm-system-boundary-network.yml
+      - docs/foundational-learning-audit.md
+  - id: encoding-owner
+    order: 6
+    title: 문자 인코딩과 정규화 owner
+    stage: planned
+    depends_on: [memory-bridge]
+    commit_message: 'content: define_text_encoding_and_normalization'
+    deliverables:
+      - wiki/concepts/문자 인코딩과 정규화.md
+      - wiki/meta/evidence.yml
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+    expected_paths:
+      - wiki/concepts/문자 인코딩과 정규화.md
+      - wiki/concepts/Byte Pair Encoding.md
+      - wiki/meta/evidence.yml
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+      - docs/llm-system-boundary-network.yml
+      - docs/foundational-learning-audit.md
+  - id: authority-bridge
+    order: 7
+    title: 문자에서 실행 권한까지 연결
+    stage: planned
+    depends_on: [encoding-owner]
+    commit_message: 'content: bridge_text_to_execution_authority'
+    deliverables:
+      - wiki/analyses/문자에서 실행 권한까지.md
+      - wiki/meta/evidence.yml
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+    expected_paths:
+      - wiki/analyses/문자에서 실행 권한까지.md
+      - wiki/concepts/함수 호출과 도구 사용.md
+      - wiki/meta/evidence.yml
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+      - docs/llm-system-boundary-network.yml
+      - docs/foundational-learning-audit.md
+  - id: safe-effects
+    order: 8
+    title: 안전한 외부 효과 보강
+    stage: planned
+    depends_on: [authority-bridge]
+    commit_message: 'content: harden_safe_external_effects'
+    deliverables:
+      - wiki/concepts/함수 호출과 도구 사용.md
+      - wiki/concepts/LLM 에이전트.md
+      - wiki/meta/evidence.yml
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+    expected_paths:
+      - wiki/concepts/함수 호출과 도구 사용.md
+      - wiki/concepts/LLM 에이전트.md
+      - wiki/analyses/모델 능력에서 서비스 능력으로.md
+      - wiki/meta/evidence.yml
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+      - docs/llm-system-boundary-network.yml
+      - docs/foundational-learning-audit.md
+  - id: realtime-owner
+    order: 9
+    title: 실시간 멀티모달 상호작용 owner
+    stage: planned
+    depends_on: [safe-effects]
+    commit_message: 'content: define_realtime_multimodal_interaction'
+    deliverables:
+      - wiki/concepts/실시간 멀티모달 상호작용.md
+      - wiki/meta/evidence.yml
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+    expected_paths:
+      - wiki/concepts/실시간 멀티모달 상호작용.md
+      - wiki/concepts/멀티모달 대규모 언어 모델.md
+      - wiki/meta/evidence.yml
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+      - docs/llm-system-boundary-network.yml
+      - docs/foundational-learning-audit.md
+  - id: realtime-bridge
+    order: 10
+    title: 텍스트에서 실시간 멀티모달로 연결
+    stage: planned
+    depends_on: [realtime-owner]
+    commit_message: 'content: bridge_text_to_realtime_multimodal_systems'
+    deliverables:
+      - wiki/analyses/텍스트 모델에서 실시간 멀티모달 시스템까지.md
+      - wiki/meta/evidence.yml
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+    expected_paths:
+      - wiki/analyses/텍스트 모델에서 실시간 멀티모달 시스템까지.md
+      - wiki/analyses/음성을 텍스트로 옮기는 경계에서 무엇이 사라지는가 — 인식·합성·네이티브 오디오.md
+      - wiki/meta/evidence.yml
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+      - docs/llm-system-boundary-network.yml
+      - docs/foundational-learning-audit.md
+  - id: integration
+    order: 11
+    title: 시스템 경계 전체 허브 통합
+    stage: planned
+    depends_on: [realtime-bridge]
+    commit_message: 'content: integrate_llm_system_boundaries'
+    deliverables:
+      - wiki/meta/LLM 시스템 경계 확장 지도.md
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+    expected_paths:
+      - wiki/meta/LLM 시스템 경계 확장 지도.md
+      - wiki/analyses/LLM 능력은 모델의 속성인가 시스템의 속성인가.md
+      - wiki/analyses/LLM을 만든 수학.md
+      - wiki/meta/LLM과 컴퓨팅 능력의 공진화.md
+      - wiki/index.md
+      - wiki/overview.md
+      - wiki/log.md
+      - docs/llm-system-boundary-network.yml
+      - docs/llm-math-network.yml
+      - docs/llm-computing-history.yml
+      - docs/foundational-learning-audit.md

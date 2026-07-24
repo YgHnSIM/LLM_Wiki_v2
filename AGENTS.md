@@ -277,6 +277,20 @@ related:
 
 사용자가 정확히 `하던 작업 계속 진행`이라고만 쓴 경우에는 이 절이 아니라 6.0의 정규 source 재개 규칙이 계속 우선한다.
 
+### 6.8 `LLM 시스템 경계 확장`
+
+사용자가 `LLM 시스템 경계 확장 계속`, `시스템 경계 확장 계속`, `boundary:resume`, 에너지·데이터 생애주기·메모리 보장·문자에서 실행 권한·안전한 외부 효과·실시간 멀티모달의 확장 원장 작업을 요청하면 `docs/llm-system-boundary-network-plan.md`와 `docs/llm-system-boundary-network.yml`을 사용한다.
+
+1. 새 세션 또는 중단 뒤에는 `git status --short --branch`, `npm run boundary:resume`, `npm run boundary:check` 순서로 원격·작업 트리·원장의 유일한 `current_batch`를 확인한다.
+2. `boundary:resume`이 제시한 배치만 수행한다. 예상 경로 밖의 기존 사용자 변경과 `.codex-remote-attachments/`는 보존하고 staging하지 않는다.
+3. `HEAD`가 `origin/main`보다 앞서면 다음 배치를 시작하지 않고 push를 먼저 재시도한다. 원격이 앞서거나 branch가 diverged하면 자동 병합하지 않고 상태를 보고한다.
+4. 각 track은 입력·대상, 변환 경로, 시간·상태·자원, 결과 계약, 지표·평가 기준, 실패·복구 경계, 권한·책임·출처 추적을 모두 설명한다.
+5. 기존 수학·컴퓨팅 역사 원장의 완료 batch·owner·hub stage는 다시 열지 않는다. 최종 통합에서 handoff와 학습 감사 baseline만 갱신한다.
+6. `raw/`, 정규 source 번호와 `C:\Vault\CS_Wiki`는 수정하지 않는다. CS_Wiki는 읽기와 외부 맥락 링크에만 사용하며, 주장 근거는 LLM_Wiki evidence 레지스트리에 등록한 원문과 locator로 뒷받침한다.
+7. 각 공개 배치는 `npm run learning:audit`, `npm run sync:index`, `npm run boundary:check`, `npm run history:check`, `npm run math:check`, `npm run learning:audit:check`, `npm run verify`, `git diff --check`, desktop·390×844 시각 검수를 통과한 뒤 원장의 다음 batch를 기록하고, 선언된 `content:` 또는 `docs:` 메시지로 `main`에 커밋·푸시한다.
+
+사용자가 정확히 `하던 작업 계속 진행`이라고만 쓴 경우에는 이 절이 아니라 6.0의 정규 source 재개 규칙이 계속 우선한다.
+
 ## 7. 특수 문서
 
 ### 7.1 index.md

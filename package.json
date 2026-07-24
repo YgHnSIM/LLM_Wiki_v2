@@ -24,6 +24,9 @@
     "math:capstone": "node scripts/llm-math-capstone.mjs",
     "history:status": "node scripts/llm-computing-history-status.mjs",
     "history:check": "node scripts/llm-computing-history-status.mjs --check",
+    "boundary:status": "node scripts/llm-system-boundary-status.mjs",
+    "boundary:check": "node scripts/llm-system-boundary-status.mjs --check",
+    "boundary:resume": "node scripts/llm-system-boundary-status.mjs --resume",
     "learning:audit": "node scripts/audit-foundational-learning.mjs --write",
     "learning:audit:check": "node scripts/audit-foundational-learning.mjs --check",
     "sync:index": "node scripts/sync-index.mjs",
@@ -33,7 +36,7 @@
     "test:browser": "playwright test",
     "test": "node --test scripts/tests/*.test.mjs",
     "build": "npm run lint:wiki && npm run build:site && npm run check:site",
-    "verify": "npm run math:check && npm run test && npm run build && npm run test:browser",
+    "verify": "npm run math:check && npm run history:check && npm run boundary:check && npm run test && npm run build && npm run test:browser",
     "check": "npm run verify"
   },
   "dependencies": {
