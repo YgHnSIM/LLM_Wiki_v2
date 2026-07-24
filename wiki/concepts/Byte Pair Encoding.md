@@ -10,7 +10,7 @@ tags:
   - domain/nlp
   - domain/computer-science
 created: '2026-07-18'
-updated: '2026-07-21'
+updated: '2026-07-25'
 lifecycle: active
 verification: verified
 artifacts:
@@ -32,12 +32,13 @@ related:
   - source.050
   - source.062
   - concept.xlm
+  - concept.text-encoding-normalization
 ---
 # Byte Pair Encoding
 
 > [!note] 학습 안내
 > **난이도:** 입문<br>
-> **선수 지식:** [[서브워드 토큰화]]<br>
+> **선수 지식:** [[문자 인코딩과 정규화]], [[서브워드 토큰화]]<br>
 > **읽고 나면:** BPE가 빈번한 symbol pair를 병합해 어휘 크기와 시퀀스 길이의 trade-off를 조절하고, 다국어 공유 어휘가 제공하는 것과 보장하지 않는 것을 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -55,6 +56,12 @@ related:
 5. 새 문자열에 학습한 merge를 순서대로 적용한다.
 
 원 NMT 설정은 word boundary를 넘는 pair를 고려하지 않았다. 최종 어휘 크기는 초기 symbol 수와 merge 횟수로 정해진다. 현대의 byte-level 변형과 원 2016 word-boundary character BPE를 같은 세부 구현으로 취급하지 않는다.
+
+### 입력 단위와 정규화는 별도 계약
+
+BPE는 주어진 **초기 symbol 열**에서 빈번한 pair를 병합한다. Gage의 원형은 byte pair 압축이고, Sennrich·Haddow·Birch의 NMT 설정은 문자·문자열 pair와 word boundary에서 시작했다. 현대의 byte-level BPE는 byte 표현을 초기 symbol로 둘 수 있다. 이 셋은 핵심 merge 절차를 공유하지만, 외부 text를 어떤 byte encoding으로 받는지와 어떤 symbol을 첫 단위로 삼는지는 같은 계약이 아니다.
+
+특히 BPE는 UTF-8 byte의 유효성을 검사하거나 Unicode normalization form을 정하지 않는다. `가`와 `가`처럼 canonical equivalent인 두 문자열도 normalization을 어디서 적용하는지에 따라 BPE가 받는 symbol 열이 달라질 수 있다. token 하나가 byte 하나, code point 하나, grapheme cluster 하나와 일대일 대응한다는 보장은 없으므로, 그 앞단의 표현 계약은 [[문자 인코딩과 정규화]]에서 따로 확인한다.
 
 ## 3단계 — 기술과 근거
 
@@ -99,3 +106,4 @@ related:
 - [[050_FastText와 서브워드 표현의 두 경로]]
 - [[062_XLM과 교차 언어 사전 학습]]
 - [[XLM]]
+- [[문자 인코딩과 정규화]] — BPE 앞단의 byte·Unicode·normalization·tokenizer 계약을 구분한다.

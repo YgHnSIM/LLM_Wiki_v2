@@ -3,10 +3,10 @@ schema_version: 1
 initiative:
   id: llm-system-boundary-network
   title: LLM 시스템 경계 확장
-  current_batch: encoding-owner
+  current_batch: authority-bridge
   next_action: >-
-    npm run boundary:resume으로 재개 상태를 확인한 뒤, encoding-owner 배치에서
-    문자 인코딩과 정규화 owner를 작성·검증한다.
+    npm run boundary:resume으로 재개 상태를 확인한 뒤, authority-bridge 배치에서
+    byte에서 JSON·schema·의미 검증·authorization까지의 관문을 연결·검증한다.
   blockers: []
   hub:
     path: wiki/meta/LLM 시스템 경계 확장 지도.md
@@ -15,9 +15,9 @@ initiative:
     stage: planned
   handoff:
     updated: '2026-07-25'
-    baseline_commit: 23c6f4f3d6d6cf3f200e2bc3f6e78fa85cb62f25
-    last_completed_batch: memory-bridge
-    last_completed_gate: physical-semantic-memory-bridge-verified
+    baseline_commit: 291154275979154c4141c2b400c629de6a45aa08
+    last_completed_batch: encoding-owner
+    last_completed_gate: text-encoding-normalization-owner-verified
     validation:
       - boundary:check
       - history:check
@@ -29,7 +29,7 @@ initiative:
       - npm run boundary:check
       - git status --short --branch
     notes: >-
-      data-bridge 뒤 memory-bridge를 검증해 완료했고, 다음 유일한 행동은 encoding-owner다.
+      memory-bridge 뒤 encoding-owner를 검증해 완료했고, 다음 유일한 행동은 authority-bridge다.
       이 원장이 세션 전환·문맥 압축 뒤에도 배치 순서와 다음 행동을 복원하는 단일 기준이다.
       raw/, C:/Vault/CS_Wiki와 사용자 첨부 파일은 수정하거나 staging하지 않는다.
 
@@ -65,7 +65,7 @@ owners:
     page_id: concept.text-encoding-normalization
     page_type: concept
     action: create
-    stage: planned
+    stage: complete
     required_by: [encoding-owner, authority-bridge]
   - id: function-calling-tools
     title: 함수 호출과 도구 사용
@@ -338,7 +338,7 @@ batches:
   - id: encoding-owner
     order: 6
     title: 문자 인코딩과 정규화 owner
-    stage: planned
+    stage: complete
     depends_on: [memory-bridge]
     commit_message: 'content: define_text_encoding_and_normalization'
     deliverables:

@@ -5226,6 +5226,25 @@ raw 등록 해시:
 - KV block의 정상 반환은 crash durability가 아니며, 이 문서가 일반적인 atomic update·access control·deletion propagation·외부 write의 안전한 완료를 보장하지 않는다. 필요한 version·policy·recovery contract는 별도 운영 근거가 필요하다.
 - 다음 배치는 **문자 인코딩과 정규화** owner에서 byte·UTF-8·Unicode·grapheme cluster·normalization과 tokenizer 경계를 보강한다. `raw/`, CS_WIKI와 `.codex-remote-attachments/`는 변경하지 않았다.
 
+## [2026-07-25] content | Define text encoding and normalization
+
+변경 내용:
+
+- [[문자 인코딩과 정규화]]를 추가해 byte·UTF-8·Unicode code point·grapheme cluster·normalization·token을 같은 단위처럼 쓰지 않게 하고, `decode → normalize → tokenize`의 versioned input contract를 정리했다.
+- `가`와 `가`의 code point·UTF-8 byte 차이를 최소 예로 두고, canonical NFC/NFD와 compatibility NFKC/NFKD의 다른 보존 범위, 정규화된 chunk를 단순 연결해도 전체가 정규형이라는 보장이 없는 경계를 설명했다.
+- RFC 3629, Unicode 17 Core Specification, UAX #15와 UAX #29를 evidence 레지스트리에 추가했다. SentencePiece의 normalized-text 복원 계약과 BPE의 초기 symbol·merge 범위를 연결하되, byte fallback·token coverage를 의미 보존·언어별 동등한 비용·권한 판단으로 확대하지 않았다.
+- [[Byte Pair Encoding]]에는 BPE가 UTF-8 decoding과 Unicode normalization을 정하지 않는다는 국소 경계를 추가하고, 반복되는 표현 계약은 새 owner에만 완결했다.
+
+검증 결과:
+
+- `npm run learning:audit`, `npm run sync:index`, `npm run lint:wiki`, `npm run math:check`, `npm run history:check`, `npm run boundary:check`, `npm run learning:audit:check`, `npm run verify`, `git diff --check`를 통과했다.
+- Playwright Chromium에서 새 owner를 desktop과 390×844 viewport로 확인하고, 가로 overflow와 console error가 없음을 확인했다.
+
+남은 제한:
+
+- UTF-8 validation과 Unicode normalization은 JSON parsing, schema·의미 검증, authentication·authorization, 외부 실행의 안전성이나 복구를 보장하지 않는다. 다음 배치에서 이 관문을 `문자에서 실행 권한까지` 연결로 분리한다.
+- `raw/`, CS_WIKI와 `.codex-remote-attachments/`는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

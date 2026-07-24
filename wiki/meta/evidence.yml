@@ -4202,3 +4202,36 @@ sources:
     doi: 10.18653/v1/D07-1090
     url: https://aclanthology.org/D07-1090/
     language: en
+  rfc-3629-utf8:
+    title: 'RFC 3629: UTF-8, a transformation format of ISO 10646'
+    authors: [François Yergeau]
+    published: 2003
+    source_type: primary
+    kind: technical-standard
+    doi: 10.17487/RFC3629
+    url: https://www.rfc-editor.org/rfc/rfc3629
+    language: en
+  unicode-standard-17-core:
+    title: 'The Unicode Standard, Version 17.0.0: Core Specification'
+    authors: [Unicode Consortium]
+    published: 2025
+    source_type: primary
+    kind: technical-standard
+    url: https://www.unicode.org/versions/Unicode17.0.0/core-spec/
+    language: en
+  unicode-uax15-normalization:
+    title: 'Unicode Standard Annex #15: Unicode Normalization Forms'
+    authors: [Ken Whistler]
+    published: 2025
+    source_type: primary
+    kind: technical-standard
+    url: https://www.unicode.org/reports/tr15/tr15-57.html
+    language: en
+  unicode-uax29-text-segmentation:
+    title: 'Unicode Standard Annex #29: Unicode Text Segmentation'
+    authors: [Josh Hadley]
+    published: 2025
+    source_type: primary
+    kind: technical-standard
+    url: https://www.unicode.org/reports/tr29/tr29-47.html
+    language: en

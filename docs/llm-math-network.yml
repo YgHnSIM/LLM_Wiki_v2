@@ -74,10 +74,10 @@ initiative:
 baseline:
   recorded_on: '2026-07-25'
   source: docs/foundational-learning-audit.md
-  wiki_documents: 388
-  non_meta_documents: 384
-  formula_documents: 202
-  formula_blocks: 815
+  wiki_documents: 389
+  non_meta_documents: 385
+  formula_documents: 203
+  formula_blocks: 816
 
 batches:
   - id: linear-algebra-foundations
