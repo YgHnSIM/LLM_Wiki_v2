@@ -4987,6 +4987,25 @@ raw 등록 해시:
 - Turing machine의 formal universality를 실제 hardware의 무한 memory나 효율, LLM의 일반 능력으로 확대하지 않는다. Shannon의 1938년 switching 연구와 1948년 통신 이론도 한 결과로 합치지 않는다.
 - 다음 본편은 초기 학습 규칙의 존재와 자료·memory·연산·평가 조건에서의 규모화 가능성을 구분한다. `raw/`와 CS_WIKI는 변경하지 않았다.
 
+## [2026-07-24] content | Early learning rules and scaling limits
+
+변경 내용:
+
+- [[학습 규칙이 있어도 왜 규모화되지 못했나]]를 추가해 Georgetown-IBM의 programmed rule execution과 Perceptron·ADALINE의 parameter learning을 고정되는 값과 갱신되는 값으로 분리했다.
+- Perceptron의 binary error correction과 ADALINE/LMS의 continuous error를 같은 숫자 예에서 계산하고, 선형 분리·representation·hidden credit assignment의 서로 다른 병목을 설명했다.
+- Data·표현·모형·credit assignment·실행·평가의 여섯 조건을 통해 update 식의 존재와 scalable learning system의 완성을 구분했다.
+- 기존 003·004·006 source와 검증된 근거를 재사용했으며 새 raw나 불필요한 concept를 만들지 않았다.
+
+검증 결과:
+
+- `npm run history:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run learning:audit`, `npm run math:check`, `npm run verify`로 원장, 학습 구조, 근거·링크·수식 표기, 정적 사이트와 브라우저 회귀를 검증했다.
+- $x=(1,2)$, $w=(0.2,-0.1)$, $\eta=0.1$에서 score 0과 갱신 weight $(0.3,0.1)$, bias 0.1을 독립 계산해 본문과 대조했다.
+
+남은 제한:
+
+- 서로 다른 초기 hardware의 속도·memory가 같은 단위로 보고되지 않아 장치 순위를 만들지 않는다. XOR 하나를 neural network 연구 침체의 단일 원인으로도 사용하지 않는다.
+- 다음 본편은 corpus count·N-gram·HMM·search가 확률적 언어 처리를 실제 계산 workload로 바꾼 과정을 다룬다. `raw/`와 CS_WIKI는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]
