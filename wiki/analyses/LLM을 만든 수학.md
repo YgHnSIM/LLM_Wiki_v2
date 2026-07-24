@@ -347,7 +347,7 @@ $$
 | shortcut 덧셈 | [[잔차 연결]] | $X,O$의 shape가 같아서 $R=X+O$가 가능하다. |
 | logit→분포 | [[소프트맥스]] | 4개 logit을 양수이고 합이 1인 후보 분포로 바꾼다. |
 | 문맥과 손실 | [[조건부 확률]], [[로그가능도]] | $p_\theta(w_t\mid w_{<t})$와 $-\ln p_\theta$의 목적을 구분한다. |
-| gradient→update | [[역전파]], [[경사하강법]] | $\partial J/\partial b_3$를 계산하고 $\eta$를 곱해 한 좌표를 갱신한다. |
+| gradient→update | [[미분·편미분·그래디언트]], [[연쇄 법칙과 계산 그래프]], [[역전파]], [[경사하강법]] | 2단계에서는 $\partial J/\partial b_3$ 한 좌표를 갱신하고, 아래에서는 같은 upstream gradient를 $W_{\mathrm{out}}$과 $r$까지 전달한다. |
 | finite-precision logit | [[수치 안정성과 log-sum-exp]] | 이 toy의 작은 logit에는 보이지 않는 max shift·log-softmax·mask row의 수치 경계를 맡는다. |
 | 실제 batch·optimizer | [[확률변수·확률분포·기대값·분산]], [[Adam 최적화기]] | 평균·분산의 대상과 Adam state를 구분한다. toy는 한 예·한 SGD update만 계산한다. |
 | 저랭크 표현·적응 | [[특이값 분해와 저랭크 근사]] | 행렬 복원에서의 절단 SVD와 task loss로 학습하는 LoRA update를 구분한다. |
@@ -355,6 +355,60 @@ $$
 | 실행 비용 | [[계산 복잡도와 비용 모델]] | 점근 산술량, FLOPs, memory, I/O, 통신과 wall-clock을 한 값으로 합치지 않는다. |
 | 다음 token 선택 | [[표본추출·온도·top-k·top-p]] | softmax 확률에서 temperature·candidate truncation·sampling과 argmax를 구분한다. |
 | 선호 기반 후훈련 | [[인간 피드백 강화학습]] | 비교 라벨·reward model·reference KL·policy optimizer의 서로 다른 역할을 구분한다. |
+
+### 한 좌표에서 전체 출력층 gradient로 넓히기
+
+앞의 bias 하나 갱신은 역전파의 가장 작은 조각만 떼어 본 것이다. 이제 같은 순전파 값을 그대로 두고 출력층 전체에 전달되는 gradient를 계산하자. 여기서는 표현을 행벡터로 놓았으므로
+
+$$
+r\in\mathbb R^{1\times2},
+\qquad
+W_{\mathrm{out}}\in\mathbb R^{2\times4},
+\qquad
+b,z,g_z\in\mathbb R^{1\times4}
+$$
+
+이고 $z=rW_{\mathrm{out}}+b$다. 정답 one-hot을 $e_3=(0,0,0,1)$이라 쓰면 softmax NLL이 출력층으로 보내는 upstream gradient는
+
+$$
+g_z=\frac{\partial J}{\partial z}
+=p-e_3
+\approx
+(0.035746,\ 0.049734,\ 0.189844,\ -0.275324)
+$$
+
+이다. 네 성분의 합이 0인지 확인하면 softmax 후보 축과 target 위치를 빠르게 점검할 수 있다. 이 $g_z$를 선형층의 세 입력으로 전달하면
+
+$$
+\frac{\partial J}{\partial b}=g_z,
+\qquad
+\frac{\partial J}{\partial W_{\mathrm{out}}}
+=r^{\mathsf T}g_z,
+\qquad
+\frac{\partial J}{\partial r}
+=g_zW_{\mathrm{out}}^{\mathsf T}
+$$
+
+가 된다. 현재 숫자를 넣으면
+
+$$
+\frac{\partial J}{\partial W_{\mathrm{out}}}
+\approx
+\begin{bmatrix}
+0.011805&0.016424&0.062694&-0.090922\\
+0.059687&0.083043&0.316994&-0.459725
+\end{bmatrix},
+\qquad
+\frac{\partial J}{\partial r}
+\approx
+(0.325057,\ -0.360803)
+$$
+
+이다. $r^{\mathsf T}g_z$의 shape는 $2\times4$라 $W_{\mathrm{out}}$과 정확히 같다. $g_zW_{\mathrm{out}}^{\mathsf T}$의 shape는 $1\times2$라 앞선 표현 $r$과 같다. 이 두 검사는 전치를 외운 결과가 아니라, 각 저장 좌표가 어느 gradient를 받아야 하는지 차원으로 확인한 것이다.
+
+이 계산은 `scripts/llm-math-toy.mjs`에서 같은 정밀도의 순전파·역전파로 실행할 수 있다. 예를 들어 $W_{\mathrm{out}}$의 둘째 행·넷째 열에 대한 해석적 gradient $-0.459725$는 중심 차분과 오차 $10^{-9}$ 이내에서 맞고, 출력층 전체를 작은 SGD 한 걸음 갱신하면 이 예의 NLL이 감소한다. 수치 미분 일치는 구현한 국소 도함수의 강한 점검이지만, 학습 전체의 정확성이나 일반화를 증명하지는 않는다.
+
+한 단계 더 앞에서는 $r=X_2+O_2$였으므로 $\partial J/\partial r$은 덧셈 노드에서 직접 $X_2$ 경로와 $O_2$ 경로로 각각 전달된다. 다만 $O_2$도 $X$에서 계산됐기 때문에 최종 $\partial J/\partial X$는 shortcut 기여와 attention 경로 기여를 **더해야** 한다. 잔차 연결이 있다고 해서 전체 입력 gradient가 단순히 $\partial J/\partial r$ 하나와 같아지는 것은 아니다. 이 경로 곱과 분기 합은 [[연쇄 법칙과 계산 그래프]], 실제 매개변수별 누적은 [[역전파]]의 책임이다.
 
 2003년 Bengio 등은 분산 word feature, 다음 단어 확률을 위한 softmax와 penalized log-likelihood 학습을 함께 제시했다. 2017년 Vaswani 등은 scaled dot-product attention과 residual connection을 Transformer의 sublayer에 배치했다. Rumelhart·Hinton·Williams의 1986년 설명은 합성된 오차 함수에서 가중치 변화율을 계산하는 신경망 학습의 중요한 근거다. 이 문서의 toy 계산은 이 자료들의 실제 차원·실험·훈련 조건을 복제하지 않는다.
 
@@ -463,6 +517,15 @@ lookup한 $X\in\mathbb R^{2\times2}$를 적는다. 이어 $Q=K=0$, $V=X$이고 c
 1. $A$를 key별 열 방향으로 정규화해 각 query 행의 합이 1이 아니게 됐다.
 2. $X$의 shape가 $(2,2)$인데 branch 출력 $O$를 $(2,1)$로 만든 뒤 broadcasting으로 $R=X+O$를 계산했다.
 
+#### 전체 출력층 gradient 전이
+
+본문의 $r$, $W_{\mathrm{out}}$, $p$, target $y=3$을 그대로 사용하되 `한 좌표에서 전체 출력층 gradient로 넓히기`의 답을 가리고 다음을 수행하라.
+
+1. $g_z=p-e_3$를 구하고 성분 합을 검산한다.
+2. $\partial J/\partial W_{\mathrm{out}}$, $\partial J/\partial b$, $\partial J/\partial r$을 계산하고 원래 변수와 shape가 같은지 표시한다.
+3. 둘째 행·넷째 열의 가중치를 $\epsilon=10^{-4}$만큼 양쪽으로 움직인 중심 차분과 해석적 gradient를 비교한다.
+4. 잔차 $r=X_2+O_2$에서 직접 경로와 attention 경로가 최종 $X$ gradient에 어떻게 합쳐지는지 말로 설명한다.
+
 ### 해설과 채점 기준
 
 시작 진단의 답은 차례로 **logit**, $0.25$인 경우, **커진다**, **서로 다른 단계다**이다.
@@ -513,6 +576,8 @@ $$
 
 순서를 $(1,2)$로 바꾸면 $X'=\begin{bmatrix}1&1\\1&-1\end{bmatrix}$, $O'=\begin{bmatrix}1&1\\1&0\end{bmatrix}$, $R'=\begin{bmatrix}2&2\\2&-1\end{bmatrix}$다. causal mask 아래 첫 행의 후보 집합은 언제나 첫 위치 하나뿐이므로, token 순서를 바꾸면 첫 출력도 그 새 value로 바뀐다. attention은 행별 key 축에서 정규화해야 하며, residual의 두 항은 같은 `(token, feature)` shape에서 같은 feature끼리 더해야 한다.
 
+전체 출력층 문제의 답은 본문의 $g_z$, $2\times4$ 가중치 gradient, $1\times4$ bias gradient, $1\times2$ 표현 gradient와 같다. $W_{\mathrm{out}}[1,3]$의 중심 차분은 약 $-0.459725$로 해석값과 일치한다. 잔차 덧셈은 upstream gradient를 두 branch에 보내고, attention branch가 다시 $X$에 의존하므로 최종 $X$ gradient는 shortcut과 attention 경로의 기여 합이다.
+
 | 평가 항목 | 2점 | 1점 | 0점 |
 | --- | --- | --- | --- |
 | 종류·shape 구분 | logit·확률·손실·gradient·update를 모두 구분 | 한 쌍을 혼동 | 여러 종류를 같은 값으로 취급 |
@@ -521,8 +586,9 @@ $$
 | 한계 판정 | 한 예의 감소와 일반화를 구분 | 결론만 말함 | 일반화가 보장된다고 주장 |
 | 표현·shape | ID lookup과 token·feature 축을 정확히 기록 | 값 또는 축 하나만 맞음 | ID를 연속 크기로 취급 |
 | attention·residual | mask, 행별 합 1, 가중합과 같은-shape 덧셈을 모두 검산 | 산술 오류 하나 | 미래 누출·열 정규화·잘못된 broadcasting |
+| 전체 역전파 | $g_z$, 세 gradient shape, 유한차분과 분기 합을 모두 검산 | 값·shape·경로 중 하나 누락 | 전치를 뒤집거나 shortcut 경로만 계산 |
 
-총 12점 중 10점 이상이고, **확률 축·causal mask·shape·target 위치·gradient 부호 오류가 하나도 없어야** 현재 순전파와 출력단을 통과한다. 미달이면 각 오류에 대응하는 [[단어 임베딩]], [[어텐션 메커니즘]], [[잔차 연결]], [[소프트맥스]], [[로그가능도]], [[경사하강법]]의 마스터리 연습을 풀고 새 ID 순서와 $z=(\ln4,\ln3,\ln2,0)$, $y=1$로 재시도한다.
+총 14점 중 12점 이상이고, **확률 축·causal mask·shape·target 위치·gradient 부호·분기 합산 오류가 하나도 없어야** 현재 순전파와 출력단을 통과한다. 미달이면 각 오류에 대응하는 [[단어 임베딩]], [[어텐션 메커니즘]], [[잔차 연결]], [[미분·편미분·그래디언트]], [[연쇄 법칙과 계산 그래프]], [[역전파]], [[소프트맥스]], [[로그가능도]], [[경사하강법]]의 마스터리 연습을 풀고 새 ID 순서와 $z=(\ln4,\ln3,\ln2,0)$, $y=1$로 재시도한다.
 
 ### 다음 문서
 

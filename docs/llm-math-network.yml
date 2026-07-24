@@ -10,28 +10,30 @@ initiative:
     stage: complete
   current_batch: null
   next_action: >-
-    npm run math:check를 실행한 뒤 derivative-partial-gradient, chain-rule-computation-graph, backpropagation owner와 wiki/analyses/LLM을 만든 수학.md의 출력층·residual 경로를 읽고 full-backprop-verification 한 배치를 in_progress로 등록한다.
+    npm run math:check를 실행한 뒤 real-transformer-shapes 배치를 시작해 vectors-matrices-tensors, attention, residual-connections, probability-distribution-expectation-variance, layer-normalization, activation-functions, backpropagation owner와 wiki/analyses/LLM을 만든 수학.md에 batch·sequence·multi-head·FFN·normalization의 실제 shape 추적 문제를 구현한다.
   blockers: []
   handoff:
     updated: '2026-07-24'
-    baseline_commit: d30545c5113ea025ee619cac81ccc67e4d568116
-    last_completed_gate: attention-transfer-mastery-g7-verified
+    baseline_commit: 0b5a4ed7a5ee39e59ce3e03c74a7e0048e7569cf
+    last_completed_gate: full-backprop-verification-g7-verified
     validation:
       - command: npm run math:check
-        result: 10개 배치·25개 수식 계열의 구조·owner·선수 관계와 attention-transfer-mastery 완료 상태 검증 통과
+        result: 11개 배치·25개 수식 계열의 구조·owner·선수 관계와 full-backprop-verification 완료 상태 검증 통과
       - command: npm run learning:audit
-        result: 365개 Markdown·362개 비메타 문서, 블록 수식 711개와 마스터리 표지 9개로 기준선 갱신
+        result: 365개 Markdown·362개 비메타 문서, 블록 수식 722개와 마스터리 표지 12개로 기준선 갱신
       - command: npm run learning:audit:check
         result: 기초 학습 감사 기준선이 현재 wiki와 일치함을 확인
       - command: npm run sync:index
         result: 변경 문서의 evidence 수와 목록을 index에 동기화
       - command: npm run lint:wiki
         result: Markdown 365개·evidence 458건·immutable raw artifact 220개 검증 통과
+      - command: node --test scripts/tests/llm-math-toy.test.mjs
+        result: stable softmax·허브 수치·gradient shape·중심 차분·SGD 손실 감소 신규 회귀 6개 통과
       - command: npm run verify
-        result: math 원장, Node 회귀 123개, wiki lint·691 HTML build/check·Chromium 회귀 4개와 KaTeX error 0개를 통과
+        result: math 원장, Node 회귀 129개, wiki lint·691 HTML·위키 링크 8671개·로컬 참조 47336개·Chromium 회귀 4개와 KaTeX error 0개 통과
     notes: >-
-      기준 branch는 main이다. attention-transfer-mastery에서 ID lookup, 행렬·shape, causal mask, attention 가중합과 residual의 도움 감소형 전이 연습을 다섯 owner와 허브에 완결했다.
-      행·열벡터 관례 대응과 치명적 축·mask·broadcasting 오류를 통과 기준에 포함했다. 다음 배치는 출력층 전체와 upstream 경로의 gradient·유한차분을 맡는다. raw와 기존 첨부 파일은 건드리지 않았다.
+      기준 branch는 main이다. full-backprop-verification에서 p-y 전체 logit gradient, 출력 weight·bias·hidden gradient,
+      residual 분기 합과 유한차분·실행 코드 일치를 완결했다. 다음은 real-transformer-shapes이며 raw와 기존 첨부 파일은 건드리지 않는다.
 
 baseline:
   recorded_on: '2026-07-24'
@@ -39,7 +41,7 @@ baseline:
   wiki_documents: 365
   non_meta_documents: 362
   formula_documents: 183
-  formula_blocks: 711
+  formula_blocks: 722
 
 batches:
   - id: linear-algebra-foundations
@@ -205,6 +207,27 @@ batches:
       - wiki/concepts/어텐션 메커니즘.md
       - wiki/concepts/잔차 연결.md
       - wiki/analyses/LLM을 만든 수학.md
+      - wiki/overview.md
+      - wiki/log.md
+
+  - id: full-backprop-verification
+    title: 전체 출력층·upstream 역전파와 실행 검산
+    stage: complete
+    families:
+      - derivative-partial-gradient
+      - chain-rule-computation-graph
+      - backpropagation
+      - dot-matrix-linear-transform
+      - softmax
+      - residual-connections
+    deliverables:
+      - wiki/concepts/미분·편미분·그래디언트.md
+      - wiki/concepts/연쇄 법칙과 계산 그래프.md
+      - wiki/concepts/역전파.md
+      - wiki/analyses/LLM을 만든 수학.md
+      - scripts/llm-math-toy.mjs
+      - scripts/tests/llm-math-toy.test.mjs
+      - package.json
       - wiki/overview.md
       - wiki/log.md
 

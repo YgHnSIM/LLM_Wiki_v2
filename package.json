@@ -19,6 +19,7 @@
     "source:ready": "node scripts/source-workflow.mjs ready",
     "math:status": "node scripts/math-network-status.mjs",
     "math:check": "node scripts/math-network-status.mjs --check",
+    "math:toy": "node scripts/llm-math-toy.mjs",
     "learning:audit": "node scripts/audit-foundational-learning.mjs --write",
     "learning:audit:check": "node scripts/audit-foundational-learning.mjs --check",
     "sync:index": "node scripts/sync-index.mjs",

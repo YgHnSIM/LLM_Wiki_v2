@@ -4818,6 +4818,24 @@ raw 등록 해시:
 - 이 배치는 한 head의 순전파와 residual 전이에 집중한다. 모든 출력 가중치·hidden state·attention 투영으로 이어지는 전체 gradient와 유한차분 검산은 다음 배치가 맡는다.
 - 실제 batch·multi-head·FFN·정규화 shape와 독립 종합 capstone은 뒤 배치에서 이어진다. raw는 변경하지 않았다.
 
+## [2026-07-24] content | Full backprop verification
+
+변경 내용:
+
+- [[미분·편미분·그래디언트]], [[연쇄 법칙과 계산 그래프]], [[역전파]]에 완전 풀이·부분 완성·새 수치·오류 진단·채점 기준을 추가했다. 미분 불가능 지점과 중심 차분 오차, 분기 경로의 기여 합, 행·열벡터 관례에 따른 가중치 gradient shape를 치명적 오류로 판정한다.
+- [[LLM을 만든 수학]]의 한 bias 예를 전체 출력층으로 확장해 $g_z=p-e_y$, $\partial J/\partial W_{\mathrm{out}}=r^{\mathsf T}g_z$, $\partial J/\partial b=g_z$, $\partial J/\partial r=g_zW_{\mathrm{out}}^{\mathsf T}$를 같은 수치로 연결했다. 잔차 shortcut과 attention 경로의 입력 gradient가 다시 합쳐져야 한다는 경계도 명시했다.
+- `scripts/llm-math-toy.mjs`와 `npm run math:toy`를 추가했다. 회귀 테스트는 안정 softmax, 허브 수치 재현, gradient shape·성분합, 출력 가중치·편향 전체의 중심 차분, 작은 SGD 한 걸음의 손실 감소를 검산한다. 자동 감사의 완전한 마스터리 표지 문서는 9개에서 12개로 늘었다.
+
+검증 결과:
+
+- 허브 출력층에서 $g_z\approx(0.035746,0.049734,0.189844,-0.275324)$, $\partial J/\partial r\approx(0.325057,-0.360803)$을 재계산했다. $W_{\mathrm{out}}$ 둘째 행·넷째 열의 해석적 gradient는 약 $-0.459725$이고 중심 차분과 $10^{-9}$ 이내에서 일치한다.
+- `node --test scripts/tests/llm-math-toy.test.mjs`의 신규 회귀 6개와 `npm run math:check`, `npm run learning:audit:check`, `npm run sync:index`, `npm run lint:wiki`, `npm run verify`를 통과했다. 전체 Node 회귀는 129개, 사이트 산출물은 HTML 691개·위키 링크 8,671개·로컬 참조 47,336개이며 Chromium 회귀 4개와 KaTeX error 0개를 확인했다.
+
+남은 제한:
+
+- 이 배치는 출력층과 잔차 분기까지의 역방향 규칙을 검증한다. attention의 $W_Q,W_K,W_V$ 전체 야코비안과 실제 batch·multi-head·FFN·정규화 shape는 다음 배치에서 다룬다.
+- 유한차분 일치는 국소 gradient 구현 점검이지 전체 학습·일반화의 증명이 아니다. `raw/`는 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]
