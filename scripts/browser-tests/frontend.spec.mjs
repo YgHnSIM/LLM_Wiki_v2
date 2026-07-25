@@ -79,3 +79,107 @@ test('mobile navigation and directories do not overflow', async ({ page }) => {
   await expect(menu).toHaveAttribute('aria-expanded', 'true');
   await expect(page.locator('#primary-nav')).toBeVisible();
 });
+
+test('learning guide has a canonical route, navigation entry, and progressive enhancement hook', async ({ page }) => {
+  await page.goto(siteUrl('/'));
+  const guideCta = page.locator('[data-learning-guide-cta]');
+  await expect(guideCta).toBeVisible();
+  await expect(guideCta).toHaveAttribute('href', siteUrl('/guide/'));
+
+  await guideCta.click();
+  await expect(page.locator('[data-learning-guide-page]')).toBeVisible();
+  await expect(page.locator('#primary-nav a[href="' + siteUrl('/guide/') + '"]')).toHaveAttribute('aria-current', 'page');
+  await expect(page.locator('[data-learning-diagnostic]')).toBeVisible();
+  await expect(page.locator('script[src$="/assets/learning-guide.js"]')).toHaveCount(1);
+});
+
+test('learning guide stays within the mobile viewport', async ({ page }) => {
+  const consoleErrors = [];
+  page.on('console', (message) => {
+    if (message.type() === 'error') consoleErrors.push(message.text());
+  });
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(siteUrl('/guide/'));
+  await expect(page.locator('[data-learning-guide-page]')).toBeVisible();
+  await expect(page.locator('[data-learning-diagnostic]')).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+  expect(consoleErrors).toEqual([]);
+});
+
+test('learning guide diagnoses, persists only self-attested progress, and resets its own state', async ({ page }) => {
+  await page.goto(siteUrl('/guide/'));
+  const form = page.locator('[data-learning-diagnostic]');
+  const answers = {
+    'core-1': 'next-token-distribution',
+    'core-2': 'separate-claim-conditions',
+    'math-1': 'shape-preserves-axis-meaning',
+    'math-2': 'gradient-update-direction',
+    'history-1': 'locator',
+    'history-2': 'comparison-conditions',
+    'systems-1': 'runtime',
+    'systems-2': 'failure-recovery',
+  };
+
+  await form.locator('input[name="learning-goal"][value="math"]').check();
+  for (const [name, value] of Object.entries(answers)) {
+    await form.locator(`input[name="${name}"][value="${value}"]`).check();
+  }
+
+  const c1 = page.locator('input[data-learning-module="C1"]');
+  await expect(c1).not.toBeChecked();
+  await form.locator('[data-learning-diagnostic-submit]').click();
+  await expect(page.locator('[data-learning-diagnostic-result]')).toContainText('주 전공: 수학·모델 계산');
+  await expect(page.locator('[data-learning-progress]')).toContainText('수학·모델 계산 경로 0/9 완료');
+
+  await c1.check();
+  await expect(page.locator('[data-learning-progress]')).toContainText('수학·모델 계산 경로 1/9 완료');
+  await page.reload();
+  await expect(page.locator('input[data-learning-module="C1"]')).toBeChecked();
+  await expect(page.locator('[data-learning-progress]')).toContainText('수학·모델 계산 경로 1/9 완료');
+
+  await page.locator('[data-learning-primary-track]').selectOption('systems');
+  await expect(page.locator('[data-learning-progress]')).toContainText('시스템·평가 경로 1/9 완료');
+  await page.reload();
+  await expect(page.locator('[data-learning-primary-track]')).toHaveValue('systems');
+  await expect(page.locator('input[data-learning-module="C1"]')).toBeChecked();
+
+  page.once('dialog', (dialog) => dialog.accept());
+  await page.locator('[data-learning-reset]').click();
+  await expect(page.locator('input[data-learning-module="C1"]')).not.toBeChecked();
+  await expect(page.locator('[data-learning-progress]')).toContainText('공통 코어 0/3 완료');
+});
+
+test('learning guide remains usable without JavaScript', async ({ browser }) => {
+  const staticContext = await browser.newContext({ javaScriptEnabled: false });
+  const staticPage = await staticContext.newPage();
+  await staticPage.goto(siteUrl('/guide/'));
+  await expect(staticPage.locator('[data-learning-diagnostic]')).toBeVisible();
+  await expect(staticPage.getByRole('heading', { name: /수동 채점표와 복귀 경로/ })).toBeVisible();
+  await expect(staticPage.getByRole('heading', { name: /학습 기록 카드/ })).toBeVisible();
+  await expect(staticPage.locator('input[data-learning-module="C1"]')).toBeVisible();
+  await staticContext.close();
+});
+
+test('learning guide falls back cleanly when local storage is unavailable', async ({ browser }) => {
+  const blockedContext = await browser.newContext();
+  await blockedContext.addInitScript(() => {
+    for (const method of ['getItem', 'setItem', 'removeItem']) {
+      Object.defineProperty(Storage.prototype, method, {
+        configurable: true,
+        value() { throw new DOMException('blocked', 'SecurityError'); },
+      });
+    }
+  });
+  const blockedPage = await blockedContext.newPage();
+  const consoleErrors = [];
+  blockedPage.on('console', (message) => {
+    if (message.type() === 'error') consoleErrors.push(message.text());
+  });
+  await blockedPage.goto(siteUrl('/guide/'));
+  await expect(blockedPage.locator('[data-learning-storage-status]')).toContainText('저장할 수 없습니다');
+  await blockedPage.locator('input[data-learning-module="C1"]').check();
+  await expect(blockedPage.locator('input[data-learning-module="C1"]')).toBeChecked();
+  expect(consoleErrors).toEqual([]);
+  await blockedContext.close();
+});

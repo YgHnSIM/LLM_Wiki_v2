@@ -5344,6 +5344,25 @@ raw 등록 해시:
 - 이 지도는 data → model → tool → realtime이라는 단일 실행 순서를 만들지 않는다. 각 경계의 수명·authority·failure model은 다르며, owner별 근거와 결과 계약을 따로 확인해야 한다.
 - 계획된 시스템 경계 확장 milestone은 완료됐다. 다음 보강은 새 1차 근거, 실제 학습자 오답 또는 재현 가능한 운영 trace가 기존 owner에 남는 공백을 보일 때만 정한다. raw/, C:/Vault/CS_Wiki와 .codex-remote-attachments/는 변경하지 않았다.
 
+## [2026-07-25] content | Add diagnostic learning guide
+
+변경 내용:
+
+- [[LLM 학습 가이드]]를 새 학습 경로 owner로 추가했다. 이 문서는 짧은 준비도 진단, 공통 코어 C1–C3, 수학·역사/근거·시스템/평가의 주 전공, 두 교차 과제와 Z1 한 페이지 주장 감사를 하나의 완료형 과정으로 묶는다.
+- 각 단위는 읽기 링크만 나열하지 않고 질문, 최소 읽기, 직접 만드는 산출물, 통과 기준과 막혔을 때의 owner 복귀 경로를 함께 둔다. 완료는 방문이나 스크롤이 아니라 산출물과 기준을 학습자가 확인한 뒤 표시한다.
+- 진단·선택·체크 상태는 JavaScript가 있을 때 이 브라우저 안에서만 저장하도록 설계했고, JavaScript 또는 저장 기능이 없을 때도 수동 채점표·경로표·복사 가능한 학습 기록 카드로 같은 과정을 사용할 수 있게 했다.
+- [[overview]]는 범위·상태·질문별 고급 탐색을, [[LLM 학습 가이드]]는 진단·진도·완료 기준을 맡도록 역할을 분리했다. [[index]]와 편집 워크플로에도 같은 소유권을 기록했다.
+
+검증 결과:
+
+- `npm run learning:audit`, `npm run learning:audit:check`, `npm run sync:index`, `npm run math:check`, `npm run history:check`, `npm run boundary:check`, `npm run verify`, `git diff --check`를 통과했다. 새 meta 문서로 변한 전체 Markdown 수 394개는 수학 문서망의 학습 감사 baseline에만 동기화했고, 완료된 batch·owner·handoff는 다시 열지 않았다.
+- Playwright Chromium에서 홈 CTA·`/guide/` 활성 메뉴·8문항 진단·전공 변경·self-attested 완료 저장·초기화·storage 차단 fallback을 확인했다. JavaScript를 끈 페이지도 수동 채점표·경로·학습 기록 카드와 module checkbox를 그대로 제공하며, desktop과 390×844 viewport에서 page-level 가로 overflow와 console error가 없었다.
+
+남은 제한:
+
+- 브라우저의 완료 표시와 진단 점수는 자기 보고용 학습 보조이며, 지식·성능·자격을 서버에서 인증하거나 다른 기기에 동기화하지 않는다.
+- Z1의 17/20 기준은 실제 산출물의 근거·경계·복구 설명을 검토하는 rubric이지, 특정 제품·모델의 일반 성능을 보장하는 점수가 아니다. raw/와 기존 수학·역사·시스템 원장은 변경하지 않았다.
+
 ## 관련 항목
 
 - [[index]]

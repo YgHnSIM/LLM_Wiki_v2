@@ -132,9 +132,10 @@ const documents = loadedDocuments.map((loadedDocument) => {
   const category = parts.length > 1 && categoryMeta[parts[0]] ? parts[0] : 'meta';
   const firstHeading = content.match(/^#\s+(.+)$/m)?.[1]?.trim();
   const title = String(data.title ?? firstHeading ?? filename);
+  const id = String(data.id ?? relativePath.replace(/\.md$/i, ''));
 
   return {
-    id: String(data.id ?? relativePath.replace(/\.md$/i, '')),
+    id,
     absolutePath,
     relativePath,
     filename,
@@ -157,7 +158,10 @@ const documents = loadedDocuments.map((loadedDocument) => {
     created: formatDate(data.created),
     updated: formatDate(data.updated),
     body: content.trim(),
-    url: routeFor(relativePath, category, filename),
+    // The guide is an intentional top-level learning entry point rather than
+    // another item in the meta-document directory. Resolve its canonical URL
+    // from the durable page id so wiki links and search entries agree.
+    url: id === 'meta.learning-guide' ? '/guide/' : routeFor(relativePath, category, filename),
     sourceNumber: category === 'sources' ? filename.match(/^(\d{3})/)?.[1] ?? '' : '',
     excerpt: truncate(firstParagraph(content), 210),
     minutes: readingMinutes(content),
@@ -660,6 +664,7 @@ function layout({ title, description, current = '', body, pageClass = '', script
       <button class="nav-toggle" type="button" data-menu-toggle aria-controls="primary-nav" aria-expanded="false">메뉴</button>
       <nav class="primary-nav" id="primary-nav" aria-label="주요 메뉴">
         ${navLink('/', '홈', current)}
+        ${navLink('/guide/', '학습 가이드', current)}
         ${navLink('/sources/', '원문 노트', current)}
         ${navLink('/concepts/', '개념', current)}
         ${navLink('/entities/', '인물·기관', current)}
@@ -686,6 +691,7 @@ function layout({ title, description, current = '', body, pageClass = '', script
     </div>
     <nav class="footer-meta" aria-label="보조 메뉴">
       <span>최근 문서 갱신 ${escapeHtml(latestUpdate)}</span>
+      <a href="${sitePath('/guide/')}">학습 가이드</a>
       <a href="${sitePath('/search/')}">전체 검색</a>
       <a href="${sitePath('/translations/')}">원문 번역본 모아보기</a>
       <a href="${sitePath('/about/')}">위키 안내</a>
@@ -742,6 +748,7 @@ function noteCard(document, { headingLevel = 3, hidden = false } = {}) {
 
 function renderHome() {
   const overview = documents.find((document) => document.filename === 'overview');
+  const learningGuide = documents.find((document) => document.id === 'meta.learning-guide');
   const intro = truncate(firstParagraph(overview?.body ?? ''), 130);
   const sourcePreview = sourceDocuments.slice(0, 3);
   const heroSourcePreview = sourceDocuments.slice(-6).reverse();
@@ -756,6 +763,7 @@ function renderHome() {
         <p class="eyebrow">원문 노트 ${sourceDocuments.length}개·참고 자료 ${referenceDocuments.length}개·비교 읽기 ${grouped.analyses.length}개</p>
         <h1>언어 모델의<br><span>역사를 함께 읽다</span></h1>
         <p class="hero-intro">${escapeHtml(intro)}</p>
+        ${learningGuide ? `<a class="hero-guide-cta" data-learning-guide-cta href="${sitePath(learningGuide.url)}"><span>새 학습 경로</span><strong>3분 진단으로 시작하기</strong><i aria-hidden="true">→</i></a>` : ''}
         ${renderSearch('hero-search', { large: true, label: '홈 주요 검색' })}
       </div>
       <nav class="hero-collage hero-source-strip" aria-label="최근 원문 노트 빠른 이동">
@@ -1143,6 +1151,7 @@ function renderRelationshipPreview(document) {
 }
 
 function renderArticle(document) {
+  const isLearningGuide = document.id === 'meta.learning-guide';
   const rendered = renderMarkdown(document);
   const siblings = grouped[document.category];
   const position = siblings.indexOf(document);
@@ -1156,7 +1165,7 @@ function renderArticle(document) {
     ? `<div class="review-banner">${verificationBadge(document)}<span>사실, 해석 또는 논쟁 상태는 문서의 근거와 설명을 함께 확인하세요.</span></div>`
     : '';
 
-  const body = `<main id="main-content" class="article-main">
+  const body = `<main id="main-content" class="article-main${isLearningGuide ? ' learning-guide-main' : ''}"${isLearningGuide ? ' data-learning-guide-page' : ''}>
     <nav class="breadcrumbs" aria-label="현재 위치">${breadcrumbFor(document)}</nav>
     <div class="reading-progress" data-reading-progress aria-hidden="true"><span></span></div>
     <header class="article-hero">
@@ -1211,10 +1220,13 @@ function renderArticle(document) {
   return layout({
     title: document.title,
     description: document.excerpt,
-    current: document.category === 'meta' ? '' : `/${document.category}/`,
+    current: isLearningGuide ? '/guide/' : document.category === 'meta' ? '' : `/${document.category}/`,
     body,
-    pageClass: `article-page article-page--${document.category}`,
-    scripts: [{ src: '/assets/relationship-explorer.js', type: 'module' }],
+    pageClass: `article-page article-page--${document.category}${isLearningGuide ? ' learning-guide-page' : ''}`,
+    scripts: [
+      { src: '/assets/relationship-explorer.js', type: 'module' },
+      ...(isLearningGuide ? [{ src: '/assets/learning-guide.js', type: 'module' }] : []),
+    ],
   });
 }
 
