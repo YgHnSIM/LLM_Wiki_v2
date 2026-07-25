@@ -11,6 +11,7 @@ import {
   remainingCount,
   serializeUiState,
 } from './ui-state.js';
+import { appendTitleWithSubtitleColon } from './title-format.js';
 
 const normalize = normalizeText;
 
@@ -57,49 +58,178 @@ function searchPageUrl(query, source) {
   return `${url.pathname}${url.search}${url.hash}`;
 }
 
-/* Mobile navigation */
+/* Mobile navigation
+ *
+ * New builds provide a native dialog ([data-mobile-nav-dialog]).  Keep the
+ * compact class-based fallback while a cached build is in use, but never use
+ * the desktop navigation as the modal target.
+ */
 const menuButton = document.querySelector('[data-menu-toggle]');
-const primaryNav = document.querySelector('#primary-nav');
+const mobileMenuDialog = document.querySelector('[data-mobile-nav-dialog]');
+const legacyPrimaryNav = document.querySelector('#primary-nav');
 
-if (menuButton && primaryNav) {
-  const isOpen = () => primaryNav.classList.contains('is-open');
-  const closeMenu = ({ restoreFocus = false } = {}) => {
-    if (!isOpen()) return;
-    primaryNav.classList.remove('is-open');
-    menuButton.setAttribute('aria-expanded', 'false');
-    if (restoreFocus) menuButton.focus();
+if (menuButton && typeof HTMLDialogElement !== 'undefined' && mobileMenuDialog instanceof HTMLDialogElement && typeof mobileMenuDialog.showModal === 'function') {
+  const mobileBreakpoint = Number.parseInt(mobileMenuDialog.dataset.mobileBreakpoint || '820', 10) || 820;
+  const mobileMedia = window.matchMedia(`(max-width: ${mobileBreakpoint}px)`);
+  const menuPanel = mobileMenuDialog.querySelector('[data-mobile-nav-panel]') || mobileMenuDialog;
+  let restoreFocusOnClose = false;
+  let lockedRootOverflow = '';
+  let lockedBodyOverflow = '';
+  let pageScrollLocked = false;
+
+  const lockPageScroll = () => {
+    if (pageScrollLocked) return;
+    pageScrollLocked = true;
+    lockedRootOverflow = document.documentElement.style.overflow;
+    lockedBodyOverflow = document.body.style.overflow;
+    document.documentElement.classList.add('mobile-menu-open');
+    document.body.classList.add('mobile-menu-open');
+    document.body.dataset.mobileMenuOpen = 'true';
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
   };
+
+  const unlockPageScroll = () => {
+    if (!pageScrollLocked) return;
+    pageScrollLocked = false;
+    document.documentElement.classList.remove('mobile-menu-open');
+    document.body.classList.remove('mobile-menu-open');
+    delete document.body.dataset.mobileMenuOpen;
+    document.documentElement.style.overflow = lockedRootOverflow;
+    document.body.style.overflow = lockedBodyOverflow;
+  };
+
+  const finishClose = () => {
+    unlockPageScroll();
+    menuButton.setAttribute('aria-expanded', 'false');
+    if (!restoreFocusOnClose) return;
+    restoreFocusOnClose = false;
+    window.requestAnimationFrame(() => menuButton.focus({ preventScroll: true }));
+  };
+
+  const closeMenu = ({ restoreFocus = false } = {}) => {
+    if (!mobileMenuDialog.open && !pageScrollLocked) return;
+    restoreFocusOnClose ||= restoreFocus;
+    if (mobileMenuDialog.open) {
+      mobileMenuDialog.close();
+      return;
+    }
+    finishClose();
+  };
+
   const openMenu = () => {
-    primaryNav.classList.add('is-open');
+    if (mobileMenuDialog.open || !mobileMedia.matches) return;
+    restoreFocusOnClose = false;
+    lockPageScroll();
     menuButton.setAttribute('aria-expanded', 'true');
+    mobileMenuDialog.showModal();
     window.requestAnimationFrame(() => {
-      primaryNav.querySelector('a[href], input:not([disabled]), button:not([disabled]), select:not([disabled])')?.focus();
+      const firstTarget = menuPanel.querySelector('[autofocus], [data-mobile-nav-links] a[href]')
+        || menuPanel.querySelector('a[href], input:not([disabled]), button:not([disabled]), select:not([disabled])');
+      firstTarget?.focus({ preventScroll: true });
     });
   };
 
   menuButton.addEventListener('click', () => {
-    if (isOpen()) closeMenu();
+    if (mobileMenuDialog.open) closeMenu({ restoreFocus: true });
     else openMenu();
   });
 
-  primaryNav.addEventListener('click', (event) => {
+  mobileMenuDialog.addEventListener('click', (event) => {
+    if (event.target === mobileMenuDialog || event.target.closest('[data-menu-close]')) closeMenu({ restoreFocus: true });
+  });
+  mobileMenuDialog.addEventListener('click', (event) => {
     if (event.target.closest('a[href]')) closeMenu();
   });
-
-  document.addEventListener('click', (event) => {
-    if (!primaryNav.contains(event.target) && !menuButton.contains(event.target)) closeMenu();
+  mobileMenuDialog.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    closeMenu({ restoreFocus: true });
   });
+  mobileMenuDialog.addEventListener('close', finishClose);
+  mobileMedia.addEventListener?.('change', (event) => {
+    if (!event.matches) closeMenu({ restoreFocus: false });
+  });
+  window.addEventListener('resize', () => {
+    if (!mobileMedia.matches) closeMenu({ restoreFocus: false });
+  }, { passive: true });
+} else if (menuButton && mobileMenuDialog) {
+  const isOpen = () => mobileMenuDialog.classList.contains('is-fallback-open');
+  const closeMenu = ({ restoreFocus = false } = {}) => {
+    if (!isOpen()) return;
+    mobileMenuDialog.classList.remove('is-fallback-open');
+    mobileMenuDialog.removeAttribute('open');
+    document.documentElement.classList.remove('mobile-menu-open');
+    document.body.classList.remove('mobile-menu-open', 'mobile-menu-fallback-open');
+    delete document.body.dataset.mobileMenuOpen;
+    menuButton.setAttribute('aria-expanded', 'false');
+    if (restoreFocus) menuButton.focus({ preventScroll: true });
+  };
+  const openMenu = () => {
+    mobileMenuDialog.classList.add('is-fallback-open');
+    mobileMenuDialog.setAttribute('open', '');
+    document.documentElement.classList.add('mobile-menu-open');
+    document.body.classList.add('mobile-menu-open', 'mobile-menu-fallback-open');
+    document.body.dataset.mobileMenuOpen = 'true';
+    menuButton.setAttribute('aria-expanded', 'true');
+    window.requestAnimationFrame(() => {
+      mobileMenuDialog.querySelector('[data-mobile-nav-links] a[href], a[href], input:not([disabled]), button:not([disabled]), select:not([disabled])')?.focus({ preventScroll: true });
+    });
+  };
 
+  menuButton.addEventListener('click', () => {
+    if (isOpen()) closeMenu({ restoreFocus: true });
+    else openMenu();
+  });
+  mobileMenuDialog.addEventListener('click', (event) => {
+    if (event.target.closest('[data-menu-close], a[href]')) closeMenu({ restoreFocus: event.target.closest('[data-menu-close]') !== null });
+  });
+  document.addEventListener('pointerdown', (event) => {
+    if (isOpen() && !mobileMenuDialog.contains(event.target) && !menuButton.contains(event.target)) closeMenu({ restoreFocus: true });
+  });
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && isOpen()) {
       event.preventDefault();
       closeMenu({ restoreFocus: true });
     }
   });
-
   window.addEventListener('resize', () => {
-    closeMenu({ restoreFocus: primaryNav.contains(document.activeElement) });
+    if (window.matchMedia('(min-width: 821px)').matches) closeMenu();
   }, { passive: true });
+} else if (menuButton && legacyPrimaryNav) {
+  const isOpen = () => legacyPrimaryNav.classList.contains('is-open');
+  const closeMenu = ({ restoreFocus = false } = {}) => {
+    if (!isOpen()) return;
+    legacyPrimaryNav.classList.remove('is-open');
+    menuButton.setAttribute('aria-expanded', 'false');
+    if (restoreFocus) menuButton.focus({ preventScroll: true });
+  };
+  const openMenu = () => {
+    legacyPrimaryNav.classList.add('is-open');
+    menuButton.setAttribute('aria-expanded', 'true');
+    window.requestAnimationFrame(() => {
+      legacyPrimaryNav.querySelector('a[href], input:not([disabled]), button:not([disabled]), select:not([disabled])')?.focus();
+    });
+  };
+
+  menuButton.addEventListener('click', () => {
+    if (isOpen()) closeMenu({ restoreFocus: true });
+    else openMenu();
+  });
+  legacyPrimaryNav.addEventListener('click', (event) => {
+    if (event.target.closest('a[href]')) closeMenu();
+  });
+  legacyPrimaryNav.addEventListener('focusout', () => {
+    window.requestAnimationFrame(() => {
+      if (isOpen() && !legacyPrimaryNav.contains(document.activeElement) && document.activeElement !== menuButton) closeMenu();
+    });
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && isOpen()) {
+      event.preventDefault();
+      closeMenu({ restoreFocus: true });
+    }
+  });
+  window.addEventListener('resize', () => closeMenu({ restoreFocus: legacyPrimaryNav.contains(document.activeElement) }), { passive: true });
 }
 
 /* Shared search index and ranking */
@@ -134,15 +264,21 @@ function normalizedSearchEntry(entry) {
   const prepared = {
     title: normalize(entry.title),
     aliases: normalize(asArray(entry.aliases).join(' ')),
-    tags: normalize(asArray(entry.tags).join(' ')),
+    tags: normalize(asArray(entry.tagLabels).concat(asArray(entry.tags)).join(' ')),
+    category: normalize([entry.category, entry.categoryKey].filter(Boolean).join(' ')),
     excerpt: normalize(entry.excerpt),
     text: normalize(entry.text),
+    suggestionText: normalize(entry.suggestionText),
   };
-  prepared.haystack = [
+  prepared.quickHaystack = [
+    prepared.suggestionText,
     prepared.title,
     prepared.aliases,
-    normalize(entry.category),
+    prepared.category,
     prepared.tags,
+  ].join(' ');
+  prepared.haystack = [
+    prepared.quickHaystack,
     prepared.excerpt,
     prepared.text,
   ].join(' ');
@@ -150,15 +286,17 @@ function normalizedSearchEntry(entry) {
   return prepared;
 }
 
-function rankEntries(index, query, { requireQuery = false } = {}) {
+function rankEntries(index, query, { requireQuery = false, scope = 'full' } = {}) {
   const terms = normalize(query).split(' ').filter(Boolean);
   if (requireQuery && !terms.length) return [];
+  const quickScope = scope === 'quick';
 
   return index.map((entry, order) => {
     const {
-      title, aliases, tags, excerpt, text, haystack,
+      title, aliases, tags, excerpt, text, haystack, quickHaystack,
     } = normalizedSearchEntry(entry);
-    if (!terms.every((term) => haystack.includes(term))) return null;
+    const searchable = quickScope ? quickHaystack : haystack;
+    if (!terms.every((term) => searchable.includes(term))) return null;
 
     let score = 0;
     for (const term of terms) {
@@ -167,8 +305,8 @@ function rankEntries(index, query, { requireQuery = false } = {}) {
       else if (title.includes(term)) score += 90;
       if (aliases.includes(term)) score += 55;
       if (tags.includes(term)) score += 30;
-      if (excerpt.includes(term)) score += 18;
-      if (text.includes(term)) score += 5;
+      if (!quickScope && excerpt.includes(term)) score += 18;
+      if (!quickScope && text.includes(term)) score += 5;
     }
     return { entry, score, order };
   })
@@ -180,7 +318,7 @@ function verificationLabel(value) {
   return {
     verified: '검증됨',
     partial: '부분 검증',
-    disputed: '이견 중',
+    disputed: '논쟁 중',
     unverified: '미검증',
   }[value] ?? value ?? '';
 }
@@ -198,19 +336,31 @@ function appendStatus(container, text, { visuallyHidden = false, live = true } =
   return status;
 }
 
-/* Search autocomplete */
+/* Search autocomplete
+ *
+ * Suggestions intentionally use the compact title/alias/tag index. Enter
+ * without an active option still goes to the full search page, which includes
+ * body text. Keeping the focus on the input gives the combobox one keyboard
+ * cursor and prevents every result link becoming a tab stop.
+ */
+let siteSearchSequence = 0;
 for (const form of document.querySelectorAll('[data-site-search]')) {
-  const input = form.querySelector('input[type="search"]');
-  const results = form.querySelector('.search-results');
+  const input = form.querySelector('[data-quick-search-input], input[type="search"]');
+  const results = form.querySelector('[data-search-results], .search-results');
   const externalStatus = form.querySelector('[data-search-status]');
   const indexUrl = form.dataset.indexUrl;
   if (!input || !results || !indexUrl) continue;
 
+  siteSearchSequence += 1;
+  if (!input.id) input.id = `site-search-${siteSearchSequence}`;
+  if (!results.id) results.id = `${input.id}-results`;
   results.setAttribute('role', 'listbox');
-  results.setAttribute('aria-label', '검색 자동완성 결과');
+  results.setAttribute('aria-label', '제목·별칭 빠른 검색 결과');
   input.setAttribute('role', 'combobox');
   input.setAttribute('aria-autocomplete', 'list');
+  input.setAttribute('aria-controls', results.id);
   input.setAttribute('aria-expanded', 'false');
+  const suggestionLimit = Math.max(1, Number.parseInt(form.dataset.suggestionLimit || '5', 10) || 5);
   let requestNumber = 0;
   let currentResults = [];
   let activeIndex = -1;
@@ -234,50 +384,80 @@ for (const form of document.querySelectorAll('[data-site-search]')) {
   const showLoading = () => {
     results.replaceChildren();
     appendStatus(results, '검색 중…', { live: !externalStatus });
-    announce('검색 중입니다.');
+    announce('제목, 별칭, 태그를 검색하고 있습니다.');
     openResults();
+  };
+  const appendOption = ({ className, href, id, label, children = [] }) => {
+    const link = document.createElement('a');
+    link.className = className;
+    link.href = href;
+    link.id = id;
+    link.tabIndex = -1;
+    link.setAttribute('role', 'option');
+    link.setAttribute('aria-selected', 'false');
+    if (label) link.setAttribute('aria-label', label);
+    link.append(...children);
+    results.append(link);
+    return link;
+  };
+  const matchingDetail = (entry, query) => {
+    const terms = normalize(query).split(' ').filter(Boolean);
+    const matchesAll = (value) => terms.every((term) => normalize(value).includes(term));
+    const alias = asArray(entry.aliases).find(matchesAll);
+    if (alias) return `별칭 · ${alias}`;
+    const tag = asArray(entry.tagLabels).concat(asArray(entry.tags)).find(matchesAll);
+    return tag ? `태그 · ${tag}` : '';
+  };
+  const appendAllResultsOption = (query, total, { fallback = false } = {}) => {
+    const label = fallback ? '전체 검색에서 본문까지 찾기' : `전체 ${total}개 결과 보기`;
+    appendOption({
+      className: 'search-all-results',
+      href: searchPageUrl(query, form),
+      id: `${input.id}-option-all`,
+      label,
+      children: [document.createTextNode(label)],
+    });
   };
   const renderResults = (ranked, query) => {
     results.replaceChildren();
     currentResults = ranked.map(({ entry }) => entry);
     activeIndex = -1;
     const total = currentResults.length;
-    announce(total ? `총 ${total}개 문서를 찾았습니다.` : '일치하는 문서가 없습니다.');
 
     if (!total) {
-      appendStatus(results, '일치하는 문서가 없습니다.', { live: !externalStatus });
+      const fallback = document.createElement('p');
+      fallback.className = 'search-message search-message--body-fallback';
+      fallback.textContent = '제목·별칭·태그 일치 없음 — Enter로 본문까지 검색';
+      results.append(fallback);
+      appendAllResultsOption(query, total, { fallback: true });
+      announce('제목, 별칭, 태그에서 일치하는 문서가 없습니다. Enter를 누르면 본문까지 전체 검색합니다.');
       openResults();
       return;
     }
 
-    appendStatus(results, `총 ${total}개 문서`, { visuallyHidden: true, live: !externalStatus });
-    for (const [index, entry] of currentResults.slice(0, 8).entries()) {
-      const link = document.createElement('a');
-      link.className = 'search-result';
-      link.href = entry.url;
-      link.id = `${input.id}-option-${index}`;
-      link.setAttribute('role', 'option');
-      link.setAttribute('aria-selected', 'false');
-
+    const visible = currentResults.slice(0, suggestionLimit);
+    appendStatus(results, `제목·별칭·태그에서 ${total}개 문서`, { visuallyHidden: true, live: !externalStatus });
+    for (const [index, entry] of visible.entries()) {
       const meta = document.createElement('span');
       meta.textContent = [entry.category, entry.verificationLabel || verificationLabel(entry.verification)]
         .filter(Boolean).join(' · ');
       const title = document.createElement('strong');
-      title.textContent = entry.title;
-      const excerpt = document.createElement('p');
-      excerpt.textContent = entry.excerpt;
-      link.append(meta, title, excerpt);
-      results.append(link);
+      appendTitleWithSubtitleColon(title, entry.title);
+      const detail = matchingDetail(entry, query);
+      const children = detail
+        ? [meta, title, Object.assign(document.createElement('span'), { className: 'search-result-match', textContent: detail })]
+        : [meta, title];
+      appendOption({
+        className: 'search-result',
+        href: entry.url,
+        id: `${input.id}-option-${index}`,
+        label: `${entry.title}, ${[entry.category, entry.verificationLabel || verificationLabel(entry.verification), detail].filter(Boolean).join(', ')}`,
+        children,
+      });
     }
 
-    const allResults = document.createElement('a');
-    allResults.className = 'search-all-results';
-    allResults.href = searchPageUrl(query, form);
-    allResults.id = `${input.id}-option-all`;
-    allResults.setAttribute('role', 'option');
-    allResults.setAttribute('aria-selected', 'false');
-    allResults.textContent = `전체 ${total}개 결과 보기`;
-    results.append(allResults);
+    appendAllResultsOption(query, total);
+    announce(`제목, 별칭, 태그에서 ${total}개 문서를 찾았습니다. 위아래 화살표로 선택할 수 있습니다.`);
     openResults();
   };
 
@@ -308,7 +488,7 @@ for (const form of document.querySelectorAll('[data-site-search]')) {
     try {
       const index = await getSearchIndex(indexUrl);
       if (thisRequest !== requestNumber || input.value.trim() !== query) return;
-      renderResults(rankEntries(index, query, { requireQuery: true }), query);
+      renderResults(rankEntries(index, query, { requireQuery: true, scope: 'quick' }), query);
     } catch {
       if (thisRequest !== requestNumber) return;
       currentResults = [];
@@ -343,7 +523,8 @@ for (const form of document.querySelectorAll('[data-site-search]')) {
     if (event.key === 'Escape') {
       event.preventDefault();
       closeResults();
-      input.focus();
+    } else if (event.key === 'Tab') {
+      closeResults();
     } else if (event.key === 'ArrowDown' && !results.hidden) {
       event.preventDefault();
       moveActiveOption(1);
@@ -365,18 +546,20 @@ for (const form of document.querySelectorAll('[data-site-search]')) {
     }
   });
 
-  results.addEventListener('mousemove', (event) => {
+  results.addEventListener('pointermove', (event) => {
     const option = event.target.closest('[role="option"]');
     if (!option) return;
     setActiveOption(options().indexOf(option));
   });
-
+  results.addEventListener('click', (event) => {
+    const option = event.target.closest('[role="option"]');
+    if (option) setActiveOption(options().indexOf(option));
+  });
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     window.location.assign(searchPageUrl(input.value, form));
   });
-
-  document.addEventListener('click', (event) => {
+  document.addEventListener('pointerdown', (event) => {
     if (!form.contains(event.target)) closeResults();
   });
 }
@@ -390,14 +573,29 @@ if (searchPage) {
   const verification = searchPage.querySelector('[data-search-filter-verification]');
   const tag = searchPage.querySelector('[data-search-filter-tag]');
   const sort = searchPage.querySelector('[data-search-sort]');
-  const results = document.querySelector('[data-search-page-results]');
-  const status = document.querySelector('[data-search-page-status]');
+  const searchContext = searchPage.closest('main, .search-page, [data-search-context]') || document;
+  const results = searchContext.querySelector('[data-search-page-results]') || document.querySelector('[data-search-page-results]');
+  const status = searchContext.querySelector('[data-search-page-status]') || document.querySelector('[data-search-page-status]');
+  const liveStatus = searchContext.querySelector('[data-search-page-live-status]') || document.querySelector('[data-search-page-live-status]') || status;
   const indexUrl = searchPage.dataset.indexUrl || sitePath('/search-index.json');
 
-  if (input && results && status) {
+  if (input && results && (status || liveStatus)) {
     let requestNumber = 0;
     let rankedResults = [];
     let shownCount = SEARCH_PAGE_SIZE;
+
+    const setSearchStatus = (visualText = '', liveText = visualText) => {
+      if (status) status.textContent = visualText;
+      if (liveStatus && liveStatus !== status) liveStatus.textContent = liveText;
+    };
+    const hasDetailedFilters = () => [category?.value, verification?.value, tag?.value]
+      .some((value) => normalize(value));
+    const detailedFilterCount = () => [category?.value, verification?.value, tag?.value]
+      .filter((value) => normalize(value)).length;
+    const normalizeSortForScope = () => {
+      if (!sort || normalize(input.value) || !hasDetailedFilters() || sort.value !== 'relevance') return;
+      if ([...sort.options].some((option) => option.value === 'title')) sort.value = 'title';
+    };
 
     const setSelectFromUrl = (control, value, fallback = '') => {
       if (!control) return;
@@ -411,8 +609,10 @@ if (searchPage) {
       setSelectFromUrl(verification, state.verification);
       setSelectFromUrl(tag, state.tag);
       setSelectFromUrl(sort, state.sort, 'relevance');
+      normalizeSortForScope();
     };
     const syncUrl = () => {
+      normalizeSortForScope();
       const url = new URL(window.location.href);
       const params = serializeUiState({
         q: input.value.trim(),
@@ -439,6 +639,12 @@ if (searchPage) {
       else if (mode === 'updated') list.sort((a, b) => dateValue(b.entry.updated) - dateValue(a.entry.updated) || collator.compare(a.entry.title, b.entry.title));
       else if (mode === 'evidence') list.sort((a, b) => numericValue(b.entry.evidenceCount ?? b.entry.evidence?.length) - numericValue(a.entry.evidenceCount ?? a.entry.evidence?.length) || collator.compare(a.entry.title, b.entry.title));
       return list;
+    };
+    const sortMetric = (entry) => {
+      const mode = sort?.value || 'relevance';
+      if (mode === 'updated') return entry.updated ? `갱신 ${entry.updated}` : '갱신일 미상';
+      if (mode === 'evidence') return `근거 ${numericValue(entry.evidenceCount ?? entry.evidence?.length)}개`;
+      return '';
     };
     const appendHighlighted = (element, text, query) => {
       const rawTerms = [...new Set(String(query).trim().split(/\s+/).filter(Boolean))]
@@ -468,13 +674,20 @@ if (searchPage) {
       results.after(button);
       return button;
     })();
-    const updateFilterSummary = () => {
-      const active = [input.value, category?.value, verification?.value, tag?.value]
-        .filter((value) => normalize(value)).length;
+    const updateFilterSummary = ({ syncPanel = true } = {}) => {
+      const active = detailedFilterCount();
       const filterCount = searchPage.querySelector('[data-search-filter-count]');
       if (filterCount) filterCount.textContent = active ? `${active}개 적용` : '';
+      if (typeof clearButton !== 'undefined') {
+        clearButton.hidden = !hasSearchScope({
+          q: input.value,
+          category: category?.value,
+          verification: verification?.value,
+          tag: tag?.value,
+        });
+      }
       const panel = searchPage.querySelector('[data-search-filter-panel]');
-      if (panel && window.matchMedia('(max-width: 620px)').matches && !active) panel.open = false;
+      if (panel && syncPanel && window.matchMedia('(max-width: 620px)').matches) panel.open = active > 0;
     };
     const renderPageResults = (ranked) => {
       results.replaceChildren();
@@ -491,7 +704,7 @@ if (searchPage) {
         empty.textContent = '검색어나 필터를 입력하면 결과가 표시됩니다.';
         results.append(empty);
         loadMore.hidden = true;
-        status.textContent = '검색어나 필터를 입력하면 결과가 표시됩니다.';
+        setSearchStatus('', '검색어나 필터를 입력하면 결과가 표시됩니다.');
         updateFilterSummary();
         return;
       }
@@ -500,7 +713,7 @@ if (searchPage) {
         empty.className = 'search-message';
         empty.textContent = '조건에 맞는 문서가 없습니다.';
         results.append(empty);
-        status.textContent = '검색 결과 0개';
+        setSearchStatus('', '검색 결과가 0개입니다.');
         loadMore.hidden = true;
         updateFilterSummary();
         return;
@@ -529,11 +742,18 @@ if (searchPage) {
           badge.textContent = verificationText;
           meta.append(badge);
         }
+        const metricText = sortMetric(entry);
+        if (metricText) {
+          const metric = document.createElement('span');
+          metric.dataset.sortMetric = '';
+          metric.textContent = metricText;
+          meta.append(metric);
+        }
         const heading = document.createElement('h2');
         const link = document.createElement('a');
         link.className = 'search-result-card__link';
         link.href = entry.url;
-        appendHighlighted(link, entry.title, query);
+        appendTitleWithSubtitleColon(link, entry.title, (target, part) => appendHighlighted(target, part, query));
         heading.append(link);
         const excerpt = document.createElement('p');
         excerpt.className = 'result-excerpt';
@@ -562,15 +782,17 @@ if (searchPage) {
       const remaining = remainingCount(visible.length, ranked.length);
       loadMore.hidden = remaining === 0;
       loadMore.textContent = remaining ? `더 보기 · ${Math.min(SEARCH_PAGE_SIZE, remaining)}개` : '모든 결과를 표시했습니다.';
-      status.textContent = `검색 결과 ${ranked.length}개 중 ${visible.length}개 표시`;
+      setSearchStatus(`검색 결과 ${ranked.length}개 중 ${visible.length}개 표시`);
       updateFilterSummary();
     };
     const applySearch = async ({ updateUrl = true } = {}) => {
       requestNumber += 1;
       const thisRequest = requestNumber;
+      normalizeSortForScope();
       if (updateUrl) syncUrl();
       shownCount = SEARCH_PAGE_SIZE;
-      status.textContent = '검색 중…';
+      updateFilterSummary();
+      setSearchStatus('검색 중…');
       try {
         const index = await getSearchIndex(indexUrl);
         if (thisRequest !== requestNumber) return;
@@ -591,8 +813,8 @@ if (searchPage) {
       } catch {
         if (thisRequest !== requestNumber) return;
         results.replaceChildren();
-        appendStatus(results, '검색 색인을 불러오지 못했습니다. 조건을 바꾸면 다시 시도합니다.');
-        status.textContent = '검색 색인을 불러오지 못했습니다.';
+        appendStatus(results, '검색 색인을 불러오지 못했습니다. 조건을 바꾸면 다시 시도합니다.', { live: false });
+        setSearchStatus('', '검색 색인을 불러오지 못했습니다.');
         loadMore.hidden = true;
       }
     };
@@ -640,7 +862,7 @@ if (searchPage) {
       restoreLoadMoreFocus(loadMore, results, previousCount, '.search-result-card', 'a[href]');
     });
     const filterPanel = searchPage.querySelector('[data-search-filter-panel]');
-    filterPanel?.addEventListener('toggle', updateFilterSummary);
+    filterPanel?.addEventListener('toggle', () => updateFilterSummary({ syncPanel: false }));
     window.addEventListener('popstate', () => {
       readUrl();
       applySearch({ updateUrl: false });
@@ -657,6 +879,16 @@ for (const filterGrid of document.querySelectorAll('[data-filter-grid]')) {
   const verification = scope.querySelector('[data-filter-verification]');
   const sort = scope.querySelector('[data-filter-sort]');
   const empty = filterGrid.querySelector('[data-filter-empty]');
+  const filterStatus = scope.querySelector('[data-filter-status]');
+  const clearFilters = scope.querySelector('[data-filter-reset], [data-filter-clear]') || (() => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'search-filter-button directory-filter-clear';
+    button.dataset.filterReset = '';
+    button.textContent = '조건 초기화';
+    (scope.querySelector('.directory-tools') || scope).append(button);
+    return button;
+  })();
   const cards = [...filterGrid.querySelectorAll('[data-card]')];
   const originalOrder = new Map(cards.map((card, index) => [card, index]));
   const pageSize = DIRECTORY_PAGE_SIZE;
@@ -673,6 +905,7 @@ for (const filterGrid of document.querySelectorAll('[data-filter-grid]')) {
   const isSourceDirectory = filterGrid.classList.contains('directory-source-list');
   const eraLabels = [];
   let shownCount = pageSize;
+  let lastMatchingCount = cards.length;
 
   const numberValue = (card, key) => Number.parseFloat(card.dataset[key]) || 0;
   const dateValue = (card) => Date.parse(card.dataset.updated) || 0;
@@ -688,9 +921,24 @@ for (const filterGrid of document.querySelectorAll('[data-filter-grid]')) {
     } else if (mode === 'title' || mode === 'title-asc') list.sort((a, b) => collator.compare(titleValue(a), titleValue(b)));
     else if (mode === 'title-desc') list.sort((a, b) => collator.compare(titleValue(b), titleValue(a)));
     else if (mode === 'updated' || mode === 'updated-desc') list.sort((a, b) => dateValue(b) - dateValue(a) || collator.compare(titleValue(a), titleValue(b)));
+    else if (mode === 'evidence') list.sort((a, b) => numberValue(b, 'evidence') - numberValue(a, 'evidence') || collator.compare(titleValue(a), titleValue(b)));
     else if (mode === 'connections') list.sort((a, b) => numberValue(b, 'connections') - numberValue(a, 'connections') || collator.compare(titleValue(a), titleValue(b)));
+    else if (filterGrid.dataset.directoryDefaultSort === 'title') list.sort((a, b) => collator.compare(titleValue(a), titleValue(b)));
     else list.sort((a, b) => originalOrder.get(a) - originalOrder.get(b));
     return list;
+  };
+  const updateSortMetrics = () => {
+    const mode = sort?.value || 'default';
+    for (const card of cards) {
+      const metric = card.querySelector('[data-sort-metric]');
+      if (!metric) continue;
+      let text = '';
+      if (mode === 'updated' || mode === 'updated-desc') text = card.dataset.updated ? `갱신 ${card.dataset.updated}` : '갱신일 미상';
+      else if (mode === 'evidence') text = `근거 ${numberValue(card, 'evidence')}개`;
+      else if (mode === 'connections') text = `연결 ${numberValue(card, 'connections')}개`;
+      metric.textContent = text;
+      metric.hidden = !text;
+    }
   };
   const readUrl = () => {
     const state = parseUiState(window.location.search, { directory: true });
@@ -732,12 +980,14 @@ for (const filterGrid of document.querySelectorAll('[data-filter-grid]')) {
     const verificationValue = normalize(verification?.value);
     const sorted = sortedCards();
     const matching = sorted.filter((card) => {
-      const searchableText = normalize(`${card.dataset.filterValue || ''} ${card.textContent || ''}`);
+      const searchableText = normalize(card.dataset.searchKey || `${card.dataset.title || ''} ${card.dataset.filterValue || ''}`);
       const textMatches = terms.every((term) => searchableText.includes(term));
       const verificationMatches = !verificationValue || normalize(card.dataset.verification) === verificationValue;
       return textMatches && verificationMatches;
     });
     const visible = matching.slice(0, shownCount);
+    lastMatchingCount = matching.length;
+    updateSortMetrics();
     const visibleSet = new Set(visible);
     clearEraLabels();
     let previousEra = Symbol('unset');
@@ -763,14 +1013,26 @@ for (const filterGrid of document.querySelectorAll('[data-filter-grid]')) {
     const remaining = remainingCount(visible.length, matching.length);
     loadMore.hidden = remaining === 0;
     loadMore.textContent = remaining ? `더 보기 · ${Math.min(pageSize, remaining)}개` : '모든 문서를 표시했습니다.';
+    if (filterStatus) filterStatus.textContent = `전체 ${cards.length}개 중 ${matching.length}개 일치 · 현재 ${visible.length}개 표시`;
+    if (clearFilters) {
+      const hasActiveFilters = Boolean(terms.length || verificationValue || (sort?.value && sort.value !== 'default'));
+      clearFilters.hidden = !hasActiveFilters;
+    }
   };
 
   filterInput.addEventListener('input', () => applyFilter());
   verification?.addEventListener('change', () => applyFilter());
   sort?.addEventListener('change', () => applyFilter());
+  clearFilters?.addEventListener('click', () => {
+    filterInput.value = '';
+    if (verification) verification.value = '';
+    if (sort) sort.value = 'default';
+    applyFilter();
+    filterInput.focus();
+  });
   loadMore.addEventListener('click', () => {
     const previousCount = filterGrid.querySelectorAll('[data-card]:not([hidden])').length;
-    shownCount = nextPageSize(shownCount, cards.length, pageSize);
+    shownCount = nextPageSize(shownCount, lastMatchingCount, pageSize);
     applyFilter({ updateUrl: false, reset: false });
     restoreLoadMoreFocus(loadMore, filterGrid, previousCount, '[data-card]', 'a[href]');
   });

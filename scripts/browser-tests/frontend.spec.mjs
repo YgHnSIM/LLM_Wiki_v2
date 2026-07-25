@@ -19,7 +19,7 @@ test('compact directories show one page and chronological labels match visible s
 
   expect(total).toBeGreaterThan(30);
   await expect(visibleCards).toHaveCount(30);
-  await expect(page.locator('[data-filter-count], .directory-result-count')).toHaveCount(0);
+  await expect(page.locator('[data-filter-status]')).toContainText(`전체 ${total}개 중 ${total}개 일치`);
   await expect(page.locator('.directory-era-label span')).toHaveText(await visibleDecades(page));
 
   const more = page.locator('[data-filter-more]');
@@ -45,14 +45,21 @@ test('search uses one load-more control and preserves focus after the final batc
   expect(await page.evaluate(() => document.activeElement?.closest('[data-search-page-results]') !== null)).toBe(true);
 });
 
-test('autocomplete uses the compact index and relationship data waits for dialog use', async ({ page }) => {
+test('autocomplete uses the compact index, keeps one keyboard cursor, and relationship data waits for dialog use', async ({ page }) => {
   const requests = [];
   page.on('request', (request) => requests.push(request.url()));
 
   await page.goto(siteUrl('/'));
   const search = page.locator('[data-site-search] input:visible').first();
+  await expect(search).toHaveAttribute('placeholder', '제목·별칭·태그 빠른 검색');
   await search.fill('Transformer');
-  await expect(page.locator('[data-site-search]:visible [role="option"]').first()).toBeVisible();
+  const options = page.locator('[data-site-search]:visible [role="option"]');
+  await expect(options.first()).toBeVisible();
+  await expect(options.first()).toHaveAttribute('tabindex', '-1');
+  await search.press('ArrowDown');
+  await expect(search).toHaveAttribute('aria-activedescendant', await options.first().getAttribute('id'));
+  await search.press('Escape');
+  await expect(search.locator('xpath=ancestor::form').locator('[data-search-results]')).toBeHidden();
   expect(requests.some((url) => url.endsWith('/search-suggestions.json'))).toBe(true);
   expect(requests.some((url) => url.endsWith('/search-index.json'))).toBe(false);
 
@@ -77,18 +84,154 @@ test('mobile navigation and directories do not overflow', async ({ page }) => {
   const menu = page.locator('[data-menu-toggle]');
   await menu.click();
   await expect(menu).toHaveAttribute('aria-expanded', 'true');
+  const dialog = page.locator('[data-mobile-nav-dialog]');
+  await expect(dialog).toHaveAttribute('open', '');
   await expect(page.locator('#primary-nav')).toBeVisible();
+  expect(await page.evaluate(() => document.activeElement?.closest('[data-mobile-nav-dialog]') !== null)).toBe(true);
+  await page.keyboard.press('Escape');
+  await expect(dialog).not.toHaveAttribute('open', '');
+  await expect(menu).toBeFocused();
+});
+
+test('mobile navigation remains reachable without JavaScript', async ({ browser }) => {
+  const context = await browser.newContext({
+    javaScriptEnabled: false,
+    viewport: { width: 390, height: 844 },
+  });
+  const page = await context.newPage();
+  await page.goto(siteUrl('/'));
+
+  await expect(page.locator('.primary-nav--noscript')).toBeVisible();
+  await expect(page.locator('.primary-nav--noscript a[href="' + siteUrl('/search/') + '"]')).toBeVisible();
+  await expect(page.locator('[data-menu-toggle]')).toBeHidden();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+
+  await context.close();
+});
+
+test('mobile navigation falls back when native dialog support is unavailable', async ({ browser }) => {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  await page.addInitScript(() => Object.defineProperty(window, 'HTMLDialogElement', {
+    value: undefined,
+    configurable: true,
+  }));
+  await page.goto(siteUrl('/'));
+
+  const menu = page.locator('[data-menu-toggle]');
+  const dialog = page.locator('[data-mobile-nav-dialog]');
+  await menu.click();
+  await expect(dialog).toHaveAttribute('open', '');
+  await expect(dialog).toHaveClass(/is-fallback-open/);
+  await expect(dialog).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(dialog).not.toBeVisible();
+  await expect(menu).toBeFocused();
+
+  await context.close();
+});
+
+test('mobile query-only search keeps detailed filters collapsed and exposes a result', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(siteUrl('/search/?q=Transformer'));
+  const panel = page.locator('[data-search-filter-panel]');
+  await expect(panel).not.toHaveAttribute('open', '');
+  await expect(page.locator('[data-search-page-results] article').first()).toBeVisible();
+  await expect(page.locator('[data-search-page-live-status]')).toContainText(/검색 결과/);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+});
+
+test('directory filtering reports matches, can reset, and shows the active sort metric', async ({ page }) => {
+  await page.goto(siteUrl('/concepts/'));
+  const input = page.locator('[data-filter-input]');
+  await input.fill('Transformer');
+  await expect(page.locator('[data-filter-status]')).toContainText(/전체 \d+개 중 \d+개 일치/);
+  const reset = page.locator('[data-filter-reset]');
+  await expect(reset).toBeVisible();
+  await page.locator('[data-filter-sort]').selectOption('connections');
+  await expect(page.locator('[data-card]:visible [data-sort-metric]').first()).toContainText('연결');
+  await reset.click();
+  await expect(input).toHaveValue('');
+});
+
+test('desktop directories use two catalogue columns', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  for (const route of ['/sources/', '/concepts/', '/entities/', '/analyses/']) {
+    await page.goto(siteUrl(route));
+    const grid = page.locator('[data-filter-grid]');
+    expect(await grid.evaluate((element) => getComputedStyle(element).gridTemplateColumns.trim().split(/\s+/).length)).toBe(2);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+  }
+
+  await page.goto(siteUrl('/sources/?view=cards'));
+  const sourceCards = page.locator('[data-filter-grid]');
+  expect(await sourceCards.evaluate((element) => getComputedStyle(element).gridTemplateColumns.trim().split(/\s+/).length)).toBe(2);
+  expect(await sourceCards.locator('.source-card').first().evaluate((element) => getComputedStyle(element).gridTemplateColumns)).toContain('86px');
+
+  await page.goto(siteUrl('/concepts/?view=cards'));
+  const conceptCards = page.locator('[data-filter-grid]');
+  expect(await conceptCards.evaluate((element) => getComputedStyle(element).gridTemplateColumns.trim().split(/\s+/).length)).toBe(2);
+});
+
+test('long mobile article titles and evidence facts wrap without overflow', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(siteUrl('/sources/110-저자원-언어-llm의-성능-격차와-전이-평가-경계/'));
+  const title = page.locator('.article-title-block h1');
+  await expect(title).toBeVisible();
+  expect(await title.evaluate((element) => {
+    const style = getComputedStyle(element);
+    return Number.parseFloat(style.lineHeight) / Number.parseFloat(style.fontSize) >= 1.04;
+  })).toBe(true);
+  const fact = page.locator('.article-facts__evidence');
+  await expect(fact).toBeVisible();
+  expect(await fact.locator('dd').evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+});
+
+test('document titles replace subtitle dashes with colons across static and dynamic views', async ({ page }) => {
+  await page.goto(siteUrl('/analyses/같은-벡터-공간은-무엇을-보장하는가-공기-대조-생성의-경계/'));
+  const title = page.locator('.article-title-block h1');
+  await expect(title).toHaveText('같은 벡터 공간은 무엇을 보장하는가: 공기·대조·생성의 경계');
+  await expect(title.locator('br')).toHaveCount(0);
+  await expect(page.locator('.breadcrumbs .breadcrumb-current')).toContainText('같은 벡터 공간은 무엇을 보장하는가: 공기·대조·생성의 경계');
+  await expect(page.locator('.breadcrumbs .breadcrumb-current br')).toHaveCount(0);
+  await expect(page.locator('.article-body h2').first().locator('br')).toHaveCount(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+
+  await page.locator('[data-open-relationship-dialog]').first().click();
+  const relationshipTitle = page.locator('[data-relationship-explorer] .relationship-explorer__masthead h2');
+  await expect(relationshipTitle).toContainText('같은 벡터 공간은 무엇을 보장하는가: 공기·대조·생성의 경계');
+
+  await page.goto(siteUrl('/analyses/?view=cards'));
+  const directoryTitle = page.locator('[data-card-title="같은 벡터 공간은 무엇을 보장하는가 — 공기·대조·생성의 경계"] h2');
+  await expect(directoryTitle).toContainText('같은 벡터 공간은 무엇을 보장하는가: 공기·대조·생성의 경계');
+
+  await page.goto(siteUrl('/search/?q=같은%20벡터'));
+  const fullSearchTitle = page.locator('[data-search-page-results] .search-result-card__link').first();
+  await expect(fullSearchTitle).toContainText('같은 벡터 공간은 무엇을 보장하는가: 공기·대조·생성의 경계');
+
+  await page.goto(siteUrl('/'));
+  const quickSearch = page.locator('[data-site-search] input:visible').first();
+  await quickSearch.fill('같은 벡터');
+  const quickSearchTitle = page.locator('[data-site-search]:visible [role="option"] strong').first();
+  await expect(quickSearchTitle).toContainText('같은 벡터 공간은 무엇을 보장하는가: 공기·대조·생성의 경계');
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(siteUrl('/analyses/같은-벡터-공간은-무엇을-보장하는가-공기-대조-생성의-경계/'));
+  await expect(page.locator('.article-title-block h1')).toHaveText('같은 벡터 공간은 무엇을 보장하는가: 공기·대조·생성의 경계');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
 });
 
 test('learning guide has a canonical route, navigation entry, and progressive enhancement hook', async ({ page }) => {
   await page.goto(siteUrl('/'));
   const guideCta = page.locator('[data-learning-guide-cta]');
   await expect(guideCta).toBeVisible();
-  await expect(guideCta).toHaveAttribute('href', siteUrl('/guide/'));
+  await expect(guideCta).toHaveAttribute('href', `${siteUrl('/guide/')}#3분-출발-진단`);
 
   await guideCta.click();
+  await expect.poll(() => decodeURIComponent(new URL(page.url()).hash)).toBe('#3분-출발-진단');
   await expect(page.locator('[data-learning-guide-page]')).toBeVisible();
-  await expect(page.locator('#primary-nav a[href="' + siteUrl('/guide/') + '"]')).toHaveAttribute('aria-current', 'page');
+  await expect(page.locator('[data-desktop-nav] a[href="' + siteUrl('/guide/') + '"]')).toHaveAttribute('aria-current', 'page');
   await expect(page.locator('[data-learning-diagnostic]')).toBeVisible();
   await expect(page.locator('script[src$="/assets/learning-guide.js"]')).toHaveCount(1);
 });

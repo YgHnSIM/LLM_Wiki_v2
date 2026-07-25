@@ -27,7 +27,8 @@ import {
   markdownBeforeFinalH2,
   slugify,
 } from './lib/wiki-utils.mjs';
-import { DIRECTORY_PAGE_SIZE, cleanDisplayAliases, primaryEvidence } from '../site/assets/ui-state.js';
+import { DIRECTORY_PAGE_SIZE, cleanDisplayAliases, normalizeText, primaryEvidence } from '../site/assets/ui-state.js';
+import { isSubtitleDashPart, splitTitleAtSubtitleDash } from '../site/assets/title-format.js';
 
 const repositoryUrl = 'https://github.com/YgHnSIM/LLM_Wiki_v2';
 const basePath = normalizeBasePath(process.env.BASE_PATH ?? '');
@@ -467,10 +468,14 @@ function publicationMeta(document) {
   const source = evidence?.source;
   const published = String(source?.published ?? '').trim();
   const year = published.match(/\b(?:1[5-9]\d{2}|20\d{2})\b/)?.[0] ?? '';
+  const title = String(source?.title ?? '').trim();
+  const firstAuthor = asStringArray(source?.authors)[0] ?? '';
   return {
     year,
     kind: String(source?.kind ?? '').trim(),
-    label: [year, String(source?.kind ?? '').trim()].filter(Boolean).join(' · '),
+    title,
+    firstAuthor,
+    label: [firstAuthor, year].filter(Boolean).join(' · ') || title,
     evidenceId: evidence?.sourceId ?? '',
   };
 }
@@ -574,6 +579,14 @@ function renderWikiLinks(markdown, currentDocument) {
   });
 }
 
+function renderDisplayTitle(title) {
+  return splitTitleAtSubtitleDash(title).map((part) => (
+    isSubtitleDashPart(part)
+      ? ': '
+      : escapeHtml(part)
+  )).join('');
+}
+
 function renderMarkdown(document, { artifact = false } = {}) {
   const markdown = markdownWithoutTitle(document.body);
   const headings = headingPlan(markdown);
@@ -615,16 +628,19 @@ function renderMarkdown(document, { artifact = false } = {}) {
   return { html, headings };
 }
 
-function renderSearch(id, { large = false, label = '위키 검색' } = {}) {
+function renderSearch(id, { large = false, label = '위키 검색', mode = 'quick' } = {}) {
+  const isQuickSearch = mode === 'quick';
+  const scopeHint = isQuickSearch ? '제목·별칭·태그 빠른 검색' : '전체 문서 검색';
   return `
-    <form class="site-search${large ? ' site-search--large' : ''}" data-site-search data-index-url="${sitePath('/search-suggestions.json')}" data-search-page-url="${sitePath('/search/')}" role="search" aria-label="${escapeHtml(label)}" action="${sitePath('/search/')}" method="get">
+    <form class="site-search${large ? ' site-search--large' : ''}" data-site-search data-search-mode="${escapeHtml(mode)}" data-search-scope="${isQuickSearch ? 'title-alias-tag' : 'full'}" data-suggestion-limit="5" data-index-url="${sitePath('/search-suggestions.json')}" data-search-page-url="${sitePath('/search/')}" role="search" aria-label="${escapeHtml(`${label} · ${scopeHint}`)}" action="${sitePath('/search/')}" method="get">
       <label class="sr-only" for="${id}">${escapeHtml(label)}</label>
       <div class="search-control">
-        <input id="${id}" name="q" type="search" autocomplete="off" placeholder="위키 검색" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="${id}-results" aria-describedby="${id}-status">
+        <input id="${id}" name="q" type="search" autocomplete="off" placeholder="${escapeHtml(scopeHint)}" data-quick-search-input role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="${id}-results" aria-describedby="${id}-status ${id}-scope">
         <button type="submit">찾기</button>
       </div>
       <div class="search-results" id="${id}-results" data-search-results role="listbox" aria-label="검색 자동완성 결과" hidden></div>
       <p class="sr-only" id="${id}-status" data-search-status role="status" aria-live="polite"></p>
+      <p class="sr-only" id="${id}-scope" data-search-scope-hint>${escapeHtml(scopeHint)}. Enter를 누르면 본문까지 검색합니다.</p>
     </form>`;
 }
 
@@ -632,6 +648,43 @@ function navLink(url, label, current, { className = '' } = {}) {
   const active = current === url;
   const classAttribute = className ? ` class="${escapeHtml(className)}"` : '';
   return `<a${classAttribute} href="${sitePath(url)}"${active ? ' aria-current="page"' : ''}>${label}</a>`;
+}
+
+function renderPrimaryNavLinks(current) {
+  return [
+    navLink('/', '홈', current),
+    navLink('/guide/', '학습 가이드', current),
+    navLink('/sources/', '원문 노트', current),
+    navLink('/concepts/', '개념', current),
+    navLink('/entities/', '인물·기관', current),
+    navLink('/analyses/', '비교 읽기', current),
+    navLink('/search/', '전체 검색', current),
+  ].join('');
+}
+
+function renderMobileNavigation(current) {
+  return `<dialog class="mobile-nav-dialog" id="mobile-nav-dialog" data-mobile-nav-dialog data-mobile-nav-backdrop aria-labelledby="mobile-nav-title">
+    <div class="mobile-nav-dialog__panel" data-mobile-nav-panel>
+      <header class="mobile-nav-dialog__header">
+        <strong id="mobile-nav-title">메뉴</strong>
+        <button class="mobile-nav-dialog__close" type="button" data-menu-close>닫기</button>
+      </header>
+      <nav class="primary-nav primary-nav--mobile mobile-nav-dialog__nav" id="primary-nav" data-mobile-nav-links aria-label="주요 메뉴">
+        ${renderPrimaryNavLinks(current)}
+      </nav>
+      <div class="mobile-nav-search">${renderSearch('mobile-nav-search', { label: '모바일 빠른 검색' })}</div>
+    </div>
+  </dialog>`;
+}
+
+function renderNoScriptMobileNavigation(current) {
+  return `<noscript>
+    <style>@media (max-width: 820px) { .nav-toggle { display: none !important; } }</style>
+    <nav class="primary-nav primary-nav--noscript" aria-label="주요 메뉴">
+      ${renderPrimaryNavLinks(current)}
+      <div class="mobile-nav-search">${renderSearch('noscript-mobile-search', { label: '모바일 빠른 검색' })}</div>
+    </nav>
+  </noscript>`;
 }
 
 function layout({ title, description, current = '', body, pageClass = '', scripts = [] }) {
@@ -661,17 +714,10 @@ function layout({ title, description, current = '', body, pageClass = '', script
     <div class="header-rule" aria-hidden="true"></div>
     <div class="header-inner">
       <a class="wordmark" href="${sitePath('/')}"><span>LLM</span><span>Wiki</span></a>
-      <button class="nav-toggle" type="button" data-menu-toggle aria-controls="primary-nav" aria-expanded="false">메뉴</button>
-      <nav class="primary-nav" id="primary-nav" aria-label="주요 메뉴">
-        ${navLink('/', '홈', current)}
-        ${navLink('/guide/', '학습 가이드', current)}
-        ${navLink('/sources/', '원문 노트', current)}
-        ${navLink('/concepts/', '개념', current)}
-        ${navLink('/entities/', '인물·기관', current)}
-        ${navLink('/analyses/', '비교 읽기', current)}
-        ${navLink('/search/', '전체 검색', current)}
-        <div class="mobile-nav-search">${renderSearch('mobile-search', { label: '모바일 사이트 검색' })}</div>
-      </nav>
+       <button class="nav-toggle" type="button" data-menu-toggle aria-controls="mobile-nav-dialog" aria-expanded="false" aria-haspopup="dialog">메뉴</button>
+       <nav class="primary-nav primary-nav--desktop" data-desktop-nav aria-label="주요 메뉴">
+         ${renderPrimaryNavLinks(current)}
+       </nav>
       <div class="header-search">${renderSearch('header-search', { label: '헤더 사이트 검색' })}</div>
       <div class="body-font-picker">
         <label for="body-font-select">본문 글꼴</label>
@@ -681,8 +727,10 @@ function layout({ title, description, current = '', body, pageClass = '', script
           <option value="d2">D2Coding</option>
         </select>
       </div>
-    </div>
+   </div>
   </header>
+  ${renderMobileNavigation(current)}
+  ${renderNoScriptMobileNavigation(current)}
   ${body}
   <footer class="site-footer">
     <div class="footer-identity">
@@ -715,7 +763,10 @@ function sourceDisplayNumber(document) {
 
 function cardDataAttributes(document) {
   const publication = publicationMeta(document);
-  return `data-card data-category="${escapeHtml(document.category)}" data-verification="${escapeHtml(document.verification)}" data-title="${escapeHtml(document.title)}" data-updated="${escapeHtml(document.updated)}" data-connections="${meaningfulConnectionCount(document)}" data-publication-year="${escapeHtml(publication.year)}" data-filter-value="${escapeHtml([...document.aliases, ...document.tags].join(' '))}"`;
+  const tags = publicTags(document);
+  const aliases = cleanDisplayAliases(document.title, document.aliases);
+  const searchKey = [document.title, ...aliases, ...tags, ...tags.map(tagLabel)].join(' ').replace(/\s+/g, ' ').trim();
+  return `data-card data-category="${escapeHtml(document.category)}" data-verification="${escapeHtml(document.verification)}" data-title="${escapeHtml(document.title)}" data-sort-title="${escapeHtml(document.title)}" data-card-title="${escapeHtml(document.title)}" data-card-aliases="${escapeHtml(aliases.join(' '))}" data-card-tags="${escapeHtml(tags.map(tagLabel).join(' '))}" data-search-key="${escapeHtml(searchKey)}" data-updated="${escapeHtml(document.updated)}" data-evidence="${document.evidence.length}" data-connections="${meaningfulConnectionCount(document)}" data-publication-year="${escapeHtml(publication.year)}" data-source-number="${escapeHtml(document.sourceNumber)}" data-filter-value="${escapeHtml(searchKey)}"`;
 }
 
 function sourceCard(document, index, { headingLevel = 3, hidden = false } = {}) {
@@ -725,8 +776,8 @@ function sourceCard(document, index, { headingLevel = 3, hidden = false } = {}) 
   return `<article class="source-card source-card--${(index % 4) + 1}" ${cardDataAttributes(document)}${hidden ? ' hidden' : ''}>
     <span class="source-number${numberClass}" aria-hidden="true">${escapeHtml(number)}</span>
     <div class="source-card-body">
-      <div class="card-meta">${verificationBadge(document)}${publication.label ? `<span class="card-publication">${escapeHtml(publication.label)}</span>` : ''}<span>연결 ${meaningfulConnectionCount(document)}</span></div>
-      <h${headingLevel}><a href="${sitePath(document.url)}">${escapeHtml(document.title)}</a></h${headingLevel}>
+      <div class="card-meta">${verificationBadge(document)}${publication.label ? `<span class="card-publication">${escapeHtml(publication.label)}</span>` : ''}<span>연결 ${meaningfulConnectionCount(document)}</span><span class="card-sort-metric" data-sort-metric hidden></span></div>
+      <h${headingLevel}><a href="${sitePath(document.url)}">${renderDisplayTitle(document.title)}</a></h${headingLevel}>
       <p>${escapeHtml(document.excerpt)}</p>
       <p class="source-card-compact-meta">${publication.label ? `${escapeHtml(publication.label)} · ` : ''}연결 ${meaningfulConnectionCount(document)}</p>
       ${renderTags(document)}
@@ -736,8 +787,8 @@ function sourceCard(document, index, { headingLevel = 3, hidden = false } = {}) 
 
 function noteCard(document, { headingLevel = 3, hidden = false } = {}) {
   return `<article class="note-card" ${cardDataAttributes(document)}${hidden ? ' hidden' : ''}>
-    <div class="card-meta"><span>${escapeHtml(categoryMeta[document.category].singular)}</span>${verificationBadge(document)}<span>${document.minutes}분 읽기</span></div>
-    <h${headingLevel}><a href="${sitePath(document.url)}">${escapeHtml(document.title)}</a></h${headingLevel}>
+    <div class="card-meta"><span>${escapeHtml(categoryMeta[document.category].singular)}</span>${verificationBadge(document)}<span>${document.minutes}분 읽기</span><span class="card-sort-metric" data-sort-metric hidden></span></div>
+    <h${headingLevel}><a href="${sitePath(document.url)}">${renderDisplayTitle(document.title)}</a></h${headingLevel}>
     <p>${escapeHtml(document.excerpt)}</p>
     <div class="note-card-footer">
       ${renderTags(document)}
@@ -750,6 +801,11 @@ function renderHome() {
   const overview = documents.find((document) => document.filename === 'overview');
   const learningGuide = documents.find((document) => document.id === 'meta.learning-guide');
   const intro = truncate(firstParagraph(overview?.body ?? ''), 130);
+  const sourceCollectionLabel = [
+    `원문 노트 ${sourceDocuments.length}개`,
+    ...(referenceDocuments.length ? [`참고 자료 ${referenceDocuments.length}개`] : []),
+  ].join(' · ');
+  const homeCollectionLabel = [sourceCollectionLabel, `비교 읽기 ${grouped.analyses.length}개`].join(' · ');
   const sourcePreview = sourceDocuments.slice(0, 3);
   const heroSourcePreview = sourceDocuments.slice(-6).reverse();
   const analysisPreview = grouped.analyses.slice(0, 3);
@@ -760,16 +816,16 @@ function renderHome() {
   const body = `<main id="main-content">
     <section class="home-hero">
       <div class="hero-copy">
-        <p class="eyebrow">원문 노트 ${sourceDocuments.length}개·참고 자료 ${referenceDocuments.length}개·비교 읽기 ${grouped.analyses.length}개</p>
+        <p class="eyebrow">${homeCollectionLabel}</p>
         <h1>언어 모델의<br><span>역사를 함께 읽다</span></h1>
         <p class="hero-intro">${escapeHtml(intro)}</p>
-        ${learningGuide ? `<a class="hero-guide-cta" data-learning-guide-cta href="${sitePath(learningGuide.url)}"><span>새 학습 경로</span><strong>3분 진단으로 시작하기</strong><i aria-hidden="true">→</i></a>` : ''}
+        ${learningGuide ? `<a class="hero-guide-cta" data-learning-guide-cta href="${sitePath(`${learningGuide.url}#3분-출발-진단`)}"><span>새 학습 경로</span><strong>3분 진단으로 시작하기</strong><i aria-hidden="true">→</i></a>` : ''}
         ${renderSearch('hero-search', { large: true, label: '홈 주요 검색' })}
       </div>
-      <nav class="hero-collage hero-source-strip" aria-label="최근 원문 노트 빠른 이동">
-        <p class="collage-label">최근 원문 노트</p>
-        <ul class="hero-source-list">${heroSourcePreview.map((document) => `<li class="hero-source-item"><a href="${sitePath(document.url)}"><span>${escapeHtml(sourceDisplayNumber(document))}</span><strong>${escapeHtml(document.title)}</strong></a></li>`).join('')}</ul>
-        <a class="hero-source-all" href="${sitePath('/sources/')}"><strong>원문 노트 ${sourceDocuments.length}개·참고 자료 ${referenceDocuments.length}개 보기</strong><span aria-hidden="true">→</span></a>
+      <nav class="hero-collage hero-source-strip" aria-label="최신 번호 원문 노트 빠른 이동">
+        <p class="collage-label">최신 번호 원문 노트</p>
+        <ul class="hero-source-list">${heroSourcePreview.map((document) => `<li class="hero-source-item"><a href="${sitePath(document.url)}"><span>${escapeHtml(sourceDisplayNumber(document))}</span><strong>${renderDisplayTitle(document.title)}</strong></a></li>`).join('')}</ul>
+        <a class="hero-source-all" href="${sitePath('/sources/')}"><strong>${sourceCollectionLabel} 보기</strong><span aria-hidden="true">→</span></a>
       </nav>
     </section>
 
@@ -783,7 +839,7 @@ function renderHome() {
         <p>통계적 언어 처리에서 대화형 AI까지, 핵심 자료를 번호순으로 읽습니다.</p>
       </div>
       <div class="source-timeline">${sourcePreview.map((document, index) => sourceCard(document, index)).join('')}</div>
-      <a class="text-link" href="${sitePath('/sources/')}">원문 노트 ${sourceDocuments.length}개·참고 자료 ${referenceDocuments.length}개 전체 보기 <span aria-hidden="true">→</span></a>
+      <a class="text-link" href="${sitePath('/sources/')}">${sourceCollectionLabel} 전체 보기 <span aria-hidden="true">→</span></a>
     </section>
 
     <section class="home-section analysis-section">
@@ -800,7 +856,7 @@ function renderHome() {
         <div><p class="eyebrow">역링크 기준</p><h2>많이 연결된 개념</h2></div>
         <p>현재 문서의 역링크 수를 기준으로, 다른 글에서 자주 참조되는 개념을 모았습니다.</p>
       </div>
-      <ol class="concept-index">${topConcepts.map((document, index) => `<li><span>${String(index + 1).padStart(2, '0')}</span><a href="${sitePath(document.url)}">${escapeHtml(document.title)}</a><small>역링크 ${document.meaningfulBacklinks.length}</small></li>`).join('')}</ol>
+      <ol class="concept-index">${topConcepts.map((document, index) => `<li><a class="concept-index-link" href="${sitePath(document.url)}"><span class="concept-index__rank">${String(index + 1).padStart(2, '0')}</span><strong class="concept-index__title">${renderDisplayTitle(document.title)}</strong><small class="concept-index__metric">역링크 ${document.meaningfulBacklinks.length}</small></a></li>`).join('')}</ol>
       <a class="text-link" href="${sitePath('/concepts/')}">개념 전체 보기 <span aria-hidden="true">→</span></a>
     </section>
   </main>`;
@@ -817,15 +873,20 @@ function renderHome() {
 function renderCategoryPage(key) {
   const meta = categoryMeta[key];
   const list = grouped[key];
+  const sourceCollectionLabel = [
+    `원문 노트 ${sourceDocuments.length}개`,
+    ...(referenceDocuments.length ? [`참고 자료 ${referenceDocuments.length}개`] : []),
+  ].join(' · ');
+  const defaultSortLabel = key === 'sources' ? '공식 번호순' : '가나다·ABC순';
   const cards = key === 'sources'
     ? list.map((document, index) => sourceCard(document, index, { headingLevel: 2, hidden: index >= DIRECTORY_PAGE_SIZE })).join('')
     : list.map((document, index) => noteCard(document, { headingLevel: 2, hidden: index >= DIRECTORY_PAGE_SIZE })).join('');
   const initialRemaining = Math.max(0, list.length - DIRECTORY_PAGE_SIZE);
   const body = `<main id="main-content" class="listing-main">
     <header class="listing-hero">
-      <p class="eyebrow">${key === 'sources' ? `원문 노트 ${sourceDocuments.length}개 · 참고 자료 ${referenceDocuments.length}개` : `${list.length}개 문서`}</p>
+      <p class="eyebrow">${key === 'sources' ? sourceCollectionLabel : `${list.length}개 문서`}</p>
       <div><h1>${escapeHtml(meta.label)}</h1><span class="listing-count">${list.length}</span></div>
-      ${key === 'sources' && sourceDocuments.length ? `<a class="translation-directory-link" href="#directory-sources"><span>전체 목록</span><strong>원문 ${sourceDocuments.length}개 모아보기</strong><span aria-hidden="true">→</span></a>` : ''}
+      ${key === 'sources' && sourceDocuments.length ? `<a class="translation-directory-link translation-directory-link--compact" href="#directory-sources"><span>전체 목록으로 이동</span><strong>원문 노트 ${sourceDocuments.length}개</strong><span aria-hidden="true">→</span></a>` : ''}
       <p>${escapeHtml(meta.description)}</p>
     </header>
     <section class="directory-tools" aria-label="목록 필터">
@@ -839,17 +900,18 @@ function renderCategoryPage(key) {
           <option value="">모든 검증 상태</option>
           <option value="verified">검증됨</option>
           <option value="partial">부분 검증</option>
-          <option value="disputed">이견 중</option>
+          <option value="disputed">논쟁 중</option>
           <option value="unverified">미검증</option>
         </select>
       </div>
       <div class="directory-select-control">
         <label for="sort-${key}">정렬</label>
         <select id="sort-${key}" data-filter-sort>
-          <option value="default">${key === 'sources' ? '번호순' : '기본순'}</option>
+          <option value="default">${defaultSortLabel}</option>
           ${key === 'sources' ? '<option value="chronological">연대순</option>' : ''}
-          <option value="title">제목순</option>
+          ${key === 'sources' ? '<option value="title">제목순</option>' : ''}
           <option value="updated">최근 갱신순</option>
+          <option value="evidence">근거 많은순</option>
           <option value="connections">연결 많은순</option>
         </select>
       </div>
@@ -858,8 +920,10 @@ function renderCategoryPage(key) {
         <button type="button" data-directory-view="compact" aria-pressed="true">간략</button>
         <button type="button" data-directory-view="cards" aria-pressed="false">카드</button>
       </div>
+      <button class="directory-filter-reset" type="button" data-filter-reset>조건 초기화</button>
     </section>
-    <section id="directory-${key}" class="${key === 'sources' ? 'source-timeline directory-source-list' : 'note-grid directory-grid'}" data-filter-grid data-directory-key="${key}" data-view="compact">
+    <p class="directory-filter-status" data-filter-status role="status" aria-live="polite" aria-atomic="true"></p>
+    <section id="directory-${key}" class="${key === 'sources' ? 'source-timeline directory-source-list' : 'note-grid directory-grid'}" data-filter-grid data-directory-key="${key}" data-directory-default-sort="${key === 'sources' ? 'official-number' : 'title'}" data-directory-total="${list.length}" data-view="compact">
       ${cards}
       <p class="empty-filter" data-filter-empty hidden>일치하는 문서가 없습니다.</p>
     </section>
@@ -879,7 +943,7 @@ function renderTranslationsPage() {
   const cards = translationReaders.map((reader) => `<li class="translation-card">
     <a href="${sitePath(reader.url)}">
       <span class="translation-number">${escapeHtml(sourceDisplayNumber(reader.sourceDocument))}</span>
-      <span class="translation-card-copy"><small>${escapeHtml(reader.label)}</small><strong>${escapeHtml(reader.sourceDocument.title)}</strong></span>
+      <span class="translation-card-copy"><small>${escapeHtml(reader.label)}</small><strong>${renderDisplayTitle(reader.sourceDocument.title)}</strong></span>
       <span class="translation-reading-time">${reader.minutes}분 읽기 <span aria-hidden="true">→</span></span>
     </a>
   </li>`).join('');
@@ -903,14 +967,15 @@ function renderTranslationsPage() {
 }
 
 function renderSearchPage() {
-  const searchableMetaCount = grouped.meta.filter((document) => document.filename !== 'index').length;
-  const searchableCount = publishedDocuments.length + searchableMetaCount;
-  const searchableTags = [...new Set(publishedDocuments.flatMap((document) => publicTags(document)))]
+  const searchableDocuments = documents.filter((document) => document.filename !== 'index');
+  const searchableMetaCount = searchableDocuments.filter((document) => document.category === 'meta').length;
+  const searchableCount = searchableDocuments.length;
+  const searchableTags = [...new Set(searchableDocuments.flatMap((document) => publicTags(document)))]
     .sort((a, b) => collator.compare(tagLabel(a), tagLabel(b)));
   const body = `<main id="main-content" class="search-main">
     <header class="listing-hero search-hero">
-      <p class="eyebrow">공개 콘텐츠 ${publishedDocuments.length}개 · 안내 ${searchableMetaCount}개</p>
-      <div><h1>전체 검색</h1><span class="listing-count">${searchableCount}</span></div>
+      <p class="eyebrow">검색 가능 문서 ${searchableCount}개 · 공개 콘텐츠 ${publishedDocuments.length}개 · 안내 ${searchableMetaCount}개</p>
+      <div><h1>전체 검색</h1><span class="listing-count" aria-label="검색 가능 문서 ${searchableCount}개">${searchableCount}</span></div>
       <p>제목·별칭·본문을 검색하고 유형, 검증 상태, 태그로 결과를 좁힙니다.</p>
     </header>
     <form class="search-page-tools" data-search-page data-index-url="${sitePath('/search-index.json')}" role="search" aria-label="전체 문서 검색" action="${sitePath('/search/')}" method="get">
@@ -921,20 +986,20 @@ function renderSearchPage() {
           <button type="submit">검색</button>
         </div>
       </div>
-      <details class="search-page-filters-panel" data-search-filter-panel open>
+      <details class="search-page-filters-panel" data-search-filter-panel data-search-filter-default="desktop-open" data-search-mobile-default="collapsed" open>
         <summary>상세 필터 <span data-search-filter-count></span></summary>
         <div class="search-page-filters">
           <label for="search-category">문서 유형</label>
           <select id="search-category" name="category" data-search-filter-category>
             <option value="">모든 문서 유형</option>
-            ${['sources', 'concepts', 'entities', 'analyses'].map((key) => `<option value="${key}">${escapeHtml(categoryMeta[key].label)}</option>`).join('')}
+            ${['sources', 'concepts', 'entities', 'analyses', 'meta'].map((key) => `<option value="${key}">${escapeHtml(categoryMeta[key].label)}</option>`).join('')}
           </select>
           <label for="search-verification">검증 상태</label>
           <select id="search-verification" name="verification" data-search-filter-verification>
             <option value="">모든 검증 상태</option>
             <option value="verified">검증됨</option>
             <option value="partial">부분 검증</option>
-            <option value="disputed">이견 중</option>
+            <option value="disputed">논쟁 중</option>
             <option value="unverified">미검증</option>
           </select>
           <label for="search-tag">태그</label>
@@ -949,10 +1014,12 @@ function renderSearchPage() {
             <option value="updated">최근 갱신순</option>
             <option value="evidence">근거 많은순</option>
           </select>
+          <button class="search-filter-button" type="button" data-search-clear>검색 조건 초기화</button>
         </div>
       </details>
     </form>
-    <p class="search-page-status" data-search-page-status role="status" aria-live="polite">검색어나 필터를 입력하면 결과가 표시됩니다.</p>
+    <p class="search-page-status" data-search-page-status data-search-page-visual-status>검색어나 필터를 입력하면 결과가 표시됩니다.</p>
+    <p class="sr-only" data-search-page-live-status role="status" aria-live="polite" aria-atomic="true"></p>
     <section class="search-page-results" data-search-page-results aria-label="검색 결과"></section>
     <button class="search-load-more" type="button" data-search-load-more hidden>더 보기</button>
   </main>`;
@@ -981,7 +1048,7 @@ function breadcrumbFor(document) {
   if (document.category !== 'meta') {
     items.push(`<li><a href="${sitePath(`/${document.category}/`)}">${escapeHtml(categoryMeta[document.category].label)}</a></li>`);
   }
-  items.push(`<li class="breadcrumb-current"><span aria-current="page" title="${escapeHtml(document.title)}">${escapeHtml(document.title)}</span></li>`);
+  items.push(`<li class="breadcrumb-current"><span aria-current="page" title="${escapeHtml(document.title)}">${renderDisplayTitle(document.title)}</span></li>`);
   return `<ol>${items.join('')}</ol>`;
 }
 
@@ -990,9 +1057,20 @@ function breadcrumbForArtifact(reader) {
   return `<ol>
     <li><a href="${sitePath('/')}">홈</a></li>
     <li><a href="${sitePath('/sources/')}">${escapeHtml(categoryMeta.sources.label)}</a></li>
-    <li><a href="${sitePath(document.url)}">${escapeHtml(document.title)}</a></li>
+    <li><a href="${sitePath(document.url)}">${renderDisplayTitle(document.title)}</a></li>
     <li class="breadcrumb-current"><span aria-current="page" title="${escapeHtml(reader.label)}">${escapeHtml(reader.label)}</span></li>
   </ol>`;
+}
+
+function sourceSwitcherLabel(destination) {
+  if (destination.registryRole === 'editorial-commentary') return '재구성 해설';
+  return {
+    note: '검증 노트',
+    translation: '한국어 번역',
+    commentary: '번역 해설',
+    'source-essay': '원문',
+    reconstruction: '편집부 재구성',
+  }[destination.routeRole] ?? destination.switcherLabel ?? destination.label;
 }
 
 function renderArtifactSwitcher(document, activeRole = 'note') {
@@ -1001,13 +1079,20 @@ function renderArtifactSwitcher(document, activeRole = 'note') {
     { routeRole: 'note', label: '원문 노트', url: document.url },
     ...document.artifactReaders,
   ];
-  return `<nav class="reading-switcher" aria-label="이 소스의 자료 보기">
+  return `<nav class="reading-switcher reading-switcher--compact" data-reading-switcher aria-label="이 소스의 자료 보기">
     <span class="reading-switcher-label">자료 보기</span>
     <div class="reading-switcher-links">${destinations.map((destination, index) => {
       const active = destination.routeRole === activeRole;
-      return `<a class="reading-switcher-link reading-switcher-link--${index + 1}" href="${sitePath(destination.url)}"${active ? ' aria-current="page"' : ''}><span>${String(index + 1).padStart(2, '0')}</span><strong>${escapeHtml(destination.switcherLabel ?? destination.label)}</strong></a>`;
+      return `<a class="reading-switcher-link reading-switcher-link--${index + 1}" data-reader-role="${escapeHtml(destination.routeRole)}" href="${sitePath(destination.url)}"${active ? ' aria-current="page"' : ''}><span>${String(index + 1).padStart(2, '0')}</span><strong>${escapeHtml(sourceSwitcherLabel(destination))}</strong></a>`;
     }).join('')}</div>
   </nav>`;
+}
+
+function renderRepresentativeEvidenceFact(publication) {
+  const title = publication.title || publication.label;
+  if (!title) return '';
+  const details = [publication.firstAuthor, publication.year].filter(Boolean).join(' · ');
+  return `<div class="article-facts__evidence"><dt>대표 근거</dt><dd title="${escapeHtml(publication.evidenceId)}"><span class="article-facts__evidence-title">${escapeHtml(title)}</span>${details ? `<span class="article-facts__evidence-meta">${escapeHtml(details)}</span>` : ''}</dd></div>`;
 }
 
 function renderToc(headings) {
@@ -1064,7 +1149,7 @@ function renderRelatedReading(document) {
   const items = related.map((item) => `<li>
     <a href="${sitePath(item.url)}">
       <span class="related-category">${escapeHtml(categoryMeta[item.category].singular)}</span>
-      <strong>${escapeHtml(item.title)}</strong>
+      <strong>${renderDisplayTitle(item.title)}</strong>
       <span class="related-excerpt">${escapeHtml(truncate(item.excerpt, 100))}</span>
     </a>
     ${verificationBadge(item)}
@@ -1084,7 +1169,7 @@ function renderBacklinks(document) {
     .map((key) => [key, visible.filter((item) => item.category === key)])
     .filter(([, items]) => items.length);
   const content = groups.length
-    ? groups.map(([key, items]) => `<div class="backlink-group backlink-group--${key}"><h3>${escapeHtml(categoryMeta[key].label)} <span>${items.length}</span></h3><ul>${items.map((item) => `<li><a href="${sitePath(item.url)}">${escapeHtml(item.title)}</a>${verificationBadge(item)}</li>`).join('')}</ul></div>`).join('')
+    ? groups.map(([key, items]) => `<div class="backlink-group backlink-group--${key}"><h3>${escapeHtml(categoryMeta[key].label)} <span>${items.length}</span></h3><ul>${items.map((item) => `<li><a href="${sitePath(item.url)}">${renderDisplayTitle(item.title)}</a>${verificationBadge(item)}</li>`).join('')}</ul></div>`).join('')
     : '<p class="no-backlinks">아직 이 문서를 가리키는 공개 글이 없습니다.</p>';
   const remaining = document.meaningfulBacklinks.length - visible.length;
   return `<section class="backlinks-section" aria-labelledby="backlinks-heading">
@@ -1122,7 +1207,7 @@ function renderRelationshipPreview(document) {
       <span class="relationship-preview__index" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>
       <span class="relationship-preview__copy">
         <span>${escapeHtml(categoryMeta[item.category].singular)} · ${escapeHtml(relationshipBasis(document, item))} · ${escapeHtml(relationshipDirection(document, item))}</span>
-        <strong>${escapeHtml(item.title)}</strong>
+        <strong>${renderDisplayTitle(item.title)}</strong>
       </span>
       ${verificationBadge(item)}
     </a>
@@ -1162,16 +1247,16 @@ function renderArticle(document) {
   const titleClass = articleTitleClass(document.title);
 
   const reviewNote = document.verification !== 'verified'
-    ? `<div class="review-banner">${verificationBadge(document)}<span>사실, 해석 또는 논쟁 상태는 문서의 근거와 설명을 함께 확인하세요.</span></div>`
+    ? `<div class="review-banner article-utility-review">${verificationBadge(document)}<span>사실, 해석 또는 논쟁 상태는 문서의 근거와 설명을 함께 확인하세요.</span></div>`
     : '';
 
   const body = `<main id="main-content" class="article-main${isLearningGuide ? ' learning-guide-main' : ''}"${isLearningGuide ? ' data-learning-guide-page' : ''}>
     <nav class="breadcrumbs" aria-label="현재 위치">${breadcrumbFor(document)}</nav>
     <div class="reading-progress" data-reading-progress aria-hidden="true"><span></span></div>
-    <header class="article-hero">
+    <header class="article-hero" data-article-hero>
       <div class="article-title-block ${titleClass}">
         <div class="article-kicker"><span>${escapeHtml(document.pageType === 'reference' ? '참고 자료' : categoryMeta[document.category].singular)}</span>${document.sourceNumber ? `<span>No. ${document.sourceNumber}</span>` : ''}</div>
-        <h1 id="article-title">${escapeHtml(document.title)}</h1>
+        <h1 id="article-title">${renderDisplayTitle(document.title)}</h1>
         <p class="article-summary">${escapeHtml(truncate(document.excerpt, 180))}</p>
         ${renderTags(document)}
         ${aliases.length || document.lifecycle !== 'active' || document.updated ? `<details class="article-details">
@@ -1184,7 +1269,7 @@ function renderArticle(document) {
         </details>` : ''}
       </div>
       <dl class="article-facts">
-        ${publication.label ? `<div><dt>대표 근거</dt><dd title="${escapeHtml(publication.evidenceId)}">${escapeHtml(publication.label)}</dd></div>` : ''}
+        ${renderRepresentativeEvidenceFact(publication)}
         <div><dt>근거 상태</dt><dd>${verificationBadge(document)}</dd></div>
         <div><dt>읽기</dt><dd>약 ${document.minutes}분</dd></div>
         <div><dt>연결</dt><dd><a class="article-connection-link" href="#relationship-preview" data-open-relationship-dialog aria-controls="relationship-explorer-dialog">직접 연결 ${meaningfulConnectionCount(document)}개</a></dd></div>
@@ -1211,10 +1296,10 @@ function renderArticle(document) {
     ${renderEvidenceLedger(document)}
     ${renderRelationshipPreview(document)}
     <nav class="article-pagination" aria-label="이전 및 다음 문서">
-      ${previous ? `<a class="previous" href="${sitePath(previous.url)}"><span>이전</span><strong>${escapeHtml(previous.title)}</strong></a>` : '<span></span>'}
-      ${next ? `<a class="next" href="${sitePath(next.url)}"><span>다음</span><strong>${escapeHtml(next.title)}</strong></a>` : '<span></span>'}
+      ${previous ? `<a class="previous" href="${sitePath(previous.url)}"><span>이전</span><strong>${renderDisplayTitle(previous.title)}</strong></a>` : '<span></span>'}
+      ${next ? `<a class="next" href="${sitePath(next.url)}"><span>다음</span><strong>${renderDisplayTitle(next.title)}</strong></a>` : '<span></span>'}
     </nav>
-    <button class="back-to-top" type="button" data-back-to-top hidden>맨 위로</button>
+    <button class="back-to-top back-to-top--in-flow" type="button" data-back-to-top data-back-to-top-flow hidden>맨 위로</button>
   </main>`;
 
   return layout({
@@ -1240,7 +1325,7 @@ function renderArtifactReader(reader) {
     <header class="article-hero artifact-hero">
       <div class="article-title-block ${articleTitleClass(document.title)}">
         <div class="article-kicker"><span>${escapeHtml(reader.label)}</span><span>${escapeHtml(sourceLabel)}</span></div>
-        <h1 id="article-title">${escapeHtml(document.title)}</h1>
+        <h1 id="article-title">${renderDisplayTitle(document.title)}</h1>
         <p class="article-summary">${escapeHtml(reader.description)}</p>
       </div>
       <dl class="article-facts">
@@ -1273,7 +1358,7 @@ function renderArtifactReader(reader) {
       <div><p class="eyebrow">검증된 설명</p><h2 id="artifact-return-heading">정정과 근거는 원문 노트에서</h2><p>원문 번역본은 원문의 흐름을 읽기 위한 자료입니다. 역사적 사실, 과장된 계보와 후대 평가는 근거 장부가 있는 공개 노트에서 확인할 수 있습니다.</p></div>
       <a class="button-link" href="${sitePath(document.url)}">원문 노트 읽기 <span aria-hidden="true">→</span></a>
     </section>
-    <button class="back-to-top" type="button" data-back-to-top hidden>맨 위로</button>
+    <button class="back-to-top back-to-top--in-flow" type="button" data-back-to-top data-back-to-top-flow hidden>맨 위로</button>
   </main>`;
 
   return layout({
@@ -1359,7 +1444,10 @@ const searchIndex = documents
     };
   });
 
-const searchSuggestions = searchIndex.map(({ text: _text, ...entry }) => entry);
+const searchSuggestions = searchIndex.map(({ text: _text, excerpt: _excerpt, ...entry }) => ({
+  ...entry,
+  suggestionText: normalizeText([entry.title, ...entry.aliases, ...entry.tagLabels].join(' ')),
+}));
 
 const buildReport = {
   generatedAt: new Date().toISOString(),

@@ -1,3 +1,5 @@
+import { appendTitleWithSubtitleColon } from './title-format.js';
+
 const collator = new Intl.Collator('ko', { numeric: true, sensitivity: 'base' });
 
 const typeLabels = {
@@ -32,6 +34,12 @@ function element(name, className = '', text = '') {
   const item = document.createElement(name);
   if (className) item.className = className;
   if (text) item.textContent = text;
+  return item;
+}
+
+function titleElement(name, className, title) {
+  const item = element(name, className);
+  appendTitleWithSubtitleColon(item, title);
   return item;
 }
 
@@ -342,7 +350,7 @@ class RelationshipExplorer {
       : String(this.index.data.stats?.nodes ?? this.index.data.nodes.length).padStart(2, '0');
     const copy = element('div', 'relationship-explorer__masthead-copy');
     copy.append(element('p', '', '연결 탐색'));
-    const heading = element('h2', '', focus?.title ?? '지식 연결');
+    const heading = titleElement('h2', '', focus?.title ?? '지식 연결');
     copy.append(heading);
     const summary = focus
       ? `${typeLabels[focus.type] ?? focus.type} · ${verificationLabels[focus.verification] ?? focus.verification}`
@@ -363,7 +371,7 @@ class RelationshipExplorer {
     valid.forEach((id, index) => {
       const node = this.index.nodeById.get(id);
       const item = element('li');
-      const button = element('button', '', node.title);
+      const button = titleElement('button', '', node.title);
       button.type = 'button';
       button.dataset.relationshipHistoryIndex = String(offset + index);
       if (id === this.focusId) {
@@ -391,7 +399,7 @@ class RelationshipExplorer {
       verificationLabels[node.verification] ?? node.verification,
       community?.label,
     ].filter(Boolean).join(' · '));
-    const title = element('h3', '', node.title);
+    const title = titleElement('h3', '', node.title);
     const excerpt = element('p', 'relationship-explorer__excerpt', node.excerpt);
     const metrics = element('dl', 'relationship-metrics');
     for (const [term, value] of [
@@ -464,7 +472,7 @@ class RelationshipExplorer {
       number.setAttribute('aria-hidden', 'true');
       const copy = element('div', 'relationship-list__copy');
       const meta = element('p', '', `${typeLabels[record.node.type] ?? record.node.type} · ${verificationLabels[record.node.verification] ?? record.node.verification}`);
-      const select = element('button', 'relationship-list__select', record.node.title);
+      const select = titleElement('button', 'relationship-list__select', record.node.title);
       select.type = 'button';
       select.dataset.relationshipFocus = record.node.id;
       const relation = element('p', 'relationship-list__relation', relationshipRecordLabel(record));
@@ -503,7 +511,7 @@ class RelationshipExplorer {
       button.dataset.relationshipCommunity = String(community.id);
       button.append(
         element('span', 'relationship-community-list__index', String(index + 1).padStart(2, '0')),
-        element('strong', '', community.label),
+        titleElement('strong', '', community.label),
         element('span', '', `문서 ${community.size}개`),
       );
       item.append(button);
@@ -547,7 +555,7 @@ class RelationshipExplorer {
     const home = element('button', '', '모든 연결 집단');
     home.type = 'button';
     home.dataset.relationshipHome = '';
-    header.append(home, element('p', '', `문서 ${community.size}개 · 집단 밖 연결 ${community.crossEdges}개`), element('h2', '', community.label));
+    header.append(home, element('p', '', `문서 ${community.size}개 · 집단 밖 연결 ${community.crossEdges}개`), titleElement('h2', '', community.label));
     fragment.append(header, this.renderRecordList(members.slice(0, this.communityLimit).map((node) => ({
       node,
       directions: new Set(),
