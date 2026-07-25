@@ -5363,6 +5363,24 @@ raw 등록 해시:
 - 브라우저의 완료 표시와 진단 점수는 자기 보고용 학습 보조이며, 지식·성능·자격을 서버에서 인증하거나 다른 기기에 동기화하지 않는다.
 - Z1의 17/20 기준은 실제 산출물의 근거·경계·복구 설명을 검토하는 rubric이지, 특정 제품·모델의 일반 성능을 보장하는 점수가 아니다. raw/와 기존 수학·역사·시스템 원장은 변경하지 않았다.
 
+## [2026-07-25] fix | 리팩터링 후속 잔재 정리
+
+변경 내용:
+
+- 전체 tracked 파일의 npm 진입점·import·빌드 복사·문서 링크를 감사했다. 현재 실행 경로에 연결된 스크립트·문서·사이트 자산과 `raw/assets/.gitkeep`는 유지하고, 런타임에서 읽지 않는 스킬 설계 중간 산출물 `intent_ssl_graph.json`만 제거했다.
+- 일괄 정정이 끝난 `remove-reading-level-blocks.mjs`, 전용 회귀 테스트와 `reading-level:*` npm 명령 네 개를 제거했다. 제거 직전 읽기 전용 검사는 외부 원문 109개, 번역·해설 214개, raw Markdown 221개와 위키 Markdown 394개에서 UI 단락이 0개임을 확인했다. 새 번역의 UI 문구·출처 형식 검사는 현행 `translation:normalize:check`가 계속 맡는다.
+- 재생성 가능한 `dist/`, `node_modules/`, Playwright 페이지 스냅샷·검수 이미지·실행 결과와 빈 `tmp/`를 정리했다. `.codex-remote-attachments/`의 사용자 첨부와 `raw/`는 보존하고, 첨부 보관 경로와 `tmp/`가 Git 미추적 항목으로 다시 나타나지 않도록 ignore 규칙을 보강했다.
+
+검증 결과:
+
+- `npm run verify`에서 Node test 151개와 browser test 9개를 통과했다. 마지막 log 반영 뒤 다시 실행한 빌드는 위키 Markdown 394개, evidence 516건과 immutable raw artifact 220개를 검증하고 720개 HTML과 51,695개 local reference를 검사했다.
+- `math:check`, `history:check`, `boundary:check`, wiki lint, 사이트 빌드·산출물 검사와 `git diff --check`를 통과했다. 검증 뒤 다시 생성된 산출물도 최종 정리 대상으로 확인했다.
+
+남은 제한:
+
+- 사용자 첨부는 임시 빌드 산출물이 아니므로 삭제하지 않았다. 의존성 디렉터리를 제거한 뒤 로컬 검증을 다시 실행하려면 `npm ci`가 필요하다.
+- 역사 기록인 기존 log의 파일 경로와 퇴역 자산이 다시 생기지 않는지 확인하는 negative guard는 현재 동작의 일부이므로 유지했다.
+
 ## 관련 항목
 
 - [[index]]

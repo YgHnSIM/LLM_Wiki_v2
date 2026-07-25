@@ -1,4 +1,5 @@
 .obsidian/
+.codex-remote-attachments/
 node_modules/
 dist/
 .dist-*/
@@ -7,3 +8,4 @@ output/playwright/
 .playwright-cli/
 test-results/
 playwright-report/
+tmp/

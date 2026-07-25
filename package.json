@@ -8,10 +8,6 @@
     "node": ">=22"
   },
   "scripts": {
-    "reading-level:audit": "node scripts/remove-reading-level-blocks.mjs --audit",
-    "reading-level:remove": "node scripts/remove-reading-level-blocks.mjs --write",
-    "reading-level:check": "node scripts/remove-reading-level-blocks.mjs --check-clean",
-    "reading-level:restore": "node scripts/remove-reading-level-blocks.mjs --restore",
     "translation:normalize": "node scripts/normalize-translation-notes.mjs --write",
     "translation:normalize:check": "node scripts/normalize-translation-notes.mjs --check",
     "source:status": "node scripts/source-workflow.mjs status",
