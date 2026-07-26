@@ -139,7 +139,7 @@ Whisper 논문에서 zero-shot은 평가 데이터셋의 훈련 분할로 별도
 Whisper의 기본 음향 문맥은 30초다. 긴 파일은 timestamp가 가리키는 위치로 창을 이동하고, 다음 전략으로 반복·누락·정렬 드리프트를 줄였다.
 
 - beam 5개로 탐색하고, 낮은 평균 log probability나 높은 gzip 압축률이 반복 실패를 가리키면 temperature를 0에서 1까지 올려 다시 디코딩한다.
-- 낮은 temperature에서 앞 창의 전사문을 다음 창의 문맥으로 제공한다.
+- 낮은 temperature에서 앞 창의 전사문을 다음 창의 문맥으로 넘긴다.
 - `nospeech` 확률과 평균 log probability를 함께 사용해 무음을 판정한다.
 - 첫 timestamp를 0–1초로 제한해 창 앞부분을 건너뛰는 실패를 줄인다.
 

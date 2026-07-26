@@ -52,7 +52,7 @@ related:
 
 - GLUE는 아홉 기존 영어 NLU task, diagnostic set, 중앙 평가와 leaderboard를 결합했다.
 - aggregate는 난이도 가중값이 아니라 서로 다른 task metric의 평균이다.
-- human 87.1은 2019년 별도 비전문가 추정이며 전 task 인간 초월을 뜻하지 않는다.
+- human 87.1은 2019년 별도 비전문가 추정이며 모든 task에서 인간을 초월했다는 뜻이 아니다.
 - SuperGLUE는 여덟 더 어려운 task와 형식을 제시했지만 일반 이해 전체의 완전한 시험은 아니다.
 - 표준화는 비교 가능성을 높이지만 training 조건·contamination·shortcut·aggregate masking을 제거하지 않는다.
 
@@ -133,7 +133,7 @@ SuperGLUE는 모든 task에 human performance estimate를 제공하고 강한 BE
 
 ### benchmark가 연구를 움직이는 방식
 
-GLUE는 ELMo·GPT·[[BERT]] 같은 전이 학습 모델을 같은 suite에서 비교하는 무대가 됐다. 특히 BERT의 GLUE 80.5와 여러 task 향상은 MLM encoder 전체 fine-tuning의 폭넓은 효과를 보여 주는 핵심 근거였다.
+GLUE는 ELMo·GPT·[[BERT]] 같은 전이 학습 모델을 같은 suite에서 비교하는 무대가 됐다. 특히 BERT의 GLUE 점수 80.5와 여러 task 향상은 MLM encoder 전체 fine-tuning의 폭넓은 효과를 보여 주는 핵심 근거였다.
 
 leaderboard는 model·training recipe 개선을 빠르게 드러냈지만 평가 대상 자체가 최적화 목표가 됐다. 수많은 연구가 같은 development set과 task collection을 반복 사용하면 public benchmark에 특화된 선택이 누적된다. 이는 train example의 overfitting과 다른 benchmark-level overfitting이다.
 

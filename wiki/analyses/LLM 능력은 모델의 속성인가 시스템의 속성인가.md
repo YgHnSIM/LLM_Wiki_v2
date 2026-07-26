@@ -210,7 +210,7 @@ System 최적화를 세 종류로 나누면 비교가 쉬워진다.
 
 Turing의 automatic machine은 무엇이 기계적으로 계산 가능한지를 형식화했지만 실제 hardware의 memory·속도를 보장하지 않았다. Shannon의 source·channel 이론은 message의 불확실성과 통신 한계를 정량화했지만 현대 neural language model의 architecture를 직접 제시하지 않았다.
 
-2012년 AlexNet은 큰 CNN, ImageNet data, 학습 기법과 두 GPU 구현을 결합해 특정 image-classification 결과를 냈다. 2017년 Transformer는 recurrent state 의존을 제거하고 8개 P100에서 번역 model을 훈련했다. 이 둘은 accelerator가 model 아이디어의 단일 원인이 아니라, 특정 model·data·software를 실제 규모에서 실행한 가능 조건임을 보여 준다.
+2012년 AlexNet은 큰 CNN, ImageNet data, 학습 기법과 두 GPU 구현을 결합해 특정 image-classification 결과를 냈다. 2017년 Transformer는 recurrent state 의존을 제거하고 8개 P100에서 번역 model을 훈련했다. 이 둘은 accelerator가 model 아이디어의 단일 원인이 아니라, 특정 model·data·software를 실제 규모에서 실행할 수 있게 한 조건임을 보여 준다.
 
 2020년 scaling-law 연구는 model size $N$, data $D$와 compute $C$를 loss와 연결해 규모를 실험 설계 변수로 만들었다. 그러나 power law는 관측 범위와 조건의 관계이며, 더 많은 compute가 모든 task·안전·service 품질을 자동 보장하지 않는다.
 
@@ -263,7 +263,7 @@ FlashAttention과 vLLM은 model weight를 바꾸지 않고도 실행 능력이 �
 | --- | --- | --- |
 | 직접 영향 | Transformer 논문은 recurrence의 sequential computation을 문제로 명시했다. | GPU가 Transformer를 발명했다. |
 | 가능 조건 | AlexNet은 두 GTX 580, Transformer는 8개 P100에서 보고된 훈련을 실행했다. | 빠른 chip이 자동으로 더 좋은 model을 만든다. |
-| 병행 맥락 | CUDA·deep-learning framework와 neural architecture 연구가 결합 가능한 stack을 형성했다. | 같은 시대였으므로 직접 계보다. |
+| 병행 맥락 | CUDA·deep-learning framework와 neural architecture 연구가 결합 가능한 stack을 형성했다. | 같은 시대였으므로 직접 계보라고 볼 수 없다. |
 | 후대 유추 | 인간 계산 조직과 accelerator cluster를 분업·검산 축으로 비교한다. | 수학 표가 LLM parameter의 직접 조상이다. |
 
 직접 영향은 원문 locator가 있어야 한다. 나머지 표지도 열등한 주장이 아니라 증거 범위를 정확히 표시하는 장치다.

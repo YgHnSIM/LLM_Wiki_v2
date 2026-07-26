@@ -135,7 +135,7 @@ Llama 계열은 Mistral의 evaluation pipeline으로 다시 평가됐고 일부 
 
 ### Router 선택은 주제별 지식 모듈을 입증하지 않았다
 
-수집 원문은 과학·code·대화를 각각 다른 전문 expert가 처리한다고 서술한다. 그러나 Mixtral 논문 §5는 The Pile validation subset에서 arXiv·PubMed Abstracts·PhilPapers 같은 domain 사이에 뚜렷한 topic routing 차이를 찾지 못했다. 대신 특정 token·Python indentation·연속 token이 비슷한 expert로 가는 syntax·temporal locality를 관찰했다.
+수집 원문은 과학·code·대화를 각각 다른 expert가 처리한다고 서술한다. 그러나 Mixtral 논문 §5는 The Pile validation subset에서 arXiv·PubMed Abstracts·PhilPapers 같은 domain 사이에 뚜렷한 topic routing 차이를 찾지 못했다. 대신 특정 token·Python indentation·연속 token이 비슷한 expert로 가는 syntax·temporal locality를 관찰했다.
 
 이는 expert가 어떤 구조도 학습하지 않았다는 뜻이 아니다. 다만 router 선택을 사람이 이름 붙인 domain module이나 출력의 충실한 인과 설명으로 읽을 근거는 아니다.
 

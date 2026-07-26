@@ -180,7 +180,7 @@ $$
 | 기호 | 현재 의미 | 종류·shape | 어디서 오는가 |
 | --- | --- | --- | --- |
 | $H$ | 현재 segment의 아래 층 은닉 상태 | $L\times d$ 행렬 | 현재 입력을 아래 층이 계산 |
-| $H_{\mathrm{mem}}$ | 잘라 보존한 과거 아래 층 상태 | $M\times d$ 행렬 | 이전 segment의 순전파 결과 |
+| $H_{\mathrm{mem}}$ | 잘라서 보존한 과거 아래 층 상태 | $M\times d$ 행렬 | 이전 segment의 순전파 결과 |
 | $\widetilde H$ | memory와 현재 상태를 연결한 확장 문맥 | $(M+L)\times d$ 행렬 | $H_{\mathrm{mem}}$과 $H$의 행 연결 |
 | $W_Q,W_{K,E},W_V$ | query·내용 key·value 투영 | 각각 $d\times d_k$, $d\times d_k$, $d\times d_v$ | 학습되는 매개변수 |
 | $Q,K,V$ | 질문·찾을 표지·가져올 내용 | 위 식의 세 행렬 | 투영 결과 |
@@ -287,7 +287,7 @@ Transformer-XL과 [[FlashAttention]]은 모두 더 긴 문맥을 실용적으로
 
 ### 실험으로 확인된 범위
 
-Transformer-XL은 다섯 word·character 언어 모델 자료에서 perplexity 또는 bpc를 평가했다. WikiText-103 18.3 perplexity와 enwik8 0.99 bpc가 대표 결과다. recurrence·위치 표현 ablation, RECL, 평가 속도와 정성적 장문 생성도 보고됐다.
+Transformer-XL은 다섯 개의 word·character 언어 모델 자료에서 perplexity 또는 bpc를 평가했다. WikiText-103 18.3 perplexity와 enwik8 0.99 bpc가 대표 결과다. recurrence·위치 표현 ablation, RECL, 평가 속도와 정성적 장문 생성도 보고됐다.
 
 RECL은 같은 parameter budget의 모델 집단에서 더 긴 문맥의 상대 이득을 측정한다. $r=0.1$ 조건의 두 비교 집단에서 80%와 450%라는 RNN·vanilla Transformer 대비 수치가 나왔다. 이 값은 memory 설정 $M$이나 최대 입력 token 수를 직접 나타내지 않는다.
 
@@ -316,7 +316,7 @@ $$
 
 ### 설계의 trade-off와 계보 경계
 
-memory를 늘리면 더 긴 과거를 직접 읽는 대신 계산량과 저장량이 증가한다. 캐시된 과거 상태 자체는 이후 문맥에 맞춰 다시 계산되거나 수정되지 않지만, 현재 query는 그 상태에 동적으로 가중해 읽는다. stop-gradient는 멀리 떨어진 과거 행동에 대한 credit assignment를 제한한다. 또한 정성적으로 긴 글을 생성했다는 사실은 장문 사실 일관성이나 이해 성능의 보증이 아니다.
+memory를 늘리면 더 긴 과거를 직접 읽는 대신 계산량과 저장량이 증가한다. 캐시된 과거 상태 자체는 이후 문맥에 맞춰 다시 계산되거나 수정되지 않지만, 현재 query는 그 상태에 동적으로 가중치를 부여해 읽는다. stop-gradient는 멀리 떨어진 과거 행동에 대한 credit assignment를 제한한다. 또한 정성적으로 긴 글을 생성했다는 사실은 장문 사실 일관성이나 이해 성능의 보증이 아니다.
 
 [[XLNet·RoBERTa·ALBERT|XLNet]]은 Transformer-XL의 recurrence와 상대 위치 표현을 backbone에 사용했으므로 직접 연결된다. 반면 RoPE·Longformer·BigBird 등은 장문 문맥이나 상대 위치라는 문제를 공유해도 기법과 근거가 다르다. `후대 장문 모델이 모두 Transformer-XL에서 파생됐다`는 계보는 이 원 논문만으로 확정할 수 없다.
 

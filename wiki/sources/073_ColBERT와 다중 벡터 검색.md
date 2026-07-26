@@ -104,7 +104,7 @@ End-to-end 검색은 각 질의 벡터로 FAISS IVFPQ 후보를 찾고, 벡터�
 
 원 논문 *ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT*는 arXiv v1이 2020-04-27이고 SIGIR 2020 pp. 39–48에 실렸다. 저자 Omar Khattab과 Matei Zaharia는 둘 다 Stanford University 소속이었다. 원문의 Carnegie Mellon University·University of Waterloo 귀속은 사실 오류다.
 
-교차 인코더보다 뒤에 나온 구조라는 점도 중요하다. BERT 기반 passage 재순위화는 2019년에 이미 질의와 후보를 한 sequence로 공동 부호화했다. ColBERT의 기여는 cross-encoder를 낳은 것이 아니라, 풍부한 상호작용과 문서 표현 사전 계산 사이에 새로운 경계를 만든 것이다.
+교차 인코더보다 나중에 나온 구조라는 점도 중요하다. BERT 기반 passage 재순위화는 2019년에 이미 질의와 후보를 한 sequence로 공동 부호화했다. ColBERT의 기여는 cross-encoder를 낳은 것이 아니라, 풍부한 상호작용과 문서 표현 사전 계산 사이에 새로운 경계를 만든 것이다.
 
 ### MS MARCO top-1,000 재순위화
 

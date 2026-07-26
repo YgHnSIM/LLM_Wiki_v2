@@ -213,7 +213,7 @@ Transformer 원 논문의 대표 훈련 수치는 다음 조건에서만 읽는�
 - [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]] — 원 구조, Table 1, WMT 품질과 8개 P100 훈련 조건을 검증한 소스.
 - John Nickolls 외, [Scalable Parallel Programming with CUDA](https://doi.org/10.1145/1365490.1365500), §§1–4.
 - [[088_FlashAttention과 IO 인지형 정확 어텐션]] — 같은 dense attention에서 HBM I/O를 줄인 후속 실행 알고리즘.
-- [CS_WIKI의 병렬 컴퓨팅 분석](https://yghnsim.github.io/CS_Wiki/analyses/%EB%B3%91%EB%A0%AC-%EC%BB%B4%ED%93%A8%ED%8C%85%EC%9D%80-%EC%8B%9C%EA%B0%84%EC%9D%84-%EC%A4%84%EC%9D%B4%EB%8A%94%EA%B0%80-%EB%AC%B8%EC%A0%9C%EB%A5%BC-%ED%82%A4%EC%9A%B0%EB%8A%94%EA%B0%80/) — 고정 문제·고정 시간 병렬성의 컴퓨터사 맥락.
+- [CS_WIKI의 병렬 컴퓨팅 분석](https://yghnsim.github.io/CS_Wiki/analyses/%EB%B3%91%EB%A0%AC-%EC%BB%B4%ED%93%A8%ED%8C%85%EC%9D%80-%EC%8B%9C%EA%B0%84%EC%9D%84-%EC%A4%84%EC%9D%B4%EB%8A%94%EA%B0%80-%EB%AC%B8%EC%A0%9C%EB%A5%BC-%ED%82%A4%EC%9A%B0%EB%8A%94%EA%B0%80/) — 고정 문제·고정 시간 병렬성의 컴퓨터과학 맥락.
 
 ## 관련 항목
 

@@ -81,7 +81,7 @@ $$
 s(w,c)=\sum_{g\in G_w}z_g^\top v_c
 $$
 
-$v_c$는 문맥 쪽 출력 벡터다. 목적은 Word2Vec의 Skip-gram with negative sampling을 유지하되 중심 단어의 독립 입력 벡터를 공유 subword 벡터의 합으로 바꾼다. 이 점에서 FastText는 별도의 형태소 분석기가 아니라 SGNS의 **매개변수화 확장**이다.
+$v_c$는 문맥 쪽 출력 벡터다. 목적은 Word2Vec의 Skip-gram with negative sampling을 유지하면서 중심 단어의 독립 입력 벡터를 공유 subword 벡터의 합으로 바꾸는 것이다. 이 점에서 FastText는 별도의 형태소 분석기가 아니라 SGNS의 **매개변수화 확장**이다.
 
 논문은 “<where>”라는 완전 단어 항목을 “where” 내부의 “<wh>, whe, her, ere, re>”와 함께 사용한다. 단어 “her”의 경계를 포함한 “<her>”와 “where” 안의 “her”는 다른 항목이다. 훈련에 없던 단어에는 완전 단어 벡터가 없지만 이미 학습한 문자 n-gram 벡터를 합해 근사할 수 있다.
 
@@ -109,7 +109,7 @@ Philip Gage의 1994년 BPE는 가장 자주 나타나는 인접 byte pair를 미
 
 ### SentencePiece는 BPE의 다른 이름이 아니다
 
-SentencePiece는 기존 subword 도구가 사전 word tokenization을 가정하는 문제를 겨냥해 raw sentence에서 직접 subword model을 훈련하고 encode/decode하는 도구·틀이다. 공백도 meta symbol로 다뤄 normalized text를 복원할 수 있게 했다. BPE와 unigram language model을 포함한 여러 model type을 지원한다.
+SentencePiece는 기존 subword 도구가 사전 word tokenization을 가정하는 문제를 겨냥해 원시 문장에서 직접 subword model을 훈련하고 encode/decode하는 도구·틀이다. 공백도 meta symbol로 다뤄 normalized text를 복원할 수 있게 했다. BPE와 unigram language model을 포함한 여러 model type을 지원한다.
 
 따라서 BPE는 merge 기반 segmentation 알고리즘이고, Unigram은 가능한 조각 집합에서 문장 확률과 분절을 다루는 다른 알고리즘이며, SentencePiece는 이를 raw text에 적용하는 구현 틀이다. 세 이름을 같은 tokenization 방법의 동의어로 쓰지 않는다.
 

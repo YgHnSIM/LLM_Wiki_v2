@@ -74,11 +74,11 @@ LLaMA 1은 API 출력만 관찰하던 연구자에게 model weight를 직접 실
 | LLaMA-33B | 32.5B | 1.4T | 43 |
 | LLaMA-65B | 65.2B | 1.4T | 21 |
 
-[[078_Chinchilla와 계산 최적 언어 모델 학습]]은 고정 training compute 아래 model과 data의 배분을 추정했다. LLaMA 논문은 그 출발점을 인정하면서도 serving을 반복할 때는 작은 model의 inference 비용이 누적된다는 다른 목적함수를 제시했다. 저자들은 Chinchilla식 예로 10B·200B token을 들고, 자신들의 7B가 1T token을 지난 뒤에도 개선됐다고 보고했다. 이는 Chinchilla를 단순 재현한 것이 아니라 **training 비용을 더 쓰고 반복 inference 비용을 낮추는 교환**이다.
+[[078_Chinchilla와 계산 최적 언어 모델 학습]]은 고정 training compute 아래 model과 data의 배분을 추정했다. LLaMA 논문은 그 출발점을 인정하면서도 serving을 반복할 때는 작은 model의 inference 비용이 누적된다는 다른 목적함수를 제시했다. 저자들은 Chinchilla식 예로 10B·200B token을 들고, 자신들의 7B가 1T token을 사용한 뒤에도 개선됐다고 보고했다. 이는 Chinchilla를 단순 재현한 것이 아니라 **training 비용을 더 쓰고 반복 inference 비용을 낮추는 교환**이다.
 
 ### 일곱 data 원천과 tokenizer
 
-1.4T-token 전체 mixture는 English Common Crawl 67%, C4 15%, GitHub 4.5%, Wikipedia 4.5%, Gutenberg·Books3 4.5%, ArXiv 2.5%, Stack Exchange 2%였다. Common Crawl과 C4만 합쳐 82%이므로 “균형 잡힌 20개 언어 model”로 부를 수 없다. 20개 Latin·Cyrillic script 언어는 Wikipedia subset의 설명이다.
+1.4T-token 전체 mixture는 English Common Crawl 67%, C4 15%, GitHub 4.5%, Wikipedia 4.5%, Gutenberg·Books3 4.5%, ArXiv 2.5%, Stack Exchange 2%였다. Common Crawl과 C4만 합쳐 82%이므로 “균형 잡힌 20개 언어 model”로 부를 수 없다. 20개 Latin·Cyrillic script 언어라는 수치는 Wikipedia subset에 해당한다.
 
 논문은 **공개적으로 접근 가능한 data만 사용했다**고 표현한다. 이것이 모든 원문이 public domain이거나 permissive license이고 자유롭게 재배포할 수 있다는 뜻은 아니다. 공개 접근성, 학습 사용 판단, 원문 재배포 권리는 별개다. Tokenizer는 SentencePiece 구현의 BPE를 사용하고, 숫자를 개별 digit으로 나누며 알 수 없는 UTF-8 문자는 byte로 분해한다.
 
@@ -102,7 +102,7 @@ LLaMA 1은 새로운 attention 계열을 발명한 model이 아니다. Causal Tr
 
 | 비교 장면 | 확인되는 결과 | 함께 붙여야 할 조건 |
 | --- | --- | --- |
-| Common-sense 8종, zero-shot | 65B는 Chinchilla보다 BoolQ를 제외한 보고 항목, PaLM-540B보다 BoolQ·WinoGrande를 제외한 항목에서 높음 | 일부 baseline 수치는 각 원 논문에서 가져옴 |
+| Common-sense 8종, zero-shot | 65B는 Chinchilla보다 BoolQ를 제외한 보고 항목에서, PaLM-540B보다 BoolQ·WinoGrande를 제외한 항목에서 높음 | 일부 baseline 수치는 각 원 논문에서 가져옴 |
 | NaturalQuestions·TriviaQA | 13B도 GPT-3·Chinchilla와 경쟁 가능한 결과 | Closed-book exact match, shot 수에 따라 값이 달라짐 |
 | MMLU, 5-shot | LLaMA-65B 63.4 | Chinchilla-70B 67.5, PaLM-540B 69.3보다 낮음 |
 | Training 중 추세 | 다수 과제는 token 증가와 함께 개선 | SIQA는 분산이 컸고 WinoGrande는 perplexity와 덜 일치 |
@@ -117,7 +117,7 @@ LLaMA 1은 새로운 attention 계열을 발명한 model이 아니다. Causal Tr
 
 ### Hardware와 carbon 장부
 
-65B 최종 학습은 2,048대의 A100-80GB에서 GPU당 약 380 token/s로 수행됐고 1.4T token에 약 21일이 걸렸다. Table 15의 동일 data-center 가정에서는 65B run을 1,022,362 GPU-hour, 449MWh, 173 tCO2eq로 추정했다. 전체 제품군 개발에는 2,048대 A100을 약 5개월 사용했다고 추정해 2,638MWh와 1,015 tCO2eq를 제시했다. 이 값은 PUE 1.1과 미국 평균 carbon intensity 0.385kg CO2e/kWh를 적용한 계산이지 실제 전력망의 측정값이 아니다.
+65B 최종 학습은 A100-80GB 2,048대에서 GPU당 약 380 token/s로 수행됐고 1.4T token에 약 21일이 걸렸다. Table 15의 동일 data-center 가정에서는 65B run을 1,022,362 GPU-hour, 449MWh, 173 tCO2eq로 추정했다. 전체 제품군 개발에는 2,048대 A100을 약 5개월 사용했다고 추정해 2,638MWh와 1,015 tCO2eq를 제시했다. 이 값은 PUE 1.1과 미국 평균 carbon intensity 0.385kg CO2e/kWh를 적용한 계산이지 실제 전력망의 측정값이 아니다.
 
 접근성 사례로 논문이 직접 말한 것은 13B가 inference 때 **단일 V100**에서 실행된다는 점이다. V100은 data-center accelerator이며, 이 문장이 consumer PC에서 모든 model을 쉽게 fine-tune할 수 있다는 뜻은 아니다. 공개된 checkpoint를 실행하는 비용과 제품군을 처음부터 훈련하는 비용도 분리해야 한다.
 
@@ -130,17 +130,17 @@ LLaMA 1은 새로운 attention 계열을 발명한 model이 아니다. Causal Tr
 - **모든 규모가 Chinchilla의 약 20 token/parameter를 따랐다:** 7B·13B·33B는 약 149·77·43으로 더 오래 학습됐다.
 - **LLaMA가 RMSNorm·SwiGLU·RoPE를 발명했다:** 모두 선행 기법이다. LLaMA는 이를 causal Transformer family에 결합했다.
 - **Data 원천은 여섯 종류뿐이다:** 공식 Table 1에는 Stack Exchange 2%도 포함된다.
-- **20개 언어를 균형 있게 학습했다:** 20개 언어는 Wikipedia subset이며 전체 mixture의 82%가 English Common Crawl·C4다.
+- **20개 언어를 균형 있게 학습했다:** 20개 언어라는 수치는 Wikipedia subset에 해당하며, 전체 mixture의 82%가 English Common Crawl·C4다.
 - **일반적인 유해·부적절 콘텐츠를 safety filter로 제거했다:** 논문은 원천별 품질·언어·형식·중복 제거를 설명하지만, 전체 mixture에 적용한 포괄적 safety filter는 보고하지 않는다.
 - **RMSNorm·SwiGLU·RoPE가 각각 성능과 효율 향상을 만들었다:** 논문에는 세 구성요소의 효과를 분리한 ablation이 없다. 결합된 recipe의 결과를 개별 요소의 인과 효과로 돌리지 않는다.
 - **13B·65B가 더 큰 model을 언제나 능가했다:** 공식 표현은 각각 대부분의 보고 benchmark와 competitive이며 MMLU 같은 반례가 있다.
-- **작은 model이라 일반 consumer hardware에서 쉽게 학습·미세조정할 수 있다:** 논문의 직접 근거는 13B single-V100 inference이고, training은 대규모 A100 cluster를 사용했다.
+- **작은 model이라 일반 consumer hardware에서 쉽게 학습·미세조정할 수 있다:** 논문이 직접 제시한 근거는 13B의 single-V100 inference이고, training은 대규모 A100 cluster를 사용했다.
 
 논문은 원천별 중복 제거와 일부 evaluation corpus의 overlap 확인을 보고하지만, 모든 benchmark를 포괄하는 단일 contamination audit이나 하나의 knowledge cutoff를 제시하지 않는다. 따라서 평가 결과를 학습 자료와 완전히 분리된 능력 측정으로 확대하지 않는다.
 
 ### Safety 평가는 mitigation이 아니다
 
-논문은 RealToxicityPrompts, CrowS-Pairs, WinoGender와 TruthfulQA로 위해 가능성을 측정했다. 같은 family 안에서 65B의 RealToxicityPrompts 점수는 7B보다 높았고, WinoGender gotcha example은 직업과 성별의 고정관념을 따르는 오류를 드러냈다. LLaMA-65B의 TruthfulQA truthful score 0.57은 비교한 GPT-3 수치보다 높았지만 저자들은 정답률이 여전히 낮아 잘못된 답을 hallucinate할 가능성이 있다고 적었다.
+논문은 RealToxicityPrompts, CrowS-Pairs, WinoGender와 TruthfulQA로 위해 가능성을 측정했다. 같은 family 안에서 65B의 RealToxicityPrompts 점수는 7B보다 높았고, WinoGender의 gotcha example은 직업과 성별의 고정관념을 따르는 오류를 드러냈다. LLaMA-65B의 TruthfulQA truthful score 0.57은 비교한 GPT-3 수치보다 높았지만 저자들은 정답률이 여전히 낮아 잘못된 답을 hallucinate할 가능성이 있다고 적었다.
 
 이는 model의 위험을 공개한 평가이지 safety alignment나 filter를 내장했다는 증거가 아니다. Base checkpoint, 제한적인 LLaMA-I 실험과 별도 chat alignment를 구분해야 한다.
 

@@ -159,7 +159,7 @@ EK100은 45개 kitchen의 100시간 egocentric video, 97 verb·300 noun과 3,568
 
 V-JEPA 2 encoder 단독에는 open-language answer decoder가 없다. Frozen encoder 비교는 Qwen2-7B-Instruct와 18M aligned sample을 공통으로 사용했다. 가장 큰 reported system은 ViT-g/16 384 encoder를 Llama 3.1 8B와 MLP projector로 잇고 88.5M image·video-text pair로 정렬했다.
 
-그 system은 PerceptionTest 84.0, MVP paired accuracy 44.5, TempCompass 76.9, TemporalBench 36.7, TOMATO 40.3을 보고했다. PerceptionTest는 test SFT, 나머지는 zero-shot이라는 조건도 다르다. TVBench 60.6과 MVBench 73.5에서는 비교 대상 PerceptionLM 8B보다 낮았다. 따라서 ‘언어 감독 없이 사전학습한 video encoder도 충분한 후속 정렬을 거치면 강한 VidQA component가 될 수 있다’가 적절한 결론이며, V-JEPA 2 자체가 language semantics를 이미 생성한다는 뜻은 아니다.
+그 system은 PerceptionTest 84.0, MVP paired accuracy 44.5, TempCompass 76.9, TemporalBench 36.7, TOMATO 40.3을 보고했다. PerceptionTest는 test SFT를 거쳤고, 나머지는 zero-shot이라는 조건도 다르다. TVBench 60.6과 MVBench 73.5에서는 비교 대상 PerceptionLM 8B보다 낮았다. 따라서 ‘언어 감독 없이 사전학습한 video encoder도 충분한 후속 정렬을 거치면 강한 VidQA component가 될 수 있다’가 적절한 결론이며, V-JEPA 2 자체가 language semantics를 이미 생성한다는 뜻은 아니다.
 
 ### Robot 결과의 분모와 환경을 붙인다
 

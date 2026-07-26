@@ -58,7 +58,7 @@ $$
 
 라는 표준 dense attention의 수학적 정의를 바꾸지 않고, 큰 중간 행렬을 GPU의 고대역폭 메모리(HBM)에 저장하지 않도록 계산 순서를 다시 설계한 I/O 인지형 알고리즘이다. Query·key·value를 온칩 SRAM에 들어가는 블록으로 나누고, 행별 softmax 통계와 출력을 온라인으로 누적한다. 역방향에서는 전체 attention matrix를 보관하는 대신 필요한 블록을 재계산한다.
 
-여기서 **exact**는 희소화·저랭크·kernel approximation 없이 같은 dense softmax attention 함수를 계산한다는 뜻이다. 부동소수점 덧셈 순서까지 같아 bitwise identical하다는 뜻은 아니다. 또한 attention 중간 상태의 추가 저장은 시퀀스 길이 $N$에 대해 $O(N)$으로 줄지만 산술량 $O(N^2d)$은 남는다.
+여기서 **exact**는 희소화·저랭크·kernel approximation 없이 같은 dense softmax attention 함수를 계산한다는 뜻이다. 부동소수점 덧셈 순서까지 같아 bitwise identical하다는 뜻은 아니다. 또한 attention 중간 상태의 추가 저장 공간은 시퀀스 길이 $N$에 대해 $O(N)$으로 줄지만 산술량 $O(N^2d)$은 남는다.
 
 ### 역사적 위치
 
@@ -86,7 +86,7 @@ FlashAttention은 다음 순서로 전체 행렬 저장을 피한다.
 2. 한 key·value 블록과 query 블록을 SRAM에 올려 score tile을 계산한다.
 3. 각 query 행에서 지금까지 본 score의 최댓값 $m$과 지수합 $\ell$을 갱신한다.
 4. 최댓값이 바뀌면 이전 출력 누산값을 새 기준에 맞춰 재스케일한 뒤 현재 value 가중합을 더한다.
-5. 각 key·value 블록을 반영한 부분 출력과 작은 행별 통계를 HBM에 갱신해 다음 바깥 반복에서 다시 읽고, score·probability tile은 저장하지 않는다. 마지막 반복 뒤의 출력이 최종값이다.
+5. 각 key·value 블록을 반영한 부분 출력과 작은 행별 통계를 HBM에 기록하고 다음 바깥 반복에서 다시 읽으며, score·probability tile은 저장하지 않는다. 마지막 반복 뒤의 출력이 최종값이다.
 
 각 블록의 softmax를 독립적으로 계산해 이어 붙이는 방식이 아니다. 이전 블록과 새 블록의 최대값·정규화 합을 같은 기준으로 맞추므로 마지막에는 전체 행을 한 번에 softmax한 것과 같은 수학적 결과가 나온다.
 
@@ -106,7 +106,7 @@ Backward는 forward 출력과 softmax 정규화 통계를 저장하고, gradient
 | 논문의 HBM 접근 모델 | $\Theta(Nd+N^2)$ | $\Theta(N^2d^2/M)$, $d\le M\le Nd$ |
 | 근사 여부 | 정확 | 정확한 dense 경로; §3.3 block-sparse 확장은 별도 근사 |
 
-$M$은 SRAM 크기다. $M$을 고정하면 FlashAttention의 HBM 접근 식도 $N$에 대해 이차이므로 “I/O 복잡도가 언제나 선형”이라고 쓰지 않는다. 선형으로 줄어드는 것은 저장하는 attention 중간 상태의 추가 공간이다. 이 결과도 단일 GPU와 논문이 가정한 메모리 계층·$M$ 범위 안의 분석이다.
+$M$은 SRAM 크기다. $M$을 고정하면 FlashAttention의 HBM 접근량도 $N$에 대해 이차적으로 증가하므로 “I/O 복잡도가 언제나 선형”이라고 쓰지 않는다. 선형으로 줄어드는 것은 저장하는 attention 중간 상태의 추가 공간이다. 이 결과도 단일 GPU와 논문이 가정한 메모리 계층·$M$ 범위 안의 분석이다.
 
 ### 더 많은 FLOPs로 더 짧아진 시간
 
@@ -122,7 +122,7 @@ FlashAttention은 재계산 때문에 약 13% 더 많은 FLOPs를 수행했지�
 ### kernel과 전체 모델 수치를 섞지 않는다
 
 - Attention kernel은 Appendix E.5의 A100 실험에서 대체로 2~4배, RTX 3090에서 2.5~4.5배 빨랐다.
-- BERT-large, sequence 512, 8×A100-80GB에서 목표 MLM 정확도 72%까지 Nvidia MLPerf는 $20.0\pm1.5$분, FlashAttention은 $17.4\pm1.4$분으로 약 15% 단축됐다.
+- BERT-large, sequence 512, 8×A100-80GB에서 목표 MLM 정확도 72%에 도달하는 데 걸린 시간은 Nvidia MLPerf가 $20.0\pm1.5$분, FlashAttention이 $17.4\pm1.4$분으로 약 15% 단축됐다.
 - GPT-2 small 학습은 Hugging Face 9.5일, Megatron-LM 4.7일, FlashAttention 2.7일이었다. 최대 약 3배는 Hugging Face 대비이고 Megatron 대비는 약 1.7배다.
 - A100 FP16 forward+backward 메모리는 sequence 1,024에서 PyTorch 1,184MB 대 FlashAttention 209MB, 2,048에서 4,416MB 대 418MB, 4,096에서 17,024MB 대 836MB였다. 절감 배수는 약 5.7배·10.6배·20.4배로 길이에 따라 달랐다.
 
@@ -130,7 +130,7 @@ FlashAttention은 재계산 때문에 약 13% 더 많은 FLOPs를 수행했지�
 
 ### 긴 문맥 실험의 범위
 
-GPT-2 small은 Megatron-LM의 1K 문맥 4.7일·perplexity 18.2와 비교해 FlashAttention 4K 문맥에서 3.6일·17.5를 기록했다. MIMIC 문서 분류는 512에서 52.8, 16K에서 57.1이었고 ECtHR은 512에서 72.2, 8K에서 80.7, 16K에서 79.2였다. 문맥을 늘리면 항상 단조롭게 좋아진다는 결과가 아니다.
+GPT-2 small에서 Megatron-LM은 1K 문맥에서 4.7일·perplexity 18.2를 기록했고, FlashAttention은 4K 문맥에서 3.6일·17.5를 기록했다. MIMIC 문서 분류는 512에서 52.8, 16K에서 57.1이었고 ECtHR은 512에서 72.2, 8K에서 80.7, 16K에서 79.2였다. 문맥을 늘리면 항상 단조롭게 좋아진다는 결과가 아니다.
 
 LRA에서 exact FlashAttention의 Path-X 16K 결과는 61.4%였다. Path-256 64K의 63.1%는 §3.3의 approximate block-sparse 확장이다. Attention kernel 자체는 exact 경로로 64K까지 측정됐지만, 이를 64K exact 모델 품질 결과와 합치지 않는다.
 
@@ -138,7 +138,7 @@ LRA에서 exact FlashAttention의 Path-X 16K 결과는 61.4%였다. Path-256 64K
 
 이 문서는 FlashAttention-1을 다룬다. 별도 2023년 논문인 FlashAttention-2는 non-matmul FLOPs를 줄이고 single-head sequence 병렬화와 warp 작업 분배를 개선했다. 별도 2024년 논문인 FlashAttention-3는 Hopper의 Tensor Core·TMA 비동기성을 warp specialization과 matmul–softmax 중첩에 활용하고 FP8 경로를 더했다. 후속 논문의 속도와 hardware 지원을 2022년 v1 성과로 소급하지 않는다.
 
-원 논문 각주는 구현 code의 공개 주소를 제공했다. 이는 연구 kernel을 재사용하고 검토할 수 있게 했다는 뜻이지, 모든 attention 변형과 모든 GPU·가속기를 동일하게 지원하는 범용 구현이 완성됐다는 뜻은 아니다.
+원 논문 각주는 구현 코드의 공개 주소를 제공했다. 이는 연구 kernel을 재사용하고 검토할 수 있게 했다는 뜻이지, 모든 attention 변형과 모든 GPU·가속기를 동일하게 지원하는 범용 구현이 완성됐다는 뜻은 아니다.
 
 ## 검증과 한계
 
@@ -149,7 +149,7 @@ LRA에서 exact FlashAttention의 Path-X 16K 결과는 61.4%였다. Path-256 64K
 - **타일링·온라인 softmax만으로 모든 혁신을 설명할 수 있다:** 타일링·재계산은 알려진 기법이었다. I/O schedule, 안정적인 누적, fused forward·backward, I/O 분석과 실험을 결합한 것이 핵심이다.
 - **일반 gradient checkpointing을 통합했다:** Attention matrix를 저장하지 않고 backward에서 필요한 블록을 명시적으로 재계산한 selective recomputation이다.
 - **Register blocking과 memory coalescing이 논문의 명시적 핵심 기법이다:** 일반 CUDA 최적화 표현이지만 2022년 논문이 핵심 기여로 직접 제시한 항목은 아니다.
-- **표준 attention을 언제나 코드 한 줄로 대체할 수 있다:** 원 구현은 head dimension과 Turing·Ampere GPU 등 지원 조건이 있었고, 새로운 attention 변형마다 저수준 kernel 작업이 필요할 수 있다.
+- **표준 attention을 언제나 코드 한 줄로 대체할 수 있다:** 원 구현에는 head dimension과 Turing·Ampere GPU 등 지원 조건이 있었고, 새로운 attention 변형마다 저수준 kernel 작업이 필요할 수 있다.
 - **2~4배·5~10배는 모든 상황의 고정 개선이다:** Kernel·전체 모델과 길이·dtype·hardware·baseline에 따라 값이 크게 달라진다.
 - **최대 16K가 exact FlashAttention의 절대 한계다:** Kernel benchmark는 더 길게 실행됐고, 모델 실험의 16K exact와 64K block-sparse 결과는 서로 다른 조건이다.
 - **품질 절충이 전혀 없다:** 같은 dense model definition에는 근사가 없지만 추가 FLOPs·이차 계산·custom kernel 제약은 남는다. 더 긴 문맥의 품질 향상은 kernel 자체가 아니라 달라진 훈련 조건의 효과다.
@@ -157,7 +157,7 @@ LRA에서 exact FlashAttention의 Path-X 16K 결과는 61.4%였다. Path-256 64K
 
 ### 남은 한계
 
-Dense attention의 $O(N^2d)$ 계산량은 극장문에서 계속 병목이다. Attention 중간 상태가 선형이어도 모델의 다른 activation·parameter·optimizer state와 추론 KV cache는 남는다. 논문도 각 attention 변형마다 새 CUDA kernel이 필요하며 GPU architecture 사이 이식성이 제한될 수 있다고 적었다.
+Dense attention의 $O(N^2d)$ 계산량은 극장문에서 계속 병목이다. Attention 중간 상태 저장 공간이 선형이어도 모델의 다른 activation·parameter·optimizer state와 추론 KV cache는 남는다. 논문도 각 attention 변형마다 새 CUDA kernel이 필요하며 GPU architecture 사이 이식성이 제한될 수 있다고 적었다.
 
 긴 sequence가 장치에 들어간다는 사실과 모델이 멀리 있는 증거를 안정적으로 활용한다는 사실도 분리한다. Position encoding, 훈련 길이 분포, data, objective와 평가 과제가 장문 능력을 함께 결정한다.
 

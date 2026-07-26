@@ -42,7 +42,7 @@ related:
 
 ## 1단계 — 먼저 잡을 핵심
 
-GloVe(Global Vectors for Word Representation)는 말뭉치 전체에 누적한 단어–문맥 동시출현 계수의 로그를 가중 저랭크 회귀로 근사해 정적 [[단어 임베딩]]을 학습하는 방법이다. Pennington·Socher·Manning이 2014년 발표했다.
+GloVe(Global Vectors for Word Representation)는 말뭉치 전체에 누적한 단어–문맥 동시출현 계수의 로그를 가중된 저랭크 회귀로 근사해 정적 [[단어 임베딩]]을 학습하는 방법이다. Pennington·Socher·Manning이 2014년 발표했다.
 
 ## 2단계 — 작동 원리
 

@@ -101,7 +101,7 @@ $$
 | 비교 실험 decontamination | Pile·CC-100·Raw CC에서 평가 자료와 겹치는 13-gram을 제거 | 이 실험용 처리이지 전체 배포 말뭉치의 보편적 무오염 보증이 아님 |
 | 문서화 | 출처별 처리·topic·profanity·co-occurrence·동의 상태를 조사 | 위험을 기록한 것이 제거·완화·법적 확정을 뜻하지 않음 |
 
-The Pile은 validation과 test를 교차 영역 benchmark로도 제안했다. Tokenizer가 다른 모델을 비교하기 위해 주 metric으로 bits per UTF-8 encoded byte(BPB)를 사용했다. 이 metric도 평균 next-token 압축 성능을 나타낼 뿐 사실성·안전성·저작권 적합성을 측정하지 않는다.
+The Pile은 validation과 test를 교차 영역 benchmark로도 제안했다. Tokenizer가 다른 모델을 비교하기 위해 주요 metric으로 bits per UTF-8 encoded byte(BPB)를 사용했다. 이 metric도 평균 next-token 압축 성능을 나타낼 뿐 사실성·안전성·저작권 적합성을 측정하지 않는다.
 
 ## 3단계 — 기술과 근거
 

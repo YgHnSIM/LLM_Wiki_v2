@@ -59,7 +59,7 @@ related:
 
 Rombach 등의 CVPR 2022 논문은 비조건부 생성·텍스트-이미지·레이아웃-이미지·초해상도·인페인팅에 적용하는 **잠재 확산 모델(Latent Diffusion Model, LDM) 계열**을 연구했다. 논문의 텍스트-이미지 실험은 LAION-400M에서 학습한 1.45B 모델이며, BERT 토크나이저와 학습 가능한 Transformer 조건 인코더를 사용했다.
 
-Stable Diffusion v1은 같은 원리를 특정 부품과 자료로 구현한 별도 계보다. 공개 v1은 $f=8$ 오토인코더, 860M U-Net, 123M 규모의 동결 CLIP ViT-L/14 텍스트 인코더를 사용하고 LAION-2B(en) 계열 부분집합에서 단계적으로 학습됐다. 따라서 LDM 논문의 모든 모델·수치·과제를 Stable Diffusion v1의 사양으로 옮기지 않는다.
+Stable Diffusion v1은 같은 원리를 특정 부품과 자료로 구현한 별도 계보이다. 공개 v1은 $f=8$ 오토인코더, 860M U-Net, 123M 규모의 동결 CLIP ViT-L/14 텍스트 인코더를 사용하고 LAION-2B(en) 계열 부분집합에서 단계적으로 학습됐다. 따라서 LDM 논문의 모든 모델·수치·과제를 Stable Diffusion v1의 사양으로 옮기지 않는다.
 
 ### 무엇이 공개됐는가
 

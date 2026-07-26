@@ -62,7 +62,7 @@ related:
 
 ### 핵심 문장
 
-**QLoRA(Quantized Low-Rank Adaptation)**는 사전 학습 model의 가중치를 4-bit NormalFloat(NF4)로 저장해 동결하고, 사용할 때 BF16으로 역양자화하면서 별도의 LoRA adapter만 학습하는 parameter-efficient fine-tuning 방법이다. 2023년 Dettmers 등은 NF4, quantization constant를 다시 압축하는 double quantization, 순간 memory peak를 넘기는 paged optimizer를 결합해 LLaMA 65B를 단일 48GB GPU에서 미세조정했다.
+**QLoRA(Quantized Low-Rank Adaptation)**는 사전 학습 model의 가중치를 4-bit NormalFloat(NF4)로 저장해 동결하고, 사용할 때 BF16으로 역양자화하면서 별도의 LoRA adapter만 학습하는 parameter-efficient fine-tuning 방법이다. 2023년 Dettmers 등은 NF4, quantization constant를 다시 압축하는 double quantization, 순간적인 memory peak에 대응하는 paged optimizer를 결합해 LLaMA 65B를 단일 48GB GPU에서 미세조정했다.
 
 이 결과를 “65B의 4-bit parameter를 소비자 GPU에서 직접 갱신했다”고 읽으면 핵심이 뒤집힌다. QLoRA에는 서로 다른 네 장부가 있다.
 
@@ -102,7 +102,7 @@ QLoRA 논문은 attention의 query·value projection에만 adapter를 붙인 조
 
 NF4는 zero-centered normal distribution의 quantile을 사용해 16개 대표값의 probability mass를 비슷하게 배정한다. 따라서 가중치가 대체로 정규분포를 따른다는 가정 아래 uniform 4-bit보다 분포에 맞는 codebook을 제공한다. “모든 layer와 모든 분포에서 최적”이라는 뜻은 아니다.
 
-실제 구현은 flattened weight를 64개 값의 block으로 나누고 block마다 scale을 둔다. 이 blockwise 처리로 layer와 outlier의 scale 차이를 국소화하지만 scale metadata가 늘어난다. Double quantization은 첫 단계 scale을 다시 FP8, block size 256으로 양자화해 이 부담을 줄인다.
+실제 구현은 flattened weight를 64개 값의 block으로 나누고 block마다 scale을 둔다. 이 blockwise 처리로 layer와 outlier의 scale 차이를 국소화하지만 scale metadata가 늘어난다. Double quantization은 첫 단계의 scale을 block size 256으로 다시 FP8 양자화해 이 부담을 줄인다.
 
 $$
 \frac{32}{64}=0.500\ \text{bit/parameter}
@@ -145,7 +145,7 @@ Guanaco는 OASST1 conversation tree에서 각 level의 top response를 골라 �
 3. QLoRA의 memory-efficient parameterization과 hyperparameter
 4. Vicuna·OpenAssistant prompt, GPT-4 또는 사람 judge와 scoring protocol
 
-Guanaco 65B의 99.3%는 80개 Vicuna prompt에서 ChatGPT의 GPT-4-judged absolute score를 100으로 놓은 양방향 평균이다. 95% confidence interval은 약 ±4.4 percentage points였고, answer order가 점수를 바꾸어 두 순서를 평균했다. Human과 GPT-4의 system rank 및 example-level agreement도 완전하지 않았다. 이 수치 하나로 범용 동등성이나 사람 선호 parity를 판정하지 않는다.
+Guanaco 65B의 99.3%는 80개 Vicuna prompt에서 ChatGPT의 GPT-4-judged absolute score를 100으로 놓은 양방향 평균이다. 95% confidence interval은 약 ±4.4 percentage points였고, answer order에 따라 점수가 달라져 두 순서의 결과를 평균했다. Human과 GPT-4의 system rank 및 example-level agreement도 완전하지 않았다. 이 수치 하나로 범용 동등성이나 사람 선호 parity를 판정하지 않는다.
 
 MMLU에서는 OASST1 Guanaco가 scale별로 항상 최고가 아니었다. 예를 들어 65B의 5-shot MMLU는 OASST1 62.2, untuned LLaMA 63.4, FLAN v2 tuning 63.9였다. Chat 평가에 적합한 작은 data와 지식 benchmark에 적합한 data가 같지 않다는 뜻이다. 논문이 말한 data quality는 목표 평가에 대한 **적합성**과 함께 읽는다.
 
@@ -167,7 +167,7 @@ QLoRA code의 MIT license도 Guanaco를 독립 model weight로 바꾸지 않는�
 - **7B training memory는 약 4GB다:** 4-bit raw payload의 근사와 전체 footprint가 섞였다. Scale, adapter, optimizer, activation과 buffer를 포함해야 한다.
 - **Alpaca와 Vicuna가 QLoRA를 입증했다:** 두 project가 QLoRA보다 먼저 공개됐다. QLoRA가 이들을 비교 자료로 사용했다.
 - **적절한 LoRA rank 선택이 성공의 핵심이었다:** 원 실험에서는 query·value만 덮는 설정보다 all-linear layer coverage가 더 중요했고, 그 조건의 rank 8–256 grid에서는 뚜렷한 차이가 없었다. 다른 model·task에서 rank가 중요할 가능성과 원 결과를 구분한다.
-- **의료·저자원 언어·code·창작에서 즉각 채택되고 비용이 수천 달러에서 수백 달러로 줄었다:** 논문은 이런 영역별 adoption이나 정확한 dollar bill을 측정하지 않았다.
+- **의료·저자원 언어·code·창작에서 즉각 채택되고 비용이 수천 달러에서 수백 달러로 줄었다:** 논문은 이런 영역별 adoption이나 정확한 달러 비용을 측정하지 않았다.
 - **Memory 절감이 환경 지속 가능성을 입증했다:** Training energy·power draw와 carbon emission은 직접 측정하지 않았다. Appendix B에는 사용 주체와 3.5배 batch-1 NF4 inference 효율을 가정한 72% energy 절감 추정이 있지만, 이를 fine-tuning carbon 개선으로 일반화할 수 없다. BF16 compute·재계산·paging·runtime과 전력 구성이 별도 변수다.
 
 ### 구현과 일반화의 경계

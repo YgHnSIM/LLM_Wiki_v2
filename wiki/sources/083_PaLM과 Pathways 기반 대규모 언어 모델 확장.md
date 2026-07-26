@@ -83,7 +83,7 @@ Raw 자료의 `sparse attention` 설명은 정정해야 한다. PaLM은 **dense*
 
 ### 두 TPU Pod를 하나의 학습으로 묶기
 
-PaLM 540B은 data-center network로 연결된 TPU v4 Pod 두 개에서 학습됐다. Pod 하나는 TPU v4 chip 3,072개와 host 768개로 이뤄졌고, 전체는 chip 6,144개·host 1,536개다. 각 Pod에서는 12-way model parallelism과 256-way fully sharded data parallelism을 쓰며, Pod 사이에서는 각 Pod가 batch의 절반을 처리한 뒤 gradient를 교환하는 **two-way pod-level data parallelism**을 쓴다.
+PaLM 540B는 data-center network로 연결된 TPU v4 Pod 두 개에서 학습됐다. Pod 하나는 TPU v4 chip 3,072개와 host 768개로 이뤄졌고, 전체는 chip 6,144개·host 1,536개다. 각 Pod에서는 12-way model parallelism과 256-way fully sharded data parallelism을 쓰며, Pod 사이에서는 각 Pod가 batch의 절반을 처리한 뒤 gradient를 교환하는 **two-way pod-level data parallelism**을 쓴다.
 
 이 방식은 pipeline parallelism을 쓰지 않았다. 논문은 2,048 batch에서 238.3k token/s, model FLOPs utilization 46.2%, rematerialization을 포함한 hardware FLOPs utilization 57.8%를 보고한다. ‘여러 Pod를 효율적으로 조율했다’는 설명은 이 수치와 병렬화 전략으로 뒷받침할 수 있지만, raw의 fault tolerance·mixed precision·sparse attention 서술은 이 논문에서 확인되지 않는다.
 
@@ -91,7 +91,7 @@ PaLM 540B은 data-center network로 연결된 TPU v4 Pod 두 개에서 학습됐
 
 ### English NLP와 BIG-bench: 평균은 범위를 지우지 않는다
 
-29개 English NLP benchmark의 1-shot aggregate에서 PaLM 540B은 NLG 63.9, NLU 74.7을 기록했다(Table 5). 이와 별도로 Table 4의 task별 few-shot 비교에서는 당시 prior large LM의 best few-shot result를 28/29 task에서 넘었다. 두 집계는 모두 prompt 기반 평가이며, task-specific fine-tuning result와 같은 조건이 아니다.
+29개 English NLP benchmark의 1-shot aggregate에서 PaLM 540B는 NLG 63.9, NLU 74.7을 기록했다(Table 5). 이와 별도로 Table 4의 task별 few-shot 비교에서는 당시 prior large LM의 best few-shot result를 28/29 task에서 넘었다. 두 집계는 모두 prompt 기반 평가이며, task-specific fine-tuning result와 같은 조건이 아니다.
 
 BIG-bench에서는 공통 58개 task에서 PaLM 540B 5-shot이 prior SOTA를 44개 task에서 넘었고, 그 집합의 평균 human score보다 높았다. 그러나 전체 150개 text task 비교에서는 평균 human score가 PaLM보다 높은 task가 35%였다. 사람이 도구를 쓸 수 있었던 human evaluation과 task별 metric의 평균이라는 조건도 함께 밝혀야 한다.
 
@@ -107,7 +107,7 @@ Base PaLM의 pretraining에는 GitHub code가 5%, 총 39B code token과 2.7B Pyt
 
 ### 다국어 결과의 정확한 읽기
 
-PaLM은 translation, GEM multilingual generation, TyDiQA-GoldP를 평가했다. 전통 WMT pair에서 English→French는 PaLM 540B이 0-shot 38.5, 1-shot 37.5, 5-shot 44.0 BLEU였고 fine-tuned SOTA 45.6과는 다르다(Table 14). TyDiQA에서 fine-tuned PaLM 540B average는 80.0으로 ByT5-XXL 81.4보다 낮고 mT5-XXL 79.1보다 높았다(Table 17).
+PaLM은 translation, GEM multilingual generation, TyDiQA-GoldP를 평가했다. 전통 WMT pair에서 English→French는 PaLM 540B가 0-shot 38.5, 1-shot 37.5, 5-shot 44.0 BLEU였고 fine-tuned SOTA 45.6과는 다르다(Table 14). TyDiQA에서 fine-tuned PaLM 540B average는 80.0으로 ByT5-XXL 81.4보다 낮고 mT5-XXL 79.1보다 높았다(Table 17).
 
 특히 multilingual summarization의 few-shot 성능은 fine-tuning과 여전히 큰 차이가 있었다. 따라서 ‘다국어 task 전반에서 전문 architecture 없이 SOTA를 달성했다’는 raw의 표현은 과장이다. 언어쌍, shot 수, fine-tuning 여부, metric을 함께 적어야 한다.
 

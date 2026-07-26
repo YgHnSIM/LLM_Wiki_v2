@@ -72,7 +72,7 @@ Wei 등이 2021년 9월 처음 공개하고 ICLR 2022에 발표한 FLAN은 이 �
 
 ### 2021년을 단일 발명의 해로 쓰지 않는다
 
-원문은 Google 연구진이 지시 튜닝을 주로 개척했다고 서술한다. 그러나 FLAN 연구진도 QA 기반 과제 통합과 instruction-following 선행 연구를 명시했다. Mishra 등의 Natural Instructions는 2021년 4월 이미 61개 과제·193k instance의 사람 작성 지시를 사용해 seen task에서 unseen task로의 일반화를 시험했다. 두 연구의 지시 길이·예시 포함·모델·분할은 같지 않지만, FLAN을 아무 선례 없는 유일한 기원으로 부를 수 없다는 점은 분명하다.
+원문은 Google 연구진이 지시 튜닝을 주로 개척했다고 서술한다. 그러나 FLAN 연구진도 QA 기반 과제 통합과 instruction-following 선행 연구를 명시했다. Mishra 등의 Natural Instructions는 2021년 4월 이미 61개 과제·193k instance의 사람이 작성한 지시를 사용해 seen task에서 unseen task로의 일반화를 시험했다. 두 연구의 지시 길이·예시 포함·모델·분할은 같지 않지만, FLAN을 아무 선례 없는 유일한 기원으로 부를 수 없다는 점은 분명하다.
 
 FLAN의 역사적 공헌은 최초성보다 **큰 모델, 여러 짧은 지시 템플릿, 과제 군집 보류와 절제 실험을 하나의 측정 틀로 묶어 instruction tuning이라는 경로를 널리 정착시킨 것**에 있다.
 
@@ -166,7 +166,7 @@ FLAN 논문은 짧은 benchmark 지시, 과제별 accuracy·F1·exact match·BLE
 
 FLAN의 강한 결론은 137B LaMDA-PT, 62개 dataset, 짧은 English 중심 template와 정한 task-cluster split에 조건화된다. 모델 내부가 지시 의미나 과제 동등성을 사람처럼 표상했다는 인과는 식별하지 않는다. 여러 metric의 개선도 하나의 공통 ‘지시 따르기 점수’가 아니다.
 
-raw의 Self-Instruct·ChatGPT·GPT-4·Claude·multimodal 확장은 후대 자료가 필요한 계보다. Self-Instruct는 2022년 arXiv·2023년 ACL 연구이고, 지시·instance 생성 뒤 filtering을 거친다. 상용 모델의 세부 자료와 단계는 공개 범위가 서로 다르므로 모두 같은 FLAN식 절차라고 단정하지 않는다.
+raw의 Self-Instruct·ChatGPT·GPT-4·Claude·multimodal 확장은 후대 자료가 필요한 계보이다. Self-Instruct는 2022년 arXiv·2023년 ACL 연구이고, 지시·instance 생성 뒤 filtering을 거친다. 상용 모델의 세부 자료와 단계는 공개 범위가 서로 다르므로 모두 같은 FLAN식 절차라고 단정하지 않는다.
 
 ## 학습 확인
 

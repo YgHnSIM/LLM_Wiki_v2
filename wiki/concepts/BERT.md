@@ -66,7 +66,7 @@ BERT는 Transformer 원 논문의 encoder stack을 사용한다. 입력 각 위�
 | BERT-base | 12 | 768 | 12 | 약 110M |
 | BERT-large | 24 | 1024 | 16 | 약 340M |
 
-최대 입력은 512 WordPiece token이었다. BERT가 순환 계산을 제거했어도 self-attention의 sequence 길이 제곱 비용은 남는다.
+최대 입력 길이는 512 WordPiece token이었다. BERT가 순환 계산을 제거했어도 self-attention의 sequence 길이 제곱 비용은 남는다.
 
 ### 사전 학습 목표
 

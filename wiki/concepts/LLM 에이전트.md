@@ -216,7 +216,7 @@ Chain-of-thought prompting은 일부 과제에서 중간 text와 정답 성능�
 | Postcondition | 의도한 상태 변화가 계약된 범위에서 확인됐는가? |
 | Grounding | Agent의 후속 답이 실제 result와 일치하는가? |
 
-Tool output도 신뢰하지 않은 입력이다. Web page·email·document 속 text가 더 높은 권한의 instruction처럼 처리되면 간접 prompt injection이 된다. Data provenance를 표시하고, untrusted content를 읽는 action과 write action 사이에 policy gate를 둔다.
+Tool output도 신뢰할 수 없는 입력이다. Web page·email·document 속 text가 더 높은 권한의 instruction처럼 처리되면 간접 prompt injection이 된다. Data provenance를 표시하고, untrusted content를 읽는 action과 write action 사이에 policy gate를 둔다.
 
 특히 write action이 unknown이면 agent가 같은 문장을 다시 생성해도 새 call을 바로 보내지 않는다. action·resource·parameter가 바뀌었다면 authorization과 필요한 confirmation 또는 waiver 결정을 다시 평가하고, 바뀌지 않았다면 operation record·상태 조회·event를 대조한다. partial effect를 발견하면 plan text가 아니라 관측된 trace를 바탕으로 멈춤·compensation 제안·사람 escalation 중 하나를 선택한다. compensation은 새 action이므로 자동으로 실행·승인·성공했다고 가정하지 않는다.
 

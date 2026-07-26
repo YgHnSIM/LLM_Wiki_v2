@@ -96,7 +96,7 @@ related:
 
 이와 달리 prior·decoder·upsampler는 노이즈가 더 많은 CLIP dataset을 합치지 않고 약 2억 5천만 image의 DALL·E dataset만 사용했다. 전자는 넓은 의미 정렬을, 후자는 생성 품질을 위한 학습 조건이었으므로 “DALL·E 2가 6억 5천만 image로 전체 훈련됐다”고 줄이면 단계별 자료가 혼합된다.
 
-### Prior가 필요했는 이유
+### Prior가 필요했던 이유
 
 작은 비교 모델에서 CLIP text embedding만 decoder에 직접 넣은 모델의 FID는 9.16이었고 prior를 포함한 unCLIP은 7.99였다. 또 모델이 예측한 image embedding 대신 CLIP text embedding을 zero-shot으로 decoder에 넣으면 FID가 16.55로 악화됐다. Caption과 image를 같은 공간에 놓는 것과, 생성기가 요구하는 image embedding 분포를 예측하는 것은 같은 문제가 아니었다.
 

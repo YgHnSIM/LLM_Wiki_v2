@@ -163,7 +163,7 @@ DeepSeekMoE는 fine-grained routed expert와 shared expert를 사용하며, V3�
 
 ### 성능은 sampling 조건과 비교 상대를 붙여 읽는다
 
-R1 평가는 model 출력을 최대 32,768 token으로 제한했다. Sampling이 필요한 benchmark에는 temperature 0.6, top-$p$ 0.95를 사용하고 test set 크기에 따라 보통 질문당 4–64개 응답으로 pass@1을 추정했다. AIME 2024의 consensus는 64개 응답의 majority vote인 cons@64다. OpenAI-o1-1217은 중국 본토에서 API 접근이 어려워 DeepSeek이 직접 같은 harness로 실행하지 않고 OpenAI 공식 보고 수치를 가져왔다.
+R1 평가는 model 출력을 최대 32,768 token으로 제한했다. Sampling이 필요한 benchmark에는 temperature 0.6, top-$p$ 0.95를 사용하고 test set 크기에 따라 보통 질문당 4–64개 응답으로 pass@1을 추정했다. AIME 2024의 consensus는 64개 응답의 majority vote인 cons@64다. 중국 본토에서는 OpenAI-o1-1217 API에 접근하기 어려워 DeepSeek은 직접 같은 harness로 실행하지 않고 OpenAI 공식 보고 수치를 가져왔다.
 
 | Benchmark | Metric | DeepSeek-R1 | OpenAI-o1-1217 | 해석 경계 |
 | --- | --- | ---: | ---: | --- |

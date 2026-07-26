@@ -56,7 +56,7 @@ related:
 
 ### 원자료가 제기한 문제
 
-2017년 「Attention Is All You Need」은 기계 번역의 encoder–decoder 구조에서 순환과 합성곱을 핵심 시퀀스 상호작용으로 쓰지 않고, stacked self-attention과 위치별 fully connected layer만으로 입력·출력 표현을 계산할 수 있는가를 물었다. 당시 RNN 계열은 위치 $t$의 상태가 $t-1$ 상태에 의존해 한 시퀀스 안의 훈련 계산을 순차적으로 진행해야 했다.
+2017년 「Attention Is All You Need」은 기계 번역의 encoder–decoder 구조에서 순환과 합성곱을 핵심 시퀀스 상호작용으로 사용하지 않고, stacked self-attention과 위치별 fully connected layer만으로 입력·출력 표현을 계산할 수 있는가를 물었다. 당시 RNN 계열은 위치 $t$의 상태가 $t-1$ 상태에 의존해 한 시퀀스 안의 훈련 계산을 순차적으로 진행해야 했다.
 
 논문은 Transformer가 각 위치 쌍을 self-attention으로 직접 연결해 더 많은 위치 병렬성을 얻고, 두 번역 과제에서 품질과 보고된 훈련 비용을 경쟁 시스템과 비교했다. 이는 현대 LLM 전체의 성능을 실험한 논문이 아니라, 6층 encoder–decoder 번역 모델의 구조·복잡도·실험 결과를 다룬 2017년 연구다.
 
@@ -138,7 +138,7 @@ $$
 
 $QK^{\mathsf T}$의 한 행은 query 하나가 모든 key에 준 점수다. $\sqrt{d_k}$로 나누는 것은 큰 차원의 내적이 softmax를 포화시켜 기울기가 매우 작아지는 경향을 줄이기 위한 선택이다. 원 논문은 query·key 성분이 독립이고 평균 0·분산 1이면 내적 분산이 $d_k$라는 직관을 제시했다. softmax는 점수를 양수이고 합 1인 가중치로 바꾸며, 마지막 행렬곱은 그 비율로 $V$의 행을 섞는다.
 
-attention 가중치는 내부 value 혼합 비율이다. 어휘 후보의 다음 token 확률도, 인간이 정한 단어 정렬 정답도, 최종 예측의 충분한 원인도 자동으로 뜻하지 않는다. 두 후보의 모든 중간 수치 계산은 [[어텐션 메커니즘]]에서 확인할 수 있다.
+attention 가중치는 내부 value 혼합 비율이다. 어휘 후보의 다음 token 확률도, 인간이 정한 단어 정렬의 정답도, 최종 예측의 충분한 원인도 자동으로 뜻하지 않는다. 두 후보의 모든 중간 수치 계산은 [[어텐션 메커니즘]]에서 확인할 수 있다.
 
 ### multi-head, FFN, 위치 표현
 
@@ -185,11 +185,11 @@ self-attention은 모든 위치의 표현을 행렬 연산으로 병렬 계산�
 
 원 Transformer는 번역 encoder–decoder다. 2018년 GPT는 decoder 계열과 causal language modeling을, BERT는 encoder 계열과 masked language modeling을 결합했다. encoder 전용·decoder 전용 모델은 원 구조의 일부를 재사용하지만 cross-attention을 포함한 번역 입출력 전체와 같지 않다.
 
-대규모 사전학습과 현대 LLM에는 자료 규모, tokenizer, optimizer·schedule, low precision, 분산 학습, 가속기와 서빙 시스템이 더해졌다. 원 2017년 논문이 수천억 매개변수·문맥 내 학습·현대 제품 능력을 직접 실험하거나 예측한 것으로 소급하지 않는다.
+대규모 사전학습과 현대 LLM으로 이어지면서 자료 규모, tokenizer, optimizer·schedule, low precision, 분산 학습, 가속기와 서빙 시스템이 더해졌다. 2017년 원 논문이 수천억 매개변수·문맥 내 학습·현대 제품 능력을 직접 실험하거나 예측한 것으로 소급하지 않는다.
 
 ### attention은 해석 가능한가
 
-attention weight를 시각화하면 모델 안에서 어느 value가 현재 표현에 크게 섞였는지 볼 수 있다. 그러나 곧바로 예측 원인의 충실한 설명이 되는 것은 아니다. Jain·Wallace는 attention과 gradient 기반 중요도 사이 낮은 상관, 매우 다른 attention 분포가 비슷한 예측을 내는 사례를 보고했다.
+attention weight를 시각화하면 모델 안에서 어떤 value가 현재 표현에 크게 섞였는지 볼 수 있다. 그러나 곧바로 예측 원인의 충실한 설명이 되는 것은 아니다. Jain·Wallace는 attention과 gradient 기반 중요도 사이 낮은 상관, 매우 다른 attention 분포가 비슷한 예측을 내는 사례를 보고했다.
 
 Wiegreffe·Pinter는 설명의 정의와 모델 전체 맥락을 고려해야 한다고 반론하고 더 엄격한 진단을 제안했다. 따라서 ‘attention은 설명이다’와 ‘attention은 절대 설명이 아니다’ 중 하나를 무조건 채택하지 않는다. 설명으로 사용하려면 안정성·충실성·개입 효과를 별도로 검증한다.
 

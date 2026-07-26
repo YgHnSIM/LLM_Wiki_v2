@@ -82,7 +82,7 @@ $$
 W'=W_0+\frac{\alpha}{r}BA
 $$
 
-LoRA 자체가 모든 layer에 같은 rank를 쓰도록 수학적으로 강제하지는 않는다. 원 논문도 선택한 weight matrix 부분집합에 적용했고 대표 실험에서는 attention query·value projection을 주로 갱신했다. 여러 target module에 하나의 rank를 반복 적용하는 흔한 설정이 uniform allocation을 만들며, AdaLoRA는 이 수동 선택이 불가능했다는 문제가 아니라 같은 총 budget을 자동으로 재배분하는 문제를 다뤘다.
+LoRA 자체가 모든 layer에 같은 rank를 쓰도록 수학적으로 강제하지는 않는다. 원 논문도 선택한 weight matrix 부분집합에 적용했고 대표 실험에서는 attention query·value projection을 주로 갱신했다. 여러 target module에 하나의 rank를 반복 적용하는 흔한 설정이 uniform allocation을 만들며, AdaLoRA는 이런 수동 선택이 불가능하다는 문제를 다룬 것이 아니라 같은 총 budget을 자동으로 재배분하는 문제를 다뤘다.
 
 ## 2단계 — 작동 원리
 
@@ -137,7 +137,7 @@ $$
 | rsLoRA | 2023-11-28 · 학회 표기 없음 | `α/√r` rank stabilization |
 | DoRA | 2024-02-14 · ICML 2024 | Magnitude–direction weight decomposition |
 
-따라서 “2024년 내내 모두 새로 개발됐다”는 원문의 연표를 유지하지 않는다. 학회연도와 최초 공개일도 구분한다.
+따라서 “2024년 내내 모두 새로 개발됐다”는 원문의 연표를 유지하지 않는다. 학회 연도와 최초 공개일도 구분한다.
 
 ### 성능 숫자가 말하는 범위
 
@@ -158,7 +158,7 @@ LLaMA 계열 instruction tuning의 Table 4는 서로 다른 rank 설정(LoRA 64,
 | Training compute·time | Forward·backward와 추가 계산 | Inference latency 감소 |
 | Inference graph | 병합 여부와 실행 kernel | Training memory 감소 |
 
-Method를 비교할 때는 base checkpoint, target module, rank budget, precision, batch·sequence, optimizer와 hardware를 함께 기록해야 한다.
+방법을 비교할 때는 base checkpoint, target module, rank budget, precision, batch·sequence, optimizer와 hardware를 함께 기록해야 한다.
 
 ## 검증과 한계
 

@@ -83,7 +83,7 @@ BLOOM은 *BigScience Large Open-science Open-access Multilingual Language Model*
 
 ### 왜 중요한가
 
-BLOOM은 model 하나뿐 아니라 dataset sourcing, tokenizer, 분산 학습, evaluation, model card, license와 협업 과정을 함께 연구 artifact로 만들었다. 이 결합은 외부 연구자가 폐쇄형 API를 호출하는 데서 그치지 않고 checkpoint를 직접 분석하고 새로운 평가·미세조정을 수행할 가능성을 넓혔다.
+BLOOM은 model 하나에 그치지 않고 dataset sourcing, tokenizer, 분산 학습, evaluation, model card, license와 협업 과정을 함께 연구 artifact로 만들었다. 이 결합은 외부 연구자가 폐쇄형 API를 호출하는 데서 그치지 않고 checkpoint를 직접 분석하고 새로운 평가·미세조정을 수행할 가능성을 넓혔다.
 
 그러나 역사적 가치는 “접근 문제를 해결했다”보다 **접근의 여러 층을 분리해서 측정하게 했다**는 데 있다. Download 가능성, 실행 가능성, 재학습 가능성, dataset 권리, 협업 참여와 의사 결정 권한은 서로 대체되지 않는다.
 
@@ -112,7 +112,7 @@ Tokenizer는 byte-level BPE다. 모든 byte를 기초 단위로 삼아 unknown t
 
 ### ROOTS와 학습 노출량
 
-ROOTS는 498개 구성 dataset, 약 1.61TB의 text로 이뤄졌다. 46개 자연어와 13개 programming language라는 범주는 **training corpus의 구성**을 말한다. Model card의 350B unique token, 논문의 약 341B corpus token은 집계 표현이 다르며, 최종 model은 반복 data 25B를 더해 총 366B token을 처리했다.
+ROOTS는 498개 구성 dataset, 약 1.61TB의 text로 이뤄졌다. 46개 자연어와 13개 programming language라는 범주는 **training corpus의 구성**을 말한다. Model card의 350B unique token과 논문의 약 341B corpus token은 집계 방식이 다르며, 최종 model은 반복 data 25B를 추가해 총 366B token을 처리했다.
 
 각 언어의 비중은 균등하지 않다. 따라서 “BLOOM이 46개 언어를 지원한다”보다 “46개 자연어가 training data에 포함됐다”고 먼저 말하는 편이 정확하다. 실제 지원 수준은 언어·과제·prompt별 evaluation으로 확인해야 한다.
 
@@ -137,7 +137,7 @@ ROOTS는 498개 구성 dataset, 약 1.61TB의 text로 이뤄졌다. 46개 자연
 
 ### 협업은 산출물의 일부였다
 
-BigScience는 30개 working group을 두고 data, architecture, engineering, evaluation, ethics·law와 broader impacts를 병행했다. 공식 사후 연구는 1,200명 넘는 등록자 중 공개 artifact에 직접 기여한 사실을 추적할 수 있었던 365명, 거주지가 확인된 308명·38개국을 별도로 집계했다.
+BigScience는 30개 working group을 두고 data, architecture, engineering, evaluation, ethics·law와 broader impacts를 병행했다. 공식 사후 연구는 1,200명 넘는 등록자 가운데 공개 artifact에 직접 기여한 사실을 추적할 수 있는 365명과, 거주지가 확인된 308명·38개국을 별도로 집계했다.
 
 이는 `등록`, `직접 기여`, `지리 대표성`을 같은 숫자로 말하면 안 된다는 사례다. 참여자가 많고 여러 분야를 포함했다는 사실은 확인되지만, 모든 지역의 동등한 대표성, 보상, 발언권까지 자동으로 따라오지 않는다.
 
@@ -165,8 +165,8 @@ BLOOM 논문은 zero-shot·one-shot prompt, translation, summarization, code gen
 ### 흔한 오해
 
 - **BLOOM은 최초의 공개 175B급 model이다:** OPT-175B의 2022년 5월 공개가 BLOOM의 7월 공개보다 앞선다. BLOOM의 구별점은 최초가 아니라 다국어 corpus·협업·artifact와 책임 있는 공개의 구체적 조합이다.
-- **46개 언어를 포함했으므로 모두 잘 지원한다:** Training 포함과 downstream 품질은 다르다. 언어별 자료량과 결과가 불균등하다.
-- **다국어 corpus가 영어 중심 bias를 제거했다:** Model card 자체가 관점 불균형, stereotype과 차별적 출력 위험을 밝힌다.
+- **46개 언어를 포함했으므로 모두 잘 지원한다:** Training data에 포함된 사실과 downstream 품질은 다르다. 언어별 자료량과 결과가 불균등하다.
+- **다국어 corpus가 영어 중심 bias를 제거했다:** Model card 자체가 관점 불균형, stereotype과 차별적 출력의 위험을 밝힌다.
 - **BLOOM 전체가 오픈 소스다:** Code, weight, data의 license와 access 조건이 다르다.
 - **ROOTS 1.6TB가 모두 자유롭게 배포됐다:** 논문은 gated인 큰 초기 subset과 source별 release·governance를 설명한다.
 - **BLOOM과 BLOOMZ는 같은 model 성능이다:** BLOOMZ는 별도 multitask prompted fine-tuning을 거친 파생 model이다.

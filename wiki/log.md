@@ -4196,7 +4196,7 @@ raw 등록 해시:
 - Alhanai 연구는 사람 번역 8개와 기존 3개를 합친 11개 African language, WinoGrande·MMLU 일부와 약 100만 단어 fine-tuning에 한정된다. 단일 언어 fine-tuning 평균 `+5.6` percentage points와 교차 언어 평균 `+2.9`에도 GPT-4o의 영어 대비 11개 언어 평균 격차는 12.0–19.9 points 남았으므로 범용 near-English 성능으로 확대하지 않는다.
 - Nagar의 CMI2 결과 90.4% English·85.6% Hindi와 4.8-point 격차는 English answer option을 둔 Hindi–English 합성 code-switch CommonSenseQA 한 조건이다. Non-archival work-in-progress이고 논문과 repository 설정도 불일치하므로 여러 언어·과제의 일반 형평성으로 일반화하지 않는다.
 - de Gibert 연구는 GPT-4o로 만든 Europarl 합성 병렬 자료의 기계 번역 실험이다. 일부 방향은 개선됐지만 Finnish–Ukrainian OPUS-MT는 하락했고 Georgian 사람 평가의 약 40%는 unacceptable이었으므로 합성 자료가 문법·문화 적합성을 자동 보장한다고 보지 않는다.
-- XLM 2019, NLLB·BLOOM 2022, Aya·MaLA-500 2024는 2025년보다 앞선 multilingual pretraining·번역·공개 접근·tokenizer 계보다. 언어 수, training token, model weight 공개, 번역 방향과 downstream 성능을 하나의 coverage 수로 합치지 않는다.
+- XLM 2019, NLLB·BLOOM 2022, Aya·MaLA-500 2024는 2025년보다 앞선 multilingual pretraining·번역·공개 접근·tokenizer 계보이다. 언어 수, training token, model weight 공개, 번역 방향과 downstream 성능을 하나의 coverage 수로 합치지 않는다.
 - 교육·의료·기업 활용, 문화 보존, 포용과 격차 해소는 원문과 세 연구에 실제 deployment·사용자 outcome·오류 피해·세대 간 언어 전승 자료가 없다. Benchmark 개선과 사회적 접근성·권리·현장 효과를 별도 증거층으로 남긴다.
 - `source:ready -- 110`은 96개 회귀 테스트와 342개 Markdown strict lint를 통과해 446개 evidence와 218개 immutable raw artifact를 확인했다. Site는 99개 legacy redirect를 포함한 666개 HTML을 만들고 7,821개 wiki link를 모두 해소했으며, 44,215개 local reference와 검색 항목 341개를 검사했다.
 - 공식 목차에서 실제 원문이 있는 110번까지 공개 처리를 마쳤다. 다음 순차 입력은 없으며, upstream 원문 결손은 공식 047 `Attention Mechanism` 한 건으로 유지한다.

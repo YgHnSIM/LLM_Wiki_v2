@@ -50,7 +50,7 @@ related:
 
 ## 1단계 — 먼저 잡을 핵심
 
-XLNet·RoBERTa·ALBERT는 2019년 전후에 [[BERT]]의 서로 다른 병목을 겨냥한 세 연구다. XLNet은 `[MASK]` 없는 **사전 학습 목표(objective)** 를, RoBERTa는 BERT를 실제로 얼마나·어떻게 학습시켰는지인 **훈련 recipe** 를, ALBERT는 같은 기능을 담는 수의 **매개변수 배치(parameterization)** 를 중심에 놓았다. 이름을 한 묶음으로 쓰더라도 같은 architecture 계열의 순차 버전이라는 뜻은 아니다.
+XLNet·RoBERTa·ALBERT는 2019년 전후에 [[BERT]]의 서로 다른 병목을 겨냥한 세 연구다. XLNet은 `[MASK]` 없는 **사전 학습 목표(objective)** 를, RoBERTa는 BERT를 실제로 얼마나·어떻게 학습시켰는지인 **훈련 recipe** 를, ALBERT는 같은 기능을 담는 매개변수의 수와 **배치(parameterization)** 를 중심에 놓았다. 이름을 한 묶음으로 쓰더라도 같은 architecture 계열의 순차 버전이라는 뜻은 아니다.
 
 | 바꾼 층 | 먼저 물어야 할 질문 | 대표 모델 |
 |---|---|---|
@@ -237,7 +237,7 @@ $$
 
 ### RoBERTa에서 ‘더 오래’의 뜻: step 수가 아니라 노출량
 
-한 optimization step에 넣는 sequence 수를 $B$, step 수를 $S$라고 하면 모델에 제시한 sequence 횟수는 우선 다음처럼 셀 수 있다.
+한 optimization step에 넣는 sequence 수를 $B$, step 수를 $S$라고 하면 모델에 제시한 sequence의 횟수는 우선 다음처럼 셀 수 있다.
 
 $$
 N_{\mathrm{seq}}=S\times B
@@ -268,7 +268,7 @@ m_i^{(r)}\sim\operatorname{Bernoulli}(0.15),
 P(m_i^{(r)}=1)=0.15
 $$
 
-조건부로 target이 되면 BERT의 원 recipe는 80%를 `[MASK]`, 10%를 무작위 token, 10%를 원 token으로 입력한다. 같은 위치를 $r$번 독립적으로 제시한다고 단순화할 때 적어도 한 번 target이 될 확률은 $1-0.85^r$이고, $r=10$이면 약 $0.803$이다. 이 계산은 mask를 다시 뽑으면 가능한 관측 조합이 늘어난다는 뜻일 뿐, dynamic masking 하나가 benchmark 향상을 만들었다는 인과 증명은 아니다. 실제 논문의 통제 비교도 static과 dynamic의 차이를 비슷하거나 소폭 우수한 정도로 보고한다.
+어떤 위치가 target으로 선택되면 BERT의 원 recipe는 80%를 `[MASK]`, 10%를 무작위 token, 10%를 원 token으로 입력한다. 같은 위치를 $r$번 독립적으로 제시한다고 단순화할 때 적어도 한 번 target이 될 확률은 $1-0.85^r$이고, $r=10$이면 약 $0.803$이다. 이 계산은 mask를 다시 뽑으면 가능한 관측 조합이 늘어난다는 뜻일 뿐, dynamic masking 하나가 benchmark 향상을 만들었다는 인과 증명은 아니다. 실제 논문의 통제 비교도 static과 dynamic의 차이를 비슷하거나 소폭 우수한 정도로 보고한다.
 
 RoBERTa는 NSP를 없앴지만 sequence 구성도 함께 바꾸었다. 그러므로 “NSP만 삭제했다”나 “batch만 키웠다”처럼 한 항만 남겨서는 논문의 비교를 재현할 수 없다. data 양·다양성, byte-level BPE, 긴 text block, batch, step, masking을 누적해 바꾼 recipe라는 점이 핵심이다.
 
@@ -322,7 +322,7 @@ $$
 
 일반 구조는 block parameter $P_{\mathrm{block}}$을 layer마다 $L P_{\mathrm{block}}$개 저장하지만, all-sharing은 $\phi_{\mathrm{shared}}$ 하나만 저장한다. 그러나 둘 다 $f$를 $L$번 적용해 서로 다른 $Z^{(0)},Z^{(1)},\ldots$를 만든다. 그래서 parameter가 줄어도 깊이 방향의 attention·feed-forward FLOPs와 latency가 같은 비율로 사라지지 않는다. 공유는 필연적 수식 변형이 아니라 memory·통신 비용과 capacity 사이의 trade-off다.
 
-ALBERT의 SOP는 연속한 두 segment $(A,B)$를 원래 순서면 $y=1$, 순서를 바꾼 $(B,A)$이면 $y=0$으로 둔다. 모델이 원래 순서일 확률을 $q=p_\theta(y=1\mid A,B)$라고 하면 보통의 이진 손실은
+ALBERT의 SOP는 연속된 두 segment $(A,B)$를 원래 순서면 $y=1$, 순서를 바꾼 $(B,A)$이면 $y=0$으로 둔다. 모델이 원래 순서일 확률을 $q=p_\theta(y=1\mid A,B)$라고 하면 보통의 이진 손실은
 
 $$
 \mathcal{L}_{\mathrm{SOP}}

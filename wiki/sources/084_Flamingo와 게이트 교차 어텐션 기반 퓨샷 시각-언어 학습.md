@@ -164,7 +164,7 @@ ALIGN·LTIP에서는 사전에 평가 대상으로 정한 ImageNet·COCO·OK-VQA
 
 연구진의 성별·피부색 caption과 toxicity 조사는 예비 분석이었다. Chinchilla에서 물려받은 사회적 bias·유해 언어·privacy risk도 남고, safe-for-work 이미지에서 명확한 독성을 관찰하지 못했다는 경험이 공격적 prompt나 실제 배포 안전성을 보장하지 않는다.
 
-가장 큰 model은 비용 때문에 한 번만 훈련돼 error bar가 없다. 따라서 model 규모별 차이를 반복 실험의 분산과 분리하기 어렵다.
+가장 큰 model은 비용 때문에 한 번만 훈련되어 error bar가 없다. 따라서 model 규모별 차이를 반복 실험의 분산과 분리하기 어렵다.
 
 ## 학습 확인
 

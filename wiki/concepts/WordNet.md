@@ -112,7 +112,7 @@ synonymy도 절대적인 표현 동등성이 아니다. 같은 synset 안의 단
 
 WordNet은 한 번 완성된 고정 hierarchy가 아니다. 1990년 명사 논문은 당시 25개의 noun `unique beginner`가 여러 hierarchy를 이끈다고 설명했다. WordNet 3.0에서는 모든 noun synset이 하나의 `entity` unique beginner 아래 조직된다. 초기 논문의 구조와 후대 문서의 구조가 다르므로, 역사적 설명에서 버전을 생략하면 모순처럼 보이는 진술을 합치게 된다.
 
-공개 이력에서도 1995를 단일 탄생일로 삼지 않는다. 프로젝트는 1985년에 시작됐고, 1992년 12월 9일에는 1.3이, 1993년 8월에는 1.4가 배포됐다. 1995년 봄에는 1.5가 배포되고 Miller의 CACM 소개 논문이 나왔으며, 1998년 단행본은 당시 최신인 1.6을 다뤘다. 논문 출판, release announcement와 플랫폼 패키지 날짜를 서로 다른 사건으로 기록한다.
+공개 이력에서도 1995년을 단일 탄생일로 삼지 않는다. 프로젝트는 1985년에 시작됐고, 1992년 12월 9일에는 1.3이, 1993년 8월에는 1.4가 배포됐다. 1995년 봄에는 1.5가 배포되고 Miller의 CACM 소개 논문이 나왔으며, 1998년 단행본은 당시 최신인 1.6을 다뤘다. 논문 출판, release announcement와 플랫폼 패키지 날짜를 서로 다른 사건으로 기록한다.
 
 ### WordNet 3.0 통계
 
@@ -143,7 +143,7 @@ WordNet은 relation traversal, taxonomy path, gloss와 sense inventory가 필요
 
 WordNet의 핵심 대상은 **lexicalized concept와 lexical semantics**다. 일반 knowledge graph처럼 특정 인물·장소·사건에 관한 사실을 포괄적으로 기술하지 않으며, 자유로운 구와 문장의 compositional meaning도 synset 조합만으로 자동 계산하지 않는다. 고유명사·신조어·전문어·closed-class word와 언어별 coverage에도 공백이 있다.
 
-수작업 분석은 relation의 종류와 경로를 사람이 읽고 검사할 수 있게 하지만, 언어 변화에 자동으로 맞춰지지는 않는다. sense granularity가 응용과 맞지 않을 수 있고, 그래프의 이산 경로는 corpus에서 관측한 연속 유사도나 실제 사용 빈도와 같지 않다. sense 번호와 나열 순서도 보편적인 빈도 법칙으로 해석하면 안 된다.
+수작업 분석은 사람이 relation의 종류와 경로를 읽고 검사할 수 있게 하지만, 언어 변화에 자동으로 맞춰지지는 않는다. sense granularity가 응용과 맞지 않을 수 있고, 그래프의 이산 경로는 corpus에서 관측한 연속 유사도나 실제 사용 빈도와 같지 않다. sense 번호와 나열 순서도 보편적인 빈도 법칙으로 해석하면 안 된다.
 
 ### 인간 기억·임베딩·지식 그래프와의 관계
 

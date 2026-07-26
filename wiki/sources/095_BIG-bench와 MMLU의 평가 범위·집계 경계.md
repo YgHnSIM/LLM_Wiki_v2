@@ -90,7 +90,7 @@ MMLU 평균은 선택지를 잘 고르는 능력을, BIG-bench 평균은 서로 
 - MMLU 원 논문의 GPT-3 175B few-shot 정확도는 43.9%였고, 13B 이하 세 GPT-3형은 약 25%의 무작위 기준에 머물렀다.
 - BIG-bench 논문은 450명의 저자와 132개 기관이 기여한 204개 과제를 보고했으며, 약 80%는 JSON, 약 20%는 programmatic 과제였다.
 - BIG-bench의 aggregate는 서로 다른 raw metric을 task별 low/high로 0–100에 맞춘 `normalized preferred metric`의 과제 평균이다. 점수가 0 미만이나 100 초과일 수도 있다.
-- BIG-bench에서 갑자기 뛰는 정확도·exact match가 더 부드러운 likelihood나 부분 과제로 보이면 연속적으로 개선되는 사례가 있었다. 급격한 점수만으로 내부 능력의 상전이를 확정하지 않는다.
+- BIG-bench에서 갑자기 뛰는 정확도·exact match도 더 부드러운 likelihood나 부분 과제로 측정하면 연속적으로 개선되는 사례가 있었다. 급격한 점수만으로 내부 능력의 상전이를 확정하지 않는다.
 - 높은 benchmark 점수는 model snapshot, prompt, shot 수, scoring, contamination audit와 task별 분포가 함께 만든 결과다.
 
 ## 2단계 — 작동 원리
@@ -152,7 +152,7 @@ $$
 
 논문의 GPT와 BIG-G 계열은 규모와 shot 수가 늘 때 평균 normalized preferred metric이 개선됐지만, 당시 가장 강한 model도 aggregate 20 미만이었고 사람이 도구와 인터넷 검색을 사용할 수 있었던 expert rater 기준보다 낮았다. Figure 1의 전체 JSON 비교는 1-shot이며, BIG-G가 사람 기준이 있는 171개·GPT가 146개 과제에서 실행된 panel과 BIG-G 161개·GPT 156개 JSON 과제 panel도 범위가 다르다. Rater는 task를 부분 표집했고 내용과 format도 개발 중 바뀌었으므로 ‘인간 성능’과 ‘BIG-bench 점수’ 모두 고정된 단일 분모가 아니다.
 
-일부 task의 exact match·accuracy는 특정 규모에서 갑자기 올랐다. 그러나 저자들은 정답 log probability, 더 세분한 하위 기능 또는 multiple-choice 재구성에서는 진행이 부드러운 사례를 보였다. 반대로 부드러운 보조 metric이 최종 과제 성공을 보장하는 것도 아니었다. 이 결과는 [[손실 곡선과 능력 곡선 사이]]에서 구분하듯 metric·task specification과 내부 능력 변화의 관계를 조사하게 하지, 단일 점프를 곧바로 일반 추론의 출현으로 확정하게 하지 않는다.
+일부 task의 exact match·accuracy는 특정 규모에서 갑자기 올랐다. 그러나 저자들은 정답 log probability, 더 세분한 하위 기능 또는 multiple-choice 재구성에서는 진행이 부드러운 사례를 보였다. 반대로 부드러운 보조 metric이 최종 과제 성공을 보장하는 것도 아니었다. 이 결과는 [[손실 곡선과 능력 곡선 사이]]에서 구분하듯 metric·task specification과 내부 능력 변화의 관계를 조사하게 할 뿐, 단일 점프를 곧바로 일반 추론의 출현으로 확정하게 하지는 않는다.
 
 ### 2022–2023년 후속 model 수치는 조건을 바꿨다
 

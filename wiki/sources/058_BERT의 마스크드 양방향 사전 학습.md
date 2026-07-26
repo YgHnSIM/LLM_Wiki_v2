@@ -98,7 +98,7 @@ BERT-base는 12층, hidden size 768, 12 attention head, 약 1억 1천만 매개�
 - token tagging: 각 위치 표현에 label 분류층을 둔다.
 - SWAG: 네 후보 문장쌍을 각각 부호화하고 점수를 비교한다.
 
-출력층만 학습한 것이 아니라 과제 손실로 BERT 전체 매개변수를 함께 미세조정했다. BERT-large는 GLUE 80.5, MultiNLI 86.7%, SQuAD 1.1 Test F1 93.2, SQuAD 2.0 Test F1 83.1을 보고했다. 이 수치는 2018–2019년 데이터·평가·ensemble/단일 모델 설정에 묶이며 현재 일반 능력 점수가 아니다.
+출력층만 학습한 것이 아니라 과제 손실로 BERT 전체 매개변수를 함께 미세조정했다. BERT-large는 GLUE 80.5, MultiNLI 86.7%, SQuAD 1.1 Test F1 93.2, SQuAD 2.0 Test F1 83.1을 보고했다. 이 수치는 2018–2019년 데이터·평가·ensemble/단일 모델 설정에 따라 달라지며 현재 일반 능력 점수가 아니다.
 
 ### 생성과 이해의 다른 인터페이스
 
