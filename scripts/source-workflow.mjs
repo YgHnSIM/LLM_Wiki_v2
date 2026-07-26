@@ -1,9 +1,10 @@
-import { constants as fsConstants, promises as fs } from 'node:fs';
+import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import yaml from 'js-yaml';
 import matter from 'gray-matter';
 import { metaDir, rawDir, rootDir, wikiDir } from './lib/project-paths.mjs';
+import { commitRawArtifactPlan } from './lib/raw-integrity.mjs';
 import {
   EDITORIALLY_RECONSTRUCTED_SOURCE_PREFIX,
   officialSourcePrefix,
@@ -227,19 +228,35 @@ async function copyRaw(context) {
     if (!registered) missingRecords.push(expected);
   }
 
+  const copies = [];
   for (let index = 0; index < destinations.length; index += 1) {
     if (!(await exists(destinations[index]))) {
-      await fs.copyFile(sources[index], destinations[index], fsConstants.COPYFILE_EXCL);
+      copies.push({ source: sources[index], destination: destinations[index] });
     }
   }
 
+  const separator = registryRaw.endsWith('\n') ? '' : '\n';
+  const registryNext = missingRecords.length
+    ? `${registryRaw}${separator}${formatArtifactRecords(missingRecords)}\n`
+    : registryRaw;
   if (missingRecords.length) {
-    const separator = registryRaw.endsWith('\n') ? '' : '\n';
-    await fs.appendFile(registryPath, `${separator}${formatArtifactRecords(missingRecords)}\n`, 'utf8');
+    const nextRegistry = yaml.safeLoad(registryNext);
+    if (!nextRegistry || nextRegistry.schema_version !== 1 || !Array.isArray(nextRegistry.artifacts)) {
+      fail('Refusing to write an invalid raw artifact registry.');
+    }
   }
 
-  const verified = await inspect(context, { requireRaw: true });
-  if (verified.problems.length) fail(`Post-copy validation failed:\n${verified.problems.join('\n')}`);
+  let verified;
+  await commitRawArtifactPlan({
+    copies,
+    registryPath,
+    registryBefore: registryRaw,
+    registryAfter: registryNext,
+    validate: async () => {
+      verified = await inspect(context, { requireRaw: true });
+      if (verified.problems.length) fail(`Post-copy validation failed:\n${verified.problems.join('\n')}`);
+    },
+  });
 
   console.log(`Raw pair verified and registered for official source ${context.prefix}:`);
   for (const record of verified.records) console.log(`- ${record.path} (${record.sha256})`);

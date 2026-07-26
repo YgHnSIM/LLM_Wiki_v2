@@ -1,33 +1,41 @@
-import { execFile } from 'node:child_process';
-import { promisify } from 'node:util';
+import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import yaml from 'js-yaml';
 import { rootDir } from './lib/project-paths.mjs';
+import {
+  classifyRawChanges,
+  collectRawGitChanges,
+  validateRegisteredAdditions,
+} from './lib/raw-integrity.mjs';
 
-const exec = promisify(execFile);
-const rawPath = path.relative(rootDir, path.join(rootDir, 'raw')).replaceAll('\\', '/');
-const changed = new Set();
-
-async function collect(args) {
-  try {
-    const { stdout } = await exec('git', args, { cwd: rootDir, windowsHide: true });
-    for (const line of stdout.split(/\r?\n/).map((item) => item.trim()).filter(Boolean)) changed.add(line.replaceAll('\\', '/'));
-  } catch (error) {
-    if (error.code !== 1) throw error;
-  }
+const rawPath = 'raw';
+const registryPath = path.join(rootDir, 'wiki', 'meta', 'raw-artifacts.yml');
+const registry = yaml.safeLoad(await fs.readFile(registryPath, 'utf8'));
+if (!registry || registry.schema_version !== 1 || !Array.isArray(registry.artifacts)) {
+  throw new Error('wiki/meta/raw-artifacts.yml does not match the expected registry structure.');
 }
 
-await collect(['diff', '--name-only', '--', rawPath]);
-await collect(['diff', '--cached', '--name-only', '--', rawPath]);
-await collect(['status', '--short', '--untracked-files=all', '--', rawPath]);
-const comparisonBase = process.env.GITHUB_BASE_SHA || process.env.BASE_SHA;
-if (comparisonBase) await collect(['diff', '--name-only', `${comparisonBase}...HEAD`, '--', rawPath]);
+const changes = await collectRawGitChanges({
+  projectRoot: rootDir,
+  rawPath,
+  comparisonBase: process.env.GITHUB_BASE_SHA || process.env.BASE_SHA || '',
+});
+const { additions, violations } = classifyRawChanges(changes, { rawPath });
+const additionProblems = await validateRegisteredAdditions(additions, {
+  projectRoot: rootDir,
+  artifactRecords: registry.artifacts,
+});
+const problems = [
+  ...violations.map((change) => `Immutable raw artifact changed: ${change}`),
+  ...additionProblems,
+];
 
-const rawChanges = [...changed]
-  .map((line) => line.replace(/^..\s+/, '').trim())
-  .filter((line) => line === rawPath || line.startsWith(`${rawPath}/`));
-if (rawChanges.length) {
-  console.error(`Raw artifacts are immutable; revert or move these changes out of scope: ${rawChanges.join(', ')}`);
+if (problems.length) {
+  console.error(`Raw integrity check failed:\n- ${problems.join('\n- ')}`);
   process.exitCode = 1;
 } else {
-  console.log('Raw immutability check passed.');
+  const additionSummary = additions.length > 0
+    ? `; ${additions.length} registered addition(s) verified`
+    : '';
+  console.log(`Raw integrity check passed${additionSummary}.`);
 }

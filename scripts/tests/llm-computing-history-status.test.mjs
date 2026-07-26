@@ -170,6 +170,15 @@ test('valid planned ledger produces a concise status', () => {
   assert.match(renderHistoryStatus(status), /Bridges: planned=1/);
 });
 
+test('handoff date must be a real calendar date', () => {
+  const ledger = validLedger();
+  ledger.initiative.handoff.updated = '2026-02-30';
+  assert.ok(
+    validateHistoryLedgerStructure(ledger)
+      .includes('initiative.handoff.updated must be a YYYY-MM-DD string.'),
+  );
+});
+
 test('schema, chapter order, capability vocabulary, current batch, and safe paths are enforced', () => {
   const ledger = validLedger();
   ledger.schema_version = 1;

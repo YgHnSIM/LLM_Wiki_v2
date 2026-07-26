@@ -5,7 +5,16 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import yaml from 'js-yaml';
+import {
+  duplicateValues,
+  isIsoDate,
+  isRecord,
+  nonemptyString,
+  normalizeRepoRelativePath,
+} from './lib/initiative-ledger.mjs';
 import { rootDir } from './lib/project-paths.mjs';
+
+export { normalizeRepoRelativePath };
 
 const execFile = promisify(execFileCallback);
 
@@ -35,42 +44,6 @@ const requiredLearningHeadings = Object.freeze([
   '## 출처',
   '## 관련 항목',
 ]);
-
-function isRecord(value) {
-  return value !== null && typeof value === 'object' && !Array.isArray(value);
-}
-
-function nonemptyString(value) {
-  return typeof value === 'string' && value.trim().length > 0;
-}
-
-function duplicateValues(values) {
-  const seen = new Set();
-  const duplicates = new Set();
-  for (const value of values) {
-    if (seen.has(value)) duplicates.add(value);
-    seen.add(value);
-  }
-  return [...duplicates];
-}
-
-export function normalizeRepoRelativePath(value) {
-  if (!nonemptyString(value)) return null;
-  const source = value.trim().replaceAll('\\', '/');
-  if (
-    source.includes('\0')
-    || source.startsWith('/')
-    || source.startsWith('//')
-    || /^[A-Za-z][A-Za-z0-9+.-]*:/.test(source)
-  ) {
-    return null;
-  }
-  const segments = source.split('/');
-  if (segments.some((segment) => segment === '..')) return null;
-  const normalized = path.posix.normalize(source);
-  if (normalized === '.' || normalized === '..' || normalized.startsWith('../')) return null;
-  return normalized;
-}
 
 function validateStringArray(value, label, errors, { allowed = null } = {}) {
   if (!Array.isArray(value)) {
@@ -145,7 +118,7 @@ function validateHandoff(handoff, errors) {
     errors.push('initiative.handoff must be an object.');
     return;
   }
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(handoff.updated ?? '')) {
+  if (!isIsoDate(handoff.updated)) {
     errors.push('initiative.handoff.updated must be a YYYY-MM-DD string.');
   }
   if (!/^[0-9a-f]{40}$/i.test(handoff.baseline_commit ?? '')) {

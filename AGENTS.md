@@ -98,7 +98,7 @@ learning:
 
 | 필드 | 규칙 |
 | --- | --- |
-| `schema_version` | 현재 값은 `2` |
+| `schema_version` | 현재 값은 `3` |
 | `id` | 페이지명과 분리된 영구 식별자, 전체 위키에서 유일해야 함 |
 | `page_type` | `source`, `reference`, `entity`, `concept`, `analysis`, `meta` |
 | `title` | 본문의 첫 H1과 정확히 일치 |

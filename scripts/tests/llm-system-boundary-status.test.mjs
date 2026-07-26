@@ -158,6 +158,15 @@ test('planned ledger identifies the first incomplete batch as the only resume ta
   assert.match(renderBoundaryStatus(status), /Current batch: batch-1/);
 });
 
+test('handoff date must be a real calendar date', () => {
+  const ledger = validLedger();
+  ledger.initiative.handoff.updated = '2026-02-30';
+  assert.ok(
+    validateBoundaryLedgerStructure(ledger)
+      .includes('initiative.handoff.updated must be a YYYY-MM-DD string.'),
+  );
+});
+
 test('resume classification keeps a just-completed batch separate from unrelated local work', () => {
   const ledger = validLedger();
   const classification = classifyResumeChanges(ledger, [

@@ -3,7 +3,16 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import yaml from 'js-yaml';
+import {
+  duplicateValues,
+  isIsoDate,
+  isRecord,
+  nonemptyString,
+  normalizeRepoRelativePath,
+} from './lib/initiative-ledger.mjs';
 import { rootDir } from './lib/project-paths.mjs';
+
+export { normalizeRepoRelativePath };
 
 export const BATCH_STAGES = Object.freeze(['planned', 'in_progress', 'complete', 'deferred']);
 export const FAMILY_COVERAGE = Object.freeze(['established', 'planned', 'needs_upgrade', 'ready', 'deferred']);
@@ -21,27 +30,6 @@ const baselineAuditLabels = Object.freeze({
   formula_documents: '블록 수식이 있는 문서',
   formula_blocks: '블록 수식 총수',
 });
-
-function isRecord(value) {
-  return value !== null && typeof value === 'object' && !Array.isArray(value);
-}
-
-function nonemptyString(value) {
-  return typeof value === 'string' && value.trim().length > 0;
-}
-
-function isIsoDate(value) {
-  if (typeof value !== 'string') return false;
-  const match = value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-  if (!match) return false;
-  const year = Number(match[1]);
-  const month = Number(match[2]);
-  const day = Number(match[3]);
-  if (year < 1 || month < 1 || month > 12 || day < 1) return false;
-  const leapYear = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
-  const daysInMonth = [31, leapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  return day <= daysInMonth[month - 1];
-}
 
 function escapeRegularExpression(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -84,16 +72,6 @@ export function parseFoundationalLearningAuditScope(markdown) {
   return values;
 }
 
-function duplicateValues(values = []) {
-  const seen = new Set();
-  const duplicates = new Set();
-  for (const value of values) {
-    if (seen.has(value)) duplicates.add(value);
-    seen.add(value);
-  }
-  return [...duplicates];
-}
-
 function requireRecord(value, label, errors) {
   if (isRecord(value)) return true;
   errors.push(`${label} must be an object.`);
@@ -127,32 +105,6 @@ function validateStringArray(value, label, errors, { paths = false } = {}) {
     errors.push(`${label} repeats '${duplicate}'.`);
   }
   return strings;
-}
-
-/**
- * Convert a repository-relative path to a stable slash-separated form.
- * Returns null for absolute, drive-relative, URI-like, empty, or traversing paths.
- */
-export function normalizeRepoRelativePath(value) {
-  if (!nonemptyString(value)) return null;
-  const source = value.trim();
-  if (source.includes('\0')) return null;
-
-  const slashPath = source.replaceAll('\\', '/');
-  if (
-    slashPath.startsWith('/')
-    || slashPath.startsWith('//')
-    || /^[A-Za-z][A-Za-z0-9+.-]*:/.test(slashPath)
-  ) {
-    return null;
-  }
-
-  const segments = slashPath.split('/');
-  if (segments.some((segment) => segment === '..')) return null;
-
-  const normalized = path.posix.normalize(slashPath);
-  if (normalized === '.' || normalized === '..' || normalized.startsWith('../')) return null;
-  return normalized;
 }
 
 function validateRepoPath(value, label, errors) {

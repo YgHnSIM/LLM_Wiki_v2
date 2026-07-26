@@ -5454,6 +5454,42 @@ raw 등록 해시:
 
 - 이전 URL은 redirect로 유지하지만 새 문서 링크와 생성 산출물은 ID 기반 canonical route를 우선한다. 외부에 이미 공유된 임의의 비등록 URL은 redirect ledger에 추가할 때 별도 검토한다.
 
+## [2026-07-26] docs | 프로젝트 상세 해설서
+
+변경 내용:
+
+- README와 분리된 루트 문서 `readmeplus.md`를 추가해 프로젝트의 목적, 폴더 구조, schema v3, 소스 처리, 정적 사이트 생성, 검증·CI·배포 방식을 비전공자용 학습자료로 설명했다.
+- Markdown, YAML frontmatter, JSON Schema, evidence, locator, artifact, SHA-256, sanitizer, knowledge graph 등 주요 기술 용어의 일반적 용도와 이 프로젝트에서의 필요성을 함께 기록했다.
+- README에서 상세 해설서로 이동할 수 있는 링크를 추가했다.
+
+검증 결과:
+
+- 문서 변경 후 `git diff --check`, 위키 lint, 정적 사이트 빌드를 실행한다.
+- `raw/` 보존 자료와 기존 위키 본문은 수정하지 않았다.
+
+남은 제한:
+
+- 이 문서는 현재 저장소의 구현과 수치를 설명하는 해설서이며, 스키마나 사이트 동작을 대신하는 규격 문서는 아니다. 규칙이 바뀌면 README와 함께 갱신해야 한다.
+
+## [2026-07-26] fix | 검증 파이프라인 안전성 리팩터링
+
+변경 내용:
+
+- raw 변경 감지를 NUL 구분 Git 출력 기반 공통 모듈로 옮겨 한글·공백 경로를 손실 없이 판독한다. 기존 artifact의 수정·삭제·이름 변경은 거부하고, 신규 artifact는 `raw-artifacts.yml` 등록과 현재 SHA-256이 일치할 때만 허용한다. pull request뿐 아니라 `main` push도 직전 SHA와 비교한다.
+- `source:copy`의 두 파일 복사와 레지스트리 교체를 복구 가능한 트랜잭션으로 묶었다. 중간 복사, 레지스트리 쓰기 또는 사후 검증이 실패하면 이번 호출이 만든 파일과 레지스트리 변경을 되돌린다.
+- 수학·컴퓨팅 역사·시스템 경계 원장 검사기의 객체·문자열·중복·안전 경로·실제 달력 날짜 판정을 공통 모듈로 합쳤다. history와 boundary 원장도 `2026-02-30` 같은 존재하지 않는 날짜를 거부한다.
+- 사이트 통합 테스트는 안전한 임시 출력 디렉터리를 주입해 실제 `dist/`와 격리했다. 로컬 `verify`와 CI 사이에 중복되던 raw 검사는 한 번만 실행하도록 정리했고, 운영 규격의 스키마 현재 값을 실제 v3와 맞췄다.
+
+검증 결과:
+
+- Node 회귀 171건, 위키 lint, math/history/boundary 및 학습 감사, 1,090개 페이지 사이트 빌드·검사, Playwright Chromium 16건과 `git diff --check`를 통과했다.
+- 임시 Git 저장소에서 한글·공백 경로, 등록된 신규 artifact, 기존 artifact 수정, 비교 기준 SHA, Git 오류 전파와 raw 복사 rollback을 검증했다.
+- `raw/` 보존 자료는 수정하지 않았다.
+
+남은 제한:
+
+- 사이트 빌더와 산출물 검사기는 아직 큰 top-level 실행 파일이다. 후속 리팩터링에서는 redirect 계산과 source catalog/evidence baseline projection을 순수 함수로 분리해 생성기와 lint가 같은 계약을 사용하도록 할 필요가 있다.
+
 ## 관련 항목
 
 - [[index]]

@@ -36,7 +36,7 @@
     "test:browser": "playwright test",
     "test": "node --test scripts/tests/*.test.mjs",
     "build": "npm run lint:wiki && npm run build:site && npm run check:site",
-    "verify": "npm run raw:check && npm run translation:normalize:check && npm run verify:ci",
+    "verify": "npm run translation:normalize:check && npm run verify:ci",
     "verify:ci": "npm run raw:check && npm run learning:audit:check && npm run math:check && npm run history:check && npm run boundary:check && npm run test && npm run build && npm run test:browser",
     "check": "npm run verify"
   },

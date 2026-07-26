@@ -8,4 +8,5 @@ output/playwright/
 .playwright-cli/
 test-results/
 playwright-report/
+/debug.log
 tmp/
