@@ -220,7 +220,7 @@
 
 - 새 주장과 정정에 맞춰 evidence와 locator를 재판정한다.
 - 실제 사용한 raw만 artifacts에 둔다.
-- 중요한 선수·후속 관계는 본문, `related`, `관련 항목`에서 의미가 일치하게 큐레이션한다.
+- 중요한 선수·후속 관계는 본문, `learning`·`relations`, `관련 항목`에서 의미가 일치하게 큐레이션한다.
 - 모든 링크를 상호화하지 않는다.
 - 새 기초 문서나 제목 변경이 있으면 index·overview·log를 갱신한다.
 
@@ -466,7 +466,7 @@ $$
 5. 등식, 근사식, 비례식과 경험적 경향을 서로 바꾸어 쓰지 않는다.
 6. 수학적 유사성을 역사적 영향 관계의 증거로 사용하지 않는다.
 7. 비유는 작동 원리를 보조할 뿐 모델이 인간처럼 이해·기억·판단한다는 근거가 아니다.
-8. 새 설명이 기존 evidence 범위를 넘으면 근거를 추가하거나 verification을 재판정한다.
+8. 새 설명이 기존 evidence 범위를 넘으면 근거를 추가하거나 `review.evidence_coverage`를 재판정한다.
 
 ## 10. 전체 문서군을 개편하는 순서
 
@@ -582,7 +582,7 @@ npm run source:ready -- NNN
 - [ ] 핵심 수식이 6장의 해설 프로토콜과 수식 게이트를 통과한다.
 - [ ] 사실·설명용 예·해석·한계를 구분했다.
 - [ ] 학습 확인과 다음 문서가 실제 이해와 경로를 시험한다.
-- [ ] frontmatter, evidence, artifacts, related, index·overview·log가 변경과 일치한다.
+- [ ] frontmatter, evidence, artifacts, learning·relations, index·overview·log가 변경과 일치한다.
 - [ ] 자동 검사와 수동 내용·수식·사이트 검수를 통과했다.
 - [ ] 관련 없는 사용자 변경을 포함하지 않고 올바른 Git 경계와 커밋 접두사를 지켰다.
 

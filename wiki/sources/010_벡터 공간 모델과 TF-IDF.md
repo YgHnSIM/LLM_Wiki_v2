@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.010
 page_type: source
 title: 벡터 공간 모델과 TF-IDF
@@ -14,14 +14,16 @@ tags:
   - domain/machine-learning
 created: '2026-07-16'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/010_Vector Space Model & TF-IDF Foundation of Modern Information Retrieval & Semantic Search.ko.md
   - raw/010_Vector Space Model & TF-IDF Foundation of Modern Information Retrieval & Semantic Search.commentary.ko.md
 evidence:
   - source_id: salton-1968
-    locator: chapter 4, document vectors and similarity methods
+    locator: 'chapter 4, document vectors and similarity methods'
     relation: contextualizes
   - source_id: sparck-jones-1972
     locator: pp. 11–21
@@ -32,20 +34,38 @@ evidence:
   - source_id: salton-buckley-1988
     locator: pp. 513–523
     relation: supplements
-related:
-  - entity.제라드-솔턴
-  - entity.캐런-스파크-존스
-  - concept.벡터-공간-모델
-  - concept.tf-idf
-  - concept.코사인-유사도
-  - concept.특징-공학
-  - concept.대규모-언어-모델
+relations:
+  - target: entity.제라드-솔턴
+    kind: related
+  - target: entity.캐런-스파크-존스
+    kind: related
+  - target: concept.tf-idf
+    kind: related
+  - target: concept.코사인-유사도
+    kind: related
+  - target: concept.특징-공학
+    kind: related
+  - target: concept.대규모-언어-모델
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites: []
+  assumed_knowledge: 벡터의 성분과 로그의 기본 개념
+  outcomes:
+    - 문서와 질의를 용어 벡터로 만들고 TF-IDF와 코사인 유사도로 순위를 정하는 과정 및 그 점수가 의미 이해와 다른 이유를 설명할 수 있다.
+  next:
+    - target: concept.벡터-공간-모델
+      reason: 벡터 공간 모델 — 문서와 질의를 같은 좌표계에 두는 표현 원리를 더 자세히 본다.
+    - target: concept.bm25
+      reason: BM25 — 계수 기반 가중치에서 빈도 포화와 길이 보정을 포함한 확률적 검색 점수로 진행한다.
 ---
 # 벡터 공간 모델과 TF-IDF
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** 벡터의 성분과 로그의 기본 개념<br>
+> **선수 지식:** 없음 — 벡터의 성분과 로그의 기본 개념<br>
 > **읽고 나면:** 문서와 질의를 용어 벡터로 만들고 TF-IDF와 코사인 유사도로 순위를 정하는 과정 및 그 점수가 의미 이해와 다른 이유를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -152,8 +172,8 @@ TF-IDF와 코사인 유사도는 주어진 문서 집합의 가중 어휘 분포
 
 ### 다음 문서
 
-- [[벡터 공간 모델]] — 문서와 질의를 같은 좌표계에 두는 표현 원리를 더 자세히 본다.
-- [[BM25]] — 계수 기반 가중치에서 빈도 포화와 길이 보정을 포함한 확률적 검색 점수로 진행한다.
+- [[concept.벡터-공간-모델|벡터 공간 모델]] — 문서와 질의를 같은 좌표계에 두는 표현 원리를 더 자세히 본다.
+- [[concept.bm25|BM25]] — 계수 기반 가중치에서 빈도 포화와 길이 보정을 포함한 확률적 검색 점수로 진행한다.
 
 ## 출처
 
@@ -166,10 +186,11 @@ TF-IDF와 코사인 유사도는 주어진 문서 집합의 가중 어휘 분포
 
 ## 관련 항목
 
-- [[제라드 솔턴]]
-- [[캐런 스파크 존스]]
-- [[벡터 공간 모델]]
-- [[TF-IDF]]
-- [[코사인 유사도]]
-- [[특징 공학]]
-- [[대규모 언어 모델]]
+- [[concept.벡터-공간-모델|벡터 공간 모델]]
+- [[concept.bm25|BM25]]
+- [[entity.제라드-솔턴|제라드 솔턴]]
+- [[entity.캐런-스파크-존스|캐런 스파크 존스]]
+- [[concept.tf-idf|TF-IDF]]
+- [[concept.코사인-유사도|코사인 유사도]]
+- [[concept.특징-공학|특징 공학]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]

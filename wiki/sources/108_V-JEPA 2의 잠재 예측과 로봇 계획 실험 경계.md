@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.108
 page_type: source
 title: V-JEPA 2의 잠재 예측과 로봇 계획 실험 경계
@@ -16,11 +16,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/108_V-JEPA 2 Vision-Based World Modeling for Embodied AI.ko.md'
-  - 'raw/108_V-JEPA 2 Vision-Based World Modeling for Embodied AI.commentary.ko.md'
+  - raw/108_V-JEPA 2 Vision-Based World Modeling for Embodied AI.ko.md
+  - raw/108_V-JEPA 2 Vision-Based World Modeling for Embodied AI.commentary.ko.md
 evidence:
   - source_id: assran-et-al-2025-vjepa2
     locator: 'arXiv:2506.09985v1, Abstract·§§1–7·9·10.1–10.3·11.4와 Tables 1–12: V-JEPA 2의 마스크드 잠재 예측, VM22M·모델 규모, V-JEPA 2-AC 후학습·계획, 평가 protocol·결과·한계'
@@ -32,24 +34,32 @@ evidence:
     locator: 'Official README의 2025-06-25 release 기록, V-JEPA 2 Pre-training·V-JEPA 2-AC Post-training·Models·Evaluation Attentive Probes·License 절'
     relation: supports
   - source_id: meta-ai-2025-vjepa2-model-card
-    locator: 'V-JEPA 2 ViT-g/16 384 model card의 Intended Uses·입력 sampling·checkpoint license와 config'
+    locator: V-JEPA 2 ViT-g/16 384 model card의 Intended Uses·입력 sampling·checkpoint license와 config
     relation: supplements
-related:
-  - source.070
-  - source.093
-  - source.105
-  - concept.clip
-  - concept.학습된-세계-모델
-  - concept.멀티모달-대규모-언어-모델
-  - concept.transformer
-  - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
-  - analysis.평가-지표와-모델-유인
+relations:
+  - target: concept.멀티모달-대규모-언어-모델
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.transformer
+    - target: concept.clip
+  assumed_knowledge: 없음
+  outcomes:
+    - 'V-JEPA 2의 action-free 마스크드 잠재 예측, V-JEPA 2-AC의 action-conditioned 후학습과 image-goal 계획을 구분하고, video·VidQA·robot benchmark 수치를 protocol과 함께 해석하며 ‘물리 세계 이해’라는 표현의 실험 범위를 설명할 수 있다.'
+  next:
+    - target: concept.학습된-세계-모델
+      reason: '학습된 세계 모델 — 관측 표현, 행동 조건부 동역학, planner·control loop를 세 층으로 나누어 읽는다.'
+    - target: source.105
+      reason: 105통합 멀티모달 아키텍처의 공유 범위와 입출력 경계 — encoder·token·objective·product interface를 구분해 ‘통합’ 주장을 읽는다.
 ---
 # V-JEPA 2의 잠재 예측과 로봇 계획 실험 경계
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[Transformer]], [[CLIP]], [[멀티모달 대규모 언어 모델]]<br>
+> **선수 지식:** [[concept.transformer|Transformer]], [[concept.clip|CLIP]]<br>
 > **읽고 나면:** V-JEPA 2의 action-free 마스크드 잠재 예측, V-JEPA 2-AC의 action-conditioned 후학습과 image-goal 계획을 구분하고, video·VidQA·robot benchmark 수치를 protocol과 함께 해석하며 ‘물리 세계 이해’라는 표현의 실험 범위를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -228,12 +238,8 @@ Code·config·weight가 공개돼 proprietary model보다 재현 가능성이 �
 
 ### 다음 문서
 
-- [[학습된 세계 모델]] — 관측 표현, 행동 조건부 동역학, planner·control loop를 세 층으로 나누어 읽는다.
-- [[105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]] — encoder·token·objective·product interface를 구분해 ‘통합’ 주장을 읽는다.
-- [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]] — visual encoder를 projector로 language model에 연결하는 V-JEPA 2 VidQA 경로를 기존 vision-language interface와 비교한다.
-- [[070_CLIP과 대조적 언어-이미지 사전 학습]] — 실제 contrastive objective와 V-JEPA 2의 non-contrastive latent regression을 구분한다.
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — frozen probe, fine-tuning, projector alignment와 action-conditioned post-training이 표현을 downstream task로 옮기는 경로를 비교한다.
-- [[자동 평가 지표는 무엇을 보상하는가]] — top-1, recall@5, paired accuracy와 robot success rate의 서로 다른 분모를 점검한다.
+- [[concept.학습된-세계-모델|학습된 세계 모델]] — 관측 표현, 행동 조건부 동역학, planner·control loop를 세 층으로 나누어 읽는다.
+- [[source.105|통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]] — 105통합 멀티모달 아키텍처의 공유 범위와 입출력 경계 — encoder·token·objective·product interface를 구분해 ‘통합’ 주장을 읽는다.
 
 ## 출처
 
@@ -246,12 +252,8 @@ Code·config·weight가 공개돼 proprietary model보다 재현 가능성이 �
 
 ## 관련 항목
 
-- [[학습된 세계 모델]]
-- [[070_CLIP과 대조적 언어-이미지 사전 학습]]
-- [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]]
-- [[105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]]
-- [[CLIP]]
-- [[멀티모달 대규모 언어 모델]]
-- [[Transformer]]
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]
-- [[자동 평가 지표는 무엇을 보상하는가]]
+- [[concept.학습된-세계-모델|학습된 세계 모델]]
+- [[source.105|통합 멀티모달 아키텍처의 공유 범위와 입출력 경계]]
+- [[concept.transformer|Transformer]]
+- [[concept.clip|CLIP]]
+- [[concept.멀티모달-대규모-언어-모델|멀티모달 대규모 언어 모델]]

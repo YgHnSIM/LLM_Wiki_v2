@@ -22,6 +22,9 @@ test('search and directory URL state keeps meaningful values only', () => {
     q: 'Transformer',
     category: 'concepts',
     verification: '',
+    coverage: '',
+    mode: '',
+    editorial: '',
     tag: '',
     sort: 'title',
     view: '',
@@ -29,6 +32,10 @@ test('search and directory URL state keeps meaningful values only', () => {
 
   const serialized = serializeUiState({ ...search, sort: 'relevance' });
   assert.equal(serialized.toString(), 'q=Transformer&category=concepts');
+
+  const reviewed = parseUiState('?coverage=partial&mode=synthesis&editorial=active');
+  assert.equal(hasSearchScope(reviewed), true);
+  assert.equal(serializeUiState(reviewed).toString(), 'coverage=partial&mode=synthesis&editorial=active');
 
   const directory = parseUiState('?q=shannon&verification=verified&view=cards', { directory: true });
   assert.equal(directory.view, 'cards');

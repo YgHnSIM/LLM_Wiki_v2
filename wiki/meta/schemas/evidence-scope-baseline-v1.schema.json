@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://llm-wiki.local/schema/evidence-scope-baseline-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "generated_on", "entries"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "generated_on": { "type": "string", "format": "date" },
+    "entries": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["fingerprint", "scope"],
+        "properties": {
+          "fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "scope": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["heading"],
+              "properties": { "heading": { "type": "string", "minLength": 1 } }
+            }
+          }
+        }
+      }
+    }
+  }
+}

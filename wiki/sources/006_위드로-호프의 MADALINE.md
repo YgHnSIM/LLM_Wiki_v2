@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.006
 page_type: source
 title: 위드로-호프의 MADALINE
@@ -14,8 +14,10 @@ tags:
   - domain/signal-processing
 created: '2026-07-14'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/006_1962_위드로-호프_MADALINE.md
   - raw/006_1962_위드로-호프_MADALINE_해설.md
@@ -32,28 +34,50 @@ evidence:
   - source_id: widrow-1975
     locator: pp. 1692–1716
     relation: contextualizes
-related:
-  - entity.버나드-위드로
-  - entity.마션-호프
-  - entity.스탠퍼드-대학교
-  - concept.adaline
-  - concept.madaline
-  - concept.lms-알고리즘
-  - concept.경사하강법
-  - concept.적응-필터
-  - concept.음성-활동-감지
-  - concept.특징-공학
-  - concept.퍼셉트론
-  - concept.선형-분류기
-  - analysis.퍼셉트론에서-madaline으로
-  - analysis.ai-시연과-실제-성능
-  - concept.대규모-언어-모델
+relations:
+  - target: entity.버나드-위드로
+    kind: related
+  - target: entity.마션-호프
+    kind: related
+  - target: entity.스탠퍼드-대학교
+    kind: related
+  - target: concept.adaline
+    kind: related
+  - target: concept.madaline
+    kind: related
+  - target: concept.적응-필터
+    kind: related
+  - target: concept.음성-활동-감지
+    kind: related
+  - target: concept.특징-공학
+    kind: related
+  - target: concept.선형-분류기
+    kind: related
+  - target: analysis.ai-시연과-실제-성능
+    kind: related
+  - target: concept.대규모-언어-모델
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.퍼셉트론
+    - target: concept.경사하강법
+  assumed_knowledge: 의 선형 결정 방식과 이 오차를 줄이는 방향으로 매개변수를 바꾼다는 직관이 필요하다.
+  outcomes:
+    - '1960년 ADALINE·LMS와 1962년 MADALINE I 규칙을 구분하고, 여러 ADALINE을 결합한 구조와 후대 계보의 한계를 설명할 수 있다.'
+  next:
+    - target: concept.lms-알고리즘
+      reason: 다음에는 LMS 알고리즘에서 실제 선형 갱신 규칙을 더 자세히 정리한다.
+    - target: analysis.퍼셉트론에서-madaline으로
+      reason: 퍼셉트론과의 차이를 역사적으로 비교하려면 퍼셉트론에서 MADALINE으로 이어지는 계보를 읽는다.
 ---
 # 위드로-호프의 MADALINE
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[퍼셉트론]]의 선형 결정 방식과 [[경사하강법]]이 오차를 줄이는 방향으로 매개변수를 바꾼다는 직관이 필요하다.<br>
+> **선수 지식:** [[concept.퍼셉트론|퍼셉트론]], [[concept.경사하강법|경사하강법]]<br>
 > **읽고 나면:** 1960년 ADALINE·LMS와 1962년 MADALINE I 규칙을 구분하고, 여러 ADALINE을 결합한 구조와 후대 계보의 한계를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -137,8 +161,12 @@ ADALINE의 선형 결합기는 목표값과 임계값 이전의 선형 출력 �
 
 다음에는 [[LMS 알고리즘]]에서 실제 선형 갱신 규칙을 더 자세히 정리한다. 퍼셉트론과의 차이를 역사적으로 비교하려면 [[퍼셉트론에서 MADALINE으로|퍼셉트론에서 MADALINE으로 이어지는 계보]]를 읽는다.
 
-## 출처
+### 다음 문서
 
+- [[concept.lms-알고리즘|LMS 알고리즘]] — 다음에는 LMS 알고리즘에서 실제 선형 갱신 규칙을 더 자세히 정리한다.
+- [[analysis.퍼셉트론에서-madaline으로|퍼셉트론에서 MADALINE으로]] — 퍼셉트론과의 차이를 역사적으로 비교하려면 퍼셉트론에서 MADALINE으로 이어지는 계보를 읽는다.
+
+## 출처
 - Bernard Widrow·Marcian E. Hoff, [Adaptive Switching Circuits](https://isl.stanford.edu/~widrow/papers/c1960adaptiveswitching.pdf), 1960.
 - Rodney Winter·Bernard Widrow, [MADALINE Rule II: A Training Algorithm for Neural Networks](https://isl.stanford.edu/~widrow/papers/c1988madalinerule.pdf), 1988, 특히 pp. 1-401–1-403.
 - Bernard Widrow·Michael A. Lehr, [30 Years of Adaptive Neural Networks: Perceptron, Madaline, and Backpropagation](https://isl.stanford.edu/people/widrow/papers/j199030years.pdf), 1990, pp. 1415–1419·1428–1432.
@@ -148,18 +176,18 @@ ADALINE의 선형 결합기는 목표값과 임계값 이전의 선형 출력 �
 
 ## 관련 항목
 
-- [[버나드 위드로]]
-- [[마션 호프]]
-- [[스탠퍼드 대학교]]
-- [[ADALINE]]
-- [[MADALINE]]
-- [[LMS 알고리즘]]
-- [[경사하강법]]
-- [[적응 필터]]
-- [[음성 활동 감지]]
-- [[특징 공학]]
-- [[퍼셉트론]]
-- [[선형 분류기]]
-- [[퍼셉트론에서 MADALINE으로]]
-- [[AI 시연과 실제 성능]]
-- [[대규모 언어 모델]]
+- [[concept.lms-알고리즘|LMS 알고리즘]]
+- [[analysis.퍼셉트론에서-madaline으로|퍼셉트론에서 MADALINE으로]]
+- [[concept.퍼셉트론|퍼셉트론]]
+- [[concept.경사하강법|경사하강법]]
+- [[entity.버나드-위드로|버나드 위드로]]
+- [[entity.마션-호프|마션 호프]]
+- [[entity.스탠퍼드-대학교|스탠퍼드 대학교]]
+- [[concept.adaline|ADALINE]]
+- [[concept.madaline|MADALINE]]
+- [[concept.적응-필터|적응 필터]]
+- [[concept.음성-활동-감지|음성 활동 감지]]
+- [[concept.특징-공학|특징 공학]]
+- [[concept.선형-분류기|선형 분류기]]
+- [[analysis.ai-시연과-실제-성능|AI 시연과 실제 성능]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]

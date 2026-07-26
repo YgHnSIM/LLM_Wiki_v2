@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis.퍼셉트론에서-madaline으로
 page_type: analysis
 title: 퍼셉트론에서 MADALINE으로
@@ -14,8 +14,10 @@ tags:
   - domain/signal-processing
 created: '2026-07-14'
 updated: '2026-07-21'
-lifecycle: active
-verification: partial
+editorial_status: active
+review:
+  evidence_coverage: partial
+  content_mode: synthesis
 artifacts:
   - raw/004_The Perceptron.md
   - raw/004_The Perceptron.commentary.md
@@ -45,23 +47,40 @@ evidence:
   - source_id: rumelhart-hinton-williams-1986-pdp
     locator: pp. 318–328
     relation: supplements
-related:
-  - concept.퍼셉트론
-  - concept.adaline
-  - concept.madaline
-  - concept.lms-알고리즘
-  - concept.경사하강법
-  - concept.역전파
-  - concept.다층-퍼셉트론
-  - concept.특징-공학
-  - analysis.규칙-기반-ai에서-데이터-기반-학습으로
-  - analysis.ai-시연과-실제-성능
+relations:
+  - target: concept.madaline
+    kind: related
+  - target: concept.lms-알고리즘
+    kind: related
+  - target: concept.경사하강법
+    kind: related
+  - target: concept.역전파
+    kind: related
+  - target: concept.다층-퍼셉트론
+    kind: related
+  - target: concept.특징-공학
+    kind: related
+  - target: analysis.ai-시연과-실제-성능
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.퍼셉트론
+    - target: concept.adaline
+  assumed_knowledge: 없음
+  outcomes:
+    - 초기 신경망을 학습 신호·구조·구현 범위로 비교하고 역전파와의 차이를 설명할 수 있다.
+  next:
+    - target: analysis.규칙-기반-ai에서-데이터-기반-학습으로
+      reason: 규칙 기반 AI에서 데이터 기반 학습으로 — 초기 신경망에서 확인한 학습과 수작업 설계의 공존을 더 넓은 AI 역사에서 비교한다.
 ---
 # 퍼셉트론에서 MADALINE으로
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[퍼셉트론]], [[ADALINE]]<br>
+> **선수 지식:** [[concept.퍼셉트론|퍼셉트론]], [[concept.adaline|ADALINE]]<br>
 > **읽고 나면:** 초기 신경망을 학습 신호·구조·구현 범위로 비교하고 역전파와의 차이를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -122,7 +141,7 @@ related:
 
 ### 다음 문서
 
-- [[규칙 기반 AI에서 데이터 기반 학습으로]] — 초기 신경망에서 확인한 학습과 수작업 설계의 공존을 더 넓은 AI 역사에서 비교한다.
+- [[analysis.규칙-기반-ai에서-데이터-기반-학습으로|규칙 기반 AI에서 데이터 기반 학습으로]] — 초기 신경망에서 확인한 학습과 수작업 설계의 공존을 더 넓은 AI 역사에서 비교한다.
 
 ## 출처
 
@@ -133,13 +152,13 @@ related:
 
 ## 관련 항목
 
-- [[퍼셉트론]]
-- [[ADALINE]]
-- [[MADALINE]]
-- [[LMS 알고리즘]]
-- [[경사하강법]]
-- [[역전파]]
-- [[다층 퍼셉트론]]
-- [[특징 공학]]
-- [[규칙 기반 AI에서 데이터 기반 학습으로]]
-- [[AI 시연과 실제 성능]]
+- [[analysis.규칙-기반-ai에서-데이터-기반-학습으로|규칙 기반 AI에서 데이터 기반 학습으로]]
+- [[concept.퍼셉트론|퍼셉트론]]
+- [[concept.adaline|ADALINE]]
+- [[concept.madaline|MADALINE]]
+- [[concept.lms-알고리즘|LMS 알고리즘]]
+- [[concept.경사하강법|경사하강법]]
+- [[concept.역전파|역전파]]
+- [[concept.다층-퍼셉트론|다층 퍼셉트론]]
+- [[concept.특징-공학|특징 공학]]
+- [[analysis.ai-시연과-실제-성능|AI 시연과 실제 성능]]

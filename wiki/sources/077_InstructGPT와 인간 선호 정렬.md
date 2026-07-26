@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.077
 page_type: source
 title: InstructGPT와 인간 선호 정렬
@@ -15,29 +15,48 @@ tags:
   - domain/machine-learning
 created: '2026-07-21'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/077_InstructGPT and RLHF Aligning Language Models with Human Preferences.ko.md'
-  - 'raw/077_InstructGPT and RLHF Aligning Language Models with Human Preferences.commentary.ko.md'
+  - raw/077_InstructGPT and RLHF Aligning Language Models with Human Preferences.ko.md
+  - raw/077_InstructGPT and RLHF Aligning Language Models with Human Preferences.commentary.ko.md
 evidence:
   - source_id: ouyang-et-al-2022-instructgpt
     locator: '초록, §§3.1–3.6와 Figure 2·Table 6의 SFT·4–9개 응답 순위·reward model·SFT 기준 KL·PPO/PPO-ptx, §§4.1–4.4와 Figures 3–7·9의 인간 선호·TruthfulQA·toxicity·bias·단순 오류, §§5.1–5.5와 Appendices A–C·E의 자료·평가자 대표성·계산량·성능 회귀·오용 한계'
     relation: supports
-related:
-  - source.056
-  - source.067
-  - source.072
-  - concept.rlhf
-  - concept.지시-미세조정
-  - analysis.평가-지표와-모델-유인
-  - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+relations:
+  - target: source.056
+    kind: related
+  - target: source.067
+    kind: related
+  - target: source.072
+    kind: related
+  - target: concept.지시-미세조정
+    kind: related
+  - target: analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.대규모-언어-모델
+  assumed_knowledge: 없음
+  outcomes:
+    - 'InstructGPT의 시연 SFT→응답 순위 보상 모델→PPO-ptx 흐름을 설명하고, 평가자 선호 우위와 보편적 가치·능력·안전성 주장을 구분할 수 있다.'
+  next:
+    - target: concept.rlhf
+      reason: 인간 피드백 강화학습 — InstructGPT 한 사례를 2017년 행동 비교부터 후속 선호 최적화까지의 개념적 계보로 넓힌다.
+    - target: analysis.평가-지표와-모델-유인
+      reason: 자동 평가 지표는 무엇을 보상하는가 — 고정 metric과 학습된 보상 모델을 최적화할 때 proxy의 사각지대가 어떻게 모델의 유인이 되는지 비교한다.
 ---
 # InstructGPT와 인간 선호 정렬
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[대규모 언어 모델]]<br>
+> **선수 지식:** [[concept.대규모-언어-모델|대규모 언어 모델]]<br>
 > **읽고 나면:** InstructGPT의 시연 SFT→응답 순위 보상 모델→PPO-ptx 흐름을 설명하고, 평가자 선호 우위와 보편적 가치·능력·안전성 주장을 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -185,8 +204,8 @@ Raw 번역은 2025년 회고 글의 서술과 `/writing/...` 탐색 링크를 �
 
 ### 다음 문서
 
-- [[인간 피드백 강화학습]] — InstructGPT 한 사례를 2017년 행동 비교부터 후속 선호 최적화까지의 개념적 계보로 넓힌다.
-- [[자동 평가 지표는 무엇을 보상하는가]] — 고정 metric과 학습된 보상 모델을 최적화할 때 proxy의 사각지대가 어떻게 모델의 유인이 되는지 비교한다.
+- [[concept.rlhf|인간 피드백 강화학습]] — InstructGPT 한 사례를 2017년 행동 비교부터 후속 선호 최적화까지의 개념적 계보로 넓힌다.
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]] — 고정 metric과 학습된 보상 모델을 최적화할 때 proxy의 사각지대가 어떻게 모델의 유인이 되는지 비교한다.
 
 ## 출처
 
@@ -199,10 +218,11 @@ Raw 번역은 2025년 회고 글의 서술과 `/writing/...` 탐색 링크를 �
 
 ## 관련 항목
 
-- [[056_RLHF 토대와 인간 선호 기반 보상 학습]]
-- [[067_GPT-3와 문맥 내 학습]]
-- [[072_지시 미세조정과 FLAN의 제로샷 일반화]]
-- [[인간 피드백 강화학습]]
-- [[지시 미세조정]]
-- [[자동 평가 지표는 무엇을 보상하는가]]
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]
+- [[concept.rlhf|인간 피드백 강화학습]]
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[source.056|RLHF 토대와 인간 선호 기반 보상 학습]]
+- [[source.067|GPT-3와 문맥 내 학습]]
+- [[source.072|지시 미세조정과 FLAN의 제로샷 일반화]]
+- [[concept.지시-미세조정|지시 미세조정]]
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]]

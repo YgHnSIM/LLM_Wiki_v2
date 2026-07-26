@@ -1,0 +1,1147 @@
+schema_version: 1
+generated_on: '2026-07-26'
+sources:
+  - id: source.001
+    source_number: '001'
+    title: 섀넌의 N-gram 모델
+    page_type: source
+    path: wiki/sources/001_섀넌의 N-gram 모델.md
+    artifacts:
+      - raw/001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md
+      - raw/001_Shannon's N-gram Model - The Foundation of Statistical Language Processing.commentary.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.002
+    source_number: '002'
+    title: 튜링 테스트
+    page_type: source
+    path: wiki/sources/002_튜링 테스트.md
+    artifacts:
+      - raw/002_The Turing Test.md
+      - raw/002_The Turing Test.commentary.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.003
+    source_number: '003'
+    title: Georgetown-IBM 기계 번역 시연
+    page_type: source
+    path: wiki/sources/003_Georgetown-IBM 기계 번역 시연.md
+    artifacts:
+      - raw/003_Georgetown-IBM Machine.md
+      - raw/003_Georgetown-IBM Machine.commentary.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.004
+    source_number: '004'
+    title: 퍼셉트론
+    page_type: source
+    path: wiki/sources/004_퍼셉트론.md
+    artifacts:
+      - raw/004_The Perceptron.md
+      - raw/004_The Perceptron.commentary.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.005
+    source_number: '005'
+    title: 촘스키의 통사 구조
+    page_type: source
+    path: wiki/sources/005_촘스키의 통사 구조.md
+    artifacts:
+      - raw/005_Chomsky's Syntactic Structures.md
+      - raw/005_Chomsky's Syntactic Structures.commentary.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.006
+    source_number: '006'
+    title: 위드로-호프의 MADALINE
+    page_type: source
+    path: wiki/sources/006_위드로-호프의 MADALINE.md
+    artifacts:
+      - raw/006_1962_위드로-호프_MADALINE.md
+      - raw/006_1962_위드로-호프_MADALINE_해설.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.007
+    source_number: '007'
+    title: ELIZA
+    page_type: source
+    path: wiki/sources/007_ELIZA.md
+    artifacts:
+      - raw/007_ELIZA - The First Conversational AI Program.ko.md
+      - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.008
+    source_number: 008
+    title: 비터비 알고리즘
+    page_type: source
+    path: wiki/sources/008_비터비 알고리즘.md
+    artifacts:
+      - >-
+        raw/008_Viterbi Algorithm - Dynamic Programming Foundation for Sequence Decoding in Speech Recognition and
+        NLP.ko.md
+      - >-
+        raw/008_Viterbi Algorithm - Dynamic Programming Foundation for Sequence Decoding in Speech Recognition and
+        NLP.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.009
+    source_number: 009
+    title: SHRDLU
+    page_type: source
+    path: wiki/sources/009_SHRDLU.md
+    artifacts:
+      - raw/009_SHRDLU - Understanding Language Through Action.ko.md
+      - raw/009_SHRDLU - Understanding Language Through Action.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.010
+    source_number: '010'
+    title: 벡터 공간 모델과 TF-IDF
+    page_type: source
+    path: wiki/sources/010_벡터 공간 모델과 TF-IDF.md
+    artifacts:
+      - raw/010_Vector Space Model & TF-IDF Foundation of Modern Information Retrieval & Semantic Search.ko.md
+      - >-
+        raw/010_Vector Space Model & TF-IDF Foundation of Modern Information Retrieval & Semantic
+        Search.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.011
+    source_number: '011'
+    title: 개념 의존 이론과 시스템
+    page_type: source
+    path: wiki/sources/011_개념 의존.md
+    artifacts:
+      - raw/011_Conceptual Dependency - Canonical Meaning Representation for Natural Language Understanding.ko.md
+      - >-
+        raw/011_Conceptual Dependency - Canonical Meaning Representation for Natural Language
+        Understanding.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.012
+    source_number: '012'
+    title: 상징 규칙에서 통계 학습으로
+    page_type: source
+    path: wiki/sources/012_상징 규칙에서 통계 학습으로.md
+    artifacts:
+      - raw/012_From Symbolic Rules to Statistical Learning - The Paradigm Shift in NLP.ko.md
+      - raw/012_From Symbolic Rules to Statistical Learning - The Paradigm Shift in NLP.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: partial
+  - id: source.013
+    source_number: '013'
+    title: 은닉 마르코프 모델과 통계적 음성 인식
+    page_type: source
+    path: wiki/sources/013_은닉 마르코프 모델과 통계적 음성 인식.md
+    artifacts:
+      - raw/013_Hidden Markov Models - Statistical Speech Recognition.ko.md
+      - raw/013_Hidden Markov Models - Statistical Speech Recognition.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.014
+    source_number: '014'
+    title: 증강 전이망과 절차적 자연어 파싱
+    page_type: source
+    path: wiki/sources/014_증강 전이망과 절차적 자연어 파싱.md
+    artifacts:
+      - raw/014_Augmented Transition Networks - Procedural Parsing Formalism for Natural Language.ko.md
+      - raw/014_Augmented Transition Networks - Procedural Parsing Formalism for Natural Language.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.015
+    source_number: '015'
+    title: 몬태규 의미론과 합성적 자연언어 해석
+    page_type: source
+    path: wiki/sources/015_몬태규 의미론과 합성적 자연언어 해석.md
+    artifacts:
+      - raw/015_Montague Semantics - The Formal Foundation of Compositional Language Understanding.ko.md
+      - raw/015_Montague Semantics - The Formal Foundation of Compositional Language Understanding.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.016
+    source_number: '016'
+    title: 중국어 방 논증과 강한 AI 논쟁
+    page_type: source
+    path: wiki/sources/016_중국어 방 논증과 강한 AI 논쟁.md
+    artifacts:
+      - 'raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.ko.md'
+      - 'raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.commentary.ko.md'
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.017
+    source_number: '017'
+    title: Lesk 알고리즘과 단어 의미 중의성 해소
+    page_type: source
+    path: wiki/sources/017_Lesk 알고리즘과 단어 의미 중의성 해소.md
+    artifacts:
+      - raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.ko.md
+      - raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.018
+    source_number: 018
+    title: 역전파와 다층 신경망 학습
+    page_type: source
+    path: wiki/sources/018_역전파와 다층 신경망 학습.md
+    artifacts:
+      - raw/018_Backpropagation - Training Deep Neural Networks.ko.md
+      - raw/018_Backpropagation - Training Deep Neural Networks.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.019
+    source_number: 019
+    title: Katz 백오프와 희소 데이터 확률 추정
+    page_type: source
+    path: wiki/sources/019_Katz 백오프와 희소 데이터 확률 추정.md
+    artifacts:
+      - raw/019_Katz Back-off - Handling Sparse Data in Language Models.ko.md
+      - raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.020
+    source_number: '020'
+    title: 시간 지연 신경망과 음소 인식
+    page_type: source
+    path: wiki/sources/020_시간 지연 신경망과 음소 인식.md
+    artifacts:
+      - raw/020_Time Delay Neural Networks - Processing Sequential Data with Temporal Convolutions.ko.md
+      - raw/020_Time Delay Neural Networks - Processing Sequential Data with Temporal Convolutions.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.021
+    source_number: '021'
+    title: 합성곱 신경망과 특징 학습
+    page_type: source
+    path: wiki/sources/021_합성곱 신경망과 특징 학습.md
+    artifacts:
+      - raw/021_Convolutional Neural Networks - Revolutionizing Feature Learning.ko.md
+      - raw/021_Convolutional Neural Networks - Revolutionizing Feature Learning.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.022
+    source_number: '022'
+    title: IBM 통계적 기계 번역과 데이터 기반 전환
+    page_type: source
+    path: wiki/sources/022_IBM 통계적 기계 번역과 데이터 기반 전환.md
+    artifacts:
+      - raw/022_IBM Statistical Machine Translation - From Rules to Data.ko.md
+      - raw/022_IBM Statistical Machine Translation - From Rules to Data.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.023
+    source_number: '023'
+    title: Penn Treebank와 통계적 구문 분석
+    page_type: source
+    path: wiki/sources/023_Penn Treebank와 통계적 구문 분석.md
+    artifacts:
+      - raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.ko.md
+      - raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.024
+    source_number: '024'
+    title: BM25와 확률적 정보 검색
+    page_type: source
+    path: wiki/sources/024_BM25와 확률적 정보 검색.md
+    artifacts:
+      - raw/024_BM25 The Probabilistic Ranking Revolution in Information Retrieval.ko.md
+      - raw/024_BM25 The Probabilistic Ranking Revolution in Information Retrieval.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.025
+    source_number: '025'
+    title: WordNet과 어휘 의미망
+    page_type: source
+    path: wiki/sources/025_WordNet과 어휘 의미망.md
+    artifacts:
+      - raw/025_WordNet - A Semantic Network for Language Understanding.ko.md
+      - raw/025_WordNet - A Semantic Network for Language Understanding.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.026
+    source_number: '026'
+    title: 순환 신경망과 시간적 문맥 학습
+    page_type: source
+    path: wiki/sources/026_순환 신경망과 시간적 문맥 학습.md
+    artifacts:
+      - raw/026_Recurrent Neural Networks - Machines That Remember.ko.md
+      - raw/026_Recurrent Neural Networks - Machines That Remember.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.027
+    source_number: '027'
+    title: 최대 엔트로피와 서포트 벡터 머신
+    page_type: source
+    path: wiki/sources/027_최대 엔트로피와 서포트 벡터 머신.md
+    artifacts:
+      - raw/027_Maximum Entropy & Support Vector Machines in NLP Feature-Based Discriminative Learning.ko.md
+      - raw/027_Maximum Entropy & Support Vector Machines in NLP Feature-Based Discriminative Learning.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.028
+    source_number: 028
+    title: 장단기 메모리와 장기 의존성 학습
+    page_type: source
+    path: wiki/sources/028_장단기 메모리와 장기 의존성 학습.md
+    artifacts:
+      - raw/028_Long Short-Term Memory - Solving the Memory Problem.ko.md
+      - raw/028_Long Short-Term Memory - Solving the Memory Problem.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.029
+    source_number: 029
+    title: 통계적 구문 분석과 어휘화 파서
+    page_type: source
+    path: wiki/sources/029_통계적 구문 분석과 어휘화 파서.md
+    artifacts:
+      - raw/029_Statistical Parsers From Rules to Probabilities - Revolution in Natural Language Parsing.ko.md
+      - >-
+        raw/029_Statistical Parsers From Rules to Probabilities - Revolution in Natural Language
+        Parsing.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.030
+    source_number: '030'
+    title: FrameNet과 프레임 의미론
+    page_type: source
+    path: wiki/sources/030_FrameNet과 프레임 의미론.md
+    artifacts:
+      - raw/030_FrameNet - A Computational Resource for Frame Semantics.ko.md
+      - raw/030_FrameNet - A Computational Resource for Frame Semantics.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.031
+    source_number: '031'
+    title: 잠재 의미 분석과 확률적 잠재 의미 색인
+    page_type: source
+    path: wiki/sources/031_잠재 의미 분석과 확률적 잠재 의미 색인.md
+    artifacts:
+      - raw/031_Latent Semantic Analysis and Topic Models Discovering Hidden Structure in Text.ko.md
+      - raw/031_Latent Semantic Analysis and Topic Models Discovering Hidden Structure in Text.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.032
+    source_number: '032'
+    title: 조건부 무작위장과 구조화 예측
+    page_type: source
+    path: wiki/sources/032_조건부 무작위장과 구조화 예측.md
+    artifacts:
+      - raw/032_Conditional Random Fields - Structured Prediction for Sequences.ko.md
+      - raw/032_Conditional Random Fields - Structured Prediction for Sequences.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.033
+    source_number: '033'
+    title: BLEU와 기계 번역 자동 평가
+    page_type: source
+    path: wiki/sources/033_BLEU와 기계 번역 자동 평가.md
+    artifacts:
+      - raw/033_BLEU Metric - Automatic Evaluation for Machine Translation.ko.md
+      - raw/033_BLEU Metric - Automatic Evaluation for Machine Translation.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.034
+    source_number: '034'
+    title: 구 기반 통계적 기계 번역과 최소 오류율 훈련
+    page_type: source
+    path: wiki/sources/034_구 기반 통계적 기계 번역과 최소 오류율 훈련.md
+    artifacts:
+      - >-
+        raw/034_Phrase-Based Statistical Machine Translation & Minimum Error Rate Training Phrase-Level Learning and
+        Direct Optimization.ko.md
+      - >-
+        raw/034_Phrase-Based Statistical Machine Translation & Minimum Error Rate Training Phrase-Level Learning and
+        Direct Optimization.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.035
+    source_number: '035'
+    title: 신경 확률 언어 모형과 분산 단어 표현
+    page_type: source
+    path: wiki/sources/035_신경 확률 언어 모형과 분산 단어 표현.md
+    artifacts:
+      - >-
+        raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language
+        Modeling.ko.md
+      - >-
+        raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language
+        Modeling.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.036
+    source_number: '036'
+    title: 잠재 디리클레 할당과 베이지안 토픽 모델링
+    page_type: source
+    path: wiki/sources/036_잠재 디리클레 할당과 베이지안 토픽 모델링.md
+    artifacts:
+      - raw/036_Latent Dirichlet Allocation Bayesian Topic Modeling Framework.ko.md
+      - raw/036_Latent Dirichlet Allocation Bayesian Topic Modeling Framework.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.037
+    source_number: '037'
+    title: ROUGE와 METEOR의 과제별 생성 텍스트 평가
+    page_type: source
+    path: wiki/sources/037_ROUGE와 METEOR의 과제별 생성 텍스트 평가.md
+    artifacts:
+      - raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.ko.md
+      - raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.038
+    source_number: 038
+    title: PropBank와 의미역 표지
+    page_type: source
+    path: wiki/sources/038_PropBank와 의미역 표지.md
+    artifacts:
+      - raw/038_PropBank - Semantic Role Labeling and Proposition Bank.ko.md
+      - raw/038_PropBank - Semantic Role Labeling and Proposition Bank.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.039
+    source_number: 039
+    title: Freebase와 협업형 지식 그래프
+    page_type: source
+    path: wiki/sources/039_Freebase와 협업형 지식 그래프.md
+    artifacts:
+      - raw/039_Freebase Collaborative Knowledge Graph for Structured Information.ko.md
+      - raw/039_Freebase Collaborative Knowledge Graph for Structured Information.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.040
+    source_number: '040'
+    title: IBM Watson과 Jeopardy 질의응답
+    page_type: source
+    path: wiki/sources/040_IBM Watson과 Jeopardy 질의응답.md
+    artifacts:
+      - raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.ko.md
+      - >-
+        raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question
+        Answering.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.041
+    source_number: '041'
+    title: 심층 신경망 음향 모델과 DNN-HMM 전환
+    page_type: source
+    path: wiki/sources/041_심층 신경망 음향 모델과 DNN-HMM 전환.md
+    artifacts:
+      - raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.ko.md
+      - raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.042
+    source_number: '042'
+    title: Wikidata와 다언어 협업 지식 베이스
+    page_type: source
+    path: wiki/sources/042_Wikidata와 다언어 협업 지식 베이스.md
+    artifacts:
+      - raw/042_Wikidata Collaborative Knowledge Base for Language AI.ko.md
+      - raw/042_Wikidata Collaborative Knowledge Base for Language AI.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.043
+    source_number: '043'
+    title: Word2Vec와 효율적 정적 단어 임베딩
+    page_type: source
+    path: wiki/sources/043_Word2Vec와 효율적 정적 단어 임베딩.md
+    artifacts:
+      - raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.ko.md
+      - raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.044
+    source_number: '044'
+    title: GloVe와 Adam의 서로 다른 2014년 전환
+    page_type: source
+    path: wiki/sources/044_GloVe와 Adam의 서로 다른 2014년 전환.md
+    artifacts:
+      - raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.ko.md
+      - raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.045
+    source_number: '045'
+    title: Sequence-to-Sequence 학습과 신경 기계 번역
+    page_type: source
+    path: wiki/sources/045_Sequence-to-Sequence 학습과 신경 기계 번역.md
+    artifacts:
+      - raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.ko.md
+      - raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.046
+    source_number: '046'
+    title: 메모리 네트워크와 외부 지식 접근
+    page_type: source
+    path: wiki/sources/046_메모리 네트워크와 외부 지식 접근.md
+    artifacts:
+      - raw/046_Memory Networks External Memory for Neural Question Answering.ko.md
+      - raw/046_Memory Networks External Memory for Neural Question Answering.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.047
+    source_number: '047'
+    title: 어텐션 메커니즘과 동적 정렬
+    page_type: source
+    path: wiki/sources/047_어텐션 메커니즘과 동적 정렬.md
+    artifacts:
+      - raw/047_Attention Mechanism Editorial Reconstruction.ko.md
+      - raw/047_Attention Mechanism Editorial Reconstruction.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.048
+    source_number: 048
+    title: 잔차 학습과 매우 깊은 신경망
+    page_type: source
+    path: wiki/sources/048_잔차 학습과 매우 깊은 신경망.md
+    artifacts:
+      - raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md
+      - raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.049
+    source_number: 049
+    title: 층 정규화와 시퀀스 모델의 배치 독립성
+    page_type: source
+    path: wiki/sources/049_층 정규화와 시퀀스 모델의 배치 독립성.md
+    artifacts:
+      - raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md
+      - raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.050
+    source_number: '050'
+    title: FastText와 서브워드 표현의 두 경로
+    page_type: source
+    path: wiki/sources/050_FastText와 서브워드 표현의 두 경로.md
+    artifacts:
+      - raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md
+      - >-
+        raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word
+        Representations.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.051
+    source_number: '051'
+    title: SQuAD와 추출형 독해 평가
+    page_type: source
+    path: wiki/sources/051_SQuAD와 추출형 독해 평가.md
+    artifacts:
+      - raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md
+      - raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.052
+    source_number: '052'
+    title: 신경 정보 검색과 의미 대응
+    page_type: source
+    path: wiki/sources/052_신경 정보 검색과 의미 대응.md
+    artifacts:
+      - raw/052_Neural Information Retrieval Semantic Search with Deep Learning.ko.md
+      - raw/052_Neural Information Retrieval Semantic Search with Deep Learning.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.053
+    source_number: '053'
+    title: GNMT와 제품 규모 신경 번역
+    page_type: source
+    path: wiki/sources/053_GNMT와 제품 규모 신경 번역.md
+    artifacts:
+      - raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md
+      - raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.054
+    source_number: '054'
+    title: WaveNet과 표본 단위 신경 오디오 생성
+    page_type: source
+    path: wiki/sources/054_WaveNet과 표본 단위 신경 오디오 생성.md
+    artifacts:
+      - raw/054_WaveNet - Neural Audio Generation Revolution.ko.md
+      - raw/054_WaveNet - Neural Audio Generation Revolution.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.055
+    source_number: '055'
+    title: Transformer와 자기어텐션 기반 시퀀스 모델링
+    page_type: source
+    path: wiki/sources/055_Transformer와 자기어텐션 기반 시퀀스 모델링.md
+    artifacts:
+      - raw/055_The Transformer Attention Is All You Need.ko.md
+      - raw/055_The Transformer Attention Is All You Need.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.056
+    source_number: '056'
+    title: RLHF 토대와 인간 선호 기반 보상 학습
+    page_type: source
+    path: wiki/sources/056_RLHF 토대와 인간 선호 기반 보상 학습.md
+    artifacts:
+      - raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md
+      - raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.057
+    source_number: '057'
+    title: ELMo와 ULMFiT의 두 전이 학습 경로
+    page_type: source
+    path: wiki/sources/057_ELMo와 ULMFiT의 두 전이 학습 경로.md
+    artifacts:
+      - raw/057_ELMo and ULMFiT Transfer Learning for Natural Language Processing.ko.md
+      - raw/057_ELMo and ULMFiT Transfer Learning for Natural Language Processing.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.058
+    source_number: 058
+    title: BERT의 마스크드 양방향 사전 학습
+    page_type: source
+    path: wiki/sources/058_BERT의 마스크드 양방향 사전 학습.md
+    artifacts:
+      - raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md
+      - raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.059
+    source_number: 059
+    title: GPT-1과 GPT-2의 전이 방식 변화
+    page_type: source
+    path: wiki/sources/059_GPT-1과 GPT-2의 전이 방식 변화.md
+    artifacts:
+      - raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md
+      - raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.060
+    source_number: '060'
+    title: GLUE와 SuperGLUE의 집계 평가
+    page_type: source
+    path: wiki/sources/060_GLUE와 SuperGLUE의 집계 평가.md
+    artifacts:
+      - raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md
+      - raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.061
+    source_number: '061'
+    title: XLNet·RoBERTa·ALBERT의 BERT 개선 경로
+    page_type: source
+    path: wiki/sources/061_XLNet·RoBERTa·ALBERT의 BERT 개선 경로.md
+    artifacts:
+      - >-
+        raw/061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter
+        Efficiency.ko.md
+      - >-
+        raw/061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter
+        Efficiency.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.062
+    source_number: '062'
+    title: XLM과 교차 언어 사전 학습
+    page_type: source
+    path: wiki/sources/062_XLM과 교차 언어 사전 학습.md
+    artifacts:
+      - raw/062_XLM Cross-lingual Language Model for Multilingual NLP.ko.md
+      - raw/062_XLM Cross-lingual Language Model for Multilingual NLP.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.063
+    source_number: '063'
+    title: T5와 Text-to-Text 통합 프레임워크
+    page_type: source
+    path: wiki/sources/063_T5와 Text-to-Text 통합 프레임워크.md
+    artifacts:
+      - raw/063_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.ko.md
+      - raw/063_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.064
+    source_number: '064'
+    title: Transformer-XL과 세그먼트 수준 재귀
+    page_type: source
+    path: wiki/sources/064_Transformer-XL과 세그먼트 수준 재귀.md
+    artifacts:
+      - raw/064_Transformer-XL Extending Transformers to Long Sequences.ko.md
+      - raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.065
+    source_number: '065'
+    title: BERT 기반 passage 재순위화
+    page_type: source
+    path: wiki/sources/065_BERT 기반 passage 재순위화.md
+    artifacts:
+      - raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.ko.md
+      - raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.066
+    source_number: '066'
+    title: 신경 언어 모델의 스케일링 법칙
+    page_type: source
+    path: wiki/sources/066_신경 언어 모델의 스케일링 법칙.md
+    artifacts:
+      - raw/066_Scaling Laws for Neural Language Models Predicting Performance from Scale.ko.md
+      - raw/066_Scaling Laws for Neural Language Models Predicting Performance from Scale.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.067
+    source_number: '067'
+    title: GPT-3와 문맥 내 학습
+    page_type: source
+    path: wiki/sources/067_GPT-3와 문맥 내 학습.md
+    artifacts:
+      - raw/067_GPT-3 and In-Context Learning Emergent Capabilities from Scale.ko.md
+      - raw/067_GPT-3 and In-Context Learning Emergent Capabilities from Scale.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.068
+    source_number: 068
+    title: DPR과 검색 증강 생성
+    page_type: source
+    path: wiki/sources/068_DPR과 검색 증강 생성.md
+    artifacts:
+      - >-
+        raw/068_Dense Passage Retrieval and Retrieval-Augmented Generation Integrating Knowledge with Language
+        Models.ko.md
+      - >-
+        raw/068_Dense Passage Retrieval and Retrieval-Augmented Generation Integrating Knowledge with Language
+        Models.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.069
+    source_number: 069
+    title: 전문가 혼합과 희소 활성 스케일링
+    page_type: source
+    path: wiki/sources/069_전문가 혼합과 희소 활성 스케일링.md
+    artifacts:
+      - raw/069_Mixture of Experts Sparse Activation for Scaling Language Models.ko.md
+      - raw/069_Mixture of Experts Sparse Activation for Scaling Language Models.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.070
+    source_number: '070'
+    title: CLIP과 대조적 언어-이미지 사전 학습
+    page_type: source
+    path: wiki/sources/070_CLIP과 대조적 언어-이미지 사전 학습.md
+    artifacts:
+      - raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md
+      - raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.071
+    source_number: '071'
+    title: Codex와 HumanEval 기반 코드 생성 평가
+    page_type: source
+    path: wiki/sources/071_Codex와 HumanEval 기반 코드 생성 평가.md
+    artifacts:
+      - raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.ko.md
+      - raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.072
+    source_number: '072'
+    title: 지시 미세조정과 FLAN의 제로샷 일반화
+    page_type: source
+    path: wiki/sources/072_지시 미세조정과 FLAN의 제로샷 일반화.md
+    artifacts:
+      - raw/072_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.ko.md
+      - raw/072_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.073
+    source_number: '073'
+    title: ColBERT와 다중 벡터 검색
+    page_type: source
+    path: wiki/sources/073_ColBERT와 다중 벡터 검색.md
+    artifacts:
+      - raw/073_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval.ko.md
+      - >-
+        raw/073_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information
+        Retrieval.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.074
+    source_number: '074'
+    title: The Pile과 대규모 언어 모델 학습 말뭉치
+    page_type: source
+    path: wiki/sources/074_The Pile과 대규모 언어 모델 학습 말뭉치.md
+    artifacts:
+      - raw/074_The Pile Open-Source Training Dataset for Large Language Models.ko.md
+      - raw/074_The Pile Open-Source Training Dataset for Large Language Models.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.075
+    source_number: '075'
+    title: DALL·E와 이산 이미지 토큰 생성
+    page_type: source
+    path: wiki/sources/075_DALL·E와 이산 이미지 토큰 생성.md
+    artifacts:
+      - raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md
+      - raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.076
+    source_number: '076'
+    title: 파운데이션 모델 보고서와 AI 생태계
+    page_type: source
+    path: wiki/sources/076_파운데이션 모델 보고서와 AI 생태계.md
+    artifacts:
+      - raw/076_Foundation Models Report Defining a New Paradigm in AI.ko.md
+      - raw/076_Foundation Models Report Defining a New Paradigm in AI.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.077
+    source_number: '077'
+    title: InstructGPT와 인간 선호 정렬
+    page_type: source
+    path: wiki/sources/077_InstructGPT와 인간 선호 정렬.md
+    artifacts:
+      - raw/077_InstructGPT and RLHF Aligning Language Models with Human Preferences.ko.md
+      - raw/077_InstructGPT and RLHF Aligning Language Models with Human Preferences.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.078
+    source_number: 078
+    title: Chinchilla와 계산 최적 언어 모델 학습
+    page_type: source
+    path: wiki/sources/078_Chinchilla와 계산 최적 언어 모델 학습.md
+    artifacts:
+      - raw/078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.ko.md
+      - >-
+        raw/078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language
+        Models.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.079
+    source_number: 079
+    title: HELM과 다차원 언어 모델 평가
+    page_type: source
+    path: wiki/sources/079_HELM과 다차원 언어 모델 평가.md
+    artifacts:
+      - raw/079_HELM Holistic Evaluation of Language Models Framework.ko.md
+      - raw/079_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.080
+    source_number: 080
+    title: 사고 연쇄 프롬프팅과 추론 행동 유도
+    page_type: source
+    path: wiki/sources/080_사고 연쇄 프롬프팅과 추론 행동 유도.md
+    artifacts:
+      - raw/080_Chain-of-Thought Prompting Unlocking Latent Reasoning in Language Models.ko.md
+      - raw/080_Chain-of-Thought Prompting Unlocking Latent Reasoning in Language Models.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.081
+    source_number: 081
+    title: ChatGPT 연구 미리보기와 대화형 LLM 배포
+    page_type: source
+    path: wiki/sources/081_ChatGPT 연구 미리보기와 대화형 LLM 배포.md
+    artifacts:
+      - raw/081_ChatGPT Conversational AI Becomes Mainstream.ko.md
+      - raw/081_ChatGPT Conversational AI Becomes Mainstream.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.082
+    source_number: 082
+    title: BLOOM과 공개 접근 다국어 LLM
+    page_type: source
+    path: wiki/sources/082_BLOOM과 공개 접근 다국어 LLM.md
+    artifacts:
+      - raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.ko.md
+      - raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.083
+    source_number: 083
+    title: PaLM과 Pathways 기반 대규모 언어 모델 확장
+    page_type: source
+    path: wiki/sources/083_PaLM과 Pathways 기반 대규모 언어 모델 확장.md
+    artifacts:
+      - 'raw/083_PaLM Pathways Language Model - Large-Scale Training, Reasoning, and Multilingual Capabilities.ko.md'
+      - >-
+        raw/083_PaLM Pathways Language Model - Large-Scale Training, Reasoning, and Multilingual
+        Capabilities.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.084
+    source_number: 084
+    title: Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습
+    page_type: source
+    path: wiki/sources/084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습.md
+    artifacts:
+      - raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.ko.md
+      - raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.085
+    source_number: 085
+    title: DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성
+    page_type: source
+    path: wiki/sources/085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성.md
+    artifacts:
+      - raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.ko.md
+      - raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.086
+    source_number: 086
+    title: 잠재 확산 모델과 Stable Diffusion v1 공개
+    page_type: source
+    path: wiki/sources/086_잠재 확산 모델과 Stable Diffusion v1 공개.md
+    artifacts:
+      - raw/086_Stable Diffusion Latent Diffusion Models for Accessible Text-to-Image Generation.ko.md
+      - raw/086_Stable Diffusion Latent Diffusion Models for Accessible Text-to-Image Generation.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.087
+    source_number: 087
+    title: Whisper와 대규모 약한 감독 음성 인식
+    page_type: source
+    path: wiki/sources/087_Whisper와 대규모 약한 감독 음성 인식.md
+    artifacts:
+      - raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.ko.md
+      - raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.088
+    source_number: 088
+    title: FlashAttention과 I/O 인지형 정확 어텐션
+    page_type: source
+    path: wiki/sources/088_FlashAttention과 IO 인지형 정확 어텐션.md
+    artifacts:
+      - raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md
+      - raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.089
+    source_number: 089
+    title: LLaMA 1과 제한적 공개 가중치 연구 배포
+    page_type: source
+    path: wiki/sources/089_LLaMA 1과 제한적 공개 가중치 연구 배포.md
+    artifacts:
+      - raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.ko.md
+      - raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.090
+    source_number: 090
+    title: 공개 가중치 LLM 파동과 서로 다른 공개 범위
+    page_type: source
+    path: wiki/sources/090_공개 가중치 LLM 파동과 서로 다른 공개 범위.md
+    artifacts:
+      - raw/090_Open LLM Wave The Proliferation of High-Quality Open-Source Language Models.ko.md
+      - raw/090_Open LLM Wave The Proliferation of High-Quality Open-Source Language Models.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.091
+    source_number: 091
+    title: QLoRA와 4비트 양자화 미세조정
+    page_type: source
+    path: wiki/sources/091_QLoRA와 4비트 양자화 미세조정.md
+    artifacts:
+      - raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.ko.md
+      - raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.092
+    source_number: 092
+    title: 함수 호출과 도구 사용의 모델-실행 경계
+    page_type: source
+    path: wiki/sources/092_함수 호출과 도구 사용의 모델-실행 경계.md
+    artifacts:
+      - raw/092_Function Calling and Tool Use Enabling Practical AI Agent Systems.ko.md
+      - raw/092_Function Calling and Tool Use Enabling Practical AI Agent Systems.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.093
+    source_number: 093
+    title: 멀티모달 LLM과 시각-언어 연결 방식의 분화
+    page_type: source
+    path: wiki/sources/093_멀티모달 LLM과 시각-언어 연결 방식의 분화.md
+    artifacts:
+      - raw/093_Multimodal Large Language Models - Vision-Language Integration That Transformed AI Capabilities.ko.md
+      - >-
+        raw/093_Multimodal Large Language Models - Vision-Language Integration That Transformed AI
+        Capabilities.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.094
+    source_number: 094
+    title: 헌법적 AI와 자기비평·AI 피드백 정렬
+    page_type: source
+    path: wiki/sources/094_헌법적 AI와 자기비평·AI 피드백 정렬.md
+    artifacts:
+      - raw/094_Constitutional AI Principle-Based Alignment Through Self-Critique.ko.md
+      - raw/094_Constitutional AI Principle-Based Alignment Through Self-Critique.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.095
+    source_number: 095
+    title: BIG-bench와 MMLU의 평가 범위·집계 경계
+    page_type: source
+    path: wiki/sources/095_BIG-bench와 MMLU의 평가 범위·집계 경계.md
+    artifacts:
+      - raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.ko.md
+      - raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.096
+    source_number: 096
+    title: GPT-4의 멀티모달 공개·시험 성능·안전 경계
+    page_type: source
+    path: wiki/sources/096_GPT-4의 멀티모달 공개·시험 성능·안전 경계.md
+    artifacts:
+      - raw/096_GPT-4 Multimodal Language Models Reach Human-Level Performance.ko.md
+      - raw/096_GPT-4 Multimodal Language Models Reach Human-Level Performance.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.097
+    source_number: 097
+    title: Mixtral의 생산 배포 효율 주장과 증거 경계
+    page_type: source
+    path: wiki/sources/097_Mixtral의 생산 배포 효율 주장과 증거 경계.md
+    artifacts:
+      - raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.ko.md
+      - >-
+        raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of
+        Experts.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.098
+    source_number: 098
+    title: 백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계
+    page_type: source
+    path: wiki/sources/098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계.md
+    artifacts:
+      - raw/098_Long Context Models Processing Million-Token Sequences in Language AI.ko.md
+      - raw/098_Long Context Models Processing Million-Token Sequences in Language AI.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.099
+    source_number: 099
+    title: 구조화 출력의 스키마 준수와 의미 정확성 경계
+    page_type: source
+    path: wiki/sources/099_구조화 출력의 스키마 준수와 의미 정확성 경계.md
+    artifacts:
+      - raw/099_Structured Outputs Reliable Schema-Validated Data Extraction from Language Models.ko.md
+      - raw/099_Structured Outputs Reliable Schema-Validated Data Extraction from Language Models.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.100
+    source_number: '100'
+    title: 희소·밀집 검색의 결합과 다단계 순위화
+    page_type: source
+    path: wiki/sources/100_희소·밀집 검색의 결합과 다단계 순위화.md
+    artifacts:
+      - raw/100_Hybrid Retrieval Combining Sparse and Dense Methods for Effective Information Retrieval.ko.md
+      - raw/100_Hybrid Retrieval Combining Sparse and Dense Methods for Effective Information Retrieval.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.101
+    source_number: '101'
+    title: LoRA 이후 PEFT 변형의 설계 축과 연표
+    page_type: source
+    path: wiki/sources/101_LoRA 이후 PEFT 변형의 설계 축과 연표.md
+    artifacts:
+      - raw/101_PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques.ko.md
+      - raw/101_PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.102
+    source_number: '102'
+    title: 지속 사전 학습의 연표와 지식 갱신 경계
+    page_type: source
+    path: wiki/sources/102_지속 사전 학습의 연표와 지식 갱신 경계.md
+    artifacts:
+      - raw/102_Continuous Post-Training Incremental Model Updates for Dynamic Language Models.ko.md
+      - raw/102_Continuous Post-Training Incremental Model Updates for Dynamic Language Models.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.103
+    source_number: '103'
+    title: GLaM에서 Mixtral까지의 희소 MoE 확장
+    page_type: source
+    path: wiki/sources/103_GLaM에서 Mixtral까지의 희소 MoE 확장.md
+    artifacts:
+      - raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md
+      - >-
+        raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic
+        Routing.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.104
+    source_number: '104'
+    title: LLM 에이전트의 추론-행동 루프와 자율성 경계
+    page_type: source
+    path: wiki/sources/104_LLM 에이전트의 추론-행동 루프와 자율성 경계.md
+    artifacts:
+      - 'raw/104_Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use.ko.md'
+      - 'raw/104_Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use.commentary.ko.md'
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.105
+    source_number: '105'
+    title: 통합 멀티모달 아키텍처의 공유 범위와 입출력 경계
+    page_type: source
+    path: wiki/sources/105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계.md
+    artifacts:
+      - raw/105_Multimodal Integration Unified Architectures for Cross-Modal AI Understanding.ko.md
+      - raw/105_Multimodal Integration Unified Architectures for Cross-Modal AI Understanding.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.106
+    source_number: '106'
+    title: DeepSeek-R1의 강화학습 파이프라인과 증류 경계
+    page_type: source
+    path: wiki/sources/106_DeepSeek-R1의 강화학습 파이프라인과 증류 경계.md
+    artifacts:
+      - raw/106_DeepSeek R1 Architectural Innovation in Reasoning Models.ko.md
+      - raw/106_DeepSeek R1 Architectural Innovation in Reasoning Models.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.107
+    source_number: '107'
+    title: GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계
+    page_type: source
+    path: wiki/sources/107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계.md
+    artifacts:
+      - 'raw/107_GPT-4o Unified Multimodal AI with Real-Time Speech, Vision, and Text.ko.md'
+      - 'raw/107_GPT-4o Unified Multimodal AI with Real-Time Speech, Vision, and Text.commentary.ko.md'
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.108
+    source_number: '108'
+    title: V-JEPA 2의 잠재 예측과 로봇 계획 실험 경계
+    page_type: source
+    path: wiki/sources/108_V-JEPA 2의 잠재 예측과 로봇 계획 실험 경계.md
+    artifacts:
+      - raw/108_V-JEPA 2 Vision-Based World Modeling for Embodied AI.ko.md
+      - raw/108_V-JEPA 2 Vision-Based World Modeling for Embodied AI.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.109
+    source_number: '109'
+    title: AI 공동 과학자의 가설 생성과 자율 연구 경계
+    page_type: source
+    path: wiki/sources/109_AI 공동 과학자의 가설 생성과 자율 연구 경계.md
+    artifacts:
+      - raw/109_AI Co-Scientist Systems Autonomous Research and Scientific Discovery.ko.md
+      - raw/109_AI Co-Scientist Systems Autonomous Research and Scientific Discovery.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified
+  - id: source.110
+    source_number: '110'
+    title: 저자원 언어 LLM의 성능 격차와 전이·평가 경계
+    page_type: source
+    path: wiki/sources/110_저자원 언어 LLM의 성능 격차와 전이·평가 경계.md
+    artifacts:
+      - raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.ko.md
+      - >-
+        raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global
+        Accessibility.commentary.ko.md
+    editorial_status: active
+    evidence_coverage: verified

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.085
 page_type: source
 title: DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성
@@ -16,11 +16,13 @@ tags:
   - domain/nlp
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.ko.md'
-  - 'raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.commentary.ko.md'
+  - raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.ko.md
+  - raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.commentary.ko.md
 evidence:
   - source_id: ramesh-et-al-2022-unclip
     locator: 'arXiv:2204.06125v1, §§2.1–2.2·3.1–3.3·5.1–5.5·6·7, Figures 2–17, Tables 1–2, Appendix A–C와 Table 3의 unCLIP 구조·잠재 조작·평가·guidance 비교·한계·학습 조건'
@@ -29,21 +31,38 @@ evidence:
     locator: 'DALL·E 2와 DALL·E 1의 caption matching·photorealism 선호도 비교, 4배 해상도와 제품 편집 기능 소개'
     relation: supplements
   - source_id: mishkin-et-al-2022-dalle2-preview
-    locator: 'System Components·Restrictions·Probes and Evaluations·Deployment의 초기 research preview 기능·접근 통제·필터·편향·오용 위험'
+    locator: System Components·Restrictions·Probes and Evaluations·Deployment의 초기 research preview 기능·접근 통제·필터·편향·오용 위험
     relation: contextualizes
-related:
-  - concept.dall-e-2
-  - concept.clip
-  - concept.dall-e-2021
-  - source.070
-  - source.075
-  - source.084
+relations:
+  - target: source.070
+    kind: related
+  - target: source.075
+    kind: related
+  - target: source.084
+    kind: related
+  - target: concept.자기회귀-생성
+    kind: background
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.clip
+    - target: concept.dall-e-2021
+  assumed_knowledge: 없음
+  outcomes:
+    - 'DALL·E 2 연구 모델인 unCLIP의 사전 모델·확산 디코더·업샘플러 흐름을 설명하고, CLIP 잠재 조건화와 CLIP gradient guidance, 논문 모델과 제품 기능을 구분할 수 있다.'
+  next:
+    - target: concept.dall-e-2
+      reason: DALL·E 2 — unCLIP의 재사용 가능한 구조·평가·배포 경계를 개념 중심으로 정리한다.
+    - target: concept.flamingo
+      reason: Flamingo — 동결된 사전 학습 구성 요소를 생성기에 연결하되 이미지가 아니라 텍스트를 출력하는 반대 방향을 살펴본다.
 ---
 # DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[CLIP]], [[DALL·E (2021)]], [[자기회귀 생성]]<br>
+> **선수 지식:** [[concept.clip|CLIP]], [[concept.dall-e-2021|DALL·E (2021)]]<br>
 > **읽고 나면:** DALL·E 2 연구 모델인 unCLIP의 사전 모델·확산 디코더·업샘플러 흐름을 설명하고, CLIP 잠재 조건화와 CLIP gradient guidance, 논문 모델과 제품 기능을 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -154,10 +173,8 @@ unCLIP은 GLIDE보다 객체와 속성을 정확히 묶는 능력이 약했고, 
 
 ### 다음 문서
 
-- [[DALL·E 2]] — unCLIP의 재사용 가능한 구조·평가·배포 경계를 개념 중심으로 정리한다.
-- [[CLIP]] — 공유 임베딩이 분류·후보 재순위화·조건부 생성에서 서로 다른 역할을 맡는 방식을 비교한다.
-- [[DALL·E (2021)]] — 이산 이미지 토큰의 공동 자기회귀 모델링과 unCLIP의 계층적 확산 경로를 대비한다.
-- [[Flamingo]] — 동결된 사전 학습 구성 요소를 생성기에 연결하되 이미지가 아니라 텍스트를 출력하는 반대 방향을 살펴본다.
+- [[concept.dall-e-2|DALL·E 2]] — unCLIP의 재사용 가능한 구조·평가·배포 경계를 개념 중심으로 정리한다.
+- [[concept.flamingo|Flamingo]] — 동결된 사전 학습 구성 요소를 생성기에 연결하되 이미지가 아니라 텍스트를 출력하는 반대 방향을 살펴본다.
 
 ## 출처
 
@@ -169,9 +186,11 @@ unCLIP은 GLIDE보다 객체와 속성을 정확히 묶는 능력이 약했고, 
 
 ## 관련 항목
 
-- [[DALL·E 2]]
-- [[CLIP]]
-- [[DALL·E (2021)]]
-- [[070_CLIP과 대조적 언어-이미지 사전 학습]]
-- [[075_DALL·E와 이산 이미지 토큰 생성]]
-- [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]]
+- [[concept.dall-e-2|DALL·E 2]]
+- [[concept.flamingo|Flamingo]]
+- [[concept.clip|CLIP]]
+- [[concept.dall-e-2021|DALL·E (2021)]]
+- [[source.070|CLIP과 대조적 언어-이미지 사전 학습]]
+- [[source.075|DALL·E와 이산 이미지 토큰 생성]]
+- [[source.084|Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]]
+- [[concept.자기회귀-생성|자기회귀 생성]]

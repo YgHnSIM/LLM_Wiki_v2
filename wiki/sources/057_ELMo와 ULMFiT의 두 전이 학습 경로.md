@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.057
 page_type: source
 title: ELMo와 ULMFiT의 두 전이 학습 경로
@@ -13,11 +13,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-20'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/057_ELMo and ULMFiT Transfer Learning for Natural Language Processing.ko.md'
-  - 'raw/057_ELMo and ULMFiT Transfer Learning for Natural Language Processing.commentary.ko.md'
+  - raw/057_ELMo and ULMFiT Transfer Learning for Natural Language Processing.ko.md
+  - raw/057_ELMo and ULMFiT Transfer Learning for Natural Language Processing.commentary.ko.md
 evidence:
   - source_id: peters-et-al-2018-elmo
     locator: '초록과 §§1–3의 biLM 층별 표현·과제별 가중합, §4와 Table 1의 여섯 NLP 과제'
@@ -25,17 +27,30 @@ evidence:
   - source_id: howard-ruder-2018-ulmfit
     locator: '초록과 §§1–3의 세 단계 전이·판별적 미세조정·기울어진 삼각형 학습률·점진적 동결 해제, §§4–5의 여섯 분류 자료'
     relation: supports
-related:
-  - concept.언어-모델-전이-학습
-  - concept.단어-임베딩
-  - concept.장단기-메모리
-  - concept.transformer
+relations:
+  - target: concept.transformer
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.단어-임베딩
+    - target: concept.장단기-메모리
+  assumed_knowledge: 없음
+  outcomes:
+    - ELMo의 고정 문맥 특징과 ULMFiT의 전체 모델 적응이 사전 학습 지식을 서로 다르게 전달하는 방식을 비교할 수 있다.
+  next:
+    - target: concept.언어-모델-전이-학습
+      reason: 언어 모델 전이 학습 — 특징 추출·전체 미세조정·영역 적응을 더 일반적인 전이 기준으로 묶는다.
+    - target: concept.bert
+      reason: BERT — 고정 특징과 전체 적응의 논점을 Transformer encoder 사전 학습이 어떻게 다시 구성했는지 살핀다.
 ---
 # ELMo와 ULMFiT의 두 전이 학습 경로
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[단어 임베딩]], [[장단기 메모리]]<br>
+> **선수 지식:** [[concept.단어-임베딩|단어 임베딩]], [[concept.장단기-메모리|장단기 메모리]]<br>
 > **읽고 나면:** ELMo의 고정 문맥 특징과 ULMFiT의 전체 모델 적응이 사전 학습 지식을 서로 다르게 전달하는 방식을 비교할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -129,8 +144,8 @@ BERT의 깊은 양방향 표현은 ELMo와 문맥화라는 문제를 공유하�
 
 ### 다음 문서
 
-- [[언어 모델 전이 학습]] — 특징 추출·전체 미세조정·영역 적응을 더 일반적인 전이 기준으로 묶는다.
-- [[BERT]] — 고정 특징과 전체 적응의 논점을 Transformer encoder 사전 학습이 어떻게 다시 구성했는지 살핀다.
+- [[concept.언어-모델-전이-학습|언어 모델 전이 학습]] — 특징 추출·전체 미세조정·영역 적응을 더 일반적인 전이 기준으로 묶는다.
+- [[concept.bert|BERT]] — 고정 특징과 전체 적응의 논점을 Transformer encoder 사전 학습이 어떻게 다시 구성했는지 살핀다.
 
 ## 출처
 
@@ -141,7 +156,8 @@ BERT의 깊은 양방향 표현은 ELMo와 문맥화라는 문제를 공유하�
 
 ## 관련 항목
 
-- [[언어 모델 전이 학습]]
-- [[단어 임베딩]]
-- [[장단기 메모리]]
-- [[Transformer]]
+- [[concept.언어-모델-전이-학습|언어 모델 전이 학습]]
+- [[concept.bert|BERT]]
+- [[concept.단어-임베딩|단어 임베딩]]
+- [[concept.장단기-메모리|장단기 메모리]]
+- [[concept.transformer|Transformer]]

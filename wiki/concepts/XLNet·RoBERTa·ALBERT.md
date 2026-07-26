@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.xlnet-roberta-albert
 page_type: concept
 title: XLNet·RoBERTa·ALBERT
@@ -15,37 +15,54 @@ tags:
   - domain/machine-learning
 created: '2026-07-21'
 updated: '2026-07-23'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - 'raw/061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.ko.md'
   - 'raw/061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.commentary.ko.md'
 evidence:
   - source_id: bert-2019
-    locator: '§3.1과 Appendix A.2의 MLM 15%·80/10/10 표본화와 NSP 구성'
+    locator: §3.1과 Appendix A.2의 MLM 15%·80/10/10 표본화와 NSP 구성
     relation: contextualizes
   - source_id: yang-et-al-2019-xlnet
-    locator: '§§2.1–2.6의 generalized autoregressive objective·two-stream attention·Transformer-XL 결합과 §3의 ablation'
+    locator: §§2.1–2.6의 generalized autoregressive objective·two-stream attention·Transformer-XL 결합과 §3의 ablation
     relation: supports
   - source_id: liu-et-al-2019-roberta
-    locator: '§§3–5의 data·masking·NSP·batch·training duration 통제 비교와 최종 결과'
+    locator: §§3–5의 data·masking·NSP·batch·training duration 통제 비교와 최종 결과
     relation: supports
   - source_id: lan-et-al-2020-albert
-    locator: '§§3–5와 Tables 1–5의 factorization·layer sharing·SOP·parameter/compute 비교'
+    locator: §§3–5와 Tables 1–5의 factorization·layer sharing·SOP·parameter/compute 비교
     relation: supports
-related:
-  - source.061
-  - concept.bert
-  - concept.마스크드-언어-모델링
-  - concept.transformer
-  - concept.transformer-xl
-  - concept.glue-superglue
+relations:
+  - target: source.061
+    kind: related
+  - target: concept.transformer
+    kind: related
+  - target: concept.transformer-xl
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.bert
+    - target: concept.마스크드-언어-모델링
+  assumed_knowledge: 없음
+  outcomes:
+    - 세 모델을 하나의 후속 버전 계보로 보지 않고 objective·training recipe·parameterization의 세 비교축으로 설명할 수 있다.
+  next:
+    - target: concept.glue-superglue
+      reason: GLUE와 SuperGLUE — 서로 다른 모델의 전이 성능을 집계 점수로 비교할 때 숨는 조건을 살핀다.
+    - target: analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+      reason: 사전 학습 지식은 과제에 어떻게 도착하는가 — 사전 학습 결과가 특징·미세조정·prompting을 통해 후속 과제로 전달되는 방식을 비교한다.
 ---
 # XLNet·RoBERTa·ALBERT
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[BERT]], [[마스크드 언어 모델링]]<br>
+> **선수 지식:** [[concept.bert|BERT]], [[concept.마스크드-언어-모델링|마스크드 언어 모델링]]<br>
 > **읽고 나면:** 세 모델을 하나의 후속 버전 계보로 보지 않고 objective·training recipe·parameterization의 세 비교축으로 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -365,8 +382,8 @@ softmax 분모는 항상 양수지만, 정답 확률이 계산상 0이 되면 $-
 
 ### 다음 문서
 
-- [[GLUE와 SuperGLUE]] — 서로 다른 모델의 전이 성능을 집계 점수로 비교할 때 숨는 조건을 살핀다.
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 사전 학습 결과가 특징·미세조정·prompting을 통해 후속 과제로 전달되는 방식을 비교한다.
+- [[concept.glue-superglue|GLUE와 SuperGLUE]] — 서로 다른 모델의 전이 성능을 집계 점수로 비교할 때 숨는 조건을 살핀다.
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]] — 사전 학습 결과가 특징·미세조정·prompting을 통해 후속 과제로 전달되는 방식을 비교한다.
 
 ## 출처
 
@@ -377,9 +394,10 @@ softmax 분모는 항상 양수지만, 정답 확률이 계산상 0이 되면 $-
 
 ## 관련 항목
 
-- [[061_XLNet·RoBERTa·ALBERT의 BERT 개선 경로]]
-- [[BERT]]
-- [[마스크드 언어 모델링]]
-- [[Transformer]]
-- [[Transformer-XL]]
-- [[GLUE와 SuperGLUE]]
+- [[concept.glue-superglue|GLUE와 SuperGLUE]]
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]]
+- [[concept.bert|BERT]]
+- [[concept.마스크드-언어-모델링|마스크드 언어 모델링]]
+- [[source.061|XLNet·RoBERTa·ALBERT의 BERT 개선 경로]]
+- [[concept.transformer|Transformer]]
+- [[concept.transformer-xl|Transformer-XL]]

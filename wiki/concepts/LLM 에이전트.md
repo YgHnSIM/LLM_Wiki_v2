@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.llm-에이전트
 page_type: concept
 title: LLM 에이전트
@@ -17,28 +17,30 @@ tags:
   - domain/nlp
 created: '2026-07-22'
 updated: '2026-07-25'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - 'raw/104_Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use.ko.md'
   - 'raw/104_Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use.commentary.ko.md'
-  - 'raw/109_AI Co-Scientist Systems Autonomous Research and Scientific Discovery.ko.md'
-  - 'raw/109_AI Co-Scientist Systems Autonomous Research and Scientific Discovery.commentary.ko.md'
+  - raw/109_AI Co-Scientist Systems Autonomous Research and Scientific Discovery.ko.md
+  - raw/109_AI Co-Scientist Systems Autonomous Research and Scientific Discovery.commentary.ko.md
 evidence:
   - source_id: wei-et-al-2022-chain-of-thought
     locator: '초록과 §§1–4, Figures 1–6의 intermediate reasoning text·few-shot prompting과 과제별 성능 범위'
     relation: contextualizes
   - source_id: yao-et-al-2023-react
-    locator: '초록과 §§1–4·Figure 1의 reasoning–action–observation loop 및 QA·interactive environment 실험'
+    locator: 초록과 §§1–4·Figure 1의 reasoning–action–observation loop 및 QA·interactive environment 실험
     relation: supports
   - source_id: schick-et-al-2023-toolformer
-    locator: '초록과 §§1–3의 self-supervised API-call 학습과 tool 선택·argument·결과 통합'
+    locator: 초록과 §§1–3의 self-supervised API-call 학습과 tool 선택·argument·결과 통합
     relation: contextualizes
   - source_id: openai-2023-function-calling-api-update
     locator: 'Function calling 절의 함수 이름·JSON argument 생성, external application 실행과 tool-output injection 경고'
     relation: contextualizes
   - source_id: shinn-et-al-2023-reflexion
-    locator: '초록과 §§2–5·Figures 2–4·Tables 1–3의 verbal feedback·episodic memory·retry 및 parameter update를 하지 않는 설정'
+    locator: 초록과 §§2–5·Figures 2–4·Tables 1–3의 verbal feedback·episodic memory·retry 및 parameter update를 하지 않는 설정
     relation: supports
   - source_id: park-et-al-2023-generative-agents
     locator: '초록과 §§3–5의 observation memory·reflection·planning, 25-agent sandbox와 human believability evaluation'
@@ -47,10 +49,10 @@ evidence:
     locator: '초록과 §§3–6·Table 4의 실제형 website task, end-to-end success와 human·GPT-4 agent 격차'
     relation: supports
   - source_id: jimenez-et-al-2024-swebench
-    locator: '초록과 §§2–5·Tables 3–5의 repository-level issue·test 기반 patch 평가와 model별 해결률'
+    locator: 초록과 §§2–5·Tables 3–5의 repository-level issue·test 기반 patch 평가와 model별 해결률
     relation: contextualizes
   - source_id: xie-et-al-2024-osworld
-    locator: '초록과 §§3–5·Table 5의 실제 web·desktop task와 human 72.36%·최고 model 12.24% success rate'
+    locator: 초록과 §§3–5·Table 5의 실제 web·desktop task와 human 72.36%·최고 model 12.24% success rate
     relation: supports
   - source_id: ruan-et-al-2024-toolemu
     locator: '초록과 §§3–5의 LM-emulated tool sandbox, 고위험 case와 helpfulness·safety evaluator'
@@ -59,43 +61,65 @@ evidence:
     locator: 'arXiv:2502.18864v1의 §§1·3.1–3.5·4와 Figure 2: scientist-in-the-loop 범위, Supervisor·전문 에이전트·context feedback, 전문가 후보 선택과 인간 wet-lab 실행 경계'
     relation: supplements
   - source_id: rfc-9110-http-semantics
-    locator: '§9.2.2의 idempotent method 범위와 §15.3.3의 accepted response와 완료 처리의 구분'
+    locator: §9.2.2의 idempotent method 범위와 §15.3.3의 accepted response와 완료 처리의 구분
     relation: contextualizes
   - source_id: google-aip-155-request-identification
-    locator: 'Guidance와 Stale success responses의 request ID·중복 제거·재시도·감사 및 유한 보존 조건'
+    locator: Guidance와 Stale success responses의 request ID·중복 제거·재시도·감사 및 유한 보존 조건
     relation: supplements
   - source_id: google-aip-194-automatic-retry
-    locator: 'Guidance와 Generally non-retryable codes의 side effect·transaction·UNKNOWN 자동 재시도 경계'
+    locator: Guidance와 Generally non-retryable codes의 side effect·transaction·UNKNOWN 자동 재시도 경계
     relation: supplements
   - source_id: google-aip-151-long-running-operations
-    locator: 'Guidance와 Errors의 operation status·partial failure·terminal response/error 구분'
+    locator: Guidance와 Errors의 operation status·partial failure·terminal response/error 구분
     relation: contextualizes
   - source_id: garcia-molina-salem-1987-sagas
-    locator: 'Abstract의 부분 실행·compensating transaction 경계'
+    locator: Abstract의 부분 실행·compensating transaction 경계
     relation: contextualizes
   - source_id: nist-sp800-53r5-audit-controls
     locator: 'AU-3, AU-5, AU-12의 action·주체·시각·결과·상관 기록과 logging failure 대응'
     relation: supplements
-related:
-  - source.104
-  - source.109
-  - source.092
-  - source.080
-  - source.071
-  - concept.함수-호출과-도구-사용
-  - concept.사고-연쇄-프롬프팅
-  - concept.구조화-출력
-  - concept.openai-codex-2021
-  - analysis.text-to-execution-authority
-  - analysis.model-capability-to-service-capability
-  - analysis.평가-지표와-모델-유인
-  - analysis.ai-시연과-실제-성능
+relations:
+  - target: source.104
+    kind: related
+  - target: source.109
+    kind: related
+  - target: source.092
+    kind: related
+  - target: source.080
+    kind: related
+  - target: source.071
+    kind: related
+  - target: concept.사고-연쇄-프롬프팅
+    kind: related
+  - target: concept.구조화-출력
+    kind: related
+  - target: concept.openai-codex-2021
+    kind: related
+  - target: analysis.text-to-execution-authority
+    kind: related
+  - target: analysis.model-capability-to-service-capability
+    kind: related
+  - target: analysis.ai-시연과-실제-성능
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.대규모-언어-모델
+    - target: concept.함수-호출과-도구-사용
+  assumed_knowledge: 없음
+  outcomes:
+    - 'LLM agent의 목표–상태–행동–관찰 loop를 설명하고, model의 제안과 runtime 실행·reconciliation, 외부 memory와 weight learning, sandbox와 authorization, component 평가와 end-to-end 평가를 분리해 설계할 수 있다.'
+  next:
+    - target: analysis.평가-지표와-모델-유인
+      reason: '자동 평가 지표는 무엇을 보상하는가 — 조건부 component와 전체 요청 분모, 비용·side effect가 model 선택 유인에 미치는 영향을 비교한다.'
 ---
 # LLM 에이전트
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[대규모 언어 모델]], [[함수 호출과 도구 사용]], [[사고 연쇄 프롬프팅]]<br>
+> **선수 지식:** [[concept.대규모-언어-모델|대규모 언어 모델]], [[concept.함수-호출과-도구-사용|함수 호출과 도구 사용]]<br>
 > **읽고 나면:** LLM agent의 목표–상태–행동–관찰 loop를 설명하고, model의 제안과 runtime 실행·reconciliation, 외부 memory와 weight learning, sandbox와 authorization, component 평가와 end-to-end 평가를 분리해 설계할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -357,8 +381,7 @@ LLM agent 연구에는 capability와 safety가 빠르게 변하는 model·framew
 
 ### 다음 문서
 
-- [[함수 호출과 도구 사용]] — 한 action의 proposed·confirmed·committed·failed·unknown 경계와 postcondition·compensation 계약을 완결한다.
-- [[자동 평가 지표는 무엇을 보상하는가]] — 조건부 component와 전체 요청 분모, 비용·side effect가 model 선택 유인에 미치는 영향을 비교한다.
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]] — 조건부 component와 전체 요청 분모, 비용·side effect가 model 선택 유인에 미치는 영향을 비교한다.
 
 ## 출처
 
@@ -386,16 +409,17 @@ LLM agent 연구에는 capability와 safety가 빠르게 변하는 model·framew
 
 ## 관련 항목
 
-- [[104_LLM 에이전트의 추론-행동 루프와 자율성 경계]]
-- [[109_AI 공동 과학자의 가설 생성과 자율 연구 경계]]
-- [[092_함수 호출과 도구 사용의 모델-실행 경계]]
-- [[함수 호출과 도구 사용]]
-- [[080_사고 연쇄 프롬프팅과 추론 행동 유도]]
-- [[사고 연쇄 프롬프팅]]
-- [[구조화 출력]]
-- [[071_Codex와 HumanEval 기반 코드 생성 평가]]
-- [[OpenAI Codex (2021)]]
-- [[문자에서 실행 권한까지]]
-- [[모델 능력에서 서비스 능력으로]]
-- [[자동 평가 지표는 무엇을 보상하는가]]
-- [[AI 시연과 실제 성능]]
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[concept.함수-호출과-도구-사용|함수 호출과 도구 사용]]
+- [[source.104|LLM 에이전트의 추론-행동 루프와 자율성 경계]]
+- [[source.109|AI 공동 과학자의 가설 생성과 자율 연구 경계]]
+- [[source.092|함수 호출과 도구 사용의 모델-실행 경계]]
+- [[source.080|사고 연쇄 프롬프팅과 추론 행동 유도]]
+- [[source.071|Codex와 HumanEval 기반 코드 생성 평가]]
+- [[concept.사고-연쇄-프롬프팅|사고 연쇄 프롬프팅]]
+- [[concept.구조화-출력|구조화 출력]]
+- [[concept.openai-codex-2021|OpenAI Codex (2021)]]
+- [[analysis.text-to-execution-authority|문자에서 실행 권한까지]]
+- [[analysis.model-capability-to-service-capability|모델 능력에서 서비스 능력으로]]
+- [[analysis.ai-시연과-실제-성능|AI 시연과 실제 성능]]

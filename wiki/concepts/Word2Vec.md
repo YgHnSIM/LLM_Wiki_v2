@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.word2vec
 page_type: concept
 title: Word2Vec
@@ -13,13 +13,15 @@ tags:
   - domain/machine-learning
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.ko.md'
-  - 'raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.commentary.ko.md'
-  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md'
-  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md'
+  - raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.ko.md
+  - raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.commentary.ko.md
+  - raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md
+  - raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md
 evidence:
   - source_id: mikolov-et-al-2013-word-representations
     locator: 'arXiv:1301.3781, §§1–4의 계산 목표·CBOW·Skip-gram·유추 평가'
@@ -33,22 +35,41 @@ evidence:
   - source_id: bojanowski-et-al-2017-fasttext
     locator: 'TACL 5, §§3.1–3.2의 Skip-gram 입력을 character n-gram 합으로 바꾼 확장'
     relation: supplements
-related:
-  - source.043
-  - concept.cbow
-  - concept.skip-gram
-  - concept.단어-임베딩
-  - concept.신경-확률-언어-모형
-  - concept.잠재-의미-분석
-  - concept.말뭉치-기반-학습
-  - source.035
-  - source.031
+relations:
+  - target: source.043
+    kind: related
+  - target: concept.cbow
+    kind: related
+  - target: concept.신경-확률-언어-모형
+    kind: related
+  - target: concept.잠재-의미-분석
+    kind: related
+  - target: concept.말뭉치-기반-학습
+    kind: related
+  - target: source.035
+    kind: related
+  - target: source.031
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.단어-임베딩
+  assumed_knowledge: 없음
+  outcomes:
+    - 'Word2Vec의 예측 방향·출력 계산·자료 처리 선택을 설명하고, SGNS 목적과 유추·FastText 확장 및 정적 벡터의 한계를 구분할 수 있다.'
+  next:
+    - target: concept.skip-gram
+      reason: '다음에는 Skip-gram에서 중심–문맥 목적을 자세히 보고, FastText에서 문자 n-gram 합으로 입력 표현을 확장하는 방식을 살핀다.'
+    - target: concept.fasttext
+      reason: '다음에는 Skip-gram에서 중심–문맥 목적을 자세히 보고, FastText에서 문자 n-gram 합으로 입력 표현을 확장하는 방식을 살핀다.'
 ---
 # Word2Vec
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[단어 임베딩]]<br>
+> **선수 지식:** [[concept.단어-임베딩|단어 임베딩]]<br>
 > **읽고 나면:** Word2Vec의 예측 방향·출력 계산·자료 처리 선택을 설명하고, SGNS 목적과 유추·FastText 확장 및 정적 벡터의 한계를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -109,8 +130,12 @@ FastText는 Skip-gram with negative sampling의 중심–문맥 목적을 유지
 
 다음에는 [[Skip-gram]]에서 중심–문맥 목적을 자세히 보고, [[FastText]]에서 문자 n-gram 합으로 입력 표현을 확장하는 방식을 살핀다.
 
-## 출처
+### 다음 문서
 
+- [[concept.skip-gram|Skip-gram]] — 다음에는 Skip-gram에서 중심–문맥 목적을 자세히 보고, FastText에서 문자 n-gram 합으로 입력 표현을 확장하는 방식을 살핀다.
+- [[concept.fasttext|FastText]] — 다음에는 Skip-gram에서 중심–문맥 목적을 자세히 보고, FastText에서 문자 n-gram 합으로 입력 표현을 확장하는 방식을 살핀다.
+
+## 출처
 - [[043_Word2Vec와 효율적 정적 단어 임베딩]]
 - Tomas Mikolov 외, [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/abs/1301.3781), 2013, §§1–4.
 - Tomas Mikolov 외, [Distributed Representations of Words and Phrases and their Compositionality](https://proceedings.neurips.cc/paper_files/paper/2013/hash/9aa42b31882ec039965f3c4923ce901b-Abstract.html), NeurIPS 2013, §§2–4.
@@ -119,12 +144,13 @@ FastText는 Skip-gram with negative sampling의 중심–문맥 목적을 유지
 
 ## 관련 항목
 
-- [[043_Word2Vec와 효율적 정적 단어 임베딩]]
-- [[CBOW]]
-- [[Skip-gram]]
-- [[단어 임베딩]]
-- [[신경 확률 언어 모형]]
-- [[잠재 의미 분석]]
-- [[말뭉치 기반 학습]]
-- [[035_신경 확률 언어 모형과 분산 단어 표현]]
-- [[031_잠재 의미 분석과 확률적 잠재 의미 색인]]
+- [[concept.skip-gram|Skip-gram]]
+- [[concept.fasttext|FastText]]
+- [[concept.단어-임베딩|단어 임베딩]]
+- [[source.043|Word2Vec와 효율적 정적 단어 임베딩]]
+- [[concept.cbow|CBOW]]
+- [[concept.신경-확률-언어-모형|신경 확률 언어 모형]]
+- [[concept.잠재-의미-분석|잠재 의미 분석]]
+- [[concept.말뭉치-기반-학습|말뭉치 기반 학습]]
+- [[source.035|신경 확률 언어 모형과 분산 단어 표현]]
+- [[source.031|잠재 의미 분석과 확률적 잠재 의미 색인]]

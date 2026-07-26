@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.whisper
 page_type: concept
 title: Whisper
@@ -15,38 +15,54 @@ tags:
   - domain/speech-processing
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.ko.md'
-  - 'raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.commentary.ko.md'
+  - raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.ko.md
+  - raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.commentary.ko.md
 evidence:
   - source_id: radford-et-al-2022-whisper
     locator: '초록, §§1–4.5, Figure 1, Tables 1–7의 자료 구성·모델·다중 과제 형식·zero-shot 평가·장문 디코딩'
     relation: supports
   - source_id: openai-2022-whisper-release
-    locator: '2022-09-21 발표문의 학습 규모·30초 log-Mel encoder–decoder 흐름·특수 토큰·zero-shot 견고성·공개 범위'
+    locator: 2022-09-21 발표문의 학습 규모·30초 log-Mel encoder–decoder 흐름·특수 토큰·zero-shot 견고성·공개 범위
     relation: contextualizes
   - source_id: openai-2024-whisper-model-card
     locator: '2024-09-30 고정 스냅샷의 Model Details, Training Data, Performance and Limitations, Model Use에 기록된 후대 모델 계열·과제 범위·언어별 성능·환각·위험 용도'
     relation: supplements
   - source_id: openai-2022-whisper-repository
-    locator: 'README의 Approach·Available models and languages·Python usage와 License의 원 model family·30초 이동 창 추론·MIT code and weights'
+    locator: README의 Approach·Available models and languages·Python usage와 License의 원 model family·30초 이동 창 추론·MIT code and weights
     relation: supplements
-related:
-  - source.087
-  - source.041
-  - concept.자동-음성-인식
-  - concept.단어-오류율
-  - concept.transformer
-  - concept.인코더-디코더
-  - concept.음성-활동-감지
+relations:
+  - target: source.041
+    kind: related
+  - target: concept.transformer
+    kind: related
+  - target: concept.음성-활동-감지
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.자동-음성-인식
+    - target: concept.인코더-디코더
+  assumed_knowledge: 없음
+  outcomes:
+    - 'Whisper가 음성을 토큰열로 바꾸는 흐름을 설명하고, zero-shot 견고성의 근거와 환각·언어 불균형·공개 범위의 한계를 구분할 수 있다.'
+  next:
+    - target: source.087
+      reason: '087Whisper와 대규모 약한 감독 음성 인식 — 모델 구조와 함께 68만 시간 자료 구축, 평가 결과, 원자료 정정의 전체 근거를 읽는다.'
+    - target: concept.단어-오류율
+      reason: 단어 오류율 — Whisper의 견고성 주장을 좌우하는 치환·삭제·삽입과 text normalization의 측정 경계를 계산한다.
 ---
 # Whisper
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[자동 음성 인식]], [[인코더-디코더]]<br>
+> **선수 지식:** [[concept.자동-음성-인식|자동 음성 인식]], [[concept.인코더-디코더|인코더-디코더]]<br>
 > **읽고 나면:** Whisper가 음성을 토큰열로 바꾸는 흐름을 설명하고, zero-shot 견고성의 근거와 환각·언어 불균형·공개 범위의 한계를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -181,8 +197,8 @@ Whisper는 약한 감독 자료에서 언어 패턴도 함께 배웠기 때문�
 
 ### 다음 문서
 
-- [[087_Whisper와 대규모 약한 감독 음성 인식]] — 모델 구조와 함께 68만 시간 자료 구축, 평가 결과, 원자료 정정의 전체 근거를 읽는다.
-- [[단어 오류율]] — Whisper의 견고성 주장을 좌우하는 치환·삭제·삽입과 text normalization의 측정 경계를 계산한다.
+- [[source.087|Whisper와 대규모 약한 감독 음성 인식]] — 087Whisper와 대규모 약한 감독 음성 인식 — 모델 구조와 함께 68만 시간 자료 구축, 평가 결과, 원자료 정정의 전체 근거를 읽는다.
+- [[concept.단어-오류율|단어 오류율]] — Whisper의 견고성 주장을 좌우하는 치환·삭제·삽입과 text normalization의 측정 경계를 계산한다.
 
 ## 출처
 
@@ -195,10 +211,10 @@ Whisper는 약한 감독 자료에서 언어 패턴도 함께 배웠기 때문�
 
 ## 관련 항목
 
-- [[087_Whisper와 대규모 약한 감독 음성 인식]]
-- [[041_심층 신경망 음향 모델과 DNN-HMM 전환]]
-- [[자동 음성 인식]]
-- [[단어 오류율]]
-- [[Transformer]]
-- [[인코더-디코더]]
-- [[음성 활동 감지]]
+- [[source.087|Whisper와 대규모 약한 감독 음성 인식]]
+- [[concept.단어-오류율|단어 오류율]]
+- [[concept.자동-음성-인식|자동 음성 인식]]
+- [[concept.인코더-디코더|인코더-디코더]]
+- [[source.041|심층 신경망 음향 모델과 DNN-HMM 전환]]
+- [[concept.transformer|Transformer]]
+- [[concept.음성-활동-감지|음성 활동 감지]]

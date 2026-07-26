@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis.transformer-parallelism-and-sequentiality
 page_type: analysis
 title: Transformer는 무엇을 병렬화했고 무엇을 남겼나
@@ -15,15 +15,17 @@ tags:
   - domain/computer-science
 created: '2026-07-24'
 updated: '2026-07-25'
-lifecycle: active
-verification: partial
+editorial_status: active
+review:
+  evidence_coverage: partial
+  content_mode: synthesis
 artifacts:
-  - 'raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.ko.md'
-  - 'raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.commentary.ko.md'
-  - 'raw/055_The Transformer Attention Is All You Need.ko.md'
-  - 'raw/055_The Transformer Attention Is All You Need.commentary.ko.md'
-  - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md'
-  - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md'
+  - raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.ko.md
+  - raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.commentary.ko.md
+  - raw/055_The Transformer Attention Is All You Need.ko.md
+  - raw/055_The Transformer Attention Is All You Need.commentary.ko.md
+  - raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md
+  - raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md
 evidence:
   - source_id: sutskever-vinyals-le-2014-seq2seq
     locator: '§§2–3와 Figure 1의 recurrent encoder–decoder, 정답 목표열을 사용한 훈련과 left-to-right beam search'
@@ -32,27 +34,47 @@ evidence:
     locator: '§§1·3–5와 Tables 1–3의 sequential operations, self-attention·FFN 구조, WMT 2014 품질과 8개 P100 훈련 시간'
     relation: supports
   - source_id: nickolls-et-al-2008-cuda
-    locator: '§§1–4의 GPU throughput 동기와 CUDA thread·block·grid·shared-memory 실행 모델'
+    locator: §§1–4의 GPU throughput 동기와 CUDA thread·block·grid·shared-memory 실행 모델
     relation: contextualizes
   - source_id: dao-et-al-2022-flashattention
     locator: '§§2.2–3.3와 Figure 2의 dense attention FLOPs, HBM–SRAM I/O, 재계산과 wall-clock 분리'
     relation: supplements
-related:
-  - source.045
-  - source.055
-  - source.088
-  - concept.transformer
-  - concept.accelerator-matrix-compute
-  - concept.memory-hierarchy-data-movement
-  - analysis.훈련-병렬성과-생성-순차성은-다른-축이다
-  - analysis.n-gram에서-llm으로
-  - analysis.stored-program-to-learning-framework
+relations:
+  - target: source.045
+    kind: related
+  - target: source.055
+    kind: related
+  - target: source.088
+    kind: related
+  - target: concept.memory-hierarchy-data-movement
+    kind: related
+  - target: analysis.훈련-병렬성과-생성-순차성은-다른-축이다
+    kind: related
+  - target: analysis.n-gram에서-llm으로
+    kind: related
+  - target: analysis.stored-program-to-learning-framework
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: intermediate
+  prerequisites:
+    - target: concept.transformer
+    - target: concept.accelerator-matrix-compute
+  assumed_knowledge: — attention 식을 몰라도 위치 의존성과 실행 장부부터 읽을 수 있다.
+  outcomes:
+    - '2017년 Transformer가 RNN보다 어떤 훈련 의존성을 줄였는지, 왜 생성은 여전히 token별로 순차적인지, P100 GPU의 가능 조건과 memory 이동이라는 후속 병목을 직접 영향과 병행 맥락으로 구분해 설명할 수 있다.'
+  next:
+    - target: analysis.matrix-acceleration-deep-learning
+      reason: 이전 행렬곱 가속은 딥러닝을 어떻게 현실화했나 · 시리즈 허브 · 다음 규모는 언제 연구 변수가 되었나
+    - target: meta.llm-computing-coevolution
+      reason: 이전 행렬곱 가속은 딥러닝을 어떻게 현실화했나 · 시리즈 허브 · 다음 규모는 언제 연구 변수가 되었나
 ---
 # Transformer는 무엇을 병렬화했고 무엇을 남겼나
 
 > [!note] 학습 안내
-> **난이도:** 입문–중급<br>
-> **선수 지식:** [[Transformer]], [[가속기와 행렬 계산]] — attention 식을 몰라도 위치 의존성과 실행 장부부터 읽을 수 있다.<br>
+> **난이도:** 입문 → 중급<br>
+> **선수 지식:** [[concept.transformer|Transformer]], [[concept.accelerator-matrix-compute|가속기와 행렬 계산]]<br>
 > **읽고 나면:** 2017년 Transformer가 RNN보다 어떤 훈련 의존성을 줄였는지, 왜 생성은 여전히 token별로 순차적인지, P100 GPU의 가능 조건과 memory 이동이라는 후속 병목을 직접 영향과 병행 맥락으로 구분해 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -207,8 +229,12 @@ Transformer 원 논문의 대표 훈련 수치는 다음 조건에서만 읽는�
 
 이전 [[행렬곱 가속은 딥러닝을 어떻게 현실화했나]] · [[LLM과 컴퓨팅 능력의 공진화|시리즈 허브]] · 다음 [[규모는 언제 연구 변수가 되었나]]
 
-## 출처
+### 다음 문서
 
+- [[analysis.matrix-acceleration-deep-learning|행렬곱 가속은 딥러닝을 어떻게 현실화했나]] — 이전 행렬곱 가속은 딥러닝을 어떻게 현실화했나 · 시리즈 허브 · 다음 규모는 언제 연구 변수가 되었나
+- [[meta.llm-computing-coevolution|LLM과 컴퓨팅 능력의 공진화]] — 이전 행렬곱 가속은 딥러닝을 어떻게 현실화했나 · 시리즈 허브 · 다음 규모는 언제 연구 변수가 되었나
+
+## 출처
 - [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] — recurrent encoder–decoder의 학습·생성 경로를 검증한 소스.
 - [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]] — 원 구조, Table 1, WMT 품질과 8개 P100 훈련 조건을 검증한 소스.
 - John Nickolls 외, [Scalable Parallel Programming with CUDA](https://doi.org/10.1145/1365490.1365500), §§1–4.
@@ -217,12 +243,14 @@ Transformer 원 논문의 대표 훈련 수치는 다음 조건에서만 읽는�
 
 ## 관련 항목
 
-- [[045_Sequence-to-Sequence 학습과 신경 기계 번역]] — recurrent encoder–decoder의 순차 의존을 확인한다.
-- [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]] — 원 논문의 구조·복잡도·훈련 조건을 읽는다.
-- [[088_FlashAttention과 IO 인지형 정확 어텐션]] — 후속 memory-aware 실행 전환을 본다.
-- [[Transformer]] — 원 구조와 attention·FFN의 계산을 배운다.
-- [[가속기와 행렬 계산]] — 같은 tensor 수학이 장치에서 실행되는 층을 구분한다.
-- [[메모리 계층과 데이터 이동]] — 높은 연산 처리량 뒤에 드러난 I/O 병목을 설명한다.
-- [[훈련 병렬성과 생성 순차성은 다른 축이다]] — 여러 model 계열의 표현 계산과 sampling 의존성을 비교한다.
-- [[N-gram에서 LLM으로]] — 다음 항목 예측의 연속성과 계산 표현의 단절을 함께 읽는다.
-- [[저장 프로그램에서 학습 프레임워크까지]] — Tensor 식 아래의 compiler·library·runtime 층을 추적한다.
+- [[analysis.matrix-acceleration-deep-learning|행렬곱 가속은 딥러닝을 어떻게 현실화했나]]
+- [[meta.llm-computing-coevolution|LLM과 컴퓨팅 능력의 공진화]]
+- [[concept.transformer|Transformer]]
+- [[concept.accelerator-matrix-compute|가속기와 행렬 계산]]
+- [[source.045|Sequence-to-Sequence 학습과 신경 기계 번역]]
+- [[source.055|Transformer와 자기어텐션 기반 시퀀스 모델링]]
+- [[source.088|FlashAttention과 I/O 인지형 정확 어텐션]]
+- [[concept.memory-hierarchy-data-movement|메모리 계층과 데이터 이동]]
+- [[analysis.훈련-병렬성과-생성-순차성은-다른-축이다|훈련 병렬성과 생성 순차성은 다른 축이다]]
+- [[analysis.n-gram에서-llm으로|N-gram에서 LLM으로]]
+- [[analysis.stored-program-to-learning-framework|저장 프로그램에서 학습 프레임워크까지]]

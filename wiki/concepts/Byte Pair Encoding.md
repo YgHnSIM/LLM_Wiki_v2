@@ -1,9 +1,12 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.byte-pair-encoding
 page_type: concept
 title: Byte Pair Encoding
-aliases: [BPE, 바이트 페어 인코딩, 바이트 쌍 인코딩]
+aliases:
+  - BPE
+  - 바이트 페어 인코딩
+  - 바이트 쌍 인코딩
 tags:
   - type/concept
   - domain/ai
@@ -11,34 +14,51 @@ tags:
   - domain/computer-science
 created: '2026-07-18'
 updated: '2026-07-25'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md'
-  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md'
-  - 'raw/062_XLM Cross-lingual Language Model for Multilingual NLP.ko.md'
-  - 'raw/062_XLM Cross-lingual Language Model for Multilingual NLP.commentary.ko.md'
+  - raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md
+  - raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md
+  - raw/062_XLM Cross-lingual Language Model for Multilingual NLP.ko.md
+  - raw/062_XLM Cross-lingual Language Model for Multilingual NLP.commentary.ko.md
 evidence:
   - source_id: gage-1994-byte-pair-encoding
-    locator: '초록과 §1의 빈번한 인접 byte pair를 미사용 byte로 치환하는 압축 알고리즘'
+    locator: 초록과 §1의 빈번한 인접 byte pair를 미사용 byte로 치환하는 압축 알고리즘
     relation: contextualizes
   - source_id: sennrich-haddow-birch-2016-subword-nmt
     locator: '§3.2와 Algorithm 1의 문자·문자열 pair merge, word boundary와 merge-count vocabulary'
     relation: supports
   - source_id: conneau-lample-2019-xlm
-    locator: '§3.1의 multilingual corpus sampling·shared BPE vocabulary와 공통 문자열 anchor에 대한 설명'
+    locator: §3.1의 multilingual corpus sampling·shared BPE vocabulary와 공통 문자열 anchor에 대한 설명
     relation: contextualizes
-related:
-  - source.050
-  - source.062
-  - concept.xlm
-  - concept.text-encoding-normalization
+relations:
+  - target: source.050
+    kind: related
+  - target: source.062
+    kind: related
+  - target: concept.xlm
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites:
+    - target: concept.text-encoding-normalization
+    - target: concept.서브워드-토큰화
+  assumed_knowledge: 없음
+  outcomes:
+    - 'BPE가 빈번한 symbol pair를 병합해 어휘 크기와 시퀀스 길이의 trade-off를 조절하고, 다국어 공유 어휘가 제공하는 것과 보장하지 않는 것을 설명할 수 있다.'
+  next:
+    - target: concept.fasttext
+      reason: FastText — 같은 희귀어 문제를 시퀀스 분절이 아니라 한 단어 벡터의 문자 특징 합성으로 다루는 방법과 비교한다.
 ---
 # Byte Pair Encoding
 
 > [!note] 학습 안내
 > **난이도:** 입문<br>
-> **선수 지식:** [[문자 인코딩과 정규화]], [[서브워드 토큰화]]<br>
+> **선수 지식:** [[concept.text-encoding-normalization|문자 인코딩과 정규화]], [[concept.서브워드-토큰화|서브워드 토큰화]]<br>
 > **읽고 나면:** BPE가 빈번한 symbol pair를 병합해 어휘 크기와 시퀀스 길이의 trade-off를 조절하고, 다국어 공유 어휘가 제공하는 것과 보장하지 않는 것을 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -91,7 +111,7 @@ BPE는 주어진 **초기 symbol 열**에서 빈번한 pair를 병합한다. Gag
 
 ### 다음 문서
 
-- [[FastText]] — 같은 희귀어 문제를 시퀀스 분절이 아니라 한 단어 벡터의 문자 특징 합성으로 다루는 방법과 비교한다.
+- [[concept.fasttext|FastText]] — 같은 희귀어 문제를 시퀀스 분절이 아니라 한 단어 벡터의 문자 특징 합성으로 다루는 방법과 비교한다.
 
 ## 출처
 
@@ -103,7 +123,9 @@ BPE는 주어진 **초기 symbol 열**에서 빈번한 pair를 병합한다. Gag
 
 ## 관련 항목
 
-- [[050_FastText와 서브워드 표현의 두 경로]]
-- [[062_XLM과 교차 언어 사전 학습]]
-- [[XLM]]
-- [[문자 인코딩과 정규화]] — BPE 앞단의 byte·Unicode·normalization·tokenizer 계약을 구분한다.
+- [[concept.fasttext|FastText]]
+- [[concept.text-encoding-normalization|문자 인코딩과 정규화]]
+- [[concept.서브워드-토큰화|서브워드 토큰화]]
+- [[source.050|FastText와 서브워드 표현의 두 경로]]
+- [[source.062|XLM과 교차 언어 사전 학습]]
+- [[concept.xlm|XLM]]

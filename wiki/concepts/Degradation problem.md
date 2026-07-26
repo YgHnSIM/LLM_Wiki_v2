@@ -1,9 +1,12 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.degradation-problem
 page_type: concept
 title: Degradation problem
-aliases: [Degradation Problem, 성능 저하 문제, 깊이 저하 문제]
+aliases:
+  - Degradation Problem
+  - 성능 저하 문제
+  - 깊이 저하 문제
 tags:
   - type/concept
   - domain/ai
@@ -11,20 +14,35 @@ tags:
   - domain/optimization
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md'
-  - 'raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.commentary.ko.md'
+  - raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md
+  - raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.commentary.ko.md
 evidence:
   - source_id: he-et-al-2016-resnet
-    locator: '§1과 Figures 1·4·6의 더 깊은 plain network에서 증가한 training error'
+    locator: §1과 Figures 1·4·6의 더 깊은 plain network에서 증가한 training error
     relation: supports
-related:
-  - source.048
-  - concept.잔차-연결
-  - concept.resnet
-  - concept.기울기-소실
+relations:
+  - target: source.048
+    kind: related
+  - target: concept.resnet
+    kind: related
+  - target: concept.기울기-소실
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites: []
+  assumed_knowledge: 없음
+  outcomes:
+    - 깊은 네트워크의 degradation problem을 과적합과 기울기 소실에서 구분하고 잔차 학습의 대응을 설명할 수 있다.
+  next:
+    - target: concept.잔차-연결
+      reason: 잔차 연결 — degradation을 완화한 항등 경로와 잔차 갱신의 구조를 이어서 본다.
 ---
 # Degradation problem
 
@@ -67,7 +85,7 @@ ResNet 실험은 residual parameterization이 같은 깊이의 plain network보�
 
 ### 다음 문서
 
-- [[잔차 연결]] — degradation을 완화한 항등 경로와 잔차 갱신의 구조를 이어서 본다.
+- [[concept.잔차-연결|잔차 연결]] — degradation을 완화한 항등 경로와 잔차 갱신의 구조를 이어서 본다.
 
 ## 출처
 
@@ -76,7 +94,7 @@ ResNet 실험은 residual parameterization이 같은 깊이의 plain network보�
 
 ## 관련 항목
 
-- [[048_잔차 학습과 매우 깊은 신경망]]
-- [[잔차 연결]]
-- [[ResNet]]
-- [[기울기 소실]]
+- [[concept.잔차-연결|잔차 연결]]
+- [[source.048|잔차 학습과 매우 깊은 신경망]]
+- [[concept.resnet|ResNet]]
+- [[concept.기울기-소실|기울기 소실]]

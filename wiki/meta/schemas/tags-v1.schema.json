@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://llm-wiki.local/schema/tags-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "tags"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "tags": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "description"],
+        "properties": {
+          "kind": { "enum": ["type", "domain"] },
+          "description": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

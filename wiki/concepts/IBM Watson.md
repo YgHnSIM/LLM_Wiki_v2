@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.ibm-watson
 page_type: concept
 title: IBM Watson
@@ -15,29 +15,46 @@ tags:
   - domain/machine-learning
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.ko.md'
-  - 'raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.commentary.ko.md'
+  - raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.ko.md
+  - raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.commentary.ko.md
 evidence:
   - source_id: ferrucci-et-al-2010-building-watson
     locator: 'AI Magazine 31(3), pp. 59–79의 Watson 목표·DeepQA 구조·blind clue 성능·하드웨어 확장'
     relation: supports
   - source_id: lewis-2012-watson-jeopardy-interface
-    locator: '전자 텍스트 입력·솔레노이드 buzzer·음성 합성·경기 상태 인터페이스 설명'
+    locator: 전자 텍스트 입력·솔레노이드 buzzer·음성 합성·경기 상태 인터페이스 설명
     relation: supports
   - source_id: ferrucci-et-al-2013-watson-beyond-jeopardy
-    locator: 'pp. 93–105의 Jeopardy용 question-in/single-answer-out 구조와 후속 영역 적응 범위'
+    locator: pp. 93–105의 Jeopardy용 question-in/single-answer-out 구조와 후속 영역 적응 범위
     relation: contextualizes
   - source_id: ibm-watson-jeopardy-history
     locator: '2011년 경기 결과·Toronto 오답·90대 서버·2,880개 코어·인터넷 미접속 설명'
     relation: supports
-related:
-  - source.040
-  - concept.deepqa
-  - concept.개방-영역-질의응답
-  - entity.ibm
+relations:
+  - target: source.040
+    kind: related
+  - target: concept.deepqa
+    kind: related
+  - target: entity.ibm
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites: []
+  assumed_knowledge: 없음
+  outcomes:
+    - 'Watson이 어떤 입력과 자료로 답을 만들고 경기에서 행동했는지 설명하며, 우승 결과와 범용 언어 능력을 구분할 수 있다.'
+  next:
+    - target: concept.개방-영역-질의응답
+      reason: '다음에는 개방 영역 질의응답에서 Watson이 보여 준 과업의 범위를 정리하고, AI 시연과 실제 성능에서 공개 시연과 일반 성능을 구분하는 법을 비교한다.'
+    - target: analysis.ai-시연과-실제-성능
+      reason: '다음에는 개방 영역 질의응답에서 Watson이 보여 준 과업의 범위를 정리하고, AI 시연과 실제 성능에서 공개 시연과 일반 성능을 구분하는 법을 비교한다.'
 ---
 # IBM Watson
 
@@ -86,8 +103,12 @@ Watson은 명시적으로 후보를 생성하고 로컬 자료에서 근거를 �
 
 다음에는 [[개방 영역 질의응답]]에서 Watson이 보여 준 과업의 범위를 정리하고, [[AI 시연과 실제 성능]]에서 공개 시연과 일반 성능을 구분하는 법을 비교한다.
 
-## 출처
+### 다음 문서
 
+- [[concept.개방-영역-질의응답|개방 영역 질의응답]] — 다음에는 개방 영역 질의응답에서 Watson이 보여 준 과업의 범위를 정리하고, AI 시연과 실제 성능에서 공개 시연과 일반 성능을 구분하는 법을 비교한다.
+- [[analysis.ai-시연과-실제-성능|AI 시연과 실제 성능]] — 다음에는 개방 영역 질의응답에서 Watson이 보여 준 과업의 범위를 정리하고, AI 시연과 실제 성능에서 공개 시연과 일반 성능을 구분하는 법을 비교한다.
+
+## 출처
 - David Ferrucci 외, [Building Watson: An Overview of the DeepQA Project](https://aaai.org/ai-magazine/the-ai-behind-watson-the-technical-article/), *AI Magazine* 31(3), 2010, pp. 59–79.
 - B. L. Lewis, [In the Game: The Interface between Watson and Jeopardy!](https://research.ibm.com/publications/in-the-game-the-interface-between-watson-and-jeopardy), 2012.
 - David Ferrucci 외, [Watson: Beyond Jeopardy!](https://scalar.usc.edu/works/meet-my-friend-watson-1/media/Beyond%20Jeopardy.pdf), 2013, pp. 93–105.
@@ -97,7 +118,8 @@ Watson은 명시적으로 후보를 생성하고 로컬 자료에서 근거를 �
 
 ## 관련 항목
 
-- [[040_IBM Watson과 Jeopardy 질의응답]]
-- [[DeepQA]]
-- [[개방 영역 질의응답]]
-- [[IBM]]
+- [[concept.개방-영역-질의응답|개방 영역 질의응답]]
+- [[analysis.ai-시연과-실제-성능|AI 시연과 실제 성능]]
+- [[source.040|IBM Watson과 Jeopardy 질의응답]]
+- [[concept.deepqa|DeepQA]]
+- [[entity.ibm|IBM]]

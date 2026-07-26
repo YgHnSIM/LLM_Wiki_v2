@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.stable-diffusion
 page_type: concept
 title: Stable Diffusion
@@ -15,11 +15,13 @@ tags:
   - domain/nlp
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/086_Stable Diffusion Latent Diffusion Models for Accessible Text-to-Image Generation.ko.md'
-  - 'raw/086_Stable Diffusion Latent Diffusion Models for Accessible Text-to-Image Generation.commentary.ko.md'
+  - raw/086_Stable Diffusion Latent Diffusion Models for Accessible Text-to-Image Generation.ko.md
+  - raw/086_Stable Diffusion Latent Diffusion Models for Accessible Text-to-Image Generation.commentary.ko.md
 evidence:
   - source_id: rombach-et-al-2022-ldm
     locator: 'CVPR 2022, pp. 10684–10695, §§1·3.1–3.3·4.1–4.5·5와 Figures 1·3·6–7·Tables 1–7 및 Supplement §§D–G·Tables 8–18의 두 단계 잠재 확산·압축률 절충·교차 어텐션·계산·한계'
@@ -33,18 +35,30 @@ evidence:
   - source_id: stability-ai-2022-stable-diffusion-public-release
     locator: '2022-08-22 Stable Diffusion Public Release의 code·weights·model card 공개, CreativeML OpenRAIL-M, 조정 가능한 safety classifier, release build 6.9GB VRAM과 NVIDIA 권장 설명'
     relation: contextualizes
-related:
-  - source.086
-  - concept.잠재-확산-모델
-  - concept.clip
-  - concept.dall-e-2
-  - analysis.훈련-병렬성과-생성-순차성은-다른-축이다
+relations:
+  - target: concept.dall-e-2
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.잠재-확산-모델
+    - target: concept.clip
+  assumed_knowledge: 없음
+  outcomes:
+    - 'Stable Diffusion v1의 구성·체크포인트 계보·표본화·공개 범위를 설명하고, 이를 일반 잠재 확산 모델 연구나 제한 없는 오픈소스와 구분할 수 있다.'
+  next:
+    - target: source.086
+      reason: 086잠재 확산 모델과 Stable Diffusion v1 공개 — LDM 논문과 공개 v1의 수치·근거·raw 검증 정정을 한 문서에서 대조한다.
+    - target: analysis.훈련-병렬성과-생성-순차성은-다른-축이다
+      reason: 훈련 병렬성과 생성 순차성은 다른 축이다 — 잠재 공간이 한 단계의 비용을 줄여도 확산 표본화의 순차 U-Net 호출이 남는 이유를 다른 생성 계열과 비교한다.
 ---
 # Stable Diffusion
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[잠재 확산 모델]], [[CLIP]]<br>
+> **선수 지식:** [[concept.잠재-확산-모델|잠재 확산 모델]], [[concept.clip|CLIP]]<br>
 > **읽고 나면:** Stable Diffusion v1의 구성·체크포인트 계보·표본화·공개 범위를 설명하고, 이를 일반 잠재 확산 모델 연구나 제한 없는 오픈소스와 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -197,8 +211,8 @@ Diffusers의 safety checker는 생성 결과를 알려진 NSFW 개념과 비교�
 
 ### 다음 문서
 
-- [[086_잠재 확산 모델과 Stable Diffusion v1 공개]] — LDM 논문과 공개 v1의 수치·근거·raw 검증 정정을 한 문서에서 대조한다.
-- [[훈련 병렬성과 생성 순차성은 다른 축이다]] — 잠재 공간이 한 단계의 비용을 줄여도 확산 표본화의 순차 U-Net 호출이 남는 이유를 다른 생성 계열과 비교한다.
+- [[source.086|잠재 확산 모델과 Stable Diffusion v1 공개]] — 086잠재 확산 모델과 Stable Diffusion v1 공개 — LDM 논문과 공개 v1의 수치·근거·raw 검증 정정을 한 문서에서 대조한다.
+- [[analysis.훈련-병렬성과-생성-순차성은-다른-축이다|훈련 병렬성과 생성 순차성은 다른 축이다]] — 잠재 공간이 한 단계의 비용을 줄여도 확산 표본화의 순차 U-Net 호출이 남는 이유를 다른 생성 계열과 비교한다.
 
 ## 출처
 
@@ -211,8 +225,8 @@ Diffusers의 safety checker는 생성 결과를 알려진 NSFW 개념과 비교�
 
 ## 관련 항목
 
-- [[086_잠재 확산 모델과 Stable Diffusion v1 공개]]
-- [[잠재 확산 모델]]
-- [[CLIP]]
-- [[DALL·E 2]]
-- [[훈련 병렬성과 생성 순차성은 다른 축이다]]
+- [[source.086|잠재 확산 모델과 Stable Diffusion v1 공개]]
+- [[analysis.훈련-병렬성과-생성-순차성은-다른-축이다|훈련 병렬성과 생성 순차성은 다른 축이다]]
+- [[concept.잠재-확산-모델|잠재 확산 모델]]
+- [[concept.clip|CLIP]]
+- [[concept.dall-e-2|DALL·E 2]]

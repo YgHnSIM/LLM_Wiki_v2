@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.039
 page_type: source
 title: Freebase와 협업형 지식 그래프
@@ -14,11 +14,13 @@ tags:
   - domain/nlp
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/039_Freebase Collaborative Knowledge Graph for Structured Information.ko.md'
-  - 'raw/039_Freebase Collaborative Knowledge Graph for Structured Information.commentary.ko.md'
+  - raw/039_Freebase Collaborative Knowledge Graph for Structured Information.ko.md
+  - raw/039_Freebase Collaborative Knowledge Graph for Structured Information.commentary.ko.md
 evidence:
   - source_id: bollacker-et-al-2008-freebase
     locator: 'pp. 1247–1250, 특히 초록과 §§1–4의 튜플 데이터 모델·협업 편집·MQL·2008년 규모'
@@ -33,15 +35,27 @@ evidence:
     locator: '2012-05-16 전체 발표, 특히 Freebase·Wikipedia·CIA World Factbook에 뿌리를 둔 5억 개 객체·35억 개 사실 설명'
     relation: contextualizes
   - source_id: google-freebase-data-dumps
-    locator: 'Freebase history와 Data dumps 절의 2007–2015 운영·API 종료·최종 19억 트리플 덤프·라이선스·비갱신 상태'
+    locator: Freebase history와 Data dumps 절의 2007–2015 운영·API 종료·최종 19억 트리플 덤프·라이선스·비갱신 상태
     relation: supports
   - source_id: pellissier-tanon-et-al-2016-freebase-wikidata
     locator: 'pp. 1419–1428, 특히 §§1–3의 종료 연표·거의 5천만 개체·30억 개 이상 사실·CVT와 §§4–6의 스키마·개체·속성 매핑'
     relation: supports
-related:
-  - concept.freebase
-  - concept.지식-그래프
-  - concept.대규모-언어-모델
+relations:
+  - target: concept.대규모-언어-모델
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites: []
+  assumed_knowledge: 없음
+  outcomes:
+    - Freebase의 토픽·타입·속성·MID와 MQL이 협업형 지식 베이스를 구성한 방식 및 그 역사적 범위를 설명할 수 있다.
+  next:
+    - target: concept.freebase
+      reason: 'Freebase — 다중 타입, 편집 가능한 스키마와 MQL을 개념 단위로 다시 살핀다.'
+    - target: concept.지식-그래프
+      reason: 지식 그래프 — Freebase를 더 넓은 개체·관계·출처·질의 체계 속에서 비교한다.
 ---
 # Freebase와 협업형 지식 그래프
 
@@ -178,8 +192,8 @@ WordNet의 중심 단위는 영어 단어 형태와 어휘화된 의미의 synse
 
 ### 다음 문서
 
-- [[Freebase]] — 다중 타입, 편집 가능한 스키마와 MQL을 개념 단위로 다시 살핀다.
-- [[지식 그래프]] — Freebase를 더 넓은 개체·관계·출처·질의 체계 속에서 비교한다.
+- [[concept.freebase|Freebase]] — 다중 타입, 편집 가능한 스키마와 MQL을 개념 단위로 다시 살핀다.
+- [[concept.지식-그래프|지식 그래프]] — Freebase를 더 넓은 개체·관계·출처·질의 체계 속에서 비교한다.
 
 ## 출처
 
@@ -194,6 +208,6 @@ WordNet의 중심 단위는 영어 단어 형태와 어휘화된 의미의 synse
 
 ## 관련 항목
 
-- [[Freebase]]
-- [[지식 그래프]]
-- [[대규모 언어 모델]]
+- [[concept.freebase|Freebase]]
+- [[concept.지식-그래프|지식 그래프]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]

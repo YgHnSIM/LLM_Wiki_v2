@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis.eliza에서-llm으로
 page_type: analysis
 title: ELIZA에서 LLM으로
@@ -14,8 +14,10 @@ tags:
   - domain/conversational-ai
 created: '2026-07-14'
 updated: '2026-07-21'
-lifecycle: active
-verification: partial
+editorial_status: active
+review:
+  evidence_coverage: partial
+  content_mode: synthesis
 artifacts:
   - raw/002_The Turing Test.md
   - raw/002_The Turing Test.commentary.md
@@ -23,8 +25,8 @@ artifacts:
   - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
   - raw/009_SHRDLU - Understanding Language Through Action.ko.md
   - raw/009_SHRDLU - Understanding Language Through Action.commentary.ko.md
-  - 'raw/081_ChatGPT Conversational AI Becomes Mainstream.ko.md'
-  - 'raw/081_ChatGPT Conversational AI Becomes Mainstream.commentary.ko.md'
+  - raw/081_ChatGPT Conversational AI Becomes Mainstream.ko.md
+  - raw/081_ChatGPT Conversational AI Becomes Mainstream.commentary.ko.md
 evidence:
   - source_id: turing-1950
     locator: 'pp. 433–460, §§1–7'
@@ -36,7 +38,7 @@ evidence:
     locator: ELIZA source and DOCTOR script records
     relation: supplements
   - source_id: winograd-1971
-    locator: chapters 1–3, especially pp. 1–39
+    locator: 'chapters 1–3, especially pp. 1–39'
     relation: supports
   - source_id: winograd-1980
     locator: pp. 212–218
@@ -44,25 +46,44 @@ evidence:
   - source_id: openai-2022-introducing-chatgpt
     locator: '도입부와 Methods·Limitations·Iterative deployment의 dialogue format, 대화 시연 SFT→응답 순위·reward model→PPO, 공개 한계와 사용자 피드백 절차'
     relation: supports
-related:
-  - concept.eliza
-  - concept.eliza-효과
-  - concept.doctor-스크립트
-  - concept.튜링-테스트
-  - concept.행동-기반-지능-기준
-  - concept.대규모-언어-모델
-  - concept.chatgpt-2022
-  - concept.shrdlu
-  - concept.블록-세계
-  - concept.마이크로월드
-  - source.081
-  - analysis.ai-시연과-실제-성능
+relations:
+  - target: concept.eliza-효과
+    kind: related
+  - target: concept.doctor-스크립트
+    kind: related
+  - target: concept.튜링-테스트
+    kind: related
+  - target: concept.행동-기반-지능-기준
+    kind: related
+  - target: concept.shrdlu
+    kind: related
+  - target: concept.블록-세계
+    kind: related
+  - target: concept.마이크로월드
+    kind: related
+  - target: concept.chatgpt-2022
+    kind: background
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites:
+    - target: concept.eliza
+    - target: concept.대규모-언어-모델
+  assumed_knowledge: 없음
+  outcomes:
+    - 'ELIZA와 2022년 ChatGPT를 작동 방식·역할 인터페이스·사용자 귀속·신뢰성의 층위로 비교하고, 닮은 사용 경험을 직접 기술 계보로 오해하지 않을 수 있다.'
+  next:
+    - target: analysis.ai-시연과-실제-성능
+      reason: AI 시연과 실제 성능 — 대화의 인상을 넘어 서로 다른 AI 시연을 같은 평가 층위에서 비교한다.
+    - target: source.081
+      reason: 081ChatGPT 연구 미리보기와 대화형 LLM 배포 — 2022년 발표가 확인한 학습·인터페이스·배포 구조와 한계를 직접 확인한다.
 ---
 # ELIZA에서 LLM으로
 
 > [!note] 학습 안내
 > **난이도:** 입문<br>
-> **선수 지식:** [[ELIZA]], [[대규모 언어 모델]], [[ChatGPT 연구 미리보기 (2022)]]<br>
+> **선수 지식:** [[concept.eliza|ELIZA]], [[concept.대규모-언어-모델|대규모 언어 모델]]<br>
 > **읽고 나면:** ELIZA와 2022년 ChatGPT를 작동 방식·역할 인터페이스·사용자 귀속·신뢰성의 층위로 비교하고, 닮은 사용 경험을 직접 기술 계보로 오해하지 않을 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -135,9 +156,8 @@ ELIZA나 SHRDLU가 ChatGPT를 포함한 현대 LLM으로 직접 이어졌다는 
 
 ### 다음 문서
 
-- [[AI 시연과 실제 성능]] — 대화의 인상을 넘어 서로 다른 AI 시연을 같은 평가 층위에서 비교한다.
-- [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]] — 2022년 발표가 확인한 학습·인터페이스·배포 구조와 한계를 직접 확인한다.
-- [[ChatGPT 연구 미리보기 (2022)]] — 모델 하나가 아니라 대화형 RLHF·UI·피드백을 결합한 역사적 배포 체계로 읽는다.
+- [[analysis.ai-시연과-실제-성능|AI 시연과 실제 성능]] — 대화의 인상을 넘어 서로 다른 AI 시연을 같은 평가 층위에서 비교한다.
+- [[source.081|ChatGPT 연구 미리보기와 대화형 LLM 배포]] — 081ChatGPT 연구 미리보기와 대화형 LLM 배포 — 2022년 발표가 확인한 학습·인터페이스·배포 구조와 한계를 직접 확인한다.
 
 ## 출처
 
@@ -149,15 +169,15 @@ ELIZA나 SHRDLU가 ChatGPT를 포함한 현대 LLM으로 직접 이어졌다는 
 
 ## 관련 항목
 
-- [[ELIZA]]
-- [[ELIZA 효과]]
-- [[DOCTOR 스크립트]]
-- [[튜링 테스트]]
-- [[행동주의적 지능 기준]]
-- [[대규모 언어 모델]]
-- [[ChatGPT 연구 미리보기 (2022)]]
-- [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]]
-- [[SHRDLU]]
-- [[블록 세계]]
-- [[마이크로월드]]
-- [[AI 시연과 실제 성능]]
+- [[analysis.ai-시연과-실제-성능|AI 시연과 실제 성능]]
+- [[source.081|ChatGPT 연구 미리보기와 대화형 LLM 배포]]
+- [[concept.eliza|ELIZA]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[concept.eliza-효과|ELIZA 효과]]
+- [[concept.doctor-스크립트|DOCTOR 스크립트]]
+- [[concept.튜링-테스트|튜링 테스트]]
+- [[concept.행동-기반-지능-기준|행동 기반 지능 기준]]
+- [[concept.shrdlu|SHRDLU]]
+- [[concept.블록-세계|블록 세계]]
+- [[concept.마이크로월드|마이크로월드]]
+- [[concept.chatgpt-2022|ChatGPT 연구 미리보기 (2022)]]

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.056
 page_type: source
 title: RLHF 토대와 인간 선호 기반 보상 학습
@@ -13,34 +13,48 @@ tags:
   - domain/machine-learning
 created: '2026-07-20'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md'
-  - 'raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.commentary.ko.md'
+  - raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md
+  - raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.commentary.ko.md
 evidence:
   - source_id: christiano-et-al-2017-human-preferences
     locator: '초록과 §§2–4의 trajectory segment 비교·reward ensemble·정책 반복 학습, §§5–6의 Atari·simulated robotics'
     relation: supports
   - source_id: ziegler-et-al-2019-lm-preferences
-    locator: '초록과 §§2–4의 선호 기반 언어 모델 미세조정 네 과제'
+    locator: 초록과 §§2–4의 선호 기반 언어 모델 미세조정 네 과제
     relation: contextualizes
   - source_id: stiennon-et-al-2020-human-feedback-summarization
-    locator: '초록과 §§2–4의 human comparison·reward model·PPO summarization policy'
+    locator: 초록과 §§2–4의 human comparison·reward model·PPO summarization policy
     relation: contextualizes
   - source_id: ouyang-et-al-2022-instructgpt
     locator: '초록과 §§3–4, Figure 2의 SFT·ranking·reward model·PPO와 인간 평가'
     relation: supplements
-related:
-  - concept.rlhf
-  - concept.대규모-언어-모델
-  - concept.transformer
+relations:
+  - target: concept.transformer
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites: []
+  assumed_knowledge: 정책과 보상의 기초 개념
+  outcomes:
+    - 인간의 쌍대 비교가 보상 모델과 정책 갱신으로 이어지는 순환을 설명하고 2017년 실험과 후대 언어 모델 RLHF를 구분할 수 있다.
+  next:
+    - target: concept.rlhf
+      reason: 인간 피드백 강화학습 — 2017년 프레임워크와 언어 모델 파이프라인을 하나의 개념 지도로 정리한다.
+    - target: concept.대규모-언어-모델
+      reason: 대규모 언어 모델 — 선호 최적화가 적용되는 사전학습 언어 모델의 구조와 범위를 이어서 살핀다.
 ---
 # RLHF 토대와 인간 선호 기반 보상 학습
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** 정책과 보상의 기초 개념<br>
+> **선수 지식:** 없음 — 정책과 보상의 기초 개념<br>
 > **읽고 나면:** 인간의 쌍대 비교가 보상 모델과 정책 갱신으로 이어지는 순환을 설명하고 2017년 실험과 후대 언어 모델 RLHF를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -110,8 +124,8 @@ related:
 
 ### 다음 문서
 
-- [[인간 피드백 강화학습]] — 2017년 프레임워크와 언어 모델 파이프라인을 하나의 개념 지도로 정리한다.
-- [[대규모 언어 모델]] — 선호 최적화가 적용되는 사전학습 언어 모델의 구조와 범위를 이어서 살핀다.
+- [[concept.rlhf|인간 피드백 강화학습]] — 2017년 프레임워크와 언어 모델 파이프라인을 하나의 개념 지도로 정리한다.
+- [[concept.대규모-언어-모델|대규모 언어 모델]] — 선호 최적화가 적용되는 사전학습 언어 모델의 구조와 범위를 이어서 살핀다.
 
 ## 출처
 
@@ -124,6 +138,6 @@ related:
 
 ## 관련 항목
 
-- [[인간 피드백 강화학습]]
-- [[대규모 언어 모델]]
-- [[Transformer]]
+- [[concept.rlhf|인간 피드백 강화학습]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[concept.transformer|Transformer]]

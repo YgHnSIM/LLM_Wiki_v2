@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.082
 page_type: source
 title: BLOOM과 공개 접근 다국어 LLM
@@ -16,11 +16,13 @@ tags:
   - domain/academia
 created: '2026-07-21'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.ko.md'
-  - 'raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.commentary.ko.md'
+  - raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.ko.md
+  - raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.commentary.ko.md
 evidence:
   - source_id: bigscience-workshop-2022-bloom
     locator: '초록, §§2.2·3.1–3.5·4.2–4.9·5와 Tables 1·3–4의 협업 범위, ROOTS, 구조·tokenizer·계산·학습량, 평가와 한계'
@@ -38,23 +40,38 @@ evidence:
     locator: '§3과 Figure 1의 1,200명 초과 등록자, 추적 가능한 직접 기여자 365명, 거주지 확인 308명·38개국이라는 서로 다른 집계 범위'
     relation: supports
   - source_id: meta-2022-opt-175b-release
-    locator: '2022-05-03 발표의 OPT-175B와 code·logbook·연구용 접근 공개 설명'
+    locator: 2022-05-03 발표의 OPT-175B와 code·logbook·연구용 접근 공개 설명
     relation: disputes
-related:
-  - concept.bloom
-  - source.062
-  - source.074
-  - source.076
-  - source.079
-  - concept.대규모-언어-모델
-  - concept.말뭉치-기반-학습
-  - analysis.데이터-품질과-분포-다양성은-같은-축인가
+relations:
+  - target: source.062
+    kind: related
+  - target: source.074
+    kind: related
+  - target: source.076
+    kind: related
+  - target: source.079
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.대규모-언어-모델
+    - target: concept.말뭉치-기반-학습
+  assumed_knowledge: 없음
+  outcomes:
+    - 'BLOOM의 구조·학습 자료·공개 범위를 수치와 라이선스로 설명하고, 공개 접근·공개 가중치·오픈 소스·민주화를 서로 다른 주장으로 구분할 수 있다.'
+  next:
+    - target: concept.bloom
+      reason: BLOOM — 공개 접근·구조·말뭉치·협업·잔여 장벽을 재사용 가능한 model 개념으로 정리한다.
+    - target: analysis.데이터-품질과-분포-다양성은-같은-축인가
+      reason: 데이터 품질과 분포 다양성은 같은 축인가 — 언어 수와 실제 자료 품질·분포·평가를 분리해서 읽는다.
 ---
 # BLOOM과 공개 접근 다국어 LLM
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[대규모 언어 모델]], [[말뭉치 기반 학습]], [[062_XLM과 교차 언어 사전 학습]]<br>
+> **선수 지식:** [[concept.대규모-언어-모델|대규모 언어 모델]], [[concept.말뭉치-기반-학습|말뭉치 기반 학습]]<br>
 > **읽고 나면:** BLOOM의 구조·학습 자료·공개 범위를 수치와 라이선스로 설명하고, 공개 접근·공개 가중치·오픈 소스·민주화를 서로 다른 주장으로 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -171,8 +188,8 @@ RAIL의 use restriction은 공개와 책임을 결합하려는 규범적 선택�
 
 ### 다음 문서
 
-- [[BLOOM]] — 공개 접근·구조·말뭉치·협업·잔여 장벽을 재사용 가능한 model 개념으로 정리한다.
-- [[데이터 품질과 분포 다양성은 같은 축인가]] — 언어 수와 실제 자료 품질·분포·평가를 분리해서 읽는다.
+- [[concept.bloom|BLOOM]] — 공개 접근·구조·말뭉치·협업·잔여 장벽을 재사용 가능한 model 개념으로 정리한다.
+- [[analysis.데이터-품질과-분포-다양성은-같은-축인가|데이터 품질과 분포 다양성은 같은 축인가]] — 언어 수와 실제 자료 품질·분포·평가를 분리해서 읽는다.
 
 ## 출처
 
@@ -187,11 +204,11 @@ RAIL의 use restriction은 공개와 책임을 결합하려는 규범적 선택�
 
 ## 관련 항목
 
-- [[BLOOM]]
-- [[062_XLM과 교차 언어 사전 학습]]
-- [[074_The Pile과 대규모 언어 모델 학습 말뭉치]]
-- [[076_파운데이션 모델 보고서와 AI 생태계]]
-- [[079_HELM과 다차원 언어 모델 평가]]
-- [[대규모 언어 모델]]
-- [[말뭉치 기반 학습]]
-- [[데이터 품질과 분포 다양성은 같은 축인가]]
+- [[concept.bloom|BLOOM]]
+- [[analysis.데이터-품질과-분포-다양성은-같은-축인가|데이터 품질과 분포 다양성은 같은 축인가]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[concept.말뭉치-기반-학습|말뭉치 기반 학습]]
+- [[source.062|XLM과 교차 언어 사전 학습]]
+- [[source.074|The Pile과 대규모 언어 모델 학습 말뭉치]]
+- [[source.076|파운데이션 모델 보고서와 AI 생태계]]
+- [[source.079|HELM과 다차원 언어 모델 평가]]

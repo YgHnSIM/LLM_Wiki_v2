@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: meta.log
 page_type: meta
 title: Log
@@ -9,14 +9,18 @@ aliases:
 tags:
   - type/meta
 created: '2026-05-07'
-updated: '2026-07-25'
-lifecycle: active
-verification: verified
+updated: '2026-07-26'
+editorial_status: active
+review:
+  evidence_coverage: not-applicable
+  content_mode: descriptive
 artifacts: []
 evidence: []
-related:
-  - meta.index
-  - meta.overview
+relations:
+  - target: meta.index
+    kind: related
+  - target: meta.overview
+    kind: related
 ---
 # Log
 
@@ -5431,6 +5435,24 @@ raw 등록 해시:
 남은 제한:
 
 - 공백 없이 쓰인 하이픈·minus, 인용·근거 제목, 본문 부제목은 바꾸지 않는다. 이 규칙은 문서 제목을 표시할 때의 부제목 구분 em dash만 대상으로 한다.
+
+## [2026-07-26] schema | 페이지 스키마 v3와 사이트 안전성
+
+변경 내용:
+
+- 전체 394개 위키 Markdown 문서를 `schema_version: 3`으로 전환하고, `editorial_status`, `review`, `learning`, `relations`를 영구 문서 계약으로 정리했다. 마이그레이션 보고서와 멱등 정규화 도구를 함께 보존했다.
+- 문서 ID를 기준으로 canonical route를 만들고, 기존 파일명·slug·reader 경로 469개를 `wiki/meta/site-redirects.yml`에 등록했다. 새 링크는 ID route를 사용하고 이전 URL은 redirect ledger로 계속 읽을 수 있다.
+- Markdown/HTML 렌더링에 허용 목록 기반 sanitizer와 unsafe URL·event-handler 검사를 적용했다. 검색과 그래프에는 근거 범위·콘텐츠 모드·편집 상태 필터를 추가했다.
+- tags, evidence, raw-artifacts, red-links, source-gaps, source catalog, redirect ledger, evidence scope baseline을 독립 JSON Schema와 lint 계약으로 묶고, raw 변경 감지 검사를 CI 진입점에 연결했다.
+
+검증 결과:
+
+- `cmd /c npm run verify` 전체 단계 통과: raw 무결성, 번역·학습 감사, math/history/boundary 검사, Node 회귀 152건, 1,090개 페이지 사이트 빌드·검사, Playwright Chromium 16건.
+- 위키 lint는 394개 문서·516개 evidence·220개 raw artifact를 통과했고, `raw/` 보존 자료는 변경하지 않았다.
+
+남은 제한:
+
+- 이전 URL은 redirect로 유지하지만 새 문서 링크와 생성 산출물은 ID 기반 canonical route를 우선한다. 외부에 이미 공유된 임의의 비등록 URL은 redirect ledger에 추가할 때 별도 검토한다.
 
 ## 관련 항목
 

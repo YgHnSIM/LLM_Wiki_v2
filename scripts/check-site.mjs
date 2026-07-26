@@ -123,14 +123,21 @@ for (const htmlFile of htmlFiles) {
     errors.push(`${relativeHtmlPath} contains an unexpected strikethrough; check numeric ranges using "~".`);
   }
 
+  const articleBodies = [...html.matchAll(/<article\b[^>]*>([\s\S]*?)<\/article>/gi)].map((match) => match[1]);
+  for (const articleBody of articleBodies) {
+    if (/<(?:script|iframe|object|embed)\b/i.test(articleBody)) {
+      errors.push(`${relativeHtmlPath} contains executable or embedded raw HTML in an article.`);
+    }
+    if (/(?:href|src|action)\s*=\s*"(?:javascript:|vbscript:|data:(?:text\/html|application\/javascript))/i.test(articleBody)) {
+      errors.push(`${relativeHtmlPath} contains an unsafe article URL.`);
+    }
+    if (/\bon[a-z]+\s*=\s*"/i.test(articleBody)) {
+      errors.push(`${relativeHtmlPath} contains an inline event handler in an article.`);
+    }
+  }
+
   if (/<body class="[^"]*\bartifact-page\b/i.test(html)) {
     const artifactBody = html.match(/<article class="article-body artifact-body"[^>]*>([\s\S]*?)<\/article>/i)?.[1] ?? '';
-    if (/<(?:script|iframe|object|embed)\b/i.test(artifactBody)) {
-      errors.push(`${relativeHtmlPath} contains executable or embedded raw HTML on an artifact page.`);
-    }
-    if (/(?:href|src)="(?:javascript:|data:text\/html)/i.test(artifactBody)) {
-      errors.push(`${relativeHtmlPath} contains an unsafe artifact URL.`);
-    }
     if (/&lt;!--\s*Obsidian note:/i.test(artifactBody)) {
       errors.push(`${relativeHtmlPath} exposes an internal Obsidian note comment.`);
     }
@@ -147,7 +154,15 @@ for (const htmlFile of htmlFiles) {
 
   for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     const value = match[1];
-    if (/^(?:https?:|mailto:|tel:|data:|javascript:)/i.test(value)) continue;
+    if (/^(?:javascript:|vbscript:|data:(?:text\/html|application\/javascript))/i.test(value)) {
+      errors.push(`${relativeHtmlPath} contains an unsafe URL: ${value.slice(0, 80)}`);
+      continue;
+    }
+    if (/^(?:https?:|mailto:|tel:)/i.test(value) || /^data:image\//i.test(value)) continue;
+    if (/^data:/i.test(value)) {
+      errors.push(`${relativeHtmlPath} contains an unsupported data URL.`);
+      continue;
+    }
     checkedReferences += 1;
 
     if (value.startsWith('#')) {
@@ -242,6 +257,13 @@ for (const key of ['sources', 'concepts', 'entities', 'analyses']) {
 
 const searchIndex = JSON.parse(await fs.readFile(path.join(distDir, 'search-index.json'), 'utf8'));
 const searchSuggestions = JSON.parse(await fs.readFile(path.join(distDir, 'search-suggestions.json'), 'utf8'));
+const searchPageHtml = htmlCache.get(fileForUrl(siteUrl('/search/')))
+  ?? await fs.readFile(fileForUrl(siteUrl('/search/')), 'utf8');
+for (const control of ['coverage', 'mode', 'editorial']) {
+  if (!searchPageHtml.includes(`data-search-filter-${control}`)) {
+    errors.push(`Search page is missing the ${control} review filter.`);
+  }
+}
 if (searchSuggestions.length !== searchIndex.length) {
   errors.push(`Search suggestions must contain ${searchIndex.length} entries, found ${searchSuggestions.length}.`);
 }
@@ -312,11 +334,17 @@ const canonicalUrls = new Set([
   ...artifactReaders.map((reader) => siteUrl(reader.url)),
 ]);
 const redirectByFrom = new Map();
-const sourceRedirectById = new Map();
-const allowedRedirectKinds = new Set(['source', 'translation', 'commentary']);
+const sourceRedirectsById = new Map();
+const allowedRedirectKinds = new Set([
+  'source',
+  'page',
+  'translation',
+  'commentary',
+  ...artifactReaders.map((reader) => reader.role),
+]);
 
 for (const redirect of redirects) {
-  const missing = ['kind', 'sourceId', 'canonicalNumber', 'legacyPrefix', 'from', 'to']
+  const missing = ['kind', 'sourceId', 'from', 'to']
     .filter((field) => !String(redirect?.[field] ?? '').trim());
   if (missing.length) {
     errors.push(`Legacy redirect metadata is incomplete (${missing.join(', ')}): ${JSON.stringify(redirect)}`);
@@ -325,7 +353,7 @@ for (const redirect of redirects) {
   if (!allowedRedirectKinds.has(redirect.kind)) {
     errors.push(`Legacy redirect ${redirect.from} has invalid kind '${redirect.kind}'.`);
   }
-  if (!/^\d{3}$/.test(String(redirect.legacyPrefix ?? ''))) {
+  if (String(redirect.legacyPrefix ?? '').trim() && !/^\d{3}$/.test(String(redirect.legacyPrefix))) {
     errors.push(`Legacy redirect ${redirect.from} has an invalid compatibility prefix '${redirect.legacyPrefix ?? ''}'.`);
   }
   if (redirectByFrom.has(redirect.from)) {
@@ -333,10 +361,9 @@ for (const redirect of redirects) {
   }
   redirectByFrom.set(redirect.from, redirect);
   if (redirect.kind === 'source') {
-    if (sourceRedirectById.has(redirect.sourceId)) {
-      errors.push(`Build report contains more than one source redirect for ${redirect.sourceId}.`);
-    }
-    sourceRedirectById.set(redirect.sourceId, redirect);
+    const sourceRedirects = sourceRedirectsById.get(redirect.sourceId) ?? [];
+    sourceRedirects.push(redirect);
+    sourceRedirectsById.set(redirect.sourceId, sourceRedirects);
   }
 
   const fromUrl = siteUrl(redirect.from);
@@ -376,23 +403,26 @@ for (const redirect of redirects) {
     errors.push(`Legacy redirect chain is not allowed: ${redirect.from} -> ${redirect.to}`);
   }
   if (redirect.kind === 'source') continue;
-  const sourceRedirect = sourceRedirectById.get(redirect.sourceId);
-  if (!sourceRedirect
-    || redirect.from !== `${sourceRedirect.from}${redirect.kind}/`
-    || redirect.to !== `${sourceRedirect.to}${redirect.kind}/`) {
-    errors.push(`Legacy ${redirect.kind} redirect for ${redirect.sourceId} does not follow its source redirect.`);
+  if (redirect.kind === 'page') continue;
+  const sourceRedirect = (sourceRedirectsById.get(redirect.sourceId) ?? []).find((candidate) => (
+    redirect.from === `${candidate.from}${redirect.kind}/`
+    && redirect.to === `${candidate.to}${redirect.kind}/`
+    && String(redirect.legacyPrefix ?? '') === String(candidate.legacyPrefix ?? '')
+  ));
+  if (!sourceRedirect) {
+    errors.push(`Legacy ${redirect.kind} redirect for ${redirect.sourceId} does not follow a matching source redirect.`);
   }
 }
 
-for (const sourceRedirect of sourceRedirectById.values()) {
-  const expectedReaders = artifactReaders.filter((reader) => (
-    reader.sourceUrl === sourceRedirect.to && ['translation', 'commentary'].includes(reader.role)
-  ));
-  for (const reader of expectedReaders) {
-    const expectedFrom = `${sourceRedirect.from}${reader.role}/`;
-    const readerRedirect = redirectByFrom.get(expectedFrom);
-    if (!readerRedirect || readerRedirect.to !== reader.url || readerRedirect.sourceId !== sourceRedirect.sourceId) {
-      errors.push(`Legacy redirect is missing for ${sourceRedirect.sourceId} ${reader.role} reader.`);
+for (const sourceRedirects of sourceRedirectsById.values()) {
+  for (const sourceRedirect of sourceRedirects) {
+    const expectedReaders = artifactReaders.filter((reader) => reader.sourceUrl === sourceRedirect.to);
+    for (const reader of expectedReaders) {
+      const expectedFrom = `${sourceRedirect.from}${reader.role}/`;
+      const readerRedirect = redirectByFrom.get(expectedFrom);
+      if (!readerRedirect || readerRedirect.to !== reader.url || readerRedirect.sourceId !== sourceRedirect.sourceId) {
+        errors.push(`Legacy redirect is missing for ${sourceRedirect.sourceId} ${reader.role} reader.`);
+      }
     }
   }
 }
@@ -404,6 +434,9 @@ const requiredSearchFields = [
   'category',
   'verification',
   'verificationLabel',
+  'evidenceCoverage',
+  'contentMode',
+  'editorialStatus',
   'tagKeys',
   'tags',
   'evidenceCount',
@@ -479,13 +512,13 @@ if (graphDataIsObject) {
     }
   }
   const allowedTypes = new Set(['source', 'reference', 'concept', 'entity', 'analysis']);
-  const allowedVerification = new Set(['verified', 'partial', 'disputed', 'unverified']);
+  const allowedVerification = new Set(['verified', 'partial', 'disputed', 'unverified', 'not-applicable']);
   for (const node of graphNodes) {
     if (node === null || typeof node !== 'object' || Array.isArray(node)) {
       errors.push(`Knowledge graph contains a non-object node: ${JSON.stringify(node)}`);
       continue;
     }
-    const missing = ['id', 'title', 'url', 'type', 'category', 'verification', 'community', 'bridgeConnections', 'x', 'y', 'radius', 'layouts']
+    const missing = ['id', 'title', 'url', 'type', 'category', 'verification', 'evidenceCoverage', 'contentMode', 'editorialStatus', 'community', 'bridgeConnections', 'x', 'y', 'radius', 'layouts']
       .filter((field) => !(field in node));
     if (missing.length) errors.push(`Knowledge graph node ${node.id ?? '(unknown)'} is missing: ${missing.join(', ')}`);
     if (nodeIds.has(node.id)) errors.push(`Knowledge graph contains a duplicate node ID: ${node.id}`);
@@ -553,6 +586,9 @@ if (graphDataIsObject) {
       ['url', node.url, searchEntry.url],
       ['type', node.type, searchEntry.type],
       ['verification', node.verification, searchEntry.verification],
+      ['evidenceCoverage', node.evidenceCoverage, searchEntry.evidenceCoverage],
+      ['contentMode', node.contentMode, searchEntry.contentMode],
+      ['editorialStatus', node.editorialStatus, searchEntry.editorialStatus],
       ['category/categoryKey', node.category, searchEntry.categoryKey],
     ];
     for (const [field, actual, expected] of comparisons) {

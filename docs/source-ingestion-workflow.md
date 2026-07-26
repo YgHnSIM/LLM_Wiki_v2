@@ -181,7 +181,7 @@ git push origin main
 
 후보 가운데 외부 근거와 기존 위키 연결이 가장 탄탄한 주제 하나를 선택한다. `[[N-gram에서 LLM으로]]`, `[[AI 시연과 실제 성능]]`, `[[규칙 기반 AI에서 데이터 기반 학습으로]]`처럼 질문과 범위를 먼저 정하고, `wiki/analyses/<주제>.md`에 작성해 사이트의 ‘비교 읽기’ 코너에 넣는다. 파일명과 제목에 숫자 범위를 강제하지 않으며, 해당 논점을 설명하는 데 필요한 신규·기존 자료만 포함한다.
 
-분석 문서는 `page_type: analysis`, `verification: partial`을 기본으로 한다. 실제 사용한 source note, 외부 evidence locator와 raw artifact를 연결하고, raw의 과장이나 오류를 새로운 사실로 재사용하지 않는다. 확인된 사실과 비교를 통한 해석을 분리하고, 직접 입증되지 않은 계보는 한계로 명시한다.
+분석 문서는 `page_type: analysis`, `review.evidence_coverage: partial`, `review.content_mode: synthesis`를 기본으로 한다. 실제 사용한 source note, 외부 evidence locator와 raw artifact를 연결하고, raw의 과장이나 오류를 새로운 사실로 재사용하지 않는다. 확인된 사실과 비교를 통한 해석을 분리하고, 직접 입증되지 않은 계보는 한계로 명시한다.
 
 `wiki/index.md`, `wiki/overview.md`, `wiki/log.md`를 갱신한 뒤 실행한다.
 

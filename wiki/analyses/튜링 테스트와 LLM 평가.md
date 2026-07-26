@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis.튜링-테스트와-llm-평가
 page_type: analysis
 title: 튜링 테스트와 LLM 평가
@@ -11,16 +11,18 @@ tags:
   - domain/ai
 created: '2026-05-08'
 updated: '2026-07-21'
-lifecycle: active
-verification: partial
+editorial_status: active
+review:
+  evidence_coverage: partial
+  content_mode: synthesis
 artifacts:
   - raw/002_The Turing Test.md
   - raw/002_The Turing Test.commentary.md
   - raw/003_Georgetown-IBM Machine.md
   - raw/007_ELIZA - The First Conversational AI Program.ko.md
   - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
-  - raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.ko.md
-  - raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.commentary.ko.md
+  - 'raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.ko.md'
+  - 'raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.commentary.ko.md'
   - raw/079_HELM Holistic Evaluation of Language Models Framework.ko.md
   - raw/079_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md
 evidence:
@@ -51,28 +53,52 @@ evidence:
   - source_id: liang-et-al-2023-helm
     locator: '초록, §§1.1–1.2·3–8·10–11, Tables 4–6·8·13과 Appendices A·C·F–J의 시나리오·적응·메트릭·평가 범위와 한계'
     relation: contextualizes
-related:
-  - concept.튜링-테스트
-  - concept.모방-게임
-  - concept.행동-기반-지능-기준
-  - concept.중국어-방-논증
-  - concept.강한-ai
-  - concept.대규모-언어-모델
-  - analysis.n-gram에서-llm으로
-  - analysis.ai-시연과-실제-성능
-  - concept.eliza
-  - concept.eliza-효과
-  - analysis.eliza에서-llm으로
-  - source.016
-  - source.079
-  - concept.helm
-  - entity.존-설
+relations:
+  - target: concept.모방-게임
+    kind: related
+  - target: concept.행동-기반-지능-기준
+    kind: related
+  - target: concept.중국어-방-논증
+    kind: related
+  - target: concept.강한-ai
+    kind: related
+  - target: concept.대규모-언어-모델
+    kind: related
+  - target: analysis.n-gram에서-llm으로
+    kind: related
+  - target: concept.eliza
+    kind: related
+  - target: concept.eliza-효과
+    kind: related
+  - target: analysis.eliza에서-llm으로
+    kind: related
+  - target: source.016
+    kind: related
+  - target: source.079
+    kind: related
+  - target: entity.존-설
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.튜링-테스트
+    - target: analysis.ai-시연과-실제-성능
+  assumed_knowledge: 없음
+  outcomes:
+    - 인간 유사 언어 행동과 정확성·접지·신뢰성·의식에 관한 주장을 서로 다른 평가 층위로 구분할 수 있다.
+  next:
+    - target: analysis.평가-지표와-모델-유인
+      reason: 자동 평가 지표는 무엇을 보상하는가 — 인간 유사성에서 분리한 평가 문제를 실제 자동 지표의 보상 구조로 이어 간다.
+    - target: concept.helm
+      reason: HELM — 시나리오·적응·메트릭을 실제 평가 실행과 결과 행렬로 조직하는 방법을 자세히 살핀다.
 ---
 # 튜링 테스트와 LLM 평가
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[튜링 테스트]], [[AI 시연과 실제 성능]]<br>
+> **선수 지식:** [[concept.튜링-테스트|튜링 테스트]], [[analysis.ai-시연과-실제-성능|AI 시연과 실제 성능]]<br>
 > **읽고 나면:** 인간 유사 언어 행동과 정확성·접지·신뢰성·의식에 관한 주장을 서로 다른 평가 층위로 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -167,8 +193,8 @@ HELM의 시나리오–적응–메트릭 구조는 이 분석 틀에서 행동 
 
 ### 다음 문서
 
-- [[자동 평가 지표는 무엇을 보상하는가]] — 인간 유사성에서 분리한 평가 문제를 실제 자동 지표의 보상 구조로 이어 간다.
-- [[HELM]] — 시나리오·적응·메트릭을 실제 평가 실행과 결과 행렬로 조직하는 방법을 자세히 살핀다.
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]] — 인간 유사성에서 분리한 평가 문제를 실제 자동 지표의 보상 구조로 이어 간다.
+- [[concept.helm|HELM]] — 시나리오·적응·메트릭을 실제 평가 실행과 결과 행렬로 조직하는 방법을 자세히 살핀다.
 
 ## 출처
 
@@ -187,18 +213,19 @@ HELM의 시나리오–적응–메트릭 구조는 이 분석 틀에서 행동 
 
 ## 관련 항목
 
-- [[튜링 테스트]]
-- [[모방 게임]]
-- [[행동주의적 지능 기준]]
-- [[중국어 방 논증]]
-- [[강한 AI]]
-- [[대규모 언어 모델]]
-- [[N-gram에서 LLM으로]]
-- [[AI 시연과 실제 성능]]
-- [[ELIZA]]
-- [[ELIZA 효과]]
-- [[ELIZA에서 LLM으로]]
-- [[016_중국어 방 논증과 강한 AI 논쟁]]
-- [[079_HELM과 다차원 언어 모델 평가]]
-- [[HELM]]
-- [[존 설]]
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]]
+- [[concept.helm|HELM]]
+- [[concept.튜링-테스트|튜링 테스트]]
+- [[analysis.ai-시연과-실제-성능|AI 시연과 실제 성능]]
+- [[concept.모방-게임|모방 게임]]
+- [[concept.행동-기반-지능-기준|행동 기반 지능 기준]]
+- [[concept.중국어-방-논증|중국어 방 논증]]
+- [[concept.강한-ai|강한 AI]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[analysis.n-gram에서-llm으로|N-gram에서 LLM으로]]
+- [[concept.eliza|ELIZA]]
+- [[concept.eliza-효과|ELIZA 효과]]
+- [[analysis.eliza에서-llm으로|ELIZA에서 LLM으로]]
+- [[source.016|중국어 방 논증과 강한 AI 논쟁]]
+- [[source.079|HELM과 다차원 언어 모델 평가]]
+- [[entity.존-설|존 설]]

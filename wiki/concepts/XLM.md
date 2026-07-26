@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.xlm
 page_type: concept
 title: XLM
@@ -14,37 +14,54 @@ tags:
   - domain/machine-learning
 created: '2026-07-21'
 updated: '2026-07-23'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/062_XLM Cross-lingual Language Model for Multilingual NLP.ko.md'
-  - 'raw/062_XLM Cross-lingual Language Model for Multilingual NLP.commentary.ko.md'
-  - 'raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.ko.md'
-  - 'raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.commentary.ko.md'
+  - raw/062_XLM Cross-lingual Language Model for Multilingual NLP.ko.md
+  - raw/062_XLM Cross-lingual Language Model for Multilingual NLP.commentary.ko.md
+  - raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.ko.md
+  - raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.commentary.ko.md
 evidence:
   - source_id: conneau-lample-2019-xlm
     locator: '§§3.1–3.5와 Figure 1의 language sampling·shared BPE·CLM/MLM/TLM, §§4–5와 Tables 1–5의 전이 protocol·평가 결과'
     relation: supports
   - source_id: joshi-et-al-2020-linguistic-diversity
-    locator: 'pp. 6282–6293의 언어별 자원 분포와 언어 불가지론적 방법의 평가 경계'
+    locator: pp. 6282–6293의 언어별 자원 분포와 언어 불가지론적 방법의 평가 경계
     relation: contextualizes
-related:
-  - source.062
-  - source.110
-  - concept.마스크드-언어-모델링
-  - concept.byte-pair-encoding
-  - concept.언어-모델-전이-학습
-  - concept.신경망-기계-번역
-  - concept.저자원-언어
-  - analysis.언어-수와-언어-형평성은-같은-축인가
-  - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
-  - analysis.같은-병렬-문장은-무엇을-학습시키는가
+relations:
+  - target: source.110
+    kind: related
+  - target: concept.언어-모델-전이-학습
+    kind: related
+  - target: concept.신경망-기계-번역
+    kind: related
+  - target: concept.저자원-언어
+    kind: related
+  - target: analysis.언어-수와-언어-형평성은-같은-축인가
+    kind: related
+learning:
+  difficulty:
+    entry: foundation
+    target: intermediate
+  prerequisites:
+    - target: concept.마스크드-언어-모델링
+    - target: concept.byte-pair-encoding
+  assumed_knowledge: 문장이 token 조각으로 나뉜다는 사실 . 확률식은 이 문서에서 처음부터 설명한다.
+  outcomes:
+    - 'XLM의 CLM·MLM·TLM이 각각 무엇을 맞히는지, shared BPE·언어 표지·병렬 문장이 왜 서로 다른 신호인지, target-language label 없는 zero-shot 전이가 무엇을 뜻하는지 설명할 수 있다.'
+  next:
+    - target: source.062
+      reason: 062XLM과 교차 언어 사전 학습 — 이 개념을 원 논문의 data·실험 조건·검증 정정과 함께 읽는다.
+    - target: analysis.같은-병렬-문장은-무엇을-학습시키는가
+      reason: 같은 병렬 문장은 무엇을 학습시키는가 — 같은 병렬 문장쌍이 SMT·NMT·TLM에서 서로 다른 loss를 만드는 이유를 비교한다.
 ---
 # XLM
 
 > [!note] 학습 안내
 > **난이도:** 기초 → 중급<br>
-> **선수 지식:** 문장이 token 조각으로 나뉜다는 사실, [[마스크드 언어 모델링]], [[Byte Pair Encoding|BPE]]. 확률식은 이 문서에서 처음부터 설명한다.<br>
+> **선수 지식:** [[concept.마스크드-언어-모델링|마스크드 언어 모델링]], [[concept.byte-pair-encoding|Byte Pair Encoding]]<br>
 > **읽고 나면:** XLM의 CLM·MLM·TLM이 각각 무엇을 맞히는지, shared BPE·언어 표지·병렬 문장이 왜 서로 다른 신호인지, target-language label 없는 zero-shot 전이가 무엇을 뜻하는지 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -280,9 +297,8 @@ shared BPE는 숫자·고유명·같은 문자권의 조각처럼 언어 사이 
 
 ### 다음 문서
 
-- [[062_XLM과 교차 언어 사전 학습]] — 이 개념을 원 논문의 data·실험 조건·검증 정정과 함께 읽는다.
-- [[같은 병렬 문장은 무엇을 학습시키는가]] — 같은 병렬 문장쌍이 SMT·NMT·TLM에서 서로 다른 loss를 만드는 이유를 비교한다.
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — zero-shot이라는 말이 언어·과제·parameter 축마다 어떻게 달라지는지 이어서 본다.
+- [[source.062|XLM과 교차 언어 사전 학습]] — 062XLM과 교차 언어 사전 학습 — 이 개념을 원 논문의 data·실험 조건·검증 정정과 함께 읽는다.
+- [[analysis.같은-병렬-문장은-무엇을-학습시키는가|같은 병렬 문장은 무엇을 학습시키는가]] — 같은 병렬 문장쌍이 SMT·NMT·TLM에서 서로 다른 loss를 만드는 이유를 비교한다.
 
 ## 출처
 
@@ -293,13 +309,12 @@ shared BPE는 숫자·고유명·같은 문자권의 조각처럼 언어 사이 
 
 ## 관련 항목
 
-- [[062_XLM과 교차 언어 사전 학습]]
-- [[마스크드 언어 모델링]]
-- [[Byte Pair Encoding]]
-- [[언어 모델 전이 학습]]
-- [[신경망 기계 번역]]
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]
-- [[같은 병렬 문장은 무엇을 학습시키는가]]
-- [[저자원 언어]]
-- [[110_저자원 언어 LLM의 성능 격차와 전이·평가 경계]]
-- [[언어 수와 언어 형평성은 같은 축인가]]
+- [[source.062|XLM과 교차 언어 사전 학습]]
+- [[analysis.같은-병렬-문장은-무엇을-학습시키는가|같은 병렬 문장은 무엇을 학습시키는가]]
+- [[concept.마스크드-언어-모델링|마스크드 언어 모델링]]
+- [[concept.byte-pair-encoding|Byte Pair Encoding]]
+- [[source.110|저자원 언어 LLM의 성능 격차와 전이·평가 경계]]
+- [[concept.언어-모델-전이-학습|언어 모델 전이 학습]]
+- [[concept.신경망-기계-번역|신경망 기계 번역]]
+- [[concept.저자원-언어|저자원 언어]]
+- [[analysis.언어-수와-언어-형평성은-같은-축인가|언어 수와 언어 형평성은 같은 축인가]]

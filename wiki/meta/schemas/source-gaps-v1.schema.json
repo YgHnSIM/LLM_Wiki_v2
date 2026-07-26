@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://llm-wiki.local/schema/source-gaps-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "gaps"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_number", "title", "status", "upstream_status", "replacement_kind", "source_url", "source_page_id", "reconstructed_on", "last_checked", "note"],
+        "properties": {
+          "source_number": { "type": "string", "pattern": "^\\d{3}$" },
+          "title": { "type": "string", "minLength": 1 },
+          "status": { "type": "string", "minLength": 1 },
+          "upstream_status": { "type": "string", "minLength": 1 },
+          "replacement_kind": { "type": "string", "minLength": 1 },
+          "source_url": { "type": "string", "format": "uri", "pattern": "^https?://" },
+          "source_page_id": { "type": "string", "minLength": 1 },
+          "reconstructed_on": { "type": "string", "format": "date" },
+          "last_checked": { "type": "string", "format": "date" },
+          "note": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

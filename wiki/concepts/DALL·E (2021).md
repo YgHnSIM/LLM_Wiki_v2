@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.dall-e-2021
 page_type: concept
 title: DALL·E (2021)
@@ -19,11 +19,13 @@ tags:
   - domain/nlp
 created: '2026-07-21'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md'
-  - 'raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md'
+  - raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md
+  - raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md
 evidence:
   - source_id: ramesh-et-al-2021-dalle
     locator: 'PMLR 139, pp. 8821–8831의 §§1–3·Figures 1–9와 Appendix §§A–C·F–G·Figures 10–14·Listings 1–2의 두 단계 모델·joint token stream·재순위화·zero-shot 평가·실패 조건'
@@ -32,24 +34,33 @@ evidence:
     locator: 'Overview, Capabilities와 Summary of approach and prior work의 공개 시연·예시·대조 재순위화·사회 영향 경계'
     relation: contextualizes
   - source_id: openai-2021-dalle-dvae
-    locator: 'README와 model_card.md의 Model Details·Model Use·Training Data·Performance and Limitations에 기록된 공개 범위와 dVAE 복원 한계'
+    locator: README와 model_card.md의 Model Details·Model Use·Training Data·Performance and Limitations에 기록된 공개 범위와 dVAE 복원 한계
     relation: supplements
   - source_id: ramesh-et-al-2022-unclip
     locator: 'arXiv:2204.06125v1, §§2.1–2.2·5.1·6–7과 Appendix C·Table 3의 동결 CLIP 인코더·prior·64×64 확산 디코더·업샘플러·classifier-free guidance, CLIP gradient guidance 대비 및 DALL·E 1 차이'
     relation: supplements
-related:
-  - source.075
-  - source.085
-  - concept.dall-e-2
-  - concept.transformer
-  - concept.자기회귀-생성
-  - concept.clip
+relations: []
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.transformer
+    - target: concept.자기회귀-생성
+  assumed_knowledge: 없음
+  outcomes:
+    - 'DALL·E 1의 이미지 이산화·텍스트-이미지 공동 자기회귀 모델링·후보 재순위화 흐름을 설명하고, 이를 CLIP이나 후속 diffusion 모델과 같은 구조로 오해하지 않을 수 있다.'
+  next:
+    - target: source.075
+      reason: 075DALL·E와 이산 이미지 토큰 생성 — 원 논문의 수치·평가·중복 분석과 raw 설명의 검증 정정을 locator로 확인한다.
+    - target: source.085
+      reason: 085DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성 — 후속 unCLIP의 동결 CLIP·prior·계층적 확산 경로를 원 논문 수치와 함께 확인한다.
 ---
 # DALL·E (2021)
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[Transformer]], [[자기회귀 생성]]<br>
+> **선수 지식:** [[concept.transformer|Transformer]], [[concept.자기회귀-생성|자기회귀 생성]]<br>
 > **읽고 나면:** DALL·E 1의 이미지 이산화·텍스트-이미지 공동 자기회귀 모델링·후보 재순위화 흐름을 설명하고, 이를 CLIP이나 후속 diffusion 모델과 같은 구조로 오해하지 않을 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -118,10 +129,8 @@ CLIP은 이미지와 텍스트를 비교하는 이중 인코더이며 DALL·E는
 
 ### 다음 문서
 
-- [[075_DALL·E와 이산 이미지 토큰 생성]] — 원 논문의 수치·평가·중복 분석과 raw 설명의 검증 정정을 locator로 확인한다.
-- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] — 후속 unCLIP의 동결 CLIP·prior·계층적 확산 경로를 원 논문 수치와 함께 확인한다.
-- [[DALL·E 2]] — DALL·E 1과 달라진 중간 표현·생성 방식·guidance를 개념 중심으로 비교한다.
-- [[CLIP]] — 생성 후보를 점수화하는 대조 표현 모델과 이미지 생성기의 역할 차이를 이어서 본다.
+- [[source.075|DALL·E와 이산 이미지 토큰 생성]] — 075DALL·E와 이산 이미지 토큰 생성 — 원 논문의 수치·평가·중복 분석과 raw 설명의 검증 정정을 locator로 확인한다.
+- [[source.085|DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] — 085DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성 — 후속 unCLIP의 동결 CLIP·prior·계층적 확산 경로를 원 논문 수치와 함께 확인한다.
 
 ## 출처
 
@@ -136,9 +145,7 @@ CLIP은 이미지와 텍스트를 비교하는 이중 인코더이며 DALL·E는
 
 ## 관련 항목
 
-- [[075_DALL·E와 이산 이미지 토큰 생성]]
-- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
-- [[DALL·E 2]]
-- [[Transformer]]
-- [[자기회귀 생성]]
-- [[CLIP]]
+- [[source.075|DALL·E와 이산 이미지 토큰 생성]]
+- [[source.085|DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
+- [[concept.transformer|Transformer]]
+- [[concept.자기회귀-생성|자기회귀 생성]]

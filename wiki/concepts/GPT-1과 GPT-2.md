@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.gpt-1-gpt-2
 page_type: concept
 title: GPT-1과 GPT-2
@@ -15,38 +15,57 @@ tags:
   - domain/machine-learning
 created: '2026-07-20'
 updated: '2026-07-23'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md'
-  - 'raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md'
-  - 'raw/067_GPT-3 and In-Context Learning Emergent Capabilities from Scale.ko.md'
-  - 'raw/067_GPT-3 and In-Context Learning Emergent Capabilities from Scale.commentary.ko.md'
+  - raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md
+  - raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md
+  - raw/067_GPT-3 and In-Context Learning Emergent Capabilities from Scale.ko.md
+  - raw/067_GPT-3 and In-Context Learning Emergent Capabilities from Scale.commentary.ko.md
 evidence:
   - source_id: gpt-2018
-    locator: '§§1–3의 117M causal Transformer·BookCorpus·두 단계 학습·input transformations와 §§4–5의 12개 과제 결과'
+    locator: §§1–3의 117M causal Transformer·BookCorpus·두 단계 학습·input transformations와 §§4–5의 12개 과제 결과
     relation: supports
   - source_id: radford-et-al-2019-gpt2
-    locator: '§§1–3의 WebText·모델 네 크기·byte-level BPE·zero-shot 설정과 §§3–4의 과제별 결과·한계'
+    locator: §§1–3의 WebText·모델 네 크기·byte-level BPE·zero-shot 설정과 §§3–4의 과제별 결과·한계
     relation: supports
   - source_id: openai-2019-gpt2-release
-    locator: '2019년 original post·interim updates의 117M·345M 공개와 zero-shot·release policy 설명'
+    locator: 2019년 original post·interim updates의 117M·345M 공개와 zero-shot·release policy 설명
     relation: contextualizes
   - source_id: openai-2019-gpt2-1-5b-release
-    locator: '2019-11-05 final model release의 1.5B 모델 weights·code 공개와 staged release 결말'
+    locator: 2019-11-05 final model release의 1.5B 모델 weights·code 공개와 staged release 결말
     relation: contextualizes
   - source_id: brown-et-al-2020-gpt3
     locator: '§§1–3, 특히 §2와 Tables 2.1–2.2의 8개 모델·300B token 학습, zero/one/few-shot 정의와 task별 결과'
     relation: supplements
-related:
-  - source.059
-  - source.067
-  - concept.자기회귀-생성
-  - concept.언어-모델-전이-학습
-  - concept.로그-가능도
-  - concept.문맥-내-학습
-  - concept.bert
-  - concept.transformer
+relations:
+  - target: source.067
+    kind: related
+  - target: concept.언어-모델-전이-학습
+    kind: related
+  - target: concept.로그-가능도
+    kind: related
+  - target: concept.문맥-내-학습
+    kind: related
+  - target: concept.bert
+    kind: related
+  - target: concept.transformer
+    kind: related
+learning:
+  difficulty:
+    entry: foundation
+    target: intermediate
+  prerequisites: []
+  assumed_knowledge: '토큰, 조건부 확률, 학습과 평가의 차이를 이 문서에서 먼저 만든다.'
+  outcomes:
+    - 'GPT-1의 지도 미세조정과 GPT-2의 zero-shot 확률 채점이 같은 다음-token 모델을 어떻게 다르게 쓰는지, 수식과 작은 계산으로 설명할 수 있다.'
+  next:
+    - target: source.059
+      reason: '059GPT-1과 GPT-2의 전이 방식 변화 — 원 GPT-1·GPT-2 논문의 데이터, 입력 변환, benchmark별 채점 조건과 raw의 서술을 대조한다.'
+    - target: concept.자기회귀-생성
+      reason: 자기회귀 생성 — 다음-token 확률이 실제 생성에서 어떻게 한 token씩 조건을 바꾸는지 더 자세히 살핀다.
 ---
 # GPT-1과 GPT-2
 
@@ -368,8 +387,8 @@ GPT-2의 full 1.5B weights는 2019년 2월에 즉시 공개되지 않았다. 117
 
 ### 다음 문서
 
-- [[059_GPT-1과 GPT-2의 전이 방식 변화]] — 원 GPT-1·GPT-2 논문의 데이터, 입력 변환, benchmark별 채점 조건과 raw의 서술을 대조한다.
-- [[자기회귀 생성]] — 다음-token 확률이 실제 생성에서 어떻게 한 token씩 조건을 바꾸는지 더 자세히 살핀다.
+- [[source.059|GPT-1과 GPT-2의 전이 방식 변화]] — 059GPT-1과 GPT-2의 전이 방식 변화 — 원 GPT-1·GPT-2 논문의 데이터, 입력 변환, benchmark별 채점 조건과 raw의 서술을 대조한다.
+- [[concept.자기회귀-생성|자기회귀 생성]] — 다음-token 확률이 실제 생성에서 어떻게 한 token씩 조건을 바꾸는지 더 자세히 살핀다.
 
 ## 출처
 
@@ -383,11 +402,11 @@ GPT-2의 full 1.5B weights는 2019년 2월에 즉시 공개되지 않았다. 117
 
 ## 관련 항목
 
-- [[059_GPT-1과 GPT-2의 전이 방식 변화]]
-- [[067_GPT-3와 문맥 내 학습]]
-- [[자기회귀 생성]]
-- [[언어 모델 전이 학습]]
-- [[로그가능도]]
-- [[문맥 내 학습]]
-- [[BERT]]
-- [[Transformer]]
+- [[source.059|GPT-1과 GPT-2의 전이 방식 변화]]
+- [[concept.자기회귀-생성|자기회귀 생성]]
+- [[source.067|GPT-3와 문맥 내 학습]]
+- [[concept.언어-모델-전이-학습|언어 모델 전이 학습]]
+- [[concept.로그-가능도|로그가능도]]
+- [[concept.문맥-내-학습|문맥 내 학습]]
+- [[concept.bert|BERT]]
+- [[concept.transformer|Transformer]]

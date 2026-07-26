@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.040
 page_type: source
 title: IBM Watson과 Jeopardy 질의응답
@@ -15,11 +15,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.ko.md'
-  - 'raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.commentary.ko.md'
+  - raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.ko.md
+  - raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.commentary.ko.md
 evidence:
   - source_id: ferrucci-et-al-2010-building-watson
     locator: 'AI Magazine 31(3), pp. 59–79의 DeepQA 원칙·처리 단계·자료·후보 생성·근거 점수화·성능·확장 실험'
@@ -34,16 +36,29 @@ evidence:
     locator: '2011-02-14–16 방송 형식·최종 점수·Toronto 오답·90 servers·2,880 processor cores·인터넷 미접속 설명'
     relation: supports
   - source_id: smithsonian-knight-rider-lunch-box
-    locator: 'Knight Rider가 NBC에서 1982–1986년 방송됐다는 소장품 설명'
+    locator: Knight Rider가 NBC에서 1982–1986년 방송됐다는 소장품 설명
     relation: disputes
   - source_id: library-of-congress-moby-dick-1851
     locator: 'Harper & Brothers가 1851년 출판한 Moby-Dick; or, The Whale 서지 정보'
     relation: disputes
-related:
-  - concept.ibm-watson
-  - concept.deepqa
-  - concept.개방-영역-질의응답
-  - entity.ibm
+relations:
+  - target: concept.ibm-watson
+    kind: related
+  - target: entity.ibm
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites: []
+  assumed_knowledge: 없음
+  outcomes:
+    - 'Watson의 실제 경기 조건과 DeepQA의 후보 생성·근거 점수화 흐름을 설명하고, 공개 시연이 보장하지 않은 능력을 구분할 수 있다.'
+  next:
+    - target: concept.deepqa
+      reason: '다음에는 DeepQA에서 병렬 후보·근거 결합 구조를 자세히 보고, 개방 영역 질의응답에서 과업의 범위와 평가 축을 넓혀 본다.'
+    - target: concept.개방-영역-질의응답
+      reason: '다음에는 DeepQA에서 병렬 후보·근거 결합 구조를 자세히 보고, 개방 영역 질의응답에서 과업의 범위와 평가 축을 넓혀 본다.'
 ---
 # IBM Watson과 Jeopardy 질의응답
 
@@ -177,8 +192,12 @@ Watson과 현대 [[대규모 언어 모델]]은 모두 많은 자료에서 언�
 
 다음에는 [[DeepQA]]에서 병렬 후보·근거 결합 구조를 자세히 보고, [[개방 영역 질의응답]]에서 과업의 범위와 평가 축을 넓혀 본다.
 
-## 출처
+### 다음 문서
 
+- [[concept.deepqa|DeepQA]] — 다음에는 DeepQA에서 병렬 후보·근거 결합 구조를 자세히 보고, 개방 영역 질의응답에서 과업의 범위와 평가 축을 넓혀 본다.
+- [[concept.개방-영역-질의응답|개방 영역 질의응답]] — 다음에는 DeepQA에서 병렬 후보·근거 결합 구조를 자세히 보고, 개방 영역 질의응답에서 과업의 범위와 평가 축을 넓혀 본다.
+
+## 출처
 - David Ferrucci 외, [Building Watson: An Overview of the DeepQA Project](https://aaai.org/ai-magazine/the-ai-behind-watson-the-technical-article/), *AI Magazine* 31(3), 2010, pp. 59–79.
 - B. L. Lewis, [In the Game: The Interface between Watson and Jeopardy!](https://research.ibm.com/publications/in-the-game-the-interface-between-watson-and-jeopardy), 2012.
 - David Ferrucci 외, [Watson: Beyond Jeopardy!](https://scalar.usc.edu/works/meet-my-friend-watson-1/media/Beyond%20Jeopardy.pdf), *Artificial Intelligence* 199–200, 2013, pp. 93–105.
@@ -190,7 +209,7 @@ Watson과 현대 [[대규모 언어 모델]]은 모두 많은 자료에서 언�
 
 ## 관련 항목
 
-- [[IBM Watson]]
-- [[DeepQA]]
-- [[개방 영역 질의응답]]
-- [[IBM]]
+- [[concept.deepqa|DeepQA]]
+- [[concept.개방-영역-질의응답|개방 영역 질의응답]]
+- [[concept.ibm-watson|IBM Watson]]
+- [[entity.ibm|IBM]]

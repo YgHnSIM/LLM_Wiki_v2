@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.smoothing
 page_type: concept
 title: Smoothing
@@ -12,12 +12,12 @@ tags:
   - domain/ai
 created: '2026-05-07'
 updated: '2026-07-23'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - >-
-    raw/001_Shannon's N-gram Model - The Foundation of Statistical Language
-    Processing..md
+  - raw/001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md
   - raw/019_Katz Back-off - Handling Sparse Data in Language Models.ko.md
   - raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md
 evidence:
@@ -25,23 +25,38 @@ evidence:
     locator: 'p. 400, eqs. (1)–(7); pp. 400–401, eqs. (13)–(23)'
     relation: supports
   - source_id: chen-goodman-1998
-    locator: '§§2.2–2.4 and §§5–6'
+    locator: §§2.2–2.4 and §§5–6
     relation: supplements
-related:
-  - source.001
-  - source.019
-  - concept.조건부-확률
-  - concept.n-gram-모델
-  - concept.데이터-희소성
-  - concept.perplexity
-  - entity.슬라바-카츠
-  - analysis.n-gram에서-llm으로
+relations:
+  - target: source.001
+    kind: related
+  - target: concept.조건부-확률
+    kind: related
+  - target: entity.슬라바-카츠
+    kind: related
+  - target: analysis.n-gram에서-llm으로
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.n-gram-모델
+    - target: concept.데이터-희소성
+  assumed_knowledge: 의 상대 빈도 의 미관측 조합 의 정규화
+  outcomes:
+    - '할인·남은 확률 질량·백오프·보간을 구분하고, 작은 예에서 Katz 백오프의 $\beta(h)$와 $\alpha(h)$가 왜 필요한지 계산할 수 있다.'
+  next:
+    - target: source.019
+      reason: 019Katz 백오프와 희소 데이터 확률 추정 — 1987년 논문의 네 분기·실험·후대 평활화 비교를 원 근거와 함께 읽는다.
+    - target: concept.perplexity
+      reason: Perplexity — 확률 0과 할인된 확률이 평가 토큰열의 로그 점수에 어떻게 들어가는지 계산한다.
 ---
 # Smoothing
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[N-gram 모델]]의 상대 빈도, [[데이터 희소성]]의 미관측 조합, [[조건부 확률]]의 정규화<br>
+> **선수 지식:** [[concept.n-gram-모델|N-gram 모델]], [[concept.데이터-희소성|데이터 희소성]]<br>
 > **읽고 나면:** 할인·남은 확률 질량·백오프·보간을 구분하고, 작은 예에서 Katz 백오프의 $\beta(h)$와 $\alpha(h)$가 왜 필요한지 계산할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -236,8 +251,8 @@ $$
 
 ### 다음 문서
 
-- [[019_Katz 백오프와 희소 데이터 확률 추정]] — 1987년 논문의 네 분기·실험·후대 평활화 비교를 원 근거와 함께 읽는다.
-- [[Perplexity]] — 확률 0과 할인된 확률이 평가 토큰열의 로그 점수에 어떻게 들어가는지 계산한다.
+- [[source.019|Katz 백오프와 희소 데이터 확률 추정]] — 019Katz 백오프와 희소 데이터 확률 추정 — 1987년 논문의 네 분기·실험·후대 평활화 비교를 원 근거와 함께 읽는다.
+- [[concept.perplexity|Perplexity]] — 확률 0과 할인된 확률이 평가 토큰열의 로그 점수에 어떻게 들어가는지 계산한다.
 
 ## 출처
 
@@ -247,11 +262,11 @@ $$
 
 ## 관련 항목
 
-- [[조건부 확률]]
-- [[001_섀넌의 N-gram 모델]]
-- [[N-gram 모델]]
-- [[데이터 희소성]]
-- [[Perplexity]]
-- [[슬라바 카츠]]
-- [[N-gram에서 LLM으로]]
-- [[019_Katz 백오프와 희소 데이터 확률 추정]]
+- [[source.019|Katz 백오프와 희소 데이터 확률 추정]]
+- [[concept.perplexity|Perplexity]]
+- [[concept.n-gram-모델|N-gram 모델]]
+- [[concept.데이터-희소성|데이터 희소성]]
+- [[source.001|섀넌의 N-gram 모델]]
+- [[concept.조건부-확률|조건부 확률]]
+- [[entity.슬라바-카츠|슬라바 카츠]]
+- [[analysis.n-gram에서-llm으로|N-gram에서 LLM으로]]

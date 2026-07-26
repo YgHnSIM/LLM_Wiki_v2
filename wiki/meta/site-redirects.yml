@@ -1,0 +1,2406 @@
+schema_version: 1
+redirects:
+  - kind: page
+    target_id: analysis.검색-근거-독해-답
+    from: /analyses/검색은-근거를-찾고-독해는-답을-찾는다/
+    to: /analyses/검색-근거-독해-답/
+  - kind: page
+    target_id: analysis.계수-기반과-예측-기반-단어-표현
+    from: /analyses/계수-기반과-예측-기반-단어-표현은-얼마나-다른가/
+    to: /analyses/계수-기반과-예측-기반-단어-표현/
+  - kind: page
+    target_id: analysis.의미-자원의-노드-단위
+    from: /analyses/구조화된-의미-자원은-무엇을-노드로-삼는가/
+    to: /analyses/의미-자원의-노드-단위/
+  - kind: page
+    target_id: analysis.scale-as-research-variable
+    from: /analyses/규모는-언제-연구-변수가-되었나/
+    to: /analyses/scale-as-research-variable/
+  - kind: page
+    target_id: analysis.pre-machine-computing-capability
+    from: /analyses/기계-이전의-계산은-어떻게-능력이-되었나/
+    to: /analyses/pre-machine-computing-capability/
+  - kind: page
+    target_id: analysis.data-scale-to-rights
+    from: /analyses/데이터의-양에서-권리와-책임까지/
+    to: /analyses/data-scale-to-rights/
+  - kind: page
+    target_id: analysis.model-capability-to-service-capability
+    from: /analyses/모델-능력에서-서비스-능력으로/
+    to: /analyses/model-capability-to-service-capability/
+  - kind: page
+    target_id: analysis.text-to-execution-authority
+    from: /analyses/문자에서-실행-권한까지/
+    to: /analyses/text-to-execution-authority/
+  - kind: page
+    target_id: analysis.language-computation-mechanical-procedure
+    from: /analyses/언어와-계산을-기계적-절차로-만들다/
+    to: /analyses/language-computation-mechanical-procedure/
+  - kind: page
+    target_id: analysis.when-data-movement-dominates
+    from: /analyses/연산보다-데이터-이동이-비싸질-때/
+    to: /analyses/when-data-movement-dominates/
+  - kind: page
+    target_id: analysis.평가-지표와-모델-유인
+    from: /analyses/자동-평가-지표는-무엇을-보상하는가/
+    to: /analyses/평가-지표와-모델-유인/
+  - kind: page
+    target_id: analysis.stored-program-to-learning-framework
+    from: /analyses/저장-프로그램에서-학습-프레임워크까지/
+    to: /analyses/stored-program-to-learning-framework/
+  - kind: page
+    target_id: analysis.power-to-service-outcomes
+    from: /analyses/전력에서-서비스-결과-계약까지-무엇을-세어야-하나/
+    to: /analyses/power-to-service-outcomes/
+  - kind: page
+    target_id: analysis.silicon-scaling-to-accelerators
+    from: /analyses/집적도-증가에서-가속기까지-무엇이-더-필요했나/
+    to: /analyses/silicon-scaling-to-accelerators/
+  - kind: page
+    target_id: analysis.text-to-realtime-multimodal-systems
+    from: /analyses/텍스트-모델에서-실시간-멀티모달-시스템까지/
+    to: /analyses/text-to-realtime-multimodal-systems/
+  - kind: page
+    target_id: analysis.early-learning-scaling-limits
+    from: /analyses/학습-규칙이-있어도-왜-규모화되지-못했나/
+    to: /analyses/early-learning-scaling-limits/
+  - kind: page
+    target_id: analysis.matrix-acceleration-deep-learning
+    from: /analyses/행렬곱-가속은-딥러닝을-어떻게-현실화했나/
+    to: /analyses/matrix-acceleration-deep-learning/
+  - kind: page
+    target_id: analysis.statistical-language-model-computing-infrastructure
+    from: /analyses/확률적-언어-모델은-어떤-계산-인프라를-요구했나/
+    to: /analyses/statistical-language-model-computing-infrastructure/
+  - kind: page
+    target_id: analysis.llm-capability-model-or-system
+    from: /analyses/llm-능력은-모델의-속성인가-시스템의-속성인가/
+    to: /analyses/llm-capability-model-or-system/
+  - kind: page
+    target_id: analysis.transformer-parallelism-and-sequentiality
+    from: /analyses/transformer는-무엇을-병렬화했고-무엇을-남겼나/
+    to: /analyses/transformer-parallelism-and-sequentiality/
+  - kind: page
+    target_id: concept.accelerator-matrix-compute
+    from: /concepts/가속기와-행렬-계산/
+    to: /concepts/accelerator-matrix-compute/
+  - kind: page
+    target_id: concept.grpo
+    from: /concepts/그룹-상대-정책-최적화/
+    to: /concepts/grpo/
+  - kind: page
+    target_id: concept.로그-가능도
+    from: /concepts/로그가능도/
+    to: /concepts/로그-가능도/
+  - kind: page
+    target_id: concept.memory-hierarchy-data-movement
+    from: /concepts/메모리-계층과-데이터-이동/
+    to: /concepts/memory-hierarchy-data-movement/
+  - kind: page
+    target_id: concept.text-encoding-normalization
+    from: /concepts/문자-인코딩과-정규화/
+    to: /concepts/text-encoding-normalization/
+  - kind: page
+    target_id: concept.distributed-training-collectives
+    from: /concepts/분산-학습과-집단-통신/
+    to: /concepts/distributed-training-collectives/
+  - kind: page
+    target_id: concept.numerical-formats-precision-quantization
+    from: /concepts/수치-형식-혼합-정밀도-양자화/
+    to: /concepts/numerical-formats-precision-quantization/
+  - kind: page
+    target_id: concept.realtime-multimodal-interaction
+    from: /concepts/실시간-멀티모달-상호작용/
+    to: /concepts/realtime-multimodal-interaction/
+  - kind: page
+    target_id: concept.llm-inference-serving
+    from: /concepts/언어-모델-추론-서빙/
+    to: /concepts/llm-inference-serving/
+  - kind: page
+    target_id: concept.rlhf
+    from: /concepts/인간-피드백-강화학습/
+    to: /concepts/rlhf/
+  - kind: page
+    target_id: concept.training-data-lifecycle-provenance
+    from: /concepts/학습-데이터-생애주기와-출처-추적/
+    to: /concepts/training-data-lifecycle-provenance/
+  - kind: page
+    target_id: concept.행동-기반-지능-기준
+    from: /concepts/행동주의적-지능-기준/
+    to: /concepts/행동-기반-지능-기준/
+  - kind: page
+    target_id: concept.big-bench-mmlu
+    from: /concepts/big-bench와-mmlu/
+    to: /concepts/big-bench-mmlu/
+  - kind: page
+    target_id: concept.chatgpt-2022
+    from: /concepts/chatgpt-연구-미리보기-2022/
+    to: /concepts/chatgpt-2022/
+  - kind: page
+    target_id: concept.glue-superglue
+    from: /concepts/glue와-superglue/
+    to: /concepts/glue-superglue/
+  - kind: page
+    target_id: concept.gpt-1-gpt-2
+    from: /concepts/gpt-1과-gpt-2/
+    to: /concepts/gpt-1-gpt-2/
+  - kind: page
+    target_id: concept.llm-inference-energy-metrics
+    from: /concepts/llm-추론-에너지-지표/
+    to: /concepts/llm-inference-energy-metrics/
+  - kind: page
+    target_id: concept.sequence-to-sequence
+    from: /concepts/sequence-to-sequence-학습/
+    to: /concepts/sequence-to-sequence/
+  - kind: page
+    target_id: meta.llm-system-boundary-map
+    from: /meta/llm-시스템-경계-확장-지도/
+    to: /meta/llm-system-boundary-map/
+  - kind: page
+    target_id: meta.llm-computing-coevolution
+    from: /meta/llm과-컴퓨팅-능력의-공진화/
+    to: /meta/llm-computing-coevolution/
+  - kind: source
+    target_id: source.001
+    canonical_number: '001'
+    from: /sources/001-섀넌의-n-gram-모델/
+    to: /sources/001/
+  - kind: translation
+    target_id: source.001
+    canonical_number: '001'
+    from: /sources/001-섀넌의-n-gram-모델/translation/
+    to: /sources/001/translation/
+  - kind: commentary
+    target_id: source.001
+    canonical_number: '001'
+    from: /sources/001-섀넌의-n-gram-모델/commentary/
+    to: /sources/001/commentary/
+  - kind: source
+    target_id: source.002
+    canonical_number: '002'
+    from: /sources/002-튜링-테스트/
+    to: /sources/002/
+  - kind: translation
+    target_id: source.002
+    canonical_number: '002'
+    from: /sources/002-튜링-테스트/translation/
+    to: /sources/002/translation/
+  - kind: commentary
+    target_id: source.002
+    canonical_number: '002'
+    from: /sources/002-튜링-테스트/commentary/
+    to: /sources/002/commentary/
+  - kind: source
+    target_id: source.003
+    canonical_number: '003'
+    from: /sources/003-georgetown-ibm-기계-번역-시연/
+    to: /sources/003/
+  - kind: translation
+    target_id: source.003
+    canonical_number: '003'
+    from: /sources/003-georgetown-ibm-기계-번역-시연/translation/
+    to: /sources/003/translation/
+  - kind: commentary
+    target_id: source.003
+    canonical_number: '003'
+    from: /sources/003-georgetown-ibm-기계-번역-시연/commentary/
+    to: /sources/003/commentary/
+  - kind: source
+    target_id: source.004
+    canonical_number: '004'
+    from: /sources/004-퍼셉트론/
+    to: /sources/004/
+  - kind: translation
+    target_id: source.004
+    canonical_number: '004'
+    from: /sources/004-퍼셉트론/translation/
+    to: /sources/004/translation/
+  - kind: commentary
+    target_id: source.004
+    canonical_number: '004'
+    from: /sources/004-퍼셉트론/commentary/
+    to: /sources/004/commentary/
+  - kind: source
+    target_id: source.005
+    canonical_number: '005'
+    from: /sources/005-촘스키의-통사-구조/
+    to: /sources/005/
+  - kind: translation
+    target_id: source.005
+    canonical_number: '005'
+    from: /sources/005-촘스키의-통사-구조/translation/
+    to: /sources/005/translation/
+  - kind: commentary
+    target_id: source.005
+    canonical_number: '005'
+    from: /sources/005-촘스키의-통사-구조/commentary/
+    to: /sources/005/commentary/
+  - kind: source
+    target_id: source.006
+    canonical_number: '006'
+    from: /sources/006-위드로-호프의-madaline/
+    to: /sources/006/
+  - kind: source-essay
+    target_id: source.006
+    canonical_number: '006'
+    from: /sources/006-위드로-호프의-madaline/source-essay/
+    to: /sources/006/source-essay/
+  - kind: commentary
+    target_id: source.006
+    canonical_number: '006'
+    from: /sources/006-위드로-호프의-madaline/commentary/
+    to: /sources/006/commentary/
+  - kind: source
+    target_id: source.007
+    canonical_number: '007'
+    from: /sources/007-eliza/
+    to: /sources/007/
+  - kind: translation
+    target_id: source.007
+    canonical_number: '007'
+    from: /sources/007-eliza/translation/
+    to: /sources/007/translation/
+  - kind: commentary
+    target_id: source.007
+    canonical_number: '007'
+    from: /sources/007-eliza/commentary/
+    to: /sources/007/commentary/
+  - kind: source
+    target_id: source.008
+    canonical_number: 008
+    from: /sources/008-비터비-알고리즘/
+    to: /sources/008/
+  - kind: translation
+    target_id: source.008
+    canonical_number: 008
+    from: /sources/008-비터비-알고리즘/translation/
+    to: /sources/008/translation/
+  - kind: commentary
+    target_id: source.008
+    canonical_number: 008
+    from: /sources/008-비터비-알고리즘/commentary/
+    to: /sources/008/commentary/
+  - kind: source
+    target_id: source.009
+    canonical_number: 009
+    from: /sources/009-shrdlu/
+    to: /sources/009/
+  - kind: translation
+    target_id: source.009
+    canonical_number: 009
+    from: /sources/009-shrdlu/translation/
+    to: /sources/009/translation/
+  - kind: commentary
+    target_id: source.009
+    canonical_number: 009
+    from: /sources/009-shrdlu/commentary/
+    to: /sources/009/commentary/
+  - kind: source
+    target_id: source.010
+    canonical_number: '010'
+    from: /sources/010-벡터-공간-모델과-tf-idf/
+    to: /sources/010/
+  - kind: translation
+    target_id: source.010
+    canonical_number: '010'
+    from: /sources/010-벡터-공간-모델과-tf-idf/translation/
+    to: /sources/010/translation/
+  - kind: commentary
+    target_id: source.010
+    canonical_number: '010'
+    from: /sources/010-벡터-공간-모델과-tf-idf/commentary/
+    to: /sources/010/commentary/
+  - kind: source
+    target_id: source.011
+    canonical_number: '011'
+    from: /sources/011-개념-의존/
+    to: /sources/011/
+  - kind: translation
+    target_id: source.011
+    canonical_number: '011'
+    from: /sources/011-개념-의존/translation/
+    to: /sources/011/translation/
+  - kind: commentary
+    target_id: source.011
+    canonical_number: '011'
+    from: /sources/011-개념-의존/commentary/
+    to: /sources/011/commentary/
+  - kind: source
+    target_id: source.012
+    canonical_number: '012'
+    from: /sources/012-상징-규칙에서-통계-학습으로/
+    to: /sources/012/
+  - kind: translation
+    target_id: source.012
+    canonical_number: '012'
+    from: /sources/012-상징-규칙에서-통계-학습으로/translation/
+    to: /sources/012/translation/
+  - kind: commentary
+    target_id: source.012
+    canonical_number: '012'
+    from: /sources/012-상징-규칙에서-통계-학습으로/commentary/
+    to: /sources/012/commentary/
+  - kind: source
+    target_id: source.013
+    canonical_number: '013'
+    from: /sources/013-은닉-마르코프-모델과-통계적-음성-인식/
+    to: /sources/013/
+  - kind: translation
+    target_id: source.013
+    canonical_number: '013'
+    from: /sources/013-은닉-마르코프-모델과-통계적-음성-인식/translation/
+    to: /sources/013/translation/
+  - kind: commentary
+    target_id: source.013
+    canonical_number: '013'
+    from: /sources/013-은닉-마르코프-모델과-통계적-음성-인식/commentary/
+    to: /sources/013/commentary/
+  - kind: source
+    target_id: source.014
+    canonical_number: '014'
+    from: /sources/014-증강-전이망과-절차적-자연어-파싱/
+    to: /sources/014/
+  - kind: translation
+    target_id: source.014
+    canonical_number: '014'
+    from: /sources/014-증강-전이망과-절차적-자연어-파싱/translation/
+    to: /sources/014/translation/
+  - kind: commentary
+    target_id: source.014
+    canonical_number: '014'
+    from: /sources/014-증강-전이망과-절차적-자연어-파싱/commentary/
+    to: /sources/014/commentary/
+  - kind: source
+    target_id: source.015
+    canonical_number: '015'
+    from: /sources/015-몬태규-의미론과-합성적-자연언어-해석/
+    to: /sources/015/
+  - kind: translation
+    target_id: source.015
+    canonical_number: '015'
+    from: /sources/015-몬태규-의미론과-합성적-자연언어-해석/translation/
+    to: /sources/015/translation/
+  - kind: commentary
+    target_id: source.015
+    canonical_number: '015'
+    from: /sources/015-몬태규-의미론과-합성적-자연언어-해석/commentary/
+    to: /sources/015/commentary/
+  - kind: source
+    target_id: source.016
+    canonical_number: '016'
+    from: /sources/016-중국어-방-논증과-강한-ai-논쟁/
+    to: /sources/016/
+  - kind: translation
+    target_id: source.016
+    canonical_number: '016'
+    from: /sources/016-중국어-방-논증과-강한-ai-논쟁/translation/
+    to: /sources/016/translation/
+  - kind: commentary
+    target_id: source.016
+    canonical_number: '016'
+    from: /sources/016-중국어-방-논증과-강한-ai-논쟁/commentary/
+    to: /sources/016/commentary/
+  - kind: source
+    target_id: source.017
+    canonical_number: '017'
+    from: /sources/017-lesk-알고리즘과-단어-의미-중의성-해소/
+    to: /sources/017/
+  - kind: translation
+    target_id: source.017
+    canonical_number: '017'
+    from: /sources/017-lesk-알고리즘과-단어-의미-중의성-해소/translation/
+    to: /sources/017/translation/
+  - kind: commentary
+    target_id: source.017
+    canonical_number: '017'
+    from: /sources/017-lesk-알고리즘과-단어-의미-중의성-해소/commentary/
+    to: /sources/017/commentary/
+  - kind: source
+    target_id: source.018
+    canonical_number: 018
+    from: /sources/018-역전파와-다층-신경망-학습/
+    to: /sources/018/
+  - kind: translation
+    target_id: source.018
+    canonical_number: 018
+    from: /sources/018-역전파와-다층-신경망-학습/translation/
+    to: /sources/018/translation/
+  - kind: commentary
+    target_id: source.018
+    canonical_number: 018
+    from: /sources/018-역전파와-다층-신경망-학습/commentary/
+    to: /sources/018/commentary/
+  - kind: source
+    target_id: source.019
+    canonical_number: 019
+    from: /sources/019-katz-백오프와-희소-데이터-확률-추정/
+    to: /sources/019/
+  - kind: translation
+    target_id: source.019
+    canonical_number: 019
+    from: /sources/019-katz-백오프와-희소-데이터-확률-추정/translation/
+    to: /sources/019/translation/
+  - kind: commentary
+    target_id: source.019
+    canonical_number: 019
+    from: /sources/019-katz-백오프와-희소-데이터-확률-추정/commentary/
+    to: /sources/019/commentary/
+  - kind: source
+    target_id: source.020
+    canonical_number: '020'
+    from: /sources/020-시간-지연-신경망과-음소-인식/
+    to: /sources/020/
+  - kind: translation
+    target_id: source.020
+    canonical_number: '020'
+    from: /sources/020-시간-지연-신경망과-음소-인식/translation/
+    to: /sources/020/translation/
+  - kind: commentary
+    target_id: source.020
+    canonical_number: '020'
+    from: /sources/020-시간-지연-신경망과-음소-인식/commentary/
+    to: /sources/020/commentary/
+  - kind: source
+    target_id: source.021
+    canonical_number: '021'
+    from: /sources/021-합성곱-신경망과-특징-학습/
+    to: /sources/021/
+  - kind: translation
+    target_id: source.021
+    canonical_number: '021'
+    from: /sources/021-합성곱-신경망과-특징-학습/translation/
+    to: /sources/021/translation/
+  - kind: commentary
+    target_id: source.021
+    canonical_number: '021'
+    from: /sources/021-합성곱-신경망과-특징-학습/commentary/
+    to: /sources/021/commentary/
+  - kind: source
+    target_id: source.022
+    canonical_number: '022'
+    from: /sources/022-ibm-통계적-기계-번역과-데이터-기반-전환/
+    to: /sources/022/
+  - kind: translation
+    target_id: source.022
+    canonical_number: '022'
+    from: /sources/022-ibm-통계적-기계-번역과-데이터-기반-전환/translation/
+    to: /sources/022/translation/
+  - kind: commentary
+    target_id: source.022
+    canonical_number: '022'
+    from: /sources/022-ibm-통계적-기계-번역과-데이터-기반-전환/commentary/
+    to: /sources/022/commentary/
+  - kind: source
+    target_id: source.023
+    canonical_number: '023'
+    from: /sources/023-penn-treebank와-통계적-구문-분석/
+    to: /sources/023/
+  - kind: translation
+    target_id: source.023
+    canonical_number: '023'
+    from: /sources/023-penn-treebank와-통계적-구문-분석/translation/
+    to: /sources/023/translation/
+  - kind: commentary
+    target_id: source.023
+    canonical_number: '023'
+    from: /sources/023-penn-treebank와-통계적-구문-분석/commentary/
+    to: /sources/023/commentary/
+  - kind: source
+    target_id: source.024
+    canonical_number: '024'
+    from: /sources/024-bm25와-확률적-정보-검색/
+    to: /sources/024/
+  - kind: translation
+    target_id: source.024
+    canonical_number: '024'
+    from: /sources/024-bm25와-확률적-정보-검색/translation/
+    to: /sources/024/translation/
+  - kind: commentary
+    target_id: source.024
+    canonical_number: '024'
+    from: /sources/024-bm25와-확률적-정보-검색/commentary/
+    to: /sources/024/commentary/
+  - kind: source
+    target_id: source.025
+    canonical_number: '025'
+    from: /sources/025-wordnet과-어휘-의미망/
+    to: /sources/025/
+  - kind: translation
+    target_id: source.025
+    canonical_number: '025'
+    from: /sources/025-wordnet과-어휘-의미망/translation/
+    to: /sources/025/translation/
+  - kind: commentary
+    target_id: source.025
+    canonical_number: '025'
+    from: /sources/025-wordnet과-어휘-의미망/commentary/
+    to: /sources/025/commentary/
+  - kind: source
+    target_id: source.026
+    canonical_number: '026'
+    from: /sources/026-순환-신경망과-시간적-문맥-학습/
+    to: /sources/026/
+  - kind: translation
+    target_id: source.026
+    canonical_number: '026'
+    from: /sources/026-순환-신경망과-시간적-문맥-학습/translation/
+    to: /sources/026/translation/
+  - kind: commentary
+    target_id: source.026
+    canonical_number: '026'
+    from: /sources/026-순환-신경망과-시간적-문맥-학습/commentary/
+    to: /sources/026/commentary/
+  - kind: source
+    target_id: source.027
+    canonical_number: '027'
+    from: /sources/027-최대-엔트로피와-서포트-벡터-머신/
+    to: /sources/027/
+  - kind: translation
+    target_id: source.027
+    canonical_number: '027'
+    from: /sources/027-최대-엔트로피와-서포트-벡터-머신/translation/
+    to: /sources/027/translation/
+  - kind: commentary
+    target_id: source.027
+    canonical_number: '027'
+    from: /sources/027-최대-엔트로피와-서포트-벡터-머신/commentary/
+    to: /sources/027/commentary/
+  - kind: source
+    target_id: source.028
+    canonical_number: 028
+    from: /sources/028-장단기-메모리와-장기-의존성-학습/
+    to: /sources/028/
+  - kind: translation
+    target_id: source.028
+    canonical_number: 028
+    from: /sources/028-장단기-메모리와-장기-의존성-학습/translation/
+    to: /sources/028/translation/
+  - kind: commentary
+    target_id: source.028
+    canonical_number: 028
+    from: /sources/028-장단기-메모리와-장기-의존성-학습/commentary/
+    to: /sources/028/commentary/
+  - kind: source
+    target_id: source.029
+    canonical_number: 029
+    from: /sources/029-통계적-구문-분석과-어휘화-파서/
+    to: /sources/029/
+  - kind: translation
+    target_id: source.029
+    canonical_number: 029
+    from: /sources/029-통계적-구문-분석과-어휘화-파서/translation/
+    to: /sources/029/translation/
+  - kind: commentary
+    target_id: source.029
+    canonical_number: 029
+    from: /sources/029-통계적-구문-분석과-어휘화-파서/commentary/
+    to: /sources/029/commentary/
+  - kind: source
+    target_id: source.030
+    canonical_number: '030'
+    from: /sources/030-framenet과-프레임-의미론/
+    to: /sources/030/
+  - kind: translation
+    target_id: source.030
+    canonical_number: '030'
+    from: /sources/030-framenet과-프레임-의미론/translation/
+    to: /sources/030/translation/
+  - kind: commentary
+    target_id: source.030
+    canonical_number: '030'
+    from: /sources/030-framenet과-프레임-의미론/commentary/
+    to: /sources/030/commentary/
+  - kind: source
+    target_id: source.031
+    canonical_number: '031'
+    from: /sources/031-잠재-의미-분석과-확률적-잠재-의미-색인/
+    to: /sources/031/
+  - kind: translation
+    target_id: source.031
+    canonical_number: '031'
+    from: /sources/031-잠재-의미-분석과-확률적-잠재-의미-색인/translation/
+    to: /sources/031/translation/
+  - kind: commentary
+    target_id: source.031
+    canonical_number: '031'
+    from: /sources/031-잠재-의미-분석과-확률적-잠재-의미-색인/commentary/
+    to: /sources/031/commentary/
+  - kind: source
+    target_id: source.032
+    canonical_number: '032'
+    from: /sources/032-조건부-무작위장과-구조화-예측/
+    to: /sources/032/
+  - kind: translation
+    target_id: source.032
+    canonical_number: '032'
+    from: /sources/032-조건부-무작위장과-구조화-예측/translation/
+    to: /sources/032/translation/
+  - kind: commentary
+    target_id: source.032
+    canonical_number: '032'
+    from: /sources/032-조건부-무작위장과-구조화-예측/commentary/
+    to: /sources/032/commentary/
+  - kind: source
+    target_id: source.033
+    canonical_number: '033'
+    from: /sources/033-bleu와-기계-번역-자동-평가/
+    to: /sources/033/
+  - kind: translation
+    target_id: source.033
+    canonical_number: '033'
+    from: /sources/033-bleu와-기계-번역-자동-평가/translation/
+    to: /sources/033/translation/
+  - kind: commentary
+    target_id: source.033
+    canonical_number: '033'
+    from: /sources/033-bleu와-기계-번역-자동-평가/commentary/
+    to: /sources/033/commentary/
+  - kind: source
+    target_id: source.034
+    canonical_number: '034'
+    from: /sources/034-구-기반-통계적-기계-번역과-최소-오류율-훈련/
+    to: /sources/034/
+  - kind: translation
+    target_id: source.034
+    canonical_number: '034'
+    from: /sources/034-구-기반-통계적-기계-번역과-최소-오류율-훈련/translation/
+    to: /sources/034/translation/
+  - kind: commentary
+    target_id: source.034
+    canonical_number: '034'
+    from: /sources/034-구-기반-통계적-기계-번역과-최소-오류율-훈련/commentary/
+    to: /sources/034/commentary/
+  - kind: source
+    target_id: source.035
+    canonical_number: '035'
+    from: /sources/035-신경-확률-언어-모형과-분산-단어-표현/
+    to: /sources/035/
+  - kind: translation
+    target_id: source.035
+    canonical_number: '035'
+    from: /sources/035-신경-확률-언어-모형과-분산-단어-표현/translation/
+    to: /sources/035/translation/
+  - kind: commentary
+    target_id: source.035
+    canonical_number: '035'
+    from: /sources/035-신경-확률-언어-모형과-분산-단어-표현/commentary/
+    to: /sources/035/commentary/
+  - kind: source
+    target_id: source.036
+    canonical_number: '036'
+    from: /sources/036-잠재-디리클레-할당과-베이지안-토픽-모델링/
+    to: /sources/036/
+  - kind: translation
+    target_id: source.036
+    canonical_number: '036'
+    from: /sources/036-잠재-디리클레-할당과-베이지안-토픽-모델링/translation/
+    to: /sources/036/translation/
+  - kind: commentary
+    target_id: source.036
+    canonical_number: '036'
+    from: /sources/036-잠재-디리클레-할당과-베이지안-토픽-모델링/commentary/
+    to: /sources/036/commentary/
+  - kind: source
+    target_id: source.037
+    canonical_number: '037'
+    from: /sources/037-rouge와-meteor의-과제별-생성-텍스트-평가/
+    to: /sources/037/
+  - kind: translation
+    target_id: source.037
+    canonical_number: '037'
+    from: /sources/037-rouge와-meteor의-과제별-생성-텍스트-평가/translation/
+    to: /sources/037/translation/
+  - kind: commentary
+    target_id: source.037
+    canonical_number: '037'
+    from: /sources/037-rouge와-meteor의-과제별-생성-텍스트-평가/commentary/
+    to: /sources/037/commentary/
+  - kind: source
+    target_id: source.038
+    canonical_number: 038
+    from: /sources/038-propbank와-의미역-표지/
+    to: /sources/038/
+  - kind: translation
+    target_id: source.038
+    canonical_number: 038
+    from: /sources/038-propbank와-의미역-표지/translation/
+    to: /sources/038/translation/
+  - kind: commentary
+    target_id: source.038
+    canonical_number: 038
+    from: /sources/038-propbank와-의미역-표지/commentary/
+    to: /sources/038/commentary/
+  - kind: source
+    target_id: source.039
+    canonical_number: 039
+    from: /sources/039-freebase와-협업형-지식-그래프/
+    to: /sources/039/
+  - kind: translation
+    target_id: source.039
+    canonical_number: 039
+    from: /sources/039-freebase와-협업형-지식-그래프/translation/
+    to: /sources/039/translation/
+  - kind: commentary
+    target_id: source.039
+    canonical_number: 039
+    from: /sources/039-freebase와-협업형-지식-그래프/commentary/
+    to: /sources/039/commentary/
+  - kind: source
+    target_id: source.040
+    canonical_number: '040'
+    from: /sources/040-ibm-watson과-jeopardy-질의응답/
+    to: /sources/040/
+  - kind: translation
+    target_id: source.040
+    canonical_number: '040'
+    from: /sources/040-ibm-watson과-jeopardy-질의응답/translation/
+    to: /sources/040/translation/
+  - kind: commentary
+    target_id: source.040
+    canonical_number: '040'
+    from: /sources/040-ibm-watson과-jeopardy-질의응답/commentary/
+    to: /sources/040/commentary/
+  - kind: source
+    target_id: source.041
+    canonical_number: '041'
+    from: /sources/041-심층-신경망-음향-모델과-dnn-hmm-전환/
+    to: /sources/041/
+  - kind: translation
+    target_id: source.041
+    canonical_number: '041'
+    from: /sources/041-심층-신경망-음향-모델과-dnn-hmm-전환/translation/
+    to: /sources/041/translation/
+  - kind: commentary
+    target_id: source.041
+    canonical_number: '041'
+    from: /sources/041-심층-신경망-음향-모델과-dnn-hmm-전환/commentary/
+    to: /sources/041/commentary/
+  - kind: source
+    target_id: source.042
+    canonical_number: '042'
+    from: /sources/042-wikidata와-다언어-협업-지식-베이스/
+    to: /sources/042/
+  - kind: translation
+    target_id: source.042
+    canonical_number: '042'
+    from: /sources/042-wikidata와-다언어-협업-지식-베이스/translation/
+    to: /sources/042/translation/
+  - kind: commentary
+    target_id: source.042
+    canonical_number: '042'
+    from: /sources/042-wikidata와-다언어-협업-지식-베이스/commentary/
+    to: /sources/042/commentary/
+  - kind: source
+    target_id: source.043
+    canonical_number: '043'
+    from: /sources/043-word2vec와-효율적-정적-단어-임베딩/
+    to: /sources/043/
+  - kind: translation
+    target_id: source.043
+    canonical_number: '043'
+    from: /sources/043-word2vec와-효율적-정적-단어-임베딩/translation/
+    to: /sources/043/translation/
+  - kind: commentary
+    target_id: source.043
+    canonical_number: '043'
+    from: /sources/043-word2vec와-효율적-정적-단어-임베딩/commentary/
+    to: /sources/043/commentary/
+  - kind: source
+    target_id: source.044
+    canonical_number: '044'
+    from: /sources/044-glove와-adam의-서로-다른-2014년-전환/
+    to: /sources/044/
+  - kind: translation
+    target_id: source.044
+    canonical_number: '044'
+    from: /sources/044-glove와-adam의-서로-다른-2014년-전환/translation/
+    to: /sources/044/translation/
+  - kind: commentary
+    target_id: source.044
+    canonical_number: '044'
+    from: /sources/044-glove와-adam의-서로-다른-2014년-전환/commentary/
+    to: /sources/044/commentary/
+  - kind: source
+    target_id: source.045
+    canonical_number: '045'
+    from: /sources/045-sequence-to-sequence-학습과-신경-기계-번역/
+    to: /sources/045/
+  - kind: translation
+    target_id: source.045
+    canonical_number: '045'
+    from: /sources/045-sequence-to-sequence-학습과-신경-기계-번역/translation/
+    to: /sources/045/translation/
+  - kind: commentary
+    target_id: source.045
+    canonical_number: '045'
+    from: /sources/045-sequence-to-sequence-학습과-신경-기계-번역/commentary/
+    to: /sources/045/commentary/
+  - kind: source
+    target_id: source.046
+    canonical_number: '046'
+    from: /sources/046-메모리-네트워크와-외부-지식-접근/
+    to: /sources/046/
+  - kind: translation
+    target_id: source.046
+    canonical_number: '046'
+    from: /sources/046-메모리-네트워크와-외부-지식-접근/translation/
+    to: /sources/046/translation/
+  - kind: commentary
+    target_id: source.046
+    canonical_number: '046'
+    from: /sources/046-메모리-네트워크와-외부-지식-접근/commentary/
+    to: /sources/046/commentary/
+  - kind: source
+    target_id: source.047
+    canonical_number: '047'
+    from: /sources/047-어텐션-메커니즘과-동적-정렬/
+    to: /sources/047/
+  - kind: reconstruction
+    target_id: source.047
+    canonical_number: '047'
+    from: /sources/047-어텐션-메커니즘과-동적-정렬/reconstruction/
+    to: /sources/047/reconstruction/
+  - kind: commentary
+    target_id: source.047
+    canonical_number: '047'
+    from: /sources/047-어텐션-메커니즘과-동적-정렬/commentary/
+    to: /sources/047/commentary/
+  - kind: source
+    target_id: source.048
+    canonical_number: 048
+    from: /sources/048-잔차-학습과-매우-깊은-신경망/
+    to: /sources/048/
+  - kind: translation
+    target_id: source.048
+    canonical_number: 048
+    from: /sources/048-잔차-학습과-매우-깊은-신경망/translation/
+    to: /sources/048/translation/
+  - kind: commentary
+    target_id: source.048
+    canonical_number: 048
+    from: /sources/048-잔차-학습과-매우-깊은-신경망/commentary/
+    to: /sources/048/commentary/
+  - kind: source
+    target_id: source.049
+    canonical_number: 049
+    from: /sources/049-층-정규화와-시퀀스-모델의-배치-독립성/
+    to: /sources/049/
+  - kind: translation
+    target_id: source.049
+    canonical_number: 049
+    from: /sources/049-층-정규화와-시퀀스-모델의-배치-독립성/translation/
+    to: /sources/049/translation/
+  - kind: commentary
+    target_id: source.049
+    canonical_number: 049
+    from: /sources/049-층-정규화와-시퀀스-모델의-배치-독립성/commentary/
+    to: /sources/049/commentary/
+  - kind: source
+    target_id: source.050
+    canonical_number: '050'
+    from: /sources/050-fasttext와-서브워드-표현의-두-경로/
+    to: /sources/050/
+  - kind: translation
+    target_id: source.050
+    canonical_number: '050'
+    from: /sources/050-fasttext와-서브워드-표현의-두-경로/translation/
+    to: /sources/050/translation/
+  - kind: commentary
+    target_id: source.050
+    canonical_number: '050'
+    from: /sources/050-fasttext와-서브워드-표현의-두-경로/commentary/
+    to: /sources/050/commentary/
+  - kind: source
+    target_id: source.051
+    canonical_number: '051'
+    from: /sources/051-squad와-추출형-독해-평가/
+    to: /sources/051/
+  - kind: translation
+    target_id: source.051
+    canonical_number: '051'
+    from: /sources/051-squad와-추출형-독해-평가/translation/
+    to: /sources/051/translation/
+  - kind: commentary
+    target_id: source.051
+    canonical_number: '051'
+    from: /sources/051-squad와-추출형-독해-평가/commentary/
+    to: /sources/051/commentary/
+  - kind: source
+    target_id: source.052
+    canonical_number: '052'
+    from: /sources/052-신경-정보-검색과-의미-대응/
+    to: /sources/052/
+  - kind: translation
+    target_id: source.052
+    canonical_number: '052'
+    from: /sources/052-신경-정보-검색과-의미-대응/translation/
+    to: /sources/052/translation/
+  - kind: commentary
+    target_id: source.052
+    canonical_number: '052'
+    from: /sources/052-신경-정보-검색과-의미-대응/commentary/
+    to: /sources/052/commentary/
+  - kind: source
+    target_id: source.053
+    canonical_number: '053'
+    from: /sources/053-gnmt와-제품-규모-신경-번역/
+    to: /sources/053/
+  - kind: translation
+    target_id: source.053
+    canonical_number: '053'
+    from: /sources/053-gnmt와-제품-규모-신경-번역/translation/
+    to: /sources/053/translation/
+  - kind: commentary
+    target_id: source.053
+    canonical_number: '053'
+    from: /sources/053-gnmt와-제품-규모-신경-번역/commentary/
+    to: /sources/053/commentary/
+  - kind: source
+    target_id: source.054
+    canonical_number: '054'
+    from: /sources/054-wavenet과-표본-단위-신경-오디오-생성/
+    to: /sources/054/
+  - kind: translation
+    target_id: source.054
+    canonical_number: '054'
+    from: /sources/054-wavenet과-표본-단위-신경-오디오-생성/translation/
+    to: /sources/054/translation/
+  - kind: commentary
+    target_id: source.054
+    canonical_number: '054'
+    from: /sources/054-wavenet과-표본-단위-신경-오디오-생성/commentary/
+    to: /sources/054/commentary/
+  - kind: source
+    target_id: source.055
+    canonical_number: '055'
+    from: /sources/055-transformer와-자기어텐션-기반-시퀀스-모델링/
+    to: /sources/055/
+  - kind: translation
+    target_id: source.055
+    canonical_number: '055'
+    from: /sources/055-transformer와-자기어텐션-기반-시퀀스-모델링/translation/
+    to: /sources/055/translation/
+  - kind: commentary
+    target_id: source.055
+    canonical_number: '055'
+    from: /sources/055-transformer와-자기어텐션-기반-시퀀스-모델링/commentary/
+    to: /sources/055/commentary/
+  - kind: source
+    target_id: source.056
+    canonical_number: '056'
+    from: /sources/056-rlhf-토대와-인간-선호-기반-보상-학습/
+    to: /sources/056/
+  - kind: translation
+    target_id: source.056
+    canonical_number: '056'
+    from: /sources/056-rlhf-토대와-인간-선호-기반-보상-학습/translation/
+    to: /sources/056/translation/
+  - kind: commentary
+    target_id: source.056
+    canonical_number: '056'
+    from: /sources/056-rlhf-토대와-인간-선호-기반-보상-학습/commentary/
+    to: /sources/056/commentary/
+  - kind: source
+    target_id: source.057
+    canonical_number: '057'
+    from: /sources/057-elmo와-ulmfit의-두-전이-학습-경로/
+    to: /sources/057/
+  - kind: translation
+    target_id: source.057
+    canonical_number: '057'
+    from: /sources/057-elmo와-ulmfit의-두-전이-학습-경로/translation/
+    to: /sources/057/translation/
+  - kind: commentary
+    target_id: source.057
+    canonical_number: '057'
+    from: /sources/057-elmo와-ulmfit의-두-전이-학습-경로/commentary/
+    to: /sources/057/commentary/
+  - kind: source
+    target_id: source.058
+    canonical_number: 058
+    from: /sources/058-bert의-마스크드-양방향-사전-학습/
+    to: /sources/058/
+  - kind: translation
+    target_id: source.058
+    canonical_number: 058
+    from: /sources/058-bert의-마스크드-양방향-사전-학습/translation/
+    to: /sources/058/translation/
+  - kind: commentary
+    target_id: source.058
+    canonical_number: 058
+    from: /sources/058-bert의-마스크드-양방향-사전-학습/commentary/
+    to: /sources/058/commentary/
+  - kind: source
+    target_id: source.059
+    canonical_number: 059
+    from: /sources/059-gpt-1과-gpt-2의-전이-방식-변화/
+    to: /sources/059/
+  - kind: translation
+    target_id: source.059
+    canonical_number: 059
+    from: /sources/059-gpt-1과-gpt-2의-전이-방식-변화/translation/
+    to: /sources/059/translation/
+  - kind: commentary
+    target_id: source.059
+    canonical_number: 059
+    from: /sources/059-gpt-1과-gpt-2의-전이-방식-변화/commentary/
+    to: /sources/059/commentary/
+  - kind: source
+    target_id: source.060
+    canonical_number: '060'
+    from: /sources/060-glue와-superglue의-집계-평가/
+    to: /sources/060/
+  - kind: translation
+    target_id: source.060
+    canonical_number: '060'
+    from: /sources/060-glue와-superglue의-집계-평가/translation/
+    to: /sources/060/translation/
+  - kind: commentary
+    target_id: source.060
+    canonical_number: '060'
+    from: /sources/060-glue와-superglue의-집계-평가/commentary/
+    to: /sources/060/commentary/
+  - kind: source
+    target_id: source.061
+    canonical_number: '061'
+    from: /sources/061-xlnet-roberta-albert의-bert-개선-경로/
+    to: /sources/061/
+  - kind: translation
+    target_id: source.061
+    canonical_number: '061'
+    from: /sources/061-xlnet-roberta-albert의-bert-개선-경로/translation/
+    to: /sources/061/translation/
+  - kind: commentary
+    target_id: source.061
+    canonical_number: '061'
+    from: /sources/061-xlnet-roberta-albert의-bert-개선-경로/commentary/
+    to: /sources/061/commentary/
+  - kind: source
+    target_id: source.062
+    canonical_number: '062'
+    from: /sources/062-xlm과-교차-언어-사전-학습/
+    to: /sources/062/
+  - kind: translation
+    target_id: source.062
+    canonical_number: '062'
+    from: /sources/062-xlm과-교차-언어-사전-학습/translation/
+    to: /sources/062/translation/
+  - kind: commentary
+    target_id: source.062
+    canonical_number: '062'
+    from: /sources/062-xlm과-교차-언어-사전-학습/commentary/
+    to: /sources/062/commentary/
+  - kind: source
+    target_id: source.063
+    canonical_number: '063'
+    from: /sources/063-t5와-text-to-text-통합-프레임워크/
+    to: /sources/063/
+  - kind: translation
+    target_id: source.063
+    canonical_number: '063'
+    from: /sources/063-t5와-text-to-text-통합-프레임워크/translation/
+    to: /sources/063/translation/
+  - kind: commentary
+    target_id: source.063
+    canonical_number: '063'
+    from: /sources/063-t5와-text-to-text-통합-프레임워크/commentary/
+    to: /sources/063/commentary/
+  - kind: source
+    target_id: source.064
+    canonical_number: '064'
+    from: /sources/064-transformer-xl과-세그먼트-수준-재귀/
+    to: /sources/064/
+  - kind: translation
+    target_id: source.064
+    canonical_number: '064'
+    from: /sources/064-transformer-xl과-세그먼트-수준-재귀/translation/
+    to: /sources/064/translation/
+  - kind: commentary
+    target_id: source.064
+    canonical_number: '064'
+    from: /sources/064-transformer-xl과-세그먼트-수준-재귀/commentary/
+    to: /sources/064/commentary/
+  - kind: source
+    target_id: source.065
+    canonical_number: '065'
+    from: /sources/065-bert-기반-passage-재순위화/
+    to: /sources/065/
+  - kind: translation
+    target_id: source.065
+    canonical_number: '065'
+    from: /sources/065-bert-기반-passage-재순위화/translation/
+    to: /sources/065/translation/
+  - kind: commentary
+    target_id: source.065
+    canonical_number: '065'
+    from: /sources/065-bert-기반-passage-재순위화/commentary/
+    to: /sources/065/commentary/
+  - kind: source
+    target_id: source.066
+    canonical_number: '066'
+    from: /sources/066-신경-언어-모델의-스케일링-법칙/
+    to: /sources/066/
+  - kind: translation
+    target_id: source.066
+    canonical_number: '066'
+    from: /sources/066-신경-언어-모델의-스케일링-법칙/translation/
+    to: /sources/066/translation/
+  - kind: commentary
+    target_id: source.066
+    canonical_number: '066'
+    from: /sources/066-신경-언어-모델의-스케일링-법칙/commentary/
+    to: /sources/066/commentary/
+  - kind: source
+    target_id: source.067
+    canonical_number: '067'
+    from: /sources/067-gpt-3와-문맥-내-학습/
+    to: /sources/067/
+  - kind: translation
+    target_id: source.067
+    canonical_number: '067'
+    from: /sources/067-gpt-3와-문맥-내-학습/translation/
+    to: /sources/067/translation/
+  - kind: commentary
+    target_id: source.067
+    canonical_number: '067'
+    from: /sources/067-gpt-3와-문맥-내-학습/commentary/
+    to: /sources/067/commentary/
+  - kind: source
+    target_id: source.068
+    canonical_number: 068
+    from: /sources/068-dpr과-검색-증강-생성/
+    to: /sources/068/
+  - kind: translation
+    target_id: source.068
+    canonical_number: 068
+    from: /sources/068-dpr과-검색-증강-생성/translation/
+    to: /sources/068/translation/
+  - kind: commentary
+    target_id: source.068
+    canonical_number: 068
+    from: /sources/068-dpr과-검색-증강-생성/commentary/
+    to: /sources/068/commentary/
+  - kind: source
+    target_id: source.069
+    canonical_number: 069
+    from: /sources/069-전문가-혼합과-희소-활성-스케일링/
+    to: /sources/069/
+  - kind: translation
+    target_id: source.069
+    canonical_number: 069
+    from: /sources/069-전문가-혼합과-희소-활성-스케일링/translation/
+    to: /sources/069/translation/
+  - kind: commentary
+    target_id: source.069
+    canonical_number: 069
+    from: /sources/069-전문가-혼합과-희소-활성-스케일링/commentary/
+    to: /sources/069/commentary/
+  - kind: source
+    target_id: source.070
+    canonical_number: '070'
+    from: /sources/070-clip과-대조적-언어-이미지-사전-학습/
+    to: /sources/070/
+  - kind: translation
+    target_id: source.070
+    canonical_number: '070'
+    from: /sources/070-clip과-대조적-언어-이미지-사전-학습/translation/
+    to: /sources/070/translation/
+  - kind: commentary
+    target_id: source.070
+    canonical_number: '070'
+    from: /sources/070-clip과-대조적-언어-이미지-사전-학습/commentary/
+    to: /sources/070/commentary/
+  - kind: source
+    target_id: source.071
+    canonical_number: '071'
+    from: /sources/071-codex와-humaneval-기반-코드-생성-평가/
+    to: /sources/071/
+  - kind: translation
+    target_id: source.071
+    canonical_number: '071'
+    from: /sources/071-codex와-humaneval-기반-코드-생성-평가/translation/
+    to: /sources/071/translation/
+  - kind: commentary
+    target_id: source.071
+    canonical_number: '071'
+    from: /sources/071-codex와-humaneval-기반-코드-생성-평가/commentary/
+    to: /sources/071/commentary/
+  - kind: source
+    target_id: source.072
+    canonical_number: '072'
+    from: /sources/072-지시-미세조정과-flan의-제로샷-일반화/
+    to: /sources/072/
+  - kind: translation
+    target_id: source.072
+    canonical_number: '072'
+    from: /sources/072-지시-미세조정과-flan의-제로샷-일반화/translation/
+    to: /sources/072/translation/
+  - kind: commentary
+    target_id: source.072
+    canonical_number: '072'
+    from: /sources/072-지시-미세조정과-flan의-제로샷-일반화/commentary/
+    to: /sources/072/commentary/
+  - kind: source
+    target_id: source.073
+    canonical_number: '073'
+    from: /sources/073-colbert와-다중-벡터-검색/
+    to: /sources/073/
+  - kind: translation
+    target_id: source.073
+    canonical_number: '073'
+    from: /sources/073-colbert와-다중-벡터-검색/translation/
+    to: /sources/073/translation/
+  - kind: commentary
+    target_id: source.073
+    canonical_number: '073'
+    from: /sources/073-colbert와-다중-벡터-검색/commentary/
+    to: /sources/073/commentary/
+  - kind: source
+    target_id: source.074
+    canonical_number: '074'
+    from: /sources/074-the-pile과-대규모-언어-모델-학습-말뭉치/
+    to: /sources/074/
+  - kind: translation
+    target_id: source.074
+    canonical_number: '074'
+    from: /sources/074-the-pile과-대규모-언어-모델-학습-말뭉치/translation/
+    to: /sources/074/translation/
+  - kind: commentary
+    target_id: source.074
+    canonical_number: '074'
+    from: /sources/074-the-pile과-대규모-언어-모델-학습-말뭉치/commentary/
+    to: /sources/074/commentary/
+  - kind: source
+    target_id: source.075
+    canonical_number: '075'
+    from: /sources/075-dall-e와-이산-이미지-토큰-생성/
+    to: /sources/075/
+  - kind: translation
+    target_id: source.075
+    canonical_number: '075'
+    from: /sources/075-dall-e와-이산-이미지-토큰-생성/translation/
+    to: /sources/075/translation/
+  - kind: commentary
+    target_id: source.075
+    canonical_number: '075'
+    from: /sources/075-dall-e와-이산-이미지-토큰-생성/commentary/
+    to: /sources/075/commentary/
+  - kind: source
+    target_id: source.076
+    canonical_number: '076'
+    from: /sources/076-파운데이션-모델-보고서와-ai-생태계/
+    to: /sources/076/
+  - kind: translation
+    target_id: source.076
+    canonical_number: '076'
+    from: /sources/076-파운데이션-모델-보고서와-ai-생태계/translation/
+    to: /sources/076/translation/
+  - kind: commentary
+    target_id: source.076
+    canonical_number: '076'
+    from: /sources/076-파운데이션-모델-보고서와-ai-생태계/commentary/
+    to: /sources/076/commentary/
+  - kind: source
+    target_id: source.077
+    canonical_number: '077'
+    from: /sources/077-instructgpt와-인간-선호-정렬/
+    to: /sources/077/
+  - kind: translation
+    target_id: source.077
+    canonical_number: '077'
+    from: /sources/077-instructgpt와-인간-선호-정렬/translation/
+    to: /sources/077/translation/
+  - kind: commentary
+    target_id: source.077
+    canonical_number: '077'
+    from: /sources/077-instructgpt와-인간-선호-정렬/commentary/
+    to: /sources/077/commentary/
+  - kind: source
+    target_id: source.078
+    canonical_number: 078
+    from: /sources/078-chinchilla와-계산-최적-언어-모델-학습/
+    to: /sources/078/
+  - kind: translation
+    target_id: source.078
+    canonical_number: 078
+    from: /sources/078-chinchilla와-계산-최적-언어-모델-학습/translation/
+    to: /sources/078/translation/
+  - kind: commentary
+    target_id: source.078
+    canonical_number: 078
+    from: /sources/078-chinchilla와-계산-최적-언어-모델-학습/commentary/
+    to: /sources/078/commentary/
+  - kind: source
+    target_id: source.079
+    canonical_number: 079
+    from: /sources/079-helm과-다차원-언어-모델-평가/
+    to: /sources/079/
+  - kind: translation
+    target_id: source.079
+    canonical_number: 079
+    from: /sources/079-helm과-다차원-언어-모델-평가/translation/
+    to: /sources/079/translation/
+  - kind: commentary
+    target_id: source.079
+    canonical_number: 079
+    from: /sources/079-helm과-다차원-언어-모델-평가/commentary/
+    to: /sources/079/commentary/
+  - kind: source
+    target_id: source.080
+    canonical_number: 080
+    from: /sources/080-사고-연쇄-프롬프팅과-추론-행동-유도/
+    to: /sources/080/
+  - kind: translation
+    target_id: source.080
+    canonical_number: 080
+    from: /sources/080-사고-연쇄-프롬프팅과-추론-행동-유도/translation/
+    to: /sources/080/translation/
+  - kind: commentary
+    target_id: source.080
+    canonical_number: 080
+    from: /sources/080-사고-연쇄-프롬프팅과-추론-행동-유도/commentary/
+    to: /sources/080/commentary/
+  - kind: source
+    target_id: source.081
+    canonical_number: 081
+    from: /sources/081-chatgpt-연구-미리보기와-대화형-llm-배포/
+    to: /sources/081/
+  - kind: translation
+    target_id: source.081
+    canonical_number: 081
+    from: /sources/081-chatgpt-연구-미리보기와-대화형-llm-배포/translation/
+    to: /sources/081/translation/
+  - kind: commentary
+    target_id: source.081
+    canonical_number: 081
+    from: /sources/081-chatgpt-연구-미리보기와-대화형-llm-배포/commentary/
+    to: /sources/081/commentary/
+  - kind: source
+    target_id: source.082
+    canonical_number: 082
+    from: /sources/082-bloom과-공개-접근-다국어-llm/
+    to: /sources/082/
+  - kind: translation
+    target_id: source.082
+    canonical_number: 082
+    from: /sources/082-bloom과-공개-접근-다국어-llm/translation/
+    to: /sources/082/translation/
+  - kind: commentary
+    target_id: source.082
+    canonical_number: 082
+    from: /sources/082-bloom과-공개-접근-다국어-llm/commentary/
+    to: /sources/082/commentary/
+  - kind: source
+    target_id: source.083
+    canonical_number: 083
+    from: /sources/083-palm과-pathways-기반-대규모-언어-모델-확장/
+    to: /sources/083/
+  - kind: translation
+    target_id: source.083
+    canonical_number: 083
+    from: /sources/083-palm과-pathways-기반-대규모-언어-모델-확장/translation/
+    to: /sources/083/translation/
+  - kind: commentary
+    target_id: source.083
+    canonical_number: 083
+    from: /sources/083-palm과-pathways-기반-대규모-언어-모델-확장/commentary/
+    to: /sources/083/commentary/
+  - kind: source
+    target_id: source.084
+    canonical_number: 084
+    from: /sources/084-flamingo와-게이트-교차-어텐션-기반-퓨샷-시각-언어-학습/
+    to: /sources/084/
+  - kind: translation
+    target_id: source.084
+    canonical_number: 084
+    from: /sources/084-flamingo와-게이트-교차-어텐션-기반-퓨샷-시각-언어-학습/translation/
+    to: /sources/084/translation/
+  - kind: commentary
+    target_id: source.084
+    canonical_number: 084
+    from: /sources/084-flamingo와-게이트-교차-어텐션-기반-퓨샷-시각-언어-학습/commentary/
+    to: /sources/084/commentary/
+  - kind: source
+    target_id: source.085
+    canonical_number: 085
+    from: /sources/085-dall-e-2와-clip-잠재-표현-기반-계층적-확산-생성/
+    to: /sources/085/
+  - kind: translation
+    target_id: source.085
+    canonical_number: 085
+    from: /sources/085-dall-e-2와-clip-잠재-표현-기반-계층적-확산-생성/translation/
+    to: /sources/085/translation/
+  - kind: commentary
+    target_id: source.085
+    canonical_number: 085
+    from: /sources/085-dall-e-2와-clip-잠재-표현-기반-계층적-확산-생성/commentary/
+    to: /sources/085/commentary/
+  - kind: source
+    target_id: source.086
+    canonical_number: 086
+    from: /sources/086-잠재-확산-모델과-stable-diffusion-v1-공개/
+    to: /sources/086/
+  - kind: translation
+    target_id: source.086
+    canonical_number: 086
+    from: /sources/086-잠재-확산-모델과-stable-diffusion-v1-공개/translation/
+    to: /sources/086/translation/
+  - kind: commentary
+    target_id: source.086
+    canonical_number: 086
+    from: /sources/086-잠재-확산-모델과-stable-diffusion-v1-공개/commentary/
+    to: /sources/086/commentary/
+  - kind: source
+    target_id: source.087
+    canonical_number: 087
+    from: /sources/087-whisper와-대규모-약한-감독-음성-인식/
+    to: /sources/087/
+  - kind: translation
+    target_id: source.087
+    canonical_number: 087
+    from: /sources/087-whisper와-대규모-약한-감독-음성-인식/translation/
+    to: /sources/087/translation/
+  - kind: commentary
+    target_id: source.087
+    canonical_number: 087
+    from: /sources/087-whisper와-대규모-약한-감독-음성-인식/commentary/
+    to: /sources/087/commentary/
+  - kind: source
+    target_id: source.088
+    canonical_number: 088
+    from: /sources/088-flashattention과-io-인지형-정확-어텐션/
+    to: /sources/088/
+  - kind: translation
+    target_id: source.088
+    canonical_number: 088
+    from: /sources/088-flashattention과-io-인지형-정확-어텐션/translation/
+    to: /sources/088/translation/
+  - kind: commentary
+    target_id: source.088
+    canonical_number: 088
+    from: /sources/088-flashattention과-io-인지형-정확-어텐션/commentary/
+    to: /sources/088/commentary/
+  - kind: source
+    target_id: source.089
+    canonical_number: 089
+    from: /sources/089-llama-1과-제한적-공개-가중치-연구-배포/
+    to: /sources/089/
+  - kind: translation
+    target_id: source.089
+    canonical_number: 089
+    from: /sources/089-llama-1과-제한적-공개-가중치-연구-배포/translation/
+    to: /sources/089/translation/
+  - kind: commentary
+    target_id: source.089
+    canonical_number: 089
+    from: /sources/089-llama-1과-제한적-공개-가중치-연구-배포/commentary/
+    to: /sources/089/commentary/
+  - kind: source
+    target_id: source.090
+    canonical_number: 090
+    from: /sources/090-공개-가중치-llm-파동과-서로-다른-공개-범위/
+    to: /sources/090/
+  - kind: translation
+    target_id: source.090
+    canonical_number: 090
+    from: /sources/090-공개-가중치-llm-파동과-서로-다른-공개-범위/translation/
+    to: /sources/090/translation/
+  - kind: commentary
+    target_id: source.090
+    canonical_number: 090
+    from: /sources/090-공개-가중치-llm-파동과-서로-다른-공개-범위/commentary/
+    to: /sources/090/commentary/
+  - kind: source
+    target_id: source.091
+    canonical_number: 091
+    from: /sources/091-qlora와-4비트-양자화-미세조정/
+    to: /sources/091/
+  - kind: translation
+    target_id: source.091
+    canonical_number: 091
+    from: /sources/091-qlora와-4비트-양자화-미세조정/translation/
+    to: /sources/091/translation/
+  - kind: commentary
+    target_id: source.091
+    canonical_number: 091
+    from: /sources/091-qlora와-4비트-양자화-미세조정/commentary/
+    to: /sources/091/commentary/
+  - kind: source
+    target_id: source.092
+    canonical_number: 092
+    from: /sources/092-함수-호출과-도구-사용의-모델-실행-경계/
+    to: /sources/092/
+  - kind: translation
+    target_id: source.092
+    canonical_number: 092
+    from: /sources/092-함수-호출과-도구-사용의-모델-실행-경계/translation/
+    to: /sources/092/translation/
+  - kind: commentary
+    target_id: source.092
+    canonical_number: 092
+    from: /sources/092-함수-호출과-도구-사용의-모델-실행-경계/commentary/
+    to: /sources/092/commentary/
+  - kind: source
+    target_id: source.093
+    canonical_number: 093
+    from: /sources/093-멀티모달-llm과-시각-언어-연결-방식의-분화/
+    to: /sources/093/
+  - kind: translation
+    target_id: source.093
+    canonical_number: 093
+    from: /sources/093-멀티모달-llm과-시각-언어-연결-방식의-분화/translation/
+    to: /sources/093/translation/
+  - kind: commentary
+    target_id: source.093
+    canonical_number: 093
+    from: /sources/093-멀티모달-llm과-시각-언어-연결-방식의-분화/commentary/
+    to: /sources/093/commentary/
+  - kind: source
+    target_id: source.094
+    canonical_number: 094
+    from: /sources/094-헌법적-ai와-자기비평-ai-피드백-정렬/
+    to: /sources/094/
+  - kind: translation
+    target_id: source.094
+    canonical_number: 094
+    from: /sources/094-헌법적-ai와-자기비평-ai-피드백-정렬/translation/
+    to: /sources/094/translation/
+  - kind: commentary
+    target_id: source.094
+    canonical_number: 094
+    from: /sources/094-헌법적-ai와-자기비평-ai-피드백-정렬/commentary/
+    to: /sources/094/commentary/
+  - kind: source
+    target_id: source.095
+    canonical_number: 095
+    from: /sources/095-big-bench와-mmlu의-평가-범위-집계-경계/
+    to: /sources/095/
+  - kind: translation
+    target_id: source.095
+    canonical_number: 095
+    from: /sources/095-big-bench와-mmlu의-평가-범위-집계-경계/translation/
+    to: /sources/095/translation/
+  - kind: commentary
+    target_id: source.095
+    canonical_number: 095
+    from: /sources/095-big-bench와-mmlu의-평가-범위-집계-경계/commentary/
+    to: /sources/095/commentary/
+  - kind: source
+    target_id: source.096
+    canonical_number: 096
+    from: /sources/096-gpt-4의-멀티모달-공개-시험-성능-안전-경계/
+    to: /sources/096/
+  - kind: translation
+    target_id: source.096
+    canonical_number: 096
+    from: /sources/096-gpt-4의-멀티모달-공개-시험-성능-안전-경계/translation/
+    to: /sources/096/translation/
+  - kind: commentary
+    target_id: source.096
+    canonical_number: 096
+    from: /sources/096-gpt-4의-멀티모달-공개-시험-성능-안전-경계/commentary/
+    to: /sources/096/commentary/
+  - kind: source
+    target_id: source.097
+    canonical_number: 097
+    from: /sources/097-mixtral의-생산-배포-효율-주장과-증거-경계/
+    to: /sources/097/
+  - kind: translation
+    target_id: source.097
+    canonical_number: 097
+    from: /sources/097-mixtral의-생산-배포-효율-주장과-증거-경계/translation/
+    to: /sources/097/translation/
+  - kind: commentary
+    target_id: source.097
+    canonical_number: 097
+    from: /sources/097-mixtral의-생산-배포-효율-주장과-증거-경계/commentary/
+    to: /sources/097/commentary/
+  - kind: source
+    target_id: source.098
+    canonical_number: 098
+    from: /sources/098-백만-토큰-문맥-모델의-명목-길이와-유효-활용-경계/
+    to: /sources/098/
+  - kind: translation
+    target_id: source.098
+    canonical_number: 098
+    from: /sources/098-백만-토큰-문맥-모델의-명목-길이와-유효-활용-경계/translation/
+    to: /sources/098/translation/
+  - kind: commentary
+    target_id: source.098
+    canonical_number: 098
+    from: /sources/098-백만-토큰-문맥-모델의-명목-길이와-유효-활용-경계/commentary/
+    to: /sources/098/commentary/
+  - kind: source
+    target_id: source.099
+    canonical_number: 099
+    from: /sources/099-구조화-출력의-스키마-준수와-의미-정확성-경계/
+    to: /sources/099/
+  - kind: translation
+    target_id: source.099
+    canonical_number: 099
+    from: /sources/099-구조화-출력의-스키마-준수와-의미-정확성-경계/translation/
+    to: /sources/099/translation/
+  - kind: commentary
+    target_id: source.099
+    canonical_number: 099
+    from: /sources/099-구조화-출력의-스키마-준수와-의미-정확성-경계/commentary/
+    to: /sources/099/commentary/
+  - kind: source
+    target_id: source.100
+    canonical_number: '100'
+    from: /sources/100-희소-밀집-검색의-결합과-다단계-순위화/
+    to: /sources/100/
+  - kind: translation
+    target_id: source.100
+    canonical_number: '100'
+    from: /sources/100-희소-밀집-검색의-결합과-다단계-순위화/translation/
+    to: /sources/100/translation/
+  - kind: commentary
+    target_id: source.100
+    canonical_number: '100'
+    from: /sources/100-희소-밀집-검색의-결합과-다단계-순위화/commentary/
+    to: /sources/100/commentary/
+  - kind: source
+    target_id: source.101
+    canonical_number: '101'
+    from: /sources/101-lora-이후-peft-변형의-설계-축과-연표/
+    to: /sources/101/
+  - kind: translation
+    target_id: source.101
+    canonical_number: '101'
+    from: /sources/101-lora-이후-peft-변형의-설계-축과-연표/translation/
+    to: /sources/101/translation/
+  - kind: commentary
+    target_id: source.101
+    canonical_number: '101'
+    from: /sources/101-lora-이후-peft-변형의-설계-축과-연표/commentary/
+    to: /sources/101/commentary/
+  - kind: source
+    target_id: source.102
+    canonical_number: '102'
+    from: /sources/102-지속-사전-학습의-연표와-지식-갱신-경계/
+    to: /sources/102/
+  - kind: translation
+    target_id: source.102
+    canonical_number: '102'
+    from: /sources/102-지속-사전-학습의-연표와-지식-갱신-경계/translation/
+    to: /sources/102/translation/
+  - kind: commentary
+    target_id: source.102
+    canonical_number: '102'
+    from: /sources/102-지속-사전-학습의-연표와-지식-갱신-경계/commentary/
+    to: /sources/102/commentary/
+  - kind: source
+    target_id: source.103
+    canonical_number: '103'
+    from: /sources/103-glam에서-mixtral까지의-희소-moe-확장/
+    to: /sources/103/
+  - kind: translation
+    target_id: source.103
+    canonical_number: '103'
+    from: /sources/103-glam에서-mixtral까지의-희소-moe-확장/translation/
+    to: /sources/103/translation/
+  - kind: commentary
+    target_id: source.103
+    canonical_number: '103'
+    from: /sources/103-glam에서-mixtral까지의-희소-moe-확장/commentary/
+    to: /sources/103/commentary/
+  - kind: source
+    target_id: source.104
+    canonical_number: '104'
+    from: /sources/104-llm-에이전트의-추론-행동-루프와-자율성-경계/
+    to: /sources/104/
+  - kind: translation
+    target_id: source.104
+    canonical_number: '104'
+    from: /sources/104-llm-에이전트의-추론-행동-루프와-자율성-경계/translation/
+    to: /sources/104/translation/
+  - kind: commentary
+    target_id: source.104
+    canonical_number: '104'
+    from: /sources/104-llm-에이전트의-추론-행동-루프와-자율성-경계/commentary/
+    to: /sources/104/commentary/
+  - kind: source
+    target_id: source.105
+    canonical_number: '105'
+    from: /sources/105-통합-멀티모달-아키텍처의-공유-범위와-입출력-경계/
+    to: /sources/105/
+  - kind: translation
+    target_id: source.105
+    canonical_number: '105'
+    from: /sources/105-통합-멀티모달-아키텍처의-공유-범위와-입출력-경계/translation/
+    to: /sources/105/translation/
+  - kind: commentary
+    target_id: source.105
+    canonical_number: '105'
+    from: /sources/105-통합-멀티모달-아키텍처의-공유-범위와-입출력-경계/commentary/
+    to: /sources/105/commentary/
+  - kind: source
+    target_id: source.106
+    canonical_number: '106'
+    from: /sources/106-deepseek-r1의-강화학습-파이프라인과-증류-경계/
+    to: /sources/106/
+  - kind: translation
+    target_id: source.106
+    canonical_number: '106'
+    from: /sources/106-deepseek-r1의-강화학습-파이프라인과-증류-경계/translation/
+    to: /sources/106/translation/
+  - kind: commentary
+    target_id: source.106
+    canonical_number: '106'
+    from: /sources/106-deepseek-r1의-강화학습-파이프라인과-증류-경계/commentary/
+    to: /sources/106/commentary/
+  - kind: source
+    target_id: source.107
+    canonical_number: '107'
+    from: /sources/107-gpt-4o의-단일-신경망-공표와-실시간-멀티모달-배포-경계/
+    to: /sources/107/
+  - kind: translation
+    target_id: source.107
+    canonical_number: '107'
+    from: /sources/107-gpt-4o의-단일-신경망-공표와-실시간-멀티모달-배포-경계/translation/
+    to: /sources/107/translation/
+  - kind: commentary
+    target_id: source.107
+    canonical_number: '107'
+    from: /sources/107-gpt-4o의-단일-신경망-공표와-실시간-멀티모달-배포-경계/commentary/
+    to: /sources/107/commentary/
+  - kind: source
+    target_id: source.108
+    canonical_number: '108'
+    from: /sources/108-v-jepa-2의-잠재-예측과-로봇-계획-실험-경계/
+    to: /sources/108/
+  - kind: translation
+    target_id: source.108
+    canonical_number: '108'
+    from: /sources/108-v-jepa-2의-잠재-예측과-로봇-계획-실험-경계/translation/
+    to: /sources/108/translation/
+  - kind: commentary
+    target_id: source.108
+    canonical_number: '108'
+    from: /sources/108-v-jepa-2의-잠재-예측과-로봇-계획-실험-경계/commentary/
+    to: /sources/108/commentary/
+  - kind: source
+    target_id: source.109
+    canonical_number: '109'
+    from: /sources/109-ai-공동-과학자의-가설-생성과-자율-연구-경계/
+    to: /sources/109/
+  - kind: translation
+    target_id: source.109
+    canonical_number: '109'
+    from: /sources/109-ai-공동-과학자의-가설-생성과-자율-연구-경계/translation/
+    to: /sources/109/translation/
+  - kind: commentary
+    target_id: source.109
+    canonical_number: '109'
+    from: /sources/109-ai-공동-과학자의-가설-생성과-자율-연구-경계/commentary/
+    to: /sources/109/commentary/
+  - kind: source
+    target_id: source.110
+    canonical_number: '110'
+    from: /sources/110-저자원-언어-llm의-성능-격차와-전이-평가-경계/
+    to: /sources/110/
+  - kind: translation
+    target_id: source.110
+    canonical_number: '110'
+    from: /sources/110-저자원-언어-llm의-성능-격차와-전이-평가-경계/translation/
+    to: /sources/110/translation/
+  - kind: commentary
+    target_id: source.110
+    canonical_number: '110'
+    from: /sources/110-저자원-언어-llm의-성능-격차와-전이-평가-경계/commentary/
+    to: /sources/110/commentary/
+  - kind: source
+    target_id: source.048
+    canonical_number: 048
+    legacy_prefix: '047'
+    from: /sources/047-잔차-학습과-매우-깊은-신경망/
+    to: /sources/048/
+  - kind: translation
+    target_id: source.048
+    canonical_number: 048
+    legacy_prefix: '047'
+    from: /sources/047-잔차-학습과-매우-깊은-신경망/translation/
+    to: /sources/048/translation/
+  - kind: commentary
+    target_id: source.048
+    canonical_number: 048
+    legacy_prefix: '047'
+    from: /sources/047-잔차-학습과-매우-깊은-신경망/commentary/
+    to: /sources/048/commentary/
+  - kind: source
+    target_id: source.049
+    canonical_number: 049
+    legacy_prefix: 048
+    from: /sources/048-층-정규화와-시퀀스-모델의-배치-독립성/
+    to: /sources/049/
+  - kind: translation
+    target_id: source.049
+    canonical_number: 049
+    legacy_prefix: 048
+    from: /sources/048-층-정규화와-시퀀스-모델의-배치-독립성/translation/
+    to: /sources/049/translation/
+  - kind: commentary
+    target_id: source.049
+    canonical_number: 049
+    legacy_prefix: 048
+    from: /sources/048-층-정규화와-시퀀스-모델의-배치-독립성/commentary/
+    to: /sources/049/commentary/
+  - kind: source
+    target_id: source.050
+    canonical_number: '050'
+    legacy_prefix: 049
+    from: /sources/049-fasttext와-서브워드-표현의-두-경로/
+    to: /sources/050/
+  - kind: translation
+    target_id: source.050
+    canonical_number: '050'
+    legacy_prefix: 049
+    from: /sources/049-fasttext와-서브워드-표현의-두-경로/translation/
+    to: /sources/050/translation/
+  - kind: commentary
+    target_id: source.050
+    canonical_number: '050'
+    legacy_prefix: 049
+    from: /sources/049-fasttext와-서브워드-표현의-두-경로/commentary/
+    to: /sources/050/commentary/
+  - kind: source
+    target_id: source.051
+    canonical_number: '051'
+    legacy_prefix: '050'
+    from: /sources/050-squad와-추출형-독해-평가/
+    to: /sources/051/
+  - kind: translation
+    target_id: source.051
+    canonical_number: '051'
+    legacy_prefix: '050'
+    from: /sources/050-squad와-추출형-독해-평가/translation/
+    to: /sources/051/translation/
+  - kind: commentary
+    target_id: source.051
+    canonical_number: '051'
+    legacy_prefix: '050'
+    from: /sources/050-squad와-추출형-독해-평가/commentary/
+    to: /sources/051/commentary/
+  - kind: source
+    target_id: source.052
+    canonical_number: '052'
+    legacy_prefix: '051'
+    from: /sources/051-신경-정보-검색과-의미-대응/
+    to: /sources/052/
+  - kind: translation
+    target_id: source.052
+    canonical_number: '052'
+    legacy_prefix: '051'
+    from: /sources/051-신경-정보-검색과-의미-대응/translation/
+    to: /sources/052/translation/
+  - kind: commentary
+    target_id: source.052
+    canonical_number: '052'
+    legacy_prefix: '051'
+    from: /sources/051-신경-정보-검색과-의미-대응/commentary/
+    to: /sources/052/commentary/
+  - kind: source
+    target_id: source.053
+    canonical_number: '053'
+    legacy_prefix: '052'
+    from: /sources/052-gnmt와-제품-규모-신경-번역/
+    to: /sources/053/
+  - kind: translation
+    target_id: source.053
+    canonical_number: '053'
+    legacy_prefix: '052'
+    from: /sources/052-gnmt와-제품-규모-신경-번역/translation/
+    to: /sources/053/translation/
+  - kind: commentary
+    target_id: source.053
+    canonical_number: '053'
+    legacy_prefix: '052'
+    from: /sources/052-gnmt와-제품-규모-신경-번역/commentary/
+    to: /sources/053/commentary/
+  - kind: source
+    target_id: source.054
+    canonical_number: '054'
+    legacy_prefix: '053'
+    from: /sources/053-wavenet과-표본-단위-신경-오디오-생성/
+    to: /sources/054/
+  - kind: translation
+    target_id: source.054
+    canonical_number: '054'
+    legacy_prefix: '053'
+    from: /sources/053-wavenet과-표본-단위-신경-오디오-생성/translation/
+    to: /sources/054/translation/
+  - kind: commentary
+    target_id: source.054
+    canonical_number: '054'
+    legacy_prefix: '053'
+    from: /sources/053-wavenet과-표본-단위-신경-오디오-생성/commentary/
+    to: /sources/054/commentary/
+  - kind: source
+    target_id: source.055
+    canonical_number: '055'
+    legacy_prefix: '054'
+    from: /sources/054-transformer와-자기어텐션-기반-시퀀스-모델링/
+    to: /sources/055/
+  - kind: translation
+    target_id: source.055
+    canonical_number: '055'
+    legacy_prefix: '054'
+    from: /sources/054-transformer와-자기어텐션-기반-시퀀스-모델링/translation/
+    to: /sources/055/translation/
+  - kind: commentary
+    target_id: source.055
+    canonical_number: '055'
+    legacy_prefix: '054'
+    from: /sources/054-transformer와-자기어텐션-기반-시퀀스-모델링/commentary/
+    to: /sources/055/commentary/
+  - kind: source
+    target_id: source.056
+    canonical_number: '056'
+    legacy_prefix: '055'
+    from: /sources/055-rlhf-토대와-인간-선호-기반-보상-학습/
+    to: /sources/056/
+  - kind: translation
+    target_id: source.056
+    canonical_number: '056'
+    legacy_prefix: '055'
+    from: /sources/055-rlhf-토대와-인간-선호-기반-보상-학습/translation/
+    to: /sources/056/translation/
+  - kind: commentary
+    target_id: source.056
+    canonical_number: '056'
+    legacy_prefix: '055'
+    from: /sources/055-rlhf-토대와-인간-선호-기반-보상-학습/commentary/
+    to: /sources/056/commentary/
+  - kind: source
+    target_id: source.057
+    canonical_number: '057'
+    legacy_prefix: '056'
+    from: /sources/056-elmo와-ulmfit의-두-전이-학습-경로/
+    to: /sources/057/
+  - kind: translation
+    target_id: source.057
+    canonical_number: '057'
+    legacy_prefix: '056'
+    from: /sources/056-elmo와-ulmfit의-두-전이-학습-경로/translation/
+    to: /sources/057/translation/
+  - kind: commentary
+    target_id: source.057
+    canonical_number: '057'
+    legacy_prefix: '056'
+    from: /sources/056-elmo와-ulmfit의-두-전이-학습-경로/commentary/
+    to: /sources/057/commentary/
+  - kind: source
+    target_id: source.058
+    canonical_number: 058
+    legacy_prefix: '057'
+    from: /sources/057-bert의-마스크드-양방향-사전-학습/
+    to: /sources/058/
+  - kind: translation
+    target_id: source.058
+    canonical_number: 058
+    legacy_prefix: '057'
+    from: /sources/057-bert의-마스크드-양방향-사전-학습/translation/
+    to: /sources/058/translation/
+  - kind: commentary
+    target_id: source.058
+    canonical_number: 058
+    legacy_prefix: '057'
+    from: /sources/057-bert의-마스크드-양방향-사전-학습/commentary/
+    to: /sources/058/commentary/
+  - kind: source
+    target_id: source.059
+    canonical_number: 059
+    legacy_prefix: 058
+    from: /sources/058-gpt-1과-gpt-2의-전이-방식-변화/
+    to: /sources/059/
+  - kind: translation
+    target_id: source.059
+    canonical_number: 059
+    legacy_prefix: 058
+    from: /sources/058-gpt-1과-gpt-2의-전이-방식-변화/translation/
+    to: /sources/059/translation/
+  - kind: commentary
+    target_id: source.059
+    canonical_number: 059
+    legacy_prefix: 058
+    from: /sources/058-gpt-1과-gpt-2의-전이-방식-변화/commentary/
+    to: /sources/059/commentary/
+  - kind: source
+    target_id: source.060
+    canonical_number: '060'
+    legacy_prefix: 059
+    from: /sources/059-glue와-superglue의-집계-평가/
+    to: /sources/060/
+  - kind: translation
+    target_id: source.060
+    canonical_number: '060'
+    legacy_prefix: 059
+    from: /sources/059-glue와-superglue의-집계-평가/translation/
+    to: /sources/060/translation/
+  - kind: commentary
+    target_id: source.060
+    canonical_number: '060'
+    legacy_prefix: 059
+    from: /sources/059-glue와-superglue의-집계-평가/commentary/
+    to: /sources/060/commentary/
+  - kind: source
+    target_id: source.061
+    canonical_number: '061'
+    legacy_prefix: '060'
+    from: /sources/060-xlnet-roberta-albert의-bert-개선-경로/
+    to: /sources/061/
+  - kind: translation
+    target_id: source.061
+    canonical_number: '061'
+    legacy_prefix: '060'
+    from: /sources/060-xlnet-roberta-albert의-bert-개선-경로/translation/
+    to: /sources/061/translation/
+  - kind: commentary
+    target_id: source.061
+    canonical_number: '061'
+    legacy_prefix: '060'
+    from: /sources/060-xlnet-roberta-albert의-bert-개선-경로/commentary/
+    to: /sources/061/commentary/
+  - kind: source
+    target_id: source.062
+    canonical_number: '062'
+    legacy_prefix: '061'
+    from: /sources/061-xlm과-교차-언어-사전-학습/
+    to: /sources/062/
+  - kind: translation
+    target_id: source.062
+    canonical_number: '062'
+    legacy_prefix: '061'
+    from: /sources/061-xlm과-교차-언어-사전-학습/translation/
+    to: /sources/062/translation/
+  - kind: commentary
+    target_id: source.062
+    canonical_number: '062'
+    legacy_prefix: '061'
+    from: /sources/061-xlm과-교차-언어-사전-학습/commentary/
+    to: /sources/062/commentary/
+  - kind: source
+    target_id: source.063
+    canonical_number: '063'
+    legacy_prefix: '062'
+    from: /sources/062-t5와-text-to-text-통합-프레임워크/
+    to: /sources/063/
+  - kind: translation
+    target_id: source.063
+    canonical_number: '063'
+    legacy_prefix: '062'
+    from: /sources/062-t5와-text-to-text-통합-프레임워크/translation/
+    to: /sources/063/translation/
+  - kind: commentary
+    target_id: source.063
+    canonical_number: '063'
+    legacy_prefix: '062'
+    from: /sources/062-t5와-text-to-text-통합-프레임워크/commentary/
+    to: /sources/063/commentary/
+  - kind: source
+    target_id: source.064
+    canonical_number: '064'
+    legacy_prefix: '063'
+    from: /sources/063-transformer-xl과-세그먼트-수준-재귀/
+    to: /sources/064/
+  - kind: translation
+    target_id: source.064
+    canonical_number: '064'
+    legacy_prefix: '063'
+    from: /sources/063-transformer-xl과-세그먼트-수준-재귀/translation/
+    to: /sources/064/translation/
+  - kind: commentary
+    target_id: source.064
+    canonical_number: '064'
+    legacy_prefix: '063'
+    from: /sources/063-transformer-xl과-세그먼트-수준-재귀/commentary/
+    to: /sources/064/commentary/
+  - kind: source
+    target_id: source.065
+    canonical_number: '065'
+    legacy_prefix: '064'
+    from: /sources/064-bert-기반-passage-재순위화/
+    to: /sources/065/
+  - kind: translation
+    target_id: source.065
+    canonical_number: '065'
+    legacy_prefix: '064'
+    from: /sources/064-bert-기반-passage-재순위화/translation/
+    to: /sources/065/translation/
+  - kind: commentary
+    target_id: source.065
+    canonical_number: '065'
+    legacy_prefix: '064'
+    from: /sources/064-bert-기반-passage-재순위화/commentary/
+    to: /sources/065/commentary/
+  - kind: source
+    target_id: source.066
+    canonical_number: '066'
+    legacy_prefix: '065'
+    from: /sources/065-신경-언어-모델의-스케일링-법칙/
+    to: /sources/066/
+  - kind: translation
+    target_id: source.066
+    canonical_number: '066'
+    legacy_prefix: '065'
+    from: /sources/065-신경-언어-모델의-스케일링-법칙/translation/
+    to: /sources/066/translation/
+  - kind: commentary
+    target_id: source.066
+    canonical_number: '066'
+    legacy_prefix: '065'
+    from: /sources/065-신경-언어-모델의-스케일링-법칙/commentary/
+    to: /sources/066/commentary/
+  - kind: source
+    target_id: source.067
+    canonical_number: '067'
+    legacy_prefix: '066'
+    from: /sources/066-gpt-3와-문맥-내-학습/
+    to: /sources/067/
+  - kind: translation
+    target_id: source.067
+    canonical_number: '067'
+    legacy_prefix: '066'
+    from: /sources/066-gpt-3와-문맥-내-학습/translation/
+    to: /sources/067/translation/
+  - kind: commentary
+    target_id: source.067
+    canonical_number: '067'
+    legacy_prefix: '066'
+    from: /sources/066-gpt-3와-문맥-내-학습/commentary/
+    to: /sources/067/commentary/
+  - kind: source
+    target_id: source.068
+    canonical_number: 068
+    legacy_prefix: '067'
+    from: /sources/067-dpr과-검색-증강-생성/
+    to: /sources/068/
+  - kind: translation
+    target_id: source.068
+    canonical_number: 068
+    legacy_prefix: '067'
+    from: /sources/067-dpr과-검색-증강-생성/translation/
+    to: /sources/068/translation/
+  - kind: commentary
+    target_id: source.068
+    canonical_number: 068
+    legacy_prefix: '067'
+    from: /sources/067-dpr과-검색-증강-생성/commentary/
+    to: /sources/068/commentary/
+  - kind: source
+    target_id: source.069
+    canonical_number: 069
+    legacy_prefix: 068
+    from: /sources/068-전문가-혼합과-희소-활성-스케일링/
+    to: /sources/069/
+  - kind: translation
+    target_id: source.069
+    canonical_number: 069
+    legacy_prefix: 068
+    from: /sources/068-전문가-혼합과-희소-활성-스케일링/translation/
+    to: /sources/069/translation/
+  - kind: commentary
+    target_id: source.069
+    canonical_number: 069
+    legacy_prefix: 068
+    from: /sources/068-전문가-혼합과-희소-활성-스케일링/commentary/
+    to: /sources/069/commentary/
+  - kind: source
+    target_id: source.070
+    canonical_number: '070'
+    legacy_prefix: 069
+    from: /sources/069-clip과-대조적-언어-이미지-사전-학습/
+    to: /sources/070/
+  - kind: translation
+    target_id: source.070
+    canonical_number: '070'
+    legacy_prefix: 069
+    from: /sources/069-clip과-대조적-언어-이미지-사전-학습/translation/
+    to: /sources/070/translation/
+  - kind: commentary
+    target_id: source.070
+    canonical_number: '070'
+    legacy_prefix: 069
+    from: /sources/069-clip과-대조적-언어-이미지-사전-학습/commentary/
+    to: /sources/070/commentary/
+  - kind: source
+    target_id: source.071
+    canonical_number: '071'
+    legacy_prefix: '070'
+    from: /sources/070-codex와-humaneval-기반-코드-생성-평가/
+    to: /sources/071/
+  - kind: translation
+    target_id: source.071
+    canonical_number: '071'
+    legacy_prefix: '070'
+    from: /sources/070-codex와-humaneval-기반-코드-생성-평가/translation/
+    to: /sources/071/translation/
+  - kind: commentary
+    target_id: source.071
+    canonical_number: '071'
+    legacy_prefix: '070'
+    from: /sources/070-codex와-humaneval-기반-코드-생성-평가/commentary/
+    to: /sources/071/commentary/
+  - kind: source
+    target_id: source.072
+    canonical_number: '072'
+    legacy_prefix: '071'
+    from: /sources/071-지시-미세조정과-flan의-제로샷-일반화/
+    to: /sources/072/
+  - kind: translation
+    target_id: source.072
+    canonical_number: '072'
+    legacy_prefix: '071'
+    from: /sources/071-지시-미세조정과-flan의-제로샷-일반화/translation/
+    to: /sources/072/translation/
+  - kind: commentary
+    target_id: source.072
+    canonical_number: '072'
+    legacy_prefix: '071'
+    from: /sources/071-지시-미세조정과-flan의-제로샷-일반화/commentary/
+    to: /sources/072/commentary/
+  - kind: source
+    target_id: source.073
+    canonical_number: '073'
+    legacy_prefix: '072'
+    from: /sources/072-colbert와-다중-벡터-검색/
+    to: /sources/073/
+  - kind: translation
+    target_id: source.073
+    canonical_number: '073'
+    legacy_prefix: '072'
+    from: /sources/072-colbert와-다중-벡터-검색/translation/
+    to: /sources/073/translation/
+  - kind: commentary
+    target_id: source.073
+    canonical_number: '073'
+    legacy_prefix: '072'
+    from: /sources/072-colbert와-다중-벡터-검색/commentary/
+    to: /sources/073/commentary/
+  - kind: source
+    target_id: source.074
+    canonical_number: '074'
+    legacy_prefix: '073'
+    from: /sources/073-the-pile과-대규모-언어-모델-학습-말뭉치/
+    to: /sources/074/
+  - kind: translation
+    target_id: source.074
+    canonical_number: '074'
+    legacy_prefix: '073'
+    from: /sources/073-the-pile과-대규모-언어-모델-학습-말뭉치/translation/
+    to: /sources/074/translation/
+  - kind: commentary
+    target_id: source.074
+    canonical_number: '074'
+    legacy_prefix: '073'
+    from: /sources/073-the-pile과-대규모-언어-모델-학습-말뭉치/commentary/
+    to: /sources/074/commentary/
+  - kind: source
+    target_id: source.075
+    canonical_number: '075'
+    legacy_prefix: '074'
+    from: /sources/074-dall-e와-이산-이미지-토큰-생성/
+    to: /sources/075/
+  - kind: translation
+    target_id: source.075
+    canonical_number: '075'
+    legacy_prefix: '074'
+    from: /sources/074-dall-e와-이산-이미지-토큰-생성/translation/
+    to: /sources/075/translation/
+  - kind: commentary
+    target_id: source.075
+    canonical_number: '075'
+    legacy_prefix: '074'
+    from: /sources/074-dall-e와-이산-이미지-토큰-생성/commentary/
+    to: /sources/075/commentary/
+  - kind: source
+    target_id: source.076
+    canonical_number: '076'
+    legacy_prefix: '075'
+    from: /sources/075-파운데이션-모델-보고서와-ai-생태계/
+    to: /sources/076/
+  - kind: translation
+    target_id: source.076
+    canonical_number: '076'
+    legacy_prefix: '075'
+    from: /sources/075-파운데이션-모델-보고서와-ai-생태계/translation/
+    to: /sources/076/translation/
+  - kind: commentary
+    target_id: source.076
+    canonical_number: '076'
+    legacy_prefix: '075'
+    from: /sources/075-파운데이션-모델-보고서와-ai-생태계/commentary/
+    to: /sources/076/commentary/
+  - kind: source
+    target_id: source.077
+    canonical_number: '077'
+    legacy_prefix: '076'
+    from: /sources/076-instructgpt와-인간-선호-정렬/
+    to: /sources/077/
+  - kind: translation
+    target_id: source.077
+    canonical_number: '077'
+    legacy_prefix: '076'
+    from: /sources/076-instructgpt와-인간-선호-정렬/translation/
+    to: /sources/077/translation/
+  - kind: commentary
+    target_id: source.077
+    canonical_number: '077'
+    legacy_prefix: '076'
+    from: /sources/076-instructgpt와-인간-선호-정렬/commentary/
+    to: /sources/077/commentary/
+  - kind: source
+    target_id: source.078
+    canonical_number: 078
+    legacy_prefix: '077'
+    from: /sources/077-chinchilla와-계산-최적-언어-모델-학습/
+    to: /sources/078/
+  - kind: translation
+    target_id: source.078
+    canonical_number: 078
+    legacy_prefix: '077'
+    from: /sources/077-chinchilla와-계산-최적-언어-모델-학습/translation/
+    to: /sources/078/translation/
+  - kind: commentary
+    target_id: source.078
+    canonical_number: 078
+    legacy_prefix: '077'
+    from: /sources/077-chinchilla와-계산-최적-언어-모델-학습/commentary/
+    to: /sources/078/commentary/
+  - kind: source
+    target_id: source.079
+    canonical_number: 079
+    legacy_prefix: 078
+    from: /sources/078-helm과-다차원-언어-모델-평가/
+    to: /sources/079/
+  - kind: translation
+    target_id: source.079
+    canonical_number: 079
+    legacy_prefix: 078
+    from: /sources/078-helm과-다차원-언어-모델-평가/translation/
+    to: /sources/079/translation/
+  - kind: commentary
+    target_id: source.079
+    canonical_number: 079
+    legacy_prefix: 078
+    from: /sources/078-helm과-다차원-언어-모델-평가/commentary/
+    to: /sources/079/commentary/
+  - kind: source
+    target_id: source.103
+    canonical_number: '103'
+    legacy_prefix: '102'
+    from: /sources/glam에서-mixtral까지의-희소-moe-확장/
+    to: /sources/103/
+  - kind: translation
+    target_id: source.103
+    canonical_number: '103'
+    legacy_prefix: '102'
+    from: /sources/glam에서-mixtral까지의-희소-moe-확장/translation/
+    to: /sources/103/translation/
+  - kind: commentary
+    target_id: source.103
+    canonical_number: '103'
+    legacy_prefix: '102'
+    from: /sources/glam에서-mixtral까지의-희소-moe-확장/commentary/
+    to: /sources/103/commentary/

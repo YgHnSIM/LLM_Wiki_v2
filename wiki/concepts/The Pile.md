@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.the-pile
 page_type: concept
 title: The Pile
@@ -15,11 +15,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-21'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/074_The Pile Open-Source Training Dataset for Large Language Models.ko.md'
-  - 'raw/074_The Pile Open-Source Training Dataset for Large Language Models.commentary.ko.md'
+  - raw/074_The Pile Open-Source Training Dataset for Large Language Models.ko.md
+  - raw/074_The Pile Open-Source Training Dataset for Large Language Models.commentary.ko.md
 evidence:
   - source_id: gao-et-al-2020-pile
     locator: '초록, §§1–7, Tables 1·3–5와 Appendices C–D의 구성요소·가중치·BPB benchmark·40GB 비교·deduplication·language·bias·consent'
@@ -27,22 +29,38 @@ evidence:
   - source_id: biderman-et-al-2022-pile-datasheet
     locator: '초록과 PDF pp. 1·8–17의 component provenance·211,043,181 documents·processing·배포·저작권·PII·동의 문답'
     relation: supports
-related:
-  - source.074
-  - source.063
-  - source.066
-  - source.067
-  - concept.말뭉치-기반-학습
-  - concept.언어-모델-스케일링-법칙
-  - concept.대규모-언어-모델
-  - concept.perplexity
-  - analysis.데이터-품질과-분포-다양성은-같은-축인가
+relations:
+  - target: source.063
+    kind: related
+  - target: source.066
+    kind: related
+  - target: source.067
+    kind: related
+  - target: concept.언어-모델-스케일링-법칙
+    kind: related
+  - target: concept.대규모-언어-모델
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.말뭉치-기반-학습
+    - target: concept.perplexity
+  assumed_knowledge: 없음
+  outcomes:
+    - 'The Pile의 component·epoch·effective size 장부를 읽고, deduplication·decontamination·data governance를 서로 다른 절차로 설명할 수 있다.'
+  next:
+    - target: source.074
+      reason: 074The Pile과 대규모 언어 모델 학습 말뭉치 — 원문 서사의 영향·법적 명확성·성능 과장을 1차 자료와 대조한다.
+    - target: analysis.데이터-품질과-분포-다양성은-같은-축인가
+      reason: 데이터 품질과 분포 다양성은 같은 축인가 — 필터·domain coverage·epoch weight와 평가 분포를 비교한다.
 ---
 # The Pile
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[말뭉치 기반 학습]], [[Perplexity]]<br>
+> **선수 지식:** [[concept.말뭉치-기반-학습|말뭉치 기반 학습]], [[concept.perplexity|Perplexity]]<br>
 > **읽고 나면:** The Pile의 component·epoch·effective size 장부를 읽고, deduplication·decontamination·data governance를 서로 다른 절차로 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -147,8 +165,8 @@ Gao 등은 같은 1.3B architecture와 약 40GB data 조건에서 Pile·CC-100 E
 
 ### 다음 문서
 
-- [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] — 원문 서사의 영향·법적 명확성·성능 과장을 1차 자료와 대조한다.
-- [[데이터 품질과 분포 다양성은 같은 축인가]] — 필터·domain coverage·epoch weight와 평가 분포를 비교한다.
+- [[source.074|The Pile과 대규모 언어 모델 학습 말뭉치]] — 074The Pile과 대규모 언어 모델 학습 말뭉치 — 원문 서사의 영향·법적 명확성·성능 과장을 1차 자료와 대조한다.
+- [[analysis.데이터-품질과-분포-다양성은-같은-축인가|데이터 품질과 분포 다양성은 같은 축인가]] — 필터·domain coverage·epoch weight와 평가 분포를 비교한다.
 
 ## 출처
 
@@ -159,12 +177,12 @@ Gao 등은 같은 1.3B architecture와 약 40GB data 조건에서 Pile·CC-100 E
 
 ## 관련 항목
 
-- [[074_The Pile과 대규모 언어 모델 학습 말뭉치]]
-- [[말뭉치 기반 학습]]
-- [[언어 모델 스케일링 법칙]]
-- [[대규모 언어 모델]]
-- [[Perplexity]]
-- [[063_T5와 Text-to-Text 통합 프레임워크]]
-- [[066_신경 언어 모델의 스케일링 법칙]]
-- [[067_GPT-3와 문맥 내 학습]]
-- [[데이터 품질과 분포 다양성은 같은 축인가]]
+- [[source.074|The Pile과 대규모 언어 모델 학습 말뭉치]]
+- [[analysis.데이터-품질과-분포-다양성은-같은-축인가|데이터 품질과 분포 다양성은 같은 축인가]]
+- [[concept.말뭉치-기반-학습|말뭉치 기반 학습]]
+- [[concept.perplexity|Perplexity]]
+- [[source.063|T5와 Text-to-Text 통합 프레임워크]]
+- [[source.066|신경 언어 모델의 스케일링 법칙]]
+- [[source.067|GPT-3와 문맥 내 학습]]
+- [[concept.언어-모델-스케일링-법칙|언어 모델 스케일링 법칙]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]

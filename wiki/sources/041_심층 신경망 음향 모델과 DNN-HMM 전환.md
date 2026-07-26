@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.041
 page_type: source
 title: 심층 신경망 음향 모델과 DNN-HMM 전환
@@ -15,20 +15,22 @@ tags:
   - domain/speech-processing
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.ko.md'
-  - 'raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.commentary.ko.md'
+  - raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.ko.md
+  - raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.commentary.ko.md
 evidence:
   - source_id: hinton-et-al-2012-dnn-acoustic-modeling
     locator: 'IEEE Signal Processing Magazine 29(6), pp. 82–97의 네 연구 집단 결과·DNN 음향 모델 학습법·HMM 혼합·자료별 WER 비교'
     relation: supports
   - source_id: mohamed-dahl-hinton-2012-dbn-acoustic-modeling
-    locator: 'pp. 14–22의 TIMIT 심층 믿음망 음향 모델·GMM 교체·phone error rate 비교'
+    locator: pp. 14–22의 TIMIT 심층 믿음망 음향 모델·GMM 교체·phone error rate 비교
     relation: supports
   - source_id: dahl-et-al-2012-context-dependent-dnn-hmm
-    locator: 'pp. 30–42의 senone 출력 CD-DNN-HMM 구조와 business search sentence accuracy·상대 오류 감소'
+    locator: pp. 30–42의 senone 출력 CD-DNN-HMM 구조와 business search sentence accuracy·상대 오류 감소
     relation: supports
   - source_id: seide-li-yu-2011-conversational-cd-dnn-hmm
     locator: 'Interspeech 2011, pp. 437–440의 Switchboard 학습·RT03S 평가·27.4%에서 18.5% WER로의 조건부 비교'
@@ -36,17 +38,29 @@ evidence:
   - source_id: dahl-sainath-hinton-2013-relu-dropout-lvcsr
     locator: 'ICASSP 2013, pp. 8609–8613의 LVCSR ReLU·dropout 후속 실험'
     relation: disputes
-related:
-  - concept.자동-음성-인식
-  - concept.dnn-hmm
-  - concept.단어-오류율
-  - concept.은닉-마르코프-모델
+relations:
+  - target: concept.자동-음성-인식
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.은닉-마르코프-모델
+  assumed_knowledge: 없음
+  outcomes:
+    - 'GMM-HMM에서 DNN-HMM으로 바뀐 구성과 학습 흐름을 설명하고, 2012년 성과의 평가 범위와 후대 기술을 구분할 수 있다.'
+  next:
+    - target: concept.dnn-hmm
+      reason: '다음에는 DNN-HMM에서 혼합 구조와 학습 절차를 좁혀 보고, 단어 오류율에서 자료별 성능 수치를 읽는 기준을 익힌다.'
+    - target: concept.단어-오류율
+      reason: '다음에는 DNN-HMM에서 혼합 구조와 학습 절차를 좁혀 보고, 단어 오류율에서 자료별 성능 수치를 읽는 기준을 익힌다.'
 ---
 # 심층 신경망 음향 모델과 DNN-HMM 전환
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[은닉 마르코프 모델]]<br>
+> **선수 지식:** [[concept.은닉-마르코프-모델|은닉 마르코프 모델]]<br>
 > **읽고 나면:** GMM-HMM에서 DNN-HMM으로 바뀐 구성과 학습 흐름을 설명하고, 2012년 성과의 평가 범위와 후대 기술을 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -180,8 +194,12 @@ Dahl·Sainath·Hinton이 대어휘 음성 인식에서 ReLU와 dropout을 함께
 
 다음에는 [[DNN-HMM]]에서 혼합 구조와 학습 절차를 좁혀 보고, [[단어 오류율]]에서 자료별 성능 수치를 읽는 기준을 익힌다.
 
-## 출처
+### 다음 문서
 
+- [[concept.dnn-hmm|DNN-HMM]] — 다음에는 DNN-HMM에서 혼합 구조와 학습 절차를 좁혀 보고, 단어 오류율에서 자료별 성능 수치를 읽는 기준을 익힌다.
+- [[concept.단어-오류율|단어 오류율]] — 다음에는 DNN-HMM에서 혼합 구조와 학습 절차를 좁혀 보고, 단어 오류율에서 자료별 성능 수치를 읽는 기준을 익힌다.
+
+## 출처
 - Geoffrey Hinton 외, [Deep Neural Networks for Acoustic Modeling in Speech Recognition](https://www.cs.toronto.edu/~hinton/absps/DNN-2012-proof.pdf), *IEEE Signal Processing Magazine* 29(6), 2012, pp. 82–97.
 - Abdel-rahman Mohamed·George E. Dahl·Geoffrey Hinton, [Acoustic Modeling Using Deep Belief Networks](https://doi.org/10.1109/TASL.2011.2109382), 2012, pp. 14–22.
 - George E. Dahl·Dong Yu·Li Deng·Alex Acero, [Context-Dependent Pre-Trained Deep Neural Networks for Large-Vocabulary Speech Recognition](https://www.microsoft.com/en-us/research/publication/context-dependent-pre-trained-deep-neural-networks-for-large-vocabulary-speech-recognition/), 2012, pp. 30–42.
@@ -192,7 +210,7 @@ Dahl·Sainath·Hinton이 대어휘 음성 인식에서 ReLU와 dropout을 함께
 
 ## 관련 항목
 
-- [[자동 음성 인식]]
-- [[DNN-HMM]]
-- [[단어 오류율]]
-- [[은닉 마르코프 모델]]
+- [[concept.dnn-hmm|DNN-HMM]]
+- [[concept.단어-오류율|단어 오류율]]
+- [[concept.은닉-마르코프-모델|은닉 마르코프 모델]]
+- [[concept.자동-음성-인식|자동 음성 인식]]

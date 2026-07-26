@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.wordnet
 page_type: concept
 title: WordNet
@@ -16,17 +16,19 @@ tags:
   - domain/computer-science
 created: '2026-07-16'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/025_WordNet - A Semantic Network for Language Understanding.ko.md'
-  - 'raw/025_WordNet - A Semantic Network for Language Understanding.commentary.ko.md'
+  - raw/025_WordNet - A Semantic Network for Language Understanding.ko.md
+  - raw/025_WordNet - A Semantic Network for Language Understanding.commentary.ko.md
 evidence:
   - source_id: miller-et-al-1990-introduction-wordnet
-    locator: 'journal pp. 235–244; Princeton 공식 묶음 PDF의 Introduction pp. 2–9'
+    locator: journal pp. 235–244; Princeton 공식 묶음 PDF의 Introduction pp. 2–9
     relation: supports
   - source_id: miller-1990-nouns-wordnet
-    locator: 'pp. 245–264; Princeton 묶음 PDF pp. 17–18의 25 unique beginners 설명'
+    locator: pp. 245–264; Princeton 묶음 PDF pp. 17–18의 25 unique beginners 설명
     relation: supports
   - source_id: miller-1993-wordnet-project
     locator: 'p. 409, WordNet 1.3 공개와 당시 구성'
@@ -35,7 +37,7 @@ evidence:
     locator: 'p. 468, WordNet 1.4 배포와 당시 규모'
     relation: contextualizes
   - source_id: fellbaum-1998-wordnet
-    locator: 'Foreword pp. xvii–xxiii와 품사·응용별 장; WordNet 1.6'
+    locator: Foreword pp. xvii–xxiii와 품사·응용별 장; WordNet 1.6
     relation: contextualizes
   - source_id: princeton-wordnet-3-0-reference
     locator: 'wninput(5WN) §§Description, Pointers; wngloss(7WN) §Database Organization; uniqbeg(7WN) §Description; wnstats(7WN) §§Number of words, synsets, and senses, Notes'
@@ -49,13 +51,28 @@ evidence:
   - source_id: palmer-et-al-2005-propbank
     locator: 'pp. 71–72, PropBank의 predicate-argument annotation 목표'
     relation: contextualizes
-related:
-  - source.025
-  - concept.framenet
-  - entity.조지-밀러
-  - concept.단어-의미-중의성-해소
-  - concept.lesk-알고리즘
-  - source.017
+relations:
+  - target: source.025
+    kind: related
+  - target: concept.framenet
+    kind: related
+  - target: entity.조지-밀러
+    kind: related
+  - target: source.017
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites: []
+  assumed_knowledge: 없음
+  outcomes:
+    - 'WordNet의 word form·sense·synset과 어휘·의미 관계를 구분하고, 품사별 구조와 자원의 한계를 설명할 수 있다.'
+  next:
+    - target: concept.단어-의미-중의성-해소
+      reason: 다음에는 단어 의미 중의성 해소에서 한 단어 형태의 여러 synset 가운데 문맥에 맞는 의미를 고르는 문제를 살핀다.
+    - target: concept.lesk-알고리즘
+      reason: WordNet의 관계를 실제 중의성 해소에 쓰는 절차는 Lesk 알고리즘에서 이어 본다.
 ---
 # WordNet
 
@@ -161,8 +178,12 @@ WordNet의 명시적 이산 graph와 neural network의 distributed representatio
 
 다음에는 [[단어 의미 중의성 해소]]에서 한 단어 형태의 여러 synset 가운데 문맥에 맞는 의미를 고르는 문제를 살핀다. WordNet의 관계를 실제 중의성 해소에 쓰는 절차는 [[Lesk 알고리즘]]에서 이어 본다.
 
-## 출처
+### 다음 문서
 
+- [[concept.단어-의미-중의성-해소|단어 의미 중의성 해소]] — 다음에는 단어 의미 중의성 해소에서 한 단어 형태의 여러 synset 가운데 문맥에 맞는 의미를 고르는 문제를 살핀다.
+- [[concept.lesk-알고리즘|Lesk 알고리즘]] — WordNet의 관계를 실제 중의성 해소에 쓰는 절차는 Lesk 알고리즘에서 이어 본다.
+
+## 출처
 - [[025_WordNet과 어휘 의미망]]
 - George A. Miller·Richard Beckwith·Christiane Fellbaum·Derek Gross·Katherine J. Miller, [Introduction to WordNet: An On-line Lexical Database](https://doi.org/10.1093/ijl/3.4.235), 1990, pp. 235–244; Princeton 공식 묶음 PDF의 Introduction pp. 2–9.
 - George A. Miller, [Nouns in WordNet: A Lexical Inheritance System](https://doi.org/10.1093/ijl/3.4.245), 1990, pp. 245–264, 특히 Princeton 묶음 PDF pp. 17–18.
@@ -176,9 +197,9 @@ WordNet의 명시적 이산 graph와 neural network의 distributed representatio
 
 ## 관련 항목
 
-- [[025_WordNet과 어휘 의미망]]
-- [[FrameNet]]
-- [[조지 밀러]]
-- [[단어 의미 중의성 해소]]
-- [[Lesk 알고리즘]]
-- [[017_Lesk 알고리즘과 단어 의미 중의성 해소]]
+- [[concept.단어-의미-중의성-해소|단어 의미 중의성 해소]]
+- [[concept.lesk-알고리즘|Lesk 알고리즘]]
+- [[source.025|WordNet과 어휘 의미망]]
+- [[concept.framenet|FrameNet]]
+- [[entity.조지-밀러|조지 밀러]]
+- [[source.017|Lesk 알고리즘과 단어 의미 중의성 해소]]

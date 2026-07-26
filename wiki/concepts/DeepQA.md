@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.deepqa
 page_type: concept
 title: DeepQA
@@ -15,22 +15,36 @@ tags:
   - domain/machine-learning
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.ko.md'
-  - 'raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.commentary.ko.md'
+  - raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.ko.md
+  - raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.commentary.ko.md
 evidence:
   - source_id: ferrucci-et-al-2010-building-watson
     locator: 'AI Magazine 31(3), pp. 59–79의 DeepQA 원칙·question analysis·candidate generation·hypothesis scoring·final merging·confidence estimation'
     relation: supports
   - source_id: ferrucci-et-al-2013-watson-beyond-jeopardy
-    locator: 'pp. 93–105의 수백 개 알고리즘·feature·학습 가중치·근거 링크와 영역 적응 설명'
+    locator: pp. 93–105의 수백 개 알고리즘·feature·학습 가중치·근거 링크와 영역 적응 설명
     relation: supports
-related:
-  - source.040
-  - concept.ibm-watson
-  - concept.개방-영역-질의응답
+relations:
+  - target: source.040
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites: []
+  assumed_knowledge: 없음
+  outcomes:
+    - 'DeepQA가 여러 후보와 근거를 병렬로 결합해 답과 신뢰도를 정하는 흐름을 설명하고, 단일 신경망·범용 엔진과 구분할 수 있다.'
+  next:
+    - target: concept.ibm-watson
+      reason: '다음에는 IBM Watson에서 DeepQA가 실제 경기 시스템 안에서 작동한 조건을 보고, 개방 영역 질의응답에서 이 구조가 다룬 과업의 폭을 살핀다.'
+    - target: concept.개방-영역-질의응답
+      reason: '다음에는 IBM Watson에서 DeepQA가 실제 경기 시스템 안에서 작동한 조건을 보고, 개방 영역 질의응답에서 이 구조가 다룬 과업의 폭을 살핀다.'
 ---
 # DeepQA
 
@@ -103,8 +117,12 @@ DeepQA의 구성요소는 영역별 자료와 증거 유형을 바꿔 재사용�
 
 다음에는 [[IBM Watson]]에서 DeepQA가 실제 경기 시스템 안에서 작동한 조건을 보고, [[개방 영역 질의응답]]에서 이 구조가 다룬 과업의 폭을 살핀다.
 
-## 출처
+### 다음 문서
 
+- [[concept.ibm-watson|IBM Watson]] — 다음에는 IBM Watson에서 DeepQA가 실제 경기 시스템 안에서 작동한 조건을 보고, 개방 영역 질의응답에서 이 구조가 다룬 과업의 폭을 살핀다.
+- [[concept.개방-영역-질의응답|개방 영역 질의응답]] — 다음에는 IBM Watson에서 DeepQA가 실제 경기 시스템 안에서 작동한 조건을 보고, 개방 영역 질의응답에서 이 구조가 다룬 과업의 폭을 살핀다.
+
+## 출처
 - David Ferrucci 외, [Building Watson: An Overview of the DeepQA Project](https://aaai.org/ai-magazine/the-ai-behind-watson-the-technical-article/), *AI Magazine* 31(3), 2010, pp. 59–79.
 - David Ferrucci 외, [Watson: Beyond Jeopardy!](https://scalar.usc.edu/works/meet-my-friend-watson-1/media/Beyond%20Jeopardy.pdf), 2013, pp. 93–105.
 - [[040_IBM Watson과 Jeopardy 질의응답]]
@@ -112,6 +130,6 @@ DeepQA의 구성요소는 영역별 자료와 증거 유형을 바꿔 재사용�
 
 ## 관련 항목
 
-- [[040_IBM Watson과 Jeopardy 질의응답]]
-- [[IBM Watson]]
-- [[개방 영역 질의응답]]
+- [[concept.ibm-watson|IBM Watson]]
+- [[concept.개방-영역-질의응답|개방 영역 질의응답]]
+- [[source.040|IBM Watson과 Jeopardy 질의응답]]

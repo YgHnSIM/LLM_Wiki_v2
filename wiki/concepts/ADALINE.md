@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.adaline
 page_type: concept
 title: ADALINE
@@ -14,8 +14,10 @@ tags:
   - domain/signal-processing
 created: '2026-07-14'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/006_1962_위드로-호프_MADALINE.md
   - raw/006_1962_위드로-호프_MADALINE_해설.md
@@ -26,18 +28,31 @@ evidence:
   - source_id: widrow-hoff-1960
     locator: Adaptive Switching Circuits
     relation: supports
-related:
-  - concept.madaline
-  - concept.lms-알고리즘
-  - concept.퍼셉트론
-  - concept.선형-분류기
-  - concept.경사하강법
+relations:
+  - target: concept.퍼셉트론
+    kind: related
+  - target: concept.경사하강법
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.선형-분류기
+  assumed_knowledge: 없음
+  outcomes:
+    - ADALINE이 연속 선형 출력의 오차로 학습하며 퍼셉트론과 어떻게 다른지 설명할 수 있다.
+  next:
+    - target: concept.lms-알고리즘
+      reason: LMS 알고리즘 — 연속 출력 오차로 가중치를 갱신하는 규칙을 자세히 본다.
+    - target: concept.madaline
+      reason: MADALINE — 여러 ADALINE을 결합한 초기 다요소 구조로 확장한다.
 ---
 # ADALINE
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[선형 분류기]]<br>
+> **선수 지식:** [[concept.선형-분류기|선형 분류기]]<br>
 > **읽고 나면:** ADALINE이 연속 선형 출력의 오차로 학습하며 퍼셉트론과 어떻게 다른지 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -84,8 +99,8 @@ ADALINE 하나가 학습하는 것은 입력의 선형 결합이다. 복잡한 �
 
 ### 다음 문서
 
-- [[LMS 알고리즘]] — 연속 출력 오차로 가중치를 갱신하는 규칙을 자세히 본다.
-- [[MADALINE]] — 여러 ADALINE을 결합한 초기 다요소 구조로 확장한다.
+- [[concept.lms-알고리즘|LMS 알고리즘]] — 연속 출력 오차로 가중치를 갱신하는 규칙을 자세히 본다.
+- [[concept.madaline|MADALINE]] — 여러 ADALINE을 결합한 초기 다요소 구조로 확장한다.
 
 ## 출처
 
@@ -95,8 +110,8 @@ ADALINE 하나가 학습하는 것은 입력의 선형 결합이다. 복잡한 �
 
 ## 관련 항목
 
-- [[MADALINE]]
-- [[LMS 알고리즘]]
-- [[퍼셉트론]]
-- [[선형 분류기]]
-- [[경사하강법]]
+- [[concept.lms-알고리즘|LMS 알고리즘]]
+- [[concept.madaline|MADALINE]]
+- [[concept.선형-분류기|선형 분류기]]
+- [[concept.퍼셉트론|퍼셉트론]]
+- [[concept.경사하강법|경사하강법]]

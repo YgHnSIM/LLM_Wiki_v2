@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.helm
 page_type: concept
 title: HELM
@@ -15,27 +15,43 @@ tags:
   - domain/machine-learning
 created: '2026-07-21'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/079_HELM Holistic Evaluation of Language Models Framework.ko.md'
-  - 'raw/079_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md'
+  - raw/079_HELM Holistic Evaluation of Language Models Framework.ko.md
+  - raw/079_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md
 evidence:
   - source_id: liang-et-al-2023-helm
     locator: '초록, §§1.1–1.2·3–8·10–11, Tables 4–6·8·13과 Appendices A·C·F–J의 시나리오·적응·일곱 메트릭·평가 규모·인간 평가·비용·오염·설계 한계'
     relation: supports
-related:
-  - source.079
-  - concept.glue-superglue
-  - concept.파운데이션-모델
-  - analysis.평가-지표와-모델-유인
-  - analysis.튜링-테스트와-llm-평가
+relations:
+  - target: concept.파운데이션-모델
+    kind: related
+  - target: analysis.튜링-테스트와-llm-평가
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.glue-superglue
+    - target: source.067
+  assumed_knowledge: 없음
+  outcomes:
+    - 'HELM의 시나리오–적응–메트릭–실행 구조를 설명하고, 다차원 평가 결과를 단일 순위나 안전 인증과 구분해 읽을 수 있다.'
+  next:
+    - target: source.079
+      reason: 079HELM과 다차원 언어 모델 평가 — 초기 HELM 논문의 평가 규모·비용·세부 정정과 raw 설명의 근거 범위를 source 문서에서 확인한다.
+    - target: analysis.평가-지표와-모델-유인
+      reason: 자동 평가 지표는 무엇을 보상하는가 — 평가 메트릭을 모델 선택과 최적화 목표로 사용할 때 생기는 유인과 사각지대를 비교한다.
 ---
 # HELM
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[GLUE와 SuperGLUE]], [[067_GPT-3와 문맥 내 학습]]<br>
+> **선수 지식:** [[concept.glue-superglue|GLUE와 SuperGLUE]], [[source.067|GPT-3와 문맥 내 학습]]<br>
 > **읽고 나면:** HELM의 시나리오–적응–메트릭–실행 구조를 설명하고, 다차원 평가 결과를 단일 순위나 안전 인증과 구분해 읽을 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -243,8 +259,8 @@ HELM은 이 문제를 해결된 보편 순위로 제시하지 않았다. 사용�
 
 ### 다음 문서
 
-- [[079_HELM과 다차원 언어 모델 평가]] — 초기 HELM 논문의 평가 규모·비용·세부 정정과 raw 설명의 근거 범위를 source 문서에서 확인한다.
-- [[자동 평가 지표는 무엇을 보상하는가]] — 평가 메트릭을 모델 선택과 최적화 목표로 사용할 때 생기는 유인과 사각지대를 비교한다.
+- [[source.079|HELM과 다차원 언어 모델 평가]] — 079HELM과 다차원 언어 모델 평가 — 초기 HELM 논문의 평가 규모·비용·세부 정정과 raw 설명의 근거 범위를 source 문서에서 확인한다.
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]] — 평가 메트릭을 모델 선택과 최적화 목표로 사용할 때 생기는 유인과 사각지대를 비교한다.
 
 ## 출처
 
@@ -256,8 +272,9 @@ HELM은 이 문제를 해결된 보편 순위로 제시하지 않았다. 사용�
 
 ## 관련 항목
 
-- [[079_HELM과 다차원 언어 모델 평가]]
-- [[GLUE와 SuperGLUE]]
-- [[파운데이션 모델]]
-- [[자동 평가 지표는 무엇을 보상하는가]]
-- [[튜링 테스트와 LLM 평가]]
+- [[source.079|HELM과 다차원 언어 모델 평가]]
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]]
+- [[concept.glue-superglue|GLUE와 SuperGLUE]]
+- [[source.067|GPT-3와 문맥 내 학습]]
+- [[concept.파운데이션-모델|파운데이션 모델]]
+- [[analysis.튜링-테스트와-llm-평가|튜링 테스트와 LLM 평가]]

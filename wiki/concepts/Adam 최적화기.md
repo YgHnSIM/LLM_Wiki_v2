@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.adam-최적화기
 page_type: concept
 title: Adam 최적화기
@@ -15,11 +15,13 @@ tags:
   - domain/optimization
 created: '2026-07-18'
 updated: '2026-07-24'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.ko.md'
-  - 'raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.commentary.ko.md'
+  - raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.ko.md
+  - raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.commentary.ko.md
 evidence:
   - source_id: kingma-ba-2015-adam
     locator: 'arXiv:1412.6980, Algorithm 1과 §§2–2.1의 갱신·편향 보정 및 §§4–6의 실험·범위'
@@ -34,21 +36,37 @@ evidence:
     locator: 'ICLR 2019, §§1–3과 Algorithm 2의 L2·weight decay 구분과 AdamW'
     relation: contextualizes
   - source_id: mit-ocw-6-012-lecture-6-2018
-    locator: '§6.2의 분산 정의; Adam의 raw second moment와 분산을 구분하기 위한 맥락'
+    locator: §6.2의 분산 정의; Adam의 raw second moment와 분산을 구분하기 위한 맥락
     relation: contextualizes
-related:
-  - source.044
-  - concept.미분-편미분-그래디언트
-  - concept.경사하강법
-  - concept.역전파
-  - concept.확률변수-확률분포-기대값-분산
+relations:
+  - target: source.044
+    kind: related
+  - target: concept.역전파
+    kind: related
+  - target: concept.확률변수-확률분포-기대값-분산
+    kind: related
+learning:
+  difficulty:
+    entry: advanced
+    target: advanced
+  prerequisites:
+    - target: concept.미분-편미분-그래디언트
+    - target: concept.경사하강법
+  assumed_knowledge: 의 raw second moment와 분산 구분
+  outcomes:
+    - 'Adam이 확률적 gradient의 1차·2차 raw moment 이동 평균과 편향 보정으로 좌표별 갱신을 만드는 과정을 한 좌표 예로 계산하고, $vt$·분산·AdamW·수렴의 범위를 구분할 수 있다.'
+  next:
+    - target: concept.transformer
+      reason: Transformer — Adam이 갱신할 gradient를 만드는 attention·MLP·residual·정규화 block을 본다.
+    - target: concept.언어-모델-전이-학습
+      reason: 언어 모델 전이 학습 — 사전학습과 과제 적응의 훈련 구성을 살핀다.
 ---
 # Adam 최적화기
 
 > [!note] 학습 안내
 > **난이도:** 심화<br>
-> **선수 지식:** [[미분·편미분·그래디언트]], [[경사하강법]], [[역전파]], [[확률변수·확률분포·기대값·분산]]의 raw second moment와 분산 구분<br>
-> **읽고 나면:** Adam이 확률적 gradient의 1차·2차 raw moment 이동 평균과 편향 보정으로 좌표별 갱신을 만드는 과정을 한 좌표 예로 계산하고, $v_t$·분산·AdamW·수렴의 범위를 구분할 수 있다.
+> **선수 지식:** [[concept.미분-편미분-그래디언트|미분·편미분·그래디언트]], [[concept.경사하강법|경사하강법]]<br>
+> **읽고 나면:** Adam이 확률적 gradient의 1차·2차 raw moment 이동 평균과 편향 보정으로 좌표별 갱신을 만드는 과정을 한 좌표 예로 계산하고, $vt$·분산·AdamW·수렴의 범위를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
 
@@ -171,8 +189,8 @@ $$
 
 ### 다음 문서
 
-- [[Transformer]] — Adam이 갱신할 gradient를 만드는 attention·MLP·residual·정규화 block을 본다.
-- [[언어 모델 전이 학습]] — 사전학습과 과제 적응의 훈련 구성을 살핀다.
+- [[concept.transformer|Transformer]] — Adam이 갱신할 gradient를 만드는 attention·MLP·residual·정규화 block을 본다.
+- [[concept.언어-모델-전이-학습|언어 모델 전이 학습]] — 사전학습과 과제 적응의 훈련 구성을 살핀다.
 
 ## 출처
 
@@ -185,8 +203,10 @@ $$
 
 ## 관련 항목
 
-- [[044_GloVe와 Adam의 서로 다른 2014년 전환]]
-- [[미분·편미분·그래디언트]]
-- [[경사하강법]]
-- [[역전파]]
-- [[확률변수·확률분포·기대값·분산]]
+- [[concept.transformer|Transformer]]
+- [[concept.언어-모델-전이-학습|언어 모델 전이 학습]]
+- [[concept.미분-편미분-그래디언트|미분·편미분·그래디언트]]
+- [[concept.경사하강법|경사하강법]]
+- [[source.044|GloVe와 Adam의 서로 다른 2014년 전환]]
+- [[concept.역전파|역전파]]
+- [[concept.확률변수-확률분포-기대값-분산|확률변수·확률분포·기대값·분산]]

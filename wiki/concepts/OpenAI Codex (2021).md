@@ -1,8 +1,8 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.openai-codex-2021
 page_type: concept
-title: 'OpenAI Codex (2021)'
+title: OpenAI Codex (2021)
 aliases:
   - Codex-12B
   - Codex-S
@@ -17,34 +17,49 @@ tags:
   - domain/nlp
 created: '2026-07-21'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.ko.md'
-  - 'raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.commentary.ko.md'
+  - raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.ko.md
+  - raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.commentary.ko.md
 evidence:
   - source_id: chen-et-al-2021-codex
     locator: '초록과 §1·Figure 1의 연구 모델–production version 구분, §§2.1–2.3·Equation 1·Figure 3의 HumanEval·pass@k·sandbox, §§3.1–3.3·Figures 4–8·Table 1의 Python 자료·미세조정·Codex-12B 평가, §4·Figures 9–10의 Codex-S, §§6–8과 Appendices A·F–G의 한계·위험·선행 연구'
     relation: supports
   - source_id: openai-2021-codex
-    locator: '2021-08-10 발표의 GPT-3 descendant·공개 source code 학습·지원 언어·14KB Python context·API와 GitHub Copilot 제품 설명 및 페이지 상단의 2023년 구형 model 폐기·2025년 동명 agent 안내'
+    locator: 2021-08-10 발표의 GPT-3 descendant·공개 source code 학습·지원 언어·14KB Python context·API와 GitHub Copilot 제품 설명 및 페이지 상단의 2023년 구형 model 폐기·2025년 동명 agent 안내
     relation: supplements
   - source_id: github-2021-copilot-preview
-    locator: '2021-06-29 technical preview 발표의 OpenAI Codex 기반·편집기 문맥·줄과 함수 제안·Python·JavaScript·TypeScript·Ruby·Go 제품 범위'
+    locator: 2021-06-29 technical preview 발표의 OpenAI Codex 기반·편집기 문맥·줄과 함수 제안·Python·JavaScript·TypeScript·Ruby·Go 제품 범위
     relation: contextualizes
-related:
-  - source.071
-  - source.067
-  - concept.언어-모델-전이-학습
-  - concept.자기회귀-생성
-  - analysis.평가-지표와-모델-유인
-  - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+relations:
+  - target: source.067
+    kind: related
+  - target: analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.언어-모델-전이-학습
+    - target: concept.자기회귀-생성
+  assumed_knowledge: 없음
+  outcomes:
+    - '2021년 연구 Codex 모델군의 코드 영역 미세조정과 HumanEval 평가를 설명하고, Codex-12B·Codex-S·Copilot용 production version·현행 동명 제품을 구분할 수 있다.'
+  next:
+    - target: source.071
+      reason: '071Codex와 HumanEval 기반 코드 생성 평가 — 연구 결과와 raw 서사의 정정, 제품 연표를 1차 근거 locator에 따라 확인한다.'
+    - target: analysis.평가-지표와-모델-유인
+      reason: 자동 평가 지표는 무엇을 보상하는가 — 문자열 중첩과 실행 기반 pass@$k$가 각각 어떤 출력을 보상하는지 비교한다.
 ---
 # OpenAI Codex (2021)
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[언어 모델 전이 학습]], [[자기회귀 생성]]<br>
+> **선수 지식:** [[concept.언어-모델-전이-학습|언어 모델 전이 학습]], [[concept.자기회귀-생성|자기회귀 생성]]<br>
 > **읽고 나면:** 2021년 연구 Codex 모델군의 코드 영역 미세조정과 HumanEval 평가를 설명하고, Codex-12B·Codex-S·Copilot용 production version·현행 동명 제품을 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -168,8 +183,8 @@ APPS의 full-program 문제에서는 HumanEval보다 훨씬 낮은 결과가 나
 
 ### 다음 문서
 
-- [[071_Codex와 HumanEval 기반 코드 생성 평가]] — 연구 결과와 raw 서사의 정정, 제품 연표를 1차 근거 locator에 따라 확인한다.
-- [[자동 평가 지표는 무엇을 보상하는가]] — 문자열 중첩과 실행 기반 pass@$k$가 각각 어떤 출력을 보상하는지 비교한다.
+- [[source.071|Codex와 HumanEval 기반 코드 생성 평가]] — 071Codex와 HumanEval 기반 코드 생성 평가 — 연구 결과와 raw 서사의 정정, 제품 연표를 1차 근거 locator에 따라 확인한다.
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]] — 문자열 중첩과 실행 기반 pass@$k$가 각각 어떤 출력을 보상하는지 비교한다.
 
 ## 출처
 
@@ -181,9 +196,9 @@ APPS의 full-program 문제에서는 HumanEval보다 훨씬 낮은 결과가 나
 
 ## 관련 항목
 
-- [[071_Codex와 HumanEval 기반 코드 생성 평가]]
-- [[067_GPT-3와 문맥 내 학습]]
-- [[언어 모델 전이 학습]]
-- [[자기회귀 생성]]
-- [[자동 평가 지표는 무엇을 보상하는가]]
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]
+- [[source.071|Codex와 HumanEval 기반 코드 생성 평가]]
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]]
+- [[concept.언어-모델-전이-학습|언어 모델 전이 학습]]
+- [[concept.자기회귀-생성|자기회귀 생성]]
+- [[source.067|GPT-3와 문맥 내 학습]]
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]]

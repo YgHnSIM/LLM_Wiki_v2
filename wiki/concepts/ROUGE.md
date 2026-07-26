@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.rouge
 page_type: concept
 title: ROUGE
@@ -14,26 +14,40 @@ tags:
   - domain/machine-learning
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.ko.md'
-  - 'raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.commentary.ko.md'
+  - raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.ko.md
+  - raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.commentary.ko.md
 evidence:
   - source_id: lin-2004-rouge
     locator: 'pp. 74–81의 ROUGE-N·L·W·S/SU 정의, DUC 2001–2003 상관·bootstrap 평가와 과제별 결론'
     relation: supports
-related:
-  - source.037
-  - concept.bleu
-  - concept.meteor
-  - source.033
+relations:
+  - target: source.037
+    kind: related
+  - target: source.033
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.bleu
+  assumed_knowledge: 없음
+  outcomes:
+    - ROUGE-N과 L·W·S·SU가 참조 요약의 서로 다른 표면 대응을 세는 방식과 적용 한계를 설명할 수 있다.
+  next:
+    - target: concept.meteor
+      reason: METEOR — n-gram 재현율과 달리 단어를 일대일 정렬하고 어순 벌점을 주는 평가를 비교한다.
 ---
 # ROUGE
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[BLEU]]<br>
+> **선수 지식:** [[concept.bleu|BLEU]]<br>
 > **읽고 나면:** ROUGE-N과 L·W·S·SU가 참조 요약의 서로 다른 표면 대응을 세는 방식과 적용 한계를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -96,7 +110,7 @@ ROUGE-1은 unigram, ROUGE-2는 bigram의 참조 포괄을 본다. [[BLEU]]의 �
 
 ### 다음 문서
 
-- [[METEOR]] — n-gram 재현율과 달리 단어를 일대일 정렬하고 어순 벌점을 주는 평가를 비교한다.
+- [[concept.meteor|METEOR]] — n-gram 재현율과 달리 단어를 일대일 정렬하고 어순 벌점을 주는 평가를 비교한다.
 
 ## 출처
 
@@ -106,7 +120,7 @@ ROUGE-1은 unigram, ROUGE-2는 bigram의 참조 포괄을 본다. [[BLEU]]의 �
 
 ## 관련 항목
 
-- [[037_ROUGE와 METEOR의 과제별 생성 텍스트 평가]]
-- [[BLEU]]
-- [[METEOR]]
-- [[033_BLEU와 기계 번역 자동 평가]]
+- [[concept.meteor|METEOR]]
+- [[concept.bleu|BLEU]]
+- [[source.037|ROUGE와 METEOR의 과제별 생성 텍스트 평가]]
+- [[source.033|BLEU와 기계 번역 자동 평가]]

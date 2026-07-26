@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.045
 page_type: source
 title: Sequence-to-Sequence 학습과 신경 기계 번역
@@ -13,11 +13,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-18'
 updated: '2026-07-23'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.ko.md'
-  - 'raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.commentary.ko.md'
+  - raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.ko.md
+  - raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.commentary.ko.md
 evidence:
   - source_id: kalchbrenner-blunsom-2013-recurrent-translation
     locator: 'EMNLP 2013, pp. 1700–1709, 특히 초록과 §§1–3의 정렬·구 단위 없는 recurrent continuous translation model'
@@ -34,20 +36,35 @@ evidence:
   - source_id: wu-et-al-2016-gnmt
     locator: 'arXiv:1609.08144, 초록과 §§2–5의 8층 LSTM·attention·residual·WordPiece·평가'
     relation: contextualizes
-related:
-  - concept.sequence-to-sequence
-  - concept.인코더-디코더
-  - concept.자기회귀-생성
-  - concept.신경망-기계-번역
-  - concept.어텐션-메커니즘
-  - source.034
-  - source.047
+relations:
+  - target: concept.인코더-디코더
+    kind: related
+  - target: concept.자기회귀-생성
+    kind: related
+  - target: concept.신경망-기계-번역
+    kind: related
+  - target: source.034
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.순환-신경망
+  assumed_knowledge: 없음
+  outcomes:
+    - '초기 seq2seq 인코더-디코더의 조건부 생성 흐름을 설명하고, 2014년 실험·어텐션·GNMT와 현대 모델 계보의 범위를 구분할 수 있다.'
+  next:
+    - target: concept.sequence-to-sequence
+      reason: '다음에는 Sequence-to-Sequence 학습에서 조건부 시퀀스 모형을 정리하고, 047어텐션 메커니즘과 동적 정렬과 어텐션 메커니즘에서 고정 벡터 이후의 계산을 이어 본다.'
+    - target: source.047
+      reason: '다음에는 Sequence-to-Sequence 학습에서 조건부 시퀀스 모형을 정리하고, 047어텐션 메커니즘과 동적 정렬과 어텐션 메커니즘에서 고정 벡터 이후의 계산을 이어 본다.'
 ---
 # Sequence-to-Sequence 학습과 신경 기계 번역
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[순환 신경망]]<br>
+> **선수 지식:** [[concept.순환-신경망|순환 신경망]]<br>
 > **읽고 나면:** 초기 seq2seq 인코더-디코더의 조건부 생성 흐름을 설명하고, 2014년 실험·어텐션·GNMT와 현대 모델 계보의 범위를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -151,8 +168,12 @@ Transformer가 NMT와 어텐션 연구에서 중요한 동기를 얻었다는 �
 
 다음에는 [[Sequence-to-Sequence 학습]]에서 조건부 시퀀스 모형을 정리하고, [[047_어텐션 메커니즘과 동적 정렬]]과 [[어텐션 메커니즘]]에서 고정 벡터 이후의 계산을 이어 본다.
 
-## 출처
+### 다음 문서
 
+- [[concept.sequence-to-sequence|Sequence-to-Sequence 학습]] — 다음에는 Sequence-to-Sequence 학습에서 조건부 시퀀스 모형을 정리하고, 047어텐션 메커니즘과 동적 정렬과 어텐션 메커니즘에서 고정 벡터 이후의 계산을 이어 본다.
+- [[source.047|어텐션 메커니즘과 동적 정렬]] — 다음에는 Sequence-to-Sequence 학습에서 조건부 시퀀스 모형을 정리하고, 047어텐션 메커니즘과 동적 정렬과 어텐션 메커니즘에서 고정 벡터 이후의 계산을 이어 본다.
+
+## 출처
 - Nal Kalchbrenner·Phil Blunsom, [Recurrent Continuous Translation Models](https://aclanthology.org/D13-1176/), EMNLP 2013, pp. 1700–1709.
 - Ilya Sutskever·Oriol Vinyals·Quoc V. Le, [Sequence to Sequence Learning with Neural Networks](https://proceedings.neurips.cc/paper_files/paper/2014/hash/5a18e133cbf9f257297f410bb7eca942-Abstract.html), NeurIPS 2014, pp. 3104–3112.
 - Kyunghyun Cho 외, [Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation](https://aclanthology.org/D14-1179/), EMNLP 2014, pp. 1724–1734.
@@ -163,10 +184,10 @@ Transformer가 NMT와 어텐션 연구에서 중요한 동기를 얻었다는 �
 
 ## 관련 항목
 
-- [[Sequence-to-Sequence 학습]]
-- [[인코더-디코더]]
-- [[자기회귀 생성]]
-- [[신경망 기계 번역]]
-- [[047_어텐션 메커니즘과 동적 정렬]]
-- [[어텐션 메커니즘]]
-- [[034_구 기반 통계적 기계 번역과 최소 오류율 훈련]]
+- [[concept.sequence-to-sequence|Sequence-to-Sequence 학습]]
+- [[source.047|어텐션 메커니즘과 동적 정렬]]
+- [[concept.순환-신경망|순환 신경망]]
+- [[concept.인코더-디코더|인코더-디코더]]
+- [[concept.자기회귀-생성|자기회귀 생성]]
+- [[concept.신경망-기계-번역|신경망 기계 번역]]
+- [[source.034|구 기반 통계적 기계 번역과 최소 오류율 훈련]]

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.070
 page_type: source
 title: CLIP과 대조적 언어-이미지 사전 학습
@@ -15,36 +15,51 @@ tags:
   - domain/nlp
 created: '2026-07-21'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md'
-  - 'raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md'
+  - raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md
+  - raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md
 evidence:
   - source_id: radford-et-al-2021-clip
     locator: 'ICML 2021, §§2.1–2.5·3.1–3.4·4–6, Figures 1–5와 Table 1; Supplementary §§A–B·D–E·I, Figures 13–14와 Tables 2·4·8–10·18–20'
     relation: supports
   - source_id: ramesh-et-al-2021-dalle
-    locator: '§2.6과 Figures 3·6·9(c)의 DALL·E 생성 후보 512개에 대한 별도 대조 모델 재순위화와 sample-pool 효과'
+    locator: §2.6과 Figures 3·6·9(c)의 DALL·E 생성 후보 512개에 대한 별도 대조 모델 재순위화와 sample-pool 효과
     relation: supplements
   - source_id: ramesh-et-al-2022-unclip
     locator: 'arXiv:2204.06125, §§2.1–2.2·3.1–3.3·5.1–5.5·6와 Figures 2–10의 동결 CLIP, text-to-image embedding prior, diffusion decoder 조건화, classifier-free guidance와 CLIP gradient guidance의 구분'
     relation: supplements
-related:
-  - concept.clip
-  - source.075
-  - source.085
-  - concept.dall-e-2021
-  - concept.dall-e-2
-  - concept.transformer
-  - concept.합성곱-신경망
-  - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+relations:
+  - target: source.075
+    kind: related
+  - target: concept.dall-e-2021
+    kind: related
+  - target: concept.dall-e-2
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.transformer
+    - target: concept.합성곱-신경망
+  assumed_knowledge: 없음
+  outcomes:
+    - 'CLIP의 이중 인코더와 대칭 대조 손실, 자연어 프롬프트로 제로샷 분류기를 만드는 절차를 설명하고, 이를 일반적인 멀티모달 이해나 생성 능력과 구분할 수 있다.'
+  next:
+    - target: concept.clip
+      reason: 'CLIP — dual encoder, 대조 손실과 zero-shot classifier를 재사용 가능한 모델 개념으로 정리한다.'
+    - target: source.085
+      reason: 085DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성 — 동결된 CLIP 표현이 prior와 확산 decoder를 잇는 생성 조건으로 바뀌는 구조를 확인한다.
 ---
 # CLIP과 대조적 언어-이미지 사전 학습
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[Transformer]], [[합성곱 신경망]]<br>
+> **선수 지식:** [[concept.transformer|Transformer]], [[concept.합성곱-신경망|합성곱 신경망]]<br>
 > **읽고 나면:** CLIP의 이중 인코더와 대칭 대조 손실, 자연어 프롬프트로 제로샷 분류기를 만드는 절차를 설명하고, 이를 일반적인 멀티모달 이해나 생성 능력과 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -172,9 +187,8 @@ CLIP은 class 설명을 텍스트 임베딩으로 바꾸어 사전 학습 지식
 
 ### 다음 문서
 
-- [[CLIP]] — dual encoder, 대조 손실과 zero-shot classifier를 재사용 가능한 모델 개념으로 정리한다.
-- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] — 동결된 CLIP 표현이 prior와 확산 decoder를 잇는 생성 조건으로 바뀌는 구조를 확인한다.
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 자연어로 만든 class vector를 미세조정·선형 탐침과 비교해 사전 학습 지식의 전달 경로를 살핀다.
+- [[concept.clip|CLIP]] — dual encoder, 대조 손실과 zero-shot classifier를 재사용 가능한 모델 개념으로 정리한다.
+- [[source.085|DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] — 085DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성 — 동결된 CLIP 표현이 prior와 확산 decoder를 잇는 생성 조건으로 바뀌는 구조를 확인한다.
 
 ## 출처
 
@@ -189,11 +203,10 @@ CLIP은 class 설명을 텍스트 임베딩으로 바꾸어 사전 학습 지식
 
 ## 관련 항목
 
-- [[CLIP]]
-- [[075_DALL·E와 이산 이미지 토큰 생성]]
-- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
-- [[DALL·E (2021)]]
-- [[DALL·E 2]]
-- [[Transformer]]
-- [[합성곱 신경망]]
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]
+- [[concept.clip|CLIP]]
+- [[source.085|DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
+- [[concept.transformer|Transformer]]
+- [[concept.합성곱-신경망|합성곱 신경망]]
+- [[source.075|DALL·E와 이산 이미지 토큰 생성]]
+- [[concept.dall-e-2021|DALL·E (2021)]]
+- [[concept.dall-e-2|DALL·E 2]]

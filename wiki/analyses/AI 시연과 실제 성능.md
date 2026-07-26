@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis.ai-시연과-실제-성능
 page_type: analysis
 title: AI 시연과 실제 성능
@@ -12,8 +12,10 @@ tags:
   - domain/ai
 created: '2026-05-08'
 updated: '2026-07-21'
-lifecycle: active
-verification: partial
+editorial_status: active
+review:
+  evidence_coverage: partial
+  content_mode: synthesis
 artifacts:
   - raw/003_Georgetown-IBM Machine.md
   - raw/003_Georgetown-IBM Machine.commentary.md
@@ -24,10 +26,10 @@ artifacts:
   - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
   - raw/009_SHRDLU - Understanding Language Through Action.ko.md
   - raw/009_SHRDLU - Understanding Language Through Action.commentary.ko.md
-  - 'raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.ko.md'
-  - 'raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.commentary.ko.md'
-  - 'raw/081_ChatGPT Conversational AI Becomes Mainstream.ko.md'
-  - 'raw/081_ChatGPT Conversational AI Becomes Mainstream.commentary.ko.md'
+  - raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.ko.md
+  - raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.commentary.ko.md
+  - raw/081_ChatGPT Conversational AI Becomes Mainstream.ko.md
+  - raw/081_ChatGPT Conversational AI Becomes Mainstream.commentary.ko.md
 evidence:
   - source_id: macdonald-1963
     locator: pp. 1–4
@@ -42,7 +44,7 @@ evidence:
     locator: pp. 36–45
     relation: supports
   - source_id: winograd-1971
-    locator: chapters 1–3, especially pp. 1–39
+    locator: 'chapters 1–3, especially pp. 1–39'
     relation: supports
   - source_id: winograd-1980
     locator: pp. 212–218
@@ -51,43 +53,69 @@ evidence:
     locator: 'AI Magazine 31(3), pp. 59–79의 Jeopardy 과업 정의·blind clue 평가·DeepQA 구조·소수 경기와 원시 QA 성능의 구분'
     relation: supports
   - source_id: lewis-2012-watson-jeopardy-interface
-    locator: '전자 텍스트 clue 입력·솔레노이드 buzzer·음성 합성·경기 상태 인터페이스 설명'
+    locator: 전자 텍스트 clue 입력·솔레노이드 buzzer·음성 합성·경기 상태 인터페이스 설명
     relation: supports
   - source_id: ferrucci-et-al-2013-watson-beyond-jeopardy
-    locator: 'pp. 93–105의 Jeopardy용 단일 답 출력과 의료 영역 전환에 필요한 자료·증거·상호작용 변경'
+    locator: pp. 93–105의 Jeopardy용 단일 답 출력과 의료 영역 전환에 필요한 자료·증거·상호작용 변경
     relation: contextualizes
   - source_id: ibm-watson-jeopardy-history
-    locator: '2011년 두 게임 특별 경기·최종 점수·Toronto 오답·하드웨어·인터넷 조건 기록'
+    locator: 2011년 두 게임 특별 경기·최종 점수·Toronto 오답·하드웨어·인터넷 조건 기록
     relation: contextualizes
   - source_id: openai-2022-introducing-chatgpt
     locator: '도입부와 Methods·Limitations·Iterative deployment의 dialogue format, 공개 대화 예시, GPT-3.5 series, SFT→응답 순위·reward model→PPO, Moderation API와 feedback 절차'
     relation: supports
-related:
-  - concept.기계-번역
-  - concept.규칙-기반-기계-번역
-  - concept.튜링-테스트
-  - analysis.튜링-테스트와-llm-평가
-  - concept.madaline
-  - concept.적응-필터
-  - analysis.퍼셉트론에서-madaline으로
-  - concept.eliza
-  - concept.eliza-효과
-  - analysis.eliza에서-llm으로
-  - concept.shrdlu
-  - concept.마이크로월드
-  - source.040
-  - concept.ibm-watson
-  - concept.deepqa
-  - concept.개방-영역-질의응답
-  - concept.대규모-언어-모델
-  - source.081
-  - concept.chatgpt-2022
+relations:
+  - target: concept.기계-번역
+    kind: related
+  - target: concept.규칙-기반-기계-번역
+    kind: related
+  - target: concept.튜링-테스트
+    kind: related
+  - target: concept.madaline
+    kind: related
+  - target: concept.적응-필터
+    kind: related
+  - target: analysis.퍼셉트론에서-madaline으로
+    kind: related
+  - target: concept.eliza
+    kind: related
+  - target: concept.eliza-효과
+    kind: related
+  - target: concept.shrdlu
+    kind: related
+  - target: concept.마이크로월드
+    kind: related
+  - target: concept.ibm-watson
+    kind: related
+  - target: concept.deepqa
+    kind: related
+  - target: concept.개방-영역-질의응답
+    kind: related
+  - target: concept.대규모-언어-모델
+    kind: related
+  - target: source.081
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: analysis.eliza에서-llm으로
+    - target: source.040
+  assumed_knowledge: 없음
+  outcomes:
+    - '공개 AI 시연을 인터페이스·과업 경계·측정·공개 효과로 나누고, 대화 제품의 여러 층과 기반 모델의 실제 성능 범위를 구분할 수 있다.'
+  next:
+    - target: analysis.튜링-테스트와-llm-평가
+      reason: 튜링 테스트와 LLM 평가 — 시연의 조건 분석을 인간 유사성·신뢰성·이해의 평가 층위로 확장한다.
+    - target: concept.chatgpt-2022
+      reason: ChatGPT 연구 미리보기 (2022) — 모델·대화 학습·인터페이스·안전 완화·feedback을 하나의 역사적 배포 체계로 구분한다.
 ---
 # AI 시연과 실제 성능
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[ELIZA에서 LLM으로]], [[040_IBM Watson과 Jeopardy 질의응답]], [[ChatGPT 연구 미리보기 (2022)]]<br>
+> **선수 지식:** [[analysis.eliza에서-llm으로|ELIZA에서 LLM으로]], [[source.040|IBM Watson과 Jeopardy 질의응답]]<br>
 > **읽고 나면:** 공개 AI 시연을 인터페이스·과업 경계·측정·공개 효과로 나누고, 대화 제품의 여러 층과 기반 모델의 실제 성능 범위를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -207,8 +235,8 @@ AI 역사에서 반복되는 교훈은 세 가지다. 첫째, 공개 장면보�
 
 ### 다음 문서
 
-- [[튜링 테스트와 LLM 평가]] — 시연의 조건 분석을 인간 유사성·신뢰성·이해의 평가 층위로 확장한다.
-- [[ChatGPT 연구 미리보기 (2022)]] — 모델·대화 학습·인터페이스·안전 완화·feedback을 하나의 역사적 배포 체계로 구분한다.
+- [[analysis.튜링-테스트와-llm-평가|튜링 테스트와 LLM 평가]] — 시연의 조건 분석을 인간 유사성·신뢰성·이해의 평가 층위로 확장한다.
+- [[concept.chatgpt-2022|ChatGPT 연구 미리보기 (2022)]] — 모델·대화 학습·인터페이스·안전 완화·feedback을 하나의 역사적 배포 체계로 구분한다.
 
 ## 출처
 
@@ -229,22 +257,22 @@ AI 역사에서 반복되는 교훈은 세 가지다. 첫째, 공개 장면보�
 
 ## 관련 항목
 
-- [[기계 번역]]
-- [[규칙 기반 기계 번역]]
-- [[튜링 테스트]]
-- [[튜링 테스트와 LLM 평가]]
-- [[MADALINE]]
-- [[적응 필터]]
-- [[퍼셉트론에서 MADALINE으로]]
-- [[ELIZA]]
-- [[ELIZA 효과]]
-- [[ELIZA에서 LLM으로]]
-- [[SHRDLU]]
-- [[마이크로월드]]
-- [[040_IBM Watson과 Jeopardy 질의응답]]
-- [[IBM Watson]]
-- [[DeepQA]]
-- [[개방 영역 질의응답]]
-- [[대규모 언어 모델]]
-- [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]]
-- [[ChatGPT 연구 미리보기 (2022)]]
+- [[analysis.튜링-테스트와-llm-평가|튜링 테스트와 LLM 평가]]
+- [[concept.chatgpt-2022|ChatGPT 연구 미리보기 (2022)]]
+- [[analysis.eliza에서-llm으로|ELIZA에서 LLM으로]]
+- [[source.040|IBM Watson과 Jeopardy 질의응답]]
+- [[concept.기계-번역|기계 번역]]
+- [[concept.규칙-기반-기계-번역|규칙 기반 기계 번역]]
+- [[concept.튜링-테스트|튜링 테스트]]
+- [[concept.madaline|MADALINE]]
+- [[concept.적응-필터|적응 필터]]
+- [[analysis.퍼셉트론에서-madaline으로|퍼셉트론에서 MADALINE으로]]
+- [[concept.eliza|ELIZA]]
+- [[concept.eliza-효과|ELIZA 효과]]
+- [[concept.shrdlu|SHRDLU]]
+- [[concept.마이크로월드|마이크로월드]]
+- [[concept.ibm-watson|IBM Watson]]
+- [[concept.deepqa|DeepQA]]
+- [[concept.개방-영역-질의응답|개방 영역 질의응답]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[source.081|ChatGPT 연구 미리보기와 대화형 LLM 배포]]

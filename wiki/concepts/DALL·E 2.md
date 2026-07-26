@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.dall-e-2
 page_type: concept
 title: DALL·E 2
@@ -17,11 +17,13 @@ tags:
   - domain/nlp
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.ko.md'
-  - 'raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.commentary.ko.md'
+  - raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.ko.md
+  - raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.commentary.ko.md
 evidence:
   - source_id: ramesh-et-al-2022-unclip
     locator: 'arXiv:2204.06125v1, §§2.1–2.2·3.1–3.3·5.1–5.5·6·7, Figures 2–17, Tables 1–2와 Appendix A–C·Table 3의 unCLIP 구조·prior 비교·평가·guidance 비교·이미지 조작·한계·제품 변경'
@@ -32,19 +34,31 @@ evidence:
   - source_id: mishkin-et-al-2022-dalle2-preview
     locator: 'DALL·E 2 Preview system card의 model·system 범위, 초기 access control, prompt·image filter, monitoring, bias·deception·harmful content 위험과 제한'
     relation: supplements
-related:
-  - source.085
-  - concept.dall-e-2021
-  - concept.clip
-  - concept.transformer
-  - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+relations:
+  - target: concept.transformer
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.clip
+    - target: concept.dall-e-2021
+  assumed_knowledge: 없음
+  outcomes:
+    - 'DALL·E 2 논문의 unCLIP을 text → CLIP image embedding → diffusion decoder로 설명하고, 이 학습된 조건부 생성을 CLIP gradient guidance·DALL·E 1·Preview 제품 기능과 구분할 수 있다.'
+  next:
+    - target: source.085
+      reason: 085DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성 — unCLIP 논문의 구조·평가·한계와 제품 변경을 locator로 확인한다.
+    - target: analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+      reason: 사전 학습 지식은 과제에 어떻게 도착하는가 — 동결된 표현과 학습된 연결부가 실제 생성 과제로 전달되는 방식을 비교한다.
 ---
 # DALL·E 2
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[CLIP]], [[DALL·E (2021)]], [[Transformer]]<br>
-> **읽고 나면:** DALL·E 2 논문의 unCLIP을 `text → CLIP image embedding → diffusion decoder`로 설명하고, 이 학습된 조건부 생성을 CLIP gradient guidance·DALL·E 1·Preview 제품 기능과 구분할 수 있다.
+> **선수 지식:** [[concept.clip|CLIP]], [[concept.dall-e-2021|DALL·E (2021)]]<br>
+> **읽고 나면:** DALL·E 2 논문의 unCLIP을 text → CLIP image embedding → diffusion decoder로 설명하고, 이 학습된 조건부 생성을 CLIP gradient guidance·DALL·E 1·Preview 제품 기능과 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
 
@@ -142,9 +156,8 @@ Preview system card는 접근 제한, prompt·이미지 filter, 사용 정책, �
 
 ### 다음 문서
 
-- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] — unCLIP 논문의 구조·평가·한계와 제품 변경을 locator로 확인한다.
-- [[CLIP]] — 텍스트와 image를 정렬하는 이중 인코더와 이를 생성 조건으로 쓰는 후속 구조를 구분한다.
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 동결된 표현과 학습된 연결부가 실제 생성 과제로 전달되는 방식을 비교한다.
+- [[source.085|DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] — 085DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성 — unCLIP 논문의 구조·평가·한계와 제품 변경을 locator로 확인한다.
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]] — 동결된 표현과 학습된 연결부가 실제 생성 과제로 전달되는 방식을 비교한다.
 
 ## 출처
 
@@ -156,8 +169,8 @@ Preview system card는 접근 제한, prompt·이미지 filter, 사용 정책, �
 
 ## 관련 항목
 
-- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
-- [[DALL·E (2021)]]
-- [[CLIP]]
-- [[Transformer]]
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]
+- [[source.085|DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]]
+- [[concept.clip|CLIP]]
+- [[concept.dall-e-2021|DALL·E (2021)]]
+- [[concept.transformer|Transformer]]

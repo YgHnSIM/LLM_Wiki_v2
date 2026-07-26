@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.clip
 page_type: concept
 title: CLIP
@@ -16,23 +16,25 @@ tags:
   - domain/machine-learning
 created: '2026-07-21'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md'
-  - 'raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md'
-  - 'raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md'
-  - 'raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md'
-  - 'raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.ko.md'
-  - 'raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.commentary.ko.md'
-  - 'raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.ko.md'
-  - 'raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.commentary.ko.md'
+  - raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md
+  - raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md
+  - raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md
+  - raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md
+  - raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.ko.md
+  - raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.commentary.ko.md
+  - raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.ko.md
+  - raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.commentary.ko.md
 evidence:
   - source_id: radford-et-al-2021-clip
     locator: 'PMLR 139, pp. 8748–8763의 §§2.1–2.5·Figures 1–3, §§3–6·Figures 4–7과 supplement §§A–B·D–E·I, Tables 2·4·8–10·18–20의 WIT·dual encoder·대칭 대조 손실·zero-shot classifier·prompt ensemble·dataset·overlap·bias·학습 및 평가 조건'
     relation: supports
   - source_id: ramesh-et-al-2021-dalle
-    locator: '§2.6과 Figures 3·6·9(c)의 별도 대조 모델을 이용한 512개 생성 후보 재순위화와 sample-pool 크기별 FID·IS 변화'
+    locator: §2.6과 Figures 3·6·9(c)의 별도 대조 모델을 이용한 512개 생성 후보 재순위화와 sample-pool 크기별 FID·IS 변화
     relation: supplements
   - source_id: alayrac-et-al-2022-flamingo
     locator: 'NeurIPS 2022, §§1·2.1–2.5·5와 Figures 2–4의 대조 시각 encoder 재사용, 조건부 생성 구조와 분류 성능 trade-off; Supplementary §§B.1.3·B.2.1과 Tables 7·11'
@@ -40,24 +42,40 @@ evidence:
   - source_id: ramesh-et-al-2022-unclip
     locator: 'arXiv:2204.06125, §§2.1–2.2·3.1–3.3·5.1–5.5·6와 Figures 2–10의 동결 CLIP, text-to-image embedding prior, diffusion decoder 조건화, classifier-free guidance와 CLIP gradient guidance의 구분'
     relation: contextualizes
-related:
-  - source.070
-  - source.075
-  - source.084
-  - source.085
-  - concept.dall-e-2021
-  - concept.dall-e-2
-  - concept.flamingo
-  - concept.엔트로피-교차-엔트로피-kl-발산
-  - concept.transformer
-  - concept.합성곱-신경망
-  - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+relations:
+  - target: source.075
+    kind: related
+  - target: source.084
+    kind: related
+  - target: concept.dall-e-2021
+    kind: related
+  - target: concept.dall-e-2
+    kind: related
+  - target: concept.flamingo
+    kind: related
+  - target: concept.엔트로피-교차-엔트로피-kl-발산
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.transformer
+    - target: concept.합성곱-신경망
+  assumed_knowledge: 없음
+  outcomes:
+    - 'CLIP의 이중 인코더·대칭 대조 손실·자연어 제로샷 분류 흐름을 설명하고, 공유 임베딩과 교차 어텐션 융합·생성·일반 멀티모달 이해를 구분할 수 있다.'
+  next:
+    - target: source.070
+      reason: '070CLIP과 대조적 언어-이미지 사전 학습 — WIT 구성, architecture, 27개 평가와 원 raw 설명의 검증 정정을 1차 근거 locator로 확인한다.'
+    - target: source.085
+      reason: 085DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성 — 동결된 CLIP 잠재 좌표계가 prior와 확산 decoder의 생성 조건으로 쓰이는 방식을 확인한다.
 ---
 # CLIP
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[Transformer]], [[합성곱 신경망]]<br>
+> **선수 지식:** [[concept.transformer|Transformer]], [[concept.합성곱-신경망|합성곱 신경망]]<br>
 > **읽고 나면:** CLIP의 이중 인코더·대칭 대조 손실·자연어 제로샷 분류 흐름을 설명하고, 공유 임베딩과 교차 어텐션 융합·생성·일반 멀티모달 이해를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -190,9 +208,8 @@ Prompt wording과 후보 클래스 설계는 정확도와 편향을 함께 바�
 
 ### 다음 문서
 
-- [[070_CLIP과 대조적 언어-이미지 사전 학습]] — WIT 구성, architecture, 27개 평가와 원 raw 설명의 검증 정정을 1차 근거 locator로 확인한다.
-- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] — 동결된 CLIP 잠재 좌표계가 prior와 확산 decoder의 생성 조건으로 쓰이는 방식을 확인한다.
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — CLIP의 class prompt를 feature extraction·fine-tuning·in-context prompting과 비교해 과제 명세가 놓이는 위치를 확장한다.
+- [[source.070|CLIP과 대조적 언어-이미지 사전 학습]] — 070CLIP과 대조적 언어-이미지 사전 학습 — WIT 구성, architecture, 27개 평가와 원 raw 설명의 검증 정정을 1차 근거 locator로 확인한다.
+- [[source.085|DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] — 085DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성 — 동결된 CLIP 잠재 좌표계가 prior와 확산 decoder의 생성 조건으로 쓰이는 방식을 확인한다.
 
 ## 출처
 
@@ -210,14 +227,13 @@ Prompt wording과 후보 클래스 설계는 정확도와 편향을 함께 바�
 
 ## 관련 항목
 
-- [[엔트로피·교차 엔트로피·KL 발산]]
-- [[070_CLIP과 대조적 언어-이미지 사전 학습]]
-- [[075_DALL·E와 이산 이미지 토큰 생성]]
-- [[084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]]
-- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
-- [[DALL·E (2021)]]
-- [[DALL·E 2]]
-- [[Flamingo]]
-- [[Transformer]]
-- [[합성곱 신경망]]
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]
+- [[source.070|CLIP과 대조적 언어-이미지 사전 학습]]
+- [[source.085|DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
+- [[concept.transformer|Transformer]]
+- [[concept.합성곱-신경망|합성곱 신경망]]
+- [[source.075|DALL·E와 이산 이미지 토큰 생성]]
+- [[source.084|Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습]]
+- [[concept.dall-e-2021|DALL·E (2021)]]
+- [[concept.dall-e-2|DALL·E 2]]
+- [[concept.flamingo|Flamingo]]
+- [[concept.엔트로피-교차-엔트로피-kl-발산|엔트로피·교차 엔트로피·KL 발산]]

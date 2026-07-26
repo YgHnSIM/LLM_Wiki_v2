@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.001
 page_type: source
 title: 섀넌의 N-gram 모델
@@ -13,15 +13,13 @@ tags:
   - domain/nlp
 created: '2026-05-07'
 updated: '2026-07-23'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - >-
-    raw/001_Shannon's N-gram Model - The Foundation of Statistical Language
-    Processing..md
-  - >-
-    raw/001_Shannon's N-gram Model - The Foundation of Statistical Language
-    Processing.commentary.md
+  - raw/001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md
+  - raw/001_Shannon's N-gram Model - The Foundation of Statistical Language Processing.commentary.md
 evidence:
   - source_id: shannon-1948
     locator: 'Part I, §§2–3 and §6'
@@ -32,26 +30,46 @@ evidence:
   - source_id: chen-goodman-1998
     locator: chapters 2–4
     relation: supplements
-related:
-  - concept.확률
-  - concept.n-gram-모델
-  - concept.마르코프-가정
-  - concept.조건부-확률
-  - concept.데이터-희소성
-  - concept.smoothing
-  - concept.perplexity
-  - entity.클로드-섀넌
-  - entity.안드레이-마르코프
-  - entity.슬라바-카츠
-  - analysis.n-gram에서-llm으로
-  - meta.overview
-  - meta.index
+relations:
+  - target: concept.마르코프-가정
+    kind: related
+  - target: concept.데이터-희소성
+    kind: related
+  - target: concept.smoothing
+    kind: related
+  - target: concept.perplexity
+    kind: related
+  - target: entity.클로드-섀넌
+    kind: related
+  - target: entity.안드레이-마르코프
+    kind: related
+  - target: entity.슬라바-카츠
+    kind: related
+  - target: meta.overview
+    kind: related
+  - target: meta.index
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites:
+    - target: concept.확률
+    - target: concept.조건부-확률
+  assumed_knowledge: 확률분포의 합이 1이라는 뜻과 문맥이 주어졌을 때 조건부 확률을 읽는 방법
+  outcomes:
+    - '섀넌이 영어의 예측 가능성을 어떤 순서의 근사로 보였는지, 이 작업이 현대 n-gram과 어디까지 이어지는지 설명할 수 있다.'
+  next:
+    - target: concept.n-gram-모델
+      reason: 다음에는 N-gram 모델에서 빈도 기반 계산을 익힌다.
+    - target: analysis.n-gram에서-llm으로
+      reason: 큰 계보를 먼저 보고 싶다면 N-gram에서 LLM으로 이어지는 계보를 먼저 읽는다.
 ---
 # 섀넌의 N-gram 모델
 
 > [!note] 학습 안내
 > **난이도:** 입문<br>
-> **선수 지식:** [[확률]]에서 여러 후보의 확률 합이 1이라는 뜻, [[조건부 확률]]에서 문맥이 주어졌을 때 확률을 다시 계산한다는 뜻<br>
+> **선수 지식:** [[concept.확률|확률]], [[concept.조건부-확률|조건부 확률]]<br>
 > **읽고 나면:** 섀넌이 영어의 예측 가능성을 어떤 순서의 근사로 보였는지, 이 작업이 현대 n-gram과 어디까지 이어지는지 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -153,8 +171,12 @@ $C(h)>0$인 관측 문맥에서 $C(h,w)=0$이면 단순 최대우도 확률은 0
 
 다음에는 [[N-gram 모델]]에서 빈도 기반 계산을 익힌다. 큰 계보를 먼저 보고 싶다면 [[N-gram에서 LLM으로|N-gram에서 LLM으로 이어지는 계보]]를 먼저 읽는다.
 
-## 출처
+### 다음 문서
 
+- [[concept.n-gram-모델|N-gram 모델]] — 다음에는 N-gram 모델에서 빈도 기반 계산을 익힌다.
+- [[analysis.n-gram에서-llm으로|N-gram에서 LLM으로]] — 큰 계보를 먼저 보고 싶다면 N-gram에서 LLM으로 이어지는 계보를 먼저 읽는다.
+
+## 출처
 - Claude E. Shannon, [A Mathematical Theory of Communication](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf), 1948, Part I §§2–3·§6.
 - Slava M. Katz, [Estimation of Probabilities from Sparse Data for the Language Model Component of a Speech Recognizer](https://doi.org/10.1109/TASSP.1987.1165125), 1987, pp. 400–401.
 - Stanley F. Chen·Joshua Goodman, [An Empirical Study of Smoothing Techniques for Language Modeling](https://dash.harvard.edu/handle/1/25104739), 1998, chapters 2–4.
@@ -163,16 +185,16 @@ $C(h)>0$인 관측 문맥에서 $C(h,w)=0$이면 단순 최대우도 확률은 0
 
 ## 관련 항목
 
-- [[확률]]
-- [[N-gram 모델]]
-- [[마르코프 가정]]
-- [[조건부 확률]]
-- [[데이터 희소성]]
-- [[Smoothing]]
-- [[Perplexity]]
-- [[클로드 섀넌]]
-- [[안드레이 마르코프]]
-- [[슬라바 카츠]]
-- [[N-gram에서 LLM으로]]
-- [[overview]]
-- [[index]]
+- [[concept.n-gram-모델|N-gram 모델]]
+- [[analysis.n-gram에서-llm으로|N-gram에서 LLM으로]]
+- [[concept.확률|확률]]
+- [[concept.조건부-확률|조건부 확률]]
+- [[concept.마르코프-가정|마르코프 가정]]
+- [[concept.데이터-희소성|데이터 희소성]]
+- [[concept.smoothing|Smoothing]]
+- [[concept.perplexity|Perplexity]]
+- [[entity.클로드-섀넌|클로드 섀넌]]
+- [[entity.안드레이-마르코프|안드레이 마르코프]]
+- [[entity.슬라바-카츠|슬라바 카츠]]
+- [[meta.overview|Overview]]
+- [[meta.index|Index]]

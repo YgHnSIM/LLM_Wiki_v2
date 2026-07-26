@@ -1,9 +1,12 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.sequence-to-sequence
 page_type: concept
 title: Sequence-to-Sequence 학습
-aliases: [Sequence-to-Sequence, seq2seq, 시퀀스-투-시퀀스]
+aliases:
+  - Sequence-to-Sequence
+  - seq2seq
+  - 시퀀스-투-시퀀스
 tags:
   - type/concept
   - domain/ai
@@ -11,11 +14,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-18'
 updated: '2026-07-23'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.ko.md'
-  - 'raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.commentary.ko.md'
+  - raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.ko.md
+  - raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.commentary.ko.md
 evidence:
   - source_id: sutskever-vinyals-le-2014-seq2seq
     locator: '초록과 §§1–3, equations (1)–(2), Tables 1–3, pp. 3104–3110'
@@ -24,21 +29,38 @@ evidence:
     locator: '§§2–4, 특히 conditional probability 구조와 SMT 구 점수 실험, pp. 1724–1731'
     relation: contextualizes
   - source_id: bahdanau-cho-bengio-2015-attention
-    locator: '초록과 §§1–3의 고정 길이 벡터 가정·soft alignment'
+    locator: 초록과 §§1–3의 고정 길이 벡터 가정·soft alignment
     relation: contextualizes
-related:
-  - source.045
-  - source.047
-  - concept.인코더-디코더
-  - concept.자기회귀-생성
-  - concept.신경망-기계-번역
-  - concept.어텐션-메커니즘
+relations:
+  - target: source.045
+    kind: related
+  - target: concept.자기회귀-생성
+    kind: related
+  - target: concept.신경망-기계-번역
+    kind: related
+  - target: concept.어텐션-메커니즘
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.순환-신경망
+    - target: concept.조건부-확률
+  assumed_knowledge: 없음
+  outcomes:
+    - 'seq2seq가 입력을 내부 상태로 바꾸고 이전 출력에 조건화해 가변 길이 시퀀스를 생성하는 흐름을 설명하며, 초기 고정 벡터와 후속 어텐션의 범위를 구분할 수 있다.'
+  next:
+    - target: concept.인코더-디코더
+      reason: '다음에는 인코더-디코더에서 두 구성요소의 역할을 자세히 보고, 047어텐션 메커니즘과 동적 정렬에서 고정 벡터 이후의 입력 접근을 살핀다.'
+    - target: source.047
+      reason: '다음에는 인코더-디코더에서 두 구성요소의 역할을 자세히 보고, 047어텐션 메커니즘과 동적 정렬에서 고정 벡터 이후의 입력 접근을 살핀다.'
 ---
 # Sequence-to-Sequence 학습
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[순환 신경망]], [[조건부 확률]]<br>
+> **선수 지식:** [[concept.순환-신경망|순환 신경망]], [[concept.조건부-확률|조건부 확률]]<br>
 > **읽고 나면:** seq2seq가 입력을 내부 상태로 바꾸고 이전 출력에 조건화해 가변 길이 시퀀스를 생성하는 흐름을 설명하며, 초기 고정 벡터와 후속 어텐션의 범위를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -89,8 +111,12 @@ Sutskever 등의 대표 실험은 4층 LSTM, 원문 순서 역전, 제한 어휘
 
 다음에는 [[인코더-디코더]]에서 두 구성요소의 역할을 자세히 보고, [[047_어텐션 메커니즘과 동적 정렬]]에서 고정 벡터 이후의 입력 접근을 살핀다.
 
-## 출처
+### 다음 문서
 
+- [[concept.인코더-디코더|인코더-디코더]] — 다음에는 인코더-디코더에서 두 구성요소의 역할을 자세히 보고, 047어텐션 메커니즘과 동적 정렬에서 고정 벡터 이후의 입력 접근을 살핀다.
+- [[source.047|어텐션 메커니즘과 동적 정렬]] — 다음에는 인코더-디코더에서 두 구성요소의 역할을 자세히 보고, 047어텐션 메커니즘과 동적 정렬에서 고정 벡터 이후의 입력 접근을 살핀다.
+
+## 출처
 - [[045_Sequence-to-Sequence 학습과 신경 기계 번역]]
 - Ilya Sutskever·Oriol Vinyals·Quoc V. Le, [Sequence to Sequence Learning with Neural Networks](https://proceedings.neurips.cc/paper_files/paper/2014/hash/5a18e133cbf9f257297f410bb7eca942-Abstract.html), 2014.
 - Kyunghyun Cho 외, [Learning Phrase Representations using RNN Encoder–Decoder](https://aclanthology.org/D14-1179/), 2014.
@@ -98,9 +124,11 @@ Sutskever 등의 대표 실험은 4층 LSTM, 원문 순서 역전, 제한 어휘
 
 ## 관련 항목
 
-- [[045_Sequence-to-Sequence 학습과 신경 기계 번역]]
-- [[047_어텐션 메커니즘과 동적 정렬]]
-- [[어텐션 메커니즘]]
-- [[인코더-디코더]]
-- [[자기회귀 생성]]
-- [[신경망 기계 번역]]
+- [[concept.인코더-디코더|인코더-디코더]]
+- [[source.047|어텐션 메커니즘과 동적 정렬]]
+- [[concept.순환-신경망|순환 신경망]]
+- [[concept.조건부-확률|조건부 확률]]
+- [[source.045|Sequence-to-Sequence 학습과 신경 기계 번역]]
+- [[concept.자기회귀-생성|자기회귀 생성]]
+- [[concept.신경망-기계-번역|신경망 기계 번역]]
+- [[concept.어텐션-메커니즘|어텐션 메커니즘]]

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.madaline
 page_type: concept
 title: MADALINE
@@ -14,8 +14,10 @@ tags:
   - domain/signal-processing
 created: '2026-07-14'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/006_1962_위드로-호프_MADALINE.md
   - raw/006_1962_위드로-호프_MADALINE_해설.md
@@ -29,18 +31,33 @@ evidence:
   - source_id: widrow-winter-1988
     locator: pp. 1-401–1-408
     relation: supports
-related:
-  - concept.adaline
-  - concept.lms-알고리즘
-  - concept.퍼셉트론
-  - concept.적응-필터
-  - analysis.퍼셉트론에서-madaline으로
+relations:
+  - target: concept.lms-알고리즘
+    kind: related
+  - target: concept.퍼셉트론
+    kind: related
+  - target: concept.적응-필터
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.adaline
+  assumed_knowledge: 없음
+  outcomes:
+    - 여러 ADALINE과 고정 논리층을 결합한 MADALINE의 구조와 학습 범위를 설명할 수 있다.
+  next:
+    - target: source.006
+      reason: 006위드로-호프의 MADALINE — 구조와 학습 규칙의 문헌 근거와 역사적 범위를 확인한다.
+    - target: analysis.퍼셉트론에서-madaline으로
+      reason: 퍼셉트론에서 MADALINE으로 — 퍼셉트론과 MADALINE의 학습 신호와 구조 차이를 비교한다.
 ---
 # MADALINE
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[ADALINE]]<br>
+> **선수 지식:** [[concept.adaline|ADALINE]]<br>
 > **읽고 나면:** 여러 ADALINE과 고정 논리층을 결합한 MADALINE의 구조와 학습 범위를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -80,8 +97,8 @@ Madaline I에서는 여러 ADALINE이 같은 입력으로 서로 다른 분리 �
 
 ### 다음 문서
 
-- [[006_위드로-호프의 MADALINE]] — 구조와 학습 규칙의 문헌 근거와 역사적 범위를 확인한다.
-- [[퍼셉트론에서 MADALINE으로]] — 퍼셉트론과 MADALINE의 학습 신호와 구조 차이를 비교한다.
+- [[source.006|위드로-호프의 MADALINE]] — 006위드로-호프의 MADALINE — 구조와 학습 규칙의 문헌 근거와 역사적 범위를 확인한다.
+- [[analysis.퍼셉트론에서-madaline으로|퍼셉트론에서 MADALINE으로]] — 퍼셉트론과 MADALINE의 학습 신호와 구조 차이를 비교한다.
 
 ## 출처
 
@@ -91,8 +108,9 @@ Madaline I에서는 여러 ADALINE이 같은 입력으로 서로 다른 분리 �
 
 ## 관련 항목
 
-- [[ADALINE]]
-- [[LMS 알고리즘]]
-- [[퍼셉트론]]
-- [[적응 필터]]
-- [[퍼셉트론에서 MADALINE으로]]
+- [[source.006|위드로-호프의 MADALINE]]
+- [[analysis.퍼셉트론에서-madaline으로|퍼셉트론에서 MADALINE으로]]
+- [[concept.adaline|ADALINE]]
+- [[concept.lms-알고리즘|LMS 알고리즘]]
+- [[concept.퍼셉트론|퍼셉트론]]
+- [[concept.적응-필터|적응 필터]]

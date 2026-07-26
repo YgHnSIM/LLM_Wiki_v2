@@ -571,6 +571,9 @@ if (searchPage) {
   const input = searchPage.querySelector('[data-search-page-input]');
   const category = searchPage.querySelector('[data-search-filter-category]');
   const verification = searchPage.querySelector('[data-search-filter-verification]');
+  const coverage = searchPage.querySelector('[data-search-filter-coverage]');
+  const mode = searchPage.querySelector('[data-search-filter-mode]');
+  const editorial = searchPage.querySelector('[data-search-filter-editorial]');
   const tag = searchPage.querySelector('[data-search-filter-tag]');
   const sort = searchPage.querySelector('[data-search-sort]');
   const searchContext = searchPage.closest('main, .search-page, [data-search-context]') || document;
@@ -588,9 +591,9 @@ if (searchPage) {
       if (status) status.textContent = visualText;
       if (liveStatus && liveStatus !== status) liveStatus.textContent = liveText;
     };
-    const hasDetailedFilters = () => [category?.value, verification?.value, tag?.value]
+    const hasDetailedFilters = () => [category?.value, verification?.value, coverage?.value, mode?.value, editorial?.value, tag?.value]
       .some((value) => normalize(value));
-    const detailedFilterCount = () => [category?.value, verification?.value, tag?.value]
+    const detailedFilterCount = () => [category?.value, verification?.value, coverage?.value, mode?.value, editorial?.value, tag?.value]
       .filter((value) => normalize(value)).length;
     const normalizeSortForScope = () => {
       if (!sort || normalize(input.value) || !hasDetailedFilters() || sort.value !== 'relevance') return;
@@ -607,6 +610,9 @@ if (searchPage) {
       input.value = state.q;
       setSelectFromUrl(category, state.category);
       setSelectFromUrl(verification, state.verification);
+      setSelectFromUrl(coverage, state.coverage);
+      setSelectFromUrl(mode, state.mode);
+      setSelectFromUrl(editorial, state.editorial);
       setSelectFromUrl(tag, state.tag);
       setSelectFromUrl(sort, state.sort, 'relevance');
       normalizeSortForScope();
@@ -618,10 +624,13 @@ if (searchPage) {
         q: input.value.trim(),
         category: category?.value,
         verification: verification?.value,
+        coverage: coverage?.value,
+        mode: mode?.value,
+        editorial: editorial?.value,
         tag: tag?.value,
         sort: sort?.value,
       });
-      for (const key of ['q', 'category', 'verification', 'tag', 'sort']) url.searchParams.delete(key);
+      for (const key of ['q', 'category', 'verification', 'coverage', 'mode', 'editorial', 'tag', 'sort']) url.searchParams.delete(key);
       for (const [key, value] of params.entries()) url.searchParams.set(key, value);
       window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
     };
@@ -683,6 +692,9 @@ if (searchPage) {
           q: input.value,
           category: category?.value,
           verification: verification?.value,
+          coverage: coverage?.value,
+          mode: mode?.value,
+          editorial: editorial?.value,
           tag: tag?.value,
         });
       }
@@ -696,6 +708,9 @@ if (searchPage) {
         q: query,
         category: category?.value,
         verification: verification?.value,
+        coverage: coverage?.value,
+        mode: mode?.value,
+        editorial: editorial?.value,
         tag: tag?.value,
       });
       if (!scoped) {
@@ -800,12 +815,18 @@ if (searchPage) {
           q: input.value,
           category: category?.value,
           verification: verification?.value,
+          coverage: coverage?.value,
+          mode: mode?.value,
+          editorial: editorial?.value,
           tag: tag?.value,
         });
         let ranked = scoped ? rankEntries(index, input.value) : [];
         ranked = ranked.filter(({ entry }) => (
           matchesChoice(category?.value, [entry.categoryKey, entry.category])
           && matchesChoice(verification?.value, [entry.verification, entry.verificationLabel])
+          && matchesChoice(coverage?.value, [entry.evidenceCoverage])
+          && matchesChoice(mode?.value, [entry.contentMode])
+          && matchesChoice(editorial?.value, [entry.editorialStatus])
           && matchesChoice(tag?.value, [...asArray(entry.tagKeys), ...asArray(entry.tags)])
         ));
         rankedResults = sortRanked(ranked);
@@ -834,7 +855,7 @@ if (searchPage) {
       requestNumber += 1;
       debouncedSearch();
     });
-    for (const control of [category, verification, tag, sort].filter(Boolean)) {
+    for (const control of [category, verification, coverage, mode, editorial, tag, sort].filter(Boolean)) {
       control.addEventListener('change', () => {
         debouncedSearch.cancel();
         applySearch();
@@ -849,6 +870,9 @@ if (searchPage) {
       input.value = '';
       if (category) category.value = '';
       if (verification) verification.value = '';
+      if (coverage) coverage.value = '';
+      if (mode) mode.value = '';
+      if (editorial) editorial.value = '';
       if (tag) tag.value = '';
       if (sort) sort.value = 'relevance';
       debouncedSearch.cancel();

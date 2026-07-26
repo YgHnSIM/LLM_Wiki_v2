@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.095
 page_type: source
 title: BIG-bench와 MMLU의 평가 범위·집계 경계
@@ -15,11 +15,13 @@ tags:
   - domain/nlp
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.ko.md'
-  - 'raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.commentary.ko.md'
+  - raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.ko.md
+  - raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.commentary.ko.md
 evidence:
   - source_id: hendrycks-et-al-2021-mmlu
     locator: 'arXiv v1 2020-09-07, 초록과 §§1·3–5, Table 1, Appendices A–B의 57개 과목·15,908문항·5-shot prompt·GPT-3/UnifiedQA·사람 기준·교정·형식·오염 분석'
@@ -37,22 +39,36 @@ evidence:
     locator: '§§2·4와 Table 2 및 Appendices B·D의 MMLU 5-shot 86.4%, 번역 MMLU, 시험·benchmark 오염 검사와 공개되지 않은 model 세부'
     relation: contextualizes
   - source_id: liang-et-al-2023-helm
-    locator: '§§1.1–1.2·3–8·10–11의 시나리오×적응×메트릭 설계와 정확도 밖 보정·강건성·공정성·독성·효율성 및 오염·prompt·비용 한계'
+    locator: §§1.1–1.2·3–8·10–11의 시나리오×적응×메트릭 설계와 정확도 밖 보정·강건성·공정성·독성·효율성 및 오염·prompt·비용 한계
     relation: contextualizes
-related:
-  - concept.big-bench-mmlu
-  - concept.glue-superglue
-  - concept.helm
-  - analysis.평가-지표와-모델-유인
-  - analysis.손실-곡선과-능력-곡선-사이
-  - source.079
-  - source.083
+relations:
+  - target: concept.big-bench-mmlu
+    kind: related
+  - target: source.079
+    kind: related
+  - target: source.083
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.glue-superglue
+    - target: concept.helm
+  assumed_knowledge: 없음
+  outcomes:
+    - 'MMLU의 57개 객관식 과목과 BIG-bench의 204개 이질적 과제를 구분하고, few-shot·prompt·task metric·정규화·평균·사람 기준·오염 조건이 빠진 단일 점수를 일반 능력이나 배포 적합성으로 확대하면 안 되는 이유를 설명할 수 있다.'
+  next:
+    - target: analysis.평가-지표와-모델-유인
+      reason: 자동 평가 지표는 무엇을 보상하는가 — task metric과 aggregate가 model 선택·최적화의 유인이 되는 방식을 살핀다.
+    - target: analysis.손실-곡선과-능력-곡선-사이
+      reason: 손실 곡선과 능력 곡선 사이 — BIG-bench의 급격한 score와 더 부드러운 likelihood·부분 과제 곡선을 구분한다.
 ---
 # BIG-bench와 MMLU의 평가 범위·집계 경계
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[GLUE와 SuperGLUE]], [[HELM]]<br>
+> **선수 지식:** [[concept.glue-superglue|GLUE와 SuperGLUE]], [[concept.helm|HELM]]<br>
 > **읽고 나면:** MMLU의 57개 객관식 과목과 BIG-bench의 204개 이질적 과제를 구분하고, few-shot·prompt·task metric·정규화·평균·사람 기준·오염 조건이 빠진 단일 점수를 일반 능력이나 배포 적합성으로 확대하면 안 되는 이유를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -203,10 +219,8 @@ MMLU는 좁은 언어 task에서 학술·전문 과목으로, BIG-bench는 고�
 
 ### 다음 문서
 
-- [[GLUE와 SuperGLUE]] — task suite의 포화에 대응해 난도를 높인 이전 평가 계보를 본다.
-- [[HELM]] — model과 scenario를 여러 메트릭·적응 조건의 행렬로 남기는 후속 평가 장부를 본다.
-- [[자동 평가 지표는 무엇을 보상하는가]] — task metric과 aggregate가 model 선택·최적화의 유인이 되는 방식을 살핀다.
-- [[손실 곡선과 능력 곡선 사이]] — BIG-bench의 급격한 score와 더 부드러운 likelihood·부분 과제 곡선을 구분한다.
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]] — task metric과 aggregate가 model 선택·최적화의 유인이 되는 방식을 살핀다.
+- [[analysis.손실-곡선과-능력-곡선-사이|손실 곡선과 능력 곡선 사이]] — BIG-bench의 급격한 score와 더 부드러운 likelihood·부분 과제 곡선을 구분한다.
 
 ## 출처
 
@@ -220,10 +234,10 @@ MMLU는 좁은 언어 task에서 학술·전문 과목으로, BIG-bench는 고�
 
 ## 관련 항목
 
-- [[BIG-bench와 MMLU]]
-- [[GLUE와 SuperGLUE]]
-- [[HELM]]
-- [[079_HELM과 다차원 언어 모델 평가]]
-- [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]]
-- [[자동 평가 지표는 무엇을 보상하는가]]
-- [[손실 곡선과 능력 곡선 사이]]
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]]
+- [[analysis.손실-곡선과-능력-곡선-사이|손실 곡선과 능력 곡선 사이]]
+- [[concept.glue-superglue|GLUE와 SuperGLUE]]
+- [[concept.helm|HELM]]
+- [[concept.big-bench-mmlu|BIG-bench와 MMLU]]
+- [[source.079|HELM과 다차원 언어 모델 평가]]
+- [[source.083|PaLM과 Pathways 기반 대규모 언어 모델 확장]]

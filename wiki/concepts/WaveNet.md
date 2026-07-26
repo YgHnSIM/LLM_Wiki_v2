@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.wavenet
 page_type: concept
 title: WaveNet
@@ -13,11 +13,13 @@ tags:
   - domain/speech-processing
 created: '2026-07-19'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/054_WaveNet - Neural Audio Generation Revolution.ko.md'
-  - 'raw/054_WaveNet - Neural Audio Generation Revolution.commentary.ko.md'
+  - raw/054_WaveNet - Neural Audio Generation Revolution.ko.md
+  - raw/054_WaveNet - Neural Audio Generation Revolution.commentary.ko.md
 evidence:
   - source_id: van-den-oord-et-al-2016-wavenet
     locator: '초록과 §§2–5, Figures 2–5와 Table 1의 자기회귀 파형 분포·팽창 인과 합성곱·조건화·MOS 평가'
@@ -25,17 +27,29 @@ evidence:
   - source_id: deepmind-2017-wavenet-assistant
     locator: '2017-10-04 공지의 원형 연구 모델과 1,000배 이상 빠른 후속 생산 모델, 미국 영어·일본어 Assistant 배포 구분'
     relation: supplements
-related:
-  - source.054
-  - concept.자기회귀-생성
-  - concept.합성곱-신경망
-  - concept.잔차-연결
+relations:
+  - target: source.054
+    kind: related
+  - target: concept.잔차-연결
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.합성곱-신경망
+  assumed_knowledge: 없음
+  outcomes:
+    - 'WaveNet의 표본별 자기회귀 분포, 팽창 인과 합성곱, 조건화와 순차 생성의 관계를 설명할 수 있다.'
+  next:
+    - target: concept.자기회귀-생성
+      reason: 자기회귀 생성 — 이전 출력이 다음 출력의 조건이 되는 일반 원리와 순차 추론 비용을 확장해 본다.
 ---
 # WaveNet
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[합성곱 신경망]]<br>
+> **선수 지식:** [[concept.합성곱-신경망|합성곱 신경망]]<br>
 > **읽고 나면:** WaveNet의 표본별 자기회귀 분포, 팽창 인과 합성곱, 조건화와 순차 생성의 관계를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -102,7 +116,7 @@ WaveNet은 [[합성곱 신경망]]을 이미지 분류가 아닌 시퀀스 생�
 
 ### 다음 문서
 
-- [[자기회귀 생성]] — 이전 출력이 다음 출력의 조건이 되는 일반 원리와 순차 추론 비용을 확장해 본다.
+- [[concept.자기회귀-생성|자기회귀 생성]] — 이전 출력이 다음 출력의 조건이 되는 일반 원리와 순차 추론 비용을 확장해 본다.
 
 ## 출처
 
@@ -112,7 +126,7 @@ WaveNet은 [[합성곱 신경망]]을 이미지 분류가 아닌 시퀀스 생�
 
 ## 관련 항목
 
-- [[054_WaveNet과 표본 단위 신경 오디오 생성]]
-- [[자기회귀 생성]]
-- [[합성곱 신경망]]
-- [[잔차 연결]]
+- [[concept.자기회귀-생성|자기회귀 생성]]
+- [[concept.합성곱-신경망|합성곱 신경망]]
+- [[source.054|WaveNet과 표본 단위 신경 오디오 생성]]
+- [[concept.잔차-연결|잔차 연결]]

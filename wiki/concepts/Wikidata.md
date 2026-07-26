@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.wikidata
 page_type: concept
 title: Wikidata
@@ -14,33 +14,51 @@ tags:
   - domain/nlp
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/042_Wikidata Collaborative Knowledge Base for Language AI.ko.md'
-  - 'raw/042_Wikidata Collaborative Knowledge Base for Language AI.commentary.ko.md'
+  - raw/042_Wikidata Collaborative Knowledge Base for Language AI.ko.md
+  - raw/042_Wikidata Collaborative Knowledge Base for Language AI.commentary.ko.md
 evidence:
   - source_id: vrandecic-krotzsch-2014-wikidata
-    locator: 'pp. 78–85의 2012년 시작·Wikimedia 통합·다언어 item·공동체 편집·개방 라이선스'
+    locator: pp. 78–85의 2012년 시작·Wikimedia 통합·다언어 item·공동체 편집·개방 라이선스
     relation: supports
   - source_id: wikidata-help-data-model
-    locator: 'item·property·statement·label·sitelink·qualifier·reference·rank 데이터 모델'
+    locator: item·property·statement·label·sitelink·qualifier·reference·rank 데이터 모델
     relation: supports
   - source_id: wikidata-help-about-data
-    locator: 'RDF export·CC0 재사용·data access 설명'
+    locator: RDF export·CC0 재사용·data access 설명
     relation: supports
   - source_id: wikidata-help-references-ranking
-    locator: 'reference와 preferred·normal·deprecated rank의 역할 구분'
+    locator: reference와 preferred·normal·deprecated rank의 역할 구분
     relation: supports
   - source_id: wikidata-query-service-limits
-    locator: '공개 SPARQL endpoint의 실행 시간·결과 규모·timeout 제한'
+    locator: 공개 SPARQL endpoint의 실행 시간·결과 규모·timeout 제한
     relation: contextualizes
-related:
-  - source.042
-  - concept.wikibase-데이터-모델
-  - concept.sparql
-  - concept.지식-그래프
-  - concept.freebase
+relations:
+  - target: source.042
+    kind: related
+  - target: concept.wikibase-데이터-모델
+    kind: related
+  - target: concept.지식-그래프
+    kind: related
+  - target: concept.freebase
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites: []
+  assumed_knowledge: 없음
+  outcomes:
+    - 'Wikidata가 언어 중립 식별자와 출처 있는 statement를 공동 편집·재사용하는 방식을 설명하고, 품질·최신성·AI 활용의 경계를 구분할 수 있다.'
+  next:
+    - target: concept.sparql
+      reason: '다음에는 SPARQL에서 Wikidata 관계를 조회하는 방식을 보고, 구조화된 의미 자원은 무엇을 노드로 삼는가에서 Wikidata와 다른 자원의 노드 선택을 비교한다.'
+    - target: analysis.의미-자원의-노드-단위
+      reason: '다음에는 SPARQL에서 Wikidata 관계를 조회하는 방식을 보고, 구조화된 의미 자원은 무엇을 노드로 삼는가에서 Wikidata와 다른 자원의 노드 선택을 비교한다.'
 ---
 # Wikidata
 
@@ -101,8 +119,12 @@ LLM이 Wikidata를 조회해도 잘못된 item·property 선택, qualifier 누�
 
 다음에는 [[SPARQL]]에서 Wikidata 관계를 조회하는 방식을 보고, [[구조화된 의미 자원은 무엇을 노드로 삼는가]]에서 Wikidata와 다른 자원의 노드 선택을 비교한다.
 
-## 출처
+### 다음 문서
 
+- [[concept.sparql|SPARQL]] — 다음에는 SPARQL에서 Wikidata 관계를 조회하는 방식을 보고, 구조화된 의미 자원은 무엇을 노드로 삼는가에서 Wikidata와 다른 자원의 노드 선택을 비교한다.
+- [[analysis.의미-자원의-노드-단위|구조화된 의미 자원은 무엇을 노드로 삼는가]] — 다음에는 SPARQL에서 Wikidata 관계를 조회하는 방식을 보고, 구조화된 의미 자원은 무엇을 노드로 삼는가에서 Wikidata와 다른 자원의 노드 선택을 비교한다.
+
+## 출처
 - Denny Vrandečić·Markus Krötzsch, [Wikidata: A Free Collaborative Knowledgebase](https://dl.acm.org/doi/pdf/10.1145/2629489), 2014, pp. 78–85.
 - Wikidata community, [Help:Data model](https://www.wikidata.org/wiki/Help:Data_model).
 - Wikidata community, [Help:About data](https://www.wikidata.org/wiki/Help:About_data).
@@ -113,8 +135,9 @@ LLM이 Wikidata를 조회해도 잘못된 item·property 선택, qualifier 누�
 
 ## 관련 항목
 
-- [[042_Wikidata와 다언어 협업 지식 베이스]]
-- [[Wikibase 데이터 모델]]
-- [[SPARQL]]
-- [[지식 그래프]]
-- [[Freebase]]
+- [[concept.sparql|SPARQL]]
+- [[analysis.의미-자원의-노드-단위|구조화된 의미 자원은 무엇을 노드로 삼는가]]
+- [[source.042|Wikidata와 다언어 협업 지식 베이스]]
+- [[concept.wikibase-데이터-모델|Wikibase 데이터 모델]]
+- [[concept.지식-그래프|지식 그래프]]
+- [[concept.freebase|Freebase]]

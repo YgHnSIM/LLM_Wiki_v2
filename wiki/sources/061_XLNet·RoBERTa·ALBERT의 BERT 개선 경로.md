@@ -1,10 +1,10 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.061
 page_type: source
 title: XLNet·RoBERTa·ALBERT의 BERT 개선 경로
 aliases:
-  - 061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency
+  - '061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency'
   - BERT 이후 세 가지 개선 경로
 tags:
   - type/source
@@ -13,8 +13,10 @@ tags:
   - domain/machine-learning
 created: '2026-07-21'
 updated: '2026-07-23'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - 'raw/061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.ko.md'
   - 'raw/061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.commentary.ko.md'
@@ -31,19 +33,36 @@ evidence:
   - source_id: lan-et-al-2020-albert
     locator: '§§3.1–3.2의 factorized embedding·cross-layer sharing·SOP, §§4.3–4.6와 Tables 1–5의 매개변수·처리량·공유·목표 비교'
     relation: supports
-related:
-  - concept.xlnet-roberta-albert
-  - concept.bert
-  - concept.마스크드-언어-모델링
-  - concept.transformer-xl
-  - source.058
-  - source.060
+relations:
+  - target: concept.xlnet-roberta-albert
+    kind: related
+  - target: concept.transformer-xl
+    kind: related
+  - target: source.058
+    kind: related
+  - target: source.060
+    kind: related
+learning:
+  difficulty:
+    entry: advanced
+    target: advanced
+  prerequisites:
+    - target: concept.bert
+    - target: concept.마스크드-언어-모델링
+  assumed_knowledge: 없음
+  outcomes:
+    - 'BERT 이후의 성능 향상을 사전 학습 목표·훈련 recipe·매개변수 구조라는 세 축으로 분리하고, parameter 수와 실제 계산 효율을 구분해 설명할 수 있다.'
+  next:
+    - target: concept.언어-모델-전이-학습
+      reason: 언어 모델 전이 학습 — 사전 학습 표현과 parameter가 후속 과제로 전달되는 여러 인터페이스를 비교한다.
+    - target: analysis.훈련-병렬성과-생성-순차성은-다른-축이다
+      reason: 훈련 병렬성과 생성 순차성은 다른 축이다 — 모델 구조·학습 계산·생성 순서를 서로 다른 효율 축으로 분리한다.
 ---
 # XLNet·RoBERTa·ALBERT의 BERT 개선 경로
 
 > [!note] 학습 안내
 > **난이도:** 심화<br>
-> **선수 지식:** [[BERT]], [[마스크드 언어 모델링]]<br>
+> **선수 지식:** [[concept.bert|BERT]], [[concept.마스크드-언어-모델링|마스크드 언어 모델링]]<br>
 > **읽고 나면:** BERT 이후의 성능 향상을 사전 학습 목표·훈련 recipe·매개변수 구조라는 세 축으로 분리하고, parameter 수와 실제 계산 효율을 구분해 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -342,8 +361,8 @@ XLNet·RoBERTa·ALBERT 논문은 서로 같은 corpus·tokenizer·training budge
 
 ### 다음 문서
 
-- [[언어 모델 전이 학습]] — 사전 학습 표현과 parameter가 후속 과제로 전달되는 여러 인터페이스를 비교한다.
-- [[훈련 병렬성과 생성 순차성은 다른 축이다]] — 모델 구조·학습 계산·생성 순서를 서로 다른 효율 축으로 분리한다.
+- [[concept.언어-모델-전이-학습|언어 모델 전이 학습]] — 사전 학습 표현과 parameter가 후속 과제로 전달되는 여러 인터페이스를 비교한다.
+- [[analysis.훈련-병렬성과-생성-순차성은-다른-축이다|훈련 병렬성과 생성 순차성은 다른 축이다]] — 모델 구조·학습 계산·생성 순서를 서로 다른 효율 축으로 분리한다.
 
 ## 출처
 
@@ -356,9 +375,11 @@ XLNet·RoBERTa·ALBERT 논문은 서로 같은 corpus·tokenizer·training budge
 
 ## 관련 항목
 
-- [[XLNet·RoBERTa·ALBERT]]
-- [[BERT]]
-- [[마스크드 언어 모델링]]
-- [[Transformer-XL]]
-- [[058_BERT의 마스크드 양방향 사전 학습]]
-- [[060_GLUE와 SuperGLUE의 집계 평가]]
+- [[concept.언어-모델-전이-학습|언어 모델 전이 학습]]
+- [[analysis.훈련-병렬성과-생성-순차성은-다른-축이다|훈련 병렬성과 생성 순차성은 다른 축이다]]
+- [[concept.bert|BERT]]
+- [[concept.마스크드-언어-모델링|마스크드 언어 모델링]]
+- [[concept.xlnet-roberta-albert|XLNet·RoBERTa·ALBERT]]
+- [[concept.transformer-xl|Transformer-XL]]
+- [[source.058|BERT의 마스크드 양방향 사전 학습]]
+- [[source.060|GLUE와 SuperGLUE의 집계 평가]]

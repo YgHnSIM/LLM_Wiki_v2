@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.087
 page_type: source
 title: Whisper와 대규모 약한 감독 음성 인식
@@ -16,38 +16,54 @@ tags:
   - domain/speech-processing
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.ko.md'
-  - 'raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.commentary.ko.md'
+  - raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.ko.md
+  - raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.commentary.ko.md
 evidence:
   - source_id: radford-et-al-2022-whisper
     locator: 'arXiv:2212.04356, §§2.1–2.4·3.1–3.9·4.2–4.5·6, Figure 1, Tables 1–7과 Appendices A·C·F의 68만 시간 자료 구축·모델·멀티태스크 형식·zero-shot 평가·text normalizer·장문 디코딩·한계'
     relation: supports
   - source_id: openai-2022-whisper-release
-    locator: '2022-09-21 Introducing Whisper의 68만 시간 학습·30초 log-Mel encoder-decoder Transformer·다국어 전사·X→English 번역·models and inference code 공개 및 LibriSpeech·zero-shot robustness 범위'
+    locator: 2022-09-21 Introducing Whisper의 68만 시간 학습·30초 log-Mel encoder-decoder Transformer·다국어 전사·X→English 번역·models and inference code 공개 및 LibriSpeech·zero-shot robustness 범위
     relation: contextualizes
   - source_id: openai-2024-whisper-model-card
-    locator: '2024-09-30 고정 스냅샷의 Model Details·Evaluated Use·Training Data·Performance and Limitations·Broader Implications에 기록된 후대 모델 계열·과제 범위·언어 불균형·환각·반복·고위험 사용 경계'
+    locator: 2024-09-30 고정 스냅샷의 Model Details·Evaluated Use·Training Data·Performance and Limitations·Broader Implications에 기록된 후대 모델 계열·과제 범위·언어 불균형·환각·반복·고위험 사용 경계
     relation: supports
   - source_id: openai-2022-whisper-repository
-    locator: 'README의 Approach·Available models and languages·Python usage 및 License의 30초 이동 창 추론·공개 model family·MIT code and weights'
+    locator: README의 Approach·Available models and languages·Python usage 및 License의 30초 이동 창 추론·공개 model family·MIT code and weights
     relation: supplements
-related:
-  - concept.whisper
-  - concept.자동-음성-인식
-  - concept.단어-오류율
-  - concept.transformer
-  - concept.인코더-디코더
-  - concept.음성-활동-감지
-  - source.041
+relations:
+  - target: concept.whisper
+    kind: related
+  - target: concept.음성-활동-감지
+    kind: related
+  - target: source.041
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.transformer
+    - target: concept.인코더-디코더
+  assumed_knowledge: 없음
+  outcomes:
+    - 'Whisper가 웹의 오디오-전사 쌍과 멀티태스크 토큰으로 전사·영어 번역·언어 식별을 통합한 방식을 설명하고, 제로샷(zero-shot)·다국어·사람 수준·공개성 주장의 실제 범위를 구분할 수 있다.'
+  next:
+    - target: concept.자동-음성-인식
+      reason: 자동 음성 인식 — Whisper가 단순화한 전통적 파이프라인과 전사 과업의 전체 평가 축을 다시 본다.
+    - target: concept.단어-오류율
+      reason: 단어 오류율 — 텍스트 정규화가 결과를 크게 바꿀 수 있는 이유와 상대 오류 감소를 읽는 법을 익힌다.
 ---
 # Whisper와 대규모 약한 감독 음성 인식
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[Transformer]], [[인코더-디코더]]<br>
+> **선수 지식:** [[concept.transformer|Transformer]], [[concept.인코더-디코더|인코더-디코더]]<br>
 > **읽고 나면:** Whisper가 웹의 오디오-전사 쌍과 멀티태스크 토큰으로 전사·영어 번역·언어 식별을 통합한 방식을 설명하고, 제로샷(zero-shot)·다국어·사람 수준·공개성 주장의 실제 범위를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -176,8 +192,8 @@ sequence-to-sequence 디코더는 비슷한 소리를 잘못 듣는 지각 오�
 
 ### 다음 문서
 
-- [[자동 음성 인식]] — Whisper가 단순화한 전통적 파이프라인과 전사 과업의 전체 평가 축을 다시 본다.
-- [[단어 오류율]] — 텍스트 정규화가 결과를 크게 바꿀 수 있는 이유와 상대 오류 감소를 읽는 법을 익힌다.
+- [[concept.자동-음성-인식|자동 음성 인식]] — Whisper가 단순화한 전통적 파이프라인과 전사 과업의 전체 평가 축을 다시 본다.
+- [[concept.단어-오류율|단어 오류율]] — 텍스트 정규화가 결과를 크게 바꿀 수 있는 이유와 상대 오류 감소를 읽는 법을 익힌다.
 
 ## 출처
 
@@ -190,10 +206,10 @@ sequence-to-sequence 디코더는 비슷한 소리를 잘못 듣는 지각 오�
 
 ## 관련 항목
 
-- [[Whisper]]
-- [[자동 음성 인식]]
-- [[단어 오류율]]
-- [[Transformer]]
-- [[인코더-디코더]]
-- [[음성 활동 감지]]
-- [[041_심층 신경망 음향 모델과 DNN-HMM 전환]]
+- [[concept.자동-음성-인식|자동 음성 인식]]
+- [[concept.단어-오류율|단어 오류율]]
+- [[concept.transformer|Transformer]]
+- [[concept.인코더-디코더|인코더-디코더]]
+- [[concept.whisper|Whisper]]
+- [[concept.음성-활동-감지|음성 활동 감지]]
+- [[source.041|심층 신경망 음향 모델과 DNN-HMM 전환]]

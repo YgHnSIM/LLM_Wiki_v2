@@ -1,0 +1,2374 @@
+{
+  "schema_version": 1,
+  "mode": "write",
+  "documents": 394,
+  "converted": [
+    {
+      "path": "analyses/같은 벡터 공간은 무엇을 보장하는가 — 공기·대조·생성의 경계.md",
+      "id": "analysis.같은-벡터-공간은-무엇을-보장하는가-공기-대조-생성의-경계",
+      "evidence": 6
+    },
+    {
+      "path": "analyses/같은 병렬 문장은 무엇을 학습시키는가.md",
+      "id": "analysis.같은-병렬-문장은-무엇을-학습시키는가",
+      "evidence": 6
+    },
+    {
+      "path": "analyses/검색은 근거를 찾고 독해는 답을 찾는다.md",
+      "id": "analysis.검색-근거-독해-답",
+      "evidence": 11
+    },
+    {
+      "path": "analyses/계수 기반과 예측 기반 단어 표현은 얼마나 다른가.md",
+      "id": "analysis.계수-기반과-예측-기반-단어-표현",
+      "evidence": 7
+    },
+    {
+      "path": "analyses/공개 가중치와 재현 가능성은 같은 축인가.md",
+      "id": "analysis.공개-가중치와-재현-가능성은-같은-축인가",
+      "evidence": 24
+    },
+    {
+      "path": "analyses/구조화된 의미 자원은 무엇을 노드로 삼는가.md",
+      "id": "analysis.의미-자원의-노드-단위",
+      "evidence": 6
+    },
+    {
+      "path": "analyses/규모는 언제 연구 변수가 되었나.md",
+      "id": "analysis.scale-as-research-variable",
+      "evidence": 6
+    },
+    {
+      "path": "analyses/규칙 기반 AI에서 데이터 기반 학습으로.md",
+      "id": "analysis.규칙-기반-ai에서-데이터-기반-학습으로",
+      "evidence": 29
+    },
+    {
+      "path": "analyses/기계 이전의 계산은 어떻게 능력이 되었나.md",
+      "id": "analysis.pre-machine-computing-capability",
+      "evidence": 3
+    },
+    {
+      "path": "analyses/데이터 품질과 분포 다양성은 같은 축인가.md",
+      "id": "analysis.데이터-품질과-분포-다양성은-같은-축인가",
+      "evidence": 5
+    },
+    {
+      "path": "analyses/데이터의 양에서 권리와 책임까지.md",
+      "id": "analysis.data-scale-to-rights",
+      "evidence": 8
+    },
+    {
+      "path": "analyses/모델 능력에서 서비스 능력으로.md",
+      "id": "analysis.model-capability-to-service-capability",
+      "evidence": 11
+    },
+    {
+      "path": "analyses/문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리.md",
+      "id": "analysis.문맥은-저장소인가-상태-재사용-검색-에이전트-메모리",
+      "evidence": 8
+    },
+    {
+      "path": "analyses/문자에서 실행 권한까지.md",
+      "id": "analysis.text-to-execution-authority",
+      "evidence": 7
+    },
+    {
+      "path": "analyses/사전 학습 지식은 과제에 어떻게 도착하는가.md",
+      "id": "analysis.사전-학습-지식은-과제에-어떻게-도착하는가",
+      "evidence": 43
+    },
+    {
+      "path": "analyses/생성은 무엇을 한 단계씩 고르는가 — 파형·이미지 토큰·잠재 잡음.md",
+      "id": "analysis.생성은-무엇을-한-단계씩-고르는가-파형-이미지-토큰-잠재-잡음",
+      "evidence": 5
+    },
+    {
+      "path": "analyses/서브워드는 한 벡터의 특징인가 여러 토큰인가.md",
+      "id": "analysis.서브워드는-한-벡터의-특징인가-여러-토큰인가",
+      "evidence": 6
+    },
+    {
+      "path": "analyses/손실 곡선과 능력 곡선 사이.md",
+      "id": "analysis.손실-곡선과-능력-곡선-사이",
+      "evidence": 7
+    },
+    {
+      "path": "analyses/언어 수와 언어 형평성은 같은 축인가.md",
+      "id": "analysis.언어-수와-언어-형평성은-같은-축인가",
+      "evidence": 12
+    },
+    {
+      "path": "analyses/언어와 계산을 기계적 절차로 만들다.md",
+      "id": "analysis.language-computation-mechanical-procedure",
+      "evidence": 5
+    },
+    {
+      "path": "analyses/연산보다 데이터 이동이 비싸질 때.md",
+      "id": "analysis.when-data-movement-dominates",
+      "evidence": 6
+    },
+    {
+      "path": "analyses/음성을 텍스트로 옮기는 경계에서 무엇이 사라지는가 — 인식·합성·네이티브 오디오.md",
+      "id": "analysis.음성을-텍스트로-옮기는-경계에서-무엇이-사라지는가-인식-합성-네이티브-오디오",
+      "evidence": 8
+    },
+    {
+      "path": "analyses/자동 평가 지표는 무엇을 보상하는가.md",
+      "id": "analysis.평가-지표와-모델-유인",
+      "evidence": 26
+    },
+    {
+      "path": "analyses/잔차 경로와 정규화는 어디에 놓이는가.md",
+      "id": "analysis.잔차-경로와-정규화는-어디에-놓이는가",
+      "evidence": 5
+    },
+    {
+      "path": "analyses/저장 프로그램에서 학습 프레임워크까지.md",
+      "id": "analysis.stored-program-to-learning-framework",
+      "evidence": 7
+    },
+    {
+      "path": "analyses/전력에서 서비스 결과 계약까지 무엇을 세어야 하나.md",
+      "id": "analysis.power-to-service-outcomes",
+      "evidence": 7
+    },
+    {
+      "path": "analyses/집적도 증가에서 가속기까지 무엇이 더 필요했나.md",
+      "id": "analysis.silicon-scaling-to-accelerators",
+      "evidence": 6
+    },
+    {
+      "path": "analyses/촘스키에서 LLM으로.md",
+      "id": "analysis.촘스키에서-llm으로",
+      "evidence": 2
+    },
+    {
+      "path": "analyses/총 매개변수와 활성 계산량은 같은 축인가.md",
+      "id": "analysis.총-매개변수와-활성-계산량은-같은-축인가",
+      "evidence": 8
+    },
+    {
+      "path": "analyses/최고 경로와 기대 통계, 백오프.md",
+      "id": "analysis.최고-경로와-기대-통계-백오프",
+      "evidence": 8
+    },
+    {
+      "path": "analyses/텍스트 모델에서 실시간 멀티모달 시스템까지.md",
+      "id": "analysis.text-to-realtime-multimodal-systems",
+      "evidence": 13
+    },
+    {
+      "path": "analyses/튜링 테스트와 LLM 평가.md",
+      "id": "analysis.튜링-테스트와-llm-평가",
+      "evidence": 9
+    },
+    {
+      "path": "analyses/퍼셉트론에서 MADALINE으로.md",
+      "id": "analysis.퍼셉트론에서-madaline으로",
+      "evidence": 7
+    },
+    {
+      "path": "analyses/학습 규칙이 있어도 왜 규모화되지 못했나.md",
+      "id": "analysis.early-learning-scaling-limits",
+      "evidence": 6
+    },
+    {
+      "path": "analyses/행렬곱 가속은 딥러닝을 어떻게 현실화했나.md",
+      "id": "analysis.matrix-acceleration-deep-learning",
+      "evidence": 5
+    },
+    {
+      "path": "analyses/확률, 마진, 순위 점수.md",
+      "id": "analysis.확률-마진-순위-점수",
+      "evidence": 8
+    },
+    {
+      "path": "analyses/확률적 언어 모델은 어떤 계산 인프라를 요구했나.md",
+      "id": "analysis.statistical-language-model-computing-infrastructure",
+      "evidence": 6
+    },
+    {
+      "path": "analyses/훈련 병렬성과 생성 순차성은 다른 축이다.md",
+      "id": "analysis.훈련-병렬성과-생성-순차성은-다른-축이다",
+      "evidence": 6
+    },
+    {
+      "path": "analyses/AI 시연과 실제 성능.md",
+      "id": "analysis.ai-시연과-실제-성능",
+      "evidence": 11
+    },
+    {
+      "path": "analyses/ELIZA에서 LLM으로.md",
+      "id": "analysis.eliza에서-llm으로",
+      "evidence": 6
+    },
+    {
+      "path": "analyses/LLM 능력은 모델의 속성인가 시스템의 속성인가.md",
+      "id": "analysis.llm-capability-model-or-system",
+      "evidence": 7
+    },
+    {
+      "path": "analyses/LLM 수학 종합 실습.md",
+      "id": "analysis.llm-수학-종합-실습",
+      "evidence": 3
+    },
+    {
+      "path": "analyses/LLM을 만든 수학.md",
+      "id": "analysis.llm을-만든-수학",
+      "evidence": 4
+    },
+    {
+      "path": "analyses/N-gram에서 LLM으로.md",
+      "id": "analysis.n-gram에서-llm으로",
+      "evidence": 15
+    },
+    {
+      "path": "analyses/Transformer는 무엇을 병렬화했고 무엇을 남겼나.md",
+      "id": "analysis.transformer-parallelism-and-sequentiality",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/가속기와 행렬 계산.md",
+      "id": "concept.accelerator-matrix-compute",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/강한 AI.md",
+      "id": "concept.강한-ai",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/개념 의존.md",
+      "id": "concept.개념-의존",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/개방 영역 질의응답.md",
+      "id": "concept.개방-영역-질의응답",
+      "evidence": 5
+    },
+    {
+      "path": "concepts/검색 증강 생성.md",
+      "id": "concept.검색-증강-생성",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/경사하강법.md",
+      "id": "concept.경사하강법",
+      "evidence": 5
+    },
+    {
+      "path": "concepts/계산 복잡도와 비용 모델.md",
+      "id": "concept.계산-복잡도와-비용-모델",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/교차 인코더 재순위화.md",
+      "id": "concept.교차-인코더-재순위화",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/구 기반 통계적 기계 번역.md",
+      "id": "concept.구-기반-통계적-기계-번역",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/구조화 출력.md",
+      "id": "concept.구조화-출력",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/규칙 기반 기계 번역.md",
+      "id": "concept.규칙-기반-기계-번역",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/그룹 상대 정책 최적화.md",
+      "id": "concept.grpo",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/기계 번역.md",
+      "id": "concept.기계-번역",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/기울기 소실.md",
+      "id": "concept.기울기-소실",
+      "evidence": 6
+    },
+    {
+      "path": "concepts/긴 문맥 언어 모델.md",
+      "id": "concept.긴-문맥-언어-모델",
+      "evidence": 8
+    },
+    {
+      "path": "concepts/내적·행렬곱과 선형변환.md",
+      "id": "concept.내적-행렬곱과-선형변환",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/다중 벡터 검색.md",
+      "id": "concept.다중-벡터-검색",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/다중 홉 검색.md",
+      "id": "concept.다중-홉-검색",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/다층 퍼셉트론.md",
+      "id": "concept.다층-퍼셉트론",
+      "evidence": 7
+    },
+    {
+      "path": "concepts/단어 오류율.md",
+      "id": "concept.단어-오류율",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/단어 의미 중의성 해소.md",
+      "id": "concept.단어-의미-중의성-해소",
+      "evidence": 6
+    },
+    {
+      "path": "concepts/단어 임베딩.md",
+      "id": "concept.단어-임베딩",
+      "evidence": 5
+    },
+    {
+      "path": "concepts/대규모 언어 모델.md",
+      "id": "concept.대규모-언어-모델",
+      "evidence": 20
+    },
+    {
+      "path": "concepts/대화 복구.md",
+      "id": "concept.대화-복구",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/데이터 희소성.md",
+      "id": "concept.데이터-희소성",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/동적 계획법.md",
+      "id": "concept.동적-계획법",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/로그가능도.md",
+      "id": "concept.로그-가능도",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/로저스식 심리치료.md",
+      "id": "concept.로저스식-심리치료",
+      "evidence": 1
+    },
+    {
+      "path": "concepts/마르코프 가정.md",
+      "id": "concept.마르코프-가정",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/마스크드 언어 모델링.md",
+      "id": "concept.마스크드-언어-모델링",
+      "evidence": 5
+    },
+    {
+      "path": "concepts/마이크로월드.md",
+      "id": "concept.마이크로월드",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/말뭉치 기반 학습.md",
+      "id": "concept.말뭉치-기반-학습",
+      "evidence": 12
+    },
+    {
+      "path": "concepts/멀티모달 대규모 언어 모델.md",
+      "id": "concept.멀티모달-대규모-언어-모델",
+      "evidence": 18
+    },
+    {
+      "path": "concepts/메모리 계층과 데이터 이동.md",
+      "id": "concept.memory-hierarchy-data-movement",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/메모리 네트워크.md",
+      "id": "concept.메모리-네트워크",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/모방 게임.md",
+      "id": "concept.모방-게임",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/몬태규 의미론.md",
+      "id": "concept.몬태규-의미론",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/문맥 내 학습.md",
+      "id": "concept.문맥-내-학습",
+      "evidence": 6
+    },
+    {
+      "path": "concepts/문맥자유문법.md",
+      "id": "concept.문맥자유문법",
+      "evidence": 5
+    },
+    {
+      "path": "concepts/문자 인코딩과 정규화.md",
+      "id": "concept.text-encoding-normalization",
+      "evidence": 7
+    },
+    {
+      "path": "concepts/미분·편미분·그래디언트.md",
+      "id": "concept.미분-편미분-그래디언트",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/벡터 공간 모델.md",
+      "id": "concept.벡터-공간-모델",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/벡터·행렬·텐서와 shape.md",
+      "id": "concept.벡터-행렬-텐서와-shape",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/변형생성문법.md",
+      "id": "concept.변형생성문법",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/보편문법.md",
+      "id": "concept.보편문법",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/분산 학습과 집단 통신.md",
+      "id": "concept.distributed-training-collectives",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/블록 세계.md",
+      "id": "concept.블록-세계",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/비터비 알고리즘.md",
+      "id": "concept.비터비-알고리즘",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/사고 연쇄 프롬프팅.md",
+      "id": "concept.사고-연쇄-프롬프팅",
+      "evidence": 7
+    },
+    {
+      "path": "concepts/서브워드 토큰화.md",
+      "id": "concept.서브워드-토큰화",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/서포트 벡터 머신.md",
+      "id": "concept.서포트-벡터-머신",
+      "evidence": 5
+    },
+    {
+      "path": "concepts/선형 분류기.md",
+      "id": "concept.선형-분류기",
+      "evidence": 5
+    },
+    {
+      "path": "concepts/선형 분리 가능성.md",
+      "id": "concept.선형-분리-가능성",
+      "evidence": 1
+    },
+    {
+      "path": "concepts/소프트맥스.md",
+      "id": "concept.소프트맥스",
+      "evidence": 1
+    },
+    {
+      "path": "concepts/수치 안정성과 log-sum-exp.md",
+      "id": "concept.수치-안정성과-log-sum-exp",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/수치 형식·혼합 정밀도·양자화.md",
+      "id": "concept.numerical-formats-precision-quantization",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/순환 신경망.md",
+      "id": "concept.순환-신경망",
+      "evidence": 11
+    },
+    {
+      "path": "concepts/스크립트.md",
+      "id": "concept.스크립트",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/시간 지연 신경망.md",
+      "id": "concept.시간-지연-신경망",
+      "evidence": 5
+    },
+    {
+      "path": "concepts/신경 정보 검색.md",
+      "id": "concept.신경-정보-검색",
+      "evidence": 7
+    },
+    {
+      "path": "concepts/신경 확률 언어 모형.md",
+      "id": "concept.신경-확률-언어-모형",
+      "evidence": 1
+    },
+    {
+      "path": "concepts/신경망 기계 번역.md",
+      "id": "concept.신경망-기계-번역",
+      "evidence": 7
+    },
+    {
+      "path": "concepts/실시간 멀티모달 상호작용.md",
+      "id": "concept.realtime-multimodal-interaction",
+      "evidence": 10
+    },
+    {
+      "path": "concepts/심층 구조.md",
+      "id": "concept.심층-구조",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/어텐션 메커니즘.md",
+      "id": "concept.어텐션-메커니즘",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/언어 모델 스케일링 법칙.md",
+      "id": "concept.언어-모델-스케일링-법칙",
+      "evidence": 6
+    },
+    {
+      "path": "concepts/언어 모델 전이 학습.md",
+      "id": "concept.언어-모델-전이-학습",
+      "evidence": 9
+    },
+    {
+      "path": "concepts/언어 모델 추론 서빙.md",
+      "id": "concept.llm-inference-serving",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/엔트로피·교차 엔트로피·KL 발산.md",
+      "id": "concept.엔트로피-교차-엔트로피-kl-발산",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/역전파.md",
+      "id": "concept.역전파",
+      "evidence": 8
+    },
+    {
+      "path": "concepts/연쇄 법칙과 계산 그래프.md",
+      "id": "concept.연쇄-법칙과-계산-그래프",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/외부 메모리.md",
+      "id": "concept.외부-메모리",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/유한상태 모델.md",
+      "id": "concept.유한상태-모델",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/은닉 마르코프 모델.md",
+      "id": "concept.은닉-마르코프-모델",
+      "evidence": 8
+    },
+    {
+      "path": "concepts/음성 활동 감지.md",
+      "id": "concept.음성-활동-감지",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/의미역 표지.md",
+      "id": "concept.의미역-표지",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/인간 피드백 강화학습.md",
+      "id": "concept.rlhf",
+      "evidence": 8
+    },
+    {
+      "path": "concepts/인지 혁명.md",
+      "id": "concept.인지-혁명",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/인코더-디코더.md",
+      "id": "concept.인코더-디코더",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/자극의 빈곤.md",
+      "id": "concept.자극의-빈곤",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/자기회귀 생성.md",
+      "id": "concept.자기회귀-생성",
+      "evidence": 7
+    },
+    {
+      "path": "concepts/자동 음성 인식.md",
+      "id": "concept.자동-음성-인식",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/잔차 연결.md",
+      "id": "concept.잔차-연결",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/잠재 디리클레 할당.md",
+      "id": "concept.잠재-디리클레-할당",
+      "evidence": 1
+    },
+    {
+      "path": "concepts/잠재 의미 분석.md",
+      "id": "concept.잠재-의미-분석",
+      "evidence": 8
+    },
+    {
+      "path": "concepts/잠재 확산 모델.md",
+      "id": "concept.잠재-확산-모델",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/장단기 메모리.md",
+      "id": "concept.장단기-메모리",
+      "evidence": 10
+    },
+    {
+      "path": "concepts/재귀.md",
+      "id": "concept.재귀",
+      "evidence": 1
+    },
+    {
+      "path": "concepts/저순위 적응.md",
+      "id": "concept.저순위-적응",
+      "evidence": 7
+    },
+    {
+      "path": "concepts/저자원 언어.md",
+      "id": "concept.저자원-언어",
+      "evidence": 9
+    },
+    {
+      "path": "concepts/적응 필터.md",
+      "id": "concept.적응-필터",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/전문가 혼합.md",
+      "id": "concept.전문가-혼합",
+      "evidence": 9
+    },
+    {
+      "path": "concepts/조건부 무작위장.md",
+      "id": "concept.조건부-무작위장",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/조건부 확률.md",
+      "id": "concept.조건부-확률",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/중국어 방 논증.md",
+      "id": "concept.중국어-방-논증",
+      "evidence": 5
+    },
+    {
+      "path": "concepts/증강 전이망.md",
+      "id": "concept.증강-전이망",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/지도 학습.md",
+      "id": "concept.지도-학습",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/지속 사전 학습.md",
+      "id": "concept.지속-사전-학습",
+      "evidence": 10
+    },
+    {
+      "path": "concepts/지수와 로그.md",
+      "id": "concept.지수와-로그",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/지시 미세조정.md",
+      "id": "concept.지시-미세조정",
+      "evidence": 5
+    },
+    {
+      "path": "concepts/지식 공학 병목.md",
+      "id": "concept.지식-공학-병목",
+      "evidence": 9
+    },
+    {
+      "path": "concepts/지식 그래프.md",
+      "id": "concept.지식-그래프",
+      "evidence": 5
+    },
+    {
+      "path": "concepts/촘스키 위계.md",
+      "id": "concept.촘스키-위계",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/최대 엔트로피 모델.md",
+      "id": "concept.최대-엔트로피-모델",
+      "evidence": 7
+    },
+    {
+      "path": "concepts/최소 오류율 훈련.md",
+      "id": "concept.최소-오류율-훈련",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/추출형 질의응답.md",
+      "id": "concept.추출형-질의응답",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/코사인 유사도.md",
+      "id": "concept.코사인-유사도",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/템플릿 기반 응답 생성.md",
+      "id": "concept.템플릿-기반-응답-생성",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/통계적 기계 번역.md",
+      "id": "concept.통계적-기계-번역",
+      "evidence": 9
+    },
+    {
+      "path": "concepts/통계적 자연어 처리.md",
+      "id": "concept.통계적-자연어-처리",
+      "evidence": 15
+    },
+    {
+      "path": "concepts/통사 구조.md",
+      "id": "concept.통사-구조",
+      "evidence": 1
+    },
+    {
+      "path": "concepts/통사론.md",
+      "id": "concept.통사론",
+      "evidence": 1
+    },
+    {
+      "path": "concepts/튜링 테스트.md",
+      "id": "concept.튜링-테스트",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/특이값 분해와 저랭크 근사.md",
+      "id": "concept.특이값-분해와-저랭크-근사",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/특징 공학.md",
+      "id": "concept.특징-공학",
+      "evidence": 7
+    },
+    {
+      "path": "concepts/파싱.md",
+      "id": "concept.파싱",
+      "evidence": 7
+    },
+    {
+      "path": "concepts/파운데이션 모델.md",
+      "id": "concept.파운데이션-모델",
+      "evidence": 7
+    },
+    {
+      "path": "concepts/패턴 매칭.md",
+      "id": "concept.패턴-매칭",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/퍼셉트론.md",
+      "id": "concept.퍼셉트론",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/표본추출·온도·top-k·top-p.md",
+      "id": "concept.표본추출-온도-top-k-top-p",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/표층 구조.md",
+      "id": "concept.표층-구조",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/하이브리드 검색.md",
+      "id": "concept.하이브리드-검색",
+      "evidence": 7
+    },
+    {
+      "path": "concepts/학습 데이터 생애주기와 출처 추적.md",
+      "id": "concept.training-data-lifecycle-provenance",
+      "evidence": 7
+    },
+    {
+      "path": "concepts/학습된 세계 모델.md",
+      "id": "concept.학습된-세계-모델",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/함수 호출과 도구 사용.md",
+      "id": "concept.함수-호출과-도구-사용",
+      "evidence": 14
+    },
+    {
+      "path": "concepts/합성곱 신경망.md",
+      "id": "concept.합성곱-신경망",
+      "evidence": 11
+    },
+    {
+      "path": "concepts/합성성.md",
+      "id": "concept.합성성",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/행동주의 언어관.md",
+      "id": "concept.행동주의-언어관",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/행동주의적 지능 기준.md",
+      "id": "concept.행동-기반-지능-기준",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/헌법적 AI.md",
+      "id": "concept.헌법적-ai",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/확률.md",
+      "id": "concept.확률",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/확률변수·확률분포·기대값·분산.md",
+      "id": "concept.확률변수-확률분포-기대값-분산",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/확률적 잠재 의미 분석.md",
+      "id": "concept.확률적-잠재-의미-분석",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/활성화 함수.md",
+      "id": "concept.활성화-함수",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/ADALINE.md",
+      "id": "concept.adaline",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/Adam 최적화기.md",
+      "id": "concept.adam-최적화기",
+      "evidence": 5
+    },
+    {
+      "path": "concepts/Batch Normalization.md",
+      "id": "concept.batch-normalization",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/Baum–Welch 알고리즘.md",
+      "id": "concept.baum-welch-알고리즘",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/BERT.md",
+      "id": "concept.bert",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/BIG-bench와 MMLU.md",
+      "id": "concept.big-bench-mmlu",
+      "evidence": 5
+    },
+    {
+      "path": "concepts/BLEU.md",
+      "id": "concept.bleu",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/BLOOM.md",
+      "id": "concept.bloom",
+      "evidence": 8
+    },
+    {
+      "path": "concepts/BM25.md",
+      "id": "concept.bm25",
+      "evidence": 7
+    },
+    {
+      "path": "concepts/Byte Pair Encoding.md",
+      "id": "concept.byte-pair-encoding",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/CBOW.md",
+      "id": "concept.cbow",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/ChatGPT 연구 미리보기 (2022).md",
+      "id": "concept.chatgpt-2022",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/CLIP.md",
+      "id": "concept.clip",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/DALL·E (2021).md",
+      "id": "concept.dall-e-2021",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/DALL·E 2.md",
+      "id": "concept.dall-e-2",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/DeepQA.md",
+      "id": "concept.deepqa",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/Degradation problem.md",
+      "id": "concept.degradation-problem",
+      "evidence": 1
+    },
+    {
+      "path": "concepts/DNN-HMM.md",
+      "id": "concept.dnn-hmm",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/DOCTOR 스크립트.md",
+      "id": "concept.doctor-스크립트",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/ELIZA 효과.md",
+      "id": "concept.eliza-효과",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/ELIZA.md",
+      "id": "concept.eliza",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/FastText.md",
+      "id": "concept.fasttext",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/Flamingo.md",
+      "id": "concept.flamingo",
+      "evidence": 1
+    },
+    {
+      "path": "concepts/FlashAttention.md",
+      "id": "concept.flashattention",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/FrameNet.md",
+      "id": "concept.framenet",
+      "evidence": 7
+    },
+    {
+      "path": "concepts/Freebase.md",
+      "id": "concept.freebase",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/GloVe.md",
+      "id": "concept.glove",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/GLUE와 SuperGLUE.md",
+      "id": "concept.glue-superglue",
+      "evidence": 5
+    },
+    {
+      "path": "concepts/GPT-1과 GPT-2.md",
+      "id": "concept.gpt-1-gpt-2",
+      "evidence": 5
+    },
+    {
+      "path": "concepts/GPT-4.md",
+      "id": "concept.gpt-4",
+      "evidence": 8
+    },
+    {
+      "path": "concepts/HELM.md",
+      "id": "concept.helm",
+      "evidence": 1
+    },
+    {
+      "path": "concepts/IBM Watson.md",
+      "id": "concept.ibm-watson",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/Layer Normalization.md",
+      "id": "concept.layer-normalization",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/Lesk 알고리즘.md",
+      "id": "concept.lesk-알고리즘",
+      "evidence": 5
+    },
+    {
+      "path": "concepts/LLaMA 1.md",
+      "id": "concept.llama-1",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/LLM 에이전트.md",
+      "id": "concept.llm-에이전트",
+      "evidence": 17
+    },
+    {
+      "path": "concepts/LLM 추론 에너지 지표.md",
+      "id": "concept.llm-inference-energy-metrics",
+      "evidence": 5
+    },
+    {
+      "path": "concepts/LMS 알고리즘.md",
+      "id": "concept.lms-알고리즘",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/MADALINE.md",
+      "id": "concept.madaline",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/METEOR.md",
+      "id": "concept.meteor",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/Mixtral 8x7B.md",
+      "id": "concept.mixtral-8x7b",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/N-gram 모델.md",
+      "id": "concept.n-gram-모델",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/OpenAI Codex (2021).md",
+      "id": "concept.openai-codex-2021",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/PaLM.md",
+      "id": "concept.palm",
+      "evidence": 1
+    },
+    {
+      "path": "concepts/Perplexity.md",
+      "id": "concept.perplexity",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/PropBank.md",
+      "id": "concept.propbank",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/QLoRA.md",
+      "id": "concept.qlora",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/ResNet.md",
+      "id": "concept.resnet",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/RMSNorm.md",
+      "id": "concept.rmsnorm",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/ROUGE.md",
+      "id": "concept.rouge",
+      "evidence": 1
+    },
+    {
+      "path": "concepts/Sequence-to-Sequence 학습.md",
+      "id": "concept.sequence-to-sequence",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/SHRDLU.md",
+      "id": "concept.shrdlu",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/Skip-gram.md",
+      "id": "concept.skip-gram",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/Smoothing.md",
+      "id": "concept.smoothing",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/SPARQL.md",
+      "id": "concept.sparql",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/Stable Diffusion.md",
+      "id": "concept.stable-diffusion",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/T5.md",
+      "id": "concept.t5",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/TF-IDF.md",
+      "id": "concept.tf-idf",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/The Pile.md",
+      "id": "concept.the-pile",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/Transformer-XL.md",
+      "id": "concept.transformer-xl",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/Transformer.md",
+      "id": "concept.transformer",
+      "evidence": 10
+    },
+    {
+      "path": "concepts/WaveNet.md",
+      "id": "concept.wavenet",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/Whisper.md",
+      "id": "concept.whisper",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/Wikibase 데이터 모델.md",
+      "id": "concept.wikibase-데이터-모델",
+      "evidence": 3
+    },
+    {
+      "path": "concepts/Wikidata.md",
+      "id": "concept.wikidata",
+      "evidence": 5
+    },
+    {
+      "path": "concepts/Word2Vec.md",
+      "id": "concept.word2vec",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/WordNet.md",
+      "id": "concept.wordnet",
+      "evidence": 9
+    },
+    {
+      "path": "concepts/XLM.md",
+      "id": "concept.xlm",
+      "evidence": 2
+    },
+    {
+      "path": "concepts/XLNet·RoBERTa·ALBERT.md",
+      "id": "concept.xlnet-roberta-albert",
+      "evidence": 4
+    },
+    {
+      "path": "concepts/XOR 문제.md",
+      "id": "concept.xor-문제",
+      "evidence": 3
+    },
+    {
+      "path": "entities/노엄 촘스키.md",
+      "id": "entity.노엄-촘스키",
+      "evidence": 2
+    },
+    {
+      "path": "entities/레너드 바움.md",
+      "id": "entity.레너드-바움",
+      "evidence": 2
+    },
+    {
+      "path": "entities/로저 섕크.md",
+      "id": "entity.로저-섕크",
+      "evidence": 4
+    },
+    {
+      "path": "entities/리처드 몬태규.md",
+      "id": "entity.리처드-몬태규",
+      "evidence": 3
+    },
+    {
+      "path": "entities/마션 호프.md",
+      "id": "entity.마션-호프",
+      "evidence": 2
+    },
+    {
+      "path": "entities/마이클 레스크.md",
+      "id": "entity.마이클-레스크",
+      "evidence": 1
+    },
+    {
+      "path": "entities/버나드 위드로.md",
+      "id": "entity.버나드-위드로",
+      "evidence": 2
+    },
+    {
+      "path": "entities/스탠퍼드 대학교.md",
+      "id": "entity.스탠퍼드-대학교",
+      "evidence": 2
+    },
+    {
+      "path": "entities/스티븐 로버트슨.md",
+      "id": "entity.스티븐-로버트슨",
+      "evidence": 5
+    },
+    {
+      "path": "entities/슬라바 카츠.md",
+      "id": "entity.슬라바-카츠",
+      "evidence": 2
+    },
+    {
+      "path": "entities/안드레이 마르코프.md",
+      "id": "entity.안드레이-마르코프",
+      "evidence": 1
+    },
+    {
+      "path": "entities/앤드루 비터비.md",
+      "id": "entity.앤드루-비터비",
+      "evidence": 2
+    },
+    {
+      "path": "entities/앨런 튜링.md",
+      "id": "entity.앨런-튜링",
+      "evidence": 2
+    },
+    {
+      "path": "entities/얀 르쿤.md",
+      "id": "entity.얀-르쿤",
+      "evidence": 4
+    },
+    {
+      "path": "entities/윌리엄 우즈.md",
+      "id": "entity.윌리엄-우즈",
+      "evidence": 3
+    },
+    {
+      "path": "entities/제라드 솔턴.md",
+      "id": "entity.제라드-솔턴",
+      "evidence": 3
+    },
+    {
+      "path": "entities/조지 밀러.md",
+      "id": "entity.조지-밀러",
+      "evidence": 5
+    },
+    {
+      "path": "entities/조지프 바이젠바움.md",
+      "id": "entity.조지프-바이젠바움",
+      "evidence": 2
+    },
+    {
+      "path": "entities/존 설.md",
+      "id": "entity.존-설",
+      "evidence": 2
+    },
+    {
+      "path": "entities/칼 로저스.md",
+      "id": "entity.칼-로저스",
+      "evidence": 1
+    },
+    {
+      "path": "entities/캐런 스파크 존스.md",
+      "id": "entity.캐런-스파크-존스",
+      "evidence": 3
+    },
+    {
+      "path": "entities/케네스 처치.md",
+      "id": "entity.케네스-처치",
+      "evidence": 3
+    },
+    {
+      "path": "entities/클로드 섀넌.md",
+      "id": "entity.클로드-섀넌",
+      "evidence": 1
+    },
+    {
+      "path": "entities/테리 위노그래드.md",
+      "id": "entity.테리-위노그래드",
+      "evidence": 2
+    },
+    {
+      "path": "entities/프랭크 로젠블랫.md",
+      "id": "entity.프랭크-로젠블랫",
+      "evidence": 2
+    },
+    {
+      "path": "entities/B.F. 스키너.md",
+      "id": "entity.b-f-스키너",
+      "evidence": 2
+    },
+    {
+      "path": "entities/Georgetown University.md",
+      "id": "entity.georgetown-university",
+      "evidence": 1
+    },
+    {
+      "path": "entities/IBM.md",
+      "id": "entity.ibm",
+      "evidence": 7
+    },
+    {
+      "path": "entities/MIT.md",
+      "id": "entity.mit",
+      "evidence": 2
+    },
+    {
+      "path": "index.md",
+      "id": "meta.index",
+      "evidence": 0
+    },
+    {
+      "path": "log.md",
+      "id": "meta.log",
+      "evidence": 0
+    },
+    {
+      "path": "meta/LLM 시스템 경계 확장 지도.md",
+      "id": "meta.llm-system-boundary-map",
+      "evidence": 0
+    },
+    {
+      "path": "meta/LLM 학습 가이드.md",
+      "id": "meta.learning-guide",
+      "evidence": 0
+    },
+    {
+      "path": "meta/LLM과 컴퓨팅 능력의 공진화.md",
+      "id": "meta.llm-computing-coevolution",
+      "evidence": 0
+    },
+    {
+      "path": "overview.md",
+      "id": "meta.overview",
+      "evidence": 0
+    },
+    {
+      "path": "sources/001_섀넌의 N-gram 모델.md",
+      "id": "source.001",
+      "evidence": 3
+    },
+    {
+      "path": "sources/002_튜링 테스트.md",
+      "id": "source.002",
+      "evidence": 2
+    },
+    {
+      "path": "sources/003_Georgetown-IBM 기계 번역 시연.md",
+      "id": "source.003",
+      "evidence": 1
+    },
+    {
+      "path": "sources/004_퍼셉트론.md",
+      "id": "source.004",
+      "evidence": 5
+    },
+    {
+      "path": "sources/005_촘스키의 통사 구조.md",
+      "id": "source.005",
+      "evidence": 5
+    },
+    {
+      "path": "sources/006_위드로-호프의 MADALINE.md",
+      "id": "source.006",
+      "evidence": 4
+    },
+    {
+      "path": "sources/007_ELIZA.md",
+      "id": "source.007",
+      "evidence": 2
+    },
+    {
+      "path": "sources/008_비터비 알고리즘.md",
+      "id": "source.008",
+      "evidence": 4
+    },
+    {
+      "path": "sources/009_SHRDLU.md",
+      "id": "source.009",
+      "evidence": 4
+    },
+    {
+      "path": "sources/010_벡터 공간 모델과 TF-IDF.md",
+      "id": "source.010",
+      "evidence": 4
+    },
+    {
+      "path": "sources/011_개념 의존.md",
+      "id": "source.011",
+      "evidence": 7
+    },
+    {
+      "path": "sources/012_상징 규칙에서 통계 학습으로.md",
+      "id": "source.012",
+      "evidence": 14
+    },
+    {
+      "path": "sources/013_은닉 마르코프 모델과 통계적 음성 인식.md",
+      "id": "source.013",
+      "evidence": 9
+    },
+    {
+      "path": "sources/014_증강 전이망과 절차적 자연어 파싱.md",
+      "id": "source.014",
+      "evidence": 4
+    },
+    {
+      "path": "sources/015_몬태규 의미론과 합성적 자연언어 해석.md",
+      "id": "source.015",
+      "evidence": 7
+    },
+    {
+      "path": "sources/016_중국어 방 논증과 강한 AI 논쟁.md",
+      "id": "source.016",
+      "evidence": 7
+    },
+    {
+      "path": "sources/017_Lesk 알고리즘과 단어 의미 중의성 해소.md",
+      "id": "source.017",
+      "evidence": 6
+    },
+    {
+      "path": "sources/018_역전파와 다층 신경망 학습.md",
+      "id": "source.018",
+      "evidence": 9
+    },
+    {
+      "path": "sources/019_Katz 백오프와 희소 데이터 확률 추정.md",
+      "id": "source.019",
+      "evidence": 3
+    },
+    {
+      "path": "sources/020_시간 지연 신경망과 음소 인식.md",
+      "id": "source.020",
+      "evidence": 9
+    },
+    {
+      "path": "sources/021_합성곱 신경망과 특징 학습.md",
+      "id": "source.021",
+      "evidence": 19
+    },
+    {
+      "path": "sources/022_IBM 통계적 기계 번역과 데이터 기반 전환.md",
+      "id": "source.022",
+      "evidence": 11
+    },
+    {
+      "path": "sources/023_Penn Treebank와 통계적 구문 분석.md",
+      "id": "source.023",
+      "evidence": 8
+    },
+    {
+      "path": "sources/024_BM25와 확률적 정보 검색.md",
+      "id": "source.024",
+      "evidence": 8
+    },
+    {
+      "path": "sources/025_WordNet과 어휘 의미망.md",
+      "id": "source.025",
+      "evidence": 13
+    },
+    {
+      "path": "sources/026_순환 신경망과 시간적 문맥 학습.md",
+      "id": "source.026",
+      "evidence": 17
+    },
+    {
+      "path": "sources/027_최대 엔트로피와 서포트 벡터 머신.md",
+      "id": "source.027",
+      "evidence": 14
+    },
+    {
+      "path": "sources/028_장단기 메모리와 장기 의존성 학습.md",
+      "id": "source.028",
+      "evidence": 16
+    },
+    {
+      "path": "sources/029_통계적 구문 분석과 어휘화 파서.md",
+      "id": "source.029",
+      "evidence": 20
+    },
+    {
+      "path": "sources/030_FrameNet과 프레임 의미론.md",
+      "id": "source.030",
+      "evidence": 9
+    },
+    {
+      "path": "sources/031_잠재 의미 분석과 확률적 잠재 의미 색인.md",
+      "id": "source.031",
+      "evidence": 8
+    },
+    {
+      "path": "sources/032_조건부 무작위장과 구조화 예측.md",
+      "id": "source.032",
+      "evidence": 4
+    },
+    {
+      "path": "sources/033_BLEU와 기계 번역 자동 평가.md",
+      "id": "source.033",
+      "evidence": 3
+    },
+    {
+      "path": "sources/034_구 기반 통계적 기계 번역과 최소 오류율 훈련.md",
+      "id": "source.034",
+      "evidence": 4
+    },
+    {
+      "path": "sources/035_신경 확률 언어 모형과 분산 단어 표현.md",
+      "id": "source.035",
+      "evidence": 1
+    },
+    {
+      "path": "sources/036_잠재 디리클레 할당과 베이지안 토픽 모델링.md",
+      "id": "source.036",
+      "evidence": 1
+    },
+    {
+      "path": "sources/037_ROUGE와 METEOR의 과제별 생성 텍스트 평가.md",
+      "id": "source.037",
+      "evidence": 3
+    },
+    {
+      "path": "sources/038_PropBank와 의미역 표지.md",
+      "id": "source.038",
+      "evidence": 4
+    },
+    {
+      "path": "sources/039_Freebase와 협업형 지식 그래프.md",
+      "id": "source.039",
+      "evidence": 6
+    },
+    {
+      "path": "sources/040_IBM Watson과 Jeopardy 질의응답.md",
+      "id": "source.040",
+      "evidence": 6
+    },
+    {
+      "path": "sources/041_심층 신경망 음향 모델과 DNN-HMM 전환.md",
+      "id": "source.041",
+      "evidence": 5
+    },
+    {
+      "path": "sources/042_Wikidata와 다언어 협업 지식 베이스.md",
+      "id": "source.042",
+      "evidence": 5
+    },
+    {
+      "path": "sources/043_Word2Vec와 효율적 정적 단어 임베딩.md",
+      "id": "source.043",
+      "evidence": 5
+    },
+    {
+      "path": "sources/044_GloVe와 Adam의 서로 다른 2014년 전환.md",
+      "id": "source.044",
+      "evidence": 5
+    },
+    {
+      "path": "sources/045_Sequence-to-Sequence 학습과 신경 기계 번역.md",
+      "id": "source.045",
+      "evidence": 5
+    },
+    {
+      "path": "sources/046_메모리 네트워크와 외부 지식 접근.md",
+      "id": "source.046",
+      "evidence": 4
+    },
+    {
+      "path": "sources/047_어텐션 메커니즘과 동적 정렬.md",
+      "id": "source.047",
+      "evidence": 4
+    },
+    {
+      "path": "sources/048_잔차 학습과 매우 깊은 신경망.md",
+      "id": "source.048",
+      "evidence": 4
+    },
+    {
+      "path": "sources/049_층 정규화와 시퀀스 모델의 배치 독립성.md",
+      "id": "source.049",
+      "evidence": 6
+    },
+    {
+      "path": "sources/050_FastText와 서브워드 표현의 두 경로.md",
+      "id": "source.050",
+      "evidence": 6
+    },
+    {
+      "path": "sources/051_SQuAD와 추출형 독해 평가.md",
+      "id": "source.051",
+      "evidence": 2
+    },
+    {
+      "path": "sources/052_신경 정보 검색과 의미 대응.md",
+      "id": "source.052",
+      "evidence": 5
+    },
+    {
+      "path": "sources/053_GNMT와 제품 규모 신경 번역.md",
+      "id": "source.053",
+      "evidence": 2
+    },
+    {
+      "path": "sources/054_WaveNet과 표본 단위 신경 오디오 생성.md",
+      "id": "source.054",
+      "evidence": 2
+    },
+    {
+      "path": "sources/055_Transformer와 자기어텐션 기반 시퀀스 모델링.md",
+      "id": "source.055",
+      "evidence": 5
+    },
+    {
+      "path": "sources/056_RLHF 토대와 인간 선호 기반 보상 학습.md",
+      "id": "source.056",
+      "evidence": 4
+    },
+    {
+      "path": "sources/057_ELMo와 ULMFiT의 두 전이 학습 경로.md",
+      "id": "source.057",
+      "evidence": 2
+    },
+    {
+      "path": "sources/058_BERT의 마스크드 양방향 사전 학습.md",
+      "id": "source.058",
+      "evidence": 2
+    },
+    {
+      "path": "sources/059_GPT-1과 GPT-2의 전이 방식 변화.md",
+      "id": "source.059",
+      "evidence": 4
+    },
+    {
+      "path": "sources/060_GLUE와 SuperGLUE의 집계 평가.md",
+      "id": "source.060",
+      "evidence": 3
+    },
+    {
+      "path": "sources/061_XLNet·RoBERTa·ALBERT의 BERT 개선 경로.md",
+      "id": "source.061",
+      "evidence": 4
+    },
+    {
+      "path": "sources/062_XLM과 교차 언어 사전 학습.md",
+      "id": "source.062",
+      "evidence": 1
+    },
+    {
+      "path": "sources/063_T5와 Text-to-Text 통합 프레임워크.md",
+      "id": "source.063",
+      "evidence": 1
+    },
+    {
+      "path": "sources/064_Transformer-XL과 세그먼트 수준 재귀.md",
+      "id": "source.064",
+      "evidence": 1
+    },
+    {
+      "path": "sources/065_BERT 기반 passage 재순위화.md",
+      "id": "source.065",
+      "evidence": 4
+    },
+    {
+      "path": "sources/066_신경 언어 모델의 스케일링 법칙.md",
+      "id": "source.066",
+      "evidence": 2
+    },
+    {
+      "path": "sources/067_GPT-3와 문맥 내 학습.md",
+      "id": "source.067",
+      "evidence": 2
+    },
+    {
+      "path": "sources/068_DPR과 검색 증강 생성.md",
+      "id": "source.068",
+      "evidence": 2
+    },
+    {
+      "path": "sources/069_전문가 혼합과 희소 활성 스케일링.md",
+      "id": "source.069",
+      "evidence": 5
+    },
+    {
+      "path": "sources/070_CLIP과 대조적 언어-이미지 사전 학습.md",
+      "id": "source.070",
+      "evidence": 3
+    },
+    {
+      "path": "sources/071_Codex와 HumanEval 기반 코드 생성 평가.md",
+      "id": "source.071",
+      "evidence": 3
+    },
+    {
+      "path": "sources/072_지시 미세조정과 FLAN의 제로샷 일반화.md",
+      "id": "source.072",
+      "evidence": 5
+    },
+    {
+      "path": "sources/073_ColBERT와 다중 벡터 검색.md",
+      "id": "source.073",
+      "evidence": 4
+    },
+    {
+      "path": "sources/074_The Pile과 대규모 언어 모델 학습 말뭉치.md",
+      "id": "source.074",
+      "evidence": 2
+    },
+    {
+      "path": "sources/075_DALL·E와 이산 이미지 토큰 생성.md",
+      "id": "source.075",
+      "evidence": 4
+    },
+    {
+      "path": "sources/076_파운데이션 모델 보고서와 AI 생태계.md",
+      "id": "source.076",
+      "evidence": 1
+    },
+    {
+      "path": "sources/077_InstructGPT와 인간 선호 정렬.md",
+      "id": "source.077",
+      "evidence": 1
+    },
+    {
+      "path": "sources/078_Chinchilla와 계산 최적 언어 모델 학습.md",
+      "id": "source.078",
+      "evidence": 2
+    },
+    {
+      "path": "sources/079_HELM과 다차원 언어 모델 평가.md",
+      "id": "source.079",
+      "evidence": 1
+    },
+    {
+      "path": "sources/080_사고 연쇄 프롬프팅과 추론 행동 유도.md",
+      "id": "source.080",
+      "evidence": 6
+    },
+    {
+      "path": "sources/081_ChatGPT 연구 미리보기와 대화형 LLM 배포.md",
+      "id": "source.081",
+      "evidence": 2
+    },
+    {
+      "path": "sources/082_BLOOM과 공개 접근 다국어 LLM.md",
+      "id": "source.082",
+      "evidence": 6
+    },
+    {
+      "path": "sources/083_PaLM과 Pathways 기반 대규모 언어 모델 확장.md",
+      "id": "source.083",
+      "evidence": 1
+    },
+    {
+      "path": "sources/084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습.md",
+      "id": "source.084",
+      "evidence": 1
+    },
+    {
+      "path": "sources/085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성.md",
+      "id": "source.085",
+      "evidence": 3
+    },
+    {
+      "path": "sources/086_잠재 확산 모델과 Stable Diffusion v1 공개.md",
+      "id": "source.086",
+      "evidence": 4
+    },
+    {
+      "path": "sources/087_Whisper와 대규모 약한 감독 음성 인식.md",
+      "id": "source.087",
+      "evidence": 4
+    },
+    {
+      "path": "sources/088_FlashAttention과 IO 인지형 정확 어텐션.md",
+      "id": "source.088",
+      "evidence": 3
+    },
+    {
+      "path": "sources/089_LLaMA 1과 제한적 공개 가중치 연구 배포.md",
+      "id": "source.089",
+      "evidence": 2
+    },
+    {
+      "path": "sources/090_공개 가중치 LLM 파동과 서로 다른 공개 범위.md",
+      "id": "source.090",
+      "evidence": 15
+    },
+    {
+      "path": "sources/091_QLoRA와 4비트 양자화 미세조정.md",
+      "id": "source.091",
+      "evidence": 6
+    },
+    {
+      "path": "sources/092_함수 호출과 도구 사용의 모델-실행 경계.md",
+      "id": "source.092",
+      "evidence": 5
+    },
+    {
+      "path": "sources/093_멀티모달 LLM과 시각-언어 연결 방식의 분화.md",
+      "id": "source.093",
+      "evidence": 12
+    },
+    {
+      "path": "sources/094_헌법적 AI와 자기비평·AI 피드백 정렬.md",
+      "id": "source.094",
+      "evidence": 3
+    },
+    {
+      "path": "sources/095_BIG-bench와 MMLU의 평가 범위·집계 경계.md",
+      "id": "source.095",
+      "evidence": 6
+    },
+    {
+      "path": "sources/096_GPT-4의 멀티모달 공개·시험 성능·안전 경계.md",
+      "id": "source.096",
+      "evidence": 8
+    },
+    {
+      "path": "sources/097_Mixtral의 생산 배포 효율 주장과 증거 경계.md",
+      "id": "source.097",
+      "evidence": 6
+    },
+    {
+      "path": "sources/098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계.md",
+      "id": "source.098",
+      "evidence": 10
+    },
+    {
+      "path": "sources/099_구조화 출력의 스키마 준수와 의미 정확성 경계.md",
+      "id": "source.099",
+      "evidence": 4
+    },
+    {
+      "path": "sources/100_희소·밀집 검색의 결합과 다단계 순위화.md",
+      "id": "source.100",
+      "evidence": 8
+    },
+    {
+      "path": "sources/101_LoRA 이후 PEFT 변형의 설계 축과 연표.md",
+      "id": "source.101",
+      "evidence": 7
+    },
+    {
+      "path": "sources/102_지속 사전 학습의 연표와 지식 갱신 경계.md",
+      "id": "source.102",
+      "evidence": 10
+    },
+    {
+      "path": "sources/103_GLaM에서 Mixtral까지의 희소 MoE 확장.md",
+      "id": "source.103",
+      "evidence": 7
+    },
+    {
+      "path": "sources/104_LLM 에이전트의 추론-행동 루프와 자율성 경계.md",
+      "id": "source.104",
+      "evidence": 10
+    },
+    {
+      "path": "sources/105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계.md",
+      "id": "source.105",
+      "evidence": 11
+    },
+    {
+      "path": "sources/106_DeepSeek-R1의 강화학습 파이프라인과 증류 경계.md",
+      "id": "source.106",
+      "evidence": 5
+    },
+    {
+      "path": "sources/107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계.md",
+      "id": "source.107",
+      "evidence": 6
+    },
+    {
+      "path": "sources/108_V-JEPA 2의 잠재 예측과 로봇 계획 실험 경계.md",
+      "id": "source.108",
+      "evidence": 4
+    },
+    {
+      "path": "sources/109_AI 공동 과학자의 가설 생성과 자율 연구 경계.md",
+      "id": "source.109",
+      "evidence": 7
+    },
+    {
+      "path": "sources/110_저자원 언어 LLM의 성능 격차와 전이·평가 경계.md",
+      "id": "source.110",
+      "evidence": 11
+    }
+  ],
+  "unresolved": [],
+  "source_hashes": {
+    "analyses/같은 벡터 공간은 무엇을 보장하는가 — 공기·대조·생성의 경계.md": "fa9f3e996716810c7f5daa948afe13762dc9630f3084f9a68b3ea368c3804f81",
+    "analyses/같은 병렬 문장은 무엇을 학습시키는가.md": "22b1b1d952e437efae69c1b37b5cc639dc54a342645238fea8cf2e4054fe7a7e",
+    "analyses/검색은 근거를 찾고 독해는 답을 찾는다.md": "cd71f4cebeefdec57aa12e51f4499fab582a888af83d64b9633f53f0a68fecc4",
+    "analyses/계수 기반과 예측 기반 단어 표현은 얼마나 다른가.md": "1cc55e867a7edb9284c90b2094b120b84015a32cf52191588b7bd145c30e47da",
+    "analyses/공개 가중치와 재현 가능성은 같은 축인가.md": "a8ee09eccd5789a52579a49255feb102e7b690c2b3998f63273fe5929c967131",
+    "analyses/구조화된 의미 자원은 무엇을 노드로 삼는가.md": "688fec0661a87ffde39ed7c42add1e32a35d5ec9d7b4e632b507d6338e3815ea",
+    "analyses/규모는 언제 연구 변수가 되었나.md": "aeb92d31eee234faedf18d0dd49738f921f2138a6e537ecbb159489316966bb9",
+    "analyses/규칙 기반 AI에서 데이터 기반 학습으로.md": "2355d86f63a1fc607aa1921634f946270e815cf08222f9f05835e8832199d9c2",
+    "analyses/기계 이전의 계산은 어떻게 능력이 되었나.md": "156a3427587818253043789498bd9f611c3d6701a965919a9e757df3722ff5b1",
+    "analyses/데이터 품질과 분포 다양성은 같은 축인가.md": "76cb273c86e3c10b8369d82dbbf64cf7500f8cbc3589cef1c747c9c0a1b0b06d",
+    "analyses/데이터의 양에서 권리와 책임까지.md": "e14610e9431d523b7ce28b4ec1d18ee20503e9c877dae2d395acdbcf68d3d102",
+    "analyses/모델 능력에서 서비스 능력으로.md": "141459c188506ea1f26014af7660e4dd3499ed020fb20443e438928b76a09c60",
+    "analyses/문맥은 저장소인가 — 상태 재사용·검색·에이전트 메모리.md": "03b2d12a6fed2506c2bde19a1b6d03509d9fbd5c1de43f7c53f322d721ab9e4d",
+    "analyses/문자에서 실행 권한까지.md": "2e30ac2b2ee8ff20fa478ad3f7d41c9b7476f30ca79c6986f0bdaa72d51b705a",
+    "analyses/사전 학습 지식은 과제에 어떻게 도착하는가.md": "c6e9ba008f9b6148b27b1db2cbe8ccab5cd528d58370345594bbc72c452b0cc4",
+    "analyses/생성은 무엇을 한 단계씩 고르는가 — 파형·이미지 토큰·잠재 잡음.md": "79b7b3f7a7d7c897b40262286546c90fcb664653fc8d6980f0fcc855ae56cbb1",
+    "analyses/서브워드는 한 벡터의 특징인가 여러 토큰인가.md": "7a3a9350d9d86baac0c80851ca1e8b161871eb2311bf7720ab91e89543abd706",
+    "analyses/손실 곡선과 능력 곡선 사이.md": "a4f84c5b9256a4cad57ea6abfd7ed27e6675f5583421a463434f2e4b9e1343c2",
+    "analyses/언어 수와 언어 형평성은 같은 축인가.md": "41465b24d78e08e4f72923e5625dfd517bffc1840920dba66a2e2789bb6a15fc",
+    "analyses/언어와 계산을 기계적 절차로 만들다.md": "c85886e2e1f9cc8a9167e873b1e516a4dd0d05efb13fcac7305956160cfa9e8a",
+    "analyses/연산보다 데이터 이동이 비싸질 때.md": "dffad8cb374ef7ebe5cb8e74f73c57c201d3f0ee263f4c30e1e528ddc4352cd9",
+    "analyses/음성을 텍스트로 옮기는 경계에서 무엇이 사라지는가 — 인식·합성·네이티브 오디오.md": "65c1e793ff42a9d6be3a1f09f7321ace6bee53c8c49014d2a3aaeba83b0d5cac",
+    "analyses/자동 평가 지표는 무엇을 보상하는가.md": "06d1e94bafe4c9a75dbc339f2f63dda5f447fac7b88636a5b898ecb2cbe85243",
+    "analyses/잔차 경로와 정규화는 어디에 놓이는가.md": "52c98a6f61cb204b86b0f47bb7ee907f0cfffa44f1dbbadc0aa28a8a83cc31db",
+    "analyses/저장 프로그램에서 학습 프레임워크까지.md": "07f1a8e592fbc5cee16dcf7145269b8e89d80282367b775d9ab3336d8954b3b1",
+    "analyses/전력에서 서비스 결과 계약까지 무엇을 세어야 하나.md": "324a2776d2f623b83e89b7d15c49f90e389a7759b7d1223dd9a181d82ff81267",
+    "analyses/집적도 증가에서 가속기까지 무엇이 더 필요했나.md": "eccd2bc17bc0281bf044d8a49145ae6e9e40ca16f1f33dca5517dbe689e9a468",
+    "analyses/촘스키에서 LLM으로.md": "db1eef22ec7c6742634507ccf56f1317f3b6274f34896acf16c73c719bcfebb5",
+    "analyses/총 매개변수와 활성 계산량은 같은 축인가.md": "1c037977c63b322f1f030f3c1b9913b23cb92594cf13395d62bdadbb99c04474",
+    "analyses/최고 경로와 기대 통계, 백오프.md": "1808c685a6672eaaa5125740f684a26080d0ed8b7f7ae50855f9364769a86795",
+    "analyses/텍스트 모델에서 실시간 멀티모달 시스템까지.md": "6ff2dbf868e76c5000ce4ac0dc8dd30edbc64691012e3c409684151eb5b85674",
+    "analyses/튜링 테스트와 LLM 평가.md": "3695403b65593a0bcadaa68992052d3e0c523266c4b233e29b79884487c20fb0",
+    "analyses/퍼셉트론에서 MADALINE으로.md": "7ffe86cf711e48daa1f5ea09568729fd0a9cbb5d179ddc5b9b15fa2fdc1eb9f0",
+    "analyses/학습 규칙이 있어도 왜 규모화되지 못했나.md": "dd6a1b8828b28f73c6e19063f4ddbdc742e5f5c54777c55fb7c2801e48ef9c4a",
+    "analyses/행렬곱 가속은 딥러닝을 어떻게 현실화했나.md": "af63873f365995516af12c83699882f6c07cb2b0e56950eab5565531f5412120",
+    "analyses/확률, 마진, 순위 점수.md": "6ab013661ec76c0d8c110f65f7caec92390ec59d3c573d76361430546a40d9b8",
+    "analyses/확률적 언어 모델은 어떤 계산 인프라를 요구했나.md": "21bffdb6cd00fcfe9024c6f17c3604d3d2ca41c43001385718cbf5cd428bedfb",
+    "analyses/훈련 병렬성과 생성 순차성은 다른 축이다.md": "2a5c04d43d5ff3ae2c6fc14d51fd12094a998e77f0184950fde8caa6cc735a6b",
+    "analyses/AI 시연과 실제 성능.md": "2bedc49f6e6ba13390976d6cd6fa5941624a3a8d708804bf7077a577ab439f3c",
+    "analyses/ELIZA에서 LLM으로.md": "9c49eae0af3b172290c47d3815fc4640b1c8a0aa5109b1d7aa1ceee4db590df4",
+    "analyses/LLM 능력은 모델의 속성인가 시스템의 속성인가.md": "d5cbfc4577de838dee1c5c6f4c2d922987526f9bd340d7efa02cce55bd11845c",
+    "analyses/LLM 수학 종합 실습.md": "717079b7ec37b4e34443c92c8f73ed467fe37e0d4e95faf79b5d93e7df4a99d5",
+    "analyses/LLM을 만든 수학.md": "85326f69efd56f51676ca96bead33414d36a3c9869eb461edf3f6f75db12e0b3",
+    "analyses/N-gram에서 LLM으로.md": "0dc695273078bda918cd4ca1b51a8b7c9f9a582b4606416e415f620d8f85d045",
+    "analyses/Transformer는 무엇을 병렬화했고 무엇을 남겼나.md": "a351212738114ee65817892c439a105dc2a9a3811570e739a76a1e2b17a4515a",
+    "concepts/가속기와 행렬 계산.md": "6ccb2f9967b53942d82a5181d61f4c351a4cbaec0efa94a471cf3ff34943b79f",
+    "concepts/강한 AI.md": "983a273f9efb99c6282b89edc5ccd434207774a835b891b32c8cbaac06b4d06c",
+    "concepts/개념 의존.md": "a2cdcc3c7c2e7ee013ca2c119af94242b044ddea971b32020a613f01a907a05b",
+    "concepts/개방 영역 질의응답.md": "9e138ed9a47e47831c56b44d55e39238c754fb385484983236cd279e556d78dd",
+    "concepts/검색 증강 생성.md": "171bea8d717cf76e5a47345e5eb94bfbc3b3cf53bbe9a3be58c6293beffeb461",
+    "concepts/경사하강법.md": "f5d4ea23e4b7e329e1a3387fd3ac424f8169023eb3c13e635dc87c58554904e2",
+    "concepts/계산 복잡도와 비용 모델.md": "23ce284f04c46f6fd1506ae2ce5df02f2f68c90460e168addd3e591688f64640",
+    "concepts/교차 인코더 재순위화.md": "91f619e996e4b8a884323adcb6dccd55e38f2ce715090b0ab6aca9613491ddcf",
+    "concepts/구 기반 통계적 기계 번역.md": "6c7e17e83401dedaab41669e18f00791d74c40e0bdd16af27ab18a76b2b39b11",
+    "concepts/구조화 출력.md": "264fc56de2882e6ac4902efd8a1f356c29bb21c63dbc83a5db6b5244a84e94da",
+    "concepts/규칙 기반 기계 번역.md": "88c74382556a18f73ecd8b34cc840578d706983b6d7a7e1637fcd24eef2968ff",
+    "concepts/그룹 상대 정책 최적화.md": "f6d624a1a947651bd9839df65acc23ee3564b05d9f23eac7a11f97450dddf644",
+    "concepts/기계 번역.md": "a37e16c87e3295363f2e68cd87c3b668aaaa4f38bb64e3f14c32a5567e0600d7",
+    "concepts/기울기 소실.md": "fe1be49de92ae4152c28beb01d0b196f0b8cf709e50817aba0b8df79e8001df8",
+    "concepts/긴 문맥 언어 모델.md": "3d5128057915caab6168a52739e1a93610b930c97fd7e68bfa935c094f9a2beb",
+    "concepts/내적·행렬곱과 선형변환.md": "a68d5a38989bed8a593ff2121585de57469e479a4c1a389235a41b2753aaff98",
+    "concepts/다중 벡터 검색.md": "a16b1056456dfe1b20280096ccd3c3512ecd2aeebc42b4d0d24fb264d03a8bcf",
+    "concepts/다중 홉 검색.md": "cf049f6ac69e4ac38ea8dbae5a7be3ac4515b47737710c4aa5c4420e3de3621a",
+    "concepts/다층 퍼셉트론.md": "3d5d2fc6965017bcd14851d5665634aab6a6fb612301556f991bb9cf930b44a3",
+    "concepts/단어 오류율.md": "38b9949563c4f296035b8f3951e2352fab8eb1586bf719b6908ca0f52f5dce1b",
+    "concepts/단어 의미 중의성 해소.md": "57395106004d6167fe92c4458db2dc5a8b6743712042e2d14be0ead68e142a92",
+    "concepts/단어 임베딩.md": "1ee1e6c4ca5b1f5032a38f4394831d16c8b203e90fd0a34d39a4df074fd2d379",
+    "concepts/대규모 언어 모델.md": "0465ad5f042a9873cf4bc34207a3c2529185ea252562b060392795732cd337a2",
+    "concepts/대화 복구.md": "fe99be937d75c4c1e543e1292ff8744b098e8921fd7fc7baf891fb2f7d67b825",
+    "concepts/데이터 희소성.md": "47f49ba93173196304b2b5942c2d1595bc815ab9ecbf93816f3d1ff39ff542e1",
+    "concepts/동적 계획법.md": "e6515159ae9891c8591026aab4c07e7aacbc8cc944a5dde983a47dc133dfcbfa",
+    "concepts/로그가능도.md": "6036c3b9f7877ccf281f6cced75ae3c51c0ea59694d991f37594865577ed09c4",
+    "concepts/로저스식 심리치료.md": "0e2ec674d624b291756804736e4cc32f4fc1605d323c022036e308d671549f3a",
+    "concepts/마르코프 가정.md": "a60620af57b7368b5d3ada49515aabafd373e9cfcb49a3e61c8cc6e314595191",
+    "concepts/마스크드 언어 모델링.md": "1aa8290373337a510e350599c449454b77544eeb7188a633e373e3e389035942",
+    "concepts/마이크로월드.md": "ce0fde93358faf538a23e3efb84a6adfb5bea58444b1f80311ab20419a26e7b1",
+    "concepts/말뭉치 기반 학습.md": "2b24f6d0c32d9db68d54b27380c39791ac046059ee49f88e2ef5fb74fb59ca33",
+    "concepts/멀티모달 대규모 언어 모델.md": "10f613255f092b824c25761287f2a567530bef59c1f44408bf3b5f11999f61a2",
+    "concepts/메모리 계층과 데이터 이동.md": "12444b9df56e9c26c162f69deab93d48eac62282ab9a998d161deda88fe67053",
+    "concepts/메모리 네트워크.md": "d15eb30ed5dfca5eed32865ba5b0b01f2bc6b89f0fefe5db644d4388935a0b0c",
+    "concepts/모방 게임.md": "8c89fcfea1e26371b5cdc159c2a6e05c180a089587c5066ab52a68446bc6094f",
+    "concepts/몬태규 의미론.md": "710ea3c9317bf48d62d107b52b58095f700286145ac6b812d8b7f2acf3b666cb",
+    "concepts/문맥 내 학습.md": "0bdf8fb59356dcae3d7ed7e3be16034c937444db5451f56fc21030bfcd0855d5",
+    "concepts/문맥자유문법.md": "cb0e99375f0911f611da740fe63d255149d6891e63261964e1e5ef25b548cc67",
+    "concepts/문자 인코딩과 정규화.md": "53abea99098721b4276b4b2255509cb7e107d42ec8cd48aa2277845c9bcc5a49",
+    "concepts/미분·편미분·그래디언트.md": "57c4b6ceac105d22d8c9e7c86ee981443cf7f8052df331f471191397caf4ac75",
+    "concepts/벡터 공간 모델.md": "066e72f0c5324e480dedda0868a5c2ccf9a38309a8f852638b1f624e71f24ebb",
+    "concepts/벡터·행렬·텐서와 shape.md": "22c1e8616b143057ba930c66948efdab7c54de5d36287ffeeac450afb14101ac",
+    "concepts/변형생성문법.md": "8a0c77e9b620f1776f607edbc6e66af6a8bfc8fbec554007e861901c2f9a62b6",
+    "concepts/보편문법.md": "17800ac414a6458030aec5bf005ebe6467a1b17f34c17167d3a97b2e0de0c631",
+    "concepts/분산 학습과 집단 통신.md": "0aa7844fa12583071a7d73a4ae894d2ccfc8c87f5405fa055be35fbea42a37a1",
+    "concepts/블록 세계.md": "49911851956903e0c9f8233db3b5170178e1e049db542d0108d81f9293fd862a",
+    "concepts/비터비 알고리즘.md": "4ad98f867405664220622273f59621f54ac9b625e27ffed210435747f3778f2f",
+    "concepts/사고 연쇄 프롬프팅.md": "195204da6cff989da4617ae0b9f6f44fd07b300e114ce798e479a506895db2b2",
+    "concepts/서브워드 토큰화.md": "effafecbbc9f6f3c509eebe37ffac1de56bbbab127c94b73be7e79113dccfcec",
+    "concepts/서포트 벡터 머신.md": "1358023bc7492583234e9f9e7273ee3222400c9766fb237b2a8ead8ca29ca47d",
+    "concepts/선형 분류기.md": "f3822cb89e991fcc3dd142049cacaf3bcdaa09ad68dc7b931f8c81e180b588dc",
+    "concepts/선형 분리 가능성.md": "9112c10075a7b5df0b077ff4191de45b30146c83257b6e427acbdace0014c2d4",
+    "concepts/소프트맥스.md": "90a2b80f5f4f01d71059fd18adf4e2a21ba4acdfaa697b49993d7221f64377dd",
+    "concepts/수치 안정성과 log-sum-exp.md": "021ec13bced48cf86fd2d4ad0073dbc194a24381a6156ba6979bf7051dbf5e02",
+    "concepts/수치 형식·혼합 정밀도·양자화.md": "2c4f62a9548ec41ec4b900509249dda8199095fc934ef9d98fb1c38f95011e61",
+    "concepts/순환 신경망.md": "97d6bceb6775f1308467e9874cc714390992b5971c482c47290a95df683ab110",
+    "concepts/스크립트.md": "d19f0b00ab6d8a6817622cb0216b8c6a3031295162098369eb22812b4bc4ffb8",
+    "concepts/시간 지연 신경망.md": "1b3152f00f2ee241d1f4d69291ac5e24c946b9100077072e19ae9897ebc1b9af",
+    "concepts/신경 정보 검색.md": "33f876277c967fc3717e2f9a8ae29877c1cab3fc0deda90d54f2691bfa6cff04",
+    "concepts/신경 확률 언어 모형.md": "dadcd73993f078e4af74552499992c28001715c8e4d962b3e4d53bf7804c278b",
+    "concepts/신경망 기계 번역.md": "9358bbf92331c4cb40d727219cd8f04a2b3c9e67c0314818e1b4e0c09e6180e8",
+    "concepts/실시간 멀티모달 상호작용.md": "651c6b44ecee4d044e2451995e2509ffecf4866b66fadbcd27cc4f4ee6db1242",
+    "concepts/심층 구조.md": "2a741e0d18083f9348fc559d67494a1579fcca57e8e43ddae5bda98b6fb4d8af",
+    "concepts/어텐션 메커니즘.md": "ad1107e71ea5bc233073b96c0c5a83aaa17bf0276cc5577879aecb814c20b449",
+    "concepts/언어 모델 스케일링 법칙.md": "4033e6181edc315c5a0271a0e137fa6d032187b35ea710ab26227f2778ab4eae",
+    "concepts/언어 모델 전이 학습.md": "4fa9050698eab843fd4b4a021a5c701c16bddc4dad0f124754e59efca5f9402d",
+    "concepts/언어 모델 추론 서빙.md": "67c52fcf794f61714abb9f87816033026633f22eb00253e0487f634585731a26",
+    "concepts/엔트로피·교차 엔트로피·KL 발산.md": "271db8273fe090579c41ad76f6f2f4dbbe517e0bec9a4d5f3cf9d5319d24607b",
+    "concepts/역전파.md": "ac3cab5cd78525357070887f60d50edc1358bfb279d509f3803c60ab60186d3a",
+    "concepts/연쇄 법칙과 계산 그래프.md": "b828044e7c3c287f31e354210eba7437e00f0656e9bd5bb2c793bbfb899a126f",
+    "concepts/외부 메모리.md": "4d07113ef8c3064d830cd9715448a1bdfd0d41fae3ce183434e780f6533b03f9",
+    "concepts/유한상태 모델.md": "b56156d0e69c4f5dce30ba79ccfa657aa05ebe16f8164c9677dd035dedabc2d4",
+    "concepts/은닉 마르코프 모델.md": "4a5569846aae553db8cb85a89c2333e2a0c2bd2fb378993667453dd46989ca72",
+    "concepts/음성 활동 감지.md": "7e88f6ebeee9448b69de484beedb7fac74f9b0c453fe212591fd9735fbb82bea",
+    "concepts/의미역 표지.md": "1658bcdc8ea5281526c593a48861576d58c62f5861efe15c40311cf7280050ff",
+    "concepts/인간 피드백 강화학습.md": "5dd4887fc152df70ca61755dc05babf7d3f3f7c362e135a6156b448eaf2e7a84",
+    "concepts/인지 혁명.md": "4a72b4e2b964099682475d7e9ddd7163f31f67bcd1ac3f7c7c2eb48a7c6c7e8d",
+    "concepts/인코더-디코더.md": "7fdcffea02e26650ded051fb13042a3f6654fd5772a12b8083fe223e8807fc65",
+    "concepts/자극의 빈곤.md": "6858aee80598ba034db43fb5d3d5344d2610961066a126b082922b37e19e2b4f",
+    "concepts/자기회귀 생성.md": "25d23ba2cbc71c442b5d764eb916a8dd271b4ca291b0a9768675399a67fc5fe3",
+    "concepts/자동 음성 인식.md": "295f9826b3f2bbedd5ffaa89d6d313ce50dfe03b01d8193bfeb1ecb299108596",
+    "concepts/잔차 연결.md": "8a8f473da047630d5966bfa28d76b12263beb4ff950e4308acd7b418201fff86",
+    "concepts/잠재 디리클레 할당.md": "57a3991510acff8cafa17e7f2c30649d25a9cb9003bb9d07921932c0e2a0b7be",
+    "concepts/잠재 의미 분석.md": "f94b2d86a885e15208fe00d5d34860398f562b871806640134f26ed9d9530149",
+    "concepts/잠재 확산 모델.md": "befe166a66c458902ff198bc0925f603740aa2cebe12cbf2ad0ac84c048649c4",
+    "concepts/장단기 메모리.md": "439c01acf57cd211268f5b491dc813697e87528c35a1c5d92167768d61dacdc6",
+    "concepts/재귀.md": "79825fb693bdf5e5517eac7364db7952d1ac18439cb313c706e1b2aa152310d4",
+    "concepts/저순위 적응.md": "fe32c26e76076403743399ddca1992b850d5b0d5b6974f19794511bef8a2569b",
+    "concepts/저자원 언어.md": "8d8a1be040a1cc78e61e6731f7be5216167d13e5bc81c3eb67c3e7fc56cb7eee",
+    "concepts/적응 필터.md": "41b6c84262c00cfffeb863e367c9027e3cb39e8d6c61026f6b9f8162f5cf10e4",
+    "concepts/전문가 혼합.md": "725bcc8e5dbe0a997f4142c097c4abc38fbc29a26681c7150bde1b1a10d8d49f",
+    "concepts/조건부 무작위장.md": "b9a190d8eae7f3d8ec0158a80dae4656e6367b20f97980867f85213d75396aea",
+    "concepts/조건부 확률.md": "9a247940ba87508f3d99f9d23a1966701eb94d6630bf5bcebcd44e35152fe616",
+    "concepts/중국어 방 논증.md": "b2c01d1d9668395c10ec388a9e80ca2df35c8f724d8ff951a21cb6079414f9de",
+    "concepts/증강 전이망.md": "02e5ac679535c5a702ebe27f82eda8dbfe739ccff983906192d2561c4339a08f",
+    "concepts/지도 학습.md": "1599667c21cb432651035d547e175aa138a3fd7911878356209b25d4859b9052",
+    "concepts/지속 사전 학습.md": "0baf1c2ff67dc0b9b0b08640991ce775c776eb834803aab5ddb3783d3394c960",
+    "concepts/지수와 로그.md": "87e957a4fce2ee76cbe0e19997a7cbb443224f17e7cfe418bf4e1b1c7b747c80",
+    "concepts/지시 미세조정.md": "b19469dea7d43c07b5a7680eac4650c8d6c3f88ff5b77c813dacdc35e0ee36ca",
+    "concepts/지식 공학 병목.md": "20e31d4fa48e8737104fc6a1570b1de03fbda11c83bb31b915ba53e01b21b370",
+    "concepts/지식 그래프.md": "0be9a51a69f698ff7574f563f312c2bcfee3f7cff89f5527fdc02c45f6f8c480",
+    "concepts/촘스키 위계.md": "a92cf8a64aa775cac91b7fb83df51f16c89ee8d05e693bdc2a19f63ddabad35f",
+    "concepts/최대 엔트로피 모델.md": "a639540f79ccf2c828a273c19d1e0aa56dd91a246b7cb7cff0c40197d78c41b0",
+    "concepts/최소 오류율 훈련.md": "fbc286bc3aed0fc3ed313f3ff246db3ce052327d8077e1499db7ab316a6278fe",
+    "concepts/추출형 질의응답.md": "6e5be2dc7d4a56732907d4763a278377e2d0cea9c5bb243ef11cf308d8a1bdf4",
+    "concepts/코사인 유사도.md": "1f503c46f55c98bc22c0a047ab4409a89b22facf2dbbbdc26c0773be91c32de8",
+    "concepts/템플릿 기반 응답 생성.md": "7b1c7592aadd10306398de430f81487e43cc95ff1c8b3655f1a5ecfcc1a17afb",
+    "concepts/통계적 기계 번역.md": "4a04e7ab1cbb2f50ee4f1b90145ead44a168fca0c43edd8156ac6b234724df83",
+    "concepts/통계적 자연어 처리.md": "4730b1a343d26c1f3a26a5667016a5ccc1e1946f76115a6e75e42d48120d4b28",
+    "concepts/통사 구조.md": "6d88cd83ba2cb951030e27bb5925f16b61836dead30d1fac809dcc3c9204cdaa",
+    "concepts/통사론.md": "44e985de976bdb649ccb486554a4d7b741f82e807ff30aaac453c35ff7085758",
+    "concepts/튜링 테스트.md": "2834e299add8d6a59ff126de05dc0aad4f804bf6c6bf7603ddb78811e7918a32",
+    "concepts/특이값 분해와 저랭크 근사.md": "3813e9693b4f418d791d4bb4eeb442382d08d5a01c8bca6e2ea1f995a50be6e2",
+    "concepts/특징 공학.md": "0aba15c5df24cb3fba3b727abf11cd4c115e6383dbfecdfa5a2aacc3d14fbee2",
+    "concepts/파싱.md": "fc9305a1ab5b6a3de1711bb46fe16b1706a53d1c146b4cee874c9379154fe670",
+    "concepts/파운데이션 모델.md": "687cfab3fe6b761e5eccdb9c50ad76cb6c12cc4cd2c8af0a3bcb1de3ae97768c",
+    "concepts/패턴 매칭.md": "72ff19d25ebbed83654ec6a06537c9975ea1e5671df5184383a3dd3211f903a8",
+    "concepts/퍼셉트론.md": "5cb48c9e55bfb554900d806d9a283c966eb69bd86c129a804faeed47f8c6399f",
+    "concepts/표본추출·온도·top-k·top-p.md": "ad657d9955d20731e843c109bf88969225dcfd45c595bf90d784df40ad9f64d9",
+    "concepts/표층 구조.md": "d6e5c2ec49af4def2732551a476b0e5488a9653c0131c4db8ba60f35585148cf",
+    "concepts/하이브리드 검색.md": "0867c99bc693b1ebc3f89439cd78d8e6f1e0099e2f6fad8a57bed83e99728c7f",
+    "concepts/학습 데이터 생애주기와 출처 추적.md": "6b2d77bc166b0d9ee6a291d669572ebc810096d89e4e508dcd95d109114f23a9",
+    "concepts/학습된 세계 모델.md": "cc305438ec54ec0961b0dc1530092b0d9a80c772ef62c062b2a0916fa93aa480",
+    "concepts/함수 호출과 도구 사용.md": "8a933621d764bafeacc6c27f89165da1b4d8ccc7c62610b85c32841f4770cd43",
+    "concepts/합성곱 신경망.md": "095eba1f600f3108a185b072ee1f04233c6cb394c5eef9f211913b735871f3ce",
+    "concepts/합성성.md": "af01214388b156a6ccd1678e1be222486b5064d39c6ca7b4254f2fefc8eb15ba",
+    "concepts/행동주의 언어관.md": "0c94a1aed1e6fa5a0b5ac2518f4e7c64bc8b186c9ca47f80c010cbc2e05c819c",
+    "concepts/행동주의적 지능 기준.md": "a885e97ce735c3d7886b09145d59caca700518f1355419446c5d93ebfa5695ad",
+    "concepts/헌법적 AI.md": "0b0a5fc240248243035509de54a2a5d60c8581c25c57cb8b8e7fdcf78fe6f93d",
+    "concepts/확률.md": "05c153653c9bf8e3c86f72ef4c0d0151bf76fb9be22d276f54f70a3b8ead8ad6",
+    "concepts/확률변수·확률분포·기대값·분산.md": "6ccf3b2ade5fa9f04834bb58e89293f0e06c84b42e95041fc28065882243bae5",
+    "concepts/확률적 잠재 의미 분석.md": "1d5d7d400cf5489df2a996d0a1f72c6008dc4ec50c4c1e8c9c49cbaeb89785e5",
+    "concepts/활성화 함수.md": "f5038c8c2f2166dd214fd5ad58256a75006a1dd9e2c5a110c2cecd185615717c",
+    "concepts/ADALINE.md": "b14bb91d5401bc1c3b4e8da702406ffc1256c85397fee805464971b14e1d3b43",
+    "concepts/Adam 최적화기.md": "574002a81f4e4de30fcac327d01f3ef3d563ce61d4b751c9c626a9cca4514540",
+    "concepts/Batch Normalization.md": "af70b6b6d78fe12a41b398b149ed0ce22e1bda8e15c7bf6ad6c4f6fd5378b43a",
+    "concepts/Baum–Welch 알고리즘.md": "8d533c5a9b1a64b376ade8f9e0b86dadef2793801e62331a85b5e4372c9404ce",
+    "concepts/BERT.md": "8de5c3589eb7df4800d1fa33acf8144b4402f38675e5b7cfcbae7d6605ea1cfe",
+    "concepts/BIG-bench와 MMLU.md": "01b865775e80e94ff2338aea6422ba345eb5a484a8d5a64360de4ee638a20018",
+    "concepts/BLEU.md": "2a7a8bc403f2b60be21a9202be0aa7baa0019e90b160b29aa8696807d36c1be8",
+    "concepts/BLOOM.md": "bf0ad37cb9e5f0687c3c8b12a321ac730c129526dfeafb24c385536cbb8253c2",
+    "concepts/BM25.md": "20271c81291f652206b1645b27f7646dcd848fdd6c3023f84502391c1de6444f",
+    "concepts/Byte Pair Encoding.md": "4f43ddecd62e14facaa343ff443e07c9d6800144ca42a0eaea6af8dbec55acfe",
+    "concepts/CBOW.md": "7ae63efdc733bd1fdaff5a1f8ae94453503da93fcc3727c867b16d677ffab03c",
+    "concepts/ChatGPT 연구 미리보기 (2022).md": "a9e8e32545ce825284dcc133f3033f21b9eac961181acd176dab97bfc5a2c922",
+    "concepts/CLIP.md": "a67b998039610c4aa97c60a483523dfaa0d2bce5db4d8375c71ada6db527513d",
+    "concepts/DALL·E (2021).md": "ff547e27976a6a9bfca044d41f294b69da9c36d654e5d1fdab525b742b6738f2",
+    "concepts/DALL·E 2.md": "4858b9b83759aafb65a54cf118ca2b7957fb000f813795df1248b518de72194a",
+    "concepts/DeepQA.md": "1ae0f0fb491e2933171aed09842f48f2efdd49b1573cce2ce1ac18a811cc9198",
+    "concepts/Degradation problem.md": "53cae22d23765acba77a83ed3d1b417e75950d81a25c14ef18b8131f3bfd7032",
+    "concepts/DNN-HMM.md": "d6220918c6b60715b7423bb7bdd37bdaaca86bc189e4636aee3857efe9f3e7fd",
+    "concepts/DOCTOR 스크립트.md": "cd7bec6bc98efaf5b5f04e062bcc4178ff2713775c6c05e517f1dd54ec56b40d",
+    "concepts/ELIZA 효과.md": "83b90d005046c0900f9fcd3e74b4c057eec214518e6803e2c0e3f4a3e830f773",
+    "concepts/ELIZA.md": "9c1e04394a5a9c604451e1e13c870cc2e6eb67b3113376a25cfb91f4070eb7bb",
+    "concepts/FastText.md": "b45622924b9c06e9eb84e8a0755fc3f55c13d3c8015bc34208c447fb1b00b3c7",
+    "concepts/Flamingo.md": "74da1f9215cef67711f6cd907be2f0e05b31fba7c05d5fa485cfa8972971f97b",
+    "concepts/FlashAttention.md": "2642570038dccc127401aacd63c55cd014338f817d65580f734929a6af0e1c8a",
+    "concepts/FrameNet.md": "cb9227885af8571982c9a4b6be1f50c4bd9d43bbe1feb8ed90df98f82648b824",
+    "concepts/Freebase.md": "68972be160c016393863399475bb0acc5c22da88aad3201eba594d0b7df242b9",
+    "concepts/GloVe.md": "f519786986aa8d899087a9a95cc99fcd0f81833ff5e993cafcbdc81c30c42a27",
+    "concepts/GLUE와 SuperGLUE.md": "c1352162f6871f3b4e13607cb9b54bb0b24b0414ffe2f8dca666a34e23a3ec67",
+    "concepts/GPT-1과 GPT-2.md": "c75e5db53bdd899254972e8e51c74c3028d44bc9474683a871bd4d231c73f1e9",
+    "concepts/GPT-4.md": "8ca1dda4b57b629f22713b410b2f9485333efcb5c9bd49eece9708875cfe8645",
+    "concepts/HELM.md": "100b755697cd432b34f3c127a809615586daa9cbee963859526e066e169af8ef",
+    "concepts/IBM Watson.md": "2e7435123871c84f5ccebf84687dbb03161102378d822f699849e83b0fd45fcb",
+    "concepts/Layer Normalization.md": "2de9f1eff2dbb6f5b4ca713ef26c729194cec168fd0997ce3530249bc5c4982d",
+    "concepts/Lesk 알고리즘.md": "8d7f7b14ed8c23a819531c058b796603cd079a80924256ef3ca1c4906a356f1a",
+    "concepts/LLaMA 1.md": "4a0b85d914b79422e78f7176f0f1ee37cd90b6234eb90cd239869ecc4343c246",
+    "concepts/LLM 에이전트.md": "cb97e8913dcc0d5fa60f4808e2229e766907c3e9caa8b64aac5c9a9894db2bea",
+    "concepts/LLM 추론 에너지 지표.md": "d11ff5cb90c4d5c89679d77735dc2693688e87bcfcaa30452eb783dab5b65317",
+    "concepts/LMS 알고리즘.md": "0dd51683c5f6495c92dedb30c90b86e35d328a8f239ea4e6deacd5414a1e263e",
+    "concepts/MADALINE.md": "8d86c333ee34ce7e66aa897c45ac3bd9eea3dbc85e0a25d2982f8514d0e60966",
+    "concepts/METEOR.md": "fda9495e11fbd3082073429709450fb79cb8393367459db2775394f3a6585535",
+    "concepts/Mixtral 8x7B.md": "739dcfeb540b0af1a536984964cdb55d2c375e2a00229de9e794a0d769524e48",
+    "concepts/N-gram 모델.md": "7d59578a617b1855ca14ad7581e9539d199486ad7131279a15823beb8aceedfe",
+    "concepts/OpenAI Codex (2021).md": "f07eb4deb556657eaa797c014b80dfca2f962f24b2a66bcbe5c4aa3d631f20b7",
+    "concepts/PaLM.md": "8a348b64ddd9088ac6d2f7451ba767d2a9126927185bdd7d5231f1b54842cf17",
+    "concepts/Perplexity.md": "06e28798351a2b4e0f53d3a128babd547bc57d38f3f708442c3a961ba0f1c7c5",
+    "concepts/PropBank.md": "ea3ac93012eaa97e9eee7f6470718b18c4e1b6d03a4738e1122d7fc0b29c33fa",
+    "concepts/QLoRA.md": "22d907f196b8cda28e9db1e205bbc3bb8406b9fd67fab2684799772f39ce77f4",
+    "concepts/ResNet.md": "88893672214f49b2c6376da2a146c14457bb1bcf676b01ca8442abe792f69995",
+    "concepts/RMSNorm.md": "289f0e8e176b156609252700d6993dca51bcc318cf0d1252272370f62334ee82",
+    "concepts/ROUGE.md": "2995b8ef062bc0598cf2368b13082916d698ace480d28d392633d44823d3657f",
+    "concepts/Sequence-to-Sequence 학습.md": "b7c327a713357269f2a45d19f43a16f3c3d8a78f68b8c80f8c016cf52b2799ee",
+    "concepts/SHRDLU.md": "c47fee8af42aa4f2b77a51fa85bfeea2c6fea81e3a5c5eefb6afe2005e72c558",
+    "concepts/Skip-gram.md": "cc95dbdc4cb9445f53b6ef8bf4311c2f91f17cd2b05ad9b2e7821022fc8fd26b",
+    "concepts/Smoothing.md": "1c35a44c15bd8648ad6ce9f496aa334f5f7aa9bb1163d48844b347a7a792072a",
+    "concepts/SPARQL.md": "dc3e3f2faf76dfdbf991ebc6f14d5570c14ed75bd3525ae0b3dabab9a418543d",
+    "concepts/Stable Diffusion.md": "b55effd749ca503c826ba1f3fe3ba949e12d7404e584c37acf37e70c9d2b9260",
+    "concepts/T5.md": "3b21a85335a047686266519ad021208182f5c6cebc4445ef37148fe2b58f1285",
+    "concepts/TF-IDF.md": "e434134774e13a23fc72b6cb179fe30541d2175cbcd612cdbf1a63856c516176",
+    "concepts/The Pile.md": "d29eff05ea4c4ad1add91715af8985bb3d8f138d7594e78e2af3f8ef7a582142",
+    "concepts/Transformer-XL.md": "566a38d26c327df912c853185e52e6525c89bddc6715933e25fbc277908149c4",
+    "concepts/Transformer.md": "7b6203ce3395402aad3590de834aea091ee1da9ff2d88c239076d4e487ea5f19",
+    "concepts/WaveNet.md": "a1c60483759d11e5f87aee972108604d3e18e3db041f207f83dc56b3d9fca681",
+    "concepts/Whisper.md": "df98cc076cd3aac17cd93f3fb5d519c633543262d3f78b42475fbc2586054662",
+    "concepts/Wikibase 데이터 모델.md": "ea6a3b065a6cb9b1f960f53824c71758a8dd4c851d141d5ab351b795ebf35c23",
+    "concepts/Wikidata.md": "2dd0f8394f73fde1ea4c00c3dbd4d8a0c06d890290e36e356a19c7faa9771c43",
+    "concepts/Word2Vec.md": "60cc1492c97079bf9cf667ed781b13f322d01e91ea95cb168520aa3227965bc3",
+    "concepts/WordNet.md": "bb03df22bff8b2293e09f37f0fb04825243e03b0e3f74e33e3e6e03808d9cd61",
+    "concepts/XLM.md": "c4b2146fca64ffd9dd23f5ccf723612e3e7738c4e328b05fdec98d508897a0c6",
+    "concepts/XLNet·RoBERTa·ALBERT.md": "08e0c7e0242d7a31d4620f37569a09689576c887662817efdb82ec27a10d9370",
+    "concepts/XOR 문제.md": "c1a4f21ce10b0367c0a27095c52ecabbeb61e5a27f5e8e336873ce8458624a76",
+    "entities/노엄 촘스키.md": "3311a088a8f8b753aec6bfc449127a089cb4b1812be7ed5197c8958d758695c5",
+    "entities/레너드 바움.md": "da04c06f1e22840bb76af6d11795928a481e1c53990ede5f70d0d5b48a0e7834",
+    "entities/로저 섕크.md": "2c07565ae806d958f1cb842e528b6c07a7be8529e78bd898b70311c4ff31a19c",
+    "entities/리처드 몬태규.md": "8f0792ce138f88b6bb20dcc8a06cc39836c2fff447451a57d343874a5a23e81a",
+    "entities/마션 호프.md": "b366030422edbbb61e7063612f13f5fc09157b649be920a7653c71aabe4d66e9",
+    "entities/마이클 레스크.md": "0fe34ca25990c26e80db28538ffd5e950dc14011b47f251bb3d88a7651b51847",
+    "entities/버나드 위드로.md": "bb992fc00d8fa6c9006d455d4fe4b2cb7d6b2ed206998d362640a03b1444971a",
+    "entities/스탠퍼드 대학교.md": "47cc76c2e9f3c9b3be253b2c0bf52b59797e20aeb7699e7991cff64db5a4aef5",
+    "entities/스티븐 로버트슨.md": "478e3db6dd997648b665ed2673815db38a7272b30c818c3ed23e7d4367cad5fe",
+    "entities/슬라바 카츠.md": "272fb45713fa0c754a3ea8bb7d5da39c06f7e4d3a1381514e523240aeb5ea77a",
+    "entities/안드레이 마르코프.md": "32386f79f22da46759a4d8d08084d6e32c935d402b3232aa5f232bc94d9fc15f",
+    "entities/앤드루 비터비.md": "73a76bd14eb347276752908579228ffc0a64b13ad36b42e1b1e0017b175ccca8",
+    "entities/앨런 튜링.md": "14704eb0227798bb524058e2d9e3a3f299abc146ac9fd02f1c6a7451363d8c9e",
+    "entities/얀 르쿤.md": "5186cd1b286908fdfc988c19185bbcf00eb7ebaade1235f0d6ac4006c37fce28",
+    "entities/윌리엄 우즈.md": "bf6d1cc5d3991eaf049cf7a1a9ea800e46d0133d703c22a7e079292e9a62abd6",
+    "entities/제라드 솔턴.md": "81bc71aec00c221171efd32fb129982b57677171e6f08f478387873b9a01b3ec",
+    "entities/조지 밀러.md": "93ab5deac505c027bb9cb4f559fc04e4e954a18291ba5afadcce36e7fa4fdcb2",
+    "entities/조지프 바이젠바움.md": "a9366f233467f9041708bb29a0b668897c0c3c9e1b744f192ff60c6a739dc7bf",
+    "entities/존 설.md": "ff82e46afbf49d3ba4cefd842d40a1d8741f33680e46f0177ed97822df0abec8",
+    "entities/칼 로저스.md": "7cd8418347993611f195676260bf59cc6acdd24dd3fa672c305826305ec09f2e",
+    "entities/캐런 스파크 존스.md": "7a587140bdbbf0d59f5d1638cdf49de5e86e7c0598346b4862ed97b7f4598857",
+    "entities/케네스 처치.md": "02a187a3e354d440a0e468511833aed458364ecd933758174584984283fcd84b",
+    "entities/클로드 섀넌.md": "0a7833524c0a79c54fdf96f6a1c243e1d1cbddda67a64bea870648f9f65a2581",
+    "entities/테리 위노그래드.md": "fb839313e39de72f5edee7448af2eece234684f20206b45d95ff933c9498b51d",
+    "entities/프랭크 로젠블랫.md": "ac7fd982960cc4512b1bec21d9118ec7b9975ac45d9bc08647268923b6ae963a",
+    "entities/B.F. 스키너.md": "9a936d4d2955af50a4c810a97721e72c32e98485ae12cf030b2ba1208a959468",
+    "entities/Georgetown University.md": "6a27dfb621ebc11a228ed918f675826ea2374790ca1d80e7303d2c178c59838e",
+    "entities/IBM.md": "380ce3eabd0cade4ece5e0740c7df1cac25badae8ab5114cfa8a812c28e61eb8",
+    "entities/MIT.md": "f80e2bf841788f940bad3f500b843de83a3b8baf8614544d5cb80a796df72607",
+    "index.md": "efd774a15106e61afb8309b794ad08ab7c94a75fe1cc05e422a0640337e564da",
+    "log.md": "db49b7828f9b3cd47c362cde36ce850789e9de97bd5b9d85eb323a843e937317",
+    "meta/LLM 시스템 경계 확장 지도.md": "fcaa218ae92cc5008cf10b6354ae60f3ead0ed78d176c3907bb6edf25c319111",
+    "meta/LLM 학습 가이드.md": "3397804daeb41907aa536accad2c48768f08aa40738f4adb24e94934519a77c2",
+    "meta/LLM과 컴퓨팅 능력의 공진화.md": "f49f38ffc939a717bae3d1f8b898c99c8197f2acdb6557f9e9efc0aa297eed36",
+    "overview.md": "59cd3502c5d5b0602fe60d37da121e40b7cb61be87341aff224dea65753bcab3",
+    "sources/001_섀넌의 N-gram 모델.md": "8077ebf7c9a771c565b259334724c253db0a0ae8d8ede0c0b5d86daa5ffb2cd3",
+    "sources/002_튜링 테스트.md": "d82555c8680a61fde4ac8c235028cdc79ac78a319976e5a37e83839f292c73ad",
+    "sources/003_Georgetown-IBM 기계 번역 시연.md": "7757fe175cf001fae62060b4e924867df0d55826ef29def8b071c8d00e01da36",
+    "sources/004_퍼셉트론.md": "ca14987c3c830c0c5df21db105c56b217cafddf5a2a5ba77fe2ad89e2b84648f",
+    "sources/005_촘스키의 통사 구조.md": "5fe2fb7143393bedb8b0dfca5d1ce845cb71e75e8ae4342ff6413f8fa4358e3b",
+    "sources/006_위드로-호프의 MADALINE.md": "7ac1f802358af46fb46e600f4b295de391e86656ed66753a5e1fa25e03afbce1",
+    "sources/007_ELIZA.md": "694e5d6c6293aa7968470d6c0990e0c7c3b98f46cc201743ae52244ffeed4f91",
+    "sources/008_비터비 알고리즘.md": "945d68ee43b3adb8576e045e54190f3c31a919314360469a5a9871d61488d01b",
+    "sources/009_SHRDLU.md": "e00825707b5f2d805cec8b77ffd3c42d7c245a7aaf0b4c38e9432c9322a9e5b3",
+    "sources/010_벡터 공간 모델과 TF-IDF.md": "049afe5e9c9f2a8c7230842172c5fc2610da3cf3be2671290569094b7af049f8",
+    "sources/011_개념 의존.md": "4036cc902c00c10e2b10c3e8297ee77ee62054a23fc43ca383b1ac730b83844e",
+    "sources/012_상징 규칙에서 통계 학습으로.md": "3d3ee53c4a57f2fe43ce204aa5dbf78765d8908b04ea959c6545793a4ad88553",
+    "sources/013_은닉 마르코프 모델과 통계적 음성 인식.md": "9c98466cbb780abc434faa3fb441f11707493a7393cf0aa69cad68f16d2b0c6a",
+    "sources/014_증강 전이망과 절차적 자연어 파싱.md": "beedf6091340999aeaf64268ca7d921d2365a8971cb71b76412b37d30b02b1f0",
+    "sources/015_몬태규 의미론과 합성적 자연언어 해석.md": "01269ca82a110268d4806b880efe531077140e453429b02d350ecc3e02a337d6",
+    "sources/016_중국어 방 논증과 강한 AI 논쟁.md": "c2fa6f562eff3eeb386af9a8fb34d5157d5ad768487a340bab820c0327398517",
+    "sources/017_Lesk 알고리즘과 단어 의미 중의성 해소.md": "98929c39dacb5c40b0ebfe332f107b052bb8e04668d44751ec2b9df614b3713a",
+    "sources/018_역전파와 다층 신경망 학습.md": "1456bcd78afc9924f2fff7240272b61a472f176e5ed00766bff5bb4ed235271c",
+    "sources/019_Katz 백오프와 희소 데이터 확률 추정.md": "f4d871a07abaf4d23ad3817f31d43604e07cd4444abdf009fca837e407ef9e78",
+    "sources/020_시간 지연 신경망과 음소 인식.md": "9554f337d5ce49fcdba9241f1d8972d32eabdeef240bb3f0c067a801490d5a08",
+    "sources/021_합성곱 신경망과 특징 학습.md": "93939b8ca25c88355ab64d651cd11d6c2a45b7eb77218992b3932d08c5d4530d",
+    "sources/022_IBM 통계적 기계 번역과 데이터 기반 전환.md": "24409922991e3f497c22a7ebef3ed804b582bae1db40edf2a0fb90b17d7d9598",
+    "sources/023_Penn Treebank와 통계적 구문 분석.md": "f03a9e870896d0f716142b51d6c68c87ce1799dbb83b2c75eec38b7c08fed1a4",
+    "sources/024_BM25와 확률적 정보 검색.md": "dbd5f8dabb4a6b11cb823053990cd4afe026d56946f8504cffdda1401b96a322",
+    "sources/025_WordNet과 어휘 의미망.md": "9588d08049f1da300214b7aa2fddc1ecb2b984e1dc70b3dbd758f2c42731b4b4",
+    "sources/026_순환 신경망과 시간적 문맥 학습.md": "94fdd88347ce79da2426835fcae1f61b6a2585c33c6541cb6f579dbf176ae971",
+    "sources/027_최대 엔트로피와 서포트 벡터 머신.md": "dee105489be748f1efe2e7bdab69d83f9eb643f18626fa48d20e82d76e4f942e",
+    "sources/028_장단기 메모리와 장기 의존성 학습.md": "53ebe1ba84681c8374517d1cd49a717e5c774a0baf0162daf6e3a756f069373b",
+    "sources/029_통계적 구문 분석과 어휘화 파서.md": "27feba538295838df9694c241b5aabee6b8026f9de1fc202438190b41687a467",
+    "sources/030_FrameNet과 프레임 의미론.md": "d88d5d19ba977882a6d08473f9c8f66d8e081cfb22c86ce9276d658ed1ff9dbd",
+    "sources/031_잠재 의미 분석과 확률적 잠재 의미 색인.md": "a98009feecaeb1ff57dda9d210dba54495e6b1f6518348dc48cfe96ec38a0a69",
+    "sources/032_조건부 무작위장과 구조화 예측.md": "e79e4cc30b42a19d07f1c32e135fdae32b54bfd92a2d25ca430d33a023fe81f9",
+    "sources/033_BLEU와 기계 번역 자동 평가.md": "6dba799c2a895d9a8c2e46bca11d84dc8e4290913c9cb78134b577cb6142f4bb",
+    "sources/034_구 기반 통계적 기계 번역과 최소 오류율 훈련.md": "62068e092e2afd470fe51379e2781fd10837105e79e061ba14aac9182c8fae64",
+    "sources/035_신경 확률 언어 모형과 분산 단어 표현.md": "cd287f6552a857d18d0e5f20da4e3c1aa99e07796df398d667bf6e082aa774ef",
+    "sources/036_잠재 디리클레 할당과 베이지안 토픽 모델링.md": "91a41e1ec59c27de0dd21f26ea1d983a9e1b75e74646f6c00c284cb510ae4367",
+    "sources/037_ROUGE와 METEOR의 과제별 생성 텍스트 평가.md": "f90de681365a7ef9db1908c35ed8786dd6f02f00042f2a616ac2f6c4c74a76ef",
+    "sources/038_PropBank와 의미역 표지.md": "8b88225043a38bafd28b8c1d2f9fc44f931a555a3cbdd12442e95d98d5abfa00",
+    "sources/039_Freebase와 협업형 지식 그래프.md": "a07d37f07bed7e6753db0a81be7519a76a2354520aee64e1d7bcacb093e25cb9",
+    "sources/040_IBM Watson과 Jeopardy 질의응답.md": "2fa270066271b1265cf8c9b27ce41b334b5039d89a1e93efecb390516f9159b2",
+    "sources/041_심층 신경망 음향 모델과 DNN-HMM 전환.md": "739908e76032ecf9c34ad9497e6b84bf5e09121260042a29ae914a685e5e5934",
+    "sources/042_Wikidata와 다언어 협업 지식 베이스.md": "3d828f6c5cfa4303e634860c0615cb396b704d571e529d0398c2476e7e365185",
+    "sources/043_Word2Vec와 효율적 정적 단어 임베딩.md": "d7fb258a13ab8e4c5b1c8511a98f429cabb4c5f2c06fed6447e0fcdf8fea7dc5",
+    "sources/044_GloVe와 Adam의 서로 다른 2014년 전환.md": "b14d57c45b074c0fe9ac69d1834b4d73d6f91cb74d726ed9b76de813d0070ad0",
+    "sources/045_Sequence-to-Sequence 학습과 신경 기계 번역.md": "95d66f28b7d57890c74499180b0b0da6c3a4197884a5a80c14a215f175f53ce5",
+    "sources/046_메모리 네트워크와 외부 지식 접근.md": "21ca81a8944699461780d6c15bdc746d5650e07f39de0d153378c6676c01d45d",
+    "sources/047_어텐션 메커니즘과 동적 정렬.md": "f571f17c0b3914692bb4c9ffa7b02b044d728e41493b310d2550fe850d9a95d7",
+    "sources/048_잔차 학습과 매우 깊은 신경망.md": "7f1ecd686665cf071e18cc2345390a986c3c2b1a930e083e56d8575ba29371b4",
+    "sources/049_층 정규화와 시퀀스 모델의 배치 독립성.md": "0a40220bb53ef16066c337a655a7fa20209e8cbd5b06e462228f8cc6715f0e33",
+    "sources/050_FastText와 서브워드 표현의 두 경로.md": "8c0410897449462fb3cb736585f4dfbabe86ed2b401fc0c64fd6a8a037b86552",
+    "sources/051_SQuAD와 추출형 독해 평가.md": "129917e66072ff1c236d55269e8c45b0eec4e57fb6c27f1e50a9e6bc4b1ffde2",
+    "sources/052_신경 정보 검색과 의미 대응.md": "194191e3de8e2a4add44e3f625518ff4218dff8d44fee19b3a9c873cfdec5798",
+    "sources/053_GNMT와 제품 규모 신경 번역.md": "9acb2b630caa6d0c0a739a5233a16a9b9848269f5479d7bb52184132ca2faf22",
+    "sources/054_WaveNet과 표본 단위 신경 오디오 생성.md": "ba8be41797bd817b7df3990f96f792b4a69fa11d4c5124c4f23f14e4fe9cdcdd",
+    "sources/055_Transformer와 자기어텐션 기반 시퀀스 모델링.md": "c84784b969b23d930772845c83fc2b4bec74bd454b4e985d5a29ebae1baadf4d",
+    "sources/056_RLHF 토대와 인간 선호 기반 보상 학습.md": "f34dea05c4704d0421659e29ce697c335e1aaae61131fc98891e0ee8d3dcf1d6",
+    "sources/057_ELMo와 ULMFiT의 두 전이 학습 경로.md": "73f7bc5bdf4d972a6cb80c104c77ef55bdbead7d9877ec7e19ccc67b5b9dc6ea",
+    "sources/058_BERT의 마스크드 양방향 사전 학습.md": "138b2b3207ec8a9cf3bf2c96736dccb34fe2bd6b408e34bf4ded67f771531322",
+    "sources/059_GPT-1과 GPT-2의 전이 방식 변화.md": "bcd52ed7b43d68fe56fed371ed6312e7460a199ce772be51e9e7d69a78bc643b",
+    "sources/060_GLUE와 SuperGLUE의 집계 평가.md": "4518f92543126536dce9888f2a98b5c069d97f0694cf415aedac8547db5615d4",
+    "sources/061_XLNet·RoBERTa·ALBERT의 BERT 개선 경로.md": "70cdeec077212cf384dd944561f45fe9c57bbf2bc41686bc4816616dedac5141",
+    "sources/062_XLM과 교차 언어 사전 학습.md": "beacbe1f849898b99564c5a6407c53957fa1fbc9c61bcbf9a4eae1bdd818a398",
+    "sources/063_T5와 Text-to-Text 통합 프레임워크.md": "e73ab21177c83903db27809263b95a8f61c23d14e2d572d51bba7d0d83a67163",
+    "sources/064_Transformer-XL과 세그먼트 수준 재귀.md": "40b78ca3d259535255a713c06f84e69ca752e0235cf53807e1fa4d788b33d1d5",
+    "sources/065_BERT 기반 passage 재순위화.md": "d1149eb766a117409c1fc2899dbd921997ebc864f63050d7f8c162b163dce983",
+    "sources/066_신경 언어 모델의 스케일링 법칙.md": "76514b67ffcea7599df7d24e771c68c6732a314cbc6cca4405f5a9b39ef81356",
+    "sources/067_GPT-3와 문맥 내 학습.md": "d27fc8b6d65620d28957755bc0d9ba3daa478a9aac9d13478f2fe7e412bf4583",
+    "sources/068_DPR과 검색 증강 생성.md": "d91ef19ea6d9d24d1594ba181244c76911abb60085aa87d4e89ff629b32f68b6",
+    "sources/069_전문가 혼합과 희소 활성 스케일링.md": "d0da01ee1a3e3ba8dab365248d99f0394adcec89774ef25d9d735e55a0901744",
+    "sources/070_CLIP과 대조적 언어-이미지 사전 학습.md": "4ca0a41ca121cc85ce416771a6db5608a1292f0af348d1fa4a4a0da205363cc1",
+    "sources/071_Codex와 HumanEval 기반 코드 생성 평가.md": "dd83b98cf28a8dee32cfbc202b56110e0ed2379ab67dbd43e7f3bed070572079",
+    "sources/072_지시 미세조정과 FLAN의 제로샷 일반화.md": "9acbfa13b8d3b127bb06d5d14b8e53b3e6f6b8baec1ada6f3ac24309c2a16dbd",
+    "sources/073_ColBERT와 다중 벡터 검색.md": "d3ebfaf2a183d86cc514810116dd026c33857f66f5c7736845313209673a0411",
+    "sources/074_The Pile과 대규모 언어 모델 학습 말뭉치.md": "ffbf335965ba8a996bacb622a303e80ef718501eeb5d6b973ccfd205e2ae61df",
+    "sources/075_DALL·E와 이산 이미지 토큰 생성.md": "49fcd13ff48e8a495e44a80c20b8a1fa417fe8dc77c982efa92a13eb3e24bdb3",
+    "sources/076_파운데이션 모델 보고서와 AI 생태계.md": "f3fd36147f7936f3043bcdcf2c75981b143c644a6d4fece98ab644e6fdb83878",
+    "sources/077_InstructGPT와 인간 선호 정렬.md": "103baa33584deca337cd66fd0c1d3ef01ecaec52def1eb48004f8254ddc58d77",
+    "sources/078_Chinchilla와 계산 최적 언어 모델 학습.md": "ac6a9f92678d3b2f46c6b88a8f51794baea036e927347a7f4746e2874729eccb",
+    "sources/079_HELM과 다차원 언어 모델 평가.md": "effa7925cfe685fe0c334579009c87d2ed46450fb38f803310f93d03ee86081e",
+    "sources/080_사고 연쇄 프롬프팅과 추론 행동 유도.md": "153928c6e82f75a9bd7ac8a502d5005555975d3532b41054c2a56a3bd7fed1b4",
+    "sources/081_ChatGPT 연구 미리보기와 대화형 LLM 배포.md": "7aa00164ee10787b277c23d15dcceb77392a15b2d65677f14bd945044554b0b7",
+    "sources/082_BLOOM과 공개 접근 다국어 LLM.md": "0bcc8da62e137082fc03b693335b5ac26de21113b03d5e56cfe4033d9cc7058e",
+    "sources/083_PaLM과 Pathways 기반 대규모 언어 모델 확장.md": "a314313a2dc2e3b9d7c1ad033749fe5604a575c1f13e5f3de3fed4fe2e180896",
+    "sources/084_Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습.md": "87cba274ea0915d70c43bf19233b455db32e1ac1b063ff1f07029ebeaf8531ca",
+    "sources/085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성.md": "b67a618e16149a7cd9f414b29c7a79bf49b5344ee7ecfe7996a0265ec46ecae0",
+    "sources/086_잠재 확산 모델과 Stable Diffusion v1 공개.md": "61fb0eee51852e5e151e03fb7c9fe5283cb5e69eb6f43684045ecbf0071f7ae6",
+    "sources/087_Whisper와 대규모 약한 감독 음성 인식.md": "b3ec8460d4b46dac0e9774b38a0b0ead6d6f97b889905b37328d9377cef3440b",
+    "sources/088_FlashAttention과 IO 인지형 정확 어텐션.md": "a2bfbabfd9819a2416f951e65e4cc106a5b3a535525027e7c14560f1f8221522",
+    "sources/089_LLaMA 1과 제한적 공개 가중치 연구 배포.md": "107bcfdb3f3e24c38097d1d9bf715a939b4a730c190705593f21cd1b411619ce",
+    "sources/090_공개 가중치 LLM 파동과 서로 다른 공개 범위.md": "85fc2437931052d008608bad77d00a3daea4dab83a86a3a9b865688f04d8a39b",
+    "sources/091_QLoRA와 4비트 양자화 미세조정.md": "ef9f780dd664bc562f96c6c716ca3b619c74af7371d662aadd9642089ed24cac",
+    "sources/092_함수 호출과 도구 사용의 모델-실행 경계.md": "c709a351b738ef9a827d6fd14fd1082d85d942a22175b93ae2c0fb1ca0783766",
+    "sources/093_멀티모달 LLM과 시각-언어 연결 방식의 분화.md": "efa2aa8aa8576acddddb2030f4b1ce8a8134fe22fa6f50f197cfc3ed27cbb590",
+    "sources/094_헌법적 AI와 자기비평·AI 피드백 정렬.md": "d1c93ae5ec1e3c5702576fef6eec1b785c66808e8580d09192db14ef0050efb0",
+    "sources/095_BIG-bench와 MMLU의 평가 범위·집계 경계.md": "aa9ea7cab274cc26ecb6aa061fde872ef1536c1a0336f62c9ea45a3887d7b656",
+    "sources/096_GPT-4의 멀티모달 공개·시험 성능·안전 경계.md": "503df51a2169f8938e3d7caa28e71d243d71dea72acf5f8bf30bb3bcda6fd6b8",
+    "sources/097_Mixtral의 생산 배포 효율 주장과 증거 경계.md": "8238fddb6d1865ab8ff29d56f8b2d482eec7b3e918bb2d2d8c84ee179e6630b2",
+    "sources/098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계.md": "98db8d221a10b4e96ec79adf744e06d383de42bc746df25d39f0c0c3d058bf5c",
+    "sources/099_구조화 출력의 스키마 준수와 의미 정확성 경계.md": "39310f1ebb48935d5c12ad680086207b9e92cf94f213cc0791e74230d6d34cd6",
+    "sources/100_희소·밀집 검색의 결합과 다단계 순위화.md": "b021c949832138677ee0ff4958d2dd2413b2c1d3dced1877b11a2cf82ea15035",
+    "sources/101_LoRA 이후 PEFT 변형의 설계 축과 연표.md": "02af76f7940062113fc7449ca1e5e2931c55e009f93bacaaa14224a20c5b753f",
+    "sources/102_지속 사전 학습의 연표와 지식 갱신 경계.md": "3716fd4b32d5d22cec6d1629dcdf04201ff8f2b2dfa3cec35ca302075852c9f4",
+    "sources/103_GLaM에서 Mixtral까지의 희소 MoE 확장.md": "41c11168519d73696db001eb0f4f100d611fb60aac3b7b991ff302fb95f54767",
+    "sources/104_LLM 에이전트의 추론-행동 루프와 자율성 경계.md": "22c81c5bd4f5ae44b51cea92ded5bc4992d56ae4ceb1f765828f90cdfbb364be",
+    "sources/105_통합 멀티모달 아키텍처의 공유 범위와 입출력 경계.md": "dde578dafd89f5ba6794d6934db77fd82932024b2cb1e9b90ea90d78988add0d",
+    "sources/106_DeepSeek-R1의 강화학습 파이프라인과 증류 경계.md": "fa5b2c592cbaabcf33a5d4efdaec19442975b72a81e240c4d57c968a114c65ee",
+    "sources/107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계.md": "cd6d59994283fb5511fc278a4b979bd4b8656b15f6e18d44e39d7bbe846cec34",
+    "sources/108_V-JEPA 2의 잠재 예측과 로봇 계획 실험 경계.md": "8f775f7c56f64ff9a09c96713d2a10da4121029c9752e214fad21eb56a12746c",
+    "sources/109_AI 공동 과학자의 가설 생성과 자율 연구 경계.md": "646ffaabdbfd89b29dedcae370078bef3d7cc8cf6a1e1965c04923d2648c7cc2",
+    "sources/110_저자원 언어 LLM의 성능 격차와 전이·평가 경계.md": "1a140d2e028d5da3cc940a3eac2083ee4850a7721648da5ab5dbc6f919443bfd"
+  }
+}

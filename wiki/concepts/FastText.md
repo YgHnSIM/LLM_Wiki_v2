@@ -1,9 +1,11 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.fasttext
 page_type: concept
 title: FastText
-aliases: [fastText subword embeddings, FastText 단어 임베딩]
+aliases:
+  - fastText subword embeddings
+  - FastText 단어 임베딩
 tags:
   - type/concept
   - domain/ai
@@ -11,26 +13,41 @@ tags:
   - domain/machine-learning
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md'
-  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md'
+  - raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md
+  - raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md
 evidence:
   - source_id: mikolov-et-al-2013-negative-sampling
-    locator: '§§2–3의 Skip-gram with negative sampling 목적'
+    locator: §§2–3의 Skip-gram with negative sampling 목적
     relation: contextualizes
   - source_id: bojanowski-et-al-2017-fasttext
     locator: '§§3.1–3.2의 character n-gram 합·경계 기호·hash, §§4–6의 9개 언어 평가'
     relation: supports
-related:
-  - source.050
+relations:
+  - target: source.050
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.skip-gram
+  assumed_knowledge: 없음
+  outcomes:
+    - FastText가 완전 단어와 문자 n-gram 벡터를 합성해 희귀어·OOV 표현을 만드는 방식과 한계를 설명할 수 있다.
+  next:
+    - target: source.053
+      reason: 053GNMT와 제품 규모 신경 번역 — 문자 특징의 합과 달리 subword를 실제 번역 시퀀스 단위로 쓰는 제품 규모 사례를 본다.
 ---
 # FastText
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[Skip-gram]]<br>
+> **선수 지식:** [[concept.skip-gram|Skip-gram]]<br>
 > **읽고 나면:** FastText가 완전 단어와 문자 n-gram 벡터를 합성해 희귀어·OOV 표현을 만드는 방식과 한계를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -82,7 +99,7 @@ $$
 
 ### 다음 문서
 
-- [[053_GNMT와 제품 규모 신경 번역]] — 문자 특징의 합과 달리 subword를 실제 번역 시퀀스 단위로 쓰는 제품 규모 사례를 본다.
+- [[source.053|GNMT와 제품 규모 신경 번역]] — 053GNMT와 제품 규모 신경 번역 — 문자 특징의 합과 달리 subword를 실제 번역 시퀀스 단위로 쓰는 제품 규모 사례를 본다.
 
 ## 출처
 
@@ -92,4 +109,6 @@ $$
 
 ## 관련 항목
 
-- [[050_FastText와 서브워드 표현의 두 경로]]
+- [[source.053|GNMT와 제품 규모 신경 번역]]
+- [[concept.skip-gram|Skip-gram]]
+- [[source.050|FastText와 서브워드 표현의 두 경로]]

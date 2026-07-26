@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.097
 page_type: source
 title: Mixtral의 생산 배포 효율 주장과 증거 경계
@@ -15,11 +15,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.ko.md'
-  - 'raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.commentary.ko.md'
+  - raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.ko.md
+  - raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.commentary.ko.md
 evidence:
   - source_id: jiang-et-al-2024-mixtral
     locator: 'arXiv submission history, 초록, §§1–6, Tables 1–3·5와 Figures 1·7–8의 2024-01-08 v1·8-expert top-2 구조·47B total/13B active·32K context·평가·memory·routing 분석'
@@ -28,32 +30,42 @@ evidence:
     locator: '2023-12-11 공개일, Architecture·Performance·Deployment 절의 46.7B total·12.9B active, Apache 2.0 가중치·vLLM 변경·SkyPilot·beta endpoint'
     relation: supports
   - source_id: lepikhin-et-al-2021-gshard
-    locator: '§§2.1–2.2와 Figures 1–3의 top-2 routing·expert capacity·SPMD sharding을 사용한 선행 Transformer MoE 구조'
+    locator: §§2.1–2.2와 Figures 1–3의 top-2 routing·expert capacity·SPMD sharding을 사용한 선행 Transformer MoE 구조
     relation: contextualizes
   - source_id: fedus-et-al-2022-switch-transformer
-    locator: '§§2.1–2.2와 Equations 3–6의 top-1 routing·expert capacity·token dropping·auxiliary load-balancing loss'
+    locator: §§2.1–2.2와 Equations 3–6의 top-1 routing·expert capacity·token dropping·auxiliary load-balancing loss
     relation: contextualizes
   - source_id: du-et-al-2022-glam
     locator: '초록, §§4–6·8–9와 Tables 1·4의 격층 top-2 MoE·1.2T total·96.6B active·dense–MoE 내부 비교와 분산 비용'
     relation: contextualizes
   - source_id: shazeer-et-al-2017-sparsely-gated-moe
-    locator: '§§1.2–2.1·4–5와 Appendix E의 noisy top-k routing·load balancing과 제한적인 expert specialization 사례'
+    locator: §§1.2–2.1·4–5와 Appendix E의 noisy top-k routing·load balancing과 제한적인 expert specialization 사례
     relation: contextualizes
-related:
-  - source.103
-  - source.069
-  - concept.mixtral-8x7b
-  - concept.전문가-혼합
-  - concept.transformer
-  - analysis.총-매개변수와-활성-계산량은-같은-축인가
-  - analysis.공개-가중치와-재현-가능성은-같은-축인가
+relations:
+  - target: source.069
+    kind: related
+learning:
+  difficulty:
+    entry: advanced
+    target: advanced
+  prerequisites:
+    - target: concept.전문가-혼합
+    - target: concept.transformer
+  assumed_knowledge: 없음
+  outcomes:
+    - 'Mixtral 8x7B의 46.7B total·12.9B active parameters와 고정 top-2 routing을 설명하고, 공개 가중치·benchmark·실행 경로가 입증하는 범위와 production-ready 시스템 주장에 더 필요한 측정을 구분할 수 있다.'
+  next:
+    - target: concept.mixtral-8x7b
+      reason: Mixtral 8x7B — 이름·구조·공개 범위·평가와 routing 분석을 model 단위로 정리한다.
+    - target: source.103
+      reason: GLaM에서 Mixtral까지의 희소 MoE 확장 — Shazeer·GShard·Switch·GLaM·Mixtral의 공통 설계 계열과 서로 다른 증거 수준을 비교한다.
 ---
 # Mixtral의 생산 배포 효율 주장과 증거 경계
 
 > [!note] 학습 안내
 > **난이도:** 심화<br>
-> **선수 지식:** [[전문가 혼합]], [[Transformer]]<br>
-> **읽고 나면:** Mixtral 8x7B의 46.7B total·12.9B active parameters와 고정 top-2 routing을 설명하고, 공개 가중치·benchmark·실행 경로가 입증하는 범위와 `production-ready` 시스템 주장에 더 필요한 측정을 구분할 수 있다.
+> **선수 지식:** [[concept.전문가-혼합|전문가 혼합]], [[concept.transformer|Transformer]]<br>
+> **읽고 나면:** Mixtral 8x7B의 46.7B total·12.9B active parameters와 고정 top-2 routing을 설명하고, 공개 가중치·benchmark·실행 경로가 입증하는 범위와 production-ready 시스템 주장에 더 필요한 측정을 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
 
@@ -169,10 +181,8 @@ Routing 분석은 특정 checkpoint·layer·The Pile subset의 관찰이다. Exp
 
 ### 다음 문서
 
-- [[Mixtral 8x7B]] — 이름·구조·공개 범위·평가와 routing 분석을 model 단위로 정리한다.
-- [[GLaM에서 Mixtral까지의 희소 MoE 확장]] — Shazeer·GShard·Switch·GLaM·Mixtral의 공통 설계 계열과 서로 다른 증거 수준을 비교한다.
-- [[총 매개변수와 활성 계산량은 같은 축인가]] — Total·active parameter, FLOPs, memory, communication, wall-clock과 quality를 별도 장부로 본다.
-- [[공개 가중치와 재현 가능성은 같은 축인가]] — License·weight·code·data·recipe·compute 공개 범위를 구분한다.
+- [[concept.mixtral-8x7b|Mixtral 8x7B]] — 이름·구조·공개 범위·평가와 routing 분석을 model 단위로 정리한다.
+- [[source.103|GLaM에서 Mixtral까지의 희소 MoE 확장]] — Shazeer·GShard·Switch·GLaM·Mixtral의 공통 설계 계열과 서로 다른 증거 수준을 비교한다.
 
 ## 출처
 
@@ -187,10 +197,8 @@ Routing 분석은 특정 checkpoint·layer·The Pile subset의 관찰이다. Exp
 
 ## 관련 항목
 
-- [[GLaM에서 Mixtral까지의 희소 MoE 확장]]
-- [[069_전문가 혼합과 희소 활성 스케일링]]
-- [[Mixtral 8x7B]]
-- [[전문가 혼합]]
-- [[Transformer]]
-- [[총 매개변수와 활성 계산량은 같은 축인가]]
-- [[공개 가중치와 재현 가능성은 같은 축인가]]
+- [[concept.mixtral-8x7b|Mixtral 8x7B]]
+- [[source.103|GLaM에서 Mixtral까지의 희소 MoE 확장]]
+- [[concept.전문가-혼합|전문가 혼합]]
+- [[concept.transformer|Transformer]]
+- [[source.069|전문가 혼합과 희소 활성 스케일링]]

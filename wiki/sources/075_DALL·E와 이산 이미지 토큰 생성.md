@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.075
 page_type: source
 title: DALL·E와 이산 이미지 토큰 생성
@@ -15,11 +15,13 @@ tags:
   - domain/nlp
 created: '2026-07-21'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md'
-  - 'raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md'
+  - raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md
+  - raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md
 evidence:
   - source_id: ramesh-et-al-2021-dalle
     locator: 'PMLR 139, pp. 8821–8831의 §§1–4·Figures 1–9와 Appendix §§A–C·F–G·Figures 10–14·Listings 1–2의 dVAE·joint token stream·희소 attention·학습·재순위화·평가·중복 분석'
@@ -28,24 +30,33 @@ evidence:
     locator: 'Overview, Capabilities의 Drawing multiple objects·Zero-shot visual reasoning, Summary of approach and prior work와 footnote A의 발표 범위·예시·후보 재순위화·사회 영향 경계'
     relation: contextualizes
   - source_id: openai-2021-dalle-dvae
-    locator: 'README와 model_card.md의 Model Details·Model Use·Training Data·Performance and Limitations에 기록된 dVAE 공개 범위와 복원 한계'
+    locator: README와 model_card.md의 Model Details·Model Use·Training Data·Performance and Limitations에 기록된 dVAE 공개 범위와 복원 한계
     relation: supplements
   - source_id: ramesh-et-al-2022-unclip
     locator: 'arXiv:2204.06125v1, §§2.1–2.2·5.1·6–7과 Appendix C·Table 3의 동결 CLIP 인코더·prior·64×64 확산 디코더·업샘플러·classifier-free guidance, CLIP gradient guidance 대비 및 DALL·E 1 차이'
     relation: contextualizes
-related:
-  - concept.dall-e-2021
-  - source.085
-  - concept.dall-e-2
-  - concept.transformer
-  - concept.자기회귀-생성
-  - concept.clip
+relations: []
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.transformer
+    - target: concept.자기회귀-생성
+  assumed_knowledge: 없음
+  outcomes:
+    - '2021년 DALL·E가 이미지를 이산 토큰으로 압축해 텍스트와 함께 자기회귀 모델링한 두 단계 구조를 설명하고, 생성기·대조 재순위화·제로샷 평가가 각각 보장하는 범위를 구분할 수 있다.'
+  next:
+    - target: concept.dall-e-2021
+      reason: DALL·E (2021) — 첫 시스템의 구조·학습·선택 단계를 재사용 가능한 모델 개념으로 정리한다.
+    - target: source.085
+      reason: 085DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성 — 이산 토큰 자기회귀에서 동결 CLIP 잠재 표현과 계층적 확산 생성으로 바뀐 후속 구조를 직접 비교한다.
 ---
 # DALL·E와 이산 이미지 토큰 생성
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[Transformer]], [[자기회귀 생성]]<br>
+> **선수 지식:** [[concept.transformer|Transformer]], [[concept.자기회귀-생성|자기회귀 생성]]<br>
 > **읽고 나면:** 2021년 DALL·E가 이미지를 이산 토큰으로 압축해 텍스트와 함께 자기회귀 모델링한 두 단계 구조를 설명하고, 생성기·대조 재순위화·제로샷 평가가 각각 보장하는 범위를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -139,10 +150,8 @@ dVAE 압축은 세부와 문자를 잃을 수 있고, 이미지 토큰의 순차
 
 ### 다음 문서
 
-- [[DALL·E (2021)]] — 첫 시스템의 구조·학습·선택 단계를 재사용 가능한 모델 개념으로 정리한다.
-- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] — 이산 토큰 자기회귀에서 동결 CLIP 잠재 표현과 계층적 확산 생성으로 바뀐 후속 구조를 직접 비교한다.
-- [[DALL·E 2]] — prior·확산 디코더·업샘플러와 classifier-free guidance의 역할을 개념 중심으로 이어서 본다.
-- [[CLIP]] — 생성기가 아닌 대조 임베딩 모델이 후보 점수화와 제로샷 분류에서 맡는 역할을 구분한다.
+- [[concept.dall-e-2021|DALL·E (2021)]] — 첫 시스템의 구조·학습·선택 단계를 재사용 가능한 모델 개념으로 정리한다.
+- [[source.085|DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]] — 085DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성 — 이산 토큰 자기회귀에서 동결 CLIP 잠재 표현과 계층적 확산 생성으로 바뀐 후속 구조를 직접 비교한다.
 
 ## 출처
 
@@ -157,9 +166,7 @@ dVAE 압축은 세부와 문자를 잃을 수 있고, 이미지 토큰의 순차
 
 ## 관련 항목
 
-- [[DALL·E (2021)]]
-- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
-- [[DALL·E 2]]
-- [[Transformer]]
-- [[자기회귀 생성]]
-- [[CLIP]]
+- [[concept.dall-e-2021|DALL·E (2021)]]
+- [[source.085|DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
+- [[concept.transformer|Transformer]]
+- [[concept.자기회귀-생성|자기회귀 생성]]

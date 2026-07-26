@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis.규칙-기반-ai에서-데이터-기반-학습으로
 page_type: analysis
 title: 규칙 기반 AI에서 데이터 기반 학습으로
@@ -12,8 +12,10 @@ tags:
   - domain/ai
 created: '2026-05-14'
 updated: '2026-07-22'
-lifecycle: active
-verification: partial
+editorial_status: active
+review:
+  evidence_coverage: partial
+  content_mode: synthesis
 artifacts:
   - raw/003_Georgetown-IBM Machine.md
   - raw/004_The Perceptron.md
@@ -43,10 +45,10 @@ artifacts:
   - raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.commentary.ko.md
   - raw/025_WordNet - A Semantic Network for Language Understanding.ko.md
   - raw/025_WordNet - A Semantic Network for Language Understanding.commentary.ko.md
-  - 'raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.ko.md'
-  - 'raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.commentary.ko.md'
-  - 'raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.ko.md'
-  - 'raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.commentary.ko.md'
+  - raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.ko.md
+  - raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.commentary.ko.md
+  - raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.ko.md
+  - raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.commentary.ko.md
 evidence:
   - source_id: macdonald-1963
     locator: pp. 1–4
@@ -91,7 +93,7 @@ evidence:
     locator: pp. 1–3 and 15–16
     relation: supports
   - source_id: brill-1992
-    locator: pp. 152, 154–155
+    locator: 'pp. 152, 154–155'
     relation: contextualizes
   - source_id: baum-petrie-1966
     locator: pp. 1554–1563
@@ -106,10 +108,10 @@ evidence:
     locator: pp. 591–606
     relation: contextualizes
   - source_id: montague-1970-efl
-    locator: collected ed., pp. 201–205 and 217–221
+    locator: 'collected ed., pp. 201–205 and 217–221'
     relation: contextualizes
   - source_id: montague-1973-ptq
-    locator: collected ed., pp. 247–270
+    locator: 'collected ed., pp. 247–270'
     relation: contextualizes
   - source_id: lesk-1986
     locator: pp. 24–26
@@ -127,61 +129,116 @@ evidence:
     locator: pp. 2278–2284 and 2316–2317
     relation: contextualizes
   - source_id: marcus-et-al-1993
-    locator: pp. 313–327, 특히 §§1–5.1과 Tables 2–4
+    locator: 'pp. 313–327, 특히 §§1–5.1과 Tables 2–4'
     relation: supports
   - source_id: hinton-et-al-2012-dnn-acoustic-modeling
     locator: 'IEEE Signal Processing Magazine 29(6), pp. 82–97의 GMM 음향 모델을 DNN으로 교체한 네 연구 집단 결과와 HMM·발음 사전·언어 모델·decoder가 남은 혼합 구조'
     relation: supports
   - source_id: radford-et-al-2022-whisper
-    locator: '§§2.1–2.4·3.1–3.9·4.2–4.5와 Figure 1의 30초 log-Mel 입력·encoder–decoder·다중 과제 token·장문 decoding·text normalizer와 한계'
+    locator: §§2.1–2.4·3.1–3.9·4.2–4.5와 Figure 1의 30초 log-Mel 입력·encoder–decoder·다중 과제 token·장문 decoding·text normalizer와 한계
     relation: supports
-related:
-  - source.023
-  - source.022
-  - concept.통계적-기계-번역
-  - source.020
-  - source.021
-  - concept.시간-지연-신경망
-  - concept.합성곱-신경망
-  - source.015
-  - concept.몬태규-의미론
-  - concept.합성성
-  - source.013
-  - concept.은닉-마르코프-모델
-  - concept.baum-welch-알고리즘
-  - concept.규칙-기반-기계-번역
-  - concept.지식-공학-병목
-  - concept.퍼셉트론
-  - concept.지도-학습
-  - concept.adaline
-  - concept.madaline
-  - concept.특징-공학
-  - concept.eliza
-  - concept.패턴-매칭
-  - concept.템플릿-기반-응답-생성
-  - concept.통사-구조
-  - concept.대규모-언어-모델
-  - source.012
-  - concept.말뭉치-기반-학습
-  - source.014
-  - concept.증강-전이망
-  - source.017
-  - concept.lesk-알고리즘
-  - concept.단어-의미-중의성-해소
-  - source.025
-  - concept.wordnet
-  - source.041
-  - source.087
-  - concept.dnn-hmm
-  - concept.whisper
-  - concept.자동-음성-인식
-  - concept.단어-오류율
+relations:
+  - target: source.023
+    kind: related
+  - target: source.022
+    kind: related
+  - target: concept.통계적-기계-번역
+    kind: related
+  - target: source.020
+    kind: related
+  - target: source.021
+    kind: related
+  - target: concept.시간-지연-신경망
+    kind: related
+  - target: concept.합성곱-신경망
+    kind: related
+  - target: source.015
+    kind: related
+  - target: concept.몬태규-의미론
+    kind: related
+  - target: concept.합성성
+    kind: related
+  - target: source.013
+    kind: related
+  - target: concept.은닉-마르코프-모델
+    kind: related
+  - target: concept.baum-welch-알고리즘
+    kind: related
+  - target: concept.규칙-기반-기계-번역
+    kind: related
+  - target: concept.지식-공학-병목
+    kind: related
+  - target: concept.퍼셉트론
+    kind: related
+  - target: concept.지도-학습
+    kind: related
+  - target: concept.adaline
+    kind: related
+  - target: concept.madaline
+    kind: related
+  - target: concept.특징-공학
+    kind: related
+  - target: concept.eliza
+    kind: related
+  - target: concept.패턴-매칭
+    kind: related
+  - target: concept.템플릿-기반-응답-생성
+    kind: related
+  - target: concept.통사-구조
+    kind: related
+  - target: concept.대규모-언어-모델
+    kind: related
+  - target: source.012
+    kind: related
+  - target: concept.말뭉치-기반-학습
+    kind: related
+  - target: source.014
+    kind: related
+  - target: concept.증강-전이망
+    kind: related
+  - target: source.017
+    kind: related
+  - target: concept.lesk-알고리즘
+    kind: related
+  - target: concept.단어-의미-중의성-해소
+    kind: related
+  - target: source.025
+    kind: related
+  - target: concept.wordnet
+    kind: related
+  - target: source.041
+    kind: related
+  - target: source.087
+    kind: related
+  - target: concept.dnn-hmm
+    kind: related
+  - target: concept.whisper
+    kind: related
+  - target: concept.자동-음성-인식
+    kind: related
+  - target: concept.단어-오류율
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: analysis.촘스키에서-llm으로
+    - target: analysis.퍼셉트론에서-madaline으로
+  assumed_knowledge: 없음
+  outcomes:
+    - 규칙과 학습이 교체된 것이 아니라 설계·표현·추정의 경계를 옮기며 공존해 왔음을 사례별로 설명할 수 있다.
+  next:
+    - target: analysis.계수-기반과-예측-기반-단어-표현
+      reason: 계수 기반과 예측 기반 단어 표현은 얼마나 다른가 — 데이터에서 표현을 만드는 두 학습 계열의 차이를 더 좁게 비교한다.
+    - target: analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+      reason: 사전 학습 지식은 과제에 어떻게 도착하는가 — 학습한 표현이 후속 과제로 전달되는 방식을 이어서 살핀다.
 ---
 # 규칙 기반 AI에서 데이터 기반 학습으로
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[촘스키에서 LLM으로]], [[퍼셉트론에서 MADALINE으로]]<br>
+> **선수 지식:** [[analysis.촘스키에서-llm으로|촘스키에서 LLM으로]], [[analysis.퍼셉트론에서-madaline으로|퍼셉트론에서 MADALINE으로]]<br>
 > **읽고 나면:** 규칙과 학습이 교체된 것이 아니라 설계·표현·추정의 경계를 옮기며 공존해 왔음을 사례별로 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -322,8 +379,8 @@ ATN·몬태규 의미론·Lesk·HMM·TDNN·CNN 가운데 어느 하나가 현대
 
 ### 다음 문서
 
-- [[계수 기반과 예측 기반 단어 표현은 얼마나 다른가]] — 데이터에서 표현을 만드는 두 학습 계열의 차이를 더 좁게 비교한다.
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 학습한 표현이 후속 과제로 전달되는 방식을 이어서 살핀다.
+- [[analysis.계수-기반과-예측-기반-단어-표현|계수 기반과 예측 기반 단어 표현은 얼마나 다른가]] — 데이터에서 표현을 만드는 두 학습 계열의 차이를 더 좁게 비교한다.
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]] — 학습한 표현이 후속 과제로 전달되는 방식을 이어서 살핀다.
 
 ## 출처
 
@@ -369,43 +426,47 @@ ATN·몬태규 의미론·Lesk·HMM·TDNN·CNN 가운데 어느 하나가 현대
 
 ## 관련 항목
 
-- [[023_Penn Treebank와 통계적 구문 분석]]
-- [[022_IBM 통계적 기계 번역과 데이터 기반 전환]]
-- [[통계적 기계 번역]]
-- [[규칙 기반 기계 번역]]
-- [[013_은닉 마르코프 모델과 통계적 음성 인식]]
-- [[은닉 마르코프 모델]]
-- [[Baum–Welch 알고리즘]]
-- [[지식 공학 병목]]
-- [[퍼셉트론]]
-- [[지도 학습]]
-- [[ADALINE]]
-- [[MADALINE]]
-- [[특징 공학]]
-- [[ELIZA]]
-- [[패턴 매칭]]
-- [[템플릿 기반 응답 생성]]
-- [[통사 구조]]
-- [[대규모 언어 모델]]
-- [[012_상징 규칙에서 통계 학습으로]]
-- [[말뭉치 기반 학습]]
-- [[014_증강 전이망과 절차적 자연어 파싱]]
-- [[증강 전이망]]
-- [[015_몬태규 의미론과 합성적 자연언어 해석]]
-- [[몬태규 의미론]]
-- [[합성성]]
-- [[017_Lesk 알고리즘과 단어 의미 중의성 해소]]
-- [[Lesk 알고리즘]]
-- [[단어 의미 중의성 해소]]
-- [[025_WordNet과 어휘 의미망]]
-- [[WordNet]]
-- [[시간 지연 신경망]]
-- [[020_시간 지연 신경망과 음소 인식]]
-- [[021_합성곱 신경망과 특징 학습]]
-- [[합성곱 신경망]]
-- [[041_심층 신경망 음향 모델과 DNN-HMM 전환]]
-- [[087_Whisper와 대규모 약한 감독 음성 인식]]
-- [[DNN-HMM]]
-- [[Whisper]]
-- [[자동 음성 인식]]
-- [[단어 오류율]]
+- [[analysis.계수-기반과-예측-기반-단어-표현|계수 기반과 예측 기반 단어 표현은 얼마나 다른가]]
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]]
+- [[analysis.촘스키에서-llm으로|촘스키에서 LLM으로]]
+- [[analysis.퍼셉트론에서-madaline으로|퍼셉트론에서 MADALINE으로]]
+- [[source.023|Penn Treebank와 통계적 구문 분석]]
+- [[source.022|IBM 통계적 기계 번역과 데이터 기반 전환]]
+- [[concept.통계적-기계-번역|통계적 기계 번역]]
+- [[source.020|시간 지연 신경망과 음소 인식]]
+- [[source.021|합성곱 신경망과 특징 학습]]
+- [[concept.시간-지연-신경망|시간 지연 신경망]]
+- [[concept.합성곱-신경망|합성곱 신경망]]
+- [[source.015|몬태규 의미론과 합성적 자연언어 해석]]
+- [[concept.몬태규-의미론|몬태규 의미론]]
+- [[concept.합성성|합성성]]
+- [[source.013|은닉 마르코프 모델과 통계적 음성 인식]]
+- [[concept.은닉-마르코프-모델|은닉 마르코프 모델]]
+- [[concept.baum-welch-알고리즘|Baum–Welch 알고리즘]]
+- [[concept.규칙-기반-기계-번역|규칙 기반 기계 번역]]
+- [[concept.지식-공학-병목|지식 공학 병목]]
+- [[concept.퍼셉트론|퍼셉트론]]
+- [[concept.지도-학습|지도 학습]]
+- [[concept.adaline|ADALINE]]
+- [[concept.madaline|MADALINE]]
+- [[concept.특징-공학|특징 공학]]
+- [[concept.eliza|ELIZA]]
+- [[concept.패턴-매칭|패턴 매칭]]
+- [[concept.템플릿-기반-응답-생성|템플릿 기반 응답 생성]]
+- [[concept.통사-구조|통사 구조]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[source.012|상징 규칙에서 통계 학습으로]]
+- [[concept.말뭉치-기반-학습|말뭉치 기반 학습]]
+- [[source.014|증강 전이망과 절차적 자연어 파싱]]
+- [[concept.증강-전이망|증강 전이망]]
+- [[source.017|Lesk 알고리즘과 단어 의미 중의성 해소]]
+- [[concept.lesk-알고리즘|Lesk 알고리즘]]
+- [[concept.단어-의미-중의성-해소|단어 의미 중의성 해소]]
+- [[source.025|WordNet과 어휘 의미망]]
+- [[concept.wordnet|WordNet]]
+- [[source.041|심층 신경망 음향 모델과 DNN-HMM 전환]]
+- [[source.087|Whisper와 대규모 약한 감독 음성 인식]]
+- [[concept.dnn-hmm|DNN-HMM]]
+- [[concept.whisper|Whisper]]
+- [[concept.자동-음성-인식|자동 음성 인식]]
+- [[concept.단어-오류율|단어 오류율]]

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.019
 page_type: source
 title: Katz 백오프와 희소 데이터 확률 추정
@@ -15,11 +15,13 @@ tags:
   - domain/speech-processing
 created: '2026-07-16'
 updated: '2026-07-23'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/019_Katz Back-off - Handling Sparse Data in Language Models.ko.md'
-  - 'raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md'
+  - raw/019_Katz Back-off - Handling Sparse Data in Language Models.ko.md
+  - raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md
 evidence:
   - source_id: katz-1987
     locator: 'p. 400, 초록과 식 (1)–(15); p. 401, 식 (16)–(23)과 Table I'
@@ -28,24 +30,42 @@ evidence:
     locator: '§§1.1, 2.2–2.4, 2.8, 5–6'
     relation: supplements
   - source_id: gpt-2018
-    locator: '§§3.1–3.3 and §4.1'
+    locator: §§3.1–3.3 and §4.1
     relation: contextualizes
-related:
-  - entity.슬라바-카츠
-  - concept.smoothing
-  - concept.데이터-희소성
-  - concept.n-gram-모델
-  - concept.조건부-확률
-  - concept.perplexity
-  - analysis.n-gram에서-llm으로
-  - concept.대규모-언어-모델
-  - source.001
+relations:
+  - target: entity.슬라바-카츠
+    kind: related
+  - target: concept.smoothing
+    kind: related
+  - target: concept.조건부-확률
+    kind: related
+  - target: concept.perplexity
+    kind: related
+  - target: analysis.n-gram에서-llm으로
+    kind: related
+  - target: concept.대규모-언어-모델
+    kind: related
+  - target: source.001
+    kind: related
+learning:
+  difficulty:
+    entry: advanced
+    target: advanced
+  prerequisites:
+    - target: concept.n-gram-모델
+    - target: concept.데이터-희소성
+  assumed_knowledge: 의 상대 빈도 의 미관측 조합 의 할인 정규화
+  outcomes:
+    - 관측 빈도에 따른 Katz 추정의 네 분기와 할인 질량을 정규화해 미관측 사건에 배분하는 원리를 설명할 수 있다.
+  next:
+    - target: analysis.최고-경로와-기대-통계-백오프
+      reason: '다음에는 최고 경로와 기대 통계, 백오프에서 Katz의 확률 재분배를 경로 탐색·기대 통계와 구분한다.'
 ---
 # Katz 백오프와 희소 데이터 확률 추정
 
 > [!note] 학습 안내
 > **난이도:** 심화<br>
-> **선수 지식:** [[N-gram 모델]]의 상대 빈도, [[데이터 희소성]]의 미관측 조합, [[Smoothing]]의 할인·정규화<br>
+> **선수 지식:** [[concept.n-gram-모델|N-gram 모델]], [[concept.데이터-희소성|데이터 희소성]]<br>
 > **읽고 나면:** 관측 빈도에 따른 Katz 추정의 네 분기와 할인 질량을 정규화해 미관측 사건에 배분하는 원리를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -232,8 +252,11 @@ GPT의 2018년 연구는 Transformer에 언어 모델 목적함수로 사전 학
 
 다음에는 [[최고 경로와 기대 통계, 백오프]]에서 Katz의 확률 재분배를 경로 탐색·기대 통계와 구분한다. 미관측 조합이 왜 생기는지 더 넓게 보려면 [[데이터 희소성]]으로 이어 간다.
 
-## 출처
+### 다음 문서
 
+- [[analysis.최고-경로와-기대-통계-백오프|최고 경로와 기대 통계, 백오프]] — 다음에는 최고 경로와 기대 통계, 백오프에서 Katz의 확률 재분배를 경로 탐색·기대 통계와 구분한다.
+
+## 출처
 - Slava M. Katz, [Estimation of Probabilities from Sparse Data for the Language Model Component of a Speech Recognizer](https://doi.org/10.1109/TASSP.1987.1165125), 1987, p. 400의 초록과 식 (1)–(15), p. 401의 식 (16)–(23)과 Table I.
 - Stanley F. Chen·Joshua Goodman, [An Empirical Study of Smoothing Techniques for Language Modeling](https://dash.harvard.edu/handle/1/25104739), Harvard Computer Science Technical Report TR-10-98, 1998, §§1.1, 2.2–2.4, 2.8, 5–6.
 - Alec Radford 외, [Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf), 2018, §§3.1–3.3·4.1.
@@ -242,12 +265,13 @@ GPT의 2018년 연구는 Transformer에 언어 모델 목적함수로 사전 학
 
 ## 관련 항목
 
-- [[Smoothing]]
-- [[데이터 희소성]]
-- [[N-gram 모델]]
-- [[조건부 확률]]
-- [[Perplexity]]
-- [[슬라바 카츠]]
-- [[N-gram에서 LLM으로]]
-- [[대규모 언어 모델]]
-- [[001_섀넌의 N-gram 모델]]
+- [[analysis.최고-경로와-기대-통계-백오프|최고 경로와 기대 통계, 백오프]]
+- [[concept.n-gram-모델|N-gram 모델]]
+- [[concept.데이터-희소성|데이터 희소성]]
+- [[entity.슬라바-카츠|슬라바 카츠]]
+- [[concept.smoothing|Smoothing]]
+- [[concept.조건부-확률|조건부 확률]]
+- [[concept.perplexity|Perplexity]]
+- [[analysis.n-gram에서-llm으로|N-gram에서 LLM으로]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[source.001|섀넌의 N-gram 모델]]

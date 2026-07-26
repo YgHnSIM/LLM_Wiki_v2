@@ -18,7 +18,9 @@ test('renumbered source and artifact-reader URLs retain static legacy redirects'
 
   const report = JSON.parse(await fs.readFile(path.join(distDir, 'build-report.json'), 'utf8'));
   assert.equal(report.redirectCount, report.redirects.length);
-  assert.equal(report.redirectCount, 99);
+  // Canonical ID routes retain both filename compatibility routes and the
+  // historical source-number routes (including their artifact readers).
+  assert.equal(report.redirectCount, 469);
 
   const sourceDirectoryHtml = await fs.readFile(path.join(distDir, 'sources', 'index.html'), 'utf8');
   const sourceLabels = [...sourceDirectoryHtml.matchAll(/<span class="source-number(?: source-number--reference)?" aria-hidden="true">([^<]+)<\/span>/g)]
@@ -71,7 +73,7 @@ test('renumbered source and artifact-reader URLs retain static legacy redirects'
     ['source.078', '077'],
     ['source.079', '078'],
   ]);
-  const sourceRedirects = report.redirects.filter((redirect) => redirect.kind === 'source');
+  const sourceRedirects = report.redirects.filter((redirect) => redirect.kind === 'source' && redirect.legacyPrefix);
   assert.deepEqual(
     sourceRedirects.map((redirect) => redirect.sourceId).sort(),
     [...expectedNumberedLegacyPrefixes.keys(), 'source.103'].sort(),
@@ -86,14 +88,14 @@ test('renumbered source and artifact-reader URLs retain static legacy redirects'
 
   for (const [sourceId, legacyPrefix] of expectedNumberedLegacyPrefixes) {
     const canonicalPrefix = sourceId.slice('source.'.length);
-    const entries = report.redirects.filter((redirect) => redirect.sourceId === sourceId);
+    const entries = report.redirects.filter((redirect) => redirect.sourceId === sourceId && redirect.legacyPrefix === legacyPrefix);
     assert.deepEqual(entries.map((redirect) => redirect.kind).sort(), ['commentary', 'source', 'translation']);
 
     const sourceRedirect = entries.find((redirect) => redirect.kind === 'source');
     assert.equal(sourceRedirect.canonicalNumber, canonicalPrefix);
     assert.equal(sourceRedirect.legacyPrefix, legacyPrefix);
     assert.match(sourceRedirect.from, new RegExp(`^/sources/${legacyPrefix}-`));
-    assert.match(sourceRedirect.to, new RegExp(`^/sources/${canonicalPrefix}-`));
+    assert.equal(sourceRedirect.to, `/sources/${canonicalPrefix}/`);
 
     for (const kind of ['translation', 'commentary']) {
       const readerRedirect = entries.find((redirect) => redirect.kind === kind);
@@ -102,12 +104,14 @@ test('renumbered source and artifact-reader URLs retain static legacy redirects'
     }
   }
 
-  const source103Redirects = report.redirects.filter((redirect) => redirect.canonicalNumber === '103');
+  const source103Redirects = report.redirects.filter((redirect) => (
+    redirect.canonicalNumber === '103' && redirect.legacyPrefix === '102'
+  ));
   assert.deepEqual(source103Redirects.map((redirect) => redirect.kind).sort(), ['commentary', 'source', 'translation']);
   const source103Redirect = source103Redirects.find((redirect) => redirect.kind === 'source');
   assert.equal(source103Redirect.legacyPrefix, '102');
   assert.equal(source103Redirect.from, '/sources/glam에서-mixtral까지의-희소-moe-확장/');
-  assert.match(source103Redirect.to, /^\/sources\/103-glam에서-mixtral까지의-희소-moe-확장\/$/);
+  assert.equal(source103Redirect.to, '/sources/103/');
   for (const kind of ['translation', 'commentary']) {
     const readerRedirect = source103Redirects.find((redirect) => redirect.kind === kind);
     assert.equal(readerRedirect.from, `${source103Redirect.from}${kind}/`);

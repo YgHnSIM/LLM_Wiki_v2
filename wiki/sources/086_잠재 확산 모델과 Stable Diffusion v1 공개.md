@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.086
 page_type: source
 title: 잠재 확산 모델과 Stable Diffusion v1 공개
@@ -16,11 +16,13 @@ tags:
   - domain/nlp
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/086_Stable Diffusion Latent Diffusion Models for Accessible Text-to-Image Generation.ko.md'
-  - 'raw/086_Stable Diffusion Latent Diffusion Models for Accessible Text-to-Image Generation.commentary.ko.md'
+  - raw/086_Stable Diffusion Latent Diffusion Models for Accessible Text-to-Image Generation.ko.md
+  - raw/086_Stable Diffusion Latent Diffusion Models for Accessible Text-to-Image Generation.commentary.ko.md
 evidence:
   - source_id: rombach-et-al-2022-ldm
     locator: 'CVPR 2022, pp. 10684–10695, §§1·3.1–3.3·4.1–4.5·5, Figures 1·3·6–7, Tables 1–3과 Supplement Tables 8·10·15 및 §§D.2.1·F–G의 두 단계 LDM·압축률 절충·교차 어텐션·과제별 평가·훈련 조건·한계'
@@ -34,21 +36,33 @@ evidence:
   - source_id: stability-ai-2022-stable-diffusion-public-release
     locator: '2022-08-22 공개 발표의 code·weights·model card, CreativeML OpenRAIL-M, 조정 가능한 safety classifier와 release build 6.9GB VRAM 설명'
     relation: contextualizes
-related:
-  - concept.stable-diffusion
-  - concept.잠재-확산-모델
-  - concept.clip
-  - concept.dall-e-2
-  - source.085
-  - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
-  - analysis.훈련-병렬성과-생성-순차성은-다른-축이다
+relations:
+  - target: source.085
+    kind: related
+  - target: analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.clip
+    - target: concept.dall-e-2
+  assumed_knowledge: 없음
+  outcomes:
+    - 'CVPR 2022의 일반 잠재 확산 모델 연구와 2022년 8월 공개된 Stable Diffusion v1을 분리하고, 오토인코더·잠재 U-Net·CLIP 텍스트 조건·분류기 없는 유도의 역할과 계산·공개성·안전성 주장의 실제 범위를 설명할 수 있다.'
+  next:
+    - target: concept.잠재-확산-모델
+      reason: '잠재 확산 모델 — 두 단계 학습, 압축률 절충과 조건부 생성 인터페이스를 개념 중심으로 다시 본다.'
+    - target: concept.stable-diffusion
+      reason: Stable Diffusion — 공개 v1의 구체적인 체크포인트 계보·추론·면허·한계를 정리한다.
 ---
 # 잠재 확산 모델과 Stable Diffusion v1 공개
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[CLIP]], [[DALL·E 2]], [[잠재 확산 모델]]<br>
-> **읽고 나면:** CVPR 2022의 일반 [[잠재 확산 모델]] 연구와 2022년 8월 공개된 [[Stable Diffusion]] v1을 분리하고, 오토인코더·잠재 U-Net·CLIP 텍스트 조건·분류기 없는 유도의 역할과 계산·공개성·안전성 주장의 실제 범위를 설명할 수 있다.
+> **선수 지식:** [[concept.clip|CLIP]], [[concept.dall-e-2|DALL·E 2]]<br>
+> **읽고 나면:** CVPR 2022의 일반 잠재 확산 모델 연구와 2022년 8월 공개된 Stable Diffusion v1을 분리하고, 오토인코더·잠재 U-Net·CLIP 텍스트 조건·분류기 없는 유도의 역할과 계산·공개성·안전성 주장의 실제 범위를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
 
@@ -165,10 +179,8 @@ LDM 논문은 낮아진 생성 비용이 창작뿐 아니라 조작 자료·허�
 
 ### 다음 문서
 
-- [[잠재 확산 모델]] — 두 단계 학습, 압축률 절충과 조건부 생성 인터페이스를 개념 중심으로 다시 본다.
-- [[Stable Diffusion]] — 공개 v1의 구체적인 체크포인트 계보·추론·면허·한계를 정리한다.
-- [[DALL·E 2]] — CLIP 이미지 잠재를 생성하는 prior와 픽셀 확산 계층을 대조한다.
-- [[훈련 병렬성과 생성 순차성은 다른 축이다]] — 잠재 공간에서 호출 비용이 줄어도 반복 표본화가 남는 이유를 비교한다.
+- [[concept.잠재-확산-모델|잠재 확산 모델]] — 두 단계 학습, 압축률 절충과 조건부 생성 인터페이스를 개념 중심으로 다시 본다.
+- [[concept.stable-diffusion|Stable Diffusion]] — 공개 v1의 구체적인 체크포인트 계보·추론·면허·한계를 정리한다.
 
 ## 출처
 
@@ -181,10 +193,9 @@ LDM 논문은 낮아진 생성 비용이 창작뿐 아니라 조작 자료·허�
 
 ## 관련 항목
 
-- [[잠재 확산 모델]]
-- [[Stable Diffusion]]
-- [[CLIP]]
-- [[DALL·E 2]]
-- [[085_DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]
-- [[훈련 병렬성과 생성 순차성은 다른 축이다]]
+- [[concept.잠재-확산-모델|잠재 확산 모델]]
+- [[concept.stable-diffusion|Stable Diffusion]]
+- [[concept.clip|CLIP]]
+- [[concept.dall-e-2|DALL·E 2]]
+- [[source.085|DALL·E 2와 CLIP 잠재 표현 기반 계층적 확산 생성]]
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]]

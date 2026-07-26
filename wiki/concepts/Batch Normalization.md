@@ -1,9 +1,11 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.batch-normalization
 page_type: concept
 title: Batch Normalization
-aliases: [BatchNorm, 배치 정규화]
+aliases:
+  - BatchNorm
+  - 배치 정규화
 tags:
   - type/concept
   - domain/ai
@@ -11,21 +13,34 @@ tags:
   - domain/optimization
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md'
-  - 'raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md'
+  - raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md
+  - raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md
 evidence:
   - source_id: ioffe-szegedy-2015-batch-normalization
     locator: '초록과 §§2–3의 mini-batch mean·variance, learned scale/shift와 train/inference 차이'
     relation: supports
   - source_id: santurkar-et-al-2018-batchnorm-optimization
-    locator: '초록과 §§1–3·6의 internal covariate shift 반례와 loss/gradient smoothness'
+    locator: 초록과 §§1–3·6의 internal covariate shift 반례와 loss/gradient smoothness
     relation: contextualizes
-related:
-  - source.049
-  - concept.layer-normalization
+relations:
+  - target: source.049
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites: []
+  assumed_knowledge: 없음
+  outcomes:
+    - BatchNorm이 mini-batch 통계를 쓰는 방식과 훈련·추론 계산이 달라지는 이유를 설명할 수 있다.
+  next:
+    - target: concept.layer-normalization
+      reason: Layer Normalization — batch의 다른 사례를 쓰지 않는 정규화가 통계 축을 어떻게 바꾸는지 비교한다.
 ---
 # Batch Normalization
 
@@ -66,7 +81,7 @@ BatchNorm의 효과를 internal covariate shift 하나로 확정하지 않는다
 
 ### 다음 문서
 
-- [[Layer Normalization]] — batch의 다른 사례를 쓰지 않는 정규화가 통계 축을 어떻게 바꾸는지 비교한다.
+- [[concept.layer-normalization|Layer Normalization]] — batch의 다른 사례를 쓰지 않는 정규화가 통계 축을 어떻게 바꾸는지 비교한다.
 
 ## 출처
 
@@ -76,5 +91,5 @@ BatchNorm의 효과를 internal covariate shift 하나로 확정하지 않는다
 
 ## 관련 항목
 
-- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]
-- [[Layer Normalization]]
+- [[concept.layer-normalization|Layer Normalization]]
+- [[source.049|층 정규화와 시퀀스 모델의 배치 독립성]]

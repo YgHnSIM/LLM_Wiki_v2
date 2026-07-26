@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.043
 page_type: source
 title: Word2Vec와 효율적 정적 단어 임베딩
@@ -13,11 +13,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.ko.md'
-  - 'raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.commentary.ko.md'
+  - raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.ko.md
+  - raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.commentary.ko.md
 evidence:
   - source_id: mikolov-et-al-2013-word-representations
     locator: 'arXiv:1301.3781, 초록과 §§1–4, 특히 §2의 계산 복잡도, §3의 CBOW·Skip-gram, §4의 구문·의미 유추 평가'
@@ -34,24 +36,43 @@ evidence:
   - source_id: levy-goldberg-dagan-2015-distributional-similarity
     locator: 'TACL 3, pp. 211–225, 특히 §§2–3의 문맥·가중·하이퍼파라미터와 §§4–6의 유사도·유추 비교'
     relation: contextualizes
-related:
-  - concept.word2vec
-  - concept.cbow
-  - concept.skip-gram
-  - concept.단어-임베딩
-  - concept.신경-확률-언어-모형
-  - concept.잠재-의미-분석
-  - concept.말뭉치-기반-학습
-  - concept.통계적-자연어-처리
-  - source.035
-  - source.031
-  - analysis.n-gram에서-llm으로
+relations:
+  - target: concept.skip-gram
+    kind: related
+  - target: concept.신경-확률-언어-모형
+    kind: related
+  - target: concept.잠재-의미-분석
+    kind: related
+  - target: concept.말뭉치-기반-학습
+    kind: related
+  - target: concept.통계적-자연어-처리
+    kind: related
+  - target: source.035
+    kind: related
+  - target: source.031
+    kind: related
+  - target: analysis.n-gram에서-llm으로
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.단어-임베딩
+  assumed_knowledge: 없음
+  outcomes:
+    - 'CBOW와 Skip-gram의 예측 방향을 비교하고, 계층적 softmax·부정 샘플링이 학습 비용을 줄이는 방식과 정적 임베딩의 한계를 설명할 수 있다.'
+  next:
+    - target: concept.word2vec
+      reason: '다음에는 Word2Vec에서 구성 선택을 한데 보고, CBOW에서 문맥을 합쳐 중심 단어를 예측하는 계산을 좁혀 본다.'
+    - target: concept.cbow
+      reason: '다음에는 Word2Vec에서 구성 선택을 한데 보고, CBOW에서 문맥을 합쳐 중심 단어를 예측하는 계산을 좁혀 본다.'
 ---
 # Word2Vec와 효율적 정적 단어 임베딩
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[단어 임베딩]]<br>
+> **선수 지식:** [[concept.단어-임베딩|단어 임베딩]]<br>
 > **읽고 나면:** CBOW와 Skip-gram의 예측 방향을 비교하고, 계층적 softmax·부정 샘플링이 학습 비용을 줄이는 방식과 정적 임베딩의 한계를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -172,8 +193,12 @@ Word2Vec 벡터는 분류·개체명 인식·검색·추천 등 여러 과제의
 
 다음에는 [[Word2Vec]]에서 구성 선택을 한데 보고, [[CBOW]]에서 문맥을 합쳐 중심 단어를 예측하는 계산을 좁혀 본다.
 
-## 출처
+### 다음 문서
 
+- [[concept.word2vec|Word2Vec]] — 다음에는 Word2Vec에서 구성 선택을 한데 보고, CBOW에서 문맥을 합쳐 중심 단어를 예측하는 계산을 좁혀 본다.
+- [[concept.cbow|CBOW]] — 다음에는 Word2Vec에서 구성 선택을 한데 보고, CBOW에서 문맥을 합쳐 중심 단어를 예측하는 계산을 좁혀 본다.
+
+## 출처
 - Tomas Mikolov·Kai Chen·Greg Corrado·Jeffrey Dean, [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/abs/1301.3781), 2013, §§1–4.
 - Tomas Mikolov·Wen-tau Yih·Geoffrey Zweig, [Linguistic Regularities in Continuous Space Word Representations](https://aclanthology.org/N13-1090/), NAACL-HLT 2013, pp. 746–751.
 - Tomas Mikolov·Ilya Sutskever·Kai Chen·Greg Corrado·Jeffrey Dean, [Distributed Representations of Words and Phrases and their Compositionality](https://proceedings.neurips.cc/paper_files/paper/2013/hash/9aa42b31882ec039965f3c4923ce901b-Abstract.html), NeurIPS 2013, pp. 3111–3119.
@@ -184,14 +209,14 @@ Word2Vec 벡터는 분류·개체명 인식·검색·추천 등 여러 과제의
 
 ## 관련 항목
 
-- [[Word2Vec]]
-- [[CBOW]]
-- [[Skip-gram]]
-- [[단어 임베딩]]
-- [[신경 확률 언어 모형]]
-- [[잠재 의미 분석]]
-- [[말뭉치 기반 학습]]
-- [[통계적 자연어 처리]]
-- [[035_신경 확률 언어 모형과 분산 단어 표현]]
-- [[031_잠재 의미 분석과 확률적 잠재 의미 색인]]
-- [[N-gram에서 LLM으로]]
+- [[concept.word2vec|Word2Vec]]
+- [[concept.cbow|CBOW]]
+- [[concept.단어-임베딩|단어 임베딩]]
+- [[concept.skip-gram|Skip-gram]]
+- [[concept.신경-확률-언어-모형|신경 확률 언어 모형]]
+- [[concept.잠재-의미-분석|잠재 의미 분석]]
+- [[concept.말뭉치-기반-학습|말뭉치 기반 학습]]
+- [[concept.통계적-자연어-처리|통계적 자연어 처리]]
+- [[source.035|신경 확률 언어 모형과 분산 단어 표현]]
+- [[source.031|잠재 의미 분석과 확률적 잠재 의미 색인]]
+- [[analysis.n-gram에서-llm으로|N-gram에서 LLM으로]]

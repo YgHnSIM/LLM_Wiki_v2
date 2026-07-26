@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.064
 page_type: source
 title: Transformer-XL과 세그먼트 수준 재귀
@@ -14,27 +14,41 @@ tags:
   - domain/machine-learning
 created: '2026-07-21'
 updated: '2026-07-23'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/064_Transformer-XL Extending Transformers to Long Sequences.ko.md'
-  - 'raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md'
+  - raw/064_Transformer-XL Extending Transformers to Long Sequences.ko.md
+  - raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md
 evidence:
   - source_id: dai-et-al-2019-transformer-xl
     locator: 'pp. 2978–2988, 특히 §§3.1–3.3와 Figures 1–2의 fixed-segment baseline·stop-gradient state reuse·relative positional attention, §§4.1–4.5와 Tables 1–9의 language-model results·ablation·RECL·evaluation-speed 조건'
     relation: supports
-related:
-  - concept.transformer-xl
-  - concept.transformer
-  - concept.자기회귀-생성
-  - concept.xlnet-roberta-albert
-  - analysis.훈련-병렬성과-생성-순차성은-다른-축이다
+relations:
+  - target: concept.xlnet-roberta-albert
+    kind: related
+learning:
+  difficulty:
+    entry: advanced
+    target: advanced
+  prerequisites:
+    - target: concept.transformer
+    - target: concept.자기회귀-생성
+  assumed_knowledge: 없음
+  outcomes:
+    - 'Transformer-XL의 상태 재사용과 상대 위치 attention이 고정 세그먼트 경계를 넘는 방식, 그리고 그 효과를 보장하는 정확한 실험 조건을 설명할 수 있다.'
+  next:
+    - target: concept.transformer-xl
+      reason: Transformer-XL — recurrence·상대 위치·계산 비용을 재사용 가능한 개념 지도로 정리한다.
+    - target: analysis.훈련-병렬성과-생성-순차성은-다른-축이다
+      reason: '훈련 병렬성과 생성 순차성은 다른 축이다 — 순전파 memory 재사용, gradient 경계와 자기회귀 생성의 순차성을 서로 다른 축에서 비교한다.'
 ---
 # Transformer-XL과 세그먼트 수준 재귀
 
 > [!note] 학습 안내
 > **난이도:** 심화<br>
-> **선수 지식:** [[Transformer]], [[자기회귀 생성]]<br>
+> **선수 지식:** [[concept.transformer|Transformer]], [[concept.자기회귀-생성|자기회귀 생성]]<br>
 > **읽고 나면:** Transformer-XL의 상태 재사용과 상대 위치 attention이 고정 세그먼트 경계를 넘는 방식, 그리고 그 효과를 보장하는 정확한 실험 조건을 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -229,8 +243,8 @@ WikiText-103에서 수천 token의 글을 생성한 결과는 저자들이 사�
 
 ### 다음 문서
 
-- [[Transformer-XL]] — recurrence·상대 위치·계산 비용을 재사용 가능한 개념 지도로 정리한다.
-- [[훈련 병렬성과 생성 순차성은 다른 축이다]] — 순전파 memory 재사용, gradient 경계와 자기회귀 생성의 순차성을 서로 다른 축에서 비교한다.
+- [[concept.transformer-xl|Transformer-XL]] — recurrence·상대 위치·계산 비용을 재사용 가능한 개념 지도로 정리한다.
+- [[analysis.훈련-병렬성과-생성-순차성은-다른-축이다|훈련 병렬성과 생성 순차성은 다른 축이다]] — 순전파 memory 재사용, gradient 경계와 자기회귀 생성의 순차성을 서로 다른 축에서 비교한다.
 
 ## 출처
 
@@ -240,8 +254,8 @@ WikiText-103에서 수천 token의 글을 생성한 결과는 저자들이 사�
 
 ## 관련 항목
 
-- [[Transformer-XL]]
-- [[Transformer]]
-- [[자기회귀 생성]]
-- [[XLNet·RoBERTa·ALBERT]]
-- [[훈련 병렬성과 생성 순차성은 다른 축이다]]
+- [[concept.transformer-xl|Transformer-XL]]
+- [[analysis.훈련-병렬성과-생성-순차성은-다른-축이다|훈련 병렬성과 생성 순차성은 다른 축이다]]
+- [[concept.transformer|Transformer]]
+- [[concept.자기회귀-생성|자기회귀 생성]]
+- [[concept.xlnet-roberta-albert|XLNet·RoBERTa·ALBERT]]

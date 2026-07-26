@@ -31,7 +31,7 @@ export function comparePublicationYears(leftValue, rightValue) {
 }
 
 export function hasSearchScope(state = {}) {
-  return ['q', 'category', 'verification', 'tag']
+  return ['q', 'category', 'verification', 'coverage', 'mode', 'editorial', 'tag']
     .some((key) => normalizeText(state[key]));
 }
 
@@ -43,6 +43,9 @@ export function parseUiState(search = '', { directory = false } = {}) {
     q: params.get('q') ?? '',
     category: params.get('category') ?? '',
     verification: params.get('verification') ?? '',
+    coverage: params.get('coverage') ?? '',
+    mode: params.get('mode') ?? '',
+    editorial: params.get('editorial') ?? '',
     tag: params.get('tag') ?? '',
     sort: params.get('sort') ?? (directory ? DEFAULT_DIRECTORY_SORT : DEFAULT_SEARCH_SORT),
     view: params.get('view') ?? (directory ? 'compact' : ''),
@@ -55,6 +58,9 @@ export function serializeUiState(state = {}, { directory = false } = {}) {
     q: state.q,
     category: state.category,
     verification: state.verification,
+    coverage: state.coverage,
+    mode: state.mode,
+    editorial: state.editorial,
     tag: state.tag,
     sort: state.sort === (directory ? DEFAULT_DIRECTORY_SORT : DEFAULT_SEARCH_SORT) ? '' : state.sort,
     view: directory && state.view && state.view !== 'compact' ? state.view : '',

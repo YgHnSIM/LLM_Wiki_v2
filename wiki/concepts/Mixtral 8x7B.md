@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.mixtral-8x7b
 page_type: concept
 title: Mixtral 8x7B
@@ -16,13 +16,15 @@ tags:
   - domain/machine-learning
 created: '2026-07-21'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md'
-  - 'raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md'
-  - 'raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.ko.md'
-  - 'raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.commentary.ko.md'
+  - raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md
+  - raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md
+  - raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.ko.md
+  - raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.commentary.ko.md
 evidence:
   - source_id: jiang-et-al-2024-mixtral
     locator: 'arXiv submission history, 초록, §§1–6, Tables 1–3·5와 Figures 1·7–8의 2024-01-08 v1·architecture·rounded total/active parameters·32K context·SFT와 DPO·평가 조건·memory와 routing 분석'
@@ -30,21 +32,33 @@ evidence:
   - source_id: mistral-ai-2023-mixtral-release
     locator: '2023-12-11 공개일, Apache 2.0 공개 가중치, architecture·46.7B total·12.9B active와 공식 비교 주장'
     relation: supports
-related:
-  - source.097
-  - source.103
-  - source.069
-  - concept.전문가-혼합
-  - concept.transformer
-  - concept.대규모-언어-모델
-  - analysis.총-매개변수와-활성-계산량은-같은-축인가
+relations:
+  - target: source.069
+    kind: related
+  - target: concept.대규모-언어-모델
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.전문가-혼합
+    - target: concept.transformer
+  assumed_knowledge: 없음
+  outcomes:
+    - '8x7B라는 이름과 46.7B total·12.9B active parameters의 관계를 설명하고, 공개 가중치·평가·routing specialization 주장의 범위를 구분할 수 있다.'
+  next:
+    - target: source.097
+      reason: 097Mixtral의 생산 배포 효율 주장과 증거 경계 — 공개 가중치·benchmark·추론 경로가 입증하는 범위와 실제 운영 검증에 더 필요한 측정을 구분한다.
+    - target: source.103
+      reason: GLaM에서 Mixtral까지의 희소 MoE 확장 — GLaM의 내부 통제 비교와 Mixtral 공개를 역사·증거 수준별로 연결한다.
 ---
 # Mixtral 8x7B
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[전문가 혼합]], [[Transformer]]<br>
-> **읽고 나면:** `8x7B`라는 이름과 46.7B total·12.9B active parameters의 관계를 설명하고, 공개 가중치·평가·routing specialization 주장의 범위를 구분할 수 있다.
+> **선수 지식:** [[concept.전문가-혼합|전문가 혼합]], [[concept.transformer|Transformer]]<br>
+> **읽고 나면:** 8x7B라는 이름과 46.7B total·12.9B active parameters의 관계를 설명하고, 공개 가중치·평가·routing specialization 주장의 범위를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
 
@@ -154,9 +168,8 @@ Mixtral 연구진은 Llama 계열을 자체 pipeline으로 다시 평가했다. 
 
 ### 다음 문서
 
-- [[097_Mixtral의 생산 배포 효율 주장과 증거 경계]] — 공개 가중치·benchmark·추론 경로가 입증하는 범위와 실제 운영 검증에 더 필요한 측정을 구분한다.
-- [[GLaM에서 Mixtral까지의 희소 MoE 확장]] — GLaM의 내부 통제 비교와 Mixtral 공개를 역사·증거 수준별로 연결한다.
-- [[총 매개변수와 활성 계산량은 같은 축인가]] — Total·active parameter, FLOPs, memory와 communication을 하나의 장부로 비교한다.
+- [[source.097|Mixtral의 생산 배포 효율 주장과 증거 경계]] — 097Mixtral의 생산 배포 효율 주장과 증거 경계 — 공개 가중치·benchmark·추론 경로가 입증하는 범위와 실제 운영 검증에 더 필요한 측정을 구분한다.
+- [[source.103|GLaM에서 Mixtral까지의 희소 MoE 확장]] — GLaM의 내부 통제 비교와 Mixtral 공개를 역사·증거 수준별로 연결한다.
 
 ## 출처
 
@@ -169,10 +182,9 @@ Mixtral 연구진은 Llama 계열을 자체 pipeline으로 다시 평가했다. 
 
 ## 관련 항목
 
-- [[097_Mixtral의 생산 배포 효율 주장과 증거 경계]]
-- [[GLaM에서 Mixtral까지의 희소 MoE 확장]]
-- [[069_전문가 혼합과 희소 활성 스케일링]]
-- [[전문가 혼합]]
-- [[Transformer]]
-- [[대규모 언어 모델]]
-- [[총 매개변수와 활성 계산량은 같은 축인가]]
+- [[source.097|Mixtral의 생산 배포 효율 주장과 증거 경계]]
+- [[source.103|GLaM에서 Mixtral까지의 희소 MoE 확장]]
+- [[concept.전문가-혼합|전문가 혼합]]
+- [[concept.transformer|Transformer]]
+- [[source.069|전문가 혼합과 희소 활성 스케일링]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]

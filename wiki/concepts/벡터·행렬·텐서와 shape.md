@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.벡터-행렬-텐서와-shape
 page_type: concept
 title: 벡터·행렬·텐서와 shape
@@ -14,11 +14,13 @@ tags:
   - domain/ai
 created: '2026-07-23'
 updated: '2026-07-24'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.ko.md'
-  - 'raw/055_The Transformer Attention Is All You Need.ko.md'
+  - raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.ko.md
+  - raw/055_The Transformer Attention Is All You Need.ko.md
 evidence:
   - source_id: bengio-et-al-2003-nplm
     locator: 'JMLR 3, §§2–3의 vocabulary matrix C와 문맥 단어 표현 결합'
@@ -26,12 +28,26 @@ evidence:
   - source_id: vaswani-et-al-2017-attention
     locator: '§§3.1–3.2의 d_model 폭, Q·K·V 투영과 attention 입력·출력 차원'
     relation: supports
-related:
-  - concept.내적-행렬곱과-선형변환
-  - concept.단어-임베딩
-  - concept.어텐션-메커니즘
-  - concept.잔차-연결
-  - concept.transformer
+relations:
+  - target: concept.어텐션-메커니즘
+    kind: related
+  - target: concept.잔차-연결
+    kind: related
+  - target: concept.transformer
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites: []
+  assumed_knowledge: '수를 묶는 방식, 축과 shape를 이 문서에서 정의한다.'
+  outcomes:
+    - 'LLM 문서의 벡터·행렬·텐서 표기를 축과 shape로 읽고, 성분별 연산·브로드캐스팅이 가능한 조건을 직접 확인할 수 있다.'
+  next:
+    - target: concept.내적-행렬곱과-선형변환
+      reason: 내적·행렬곱과 선형변환 — shape가 맞는 배열에서 내적·행렬곱으로 feature를 결합하고 공간을 바꾸는 방법을 계산한다.
+    - target: concept.단어-임베딩
+      reason: 단어 임베딩 — token ID가 이 문서의 feature 축을 가진 조밀한 벡터로 조회되는 실제 모델 단계를 본다.
 ---
 # 벡터·행렬·텐서와 shape
 
@@ -224,8 +240,8 @@ shape가 $(B,T,D)=(4,5,8)$인 hidden state에서 token mask의 shape를 `(8,)`�
 
 ### 다음 문서
 
-- [[내적·행렬곱과 선형변환]] — shape가 맞는 배열에서 내적·행렬곱으로 feature를 결합하고 공간을 바꾸는 방법을 계산한다.
-- [[단어 임베딩]] — token ID가 이 문서의 feature 축을 가진 조밀한 벡터로 조회되는 실제 모델 단계를 본다.
+- [[concept.내적-행렬곱과-선형변환|내적·행렬곱과 선형변환]] — shape가 맞는 배열에서 내적·행렬곱으로 feature를 결합하고 공간을 바꾸는 방법을 계산한다.
+- [[concept.단어-임베딩|단어 임베딩]] — token ID가 이 문서의 feature 축을 가진 조밀한 벡터로 조회되는 실제 모델 단계를 본다.
 
 ## 출처
 
@@ -236,8 +252,8 @@ shape가 $(B,T,D)=(4,5,8)$인 hidden state에서 token mask의 shape를 `(8,)`�
 
 ## 관련 항목
 
-- [[내적·행렬곱과 선형변환]]
-- [[단어 임베딩]]
-- [[어텐션 메커니즘]]
-- [[잔차 연결]]
-- [[Transformer]]
+- [[concept.내적-행렬곱과-선형변환|내적·행렬곱과 선형변환]]
+- [[concept.단어-임베딩|단어 임베딩]]
+- [[concept.어텐션-메커니즘|어텐션 메커니즘]]
+- [[concept.잔차-연결|잔차 연결]]
+- [[concept.transformer|Transformer]]

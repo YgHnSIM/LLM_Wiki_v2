@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.glue-superglue
 page_type: concept
 title: GLUE와 SuperGLUE
@@ -15,22 +15,24 @@ tags:
   - domain/machine-learning
 created: '2026-07-20'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md'
-  - 'raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md'
-  - 'raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.ko.md'
-  - 'raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.commentary.ko.md'
+  - raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md
+  - raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md
+  - raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.ko.md
+  - raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.commentary.ko.md
 evidence:
   - source_id: wang-et-al-2018-glue
-    locator: 'pp. 353–355와 Table 1의 아홉 task·metric·domain·자료량·private test와 diagnostic platform'
+    locator: pp. 353–355와 Table 1의 아홉 task·metric·domain·자료량·private test와 diagnostic platform
     relation: supports
   - source_id: nangia-bowman-2019-human-glue
-    locator: '§§1–4와 Tables 1–2의 비전문가 인간 성능 추정·aggregate 87.1과 task별 차이'
+    locator: §§1–4와 Tables 1–2의 비전문가 인간 성능 추정·aggregate 87.1과 task별 차이
     relation: contextualizes
   - source_id: wang-et-al-2019-superglue
-    locator: '§§1–3과 Tables 1–3의 여덟 task·metric·human baseline·toolkit·leaderboard rule'
+    locator: §§1–3과 Tables 1–3의 여덟 task·metric·human baseline·toolkit·leaderboard rule
     relation: supports
   - source_id: hendrycks-et-al-2021-mmlu
     locator: '§§1·3–5와 Table 1·Appendices A–B의 GLUE·SuperGLUE 포화 문제, 57개 학술·전문 과목·5-shot·객관식 집계와 prompt·오염 한계'
@@ -38,22 +40,35 @@ evidence:
   - source_id: big-bench-authors-2023
     locator: '§§1–3·6의 204개 JSON/programmatic task, task별 preferred metric 정규화, BBL 24개와 prompt·coverage·오염 한계'
     relation: contextualizes
-related:
-  - source.060
-  - source.079
-  - source.095
-  - concept.helm
-  - concept.big-bench-mmlu
-  - concept.bert
-  - source.051
-  - analysis.평가-지표와-모델-유인
-  - analysis.튜링-테스트와-llm-평가
+relations:
+  - target: source.060
+    kind: related
+  - target: concept.helm
+    kind: related
+  - target: concept.big-bench-mmlu
+    kind: related
+  - target: source.051
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.bert
+  assumed_knowledge: 와 기본 분류 평가 지표
+  outcomes:
+    - 여러 과제의 서로 다른 metric이 aggregate로 묶이는 과정과 benchmark 점수의 해석 한계를 설명할 수 있다.
+  next:
+    - target: source.079
+      reason: 079HELM과 다차원 언어 모델 평가 — 공통 평가 좌표를 시나리오·적응·다중 메트릭으로 확장한 설계를 살핀다.
+    - target: source.095
+      reason: 095BIG-bench와 MMLU의 평가 범위·집계 경계 — 과목 수를 늘린 MMLU와 task·metric 형식을 넓힌 BIG-bench의 서로 다른 확장을 비교한다.
 ---
 # GLUE와 SuperGLUE
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[BERT]]와 기본 분류 평가 지표<br>
+> **선수 지식:** [[concept.bert|BERT]]<br>
 > **읽고 나면:** 여러 과제의 서로 다른 metric이 aggregate로 묶이는 과정과 benchmark 점수의 해석 한계를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -132,10 +147,8 @@ HELM은 다시 prompt와 few-shot 조건을 adaptation으로 분리하고 정확
 
 ### 다음 문서
 
-- [[079_HELM과 다차원 언어 모델 평가]] — 공통 평가 좌표를 시나리오·적응·다중 메트릭으로 확장한 설계를 살핀다.
-- [[095_BIG-bench와 MMLU의 평가 범위·집계 경계]] — 과목 수를 늘린 MMLU와 task·metric 형식을 넓힌 BIG-bench의 서로 다른 확장을 비교한다.
-- [[자동 평가 지표는 무엇을 보상하는가]] — 하나의 점수가 모델 개발의 선택과 유인을 어떻게 바꾸는지 비교한다.
-- [[튜링 테스트와 LLM 평가]] — 정답형 benchmark와 상호작용 기반 평가의 차이를 더 넓게 살핀다.
+- [[source.079|HELM과 다차원 언어 모델 평가]] — 079HELM과 다차원 언어 모델 평가 — 공통 평가 좌표를 시나리오·적응·다중 메트릭으로 확장한 설계를 살핀다.
+- [[source.095|BIG-bench와 MMLU의 평가 범위·집계 경계]] — 095BIG-bench와 MMLU의 평가 범위·집계 경계 — 과목 수를 늘린 MMLU와 task·metric 형식을 넓힌 BIG-bench의 서로 다른 확장을 비교한다.
 
 ## 출처
 
@@ -150,12 +163,10 @@ HELM은 다시 prompt와 few-shot 조건을 adaptation으로 분리하고 정확
 
 ## 관련 항목
 
-- [[060_GLUE와 SuperGLUE의 집계 평가]]
-- [[HELM]]
-- [[079_HELM과 다차원 언어 모델 평가]]
-- [[095_BIG-bench와 MMLU의 평가 범위·집계 경계]]
-- [[BIG-bench와 MMLU]]
-- [[BERT]]
-- [[051_SQuAD와 추출형 독해 평가]]
-- [[자동 평가 지표는 무엇을 보상하는가]]
-- [[튜링 테스트와 LLM 평가]]
+- [[source.079|HELM과 다차원 언어 모델 평가]]
+- [[source.095|BIG-bench와 MMLU의 평가 범위·집계 경계]]
+- [[concept.bert|BERT]]
+- [[source.060|GLUE와 SuperGLUE의 집계 평가]]
+- [[concept.helm|HELM]]
+- [[concept.big-bench-mmlu|BIG-bench와 MMLU]]
+- [[source.051|SQuAD와 추출형 독해 평가]]

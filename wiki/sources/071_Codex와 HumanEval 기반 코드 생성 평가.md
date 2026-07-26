@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.071
 page_type: source
 title: Codex와 HumanEval 기반 코드 생성 평가
@@ -16,11 +16,13 @@ tags:
   - domain/nlp
 created: '2026-07-21'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.ko.md'
-  - 'raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.commentary.ko.md'
+  - raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.ko.md
+  - raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.commentary.ko.md
 evidence:
   - source_id: chen-et-al-2021-codex
     locator: '초록, §§1–7, Figures 1·4–8과 Tables 1–3, Appendices A·C–H의 HumanEval·pass@k·코드 미세조정·Codex-S·한계·위험 분석'
@@ -31,19 +33,32 @@ evidence:
   - source_id: github-2021-copilot-preview
     locator: '2021-06-29 technical preview 발표의 Codex 기반, 편집기 문맥과 지원 언어에 관한 제품 설명'
     relation: contextualizes
-related:
-  - concept.openai-codex-2021
-  - source.067
-  - concept.언어-모델-전이-학습
-  - concept.자기회귀-생성
-  - analysis.평가-지표와-모델-유인
-  - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+relations:
+  - target: concept.언어-모델-전이-학습
+    kind: related
+  - target: analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: source.067
+    - target: concept.자기회귀-생성
+  assumed_knowledge: 없음
+  outcomes:
+    - '2021년 연구용 Codex의 코드 특화 학습과 HumanEval·pass@k 평가를 설명하고, 연구 모델·GitHub Copilot용 production version·현행 동명 제품을 구분할 수 있다.'
+  next:
+    - target: concept.openai-codex-2021
+      reason: 'OpenAI Codex (2021) — 코드 영역 계속학습, 함수 생성과 연구 모델의 경계를 재사용 가능한 개념으로 정리한다.'
+    - target: analysis.평가-지표와-모델-유인
+      reason: 자동 평가 지표는 무엇을 보상하는가 — 참조 문자열 중첩과 unit-test 기능 정확성이 서로 다른 출력을 보상하는 이유를 비교한다.
 ---
 # Codex와 HumanEval 기반 코드 생성 평가
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[067_GPT-3와 문맥 내 학습|GPT-3]], [[자기회귀 생성]]<br>
+> **선수 지식:** [[source.067|GPT-3와 문맥 내 학습]], [[concept.자기회귀-생성|자기회귀 생성]]<br>
 > **읽고 나면:** 2021년 연구용 Codex의 코드 특화 학습과 HumanEval·pass@k 평가를 설명하고, 연구 모델·GitHub Copilot용 production version·현행 동명 제품을 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -187,8 +202,8 @@ Training data에는 보안상 좋지 않은 관행, 편향된 주석과 여러 l
 
 ### 다음 문서
 
-- [[OpenAI Codex (2021)]] — 코드 영역 계속학습, 함수 생성과 연구 모델의 경계를 재사용 가능한 개념으로 정리한다.
-- [[자동 평가 지표는 무엇을 보상하는가]] — 참조 문자열 중첩과 unit-test 기능 정확성이 서로 다른 출력을 보상하는 이유를 비교한다.
+- [[concept.openai-codex-2021|OpenAI Codex (2021)]] — 코드 영역 계속학습, 함수 생성과 연구 모델의 경계를 재사용 가능한 개념으로 정리한다.
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]] — 참조 문자열 중첩과 unit-test 기능 정확성이 서로 다른 출력을 보상하는 이유를 비교한다.
 
 ## 출처
 
@@ -200,9 +215,9 @@ Training data에는 보안상 좋지 않은 관행, 편향된 주석과 여러 l
 
 ## 관련 항목
 
-- [[OpenAI Codex (2021)]]
-- [[067_GPT-3와 문맥 내 학습]]
-- [[언어 모델 전이 학습]]
-- [[자기회귀 생성]]
-- [[자동 평가 지표는 무엇을 보상하는가]]
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]
+- [[concept.openai-codex-2021|OpenAI Codex (2021)]]
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]]
+- [[source.067|GPT-3와 문맥 내 학습]]
+- [[concept.자기회귀-생성|자기회귀 생성]]
+- [[concept.언어-모델-전이-학습|언어 모델 전이 학습]]
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]]

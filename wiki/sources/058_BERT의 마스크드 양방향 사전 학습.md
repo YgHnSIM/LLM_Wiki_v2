@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.058
 page_type: source
 title: BERT의 마스크드 양방향 사전 학습
@@ -13,30 +13,44 @@ tags:
   - domain/machine-learning
 created: '2026-07-20'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md'
-  - 'raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md'
+  - raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md
+  - raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md
 evidence:
   - source_id: bert-2019
     locator: '초록과 §§1–3의 feature/fine-tuning 대비·MLM·NSP·입력 표현, §4와 Tables 1–5의 열한 과제·ablation, Appendix A의 15%·80/10/10 masking'
     relation: supports
   - source_id: liu-et-al-2019-roberta
-    locator: '초록과 §§1–4의 BERT replication·더 긴 학습·큰 batch·추가 자료·동적 masking·NSP 제거 비교'
+    locator: 초록과 §§1–4의 BERT replication·더 긴 학습·큰 batch·추가 자료·동적 masking·NSP 제거 비교
     relation: contextualizes
-related:
-  - concept.bert
-  - concept.마스크드-언어-모델링
-  - concept.언어-모델-전이-학습
-  - concept.transformer
-  - source.057
+relations:
+  - target: source.057
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.transformer
+    - target: concept.언어-모델-전이-학습
+  assumed_knowledge: 없음
+  outcomes:
+    - BERT의 양방향성이 MLM과 encoder attention에서 어떻게 만들어지며 후속 과제에 어떤 방식으로 전이되는지 설명할 수 있다.
+  next:
+    - target: concept.bert
+      reason: BERT — 구조·사전 학습 목표·과제 적응을 개념 단위로 다시 정리한다.
+    - target: concept.마스크드-언어-모델링
+      reason: 마스크드 언어 모델링 — 15% 선택과 80/10/10 교란이 만드는 학습 신호와 불일치를 자세히 살핀다.
 ---
 # BERT의 마스크드 양방향 사전 학습
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[Transformer]], [[언어 모델 전이 학습]]<br>
+> **선수 지식:** [[concept.transformer|Transformer]], [[concept.언어-모델-전이-학습|언어 모델 전이 학습]]<br>
 > **읽고 나면:** BERT의 양방향성이 MLM과 encoder attention에서 어떻게 만들어지며 후속 과제에 어떤 방식으로 전이되는지 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -131,8 +145,8 @@ BERT의 encoder는 입력 전체가 주어졌을 때 각 위치 표현을 계산
 
 ### 다음 문서
 
-- [[BERT]] — 구조·사전 학습 목표·과제 적응을 개념 단위로 다시 정리한다.
-- [[마스크드 언어 모델링]] — 15% 선택과 80/10/10 교란이 만드는 학습 신호와 불일치를 자세히 살핀다.
+- [[concept.bert|BERT]] — 구조·사전 학습 목표·과제 적응을 개념 단위로 다시 정리한다.
+- [[concept.마스크드-언어-모델링|마스크드 언어 모델링]] — 15% 선택과 80/10/10 교란이 만드는 학습 신호와 불일치를 자세히 살핀다.
 
 ## 출처
 
@@ -143,8 +157,8 @@ BERT의 encoder는 입력 전체가 주어졌을 때 각 위치 표현을 계산
 
 ## 관련 항목
 
-- [[BERT]]
-- [[마스크드 언어 모델링]]
-- [[언어 모델 전이 학습]]
-- [[Transformer]]
-- [[057_ELMo와 ULMFiT의 두 전이 학습 경로]]
+- [[concept.bert|BERT]]
+- [[concept.마스크드-언어-모델링|마스크드 언어 모델링]]
+- [[concept.transformer|Transformer]]
+- [[concept.언어-모델-전이-학습|언어 모델 전이 학습]]
+- [[source.057|ELMo와 ULMFiT의 두 전이 학습 경로]]

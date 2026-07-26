@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.qlora
 page_type: concept
 title: QLoRA
@@ -17,13 +17,15 @@ tags:
   - domain/optimization
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.ko.md'
-  - 'raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.commentary.ko.md'
-  - 'raw/101_PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques.ko.md'
-  - 'raw/101_PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques.commentary.ko.md'
+  - raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.ko.md
+  - raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.commentary.ko.md
+  - raw/101_PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques.ko.md
+  - raw/101_PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques.commentary.ko.md
 evidence:
   - source_id: dettmers-et-al-2023-qlora
     locator: '초록과 §§2–4의 frozen 4-bit base·BF16 compute·NF4·double quantization·paged optimizer·all-linear LoRA, Tables 3–4와 Appendices A·C·I·J의 rank·정규성·품질·memory 조건'
@@ -37,22 +39,32 @@ evidence:
   - source_id: li-et-al-2024-loftq
     locator: 'ICLR 2024, §§2.3·3.1–3.3, Eqs. 4–9와 Algorithm 1의 alternating quantization·저순위 초기화 및 이후 frozen backbone 경계'
     relation: contextualizes
-related:
-  - source.091
-  - source.101
-  - concept.저순위-적응
-  - source.089
-  - concept.llama-1
-  - concept.언어-모델-전이-학습
-  - concept.지시-미세조정
-  - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
-  - analysis.공개-가중치와-재현-가능성은-같은-축인가
+relations:
+  - target: source.089
+    kind: related
+  - target: concept.지시-미세조정
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.언어-모델-전이-학습
+    - target: concept.llama-1
+  assumed_knowledge: 없음
+  outcomes:
+    - 'QLoRA를 일반 4-bit inference·full fine-tuning·LoRA-only training과 구분하고, NF4·double quantization·paged optimizer가 각각 어느 memory 항목을 줄이는지 설명할 수 있다.'
+  next:
+    - target: source.091
+      reason: 091QLoRA와 4비트 양자화 미세조정 — 원 논문의 hardware·MMLU·Guanaco 평가와 원 웹글의 정정을 확인한다.
+    - target: source.101
+      reason: '101LoRA 이후 PEFT 변형의 설계 축과 연표 — LoftQ와 QLoRA의 결합 단계, AdaLoRA·DoRA·VeRA·rsLoRA의 서로 다른 설계 축을 비교한다.'
 ---
 # QLoRA
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[언어 모델 전이 학습]], [[LLaMA 1]]<br>
+> **선수 지식:** [[concept.언어-모델-전이-학습|언어 모델 전이 학습]], [[concept.llama-1|LLaMA 1]]<br>
 > **읽고 나면:** QLoRA를 일반 4-bit inference·full fine-tuning·LoRA-only training과 구분하고, NF4·double quantization·paged optimizer가 각각 어느 memory 항목을 줄이는지 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -197,11 +209,8 @@ VRAM 문턱이 낮아진 것은 논문이 직접 보인 결과다. 그러나 har
 
 ### 다음 문서
 
-- [[091_QLoRA와 4비트 양자화 미세조정]] — 원 논문의 hardware·MMLU·Guanaco 평가와 원 웹글의 정정을 확인한다.
-- [[101_LoRA 이후 PEFT 변형의 설계 축과 연표]] — LoftQ와 QLoRA의 결합 단계, AdaLoRA·DoRA·VeRA·rsLoRA의 서로 다른 설계 축을 비교한다.
-- [[저순위 적응]] — Target module·rank allocation·parameterization·sharing·scaling·initialization을 하나의 지도에 놓는다.
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 전체 parameter update, frozen feature와 adapter update를 같은 적응 지도에서 비교한다.
-- [[공개 가중치와 재현 가능성은 같은 축인가]] — 작은 adapter와 별도 base artifact의 공개·license 경계를 살펴본다.
+- [[source.091|QLoRA와 4비트 양자화 미세조정]] — 091QLoRA와 4비트 양자화 미세조정 — 원 논문의 hardware·MMLU·Guanaco 평가와 원 웹글의 정정을 확인한다.
+- [[source.101|LoRA 이후 PEFT 변형의 설계 축과 연표]] — 101LoRA 이후 PEFT 변형의 설계 축과 연표 — LoftQ와 QLoRA의 결합 단계, AdaLoRA·DoRA·VeRA·rsLoRA의 서로 다른 설계 축을 비교한다.
 
 ## 출처
 
@@ -212,12 +221,9 @@ VRAM 문턱이 낮아진 것은 논문이 직접 보인 결과다. 그러나 har
 
 ## 관련 항목
 
-- [[091_QLoRA와 4비트 양자화 미세조정]]
-- [[101_LoRA 이후 PEFT 변형의 설계 축과 연표]]
-- [[저순위 적응]]
-- [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]]
-- [[LLaMA 1]]
-- [[언어 모델 전이 학습]]
-- [[지시 미세조정]]
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]
-- [[공개 가중치와 재현 가능성은 같은 축인가]]
+- [[source.091|QLoRA와 4비트 양자화 미세조정]]
+- [[source.101|LoRA 이후 PEFT 변형의 설계 축과 연표]]
+- [[concept.언어-모델-전이-학습|언어 모델 전이 학습]]
+- [[concept.llama-1|LLaMA 1]]
+- [[source.089|LLaMA 1과 제한적 공개 가중치 연구 배포]]
+- [[concept.지시-미세조정|지시 미세조정]]

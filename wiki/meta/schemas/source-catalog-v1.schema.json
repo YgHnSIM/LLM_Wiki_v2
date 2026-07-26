@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://llm-wiki.local/schema/source-catalog-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "generated_on", "sources"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "generated_on": { "type": "string", "format": "date" },
+    "sources": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "source_number", "title", "page_type", "path", "artifacts", "editorial_status", "evidence_coverage"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^(source|reference)\\." },
+          "source_number": { "type": ["string", "null"], "pattern": "^\\d{3}$" },
+          "title": { "type": "string", "minLength": 1 },
+          "page_type": { "enum": ["source", "reference"] },
+          "path": { "type": "string", "pattern": "^wiki/" },
+          "artifacts": { "type": "array", "items": { "type": "string", "pattern": "^raw/" } },
+          "editorial_status": { "type": "string", "minLength": 1 },
+          "evidence_coverage": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

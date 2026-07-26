@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: meta.index
 page_type: meta
 title: Index
@@ -10,14 +10,19 @@ tags:
   - type/meta
 created: '2026-05-07'
 updated: '2026-07-25'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: not-applicable
+  content_mode: descriptive
 artifacts: []
 evidence: []
-related:
-  - meta.overview
-  - meta.log
-  - meta.learning-guide
+relations:
+  - target: meta.overview
+    kind: related
+  - target: meta.log
+    kind: related
+  - target: meta.learning-guide
+    kind: related
 ---
 # Index
 
@@ -34,7 +39,7 @@ related:
 
 - [[001_섀넌의 N-gram 모델]] — 섀넌의 정보 이론에서 n-gram 언어 모델과 현대 LLM 계보로 이어지는 핵심 소스 (근거 3개)
 - [[002_튜링 테스트]] — 튜링의 모방 게임과 언어 행동 기반 기계 지능 평가를 다루는 핵심 소스 (근거 2개)
-- [[003_Georgetown-IBM 기계 번역 시연]] — 약 250개 어휘와 6개 통사 연산으로 선별 문장을 처리한 1954년 공개 시연 (근거 1개)
+- [[003_Georgetown-IBM 기계 번역 시연]] — 약 250개 어휘와 6개 통사 연산으로 선별 문장을 처리한 1954년 공개 시연 (근거 2개)
 - [[004_퍼셉트론]] — 오류 수정 규칙, 수렴 조건, 단층 선형 모델의 범위를 다루는 소스 (근거 5개)
 - [[005_촘스키의 통사 구조]] — 1957년 저작과 1959·1965·1980년대 이론을 시기별로 구분한 소스 (근거 5개)
 - [[006_위드로-호프의 MADALINE]] — ADALINE·선형 LMS·Madaline I과 후대 적응 필터 계보를 구분한 소스 (근거 4개)

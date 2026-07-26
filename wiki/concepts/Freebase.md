@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.freebase
 page_type: concept
 title: Freebase
@@ -14,11 +14,13 @@ tags:
   - domain/nlp
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/039_Freebase Collaborative Knowledge Graph for Structured Information.ko.md'
-  - 'raw/039_Freebase Collaborative Knowledge Graph for Structured Information.commentary.ko.md'
+  - raw/039_Freebase Collaborative Knowledge Graph for Structured Information.ko.md
+  - raw/039_Freebase Collaborative Knowledge Graph for Structured Information.commentary.ko.md
 evidence:
   - source_id: bollacker-et-al-2008-freebase
     locator: 'pp. 1247–1250의 튜플 데이터베이스·협업 구조·MQL과 1억 2,500만 개 이상 튜플 규모'
@@ -27,21 +29,32 @@ evidence:
     locator: 'Types and properties, Domains and namespaces, Compound Value Types, MIDs 절'
     relation: supports
   - source_id: google-freebase-data-dumps
-    locator: 'Freebase history와 Data dumps 절의 2007–2015 운영·API 종료·최종 덤프 상태'
+    locator: Freebase history와 Data dumps 절의 2007–2015 운영·API 종료·최종 덤프 상태
     relation: supports
   - source_id: pellissier-tanon-et-al-2016-freebase-wikidata
-    locator: 'pp. 1419–1428의 종료 시점 규모·CVT·스키마·개체·속성 이전'
+    locator: pp. 1419–1428의 종료 시점 규모·CVT·스키마·개체·속성 이전
     relation: supports
-related:
-  - source.039
-  - concept.지식-그래프
-  - concept.wikidata
+relations:
+  - target: source.039
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.지식-그래프
+  assumed_knowledge: 없음
+  outcomes:
+    - Freebase의 topic·type·property·MID·CVT와 MQL·협업 운영을 설명하고 후속 체계와 구분할 수 있다.
+  next:
+    - target: concept.wikidata
+      reason: Wikidata — 공개 서비스 종료 뒤 서로 다른 데이터 모델로 지식을 옮긴 협업형 체계를 비교한다.
 ---
 # Freebase
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[지식 그래프]]<br>
+> **선수 지식:** [[concept.지식-그래프|지식 그래프]]<br>
 > **읽고 나면:** Freebase의 topic·type·property·MID·CVT와 MQL·협업 운영을 설명하고 후속 체계와 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -111,7 +124,7 @@ Freebase 데이터가 구조화됐다는 사실은 값의 참됨·최신성·완
 
 ### 다음 문서
 
-- [[Wikidata]] — 공개 서비스 종료 뒤 서로 다른 데이터 모델로 지식을 옮긴 협업형 체계를 비교한다.
+- [[concept.wikidata|Wikidata]] — 공개 서비스 종료 뒤 서로 다른 데이터 모델로 지식을 옮긴 협업형 체계를 비교한다.
 
 ## 출처
 
@@ -124,6 +137,6 @@ Freebase 데이터가 구조화됐다는 사실은 값의 참됨·최신성·완
 
 ## 관련 항목
 
-- [[039_Freebase와 협업형 지식 그래프]]
-- [[지식 그래프]]
-- [[Wikidata]]
+- [[concept.wikidata|Wikidata]]
+- [[concept.지식-그래프|지식 그래프]]
+- [[source.039|Freebase와 협업형 지식 그래프]]

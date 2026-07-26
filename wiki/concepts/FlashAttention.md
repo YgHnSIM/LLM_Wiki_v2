@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.flashattention
 page_type: concept
 title: FlashAttention
@@ -15,44 +15,64 @@ tags:
   - domain/nlp
 created: '2026-07-22'
 updated: '2026-07-24'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md'
-  - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md'
-  - 'raw/098_Long Context Models Processing Million-Token Sequences in Language AI.ko.md'
-  - 'raw/098_Long Context Models Processing Million-Token Sequences in Language AI.commentary.ko.md'
+  - raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md
+  - raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md
+  - raw/098_Long Context Models Processing Million-Token Sequences in Language AI.ko.md
+  - raw/098_Long Context Models Processing Million-Token Sequences in Language AI.commentary.ko.md
 evidence:
   - source_id: dao-et-al-2022-flashattention
     locator: '§§2.2–3.3과 Algorithms 0–1의 online softmax·타일링·재계산, Theorems 1–2와 Proposition 3의 공간·I/O 복잡도, §§4–5와 Tables 1–6의 성능·한계'
     relation: supports
   - source_id: dao-2023-flashattention-2
-    locator: '초록과 §§2–3의 non-matmul FLOPs 절감·sequence 병렬화·warp 작업 분배'
+    locator: 초록과 §§2–3의 non-matmul FLOPs 절감·sequence 병렬화·warp 작업 분배
     relation: contextualizes
   - source_id: shah-et-al-2024-flashattention-3
-    locator: '초록과 §§2–3의 Hopper 비동기 실행·warp specialization·matmul–softmax 중첩·FP8 경로'
+    locator: 초록과 §§2–3의 Hopper 비동기 실행·warp specialization·matmul–softmax 중첩·FP8 경로
     relation: contextualizes
   - source_id: liu-et-al-2024-lwm
     locator: 'arXiv v1 §§2–3.2와 Figure 3·Table 1의 RingAttention과 FlashAttention 결합, RoPE scaling, Llama 2 7B(4K) 초기화 뒤 32K→128K→256K→512K→1M의 5-stage 확장'
     relation: contextualizes
-related:
-  - source.088
-  - source.098
-  - source.055
-  - source.064
-  - concept.transformer
-  - concept.transformer-xl
-  - concept.수치-안정성과-log-sum-exp
-  - concept.긴-문맥-언어-모델
-  - concept.대규모-언어-모델
-  - concept.계산-복잡도와-비용-모델
-  - analysis.훈련-병렬성과-생성-순차성은-다른-축이다
+relations:
+  - target: source.098
+    kind: related
+  - target: source.055
+    kind: related
+  - target: source.064
+    kind: related
+  - target: concept.transformer-xl
+    kind: related
+  - target: concept.긴-문맥-언어-모델
+    kind: related
+  - target: concept.대규모-언어-모델
+    kind: related
+  - target: concept.계산-복잡도와-비용-모델
+    kind: related
+learning:
+  difficulty:
+    entry: advanced
+    target: advanced
+  prerequisites:
+    - target: concept.transformer
+    - target: concept.수치-안정성과-log-sum-exp
+  assumed_knowledge: 의 query key value와 softmax attention 의 max shift
+  outcomes:
+    - 'FlashAttention의 온라인 softmax·타일링·재계산을 설명하고, exact·선형 추가 메모리·이차 계산량이라는 세 표현을 동시에 정확히 사용할 수 있다.'
+  next:
+    - target: source.088
+      reason: '088FlashAttention과 IO 인지형 정확 어텐션 — 논문의 I/O 정리와 실제 BERT·GPT-2·장문 실험, 원문 정정을 함께 확인한다.'
+    - target: analysis.훈련-병렬성과-생성-순차성은-다른-축이다
+      reason: 훈련 병렬성과 생성 순차성은 다른 축이다 — 메모리 이동과 자기회귀 생성 의존성을 포함한 여러 효율 축을 비교한다.
 ---
 # FlashAttention
 
 > [!note] 학습 안내
 > **난이도:** 심화<br>
-> **선수 지식:** [[Transformer]]의 query·key·value와 softmax attention, [[수치 안정성과 log-sum-exp]]의 max shift<br>
+> **선수 지식:** [[concept.transformer|Transformer]], [[concept.수치-안정성과-log-sum-exp|수치 안정성과 log-sum-exp]]<br>
 > **읽고 나면:** FlashAttention의 온라인 softmax·타일링·재계산을 설명하고, exact·선형 추가 메모리·이차 계산량이라는 세 표현을 동시에 정확히 사용할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -160,9 +180,8 @@ FlashAttention은 자기회귀 생성의 token-by-token 의존성도 없애지 �
 
 ### 다음 문서
 
-- [[088_FlashAttention과 IO 인지형 정확 어텐션]] — 논문의 I/O 정리와 실제 BERT·GPT-2·장문 실험, 원문 정정을 함께 확인한다.
-- [[훈련 병렬성과 생성 순차성은 다른 축이다]] — 메모리 이동과 자기회귀 생성 의존성을 포함한 여러 효율 축을 비교한다.
-- [[수치 안정성과 log-sum-exp]] — online softmax가 공유하는 max shift·block 재스케일의 수치적 근거를 본다.
+- [[source.088|FlashAttention과 I/O 인지형 정확 어텐션]] — 088FlashAttention과 IO 인지형 정확 어텐션 — 논문의 I/O 정리와 실제 BERT·GPT-2·장문 실험, 원문 정정을 함께 확인한다.
+- [[analysis.훈련-병렬성과-생성-순차성은-다른-축이다|훈련 병렬성과 생성 순차성은 다른 축이다]] — 메모리 이동과 자기회귀 생성 의존성을 포함한 여러 효율 축을 비교한다.
 
 ## 출처
 
@@ -177,14 +196,14 @@ FlashAttention은 자기회귀 생성의 token-by-token 의존성도 없애지 �
 
 ## 관련 항목
 
-- [[088_FlashAttention과 IO 인지형 정확 어텐션]]
-- [[098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계]]
-- [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]]
-- [[064_Transformer-XL과 세그먼트 수준 재귀]]
-- [[Transformer]]
-- [[Transformer-XL]]
-- [[수치 안정성과 log-sum-exp]]
-- [[긴 문맥 언어 모델]]
-- [[대규모 언어 모델]]
-- [[계산 복잡도와 비용 모델]]
-- [[훈련 병렬성과 생성 순차성은 다른 축이다]]
+- [[source.088|FlashAttention과 I/O 인지형 정확 어텐션]]
+- [[analysis.훈련-병렬성과-생성-순차성은-다른-축이다|훈련 병렬성과 생성 순차성은 다른 축이다]]
+- [[concept.transformer|Transformer]]
+- [[concept.수치-안정성과-log-sum-exp|수치 안정성과 log-sum-exp]]
+- [[source.098|백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계]]
+- [[source.055|Transformer와 자기어텐션 기반 시퀀스 모델링]]
+- [[source.064|Transformer-XL과 세그먼트 수준 재귀]]
+- [[concept.transformer-xl|Transformer-XL]]
+- [[concept.긴-문맥-언어-모델|긴 문맥 언어 모델]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[concept.계산-복잡도와-비용-모델|계산 복잡도와 비용 모델]]

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.042
 page_type: source
 title: Wikidata와 다언어 협업 지식 베이스
@@ -14,38 +14,52 @@ tags:
   - domain/nlp
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/042_Wikidata Collaborative Knowledge Base for Language AI.ko.md'
-  - 'raw/042_Wikidata Collaborative Knowledge Base for Language AI.commentary.ko.md'
+  - raw/042_Wikidata Collaborative Knowledge Base for Language AI.ko.md
+  - raw/042_Wikidata Collaborative Knowledge Base for Language AI.commentary.ko.md
 evidence:
   - source_id: vrandecic-krotzsch-2014-wikidata
     locator: 'Communications of the ACM 57(10), pp. 78–85의 2012년 프로젝트 출범·다언어 item·statement·공동체·Wikipedia 통합·개방 데이터 설명'
     relation: supports
   - source_id: wikidata-help-data-model
-    locator: 'item·property·statement·qualifier·reference·rank·unknown/no value·제한적 상속과 적용 범위 절'
+    locator: item·property·statement·qualifier·reference·rank·unknown/no value·제한적 상속과 적용 범위 절
     relation: supports
   - source_id: wikidata-help-about-data
     locator: 'item–property–value와 triple 근사, qualifier·reference를 포함한 statement 차이, RDF export·CC0 재사용 절'
     relation: supports
   - source_id: wikidata-help-references-ranking
-    locator: 'normal·preferred·deprecated rank와 reference의 서로 다른 역할 및 다중 값 선택 설명'
+    locator: normal·preferred·deprecated rank와 reference의 서로 다른 역할 및 다중 값 선택 설명
     relation: supports
   - source_id: wikidata-query-service-limits
-    locator: 'Wikidata Query Service의 응답 시간·결과 규모·timeout 예시와 live SPARQL 자원 제한'
+    locator: Wikidata Query Service의 응답 시간·결과 규모·timeout 예시와 live SPARQL 자원 제한
     relation: disputes
-related:
-  - concept.wikidata
-  - concept.wikibase-데이터-모델
-  - concept.sparql
-  - concept.지식-그래프
+relations:
+  - target: concept.sparql
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.지식-그래프
+  assumed_knowledge: 없음
+  outcomes:
+    - 'Wikidata의 item·property·statement 구조와 다언어 조회 흐름을 설명하고, triple 요약·공동 편집·서비스 운영의 한계를 구분할 수 있다.'
+  next:
+    - target: concept.wikidata
+      reason: '다음에는 Wikidata에서 프로젝트의 식별·다언어 운영 범위를 보고, Wikibase 데이터 모델에서 statement의 세부 단위를 살핀다.'
+    - target: concept.wikibase-데이터-모델
+      reason: '다음에는 Wikidata에서 프로젝트의 식별·다언어 운영 범위를 보고, Wikibase 데이터 모델에서 statement의 세부 단위를 살핀다.'
 ---
 # Wikidata와 다언어 협업 지식 베이스
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[지식 그래프]]<br>
+> **선수 지식:** [[concept.지식-그래프|지식 그래프]]<br>
 > **읽고 나면:** Wikidata의 item·property·statement 구조와 다언어 조회 흐름을 설명하고, triple 요약·공동 편집·서비스 운영의 한계를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -236,8 +250,12 @@ Raw는 구조 지식 조회를 검색 증강 생성 전체와 곧바로 동일�
 
 다음에는 [[Wikidata]]에서 프로젝트의 식별·다언어 운영 범위를 보고, [[Wikibase 데이터 모델]]에서 statement의 세부 단위를 살핀다.
 
-## 출처
+### 다음 문서
 
+- [[concept.wikidata|Wikidata]] — 다음에는 Wikidata에서 프로젝트의 식별·다언어 운영 범위를 보고, Wikibase 데이터 모델에서 statement의 세부 단위를 살핀다.
+- [[concept.wikibase-데이터-모델|Wikibase 데이터 모델]] — 다음에는 Wikidata에서 프로젝트의 식별·다언어 운영 범위를 보고, Wikibase 데이터 모델에서 statement의 세부 단위를 살핀다.
+
+## 출처
 - Denny Vrandečić·Markus Krötzsch, [Wikidata: A Free Collaborative Knowledgebase](https://dl.acm.org/doi/pdf/10.1145/2629489), *Communications of the ACM* 57(10), 2014, pp. 78–85.
 - Wikidata community, [Help:Data model](https://www.wikidata.org/wiki/Help:Data_model), item·statement·rank·qualifier·reference 절.
 - Wikidata community, [Help:About data](https://www.wikidata.org/wiki/Help:About_data), Wikibase model·RDF·CC0 절.
@@ -248,7 +266,7 @@ Raw는 구조 지식 조회를 검색 증강 생성 전체와 곧바로 동일�
 
 ## 관련 항목
 
-- [[Wikidata]]
-- [[Wikibase 데이터 모델]]
-- [[SPARQL]]
-- [[지식 그래프]]
+- [[concept.wikidata|Wikidata]]
+- [[concept.wikibase-데이터-모델|Wikibase 데이터 모델]]
+- [[concept.지식-그래프|지식 그래프]]
+- [[concept.sparql|SPARQL]]

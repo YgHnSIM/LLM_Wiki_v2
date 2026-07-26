@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://llm-wiki.local/schema/site-redirects-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "redirects"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "redirects": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "target_id", "from", "to"],
+        "properties": {
+          "kind": { "type": "string", "minLength": 1 },
+          "target_id": { "type": "string", "minLength": 1 },
+          "from": { "type": "string", "pattern": "^/[^\\n]*/$" },
+          "to": { "type": "string", "pattern": "^/[^\\n]*/$" },
+          "canonical_number": { "type": "string", "pattern": "^\\d{3}$" },
+          "legacy_prefix": { "type": "string", "pattern": "^\\d{3}$" }
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.bert
 page_type: concept
 title: BERT
@@ -13,36 +13,56 @@ tags:
   - domain/machine-learning
 created: '2026-07-20'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md'
-  - 'raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md'
-  - 'raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.ko.md'
-  - 'raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.commentary.ko.md'
+  - raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md
+  - raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md
+  - raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.ko.md
+  - raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.commentary.ko.md
 evidence:
   - source_id: bert-2019
     locator: '§§1–3의 encoder·MLM·NSP·fine-tuning, §4와 Tables 1–5의 GLUE·SQuAD·SWAG·ablation, Appendix A의 학습 절차'
     relation: supports
   - source_id: liu-et-al-2019-roberta
-    locator: '§§1–4의 BERT 학습 조건 재평가와 NSP 제거·동적 masking·자료·batch·학습량 비교'
+    locator: §§1–4의 BERT 학습 조건 재평가와 NSP 제거·동적 masking·자료·batch·학습량 비교
     relation: contextualizes
   - source_id: nogueira-cho-2019-bert-reranking
     locator: '§2와 Eq. 1의 query–passage 결합 입력·[CLS] 이진 분류·pointwise cross-entropy·BM25 상위 1,000개 재순위화, §3과 Table 1의 MS MARCO·TREC-CAR 평가'
     relation: supplements
-related:
-  - source.058
-  - source.065
-  - concept.마스크드-언어-모델링
-  - concept.언어-모델-전이-학습
-  - concept.transformer
-  - concept.교차-인코더-재순위화
+relations:
+  - target: source.058
+    kind: related
+  - target: source.065
+    kind: related
+  - target: concept.마스크드-언어-모델링
+    kind: related
+  - target: concept.언어-모델-전이-학습
+    kind: related
+  - target: concept.교차-인코더-재순위화
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.transformer
+  assumed_knowledge: 없음
+  outcomes:
+    - BERT가 masked-token 사전 학습과 전체 encoder 미세조정을 연결하는 방식과 표준 생성 모델과의 차이를 설명할 수 있다.
+  next:
+    - target: concept.glue-superglue
+      reason: GLUE와 SuperGLUE — BERT의 전이 성능이 집계 평가에서 어떻게 비교됐는지 살핀다.
+    - target: concept.추출형-질의응답
+      reason: 추출형 질의응답 — BERT가 span 시작·끝 점수로 적응한 대표 출력 형식을 자세히 본다.
 ---
 # BERT
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[Transformer]]<br>
+> **선수 지식:** [[concept.transformer|Transformer]]<br>
 > **읽고 나면:** BERT가 masked-token 사전 학습과 전체 encoder 미세조정을 연결하는 방식과 표준 생성 모델과의 차이를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -122,8 +142,8 @@ BERT 원 ablation은 NSP가 일부 문장쌍·질의응답 결과에 도움을 �
 
 ### 다음 문서
 
-- [[GLUE와 SuperGLUE]] — BERT의 전이 성능이 집계 평가에서 어떻게 비교됐는지 살핀다.
-- [[추출형 질의응답]] — BERT가 span 시작·끝 점수로 적응한 대표 출력 형식을 자세히 본다.
+- [[concept.glue-superglue|GLUE와 SuperGLUE]] — BERT의 전이 성능이 집계 평가에서 어떻게 비교됐는지 살핀다.
+- [[concept.추출형-질의응답|추출형 질의응답]] — BERT가 span 시작·끝 점수로 적응한 대표 출력 형식을 자세히 본다.
 
 ## 출처
 
@@ -135,9 +155,11 @@ BERT 원 ablation은 NSP가 일부 문장쌍·질의응답 결과에 도움을 �
 
 ## 관련 항목
 
-- [[058_BERT의 마스크드 양방향 사전 학습]]
-- [[065_BERT 기반 passage 재순위화]]
-- [[마스크드 언어 모델링]]
-- [[언어 모델 전이 학습]]
-- [[Transformer]]
-- [[교차 인코더 재순위화]]
+- [[concept.glue-superglue|GLUE와 SuperGLUE]]
+- [[concept.추출형-질의응답|추출형 질의응답]]
+- [[concept.transformer|Transformer]]
+- [[source.058|BERT의 마스크드 양방향 사전 학습]]
+- [[source.065|BERT 기반 passage 재순위화]]
+- [[concept.마스크드-언어-모델링|마스크드 언어 모델링]]
+- [[concept.언어-모델-전이-학습|언어 모델 전이 학습]]
+- [[concept.교차-인코더-재순위화|교차 인코더 재순위화]]

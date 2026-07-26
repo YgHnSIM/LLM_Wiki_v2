@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.baum-welch-알고리즘
 page_type: concept
 title: Baum–Welch 알고리즘
@@ -15,8 +15,10 @@ tags:
   - domain/speech-processing
 created: '2026-07-16'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/013_Hidden Markov Models - Statistical Speech Recognition.ko.md
   - raw/013_Hidden Markov Models - Statistical Speech Recognition.commentary.ko.md
@@ -30,18 +32,30 @@ evidence:
   - source_id: rabiner-1989
     locator: pp. 264–267
     relation: supplements
-related:
-  - source.013
-  - entity.레너드-바움
-  - concept.은닉-마르코프-모델
-  - concept.동적-계획법
-  - concept.비터비-알고리즘
+relations:
+  - target: entity.레너드-바움
+    kind: related
+learning:
+  difficulty:
+    entry: advanced
+    target: advanced
+  prerequisites:
+    - target: concept.은닉-마르코프-모델
+    - target: concept.동적-계획법
+  assumed_knowledge: 없음
+  outcomes:
+    - 순방향-역방향 기대 통계로 HMM 매개변수를 반복 재추정하는 과정과 가능도 비감소 보장의 한계를 설명할 수 있다.
+  next:
+    - target: source.013
+      reason: 다음에는 013은닉 마르코프 모델과 통계적 음성 인식에서 수학적 근거와 실제 시스템 구성을 본다.
+    - target: concept.비터비-알고리즘
+      reason: 단일 최고 경로와의 차이는 비터비 알고리즘으로 이어 간다.
 ---
 # Baum–Welch 알고리즘
 
 > [!note] 학습 안내
 > **난이도:** 심화<br>
-> **선수 지식:** [[은닉 마르코프 모델]], [[동적 계획법]]<br>
+> **선수 지식:** [[concept.은닉-마르코프-모델|은닉 마르코프 모델]], [[concept.동적-계획법|동적 계획법]]<br>
 > **읽고 나면:** 순방향-역방향 기대 통계로 HMM 매개변수를 반복 재추정하는 과정과 가능도 비감소 보장의 한계를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -82,8 +96,12 @@ Baum·Petrie·George Soules·Norman Weiss의 1970년 재추정 변환은 관측 
 
 다음에는 [[013_은닉 마르코프 모델과 통계적 음성 인식]]에서 수학적 근거와 실제 시스템 구성을 본다. 단일 최고 경로와의 차이는 [[비터비 알고리즘]]으로 이어 간다.
 
-## 출처
+### 다음 문서
 
+- [[source.013|은닉 마르코프 모델과 통계적 음성 인식]] — 다음에는 013은닉 마르코프 모델과 통계적 음성 인식에서 수학적 근거와 실제 시스템 구성을 본다.
+- [[concept.비터비-알고리즘|비터비 알고리즘]] — 단일 최고 경로와의 차이는 비터비 알고리즘으로 이어 간다.
+
+## 출처
 - Leonard E. Baum·Ted Petrie, [Statistical Inference for Probabilistic Functions of Finite State Markov Chains](https://doi.org/10.1214/aoms/1177699147), 1966, pp. 1554–1563.
 - Leonard E. Baum·Ted Petrie·George Soules·Norman Weiss, [A Maximization Technique Occurring in the Statistical Analysis of Probabilistic Functions of Markov Chains](https://doi.org/10.1214/aoms/1177697196), 1970, pp. 164–171.
 - Lawrence R. Rabiner, [A Tutorial on Hidden Markov Models and Selected Applications in Speech Recognition](https://doi.org/10.1109/5.18626), 1989, pp. 264–267.
@@ -91,8 +109,8 @@ Baum·Petrie·George Soules·Norman Weiss의 1970년 재추정 변환은 관측 
 
 ## 관련 항목
 
-- [[013_은닉 마르코프 모델과 통계적 음성 인식]]
-- [[레너드 바움]]
-- [[은닉 마르코프 모델]]
-- [[동적 계획법]]
-- [[비터비 알고리즘]]
+- [[source.013|은닉 마르코프 모델과 통계적 음성 인식]]
+- [[concept.비터비-알고리즘|비터비 알고리즘]]
+- [[concept.은닉-마르코프-모델|은닉 마르코프 모델]]
+- [[concept.동적-계획법|동적 계획법]]
+- [[entity.레너드-바움|레너드 바움]]

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.wikibase-데이터-모델
 page_type: concept
 title: Wikibase 데이터 모델
@@ -13,31 +13,48 @@ tags:
   - domain/ai
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/042_Wikidata Collaborative Knowledge Base for Language AI.ko.md'
-  - 'raw/042_Wikidata Collaborative Knowledge Base for Language AI.commentary.ko.md'
+  - raw/042_Wikidata Collaborative Knowledge Base for Language AI.ko.md
+  - raw/042_Wikidata Collaborative Knowledge Base for Language AI.commentary.ko.md
 evidence:
   - source_id: wikidata-help-data-model
-    locator: 'item·property·statement group·snak·qualifier·reference·rank·unknown/no value·적용 범위 전체'
+    locator: item·property·statement group·snak·qualifier·reference·rank·unknown/no value·적용 범위 전체
     relation: supports
   - source_id: wikidata-help-about-data
-    locator: '단순 triple 근사와 qualifier·reference가 있는 Wikibase statement의 RDF 표현 차이'
+    locator: 단순 triple 근사와 qualifier·reference가 있는 Wikibase statement의 RDF 표현 차이
     relation: supports
   - source_id: wikidata-help-references-ranking
-    locator: 'rank와 reference가 수행하는 서로 다른 선택·provenance 역할'
+    locator: rank와 reference가 수행하는 서로 다른 선택·provenance 역할
     relation: supports
-related:
-  - source.042
-  - concept.wikidata
-  - concept.sparql
+relations:
+  - target: source.042
+    kind: related
+  - target: concept.wikidata
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.지식-그래프
+  assumed_knowledge: 없음
+  outcomes:
+    - 'Wikibase statement의 main snak·qualifier·reference·rank를 구분하고, unknown·no value와 RDF 표현의 정보 경계를 설명할 수 있다.'
+  next:
+    - target: concept.sparql
+      reason: '다음에는 SPARQL에서 이 자료 모델을 그래프 패턴으로 조회하는 법을 보고, 구조화된 의미 자원은 무엇을 노드로 삼는가에서 다른 의미 자원과 구조를 비교한다.'
+    - target: analysis.의미-자원의-노드-단위
+      reason: '다음에는 SPARQL에서 이 자료 모델을 그래프 패턴으로 조회하는 법을 보고, 구조화된 의미 자원은 무엇을 노드로 삼는가에서 다른 의미 자원과 구조를 비교한다.'
 ---
 # Wikibase 데이터 모델
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[지식 그래프]]<br>
+> **선수 지식:** [[concept.지식-그래프|지식 그래프]]<br>
 > **읽고 나면:** Wikibase statement의 main snak·qualifier·reference·rank를 구분하고, unknown·no value와 RDF 표현의 정보 경계를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -88,8 +105,12 @@ Main value만 보면 item–property–value triple로 근사할 수 있다. 그
 
 다음에는 [[SPARQL]]에서 이 자료 모델을 그래프 패턴으로 조회하는 법을 보고, [[구조화된 의미 자원은 무엇을 노드로 삼는가]]에서 다른 의미 자원과 구조를 비교한다.
 
-## 출처
+### 다음 문서
 
+- [[concept.sparql|SPARQL]] — 다음에는 SPARQL에서 이 자료 모델을 그래프 패턴으로 조회하는 법을 보고, 구조화된 의미 자원은 무엇을 노드로 삼는가에서 다른 의미 자원과 구조를 비교한다.
+- [[analysis.의미-자원의-노드-단위|구조화된 의미 자원은 무엇을 노드로 삼는가]] — 다음에는 SPARQL에서 이 자료 모델을 그래프 패턴으로 조회하는 법을 보고, 구조화된 의미 자원은 무엇을 노드로 삼는가에서 다른 의미 자원과 구조를 비교한다.
+
+## 출처
 - Wikidata community, [Help:Data model](https://www.wikidata.org/wiki/Help:Data_model).
 - Wikidata community, [Help:About data](https://www.wikidata.org/wiki/Help:About_data).
 - Wikidata community, [Help:Ranking](https://www.wikidata.org/wiki/Help:Ranking).
@@ -98,6 +119,8 @@ Main value만 보면 item–property–value triple로 근사할 수 있다. 그
 
 ## 관련 항목
 
-- [[042_Wikidata와 다언어 협업 지식 베이스]]
-- [[Wikidata]]
-- [[SPARQL]]
+- [[concept.sparql|SPARQL]]
+- [[analysis.의미-자원의-노드-단위|구조화된 의미 자원은 무엇을 노드로 삼는가]]
+- [[concept.지식-그래프|지식 그래프]]
+- [[source.042|Wikidata와 다언어 협업 지식 베이스]]
+- [[concept.wikidata|Wikidata]]

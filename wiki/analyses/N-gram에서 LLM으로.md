@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis.n-gram에서-llm으로
 page_type: analysis
 title: N-gram에서 LLM으로
@@ -12,15 +12,13 @@ tags:
   - domain/ai
 created: '2026-05-07'
 updated: '2026-07-25'
-lifecycle: active
-verification: partial
+editorial_status: active
+review:
+  evidence_coverage: partial
+  content_mode: synthesis
 artifacts:
-  - >-
-    raw/001_Shannon's N-gram Model - The Foundation of Statistical Language
-    Processing..md
-  - >-
-    raw/001_Shannon's N-gram Model - The Foundation of Statistical Language
-    Processing.commentary.md
+  - raw/001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md
+  - raw/001_Shannon's N-gram Model - The Foundation of Statistical Language Processing.commentary.md
   - raw/002_The Turing Test.md
   - raw/003_Georgetown-IBM Machine.md
   - raw/004_The Perceptron.md
@@ -57,7 +55,7 @@ evidence:
     locator: 'pp. 400–401, especially eqs. (13)–(23) and the final paragraph'
     relation: supports
   - source_id: chen-goodman-1998
-    locator: '§§2.3–2.4 and §5.2.4'
+    locator: §§2.3–2.4 and §5.2.4
     relation: supplements
   - source_id: bengio-et-al-2003-nplm
     locator: 'JMLR 3, pp. 1137–1155, 특히 §§1.1·2의 연속 표현 일반화와 §4의 n-gram 비교'
@@ -83,39 +81,80 @@ evidence:
   - source_id: kaplan-et-al-2020-scaling-laws
     locator: '§§1.1–1.3·2–3·8, 특히 자기회귀 token 예측 실험의 N·D·C 범위와 language-model loss의 적용 범위'
     relation: supports
-related:
-  - source.001
-  - source.002
-  - source.019
-  - source.035
-  - source.043
-  - source.045
-  - source.055
-  - source.066
-  - concept.언어-모델-스케일링-법칙
-  - concept.신경-확률-언어-모형
-  - concept.단어-임베딩
-  - concept.n-gram-모델
-  - concept.마르코프-가정
-  - concept.데이터-희소성
-  - concept.smoothing
-  - concept.perplexity
-  - analysis.튜링-테스트와-llm-평가
-  - concept.기계-번역
-  - analysis.ai-시연과-실제-성능
-  - concept.퍼셉트론
-  - analysis.규칙-기반-ai에서-데이터-기반-학습으로
-  - concept.통사-구조
-  - analysis.촘스키에서-llm으로
-  - source.026
-  - concept.순환-신경망
-  - concept.word2vec
-  - concept.sequence-to-sequence
-  - concept.transformer
-  - analysis.statistical-language-model-computing-infrastructure
-  - analysis.matrix-acceleration-deep-learning
-  - analysis.transformer-parallelism-and-sequentiality
-  - meta.llm-computing-coevolution
+relations:
+  - target: source.001
+    kind: related
+  - target: source.002
+    kind: related
+  - target: source.019
+    kind: related
+  - target: source.043
+    kind: related
+  - target: source.045
+    kind: related
+  - target: source.055
+    kind: related
+  - target: source.066
+    kind: related
+  - target: concept.언어-모델-스케일링-법칙
+    kind: related
+  - target: concept.신경-확률-언어-모형
+    kind: related
+  - target: concept.단어-임베딩
+    kind: related
+  - target: concept.n-gram-모델
+    kind: related
+  - target: concept.마르코프-가정
+    kind: related
+  - target: concept.데이터-희소성
+    kind: related
+  - target: concept.smoothing
+    kind: related
+  - target: concept.perplexity
+    kind: related
+  - target: analysis.튜링-테스트와-llm-평가
+    kind: related
+  - target: concept.기계-번역
+    kind: related
+  - target: analysis.ai-시연과-실제-성능
+    kind: related
+  - target: concept.퍼셉트론
+    kind: related
+  - target: analysis.규칙-기반-ai에서-데이터-기반-학습으로
+    kind: related
+  - target: concept.통사-구조
+    kind: related
+  - target: analysis.촘스키에서-llm으로
+    kind: related
+  - target: source.026
+    kind: related
+  - target: concept.순환-신경망
+    kind: related
+  - target: concept.word2vec
+    kind: related
+  - target: concept.sequence-to-sequence
+    kind: related
+  - target: concept.transformer
+    kind: related
+  - target: analysis.statistical-language-model-computing-infrastructure
+    kind: related
+  - target: analysis.matrix-acceleration-deep-learning
+    kind: related
+  - target: analysis.transformer-parallelism-and-sequentiality
+    kind: related
+  - target: meta.llm-computing-coevolution
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: intermediate
+  prerequisites: []
+  assumed_knowledge: '빈도표, 임베딩, softmax, 순환 상태와 attention을 작은 예부터 정의한다.'
+  outcomes:
+    - 'n-gram과 LLM의 공통 문제를 보존하면서, 희소 계수 → 연속 표현 → 재사용 임베딩 → 순환 상태 → 조건부 생성 → Transformer라는 작업 전환을 설명하고 “n-gram이 커져 LLM이 됐다”는 설명의 한계를 근거와 함께 말할 수 있다.'
+  next:
+    - target: source.035
+      reason: 이어서 035신경 확률 언어 모형과 분산 단어 표현에서 공유 표현으로의 전환을 확인한다.
 ---
 # N-gram에서 LLM으로
 
@@ -264,8 +303,11 @@ N-gram은 현대 LLM의 축소판이 아니다. Shannon의 1948년 논문은 확
 
 횡단 역사 경로로는 [[확률적 언어 모델은 어떤 계산 인프라를 요구했나]] → 이 문서 → [[행렬곱 가속은 딥러닝을 어떻게 현실화했나]] → [[Transformer는 무엇을 병렬화했고 무엇을 남겼나]] 순서로 읽는다.
 
-## 출처
+### 다음 문서
 
+- [[source.035|신경 확률 언어 모형과 분산 단어 표현]] — 이어서 035신경 확률 언어 모형과 분산 단어 표현에서 공유 표현으로의 전환을 확인한다.
+
+## 출처
 - [[001_섀넌의 N-gram 모델]]
 - [[002_튜링 테스트]]
 - [[003_Georgetown-IBM 기계 번역 시연]]
@@ -290,35 +332,35 @@ N-gram은 현대 LLM의 축소판이 아니다. Shannon의 1948년 논문은 확
 
 ## 관련 항목
 
-- [[001_섀넌의 N-gram 모델]]
-- [[002_튜링 테스트]]
-- [[019_Katz 백오프와 희소 데이터 확률 추정]]
-- [[035_신경 확률 언어 모형과 분산 단어 표현]]
-- [[043_Word2Vec와 효율적 정적 단어 임베딩]]
-- [[045_Sequence-to-Sequence 학습과 신경 기계 번역]]
-- [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]]
-- [[066_신경 언어 모델의 스케일링 법칙]]
-- [[언어 모델 스케일링 법칙]]
-- [[신경 확률 언어 모형]]
-- [[단어 임베딩]]
-- [[N-gram 모델]]
-- [[마르코프 가정]]
-- [[데이터 희소성]]
-- [[Smoothing]]
-- [[Perplexity]]
-- [[튜링 테스트와 LLM 평가]]
-- [[기계 번역]]
-- [[AI 시연과 실제 성능]]
-- [[퍼셉트론]]
-- [[규칙 기반 AI에서 데이터 기반 학습으로]]
-- [[통사 구조]]
-- [[촘스키에서 LLM으로]]
-- [[026_순환 신경망과 시간적 문맥 학습]]
-- [[순환 신경망]]
-- [[Word2Vec]]
-- [[Sequence-to-Sequence 학습]]
-- [[Transformer]]
-- [[확률적 언어 모델은 어떤 계산 인프라를 요구했나]]
-- [[행렬곱 가속은 딥러닝을 어떻게 현실화했나]]
-- [[Transformer는 무엇을 병렬화했고 무엇을 남겼나]]
-- [[LLM과 컴퓨팅 능력의 공진화]]
+- [[source.035|신경 확률 언어 모형과 분산 단어 표현]]
+- [[source.001|섀넌의 N-gram 모델]]
+- [[source.002|튜링 테스트]]
+- [[source.019|Katz 백오프와 희소 데이터 확률 추정]]
+- [[source.043|Word2Vec와 효율적 정적 단어 임베딩]]
+- [[source.045|Sequence-to-Sequence 학습과 신경 기계 번역]]
+- [[source.055|Transformer와 자기어텐션 기반 시퀀스 모델링]]
+- [[source.066|신경 언어 모델의 스케일링 법칙]]
+- [[concept.언어-모델-스케일링-법칙|언어 모델 스케일링 법칙]]
+- [[concept.신경-확률-언어-모형|신경 확률 언어 모형]]
+- [[concept.단어-임베딩|단어 임베딩]]
+- [[concept.n-gram-모델|N-gram 모델]]
+- [[concept.마르코프-가정|마르코프 가정]]
+- [[concept.데이터-희소성|데이터 희소성]]
+- [[concept.smoothing|Smoothing]]
+- [[concept.perplexity|Perplexity]]
+- [[analysis.튜링-테스트와-llm-평가|튜링 테스트와 LLM 평가]]
+- [[concept.기계-번역|기계 번역]]
+- [[analysis.ai-시연과-실제-성능|AI 시연과 실제 성능]]
+- [[concept.퍼셉트론|퍼셉트론]]
+- [[analysis.규칙-기반-ai에서-데이터-기반-학습으로|규칙 기반 AI에서 데이터 기반 학습으로]]
+- [[concept.통사-구조|통사 구조]]
+- [[analysis.촘스키에서-llm으로|촘스키에서 LLM으로]]
+- [[source.026|순환 신경망과 시간적 문맥 학습]]
+- [[concept.순환-신경망|순환 신경망]]
+- [[concept.word2vec|Word2Vec]]
+- [[concept.sequence-to-sequence|Sequence-to-Sequence 학습]]
+- [[concept.transformer|Transformer]]
+- [[analysis.statistical-language-model-computing-infrastructure|확률적 언어 모델은 어떤 계산 인프라를 요구했나]]
+- [[analysis.matrix-acceleration-deep-learning|행렬곱 가속은 딥러닝을 어떻게 현실화했나]]
+- [[analysis.transformer-parallelism-and-sequentiality|Transformer는 무엇을 병렬화했고 무엇을 남겼나]]
+- [[meta.llm-computing-coevolution|LLM과 컴퓨팅 능력의 공진화]]

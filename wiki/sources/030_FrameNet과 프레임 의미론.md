@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.030
 page_type: source
 title: FrameNet과 프레임 의미론
@@ -14,11 +14,13 @@ tags:
   - domain/computer-science
 created: '2026-07-17'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/030_FrameNet - A Computational Resource for Frame Semantics.ko.md'
-  - 'raw/030_FrameNet - A Computational Resource for Frame Semantics.commentary.ko.md'
+  - raw/030_FrameNet - A Computational Resource for Frame Semantics.ko.md
+  - raw/030_FrameNet - A Computational Resource for Frame Semantics.commentary.ko.md
 evidence:
   - source_id: baker-et-al-1998-framenet
     locator: 'pp. 86–90, 특히 초록·§§1–3과 p. 90 결론의 당시 프로젝트 상태·규모'
@@ -47,17 +49,36 @@ evidence:
   - source_id: knight-et-al-2020-amr-3
     locator: 'LDC2020T02 §§Introduction–Data, 특히 PropBank frames와 59,255문장 구성 설명'
     relation: contextualizes
-related:
-  - concept.framenet
-  - concept.propbank
-  - concept.의미역-표지
-  - concept.wordnet
-  - concept.말뭉치-기반-학습
-  - concept.통계적-자연어-처리
-  - source.011
-  - source.023
-  - source.025
-  - analysis.규칙-기반-ai에서-데이터-기반-학습으로
+relations:
+  - target: concept.propbank
+    kind: related
+  - target: concept.wordnet
+    kind: related
+  - target: concept.말뭉치-기반-학습
+    kind: related
+  - target: concept.통계적-자연어-처리
+    kind: related
+  - target: source.011
+    kind: related
+  - target: source.023
+    kind: related
+  - target: source.025
+    kind: related
+  - target: analysis.규칙-기반-ai에서-데이터-기반-학습으로
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites: []
+  assumed_knowledge: 없음
+  outcomes:
+    - 'FrameNet의 프레임·프레임 요소·어휘 단위·주석 층을 설명하고, 자원 자체와 자동 의미 분석 모델을 구분할 수 있다.'
+  next:
+    - target: concept.framenet
+      reason: FrameNet — 자원의 기본 단위와 구축 절차를 개념 문서에서 정리한다.
+    - target: concept.의미역-표지
+      reason: 의미역 표지 — 프레임·논항 주석을 실제 예측 과제로 바꾸는 문제를 이어서 살핀다.
 ---
 # FrameNet과 프레임 의미론
 
@@ -222,8 +243,8 @@ FrameNet은 언어 모델을 평가하거나 구조화된 감독을 더하는 �
 
 ### 다음 문서
 
-- [[FrameNet]] — 자원의 기본 단위와 구축 절차를 개념 문서에서 정리한다.
-- [[의미역 표지]] — 프레임·논항 주석을 실제 예측 과제로 바꾸는 문제를 이어서 살핀다.
+- [[concept.framenet|FrameNet]] — 자원의 기본 단위와 구축 절차를 개념 문서에서 정리한다.
+- [[concept.의미역-표지|의미역 표지]] — 프레임·논항 주석을 실제 예측 과제로 바꾸는 문제를 이어서 살핀다.
 
 ## 출처
 
@@ -241,13 +262,13 @@ FrameNet은 언어 모델을 평가하거나 구조화된 감독을 더하는 �
 
 ## 관련 항목
 
-- [[FrameNet]]
-- [[PropBank]]
-- [[의미역 표지]]
-- [[WordNet]]
-- [[025_WordNet과 어휘 의미망]]
-- [[말뭉치 기반 학습]]
-- [[통계적 자연어 처리]]
-- [[023_Penn Treebank와 통계적 구문 분석]]
-- [[011_개념 의존]]
-- [[규칙 기반 AI에서 데이터 기반 학습으로]]
+- [[concept.framenet|FrameNet]]
+- [[concept.의미역-표지|의미역 표지]]
+- [[concept.propbank|PropBank]]
+- [[concept.wordnet|WordNet]]
+- [[concept.말뭉치-기반-학습|말뭉치 기반 학습]]
+- [[concept.통계적-자연어-처리|통계적 자연어 처리]]
+- [[source.011|개념 의존 이론과 시스템]]
+- [[source.023|Penn Treebank와 통계적 구문 분석]]
+- [[source.025|WordNet과 어휘 의미망]]
+- [[analysis.규칙-기반-ai에서-데이터-기반-학습으로|규칙 기반 AI에서 데이터 기반 학습으로]]

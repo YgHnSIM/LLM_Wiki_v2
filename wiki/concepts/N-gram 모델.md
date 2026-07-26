@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.n-gram-모델
 page_type: concept
 title: N-gram 모델
@@ -12,12 +12,12 @@ tags:
   - domain/ai
 created: '2026-05-07'
 updated: '2026-07-23'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - >-
-    raw/001_Shannon's N-gram Model - The Foundation of Statistical Language
-    Processing..md
+  - raw/001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md
   - raw/019_Katz Back-off - Handling Sparse Data in Language Models.ko.md
   - raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md
   - raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.ko.md
@@ -30,30 +30,49 @@ evidence:
     locator: 'p. 400; pp. 400–401, eqs. (13)–(23)'
     relation: supports
   - source_id: chen-goodman-1998
-    locator: '§§1.1 and 2.2–2.4'
+    locator: §§1.1 and 2.2–2.4
     relation: supplements
   - source_id: bengio-et-al-2003-nplm
     locator: 'JMLR 3, pp. 1138–1141과 1147–1149의 n-gram 한계·기준선 비교'
     relation: contextualizes
-related:
-  - source.001
-  - source.019
-  - source.035
-  - concept.확률
-  - concept.조건부-확률
-  - concept.마르코프-가정
-  - concept.데이터-희소성
-  - concept.smoothing
-  - concept.perplexity
-  - concept.신경-확률-언어-모형
-  - concept.단어-임베딩
-  - analysis.n-gram에서-llm으로
+relations:
+  - target: source.001
+    kind: related
+  - target: source.035
+    kind: related
+  - target: concept.마르코프-가정
+    kind: related
+  - target: concept.데이터-희소성
+    kind: related
+  - target: concept.smoothing
+    kind: related
+  - target: concept.perplexity
+    kind: related
+  - target: concept.신경-확률-언어-모형
+    kind: related
+  - target: concept.단어-임베딩
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites:
+    - target: concept.확률
+    - target: concept.조건부-확률
+  assumed_knowledge: 확률분포의 합이 1이라는 뜻과 문맥이 주어졌을 때 조건부 확률을 읽는 방법
+  outcomes:
+    - 'n-gram이 무엇을 세고, 그 빈도를 다음 항목의 확률로 바꾸는 식의 분자·분모·가정을 설명하며, 보지 못한 조합에서 왜 평활화가 필요한지 계산으로 말할 수 있다.'
+  next:
+    - target: source.019
+      reason: 다음에는 019Katz 백오프와 희소 데이터 확률 추정에서 미관측 조합의 확률을 실제로 재분배하는 방법을 읽는다.
+    - target: analysis.n-gram에서-llm으로
+      reason: 큰 흐름이 궁금하면 N-gram에서 LLM으로 이어지는 분석을 읽는다.
 ---
 # N-gram 모델
 
 > [!note] 학습 안내
 > **난이도:** 입문<br>
-> **선수 지식:** [[확률]]에서 확률분포의 합이 1이라는 뜻, [[조건부 확률]]에서 “문맥이 주어졌을 때”의 의미<br>
+> **선수 지식:** [[concept.확률|확률]], [[concept.조건부-확률|조건부 확률]]<br>
 > **읽고 나면:** n-gram이 무엇을 세고, 그 빈도를 다음 항목의 확률로 바꾸는 식의 분자·분모·가정을 설명하며, 보지 못한 조합에서 왜 평활화가 필요한지 계산으로 말할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -250,8 +269,12 @@ Shannon의 1948년 논문은 문자·단어 연속 근사와 조건부확률을 
 
 다음에는 [[019_Katz 백오프와 희소 데이터 확률 추정]]에서 미관측 조합의 확률을 실제로 재분배하는 방법을 읽는다. 큰 흐름이 궁금하면 [[N-gram에서 LLM으로|N-gram에서 LLM으로 이어지는 분석]]을 읽는다.
 
-## 출처
+### 다음 문서
 
+- [[source.019|Katz 백오프와 희소 데이터 확률 추정]] — 다음에는 019Katz 백오프와 희소 데이터 확률 추정에서 미관측 조합의 확률을 실제로 재분배하는 방법을 읽는다.
+- [[analysis.n-gram에서-llm으로|N-gram에서 LLM으로]] — 큰 흐름이 궁금하면 N-gram에서 LLM으로 이어지는 분석을 읽는다.
+
+## 출처
 - [[001_섀넌의 N-gram 모델]]
 - [[019_Katz 백오프와 희소 데이터 확률 추정]]
 - [[035_신경 확률 언어 모형과 분산 단어 표현]]
@@ -261,15 +284,15 @@ Shannon의 1948년 논문은 문자·단어 연속 근사와 조건부확률을 
 
 ## 관련 항목
 
-- [[확률]]
-- [[조건부 확률]]
-- [[001_섀넌의 N-gram 모델]]
-- [[019_Katz 백오프와 희소 데이터 확률 추정]]
-- [[035_신경 확률 언어 모형과 분산 단어 표현]]
-- [[신경 확률 언어 모형]]
-- [[단어 임베딩]]
-- [[마르코프 가정]]
-- [[데이터 희소성]]
-- [[Smoothing]]
-- [[Perplexity]]
-- [[N-gram에서 LLM으로]]
+- [[source.019|Katz 백오프와 희소 데이터 확률 추정]]
+- [[analysis.n-gram에서-llm으로|N-gram에서 LLM으로]]
+- [[concept.확률|확률]]
+- [[concept.조건부-확률|조건부 확률]]
+- [[source.001|섀넌의 N-gram 모델]]
+- [[source.035|신경 확률 언어 모형과 분산 단어 표현]]
+- [[concept.마르코프-가정|마르코프 가정]]
+- [[concept.데이터-희소성|데이터 희소성]]
+- [[concept.smoothing|Smoothing]]
+- [[concept.perplexity|Perplexity]]
+- [[concept.신경-확률-언어-모형|신경 확률 언어 모형]]
+- [[concept.단어-임베딩|단어 임베딩]]

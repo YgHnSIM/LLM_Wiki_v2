@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.헌법적-ai
 page_type: concept
 title: 헌법적 AI
@@ -15,11 +15,13 @@ tags:
   - domain/nlp
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/094_Constitutional AI Principle-Based Alignment Through Self-Critique.ko.md'
-  - 'raw/094_Constitutional AI Principle-Based Alignment Through Self-Critique.commentary.ko.md'
+  - raw/094_Constitutional AI Principle-Based Alignment Through Self-Critique.ko.md
+  - raw/094_Constitutional AI Principle-Based Alignment Through Self-Critique.commentary.ko.md
 evidence:
   - source_id: bai-et-al-2022-constitutional-ai
     locator: 'Abstract와 §§1.2·3.1–3.5·4.1–4.5·6, Appendix C의 SL-CAI 비평·수정, AI 유해성 선호·혼합 preference model·RL-CAI, 연구용 원칙과 한계'
@@ -30,19 +32,33 @@ evidence:
   - source_id: anthropic-cip-2023-collective-cai
     locator: 'Designing a Public Input Process, Analyzing the Publicly Sourced Constitution, Training and Evaluating, Lessons Learned의 약 1,000명 미국 표본·원칙 변환·두 헌법 비교·주관적 편집 결정'
     relation: contextualizes
-related:
-  - source.094
-  - source.056
-  - source.077
-  - concept.rlhf
-  - concept.chatgpt-2022
-  - analysis.평가-지표와-모델-유인
+relations:
+  - target: source.094
+    kind: related
+  - target: source.056
+    kind: related
+  - target: concept.chatgpt-2022
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.rlhf
+  assumed_knowledge: 선호 모델과 정책 최적화의 기초
+  outcomes:
+    - '헌법적 AI를 자연어 원칙을 비평·수정 자료와 AI 선호 라벨로 변환하는 방법 계열로 정의하고, SL-CAI와 RL-CAI에서 사람·AI 신호가 들어가는 위치와 검증 한계를 구분할 수 있다.'
+  next:
+    - target: analysis.평가-지표와-모델-유인
+      reason: 자동 평가 지표는 무엇을 보상하는가 — 측정 가능한 대리 목표를 최적화할 때 생기는 유인과 Goodharting을 더 넓게 살펴본다.
+    - target: source.077
+      reason: 077InstructGPT와 인간 선호 정렬 — SFT·보상 모델·PPO로 이어지는 대표 RLHF 파이프라인과 CAI의 혼합 경계를 대조한다.
 ---
 # 헌법적 AI
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[인간 피드백 강화학습]], 선호 모델과 정책 최적화의 기초<br>
+> **선수 지식:** [[concept.rlhf|인간 피드백 강화학습]]<br>
 > **읽고 나면:** 헌법적 AI를 자연어 원칙을 비평·수정 자료와 AI 선호 라벨로 변환하는 방법 계열로 정의하고, SL-CAI와 RL-CAI에서 사람·AI 신호가 들어가는 위치와 검증 한계를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -215,9 +231,8 @@ RLAIF는 라벨 생성 비용을 줄일 가능성이 있지만 AI 피드백의 �
 
 ### 다음 문서
 
-- [[인간 피드백 강화학습]] — 사람 비교가 선호 모델과 정책 갱신으로 이어지는 기본 골격을 먼저 비교한다.
-- [[자동 평가 지표는 무엇을 보상하는가]] — 측정 가능한 대리 목표를 최적화할 때 생기는 유인과 Goodharting을 더 넓게 살펴본다.
-- [[077_InstructGPT와 인간 선호 정렬]] — SFT·보상 모델·PPO로 이어지는 대표 RLHF 파이프라인과 CAI의 혼합 경계를 대조한다.
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]] — 측정 가능한 대리 목표를 최적화할 때 생기는 유인과 Goodharting을 더 넓게 살펴본다.
+- [[source.077|InstructGPT와 인간 선호 정렬]] — 077InstructGPT와 인간 선호 정렬 — SFT·보상 모델·PPO로 이어지는 대표 RLHF 파이프라인과 CAI의 혼합 경계를 대조한다.
 
 ## 출처
 
@@ -231,9 +246,9 @@ RLAIF는 라벨 생성 비용을 줄일 가능성이 있지만 AI 피드백의 �
 
 ## 관련 항목
 
-- [[094_헌법적 AI와 자기비평·AI 피드백 정렬]]
-- [[인간 피드백 강화학습]]
-- [[056_RLHF 토대와 인간 선호 기반 보상 학습]]
-- [[077_InstructGPT와 인간 선호 정렬]]
-- [[ChatGPT 연구 미리보기 (2022)]]
-- [[자동 평가 지표는 무엇을 보상하는가]]
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]]
+- [[source.077|InstructGPT와 인간 선호 정렬]]
+- [[concept.rlhf|인간 피드백 강화학습]]
+- [[source.094|헌법적 AI와 자기비평·AI 피드백 정렬]]
+- [[source.056|RLHF 토대와 인간 선호 기반 보상 학습]]
+- [[concept.chatgpt-2022|ChatGPT 연구 미리보기 (2022)]]

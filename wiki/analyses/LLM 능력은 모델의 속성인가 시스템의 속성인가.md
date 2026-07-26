@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis.llm-capability-model-or-system
 page_type: analysis
 title: LLM 능력은 모델의 속성인가 시스템의 속성인가
@@ -15,23 +15,25 @@ tags:
   - domain/computer-science
 created: '2026-07-24'
 updated: '2026-07-25'
-lifecycle: active
-verification: partial
+editorial_status: active
+review:
+  evidence_coverage: partial
+  content_mode: synthesis
 artifacts:
-  - 'raw/055_The Transformer Attention Is All You Need.ko.md'
-  - 'raw/055_The Transformer Attention Is All You Need.commentary.ko.md'
-  - 'raw/066_Scaling Laws for Neural Language Models Predicting Performance from Scale.ko.md'
-  - 'raw/066_Scaling Laws for Neural Language Models Predicting Performance from Scale.commentary.ko.md'
-  - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md'
-  - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md'
-  - 'raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.ko.md'
-  - 'raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.commentary.ko.md'
+  - raw/055_The Transformer Attention Is All You Need.ko.md
+  - raw/055_The Transformer Attention Is All You Need.commentary.ko.md
+  - raw/066_Scaling Laws for Neural Language Models Predicting Performance from Scale.ko.md
+  - raw/066_Scaling Laws for Neural Language Models Predicting Performance from Scale.commentary.ko.md
+  - raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md
+  - raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md
+  - raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.ko.md
+  - raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.commentary.ko.md
 evidence:
   - source_id: turing-1936-computable-numbers
     locator: '§§1–6의 automatic machine, configuration과 computable sequence 정의'
     relation: contextualizes
   - source_id: shannon-1948
-    locator: 'Part I §§2–6의 discrete source·entropy·channel capacity와 coding problem'
+    locator: Part I §§2–6의 discrete source·entropy·channel capacity와 coding problem
     relation: contextualizes
   - source_id: krizhevsky-et-al-2012-imagenet-cnn
     locator: '초록, §§1–3.2·5–6의 model·data·두 GTX 580 훈련 구성과 test error'
@@ -40,7 +42,7 @@ evidence:
     locator: '§§1·3–5와 Tables 1–3의 계산 그래프 의존성, 8개 P100 훈련과 번역 평가'
     relation: supports
   - source_id: kaplan-et-al-2020-scaling-laws
-    locator: '§§1.1–1.2·2–6·8의 model·data·compute별 loss와 fixed-compute 배분'
+    locator: §§1.1–1.2·2–6·8의 model·data·compute별 loss와 fixed-compute 배분
     relation: supports
   - source_id: dao-et-al-2022-flashattention
     locator: '§§2.2–3.3과 Figures 1–2의 같은 exact attention, HBM–SRAM I/O와 wall-clock'
@@ -48,27 +50,50 @@ evidence:
   - source_id: kwon-et-al-2023-vllm
     locator: '§§2–7과 Figures 1–19의 PagedAttention·KV memory, request rate·latency와 end-to-end serving'
     relation: supports
-related:
-  - meta.llm-computing-coevolution
-  - analysis.pre-machine-computing-capability
-  - analysis.language-computation-mechanical-procedure
-  - analysis.early-learning-scaling-limits
-  - analysis.statistical-language-model-computing-infrastructure
-  - analysis.matrix-acceleration-deep-learning
-  - analysis.transformer-parallelism-and-sequentiality
-  - analysis.scale-as-research-variable
-  - analysis.when-data-movement-dominates
-  - analysis.model-capability-to-service-capability
-  - analysis.n-gram에서-llm으로
-  - analysis.stored-program-to-learning-framework
-  - analysis.silicon-scaling-to-accelerators
-  - meta.llm-system-boundary-map
+relations:
+  - target: analysis.pre-machine-computing-capability
+    kind: related
+  - target: analysis.language-computation-mechanical-procedure
+    kind: related
+  - target: analysis.early-learning-scaling-limits
+    kind: related
+  - target: analysis.statistical-language-model-computing-infrastructure
+    kind: related
+  - target: analysis.matrix-acceleration-deep-learning
+    kind: related
+  - target: analysis.transformer-parallelism-and-sequentiality
+    kind: related
+  - target: analysis.scale-as-research-variable
+    kind: related
+  - target: analysis.when-data-movement-dominates
+    kind: related
+  - target: analysis.model-capability-to-service-capability
+    kind: related
+  - target: analysis.n-gram에서-llm으로
+    kind: related
+  - target: analysis.stored-program-to-learning-framework
+    kind: related
+  - target: analysis.silicon-scaling-to-accelerators
+    kind: related
+  - target: meta.llm-system-boundary-map
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: preprofessional
+  prerequisites: []
+  assumed_knowledge: 'model, checkpoint, runtime, service contract와 능력 지표를 작은 가상 비교부터 정의한다. 시대별 세부 근거는 LLM과 컴퓨팅 능력의 공진화의 아홉 본편에서 다시 찾을 수 있다.'
+  outcomes:
+    - 'model이 학습한 함수와 system이 실제 제공한 결과를 분리하면서도 둘을 경쟁 설명으로 만들지 않고, 새 LLM·accelerator·serving 주장을 일곱 능력층·여섯 항목 측정 장부·네 인과 표지로 감사할 수 있다.'
+  next:
+    - target: meta.llm-computing-coevolution
+      reason: 학습 확인 뒤의 후속 문서 연결.
 ---
 # LLM 능력은 모델의 속성인가 시스템의 속성인가
 
 > [!note] 학습 안내
 > **난이도:** 입문 → 준전문가<br>
-> **선수 지식:** 없음 — model, checkpoint, runtime, service contract와 능력 지표를 작은 가상 비교부터 정의한다. 시대별 세부 근거는 [[LLM과 컴퓨팅 능력의 공진화]]의 아홉 본편에서 다시 찾을 수 있다.<br>
+> **선수 지식:** 없음 — model, checkpoint, runtime, service contract와 능력 지표를 작은 가상 비교부터 정의한다. 시대별 세부 근거는 LLM과 컴퓨팅 능력의 공진화의 아홉 본편에서 다시 찾을 수 있다.<br>
 > **읽고 나면:** model이 학습한 함수와 system이 실제 제공한 결과를 분리하면서도 둘을 경쟁 설명으로 만들지 않고, 새 LLM·accelerator·serving 주장을 일곱 능력층·여섯 항목 측정 장부·네 인과 표지로 감사할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -321,8 +346,11 @@ FlashAttention과 vLLM은 model weight를 바꾸지 않고도 실행 능력이 �
 
 정답은 하나의 기술 이름이 아니라 경계와 근거가 일관된 비교다. 막히면 [[LLM과 컴퓨팅 능력의 공진화]]에서 해당 능력층의 대표 본편으로 돌아간다.
 
-## 출처
+### 다음 문서
 
+- [[meta.llm-computing-coevolution|LLM과 컴퓨팅 능력의 공진화]] — 학습 확인 뒤의 후속 문서 연결.
+
+## 출처
 - [[LLM과 컴퓨팅 능력의 공진화]] — 아홉 본편과 공통 능력층·측정 장부의 탐색 허브.
 - Alan M. Turing, [On Computable Numbers, with an Application to the Entscheidungsproblem](https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf), 1936, §§1–6.
 - Claude E. Shannon, [A Mathematical Theory of Communication](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf), 1948, Part I.
@@ -334,17 +362,17 @@ FlashAttention과 vLLM은 model weight를 바꾸지 않고도 실행 능력이 �
 
 ## 관련 항목
 
-- [[LLM과 컴퓨팅 능력의 공진화]]
-- [[기계 이전의 계산은 어떻게 능력이 되었나]]
-- [[언어와 계산을 기계적 절차로 만들다]]
-- [[학습 규칙이 있어도 왜 규모화되지 못했나]]
-- [[확률적 언어 모델은 어떤 계산 인프라를 요구했나]]
-- [[행렬곱 가속은 딥러닝을 어떻게 현실화했나]]
-- [[Transformer는 무엇을 병렬화했고 무엇을 남겼나]]
-- [[규모는 언제 연구 변수가 되었나]]
-- [[연산보다 데이터 이동이 비싸질 때]]
-- [[모델 능력에서 서비스 능력으로]]
-- [[N-gram에서 LLM으로]]
-- [[저장 프로그램에서 학습 프레임워크까지]]
-- [[집적도 증가에서 가속기까지 무엇이 더 필요했나]]
-- [[LLM 시스템 경계 확장 지도]] — 능력 주장을 data·memory·authority·media까지 어떤 owner에서 감사할지 고른다.
+- [[meta.llm-computing-coevolution|LLM과 컴퓨팅 능력의 공진화]]
+- [[analysis.pre-machine-computing-capability|기계 이전의 계산은 어떻게 능력이 되었나]]
+- [[analysis.language-computation-mechanical-procedure|언어와 계산을 기계적 절차로 만들다]]
+- [[analysis.early-learning-scaling-limits|학습 규칙이 있어도 왜 규모화되지 못했나]]
+- [[analysis.statistical-language-model-computing-infrastructure|확률적 언어 모델은 어떤 계산 인프라를 요구했나]]
+- [[analysis.matrix-acceleration-deep-learning|행렬곱 가속은 딥러닝을 어떻게 현실화했나]]
+- [[analysis.transformer-parallelism-and-sequentiality|Transformer는 무엇을 병렬화했고 무엇을 남겼나]]
+- [[analysis.scale-as-research-variable|규모는 언제 연구 변수가 되었나]]
+- [[analysis.when-data-movement-dominates|연산보다 데이터 이동이 비싸질 때]]
+- [[analysis.model-capability-to-service-capability|모델 능력에서 서비스 능력으로]]
+- [[analysis.n-gram에서-llm으로|N-gram에서 LLM으로]]
+- [[analysis.stored-program-to-learning-framework|저장 프로그램에서 학습 프레임워크까지]]
+- [[analysis.silicon-scaling-to-accelerators|집적도 증가에서 가속기까지 무엇이 더 필요했나]]
+- [[meta.llm-system-boundary-map|LLM 시스템 경계 확장 지도]]

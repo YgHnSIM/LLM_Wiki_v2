@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.sparql
 page_type: concept
 title: SPARQL
@@ -13,29 +13,47 @@ tags:
   - domain/ai
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/042_Wikidata Collaborative Knowledge Base for Language AI.ko.md'
-  - 'raw/042_Wikidata Collaborative Knowledge Base for Language AI.commentary.ko.md'
+  - raw/042_Wikidata Collaborative Knowledge Base for Language AI.ko.md
+  - raw/042_Wikidata Collaborative Knowledge Base for Language AI.commentary.ko.md
 evidence:
   - source_id: vrandecic-krotzsch-2014-wikidata
-    locator: 'pp. 82–84의 Wikidata API·RDF·query와 외부 재사용 설명'
+    locator: pp. 82–84의 Wikidata API·RDF·query와 외부 재사용 설명
     relation: contextualizes
   - source_id: wikidata-query-service-limits
-    locator: 'Wikidata Query Service의 복합 질의 실행 시간·결과 규모·timeout 사례'
+    locator: Wikidata Query Service의 복합 질의 실행 시간·결과 규모·timeout 사례
     relation: supports
-related:
-  - source.042
-  - concept.wikidata
-  - concept.wikibase-데이터-모델
-  - concept.지식-그래프
+relations:
+  - target: source.042
+    kind: related
+  - target: concept.wikidata
+    kind: related
+  - target: concept.wikibase-데이터-모델
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.지식-그래프
+  assumed_knowledge: 없음
+  outcomes:
+    - 'SPARQL의 그래프 패턴이 여러 관계를 맞춰 결과를 만드는 방식을 설명하고, 저장된 관계 조회와 논리 추론의 경계를 구분할 수 있다.'
+  next:
+    - target: analysis.의미-자원의-노드-단위
+      reason: '다음에는 구조화된 의미 자원은 무엇을 노드로 삼는가에서 그래프 자원별 노드 설계를 비교하고, 검색은 근거를 찾고 독해는 답을 찾는다에서 조회 결과가 답으로 이어지는 조건을 본다.'
+    - target: analysis.검색-근거-독해-답
+      reason: '다음에는 구조화된 의미 자원은 무엇을 노드로 삼는가에서 그래프 자원별 노드 설계를 비교하고, 검색은 근거를 찾고 독해는 답을 찾는다에서 조회 결과가 답으로 이어지는 조건을 본다.'
 ---
 # SPARQL
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[지식 그래프]]<br>
+> **선수 지식:** [[concept.지식-그래프|지식 그래프]]<br>
 > **읽고 나면:** SPARQL의 그래프 패턴이 여러 관계를 맞춰 결과를 만드는 방식을 설명하고, 저장된 관계 조회와 논리 추론의 경계를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -85,8 +103,12 @@ Live Query Service는 공유 자원이다. Join 수, 중간 결과 규모, label
 
 다음에는 [[구조화된 의미 자원은 무엇을 노드로 삼는가]]에서 그래프 자원별 노드 설계를 비교하고, [[검색은 근거를 찾고 독해는 답을 찾는다]]에서 조회 결과가 답으로 이어지는 조건을 본다.
 
-## 출처
+### 다음 문서
 
+- [[analysis.의미-자원의-노드-단위|구조화된 의미 자원은 무엇을 노드로 삼는가]] — 다음에는 구조화된 의미 자원은 무엇을 노드로 삼는가에서 그래프 자원별 노드 설계를 비교하고, 검색은 근거를 찾고 독해는 답을 찾는다에서 조회 결과가 답으로 이어지는 조건을 본다.
+- [[analysis.검색-근거-독해-답|검색은 근거를 찾고 독해는 답을 찾는다]] — 다음에는 구조화된 의미 자원은 무엇을 노드로 삼는가에서 그래프 자원별 노드 설계를 비교하고, 검색은 근거를 찾고 독해는 답을 찾는다에서 조회 결과가 답으로 이어지는 조건을 본다.
+
+## 출처
 - Denny Vrandečić·Markus Krötzsch, [Wikidata: A Free Collaborative Knowledgebase](https://dl.acm.org/doi/pdf/10.1145/2629489), 2014, pp. 82–84.
 - Wikidata community, [Wikidata SPARQL Query Service — Query limits](https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/query_limits).
 - [[042_Wikidata와 다언어 협업 지식 베이스]]
@@ -94,7 +116,9 @@ Live Query Service는 공유 자원이다. Join 수, 중간 결과 규모, label
 
 ## 관련 항목
 
-- [[042_Wikidata와 다언어 협업 지식 베이스]]
-- [[Wikidata]]
-- [[Wikibase 데이터 모델]]
-- [[지식 그래프]]
+- [[analysis.의미-자원의-노드-단위|구조화된 의미 자원은 무엇을 노드로 삼는가]]
+- [[analysis.검색-근거-독해-답|검색은 근거를 찾고 독해는 답을 찾는다]]
+- [[concept.지식-그래프|지식 그래프]]
+- [[source.042|Wikidata와 다언어 협업 지식 베이스]]
+- [[concept.wikidata|Wikidata]]
+- [[concept.wikibase-데이터-모델|Wikibase 데이터 모델]]

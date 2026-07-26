@@ -129,6 +129,8 @@ export function createWikiLookup(documents, {
 
   function resolve(value) {
     const parsed = parseWikiLink(value);
+    const idMatch = ids.get(normalizeWikiName(parsed.targetPath));
+    if (idMatch) return { ...parsed, document: idMatch };
     const key = normalizeWikiName(parsed.basename);
     const exactMatch = exact.get(key);
     if (exactMatch) return { ...parsed, document: exactMatch };

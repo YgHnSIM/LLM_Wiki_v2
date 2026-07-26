@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.091
 page_type: source
 title: QLoRA와 4비트 양자화 미세조정
@@ -16,17 +16,19 @@ tags:
   - domain/optimization
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.ko.md'
-  - 'raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.commentary.ko.md'
+  - raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.ko.md
+  - raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.commentary.ko.md
 evidence:
   - source_id: dettmers-et-al-2023-qlora
     locator: '초록과 §§1–4의 4-bit frozen base·NF4·double quantization·paged optimizer·all-linear LoRA, §§5–6과 Tables 3–7의 MMLU·Guanaco·자동/인간 평가, §§7–8과 Appendices A–D·I–J의 비교 한계·recipe·정규성·memory 조건'
     relation: supports
   - source_id: dettmers-et-al-2023-qlora-repository
-    locator: 'README의 Overview·Quantization·Paged Optimizer·Guanaco Finetuning·Known Issues·License 절과 초기 4-bit 학습/추론 구현 경계'
+    locator: README의 Overview·Quantization·Paged Optimizer·Guanaco Finetuning·Known Issues·License 절과 초기 4-bit 학습/추론 구현 경계
     relation: supports
   - source_id: hu-et-al-2022-lora
     locator: '초록과 §§1–4의 frozen pretrained weight, 저순위 update parameterization과 trainable parameter·memory 절감'
@@ -35,27 +37,41 @@ evidence:
     locator: '§2.1과 Table 2.1의 GPT-3 175B 규모: 원 웹글의 GPT-3.5·175B 혼동 교정'
     relation: contextualizes
   - source_id: stanford-crfm-2023-alpaca
-    locator: '2023-03-13 공개 기록과 52K instruction data·LLaMA 7B full fine-tuning 설명'
+    locator: 2023-03-13 공개 기록과 52K instruction data·LLaMA 7B full fine-tuning 설명
     relation: contextualizes
   - source_id: lmsys-2023-vicuna
-    locator: '2023-03-30 공개 기록과 ShareGPT data·8대 A100에서의 full fine-tuning·초기 80-prompt 평가 범위'
+    locator: 2023-03-30 공개 기록과 ShareGPT data·8대 A100에서의 full fine-tuning·초기 80-prompt 평가 범위
     relation: contextualizes
-related:
-  - source.089
-  - source.090
-  - source.072
-  - concept.qlora
-  - concept.llama-1
-  - concept.지시-미세조정
-  - concept.언어-모델-전이-학습
-  - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
-  - analysis.공개-가중치와-재현-가능성은-같은-축인가
+relations:
+  - target: source.089
+    kind: related
+  - target: source.090
+    kind: related
+  - target: source.072
+    kind: related
+  - target: concept.지시-미세조정
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.llama-1
+    - target: concept.언어-모델-전이-학습
+  assumed_knowledge: 없음
+  outcomes:
+    - 'QLoRA에서 4비트로 저장되는 것과 16비트로 계산되는 것, 동결되는 것과 학습되는 것을 구분하고, 24GB·48GB hardware 및 MMLU·Guanaco 결과의 정확한 범위를 설명할 수 있다.'
+  next:
+    - target: concept.qlora
+      reason: QLoRA — Algorithm의 구성요소와 memory 장부를 재사용 가능한 개념으로 정리한다.
+    - target: analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+      reason: '사전 학습 지식은 과제에 어떻게 도착하는가 — 전체 가중치 갱신, prompt-only adaptation과 frozen base·adapter 경로를 비교한다.'
 ---
 # QLoRA와 4비트 양자화 미세조정
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[LLaMA 1]], [[언어 모델 전이 학습]], [[지시 미세조정]]<br>
+> **선수 지식:** [[concept.llama-1|LLaMA 1]], [[concept.언어-모델-전이-학습|언어 모델 전이 학습]]<br>
 > **읽고 나면:** QLoRA에서 4비트로 저장되는 것과 16비트로 계산되는 것, 동결되는 것과 학습되는 것을 구분하고, 24GB·48GB hardware 및 MMLU·Guanaco 결과의 정확한 범위를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -192,9 +208,8 @@ QLoRA는 memory-efficient adaptation 방법이지 안전 정렬 방법이 아니
 
 ### 다음 문서
 
-- [[QLoRA]] — Algorithm의 구성요소와 memory 장부를 재사용 가능한 개념으로 정리한다.
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 전체 가중치 갱신, prompt-only adaptation과 frozen base·adapter 경로를 비교한다.
-- [[공개 가중치와 재현 가능성은 같은 축인가]] — Base weight·adapter·code의 서로 다른 license와 실행 가능성을 공개 장부에 놓는다.
+- [[concept.qlora|QLoRA]] — Algorithm의 구성요소와 memory 장부를 재사용 가능한 개념으로 정리한다.
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]] — 전체 가중치 갱신, prompt-only adaptation과 frozen base·adapter 경로를 비교한다.
 
 ## 출처
 
@@ -209,12 +224,11 @@ QLoRA는 memory-efficient adaptation 방법이지 안전 정렬 방법이 아니
 
 ## 관련 항목
 
-- [[QLoRA]]
-- [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]]
-- [[090_공개 가중치 LLM 파동과 서로 다른 공개 범위]]
-- [[072_지시 미세조정과 FLAN의 제로샷 일반화]]
-- [[LLaMA 1]]
-- [[지시 미세조정]]
-- [[언어 모델 전이 학습]]
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]
-- [[공개 가중치와 재현 가능성은 같은 축인가]]
+- [[concept.qlora|QLoRA]]
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]]
+- [[concept.llama-1|LLaMA 1]]
+- [[concept.언어-모델-전이-학습|언어 모델 전이 학습]]
+- [[source.089|LLaMA 1과 제한적 공개 가중치 연구 배포]]
+- [[source.090|공개 가중치 LLM 파동과 서로 다른 공개 범위]]
+- [[source.072|지시 미세조정과 FLAN의 제로샷 일반화]]
+- [[concept.지시-미세조정|지시 미세조정]]

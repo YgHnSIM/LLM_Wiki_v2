@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.eliza-효과
 page_type: concept
 title: ELIZA 효과
@@ -13,8 +13,10 @@ tags:
   - domain/human-computer-interaction
 created: '2026-07-14'
 updated: '2026-07-21'
-lifecycle: active
-verification: partial
+editorial_status: active
+review:
+  evidence_coverage: partial
+  content_mode: descriptive
 artifacts:
   - raw/007_ELIZA - The First Conversational AI Program.ko.md
   - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
@@ -25,19 +27,33 @@ evidence:
   - source_id: mit-eliza-1965
     locator: ELIZA source and DOCTOR script records
     relation: supplements
-related:
-  - concept.eliza
-  - concept.doctor-스크립트
-  - concept.튜링-테스트
-  - concept.행동-기반-지능-기준
-  - analysis.튜링-테스트와-llm-평가
-  - analysis.eliza에서-llm으로
+relations:
+  - target: concept.doctor-스크립트
+    kind: related
+  - target: concept.튜링-테스트
+    kind: related
+  - target: concept.행동-기반-지능-기준
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites:
+    - target: concept.eliza
+  assumed_knowledge: 없음
+  outcomes:
+    - 자연스러운 대화 행동과 실제 이해·신뢰성을 분리해 평가해야 하는 이유를 설명할 수 있다.
+  next:
+    - target: analysis.튜링-테스트와-llm-평가
+      reason: 튜링 테스트와 LLM 평가 — 관찰 가능한 행동과 실제 능력을 평가할 때 생기는 공통 문제를 비교한다.
+    - target: analysis.eliza에서-llm으로
+      reason: ELIZA에서 LLM으로 — ELIZA와 현대 언어 모델 사이의 연속성과 차이를 함께 본다.
 ---
 # ELIZA 효과
 
 > [!note] 학습 안내
 > **난이도:** 입문<br>
-> **선수 지식:** [[ELIZA]]<br>
+> **선수 지식:** [[concept.eliza|ELIZA]]<br>
 > **읽고 나면:** 자연스러운 대화 행동과 실제 이해·신뢰성을 분리해 평가해야 하는 이유를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -78,8 +94,8 @@ ELIZA 효과는 자연스럽거나 인간다운 대화가 시스템의 실제 �
 
 ### 다음 문서
 
-- [[튜링 테스트와 LLM 평가]] — 관찰 가능한 행동과 실제 능력을 평가할 때 생기는 공통 문제를 비교한다.
-- [[ELIZA에서 LLM으로]] — ELIZA와 현대 언어 모델 사이의 연속성과 차이를 함께 본다.
+- [[analysis.튜링-테스트와-llm-평가|튜링 테스트와 LLM 평가]] — 관찰 가능한 행동과 실제 능력을 평가할 때 생기는 공통 문제를 비교한다.
+- [[analysis.eliza에서-llm으로|ELIZA에서 LLM으로]] — ELIZA와 현대 언어 모델 사이의 연속성과 차이를 함께 본다.
 
 ## 출처
 
@@ -88,9 +104,9 @@ ELIZA 효과는 자연스럽거나 인간다운 대화가 시스템의 실제 �
 
 ## 관련 항목
 
-- [[ELIZA]]
-- [[DOCTOR 스크립트]]
-- [[튜링 테스트]]
-- [[행동주의적 지능 기준]]
-- [[튜링 테스트와 LLM 평가]]
-- [[ELIZA에서 LLM으로]]
+- [[analysis.튜링-테스트와-llm-평가|튜링 테스트와 LLM 평가]]
+- [[analysis.eliza에서-llm으로|ELIZA에서 LLM으로]]
+- [[concept.eliza|ELIZA]]
+- [[concept.doctor-스크립트|DOCTOR 스크립트]]
+- [[concept.튜링-테스트|튜링 테스트]]
+- [[concept.행동-기반-지능-기준|행동 기반 지능 기준]]

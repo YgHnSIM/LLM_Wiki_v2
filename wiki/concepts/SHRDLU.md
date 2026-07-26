@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.shrdlu
 page_type: concept
 title: SHRDLU
@@ -13,14 +13,16 @@ tags:
   - domain/conversational-ai
 created: '2026-07-16'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/009_SHRDLU - Understanding Language Through Action.ko.md
   - raw/009_SHRDLU - Understanding Language Through Action.commentary.ko.md
 evidence:
   - source_id: winograd-1971
-    locator: chapters 1–3, especially pp. 1–39
+    locator: 'chapters 1–3, especially pp. 1–39'
     relation: supports
   - source_id: winograd-1972
     locator: pp. 1–191
@@ -28,20 +30,35 @@ evidence:
   - source_id: winograd-1980
     locator: pp. 212–218
     relation: contextualizes
-related:
-  - source.009
-  - entity.테리-위노그래드
-  - entity.mit
-  - concept.블록-세계
-  - concept.마이크로월드
-  - concept.파싱
-  - concept.지식-공학-병목
+relations:
+  - target: entity.테리-위노그래드
+    kind: related
+  - target: entity.mit
+    kind: related
+  - target: concept.파싱
+    kind: related
+  - target: concept.지식-공학-병목
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.블록-세계
+  assumed_knowledge: 없음
+  outcomes:
+    - SHRDLU가 문법·담화·세계 모델·계획·행동을 연결한 처리 흐름과 제한 영역 밖의 한계를 설명할 수 있다.
+  next:
+    - target: source.009
+      reason: 다음에는 009SHRDLU에서 개발 문헌과 후대 재평가를 자세히 본다.
+    - target: concept.마이크로월드
+      reason: 제한 영역의 연구 전략은 마이크로월드로 이어 간다.
 ---
 # SHRDLU
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[블록 세계]]<br>
+> **선수 지식:** [[concept.블록-세계|블록 세계]]<br>
 > **읽고 나면:** SHRDLU가 문법·담화·세계 모델·계획·행동을 연결한 처리 흐름과 제한 영역 밖의 한계를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -76,18 +93,22 @@ related:
 
 다음에는 [[009_SHRDLU]]에서 개발 문헌과 후대 재평가를 자세히 본다. 제한 영역의 연구 전략은 [[마이크로월드]]로 이어 간다.
 
-## 출처
+### 다음 문서
 
+- [[source.009|SHRDLU]] — 다음에는 009SHRDLU에서 개발 문헌과 후대 재평가를 자세히 본다.
+- [[concept.마이크로월드|마이크로월드]] — 제한 영역의 연구 전략은 마이크로월드로 이어 간다.
+
+## 출처
 - [[009_SHRDLU]]
 - Terry Winograd, [Procedures as a Representation for Data in a Computer Program for Understanding Natural Language](https://hdl.handle.net/1721.1/7095), 1971, 특히 pp. 1–39.
 - Terry Winograd, [Understanding Natural Language](https://doi.org/10.1016/0010-0285(72)90002-3), 1972, pp. 1–191.
 
 ## 관련 항목
 
-- [[009_SHRDLU]]
-- [[테리 위노그래드]]
-- [[MIT]]
-- [[블록 세계]]
-- [[마이크로월드]]
-- [[파싱]]
-- [[지식 공학 병목]]
+- [[source.009|SHRDLU]]
+- [[concept.마이크로월드|마이크로월드]]
+- [[concept.블록-세계|블록 세계]]
+- [[entity.테리-위노그래드|테리 위노그래드]]
+- [[entity.mit|MIT]]
+- [[concept.파싱|파싱]]
+- [[concept.지식-공학-병목|지식 공학 병목]]

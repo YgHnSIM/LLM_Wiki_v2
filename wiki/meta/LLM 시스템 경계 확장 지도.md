@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: meta.llm-system-boundary-map
 page_type: meta
 title: LLM 시스템 경계 확장 지도
@@ -11,25 +11,41 @@ tags:
   - type/meta
 created: '2026-07-25'
 updated: '2026-07-25'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: not-applicable
+  content_mode: descriptive
 artifacts: []
 evidence: []
-related:
-  - concept.llm-inference-energy-metrics
-  - analysis.power-to-service-outcomes
-  - concept.training-data-lifecycle-provenance
-  - analysis.data-scale-to-rights
-  - analysis.문맥은-저장소인가-상태-재사용-검색-에이전트-메모리
-  - concept.text-encoding-normalization
-  - analysis.text-to-execution-authority
-  - concept.함수-호출과-도구-사용
-  - concept.llm-에이전트
-  - concept.realtime-multimodal-interaction
-  - analysis.text-to-realtime-multimodal-systems
-  - analysis.llm-capability-model-or-system
-  - analysis.llm을-만든-수학
-  - meta.llm-computing-coevolution
+relations:
+  - target: concept.llm-inference-energy-metrics
+    kind: related
+  - target: analysis.power-to-service-outcomes
+    kind: related
+  - target: concept.training-data-lifecycle-provenance
+    kind: related
+  - target: analysis.data-scale-to-rights
+    kind: related
+  - target: analysis.문맥은-저장소인가-상태-재사용-검색-에이전트-메모리
+    kind: related
+  - target: concept.text-encoding-normalization
+    kind: related
+  - target: analysis.text-to-execution-authority
+    kind: related
+  - target: concept.함수-호출과-도구-사용
+    kind: related
+  - target: concept.llm-에이전트
+    kind: related
+  - target: concept.realtime-multimodal-interaction
+    kind: related
+  - target: analysis.text-to-realtime-multimodal-systems
+    kind: related
+  - target: analysis.llm-capability-model-or-system
+    kind: related
+  - target: analysis.llm을-만든-수학
+    kind: related
+  - target: meta.llm-computing-coevolution
+    kind: related
 ---
 # LLM 시스템 경계 확장 지도
 

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.037
 page_type: source
 title: ROUGE와 METEOR의 과제별 생성 텍스트 평가
@@ -15,11 +15,13 @@ tags:
   - domain/linguistics
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.ko.md'
-  - 'raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.commentary.ko.md'
+  - raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.ko.md
+  - raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.commentary.ko.md
 evidence:
   - source_id: lin-2004-rouge
     locator: 'pp. 74–81, 특히 §§2–5의 ROUGE-N·L·W·S/SU 정의와 §6의 DUC 2001–2003 인간 coverage 상관 평가'
@@ -30,18 +32,31 @@ evidence:
   - source_id: banerjee-lavie-2005-meteor
     locator: 'pp. 65–72, 특히 §2의 exact·stem·WordNet 정렬, recall 가중 Fmean·chunk 벌점과 §3의 TIDES 2003 문장별 상관·모듈 절제 실험'
     relation: supports
-related:
-  - concept.rouge
-  - concept.meteor
-  - concept.bleu
-  - concept.wordnet
-  - source.033
+relations:
+  - target: concept.wordnet
+    kind: related
+  - target: source.033
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.bleu
+  assumed_knowledge: 없음
+  outcomes:
+    - ROUGE와 METEOR가 참조 텍스트의 서로 다른 대응을 세는 방식과 인간 평가 상관의 적용 범위를 구분할 수 있다.
+  next:
+    - target: concept.rouge
+      reason: 'ROUGE — 요약 평가에서 재현율, LCS와 skip-bigram을 쓰는 변형을 개념별로 살핀다.'
+    - target: concept.meteor
+      reason: METEOR — 일대일 단어 정렬과 어순 단편화 벌점의 계산을 별도로 따라간다.
 ---
 # ROUGE와 METEOR의 과제별 생성 텍스트 평가
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[BLEU]]<br>
+> **선수 지식:** [[concept.bleu|BLEU]]<br>
 > **읽고 나면:** ROUGE와 METEOR가 참조 텍스트의 서로 다른 대응을 세는 방식과 인간 평가 상관의 적용 범위를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -215,8 +230,8 @@ $$
 
 ### 다음 문서
 
-- [[ROUGE]] — 요약 평가에서 재현율, LCS와 skip-bigram을 쓰는 변형을 개념별로 살핀다.
-- [[METEOR]] — 일대일 단어 정렬과 어순 단편화 벌점의 계산을 별도로 따라간다.
+- [[concept.rouge|ROUGE]] — 요약 평가에서 재현율, LCS와 skip-bigram을 쓰는 변형을 개념별로 살핀다.
+- [[concept.meteor|METEOR]] — 일대일 단어 정렬과 어순 단편화 벌점의 계산을 별도로 따라간다.
 
 ## 출처
 
@@ -229,8 +244,8 @@ $$
 
 ## 관련 항목
 
-- [[ROUGE]]
-- [[METEOR]]
-- [[BLEU]]
-- [[033_BLEU와 기계 번역 자동 평가]]
-- [[WordNet]]
+- [[concept.rouge|ROUGE]]
+- [[concept.meteor|METEOR]]
+- [[concept.bleu|BLEU]]
+- [[concept.wordnet|WordNet]]
+- [[source.033|BLEU와 기계 번역 자동 평가]]

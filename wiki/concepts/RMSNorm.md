@@ -1,9 +1,11 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.rmsnorm
 page_type: concept
 title: RMSNorm
-aliases: [Root Mean Square Layer Normalization, RMS Normalization]
+aliases:
+  - Root Mean Square Layer Normalization
+  - RMS Normalization
 tags:
   - type/concept
   - domain/ai
@@ -13,38 +15,54 @@ tags:
   - domain/mathematics
 created: '2026-07-18'
 updated: '2026-07-24'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md'
-  - 'raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md'
-  - "raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.ko.md"
-  - "raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.commentary.ko.md"
+  - raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md
+  - raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md
+  - raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.ko.md
+  - raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.commentary.ko.md
 evidence:
   - source_id: zhang-sennrich-2019-rmsnorm
     locator: '초록과 §§3–5의 re-centering 제거, RMS 식, pRMSNorm과 속도·성능 평가'
     relation: supports
   - source_id: ba-kiros-hinton-2016-layer-normalization
-    locator: '§§2–3의 mean·variance LayerNorm 정의'
+    locator: §§2–3의 mean·variance LayerNorm 정의
     relation: contextualizes
   - source_id: touvron-et-al-2023-llama
     locator: '§2.2의 “Pre-normalization” 단락: 각 Transformer sub-layer 입력의 pre-normalization과 RMSNorm 채택'
     relation: contextualizes
   - source_id: mit-ocw-6-012-lecture-6-2018
-    locator: '§6.2의 평균·분산 정의; 중심화한 분산과 raw second moment의 구분을 위한 맥락'
+    locator: §6.2의 평균·분산 정의; 중심화한 분산과 raw second moment의 구분을 위한 맥락
     relation: contextualizes
-related:
-  - source.049
-  - source.089
-  - concept.확률변수-확률분포-기대값-분산
-  - concept.layer-normalization
-  - concept.llama-1
+relations:
+  - target: source.049
+    kind: related
+  - target: source.089
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.layer-normalization
+    - target: concept.확률변수-확률분포-기대값-분산
+  assumed_knowledge: 의 평균 분산 raw second moment 구분
+  outcomes:
+    - 'RMSNorm이 한 feature 축의 root mean square로 scale을 조정하는 정확한 shape와 $\epsilon$·$\gamma$의 역할, LayerNorm variance와 다른 이유, LLaMA 1의 pre-normalization 채택 범위를 설명할 수 있다.'
+  next:
+    - target: concept.batch-normalization
+      reason: Batch Normalization — 사례 안 feature가 아니라 mini-batch 사례 사이에서 통계를 공유하는 방법과 대조한다.
+    - target: concept.llama-1
+      reason: LLaMA 1 — pre-norm RMSNorm을 SwiGLU·RoPE와 함께 채택한 대규모 decoder-only 모델 사례를 본다.
 ---
 # RMSNorm
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[Layer Normalization]], [[확률변수·확률분포·기대값·분산]]의 평균·분산·raw second moment 구분<br>
+> **선수 지식:** [[concept.layer-normalization|Layer Normalization]], [[concept.확률변수-확률분포-기대값-분산|확률변수·확률분포·기대값·분산]]<br>
 > **읽고 나면:** RMSNorm이 한 feature 축의 root mean square로 scale을 조정하는 정확한 shape와 $\epsilon$·$\gamma$의 역할, LayerNorm variance와 다른 이유, LLaMA 1의 pre-normalization 채택 범위를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -152,8 +170,8 @@ LLaMA 1의 성능은 RMSNorm 하나만의 ablation 결과가 아니다. Pre-norm
 
 ### 다음 문서
 
-- [[Batch Normalization]] — 사례 안 feature가 아니라 mini-batch 사례 사이에서 통계를 공유하는 방법과 대조한다.
-- [[LLaMA 1]] — pre-norm RMSNorm을 SwiGLU·RoPE와 함께 채택한 대규모 decoder-only 모델 사례를 본다.
+- [[concept.batch-normalization|Batch Normalization]] — 사례 안 feature가 아니라 mini-batch 사례 사이에서 통계를 공유하는 방법과 대조한다.
+- [[concept.llama-1|LLaMA 1]] — pre-norm RMSNorm을 SwiGLU·RoPE와 함께 채택한 대규모 decoder-only 모델 사례를 본다.
 
 ## 출처
 
@@ -167,8 +185,9 @@ LLaMA 1의 성능은 RMSNorm 하나만의 ablation 결과가 아니다. Pre-norm
 
 ## 관련 항목
 
-- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]
-- [[확률변수·확률분포·기대값·분산]]
-- [[Layer Normalization]]
-- [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]]
-- [[LLaMA 1]]
+- [[concept.batch-normalization|Batch Normalization]]
+- [[concept.llama-1|LLaMA 1]]
+- [[concept.layer-normalization|Layer Normalization]]
+- [[concept.확률변수-확률분포-기대값-분산|확률변수·확률분포·기대값·분산]]
+- [[source.049|층 정규화와 시퀀스 모델의 배치 독립성]]
+- [[source.089|LLaMA 1과 제한적 공개 가중치 연구 배포]]

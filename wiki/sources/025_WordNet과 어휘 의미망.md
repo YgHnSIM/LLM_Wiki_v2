@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.025
 page_type: source
 title: WordNet과 어휘 의미망
@@ -15,17 +15,19 @@ tags:
   - domain/computer-science
 created: '2026-07-16'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/025_WordNet - A Semantic Network for Language Understanding.ko.md'
-  - 'raw/025_WordNet - A Semantic Network for Language Understanding.commentary.ko.md'
+  - raw/025_WordNet - A Semantic Network for Language Understanding.ko.md
+  - raw/025_WordNet - A Semantic Network for Language Understanding.commentary.ko.md
 evidence:
   - source_id: miller-et-al-1990-introduction-wordnet
-    locator: 'journal pp. 235–244; Princeton 공식 묶음 PDF의 Introduction pp. 2–9'
+    locator: journal pp. 235–244; Princeton 공식 묶음 PDF의 Introduction pp. 2–9
     relation: supports
   - source_id: miller-1990-nouns-wordnet
-    locator: 'pp. 245–264; Princeton 묶음 PDF pp. 17–18의 25 unique beginners 설명'
+    locator: pp. 245–264; Princeton 묶음 PDF pp. 17–18의 25 unique beginners 설명
     relation: supports
   - source_id: miller-1993-wordnet-project
     locator: 'p. 409, 특히 WordNet 1.3 공개일·부사 추가·SemCor 설명'
@@ -34,13 +36,13 @@ evidence:
     locator: 'p. 468, 특히 WordNet Distribution과 1994-02-09 규모 보고'
     relation: supports
   - source_id: princeton-wordnet-1995-release-1-5
-    locator: 'Release Information; What’s New; Semantic Concordance; 공식 아카이브 날짜'
+    locator: Release Information; What’s New; Semantic Concordance; 공식 아카이브 날짜
     relation: supports
   - source_id: miller-1995-wordnet
-    locator: 'pp. 39–41'
+    locator: pp. 39–41
     relation: contextualizes
   - source_id: fellbaum-1998-wordnet
-    locator: 'Foreword pp. xvii–xxiii와 품사·응용별 장; WordNet 1.6'
+    locator: Foreword pp. xvii–xxiii와 품사·응용별 장; WordNet 1.6
     relation: contextualizes
   - source_id: princeton-wordnet-3-0-reference
     locator: 'wninput(5WN) §§Description, Pointers; wngloss(7WN) §Database Organization; uniqbeg(7WN) §Description; wnstats(7WN) §§Number of words, synsets, and senses, Notes'
@@ -60,14 +62,30 @@ evidence:
   - source_id: palmer-et-al-2005-propbank
     locator: 'pp. 71–72, PropBank의 predicate-argument annotation 목표'
     relation: contextualizes
-related:
-  - concept.wordnet
-  - concept.framenet
-  - entity.조지-밀러
-  - concept.단어-의미-중의성-해소
-  - concept.lesk-알고리즘
-  - source.017
-  - analysis.규칙-기반-ai에서-데이터-기반-학습으로
+relations:
+  - target: concept.framenet
+    kind: related
+  - target: concept.단어-의미-중의성-해소
+    kind: related
+  - target: concept.lesk-알고리즘
+    kind: related
+  - target: source.017
+    kind: related
+  - target: analysis.규칙-기반-ai에서-데이터-기반-학습으로
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites: []
+  assumed_knowledge: 없음
+  outcomes:
+    - 'WordNet이 단어 형태를 synset으로 묶고 어휘 관계와 의미 관계를 연결하는 방식, 버전별 자원과 인간 기억 모형의 경계를 설명할 수 있다.'
+  next:
+    - target: concept.wordnet
+      reason: 다음에는 WordNet에서 synset과 관계 유형을 개념 중심으로 정리한다.
+    - target: entity.조지-밀러
+      reason: 프로젝트의 연구 목표와 공동 작업 범위는 조지 밀러에서 이어 본다.
 ---
 # WordNet과 어휘 의미망
 
@@ -220,8 +238,12 @@ raw가 제시한 문화적 편향과 높은 수작업 품질은 가능한 평가
 
 다음에는 [[WordNet]]에서 synset과 관계 유형을 개념 중심으로 정리한다. 프로젝트의 연구 목표와 공동 작업 범위는 [[조지 밀러]]에서 이어 본다.
 
-## 출처
+### 다음 문서
 
+- [[concept.wordnet|WordNet]] — 다음에는 WordNet에서 synset과 관계 유형을 개념 중심으로 정리한다.
+- [[entity.조지-밀러|조지 밀러]] — 프로젝트의 연구 목표와 공동 작업 범위는 조지 밀러에서 이어 본다.
+
+## 출처
 - George A. Miller·Richard Beckwith·Christiane Fellbaum·Derek Gross·Katherine J. Miller, [Introduction to WordNet: An On-line Lexical Database](https://doi.org/10.1093/ijl/3.4.235), 1990, pp. 235–244; Princeton 공식 묶음 PDF의 Introduction pp. 2–9.
 - George A. Miller, [Nouns in WordNet: A Lexical Inheritance System](https://doi.org/10.1093/ijl/3.4.245), 1990, pp. 245–264, 특히 Princeton 묶음 PDF pp. 17–18.
 - George A. Miller, [WORDNET: A Lexical Database for English](https://aclanthology.org/H93-1103/), 1993, p. 409.
@@ -240,10 +262,10 @@ raw가 제시한 문화적 편향과 높은 수작업 품질은 가능한 평가
 
 ## 관련 항목
 
-- [[WordNet]]
-- [[FrameNet]]
-- [[조지 밀러]]
-- [[단어 의미 중의성 해소]]
-- [[Lesk 알고리즘]]
-- [[017_Lesk 알고리즘과 단어 의미 중의성 해소]]
-- [[규칙 기반 AI에서 데이터 기반 학습으로]]
+- [[concept.wordnet|WordNet]]
+- [[entity.조지-밀러|조지 밀러]]
+- [[concept.framenet|FrameNet]]
+- [[concept.단어-의미-중의성-해소|단어 의미 중의성 해소]]
+- [[concept.lesk-알고리즘|Lesk 알고리즘]]
+- [[source.017|Lesk 알고리즘과 단어 의미 중의성 해소]]
+- [[analysis.규칙-기반-ai에서-데이터-기반-학습으로|규칙 기반 AI에서 데이터 기반 학습으로]]

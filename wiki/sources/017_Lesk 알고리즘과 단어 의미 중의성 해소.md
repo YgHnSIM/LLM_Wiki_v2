@@ -1,10 +1,10 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.017
 page_type: source
 title: Lesk 알고리즘과 단어 의미 중의성 해소
 aliases:
-  - 'Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP'
+  - Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP
   - 레스크 알고리즘과 문맥 기반 중의성 해소
 tags:
   - type/source
@@ -13,11 +13,13 @@ tags:
   - domain/computer-science
 created: '2026-07-16'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.ko.md'
-  - 'raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.commentary.ko.md'
+  - raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.ko.md
+  - raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.commentary.ko.md
 evidence:
   - source_id: lesk-1986
     locator: 'pp. 24–26, 특히 p. 24의 절차·예시와 p. 26의 실험·논의'
@@ -37,19 +39,35 @@ evidence:
   - source_id: huang-et-al-2019-glossbert
     locator: 'pp. 3509–3514, 특히 §2, Table 1, §3과 Tables 2–3'
     relation: contextualizes
-related:
-  - entity.마이클-레스크
-  - concept.lesk-알고리즘
-  - concept.단어-의미-중의성-해소
-  - concept.wordnet
-  - concept.통계적-자연어-처리
-  - analysis.규칙-기반-ai에서-데이터-기반-학습으로
+relations:
+  - target: entity.마이클-레스크
+    kind: related
+  - target: concept.lesk-알고리즘
+    kind: related
+  - target: concept.통계적-자연어-처리
+    kind: related
+  - target: analysis.규칙-기반-ai에서-데이터-기반-학습으로
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.단어-의미-중의성-해소
+  assumed_knowledge: 없음
+  outcomes:
+    - 사전 뜻풀이의 어휘 중첩으로 의미를 고르는 절차와 원 구현·후대 변형·신경 방법의 차이를 설명할 수 있다.
+  next:
+    - target: source.025
+      reason: 다음에는 025WordNet과 어휘 의미망에서 글로스 중첩이 기대는 의미 목록과 관계 구조를 역사적 근거와 함께 본다.
+    - target: concept.wordnet
+      reason: 개념 구조를 복습하려면 WordNet으로 이어 간다.
 ---
 # Lesk 알고리즘과 단어 의미 중의성 해소
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[단어 의미 중의성 해소]]<br>
+> **선수 지식:** [[concept.단어-의미-중의성-해소|단어 의미 중의성 해소]]<br>
 > **읽고 나면:** 사전 뜻풀이의 어휘 중첩으로 의미를 고르는 절차와 원 구현·후대 변형·신경 방법의 차이를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -140,8 +158,12 @@ Oele와 van Noord의 2018년 방법은 Lesk에서 영감을 받았다고 명시�
 
 다음에는 [[025_WordNet과 어휘 의미망]]에서 글로스 중첩이 기대는 의미 목록과 관계 구조를 역사적 근거와 함께 본다. 개념 구조를 복습하려면 [[WordNet]]으로 이어 간다.
 
-## 출처
+### 다음 문서
 
+- [[source.025|WordNet과 어휘 의미망]] — 다음에는 025WordNet과 어휘 의미망에서 글로스 중첩이 기대는 의미 목록과 관계 구조를 역사적 근거와 함께 본다.
+- [[concept.wordnet|WordNet]] — 개념 구조를 복습하려면 WordNet으로 이어 간다.
+
+## 출처
 - Michael E. Lesk, [Automatic Sense Disambiguation Using Machine Readable Dictionaries](https://doi.org/10.1145/318723.318728), 1986, pp. 24–26.
 - Satanjeev Banerjee·Ted Pedersen, [An Adapted Lesk Algorithm for Word Sense Disambiguation Using WordNet](https://doi.org/10.1007/3-540-45715-1_11), 2002, pp. 136–145.
 - Satanjeev Banerjee·Ted Pedersen, [Extended Gloss Overlaps as a Measure of Semantic Relatedness](https://www.ijcai.org/Proceedings/03/Papers/116.pdf), 2003, pp. 805–810.
@@ -153,9 +175,10 @@ Oele와 van Noord의 2018년 방법은 Lesk에서 영감을 받았다고 명시�
 
 ## 관련 항목
 
-- [[마이클 레스크]]
-- [[Lesk 알고리즘]]
-- [[단어 의미 중의성 해소]]
-- [[통계적 자연어 처리]]
-- [[규칙 기반 AI에서 데이터 기반 학습으로]]
-- [[WordNet]]
+- [[source.025|WordNet과 어휘 의미망]]
+- [[concept.wordnet|WordNet]]
+- [[concept.단어-의미-중의성-해소|단어 의미 중의성 해소]]
+- [[entity.마이클-레스크|마이클 레스크]]
+- [[concept.lesk-알고리즘|Lesk 알고리즘]]
+- [[concept.통계적-자연어-처리|통계적 자연어 처리]]
+- [[analysis.규칙-기반-ai에서-데이터-기반-학습으로|규칙 기반 AI에서 데이터 기반 학습으로]]

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.084
 page_type: source
 title: Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습
@@ -15,31 +15,49 @@ tags:
   - domain/nlp
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.ko.md'
-  - 'raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.commentary.ko.md'
+  - raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.ko.md
+  - raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.commentary.ko.md
 evidence:
   - source_id: alayrac-et-al-2022-flamingo
     locator: 'NeurIPS 2022, §§2.1–2.5·3.1–3.3·5와 Figures 2–4·Tables 1–3; Supplementary §§A.1–A.3·B.1–B.3·D.1–D.2·E–F와 Figures 5–9·13·Tables 4–16의 model 구성·훈련 mixture·문맥 내 평가·절제·실패·위험·자료·model card'
     relation: supports
-related:
-  - concept.flamingo
-  - source.067
-  - source.070
-  - source.078
-  - concept.문맥-내-학습
-  - concept.clip
-  - concept.transformer
-  - concept.합성곱-신경망
-  - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+relations:
+  - target: source.067
+    kind: related
+  - target: source.078
+    kind: related
+  - target: concept.transformer
+    kind: related
+  - target: concept.합성곱-신경망
+    kind: related
+  - target: analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.clip
+    - target: concept.문맥-내-학습
+  assumed_knowledge: 없음
+  outcomes:
+    - 'Flamingo가 동결된 시각·언어 백본을 어떻게 연결하고 멀티모달 문맥 내 학습을 평가했는지 설명하며, 게이트의 훈련 역할과 추론 시 퓨샷 적응을 구분할 수 있다.'
+  next:
+    - target: concept.flamingo
+      reason: Flamingo — model family의 구성요소·자료·평가와 한계를 개념 단위로 다시 정리한다.
+    - target: source.070
+      reason: 070CLIP과 대조적 언어-이미지 사전 학습 — shared embedding을 이용한 후보 비교와 Flamingo의 조건부 text 생성을 구분한다.
 ---
 # Flamingo와 게이트 교차 어텐션 기반 퓨샷 시각-언어 학습
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[CLIP]], [[문맥 내 학습]], [[Transformer]]<br>
+> **선수 지식:** [[concept.clip|CLIP]], [[concept.문맥-내-학습|문맥 내 학습]]<br>
 > **읽고 나면:** Flamingo가 동결된 시각·언어 백본을 어떻게 연결하고 멀티모달 문맥 내 학습을 평가했는지 설명하며, 게이트의 훈련 역할과 추론 시 퓨샷 적응을 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -176,9 +194,8 @@ ALIGN·LTIP에서는 사전에 평가 대상으로 정한 ImageNet·COCO·OK-VQA
 
 ### 다음 문서
 
-- [[Flamingo]] — model family의 구성요소·자료·평가와 한계를 개념 단위로 다시 정리한다.
-- [[070_CLIP과 대조적 언어-이미지 사전 학습]] — shared embedding을 이용한 후보 비교와 Flamingo의 조건부 text 생성을 구분한다.
-- [[문맥 내 학습]] — weight update 없이 demonstration이 현재 출력 분포를 바꾸는 평가 조건을 살핀다.
+- [[concept.flamingo|Flamingo]] — model family의 구성요소·자료·평가와 한계를 개념 단위로 다시 정리한다.
+- [[source.070|CLIP과 대조적 언어-이미지 사전 학습]] — 070CLIP과 대조적 언어-이미지 사전 학습 — shared embedding을 이용한 후보 비교와 Flamingo의 조건부 text 생성을 구분한다.
 
 ## 출처
 
@@ -189,12 +206,12 @@ ALIGN·LTIP에서는 사전에 평가 대상으로 정한 ImageNet·COCO·OK-VQA
 
 ## 관련 항목
 
-- [[Flamingo]]
-- [[067_GPT-3와 문맥 내 학습]]
-- [[070_CLIP과 대조적 언어-이미지 사전 학습]]
-- [[078_Chinchilla와 계산 최적 언어 모델 학습]]
-- [[문맥 내 학습]]
-- [[CLIP]]
-- [[Transformer]]
-- [[합성곱 신경망]]
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]
+- [[concept.flamingo|Flamingo]]
+- [[source.070|CLIP과 대조적 언어-이미지 사전 학습]]
+- [[concept.clip|CLIP]]
+- [[concept.문맥-내-학습|문맥 내 학습]]
+- [[source.067|GPT-3와 문맥 내 학습]]
+- [[source.078|Chinchilla와 계산 최적 언어 모델 학습]]
+- [[concept.transformer|Transformer]]
+- [[concept.합성곱-신경망|합성곱 신경망]]
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]]

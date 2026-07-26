@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://llm-wiki.local/schema/red-links-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "allowed"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "allowed": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+  }
+}

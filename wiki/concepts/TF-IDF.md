@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.tf-idf
 page_type: concept
 title: TF-IDF
@@ -14,8 +14,10 @@ tags:
   - domain/machine-learning
 created: '2026-07-16'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/010_Vector Space Model & TF-IDF Foundation of Modern Information Retrieval & Semantic Search.ko.md
   - raw/010_Vector Space Model & TF-IDF Foundation of Modern Information Retrieval & Semantic Search.commentary.ko.md
@@ -32,23 +34,39 @@ evidence:
     locator: pp. 513–523
     relation: supports
   - source_id: robertson-zaragoza-2009-bm25
-    locator: §§3.1–3.4, pp. 347–360
+    locator: '§§3.1–3.4, pp. 347–360'
     relation: contextualizes
-related:
-  - source.024
-  - source.010
-  - entity.제라드-솔턴
-  - entity.캐런-스파크-존스
-  - concept.벡터-공간-모델
-  - concept.코사인-유사도
-  - concept.특징-공학
-  - concept.bm25
+relations:
+  - target: entity.제라드-솔턴
+    kind: related
+  - target: entity.캐런-스파크-존스
+    kind: related
+  - target: concept.코사인-유사도
+    kind: related
+  - target: concept.특징-공학
+    kind: related
+  - target: concept.bm25
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.벡터-공간-모델
+  assumed_knowledge: 없음
+  outcomes:
+    - 문서 안 빈도와 문서 집합의 희귀도를 결합해 용어 가중치를 계산하고 구현 변형·BM25와의 차이를 설명할 수 있다.
+  next:
+    - target: source.010
+      reason: 다음에는 010벡터 공간 모델과 TF-IDF에서 역사적 형성과 검색 실험을 본다.
+    - target: source.024
+      reason: 후대의 포화·길이 보정은 024BM25와 확률적 정보 검색으로 이어 간다.
 ---
 # TF-IDF
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[벡터 공간 모델]]<br>
+> **선수 지식:** [[concept.벡터-공간-모델|벡터 공간 모델]]<br>
 > **읽고 나면:** 문서 안 빈도와 문서 집합의 희귀도를 결합해 용어 가중치를 계산하고 구현 변형·BM25와의 차이를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -105,8 +123,12 @@ TF와 IDF에는 여러 정의와 평활화·정규화 조합이 있으므로 같
 
 다음에는 [[010_벡터 공간 모델과 TF-IDF]]에서 역사적 형성과 검색 실험을 본다. 후대의 포화·길이 보정은 [[024_BM25와 확률적 정보 검색]]으로 이어 간다.
 
-## 출처
+### 다음 문서
 
+- [[source.010|벡터 공간 모델과 TF-IDF]] — 다음에는 010벡터 공간 모델과 TF-IDF에서 역사적 형성과 검색 실험을 본다.
+- [[source.024|BM25와 확률적 정보 검색]] — 후대의 포화·길이 보정은 024BM25와 확률적 정보 검색으로 이어 간다.
+
+## 출처
 - [[010_벡터 공간 모델과 TF-IDF]]
 - Karen Spärck Jones, [A Statistical Interpretation of Term Specificity and Its Application in Retrieval](https://doi.org/10.1108/eb026526), 1972, pp. 11–21.
 - Gerard Salton, Anita Wong, Chung-Shu Yang, [A Vector Space Model for Automatic Indexing](https://doi.org/10.1145/361219.361220), 1975, pp. 613–620.
@@ -116,11 +138,11 @@ TF와 IDF에는 여러 정의와 평활화·정규화 조합이 있으므로 같
 
 ## 관련 항목
 
-- [[010_벡터 공간 모델과 TF-IDF]]
-- [[제라드 솔턴]]
-- [[캐런 스파크 존스]]
-- [[벡터 공간 모델]]
-- [[코사인 유사도]]
-- [[특징 공학]]
-- [[BM25]]
-- [[024_BM25와 확률적 정보 검색]]
+- [[source.010|벡터 공간 모델과 TF-IDF]]
+- [[source.024|BM25와 확률적 정보 검색]]
+- [[concept.벡터-공간-모델|벡터 공간 모델]]
+- [[entity.제라드-솔턴|제라드 솔턴]]
+- [[entity.캐런-스파크-존스|캐런 스파크 존스]]
+- [[concept.코사인-유사도|코사인 유사도]]
+- [[concept.특징-공학|특징 공학]]
+- [[concept.bm25|BM25]]

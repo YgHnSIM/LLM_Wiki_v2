@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.038
 page_type: source
 title: PropBank와 의미역 표지
@@ -14,11 +14,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/038_PropBank - Semantic Role Labeling and Proposition Bank.ko.md'
-  - 'raw/038_PropBank - Semantic Role Labeling and Proposition Bank.commentary.ko.md'
+  - raw/038_PropBank - Semantic Role Labeling and Proposition Bank.ko.md
+  - raw/038_PropBank - Semantic Role Labeling and Proposition Bank.commentary.ko.md
 evidence:
   - source_id: palmer-et-al-2005-propbank
     locator: 'pp. 71–106, 특히 pp. 71–78의 목표·역할 체계, pp. 81–88의 주석 절차, pp. 88–90의 FrameNet 비교, pp. 95–101의 SRL 실험'
@@ -32,19 +34,32 @@ evidence:
   - source_id: carreras-marquez-2005-conll-srl
     locator: 'pp. 152–164, 특히 §§1–3의 완전 구문·영역 밖 평가와 Penn Treebank·PropBank 자료 구성'
     relation: supports
-related:
-  - concept.propbank
-  - concept.의미역-표지
-  - source.023
-  - concept.framenet
-  - source.030
-  - concept.말뭉치-기반-학습
+relations:
+  - target: source.030
+    kind: related
+  - target: concept.말뭉치-기반-학습
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: source.023
+    - target: concept.framenet
+  assumed_knowledge: 없음
+  outcomes:
+    - PropBank의 술어별 역할 주석과 자동 의미역 표지 과제를 구분하고 번호형 논항의 범위를 설명할 수 있다.
+  next:
+    - target: concept.propbank
+      reason: 'PropBank — frameset, roleset과 번호형 논항의 설계를 자원 중심으로 다시 정리한다.'
+    - target: concept.의미역-표지
+      reason: 의미역 표지 — 주어진 문장에서 논항 경계와 역할을 예측하는 과제·평가로 이어 간다.
 ---
 # PropBank와 의미역 표지
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[Penn Treebank]], [[FrameNet]]<br>
+> **선수 지식:** [[source.023|Penn Treebank와 통계적 구문 분석]], [[concept.framenet|FrameNet]]<br>
 > **읽고 나면:** PropBank의 술어별 역할 주석과 자동 의미역 표지 과제를 구분하고 번호형 논항의 범위를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -161,8 +176,8 @@ OntoNotes는 PropBank식 술어·논항 주석을 다른 구문·의미·담화 
 
 ### 다음 문서
 
-- [[PropBank]] — frameset, roleset과 번호형 논항의 설계를 자원 중심으로 다시 정리한다.
-- [[의미역 표지]] — 주어진 문장에서 논항 경계와 역할을 예측하는 과제·평가로 이어 간다.
+- [[concept.propbank|PropBank]] — frameset, roleset과 번호형 논항의 설계를 자원 중심으로 다시 정리한다.
+- [[concept.의미역-표지|의미역 표지]] — 주어진 문장에서 논항 경계와 역할을 예측하는 과제·평가로 이어 간다.
 
 ## 출처
 
@@ -175,9 +190,9 @@ OntoNotes는 PropBank식 술어·논항 주석을 다른 구문·의미·담화 
 
 ## 관련 항목
 
-- [[PropBank]]
-- [[의미역 표지]]
-- [[023_Penn Treebank와 통계적 구문 분석]]
-- [[FrameNet]]
-- [[030_FrameNet과 프레임 의미론]]
-- [[말뭉치 기반 학습]]
+- [[concept.propbank|PropBank]]
+- [[concept.의미역-표지|의미역 표지]]
+- [[source.023|Penn Treebank와 통계적 구문 분석]]
+- [[concept.framenet|FrameNet]]
+- [[source.030|FrameNet과 프레임 의미론]]
+- [[concept.말뭉치-기반-학습|말뭉치 기반 학습]]

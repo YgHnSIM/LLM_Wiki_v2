@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.표본추출-온도-top-k-top-p
 page_type: concept
 title: 표본추출·온도·top-k·top-p
@@ -15,8 +15,10 @@ tags:
   - domain/nlp
 created: '2026-07-24'
 updated: '2026-07-24'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts: []
 evidence:
   - source_id: bengio-et-al-2003-nplm
@@ -25,17 +27,28 @@ evidence:
   - source_id: holtzman-et-al-2020-neural-text-degeneration
     locator: '초록, §§2–4와 Figures 1–4의 likelihood decoding 비교, top-$k$와 dynamic nucleus(top-$p$) 후보 집합'
     relation: supports
-related:
-  - concept.확률
-  - concept.소프트맥스
-  - concept.자기회귀-생성
-  - concept.대규모-언어-모델
+relations: []
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.확률
+    - target: concept.소프트맥스
+  assumed_knowledge: 의 확률분포 의 로짓 정규화와 후보 축
+  outcomes:
+    - '온도 변환, top-$k$·top-$p$ 후보 절단, 그 뒤의 무작위 표본추출을 argmax와 구분하고, 같은 모델에서도 생성 규칙이 결과와 평가 조건을 바꾸는 이유를 설명할 수 있다.'
+  next:
+    - target: concept.자기회귀-생성
+      reason: 자기회귀 생성 — 조건부 확률분포가 sequence 전체의 생성으로 이어지는 방식을 본다.
+    - target: concept.대규모-언어-모델
+      reason: 대규모 언어 모델 — 다음-token 확률을 학습하는 목적과 실제 생성 단계를 구분해 본다.
 ---
 # 표본추출·온도·top-k·top-p
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[확률]]의 확률분포, [[소프트맥스]]의 로짓 정규화와 후보 축<br>
+> **선수 지식:** [[concept.확률|확률]], [[concept.소프트맥스|소프트맥스]]<br>
 > **읽고 나면:** 온도 변환, top-$k$·top-$p$ 후보 절단, 그 뒤의 무작위 표본추출을 argmax와 구분하고, 같은 모델에서도 생성 규칙이 결과와 평가 조건을 바꾸는 이유를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -154,8 +167,8 @@ Holtzman 등은 likelihood를 가장 크게 만드는 decoding이 반복·퇴화
 
 ### 다음 문서
 
-- [[자기회귀 생성]] — 조건부 확률분포가 sequence 전체의 생성으로 이어지는 방식을 본다.
-- [[대규모 언어 모델]] — 다음-token 확률을 학습하는 목적과 실제 생성 단계를 구분해 본다.
+- [[concept.자기회귀-생성|자기회귀 생성]] — 조건부 확률분포가 sequence 전체의 생성으로 이어지는 방식을 본다.
+- [[concept.대규모-언어-모델|대규모 언어 모델]] — 다음-token 확률을 학습하는 목적과 실제 생성 단계를 구분해 본다.
 
 ## 출처
 
@@ -164,7 +177,7 @@ Holtzman 등은 likelihood를 가장 크게 만드는 decoding이 반복·퇴화
 
 ## 관련 항목
 
-- [[확률]]
-- [[소프트맥스]]
-- [[자기회귀 생성]]
-- [[대규모 언어 모델]]
+- [[concept.자기회귀-생성|자기회귀 생성]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[concept.확률|확률]]
+- [[concept.소프트맥스|소프트맥스]]

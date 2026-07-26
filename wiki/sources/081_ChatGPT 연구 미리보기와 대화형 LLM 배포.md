@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.081
 page_type: source
 title: ChatGPT 연구 미리보기와 대화형 LLM 배포
@@ -16,11 +16,13 @@ tags:
   - domain/conversational-ai
 created: '2026-07-21'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/081_ChatGPT Conversational AI Becomes Mainstream.ko.md'
-  - 'raw/081_ChatGPT Conversational AI Becomes Mainstream.commentary.ko.md'
+  - raw/081_ChatGPT Conversational AI Becomes Mainstream.ko.md
+  - raw/081_ChatGPT Conversational AI Becomes Mainstream.commentary.ko.md
 evidence:
   - source_id: openai-2022-introducing-chatgpt
     locator: '도입부와 Methods·Limitations·Iterative deployment의 무료 research preview, dialogue format, SFT→응답 순위·reward model→PPO, GPT-3.5 series, 공개 한계와 사용자 피드백 절차'
@@ -28,18 +30,30 @@ evidence:
   - source_id: ouyang-et-al-2022-instructgpt
     locator: '초록과 §§3.1–3.6의 평가자 시연 SFT, 응답 순위·reward model, PPO/PPO-ptx 파이프라인과 §§5.1–5.5의 적용 범위·한계'
     relation: contextualizes
-related:
-  - concept.chatgpt-2022
-  - source.077
-  - concept.rlhf
-  - concept.대규모-언어-모델
-  - analysis.eliza에서-llm으로
+relations:
+  - target: analysis.eliza에서-llm으로
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites:
+    - target: concept.대규모-언어-모델
+    - target: source.077
+  assumed_knowledge: 없음
+  outcomes:
+    - '2022년 ChatGPT 연구 미리보기의 대화 방식·세 단계 학습·피드백 배포 순환을 설명하고, 당시 발표가 공개하지 않았거나 보장하지 않은 주장을 구분할 수 있다.'
+  next:
+    - target: concept.chatgpt-2022
+      reason: ChatGPT 연구 미리보기 (2022) — 한 release 기록을 넘어 연구 미리보기·대화 UI·피드백 순환을 재사용 가능한 배포 개념으로 정리한다.
+    - target: concept.rlhf
+      reason: 인간 피드백 강화학습 — 사람의 비교 순위가 reward model과 정책 갱신으로 들어가는 넓은 방법 계보를 살핀다.
 ---
 # ChatGPT 연구 미리보기와 대화형 LLM 배포
 
 > [!note] 학습 안내
 > **난이도:** 입문<br>
-> **선수 지식:** [[대규모 언어 모델]], [[077_InstructGPT와 인간 선호 정렬]]<br>
+> **선수 지식:** [[concept.대규모-언어-모델|대규모 언어 모델]], [[source.077|InstructGPT와 인간 선호 정렬]]<br>
 > **읽고 나면:** 2022년 ChatGPT 연구 미리보기의 대화 방식·세 단계 학습·피드백 배포 순환을 설명하고, 당시 발표가 공개하지 않았거나 보장하지 않은 주장을 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -143,8 +157,8 @@ Ouyang 등의 InstructGPT는 평가자 시연 SFT, 여러 응답의 순위에서
 
 ### 다음 문서
 
-- [[ChatGPT 연구 미리보기 (2022)]] — 한 release 기록을 넘어 연구 미리보기·대화 UI·피드백 순환을 재사용 가능한 배포 개념으로 정리한다.
-- [[인간 피드백 강화학습]] — 사람의 비교 순위가 reward model과 정책 갱신으로 들어가는 넓은 방법 계보를 살핀다.
+- [[concept.chatgpt-2022|ChatGPT 연구 미리보기 (2022)]] — 한 release 기록을 넘어 연구 미리보기·대화 UI·피드백 순환을 재사용 가능한 배포 개념으로 정리한다.
+- [[concept.rlhf|인간 피드백 강화학습]] — 사람의 비교 순위가 reward model과 정책 갱신으로 들어가는 넓은 방법 계보를 살핀다.
 
 ## 출처
 
@@ -156,8 +170,8 @@ Ouyang 등의 InstructGPT는 평가자 시연 SFT, 여러 응답의 순위에서
 
 ## 관련 항목
 
-- [[ChatGPT 연구 미리보기 (2022)]]
-- [[077_InstructGPT와 인간 선호 정렬]]
-- [[인간 피드백 강화학습]]
-- [[대규모 언어 모델]]
-- [[ELIZA에서 LLM으로]]
+- [[concept.chatgpt-2022|ChatGPT 연구 미리보기 (2022)]]
+- [[concept.rlhf|인간 피드백 강화학습]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[source.077|InstructGPT와 인간 선호 정렬]]
+- [[analysis.eliza에서-llm으로|ELIZA에서 LLM으로]]

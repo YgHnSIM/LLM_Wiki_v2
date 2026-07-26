@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.eliza
 page_type: concept
 title: ELIZA
@@ -13,8 +13,10 @@ tags:
   - domain/conversational-ai
 created: '2026-07-14'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/007_ELIZA - The First Conversational AI Program.ko.md
   - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
@@ -25,14 +27,32 @@ evidence:
   - source_id: mit-eliza-1965
     locator: ELIZA source and DOCTOR script records
     relation: supplements
-related:
-  - entity.조지프-바이젠바움
-  - concept.doctor-스크립트
-  - concept.패턴-매칭
-  - concept.템플릿-기반-응답-생성
-  - concept.대화-복구
-  - concept.eliza-효과
-  - analysis.eliza에서-llm으로
+relations:
+  - target: entity.조지프-바이젠바움
+    kind: related
+  - target: concept.doctor-스크립트
+    kind: related
+  - target: concept.패턴-매칭
+    kind: related
+  - target: concept.템플릿-기반-응답-생성
+    kind: related
+  - target: concept.대화-복구
+    kind: related
+  - target: concept.eliza-효과
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites: []
+  assumed_knowledge: 없음
+  outcomes:
+    - ELIZA가 스크립트의 패턴과 재조립 규칙으로 대화를 이어 간 방식과 그 평가 한계를 설명할 수 있다.
+  next:
+    - target: source.007
+      reason: 007ELIZA — 1966년 논문과 보존 코드에 근거한 구현 범위와 정정을 확인한다.
+    - target: analysis.eliza에서-llm으로
+      reason: ELIZA에서 LLM으로 — 표면적 유창성과 실제 능력 평가의 문제를 현대 모델까지 비교한다.
 ---
 # ELIZA
 
@@ -79,8 +99,8 @@ ELIZA의 중요성은 인간과 같은 이해를 구현했다는 데 있지 않�
 
 ### 다음 문서
 
-- [[007_ELIZA]] — 1966년 논문과 보존 코드에 근거한 구현 범위와 정정을 확인한다.
-- [[ELIZA에서 LLM으로]] — 표면적 유창성과 실제 능력 평가의 문제를 현대 모델까지 비교한다.
+- [[source.007|ELIZA]] — 007ELIZA — 1966년 논문과 보존 코드에 근거한 구현 범위와 정정을 확인한다.
+- [[analysis.eliza에서-llm으로|ELIZA에서 LLM으로]] — 표면적 유창성과 실제 능력 평가의 문제를 현대 모델까지 비교한다.
 
 ## 출처
 
@@ -90,10 +110,11 @@ ELIZA의 중요성은 인간과 같은 이해를 구현했다는 데 있지 않�
 
 ## 관련 항목
 
-- [[조지프 바이젠바움]]
-- [[DOCTOR 스크립트]]
-- [[패턴 매칭]]
-- [[템플릿 기반 응답 생성]]
-- [[대화 복구]]
-- [[ELIZA 효과]]
-- [[ELIZA에서 LLM으로]]
+- [[source.007|ELIZA]]
+- [[analysis.eliza에서-llm으로|ELIZA에서 LLM으로]]
+- [[entity.조지프-바이젠바움|조지프 바이젠바움]]
+- [[concept.doctor-스크립트|DOCTOR 스크립트]]
+- [[concept.패턴-매칭|패턴 매칭]]
+- [[concept.템플릿-기반-응답-생성|템플릿 기반 응답 생성]]
+- [[concept.대화-복구|대화 복구]]
+- [[concept.eliza-효과|ELIZA 효과]]

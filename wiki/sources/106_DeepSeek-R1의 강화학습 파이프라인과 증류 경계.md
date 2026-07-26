@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.106
 page_type: source
 title: DeepSeek-R1의 강화학습 파이프라인과 증류 경계
@@ -17,11 +17,13 @@ tags:
   - domain/optimization
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/106_DeepSeek R1 Architectural Innovation in Reasoning Models.ko.md'
-  - 'raw/106_DeepSeek R1 Architectural Innovation in Reasoning Models.commentary.ko.md'
+  - raw/106_DeepSeek R1 Architectural Innovation in Reasoning Models.ko.md
+  - raw/106_DeepSeek R1 Architectural Innovation in Reasoning Models.commentary.ko.md
 evidence:
   - source_id: deepseek-ai-2025-r1
     locator: 'arXiv:2501.12948v1, §§1.1–5와 Tables 1–6의 R1-Zero·R1 학습 단계, GRPO·보상, 증류, 평가 조건과 한계'
@@ -30,7 +32,7 @@ evidence:
     locator: '2025-01-20 DeepSeek-R1 Release의 공개일, Technical Highlights, License Update와 API Access 절'
     relation: supports
   - source_id: deepseek-ai-2025-r1-repository
-    locator: 'Official README §§2–7의 Model Summary·Model Downloads·Evaluation Results·Usage Recommendations·License와 저장소 공개 파일 범위'
+    locator: Official README §§2–7의 Model Summary·Model Downloads·Evaluation Results·Usage Recommendations·License와 저장소 공개 파일 범위
     relation: supports
   - source_id: deepseek-ai-2024-v3
     locator: 'arXiv:2412.19437v1, Abstract·§§2.1–2.2의 671B/37B MoE, MLA·DeepSeekMoE 상속, auxiliary-loss-free load balancing과 MTP 경계'
@@ -38,23 +40,40 @@ evidence:
   - source_id: shao-et-al-2024-deepseekmath
     locator: 'arXiv:2402.03300v3, §§4.1.1–4.1.3과 Eqs. 1–4의 PPO 대비 GRPO 목적함수, group-relative advantage, clipped ratio와 직접 KL'
     relation: contextualizes
-related:
-  - source.056
-  - source.069
-  - source.080
-  - source.103
-  - concept.rlhf
-  - concept.전문가-혼합
-  - concept.사고-연쇄-프롬프팅
-  - concept.grpo
-  - analysis.평가-지표와-모델-유인
-  - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+relations:
+  - target: source.056
+    kind: related
+  - target: source.069
+    kind: related
+  - target: source.080
+    kind: related
+  - target: source.103
+    kind: related
+  - target: concept.사고-연쇄-프롬프팅
+    kind: related
+  - target: analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.전문가-혼합
+    - target: concept.rlhf
+  assumed_knowledge: 없음
+  outcomes:
+    - 'DeepSeek-R1의 기여를 새 추론 architecture가 아니라 DeepSeek-V3-Base 위의 강화학습·다단계 후학습·증류로 설명하고, R1-Zero·정식 R1·증류 model의 성능과 공개 범위를 구분할 수 있다.'
+  next:
+    - target: concept.grpo
+      reason: 그룹 상대 정책 최적화 — 같은 질문의 응답 group에서 advantage를 만드는 GRPO 목적함수와 PPO 계열 clipping을 개념 단위로 살핀다.
+    - target: analysis.평가-지표와-모델-유인
+      reason: 자동 평가 지표는 무엇을 보상하는가 — 정답·형식·judge reward가 model 행동을 어떻게 바꾸며 무엇을 놓칠 수 있는지 비교한다.
 ---
 # DeepSeek-R1의 강화학습 파이프라인과 증류 경계
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[전문가 혼합]], [[인간 피드백 강화학습]]<br>
+> **선수 지식:** [[concept.전문가-혼합|전문가 혼합]], [[concept.rlhf|인간 피드백 강화학습]]<br>
 > **읽고 나면:** DeepSeek-R1의 기여를 새 추론 architecture가 아니라 DeepSeek-V3-Base 위의 강화학습·다단계 후학습·증류로 설명하고, R1-Zero·정식 R1·증류 model의 성능과 공개 범위를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -232,8 +251,8 @@ Safety RL은 C-SimpleQA에서 일부 query의 answer refusal을 늘려 점수를
 
 ### 다음 문서
 
-- [[그룹 상대 정책 최적화]] — 같은 질문의 응답 group에서 advantage를 만드는 GRPO 목적함수와 PPO 계열 clipping을 개념 단위로 살핀다.
-- [[자동 평가 지표는 무엇을 보상하는가]] — 정답·형식·judge reward가 model 행동을 어떻게 바꾸며 무엇을 놓칠 수 있는지 비교한다.
+- [[concept.grpo|그룹 상대 정책 최적화]] — 같은 질문의 응답 group에서 advantage를 만드는 GRPO 목적함수와 PPO 계열 clipping을 개념 단위로 살핀다.
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]] — 정답·형식·judge reward가 model 행동을 어떻게 바꾸며 무엇을 놓칠 수 있는지 비교한다.
 
 ## 출처
 
@@ -247,13 +266,13 @@ Safety RL은 C-SimpleQA에서 일부 query의 answer refusal을 늘려 점수를
 
 ## 관련 항목
 
-- [[056_RLHF 토대와 인간 선호 기반 보상 학습]]
-- [[069_전문가 혼합과 희소 활성 스케일링]]
-- [[080_사고 연쇄 프롬프팅과 추론 행동 유도]]
-- [[103_GLaM에서 Mixtral까지의 희소 MoE 확장]]
-- [[인간 피드백 강화학습]]
-- [[전문가 혼합]]
-- [[사고 연쇄 프롬프팅]]
-- [[그룹 상대 정책 최적화]]
-- [[자동 평가 지표는 무엇을 보상하는가]]
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]
+- [[concept.grpo|그룹 상대 정책 최적화]]
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]]
+- [[concept.전문가-혼합|전문가 혼합]]
+- [[concept.rlhf|인간 피드백 강화학습]]
+- [[source.056|RLHF 토대와 인간 선호 기반 보상 학습]]
+- [[source.069|전문가 혼합과 희소 활성 스케일링]]
+- [[source.080|사고 연쇄 프롬프팅과 추론 행동 유도]]
+- [[source.103|GLaM에서 Mixtral까지의 희소 MoE 확장]]
+- [[concept.사고-연쇄-프롬프팅|사고 연쇄 프롬프팅]]
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]]

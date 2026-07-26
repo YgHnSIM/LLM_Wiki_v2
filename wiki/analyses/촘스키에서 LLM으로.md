@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis.촘스키에서-llm으로
 page_type: analysis
 title: 촘스키에서 LLM으로
@@ -14,8 +14,10 @@ tags:
   - domain/linguistics
 created: '2026-05-14'
 updated: '2026-07-21'
-lifecycle: active
-verification: partial
+editorial_status: active
+review:
+  evidence_coverage: partial
+  content_mode: synthesis
 artifacts:
   - raw/005_Chomsky's Syntactic Structures.md
   - raw/005_Chomsky's Syntactic Structures.commentary.md
@@ -26,19 +28,34 @@ evidence:
   - source_id: chomsky-1965
     locator: chapters 1–2
     relation: supports
-related:
-  - concept.통사론
-  - concept.변형생성문법
-  - concept.문맥자유문법
-  - analysis.n-gram에서-llm으로
-  - analysis.규칙-기반-ai에서-데이터-기반-학습으로
-  - concept.대규모-언어-모델
+relations:
+  - target: concept.변형생성문법
+    kind: related
+  - target: concept.문맥자유문법
+    kind: related
+  - target: analysis.n-gram에서-llm으로
+    kind: related
+  - target: concept.대규모-언어-모델
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites:
+    - target: concept.통사론
+    - target: concept.n-gram-모델
+  assumed_knowledge: 없음
+  outcomes:
+    - 명시적 문법 규칙에서 통계·신경망 학습으로 이어지는 비교 축과 그 계보 해석의 한계를 설명할 수 있다.
+  next:
+    - target: analysis.규칙-기반-ai에서-데이터-기반-학습으로
+      reason: 규칙 기반 AI에서 데이터 기반 학습으로 — 언어 이론에서 잡은 비교 축을 여러 AI 시스템의 설계 변화로 확장한다.
 ---
 # 촘스키에서 LLM으로
 
 > [!note] 학습 안내
 > **난이도:** 입문<br>
-> **선수 지식:** [[통사론]], [[N-gram 모델]]<br>
+> **선수 지식:** [[concept.통사론|통사론]], [[concept.n-gram-모델|N-gram 모델]]<br>
 > **읽고 나면:** 명시적 문법 규칙에서 통계·신경망 학습으로 이어지는 비교 축과 그 계보 해석의 한계를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -97,7 +114,7 @@ related:
 
 ### 다음 문서
 
-- [[규칙 기반 AI에서 데이터 기반 학습으로]] — 언어 이론에서 잡은 비교 축을 여러 AI 시스템의 설계 변화로 확장한다.
+- [[analysis.규칙-기반-ai에서-데이터-기반-학습으로|규칙 기반 AI에서 데이터 기반 학습으로]] — 언어 이론에서 잡은 비교 축을 여러 AI 시스템의 설계 변화로 확장한다.
 
 ## 출처
 
@@ -105,9 +122,10 @@ related:
 
 ## 관련 항목
 
-- [[통사론]]
-- [[변형생성문법]]
-- [[문맥자유문법]]
-- [[N-gram에서 LLM으로]]
-- [[규칙 기반 AI에서 데이터 기반 학습으로]]
-- [[대규모 언어 모델]]
+- [[analysis.규칙-기반-ai에서-데이터-기반-학습으로|규칙 기반 AI에서 데이터 기반 학습으로]]
+- [[concept.통사론|통사론]]
+- [[concept.n-gram-모델|N-gram 모델]]
+- [[concept.변형생성문법|변형생성문법]]
+- [[concept.문맥자유문법|문맥자유문법]]
+- [[analysis.n-gram에서-llm으로|N-gram에서 LLM으로]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]

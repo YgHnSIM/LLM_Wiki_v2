@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.bleu
 page_type: concept
 title: BLEU
@@ -15,11 +15,13 @@ tags:
   - domain/linguistics
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/033_BLEU Metric - Automatic Evaluation for Machine Translation.ko.md'
-  - 'raw/033_BLEU Metric - Automatic Evaluation for Machine Translation.commentary.ko.md'
+  - raw/033_BLEU Metric - Automatic Evaluation for Machine Translation.ko.md
+  - raw/033_BLEU Metric - Automatic Evaluation for Machine Translation.commentary.ko.md
 evidence:
   - source_id: papineni-et-al-2002-bleu
     locator: 'pp. 311–318, 특히 §§2–3의 modified precision·brevity penalty·BLEU 정의와 §§4–6의 평가 범위'
@@ -30,26 +32,47 @@ evidence:
   - source_id: post-2018-sacrebleu
     locator: 'pp. 186–191, 특히 §§2–4의 점수 설정·signature·재현성 분석'
     relation: supplements
-related:
-  - source.033
-  - source.037
-  - concept.rouge
-  - concept.meteor
-  - source.034
-  - concept.최소-오류율-훈련
-  - concept.기계-번역
-  - concept.통계적-기계-번역
-  - concept.신경망-기계-번역
-  - concept.n-gram-모델
-  - concept.perplexity
-  - source.001
-  - source.022
+relations:
+  - target: source.033
+    kind: related
+  - target: concept.meteor
+    kind: related
+  - target: source.034
+    kind: related
+  - target: concept.최소-오류율-훈련
+    kind: related
+  - target: concept.기계-번역
+    kind: related
+  - target: concept.통계적-기계-번역
+    kind: related
+  - target: concept.신경망-기계-번역
+    kind: related
+  - target: concept.perplexity
+    kind: related
+  - target: source.001
+    kind: related
+  - target: source.022
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites:
+    - target: concept.n-gram-모델
+  assumed_knowledge: 없음
+  outcomes:
+    - 'BLEU의 계산 단위와 벌점 구조를 설명하고, 점수의 장점·한계와 학습 손실의 차이를 구분할 수 있다.'
+  next:
+    - target: concept.rouge
+      reason: ROUGE — 후보 쪽 수정 정밀도와 참조 쪽 재현율이 평가 질문을 어떻게 달리 만드는지 비교한다.
+    - target: source.037
+      reason: 037ROUGE와 METEOR의 과제별 생성 텍스트 평가 — 다른 생성 텍스트 지표가 강조하는 품질 차원을 비교한다.
 ---
 # BLEU
 
 > [!note] 학습 안내
 > **난이도:** 입문<br>
-> **선수 지식:** [[N-gram 모델]]<br>
+> **선수 지식:** [[concept.n-gram-모델|N-gram 모델]]<br>
 > **읽고 나면:** BLEU의 계산 단위와 벌점 구조를 설명하고, 점수의 장점·한계와 학습 손실의 차이를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -135,8 +158,8 @@ BLEU의 어휘 일치 한계를 보완하려고 stemming·동의어·정렬을 �
 
 ### 다음 문서
 
-- [[ROUGE]] — 후보 쪽 수정 정밀도와 참조 쪽 재현율이 평가 질문을 어떻게 달리 만드는지 비교한다.
-- [[037_ROUGE와 METEOR의 과제별 생성 텍스트 평가]] — 다른 생성 텍스트 지표가 강조하는 품질 차원을 비교한다.
+- [[concept.rouge|ROUGE]] — 후보 쪽 수정 정밀도와 참조 쪽 재현율이 평가 질문을 어떻게 달리 만드는지 비교한다.
+- [[source.037|ROUGE와 METEOR의 과제별 생성 텍스트 평가]] — 037ROUGE와 METEOR의 과제별 생성 텍스트 평가 — 다른 생성 텍스트 지표가 강조하는 품질 차원을 비교한다.
 
 ## 출처
 
@@ -147,16 +170,16 @@ BLEU의 어휘 일치 한계를 보완하려고 stemming·동의어·정렬을 �
 
 ## 관련 항목
 
-- [[033_BLEU와 기계 번역 자동 평가]]
-- [[037_ROUGE와 METEOR의 과제별 생성 텍스트 평가]]
-- [[ROUGE]]
-- [[METEOR]]
-- [[기계 번역]]
-- [[통계적 기계 번역]]
-- [[신경망 기계 번역]]
-- [[N-gram 모델]]
-- [[Perplexity]]
-- [[001_섀넌의 N-gram 모델]]
-- [[022_IBM 통계적 기계 번역과 데이터 기반 전환]]
-- [[034_구 기반 통계적 기계 번역과 최소 오류율 훈련]]
-- [[최소 오류율 훈련]]
+- [[concept.rouge|ROUGE]]
+- [[source.037|ROUGE와 METEOR의 과제별 생성 텍스트 평가]]
+- [[concept.n-gram-모델|N-gram 모델]]
+- [[source.033|BLEU와 기계 번역 자동 평가]]
+- [[concept.meteor|METEOR]]
+- [[source.034|구 기반 통계적 기계 번역과 최소 오류율 훈련]]
+- [[concept.최소-오류율-훈련|최소 오류율 훈련]]
+- [[concept.기계-번역|기계 번역]]
+- [[concept.통계적-기계-번역|통계적 기계 번역]]
+- [[concept.신경망-기계-번역|신경망 기계 번역]]
+- [[concept.perplexity|Perplexity]]
+- [[source.001|섀넌의 N-gram 모델]]
+- [[source.022|IBM 통계적 기계 번역과 데이터 기반 전환]]

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.doctor-스크립트
 page_type: concept
 title: DOCTOR 스크립트
@@ -14,8 +14,10 @@ tags:
   - domain/conversational-ai
 created: '2026-07-14'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/007_ELIZA - The First Conversational AI Program.ko.md
   - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
@@ -26,19 +28,33 @@ evidence:
   - source_id: mit-eliza-1965
     locator: ELIZA source and DOCTOR script records
     relation: supplements
-related:
-  - concept.eliza
-  - entity.칼-로저스
-  - concept.로저스식-심리치료
-  - concept.패턴-매칭
-  - concept.템플릿-기반-응답-생성
-  - concept.eliza-효과
+relations:
+  - target: entity.칼-로저스
+    kind: related
+  - target: concept.로저스식-심리치료
+    kind: related
+  - target: concept.패턴-매칭
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites:
+    - target: concept.eliza
+  assumed_knowledge: 없음
+  outcomes:
+    - DOCTOR가 특정 대화 역할을 키워드·우선순위·응답 템플릿으로 구성한 방식을 설명할 수 있다.
+  next:
+    - target: concept.템플릿-기반-응답-생성
+      reason: 템플릿 기반 응답 생성 — DOCTOR의 키워드·변환·응답 규칙을 더 넓은 규칙 기반 생성 방식으로 확장해 본다.
+    - target: concept.eliza-효과
+      reason: ELIZA 효과 — 치료적 역할이 이해와 공감의 과대 귀속을 부르는 문제를 살펴본다.
 ---
 # DOCTOR 스크립트
 
 > [!note] 학습 안내
 > **난이도:** 입문<br>
-> **선수 지식:** [[ELIZA]]<br>
+> **선수 지식:** [[concept.eliza|ELIZA]]<br>
 > **읽고 나면:** DOCTOR가 특정 대화 역할을 키워드·우선순위·응답 템플릿으로 구성한 방식을 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -75,8 +91,8 @@ DOCTOR의 치료적 인상은 심리 상태를 실제로 이해하거나 안전�
 
 ### 다음 문서
 
-- [[템플릿 기반 응답 생성]] — DOCTOR의 키워드·변환·응답 규칙을 더 넓은 규칙 기반 생성 방식으로 확장해 본다.
-- [[ELIZA 효과]] — 치료적 역할이 이해와 공감의 과대 귀속을 부르는 문제를 살펴본다.
+- [[concept.템플릿-기반-응답-생성|템플릿 기반 응답 생성]] — DOCTOR의 키워드·변환·응답 규칙을 더 넓은 규칙 기반 생성 방식으로 확장해 본다.
+- [[concept.eliza-효과|ELIZA 효과]] — 치료적 역할이 이해와 공감의 과대 귀속을 부르는 문제를 살펴본다.
 
 ## 출처
 
@@ -84,9 +100,9 @@ DOCTOR의 치료적 인상은 심리 상태를 실제로 이해하거나 안전�
 
 ## 관련 항목
 
-- [[ELIZA]]
-- [[칼 로저스]]
-- [[로저스식 심리치료]]
-- [[패턴 매칭]]
-- [[템플릿 기반 응답 생성]]
-- [[ELIZA 효과]]
+- [[concept.템플릿-기반-응답-생성|템플릿 기반 응답 생성]]
+- [[concept.eliza-효과|ELIZA 효과]]
+- [[concept.eliza|ELIZA]]
+- [[entity.칼-로저스|칼 로저스]]
+- [[concept.로저스식-심리치료|로저스식 심리치료]]
+- [[concept.패턴-매칭|패턴 매칭]]

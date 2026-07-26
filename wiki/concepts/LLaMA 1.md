@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.llama-1
 page_type: concept
 title: LLaMA 1
@@ -16,11 +16,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - "raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.ko.md"
-  - "raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.commentary.ko.md"
+  - raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.ko.md
+  - raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.commentary.ko.md
 evidence:
   - source_id: touvron-et-al-2023-llama
     locator: '초록, §§1–6·8, Tables 1–15와 Figures 1–2의 7B–65B family, inference-oriented 장기 학습, data·architecture·optimizer, benchmark·LLaMA-I·safety·hardware와 carbon 조건'
@@ -28,22 +30,38 @@ evidence:
   - source_id: meta-ai-2023-introducing-llama
     locator: '2023-02-24 발표의 model 규모·token 수·연구 목적, noncommercial license와 case-by-case weight 접근, 알려진 bias·toxicity·hallucination 위험'
     relation: supports
-related:
-  - source.089
-  - source.078
-  - source.082
-  - source.083
-  - source.072
-  - concept.rmsnorm
-  - concept.언어-모델-스케일링-법칙
-  - concept.파운데이션-모델
-  - analysis.공개-가중치와-재현-가능성은-같은-축인가
+relations:
+  - target: source.078
+    kind: related
+  - target: source.082
+    kind: related
+  - target: source.083
+    kind: related
+  - target: source.072
+    kind: related
+  - target: concept.rmsnorm
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.파운데이션-모델
+    - target: concept.언어-모델-스케일링-법칙
+  assumed_knowledge: causal language modeling
+  outcomes:
+    - 'LLaMA 1을 model family·학습 목표·배포 artifact로 나눠 정의하고, base model과 LLaMA-I·후속 Llama 세대를 혼동하지 않을 수 있다.'
+  next:
+    - target: source.089
+      reason: 089LLaMA 1과 제한적 공개 가중치 연구 배포 — 공식 논문과 발표에 근거한 benchmark·license·safety·carbon 수치를 확인한다.
+    - target: analysis.공개-가중치와-재현-가능성은-같은-축인가
+      reason: 공개 가중치와 재현 가능성은 같은 축인가 — LLaMA의 gated weight access를 더 넓은 공개·재현 장부에 놓는다.
 ---
 # LLaMA 1
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[파운데이션 모델]], [[언어 모델 스케일링 법칙]], causal language modeling<br>
+> **선수 지식:** [[concept.파운데이션-모델|파운데이션 모델]], [[concept.언어-모델-스케일링-법칙|언어 모델 스케일링 법칙]]<br>
 > **읽고 나면:** LLaMA 1을 model family·학습 목표·배포 artifact로 나눠 정의하고, base model과 LLaMA-I·후속 Llama 세대를 혼동하지 않을 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -142,8 +160,8 @@ LLaMA-13B가 GPT-3 175B를 “대부분의 benchmark에서” 앞섰다는 초�
 
 ### 다음 문서
 
-- [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]] — 공식 논문과 발표에 근거한 benchmark·license·safety·carbon 수치를 확인한다.
-- [[공개 가중치와 재현 가능성은 같은 축인가]] — LLaMA의 gated weight access를 더 넓은 공개·재현 장부에 놓는다.
+- [[source.089|LLaMA 1과 제한적 공개 가중치 연구 배포]] — 089LLaMA 1과 제한적 공개 가중치 연구 배포 — 공식 논문과 발표에 근거한 benchmark·license·safety·carbon 수치를 확인한다.
+- [[analysis.공개-가중치와-재현-가능성은-같은-축인가|공개 가중치와 재현 가능성은 같은 축인가]] — LLaMA의 gated weight access를 더 넓은 공개·재현 장부에 놓는다.
 
 ## 출처
 
@@ -154,12 +172,12 @@ LLaMA-13B가 GPT-3 175B를 “대부분의 benchmark에서” 앞섰다는 초�
 
 ## 관련 항목
 
-- [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]]
-- [[078_Chinchilla와 계산 최적 언어 모델 학습]]
-- [[082_BLOOM과 공개 접근 다국어 LLM]]
-- [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]]
-- [[072_지시 미세조정과 FLAN의 제로샷 일반화]]
-- [[RMSNorm]]
-- [[언어 모델 스케일링 법칙]]
-- [[파운데이션 모델]]
-- [[공개 가중치와 재현 가능성은 같은 축인가]]
+- [[source.089|LLaMA 1과 제한적 공개 가중치 연구 배포]]
+- [[analysis.공개-가중치와-재현-가능성은-같은-축인가|공개 가중치와 재현 가능성은 같은 축인가]]
+- [[concept.파운데이션-모델|파운데이션 모델]]
+- [[concept.언어-모델-스케일링-법칙|언어 모델 스케일링 법칙]]
+- [[source.078|Chinchilla와 계산 최적 언어 모델 학습]]
+- [[source.082|BLOOM과 공개 접근 다국어 LLM]]
+- [[source.083|PaLM과 Pathways 기반 대규모 언어 모델 확장]]
+- [[source.072|지시 미세조정과 FLAN의 제로샷 일반화]]
+- [[concept.rmsnorm|RMSNorm]]

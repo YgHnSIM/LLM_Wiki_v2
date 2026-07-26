@@ -1,9 +1,11 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import { randomUUID } from 'node:crypto';
 import matter from 'gray-matter';
 import yaml from 'js-yaml';
 import katex from 'katex';
 import { marked, Renderer } from 'marked';
+import sanitizeHtml from 'sanitize-html';
 import {
   artifactRoleMetadata,
   normalizeArtifactMarkdown,
@@ -77,6 +79,51 @@ function safeArtifactUrl(value, { image = false } = {}) {
   }
 }
 
+const commonSanitizeTags = [
+  'a', 'abbr', 'article', 'b', 'blockquote', 'br', 'code', 'del', 'div', 'em',
+  'figcaption', 'figure', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'i', 'img',
+  'kbd', 'li', 'ol', 'p', 'pre', 'small', 'span', 'strong', 'sub', 'sup', 'table',
+  'tbody', 'td', 'tfoot', 'th', 'thead', 'tr', 'u', 'ul',
+];
+const learningGuideSanitizeTags = [
+  ...commonSanitizeTags, 'button', 'fieldset', 'form', 'input', 'label', 'legend',
+  'option', 'select', 'section',
+];
+const commonSanitizeAttributes = {
+  a: ['href', 'title', 'target', 'rel', 'class', 'id', 'aria-label'],
+  img: ['src', 'alt', 'title', 'loading', 'class', 'id'],
+  '*': ['class', 'id', 'role', 'tabindex', 'aria-*', 'data-*'],
+};
+const learningGuideSanitizeAttributes = {
+  ...commonSanitizeAttributes,
+  button: ['type', 'name', 'value', 'class', 'id', 'aria-*', 'data-*'],
+  form: ['action', 'method', 'class', 'id', 'novalidate', 'aria-*', 'data-*'],
+  input: ['type', 'name', 'value', 'checked', 'disabled', 'class', 'id', 'for', 'aria-*', 'data-*'],
+  label: ['for', 'class', 'id', 'aria-*', 'data-*'],
+  option: ['value', 'selected', 'disabled', 'class', 'id', 'aria-*', 'data-*'],
+  select: ['name', 'value', 'class', 'id', 'aria-*', 'data-*'],
+};
+
+function sanitizeRenderedHtml(html, { learningGuide = false, trustedFragments = [] } = {}) {
+  const nonce = randomUUID();
+  let protectedHtml = String(html);
+  const replacements = trustedFragments.map((fragment, index) => {
+    const token = `LLMWIKI_TRUSTED_${nonce}_${index}`;
+    protectedHtml = protectedHtml.replace(fragment, token);
+    return { fragment, token };
+  });
+  const cleaned = sanitizeHtml(protectedHtml, {
+    allowedTags: learningGuide ? learningGuideSanitizeTags : commonSanitizeTags,
+    allowedAttributes: learningGuide ? learningGuideSanitizeAttributes : commonSanitizeAttributes,
+    allowedSchemes: ['http', 'https', 'mailto', 'tel'],
+    allowedSchemesByTag: { img: ['http', 'https'] },
+    allowProtocolRelative: false,
+    disallowedTagsMode: 'escape',
+    enforceHtmlBoundary: true,
+  });
+  return replacements.reduce((output, { fragment, token }) => output.replaceAll(token, fragment), cleaned);
+}
+
 const artifactRenderer = new Renderer();
 artifactRenderer.link = function renderArtifactLink({ href, title, tokens }) {
   const label = this.parser.parseInline(tokens);
@@ -93,6 +140,17 @@ artifactRenderer.image = function renderArtifactImage({ href, title, text, token
   return `<img src="${escapeHtml(safeHref)}" alt="${escapeHtml(alt)}"${titleAttribute} loading="lazy">`;
 };
 
+const safeRenderer = new Renderer();
+safeRenderer.link = function renderSafeLink({ href, title, tokens }) {
+  const label = this.parser.parseInline(tokens);
+  const safeHref = safeArtifactUrl(href);
+  if (!safeHref) return `<span class="unsafe-link">${label}</span>`;
+  const titleAttribute = title ? ` title="${escapeHtml(title)}"` : '';
+  const external = /^https?:\/\//i.test(safeHref);
+  return `<a href="${escapeHtml(safeHref)}"${titleAttribute}${external ? ' target="_blank" rel="noopener noreferrer"' : ''}>${label}</a>`;
+};
+safeRenderer.image = artifactRenderer.image;
+
 function asObjectArray(value) {
   if (!Array.isArray(value)) return [];
   return value
@@ -106,11 +164,22 @@ function asObjectArray(value) {
 }
 
 
-function routeFor(relativePath, category, filename) {
+function routeFor(relativePath, category, filename, id = '') {
   const normalized = relativePath.replaceAll('\\', '/');
   if (normalized === 'index.md') return '/';
   if (normalized === 'overview.md') return '/about/';
   if (normalized === 'log.md') return '/log/';
+  if (id === 'meta.learning-guide') return '/guide/';
+  const suffix = String(id).includes('.') ? String(id).slice(String(id).indexOf('.') + 1) : filename;
+  return `/${category}/${suffix}/`;
+}
+
+function legacyRouteFor(relativePath, category, filename) {
+  const normalized = relativePath.replaceAll('\\', '/');
+  if (normalized === 'index.md') return '/';
+  if (normalized === 'overview.md') return '/about/';
+  if (normalized === 'log.md') return '/log/';
+  if (normalized === 'meta/LLM 학습 가이드.md') return '/guide/';
   return `/${category}/${slugify(filename)}/`;
 }
 
@@ -135,6 +204,24 @@ const documents = loadedDocuments.map((loadedDocument) => {
   const title = String(data.title ?? firstHeading ?? filename);
   const id = String(data.id ?? relativePath.replace(/\.md$/i, ''));
 
+  const review = data.review ?? {};
+  const evidenceCoverage = String(review.evidence_coverage ?? data.verification ?? 'unverified');
+  const contentMode = String(review.content_mode ?? 'descriptive');
+  const legacyVerification = evidenceCoverage === 'not-applicable'
+    ? 'not-applicable'
+    : evidenceCoverage === 'unverified'
+    ? 'unverified'
+    : contentMode === 'contested'
+      ? 'disputed'
+      : evidenceCoverage === 'partial' || contentMode === 'synthesis'
+        ? 'partial'
+        : 'verified';
+  const learningTargets = [
+    ...(Array.isArray(data.learning?.prerequisites) ? data.learning.prerequisites : []),
+    ...(Array.isArray(data.learning?.next) ? data.learning.next : []),
+  ].map((item) => String(item?.target ?? '').trim()).filter(Boolean);
+  const relationTargets = (Array.isArray(data.relations) ? data.relations : [])
+    .map((item) => String(item?.target ?? '').trim()).filter(Boolean);
   return {
     id,
     absolutePath,
@@ -153,17 +240,22 @@ const documents = loadedDocuments.map((loadedDocument) => {
     tags: asStringArray(data.tags),
     artifacts: asStringArray(data.artifacts),
     evidence: asObjectArray(data.evidence),
-    related: asStringArray(data.related),
-    lifecycle: String(data.lifecycle ?? 'active'),
-    verification: String(data.verification ?? 'unverified'),
+    related: [...new Set([...learningTargets, ...relationTargets])],
+    relations: Array.isArray(data.relations) ? data.relations : [],
+    learning: data.learning ?? null,
+    lifecycle: String(data.editorial_status ?? data.lifecycle ?? 'active'),
+    editorialStatus: String(data.editorial_status ?? data.lifecycle ?? 'active'),
+    verification: legacyVerification,
+    evidenceCoverage,
+    contentMode,
     created: formatDate(data.created),
     updated: formatDate(data.updated),
     body: content.trim(),
     // The guide is an intentional top-level learning entry point rather than
     // another item in the meta-document directory. Resolve its canonical URL
     // from the durable page id so wiki links and search entries agree.
-    url: id === 'meta.learning-guide' ? '/guide/' : routeFor(relativePath, category, filename),
-    sourceNumber: category === 'sources' ? filename.match(/^(\d{3})/)?.[1] ?? '' : '',
+    url: routeFor(relativePath, category, filename, id),
+    sourceNumber: id.match(/^source\.(\d{3})$/)?.[1] ?? '',
     excerpt: truncate(firstParagraph(content), 210),
     minutes: readingMinutes(content),
     outgoing: [],
@@ -370,7 +462,7 @@ function legacySourceRoute(document, { legacyPrefix, sourceRoute = '' }) {
   if (sourceRoute) return sourceRoute;
   if (!/^\d{3}/.test(document.filename)) return '';
   const legacyFilename = document.filename.replace(/^\d{3}/, legacyPrefix);
-  return routeFor(`sources/${legacyFilename}.md`, 'sources', legacyFilename);
+  return legacyRouteFor(`sources/${legacyFilename}.md`, 'sources', legacyFilename);
 }
 
 const canonicalRoutes = new Map();
@@ -416,6 +508,28 @@ function addLegacyRedirect({ kind, sourceDocument, legacyPrefix, from, to }) {
 }
 
 const sourceDocumentsById = new Map(grouped.sources.map((document) => [document.id, document]));
+
+for (const document of documents) {
+  const legacyBaseUrl = legacyRouteFor(document.relativePath, document.category, document.filename);
+  if (!legacyBaseUrl || legacyBaseUrl === document.url || document.url === '/') continue;
+  addLegacyRedirect({
+    kind: document.pageType === 'source' ? 'source' : 'page',
+    sourceDocument: document,
+    legacyPrefix: '',
+    from: legacyBaseUrl,
+    to: document.url,
+  });
+  for (const reader of document.artifactReaders) {
+    addLegacyRedirect({
+      kind: reader.routeRole,
+      sourceDocument: document,
+      legacyPrefix: '',
+      from: `${legacyBaseUrl}${reader.routeRole}/`,
+      to: reader.url,
+    });
+  }
+}
+
 for (const [sourceId, compatibility] of legacySourceCompatibility) {
   const document = sourceDocumentsById.get(sourceId);
   if (!document) throw new Error(`Legacy source compatibility entry has no source document: ${sourceId}`);
@@ -445,6 +559,19 @@ for (const [sourceId, compatibility] of legacySourceCompatibility) {
   }
 }
 
+const redirectRegistryFile = path.join(wikiDir, 'meta', 'site-redirects.yml');
+const redirectRegistry = yaml.safeLoad(await fs.readFile(redirectRegistryFile, 'utf8')) ?? {};
+if (redirectRegistry.schema_version !== 1 || !Array.isArray(redirectRegistry.redirects)) {
+  throw new Error('site-redirects.yml must use schema_version 1 and a redirects array.');
+}
+const computedRedirectKey = (item) => `${item.kind}|${item.sourceId}|${item.from}|${item.to}`;
+const registryRedirectKeys = new Set(redirectRegistry.redirects.map((item) => `${item.kind}|${item.target_id}|${item.from}|${item.to}`));
+const computedRedirectKeys = new Set(legacyRedirects.map(computedRedirectKey));
+if (registryRedirectKeys.size !== redirectRegistry.redirects.length || registryRedirectKeys.size !== computedRedirectKeys.size
+  || [...computedRedirectKeys].some((key) => !registryRedirectKeys.has(key))) {
+  throw new Error('site-redirects.yml does not match the computed canonical redirect ledger. Run generate-site-redirects.mjs.');
+}
+
 function lifecycleLabel(lifecycle) {
   return lifecycle === 'draft' ? '초안' : lifecycle === 'archived' ? '보관됨' : '공개';
 }
@@ -455,6 +582,7 @@ function verificationLabel(verification) {
     partial: '부분 검증',
     disputed: '논쟁 중',
     unverified: '미검증',
+    'not-applicable': '해당 없음',
   }[verification] ?? verification;
 }
 
@@ -497,8 +625,10 @@ function relationLabel(relation) {
 }
 
 function externalLink(href, label, className = '') {
+  const safeHref = safeArtifactUrl(href);
+  if (!safeHref || !/^https?:\/\//i.test(safeHref)) throw new Error(`Unsafe external link: ${href}`);
   const classAttribute = className ? ` class="${escapeHtml(className)}"` : '';
-  return `<a${classAttribute} href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}<span class="sr-only"> (새 창)</span></a>`;
+  return `<a${classAttribute} href="${escapeHtml(safeHref)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}<span class="sr-only"> (새 창)</span></a>`;
 }
 
 function tagLabel(tag) {
@@ -591,17 +721,22 @@ function renderMarkdown(document, { artifact = false } = {}) {
   const markdown = markdownWithoutTitle(document.body);
   const headings = headingPlan(markdown);
   const protectedFragments = [];
+  const trustedFragments = [];
   const protect = (fragment) => {
     const token = `@@LLMWIKI_FRAGMENT_${protectedFragments.length}@@`;
     protectedFragments.push(fragment);
     return token;
   };
+  const protectTrusted = (fragment) => {
+    trustedFragments.push(fragment);
+    return protect(fragment);
+  };
 
   let prepared = markdown.replace(/```[\s\S]*?```|~~~[\s\S]*?~~~|`[^`\n]+`/g, (fragment) => protect(fragment));
-  prepared = prepared.replace(/\$\$([\s\S]+?)\$\$/g, (_match, expression) => protect(renderMath(expression, true)));
-  prepared = prepared.replace(/\\\[([\s\S]+?)\\\]/g, (_match, expression) => protect(renderMath(expression, true)));
-  prepared = prepared.replace(/\\\((.+?)\\\)/g, (_match, expression) => protect(renderMath(expression, false)));
-  prepared = prepared.replace(/(^|[^\\$])\$([^$\n]+?)\$/g, (_match, prefix, expression) => `${prefix}${protect(renderMath(expression, false))}`);
+  prepared = prepared.replace(/\$\$([\s\S]+?)\$\$/g, (_match, expression) => protectTrusted(renderMath(expression, true)));
+  prepared = prepared.replace(/\\\[([\s\S]+?)\\\]/g, (_match, expression) => protectTrusted(renderMath(expression, true)));
+  prepared = prepared.replace(/\\\((.+?)\\\)/g, (_match, expression) => protectTrusted(renderMath(expression, false)));
+  prepared = prepared.replace(/(^|[^\\$])\$([^$\n]+?)\$/g, (_match, prefix, expression) => `${prefix}${protectTrusted(renderMath(expression, false))}`);
   // Marked's GFM mode treats a single tilde as strikethrough. Preserve Korean
   // numeric ranges such as 1964~1966 without changing the source Markdown.
   prepared = prepared.replace(/(\d)~(?=\d)/g, '$1\\~');
@@ -609,7 +744,7 @@ function renderMarkdown(document, { artifact = false } = {}) {
   prepared = renderWikiLinks(prepared, document);
   prepared = prepared.replace(/@@LLMWIKI_FRAGMENT_(\d+)@@/g, (_match, index) => protectedFragments[Number(index)]);
 
-  let html = marked.parse(prepared, artifact ? { renderer: artifactRenderer } : undefined);
+  let html = marked.parse(prepared, { renderer: artifact ? artifactRenderer : safeRenderer });
   let headingIndex = 0;
   html = html.replace(/<h([2-4])>([\s\S]*?)<\/h\1>/g, (_match, depth, inner) => {
     const planned = headings[headingIndex] ?? { id: slugify(stripMarkdown(inner)), label: stripMarkdown(inner) };
@@ -623,6 +758,11 @@ function renderMarkdown(document, { artifact = false } = {}) {
   html = html.replace(/<blockquote>\s*<p>\[!(WARNING|CAUTION|NOTE|TIP|IMPORTANT)\]\s*/gi, (_match, type) => {
     const label = ['WARNING', 'CAUTION'].includes(type.toUpperCase()) ? '검토 메모' : '참고';
     return `<blockquote class="callout callout--${type.toLowerCase()}"><p><span class="callout-label">${label}</span>`;
+  });
+
+  html = sanitizeRenderedHtml(html, {
+    learningGuide: document.id === 'meta.learning-guide',
+    trustedFragments,
   });
 
   return { html, headings };
@@ -766,7 +906,7 @@ function cardDataAttributes(document) {
   const tags = publicTags(document);
   const aliases = cleanDisplayAliases(document.title, document.aliases);
   const searchKey = [document.title, ...aliases, ...tags, ...tags.map(tagLabel)].join(' ').replace(/\s+/g, ' ').trim();
-  return `data-card data-category="${escapeHtml(document.category)}" data-verification="${escapeHtml(document.verification)}" data-title="${escapeHtml(document.title)}" data-sort-title="${escapeHtml(document.title)}" data-card-title="${escapeHtml(document.title)}" data-card-aliases="${escapeHtml(aliases.join(' '))}" data-card-tags="${escapeHtml(tags.map(tagLabel).join(' '))}" data-search-key="${escapeHtml(searchKey)}" data-updated="${escapeHtml(document.updated)}" data-evidence="${document.evidence.length}" data-connections="${meaningfulConnectionCount(document)}" data-publication-year="${escapeHtml(publication.year)}" data-source-number="${escapeHtml(document.sourceNumber)}" data-filter-value="${escapeHtml(searchKey)}"`;
+  return `data-card data-category="${escapeHtml(document.category)}" data-verification="${escapeHtml(document.verification)}" data-coverage="${escapeHtml(document.evidenceCoverage)}" data-mode="${escapeHtml(document.contentMode)}" data-editorial-status="${escapeHtml(document.editorialStatus)}" data-title="${escapeHtml(document.title)}" data-sort-title="${escapeHtml(document.title)}" data-card-title="${escapeHtml(document.title)}" data-card-aliases="${escapeHtml(aliases.join(' '))}" data-card-tags="${escapeHtml(tags.map(tagLabel).join(' '))}" data-search-key="${escapeHtml(searchKey)}" data-updated="${escapeHtml(document.updated)}" data-evidence="${document.evidence.length}" data-connections="${meaningfulConnectionCount(document)}" data-publication-year="${escapeHtml(publication.year)}" data-source-number="${escapeHtml(document.sourceNumber)}" data-filter-value="${escapeHtml(searchKey)}"`;
 }
 
 function sourceCard(document, index, { headingLevel = 3, hidden = false } = {}) {
@@ -1001,6 +1141,28 @@ function renderSearchPage() {
             <option value="partial">부분 검증</option>
             <option value="disputed">논쟁 중</option>
             <option value="unverified">미검증</option>
+          </select>
+          <label for="search-coverage">근거 범위</label>
+          <select id="search-coverage" name="coverage" data-search-filter-coverage>
+            <option value="">모든 근거 범위</option>
+            <option value="verified">확인됨</option>
+            <option value="partial">부분 확인</option>
+            <option value="disputed">논쟁 중</option>
+            <option value="not-applicable">해당 없음</option>
+          </select>
+          <label for="search-mode">콘텐츠 성격</label>
+          <select id="search-mode" name="mode" data-search-filter-mode>
+            <option value="">모든 콘텐츠 성격</option>
+            <option value="descriptive">기술·서술</option>
+            <option value="synthesis">종합·분석</option>
+            <option value="contested">논쟁·비교</option>
+          </select>
+          <label for="search-editorial">편집 상태</label>
+          <select id="search-editorial" name="editorial" data-search-filter-editorial>
+            <option value="">모든 편집 상태</option>
+            <option value="active">공개</option>
+            <option value="draft">초안</option>
+            <option value="archived">보관</option>
           </select>
           <label for="search-tag">태그</label>
           <select id="search-tag" name="tag" data-search-filter-tag>
@@ -1423,6 +1585,9 @@ const searchIndex = documents
       verification: document.verification,
       verificationLabel: verificationLabel(document.verification),
       lifecycle: document.lifecycle,
+      editorialStatus: document.editorialStatus,
+      evidenceCoverage: document.evidenceCoverage,
+      contentMode: document.contentMode,
       created: document.created,
       updated: document.updated,
       publicationYear: publication.year,

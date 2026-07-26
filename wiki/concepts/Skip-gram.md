@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.skip-gram
 page_type: concept
 title: Skip-gram
@@ -14,11 +14,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.ko.md'
-  - 'raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.commentary.ko.md'
+  - raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.ko.md
+  - raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.commentary.ko.md
 evidence:
   - source_id: mikolov-et-al-2013-word-representations
     locator: 'arXiv:1301.3781, §3과 Fig. 1의 continuous Skip-gram 구조, §4의 구문·의미 유추 평가'
@@ -29,18 +31,35 @@ evidence:
   - source_id: levy-goldberg-2014-sgns-pmi
     locator: 'NeurIPS 2014, §§2–3의 SGNS 목적과 shifted PMI 해석'
     relation: contextualizes
-related:
-  - source.043
-  - concept.word2vec
-  - concept.cbow
-  - concept.단어-임베딩
-  - concept.말뭉치-기반-학습
+relations:
+  - target: source.043
+    kind: related
+  - target: concept.word2vec
+    kind: related
+  - target: concept.cbow
+    kind: related
+  - target: concept.말뭉치-기반-학습
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.단어-임베딩
+  assumed_knowledge: 없음
+  outcomes:
+    - 'Skip-gram이 중심 단어에서 여러 문맥 학습 쌍을 만드는 흐름을 설명하고, 출력 방식·분포 통계·정적 어휘의 한계를 구분할 수 있다.'
+  next:
+    - target: concept.glove
+      reason: '다음에는 GloVe에서 동시출현 계수 회귀와의 차이를 보고, FastText에서 문자 n-gram으로 희귀어·OOV 표현을 확장하는 방식을 살핀다.'
+    - target: concept.fasttext
+      reason: '다음에는 GloVe에서 동시출현 계수 회귀와의 차이를 보고, FastText에서 문자 n-gram으로 희귀어·OOV 표현을 확장하는 방식을 살핀다.'
 ---
 # Skip-gram
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[단어 임베딩]]<br>
+> **선수 지식:** [[concept.단어-임베딩|단어 임베딩]]<br>
 > **읽고 나면:** Skip-gram이 중심 단어에서 여러 문맥 학습 쌍을 만드는 흐름을 설명하고, 출력 방식·분포 통계·정적 어휘의 한계를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -89,8 +108,12 @@ $$
 
 다음에는 [[GloVe]]에서 동시출현 계수 회귀와의 차이를 보고, [[FastText]]에서 문자 n-gram으로 희귀어·OOV 표현을 확장하는 방식을 살핀다.
 
-## 출처
+### 다음 문서
 
+- [[concept.glove|GloVe]] — 다음에는 GloVe에서 동시출현 계수 회귀와의 차이를 보고, FastText에서 문자 n-gram으로 희귀어·OOV 표현을 확장하는 방식을 살핀다.
+- [[concept.fasttext|FastText]] — 다음에는 GloVe에서 동시출현 계수 회귀와의 차이를 보고, FastText에서 문자 n-gram으로 희귀어·OOV 표현을 확장하는 방식을 살핀다.
+
+## 출처
 - [[043_Word2Vec와 효율적 정적 단어 임베딩]]
 - Tomas Mikolov 외, [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/abs/1301.3781), 2013, §§3–4.
 - Tomas Mikolov 외, [Distributed Representations of Words and Phrases and their Compositionality](https://proceedings.neurips.cc/paper_files/paper/2013/hash/9aa42b31882ec039965f3c4923ce901b-Abstract.html), NeurIPS 2013, §§2–3.
@@ -98,8 +121,10 @@ $$
 
 ## 관련 항목
 
-- [[043_Word2Vec와 효율적 정적 단어 임베딩]]
-- [[Word2Vec]]
-- [[CBOW]]
-- [[단어 임베딩]]
-- [[말뭉치 기반 학습]]
+- [[concept.glove|GloVe]]
+- [[concept.fasttext|FastText]]
+- [[concept.단어-임베딩|단어 임베딩]]
+- [[source.043|Word2Vec와 효율적 정적 단어 임베딩]]
+- [[concept.word2vec|Word2Vec]]
+- [[concept.cbow|CBOW]]
+- [[concept.말뭉치-기반-학습|말뭉치 기반 학습]]

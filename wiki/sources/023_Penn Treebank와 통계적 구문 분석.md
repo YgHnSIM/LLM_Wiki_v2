@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.023
 page_type: source
 title: Penn Treebank와 통계적 구문 분석
@@ -14,17 +14,19 @@ tags:
   - domain/linguistics
 created: '2026-07-16'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.ko.md'
-  - 'raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.commentary.ko.md'
+  - raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.ko.md
+  - raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.commentary.ko.md
 evidence:
   - source_id: marcus-et-al-1993
     locator: 'pp. 313–327, 특히 §§1–5.1과 Tables 2–4'
     relation: supports
   - source_id: penn-treebank-2-1995
-    locator: 'catalog sections “Original Treebank Release”·“Release - 2”; online documentation introduction and wsj/ inventory'
+    locator: catalog sections “Original Treebank Release”·“Release - 2”; online documentation introduction and wsj/ inventory
     relation: supports
   - source_id: marcus-et-al-1994-penn-treebank
     locator: 'PDF pp. 114–119, 특히 §§1–2와 5–7'
@@ -44,27 +46,48 @@ evidence:
   - source_id: chiang-2005-hierarchical-phrase-based-mt
     locator: 'pp. 263–270, 특히 초록과 §1'
     relation: contextualizes
-related:
-  - concept.말뭉치-기반-학습
-  - concept.통계적-자연어-처리
-  - concept.파싱
-  - concept.문맥자유문법
-  - concept.지도-학습
-  - concept.동적-계획법
-  - concept.데이터-희소성
-  - entity.케네스-처치
-  - source.005
-  - source.012
-  - source.014
-  - source.029
-  - concept.propbank
-  - analysis.규칙-기반-ai에서-데이터-기반-학습으로
+relations:
+  - target: concept.통계적-자연어-처리
+    kind: related
+  - target: concept.파싱
+    kind: related
+  - target: concept.지도-학습
+    kind: related
+  - target: concept.동적-계획법
+    kind: related
+  - target: concept.데이터-희소성
+    kind: related
+  - target: entity.케네스-처치
+    kind: related
+  - target: source.005
+    kind: related
+  - target: source.012
+    kind: related
+  - target: source.014
+    kind: related
+  - target: analysis.규칙-기반-ai에서-데이터-기반-학습으로
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.말뭉치-기반-학습
+    - target: concept.문맥자유문법
+  assumed_knowledge: 없음
+  outcomes:
+    - Penn Treebank의 자동 전처리·인간 교정·구문 주석이 통계적 파서의 학습과 공통 평가를 가능하게 한 과정을 설명할 수 있다.
+  next:
+    - target: source.029
+      reason: 다음에는 029통계적 구문 분석과 어휘화 파서에서 Treebank 주석을 실제 파서가 어떻게 이용했는지 살핀다.
+    - target: concept.propbank
+      reason: 구문 트리에 의미 역할이 더해진 후속 자원은 PropBank에서 이어진다.
 ---
 # Penn Treebank와 통계적 구문 분석
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[말뭉치 기반 학습]], [[문맥자유문법]]<br>
+> **선수 지식:** [[concept.말뭉치-기반-학습|말뭉치 기반 학습]], [[concept.문맥자유문법|문맥자유문법]]<br>
 > **읽고 나면:** Penn Treebank의 자동 전처리·인간 교정·구문 주석이 통계적 파서의 학습과 공통 평가를 가능하게 한 과정을 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -179,8 +202,12 @@ raw가 드는 Brill 태거 사례도 조건이 다르다. 1992년 논문은 Penn
 
 다음에는 [[029_통계적 구문 분석과 어휘화 파서]]에서 Treebank 주석을 실제 파서가 어떻게 이용했는지 살핀다. 구문 트리에 의미 역할이 더해진 후속 자원은 [[PropBank]]에서 이어진다.
 
-## 출처
+### 다음 문서
 
+- [[source.029|통계적 구문 분석과 어휘화 파서]] — 다음에는 029통계적 구문 분석과 어휘화 파서에서 Treebank 주석을 실제 파서가 어떻게 이용했는지 살핀다.
+- [[concept.propbank|PropBank]] — 구문 트리에 의미 역할이 더해진 후속 자원은 PropBank에서 이어진다.
+
+## 출처
 - Mitchell P. Marcus·Beatrice Santorini·Mary Ann Marcinkiewicz, [Building a Large Annotated Corpus of English: The Penn Treebank](https://aclanthology.org/J93-2004/), 1993, pp. 313–330.
 - Linguistic Data Consortium, [Treebank-2](https://catalog.ldc.upenn.edu/LDC95T7), LDC95T7, 1995; Release 2 online documentation.
 - Mitchell Marcus 외, [The Penn Treebank: Annotating Predicate Argument Structure](https://aclanthology.org/H94-1020/), 1994, PDF pp. 114–119.
@@ -194,17 +221,17 @@ raw가 드는 Brill 태거 사례도 조건이 다르다. 1992년 논문은 Penn
 
 ## 관련 항목
 
-- [[말뭉치 기반 학습]]
-- [[통계적 자연어 처리]]
-- [[파싱]]
-- [[문맥자유문법]]
-- [[지도 학습]]
-- [[동적 계획법]]
-- [[데이터 희소성]]
-- [[케네스 처치]]
-- [[005_촘스키의 통사 구조]]
-- [[012_상징 규칙에서 통계 학습으로]]
-- [[014_증강 전이망과 절차적 자연어 파싱]]
-- [[029_통계적 구문 분석과 어휘화 파서]]
-- [[PropBank]]
-- [[규칙 기반 AI에서 데이터 기반 학습으로]]
+- [[source.029|통계적 구문 분석과 어휘화 파서]]
+- [[concept.propbank|PropBank]]
+- [[concept.말뭉치-기반-학습|말뭉치 기반 학습]]
+- [[concept.문맥자유문법|문맥자유문법]]
+- [[concept.통계적-자연어-처리|통계적 자연어 처리]]
+- [[concept.파싱|파싱]]
+- [[concept.지도-학습|지도 학습]]
+- [[concept.동적-계획법|동적 계획법]]
+- [[concept.데이터-희소성|데이터 희소성]]
+- [[entity.케네스-처치|케네스 처치]]
+- [[source.005|촘스키의 통사 구조]]
+- [[source.012|상징 규칙에서 통계 학습으로]]
+- [[source.014|증강 전이망과 절차적 자연어 파싱]]
+- [[analysis.규칙-기반-ai에서-데이터-기반-학습으로|규칙 기반 AI에서 데이터 기반 학습으로]]

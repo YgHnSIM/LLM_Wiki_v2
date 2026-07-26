@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Markdown 기반 LLM 역사 위키의 GitHub Pages 정적 사이트",
   "engines": {
-    "node": ">=22"
+    "node": ">=22.12.0"
   },
   "scripts": {
     "translation:normalize": "node scripts/normalize-translation-notes.mjs --write",
@@ -25,6 +25,10 @@
     "boundary:resume": "node scripts/llm-system-boundary-status.mjs --resume",
     "learning:audit": "node scripts/audit-foundational-learning.mjs --write",
     "learning:audit:check": "node scripts/audit-foundational-learning.mjs --check",
+    "raw:check": "node scripts/check-raw-immutability.mjs",
+    "catalog:sync": "node scripts/generate-source-catalog.mjs",
+    "evidence:baseline": "node scripts/generate-evidence-scope-baseline.mjs",
+    "page:v3:normalize": "node scripts/normalize-page-v3.mjs",
     "sync:index": "node scripts/sync-index.mjs",
     "lint:wiki": "node scripts/lint-wiki.mjs",
     "build:site": "node scripts/build-site.mjs",
@@ -32,14 +36,15 @@
     "test:browser": "playwright test",
     "test": "node --test scripts/tests/*.test.mjs",
     "build": "npm run lint:wiki && npm run build:site && npm run check:site",
-    "verify": "npm run math:check && npm run history:check && npm run boundary:check && npm run test && npm run build && npm run test:browser",
+    "verify": "npm run raw:check && npm run translation:normalize:check && npm run learning:audit:check && npm run math:check && npm run history:check && npm run boundary:check && npm run test && npm run build && npm run test:browser",
     "check": "npm run verify"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
     "js-yaml": "^3.15.0",
     "katex": "^0.16.22",
-    "marked": "^15.0.12"
+    "marked": "^15.0.12",
+    "sanitize-html": "^2.17.6"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1",

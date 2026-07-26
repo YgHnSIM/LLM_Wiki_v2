@@ -54,13 +54,13 @@ LLM_Wiki_v2/
 └── site/
 ```
 
-## 2. 위키 페이지 스키마 v2
+## 2. 위키 페이지 스키마 v3
 
 모든 `wiki/**/*.md` 문서는 다음 필드를 가진다. 기계 판독 규격은 `wiki/meta/page.schema.json`이 기준이다.
 
 ```yaml
 ---
-schema_version: 2
+schema_version: 3
 id: concept.madaline
 page_type: concept
 title: MADALINE
@@ -68,16 +68,29 @@ aliases: [many ADALINEs]
 tags: [type/concept, domain/ai, domain/machine-learning]
 created: 2026-07-14
 updated: 2026-07-15
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/006_1962_위드로-호프_MADALINE.md
 evidence:
   - source_id: widrow-lehr-1990
     locator: pp. 1415–1419
     relation: supports
-related:
-  - concept.adaline
+relations:
+  - target: concept.adaline
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: intermediate
+  prerequisites: []
+  assumed_knowledge: 기초 용어를 알고 있으면 된다.
+  outcomes: [핵심 문제와 한계를 설명할 수 있다.]
+  next:
+    - target: concept.example
+      reason: 다음 단계의 예시
 ---
 ```
 
@@ -92,11 +105,12 @@ related:
 | `aliases` | 검색용 대체 이름. 다른 페이지의 `id` 역할을 대신하지 않음 |
 | `tags` | `wiki/meta/tags.yml`에 등록된 값만 사용 |
 | `created`, `updated` | `YYYY-MM-DD`, `created <= updated` |
-| `lifecycle` | 편집 수명주기: `draft`, `active`, `archived` |
-| `verification` | 근거 상태: `unverified`, `partial`, `verified`, `disputed` |
+| `editorial_status` | 편집 수명주기: `draft`, `active`, `archived` |
+| `review` | `evidence_coverage`와 `content_mode`를 분리한 검토 상태 |
 | `artifacts` | 프로젝트 안의 물리적 `raw/` 보존 파일 경로 |
 | `evidence` | 주장 근거 ID, 문헌 내 위치, 관계 |
-| `related` | 큐레이션된 방향성 관계의 대상 페이지 ID |
+| `relations` | `kind`와 선택적 메모를 가진 큐레이션된 방향성 관계 |
+| `learning` | 난이도, 선수 지식, 목표, 다음 문서로 구성된 학습 경로 |
 
 `status`와 `status/*` 태그는 사용하지 않는다. 편집 상태와 사실 검증 상태를 하나의 값으로 합치지 않는다.
 
@@ -112,8 +126,8 @@ related:
 
 ### 2.3 수명주기와 검증 상태
 
-- `lifecycle: active`는 문서가 읽을 수 있는 완성 상태라는 뜻이다.
-- `verification: verified`는 현재 본문의 핵심 사실이 locator가 있는 근거로 확인됐다는 뜻이다.
+- `editorial_status: active`는 문서가 읽을 수 있는 공개 상태라는 뜻이다.
+- `review.evidence_coverage: verified`는 현재 본문의 핵심 사실이 locator가 있는 근거로 확인됐다는 뜻이다.
 - `partial`은 해석적 분석이 포함되거나 일부 주장만 검증됐다는 뜻이다.
 - `disputed`는 신뢰할 만한 자료가 서로 충돌하거나 논쟁 자체가 문서의 핵심이라는 뜻이다.
 - 비메타 문서의 `evidence`는 비어 있을 수 없다.
@@ -130,6 +144,7 @@ related:
 - `source_id`는 `wiki/meta/evidence.yml`에 있어야 한다.
 - `locator`에는 페이지, 절, 장, 표, 코드 기록처럼 주장을 재확인할 수 있는 위치를 적는다.
 - `relation`은 `supports`, `supplements`, `contextualizes`, `disputes` 중 하나다.
+- 새 evidence를 추가하거나 locator를 바꿀 때는 `evidence-scope-baseline.yml`을 함께 갱신하고, 주장 범위를 특정 H2로 좁히는 `scope`를 남긴다.
 
 ### 3.2 raw 불변성과 정정
 
@@ -169,7 +184,7 @@ related:
 
 - 본문 링크는 Obsidian `[[페이지]]` 또는 `[[페이지|표시명]]` 형식을 사용한다.
 - 본문 링크는 방향성을 가진다. 모든 링크에 상호 링크를 강제하지 않는다.
-- frontmatter `related`도 큐레이션된 방향성 관계이며 자동 상호화하지 않는다.
+- frontmatter `relations`도 큐레이션된 방향성 관계이며 자동 상호화하지 않는다.
 - 사이트의 역링크가 반대 방향 탐색을 제공한다.
 - 의도적인 미작성 링크만 `wiki/meta/red-links.yml`에 등록한다. 그 밖의 빨간 링크는 lint 오류다.
 - 제목이나 alias가 겹쳐도 `id`는 겹칠 수 없다. 모호한 링크는 파일명 또는 명시적인 표시명을 사용한다.
@@ -224,7 +239,7 @@ related:
 2. 분석은 자료를 정해진 수만큼 묶기 위한 정리가 아니다. 서로 다른 자료를 함께 읽을 때만 드러나는 설명, 기존 분석을 실질적으로 보강·정정하는 연결, 후속 탐구에 재사용할 수 있는 비교 관점이 있을 때 작성한다. `[[N-gram에서 LLM으로]]`, `[[AI 시연과 실제 성능]]`, `[[규칙 기반 AI에서 데이터 기반 학습으로]]` 같은 기존 분석의 범위 설정 방식을 참고한다.
 3. 근거가 충분하지 않거나 기존 source·concept 문서의 보강으로 충분하면 새 분석 문서를 만들지 않는다. 반대로 근거가 탄탄한 주제가 확인되면 다음 정규 번호를 기다리지 않고 그 시점에 작성한다.
 4. 가장 근거가 탄탄한 주제를 골라 `wiki/analyses/`의 ‘비교 읽기’ 코너에 주제 중심 제목의 분석 문서를 작성한다. 번호 범위 제목이나 신규 소스의 전부 포함을 강제하지 않으며, 선택한 논점에 실제로 필요한 신규·기존 자료만 사용한다.
-5. 분석 문서는 `page_type: analysis`, `verification: partial`을 기본으로 하고, 관련 외부 evidence locator와 raw artifact를 연결한다. 확인된 사실, 비교를 통한 해석, 아직 입증되지 않은 계보를 분리하며 `## 출처`와 마지막 `## 관련 항목`에는 실제 사용한 자료만 적는다.
+5. 분석 문서는 `page_type: analysis`, `review.evidence_coverage: partial`, `review.content_mode: synthesis`를 기본으로 하고, 관련 외부 evidence locator와 raw artifact를 연결한다. 확인된 사실, 비교를 통한 해석, 아직 입증되지 않은 계보를 분리하며 `## 출처`와 마지막 `## 관련 항목`에는 실제 사용한 자료만 적는다.
 6. `index.md`, `overview.md`, `log.md`를 갱신하고 `npm run sync:index`와 `npm run verify`를 통과시킨다.
 7. 현재 브랜치가 `main`인지 확인한 뒤 `content: short_analysis_topic`으로 별도 커밋해 `origin/main`에 푸시한다. 분석 문서가 원격에 반영된 뒤에 다음 소스 공개 처리를 계속한다.
 

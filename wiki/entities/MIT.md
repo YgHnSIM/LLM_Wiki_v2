@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: entity.mit
 page_type: entity
 title: MIT
@@ -13,8 +13,10 @@ tags:
   - domain/academia
 created: '2026-07-14'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/007_ELIZA - The First Conversational AI Program.ko.md
   - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
@@ -27,12 +29,26 @@ evidence:
   - source_id: winograd-1971
     locator: title page and chapters 1–3
     relation: supports
-related:
-  - entity.조지프-바이젠바움
-  - entity.테리-위노그래드
-  - concept.eliza
-  - concept.shrdlu
-  - concept.튜링-테스트
+relations:
+  - target: entity.조지프-바이젠바움
+    kind: related
+  - target: entity.테리-위노그래드
+    kind: related
+  - target: concept.튜링-테스트
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites: []
+  assumed_knowledge: 없음
+  outcomes:
+    - 현재 위키에서 MIT가 ELIZA와 SHRDLU라는 서로 다른 자연어 시스템의 연구 환경으로 어떤 의미를 갖는지 설명할 수 있다.
+  next:
+    - target: concept.eliza
+      reason: ELIZA — 제한된 패턴과 역할 설정으로 대화를 이어 간 시스템을 먼저 본다.
+    - target: concept.shrdlu
+      reason: SHRDLU — 폐쇄된 세계에서 언어·추론·행동을 통합한 다음 사례를 살펴본다.
 ---
 # MIT
 
@@ -75,8 +91,8 @@ ELIZA 사례에서 MIT는 제한된 패턴과 대화 역할만으로도 자연�
 
 ### 다음 문서
 
-- [[ELIZA]] — 제한된 패턴과 역할 설정으로 대화를 이어 간 시스템을 먼저 본다.
-- [[SHRDLU]] — 폐쇄된 세계에서 언어·추론·행동을 통합한 다음 사례를 살펴본다.
+- [[concept.eliza|ELIZA]] — 제한된 패턴과 역할 설정으로 대화를 이어 간 시스템을 먼저 본다.
+- [[concept.shrdlu|SHRDLU]] — 폐쇄된 세계에서 언어·추론·행동을 통합한 다음 사례를 살펴본다.
 
 ## 출처
 
@@ -86,8 +102,8 @@ ELIZA 사례에서 MIT는 제한된 패턴과 대화 역할만으로도 자연�
 
 ## 관련 항목
 
-- [[조지프 바이젠바움]]
-- [[테리 위노그래드]]
-- [[ELIZA]]
-- [[SHRDLU]]
-- [[튜링 테스트]]
+- [[concept.eliza|ELIZA]]
+- [[concept.shrdlu|SHRDLU]]
+- [[entity.조지프-바이젠바움|조지프 바이젠바움]]
+- [[entity.테리-위노그래드|테리 위노그래드]]
+- [[concept.튜링-테스트|튜링 테스트]]

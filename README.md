@@ -58,9 +58,12 @@ npm run source:ready -- 010
 - `wiki/concepts`: 개념 노트
 - `wiki/entities`: 인물·기관 노트
 - `wiki/analyses`: 소스 간 연결 분석
-- `wiki/meta/page.schema.json`: frontmatter 스키마 v2
+- `wiki/meta/page.schema.json`: frontmatter 스키마 v3 (ID 네임스페이스·학습 경로·검토 메타데이터)
+- `wiki/meta/schemas`: evidence·raw·source catalog·redirect 레지스트리 JSON Schema
 - `wiki/meta/evidence.yml`: 외부 근거와 DOI·URL 레지스트리
 - `wiki/meta/raw-artifacts.yml`: raw 역할·출처 상태·SHA-256 레지스트리
+- `wiki/meta/source-catalog.yml`: 공개 source/reference 페이지와 공식 번호의 단일 색인
+- `wiki/meta/evidence-scope-baseline.yml`: 근거 locator 변경을 감시하는 baseline
 - `wiki/meta/tags.yml`: 허용 태그 사전
 - `scripts/lint-wiki.mjs`: JSON Schema와 근거·링크·raw 무결성 검사
 - `scripts/source-workflow.mjs`: 번역 상태·raw 복사·공개 소스 처리 준비 상태 검사
@@ -71,4 +74,4 @@ npm run source:ready -- 010
 
 ## 문서 상태
 
-스키마 v2는 편집 수명주기 `lifecycle`과 사실 검증 상태 `verification`을 분리한다. 비메타 문서는 `evidence`에 근거 ID와 문헌 내 위치를 기록하며, `artifacts`에는 실제 `raw/` 파일 경로만 기록한다. 상세 규칙은 `AGENTS.md`를 따른다.
+스키마 v3는 영구 ID 네임스페이스, `editorial_status`, `review`, `learning`, 방향성 `relations`를 분리한다. 기존 `lifecycle`·`verification` 값은 마이그레이션 도구가 의미를 보존해 `editorial_status`·`review`로 옮겼다. 비메타 문서는 `evidence`에 근거 ID와 문헌 내 위치를 기록하며, `artifacts`에는 실제 `raw/` 파일 경로만 기록한다. 상세 규칙은 `AGENTS.md`를 따른다.

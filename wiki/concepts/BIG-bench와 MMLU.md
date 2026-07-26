@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.big-bench-mmlu
 page_type: concept
 title: BIG-bench와 MMLU
@@ -18,11 +18,13 @@ tags:
   - domain/nlp
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.ko.md'
-  - 'raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.commentary.ko.md'
+  - raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.ko.md
+  - raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.commentary.ko.md
 evidence:
   - source_id: hendrycks-et-al-2021-mmlu
     locator: '초록과 §§1·3–5, Table 1, Appendices A–B의 57개 과목·문항 분할·객관식 확률 scoring·5-shot·사람 기준·교정·형식·오염'
@@ -37,23 +39,35 @@ evidence:
     locator: '§4 Table 2와 Appendix D Table 11의 MMLU 5-shot 86.4%, 선택지 prompt·번역 평가·오염 표본 검사 및 BIG-bench 결과 미보고 경계'
     relation: contextualizes
   - source_id: liang-et-al-2023-helm
-    locator: '§§1.1–1.2·3–8·10–11의 scenario·adaptation·metric 다차원 장부와 prompt·오염·비용·타당성 한계'
+    locator: §§1.1–1.2·3–8·10–11의 scenario·adaptation·metric 다차원 장부와 prompt·오염·비용·타당성 한계
     relation: contextualizes
-related:
-  - source.095
-  - source.079
-  - source.083
-  - concept.glue-superglue
-  - concept.helm
-  - analysis.평가-지표와-모델-유인
-  - analysis.손실-곡선과-능력-곡선-사이
-  - concept.palm
+relations:
+  - target: source.079
+    kind: related
+  - target: source.083
+    kind: related
+  - target: concept.palm
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.glue-superglue
+  assumed_knowledge: benchmark의 accuracy few-shot 평균 개념
+  outcomes:
+    - 'BIG-bench 전체·BIG-Bench Lite·MMLU를 구분하고, model 점수를 재현하는 데 필요한 task subset·prompt·shot·metric·집계·오염 장부와 단일 평균의 한계를 설명할 수 있다.'
+  next:
+    - target: source.095
+      reason: 095BIG-bench와 MMLU의 평가 범위·집계 경계 — 원 웹글과 1차 논문의 chronology·수치·과장 교정을 확인한다.
+    - target: concept.helm
+      reason: HELM — scenario·adaptation·metric을 한 평균 대신 다차원 장부로 남기는 평가를 이어서 본다.
 ---
 # BIG-bench와 MMLU
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** benchmark의 accuracy·few-shot·평균 개념, [[GLUE와 SuperGLUE]]<br>
+> **선수 지식:** [[concept.glue-superglue|GLUE와 SuperGLUE]]<br>
 > **읽고 나면:** BIG-bench 전체·BIG-Bench Lite·MMLU를 구분하고, model 점수를 재현하는 데 필요한 task subset·prompt·shot·metric·집계·오염 장부와 단일 평균의 한계를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -207,10 +221,8 @@ MMLU와 BIG-bench가 여러 주요 model 논문에 채택된 것은 확인할 �
 
 ### 다음 문서
 
-- [[095_BIG-bench와 MMLU의 평가 범위·집계 경계]] — 원 웹글과 1차 논문의 chronology·수치·과장 교정을 확인한다.
-- [[HELM]] — scenario·adaptation·metric을 한 평균 대신 다차원 장부로 남기는 평가를 이어서 본다.
-- [[자동 평가 지표는 무엇을 보상하는가]] — score 식과 평균이 model 선택의 유인으로 바뀌는 과정을 본다.
-- [[손실 곡선과 능력 곡선 사이]] — scale에 따른 loss·task behavior·불연속 score를 구분한다.
+- [[source.095|BIG-bench와 MMLU의 평가 범위·집계 경계]] — 095BIG-bench와 MMLU의 평가 범위·집계 경계 — 원 웹글과 1차 논문의 chronology·수치·과장 교정을 확인한다.
+- [[concept.helm|HELM]] — scenario·adaptation·metric을 한 평균 대신 다차원 장부로 남기는 평가를 이어서 본다.
 
 ## 출처
 
@@ -224,11 +236,9 @@ MMLU와 BIG-bench가 여러 주요 model 논문에 채택된 것은 확인할 �
 
 ## 관련 항목
 
-- [[095_BIG-bench와 MMLU의 평가 범위·집계 경계]]
-- [[GLUE와 SuperGLUE]]
-- [[HELM]]
-- [[079_HELM과 다차원 언어 모델 평가]]
-- [[PaLM]]
-- [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]]
-- [[자동 평가 지표는 무엇을 보상하는가]]
-- [[손실 곡선과 능력 곡선 사이]]
+- [[source.095|BIG-bench와 MMLU의 평가 범위·집계 경계]]
+- [[concept.helm|HELM]]
+- [[concept.glue-superglue|GLUE와 SuperGLUE]]
+- [[source.079|HELM과 다차원 언어 모델 평가]]
+- [[source.083|PaLM과 Pathways 기반 대규모 언어 모델 확장]]
+- [[concept.palm|PaLM]]

@@ -1,10 +1,10 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.083
 page_type: source
 title: PaLM과 Pathways 기반 대규모 언어 모델 확장
 aliases:
-  - 083_PaLM Pathways Language Model - Large-Scale Training, Reasoning, and Multilingual Capabilities
+  - '083_PaLM Pathways Language Model - Large-Scale Training, Reasoning, and Multilingual Capabilities'
 tags:
   - type/source
   - domain/ai
@@ -13,8 +13,10 @@ tags:
   - domain/machine-learning
 created: '2026-07-21'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - 'raw/083_PaLM Pathways Language Model - Large-Scale Training, Reasoning, and Multilingual Capabilities.ko.md'
   - 'raw/083_PaLM Pathways Language Model - Large-Scale Training, Reasoning, and Multilingual Capabilities.commentary.ko.md'
@@ -22,22 +24,38 @@ evidence:
   - source_id: chowdhery-et-al-2022-palm
     locator: '초록, §§2–4와 Tables 1–3의 dense architecture·780B-token corpus·6,144 TPU v4/두 Pod 병렬화·효율; §§6.1–6.8와 Tables 4–5·10–11·14·17의 조건별 평가와 62B checkpoint 예외; §§7–8·10·Appendix E의 memorization·contamination·bias/toxicity·model 사용 한계'
     relation: supports
-related:
-  - concept.palm
-  - source.078
-  - source.079
-  - source.080
-  - concept.대규모-언어-모델
-  - concept.transformer
-  - concept.언어-모델-스케일링-법칙
-  - concept.사고-연쇄-프롬프팅
-  - analysis.손실-곡선과-능력-곡선-사이
+relations:
+  - target: source.078
+    kind: related
+  - target: source.079
+    kind: related
+  - target: concept.언어-모델-스케일링-법칙
+    kind: related
+  - target: concept.사고-연쇄-프롬프팅
+    kind: related
+  - target: analysis.손실-곡선과-능력-곡선-사이
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.대규모-언어-모델
+    - target: concept.transformer
+  assumed_knowledge: 없음
+  outcomes:
+    - 'PaLM의 540B 규모를 구조·자료·분산 학습의 구체적 수치로 설명하고, few-shot·CoT·다국어·code 성능을 각각의 평가 조건과 한계 안에서 읽을 수 있다.'
+  next:
+    - target: concept.palm
+      reason: PaLM — model 구조·학습 시스템·평가와 위험을 개념 단위로 다시 정리한다.
+    - target: source.080
+      reason: 080사고 연쇄 프롬프팅과 추론 행동 유도 — CoT exemplar가 추론 benchmark 결과를 어떻게 바꾸는지 비교한다.
 ---
 # PaLM과 Pathways 기반 대규모 언어 모델 확장
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[대규모 언어 모델]], [[Transformer]], [[사고 연쇄 프롬프팅]]<br>
+> **선수 지식:** [[concept.대규모-언어-모델|대규모 언어 모델]], [[concept.transformer|Transformer]]<br>
 > **읽고 나면:** PaLM의 540B 규모를 구조·자료·분산 학습의 구체적 수치로 설명하고, few-shot·CoT·다국어·code 성능을 각각의 평가 조건과 한계 안에서 읽을 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -145,8 +163,8 @@ RealToxicityPrompts 분석에서 540B은 non-toxic prompt에 대해 25개 contin
 
 ### 다음 문서
 
-- [[PaLM]] — model 구조·학습 시스템·평가와 위험을 개념 단위로 다시 정리한다.
-- [[080_사고 연쇄 프롬프팅과 추론 행동 유도]] — CoT exemplar가 추론 benchmark 결과를 어떻게 바꾸는지 비교한다.
+- [[concept.palm|PaLM]] — model 구조·학습 시스템·평가와 위험을 개념 단위로 다시 정리한다.
+- [[source.080|사고 연쇄 프롬프팅과 추론 행동 유도]] — 080사고 연쇄 프롬프팅과 추론 행동 유도 — CoT exemplar가 추론 benchmark 결과를 어떻게 바꾸는지 비교한다.
 
 ## 출처
 
@@ -157,12 +175,12 @@ RealToxicityPrompts 분석에서 540B은 non-toxic prompt에 대해 25개 contin
 
 ## 관련 항목
 
-- [[PaLM]]
-- [[078_Chinchilla와 계산 최적 언어 모델 학습]]
-- [[079_HELM과 다차원 언어 모델 평가]]
-- [[080_사고 연쇄 프롬프팅과 추론 행동 유도]]
-- [[대규모 언어 모델]]
-- [[Transformer]]
-- [[언어 모델 스케일링 법칙]]
-- [[사고 연쇄 프롬프팅]]
-- [[손실 곡선과 능력 곡선 사이]]
+- [[concept.palm|PaLM]]
+- [[source.080|사고 연쇄 프롬프팅과 추론 행동 유도]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[concept.transformer|Transformer]]
+- [[source.078|Chinchilla와 계산 최적 언어 모델 학습]]
+- [[source.079|HELM과 다차원 언어 모델 평가]]
+- [[concept.언어-모델-스케일링-법칙|언어 모델 스케일링 법칙]]
+- [[concept.사고-연쇄-프롬프팅|사고 연쇄 프롬프팅]]
+- [[analysis.손실-곡선과-능력-곡선-사이|손실 곡선과 능력 곡선 사이]]

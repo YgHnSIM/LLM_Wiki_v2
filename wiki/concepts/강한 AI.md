@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.강한-ai
 page_type: concept
 title: 강한 AI
@@ -13,11 +13,13 @@ tags:
   - domain/cognitive-science
 created: '2026-07-16'
 updated: '2026-07-21'
-lifecycle: active
-verification: disputed
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: contested
 artifacts:
-  - raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.ko.md
-  - raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.commentary.ko.md
+  - 'raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.ko.md'
+  - 'raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.commentary.ko.md'
 evidence:
   - source_id: searle-1980
     locator: 'pp. 417–424, 특히 pp. 417–418, 422와 p. 424 n. 1'
@@ -28,13 +30,28 @@ evidence:
   - source_id: searle-1980-response
     locator: 'pp. 450–457, 특히 pp. 451–455'
     relation: supplements
-related:
-  - source.016
-  - entity.존-설
-  - concept.중국어-방-논증
-  - concept.튜링-테스트
-  - concept.행동-기반-지능-기준
-  - concept.대규모-언어-모델
+relations:
+  - target: entity.존-설
+    kind: related
+  - target: concept.튜링-테스트
+    kind: related
+  - target: concept.행동-기반-지능-기준
+    kind: related
+  - target: concept.대규모-언어-모델
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites: []
+  assumed_knowledge: 없음
+  outcomes:
+    - 설이 비판한 강한 AI의 두 주장과 오늘날의 AGI·협소 AI 구분을 혼동하지 않고 설명할 수 있다.
+  next:
+    - target: source.016
+      reason: 016중국어 방 논증과 강한 AI 논쟁 — 목표 논문과 반론의 정확한 범위를 근거별로 확인한다.
+    - target: concept.중국어-방-논증
+      reason: 중국어 방 논증 — 프로그램 실행과 이해 사이의 간극을 제시한 사고실험의 구조를 살핀다.
 ---
 # 강한 AI
 
@@ -96,8 +113,8 @@ raw는 제리 포더를 강한 AI의 대표 표명자로 제시하지만, Fodor�
 
 ### 다음 문서
 
-- [[016_중국어 방 논증과 강한 AI 논쟁]] — 목표 논문과 반론의 정확한 범위를 근거별로 확인한다.
-- [[중국어 방 논증]] — 프로그램 실행과 이해 사이의 간극을 제시한 사고실험의 구조를 살핀다.
+- [[source.016|중국어 방 논증과 강한 AI 논쟁]] — 016중국어 방 논증과 강한 AI 논쟁 — 목표 논문과 반론의 정확한 범위를 근거별로 확인한다.
+- [[concept.중국어-방-논증|중국어 방 논증]] — 프로그램 실행과 이해 사이의 간극을 제시한 사고실험의 구조를 살핀다.
 
 ## 출처
 
@@ -108,9 +125,9 @@ raw는 제리 포더를 강한 AI의 대표 표명자로 제시하지만, Fodor�
 
 ## 관련 항목
 
-- [[016_중국어 방 논증과 강한 AI 논쟁]]
-- [[존 설]]
-- [[중국어 방 논증]]
-- [[튜링 테스트]]
-- [[행동주의적 지능 기준|행동 기반 지능 기준]]
-- [[대규모 언어 모델]]
+- [[source.016|중국어 방 논증과 강한 AI 논쟁]]
+- [[concept.중국어-방-논증|중국어 방 논증]]
+- [[entity.존-설|존 설]]
+- [[concept.튜링-테스트|튜링 테스트]]
+- [[concept.행동-기반-지능-기준|행동 기반 지능 기준]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]

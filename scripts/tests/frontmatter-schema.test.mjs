@@ -8,7 +8,7 @@ import { metaDir } from '../lib/project-paths.mjs';
 const schema = JSON.parse(await fs.readFile(path.join(metaDir, 'page.schema.json'), 'utf8'));
 const validate = createFrontmatterValidator(schema);
 const validMetaPage = {
-  schema_version: 2,
+  schema_version: 3,
   id: 'meta.test',
   page_type: 'meta',
   title: 'Test',
@@ -16,11 +16,11 @@ const validMetaPage = {
   tags: ['type/meta'],
   created: '2026-07-15',
   updated: '2026-07-15',
-  lifecycle: 'active',
-  verification: 'verified',
+  editorial_status: 'active',
+  review: { evidence_coverage: 'not-applicable', content_mode: 'descriptive' },
   artifacts: [],
   evidence: [],
-  related: [],
+  relations: [],
 };
 
 test('the frontmatter schema accepts a complete meta page', () => {

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.meteor
 page_type: concept
 title: METEOR
@@ -15,30 +15,47 @@ tags:
   - domain/linguistics
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.ko.md'
-  - 'raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.commentary.ko.md'
+  - raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.ko.md
+  - raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.commentary.ko.md
 evidence:
   - source_id: lavie-sagae-jayaraman-2004-recall
-    locator: 'pp. 134–143의 recall 가중 조화평균·stemming 선행 실험과 시스템 수준 인간 상관'
+    locator: pp. 134–143의 recall 가중 조화평균·stemming 선행 실험과 시스템 수준 인간 상관
     relation: contextualizes
   - source_id: banerjee-lavie-2005-meteor
     locator: 'pp. 65–72의 단계별 unigram 정렬·Fmean·chunk 벌점, TIDES 2003 문장별 상관과 mapping module 절제 실험'
     relation: supports
-related:
-  - source.037
-  - concept.bleu
-  - concept.rouge
-  - concept.wordnet
-  - source.033
+relations:
+  - target: source.037
+    kind: related
+  - target: concept.rouge
+    kind: related
+  - target: source.033
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.bleu
+  assumed_knowledge: 없음
+  outcomes:
+    - 'METEOR의 우선순위 단어 정렬, recall 가중 점수와 chunk 벌점이 무엇을 측정하고 놓치는지 설명할 수 있다.'
+  next:
+    - target: concept.wordnet
+      reason: WordNet — METEOR의 synonym 모듈이 사용하는 synset 관계와 문맥 의미 판별의 차이를 살핀다.
+    - target: concept.최소-오류율-훈련
+      reason: 최소 오류율 훈련 — 자동 평가 지표를 개발 집합 최적화 목표로 사용할 때 생기는 유인과 한계를 살핀다.
 ---
 # METEOR
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[BLEU]]<br>
+> **선수 지식:** [[concept.bleu|BLEU]]<br>
 > **읽고 나면:** METEOR의 우선순위 단어 정렬, recall 가중 점수와 chunk 벌점이 무엇을 측정하고 놓치는지 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -116,8 +133,8 @@ exact만 쓴 상관보다 Porter stem과 WordNet synonym을 차례로 추가한 
 
 ### 다음 문서
 
-- [[WordNet]] — METEOR의 synonym 모듈이 사용하는 synset 관계와 문맥 의미 판별의 차이를 살핀다.
-- [[최소 오류율 훈련]] — 자동 평가 지표를 개발 집합 최적화 목표로 사용할 때 생기는 유인과 한계를 살핀다.
+- [[concept.wordnet|WordNet]] — METEOR의 synonym 모듈이 사용하는 synset 관계와 문맥 의미 판별의 차이를 살핀다.
+- [[concept.최소-오류율-훈련|최소 오류율 훈련]] — 자동 평가 지표를 개발 집합 최적화 목표로 사용할 때 생기는 유인과 한계를 살핀다.
 
 ## 출처
 
@@ -128,8 +145,9 @@ exact만 쓴 상관보다 Porter stem과 WordNet synonym을 차례로 추가한 
 
 ## 관련 항목
 
-- [[037_ROUGE와 METEOR의 과제별 생성 텍스트 평가]]
-- [[BLEU]]
-- [[ROUGE]]
-- [[WordNet]]
-- [[033_BLEU와 기계 번역 자동 평가]]
+- [[concept.wordnet|WordNet]]
+- [[concept.최소-오류율-훈련|최소 오류율 훈련]]
+- [[concept.bleu|BLEU]]
+- [[source.037|ROUGE와 METEOR의 과제별 생성 텍스트 평가]]
+- [[concept.rouge|ROUGE]]
+- [[source.033|BLEU와 기계 번역 자동 평가]]

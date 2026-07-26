@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.003
 page_type: source
 title: Georgetown-IBM 기계 번역 시연
@@ -13,8 +13,10 @@ tags:
   - domain/nlp
 created: '2026-05-08'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/003_Georgetown-IBM Machine.md
   - raw/003_Georgetown-IBM Machine.commentary.md
@@ -22,16 +24,39 @@ evidence:
   - source_id: macdonald-1963
     locator: pp. 1–4
     relation: supports
-related:
-  - concept.기계-번역
-  - concept.규칙-기반-기계-번역
-  - concept.지식-공학-병목
-  - concept.신경망-기계-번역
-  - analysis.ai-시연과-실제-성능
-  - concept.대규모-언어-모델
-  - analysis.튜링-테스트와-llm-평가
-  - meta.overview
-  - meta.index
+  - source_id: ibm-history-1954
+    locator: 'Machine-aided translation event summary (January 7, 1954; IBM 701)'
+    relation: contextualizes
+    scope:
+      - heading: 검증과 한계
+relations:
+  - target: concept.기계-번역
+    kind: related
+  - target: concept.지식-공학-병목
+    kind: related
+  - target: concept.신경망-기계-번역
+    kind: related
+  - target: concept.대규모-언어-모델
+    kind: related
+  - target: analysis.튜링-테스트와-llm-평가
+    kind: related
+  - target: meta.overview
+    kind: related
+  - target: meta.index
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites: []
+  assumed_knowledge: 없음
+  outcomes:
+    - '제한된 어휘와 규칙으로 구성된 1954년 시연의 처리 흐름을 설명하고, 공개 데모의 성공과 일반 번역 성능을 구분할 수 있다.'
+  next:
+    - target: concept.규칙-기반-기계-번역
+      reason: 규칙 기반 기계 번역 — 사전과 문법 규칙을 이용하는 번역 방식의 구성과 확장성 문제를 더 자세히 살핀다.
+    - target: analysis.ai-시연과-실제-성능
+      reason: AI 시연과 실제 성능 — 통제된 공개 데모의 성공을 실제 적용 능력과 구분하는 비교 틀로 이어 간다.
 ---
 # Georgetown-IBM 기계 번역 시연
 
@@ -128,8 +153,8 @@ Georgetown의 후대 보고서에 따르면 시연은 화학 분야에서 고른
 
 ### 다음 문서
 
-- [[규칙 기반 기계 번역]] — 사전과 문법 규칙을 이용하는 번역 방식의 구성과 확장성 문제를 더 자세히 살핀다.
-- [[AI 시연과 실제 성능]] — 통제된 공개 데모의 성공을 실제 적용 능력과 구분하는 비교 틀로 이어 간다.
+- [[concept.규칙-기반-기계-번역|규칙 기반 기계 번역]] — 사전과 문법 규칙을 이용하는 번역 방식의 구성과 확장성 문제를 더 자세히 살핀다.
+- [[analysis.ai-시연과-실제-성능|AI 시연과 실제 성능]] — 통제된 공개 데모의 성공을 실제 적용 능력과 구분하는 비교 틀로 이어 간다.
 
 ## 출처
 
@@ -140,12 +165,12 @@ Georgetown의 후대 보고서에 따르면 시연은 화학 분야에서 고른
 
 ## 관련 항목
 
-- [[기계 번역]]
-- [[규칙 기반 기계 번역]]
-- [[지식 공학 병목]]
-- [[신경망 기계 번역]]
-- [[AI 시연과 실제 성능]]
-- [[대규모 언어 모델]]
-- [[튜링 테스트와 LLM 평가]]
-- [[overview]]
-- [[index]]
+- [[concept.규칙-기반-기계-번역|규칙 기반 기계 번역]]
+- [[analysis.ai-시연과-실제-성능|AI 시연과 실제 성능]]
+- [[concept.기계-번역|기계 번역]]
+- [[concept.지식-공학-병목|지식 공학 병목]]
+- [[concept.신경망-기계-번역|신경망 기계 번역]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[analysis.튜링-테스트와-llm-평가|튜링 테스트와 LLM 평가]]
+- [[meta.overview|Overview]]
+- [[meta.index|Index]]

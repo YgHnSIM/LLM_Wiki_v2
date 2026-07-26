@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.perplexity
 page_type: concept
 title: Perplexity
@@ -11,12 +11,12 @@ tags:
   - domain/ai
 created: '2026-05-07'
 updated: '2026-07-23'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - >-
-    raw/001_Shannon's N-gram Model - The Foundation of Statistical Language
-    Processing..md
+  - raw/001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md
   - raw/019_Katz Back-off - Handling Sparse Data in Language Models.ko.md
   - raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md
   - raw/066_Scaling Laws for Neural Language Models Predicting Performance from Scale.ko.md
@@ -34,27 +34,48 @@ evidence:
   - source_id: kaplan-et-al-2020-scaling-laws
     locator: '§§1.3·2·8, 특히 token 평균 cross-entropy 정의와 관련 언어 과제로의 전이를 남은 문제로 둔 논의'
     relation: supports
-related:
-  - source.001
-  - source.019
-  - source.066
-  - concept.확률
-  - concept.조건부-확률
-  - concept.지수와-로그
-  - concept.로그-가능도
-  - concept.엔트로피-교차-엔트로피-kl-발산
-  - concept.n-gram-모델
-  - concept.데이터-희소성
-  - concept.smoothing
-  - concept.언어-모델-스케일링-법칙
-  - analysis.n-gram에서-llm으로
-  - entity.클로드-섀넌
+relations:
+  - target: source.001
+    kind: related
+  - target: source.019
+    kind: related
+  - target: concept.확률
+    kind: related
+  - target: concept.로그-가능도
+    kind: related
+  - target: concept.엔트로피-교차-엔트로피-kl-발산
+    kind: related
+  - target: concept.n-gram-모델
+    kind: related
+  - target: concept.데이터-희소성
+    kind: related
+  - target: concept.언어-모델-스케일링-법칙
+    kind: related
+  - target: analysis.n-gram에서-llm으로
+    kind: related
+  - target: entity.클로드-섀넌
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.조건부-확률
+    - target: concept.지수와-로그
+  assumed_knowledge: 없음
+  outcomes:
+    - '토큰별 조건부확률에서 평균 음의 로그확률과 perplexity를 끝까지 계산하고, 왜 로그·평균·지수화를 쓰는지와 어떤 조건에서만 값을 비교할 수 있는지 설명할 수 있다.'
+  next:
+    - target: concept.smoothing
+      reason: Smoothing — 미관측 조합의 0 확률을 어떻게 정규화된 분포로 바꾸는지 본다.
+    - target: source.066
+      reason: 066신경 언어 모델의 스케일링 법칙 — token 평균 손실 곡선을 모델·데이터·계산 규모와 어떻게 연결했는지 읽는다.
 ---
 # Perplexity
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[조건부 확률]], [[지수와 로그]]<br>
+> **선수 지식:** [[concept.조건부-확률|조건부 확률]], [[concept.지수와-로그|지수와 로그]]<br>
 > **읽고 나면:** 토큰별 조건부확률에서 평균 음의 로그확률과 perplexity를 끝까지 계산하고, 왜 로그·평균·지수화를 쓰는지와 어떤 조건에서만 값을 비교할 수 있는지 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -225,8 +246,8 @@ Katz의 1987년 논문은 약 75만 단어의 사무 서신 자료로 통계를 
 
 ### 다음 문서
 
-- [[Smoothing]] — 미관측 조합의 0 확률을 어떻게 정규화된 분포로 바꾸는지 본다.
-- [[066_신경 언어 모델의 스케일링 법칙]] — token 평균 손실 곡선을 모델·데이터·계산 규모와 어떻게 연결했는지 읽는다.
+- [[concept.smoothing|Smoothing]] — 미관측 조합의 0 확률을 어떻게 정규화된 분포로 바꾸는지 본다.
+- [[source.066|신경 언어 모델의 스케일링 법칙]] — 066신경 언어 모델의 스케일링 법칙 — token 평균 손실 곡선을 모델·데이터·계산 규모와 어떻게 연결했는지 읽는다.
 
 ## 출처
 
@@ -240,17 +261,17 @@ Katz의 1987년 논문은 약 75만 단어의 사무 서신 자료로 통계를 
 
 ## 관련 항목
 
-- [[확률]]
-- [[조건부 확률]]
-- [[지수와 로그]]
-- [[로그가능도]]
-- [[엔트로피·교차 엔트로피·KL 발산]]
-- [[001_섀넌의 N-gram 모델]]
-- [[N-gram 모델]]
-- [[데이터 희소성]]
-- [[Smoothing]]
-- [[066_신경 언어 모델의 스케일링 법칙]]
-- [[언어 모델 스케일링 법칙]]
-- [[N-gram에서 LLM으로]]
-- [[클로드 섀넌]]
-- [[019_Katz 백오프와 희소 데이터 확률 추정]]
+- [[concept.smoothing|Smoothing]]
+- [[source.066|신경 언어 모델의 스케일링 법칙]]
+- [[concept.조건부-확률|조건부 확률]]
+- [[concept.지수와-로그|지수와 로그]]
+- [[source.001|섀넌의 N-gram 모델]]
+- [[source.019|Katz 백오프와 희소 데이터 확률 추정]]
+- [[concept.확률|확률]]
+- [[concept.로그-가능도|로그가능도]]
+- [[concept.엔트로피-교차-엔트로피-kl-발산|엔트로피·교차 엔트로피·KL 발산]]
+- [[concept.n-gram-모델|N-gram 모델]]
+- [[concept.데이터-희소성|데이터 희소성]]
+- [[concept.언어-모델-스케일링-법칙|언어 모델 스케일링 법칙]]
+- [[analysis.n-gram에서-llm으로|N-gram에서 LLM으로]]
+- [[entity.클로드-섀넌|클로드 섀넌]]

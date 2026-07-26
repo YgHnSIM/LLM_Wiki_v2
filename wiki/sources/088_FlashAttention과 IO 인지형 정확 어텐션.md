@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.088
 page_type: source
 title: FlashAttention과 I/O 인지형 정확 어텐션
@@ -15,35 +15,52 @@ tags:
   - domain/nlp
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md'
-  - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md'
+  - raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md
+  - raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md
 evidence:
   - source_id: dao-et-al-2022-flashattention
     locator: '초록, §§2.2–3.3·4.1–4.3·5, Algorithms 0–1, Theorems 1–2, Propositions 3–4, Figures 1–3, Tables 1–6과 Appendices B.2·B.4·B.5·E.4–E.6의 HBM–SRAM 타일링·재계산·I/O 복잡도·실험 조건·이식성 한계'
     relation: supports
   - source_id: dao-2023-flashattention-2
-    locator: '초록과 §§2–3의 non-matmul FLOPs 절감·sequence 병렬화·warp 작업 분배 및 FlashAttention-1 대비 범위'
+    locator: 초록과 §§2–3의 non-matmul FLOPs 절감·sequence 병렬화·warp 작업 분배 및 FlashAttention-1 대비 범위
     relation: contextualizes
   - source_id: shah-et-al-2024-flashattention-3
-    locator: '초록과 §§2–3의 Hopper TMA·warp specialization·matmul–softmax 비동기 중첩·FP8 저정밀 경로'
+    locator: 초록과 §§2–3의 Hopper TMA·warp specialization·matmul–softmax 비동기 중첩·FP8 저정밀 경로
     relation: contextualizes
-related:
-  - concept.flashattention
-  - concept.transformer
-  - concept.transformer-xl
-  - concept.대규모-언어-모델
-  - source.055
-  - source.064
-  - analysis.훈련-병렬성과-생성-순차성은-다른-축이다
+relations:
+  - target: concept.flashattention
+    kind: related
+  - target: concept.대규모-언어-모델
+    kind: related
+  - target: source.055
+    kind: related
+  - target: source.064
+    kind: related
+learning:
+  difficulty:
+    entry: advanced
+    target: advanced
+  prerequisites:
+    - target: concept.transformer
+  assumed_knowledge: 의 scaled dot-product attention과 GPU 메모리 계층의 기본 개념
+  outcomes:
+    - 'FlashAttention이 같은 dense attention을 어떤 블록 순서로 계산하는지 설명하고, 추가 메모리·FLOPs·HBM 접근·wall-clock을 서로 다른 축으로 구분할 수 있다.'
+  next:
+    - target: concept.transformer-xl
+      reason: Transformer-XL — 세그먼트 상태 재사용이라는 architecture 변화와 같은 dense attention의 실행 schedule 최적화를 비교한다.
+    - target: analysis.훈련-병렬성과-생성-순차성은-다른-축이다
+      reason: 훈련 병렬성과 생성 순차성은 다른 축이다 — FLOPs·메모리·대역폭·wall-clock과 자기회귀 생성 의존성을 서로 다른 효율 축으로 이어서 본다.
 ---
 # FlashAttention과 I/O 인지형 정확 어텐션
 
 > [!note] 학습 안내
 > **난이도:** 심화<br>
-> **선수 지식:** [[Transformer]]의 scaled dot-product attention과 GPU 메모리 계층의 기본 개념<br>
+> **선수 지식:** [[concept.transformer|Transformer]]<br>
 > **읽고 나면:** FlashAttention이 같은 dense attention을 어떤 블록 순서로 계산하는지 설명하고, 추가 메모리·FLOPs·HBM 접근·wall-clock을 서로 다른 축으로 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -171,8 +188,8 @@ Dense attention의 $O(N^2d)$ 계산량은 극장문에서 계속 병목이다. A
 
 ### 다음 문서
 
-- [[Transformer-XL]] — 세그먼트 상태 재사용이라는 architecture 변화와 같은 dense attention의 실행 schedule 최적화를 비교한다.
-- [[훈련 병렬성과 생성 순차성은 다른 축이다]] — FLOPs·메모리·대역폭·wall-clock과 자기회귀 생성 의존성을 서로 다른 효율 축으로 이어서 본다.
+- [[concept.transformer-xl|Transformer-XL]] — 세그먼트 상태 재사용이라는 architecture 변화와 같은 dense attention의 실행 schedule 최적화를 비교한다.
+- [[analysis.훈련-병렬성과-생성-순차성은-다른-축이다|훈련 병렬성과 생성 순차성은 다른 축이다]] — FLOPs·메모리·대역폭·wall-clock과 자기회귀 생성 의존성을 서로 다른 효율 축으로 이어서 본다.
 
 ## 출처
 
@@ -184,10 +201,10 @@ Dense attention의 $O(N^2d)$ 계산량은 극장문에서 계속 병목이다. A
 
 ## 관련 항목
 
-- [[FlashAttention]]
-- [[Transformer]]
-- [[Transformer-XL]]
-- [[대규모 언어 모델]]
-- [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]]
-- [[064_Transformer-XL과 세그먼트 수준 재귀]]
-- [[훈련 병렬성과 생성 순차성은 다른 축이다]]
+- [[concept.transformer-xl|Transformer-XL]]
+- [[analysis.훈련-병렬성과-생성-순차성은-다른-축이다|훈련 병렬성과 생성 순차성은 다른 축이다]]
+- [[concept.transformer|Transformer]]
+- [[concept.flashattention|FlashAttention]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[source.055|Transformer와 자기어텐션 기반 시퀀스 모델링]]
+- [[source.064|Transformer-XL과 세그먼트 수준 재귀]]

@@ -1,10 +1,10 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.089
 page_type: source
 title: LLaMA 1과 제한적 공개 가중치 연구 배포
 aliases:
-  - "089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research"
+  - 089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research
   - 'LLaMA: Open and Efficient Foundation Language Models'
   - LLaMA 1 공개
   - LLaMA 1 gated release
@@ -17,11 +17,13 @@ tags:
   - domain/academia
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - "raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.ko.md"
-  - "raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.commentary.ko.md"
+  - raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.ko.md
+  - raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.commentary.ko.md
 evidence:
   - source_id: touvron-et-al-2023-llama
     locator: '초록, §§1–6·8, Tables 1–15와 Figures 1–2의 추론 예산 중심 목표·data mixture·model/학습 조건·20개 benchmark·LLaMA-I·bias/toxicity/truthfulness·hardware와 carbon 추정'
@@ -29,22 +31,38 @@ evidence:
   - source_id: meta-ai-2023-introducing-llama
     locator: '2023-02-24 발표의 7B·13B·33B·65B 제품군, 1.0T/1.4T token, noncommercial research license, case-by-case 접근 대상과 safety 한계 설명'
     relation: supports
-related:
-  - concept.llama-1
-  - source.078
-  - source.082
-  - source.083
-  - source.072
-  - concept.rmsnorm
-  - concept.언어-모델-스케일링-법칙
-  - concept.파운데이션-모델
-  - analysis.공개-가중치와-재현-가능성은-같은-축인가
+relations:
+  - target: concept.llama-1
+    kind: related
+  - target: source.078
+    kind: related
+  - target: source.082
+    kind: related
+  - target: source.072
+    kind: related
+  - target: concept.rmsnorm
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.파운데이션-모델
+    - target: concept.언어-모델-스케일링-법칙
+  assumed_knowledge: autoregressive Transformer의 기본 원리
+  outcomes:
+    - 'LLaMA 1의 추론 지향 장기 학습, model·data·구조·평가 조건과 최초 가중치 배포 범위를 설명하고, base LLaMA·LLaMA-I·후속 Llama 세대를 구분할 수 있다.'
+  next:
+    - target: analysis.공개-가중치와-재현-가능성은-같은-축인가
+      reason: '공개 가중치와 재현 가능성은 같은 축인가 — weight 접근, license, data·code·log와 전체 재현을 별도 축으로 비교한다.'
+    - target: source.083
+      reason: 083PaLM과 Pathways 기반 대규모 언어 모델 확장 — 더 큰 dense model의 training infrastructure와 LLaMA의 inference-oriented 선택을 대조한다.
 ---
 # LLaMA 1과 제한적 공개 가중치 연구 배포
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[파운데이션 모델]], [[언어 모델 스케일링 법칙]], autoregressive Transformer의 기본 원리<br>
+> **선수 지식:** [[concept.파운데이션-모델|파운데이션 모델]], [[concept.언어-모델-스케일링-법칙|언어 모델 스케일링 법칙]]<br>
 > **읽고 나면:** LLaMA 1의 추론 지향 장기 학습, model·data·구조·평가 조건과 최초 가중치 배포 범위를 설명하고, base LLaMA·LLaMA-I·후속 Llama 세대를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -158,8 +176,8 @@ LLaMA 1은 새로운 attention 계열을 발명한 model이 아니다. Causal Tr
 
 ### 다음 문서
 
-- [[공개 가중치와 재현 가능성은 같은 축인가]] — weight 접근, license, data·code·log와 전체 재현을 별도 축으로 비교한다.
-- [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]] — 더 큰 dense model의 training infrastructure와 LLaMA의 inference-oriented 선택을 대조한다.
+- [[analysis.공개-가중치와-재현-가능성은-같은-축인가|공개 가중치와 재현 가능성은 같은 축인가]] — weight 접근, license, data·code·log와 전체 재현을 별도 축으로 비교한다.
+- [[source.083|PaLM과 Pathways 기반 대규모 언어 모델 확장]] — 083PaLM과 Pathways 기반 대규모 언어 모델 확장 — 더 큰 dense model의 training infrastructure와 LLaMA의 inference-oriented 선택을 대조한다.
 
 ## 출처
 
@@ -170,12 +188,12 @@ LLaMA 1은 새로운 attention 계열을 발명한 model이 아니다. Causal Tr
 
 ## 관련 항목
 
-- [[LLaMA 1]]
-- [[078_Chinchilla와 계산 최적 언어 모델 학습]]
-- [[082_BLOOM과 공개 접근 다국어 LLM]]
-- [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]]
-- [[072_지시 미세조정과 FLAN의 제로샷 일반화]]
-- [[RMSNorm]]
-- [[언어 모델 스케일링 법칙]]
-- [[파운데이션 모델]]
-- [[공개 가중치와 재현 가능성은 같은 축인가]]
+- [[analysis.공개-가중치와-재현-가능성은-같은-축인가|공개 가중치와 재현 가능성은 같은 축인가]]
+- [[source.083|PaLM과 Pathways 기반 대규모 언어 모델 확장]]
+- [[concept.파운데이션-모델|파운데이션 모델]]
+- [[concept.언어-모델-스케일링-법칙|언어 모델 스케일링 법칙]]
+- [[concept.llama-1|LLaMA 1]]
+- [[source.078|Chinchilla와 계산 최적 언어 모델 학습]]
+- [[source.082|BLOOM과 공개 접근 다국어 LLM]]
+- [[source.072|지시 미세조정과 FLAN의 제로샷 일반화]]
+- [[concept.rmsnorm|RMSNorm]]

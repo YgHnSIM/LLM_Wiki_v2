@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.009
 page_type: source
 title: SHRDLU
@@ -14,14 +14,16 @@ tags:
   - domain/human-computer-interaction
 created: '2026-07-16'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/009_SHRDLU - Understanding Language Through Action.ko.md
   - raw/009_SHRDLU - Understanding Language Through Action.commentary.ko.md
 evidence:
   - source_id: winograd-1971
-    locator: chapters 1–3, especially pp. 1–39
+    locator: 'chapters 1–3, especially pp. 1–39'
     relation: supports
   - source_id: winograd-1972
     locator: pp. 1–191
@@ -30,19 +32,38 @@ evidence:
     locator: pp. 212–218
     relation: contextualizes
   - source_id: minsky-papert-1971
-    locator: §5.2, Micro-worlds and Understanding
+    locator: '§5.2, Micro-worlds and Understanding'
     relation: contextualizes
-related:
-  - entity.테리-위노그래드
-  - entity.mit
-  - concept.shrdlu
-  - concept.블록-세계
-  - concept.마이크로월드
-  - concept.파싱
-  - concept.지식-공학-병목
-  - concept.eliza
-  - analysis.eliza에서-llm으로
-  - analysis.ai-시연과-실제-성능
+relations:
+  - target: entity.테리-위노그래드
+    kind: related
+  - target: entity.mit
+    kind: related
+  - target: concept.shrdlu
+    kind: related
+  - target: concept.블록-세계
+    kind: related
+  - target: concept.마이크로월드
+    kind: related
+  - target: concept.파싱
+    kind: related
+  - target: concept.eliza
+    kind: related
+  - target: analysis.eliza에서-llm으로
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites: []
+  assumed_knowledge: 없음
+  outcomes:
+    - SHRDLU가 언어·세계 상태·추론·행동을 어떻게 연결했는지와 블록 세계 시연을 일반 언어 이해로 확대할 수 없는 이유를 설명할 수 있다.
+  next:
+    - target: concept.지식-공학-병목
+      reason: 지식 공학 병목 — 수작업 세계 모델과 규칙이 넓은 영역으로 확장될 때 생기는 한계를 정리한다.
+    - target: analysis.ai-시연과-실제-성능
+      reason: AI 시연과 실제 성능 — 인상적인 데모와 실제 적용 범위를 구분하는 평가 관점을 확장한다.
 ---
 # SHRDLU
 
@@ -130,8 +151,8 @@ SHRDLU의 성과는 일반 언어 이해를 완성한 데 있지 않다. 제한�
 
 ### 다음 문서
 
-- [[지식 공학 병목]] — 수작업 세계 모델과 규칙이 넓은 영역으로 확장될 때 생기는 한계를 정리한다.
-- [[AI 시연과 실제 성능]] — 인상적인 데모와 실제 적용 범위를 구분하는 평가 관점을 확장한다.
+- [[concept.지식-공학-병목|지식 공학 병목]] — 수작업 세계 모델과 규칙이 넓은 영역으로 확장될 때 생기는 한계를 정리한다.
+- [[analysis.ai-시연과-실제-성능|AI 시연과 실제 성능]] — 인상적인 데모와 실제 적용 범위를 구분하는 평가 관점을 확장한다.
 
 ## 출처
 
@@ -144,13 +165,13 @@ SHRDLU의 성과는 일반 언어 이해를 완성한 데 있지 않다. 제한�
 
 ## 관련 항목
 
-- [[테리 위노그래드]]
-- [[MIT]]
-- [[SHRDLU|SHRDLU 개념]]
-- [[블록 세계]]
-- [[마이크로월드]]
-- [[파싱]]
-- [[지식 공학 병목]]
-- [[ELIZA]]
-- [[ELIZA에서 LLM으로]]
-- [[AI 시연과 실제 성능]]
+- [[concept.지식-공학-병목|지식 공학 병목]]
+- [[analysis.ai-시연과-실제-성능|AI 시연과 실제 성능]]
+- [[entity.테리-위노그래드|테리 위노그래드]]
+- [[entity.mit|MIT]]
+- [[concept.shrdlu|SHRDLU]]
+- [[concept.블록-세계|블록 세계]]
+- [[concept.마이크로월드|마이크로월드]]
+- [[concept.파싱|파싱]]
+- [[concept.eliza|ELIZA]]
+- [[analysis.eliza에서-llm으로|ELIZA에서 LLM으로]]

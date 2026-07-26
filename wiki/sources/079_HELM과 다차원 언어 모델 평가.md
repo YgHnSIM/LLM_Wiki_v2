@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.079
 page_type: source
 title: HELM과 다차원 언어 모델 평가
@@ -13,32 +13,51 @@ tags:
   - domain/machine-learning
 created: '2026-07-21'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/079_HELM Holistic Evaluation of Language Models Framework.ko.md'
-  - 'raw/079_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md'
+  - raw/079_HELM Holistic Evaluation of Language Models Framework.ko.md
+  - raw/079_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md
 evidence:
   - source_id: liang-et-al-2023-helm
     locator: '초록, §§1.1–1.2·3–8·10–11, Tables 4–6·8·13과 Appendices A·C·F–J의 시나리오·메트릭·30개 모델·5-shot 적응·인간 평가·비용·오염·설계 한계'
     relation: supports
-related:
-  - concept.helm
-  - concept.glue-superglue
-  - concept.파운데이션-모델
-  - source.060
-  - source.067
-  - source.076
-  - source.077
-  - entity.스탠퍼드-대학교
-  - analysis.평가-지표와-모델-유인
-  - analysis.튜링-테스트와-llm-평가
+relations:
+  - target: concept.파운데이션-모델
+    kind: related
+  - target: source.060
+    kind: related
+  - target: source.076
+    kind: related
+  - target: source.077
+    kind: related
+  - target: entity.스탠퍼드-대학교
+    kind: related
+  - target: analysis.튜링-테스트와-llm-평가
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.glue-superglue
+    - target: source.067
+  assumed_knowledge: 없음
+  outcomes:
+    - 'HELM이 16개 핵심 시나리오와 26개 표적 시나리오를 일곱 메트릭·표준화된 적응 절차로 평가한 방식과, 그 결과가 안전 인증이나 보편 순위를 뜻하지 않는 이유를 설명할 수 있다.'
+  next:
+    - target: concept.helm
+      reason: HELM — 시나리오·적응·메트릭·run의 구조와 평가 결과를 읽는 법을 재사용 가능한 개념으로 정리한다.
+    - target: analysis.평가-지표와-모델-유인
+      reason: 자동 평가 지표는 무엇을 보상하는가 — 여러 점수를 모델 선택과 최적화 목표로 쓸 때 생기는 유인과 사각지대를 이어서 살핀다.
 ---
 # HELM과 다차원 언어 모델 평가
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[GLUE와 SuperGLUE]], [[067_GPT-3와 문맥 내 학습]]<br>
+> **선수 지식:** [[concept.glue-superglue|GLUE와 SuperGLUE]], [[source.067|GPT-3와 문맥 내 학습]]<br>
 > **읽고 나면:** HELM이 16개 핵심 시나리오와 26개 표적 시나리오를 일곱 메트릭·표준화된 적응 절차로 평가한 방식과, 그 결과가 안전 인증이나 보편 순위를 뜻하지 않는 이유를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -203,8 +222,8 @@ Few-shot 평가는 정확한 test 문장뿐 아니라 평가 분포 자체가 �
 
 ### 다음 문서
 
-- [[HELM]] — 시나리오·적응·메트릭·run의 구조와 평가 결과를 읽는 법을 재사용 가능한 개념으로 정리한다.
-- [[자동 평가 지표는 무엇을 보상하는가]] — 여러 점수를 모델 선택과 최적화 목표로 쓸 때 생기는 유인과 사각지대를 이어서 살핀다.
+- [[concept.helm|HELM]] — 시나리오·적응·메트릭·run의 구조와 평가 결과를 읽는 법을 재사용 가능한 개념으로 정리한다.
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]] — 여러 점수를 모델 선택과 최적화 목표로 쓸 때 생기는 유인과 사각지대를 이어서 살핀다.
 
 ## 출처
 
@@ -220,13 +239,13 @@ Few-shot 평가는 정확한 test 문장뿐 아니라 평가 분포 자체가 �
 
 ## 관련 항목
 
-- [[HELM]]
-- [[GLUE와 SuperGLUE]]
-- [[파운데이션 모델]]
-- [[060_GLUE와 SuperGLUE의 집계 평가]]
-- [[067_GPT-3와 문맥 내 학습]]
-- [[076_파운데이션 모델 보고서와 AI 생태계]]
-- [[077_InstructGPT와 인간 선호 정렬]]
-- [[스탠퍼드 대학교]]
-- [[자동 평가 지표는 무엇을 보상하는가]]
-- [[튜링 테스트와 LLM 평가]]
+- [[concept.helm|HELM]]
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]]
+- [[concept.glue-superglue|GLUE와 SuperGLUE]]
+- [[source.067|GPT-3와 문맥 내 학습]]
+- [[concept.파운데이션-모델|파운데이션 모델]]
+- [[source.060|GLUE와 SuperGLUE의 집계 평가]]
+- [[source.076|파운데이션 모델 보고서와 AI 생태계]]
+- [[source.077|InstructGPT와 인간 선호 정렬]]
+- [[entity.스탠퍼드-대학교|스탠퍼드 대학교]]
+- [[analysis.튜링-테스트와-llm-평가|튜링 테스트와 LLM 평가]]

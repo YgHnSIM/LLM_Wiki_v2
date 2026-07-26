@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.수치-안정성과-log-sum-exp
 page_type: concept
 title: 수치 안정성과 log-sum-exp
@@ -15,8 +15,10 @@ tags:
   - domain/machine-learning
 created: '2026-07-24'
 updated: '2026-07-24'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts: []
 evidence:
   - source_id: blanchard-higham-higham-2021-logsumexp-softmax
@@ -28,16 +30,26 @@ evidence:
   - source_id: bengio-et-al-2003-nplm
     locator: 'JMLR 3, pp. 1141–1143, Eq. (1)의 exponentiated output과 확률 정규화'
     relation: contextualizes
-related:
-  - concept.지수와-로그
-  - concept.소프트맥스
-  - concept.flashattention
+relations: []
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.지수와-로그
+    - target: concept.소프트맥스
+  assumed_knowledge: 의 $\exp$ $\log$ 의 후보 축 정규화
+  outcomes:
+    - 'log-sum-exp와 stable softmax를 최댓값 이동으로 계산하고, 실수 수학에서 같은 식이라는 사실과 부동소수점에서 필요한 공학적 선택이라는 사실을 구분하며, FlashAttention의 online softmax 상태가 왜 필요한지 설명할 수 있다.'
+  next:
+    - target: concept.flashattention
+      reason: FlashAttention — blockwise online softmax를 SRAM tile·I/O·backward 재계산과 함께 적용하는 알고리즘을 본다.
 ---
 # 수치 안정성과 log-sum-exp
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[지수와 로그]]의 $\exp$·$\log$, [[소프트맥스]]의 후보 축 정규화<br>
+> **선수 지식:** [[concept.지수와-로그|지수와 로그]], [[concept.소프트맥스|소프트맥스]]<br>
 > **읽고 나면:** log-sum-exp와 stable softmax를 최댓값 이동으로 계산하고, 실수 수학에서 같은 식이라는 사실과 부동소수점에서 필요한 공학적 선택이라는 사실을 구분하며, FlashAttention의 online softmax 상태가 왜 필요한지 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -219,8 +231,7 @@ $$
 
 ### 다음 문서
 
-- [[소프트맥스]] — 후보 축에서 stable softmax와 NLL이 모델 출력·gradient로 어떻게 이어지는지 본다.
-- [[FlashAttention]] — blockwise online softmax를 SRAM tile·I/O·backward 재계산과 함께 적용하는 알고리즘을 본다.
+- [[concept.flashattention|FlashAttention]] — blockwise online softmax를 SRAM tile·I/O·backward 재계산과 함께 적용하는 알고리즘을 본다.
 
 ## 출처
 
@@ -230,6 +241,6 @@ $$
 
 ## 관련 항목
 
-- [[지수와 로그]]
-- [[소프트맥스]]
-- [[FlashAttention]]
+- [[concept.flashattention|FlashAttention]]
+- [[concept.지수와-로그|지수와 로그]]
+- [[concept.소프트맥스|소프트맥스]]

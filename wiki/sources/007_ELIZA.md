@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.007
 page_type: source
 title: ELIZA
@@ -14,8 +14,10 @@ tags:
   - domain/conversational-ai
 created: '2026-07-14'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/007_ELIZA - The First Conversational AI Program.ko.md
   - raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
@@ -26,28 +28,52 @@ evidence:
   - source_id: mit-eliza-1965
     locator: ELIZA source and DOCTOR script records
     relation: supports
-related:
-  - entity.조지프-바이젠바움
-  - entity.mit
-  - entity.칼-로저스
-  - concept.eliza
-  - concept.doctor-스크립트
-  - concept.패턴-매칭
-  - concept.템플릿-기반-응답-생성
-  - concept.대화-복구
-  - concept.로저스식-심리치료
-  - concept.eliza-효과
-  - concept.튜링-테스트
-  - concept.행동-기반-지능-기준
-  - analysis.eliza에서-llm으로
-  - analysis.ai-시연과-실제-성능
-  - concept.대규모-언어-모델
+relations:
+  - target: entity.조지프-바이젠바움
+    kind: related
+  - target: entity.mit
+    kind: related
+  - target: entity.칼-로저스
+    kind: related
+  - target: concept.eliza
+    kind: related
+  - target: concept.doctor-스크립트
+    kind: related
+  - target: concept.템플릿-기반-응답-생성
+    kind: related
+  - target: concept.대화-복구
+    kind: related
+  - target: concept.로저스식-심리치료
+    kind: related
+  - target: concept.eliza-효과
+    kind: related
+  - target: concept.튜링-테스트
+    kind: related
+  - target: concept.행동-기반-지능-기준
+    kind: related
+  - target: analysis.eliza에서-llm으로
+    kind: related
+  - target: analysis.ai-시연과-실제-성능
+    kind: related
+  - target: concept.대규모-언어-모델
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites: []
+  assumed_knowledge: .
+  outcomes:
+    - 'ELIZA 프레임워크와 DOCTOR 스크립트를 구분하고, 규칙 기반 대화가 설득력 있는 응답을 만드는 과정과 그 평가 한계를 설명할 수 있다.'
+  next:
+    - target: concept.패턴-매칭
+      reason: 다음에는 패턴 매칭에서 입력 규칙이 작동하는 방식을 자세히 본다.
 ---
 # ELIZA
 
 > [!note] 학습 안내
 > **난이도:** 입문<br>
-> **선수 지식:** 없음.<br>
+> **선수 지식:** 없음 — .<br>
 > **읽고 나면:** ELIZA 프레임워크와 DOCTOR 스크립트를 구분하고, 규칙 기반 대화가 설득력 있는 응답을 만드는 과정과 그 평가 한계를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -130,8 +156,11 @@ ELIZA를 [[튜링 테스트]]의 “최초 구현” 또는 튜링이 구상한 
 
 다음에는 [[패턴 매칭]]에서 입력 규칙이 작동하는 방식을 자세히 본다. 규칙 기반 대화와 현대 모델의 평가 문제를 비교하려면 문서 [[ELIZA에서 LLM으로]]를 읽는다.
 
-## 출처
+### 다음 문서
 
+- [[concept.패턴-매칭|패턴 매칭]] — 다음에는 패턴 매칭에서 입력 규칙이 작동하는 방식을 자세히 본다.
+
+## 출처
 - Joseph Weizenbaum, [ELIZA—A Computer Program for the Study of Natural Language Communication Between Man and Machine](https://doi.org/10.1145/365153.365168), 1966, pp. 36–45.
 - MIT Libraries, [ELIZA source code and DOCTOR script records](https://dome.mit.edu/handle/1721.3/201699?show=full), 1965.
 - 프로젝트 번역·검토 출발 자료: [ELIZA - The First Conversational AI Program](https://mbrenndoerfer.com/writing/history-eliza-conversational-ai)
@@ -139,18 +168,18 @@ ELIZA를 [[튜링 테스트]]의 “최초 구현” 또는 튜링이 구상한 
 
 ## 관련 항목
 
-- [[조지프 바이젠바움]]
-- [[MIT]]
-- [[칼 로저스]]
-- [[ELIZA]]
-- [[DOCTOR 스크립트]]
-- [[패턴 매칭]]
-- [[템플릿 기반 응답 생성]]
-- [[대화 복구]]
-- [[로저스식 심리치료]]
-- [[ELIZA 효과]]
-- [[튜링 테스트]]
-- [[행동주의적 지능 기준]]
-- [[ELIZA에서 LLM으로]]
-- [[AI 시연과 실제 성능]]
-- [[대규모 언어 모델]]
+- [[concept.패턴-매칭|패턴 매칭]]
+- [[entity.조지프-바이젠바움|조지프 바이젠바움]]
+- [[entity.mit|MIT]]
+- [[entity.칼-로저스|칼 로저스]]
+- [[concept.eliza|ELIZA]]
+- [[concept.doctor-스크립트|DOCTOR 스크립트]]
+- [[concept.템플릿-기반-응답-생성|템플릿 기반 응답 생성]]
+- [[concept.대화-복구|대화 복구]]
+- [[concept.로저스식-심리치료|로저스식 심리치료]]
+- [[concept.eliza-효과|ELIZA 효과]]
+- [[concept.튜링-테스트|튜링 테스트]]
+- [[concept.행동-기반-지능-기준|행동 기반 지능 기준]]
+- [[analysis.eliza에서-llm으로|ELIZA에서 LLM으로]]
+- [[analysis.ai-시연과-실제-성능|AI 시연과 실제 성능]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]

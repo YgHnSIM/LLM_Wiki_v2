@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.framenet
 page_type: concept
 title: FrameNet
@@ -15,11 +15,13 @@ tags:
   - domain/computer-science
 created: '2026-07-17'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/030_FrameNet - A Computational Resource for Frame Semantics.ko.md'
-  - 'raw/030_FrameNet - A Computational Resource for Frame Semantics.commentary.ko.md'
+  - raw/030_FrameNet - A Computational Resource for Frame Semantics.ko.md
+  - raw/030_FrameNet - A Computational Resource for Frame Semantics.commentary.ko.md
 evidence:
   - source_id: baker-et-al-1998-framenet
     locator: 'pp. 86–90, 특히 §§1–3의 frame-local FE, 데이터 구성과 수작업 주석 절차'
@@ -40,17 +42,34 @@ evidence:
     locator: 'pp. 71–106, 특히 pp. 74–76의 Levin·VerbNet 계보, §5 pp. 88–90의 FrameNet 비교와 p. 95의 초기 SRL 모델 영향'
     relation: contextualizes
   - source_id: knight-et-al-2020-amr-3
-    locator: 'LDC2020T02 §§Introduction–Data의 PropBank frames 기반 AMR 3.0 설명'
+    locator: LDC2020T02 §§Introduction–Data의 PropBank frames 기반 AMR 3.0 설명
     relation: contextualizes
-related:
-  - source.030
-  - concept.propbank
-  - concept.의미역-표지
-  - concept.wordnet
-  - concept.말뭉치-기반-학습
-  - concept.통계적-자연어-처리
-  - source.023
-  - analysis.규칙-기반-ai에서-데이터-기반-학습으로
+relations:
+  - target: source.030
+    kind: related
+  - target: concept.wordnet
+    kind: related
+  - target: concept.말뭉치-기반-학습
+    kind: related
+  - target: concept.통계적-자연어-처리
+    kind: related
+  - target: source.023
+    kind: related
+  - target: analysis.규칙-기반-ai에서-데이터-기반-학습으로
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites: []
+  assumed_knowledge: 없음
+  outcomes:
+    - 'FrameNet의 네 기본 단위와 구축 절차를 설명하고, 자동 분석 모델 및 다른 의미 자원과 구분할 수 있다.'
+  next:
+    - target: concept.propbank
+      reason: PropBank — 프레임별 의미역과 술어별 번호형 논항이 주석 단위를 어떻게 다르게 잡는지 비교한다.
+    - target: concept.의미역-표지
+      reason: 의미역 표지 — FrameNet 같은 주석 자원을 자동 예측 과제로 사용하는 방식을 이어서 본다.
 ---
 # FrameNet
 
@@ -194,8 +213,8 @@ BERT·GPT 계열이 FrameNet 주석 없이도 역할 정보를 어느 정도 예
 
 ### 다음 문서
 
-- [[PropBank]] — 프레임별 의미역과 술어별 번호형 논항이 주석 단위를 어떻게 다르게 잡는지 비교한다.
-- [[의미역 표지]] — FrameNet 같은 주석 자원을 자동 예측 과제로 사용하는 방식을 이어서 본다.
+- [[concept.propbank|PropBank]] — 프레임별 의미역과 술어별 번호형 논항이 주석 단위를 어떻게 다르게 잡는지 비교한다.
+- [[concept.의미역-표지|의미역 표지]] — FrameNet 같은 주석 자원을 자동 예측 과제로 사용하는 방식을 이어서 본다.
 
 ## 출처
 
@@ -211,11 +230,11 @@ BERT·GPT 계열이 FrameNet 주석 없이도 역할 정보를 어느 정도 예
 
 ## 관련 항목
 
-- [[030_FrameNet과 프레임 의미론]]
-- [[WordNet]]
-- [[말뭉치 기반 학습]]
-- [[통계적 자연어 처리]]
-- [[023_Penn Treebank와 통계적 구문 분석]]
-- [[규칙 기반 AI에서 데이터 기반 학습으로]]
-- [[PropBank]]
-- [[의미역 표지]]
+- [[concept.propbank|PropBank]]
+- [[concept.의미역-표지|의미역 표지]]
+- [[source.030|FrameNet과 프레임 의미론]]
+- [[concept.wordnet|WordNet]]
+- [[concept.말뭉치-기반-학습|말뭉치 기반 학습]]
+- [[concept.통계적-자연어-처리|통계적 자연어 처리]]
+- [[source.023|Penn Treebank와 통계적 구문 분석]]
+- [[analysis.규칙-기반-ai에서-데이터-기반-학습으로|규칙 기반 AI에서 데이터 기반 학습으로]]

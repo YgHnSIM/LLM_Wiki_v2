@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.050
 page_type: source
 title: FastText와 서브워드 표현의 두 경로
@@ -13,11 +13,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md'
-  - 'raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md'
+  - raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md
+  - raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md
 evidence:
   - source_id: mikolov-et-al-2013-negative-sampling
     locator: 'NeurIPS 2013, §§2–3의 Skip-gram negative sampling과 subsampling'
@@ -37,16 +39,29 @@ evidence:
   - source_id: kudo-richardson-2018-sentencepiece
     locator: 'EMNLP 2018 System Demonstrations, pp. 66–71, 특히 §§1–2의 raw sentence 훈련·lossless tokenization과 §3의 NMT 검증'
     relation: contextualizes
-related:
-  - concept.fasttext
-  - concept.서브워드-토큰화
-  - concept.byte-pair-encoding
+relations:
+  - target: concept.fasttext
+    kind: related
+  - target: concept.byte-pair-encoding
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.word2vec
+  assumed_knowledge: 없음
+  outcomes:
+    - FastText의 문자 n-gram 벡터 합성과 BPE의 시퀀스 분절이 어떻게 다른지 설명할 수 있다.
+  next:
+    - target: concept.서브워드-토큰화
+      reason: 서브워드 토큰화 — 문자열 분절이 어휘 크기와 시퀀스 길이를 어떻게 바꾸는지 개념 단위로 확인한다.
 ---
 # FastText와 서브워드 표현의 두 경로
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[Word2Vec]]<br>
+> **선수 지식:** [[concept.word2vec|Word2Vec]]<br>
 > **읽고 나면:** FastText의 문자 n-gram 벡터 합성과 BPE의 시퀀스 분절이 어떻게 다른지 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -157,7 +172,7 @@ FastText가 BPE의 직접 원인이었다는 계보도 현재 근거로 확정�
 
 ### 다음 문서
 
-- [[서브워드 토큰화]] — 문자열 분절이 어휘 크기와 시퀀스 길이를 어떻게 바꾸는지 개념 단위로 확인한다.
+- [[concept.서브워드-토큰화|서브워드 토큰화]] — 문자열 분절이 어휘 크기와 시퀀스 길이를 어떻게 바꾸는지 개념 단위로 확인한다.
 
 ## 출처
 
@@ -172,6 +187,7 @@ FastText가 BPE의 직접 원인이었다는 계보도 현재 근거로 확정�
 
 ## 관련 항목
 
-- [[FastText]]
-- [[서브워드 토큰화]]
-- [[Byte Pair Encoding]]
+- [[concept.서브워드-토큰화|서브워드 토큰화]]
+- [[concept.word2vec|Word2Vec]]
+- [[concept.fasttext|FastText]]
+- [[concept.byte-pair-encoding|Byte Pair Encoding]]

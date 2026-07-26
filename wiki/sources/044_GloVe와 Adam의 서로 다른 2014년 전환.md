@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.044
 page_type: source
 title: GloVe와 Adam의 서로 다른 2014년 전환
@@ -14,11 +14,13 @@ tags:
   - domain/optimization
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.ko.md'
-  - 'raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.commentary.ko.md'
+  - raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.ko.md
+  - raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.commentary.ko.md
 evidence:
   - source_id: pennington-et-al-2014-glove
     locator: 'EMNLP 2014, pp. 1532–1543, 특히 §§2–3의 동시출현 비율 유도·가중 목적, §§4–4.6의 자료·유추·유사도·NER 평가'
@@ -35,17 +37,30 @@ evidence:
   - source_id: loshchilov-hutter-2019-adamw
     locator: 'ICLR 2019, §§1–2의 L2 regularization·weight decay 비동일성, Algorithm 2와 §§3–4의 AdamW 평가'
     relation: contextualizes
-related:
-  - concept.glove
-  - concept.adam-최적화기
-  - concept.단어-임베딩
-  - source.043
+relations:
+  - target: source.043
+    kind: related
+learning:
+  difficulty:
+    entry: advanced
+    target: advanced
+  prerequisites:
+    - target: concept.단어-임베딩
+    - target: concept.경사하강법
+  assumed_knowledge: 없음
+  outcomes:
+    - 'GloVe의 동시출현 회귀와 Adam의 모멘트 기반 갱신을 각각 설명하고, 두 연구를 하나의 직접 계보로 합칠 수 없는 이유를 구분할 수 있다.'
+  next:
+    - target: concept.glove
+      reason: '다음에는 GloVe에서 가중 log-bilinear 목적을 살피고, Adam 최적화기에서 모멘트 추정과 후속 수렴 논의를 분리해 본다.'
+    - target: concept.adam-최적화기
+      reason: '다음에는 GloVe에서 가중 log-bilinear 목적을 살피고, Adam 최적화기에서 모멘트 추정과 후속 수렴 논의를 분리해 본다.'
 ---
 # GloVe와 Adam의 서로 다른 2014년 전환
 
 > [!note] 학습 안내
 > **난이도:** 심화<br>
-> **선수 지식:** [[단어 임베딩]], [[경사하강법]]<br>
+> **선수 지식:** [[concept.단어-임베딩|단어 임베딩]], [[concept.경사하강법|경사하강법]]<br>
 > **읽고 나면:** GloVe의 동시출현 회귀와 Adam의 모멘트 기반 갱신을 각각 설명하고, 두 연구를 하나의 직접 계보로 합칠 수 없는 이유를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -187,8 +202,12 @@ Adam은 매개변수마다 $m$과 $v$ 두 상태를 저장한다. 두 상태를 
 
 다음에는 [[GloVe]]에서 가중 log-bilinear 목적을 살피고, [[Adam 최적화기]]에서 모멘트 추정과 후속 수렴 논의를 분리해 본다.
 
-## 출처
+### 다음 문서
 
+- [[concept.glove|GloVe]] — 다음에는 GloVe에서 가중 log-bilinear 목적을 살피고, Adam 최적화기에서 모멘트 추정과 후속 수렴 논의를 분리해 본다.
+- [[concept.adam-최적화기|Adam 최적화기]] — 다음에는 GloVe에서 가중 log-bilinear 목적을 살피고, Adam 최적화기에서 모멘트 추정과 후속 수렴 논의를 분리해 본다.
+
+## 출처
 - Jeffrey Pennington·Richard Socher·Christopher D. Manning, [GloVe: Global Vectors for Word Representation](https://aclanthology.org/D14-1162/), EMNLP 2014, pp. 1532–1543.
 - Diederik P. Kingma·Jimmy Ba, [Adam: A Method for Stochastic Optimization](https://arxiv.org/abs/1412.6980), 2014년 12월 공개·ICLR 2015, Algorithm 1과 §§2–6.
 - Sashank J. Reddi·Satyen Kale·Sanjiv Kumar, [On the Convergence of Adam and Beyond](https://openreview.net/forum?id=ryQu7f-RZ), ICLR 2018.
@@ -199,7 +218,8 @@ Adam은 매개변수마다 $m$과 $v$ 두 상태를 저장한다. 두 상태를 
 
 ## 관련 항목
 
-- [[GloVe]]
-- [[Adam 최적화기]]
-- [[단어 임베딩]]
-- [[043_Word2Vec와 효율적 정적 단어 임베딩]]
+- [[concept.glove|GloVe]]
+- [[concept.adam-최적화기|Adam 최적화기]]
+- [[concept.단어-임베딩|단어 임베딩]]
+- [[concept.경사하강법|경사하강법]]
+- [[source.043|Word2Vec와 효율적 정적 단어 임베딩]]

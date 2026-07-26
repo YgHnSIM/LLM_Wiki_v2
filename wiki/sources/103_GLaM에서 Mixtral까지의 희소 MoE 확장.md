@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.103
 page_type: source
 title: GLaM에서 Mixtral까지의 희소 MoE 확장
@@ -15,11 +15,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-21'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md'
-  - 'raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md'
+  - raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md
+  - raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md
 evidence:
   - source_id: shazeer-et-al-2017-sparsely-gated-moe
     locator: 'ICLR 2017, §§1.2–2.1·4–5와 Appendix E의 noisy top-k routing·load balancing·제한적 expert specialization 사례'
@@ -31,7 +33,7 @@ evidence:
     locator: 'JMLR 23(120), §§2–3·5.4–5.6·8과 Tables 1·9의 top-1 routing·2,048-expert Switch-C·time-to-quality·전이·분산 비용'
     relation: contextualizes
   - source_id: kaplan-et-al-2020-scaling-laws
-    locator: '§§1.1–1.3와 Appendix C의 dense Transformer 비임베딩 매개변수 N·token D·training compute C≈6ND 근사'
+    locator: §§1.1–1.3와 Appendix C의 dense Transformer 비임베딩 매개변수 N·token D·training compute C≈6ND 근사
     relation: disputes
   - source_id: du-et-al-2022-glam
     locator: '초록, §§1·4–6·8–9, Tables 1·4와 Figures 1–4의 decoder-only top-2 MoE·1.2T total·96.6B active·동일 자료 dense–MoE family·GPT-3 교차 모델 비교·resource limitation'
@@ -42,20 +44,34 @@ evidence:
   - source_id: mistral-ai-2023-mixtral-release
     locator: '2023-12-11 공개일, Pushing the frontier of open models with sparse architectures, Performance와 Apache 2.0 공개 가중치 설명'
     relation: supports
-related:
-  - source.069
-  - concept.전문가-혼합
-  - concept.mixtral-8x7b
-  - concept.transformer
-  - concept.대규모-언어-모델
-  - concept.언어-모델-스케일링-법칙
-  - analysis.총-매개변수와-활성-계산량은-같은-축인가
+relations:
+  - target: concept.transformer
+    kind: related
+  - target: concept.대규모-언어-모델
+    kind: related
+  - target: concept.언어-모델-스케일링-법칙
+    kind: related
+learning:
+  difficulty:
+    entry: advanced
+    target: advanced
+  prerequisites:
+    - target: source.069
+    - target: concept.전문가-혼합
+  assumed_knowledge: 없음
+  outcomes:
+    - 'GLaM과 Mixtral의 total·active parameter를 구분하고, 2024년 단일 돌파 서사·주제별 expert·고정 배수 속도 주장을 실험 조건에 맞게 평가할 수 있다.'
+  next:
+    - target: concept.mixtral-8x7b
+      reason: Mixtral 8x7B — 이름·구조·공개 범위·평가와 routing 분석을 model 단위로 정리한다.
+    - target: analysis.총-매개변수와-활성-계산량은-같은-축인가
+      reason: '총 매개변수와 활성 계산량은 같은 축인가 — Dense와 sparse model을 total·active parameter, FLOPs, memory, communication과 quality의 장부로 비교한다.'
 ---
 # GLaM에서 Mixtral까지의 희소 MoE 확장
 
 > [!note] 학습 안내
 > **난이도:** 심화<br>
-> **선수 지식:** [[069_전문가 혼합과 희소 활성 스케일링]], [[전문가 혼합]], [[Transformer]]<br>
+> **선수 지식:** [[source.069|전문가 혼합과 희소 활성 스케일링]], [[concept.전문가-혼합|전문가 혼합]]<br>
 > **읽고 나면:** GLaM과 Mixtral의 total·active parameter를 구분하고, 2024년 단일 돌파 서사·주제별 expert·고정 배수 속도 주장을 실험 조건에 맞게 평가할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -177,8 +193,8 @@ Mixtral의 2023년 공식 발표가 제시한 “Llama 2 70B보다 6배 빠른 i
 
 ### 다음 문서
 
-- [[Mixtral 8x7B]] — 이름·구조·공개 범위·평가와 routing 분석을 model 단위로 정리한다.
-- [[총 매개변수와 활성 계산량은 같은 축인가]] — Dense와 sparse model을 total·active parameter, FLOPs, memory, communication과 quality의 장부로 비교한다.
+- [[concept.mixtral-8x7b|Mixtral 8x7B]] — 이름·구조·공개 범위·평가와 routing 분석을 model 단위로 정리한다.
+- [[analysis.총-매개변수와-활성-계산량은-같은-축인가|총 매개변수와 활성 계산량은 같은 축인가]] — Dense와 sparse model을 total·active parameter, FLOPs, memory, communication과 quality의 장부로 비교한다.
 
 ## 출처
 
@@ -192,10 +208,10 @@ Mixtral의 2023년 공식 발표가 제시한 “Llama 2 70B보다 6배 빠른 i
 
 ## 관련 항목
 
-- [[069_전문가 혼합과 희소 활성 스케일링]]
-- [[전문가 혼합]]
-- [[Mixtral 8x7B]]
-- [[Transformer]]
-- [[대규모 언어 모델]]
-- [[언어 모델 스케일링 법칙]]
-- [[총 매개변수와 활성 계산량은 같은 축인가]]
+- [[concept.mixtral-8x7b|Mixtral 8x7B]]
+- [[analysis.총-매개변수와-활성-계산량은-같은-축인가|총 매개변수와 활성 계산량은 같은 축인가]]
+- [[source.069|전문가 혼합과 희소 활성 스케일링]]
+- [[concept.전문가-혼합|전문가 혼합]]
+- [[concept.transformer|Transformer]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[concept.언어-모델-스케일링-법칙|언어 모델 스케일링 법칙]]

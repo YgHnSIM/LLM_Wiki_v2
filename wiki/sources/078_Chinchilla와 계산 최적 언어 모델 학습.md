@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.078
 page_type: source
 title: Chinchilla와 계산 최적 언어 모델 학습
@@ -16,11 +16,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-21'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.ko.md'
-  - 'raw/078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.commentary.ko.md'
+  - raw/078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.ko.md
+  - raw/078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.commentary.ko.md
 evidence:
   - source_id: hoffmann-et-al-2022-chinchilla
     locator: '초록, §§1·3.1–3.4·4–5, Eqs. 1–2, Tables 1–5와 Appendices A·C·D.2–D.4·E–F의 fixed-compute 최적화·세 추정법·Chinchilla–Gopher 비교·데이터와 FLOP 조건'
@@ -28,24 +30,40 @@ evidence:
   - source_id: touvron-et-al-2023-llama
     locator: '§1의 training-compute optimum과 inference budget 구분, Table 2의 6.7B·13.0B·32.5B·65.2B model과 1.0T·1.4T token 학습 조건, Figures 1–2의 추가 token 학습 추이'
     relation: contextualizes
-related:
-  - source.066
-  - source.067
-  - source.074
-  - source.089
-  - concept.언어-모델-스케일링-법칙
-  - concept.llama-1
-  - concept.대규모-언어-모델
-  - concept.perplexity
-  - concept.transformer
-  - analysis.데이터-품질과-분포-다양성은-같은-축인가
-  - analysis.총-매개변수와-활성-계산량은-같은-축인가
+relations:
+  - target: source.067
+    kind: related
+  - target: source.074
+    kind: related
+  - target: source.089
+    kind: related
+  - target: concept.대규모-언어-모델
+    kind: related
+  - target: concept.transformer
+    kind: related
+  - target: analysis.총-매개변수와-활성-계산량은-같은-축인가
+    kind: related
+learning:
+  difficulty:
+    entry: advanced
+    target: advanced
+  prerequisites:
+    - target: concept.언어-모델-스케일링-법칙
+    - target: concept.perplexity
+  assumed_knowledge: 없음
+  outcomes:
+    - '고정 훈련 compute에서 모델 크기와 token 수를 배분하는 세 추정법을 설명하고, 제곱근 scaling·20:1 근사·Chinchilla–Gopher 비교의 조건을 구분할 수 있다.'
+  next:
+    - target: source.066
+      reason: 066신경 언어 모델의 스케일링 법칙 — Kaplan 2020의 원래 power law와 0.73/0.27 배분을 먼저 확인한다.
+    - target: concept.llama-1
+      reason: LLaMA 1 — training compute 최적점과 반복 inference 비용을 나누고 작은 모델을 더 오래 학습한 사례를 본다.
 ---
 # Chinchilla와 계산 최적 언어 모델 학습
 
 > [!note] 학습 안내
 > **난이도:** 심화<br>
-> **선수 지식:** [[언어 모델 스케일링 법칙]], [[Perplexity]], [[대규모 언어 모델]]<br>
+> **선수 지식:** [[concept.언어-모델-스케일링-법칙|언어 모델 스케일링 법칙]], [[concept.perplexity|Perplexity]]<br>
 > **읽고 나면:** 고정 훈련 compute에서 모델 크기와 token 수를 배분하는 세 추정법을 설명하고, 제곱근 scaling·20:1 근사·Chinchilla–Gopher 비교의 조건을 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -183,10 +201,8 @@ Scaling law의 직접 적합 대상은 평균 pretraining loss다. Reasoning, fa
 
 ### 다음 문서
 
-- [[066_신경 언어 모델의 스케일링 법칙]] — Kaplan 2020의 원래 power law와 0.73/0.27 배분을 먼저 확인한다.
-- [[언어 모델 스케일링 법칙]] — 두 연구의 변수·지수·병목·외삽을 재사용 가능한 개념 장부로 정리한다.
-- [[LLaMA 1]] — training compute 최적점과 반복 inference 비용을 나누고 작은 모델을 더 오래 학습한 사례를 본다.
-- [[데이터 품질과 분포 다양성은 같은 축인가]] — 학습 token 수와 품질·혼합·sampling weight·반복 노출을 분리한다.
+- [[source.066|신경 언어 모델의 스케일링 법칙]] — 066신경 언어 모델의 스케일링 법칙 — Kaplan 2020의 원래 power law와 0.73/0.27 배분을 먼저 확인한다.
+- [[concept.llama-1|LLaMA 1]] — training compute 최적점과 반복 inference 비용을 나누고 작은 모델을 더 오래 학습한 사례를 본다.
 
 ## 출처
 
@@ -200,14 +216,13 @@ Scaling law의 직접 적합 대상은 평균 pretraining loss다. Reasoning, fa
 
 ## 관련 항목
 
-- [[066_신경 언어 모델의 스케일링 법칙]]
-- [[067_GPT-3와 문맥 내 학습]]
-- [[074_The Pile과 대규모 언어 모델 학습 말뭉치]]
-- [[089_LLaMA 1과 제한적 공개 가중치 연구 배포]]
-- [[언어 모델 스케일링 법칙]]
-- [[LLaMA 1]]
-- [[대규모 언어 모델]]
-- [[Perplexity]]
-- [[Transformer]]
-- [[데이터 품질과 분포 다양성은 같은 축인가]]
-- [[총 매개변수와 활성 계산량은 같은 축인가]]
+- [[source.066|신경 언어 모델의 스케일링 법칙]]
+- [[concept.llama-1|LLaMA 1]]
+- [[concept.언어-모델-스케일링-법칙|언어 모델 스케일링 법칙]]
+- [[concept.perplexity|Perplexity]]
+- [[source.067|GPT-3와 문맥 내 학습]]
+- [[source.074|The Pile과 대규모 언어 모델 학습 말뭉치]]
+- [[source.089|LLaMA 1과 제한적 공개 가중치 연구 배포]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[concept.transformer|Transformer]]
+- [[analysis.총-매개변수와-활성-계산량은-같은-축인가|총 매개변수와 활성 계산량은 같은 축인가]]

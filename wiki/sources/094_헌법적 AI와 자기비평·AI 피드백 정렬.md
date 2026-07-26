@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.094
 page_type: source
 title: 헌법적 AI와 자기비평·AI 피드백 정렬
@@ -15,11 +15,13 @@ tags:
   - domain/nlp
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/094_Constitutional AI Principle-Based Alignment Through Self-Critique.ko.md'
-  - 'raw/094_Constitutional AI Principle-Based Alignment Through Self-Critique.commentary.ko.md'
+  - raw/094_Constitutional AI Principle-Based Alignment Through Self-Critique.ko.md
+  - raw/094_Constitutional AI Principle-Based Alignment Through Self-Critique.commentary.ko.md
 evidence:
   - source_id: bai-et-al-2022-constitutional-ai
     locator: 'Abstract, §§1–4·6과 Figures 1–9·Appendices B–C·E의 2022년 공개 시점, 438개 HHH 비교, SL-CAI·RL-CAI 자료·절차·원칙·Elo 평가·비평·Goodharting·한계'
@@ -30,18 +32,30 @@ evidence:
   - source_id: anthropic-cip-2023-collective-cai
     locator: '2023-10-17, Designing a Public Input Process·Training and Evaluating a Model·Lessons Learned의 약 1,000명·1,127개 진술·38,252표, Public/Standard model과 참여·편집 한계'
     relation: contextualizes
-related:
-  - concept.헌법적-ai
-  - concept.rlhf
-  - source.056
-  - source.077
-  - analysis.평가-지표와-모델-유인
+relations:
+  - target: concept.헌법적-ai
+    kind: related
+  - target: source.056
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.rlhf
+    - target: source.077
+  assumed_knowledge: 없음
+  outcomes:
+    - '2022년 논문의 SL-CAI와 RL-CAI를 구분하고, AI가 만든 유해성 선호와 사람이 만든 유용성 선호가 어떻게 합쳐졌는지 설명하며, 명시적 원칙의 가독성을 모델 내부의 도덕 추론이나 완전한 해석 가능성과 구별할 수 있다.'
+  next:
+    - target: analysis.평가-지표와-모델-유인
+      reason: 자동 평가 지표는 무엇을 보상하는가 — 학습된 평가자 점수가 정책의 보상이 될 때 proxy와 Goodharting 위험을 넓게 살핀다.
 ---
 # 헌법적 AI와 자기비평·AI 피드백 정렬
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[인간 피드백 강화학습]], [[077_InstructGPT와 인간 선호 정렬]]<br>
+> **선수 지식:** [[concept.rlhf|인간 피드백 강화학습]], [[source.077|InstructGPT와 인간 선호 정렬]]<br>
 > **읽고 나면:** 2022년 논문의 SL-CAI와 RL-CAI를 구분하고, AI가 만든 유해성 선호와 사람이 만든 유용성 선호가 어떻게 합쳐졌는지 설명하며, 명시적 원칙의 가독성을 모델 내부의 도덕 추론이나 완전한 해석 가능성과 구별할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -186,9 +200,7 @@ Public constitution model과 Anthropic-written Standard constitution model은 �
 
 ### 다음 문서
 
-- [[인간 피드백 강화학습]] — 사람 비교가 보상 model과 정책 갱신에 들어가는 계보에서 CAI의 변경 지점을 본다.
-- [[077_InstructGPT와 인간 선호 정렬]] — 사람 순위 기반 reward model·PPO 파이프라인과 AI 유해성 선호의 혼합을 비교한다.
-- [[자동 평가 지표는 무엇을 보상하는가]] — 학습된 평가자 점수가 정책의 보상이 될 때 proxy와 Goodharting 위험을 넓게 살핀다.
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]] — 학습된 평가자 점수가 정책의 보상이 될 때 proxy와 Goodharting 위험을 넓게 살핀다.
 
 ## 출처
 
@@ -200,8 +212,8 @@ Public constitution model과 Anthropic-written Standard constitution model은 �
 
 ## 관련 항목
 
-- [[헌법적 AI]]
-- [[인간 피드백 강화학습]]
-- [[056_RLHF 토대와 인간 선호 기반 보상 학습]]
-- [[077_InstructGPT와 인간 선호 정렬]]
-- [[자동 평가 지표는 무엇을 보상하는가]]
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]]
+- [[concept.rlhf|인간 피드백 강화학습]]
+- [[source.077|InstructGPT와 인간 선호 정렬]]
+- [[concept.헌법적-ai|헌법적 AI]]
+- [[source.056|RLHF 토대와 인간 선호 기반 보상 학습]]

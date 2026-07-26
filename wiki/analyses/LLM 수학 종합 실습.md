@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis.llm-수학-종합-실습
 page_type: analysis
 title: LLM 수학 종합 실습
@@ -14,15 +14,17 @@ tags:
   - domain/mathematics
 created: '2026-07-24'
 updated: '2026-07-24'
-lifecycle: active
-verification: partial
+editorial_status: active
+review:
+  evidence_coverage: partial
+  content_mode: synthesis
 artifacts:
-  - 'raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.ko.md'
-  - 'raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.commentary.ko.md'
+  - raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.ko.md
+  - raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.commentary.ko.md
   - raw/018_Backpropagation - Training Deep Neural Networks.ko.md
   - raw/018_Backpropagation - Training Deep Neural Networks.commentary.ko.md
-  - 'raw/055_The Transformer Attention Is All You Need.ko.md'
-  - 'raw/055_The Transformer Attention Is All You Need.commentary.ko.md'
+  - raw/055_The Transformer Attention Is All You Need.ko.md
+  - raw/055_The Transformer Attention Is All You Need.commentary.ko.md
 evidence:
   - source_id: bengio-et-al-2003-nplm
     locator: 'JMLR 3, pp. 1141–1143의 distributed word feature·softmax 다음 단어 확률·penalized log-likelihood 학습'
@@ -31,26 +33,47 @@ evidence:
     locator: 'pp. 5998–6002, 특히 §§3.1–3.3의 scaled dot-product attention·residual·position-wise FFN'
     relation: contextualizes
   - source_id: rumelhart-hinton-williams-1986-pdp
-    locator: 'pp. 322–328의 합성된 오차 함수에 대한 가중치 변화율과 일반화 델타 규칙'
+    locator: pp. 322–328의 합성된 오차 함수에 대한 가중치 변화율과 일반화 델타 규칙
     relation: contextualizes
-related:
-  - analysis.llm을-만든-수학
-  - concept.단어-임베딩
-  - concept.어텐션-메커니즘
-  - concept.잔차-연결
-  - concept.layer-normalization
-  - concept.활성화-함수
-  - concept.소프트맥스
-  - concept.로그-가능도
-  - concept.역전파
-  - concept.경사하강법
-  - concept.transformer
+relations:
+  - target: concept.단어-임베딩
+    kind: related
+  - target: concept.어텐션-메커니즘
+    kind: related
+  - target: concept.잔차-연결
+    kind: related
+  - target: concept.layer-normalization
+    kind: related
+  - target: concept.활성화-함수
+    kind: related
+  - target: concept.소프트맥스
+    kind: related
+  - target: concept.로그-가능도
+    kind: related
+  - target: concept.역전파
+    kind: related
+  - target: concept.경사하강법
+    kind: related
+  - target: concept.transformer
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: preprofessional
+  prerequisites:
+    - target: analysis.llm을-만든-수학
+  assumed_knowledge: 의 다섯 단계와 각 owner의 마스터리 연습 통과
+  outcomes:
+    - '처음 보는 숫자에서 token ID→attention→residual→LayerNorm→FFN→softmax NLL→전체 출력 gradient를 독립 계산하고, 틀린 축·shape·부호를 해당 선수 개념으로 역추적할 수 있다.'
+  next:
+    - target: concept.대규모-언어-모델
+      reason: 대규모 언어 모델 — 이 손계산이 생략한 자료·규모·시스템·평가 조건으로 범위를 넓힌다.
 ---
 # LLM 수학 종합 실습
 
 > [!note] 학습 안내
-> **난이도:** 중급 → 준전문가 입문<br>
-> **선수 지식:** [[LLM을 만든 수학]]의 다섯 단계와 각 owner의 마스터리 연습 통과<br>
+> **난이도:** 중급 → 준전문가<br>
+> **선수 지식:** [[analysis.llm을-만든-수학|LLM을 만든 수학]]<br>
 > **읽고 나면:** 처음 보는 숫자에서 token ID→attention→residual→LayerNorm→FFN→softmax NLL→전체 출력 gradient를 독립 계산하고, 틀린 축·shape·부호를 해당 선수 개념으로 역추적할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -381,8 +404,7 @@ $$
 
 ### 다음 문서
 
-- [[LLM을 만든 수학]] — 전체 개념 지도로 돌아가 각 owner와 실제 LLM의 생략 조건을 다시 연결한다.
-- [[대규모 언어 모델]] — 이 손계산이 생략한 자료·규모·시스템·평가 조건으로 범위를 넓힌다.
+- [[concept.대규모-언어-모델|대규모 언어 모델]] — 이 손계산이 생략한 자료·규모·시스템·평가 조건으로 범위를 넓힌다.
 
 ## 출처
 
@@ -395,14 +417,15 @@ $$
 
 ## 관련 항목
 
-- [[LLM을 만든 수학]]
-- [[단어 임베딩]]
-- [[어텐션 메커니즘]]
-- [[잔차 연결]]
-- [[Layer Normalization]]
-- [[활성화 함수]]
-- [[Transformer]]
-- [[소프트맥스]]
-- [[로그가능도]]
-- [[역전파]]
-- [[경사하강법]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[analysis.llm을-만든-수학|LLM을 만든 수학]]
+- [[concept.단어-임베딩|단어 임베딩]]
+- [[concept.어텐션-메커니즘|어텐션 메커니즘]]
+- [[concept.잔차-연결|잔차 연결]]
+- [[concept.layer-normalization|Layer Normalization]]
+- [[concept.활성화-함수|활성화 함수]]
+- [[concept.소프트맥스|소프트맥스]]
+- [[concept.로그-가능도|로그가능도]]
+- [[concept.역전파|역전파]]
+- [[concept.경사하강법|경사하강법]]
+- [[concept.transformer|Transformer]]

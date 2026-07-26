@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.엔트로피-교차-엔트로피-kl-발산
 page_type: concept
 title: 엔트로피·교차 엔트로피·KL 발산
@@ -15,34 +15,48 @@ tags:
   - domain/machine-learning
 created: '2026-07-23'
 updated: '2026-07-23'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts: []
 evidence:
   - source_id: shannon-1948
     locator: 'Part I, §6의 entropy 정의와 로그 밑에 따른 단위'
     relation: supports
   - source_id: kullback-leibler-1951
-    locator: 'pp. 79–82의 두 분포를 구별하는 information measure 정의와 성질'
+    locator: pp. 79–82의 두 분포를 구별하는 information measure 정의와 성질
     relation: supports
   - source_id: chen-goodman-1998
-    locator: '§1.1의 cross-entropy와 perplexity 정의'
+    locator: §1.1의 cross-entropy와 perplexity 정의
     relation: supports
   - source_id: bengio-et-al-2003-nplm
     locator: 'JMLR 3, pp. 1141–1143의 다음 단어 확률과 log-likelihood 학습'
     relation: contextualizes
-related:
-  - concept.확률
-  - concept.지수와-로그
-  - concept.로그-가능도
-  - concept.소프트맥스
-  - concept.perplexity
+relations:
+  - target: concept.소프트맥스
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.확률
+    - target: concept.지수와-로그
+  assumed_knowledge: 없음
+  outcomes:
+    - '한 분포의 평균 정보량, 실제 분포와 모델 분포의 교차 엔트로피·KL 발산, one-hot 정답에서 NLL과의 관계를 작은 분포로 계산하고 구분할 수 있다.'
+  next:
+    - target: concept.로그-가능도
+      reason: 로그가능도 — one-hot 교차 엔트로피가 실제 토큰의 음의 로그가능도와 어떻게 같은 식이 되는지 계산한다.
+    - target: concept.perplexity
+      reason: Perplexity — 토큰 평균 교차 엔트로피를 왜 다시 지수화해 평가 지표로 쓰는지 이어서 배운다.
 ---
 # 엔트로피·교차 엔트로피·KL 발산
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[확률]], [[지수와 로그]], [[로그가능도]]<br>
+> **선수 지식:** [[concept.확률|확률]], [[concept.지수와-로그|지수와 로그]]<br>
 > **읽고 나면:** 한 분포의 평균 정보량, 실제 분포와 모델 분포의 교차 엔트로피·KL 발산, one-hot 정답에서 NLL과의 관계를 작은 분포로 계산하고 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -201,8 +215,8 @@ Shannon은 확률분포의 평균 정보량을 로그 합으로 정의했고, Ku
 
 ### 다음 문서
 
-- [[로그가능도]] — one-hot 교차 엔트로피가 실제 토큰의 음의 로그가능도와 어떻게 같은 식이 되는지 계산한다.
-- [[Perplexity]] — 토큰 평균 교차 엔트로피를 왜 다시 지수화해 평가 지표로 쓰는지 이어서 배운다.
+- [[concept.로그-가능도|로그가능도]] — one-hot 교차 엔트로피가 실제 토큰의 음의 로그가능도와 어떻게 같은 식이 되는지 계산한다.
+- [[concept.perplexity|Perplexity]] — 토큰 평균 교차 엔트로피를 왜 다시 지수화해 평가 지표로 쓰는지 이어서 배운다.
 
 ## 출처
 
@@ -213,8 +227,8 @@ Shannon은 확률분포의 평균 정보량을 로그 합으로 정의했고, Ku
 
 ## 관련 항목
 
-- [[확률]]
-- [[지수와 로그]]
-- [[로그가능도]]
-- [[소프트맥스]]
-- [[Perplexity]]
+- [[concept.로그-가능도|로그가능도]]
+- [[concept.perplexity|Perplexity]]
+- [[concept.확률|확률]]
+- [[concept.지수와-로그|지수와 로그]]
+- [[concept.소프트맥스|소프트맥스]]

@@ -1,9 +1,12 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.layer-normalization
 page_type: concept
 title: Layer Normalization
-aliases: [LayerNorm, 층 정규화, 레이어 정규화]
+aliases:
+  - LayerNorm
+  - 층 정규화
+  - 레이어 정규화
 tags:
   - type/concept
   - domain/ai
@@ -13,37 +16,54 @@ tags:
   - domain/mathematics
 created: '2026-07-18'
 updated: '2026-07-24'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md'
-  - 'raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md'
+  - raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md
+  - raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md
 evidence:
   - source_id: ba-kiros-hinton-2016-layer-normalization
     locator: '초록과 §§2–3의 layer mean·variance·gain/bias와 recurrent formulation, §§4–5의 실험'
     relation: supports
   - source_id: vaswani-et-al-2017-attention
-    locator: '§3.1의 post-LN Add & Norm'
+    locator: §3.1의 post-LN Add & Norm
     relation: contextualizes
   - source_id: xiong-et-al-2020-transformer-layernorm
-    locator: '초록과 §§2–4의 Post-LN·Pre-LN 정의와 초기 gradient 분석'
+    locator: 초록과 §§2–4의 Post-LN·Pre-LN 정의와 초기 gradient 분석
     relation: supplements
   - source_id: mit-ocw-6-012-lecture-6-2018
-    locator: '§6.2의 평균으로부터의 제곱 편차로 정의한 분산'
+    locator: §6.2의 평균으로부터의 제곱 편차로 정의한 분산
     relation: contextualizes
-related:
-  - source.049
-  - concept.확률변수-확률분포-기대값-분산
-  - concept.batch-normalization
-  - concept.rmsnorm
-  - concept.잔차-연결
-  - concept.transformer
+relations:
+  - target: source.049
+    kind: related
+  - target: concept.batch-normalization
+    kind: related
+  - target: concept.잔차-연결
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.벡터-행렬-텐서와-shape
+    - target: concept.확률변수-확률분포-기대값-분산
+  assumed_knowledge: 의 평균 분산 구분
+  outcomes:
+    - 'LayerNorm이 한 사례의 feature 축에서 평균·분산을 계산하는 정확한 shape, $\epsilon$·$\gamma$·$\beta$의 역할, 그리고 Post-LN·Pre-LN의 잔차 경로 차이를 숫자 예와 함께 설명할 수 있다.'
+  next:
+    - target: concept.rmsnorm
+      reason: RMSNorm — mean centering을 제거하고 RMS만으로 scale을 조정하는 변형을 비교한다.
+    - target: concept.transformer
+      reason: Transformer — LayerNorm 위치가 residual·attention·MLP와 결합되는 block을 본다.
 ---
 # Layer Normalization
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[벡터·행렬·텐서와 shape]], [[확률변수·확률분포·기대값·분산]]의 평균·분산 구분<br>
+> **선수 지식:** [[concept.벡터-행렬-텐서와-shape|벡터·행렬·텐서와 shape]], [[concept.확률변수-확률분포-기대값-분산|확률변수·확률분포·기대값·분산]]<br>
 > **읽고 나면:** LayerNorm이 한 사례의 feature 축에서 평균·분산을 계산하는 정확한 shape, $\epsilon$·$\gamma$·$\beta$의 역할, 그리고 Post-LN·Pre-LN의 잔차 경로 차이를 숫자 예와 함께 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -205,8 +225,8 @@ $$
 
 ### 다음 문서
 
-- [[RMSNorm]] — mean centering을 제거하고 RMS만으로 scale을 조정하는 변형을 비교한다.
-- [[Transformer]] — LayerNorm 위치가 residual·attention·MLP와 결합되는 block을 본다.
+- [[concept.rmsnorm|RMSNorm]] — mean centering을 제거하고 RMS만으로 scale을 조정하는 변형을 비교한다.
+- [[concept.transformer|Transformer]] — LayerNorm 위치가 residual·attention·MLP와 결합되는 block을 본다.
 
 ## 출처
 
@@ -218,9 +238,10 @@ $$
 
 ## 관련 항목
 
-- [[049_층 정규화와 시퀀스 모델의 배치 독립성]]
-- [[확률변수·확률분포·기대값·분산]]
-- [[Batch Normalization]]
-- [[RMSNorm]]
-- [[잔차 연결]]
-- [[Transformer]]
+- [[concept.rmsnorm|RMSNorm]]
+- [[concept.transformer|Transformer]]
+- [[concept.벡터-행렬-텐서와-shape|벡터·행렬·텐서와 shape]]
+- [[concept.확률변수-확률분포-기대값-분산|확률변수·확률분포·기대값·분산]]
+- [[source.049|층 정규화와 시퀀스 모델의 배치 독립성]]
+- [[concept.batch-normalization|Batch Normalization]]
+- [[concept.잔차-연결|잔차 연결]]

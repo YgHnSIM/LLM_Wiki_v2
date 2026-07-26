@@ -64,7 +64,7 @@ test('autocomplete uses the compact index, keeps one keyboard cursor, and relati
   expect(requests.some((url) => url.endsWith('/search-index.json'))).toBe(false);
 
   await page.goto(siteUrl('/sources/'));
-  const sourceHref = await page.locator('a[href*="/sources/006-"]').first().getAttribute('href');
+  const sourceHref = await page.locator('a[href*="/sources/006/"]').first().getAttribute('href');
   await page.goto(sourceHref);
   expect(requests.some((url) => url.endsWith('/relationship-data.json'))).toBe(false);
 

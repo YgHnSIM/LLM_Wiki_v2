@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: entity.b-f-스키너
 page_type: entity
 title: B.F. 스키너
@@ -14,8 +14,10 @@ tags:
   - domain/ai
 created: '2026-05-14'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/005_Chomsky's Syntactic Structures.md
   - raw/005_Chomsky's Syntactic Structures.commentary.md
@@ -26,11 +28,24 @@ evidence:
   - source_id: chomsky-1959
     locator: pp. 26–58
     relation: supports
-related:
-  - entity.노엄-촘스키
-  - concept.행동주의-언어관
-  - concept.자극의-빈곤
-  - concept.인지-혁명
+relations:
+  - target: entity.노엄-촘스키
+    kind: related
+  - target: concept.행동주의-언어관
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites: []
+  assumed_knowledge: 없음
+  outcomes:
+    - 스키너가 언어 행동을 조작적 조건형성으로 분석한 방식과 촘스키 비판의 역사적 범위를 설명할 수 있다.
+  next:
+    - target: concept.자극의-빈곤
+      reason: 자극의 빈곤 — 행동주의적 설명을 비판하며 제시된 입력과 문법 지식 사이의 간극을 살핀다.
+    - target: concept.인지-혁명
+      reason: 인지 혁명 — 행동 중심 설명과 내부 표상 중심 접근의 대비를 더 넓은 역사에서 본다.
 ---
 # B.F. 스키너
 
@@ -77,8 +92,8 @@ related:
 
 ### 다음 문서
 
-- [[자극의 빈곤]] — 행동주의적 설명을 비판하며 제시된 입력과 문법 지식 사이의 간극을 살핀다.
-- [[인지 혁명]] — 행동 중심 설명과 내부 표상 중심 접근의 대비를 더 넓은 역사에서 본다.
+- [[concept.자극의-빈곤|자극의 빈곤]] — 행동주의적 설명을 비판하며 제시된 입력과 문법 지식 사이의 간극을 살핀다.
+- [[concept.인지-혁명|인지 혁명]] — 행동 중심 설명과 내부 표상 중심 접근의 대비를 더 넓은 역사에서 본다.
 
 ## 출처
 
@@ -87,7 +102,7 @@ related:
 
 ## 관련 항목
 
-- [[노엄 촘스키]]
-- [[행동주의 언어관]]
-- [[자극의 빈곤]]
-- [[인지 혁명]]
+- [[concept.자극의-빈곤|자극의 빈곤]]
+- [[concept.인지-혁명|인지 혁명]]
+- [[entity.노엄-촘스키|노엄 촘스키]]
+- [[concept.행동주의-언어관|행동주의 언어관]]

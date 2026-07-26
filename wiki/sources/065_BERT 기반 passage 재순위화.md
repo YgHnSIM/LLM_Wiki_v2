@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.065
 page_type: source
 title: BERT 기반 passage 재순위화
@@ -15,11 +15,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-21'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.ko.md'
-  - 'raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.commentary.ko.md'
+  - raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.ko.md
+  - raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.commentary.ko.md
 evidence:
   - source_id: bert-2019
     locator: '§3과 Figure 1의 문장쌍 결합 입력·[CLS] sequence classification·전체 미세조정, Appendix A.2의 최대 512 WordPiece 입력'
@@ -33,22 +35,38 @@ evidence:
   - source_id: google-search-2019-bert
     locator: '2019-10-25, “Applying BERT models to Search”·“Cracking your queries”의 ranking·featured snippets 적용과 미국 영어 검색 10건 중 1건이라는 공개 범위'
     relation: contextualizes
-related:
-  - source.073
-  - concept.다중-벡터-검색
-  - concept.교차-인코더-재순위화
-  - concept.bert
-  - concept.신경-정보-검색
-  - concept.bm25
-  - source.052
-  - source.058
-  - analysis.검색-근거-독해-답
+relations:
+  - target: source.073
+    kind: related
+  - target: concept.다중-벡터-검색
+    kind: related
+  - target: concept.bm25
+    kind: related
+  - target: source.052
+    kind: related
+  - target: source.058
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.bert
+    - target: concept.신경-정보-검색
+  assumed_knowledge: 없음
+  outcomes:
+    - BERT가 검색 후보를 공동 부호화해 다시 정렬하는 방식과 first-stage retrieval·dual encoder·encoder–decoder cross-attention의 차이를 설명할 수 있다.
+  next:
+    - target: concept.교차-인코더-재순위화
+      reason: 교차 인코더 재순위화 — 공동 부호화의 계산 경계와 dual encoder 대비를 개념으로 정리한다.
+    - target: analysis.검색-근거-독해-답
+      reason: '검색은 근거를 찾고 독해는 답을 찾는다 — 후보 누락, 재순위 실패와 reader 실패를 단계별로 진단한다.'
 ---
 # BERT 기반 passage 재순위화
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[BERT]], [[신경 정보 검색]], [[BM25]]<br>
+> **선수 지식:** [[concept.bert|BERT]], [[concept.신경-정보-검색|신경 정보 검색]]<br>
 > **읽고 나면:** BERT가 검색 후보를 공동 부호화해 다시 정렬하는 방식과 first-stage retrieval·dual encoder·encoder–decoder cross-attention의 차이를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -165,8 +183,8 @@ MS MARCO의 question-like query와 TREC-CAR passage 결과를 웹 문서·상품
 
 ### 다음 문서
 
-- [[교차 인코더 재순위화]] — 공동 부호화의 계산 경계와 dual encoder 대비를 개념으로 정리한다.
-- [[검색은 근거를 찾고 독해는 답을 찾는다]] — 후보 누락, 재순위 실패와 reader 실패를 단계별로 진단한다.
+- [[concept.교차-인코더-재순위화|교차 인코더 재순위화]] — 공동 부호화의 계산 경계와 dual encoder 대비를 개념으로 정리한다.
+- [[analysis.검색-근거-독해-답|검색은 근거를 찾고 독해는 답을 찾는다]] — 후보 누락, 재순위 실패와 reader 실패를 단계별로 진단한다.
 
 ## 출처
 
@@ -179,12 +197,12 @@ MS MARCO의 question-like query와 TREC-CAR passage 결과를 웹 문서·상품
 
 ## 관련 항목
 
-- [[교차 인코더 재순위화]]
-- [[다중 벡터 검색]]
-- [[073_ColBERT와 다중 벡터 검색]]
-- [[BERT]]
-- [[신경 정보 검색]]
-- [[BM25]]
-- [[052_신경 정보 검색과 의미 대응]]
-- [[058_BERT의 마스크드 양방향 사전 학습]]
-- [[검색은 근거를 찾고 독해는 답을 찾는다]]
+- [[concept.교차-인코더-재순위화|교차 인코더 재순위화]]
+- [[analysis.검색-근거-독해-답|검색은 근거를 찾고 독해는 답을 찾는다]]
+- [[concept.bert|BERT]]
+- [[concept.신경-정보-검색|신경 정보 검색]]
+- [[source.073|ColBERT와 다중 벡터 검색]]
+- [[concept.다중-벡터-검색|다중 벡터 검색]]
+- [[concept.bm25|BM25]]
+- [[source.052|신경 정보 검색과 의미 대응]]
+- [[source.058|BERT의 마스크드 양방향 사전 학습]]

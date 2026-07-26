@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.bloom
 page_type: concept
 title: BLOOM
@@ -16,13 +16,15 @@ tags:
   - domain/academia
 created: '2026-07-21'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.ko.md'
-  - 'raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.commentary.ko.md'
-  - 'raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.ko.md'
-  - 'raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.commentary.ko.md'
+  - raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.ko.md
+  - raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.commentary.ko.md
+  - raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.ko.md
+  - raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.commentary.ko.md
 evidence:
   - source_id: bigscience-workshop-2022-bloom
     locator: '초록, §§2.2·3.1–3.5·4.2–4.9·5와 Tables 1·3의 model 정의, ROOTS, 구조·tokenizer·학습량, 평가 범위'
@@ -37,36 +39,57 @@ evidence:
     locator: 'Preamble, §I.2·6, §§II–III와 Attachment A의 model·data·code 역할 구분과 이용·재배포 제한'
     relation: supports
   - source_id: akiki-et-al-2022-bigscience-case-study
-    locator: '§3과 Figure 1의 등록·직접 기여·지리 정보별 참여자 집계와 협업 한계'
+    locator: §3과 Figure 1의 등록·직접 기여·지리 정보별 참여자 집계와 협업 한계
     relation: contextualizes
   - source_id: meta-2022-opt-175b-release
-    locator: '2022-05-03 OPT-175B 연구용 공개 발표로 확인하는 동시대 공개 model의 선행 사례'
+    locator: 2022-05-03 OPT-175B 연구용 공개 발표로 확인하는 동시대 공개 model의 선행 사례
     relation: contextualizes
   - source_id: joshi-et-al-2020-linguistic-diversity
-    locator: 'pp. 6282–6293의 언어별 자원 등급·연구 및 자원 분포와 화자 수의 비동일성'
+    locator: pp. 6282–6293의 언어별 자원 등급·연구 및 자원 분포와 화자 수의 비동일성
     relation: contextualizes
   - source_id: blasi-et-al-2022-systematic-inequalities
-    locator: 'pp. 5486–5505의 세계 언어별 MT·NLU·QA·TTS 등 기술 효용 격차와 사회·학술 요인 분석'
+    locator: pp. 5486–5505의 세계 언어별 MT·NLU·QA·TTS 등 기술 효용 격차와 사회·학술 요인 분석
     relation: contextualizes
-related:
-  - source.082
-  - source.110
-  - source.062
-  - source.074
-  - source.076
-  - source.079
-  - concept.대규모-언어-모델
-  - concept.말뭉치-기반-학습
-  - concept.transformer
-  - concept.저자원-언어
-  - analysis.데이터-품질과-분포-다양성은-같은-축인가
-  - analysis.언어-수와-언어-형평성은-같은-축인가
+relations:
+  - target: source.110
+    kind: related
+  - target: source.062
+    kind: related
+  - target: source.076
+    kind: related
+  - target: source.079
+    kind: related
+  - target: concept.말뭉치-기반-학습
+    kind: related
+  - target: concept.저자원-언어
+    kind: related
+  - target: analysis.데이터-품질과-분포-다양성은-같은-축인가
+    kind: related
+  - target: analysis.언어-수와-언어-형평성은-같은-축인가
+    kind: related
+  - target: concept.서브워드-토큰화
+    kind: background
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.transformer
+    - target: concept.대규모-언어-모델
+  assumed_knowledge: 없음
+  outcomes:
+    - 'BLOOM을 176B decoder-only model, ROOTS, 공공 compute, 공개 artifact와 RAIL 조건의 결합으로 설명하고, 다국어·개방·민주화에 관한 서로 다른 평가 질문을 세울 수 있다.'
+  next:
+    - target: source.082
+      reason: 082BLOOM과 공개 접근 다국어 LLM — raw 서사와 1차 자료를 대조한 기술·역사 정정을 확인한다.
+    - target: source.074
+      reason: '074The Pile과 대규모 언어 모델 학습 말뭉치 — 큰 corpus의 구성, 가중 분포, license와 공개 범위를 비교한다.'
 ---
 # BLOOM
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[Transformer]], [[대규모 언어 모델]], [[서브워드 토큰화]]<br>
+> **선수 지식:** [[concept.transformer|Transformer]], [[concept.대규모-언어-모델|대규모 언어 모델]]<br>
 > **읽고 나면:** BLOOM을 176B decoder-only model, ROOTS, 공공 compute, 공개 artifact와 RAIL 조건의 결합으로 설명하고, 다국어·개방·민주화에 관한 서로 다른 평가 질문을 세울 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -194,8 +217,8 @@ BLOOM의 1차 자료가 직접 지지하는 것은 checkpoint와 code·문서에
 
 ### 다음 문서
 
-- [[082_BLOOM과 공개 접근 다국어 LLM]] — raw 서사와 1차 자료를 대조한 기술·역사 정정을 확인한다.
-- [[074_The Pile과 대규모 언어 모델 학습 말뭉치]] — 큰 corpus의 구성, 가중 분포, license와 공개 범위를 비교한다.
+- [[source.082|BLOOM과 공개 접근 다국어 LLM]] — 082BLOOM과 공개 접근 다국어 LLM — raw 서사와 1차 자료를 대조한 기술·역사 정정을 확인한다.
+- [[source.074|The Pile과 대규모 언어 모델 학습 말뭉치]] — 074The Pile과 대규모 언어 모델 학습 말뭉치 — 큰 corpus의 구성, 가중 분포, license와 공개 범위를 비교한다.
 
 ## 출처
 
@@ -213,15 +236,16 @@ BLOOM의 1차 자료가 직접 지지하는 것은 checkpoint와 code·문서에
 
 ## 관련 항목
 
-- [[082_BLOOM과 공개 접근 다국어 LLM]]
-- [[062_XLM과 교차 언어 사전 학습]]
-- [[074_The Pile과 대규모 언어 모델 학습 말뭉치]]
-- [[076_파운데이션 모델 보고서와 AI 생태계]]
-- [[079_HELM과 다차원 언어 모델 평가]]
-- [[대규모 언어 모델]]
-- [[말뭉치 기반 학습]]
-- [[Transformer]]
-- [[데이터 품질과 분포 다양성은 같은 축인가]]
-- [[저자원 언어]]
-- [[110_저자원 언어 LLM의 성능 격차와 전이·평가 경계]]
-- [[언어 수와 언어 형평성은 같은 축인가]]
+- [[source.082|BLOOM과 공개 접근 다국어 LLM]]
+- [[source.074|The Pile과 대규모 언어 모델 학습 말뭉치]]
+- [[concept.transformer|Transformer]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[source.110|저자원 언어 LLM의 성능 격차와 전이·평가 경계]]
+- [[source.062|XLM과 교차 언어 사전 학습]]
+- [[source.076|파운데이션 모델 보고서와 AI 생태계]]
+- [[source.079|HELM과 다차원 언어 모델 평가]]
+- [[concept.말뭉치-기반-학습|말뭉치 기반 학습]]
+- [[concept.저자원-언어|저자원 언어]]
+- [[analysis.데이터-품질과-분포-다양성은-같은-축인가|데이터 품질과 분포 다양성은 같은 축인가]]
+- [[analysis.언어-수와-언어-형평성은-같은-축인가|언어 수와 언어 형평성은 같은 축인가]]
+- [[concept.서브워드-토큰화|서브워드 토큰화]]

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.059
 page_type: source
 title: GPT-1과 GPT-2의 전이 방식 변화
@@ -14,11 +14,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-20'
 updated: '2026-07-23'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md'
-  - 'raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md'
+  - raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md
+  - raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md
 evidence:
   - source_id: gpt-2018
     locator: '초록과 §§1–3의 자기회귀 사전 학습·과제별 입력 변환·지도 미세조정, §§4–5와 Tables 2–7의 12개 과제·ablation·zero-shot 분석'
@@ -30,22 +32,37 @@ evidence:
     locator: '2019-02-14 original post와 2019-05 interim update의 117M·345M staged release, zero-shot·sample failure·policy 설명'
     relation: contextualizes
   - source_id: openai-2019-gpt2-1-5b-release
-    locator: '2019-11-05 final model release의 1.5B 모델 weights·code 공개와 staged release 결말'
+    locator: 2019-11-05 final model release의 1.5B 모델 weights·code 공개와 staged release 결말
     relation: contextualizes
-related:
-  - concept.gpt-1-gpt-2
-  - concept.로그-가능도
-  - concept.자기회귀-생성
-  - concept.언어-모델-전이-학습
-  - concept.bert
-  - source.058
+relations:
+  - target: concept.자기회귀-생성
+    kind: related
+  - target: concept.언어-모델-전이-학습
+    kind: related
+  - target: concept.bert
+    kind: related
+  - target: source.058
+    kind: related
+learning:
+  difficulty:
+    entry: foundation
+    target: intermediate
+  prerequisites: []
+  assumed_knowledge: 'token 열, 조건부확률, 로그가능도와 가중치 갱신의 차이를 이 문서에서 실제 원 논문 설정으로 다시 만든다.'
+  outcomes:
+    - 'GPT-1의 $L1,L2,L3$가 무엇을 최대화했는지와 GPT-2가 zero-shot에서 무엇을 고정하고 무엇을 채점했는지를 원 논문의 자료·모델·평가 조건과 함께 설명할 수 있다.'
+  next:
+    - target: concept.gpt-1-gpt-2
+      reason: 'GPT-1과 GPT-2 — 두 모델의 목적함수, candidate scoring, perplexity와 후속 GPT-3 비교를 개념별 수식으로 더 자세히 따라간다.'
+    - target: concept.로그-가능도
+      reason: '로그가능도 — 사전 관측 확률이 관측 뒤의 가능도로 바뀌는 방향, NLL·Bayes·조건부 연쇄의 근거를 기초 계산으로 다시 본다.'
 ---
 # GPT-1과 GPT-2의 전이 방식 변화
 
 > [!note] 학습 안내
 > **난이도:** 기초 → 중급<br>
-> **선수 지식:** 없음 — token 열, 조건부확률, [[로그가능도]]와 가중치 갱신의 차이를 이 문서에서 실제 원 논문 설정으로 다시 만든다.<br>
-> **읽고 나면:** GPT-1의 $L_1,L_2,L_3$가 무엇을 최대화했는지와 GPT-2가 zero-shot에서 무엇을 고정하고 무엇을 채점했는지를 원 논문의 자료·모델·평가 조건과 함께 설명할 수 있다.
+> **선수 지식:** 없음 — token 열, 조건부확률, 로그가능도와 가중치 갱신의 차이를 이 문서에서 실제 원 논문 설정으로 다시 만든다.<br>
+> **읽고 나면:** GPT-1의 $L1,L2,L3$가 무엇을 최대화했는지와 GPT-2가 zero-shot에서 무엇을 고정하고 무엇을 채점했는지를 원 논문의 자료·모델·평가 조건과 함께 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
 
@@ -297,8 +314,8 @@ GPT-1과 BERT는 사전 학습 뒤 전체 fine-tuning을 한다는 인터페이�
 
 ### 다음 문서
 
-- [[GPT-1과 GPT-2]] — 두 모델의 목적함수, candidate scoring, perplexity와 후속 GPT-3 비교를 개념별 수식으로 더 자세히 따라간다.
-- [[로그가능도]] — 사전 관측 확률이 관측 뒤의 가능도로 바뀌는 방향, NLL·Bayes·조건부 연쇄의 근거를 기초 계산으로 다시 본다.
+- [[concept.gpt-1-gpt-2|GPT-1과 GPT-2]] — 두 모델의 목적함수, candidate scoring, perplexity와 후속 GPT-3 비교를 개념별 수식으로 더 자세히 따라간다.
+- [[concept.로그-가능도|로그가능도]] — 사전 관측 확률이 관측 뒤의 가능도로 바뀌는 방향, NLL·Bayes·조건부 연쇄의 근거를 기초 계산으로 다시 본다.
 
 ## 출처
 
@@ -311,9 +328,9 @@ GPT-1과 BERT는 사전 학습 뒤 전체 fine-tuning을 한다는 인터페이�
 
 ## 관련 항목
 
-- [[GPT-1과 GPT-2]]
-- [[로그가능도]]
-- [[자기회귀 생성]]
-- [[언어 모델 전이 학습]]
-- [[BERT]]
-- [[058_BERT의 마스크드 양방향 사전 학습]]
+- [[concept.gpt-1-gpt-2|GPT-1과 GPT-2]]
+- [[concept.로그-가능도|로그가능도]]
+- [[concept.자기회귀-생성|자기회귀 생성]]
+- [[concept.언어-모델-전이-학습|언어 모델 전이 학습]]
+- [[concept.bert|BERT]]
+- [[source.058|BERT의 마스크드 양방향 사전 학습]]

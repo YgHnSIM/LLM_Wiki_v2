@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: entity.ibm
 page_type: entity
 title: IBM
@@ -11,14 +11,16 @@ tags:
   - domain/ai
 created: '2026-05-08'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/003_Georgetown-IBM Machine.md
   - raw/022_IBM Statistical Machine Translation - From Rules to Data.ko.md
   - raw/022_IBM Statistical Machine Translation - From Rules to Data.commentary.ko.md
-  - 'raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.ko.md'
-  - 'raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.commentary.ko.md'
+  - raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.ko.md
+  - raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.commentary.ko.md
 evidence:
   - source_id: macdonald-1963
     locator: pp. 1–4
@@ -36,25 +38,40 @@ evidence:
     locator: 'AI Magazine 31(3), pp. 59–79의 IBM Research Watson·DeepQA 개발과 성능 보고'
     relation: supports
   - source_id: lewis-2012-watson-jeopardy-interface
-    locator: 'Watson과 Jeopardy 경기 시스템 사이의 전자·물리 인터페이스 설명'
+    locator: Watson과 Jeopardy 경기 시스템 사이의 전자·물리 인터페이스 설명
     relation: supports
   - source_id: ibm-watson-jeopardy-history
-    locator: '2011년 특별 경기·최종 점수·하드웨어·인터넷 조건에 대한 IBM 역사 기록'
+    locator: 2011년 특별 경기·최종 점수·하드웨어·인터넷 조건에 대한 IBM 역사 기록
     relation: contextualizes
-related:
-  - source.022
-  - source.040
-  - entity.georgetown-university
-  - concept.기계-번역
-  - concept.통계적-기계-번역
-  - concept.규칙-기반-기계-번역
-  - concept.ibm-watson
+relations:
+  - target: entity.georgetown-university
+    kind: related
+  - target: concept.통계적-기계-번역
+    kind: related
+  - target: concept.규칙-기반-기계-번역
+    kind: related
+  - target: concept.ibm-watson
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.기계-번역
+  assumed_knowledge: 없음
+  outcomes:
+    - 'IBM의 세 시기 언어·질의응답 프로젝트를 구분하고, 같은 기업의 연구를 하나의 연속 시스템으로 오해하면 안 되는 이유를 설명할 수 있다.'
+  next:
+    - target: source.022
+      reason: 022IBM 통계적 기계 번역과 데이터 기반 전환 — Hansard 병렬 자료와 확률 모델을 사용한 별도 연구 흐름을 자세히 본다.
+    - target: source.040
+      reason: 040IBM Watson과 Jeopardy 질의응답 — DeepQA의 후보 생성·근거 점수화와 경기 조건을 살핀다.
 ---
 # IBM
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[기계 번역]]<br>
+> **선수 지식:** [[concept.기계-번역|기계 번역]]<br>
 > **읽고 나면:** IBM의 세 시기 언어·질의응답 프로젝트를 구분하고, 같은 기업의 연구를 하나의 연속 시스템으로 오해하면 안 되는 이유를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -93,8 +110,8 @@ IBM은 초기 전자식 컴퓨터의 계산 능력을 언어 처리 과업에 �
 
 ### 다음 문서
 
-- [[022_IBM 통계적 기계 번역과 데이터 기반 전환]] — Hansard 병렬 자료와 확률 모델을 사용한 별도 연구 흐름을 자세히 본다.
-- [[040_IBM Watson과 Jeopardy 질의응답]] — DeepQA의 후보 생성·근거 점수화와 경기 조건을 살핀다.
+- [[source.022|IBM 통계적 기계 번역과 데이터 기반 전환]] — 022IBM 통계적 기계 번역과 데이터 기반 전환 — Hansard 병렬 자료와 확률 모델을 사용한 별도 연구 흐름을 자세히 본다.
+- [[source.040|IBM Watson과 Jeopardy 질의응답]] — 040IBM Watson과 Jeopardy 질의응답 — DeepQA의 후보 생성·근거 점수화와 경기 조건을 살핀다.
 
 ## 출처
 
@@ -110,10 +127,10 @@ IBM은 초기 전자식 컴퓨터의 계산 능력을 언어 처리 과업에 �
 
 ## 관련 항목
 
-- [[022_IBM 통계적 기계 번역과 데이터 기반 전환]]
-- [[040_IBM Watson과 Jeopardy 질의응답]]
-- [[Georgetown University]]
-- [[기계 번역]]
-- [[통계적 기계 번역]]
-- [[규칙 기반 기계 번역]]
-- [[IBM Watson]]
+- [[source.022|IBM 통계적 기계 번역과 데이터 기반 전환]]
+- [[source.040|IBM Watson과 Jeopardy 질의응답]]
+- [[concept.기계-번역|기계 번역]]
+- [[entity.georgetown-university|Georgetown University]]
+- [[concept.통계적-기계-번역|통계적 기계 번역]]
+- [[concept.규칙-기반-기계-번역|규칙 기반 기계 번역]]
+- [[concept.ibm-watson|IBM Watson]]

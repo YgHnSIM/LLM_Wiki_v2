@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.propbank
 page_type: concept
 title: PropBank
@@ -14,33 +14,47 @@ tags:
   - domain/machine-learning
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/038_PropBank - Semantic Role Labeling and Proposition Bank.ko.md'
-  - 'raw/038_PropBank - Semantic Role Labeling and Proposition Bank.commentary.ko.md'
+  - raw/038_PropBank - Semantic Role Labeling and Proposition Bank.ko.md
+  - raw/038_PropBank - Semantic Role Labeling and Proposition Bank.commentary.ko.md
 evidence:
   - source_id: palmer-et-al-2005-propbank
     locator: 'pp. 71–106, 특히 §§1–4의 역할집합·Arg0–Arg5·ArgM·Penn Treebank 노드 주석과 §5의 FrameNet 비교'
     relation: supports
   - source_id: carreras-marquez-2004-conll-srl
-    locator: 'pp. 89–97의 PropBank 기반 SRL 자료와 부분 구문 입력'
+    locator: pp. 89–97의 PropBank 기반 SRL 자료와 부분 구문 입력
     relation: contextualizes
   - source_id: carreras-marquez-2005-conll-srl
-    locator: 'pp. 152–164의 Penn Treebank·PropBank 학습·시험과 Brown 영역 밖 평가'
+    locator: pp. 152–164의 Penn Treebank·PropBank 학습·시험과 Brown 영역 밖 평가
     relation: contextualizes
-related:
-  - source.038
-  - concept.의미역-표지
-  - source.023
-  - concept.framenet
-  - source.030
+relations:
+  - target: source.038
+    kind: related
+  - target: source.030
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: source.023
+    - target: concept.framenet
+  assumed_knowledge: 없음
+  outcomes:
+    - PropBank의 roleset·번호형 논항과 Penn Treebank 결합 방식을 설명하고 FrameNet 및 자동 SRL과 구분할 수 있다.
+  next:
+    - target: concept.의미역-표지
+      reason: 의미역 표지 — 주석 자원에서 새 문장의 논항 경계와 역할을 예측하는 과제로 이동한다.
 ---
 # PropBank
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[023_Penn Treebank와 통계적 구문 분석]], [[FrameNet]]<br>
+> **선수 지식:** [[source.023|Penn Treebank와 통계적 구문 분석]], [[concept.framenet|FrameNet]]<br>
 > **읽고 나면:** PropBank의 roleset·번호형 논항과 Penn Treebank 결합 방식을 설명하고 FrameNet 및 자동 SRL과 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -97,7 +111,7 @@ PropBank는 문장 의미 전체가 아니다. 공지시, 양화, 사실성, 담
 
 ### 다음 문서
 
-- [[의미역 표지]] — 주석 자원에서 새 문장의 논항 경계와 역할을 예측하는 과제로 이동한다.
+- [[concept.의미역-표지|의미역 표지]] — 주석 자원에서 새 문장의 논항 경계와 역할을 예측하는 과제로 이동한다.
 
 ## 출처
 
@@ -109,8 +123,8 @@ PropBank는 문장 의미 전체가 아니다. 공지시, 양화, 사실성, 담
 
 ## 관련 항목
 
-- [[038_PropBank와 의미역 표지]]
-- [[의미역 표지]]
-- [[023_Penn Treebank와 통계적 구문 분석]]
-- [[FrameNet]]
-- [[030_FrameNet과 프레임 의미론]]
+- [[concept.의미역-표지|의미역 표지]]
+- [[source.023|Penn Treebank와 통계적 구문 분석]]
+- [[concept.framenet|FrameNet]]
+- [[source.038|PropBank와 의미역 표지]]
+- [[source.030|FrameNet과 프레임 의미론]]

@@ -59,7 +59,7 @@
 
 ## 5. 품질과 Git 경계
 
-- 신규 concept는 `verification: verified`가 되려면 핵심 주장을 직접 확인할 locator가 있어야 한다. 횡단 analysis는 기본 `verification: partial`로 시작한다.
+- 신규 concept는 `review.evidence_coverage: verified`가 되려면 핵심 주장을 직접 확인할 locator가 있어야 한다. 횡단 analysis는 기본 `review.evidence_coverage: partial`과 `review.content_mode: synthesis`로 시작한다.
 - `raw/`, 정규 source 번호, `C:\Vault\CS_Wiki`, 기존 첨부 파일은 수정하거나 staging하지 않는다.
 - CS_Wiki는 읽기와 맥락 링크에만 사용하고, LLM Wiki의 evidence 레지스트리에는 독립적인 1차 자료와 locator를 등록한다.
 - 각 공개 배치는 `learning:audit`, `sync:index`, `boundary:check`, `history:check`, `math:check`, `learning:audit:check`, `verify`, `git diff --check`, desktop·390×844 시각 검수를 통과한다.

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: analysis.llm을-만든-수학
 page_type: analysis
 title: LLM을 만든 수학
@@ -15,15 +15,17 @@ tags:
   - domain/mathematics
 created: '2026-07-23'
 updated: '2026-07-24'
-lifecycle: active
-verification: partial
+editorial_status: active
+review:
+  evidence_coverage: partial
+  content_mode: synthesis
 artifacts:
-  - 'raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.ko.md'
-  - 'raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.commentary.ko.md'
+  - raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.ko.md
+  - raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.commentary.ko.md
   - raw/018_Backpropagation - Training Deep Neural Networks.ko.md
   - raw/018_Backpropagation - Training Deep Neural Networks.commentary.ko.md
-  - 'raw/055_The Transformer Attention Is All You Need.ko.md'
-  - 'raw/055_The Transformer Attention Is All You Need.commentary.ko.md'
+  - raw/055_The Transformer Attention Is All You Need.ko.md
+  - raw/055_The Transformer Attention Is All You Need.commentary.ko.md
 evidence:
   - source_id: bengio-et-al-2003-nplm
     locator: 'JMLR 3, pp. 1141–1143의 distributed word feature·softmax 다음 단어 확률·penalized log-likelihood 학습'
@@ -32,42 +34,72 @@ evidence:
     locator: 'pp. 5998–6002, 특히 §3.1–3.2의 residual connection과 scaled dot-product attention'
     relation: supports
   - source_id: rumelhart-hinton-williams-1986-pdp
-    locator: 'pp. 322–328의 합성된 오차 함수에 대한 가중치 변화율과 일반화 델타 규칙'
+    locator: pp. 322–328의 합성된 오차 함수에 대한 가중치 변화율과 일반화 델타 규칙
     relation: supports
   - source_id: widrow-hoff-1960
-    locator: 'Adaptive Switching Circuits의 제곱오차 적응 갱신'
+    locator: Adaptive Switching Circuits의 제곱오차 적응 갱신
     relation: contextualizes
-related:
-  - analysis.llm-수학-종합-실습
-  - concept.단어-임베딩
-  - concept.어텐션-메커니즘
-  - concept.잔차-연결
-  - concept.소프트맥스
-  - concept.수치-안정성과-log-sum-exp
-  - concept.조건부-확률
-  - concept.로그-가능도
-  - concept.역전파
-  - concept.경사하강법
-  - concept.확률변수-확률분포-기대값-분산
-  - concept.adam-최적화기
-  - concept.특이값-분해와-저랭크-근사
-  - concept.활성화-함수
-  - concept.계산-복잡도와-비용-모델
-  - concept.표본추출-온도-top-k-top-p
-  - concept.rlhf
-  - concept.transformer
-  - concept.대규모-언어-모델
-  - source.035
-  - source.018
-  - source.055
-  - meta.llm-system-boundary-map
+relations:
+  - target: concept.단어-임베딩
+    kind: related
+  - target: concept.어텐션-메커니즘
+    kind: related
+  - target: concept.잔차-연결
+    kind: related
+  - target: concept.소프트맥스
+    kind: related
+  - target: concept.조건부-확률
+    kind: related
+  - target: concept.로그-가능도
+    kind: related
+  - target: concept.역전파
+    kind: related
+  - target: concept.경사하강법
+    kind: related
+  - target: concept.확률변수-확률분포-기대값-분산
+    kind: related
+  - target: concept.adam-최적화기
+    kind: related
+  - target: concept.특이값-분해와-저랭크-근사
+    kind: related
+  - target: concept.활성화-함수
+    kind: related
+  - target: concept.계산-복잡도와-비용-모델
+    kind: related
+  - target: concept.표본추출-온도-top-k-top-p
+    kind: related
+  - target: concept.rlhf
+    kind: related
+  - target: concept.transformer
+    kind: related
+  - target: source.035
+    kind: related
+  - target: source.018
+    kind: related
+  - target: source.055
+    kind: related
+  - target: meta.llm-system-boundary-map
+    kind: related
+learning:
+  difficulty:
+    entry: foundation
+    target: advanced
+  prerequisites: []
+  assumed_knowledge: 'token ID, 벡터, 확률, 손실과 gradient를 이 작은 계산 안에서 차례로 정의한다.'
+  outcomes:
+    - '두 token의 문맥이 attention·residual·정규화·FFN을 거쳐 다음 token 확률이 되고, NLL의 전체 출력층 gradient와 실제 Transformer shape로 확장되는 과정을 설명한 뒤 LLM 수학 종합 실습으로 독립 전이할 수 있다.'
+  next:
+    - target: analysis.llm-수학-종합-실습
+      reason: LLM 수학 종합 실습 — 새 숫자에서 lookup부터 gradient·실제 shape까지 무도움으로 연결하고 오류별 복습 경로를 판정한다.
+    - target: concept.수치-안정성과-log-sum-exp
+      reason: 수치 안정성과 log-sum-exp — softmax·NLL을 finite precision에서 계산할 때의 max shift·mask·blockwise 누적을 이어서 본다.
 ---
 # LLM을 만든 수학
 
 > [!note] 학습 안내
 > **난이도:** 기초 → 심화<br>
 > **선수 지식:** 없음 — token ID, 벡터, 확률, 손실과 gradient를 이 작은 계산 안에서 차례로 정의한다.<br>
-> **읽고 나면:** 두 token의 문맥이 attention·residual·정규화·FFN을 거쳐 다음 token 확률이 되고, NLL의 전체 출력층 gradient와 실제 Transformer shape로 확장되는 과정을 설명한 뒤 [[LLM 수학 종합 실습]]으로 독립 전이할 수 있다.
+> **읽고 나면:** 두 token의 문맥이 attention·residual·정규화·FFN을 거쳐 다음 token 확률이 되고, NLL의 전체 출력층 gradient와 실제 Transformer shape로 확장되는 과정을 설명한 뒤 LLM 수학 종합 실습으로 독립 전이할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
 
@@ -652,9 +684,8 @@ $$
 
 ### 다음 문서
 
-- [[LLM 수학 종합 실습]] — 새 숫자에서 lookup부터 gradient·실제 shape까지 무도움으로 연결하고 오류별 복습 경로를 판정한다.
-- [[수치 안정성과 log-sum-exp]] — softmax·NLL을 finite precision에서 계산할 때의 max shift·mask·blockwise 누적을 이어서 본다.
-- [[대규모 언어 모델]] — toy 계산을 넘어 자료·구조·계산·평가가 함께 바꾸는 실제 LLM 범위를 이어서 본다.
+- [[analysis.llm-수학-종합-실습|LLM 수학 종합 실습]] — 새 숫자에서 lookup부터 gradient·실제 shape까지 무도움으로 연결하고 오류별 복습 경로를 판정한다.
+- [[concept.수치-안정성과-log-sum-exp|수치 안정성과 log-sum-exp]] — softmax·NLL을 finite precision에서 계산할 때의 max shift·mask·blockwise 누적을 이어서 본다.
 
 ## 출처
 
@@ -668,26 +699,25 @@ $$
 
 ## 관련 항목
 
-- [[LLM 수학 종합 실습]]
-- [[단어 임베딩]]
-- [[어텐션 메커니즘]]
-- [[잔차 연결]]
-- [[소프트맥스]]
-- [[수치 안정성과 log-sum-exp]]
-- [[조건부 확률]]
-- [[로그가능도]]
-- [[역전파]]
-- [[경사하강법]]
-- [[확률변수·확률분포·기대값·분산]]
-- [[Adam 최적화기]]
-- [[특이값 분해와 저랭크 근사]]
-- [[활성화 함수]]
-- [[계산 복잡도와 비용 모델]]
-- [[표본추출·온도·top-k·top-p]]
-- [[인간 피드백 강화학습]]
-- [[Transformer]]
-- [[대규모 언어 모델]]
-- [[035_신경 확률 언어 모형과 분산 단어 표현]]
-- [[018_역전파와 다층 신경망 학습]]
-- [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]]
-- [[LLM 시스템 경계 확장 지도]] — model 내부 계산이 system 결과 계약과 만나는 다음 질문을 고른다.
+- [[analysis.llm-수학-종합-실습|LLM 수학 종합 실습]]
+- [[concept.수치-안정성과-log-sum-exp|수치 안정성과 log-sum-exp]]
+- [[concept.단어-임베딩|단어 임베딩]]
+- [[concept.어텐션-메커니즘|어텐션 메커니즘]]
+- [[concept.잔차-연결|잔차 연결]]
+- [[concept.소프트맥스|소프트맥스]]
+- [[concept.조건부-확률|조건부 확률]]
+- [[concept.로그-가능도|로그가능도]]
+- [[concept.역전파|역전파]]
+- [[concept.경사하강법|경사하강법]]
+- [[concept.확률변수-확률분포-기대값-분산|확률변수·확률분포·기대값·분산]]
+- [[concept.adam-최적화기|Adam 최적화기]]
+- [[concept.특이값-분해와-저랭크-근사|특이값 분해와 저랭크 근사]]
+- [[concept.활성화-함수|활성화 함수]]
+- [[concept.계산-복잡도와-비용-모델|계산 복잡도와 비용 모델]]
+- [[concept.표본추출-온도-top-k-top-p|표본추출·온도·top-k·top-p]]
+- [[concept.rlhf|인간 피드백 강화학습]]
+- [[concept.transformer|Transformer]]
+- [[source.035|신경 확률 언어 모형과 분산 단어 표현]]
+- [[source.018|역전파와 다층 신경망 학습]]
+- [[source.055|Transformer와 자기어텐션 기반 시퀀스 모델링]]
+- [[meta.llm-system-boundary-map|LLM 시스템 경계 확장 지도]]

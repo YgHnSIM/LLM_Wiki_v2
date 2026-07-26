@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.055
 page_type: source
 title: Transformer와 자기어텐션 기반 시퀀스 모델링
@@ -14,20 +14,22 @@ tags:
   - domain/machine-learning
 created: '2026-07-19'
 updated: '2026-07-23'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/055_The Transformer Attention Is All You Need.ko.md'
-  - 'raw/055_The Transformer Attention Is All You Need.commentary.ko.md'
+  - raw/055_The Transformer Attention Is All You Need.ko.md
+  - raw/055_The Transformer Attention Is All You Need.commentary.ko.md
 evidence:
   - source_id: vaswani-et-al-2017-attention
     locator: 'pp. 5998–6008, 특히 §§3–5, Figure 1과 Tables 1–3의 구조·복잡도·번역 성능·훈련 비용'
     relation: supports
   - source_id: gpt-2018
-    locator: '§2와 Figure 1의 Transformer decoder 기반 generative pre-training'
+    locator: §2와 Figure 1의 Transformer decoder 기반 generative pre-training
     relation: contextualizes
   - source_id: bert-2019
-    locator: '§3.1과 Figure 1의 bidirectional Transformer encoder와 masked language model'
+    locator: §3.1과 Figure 1의 bidirectional Transformer encoder와 masked language model
     relation: contextualizes
   - source_id: jain-wallace-2019-attention-explanation
     locator: 'NAACL 2019, pp. 3543–3556의 attention explanation 충실성 실험'
@@ -35,21 +37,36 @@ evidence:
   - source_id: wiegreffe-pinter-2019-attention-explanation
     locator: 'EMNLP-IJCNLP 2019, pp. 11–20의 설명 정의 비판과 대안 진단'
     relation: contextualizes
-related:
-  - concept.transformer
-  - concept.어텐션-메커니즘
-  - concept.소프트맥스
-  - concept.잔차-연결
-  - concept.신경망-기계-번역
-  - concept.자기회귀-생성
-  - source.047
-  - source.054
+relations:
+  - target: concept.소프트맥스
+    kind: related
+  - target: concept.신경망-기계-번역
+    kind: related
+  - target: source.047
+    kind: related
+  - target: source.054
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.어텐션-메커니즘
+    - target: concept.잔차-연결
+  assumed_knowledge: 의 Q K V와 mask 의 residual block
+  outcomes:
+    - '2017년 원 논문이 순환을 무엇으로 바꿨는지, scaled dot-product attention을 어떤 shape로 계산했는지, 훈련 병렬성·제곱 비용·생성 순차성이 왜 동시에 성립하는지 원자료 범위에서 설명할 수 있다.'
+  next:
+    - target: concept.transformer
+      reason: Transformer — 원 논문의 요소를 한 block의 입력·shape·mask·MLP·잔차·출력 확률 흐름으로 다시 조립한다.
+    - target: concept.자기회귀-생성
+      reason: 자기회귀 생성 — causal mask 아래의 확률 분해가 실제 decoding에서 왜 순차적으로 남는지 계산 관점에서 이어서 살핀다.
 ---
 # Transformer와 자기어텐션 기반 시퀀스 모델링
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[어텐션 메커니즘]]의 Q·K·V와 mask, [[잔차 연결]]의 residual block<br>
+> **선수 지식:** [[concept.어텐션-메커니즘|어텐션 메커니즘]], [[concept.잔차-연결|잔차 연결]]<br>
 > **읽고 나면:** 2017년 원 논문이 순환을 무엇으로 바꿨는지, scaled dot-product attention을 어떤 shape로 계산했는지, 훈련 병렬성·제곱 비용·생성 순차성이 왜 동시에 성립하는지 원자료 범위에서 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -229,8 +246,8 @@ Wiegreffe·Pinter는 설명의 정의와 모델 전체 맥락을 고려해야 �
 
 ### 다음 문서
 
-- [[Transformer]] — 원 논문의 요소를 한 block의 입력·shape·mask·MLP·잔차·출력 확률 흐름으로 다시 조립한다.
-- [[자기회귀 생성]] — causal mask 아래의 확률 분해가 실제 decoding에서 왜 순차적으로 남는지 계산 관점에서 이어서 살핀다.
+- [[concept.transformer|Transformer]] — 원 논문의 요소를 한 block의 입력·shape·mask·MLP·잔차·출력 확률 흐름으로 다시 조립한다.
+- [[concept.자기회귀-생성|자기회귀 생성]] — causal mask 아래의 확률 분해가 실제 decoding에서 왜 순차적으로 남는지 계산 관점에서 이어서 살핀다.
 
 ## 출처
 
@@ -244,11 +261,11 @@ Wiegreffe·Pinter는 설명의 정의와 모델 전체 맥락을 고려해야 �
 
 ## 관련 항목
 
-- [[Transformer]]
-- [[어텐션 메커니즘]]
-- [[소프트맥스]]
-- [[잔차 연결]]
-- [[047_어텐션 메커니즘과 동적 정렬]]
-- [[신경망 기계 번역]]
-- [[자기회귀 생성]]
-- [[054_WaveNet과 표본 단위 신경 오디오 생성]]
+- [[concept.transformer|Transformer]]
+- [[concept.자기회귀-생성|자기회귀 생성]]
+- [[concept.어텐션-메커니즘|어텐션 메커니즘]]
+- [[concept.잔차-연결|잔차 연결]]
+- [[concept.소프트맥스|소프트맥스]]
+- [[concept.신경망-기계-번역|신경망 기계 번역]]
+- [[source.047|어텐션 메커니즘과 동적 정렬]]
+- [[source.054|WaveNet과 표본 단위 신경 오디오 생성]]

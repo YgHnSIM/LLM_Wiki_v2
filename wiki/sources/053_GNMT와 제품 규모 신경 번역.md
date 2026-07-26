@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.053
 page_type: source
 title: GNMT와 제품 규모 신경 번역
@@ -14,11 +14,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-19'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md'
-  - 'raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.commentary.ko.md'
+  - raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md
+  - raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.commentary.ko.md
 evidence:
   - source_id: wu-et-al-2016-gnmt
     locator: '초록, §§2–5, Figures 1–2, Tables 1–4의 8층 LSTM·attention·residual·WordPiece·평가와 배포 설계'
@@ -26,17 +28,33 @@ evidence:
   - source_id: google-research-2016-gnmt-production
     locator: '2016-09-27 제품 공지의 중국어→영어 100% 적용과 하루 약 1,800만 건 번역'
     relation: supplements
-related:
-  - concept.신경망-기계-번역
-  - source.045
-  - concept.잔차-연결
-  - concept.서브워드-토큰화
+relations:
+  - target: concept.신경망-기계-번역
+    kind: related
+  - target: source.045
+    kind: related
+  - target: concept.잔차-연결
+    kind: related
+  - target: concept.서브워드-토큰화
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.sequence-to-sequence
+  assumed_knowledge: 없음
+  outcomes:
+    - GNMT가 깊은 LSTM·어텐션·잔차 연결·WordPiece·탐색 보정을 제품 제약 아래 결합한 방식을 설명할 수 있다.
+  next:
+    - target: concept.transformer
+      reason: Transformer — 신경 번역의 조건부 생성 틀은 유지하면서 순환 계산을 제거한 후속 구조를 이어서 읽는다.
 ---
 # GNMT와 제품 규모 신경 번역
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[Sequence-to-Sequence 학습]]<br>
+> **선수 지식:** [[concept.sequence-to-sequence|Sequence-to-Sequence 학습]]<br>
 > **읽고 나면:** GNMT가 깊은 LSTM·어텐션·잔차 연결·WordPiece·탐색 보정을 제품 제약 아래 결합한 방식을 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -115,7 +133,7 @@ GNMT의 중요성은 “신경망 하나가 번역을 해결했다”는 데 있
 
 ### 다음 문서
 
-- [[Transformer]] — 신경 번역의 조건부 생성 틀은 유지하면서 순환 계산을 제거한 후속 구조를 이어서 읽는다.
+- [[concept.transformer|Transformer]] — 신경 번역의 조건부 생성 틀은 유지하면서 순환 계산을 제거한 후속 구조를 이어서 읽는다.
 
 ## 출처
 
@@ -126,7 +144,9 @@ GNMT의 중요성은 “신경망 하나가 번역을 해결했다”는 데 있
 
 ## 관련 항목
 
-- [[신경망 기계 번역]]
-- [[045_Sequence-to-Sequence 학습과 신경 기계 번역]]
-- [[잔차 연결]]
-- [[서브워드 토큰화]]
+- [[concept.transformer|Transformer]]
+- [[concept.sequence-to-sequence|Sequence-to-Sequence 학습]]
+- [[concept.신경망-기계-번역|신경망 기계 번역]]
+- [[source.045|Sequence-to-Sequence 학습과 신경 기계 번역]]
+- [[concept.잔차-연결|잔차 연결]]
+- [[concept.서브워드-토큰화|서브워드 토큰화]]

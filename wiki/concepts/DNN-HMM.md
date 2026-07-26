@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.dnn-hmm
 page_type: concept
 title: DNN-HMM
@@ -14,32 +14,48 @@ tags:
   - domain/speech-processing
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.ko.md'
-  - 'raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.commentary.ko.md'
+  - raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.ko.md
+  - raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.commentary.ko.md
 evidence:
   - source_id: hinton-et-al-2012-dnn-acoustic-modeling
-    locator: 'pp. 82–97의 DNN posterior·HMM likelihood 변환·사전학습·미세조정·네 연구팀 대규모 음성 실험'
+    locator: pp. 82–97의 DNN posterior·HMM likelihood 변환·사전학습·미세조정·네 연구팀 대규모 음성 실험
     relation: supports
   - source_id: dahl-et-al-2012-context-dependent-dnn-hmm
-    locator: 'pp. 30–42의 senone 출력·상태 사전확률·강제 정렬·CD-DNN-HMM 학습 및 business search 평가'
+    locator: pp. 30–42의 senone 출력·상태 사전확률·강제 정렬·CD-DNN-HMM 학습 및 business search 평가
     relation: supports
   - source_id: seide-li-yu-2011-conversational-cd-dnn-hmm
     locator: 'pp. 437–440의 9,000개 이상 묶인 triphone 상태와 Switchboard·RT03S 평가'
     relation: supports
-related:
-  - source.041
-  - concept.자동-음성-인식
-  - concept.은닉-마르코프-모델
-  - concept.단어-오류율
+relations:
+  - target: source.041
+    kind: related
+  - target: concept.단어-오류율
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.은닉-마르코프-모델
+  assumed_knowledge: 없음
+  outcomes:
+    - 'DNN이 GMM 음향 모델을 대신하고 HMM 디코더와 결합되는 흐름을 설명하며, 초기 성과와 후속 종단간 구조를 구분할 수 있다.'
+  next:
+    - target: concept.자동-음성-인식
+      reason: '다음에는 자동 음성 인식에서 음향·발음·언어 모델 전체 파이프라인을 보고, 시간 지연 신경망에서 인접 음향 프레임을 다루는 다른 구조를 살핀다.'
+    - target: concept.시간-지연-신경망
+      reason: '다음에는 자동 음성 인식에서 음향·발음·언어 모델 전체 파이프라인을 보고, 시간 지연 신경망에서 인접 음향 프레임을 다루는 다른 구조를 살핀다.'
 ---
 # DNN-HMM
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[은닉 마르코프 모델]]<br>
+> **선수 지식:** [[concept.은닉-마르코프-모델|은닉 마르코프 모델]]<br>
 > **읽고 나면:** DNN이 GMM 음향 모델을 대신하고 HMM 디코더와 결합되는 흐름을 설명하며, 초기 성과와 후속 종단간 구조를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -84,8 +100,12 @@ DNN의 출력은 보통 senone이라 불리는 묶인 문맥 의존 triphone 상
 
 다음에는 [[자동 음성 인식]]에서 음향·발음·언어 모델 전체 파이프라인을 보고, [[시간 지연 신경망]]에서 인접 음향 프레임을 다루는 다른 구조를 살핀다.
 
-## 출처
+### 다음 문서
 
+- [[concept.자동-음성-인식|자동 음성 인식]] — 다음에는 자동 음성 인식에서 음향·발음·언어 모델 전체 파이프라인을 보고, 시간 지연 신경망에서 인접 음향 프레임을 다루는 다른 구조를 살핀다.
+- [[concept.시간-지연-신경망|시간 지연 신경망]] — 다음에는 자동 음성 인식에서 음향·발음·언어 모델 전체 파이프라인을 보고, 시간 지연 신경망에서 인접 음향 프레임을 다루는 다른 구조를 살핀다.
+
+## 출처
 - Geoffrey Hinton 외, [Deep Neural Networks for Acoustic Modeling in Speech Recognition](https://www.cs.toronto.edu/~hinton/absps/DNN-2012-proof.pdf), 2012, pp. 82–97.
 - George E. Dahl 외, [Context-Dependent Pre-Trained Deep Neural Networks for Large-Vocabulary Speech Recognition](https://www.microsoft.com/en-us/research/publication/context-dependent-pre-trained-deep-neural-networks-for-large-vocabulary-speech-recognition/), 2012, pp. 30–42.
 - Frank Seide·Gang Li·Dong Yu, [Conversational Speech Transcription Using Context-Dependent Deep Neural Networks](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/CD-DNN-HMM-SWB-Interspeech2011-Pub.pdf), 2011, pp. 437–440.
@@ -94,7 +114,8 @@ DNN의 출력은 보통 senone이라 불리는 묶인 문맥 의존 triphone 상
 
 ## 관련 항목
 
-- [[041_심층 신경망 음향 모델과 DNN-HMM 전환]]
-- [[자동 음성 인식]]
-- [[은닉 마르코프 모델]]
-- [[단어 오류율]]
+- [[concept.자동-음성-인식|자동 음성 인식]]
+- [[concept.시간-지연-신경망|시간 지연 신경망]]
+- [[concept.은닉-마르코프-모델|은닉 마르코프 모델]]
+- [[source.041|심층 신경망 음향 모델과 DNN-HMM 전환]]
+- [[concept.단어-오류율|단어 오류율]]

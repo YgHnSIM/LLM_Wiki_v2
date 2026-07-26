@@ -1,9 +1,12 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.resnet
 page_type: concept
 title: ResNet
-aliases: [Residual Network, Residual Networks, 잔차 네트워크]
+aliases:
+  - Residual Network
+  - Residual Networks
+  - 잔차 네트워크
 tags:
   - type/concept
   - domain/ai
@@ -11,29 +14,43 @@ tags:
   - domain/computer-vision
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md'
-  - 'raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.commentary.ko.md'
+  - raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md
+  - raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.commentary.ko.md
 evidence:
   - source_id: he-et-al-2016-resnet
     locator: '전체, 특히 Figures 2–6, Tables 2–6의 18–152층 ImageNet과 20–1202층 CIFAR 실험'
     relation: supports
   - source_id: he-et-al-2016-identity-mappings
-    locator: '§§3–4의 pre-activation ResNet과 1001층 CIFAR·200층 ImageNet 평가'
+    locator: §§3–4의 pre-activation ResNet과 1001층 CIFAR·200층 ImageNet 평가
     relation: supplements
-related:
-  - source.048
-  - concept.잔차-연결
-  - concept.degradation-problem
-  - concept.합성곱-신경망
+relations:
+  - target: source.048
+    kind: related
+  - target: concept.합성곱-신경망
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.잔차-연결
+  assumed_knowledge: 없음
+  outcomes:
+    - ResNet의 basic block과 bottleneck이 잔차 갱신을 반복하는 방식과 실험 결과의 범위를 설명할 수 있다.
+  next:
+    - target: concept.degradation-problem
+      reason: Degradation problem — 잔차 구조가 겨냥한 훈련 오류 증가 현상을 더 정확히 구분한다.
 ---
 # ResNet
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[잔차 연결]]<br>
+> **선수 지식:** [[concept.잔차-연결|잔차 연결]]<br>
 > **읽고 나면:** ResNet의 basic block과 bottleneck이 잔차 갱신을 반복하는 방식과 실험 결과의 범위를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -74,7 +91,7 @@ ResNet의 비교 실험은 잔차 매개변수화가 동일 깊이의 plain netw
 
 ### 다음 문서
 
-- [[Degradation problem]] — 잔차 구조가 겨냥한 훈련 오류 증가 현상을 더 정확히 구분한다.
+- [[concept.degradation-problem|Degradation problem]] — 잔차 구조가 겨냥한 훈련 오류 증가 현상을 더 정확히 구분한다.
 
 ## 출처
 
@@ -84,7 +101,7 @@ ResNet의 비교 실험은 잔차 매개변수화가 동일 깊이의 plain netw
 
 ## 관련 항목
 
-- [[048_잔차 학습과 매우 깊은 신경망]]
-- [[잔차 연결]]
-- [[Degradation problem]]
-- [[합성곱 신경망]]
+- [[concept.degradation-problem|Degradation problem]]
+- [[concept.잔차-연결|잔차 연결]]
+- [[source.048|잔차 학습과 매우 깊은 신경망]]
+- [[concept.합성곱-신경망|합성곱 신경망]]

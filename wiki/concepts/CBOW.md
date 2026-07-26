@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.cbow
 page_type: concept
 title: CBOW
@@ -13,11 +13,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.ko.md'
-  - 'raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.commentary.ko.md'
+  - raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.ko.md
+  - raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.commentary.ko.md
 evidence:
   - source_id: mikolov-et-al-2013-word-representations
     locator: 'arXiv:1301.3781, §3과 Fig. 1의 continuous bag-of-words 구조·계산량'
@@ -25,18 +27,33 @@ evidence:
   - source_id: levy-goldberg-dagan-2015-distributional-similarity
     locator: 'TACL 3, pp. 211–225, §2의 CBOW·Skip-gram을 포함한 분포 모형 구분과 §§4–6의 설정별 평가'
     relation: contextualizes
-related:
-  - source.043
-  - concept.word2vec
-  - concept.skip-gram
-  - concept.단어-임베딩
-  - concept.말뭉치-기반-학습
+relations:
+  - target: source.043
+    kind: related
+  - target: concept.word2vec
+    kind: related
+  - target: concept.말뭉치-기반-학습
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.단어-임베딩
+  assumed_knowledge: 없음
+  outcomes:
+    - 'CBOW가 주변 문맥 벡터를 모아 중심 단어를 예측하는 흐름을 설명하고, Skip-gram과의 방향 차이 및 정적 표현의 한계를 구분할 수 있다.'
+  next:
+    - target: concept.skip-gram
+      reason: '다음에는 Skip-gram에서 반대 방향의 학습 쌍을 보고, GloVe에서 예측 대신 말뭉치 전체 동시출현을 회귀하는 방식을 비교한다.'
+    - target: concept.glove
+      reason: '다음에는 Skip-gram에서 반대 방향의 학습 쌍을 보고, GloVe에서 예측 대신 말뭉치 전체 동시출현을 회귀하는 방식을 비교한다.'
 ---
 # CBOW
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[단어 임베딩]]<br>
+> **선수 지식:** [[concept.단어-임베딩|단어 임베딩]]<br>
 > **읽고 나면:** CBOW가 주변 문맥 벡터를 모아 중심 단어를 예측하는 흐름을 설명하고, Skip-gram과의 방향 차이 및 정적 표현의 한계를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -79,16 +96,21 @@ $$
 
 다음에는 [[Skip-gram]]에서 반대 방향의 학습 쌍을 보고, [[GloVe]]에서 예측 대신 말뭉치 전체 동시출현을 회귀하는 방식을 비교한다.
 
-## 출처
+### 다음 문서
 
+- [[concept.skip-gram|Skip-gram]] — 다음에는 Skip-gram에서 반대 방향의 학습 쌍을 보고, GloVe에서 예측 대신 말뭉치 전체 동시출현을 회귀하는 방식을 비교한다.
+- [[concept.glove|GloVe]] — 다음에는 Skip-gram에서 반대 방향의 학습 쌍을 보고, GloVe에서 예측 대신 말뭉치 전체 동시출현을 회귀하는 방식을 비교한다.
+
+## 출처
 - [[043_Word2Vec와 효율적 정적 단어 임베딩]]
 - Tomas Mikolov·Kai Chen·Greg Corrado·Jeffrey Dean, [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/abs/1301.3781), 2013, §3과 Fig. 1.
 - Omer Levy·Yoav Goldberg·Ido Dagan, [Improving Distributional Similarity with Lessons Learned from Word Embeddings](https://aclanthology.org/Q15-1016/), TACL 3, 2015, pp. 211–225.
 
 ## 관련 항목
 
-- [[043_Word2Vec와 효율적 정적 단어 임베딩]]
-- [[Word2Vec]]
-- [[Skip-gram]]
-- [[단어 임베딩]]
-- [[말뭉치 기반 학습]]
+- [[concept.skip-gram|Skip-gram]]
+- [[concept.glove|GloVe]]
+- [[concept.단어-임베딩|단어 임베딩]]
+- [[source.043|Word2Vec와 효율적 정적 단어 임베딩]]
+- [[concept.word2vec|Word2Vec]]
+- [[concept.말뭉치-기반-학습|말뭉치 기반 학습]]

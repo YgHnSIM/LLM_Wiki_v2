@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.lms-알고리즘
 page_type: concept
 title: LMS 알고리즘
@@ -16,8 +16,10 @@ tags:
   - domain/signal-processing
 created: '2026-07-14'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/006_1962_위드로-호프_MADALINE.md
   - raw/006_1962_위드로-호프_MADALINE_해설.md
@@ -28,18 +30,31 @@ evidence:
   - source_id: widrow-hoff-1960
     locator: Adaptive Switching Circuits
     relation: supports
-related:
-  - concept.adaline
-  - concept.madaline
-  - concept.경사하강법
-  - concept.적응-필터
-  - concept.지도-학습
+relations:
+  - target: concept.madaline
+    kind: related
+  - target: concept.지도-학습
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.adaline
+  assumed_knowledge: 없음
+  outcomes:
+    - LMS가 목표와 선형 출력의 오차를 이용해 가중치를 갱신하는 방식을 설명할 수 있다.
+  next:
+    - target: concept.경사하강법
+      reason: 경사하강법 — LMS를 더 넓은 그래디언트 기반 최적화 계열에서 위치시킨다.
+    - target: concept.적응-필터
+      reason: 적응 필터 — 같은 선형 갱신 구조가 신호 처리에서 어떻게 쓰이는지 살펴본다.
 ---
 # LMS 알고리즘
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[ADALINE]]<br>
+> **선수 지식:** [[concept.adaline|ADALINE]]<br>
 > **읽고 나면:** LMS가 목표와 선형 출력의 오차를 이용해 가중치를 갱신하는 방식을 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -86,8 +101,8 @@ LMS는 순간 제곱오차의 그래디언트를 평균제곱오차 그래디언
 
 ### 다음 문서
 
-- [[경사하강법]] — LMS를 더 넓은 그래디언트 기반 최적화 계열에서 위치시킨다.
-- [[적응 필터]] — 같은 선형 갱신 구조가 신호 처리에서 어떻게 쓰이는지 살펴본다.
+- [[concept.경사하강법|경사하강법]] — LMS를 더 넓은 그래디언트 기반 최적화 계열에서 위치시킨다.
+- [[concept.적응-필터|적응 필터]] — 같은 선형 갱신 구조가 신호 처리에서 어떻게 쓰이는지 살펴본다.
 
 ## 출처
 
@@ -96,8 +111,8 @@ LMS는 순간 제곱오차의 그래디언트를 평균제곱오차 그래디언
 
 ## 관련 항목
 
-- [[ADALINE]]
-- [[MADALINE]]
-- [[경사하강법]]
-- [[적응 필터]]
-- [[지도 학습]]
+- [[concept.경사하강법|경사하강법]]
+- [[concept.적응-필터|적응 필터]]
+- [[concept.adaline|ADALINE]]
+- [[concept.madaline|MADALINE]]
+- [[concept.지도-학습|지도 학습]]

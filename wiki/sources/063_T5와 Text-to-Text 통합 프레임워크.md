@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.063
 page_type: source
 title: T5와 Text-to-Text 통합 프레임워크
@@ -14,23 +14,41 @@ tags:
   - domain/machine-learning
 created: '2026-07-21'
 updated: '2026-07-23'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/063_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.ko.md'
-  - 'raw/063_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.commentary.ko.md'
+  - raw/063_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.ko.md
+  - raw/063_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.commentary.ko.md
 evidence:
   - source_id: raffel-et-al-2020-t5
     locator: 'pp. 1–67, 특히 §§1–2.4와 Figures 1–2의 연구 목적·architecture·C4·task format·denoising, §§3.2–3.7와 Tables 2–15의 architecture·objective·data·transfer·scaling 비교와 최종 결과, §§4.1–4.2의 종합과 한계'
     relation: supports
-related:
-  - concept.t5
-  - concept.마스크드-언어-모델링
-  - concept.언어-모델-전이-학습
-  - concept.인코더-디코더
-  - concept.transformer
-  - concept.glue-superglue
-  - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+relations:
+  - target: concept.마스크드-언어-모델링
+    kind: related
+  - target: concept.언어-모델-전이-학습
+    kind: related
+  - target: concept.인코더-디코더
+    kind: related
+  - target: concept.transformer
+    kind: related
+  - target: concept.glue-superglue
+    kind: related
+learning:
+  difficulty:
+    entry: foundation
+    target: intermediate
+  prerequisites: []
+  assumed_knowledge: '토큰 열, 확률, encoder와 decoder를 이 문서의 실제 설정으로부터 차례로 설명한다.'
+  outcomes:
+    - '원 T5 논문이 text-to-text를 어디까지 통일했는지, 15% span corruption 손실과 최종 결과를 어떤 조건에서 읽어야 하는지 설명할 수 있다.'
+  next:
+    - target: concept.t5
+      reason: 'T5 — 이 소스의 maximum likelihood, cross-attention, span corruption을 개념·수식·작은 계산으로 다시 따라간다.'
+    - target: analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+      reason: 사전 학습 지식은 과제에 어떻게 도착하는가 — T5의 전이 recipe를 다른 사전 학습 모델의 pretrain–adapt 경로와 비교한다.
 ---
 # T5와 Text-to-Text 통합 프레임워크
 
@@ -255,8 +273,8 @@ $D_j$는 $j$번째 과제의 예 분포이고, $w_j$는 그 과제의 비중이�
 
 ### 다음 문서
 
-- [[T5]] — 이 소스의 maximum likelihood, cross-attention, span corruption을 개념·수식·작은 계산으로 다시 따라간다.
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — T5의 전이 recipe를 다른 사전 학습 모델의 pretrain–adapt 경로와 비교한다.
+- [[concept.t5|T5]] — 이 소스의 maximum likelihood, cross-attention, span corruption을 개념·수식·작은 계산으로 다시 따라간다.
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]] — T5의 전이 recipe를 다른 사전 학습 모델의 pretrain–adapt 경로와 비교한다.
 
 ## 출처
 
@@ -266,10 +284,10 @@ $D_j$는 $j$번째 과제의 예 분포이고, $w_j$는 그 과제의 비중이�
 
 ## 관련 항목
 
-- [[T5]]
-- [[마스크드 언어 모델링]]
-- [[언어 모델 전이 학습]]
-- [[인코더-디코더]]
-- [[Transformer]]
-- [[GLUE와 SuperGLUE]]
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]
+- [[concept.t5|T5]]
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]]
+- [[concept.마스크드-언어-모델링|마스크드 언어 모델링]]
+- [[concept.언어-모델-전이-학습|언어 모델 전이 학습]]
+- [[concept.인코더-디코더|인코더-디코더]]
+- [[concept.transformer|Transformer]]
+- [[concept.glue-superglue|GLUE와 SuperGLUE]]

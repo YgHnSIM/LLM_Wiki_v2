@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.101
 page_type: source
 title: LoRA 이후 PEFT 변형의 설계 축과 연표
@@ -16,11 +16,13 @@ tags:
   - domain/optimization
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/101_PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques.ko.md'
-  - 'raw/101_PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques.commentary.ko.md'
+  - raw/101_PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques.ko.md
+  - raw/101_PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques.commentary.ko.md
 evidence:
   - source_id: hu-et-al-2022-lora
     locator: '초록과 §§1–4·7, Eqs. 3–4와 Tables 1–7의 동결 base·저순위 update·target matrix·rank 및 추론 병합'
@@ -41,21 +43,34 @@ evidence:
     locator: 'ICLR 2024, §§2.3·3.1–3.3·4, Eqs. 4–9, Algorithm 1과 Tables 1–5의 alternating quantization·저순위 초기화·미세조정 경계'
     relation: supports
   - source_id: dettmers-et-al-2023-qlora
-    locator: '초록과 §§2–4의 frozen 4-bit base·NF4·LoRA update 및 QLoRA의 양자화·미세조정 경계'
+    locator: 초록과 §§2–4의 frozen 4-bit base·NF4·LoRA update 및 QLoRA의 양자화·미세조정 경계
     relation: contextualizes
-related:
-  - source.091
-  - concept.저순위-적응
-  - concept.qlora
-  - concept.언어-모델-전이-학습
-  - concept.지시-미세조정
-  - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+relations:
+  - target: source.091
+    kind: related
+  - target: concept.지시-미세조정
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.언어-모델-전이-학습
+    - target: concept.qlora
+  assumed_knowledge: 없음
+  outcomes:
+    - 'AdaLoRA·DoRA·VeRA·rsLoRA·LoftQ가 LoRA의 같은 한계를 순서대로 해결한 단일 계보가 아니라, rank 배분·weight 매개변수화·basis 공유·scaling·양자화 초기화라는 서로 다른 축을 바꾼다는 점을 설명할 수 있다.'
+  next:
+    - target: concept.저순위-적응
+      reason: 저순위 적응 — 다섯 변형을 method 이름보다 allocation·parameterization·sharing·scaling·initialization 축으로 비교한다.
+    - target: analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+      reason: '사전 학습 지식은 과제에 어떻게 도착하는가 — 같은 task supervision이 full weight, adapter와 입력 context 가운데 어디를 바꾸는지 비교한다.'
 ---
 # LoRA 이후 PEFT 변형의 설계 축과 연표
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[언어 모델 전이 학습]], [[QLoRA]]<br>
+> **선수 지식:** [[concept.언어-모델-전이-학습|언어 모델 전이 학습]], [[concept.qlora|QLoRA]]<br>
 > **읽고 나면:** AdaLoRA·DoRA·VeRA·rsLoRA·LoftQ가 LoRA의 같은 한계를 순서대로 해결한 단일 계보가 아니라, rank 배분·weight 매개변수화·basis 공유·scaling·양자화 초기화라는 서로 다른 축을 바꾼다는 점을 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -190,9 +205,8 @@ LLaMA 계열 instruction tuning의 Table 4는 서로 다른 rank 설정(LoRA 64,
 
 ### 다음 문서
 
-- [[저순위 적응]] — 다섯 변형을 method 이름보다 allocation·parameterization·sharing·scaling·initialization 축으로 비교한다.
-- [[QLoRA]] — Quantized frozen base, compute dtype와 adapter update의 memory 장부를 확인한다.
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]] — 같은 task supervision이 full weight, adapter와 입력 context 가운데 어디를 바꾸는지 비교한다.
+- [[concept.저순위-적응|저순위 적응]] — 다섯 변형을 method 이름보다 allocation·parameterization·sharing·scaling·initialization 축으로 비교한다.
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]] — 같은 task supervision이 full weight, adapter와 입력 context 가운데 어디를 바꾸는지 비교한다.
 
 ## 출처
 
@@ -208,9 +222,9 @@ LLaMA 계열 instruction tuning의 Table 4는 서로 다른 rank 설정(LoRA 64,
 
 ## 관련 항목
 
-- [[저순위 적응]]
-- [[QLoRA]]
-- [[091_QLoRA와 4비트 양자화 미세조정]]
-- [[언어 모델 전이 학습]]
-- [[지시 미세조정]]
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]
+- [[concept.저순위-적응|저순위 적응]]
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]]
+- [[concept.언어-모델-전이-학습|언어 모델 전이 학습]]
+- [[concept.qlora|QLoRA]]
+- [[source.091|QLoRA와 4비트 양자화 미세조정]]
+- [[concept.지시-미세조정|지시 미세조정]]

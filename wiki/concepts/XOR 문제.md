@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.xor-문제
 page_type: concept
 title: XOR 문제
@@ -13,8 +13,10 @@ tags:
   - domain/machine-learning
 created: '2026-05-14'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/004_The Perceptron.md
   - raw/004_The Perceptron.commentary.md
@@ -30,19 +32,33 @@ evidence:
   - source_id: rumelhart-hinton-williams-1986-pdp
     locator: p. 319 and pp. 331–333
     relation: supports
-related:
-  - concept.퍼셉트론
-  - concept.선형-분리-가능성
-  - concept.선형-분류기
-  - concept.지도-학습
-  - concept.다층-퍼셉트론
-  - concept.역전파
+relations:
+  - target: concept.퍼셉트론
+    kind: related
+  - target: concept.선형-분류기
+    kind: related
+  - target: concept.지도-학습
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites:
+    - target: concept.선형-분리-가능성
+  assumed_knowledge: 없음
+  outcomes:
+    - 'XOR의 네 입력을 하나의 직선으로 나눌 수 없는 이유와, 은닉층이 이 문제를 풀 수 있는 방식을 설명할 수 있다.'
+  next:
+    - target: concept.다층-퍼셉트론
+      reason: 다층 퍼셉트론 — 비선형 은닉층이 입력을 다시 표현하는 구조를 살핀다.
+    - target: concept.역전파
+      reason: 역전파 — 은닉층의 가중치를 출력 오차에서 함께 학습하는 절차를 이어서 본다.
 ---
 # XOR 문제
 
 > [!note] 학습 안내
 > **난이도:** 입문<br>
-> **선수 지식:** [[선형 분리 가능성]]<br>
+> **선수 지식:** [[concept.선형-분리-가능성|선형 분리 가능성]]<br>
 > **읽고 나면:** XOR의 네 입력을 하나의 직선으로 나눌 수 없는 이유와, 은닉층이 이 문제를 풀 수 있는 방식을 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -85,8 +101,8 @@ XOR은 단층 선형 모델의 표현 한계를 분명하게 보여주지만, �
 
 ### 다음 문서
 
-- [[다층 퍼셉트론]] — 비선형 은닉층이 입력을 다시 표현하는 구조를 살핀다.
-- [[역전파]] — 은닉층의 가중치를 출력 오차에서 함께 학습하는 절차를 이어서 본다.
+- [[concept.다층-퍼셉트론|다층 퍼셉트론]] — 비선형 은닉층이 입력을 다시 표현하는 구조를 살핀다.
+- [[concept.역전파|역전파]] — 은닉층의 가중치를 출력 오차에서 함께 학습하는 절차를 이어서 본다.
 
 ## 출처
 
@@ -97,9 +113,9 @@ XOR은 단층 선형 모델의 표현 한계를 분명하게 보여주지만, �
 
 ## 관련 항목
 
-- [[퍼셉트론]]
-- [[선형 분리 가능성]]
-- [[선형 분류기]]
-- [[지도 학습]]
-- [[다층 퍼셉트론]]
-- [[역전파]]
+- [[concept.다층-퍼셉트론|다층 퍼셉트론]]
+- [[concept.역전파|역전파]]
+- [[concept.선형-분리-가능성|선형 분리 가능성]]
+- [[concept.퍼셉트론|퍼셉트론]]
+- [[concept.선형-분류기|선형 분류기]]
+- [[concept.지도-학습|지도 학습]]

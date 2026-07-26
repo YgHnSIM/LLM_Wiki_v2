@@ -3,6 +3,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import yaml from 'js-yaml';
 import { createFrontmatterValidator, schemaErrorMessage } from './lib/frontmatter-schema.mjs';
+import { registryErrorMessage, validateRegistry } from './lib/registry-schema.mjs';
 import { metaDir, rootDir, wikiDir } from './lib/project-paths.mjs';
 import {
   rawArtifactRecordNumberingErrors,
@@ -45,9 +46,9 @@ function lastH2(body) {
 }
 
 function relatedBodyLinks(body) {
-  const marker = '\n## 관련 항목';
-  const index = body.lastIndexOf(marker);
-  return index < 0 ? [] : extractWikiLinks(body.slice(index + marker.length));
+  const matches = [...String(body).matchAll(/^##\s+.+?\s*$/gm)];
+  const final = matches.at(-1);
+  return final ? extractWikiLinks(String(body).slice(final.index)) : [];
 }
 
 async function loadYaml(filename) {
@@ -60,6 +61,25 @@ const [pageSchema, tagRegistry, evidenceRegistry, artifactRegistry, redLinkRegis
   loadYaml('evidence.yml'),
   loadYaml('raw-artifacts.yml'),
   loadYaml('red-links.yml'),
+]);
+const registrySchemaFiles = {
+  'tags.yml': 'tags-v1.schema.json',
+  'evidence.yml': 'evidence-v1.schema.json',
+  'raw-artifacts.yml': 'raw-artifacts-v1.schema.json',
+  'red-links.yml': 'red-links-v1.schema.json',
+  'source-gaps.yml': 'source-gaps-v1.schema.json',
+  'site-redirects.yml': 'site-redirects-v1.schema.json',
+  'source-catalog.yml': 'source-catalog-v1.schema.json',
+  'evidence-scope-baseline.yml': 'evidence-scope-baseline-v1.schema.json',
+};
+const registrySchemas = new Map(await Promise.all(Object.entries(registrySchemaFiles).map(async ([name, filename]) => (
+  [name, JSON.parse(await fs.readFile(path.join(metaDir, 'schemas', filename), 'utf8'))]
+))));
+const [sourceGapRegistry, siteRedirectRegistry, sourceCatalogRegistry, evidenceScopeBaseline] = await Promise.all([
+  loadYaml('source-gaps.yml'),
+  loadYaml('site-redirects.yml'),
+  loadYaml('source-catalog.yml'),
+  loadYaml('evidence-scope-baseline.yml'),
 ]);
 const allowedTags = new Set(Object.keys(tagRegistry.tags ?? {}));
 const evidenceSources = evidenceRegistry.sources ?? {};
@@ -75,8 +95,17 @@ for (const [name, registry] of [
   ['evidence.yml', evidenceRegistry],
   ['raw-artifacts.yml', artifactRegistry],
   ['red-links.yml', redLinkRegistry],
+  ['source-gaps.yml', sourceGapRegistry],
+  ['site-redirects.yml', siteRedirectRegistry],
+  ['source-catalog.yml', sourceCatalogRegistry],
+  ['evidence-scope-baseline.yml', evidenceScopeBaseline],
 ]) {
   if (registry?.schema_version !== 1) errors.push(`${name}: schema_version must be 1.`);
+  const schema = registrySchemas.get(name);
+  if (schema) {
+    const result = validateRegistry(registry, schema);
+    for (const error of result.errors) errors.push(`${name}: ${registryErrorMessage(error)}.`);
+  }
 }
 
 const validateFrontmatter = createFrontmatterValidator(pageSchema);
@@ -117,7 +146,7 @@ for (const document of documents) {
 
   const tags = asStringArray(data.tags);
   for (const tag of tags) if (!allowedTags.has(tag)) errors.push(`${document.relativePath}: unregistered tag '${tag}'.`);
-  if (tags.some((tag) => tag.startsWith('status/'))) errors.push(`${document.relativePath}: status tags are not allowed in schema v2.`);
+  if (tags.some((tag) => tag.startsWith('status/'))) errors.push(`${document.relativePath}: status tags are not allowed in schema v3.`);
   const typeTags = tags.filter((tag) => tag.startsWith('type/'));
   if (typeTags.length !== 1 || typeTags[0] !== `type/${data.page_type}`) errors.push(`${document.relativePath}: expected exactly one type/${data.page_type} tag.`);
 
@@ -165,13 +194,57 @@ for (const document of documents) {
     }
   }
   if (lastH2(document.body) !== '관련 항목') errors.push(`${document.relativePath}: ## 관련 항목 must be the final H2.`);
-  if (data.verification === 'verified' && /\[!WARNING\]/i.test(document.body)) errors.push(`${document.relativePath}: verified page contains an unresolved WARNING callout.`);
+  if (data.review?.evidence_coverage === 'verified' && /\[!WARNING\]/i.test(document.body)) errors.push(`${document.relativePath}: verified page contains an unresolved WARNING callout.`);
   if (/^## 인용할 만한 구절\s*$/m.test(document.body)) errors.push(`${document.relativePath}: generated quote section must be converted to 핵심 문장 or sourced quotes.`);
   if (data.page_type !== 'meta' && /^>\s*[“"']/m.test(document.body)) errors.push(`${document.relativePath}: quote block lacks the structured citation format.`);
   for (const lineNumber of terminalDisplayMathPeriodLines(document.body)) {
     errors.push(`${document.relativePath}: display math block ends with a period at line ${lineNumber}; move sentence punctuation outside the formula.`);
   }
 
+}
+
+const catalogById = new Map((sourceCatalogRegistry.sources ?? []).map((item) => [item.id, item]));
+for (const document of documents) {
+  if (!['source', 'reference'].includes(document.data.page_type)) continue;
+  const record = catalogById.get(document.data.id);
+  if (!record) errors.push(`source-catalog.yml: missing record for ${document.data.id}.`);
+  else {
+    if (record.path !== `wiki/${document.relativePath}`) errors.push(`source-catalog.yml: path mismatch for ${document.data.id}.`);
+    if (record.title !== document.data.title) errors.push(`source-catalog.yml: title mismatch for ${document.data.id}.`);
+  }
+}
+for (const record of sourceCatalogRegistry.sources ?? []) {
+  if (!ids.has(record.id)) errors.push(`source-catalog.yml: unknown page id '${record.id}'.`);
+}
+
+const evidenceBaselineByFingerprint = new Map((evidenceScopeBaseline.entries ?? [])
+  .map((entry) => [entry.fingerprint, entry]));
+const currentEvidenceFingerprints = new Set();
+for (const document of documents) {
+  for (const evidence of Array.isArray(document.data.evidence) ? document.data.evidence : []) {
+    const pageId = String(document.data.id ?? '').trim();
+    const sourceId = String(evidence?.source_id ?? '').trim();
+    const locator = String(evidence?.locator ?? '').trim();
+    const relation = String(evidence?.relation ?? '').trim();
+    const fingerprint = createHash('sha256')
+      .update([pageId, sourceId, locator, relation].join('\u0000'))
+      .digest('hex');
+    currentEvidenceFingerprints.add(fingerprint);
+    const baseline = evidenceBaselineByFingerprint.get(fingerprint);
+    const scope = Array.isArray(evidence?.scope) ? evidence.scope : [];
+    if (!baseline) {
+      if (!scope.length) errors.push(`${document.relativePath}: new or changed evidence '${sourceId}' must declare scope.`);
+      continue;
+    }
+    if (JSON.stringify(scope) !== JSON.stringify(baseline.scope ?? [])) {
+      errors.push(`${document.relativePath}: evidence scope baseline is stale for '${sourceId}'. Run generate-evidence-scope-baseline.mjs.`);
+    }
+  }
+}
+for (const fingerprint of evidenceBaselineByFingerprint.keys()) {
+  if (!currentEvidenceFingerprints.has(fingerprint)) {
+    errors.push(`evidence-scope-baseline.yml: stale fingerprint '${fingerprint}'. Run generate-evidence-scope-baseline.mjs.`);
+  }
 }
 
 if (legacyStructureCount) {
@@ -188,13 +261,30 @@ for (const document of documents) {
     if (!resolveLink(rawLink) && !allowedRedLinks.has(normalizeWikiName(target))) errors.push(`${document.relativePath}: unresolved wiki link '${target}'.`);
   }
   const bodyRelated = [...new Set(relatedBodyLinks(document.body).map(resolveLink).filter(Boolean).map((item) => item.data.id))];
-  const frontmatterRelated = asStringArray(document.data.related);
-  const missingInFrontmatter = bodyRelated.filter((id) => !frontmatterRelated.includes(id));
-  const missingInBody = frontmatterRelated.filter((id) => !bodyRelated.includes(id));
-  if (missingInFrontmatter.length || missingInBody.length) {
-    errors.push(`${document.relativePath}: related frontmatter/body mismatch (frontmatter missing: ${missingInFrontmatter.join(', ') || '-'}; body missing: ${missingInBody.join(', ') || '-'}).`);
+  const learning = document.data.learning ?? {};
+  const learningTargets = [
+    ...(Array.isArray(learning.prerequisites) ? learning.prerequisites : []),
+    ...(Array.isArray(learning.next) ? learning.next : []),
+  ].map((item) => String(item?.target ?? '').trim()).filter(Boolean);
+  const relationTargets = (Array.isArray(document.data.relations) ? document.data.relations : [])
+    .map((item) => String(item?.target ?? '').trim()).filter(Boolean);
+  const expectedRelated = [...new Set([...learningTargets, ...relationTargets])];
+  const missingInMetadata = bodyRelated.filter((id) => !expectedRelated.includes(id));
+  const missingInBody = expectedRelated.filter((id) => !bodyRelated.includes(id));
+  if (missingInMetadata.length || missingInBody.length) {
+    errors.push(`${document.relativePath}: related projection mismatch (metadata missing: ${missingInMetadata.join(', ') || '-'}; body missing: ${missingInBody.join(', ') || '-'}).`);
   }
-  for (const id of frontmatterRelated) if (!ids.has(id)) errors.push(`${document.relativePath}: related id '${id}' does not exist.`);
+  const allRelationTargets = [...learningTargets, ...relationTargets];
+  if (new Set(allRelationTargets).size !== allRelationTargets.length) errors.push(`${document.relativePath}: learning and relations contain duplicate targets.`);
+  for (const id of allRelationTargets) {
+    if (!ids.has(id)) errors.push(`${document.relativePath}: relation target '${id}' does not exist.`);
+    if (id === document.data.id) errors.push(`${document.relativePath}: relation target must not point to itself.`);
+  }
+  if (document.data.page_type !== 'meta') {
+    if (typeof learning.assumed_knowledge !== 'string') errors.push(`${document.relativePath}: learning.assumed_knowledge must be a string.`);
+    if (!Array.isArray(learning.next) || learning.next.length < 1 || learning.next.length > 2) errors.push(`${document.relativePath}: learning.next must contain 1–2 documents.`);
+    if (Array.isArray(learning.prerequisites) && learning.prerequisites.length > 2) errors.push(`${document.relativePath}: learning.prerequisites must contain at most 2 documents.`);
+  }
 }
 
 const indexDocument = documents.find((document) => document.relativePath === 'index.md');

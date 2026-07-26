@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: meta.overview
 page_type: meta
 title: Overview
@@ -9,20 +9,28 @@ aliases:
 tags:
   - type/meta
 created: '2026-05-07'
-updated: '2026-07-25'
-lifecycle: active
-verification: verified
+updated: '2026-07-26'
+editorial_status: active
+review:
+  evidence_coverage: not-applicable
+  content_mode: descriptive
 artifacts: []
 evidence: []
-related:
-  - meta.index
-  - meta.log
-  - meta.learning-guide
-  - meta.llm-computing-coevolution
+relations:
+  - target: meta.index
+    kind: related
+  - target: meta.log
+    kind: related
+  - target: meta.learning-guide
+    kind: related
+  - target: meta.llm-computing-coevolution
+    kind: related
 ---
 # Overview
 
 이 위키는 언어 모델링, 기계 지능 평가, 초기 기계 번역, 신경망 학습, 형식언어, 대화형 AI의 역사를 1차 문헌과 함께 연결한다. 수집 당시의 번역·해설은 `raw/`에 보존하고, 공개 문서는 locator가 있는 근거로 검증한다.
+
+현재 공개 문서 계약은 페이지 스키마 v3이다. 각 문서는 영구 ID, 편집 상태, 근거 범위, 콘텐츠 모드, 단계별 학습 정보를 frontmatter에 기록하며, 사이트는 ID 기반 canonical URL과 이전 경로 redirect를 함께 제공한다. `raw/`는 수집 artifact로서 불변 보존하고, registry schema·evidence scope baseline·사이트 보안 검사가 공개 전 검증을 담당한다.
 
 언어 모델 발전과 인간 계산·stored program·GPU·분산 학습·memory·serving의 역사를 함께 읽으려면 [[LLM과 컴퓨팅 능력의 공진화]]에서 시작한다. 시대순 아홉 본편과 세 횡단 연결고리, 종합편이 “빨라졌다”를 계산 가능성·실현 성능·확장성·효율·신뢰성으로 나누어 안내한다. 표현 workload는 [[N-gram에서 LLM으로]], software 추상화는 [[저장 프로그램에서 학습 프레임워크까지]], silicon과 실제 가속 사이의 조건은 [[집적도 증가에서 가속기까지 무엇이 더 필요했나]]가 맡는다.
 
@@ -501,7 +509,7 @@ related:
 
 ## 현재 상태
 
-소스 110개, 참고 자료 0개, 개념 204개, 개체 29개, 분석 45개와 메타 문서 6개, 총 394개 Markdown 문서가 있다. 전체 문서는 스키마 v2를 따르며 339개는 `verified`, 해석적 문서 52개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 516개 외부 근거와 220개 불변 raw artifact가 레지스트리에 등록돼 있다.
+소스 110개, 참고 자료 0개, 개념 204개, 개체 29개, 분석 45개와 메타 문서 6개, 총 394개 Markdown 문서가 있다. 전체 문서는 스키마 v3을 따르며 `review.evidence_coverage` 기준으로 339개는 `verified`, 해석적 문서 52개는 `partial`, 철학적 결론이 논쟁 중인 문서 3개는 `disputed`다. 516개 외부 근거와 220개 불변 raw artifact가 레지스트리에 등록돼 있다.
 
 [[LLM 학습 가이드]]는 이 범위를 통과형 학습 경로로 조립하는 owner이고, 이 overview는 범위·상태·주제별 탐색의 owner다. 따라서 가이드의 진단·완료 기준·진도는 이 문서에 복제하지 않으며, 이 문서의 긴 질문별 표는 특정 관심사에서 곧바로 출발하는 고급 탐색 도구로 보존한다.
 

@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.072
 page_type: source
 title: 지시 미세조정과 FLAN의 제로샷 일반화
@@ -15,11 +15,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-21'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/072_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.ko.md'
-  - 'raw/072_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.commentary.ko.md'
+  - raw/072_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.ko.md
+  - raw/072_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.commentary.ko.md
 evidence:
   - source_id: wei-et-al-2022-flan
     locator: '초록, §§1–4와 Figures 1–10의 정의·62개 데이터셋·12개 과제 군집·군집 보류·LaMDA-PT 학습·GPT-3 비교·과제 수·규모·지시 절제, §6·Appendix C와 FAQ의 한계'
@@ -34,24 +36,40 @@ evidence:
     locator: '초록, §§2.1–2.3·3.1·8, Figure 2와 Table 1의 175개 seed 기반 instruction·instance 생성·분류·filtering, 52,445개 instruction·82,439개 instance; arXiv v1 2022-12-20·ACL 2023'
     relation: contextualizes
   - source_id: ouyang-et-al-2022-instructgpt
-    locator: '§§1·3.1–3.2와 Figure 2의 사람 시연 SFT·선호 순위·보상 모델·PPO 단계 및 FLAN/T0와 실제 사용자 지시 정렬의 차이'
+    locator: §§1·3.1–3.2와 Figure 2의 사람 시연 SFT·선호 순위·보상 모델·PPO 단계 및 FLAN/T0와 실제 사용자 지시 정렬의 차이
     relation: contextualizes
-related:
-  - concept.지시-미세조정
-  - source.063
-  - source.067
-  - concept.t5
-  - concept.문맥-내-학습
-  - concept.언어-모델-전이-학습
-  - concept.rlhf
-  - analysis.사전-학습-지식은-과제에-어떻게-도착하는가
-  - analysis.손실-곡선과-능력-곡선-사이
+relations:
+  - target: source.063
+    kind: related
+  - target: source.067
+    kind: related
+  - target: concept.언어-모델-전이-학습
+    kind: related
+  - target: concept.rlhf
+    kind: related
+  - target: analysis.사전-학습-지식은-과제에-어떻게-도착하는가
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.t5
+    - target: concept.문맥-내-학습
+  assumed_knowledge: 없음
+  outcomes:
+    - '지시 미세조정이 과제 정보를 가중치와 입력에 나누어 두는 방식을 설명하고, FLAN의 62개 데이터셋·군집 보류 평가·규모별 결과와 원문의 후대 서사를 구분할 수 있다.'
+  next:
+    - target: concept.지시-미세조정
+      reason: 지시 미세조정 — FLAN의 한 실험을 넘어 task-specific fine-tuning·문맥 내 학습·RLHF와의 경계를 개념으로 정리한다.
+    - target: analysis.손실-곡선과-능력-곡선-사이
+      reason: 손실 곡선과 능력 곡선 사이 — 규모별 점수 부호 반전과 능력 임계점 주장을 metric·표본·개입 조건으로 다시 읽는다.
 ---
 # 지시 미세조정과 FLAN의 제로샷 일반화
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[T5]], [[문맥 내 학습]]<br>
+> **선수 지식:** [[concept.t5|T5]], [[concept.문맥-내-학습|문맥 내 학습]]<br>
 > **읽고 나면:** 지시 미세조정이 과제 정보를 가중치와 입력에 나누어 두는 방식을 설명하고, FLAN의 62개 데이터셋·군집 보류 평가·규모별 결과와 원문의 후대 서사를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -178,8 +196,8 @@ raw의 Self-Instruct·ChatGPT·GPT-4·Claude·multimodal 확장은 후대 자료
 
 ### 다음 문서
 
-- [[지시 미세조정]] — FLAN의 한 실험을 넘어 task-specific fine-tuning·문맥 내 학습·RLHF와의 경계를 개념으로 정리한다.
-- [[손실 곡선과 능력 곡선 사이]] — 규모별 점수 부호 반전과 능력 임계점 주장을 metric·표본·개입 조건으로 다시 읽는다.
+- [[concept.지시-미세조정|지시 미세조정]] — FLAN의 한 실험을 넘어 task-specific fine-tuning·문맥 내 학습·RLHF와의 경계를 개념으로 정리한다.
+- [[analysis.손실-곡선과-능력-곡선-사이|손실 곡선과 능력 곡선 사이]] — 규모별 점수 부호 반전과 능력 임계점 주장을 metric·표본·개입 조건으로 다시 읽는다.
 
 ## 출처
 
@@ -193,12 +211,12 @@ raw의 Self-Instruct·ChatGPT·GPT-4·Claude·multimodal 확장은 후대 자료
 
 ## 관련 항목
 
-- [[지시 미세조정]]
-- [[063_T5와 Text-to-Text 통합 프레임워크]]
-- [[067_GPT-3와 문맥 내 학습]]
-- [[T5]]
-- [[문맥 내 학습]]
-- [[언어 모델 전이 학습]]
-- [[인간 피드백 강화학습]]
-- [[사전 학습 지식은 과제에 어떻게 도착하는가]]
-- [[손실 곡선과 능력 곡선 사이]]
+- [[concept.지시-미세조정|지시 미세조정]]
+- [[analysis.손실-곡선과-능력-곡선-사이|손실 곡선과 능력 곡선 사이]]
+- [[concept.t5|T5]]
+- [[concept.문맥-내-학습|문맥 내 학습]]
+- [[source.063|T5와 Text-to-Text 통합 프레임워크]]
+- [[source.067|GPT-3와 문맥 내 학습]]
+- [[concept.언어-모델-전이-학습|언어 모델 전이 학습]]
+- [[concept.rlhf|인간 피드백 강화학습]]
+- [[analysis.사전-학습-지식은-과제에-어떻게-도착하는가|사전 학습 지식은 과제에 어떻게 도착하는가]]

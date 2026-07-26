@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: meta.llm-computing-coevolution
 page_type: meta
 title: LLM과 컴퓨팅 능력의 공진화
@@ -11,28 +11,47 @@ tags:
   - type/meta
 created: '2026-07-24'
 updated: '2026-07-25'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: not-applicable
+  content_mode: descriptive
 artifacts: []
 evidence: []
-related:
-  - analysis.pre-machine-computing-capability
-  - analysis.language-computation-mechanical-procedure
-  - analysis.early-learning-scaling-limits
-  - analysis.statistical-language-model-computing-infrastructure
-  - analysis.matrix-acceleration-deep-learning
-  - analysis.transformer-parallelism-and-sequentiality
-  - analysis.scale-as-research-variable
-  - analysis.when-data-movement-dominates
-  - analysis.model-capability-to-service-capability
-  - concept.llm-inference-energy-metrics
-  - analysis.power-to-service-outcomes
-  - analysis.llm-capability-model-or-system
-  - analysis.n-gram에서-llm으로
-  - analysis.stored-program-to-learning-framework
-  - analysis.silicon-scaling-to-accelerators
-  - analysis.문맥은-저장소인가-상태-재사용-검색-에이전트-메모리
-  - meta.llm-system-boundary-map
+relations:
+  - target: analysis.pre-machine-computing-capability
+    kind: related
+  - target: analysis.language-computation-mechanical-procedure
+    kind: related
+  - target: analysis.early-learning-scaling-limits
+    kind: related
+  - target: analysis.statistical-language-model-computing-infrastructure
+    kind: related
+  - target: analysis.matrix-acceleration-deep-learning
+    kind: related
+  - target: analysis.transformer-parallelism-and-sequentiality
+    kind: related
+  - target: analysis.scale-as-research-variable
+    kind: related
+  - target: analysis.when-data-movement-dominates
+    kind: related
+  - target: analysis.model-capability-to-service-capability
+    kind: related
+  - target: concept.llm-inference-energy-metrics
+    kind: related
+  - target: analysis.power-to-service-outcomes
+    kind: related
+  - target: analysis.llm-capability-model-or-system
+    kind: related
+  - target: analysis.n-gram에서-llm으로
+    kind: related
+  - target: analysis.stored-program-to-learning-framework
+    kind: related
+  - target: analysis.silicon-scaling-to-accelerators
+    kind: related
+  - target: analysis.문맥은-저장소인가-상태-재사용-검색-에이전트-메모리
+    kind: related
+  - target: meta.llm-system-boundary-map
+    kind: related
 ---
 # LLM과 컴퓨팅 능력의 공진화
 

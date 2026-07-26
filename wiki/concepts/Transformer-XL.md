@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.transformer-xl
 page_type: concept
 title: Transformer-XL
@@ -14,41 +14,59 @@ tags:
   - domain/machine-learning
 created: '2026-07-21'
 updated: '2026-07-23'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/064_Transformer-XL Extending Transformers to Long Sequences.ko.md'
-  - 'raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md'
-  - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md'
-  - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md'
-  - 'raw/098_Long Context Models Processing Million-Token Sequences in Language AI.ko.md'
-  - 'raw/098_Long Context Models Processing Million-Token Sequences in Language AI.commentary.ko.md'
+  - raw/064_Transformer-XL Extending Transformers to Long Sequences.ko.md
+  - raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md
+  - raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md
+  - raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md
+  - raw/098_Long Context Models Processing Million-Token Sequences in Language AI.ko.md
+  - raw/098_Long Context Models Processing Million-Token Sequences in Language AI.commentary.ko.md
 evidence:
   - source_id: dai-et-al-2019-transformer-xl
     locator: 'pp. 2980–2986, 특히 §§3.2–3.3와 Figures 1–2의 state reuse·stop-gradient·layer shift·relative positional attention, §§4.2–4.5와 Tables 6–9의 ablation·RECL·평가 속도 조건'
     relation: supports
   - source_id: dao-et-al-2022-flashattention
-    locator: '§§2.2–3.2와 Algorithms 0–1의 동일 dense attention을 위한 HBM–SRAM 타일링·온라인 softmax·추가 메모리와 이차 산술량의 구분'
+    locator: §§2.2–3.2와 Algorithms 0–1의 동일 dense attention을 위한 HBM–SRAM 타일링·온라인 softmax·추가 메모리와 이차 산술량의 구분
     relation: contextualizes
   - source_id: liu-et-al-2024-lwm
-    locator: 'arXiv v1 §§2–3.2와 Figure 3·Table 1의 RingAttention+FlashAttention·RoPE scaling·Llama 2 7B(4K) 초기화 뒤 32K→128K→256K→512K→1M의 5-stage 확장; Transformer-XL recurrence와 다른 1M 경로'
+    locator: arXiv v1 §§2–3.2와 Figure 3·Table 1의 RingAttention+FlashAttention·RoPE scaling·Llama 2 7B(4K) 초기화 뒤 32K→128K→256K→512K→1M의 5-stage 확장; Transformer-XL recurrence와 다른 1M 경로
     relation: contextualizes
-related:
-  - source.064
-  - source.088
-  - source.098
-  - concept.transformer
-  - concept.flashattention
-  - concept.긴-문맥-언어-모델
-  - concept.자기회귀-생성
-  - concept.xlnet-roberta-albert
-  - analysis.훈련-병렬성과-생성-순차성은-다른-축이다
+relations:
+  - target: source.088
+    kind: related
+  - target: source.098
+    kind: related
+  - target: concept.flashattention
+    kind: related
+  - target: concept.긴-문맥-언어-모델
+    kind: related
+  - target: analysis.훈련-병렬성과-생성-순차성은-다른-축이다
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.transformer
+    - target: concept.자기회귀-생성
+  assumed_knowledge: 없음
+  outcomes:
+    - 'Transformer-XL의 세그먼트 수준 재귀와 상대 위치 attention을 설명하고, memory 범위·gradient 경계·dense 계산 비용을 구분할 수 있다.'
+  next:
+    - target: source.064
+      reason: 064Transformer-XL과 세그먼트 수준 재귀 — 원 논문의 수식·ablation·RECL과 속도 수치의 조건을 확인한다.
+    - target: concept.xlnet-roberta-albert
+      reason: XLNet·RoBERTa·ALBERT — Transformer-XL backbone이 순열 언어 모델링과 결합되는 직접 후속 사용을 살핀다.
 ---
 # Transformer-XL
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[Transformer]], [[자기회귀 생성]]<br>
+> **선수 지식:** [[concept.transformer|Transformer]], [[concept.자기회귀-생성|자기회귀 생성]]<br>
 > **읽고 나면:** Transformer-XL의 세그먼트 수준 재귀와 상대 위치 attention을 설명하고, memory 범위·gradient 경계·dense 계산 비용을 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -330,8 +348,8 @@ memory를 늘리면 더 긴 과거를 직접 읽는 대신 계산량과 저장�
 
 ### 다음 문서
 
-- [[064_Transformer-XL과 세그먼트 수준 재귀]] — 원 논문의 수식·ablation·RECL과 속도 수치의 조건을 확인한다.
-- [[XLNet·RoBERTa·ALBERT]] — Transformer-XL backbone이 순열 언어 모델링과 결합되는 직접 후속 사용을 살핀다.
+- [[source.064|Transformer-XL과 세그먼트 수준 재귀]] — 064Transformer-XL과 세그먼트 수준 재귀 — 원 논문의 수식·ablation·RECL과 속도 수치의 조건을 확인한다.
+- [[concept.xlnet-roberta-albert|XLNet·RoBERTa·ALBERT]] — Transformer-XL backbone이 순열 언어 모델링과 결합되는 직접 후속 사용을 살핀다.
 
 ## 출처
 
@@ -346,12 +364,12 @@ memory를 늘리면 더 긴 과거를 직접 읽는 대신 계산량과 저장�
 
 ## 관련 항목
 
-- [[064_Transformer-XL과 세그먼트 수준 재귀]]
-- [[088_FlashAttention과 IO 인지형 정확 어텐션]]
-- [[098_백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계]]
-- [[Transformer]]
-- [[FlashAttention]]
-- [[긴 문맥 언어 모델]]
-- [[자기회귀 생성]]
-- [[XLNet·RoBERTa·ALBERT]]
-- [[훈련 병렬성과 생성 순차성은 다른 축이다]]
+- [[source.064|Transformer-XL과 세그먼트 수준 재귀]]
+- [[concept.xlnet-roberta-albert|XLNet·RoBERTa·ALBERT]]
+- [[concept.transformer|Transformer]]
+- [[concept.자기회귀-생성|자기회귀 생성]]
+- [[source.088|FlashAttention과 I/O 인지형 정확 어텐션]]
+- [[source.098|백만 토큰 문맥 모델의 명목 길이와 유효 활용 경계]]
+- [[concept.flashattention|FlashAttention]]
+- [[concept.긴-문맥-언어-모델|긴 문맥 언어 모델]]
+- [[analysis.훈련-병렬성과-생성-순차성은-다른-축이다|훈련 병렬성과 생성 순차성은 다른 축이다]]

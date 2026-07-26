@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.glove
 page_type: concept
 title: GloVe
@@ -13,11 +13,13 @@ tags:
   - domain/machine-learning
 created: '2026-07-18'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.ko.md'
-  - 'raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.commentary.ko.md'
+  - raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.ko.md
+  - raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.commentary.ko.md
 evidence:
   - source_id: pennington-et-al-2014-glove
     locator: 'EMNLP 2014, pp. 1532–1543, 특히 §§2–3의 비율·목적 함수와 §§4–4.6의 평가'
@@ -28,16 +30,29 @@ evidence:
   - source_id: levy-goldberg-dagan-2015-distributional-similarity
     locator: 'TACL 3, pp. 211–225의 예측·계수 방법 설계 선택 통제 비교'
     relation: contextualizes
-related:
-  - source.044
-  - concept.단어-임베딩
-  - concept.word2vec
+relations:
+  - target: source.044
+    kind: related
+  - target: concept.word2vec
+    kind: related
+learning:
+  difficulty:
+    entry: advanced
+    target: advanced
+  prerequisites:
+    - target: concept.단어-임베딩
+  assumed_knowledge: 없음
+  outcomes:
+    - 'GloVe가 국소 동시출현을 전역 계수로 집계해 로그 회귀 목적을 학습하는 방식을 설명하고, Word2Vec과의 관계 및 고정 벡터의 한계를 구분할 수 있다.'
+  next:
+    - target: analysis.계수-기반과-예측-기반-단어-표현
+      reason: 다음에는 계수 기반과 예측 기반 단어 표현은 얼마나 다른가에서 GloVe와 SGNS의 통계적 관계를 비교한다.
 ---
 # GloVe
 
 > [!note] 학습 안내
 > **난이도:** 심화<br>
-> **선수 지식:** [[단어 임베딩]]<br>
+> **선수 지식:** [[concept.단어-임베딩|단어 임베딩]]<br>
 > **읽고 나면:** GloVe가 국소 동시출현을 전역 계수로 집계해 로그 회귀 목적을 학습하는 방식을 설명하고, Word2Vec과의 관계 및 고정 벡터의 한계를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -91,8 +106,11 @@ $$
 
 다음에는 [[계수 기반과 예측 기반 단어 표현은 얼마나 다른가]]에서 GloVe와 SGNS의 통계적 관계를 비교한다.
 
-## 출처
+### 다음 문서
 
+- [[analysis.계수-기반과-예측-기반-단어-표현|계수 기반과 예측 기반 단어 표현은 얼마나 다른가]] — 다음에는 계수 기반과 예측 기반 단어 표현은 얼마나 다른가에서 GloVe와 SGNS의 통계적 관계를 비교한다.
+
+## 출처
 - [[044_GloVe와 Adam의 서로 다른 2014년 전환]]
 - Jeffrey Pennington·Richard Socher·Christopher D. Manning, [GloVe: Global Vectors for Word Representation](https://aclanthology.org/D14-1162/), EMNLP 2014, pp. 1532–1543.
 - Omer Levy·Yoav Goldberg, [Neural Word Embedding as Implicit Matrix Factorization](https://proceedings.neurips.cc/paper_files/paper/2014/hash/b78666971ceae55a8e87efb7cbfd9ad4-Abstract.html), NeurIPS 2014.
@@ -100,6 +118,7 @@ $$
 
 ## 관련 항목
 
-- [[044_GloVe와 Adam의 서로 다른 2014년 전환]]
-- [[단어 임베딩]]
-- [[Word2Vec]]
+- [[analysis.계수-기반과-예측-기반-단어-표현|계수 기반과 예측 기반 단어 표현은 얼마나 다른가]]
+- [[concept.단어-임베딩|단어 임베딩]]
+- [[source.044|GloVe와 Adam의 서로 다른 2014년 전환]]
+- [[concept.word2vec|Word2Vec]]

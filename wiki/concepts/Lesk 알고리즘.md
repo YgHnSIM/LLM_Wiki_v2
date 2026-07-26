@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.lesk-알고리즘
 page_type: concept
 title: Lesk 알고리즘
@@ -13,11 +13,13 @@ tags:
   - domain/computer-science
 created: '2026-07-16'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.ko.md'
-  - 'raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.commentary.ko.md'
+  - raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.ko.md
+  - raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.commentary.ko.md
 evidence:
   - source_id: lesk-1986
     locator: 'pp. 24–26, 특히 p. 24의 절차와 p. 26의 한계·개선안'
@@ -34,18 +36,31 @@ evidence:
   - source_id: huang-et-al-2019-glossbert
     locator: 'pp. 3509–3514, 특히 §2와 §3'
     relation: contextualizes
-related:
-  - source.017
-  - entity.마이클-레스크
-  - concept.단어-의미-중의성-해소
-  - concept.wordnet
-  - concept.통계적-자연어-처리
+relations:
+  - target: entity.마이클-레스크
+    kind: related
+  - target: concept.통계적-자연어-처리
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.wordnet
+  assumed_knowledge: 없음
+  outcomes:
+    - 1986년 Lesk 절차가 글로스 중첩으로 의미를 고르는 과정과 후대 변형의 차이를 설명할 수 있다.
+  next:
+    - target: source.017
+      reason: '017Lesk 알고리즘과 단어 의미 중의성 해소 — 1986년 구현과 평가, 후속 변형의 원문 근거를 확인한다.'
+    - target: concept.단어-의미-중의성-해소
+      reason: 단어 의미 중의성 해소 — Lesk를 포함한 지식 기반·지도 학습·신경 방법의 과제 틀을 비교한다.
 ---
 # Lesk 알고리즘
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[WordNet]]<br>
+> **선수 지식:** [[concept.wordnet|WordNet]]<br>
 > **읽고 나면:** 1986년 Lesk 절차가 글로스 중첩으로 의미를 고르는 과정과 후대 변형의 차이를 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -94,8 +109,8 @@ related:
 
 ### 다음 문서
 
-- [[017_Lesk 알고리즘과 단어 의미 중의성 해소]] — 1986년 구현과 평가, 후속 변형의 원문 근거를 확인한다.
-- [[단어 의미 중의성 해소]] — Lesk를 포함한 지식 기반·지도 학습·신경 방법의 과제 틀을 비교한다.
+- [[source.017|Lesk 알고리즘과 단어 의미 중의성 해소]] — 017Lesk 알고리즘과 단어 의미 중의성 해소 — 1986년 구현과 평가, 후속 변형의 원문 근거를 확인한다.
+- [[concept.단어-의미-중의성-해소|단어 의미 중의성 해소]] — Lesk를 포함한 지식 기반·지도 학습·신경 방법의 과제 틀을 비교한다.
 
 ## 출처
 
@@ -108,8 +123,8 @@ related:
 
 ## 관련 항목
 
-- [[017_Lesk 알고리즘과 단어 의미 중의성 해소]]
-- [[마이클 레스크]]
-- [[단어 의미 중의성 해소]]
-- [[통계적 자연어 처리]]
-- [[WordNet]]
+- [[source.017|Lesk 알고리즘과 단어 의미 중의성 해소]]
+- [[concept.단어-의미-중의성-해소|단어 의미 중의성 해소]]
+- [[concept.wordnet|WordNet]]
+- [[entity.마이클-레스크|마이클 레스크]]
+- [[concept.통계적-자연어-처리|통계적 자연어 처리]]

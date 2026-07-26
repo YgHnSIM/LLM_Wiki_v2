@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.060
 page_type: source
 title: GLUE와 SuperGLUE의 집계 평가
@@ -13,35 +13,50 @@ tags:
   - domain/machine-learning
 created: '2026-07-20'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md'
-  - 'raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md'
+  - raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md
+  - raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md
 evidence:
   - source_id: wang-et-al-2018-glue
-    locator: '초록과 pp. 353–355의 아홉 과제·자료량·domain·private test·diagnostic set·baseline 설계'
+    locator: 초록과 pp. 353–355의 아홉 과제·자료량·domain·private test·diagnostic set·baseline 설계
     relation: supports
   - source_id: nangia-bowman-2019-human-glue
-    locator: '초록과 §§1–4의 GLUE 비전문가 인간 성능 추정 절차·87.1 aggregate와 과제별 결과'
+    locator: 초록과 §§1–4의 GLUE 비전문가 인간 성능 추정 절차·87.1 aggregate와 과제별 결과
     relation: contextualizes
   - source_id: wang-et-al-2019-superglue
     locator: '초록과 §§1–3, Tables 1–3의 여덟 과제·metric·human baseline·leaderboard 설계와 GLUE 포화 근거'
     relation: supports
-related:
-  - concept.glue-superglue
-  - concept.helm
-  - concept.bert
-  - source.051
-  - source.079
-  - analysis.평가-지표와-모델-유인
-  - analysis.튜링-테스트와-llm-평가
+relations:
+  - target: concept.helm
+    kind: related
+  - target: source.051
+    kind: related
+  - target: analysis.튜링-테스트와-llm-평가
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.bert
+  assumed_knowledge: 와 분류 회귀 평가 지표의 기초
+  outcomes:
+    - GLUE와 SuperGLUE가 여러 과제를 한 집계 점수로 비교하는 방식과 그 점수가 숨기는 조건을 설명할 수 있다.
+  next:
+    - target: concept.glue-superglue
+      reason: GLUE와 SuperGLUE — 과제 구성·집계·인간 비교를 개념 지도에서 다시 정리한다.
+    - target: source.079
+      reason: 079HELM과 다차원 언어 모델 평가 — 집계 점수에서 시나리오×메트릭 행렬로 평가 단위가 확장된 방식을 비교한다.
 ---
 # GLUE와 SuperGLUE의 집계 평가
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[BERT]]와 분류·회귀 평가 지표의 기초<br>
+> **선수 지식:** [[concept.bert|BERT]]<br>
 > **읽고 나면:** GLUE와 SuperGLUE가 여러 과제를 한 집계 점수로 비교하는 방식과 그 점수가 숨기는 조건을 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -168,9 +183,8 @@ GLUE가 SQuAD 평가 원칙을 만들었다거나 ImageNet·COCO가 GLUE 방식�
 
 ### 다음 문서
 
-- [[GLUE와 SuperGLUE]] — 과제 구성·집계·인간 비교를 개념 지도에서 다시 정리한다.
-- [[079_HELM과 다차원 언어 모델 평가]] — 집계 점수에서 시나리오×메트릭 행렬로 평가 단위가 확장된 방식을 비교한다.
-- [[자동 평가 지표는 무엇을 보상하는가]] — 집계 지표가 연구와 모델 선택에 주는 유인을 더 넓게 비교한다.
+- [[concept.glue-superglue|GLUE와 SuperGLUE]] — 과제 구성·집계·인간 비교를 개념 지도에서 다시 정리한다.
+- [[source.079|HELM과 다차원 언어 모델 평가]] — 079HELM과 다차원 언어 모델 평가 — 집계 점수에서 시나리오×메트릭 행렬로 평가 단위가 확장된 방식을 비교한다.
 
 ## 출처
 
@@ -183,10 +197,9 @@ GLUE가 SQuAD 평가 원칙을 만들었다거나 ImageNet·COCO가 GLUE 방식�
 
 ## 관련 항목
 
-- [[GLUE와 SuperGLUE]]
-- [[HELM]]
-- [[079_HELM과 다차원 언어 모델 평가]]
-- [[BERT]]
-- [[051_SQuAD와 추출형 독해 평가]]
-- [[자동 평가 지표는 무엇을 보상하는가]]
-- [[튜링 테스트와 LLM 평가]]
+- [[concept.glue-superglue|GLUE와 SuperGLUE]]
+- [[source.079|HELM과 다차원 언어 모델 평가]]
+- [[concept.bert|BERT]]
+- [[concept.helm|HELM]]
+- [[source.051|SQuAD와 추출형 독해 평가]]
+- [[analysis.튜링-테스트와-llm-평가|튜링 테스트와 LLM 평가]]

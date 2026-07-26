@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.llm-inference-energy-metrics
 page_type: concept
 title: LLM 추론 에너지 지표
@@ -15,8 +15,10 @@ tags:
   - domain/computer-science
 created: '2026-07-25'
 updated: '2026-07-25'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts: []
 evidence:
   - source_id: barroso-holzle-2007-energy-proportional
@@ -34,18 +36,33 @@ evidence:
   - source_id: dean-barroso-2013-tail-at-scale
     locator: 'pp. 74–80의 utilization, tail latency, 여유 용량과 service-level 결과 계약'
     relation: contextualizes
-related:
-  - concept.llm-inference-serving
-  - concept.memory-hierarchy-data-movement
-  - concept.계산-복잡도와-비용-모델
-  - analysis.model-capability-to-service-capability
-  - analysis.when-data-movement-dominates
+relations:
+  - target: concept.memory-hierarchy-data-movement
+    kind: related
+  - target: concept.계산-복잡도와-비용-모델
+    kind: related
+  - target: analysis.model-capability-to-service-capability
+    kind: related
+  - target: analysis.when-data-movement-dominates
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: intermediate
+  prerequisites:
+    - target: concept.llm-inference-serving
+  assumed_knowledge: — 요청이 queue prefill decode 종료를 거치며 TTFT TPOT 실패율이 따로 측정된다는 사실을 알고 시작한다.
+  outcomes:
+    - '전력과 에너지, GPU·node·서비스 경계, token·request·성공한 요청의 분모를 구분하고 “더 적은 J/token”이 언제 더 좋은 LLM 서비스 결과를 뜻하지 않는지 설명할 수 있다.'
+  next:
+    - target: analysis.power-to-service-outcomes
+      reason: 학습 경로의 다음 질문으로 이어진다.
 ---
 # LLM 추론 에너지 지표
 
 > [!note] 학습 안내
-> **난이도:** 입문–중급<br>
-> **선수 지식:** [[언어 모델 추론 서빙]] — 요청이 queue, prefill, decode, 종료를 거치며 TTFT·TPOT·실패율이 따로 측정된다는 사실을 알고 시작한다.<br>
+> **난이도:** 입문 → 중급<br>
+> **선수 지식:** [[concept.llm-inference-serving|언어 모델 추론 서빙]]<br>
 > **읽고 나면:** 전력과 에너지, GPU·node·서비스 경계, token·request·성공한 요청의 분모를 구분하고 “더 적은 J/token”이 언제 더 좋은 LLM 서비스 결과를 뜻하지 않는지 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -162,8 +179,11 @@ TokenPowerBench는 GPU·node·system 측정 경계를 분리하고 request의 pr
 
 다음 배치의 **전력에서 서비스 결과 계약까지 무엇을 세어야 하나**는 이 장부를 quality·traffic·SLO와 함께 읽는다.
 
-## 출처
+### 다음 문서
 
+- [[analysis.power-to-service-outcomes|전력에서 서비스 결과 계약까지 무엇을 세어야 하나]] — 학습 경로의 다음 질문으로 이어진다.
+
+## 출처
 - Luiz André Barroso·Urs Hölzle, [The Case for Energy-Proportional Computing](https://research.google/pubs/the-case-for-energy-proportional-computing/), *IEEE Computer* 40, 2007, pp. 33–37.
 - Norman P. Jouppi 외, [In-Datacenter Performance Analysis of a Tensor Processing Unit](https://research.google/pubs/in-datacenter-performance-analysis-of-a-tensor-processing-unit/), ISCA 2017, pp. 1–12.
 - [MLPerf Inference Benchmark Suite v5.1](https://github.com/mlcommons/inference/tree/v5.1), README의 workload·scenario·power submission 조건.
@@ -172,8 +192,9 @@ TokenPowerBench는 GPU·node·system 측정 경계를 분리하고 request의 pr
 
 ## 관련 항목
 
-- [[언어 모델 추론 서빙]] — prefill·decode·KV cache·batching의 실행 경계를 읽는다.
-- [[메모리 계층과 데이터 이동]] — 같은 FLOPs라도 byte 이동과 memory 계층이 실행 비용을 바꾸는 이유를 본다.
-- [[계산 복잡도와 비용 모델]] — FLOPs, memory, I/O, communication, wall-clock을 분리한다.
-- [[모델 능력에서 서비스 능력으로]] — model 품질을 traffic·지연·가용성·접근성의 서비스 계약으로 확장한다.
-- [[연산보다 데이터 이동이 비싸질 때]] — hardware 병목이 arithmetic에서 data movement로 이동하는 역사적 맥락을 읽는다.
+- [[analysis.power-to-service-outcomes|전력에서 서비스 결과 계약까지 무엇을 세어야 하나]]
+- [[concept.llm-inference-serving|언어 모델 추론 서빙]]
+- [[concept.memory-hierarchy-data-movement|메모리 계층과 데이터 이동]]
+- [[concept.계산-복잡도와-비용-모델|계산 복잡도와 비용 모델]]
+- [[analysis.model-capability-to-service-capability|모델 능력에서 서비스 능력으로]]
+- [[analysis.when-data-movement-dominates|연산보다 데이터 이동이 비싸질 때]]

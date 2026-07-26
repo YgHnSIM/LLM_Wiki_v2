@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.palm
 page_type: concept
 title: PaLM
@@ -14,8 +14,10 @@ tags:
   - domain/machine-learning
 created: '2026-07-21'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - 'raw/083_PaLM Pathways Language Model - Large-Scale Training, Reasoning, and Multilingual Capabilities.ko.md'
   - 'raw/083_PaLM Pathways Language Model - Large-Scale Training, Reasoning, and Multilingual Capabilities.commentary.ko.md'
@@ -23,22 +25,38 @@ evidence:
   - source_id: chowdhery-et-al-2022-palm
     locator: '초록, §§2–4·6–8·10과 Tables 1–5·10–11·14·17·20, Appendix B Table 22와 Appendix E의 PaLM 540B 정의·Pathways 학습·평가 조건·compute·memorization·risk·사용 제한'
     relation: supports
-related:
-  - source.083
-  - source.078
-  - source.079
-  - source.080
-  - concept.대규모-언어-모델
-  - concept.transformer
-  - concept.언어-모델-스케일링-법칙
-  - concept.사고-연쇄-프롬프팅
-  - analysis.손실-곡선과-능력-곡선-사이
+relations:
+  - target: source.078
+    kind: related
+  - target: source.079
+    kind: related
+  - target: concept.언어-모델-스케일링-법칙
+    kind: related
+  - target: concept.사고-연쇄-프롬프팅
+    kind: related
+  - target: analysis.손실-곡선과-능력-곡선-사이
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.transformer
+    - target: concept.대규모-언어-모델
+  assumed_knowledge: 없음
+  outcomes:
+    - 'PaLM을 540B dense Transformer와 Pathways 분산 학습의 결합으로 설명하고, benchmark의 큰 수치를 prompt·fine-tuning·언어·위험 조건에서 해석할 수 있다.'
+  next:
+    - target: source.083
+      reason: 083PaLM과 Pathways 기반 대규모 언어 모델 확장 — PaLM raw 서사를 수치·평가 조건·위험으로 검증한다.
+    - target: source.080
+      reason: 080사고 연쇄 프롬프팅과 추론 행동 유도 — prompt가 reasoning benchmark에 끼치는 효과를 살핀다.
 ---
 # PaLM
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[Transformer]], [[대규모 언어 모델]], [[사고 연쇄 프롬프팅]]<br>
+> **선수 지식:** [[concept.transformer|Transformer]], [[concept.대규모-언어-모델|대규모 언어 모델]]<br>
 > **읽고 나면:** PaLM을 540B dense Transformer와 Pathways 분산 학습의 결합으로 설명하고, benchmark의 큰 수치를 prompt·fine-tuning·언어·위험 조건에서 해석할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -137,8 +155,8 @@ PaLM 논문은 model weight release를 보고하지 않는다. Appendix E는 PaL
 
 ### 다음 문서
 
-- [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]] — PaLM raw 서사를 수치·평가 조건·위험으로 검증한다.
-- [[080_사고 연쇄 프롬프팅과 추론 행동 유도]] — prompt가 reasoning benchmark에 끼치는 효과를 살핀다.
+- [[source.083|PaLM과 Pathways 기반 대규모 언어 모델 확장]] — 083PaLM과 Pathways 기반 대규모 언어 모델 확장 — PaLM raw 서사를 수치·평가 조건·위험으로 검증한다.
+- [[source.080|사고 연쇄 프롬프팅과 추론 행동 유도]] — 080사고 연쇄 프롬프팅과 추론 행동 유도 — prompt가 reasoning benchmark에 끼치는 효과를 살핀다.
 
 ## 출처
 
@@ -149,12 +167,12 @@ PaLM 논문은 model weight release를 보고하지 않는다. Appendix E는 PaL
 
 ## 관련 항목
 
-- [[083_PaLM과 Pathways 기반 대규모 언어 모델 확장]]
-- [[078_Chinchilla와 계산 최적 언어 모델 학습]]
-- [[079_HELM과 다차원 언어 모델 평가]]
-- [[080_사고 연쇄 프롬프팅과 추론 행동 유도]]
-- [[대규모 언어 모델]]
-- [[Transformer]]
-- [[언어 모델 스케일링 법칙]]
-- [[사고 연쇄 프롬프팅]]
-- [[손실 곡선과 능력 곡선 사이]]
+- [[source.083|PaLM과 Pathways 기반 대규모 언어 모델 확장]]
+- [[source.080|사고 연쇄 프롬프팅과 추론 행동 유도]]
+- [[concept.transformer|Transformer]]
+- [[concept.대규모-언어-모델|대규모 언어 모델]]
+- [[source.078|Chinchilla와 계산 최적 언어 모델 학습]]
+- [[source.079|HELM과 다차원 언어 모델 평가]]
+- [[concept.언어-모델-스케일링-법칙|언어 모델 스케일링 법칙]]
+- [[concept.사고-연쇄-프롬프팅|사고 연쇄 프롬프팅]]
+- [[analysis.손실-곡선과-능력-곡선-사이|손실 곡선과 능력 곡선 사이]]

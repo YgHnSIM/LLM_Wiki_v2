@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.transformer
 page_type: concept
 title: Transformer
@@ -14,19 +14,21 @@ tags:
   - domain/machine-learning
 created: '2026-07-19'
 updated: '2026-07-24'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/055_The Transformer Attention Is All You Need.ko.md'
-  - 'raw/055_The Transformer Attention Is All You Need.commentary.ko.md'
-  - 'raw/064_Transformer-XL Extending Transformers to Long Sequences.ko.md'
-  - 'raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md'
-  - 'raw/069_Mixture of Experts Sparse Activation for Scaling Language Models.ko.md'
-  - 'raw/069_Mixture of Experts Sparse Activation for Scaling Language Models.commentary.ko.md'
-  - 'raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.ko.md'
-  - 'raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.commentary.ko.md'
-  - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md'
-  - 'raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md'
+  - raw/055_The Transformer Attention Is All You Need.ko.md
+  - raw/055_The Transformer Attention Is All You Need.commentary.ko.md
+  - raw/064_Transformer-XL Extending Transformers to Long Sequences.ko.md
+  - raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md
+  - raw/069_Mixture of Experts Sparse Activation for Scaling Language Models.ko.md
+  - raw/069_Mixture of Experts Sparse Activation for Scaling Language Models.commentary.ko.md
+  - raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.ko.md
+  - raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.commentary.ko.md
+  - raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md
+  - raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md
 evidence:
   - source_id: vaswani-et-al-2017-attention
     locator: 'pp. 5998–6008, 특히 §§3–5, Figure 1, Tables 1–3의 encoder–decoder·attention·위치 인코딩·복잡도·번역 평가'
@@ -35,10 +37,10 @@ evidence:
     locator: 'pp. 2978–2988, 특히 §§3.1–3.3과 Figures 1–2의 stop-gradient segment recurrence·relative positional attention, §4.5와 Table 9의 evaluation-speed 조건'
     relation: supplements
   - source_id: gpt-2018
-    locator: '§2와 Figure 1의 Transformer decoder 기반 generative pre-training·task-aware input transformation'
+    locator: §2와 Figure 1의 Transformer decoder 기반 generative pre-training·task-aware input transformation
     relation: contextualizes
   - source_id: bert-2019
-    locator: '§3.1과 Figure 1의 bidirectional Transformer encoder와 masked language model 사전학습'
+    locator: §3.1과 Figure 1의 bidirectional Transformer encoder와 masked language model 사전학습
     relation: contextualizes
   - source_id: jain-wallace-2019-attention-explanation
     locator: 'NAACL 2019, pp. 3543–3556의 attention weight·gradient importance 상관과 adversarial attention 실험'
@@ -53,41 +55,71 @@ evidence:
     locator: 'JMLR 23(120), §§2–3과 Figures 1–2의 공유 attention·희소 Switch FFN·top-1 token routing'
     relation: supplements
   - source_id: radford-et-al-2022-whisper
-    locator: '§§2.2–2.4와 Figure 1의 log-Mel·합성곱 stem·Transformer encoder–decoder·교차 어텐션·다중 과제 token 구성'
+    locator: §§2.2–2.4와 Figure 1의 log-Mel·합성곱 stem·Transformer encoder–decoder·교차 어텐션·다중 과제 token 구성
     relation: supplements
   - source_id: dao-et-al-2022-flashattention
     locator: '§§2.2–3.2, Algorithms 0–1, Theorems 1–2와 Figure 2의 dense attention 산술량·중간 저장·HBM 접근·타일링·backward 재계산'
     relation: supplements
-related:
-  - source.055
-  - source.064
-  - source.069
-  - source.087
-  - source.088
-  - concept.벡터-행렬-텐서와-shape
-  - concept.내적-행렬곱과-선형변환
-  - concept.어텐션-메커니즘
-  - concept.소프트맥스
-  - concept.활성화-함수
-  - concept.계산-복잡도와-비용-모델
-  - concept.다층-퍼셉트론
-  - concept.미분-편미분-그래디언트
-  - concept.연쇄-법칙과-계산-그래프
-  - concept.역전파
-  - concept.whisper
-  - concept.flashattention
-  - concept.신경망-기계-번역
-  - concept.자기회귀-생성
-  - concept.잔차-연결
-  - concept.layer-normalization
-  - concept.transformer-xl
-  - concept.전문가-혼합
+relations:
+  - target: source.064
+    kind: related
+  - target: source.069
+    kind: related
+  - target: source.087
+    kind: related
+  - target: source.088
+    kind: related
+  - target: concept.벡터-행렬-텐서와-shape
+    kind: related
+  - target: concept.내적-행렬곱과-선형변환
+    kind: related
+  - target: concept.소프트맥스
+    kind: related
+  - target: concept.활성화-함수
+    kind: related
+  - target: concept.계산-복잡도와-비용-모델
+    kind: related
+  - target: concept.다층-퍼셉트론
+    kind: related
+  - target: concept.미분-편미분-그래디언트
+    kind: related
+  - target: concept.연쇄-법칙과-계산-그래프
+    kind: related
+  - target: concept.역전파
+    kind: related
+  - target: concept.whisper
+    kind: related
+  - target: concept.flashattention
+    kind: related
+  - target: concept.신경망-기계-번역
+    kind: related
+  - target: concept.layer-normalization
+    kind: related
+  - target: concept.transformer-xl
+    kind: related
+  - target: concept.전문가-혼합
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.어텐션-메커니즘
+    - target: concept.잔차-연결
+  assumed_knowledge: 의 Q K V와 softmax 의 shortcut과 shape 조건
+  outcomes:
+    - 'Transformer 한 block에서 위치 표현·어텐션·MLP·잔차·정규화·출력 softmax가 맡는 역할을 계산 순서와 수식으로 설명하고, 병렬 훈련과 순차 생성이 함께 성립하는 이유를 구분할 수 있다.'
+  next:
+    - target: source.055
+      reason: 055Transformer와 자기어텐션 기반 시퀀스 모델링 — 원 2017년 논문의 번역 실험·복잡도 표·후속 계보를 원자료의 범위에서 다시 확인한다.
+    - target: concept.자기회귀-생성
+      reason: 자기회귀 생성 — causal decoder가 확률을 한 token씩 곱해 문장을 만드는 이유와 생성 전략을 이어서 살핀다.
 ---
 # Transformer
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[어텐션 메커니즘]]의 Q·K·V와 softmax, [[잔차 연결]]의 shortcut과 shape 조건<br>
+> **선수 지식:** [[concept.어텐션-메커니즘|어텐션 메커니즘]], [[concept.잔차-연결|잔차 연결]]<br>
 > **읽고 나면:** Transformer 한 block에서 위치 표현·어텐션·MLP·잔차·정규화·출력 softmax가 맡는 역할을 계산 순서와 수식으로 설명하고, 병렬 훈련과 순차 생성이 함께 성립하는 이유를 구분할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -441,8 +473,8 @@ $$
 
 ### 다음 문서
 
-- [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]] — 원 2017년 논문의 번역 실험·복잡도 표·후속 계보를 원자료의 범위에서 다시 확인한다.
-- [[자기회귀 생성]] — causal decoder가 확률을 한 token씩 곱해 문장을 만드는 이유와 생성 전략을 이어서 살핀다.
+- [[source.055|Transformer와 자기어텐션 기반 시퀀스 모델링]] — 055Transformer와 자기어텐션 기반 시퀀스 모델링 — 원 2017년 논문의 번역 실험·복잡도 표·후속 계보를 원자료의 범위에서 다시 확인한다.
+- [[concept.자기회귀-생성|자기회귀 생성]] — causal decoder가 확률을 한 token씩 곱해 문장을 만드는 이유와 생성 전략을 이어서 살핀다.
 
 ## 출처
 
@@ -464,26 +496,26 @@ $$
 
 ## 관련 항목
 
-- [[055_Transformer와 자기어텐션 기반 시퀀스 모델링]]
-- [[064_Transformer-XL과 세그먼트 수준 재귀]]
-- [[069_전문가 혼합과 희소 활성 스케일링]]
-- [[087_Whisper와 대규모 약한 감독 음성 인식]]
-- [[088_FlashAttention과 IO 인지형 정확 어텐션]]
-- [[벡터·행렬·텐서와 shape]]
-- [[내적·행렬곱과 선형변환]]
-- [[어텐션 메커니즘]]
-- [[소프트맥스]]
-- [[활성화 함수]]
-- [[계산 복잡도와 비용 모델]]
-- [[다층 퍼셉트론]]
-- [[미분·편미분·그래디언트]]
-- [[연쇄 법칙과 계산 그래프]]
-- [[역전파]]
-- [[Whisper]]
-- [[FlashAttention]]
-- [[신경망 기계 번역]]
-- [[자기회귀 생성]]
-- [[잔차 연결]]
-- [[Layer Normalization]]
-- [[Transformer-XL]]
-- [[전문가 혼합]]
+- [[source.055|Transformer와 자기어텐션 기반 시퀀스 모델링]]
+- [[concept.자기회귀-생성|자기회귀 생성]]
+- [[concept.어텐션-메커니즘|어텐션 메커니즘]]
+- [[concept.잔차-연결|잔차 연결]]
+- [[source.064|Transformer-XL과 세그먼트 수준 재귀]]
+- [[source.069|전문가 혼합과 희소 활성 스케일링]]
+- [[source.087|Whisper와 대규모 약한 감독 음성 인식]]
+- [[source.088|FlashAttention과 I/O 인지형 정확 어텐션]]
+- [[concept.벡터-행렬-텐서와-shape|벡터·행렬·텐서와 shape]]
+- [[concept.내적-행렬곱과-선형변환|내적·행렬곱과 선형변환]]
+- [[concept.소프트맥스|소프트맥스]]
+- [[concept.활성화-함수|활성화 함수]]
+- [[concept.계산-복잡도와-비용-모델|계산 복잡도와 비용 모델]]
+- [[concept.다층-퍼셉트론|다층 퍼셉트론]]
+- [[concept.미분-편미분-그래디언트|미분·편미분·그래디언트]]
+- [[concept.연쇄-법칙과-계산-그래프|연쇄 법칙과 계산 그래프]]
+- [[concept.역전파|역전파]]
+- [[concept.whisper|Whisper]]
+- [[concept.flashattention|FlashAttention]]
+- [[concept.신경망-기계-번역|신경망 기계 번역]]
+- [[concept.layer-normalization|Layer Normalization]]
+- [[concept.transformer-xl|Transformer-XL]]
+- [[concept.전문가-혼합|전문가 혼합]]

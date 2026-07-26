@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: concept.gpt-4
 page_type: concept
 title: GPT-4
@@ -16,11 +16,13 @@ tags:
   - domain/nlp
 created: '2026-07-22'
 updated: '2026-07-22'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/096_GPT-4 Multimodal Language Models Reach Human-Level Performance.ko.md'
-  - 'raw/096_GPT-4 Multimodal Language Models Reach Human-Level Performance.commentary.ko.md'
+  - raw/096_GPT-4 Multimodal Language Models Reach Human-Level Performance.ko.md
+  - raw/096_GPT-4 Multimodal Language Models Reach Human-Level Performance.commentary.ko.md
 evidence:
   - source_id: openai-2023-gpt4-technical-report
     locator: 'Abstract·§§1–2·4–6, Tables 1–3, Figures 4·6–8와 Appendices A·C–D·G의 multimodal interface, 시험·MMLU·오염·scaling 예측·안전과 비공개 구조'
@@ -32,38 +34,54 @@ evidence:
     locator: 'pp. 1–13과 §§2.1–2.4의 2022년 훈련·2023년 early access, 시각 평가·pilot·의료·근거 없는 추론·multimodal 위험'
     relation: supports
   - source_id: openai-2023-chatgpt-vision-rollout
-    locator: '2023-09-25의 Plus·Enterprise image 입력 단계적 rollout과 OCR·고위험 사용 경계'
+    locator: 2023-09-25의 Plus·Enterprise image 입력 단계적 rollout과 OCR·고위험 사용 경계
     relation: supports
   - source_id: openai-2023-devday-developer-products
     locator: '2023-11-06, New modalities in the API 절의 GPT-4 Turbo with vision과 gpt-4-vision-preview 공개'
     relation: supports
   - source_id: katz-et-al-2024-gpt4-bar-exam
-    locator: 'Abstract·Methods·Results의 simulated UBE protocol과 MBE·MEE·MPT 점수·합격선'
+    locator: Abstract·Methods·Results의 simulated UBE protocol과 MBE·MEE·MPT 점수·합격선
     relation: contextualizes
   - source_id: martinez-2024-gpt4-bar-exam
-    locator: 'Abstract·§§2–5와 Tables 1–5의 UBE percentile 재산정·MBE 복제·essay scoring 비판'
+    locator: Abstract·§§2–5와 Tables 1–5의 UBE percentile 재산정·MBE 복제·essay scoring 비판
     relation: disputes
   - source_id: openai-2024-gpt4o-release
     locator: '2024-05-13 Model capabilities·Model availability의 GPT-4o 별도 공표, 단일 신경망 end-to-end claim과 단계적 rollout'
     relation: contextualizes
-related:
-  - source.096
-  - source.107
-  - source.067
-  - source.077
-  - source.081
-  - source.093
-  - source.095
-  - concept.rlhf
-  - concept.멀티모달-대규모-언어-모델
-  - concept.big-bench-mmlu
-  - analysis.평가-지표와-모델-유인
+relations:
+  - target: source.077
+    kind: related
+  - target: source.081
+    kind: related
+  - target: source.093
+    kind: related
+  - target: source.095
+    kind: related
+  - target: analysis.평가-지표와-모델-유인
+    kind: related
+  - target: concept.멀티모달-대규모-언어-모델
+    kind: background
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: source.067
+    - target: concept.rlhf
+  assumed_knowledge: 없음
+  outcomes:
+    - 'GPT-4의 공개된 입출력·훈련 개요와 비공개 architecture를 구분하고, base·post-training·GPT-4V·제품 snapshot 및 benchmark·실무·안전 주장을 서로 다른 층으로 설명할 수 있다.'
+  next:
+    - target: source.096
+      reason: 096GPT-4의 멀티모달 공개·시험 성능·안전 경계 — 원 웹글의 주장과 1차 자료·후속 재평가를 대조한다.
+    - target: source.107
+      reason: 107GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계 — GPT-4와 구분되는 2024년 omni model 공표와 audio·rollout 평가 경계를 살핀다.
 ---
 # GPT-4
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[067_GPT-3와 문맥 내 학습|GPT-3]], [[인간 피드백 강화학습]], [[멀티모달 대규모 언어 모델]]<br>
+> **선수 지식:** [[source.067|GPT-3와 문맥 내 학습]], [[concept.rlhf|인간 피드백 강화학습]]<br>
 > **읽고 나면:** GPT-4의 공개된 입출력·훈련 개요와 비공개 architecture를 구분하고, base·post-training·GPT-4V·제품 snapshot 및 benchmark·실무·안전 주장을 서로 다른 층으로 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -196,11 +214,8 @@ GPT-4 공개가 멀티모달 제품·시험 평가·AI 안전 논의를 넓힌 �
 
 ### 다음 문서
 
-- [[096_GPT-4의 멀티모달 공개·시험 성능·안전 경계]] — 원 웹글의 주장과 1차 자료·후속 재평가를 대조한다.
-- [[107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]] — GPT-4와 구분되는 2024년 omni model 공표와 audio·rollout 평가 경계를 살핀다.
-- [[멀티모달 대규모 언어 모델]] — 공개 model의 여러 bridge와 입출력 signature를 비교한다.
-- [[BIG-bench와 MMLU]] — benchmark 집계·prompt·오염의 평가 경계를 살핀다.
-- [[인간 피드백 강화학습]] — base 능력과 post-training 행동을 구분한다.
+- [[source.096|GPT-4의 멀티모달 공개·시험 성능·안전 경계]] — 096GPT-4의 멀티모달 공개·시험 성능·안전 경계 — 원 웹글의 주장과 1차 자료·후속 재평가를 대조한다.
+- [[source.107|GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]] — 107GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계 — GPT-4와 구분되는 2024년 omni model 공표와 audio·rollout 평가 경계를 살핀다.
 
 ## 출처
 
@@ -218,14 +233,13 @@ GPT-4 공개가 멀티모달 제품·시험 평가·AI 안전 논의를 넓힌 �
 
 ## 관련 항목
 
-- [[096_GPT-4의 멀티모달 공개·시험 성능·안전 경계]]
-- [[107_GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]]
-- [[067_GPT-3와 문맥 내 학습|GPT-3]]
-- [[077_InstructGPT와 인간 선호 정렬]]
-- [[081_ChatGPT 연구 미리보기와 대화형 LLM 배포]]
-- [[093_멀티모달 LLM과 시각-언어 연결 방식의 분화]]
-- [[095_BIG-bench와 MMLU의 평가 범위·집계 경계]]
-- [[인간 피드백 강화학습]]
-- [[멀티모달 대규모 언어 모델]]
-- [[BIG-bench와 MMLU]]
-- [[자동 평가 지표는 무엇을 보상하는가]]
+- [[source.096|GPT-4의 멀티모달 공개·시험 성능·안전 경계]]
+- [[source.107|GPT-4o의 단일 신경망 공표와 실시간 멀티모달 배포 경계]]
+- [[source.067|GPT-3와 문맥 내 학습]]
+- [[concept.rlhf|인간 피드백 강화학습]]
+- [[source.077|InstructGPT와 인간 선호 정렬]]
+- [[source.081|ChatGPT 연구 미리보기와 대화형 LLM 배포]]
+- [[source.093|멀티모달 LLM과 시각-언어 연결 방식의 분화]]
+- [[source.095|BIG-bench와 MMLU의 평가 범위·집계 경계]]
+- [[analysis.평가-지표와-모델-유인|자동 평가 지표는 무엇을 보상하는가]]
+- [[concept.멀티모달-대규모-언어-모델|멀티모달 대규모 언어 모델]]

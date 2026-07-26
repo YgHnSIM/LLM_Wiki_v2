@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: meta.learning-guide
 page_type: meta
 title: LLM 학습 가이드
@@ -11,15 +11,21 @@ tags:
   - type/meta
 created: '2026-07-25'
 updated: '2026-07-25'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: not-applicable
+  content_mode: descriptive
 artifacts: []
 evidence: []
-related:
-  - analysis.llm을-만든-수학
-  - meta.llm-computing-coevolution
-  - meta.llm-system-boundary-map
-  - analysis.llm-capability-model-or-system
+relations:
+  - target: analysis.llm을-만든-수학
+    kind: related
+  - target: meta.llm-computing-coevolution
+    kind: related
+  - target: meta.llm-system-boundary-map
+    kind: related
+  - target: analysis.llm-capability-model-or-system
+    kind: related
 ---
 # LLM 학습 가이드
 

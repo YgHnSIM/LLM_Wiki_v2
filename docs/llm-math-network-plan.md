@@ -16,7 +16,7 @@
 
 ## 1. 고정 결정
 
-- 허브는 `wiki/analyses/LLM을 만든 수학.md`에 두고 `page_type: analysis`, `id: analysis.llm을-만든-수학`, `verification: partial`을 기본으로 한다.
+- 허브는 `wiki/analyses/LLM을 만든 수학.md`에 두고 `page_type: analysis`, `id: analysis.llm을-만든-수학`, `review.evidence_coverage: partial`, `review.content_mode: synthesis`를 기본으로 한다.
 - 기준 수학 설명은 기존 또는 신규 `wiki/concepts/` 문서가 맡는다.
 - 새 `math` page type이나 `wiki/mathematics/` 폴더를 만들지 않는다.
 - 수학 문서군을 실제로 공개하기 전에 `wiki/meta/tags.yml`에 `domain/mathematics`를 설명과 함께 등록한다.
@@ -152,9 +152,9 @@ token ID
 
 1. 선수 문서는 `학습 안내`에서 최대 2개만 연결하고 국소 설명을 유지한다.
 2. 다음 문서는 실제로 남은 질문을 받는 최대 2개로 제한한다.
-3. `related`는 핵심 관계만 두고 본문 링크와 기계적으로 상호화하지 않는다.
+3. `relations`는 핵심 관계만 두고 본문 링크와 기계적으로 상호화하지 않는다.
 4. 새 페이지·제목·근거 수에 맞춰 index·overview·log를 갱신한다.
-5. 태그는 검색·분류용이며 그래프 edge는 본문 링크와 `related`가 만든다는 점을 유지한다.
+5. 태그는 검색·분류용이며 그래프 edge는 본문 링크와 `relations`가 만든다는 점을 유지한다.
 
 ## 8. 수학의 기원과 계보 게이트
 
@@ -183,7 +183,7 @@ token ID
 | G2 owner | 계열당 owner 하나, downstream의 국소 설명 책임이 충족됨 |
 | G3 수식 | 질문·기호·shape·항·연산 이유·유도·숫자 예·대안·실패 조건이 준비됨 |
 | G4 근거·계보 | 사실·설명용 예·해석·미확인 계보와 네 계보 층이 분리됨 |
-| G5 위키 통합 | evidence·artifacts·related와 index·overview·log가 정합하고 red link가 없음 |
+| G5 위키 통합 | evidence·artifacts·learning·relations와 index·overview·log가 정합하고 red link가 없음 |
 | G6 계산·사이트 | 손계산, shape, 확률 합, 관련 시 유한차분, KaTeX·390px 렌더를 확인함 |
 | G7 저장소 | 모든 자동 검사와 원문 diff 검토를 통과함 |
 

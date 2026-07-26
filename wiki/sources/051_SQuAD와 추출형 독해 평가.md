@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: source.051
 page_type: source
 title: SQuAD와 추출형 독해 평가
@@ -14,11 +14,13 @@ tags:
   - domain/academia
 created: '2026-07-19'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
-  - 'raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md'
-  - 'raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.commentary.ko.md'
+  - raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md
+  - raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.commentary.ko.md
 evidence:
   - source_id: rajpurkar-et-al-2016-squad
     locator: 'EMNLP 2016, pp. 2383–2392의 §§1–4 데이터 구축·분할·분석·로지스틱 기준선과 표 1–3'
@@ -26,17 +28,29 @@ evidence:
   - source_id: rajpurkar-jia-liang-2018-squad2
     locator: 'ACL 2018, pp. 784–789의 §§1–3 답 불가능 질문 구축·평가와 표 1–2'
     relation: supplements
-related:
-  - concept.추출형-질의응답
-  - concept.개방-영역-질의응답
-  - source.040
-  - source.046
+relations:
+  - target: source.040
+    kind: related
+  - target: source.046
+    kind: related
+learning:
+  difficulty:
+    entry: intermediate
+    target: intermediate
+  prerequisites:
+    - target: concept.개방-영역-질의응답
+  assumed_knowledge: 없음
+  outcomes:
+    - SQuAD의 답 구간 선택과 EM·F1 평가가 무엇을 측정하고 무엇을 보장하지 않는지 설명할 수 있다.
+  next:
+    - target: concept.추출형-질의응답
+      reason: 추출형 질의응답 — 답의 시작·끝 위치 예측과 답 없음 판단을 과업 단위로 정리한다.
 ---
 # SQuAD와 추출형 독해 평가
 
 > [!note] 학습 안내
 > **난이도:** 중급<br>
-> **선수 지식:** [[개방 영역 질의응답]]<br>
+> **선수 지식:** [[concept.개방-영역-질의응답|개방 영역 질의응답]]<br>
 > **읽고 나면:** SQuAD의 답 구간 선택과 EM·F1 평가가 무엇을 측정하고 무엇을 보장하지 않는지 설명할 수 있다.
 
 ## 1단계 — 먼저 잡을 핵심
@@ -136,7 +150,7 @@ SQuAD는 지문·질문·답 구간이라는 데이터 형식, EM·F1, 공개 �
 
 ### 다음 문서
 
-- [[추출형 질의응답]] — 답의 시작·끝 위치 예측과 답 없음 판단을 과업 단위로 정리한다.
+- [[concept.추출형-질의응답|추출형 질의응답]] — 답의 시작·끝 위치 예측과 답 없음 판단을 과업 단위로 정리한다.
 
 ## 출처
 
@@ -148,7 +162,7 @@ SQuAD는 지문·질문·답 구간이라는 데이터 형식, EM·F1, 공개 �
 
 ## 관련 항목
 
-- [[추출형 질의응답]]
-- [[개방 영역 질의응답]]
-- [[040_IBM Watson과 Jeopardy 질의응답]]
-- [[046_메모리 네트워크와 외부 지식 접근]]
+- [[concept.추출형-질의응답|추출형 질의응답]]
+- [[concept.개방-영역-질의응답|개방 영역 질의응답]]
+- [[source.040|IBM Watson과 Jeopardy 질의응답]]
+- [[source.046|메모리 네트워크와 외부 지식 접근]]

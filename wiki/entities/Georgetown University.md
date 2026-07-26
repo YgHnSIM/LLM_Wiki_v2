@@ -1,5 +1,5 @@
 ---
-schema_version: 2
+schema_version: 3
 id: entity.georgetown-university
 page_type: entity
 title: Georgetown University
@@ -11,18 +11,34 @@ tags:
   - domain/ai
 created: '2026-05-08'
 updated: '2026-07-21'
-lifecycle: active
-verification: verified
+editorial_status: active
+review:
+  evidence_coverage: verified
+  content_mode: descriptive
 artifacts:
   - raw/003_Georgetown-IBM Machine.md
 evidence:
   - source_id: macdonald-1963
     locator: pp. 1–4
     relation: supports
-related:
-  - entity.ibm
-  - concept.기계-번역
-  - concept.규칙-기반-기계-번역
+relations:
+  - target: entity.ibm
+    kind: related
+  - target: concept.기계-번역
+    kind: related
+learning:
+  difficulty:
+    entry: introductory
+    target: introductory
+  prerequisites: []
+  assumed_knowledge: 없음
+  outcomes:
+    - Georgetown University가 1954년 기계 번역 시연에서 맡은 역할과 이 문서가 확인하는 기여 범위를 설명할 수 있다.
+  next:
+    - target: source.003
+      reason: '003Georgetown-IBM 기계 번역 시연 — 시연의 문장 범위와 처리 절차, 역사적 주장을 원자료 단위로 살핀다.'
+    - target: concept.규칙-기반-기계-번역
+      reason: 규칙 기반 기계 번역 — 사전과 통사 규칙이 번역 과정에서 맡는 역할을 개념 수준에서 정리한다.
 ---
 # Georgetown University
 
@@ -65,8 +81,8 @@ Georgetown 팀은 번역 수요를 사전 조회와 통사 규칙을 결합하�
 
 ### 다음 문서
 
-- [[003_Georgetown-IBM 기계 번역 시연]] — 시연의 문장 범위와 처리 절차, 역사적 주장을 원자료 단위로 살핀다.
-- [[규칙 기반 기계 번역]] — 사전과 통사 규칙이 번역 과정에서 맡는 역할을 개념 수준에서 정리한다.
+- [[source.003|Georgetown-IBM 기계 번역 시연]] — 003Georgetown-IBM 기계 번역 시연 — 시연의 문장 범위와 처리 절차, 역사적 주장을 원자료 단위로 살핀다.
+- [[concept.규칙-기반-기계-번역|규칙 기반 기계 번역]] — 사전과 통사 규칙이 번역 과정에서 맡는 역할을 개념 수준에서 정리한다.
 
 ## 출처
 
@@ -74,6 +90,7 @@ Georgetown 팀은 번역 수요를 사전 조회와 통사 규칙을 결합하�
 
 ## 관련 항목
 
-- [[IBM]]
-- [[기계 번역]]
-- [[규칙 기반 기계 번역]]
+- [[source.003|Georgetown-IBM 기계 번역 시연]]
+- [[concept.규칙-기반-기계-번역|규칙 기반 기계 번역]]
+- [[entity.ibm|IBM]]
+- [[concept.기계-번역|기계 번역]]
