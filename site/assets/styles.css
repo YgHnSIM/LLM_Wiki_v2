@@ -6346,12 +6346,14 @@ details.toc-card > nav > ol {
 }
 
 dialog[data-mobile-nav-dialog].mobile-nav-dialog {
-  width: min(calc(100vw - 28px), 420px);
+  position: fixed;
+  inset: var(--mobile-nav-top, 82px) 14px auto auto;
+  width: min(calc(100vw - 88px), 288px);
   max-width: none;
-  max-height: calc(100dvh - 28px);
+  max-height: calc(100dvh - var(--mobile-nav-top, 82px) - 14px);
   padding: 0;
   border: var(--border);
-  margin: auto;
+  margin: 0;
   overflow: auto;
   background: var(--paper-light);
   box-shadow: 8px 8px 0 var(--ink);
@@ -6364,8 +6366,6 @@ dialog[data-mobile-nav-dialog].mobile-nav-dialog::backdrop {
 }
 
 dialog[data-mobile-nav-dialog].mobile-nav-dialog.is-fallback-open {
-  position: fixed;
-  inset: 14px 14px auto;
   z-index: 100;
   display: block;
 }
@@ -6415,6 +6415,7 @@ body.mobile-menu-fallback-open::before {
 
 .mobile-nav-dialog__nav {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   position: static;
   width: auto;
   max-height: none;

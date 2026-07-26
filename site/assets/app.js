@@ -67,6 +67,13 @@ function searchPageUrl(query, source) {
 const menuButton = document.querySelector('[data-menu-toggle]');
 const mobileMenuDialog = document.querySelector('[data-mobile-nav-dialog]');
 const legacyPrimaryNav = document.querySelector('#primary-nav');
+const positionMobileMenu = () => {
+  if (!menuButton || !mobileMenuDialog) return;
+  const menuButtonBox = menuButton.getBoundingClientRect();
+  const headerBox = document.querySelector('.site-header')?.getBoundingClientRect();
+  const anchorBottom = Math.max(menuButtonBox.bottom, headerBox?.bottom ?? menuButtonBox.bottom);
+  mobileMenuDialog.style.setProperty('--mobile-nav-top', `${Math.round(anchorBottom + 8)}px`);
+};
 
 if (menuButton && typeof HTMLDialogElement !== 'undefined' && mobileMenuDialog instanceof HTMLDialogElement && typeof mobileMenuDialog.showModal === 'function') {
   const mobileBreakpoint = Number.parseInt(mobileMenuDialog.dataset.mobileBreakpoint || '820', 10) || 820;
@@ -122,6 +129,7 @@ if (menuButton && typeof HTMLDialogElement !== 'undefined' && mobileMenuDialog i
     restoreFocusOnClose = false;
     lockPageScroll();
     menuButton.setAttribute('aria-expanded', 'true');
+    positionMobileMenu();
     mobileMenuDialog.showModal();
     window.requestAnimationFrame(() => {
       const firstTarget = menuPanel.querySelector('[autofocus], [data-mobile-nav-links] a[href]')
@@ -150,7 +158,11 @@ if (menuButton && typeof HTMLDialogElement !== 'undefined' && mobileMenuDialog i
     if (!event.matches) closeMenu({ restoreFocus: false });
   });
   window.addEventListener('resize', () => {
-    if (!mobileMedia.matches) closeMenu({ restoreFocus: false });
+    if (!mobileMedia.matches) {
+      closeMenu({ restoreFocus: false });
+      return;
+    }
+    if (mobileMenuDialog.open) positionMobileMenu();
   }, { passive: true });
 } else if (menuButton && mobileMenuDialog) {
   const isOpen = () => mobileMenuDialog.classList.contains('is-fallback-open');
@@ -165,6 +177,7 @@ if (menuButton && typeof HTMLDialogElement !== 'undefined' && mobileMenuDialog i
     if (restoreFocus) menuButton.focus({ preventScroll: true });
   };
   const openMenu = () => {
+    positionMobileMenu();
     mobileMenuDialog.classList.add('is-fallback-open');
     mobileMenuDialog.setAttribute('open', '');
     document.documentElement.classList.add('mobile-menu-open');
@@ -193,7 +206,11 @@ if (menuButton && typeof HTMLDialogElement !== 'undefined' && mobileMenuDialog i
     }
   });
   window.addEventListener('resize', () => {
-    if (window.matchMedia('(min-width: 821px)').matches) closeMenu();
+    if (window.matchMedia('(min-width: 821px)').matches) {
+      closeMenu();
+      return;
+    }
+    if (isOpen()) positionMobileMenu();
   }, { passive: true });
 } else if (menuButton && legacyPrimaryNav) {
   const isOpen = () => legacyPrimaryNav.classList.contains('is-open');

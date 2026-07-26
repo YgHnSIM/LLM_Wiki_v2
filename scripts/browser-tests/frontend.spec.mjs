@@ -87,6 +87,29 @@ test('mobile navigation and directories do not overflow', async ({ page }) => {
   const dialog = page.locator('[data-mobile-nav-dialog]');
   await expect(dialog).toHaveAttribute('open', '');
   await expect(page.locator('#primary-nav')).toBeVisible();
+  const menuGeometry = await page.evaluate(() => {
+    const menuButtonBox = document.querySelector('[data-menu-toggle]').getBoundingClientRect();
+    const headerBox = document.querySelector('.site-header').getBoundingClientRect();
+    const dialogBox = document.querySelector('[data-mobile-nav-dialog]').getBoundingClientRect();
+    const navBox = document.querySelector('.mobile-nav-dialog__nav').getBoundingClientRect();
+    const firstLink = document.querySelector('.mobile-nav-dialog__nav > a');
+    const firstLinkBox = firstLink.getBoundingClientRect();
+    return {
+      dialogWidth: dialogBox.width,
+      leftGutter: dialogBox.left,
+      rightGutter: window.innerWidth - dialogBox.right,
+      topGap: dialogBox.top - Math.max(menuButtonBox.bottom, headerBox.bottom),
+      firstLinkJustifyContent: getComputedStyle(firstLink).justifyContent,
+      firstLinkWidthShare: firstLinkBox.width / navBox.width,
+    };
+  });
+  expect(menuGeometry.dialogWidth).toBeLessThanOrEqual(288);
+  expect(menuGeometry.leftGutter).toBeGreaterThan(menuGeometry.rightGutter);
+  expect(menuGeometry.leftGutter - menuGeometry.rightGutter).toBeGreaterThanOrEqual(30);
+  expect(menuGeometry.topGap).toBeGreaterThanOrEqual(6);
+  expect(menuGeometry.topGap).toBeLessThanOrEqual(10);
+  expect(menuGeometry.firstLinkJustifyContent).toBe('center');
+  expect(menuGeometry.firstLinkWidthShare).toBeGreaterThan(0.85);
   expect(await page.evaluate(() => document.activeElement?.closest('[data-mobile-nav-dialog]') !== null)).toBe(true);
   await page.keyboard.press('Escape');
   await expect(dialog).not.toHaveAttribute('open', '');
