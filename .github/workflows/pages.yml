@@ -38,7 +38,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Verify and build static site
-        run: npm run verify
+        run: npm run verify:ci
         env:
           BASE_PATH: /${{ github.event.repository.name }}
           GITHUB_BASE_SHA: ${{ github.event.pull_request.base.sha }}
