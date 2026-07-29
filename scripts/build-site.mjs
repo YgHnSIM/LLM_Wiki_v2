@@ -104,15 +104,8 @@ const learningGuideSanitizeAttributes = {
   select: ['name', 'value', 'class', 'id', 'aria-*', 'data-*'],
 };
 
-function sanitizeRenderedHtml(html, { learningGuide = false, trustedFragments = [] } = {}) {
-  const nonce = randomUUID();
-  let protectedHtml = String(html);
-  const replacements = trustedFragments.map((fragment, index) => {
-    const token = `LLMWIKI_TRUSTED_${nonce}_${index}`;
-    protectedHtml = protectedHtml.replace(fragment, token);
-    return { fragment, token };
-  });
-  const cleaned = sanitizeHtml(protectedHtml, {
+function sanitizeRenderedHtml(html, { learningGuide = false } = {}) {
+  return sanitizeHtml(String(html), {
     allowedTags: learningGuide ? learningGuideSanitizeTags : commonSanitizeTags,
     allowedAttributes: learningGuide ? learningGuideSanitizeAttributes : commonSanitizeAttributes,
     allowedSchemes: ['http', 'https', 'mailto', 'tel'],
@@ -121,7 +114,6 @@ function sanitizeRenderedHtml(html, { learningGuide = false, trustedFragments = 
     disallowedTagsMode: 'escape',
     enforceHtmlBoundary: true,
   });
-  return replacements.reduce((output, { fragment, token }) => output.replaceAll(token, fragment), cleaned);
 }
 
 const artifactRenderer = new Renderer();
@@ -727,16 +719,18 @@ function renderMarkdown(document, { artifact = false } = {}) {
     protectedFragments.push(fragment);
     return token;
   };
-  const protectTrusted = (fragment) => {
-    trustedFragments.push(fragment);
-    return protect(fragment);
+  const protectTrusted = (fragment, isDisplay = false) => {
+    const index = trustedFragments.length;
+    const token = `@@LLMWIKI_TRUSTED_MATH_${index}@@`;
+    trustedFragments.push({ fragment, isDisplay, token });
+    return token;
   };
 
   let prepared = markdown.replace(/```[\s\S]*?```|~~~[\s\S]*?~~~|`[^`\n]+`/g, (fragment) => protect(fragment));
-  prepared = prepared.replace(/\$\$([\s\S]+?)\$\$/g, (_match, expression) => protectTrusted(renderMath(expression, true)));
-  prepared = prepared.replace(/\\\[([\s\S]+?)\\\]/g, (_match, expression) => protectTrusted(renderMath(expression, true)));
-  prepared = prepared.replace(/\\\((.+?)\\\)/g, (_match, expression) => protectTrusted(renderMath(expression, false)));
-  prepared = prepared.replace(/(^|[^\\$])\$([^$\n]+?)\$/g, (_match, prefix, expression) => `${prefix}${protectTrusted(renderMath(expression, false))}`);
+  prepared = prepared.replace(/\$\$([\s\S]+?)\$\$/g, (_match, expression) => protectTrusted(renderMath(expression, true), true));
+  prepared = prepared.replace(/\\\[([\s\S]+?)\\\]/g, (_match, expression) => protectTrusted(renderMath(expression, true), true));
+  prepared = prepared.replace(/\\\((.+?)\\\)/g, (_match, expression) => protectTrusted(renderMath(expression, false), false));
+  prepared = prepared.replace(/(^|[^\\$])\$([^$\n]+?)\$/g, (_match, prefix, expression) => `${prefix}${protectTrusted(renderMath(expression, false), false)}`);
   // Marked's GFM mode treats a single tilde as strikethrough. Preserve Korean
   // numeric ranges such as 1964~1966 without changing the source Markdown.
   prepared = prepared.replace(/(\d)~(?=\d)/g, '$1\\~');
@@ -762,7 +756,19 @@ function renderMarkdown(document, { artifact = false } = {}) {
 
   html = sanitizeRenderedHtml(html, {
     learningGuide: document.id === 'meta.learning-guide',
-    trustedFragments,
+  });
+
+  // Restore trusted math fragments after sanitizeRenderedHtml
+  html = html.replace(/(?:<p>\s*)?@@LLMWIKI_TRUSTED_MATH_(\d+)@@(?:\s*<\/p>)?/g, (match, indexStr) => {
+    const item = trustedFragments[Number(indexStr)];
+    if (!item) return match;
+    if (item.isDisplay && match.startsWith('<p>')) {
+      return item.fragment;
+    }
+    if (item.isDisplay) {
+      return match.replace(`@@LLMWIKI_TRUSTED_MATH_${indexStr}@@`, item.fragment).replace(/^<p>/, '').replace(/<\/p>$/, '');
+    }
+    return item.fragment;
   });
 
   return { html, headings };

@@ -10,7 +10,14 @@ async function replaceDirectory(sourceDir, targetDir) {
     await fs.rename(targetDir, backupDir);
     hasBackup = true;
   } catch (error) {
-    if (error.code !== 'ENOENT') throw error;
+    if (error.code !== 'ENOENT') {
+      if (['EPERM', 'EBUSY', 'EACCES'].includes(error.code)) {
+        await fs.cp(sourceDir, targetDir, { recursive: true, force: true });
+        await fs.rm(sourceDir, { recursive: true, force: true });
+        return;
+      }
+      throw error;
+    }
   }
 
   try {
