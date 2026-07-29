@@ -6709,7 +6709,8 @@ body[data-mobile-menu-open='true'] {
   color: #155724;
 }
 
-.mermaid {
+pre.mermaid,
+div.mermaid {
   display: flex;
   justify-content: center;
   margin: 1.5rem 0;
@@ -6718,6 +6719,8 @@ body[data-mobile-menu-open='true'] {
   background: var(--paper-light, #faf8f5);
   border: var(--border, 1px solid #e2ded4);
   border-radius: 4px;
+  font-family: inherit;
+  white-space: pre;
 }
 
 
