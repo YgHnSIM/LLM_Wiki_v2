@@ -106,7 +106,7 @@ learning:
   prerequisites:
     - target: concept.어텐션-메커니즘
     - target: concept.잔차-연결
-  assumed_knowledge: 의 Q K V와 softmax 의 shortcut과 shape 조건
+  assumed_knowledge: 어텐션 메커니즘의 Q·K·V와 softmax, 잔차 연결의 shortcut과 shape 조건
   outcomes:
     - 'Transformer 한 block에서 위치 표현·어텐션·MLP·잔차·정규화·출력 softmax가 맡는 역할을 계산 순서와 수식으로 설명하고, 병렬 훈련과 순차 생성이 함께 성립하는 이유를 구분할 수 있다.'
   next:
@@ -157,6 +157,23 @@ $$
 \end{aligned}
 $$
 
+다음 다이어그램은 한 encoder block 안에서 데이터가 어텐션과 MLP, 그리고 잔차 연결과 정규화를 거치는 경로를 보여 준다.
+
+```mermaid
+graph TD
+    subgraph Encoder_Block ["Encoder Block (1개 층)"]
+        X["입력 X (n × d_model)"] --> MHA["Multi-Head Self-Attention"]
+        X ----> Add1["+ (잔차 덧셈)"]
+        MHA --> Add1
+        Add1 --> LN1["LayerNorm"]
+        LN1 --> FFN["Position-wise MLP (FFN)"]
+        LN1 ----> Add2["+ (잔차 덧셈)"]
+        FFN --> Add2
+        Add2 --> LN2["LayerNorm"]
+        LN2 --> Out["Encoder 출력 (n × d_model)"]
+    end
+```
+
 원 2017년 Transformer는 각 sublayer의 결과를 먼저 입력에 더하고 그 뒤 LayerNorm을 적용하는 Post-LN이었다. decoder에는 masked self-attention과 encoder 출력에 접근하는 cross-attention sublayer가 하나 더 있다.
 
 ## 2단계 — 작동 원리
@@ -179,6 +196,11 @@ V&=XW_V\in\mathbb R^{3\times2}.
 \end{aligned}
 $$
 
+이 $Q, K, V$ 행렬의 역할은 정보를 주고받는 검색 시스템에 비유할 수 있다.
+- **Query ($Q$)**: 현재 위치가 *"다른 토큰에게 묻고자 하는 질문"*이다.
+- **Key ($K$)**: 각 후보 위치가 *"자신이 가진 정보의 특성을 나타내는 색인"*이다.
+- **Value ($V$)**: 실제 조화되어 전달될 *"토큰의 의미 정보"*다.
+
 $QK^{\mathsf T}$의 shape는 $3\times3$이다. 즉 각 행은 한 토큰 위치가 세 후보 위치에 준 점수, 각 열은 한 후보 위치가 세 query에서 받은 점수다. 행별 softmax를 거쳐 $A\in\mathbb R^{3\times3}$를 만들고 $AV$를 계산하면, 각 위치는 길이 2인 새 value 조합을 얻는다.
 
 이 예에서 모든 위치가 한꺼번에 계산된다는 것은 $3\times3$ 점수 행렬을 한 번에 만들 수 있다는 뜻이다. 세 위치가 같은 정보를 보거나 같은 가중치를 갖는다는 뜻은 아니다. 각 행은 다른 query의 독립적인 후보 비율이다.
@@ -198,6 +220,14 @@ $$
 
 이를 attention score에 더한 뒤 softmax를 적용하면 첫 행은 첫 위치만, 둘째 행은 첫·둘째 위치만, 셋째 행은 세 위치 모두를 볼 수 있다. $-\infty$는 softmax 뒤 가중치 0을 뜻하는 수학적 표기다. 실제 구현은 충분히 작은 유한값을 쓰는 경우가 많다.
 
+예를 들어 3개 토큰 문장("안녕 하세 요")을 생성할 때, 위치별 참조 가능 범위는 다음과 같이 가려진다.
+
+| Query 위치 (현재 생성 중) | Key 위치 1 ("안녕") | Key 위치 2 ("하세") | Key 위치 3 ("요") | 참조 범위 설명 |
+| :--- | :---: | :---: | :---: | :--- |
+| **위치 1 ("안녕")** | 👁️ 참조 | 🚫 차단 ($-\infty$) | 🚫 차단 ($-\infty$) | 자기 자신만 참조 |
+| **위치 2 ("하세")** | 👁️ 참조 | 👁️ 참조 | 🚫 차단 ($-\infty$) | 이전 토큰과 현재 토큰 참조 |
+| **위치 3 ("요")** | 👁️ 참조 | 👁️ 참조 | 👁️ 참조 | 전체 생성된 이전 토큰 참조 |
+
 훈련에서는 정답 목표열을 한 칸 옮겨 decoder 입력으로 주고 이 mask를 적용하므로 여러 위치의 손실을 병렬 계산할 수 있다. 하지만 추론에서는 다음 token을 실제로 생성해야 그 token이 다음 위치의 조건이 된다. 따라서 표준 자기회귀 decoder의 출력 생성은 여전히 순차적이다.
 
 ### attention과 MLP가 나누어 하는 일
@@ -205,6 +235,14 @@ $$
 한 attention sublayer는 각 위치가 **다른 위치에서** 어떤 정보를 읽을지를 정한다. 그 뒤 위치별 MLP는 이미 섞인 한 위치의 벡터 안에서 feature를 비선형으로 바꾼다. MLP의 가중치는 모든 위치에서 같지만, 각 위치의 입력값이 다르므로 출력은 달라진다.
 
 이 구분은 “Transformer가 어텐션만 쓴다”는 오해를 막는다. 원 모델의 encoder와 decoder는 attention 외에도 각 층마다 위치별 두 층 MLP를 갖고, decoder 끝에는 선형 변환과 softmax로 다음 토큰 확률을 만든다.
+
+또한 어텐션은 적용되는 위치와 역할에 따라 세 가지 형태(Encoder Self-Attention, Decoder Masked Self-Attention, Decoder Cross-Attention)로 나뉘며, 각 형태의 $Q, K, V$ 출처와 마스킹 여부는 다음과 같다.
+
+| 어텐션 종류 | Query ($Q$) 출처 | Key ($K$) / Value ($V$) 출처 | Mask 적용 여부 | 주요 역할 |
+| :--- | :--- | :--- | :---: | :--- |
+| **Encoder Self-Attention** | 이전 Encoder 층 | 이전 Encoder 층 | ✕ | 입력 문맥 전체의 상호작용 표현 |
+| **Decoder Masked Self-Attention** | 이전 Decoder 층 | 이전 Decoder 층 | O (Causal Mask) | 생성된 이전 토큰 정보 축적 |
+| **Decoder Cross-Attention** | 이전 Decoder sublayer | **최종 Encoder 출력** | ✕ | 입력 조건(소스 문맥) 참조 |
 
 ## 3단계 — 기술과 근거
 
@@ -250,11 +288,23 @@ $$
 | 첫 residual·norm | add, LayerNorm | $(2,4,8)$ | 두 항 shape 일치, 마지막 $D$만 정규화 |
 | FFN 확장 | $XW_1+b_1$ | $(2,4,16)$ | $D\to D_{\mathrm{ff}}$ |
 | activation | ReLU·GELU 등 | $(2,4,16)$ | 성분별 적용, shape 보존 |
-| FFN 축소 | $HW_2+b_2$ | $(2,4,8)$ | $D_{\mathrm{ff}}\to D$ |
+| FFN 축소 | $H_{\mathrm{ff}}W_2+b_2$ | $(2,4,8)$ | $D_{\mathrm{ff}}\to D$ |
 | 둘째 residual·norm | add, LayerNorm | $(2,4,8)$ | block 출력 |
 | 어휘 투영 | $XW_{\mathrm{out}}+b$ | $(2,4,10)$ | $D\to|\mathcal V|$ |
 
 LayerNorm의 평균·분산은 각 $(b,t)$마다 마지막 $D$축만 줄이므로, 축을 유지해 저장하면 통계 shape는 $(2,4,1)$이다. FFN activation은 $(B,T,D_{\mathrm{ff}})$의 각 성분에 독립 적용되고, 출력 softmax는 $(B,T,|\mathcal V|)$의 마지막 **어휘 후보 축**을 정규화한다. 둘 다 마지막 축을 다룬다는 이유로 같은 연산은 아니다.
+
+이 배치(Batch) 및 헤드(Head) 축 분할부터 score 계산, 헤드 결합까지의 텐서 흐름을 4D 텐서 파이프라인으로 시각화하면 다음과 같다.
+
+```mermaid
+flowchart LR
+    In["입력 X<br/>(B, T, D)"] --> Proj["QKV 투영<br/>(B, T, 3D)"]
+    Proj --> Split["Head 분할 & Transpose<br/>Q, K, V 각각 (B, H, T, D_h)"]
+    Split --> Score["QKᵀ / √d_k + M<br/>Score: (B, H, T, T)"]
+    Score --> Softmax["Softmax & × V<br/>가중합: (B, H, T, D_h)"]
+    Softmax --> Concat["Transpose & Concat<br/>(B, T, D)"]
+    Concat --> OutProj["출력 투영 Wᵀ<br/>(B, T, D)"]
+```
 
 역전파에서 매개변수 gradient는 원 매개변수와 같은 shape다. 예를 들어 $W_{QKV}\in\mathbb R^{8\times24}$이면 $\partial J/\partial W_{QKV}$도 $8\times24$, $W_1\in\mathbb R^{8\times16}$이면 $\partial J/\partial W_1$도 $8\times16$, $W_{\mathrm{out}}\in\mathbb R^{8\times10}$이면 그 gradient도 $8\times10$이다. activation gradient와 residual branch gradient는 대응하는 중간 tensor shape를 보존한다.
 
@@ -492,7 +542,7 @@ $$
 - Alec Radford 외, [Robust Speech Recognition via Large-Scale Weak Supervision](https://arxiv.org/abs/2212.04356), 2022, §§2.2–2.4와 Figure 1.
 - [[087_Whisper와 대규모 약한 감독 음성 인식]]
 - Tri Dao 외, [FlashAttention](https://proceedings.neurips.cc/paper_files/paper/2022/hash/67d57c32e20fd0a7a302cb81d36e40d5-Abstract.html), NeurIPS 2022, §§2.2–3.2, Algorithms 0–1, Theorems 1–2와 Figure 2.
-- [[088_FlashAttention과 IO 인지형 정확 어텐션]]
+- [[source.088|FlashAttention과 I/O 인지형 정확 어텐션]]
 
 ## 관련 항목
 
