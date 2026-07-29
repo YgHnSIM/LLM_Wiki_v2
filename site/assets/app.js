@@ -1285,3 +1285,30 @@ document.addEventListener('click', async (event) => {
     }, 2000);
   }
 });
+
+/* Mermaid Diagram Renderer
+ * Dynamically loads and initializes Mermaid CDN when .mermaid elements are present.
+ */
+if (document.querySelector('.mermaid')) {
+  const initMermaid = () => {
+    if (window.mermaid) {
+      window.mermaid.initialize({
+        startOnLoad: true,
+        theme: 'neutral',
+        securityLevel: 'loose',
+        fontFamily: 'system-ui, -apple-system, sans-serif',
+      });
+      window.mermaid.run({ querySelector: '.mermaid' });
+    }
+  };
+
+  if (window.mermaid) {
+    initMermaid();
+  } else {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';
+    script.onload = initMermaid;
+    document.head.appendChild(script);
+  }
+}
+

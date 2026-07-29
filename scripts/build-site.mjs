@@ -133,6 +133,13 @@ artifactRenderer.image = function renderArtifactImage({ href, title, text, token
 };
 
 const safeRenderer = new Renderer();
+safeRenderer.code = function renderSafeCode({ text, lang }) {
+  if (lang === 'mermaid') {
+    return `<div class="mermaid">${escapeHtml(text)}</div>\n`;
+  }
+  const languageClass = lang ? ` class="language-${escapeHtml(lang)}"` : '';
+  return `<pre><code${languageClass}>${escapeHtml(text)}</code></pre>\n`;
+};
 safeRenderer.link = function renderSafeLink({ href, title, tokens }) {
   const label = this.parser.parseInline(tokens);
   const safeHref = safeArtifactUrl(href);

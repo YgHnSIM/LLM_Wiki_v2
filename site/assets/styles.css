@@ -6709,3 +6709,15 @@ body[data-mobile-menu-open='true'] {
   color: #155724;
 }
 
+.mermaid {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  overflow-x: auto;
+  background: var(--paper-light, #faf8f5);
+  border: var(--border, 1px solid #e2ded4);
+  border-radius: 4px;
+}
+
+
