@@ -1441,6 +1441,7 @@ function renderArticle(document) {
         <div><dt>근거 상태</dt><dd>${verificationBadge(document)}</dd></div>
         <div><dt>읽기</dt><dd>약 ${document.minutes}분</dd></div>
         <div><dt>연결</dt><dd><a class="article-connection-link" href="#relationship-preview" data-open-relationship-dialog aria-controls="relationship-explorer-dialog">직접 연결 ${meaningfulConnectionCount(document)}개</a></dd></div>
+        <div><dt>내보내기</dt><dd><button class="copy-markdown-button" type="button" data-copy-markdown><span class="copy-icon" aria-hidden="true">📋</span> <span class="copy-text">마크다운 복사</span></button></dd></div>
       </dl>
     </header>
     ${reviewNote}
@@ -1457,6 +1458,7 @@ function renderArticle(document) {
         <div class="source-note article-source-note">
           <span>Markdown 원본</span>
           <code>${escapeHtml(`wiki/${document.relativePath}`)}</code>
+          <button class="copy-markdown-button copy-markdown-button--compact" type="button" data-copy-markdown><span class="copy-icon" aria-hidden="true">📋</span> <span class="copy-text">복사하기</span></button>
           ${externalLink(githubFileUrl(document), 'GitHub에서 보기')}
         </div>
       </div>
@@ -1467,6 +1469,7 @@ function renderArticle(document) {
       ${previous ? `<a class="previous" href="${sitePath(previous.url)}"><span>이전</span><strong>${renderDisplayTitle(previous.title)}</strong></a>` : '<span></span>'}
       ${next ? `<a class="next" href="${sitePath(next.url)}"><span>다음</span><strong>${renderDisplayTitle(next.title)}</strong></a>` : '<span></span>'}
     </nav>
+    <template id="markdown-source">${escapeHtml(document.body)}</template>
     <button class="back-to-top back-to-top--in-flow" type="button" data-back-to-top data-back-to-top-flow hidden>맨 위로</button>
   </main>`;
 
@@ -1501,6 +1504,7 @@ function renderArtifactReader(reader) {
         <div><dt>보존 역할</dt><dd>${escapeHtml(reader.registryRole)}</dd></div>
         <div><dt>읽기</dt><dd>약 ${reader.minutes}분</dd></div>
         <div><dt>기준 문서</dt><dd>${escapeHtml(sourceLabel)}</dd></div>
+        <div><dt>내보내기</dt><dd><button class="copy-markdown-button" type="button" data-copy-markdown><span class="copy-icon" aria-hidden="true">📋</span> <span class="copy-text">마크다운 복사</span></button></dd></div>
       </dl>
     </header>
     ${renderArtifactSwitcher(document, reader.routeRole)}
@@ -1517,6 +1521,7 @@ function renderArtifactReader(reader) {
         <div class="source-note article-source-note artifact-source-note">
           <span>보존 파일</span>
           <code>${escapeHtml(reader.artifactPath)}</code>
+          <button class="copy-markdown-button copy-markdown-button--compact" type="button" data-copy-markdown><span class="copy-icon" aria-hidden="true">📋</span> <span class="copy-text">복사하기</span></button>
           ${reader.sourceUrl ? externalLink(reader.sourceUrl, '원문 출처') : ''}
           ${externalLink(githubArtifactUrl(reader), 'GitHub에서 보기')}
         </div>
@@ -1526,6 +1531,7 @@ function renderArtifactReader(reader) {
       <div><p class="eyebrow">검증된 설명</p><h2 id="artifact-return-heading">정정과 근거는 원문 노트에서</h2><p>원문 번역본은 원문의 흐름을 읽기 위한 자료입니다. 역사적 사실, 과장된 계보와 후대 평가는 근거 장부가 있는 공개 노트에서 확인할 수 있습니다.</p></div>
       <a class="button-link" href="${sitePath(document.url)}">원문 노트 읽기 <span aria-hidden="true">→</span></a>
     </section>
+    <template id="markdown-source">${escapeHtml(reader.body)}</template>
     <button class="back-to-top back-to-top--in-flow" type="button" data-back-to-top data-back-to-top-flow hidden>맨 위로</button>
   </main>`;
 

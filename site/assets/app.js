@@ -1237,3 +1237,51 @@ if (progressBar || topButton) {
   }));
   updateReadingProgress();
 }
+
+/* Copy markdown content to clipboard */
+document.addEventListener('click', async (event) => {
+  const button = event.target.closest('[data-copy-markdown]');
+  if (!button) return;
+
+  const template = document.getElementById('markdown-source');
+  if (!template) return;
+
+  const rawMarkdown = (template.content ? template.content.textContent : template.textContent) || '';
+  if (!rawMarkdown) return;
+
+  const textEl = button.querySelector('.copy-text') || button;
+  const originalText = button.dataset.originalText || textEl.textContent;
+  if (!button.dataset.originalText) {
+    button.dataset.originalText = originalText;
+  }
+
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(rawMarkdown);
+    } else {
+      const textarea = document.createElement('textarea');
+      textarea.value = rawMarkdown;
+      textarea.style.position = 'fixed';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+    }
+
+    button.classList.add('is-copied');
+    textEl.textContent = '복사 완료!';
+    window.clearTimeout(button._copyTimer);
+    button._copyTimer = window.setTimeout(() => {
+      button.classList.remove('is-copied');
+      textEl.textContent = originalText;
+    }, 2000);
+  } catch (err) {
+    console.error('Failed to copy markdown:', err);
+    textEl.textContent = '복사 실패';
+    window.clearTimeout(button._copyTimer);
+    button._copyTimer = window.setTimeout(() => {
+      textEl.textContent = originalText;
+    }, 2000);
+  }
+});
