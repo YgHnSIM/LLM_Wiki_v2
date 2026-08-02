@@ -348,3 +348,44 @@ learning:
 3. `raw/`는 수정하지 않는다.
 4. 사실과 해석, 원문과 번역, 역사적 시기를 구분한다.
 5. 큰 변경은 `log.md`에 기록하고 lint·사이트 빌드로 검증한다.
+
+## 10. 구조 지식 지도 (init-deep, 2026-08-02)
+
+### 10.1 적용 경계
+
+- 이 파일은 저장소 전체의 유일한 상위 지침이다. 현재 별도 하위 지침은 `scripts/AGENTS.md`와 `scripts/tests/AGENTS.md`뿐이다.
+- `wiki/` 아래의 모든 `.md`는 `scripts/lib/wiki-utils.mjs`의 `loadMarkdownDocuments`가 읽고 `scripts/lint-wiki.mjs`가 frontmatter를 검사한다. `wiki/` 안에 `AGENTS.md`나 일반 Markdown 안내 파일을 추가하지 않는다.
+- `raw/`는 등록 artifact와 SHA-256을 보존하는 불변 영역이다. `raw/AGENTS.md`를 추가하지 않으며, 운영 문서 예외는 `raw/README.md`뿐이다.
+- `dist/`, `output/`, `test-results/`, `.playwright-cli/`는 생성·검증 산출물이다. 직접 편집하거나 staging하지 않는다. `.obsidian/`은 개인 설정이다.
+
+### 10.2 주요 위치
+
+| 작업 | 위치 | 판단 기준 |
+| --- | --- | --- |
+| 공개 지식 편집 | `wiki/` | schema v3, evidence, learning, 링크와 마지막 `관련 항목`을 함께 맞춘다. |
+| 보존 자료 확인 | `raw/` | 읽기 전용. 오류는 위키의 검증 정정으로 기록한다. |
+| CLI·검증·생성 | `scripts/` | 명령의 읽기/쓰기 여부와 부작용을 먼저 확인한다. |
+| 공통 경로·문서·무결성 | `scripts/lib/` | `project-paths`, `wiki-utils`, `wiki-lint`, `source-numbering`, `raw-integrity`가 중심이다. |
+| 회귀 검증 | `scripts/tests/` | Node 내장 테스트 26개 파일과 임시 fixture/Git 저장소 계약을 사용한다. |
+| 브라우저 검증 | `scripts/browser-tests/` | Playwright로 생성된 사이트의 UI·검색·학습 경로를 확인한다. |
+| 계획·상태 원장 | `docs/` | 수학·컴퓨팅 역사·시스템 경계의 `status`/`check`와 학습 감사 기준을 따른다. |
+
+### 10.3 CodeGraph 기반 핵심 경로
+
+| 심볼/파일 | 역할과 영향 범위 |
+| --- | --- |
+| `scripts/lib/project-paths.mjs` | `wiki`, `raw`, `site`, `dist`의 단일 경로 허브. 출력 경로 변경은 모든 CLI·테스트에 영향을 준다. |
+| `scripts/lib/wiki-utils.mjs` | Markdown 재귀 로딩, 링크 추출, 문서 lookup. lint·build·색인·감사가 공유한다. |
+| `scripts/lint-wiki.mjs` | page type, schema, registry, evidence, raw hash, 링크와 문서 구조의 품질 게이트다. |
+| `scripts/build-site.mjs` | `wiki/`를 HTML·검색 색인·관계 데이터·artifact reader·redirect로 변환한다. `sitePath`와 `buildInto` 변경은 전체 사이트에 파급된다. |
+| `scripts/lib/knowledge-graph.mjs` | 방향성 관계와 역링크를 그래프로 만든다. 관련 항목·관계 탐색기와 함께 확인한다. |
+| `scripts/math-network-status.mjs` | 수식 owner·의존성·batch 원장의 정책 실행기다. `docs/llm-math-network.yml`과 테스트를 함께 본다. |
+| `site/assets/app.js`, `relationship-explorer.js` | 정적 HTML·관계 JSON과 결합된 브라우저 런타임이다. selector·data attribute·base path를 함부로 바꾸지 않는다. |
+
+### 10.4 실행 순서와 쓰기 주의
+
+- 기본 품질 게이트는 `npm run verify`이며, Node 테스트 → index/audit → wiki lint → site build/check → browser test가 연결된다.
+- 빠른 범위 확인은 `npm test`, `npm run lint:wiki`, `npm run check:site`를 사용한다. 전체 산출물은 `npm run build`로 검증한다.
+- `npm run sync:index`, `npm run build`, `npm run build:site`, catalog/baseline/audit 생성 명령은 파일을 쓴다. 실행 전 diff 범위를 확인한다.
+- `node scripts/serve-site.mjs`는 package script에 등록되지 않은 로컬 서버 진입점이다.
+- JavaScript/TypeScript LSP 서버는 이 환경에 설치되어 있지 않다. 이번 구조 지도는 실제 파일·CodeGraph·npm 계약을 교차 확인해 작성했다.
