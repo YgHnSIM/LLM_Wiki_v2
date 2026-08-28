@@ -62,7 +62,7 @@ learning:
 
 ### 핵심 문장
 
-2022년 발표된 **PaLM(Pathways Language Model)**은 540.35B 매개변수의 dense decoder-only Transformer다. Google 연구진은 780B token의 한 차례 학습을 두 개의 TPU v4 Pod, 총 6,144개 chip에 걸쳐 실행했다. 이 작업의 핵심은 단순히 model을 크게 만든 데 있지 않다. Pathways를 이용해 pipeline parallelism 없이 두 Pod를 data-parallel하게 묶고, 같은 model family와 task별 fine-tuned variant를 English NLP·BIG-bench·수학·상식 추론·code·다국어 benchmark에서 서로 다른 조건으로 평가했다.
+2022년 발표된 **PaLM**(Pathways Language Model)은 540.35B 매개변수의 dense decoder-only Transformer다. Google 연구진은 780B token의 한 차례 학습을 두 개의 TPU v4 Pod, 총 6,144개 chip에 걸쳐 실행했다. 이 작업의 핵심은 단순히 model을 크게 만든 데 있지 않다. Pathways를 이용해 pipeline parallelism 없이 두 Pod를 data-parallel하게 묶고, 같은 model family와 task별 fine-tuned variant를 English NLP·BIG-bench·수학·상식 추론·code·다국어 benchmark에서 서로 다른 조건으로 평가했다.
 
 PaLM의 성과를 ‘540B라서 일반적으로 추론한다’는 한 문장으로 줄일 수 없다. 예를 들어 GSM8K의 강한 결과는 **8-shot chain-of-thought(CoT) prompt**와 경우에 따라 외부 calculator를 함께 쓴 결과다. BIG-bench의 평균 human score 초과도 전체 150개 text task의 평균에 관한 말이며, 개별 task의 35%에서는 평균 human 성능이 더 높았다. 이 문서는 raw 보존 자료의 서사를 이러한 조건으로 되돌려 읽는다.
 

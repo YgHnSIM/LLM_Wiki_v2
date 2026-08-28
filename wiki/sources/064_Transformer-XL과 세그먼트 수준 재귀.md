@@ -55,9 +55,9 @@ learning:
 
 ### 고정 세그먼트가 만든 두 문제
 
-2019년 [[Transformer-XL]] 논문은 긴 언어 모델 입력을 서로 독립인 고정 길이 조각으로 훈련할 때 생기는 두 문제를 겨냥했다. 첫째, 이전 조각의 정보가 다음 조각으로 흐르지 않아 학습 가능한 의존 범위가 세그먼트 길이에 묶인다. 둘째, 새 조각의 첫 token은 바로 앞 문맥 없이 예측해야 한다. 저자들은 이를 **문맥 단편화(context fragmentation)**라고 불렀다.
+2019년 [[Transformer-XL]] 논문은 긴 언어 모델 입력을 서로 독립인 고정 길이 조각으로 훈련할 때 생기는 두 문제를 겨냥했다. 첫째, 이전 조각의 정보가 다음 조각으로 흐르지 않아 학습 가능한 의존 범위가 세그먼트 길이에 묶인다. 둘째, 새 조각의 첫 token은 바로 앞 문맥 없이 예측해야 한다. 저자들은 이를 **문맥 단편화**(context fragmentation)라고 불렀다.
 
-핵심 해법은 이전 세그먼트의 은닉 상태를 다음 세그먼트의 key·value용 memory로 재사용하는 **세그먼트 수준 재귀(segment-level recurrence)**다. 재사용 상태의 시간 순서를 구분하기 위해 attention 점수에는 절대 위치 대신 상대 거리를 넣는다. 이 결합은 세그먼트를 없애는 방식이 아니라, 제한된 길이로 계산하면서 과거 표현을 다음 계산에 넘기는 방식이다.
+핵심 해법은 이전 세그먼트의 은닉 상태를 다음 세그먼트의 key·value용 memory로 재사용하는 **세그먼트 수준 재귀**(segment-level recurrence)다. 재사용 상태의 시간 순서를 구분하기 위해 attention 점수에는 절대 위치 대신 상대 거리를 넣는다. 이 결합은 세그먼트를 없애는 방식이 아니라, 제한된 길이로 계산하면서 과거 표현을 다음 계산에 넘기는 방식이다.
 
 ### 이 논문을 읽기 위한 국소 기초
 
@@ -97,7 +97,7 @@ $$
 =\left[\operatorname{SG}\!\left(m_{\tau}^{n-1}\right)\,\Vert\,h_{\tau}^{n-1}\right]
 $$
 
-$\Vert$는 성분별 곱이나 덧셈이 아니라 **길이 축 연결(concatenation)**이다. 따라서 $m_{\tau}^{n-1}\in\mathbb{R}^{M\times d}$, $h_{\tau}^{n-1}\in\mathbb{R}^{L\times d}$이면 $\widetilde h_{\tau}^{n-1}\in\mathbb{R}^{(M+L)\times d}$가 된다. stop-gradient는 순전파 값은 유지하고 역전파 경로만 끊는다.
+$\Vert$는 성분별 곱이나 덧셈이 아니라 **길이 축 연결**(concatenation)이다. 따라서 $m_{\tau}^{n-1}\in\mathbb{R}^{M\times d}$, $h_{\tau}^{n-1}\in\mathbb{R}^{L\times d}$이면 $\widetilde h_{\tau}^{n-1}\in\mathbb{R}^{(M+L)\times d}$가 된다. stop-gradient는 순전파 값은 유지하고 역전파 경로만 끊는다.
 
 $$
 \operatorname{SG}(z)=z\quad\text{(순전파)},

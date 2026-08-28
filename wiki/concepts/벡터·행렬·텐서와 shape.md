@@ -66,10 +66,10 @@ learning:
 
 ### 스칼라·벡터·행렬·텐서
 
-- **스칼라(scalar)**는 값 하나다. 학습률 $\eta$나 손실 $\mathcal L$처럼 shape를 적으면 `()`인 값으로 볼 수 있다.
-- **벡터(vector)**는 한 축을 따라 놓인 숫자 묶음이다. 길이 $d$인 표현 $x$의 shape는 `(d,)` 또는 행·열 관례를 밝혔을 때 $(1\times d)$, $(d\times1)$이다.
-- **행렬(matrix)**은 두 축을 가진 표다. token 수 $T$, feature 수 $d$인 표현 표 $X$는 보통 $X\in\mathbb R^{T\times d}$로 쓴다.
-- **텐서(tensor)**는 축이 셋 이상인 배열을 가리키는 실무 용어다. batch $B$개의 길이 $T$ 시퀀스 표현은 흔히 $X\in\mathbb R^{B\times T\times d}$다.
+- **스칼라**(scalar)는 값 하나다. 학습률 $\eta$나 손실 $\mathcal L$처럼 shape를 적으면 `()`인 값으로 볼 수 있다.
+- **벡터**(vector)는 한 축을 따라 놓인 숫자 묶음이다. 길이 $d$인 표현 $x$의 shape는 `(d,)` 또는 행·열 관례를 밝혔을 때 $(1\times d)$, $(d\times1)$이다.
+- **행렬**(matrix)은 두 축을 가진 표다. token 수 $T$, feature 수 $d$인 표현 표 $X$는 보통 $X\in\mathbb R^{T\times d}$로 쓴다.
+- **텐서**(tensor)는 축이 셋 이상인 배열을 가리키는 실무 용어다. batch $B$개의 길이 $T$ 시퀀스 표현은 흔히 $X\in\mathbb R^{B\times T\times d}$다.
 
 텐서의 축 수와 행렬의 **rank**는 같은 말이 아니다. 여기서 텐서의 차수(order)는 축 개수이고, 행렬 rank는 독립인 행 또는 열 방향의 수를 뜻한다. 저순위 근사처럼 rank가 중요해지는 문제는 이후 심화 경로의 별도 질문이며, 이 문서는 배열을 읽는 규약을 맡는다.
 

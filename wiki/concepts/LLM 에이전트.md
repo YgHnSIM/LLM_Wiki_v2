@@ -126,7 +126,7 @@ learning:
 
 ### 한 문장 정의
 
-**LLM 에이전트(LLM agent)**는 언어 모델이 목표와 현재 state에서 다음 action 후보를 생성하고, 외부 orchestrator가 policy에 따라 이를 검증·실행해 얻은 observation을 다시 state에 넣는 반복 system이다.
+**LLM 에이전트**(LLM agent)는 언어 모델이 목표와 현재 state에서 다음 action 후보를 생성하고, 외부 orchestrator가 policy에 따라 이를 검증·실행해 얻은 observation을 다시 state에 넣는 반복 system이다.
 
 에이전트는 model 하나의 속성이 아니다.
 

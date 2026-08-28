@@ -3242,7 +3242,7 @@ raw 등록 해시:
 
 - 외부 원문 63개를 047–109에서 공식 048–110으로, source-stem이 일치하는 번역·해설 33쌍을 공식 048–079·103으로 이름만 이동했다. 최종 원문 목록은 001–046·048–110의 109개이며 047 파일은 없다.
 - `raw/`의 번역·해설 33쌍 66개도 공식 048–079·103으로 이동하고, 95개 위키 문서의 435개 literal raw 경로와 `raw-artifacts.yml` 66개 레코드의 path·`order_prefix`를 같은 번호로 맞췄다. Raw 본문·역할·원문 URL·SHA-256은 바꾸지 않았다.
-- `wiki/meta/source-gaps.yml`에 공식 047 **Attention Mechanism (2015)**을 `upstream-original-unavailable`로 등록했다. `/lt`·`source:*` selector, 외부 원문·번역·raw·레지스트리·공개 source·커밋은 이제 하나의 공식 번호를 사용하며, 047은 명시적 결손 오류로 거부하고 110까지 허용한다.
+- `wiki/meta/source-gaps.yml`에 공식 047 **Attention Mechanism**(2015)을 `upstream-original-unavailable`로 등록했다. `/lt`·`source:*` selector, 외부 원문·번역·raw·레지스트리·공개 source·커밋은 이제 하나의 공식 번호를 사용하며, 047은 명시적 결손 오류로 거부하고 110까지 허용한다.
 - 과거 번호 교정으로 이미 배포된 source.048–079의 한 번호 낮은 source·translation·commentary 주소 96개와 공식 103의 옛 비번호 주소 3개는 raw 접두사 산술에서 분리한 명시적 호환 장부로 보존했다. 이후 080 이상에는 장부에 없는 자동 리다이렉트를 만들지 않는다.
 - 활성 `LLM_ko`에 남아 있던 잘못된 구판 `072_Mixture of Experts at Scale` 번역·해설은 정규 새 103 쌍과 내용이 다른 고아 파일임을 확인해 제거했다. 두 파일은 복구 가능하도록 `C:\tmp\LLM_ko_obsolete_072_moe_20260721`에 격리했다.
 

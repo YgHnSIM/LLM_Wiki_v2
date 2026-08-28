@@ -38,7 +38,7 @@ relations:
 
 ## 공식 장 번호와 편집부 재구성
 
-공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism (2015)**이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-23 현재 원문을 제공하지 않는다.
+공개 source의 번호는 Michael Brenndoerfer의 [공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)에 있는 110개 장 번호를 따른다. [연재 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 목록에는 109개 게시물만 있으며, 차이는 공식 047 **Attention Mechanism**(2015)이다. 목차의 [047 연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-23 현재 원문을 제공하지 않는다.
 
 공식 047은 [[047_어텐션 메커니즘과 동적 정렬]]과 [[어텐션 메커니즘]]으로 채웠다. 다만 upstream 원문을 찾았거나 번역한 것으로 표시하지 않는다. 연결 raw 두 파일은 Bahdanau 2015·Luong 2015·Vaswani 2017을 토대로 위키가 새로 쓴 `editorial-reconstruction`과 `editorial-commentary`이며, `wiki/meta/source-gaps.yml`은 upstream 결손과 재구성 공개를 동시에 기록한다. 외부 원문 목록은 계속 001–046·048–110의 109개이고, 공개 source는 공식 001–110의 110개다. 다음 순차 입력은 없다.
 

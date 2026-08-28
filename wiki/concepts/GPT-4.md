@@ -88,7 +88,7 @@ learning:
 
 ### 한 문장 정의
 
-**GPT-4(Generative Pre-trained Transformer 4)**는 OpenAI가 2023년 공개한 Transformer-style 대규모 model 계열로, text 또는 interleaved image·text 입력을 조건으로 text를 생성하며 base pretraining 뒤 post-training과 제품 수준 안전·배포 계층을 거친다.
+**GPT-4**(Generative Pre-trained Transformer 4)는 OpenAI가 2023년 공개한 Transformer-style 대규모 model 계열로, text 또는 interleaved image·text 입력을 조건으로 text를 생성하며 base pretraining 뒤 post-training과 제품 수준 안전·배포 계층을 거친다.
 
 이 정의가 말하지 않는 것도 중요하다. 공개 자료는 parameter 수, dense·[[전문가 혼합|MoE]] 여부, 구체적 vision encoder·bridge, hardware·training compute와 dataset 구성을 밝히지 않았다. `GPT-4V`는 image-input 기능을 강조한 이름이지 공개된 별도 architecture 명세가 아니다.
 

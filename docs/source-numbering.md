@@ -4,7 +4,7 @@
 
 정규 source 번호는 Michael Brenndoerfer의 [*A History of Language AI* 공식 책 목차](https://mbrenndoerfer.com/books/history-of-language-ai)를 기준으로 한다. 목차는 001–110의 110장을 제시하지만, [History of Language AI 카테고리](https://mbrenndoerfer.com/writing/categories/history-of-language-ai)와 로컬 원문 폴더에는 109개 게시물만 있다.
 
-Upstream 결손은 공식 047 **Attention Mechanism (2015)**이다. 목차의 [연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-23 현재 본문을 반환하지 않으며 카테고리에도 없다. 2026-07-23 이 번호는 Bahdanau 2015·Luong 2015·Vaswani 2017의 1차 문헌을 토대로 위키가 새로 쓴 편집부 재구성으로 공개했다. 원문이 새로 발견된 것처럼 보이지 않도록 upstream 결손과 공개 대체물의 성격을 `wiki/meta/source-gaps.yml`에 함께 기록한다.
+Upstream 결손은 공식 047 **Attention Mechanism**(2015)이다. 목차의 [연결 주소](https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment)는 2026-07-23 현재 본문을 반환하지 않으며 카테고리에도 없다. 2026-07-23 이 번호는 Bahdanau 2015·Luong 2015·Vaswani 2017의 1차 문헌을 토대로 위키가 새로 쓴 편집부 재구성으로 공개했다. 원문이 새로 발견된 것처럼 보이지 않도록 upstream 결손과 공개 대체물의 성격을 `wiki/meta/source-gaps.yml`에 함께 기록한다.
 
 ```text
 001–046  원문 있음

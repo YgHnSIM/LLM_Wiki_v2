@@ -78,7 +78,7 @@ learning:
 
 ### 핵심 문장
 
-**QLoRA(Quantized Low-Rank Adaptation)**는 사전 학습 model의 가중치를 4-bit NormalFloat(NF4)로 저장해 동결하고, 사용할 때 BF16으로 역양자화하면서 별도의 LoRA adapter만 학습하는 parameter-efficient fine-tuning 방법이다. 2023년 Dettmers 등은 NF4, quantization constant를 다시 압축하는 double quantization, 순간적인 memory peak에 대응하는 paged optimizer를 결합해 LLaMA 65B를 단일 48GB GPU에서 미세조정했다.
+**QLoRA**(Quantized Low-Rank Adaptation)는 사전 학습 model의 가중치를 4-bit NormalFloat(NF4)로 저장해 동결하고, 사용할 때 BF16으로 역양자화하면서 별도의 LoRA adapter만 학습하는 parameter-efficient fine-tuning 방법이다. 2023년 Dettmers 등은 NF4, quantization constant를 다시 압축하는 double quantization, 순간적인 memory peak에 대응하는 paged optimizer를 결합해 LLaMA 65B를 단일 48GB GPU에서 미세조정했다.
 
 이 결과를 “65B의 4-bit parameter를 소비자 GPU에서 직접 갱신했다”고 읽으면 핵심이 뒤집힌다. QLoRA에는 서로 다른 네 장부가 있다.
 

@@ -71,7 +71,7 @@ learning:
 
 ### 한 문장 정의
 
-**QLoRA(Quantized Low-Rank Adaptation)**는 pretrained base weight를 4-bit로 양자화해 **저장하고 동결**한 뒤, 계산할 때 higher precision으로 역양자화하면서 low-rank adapter만 학습하는 parameter-efficient fine-tuning 방법이다.
+**QLoRA**(Quantized Low-Rank Adaptation)는 pretrained base weight를 4-bit로 양자화해 **저장하고 동결**한 뒤, 계산할 때 higher precision으로 역양자화하면서 low-rank adapter만 학습하는 parameter-efficient fine-tuning 방법이다.
 
 이 정의에는 세 가지 분리가 들어 있다.
 

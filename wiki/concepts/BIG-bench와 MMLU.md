@@ -74,7 +74,7 @@ learning:
 
 ### 한 문장 정의
 
-**MMLU(Massive Multitask Language Understanding)**는 57개 학술·전문 과목의 영어 사지선다 문항으로 zero/few-shot 지식 적용을 재는 benchmark이고, **BIG-bench(Beyond the Imitation Game benchmark)**는 204개 이상의 이질적인 JSON·programmatic language task를 과제별 metric으로 실행하고 정규화해 비교하는 협업 benchmark다.
+**MMLU**(Massive Multitask Language Understanding)는 57개 학술·전문 과목의 영어 사지선다 문항으로 zero/few-shot 지식 적용을 재는 benchmark이고, **BIG-bench**(Beyond the Imitation Game benchmark)는 204개 이상의 이질적인 JSON·programmatic language task를 과제별 metric으로 실행하고 정규화해 비교하는 협업 benchmark다.
 
 둘은 모두 [[GLUE와 SuperGLUE]]보다 과목과 task 형식의 폭을 넓혔지만, 하나의 ‘종합 지능 시험’으로 합칠 수 없다. MMLU는 같은 객관식 형식을 여러 과목에 반복한다. BIG-bench는 과제 형식과 metric 자체가 다양하다.
 

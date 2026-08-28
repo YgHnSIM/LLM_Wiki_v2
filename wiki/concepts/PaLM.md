@@ -63,7 +63,7 @@ learning:
 
 ### 한 문장 정의
 
-**PaLM(Pathways Language Model)**은 2022년에 보고된 540.35B parameter의 dense decoder-only Transformer와 그 model family(8B·62B·540B)를 가리킨다. 이름의 Pathways는 model이 sparse하거나 범용 task router라는 뜻이 아니라, 두 TPU v4 Pod에서 model 학습을 조율한 distributed ML system과의 관계를 가리킨다.
+**PaLM**(Pathways Language Model)은 2022년에 보고된 540.35B parameter의 dense decoder-only Transformer와 그 model family(8B·62B·540B)를 가리킨다. 이름의 Pathways는 model이 sparse하거나 범용 task router라는 뜻이 아니라, 두 TPU v4 Pod에서 model 학습을 조율한 distributed ML system과의 관계를 가리킨다.
 
 ### 왜 중요한가
 
