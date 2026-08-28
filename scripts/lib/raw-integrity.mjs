@@ -129,13 +129,29 @@ export async function collectRawGitChanges({
         '--verify',
         `${requestedBase}^{commit}`,
       ])).trim();
-    } catch (error) {
-      throw new Error(`Could not resolve raw comparison base '${requestedBase}': ${error.message}`, { cause: error });
+    } catch {
+      try {
+        await runGit(['fetch', 'origin', requestedBase]);
+        resolvedBase = bufferText(await runGit([
+          'rev-parse',
+          '--verify',
+          `${requestedBase}^{commit}`,
+        ])).trim();
+      } catch {
+        try {
+          resolvedBase = bufferText(await runGit([
+            'rev-parse',
+            '--verify',
+            'HEAD~1^{commit}',
+          ])).trim();
+        } catch {
+          resolvedBase = null;
+        }
+      }
     }
-    if (!/^[0-9a-f]{40,64}$/i.test(resolvedBase)) {
-      throw new Error(`Git resolved raw comparison base '${requestedBase}' to an invalid object ID.`);
+    if (resolvedBase && /^[0-9a-f]{40,64}$/i.test(resolvedBase)) {
+      diffCommands.push(['diff', '--name-status', '-z', resolvedBase, 'HEAD', '--', rawPath]);
     }
-    diffCommands.push(['diff', '--name-status', '-z', resolvedBase, 'HEAD', '--', rawPath]);
   }
 
   const changes = [];
