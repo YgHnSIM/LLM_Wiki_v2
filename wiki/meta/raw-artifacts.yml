@@ -1,1982 +1,1982 @@
 schema_version: 1
 artifacts:
-  - path: "raw/001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md"
+  - path: raw/001_Shannon's N-gram Model - The Foundation of Statistical Language Processing..md
     role: translated-essay
-    order_prefix: "001"
+    order_prefix: '001'
     language: ko
     source_type: derivative
     provenance: incomplete
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-shannon-ngram-language-model
+    source_url: 'https://mbrenndoerfer.com/writing/history-shannon-ngram-language-model'
     sha256: e25dbd3b4bdd1177531053cc085e2cdb5d6e05e80b6b4c4e97af5d33dcf5ef52
-  - path: "raw/001_Shannon's N-gram Model - The Foundation of Statistical Language Processing.commentary.md"
+  - path: raw/001_Shannon's N-gram Model - The Foundation of Statistical Language Processing.commentary.md
     role: commentary
-    order_prefix: "001"
+    order_prefix: '001'
     language: ko
     source_type: derivative
     provenance: incomplete
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-shannon-ngram-language-model
+    source_url: 'https://mbrenndoerfer.com/writing/history-shannon-ngram-language-model'
     sha256: c6735d2cd43287730a6a012ecf2ad22ddf33d90dae8f21338686eacf4330b2a2
-  - path: "raw/002_The Turing Test.md"
+  - path: raw/002_The Turing Test.md
     role: translated-essay
-    order_prefix: "002"
+    order_prefix: '002'
     language: ko
     source_type: derivative
     provenance: incomplete
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-turing-test-imitation-game
+    source_url: 'https://mbrenndoerfer.com/writing/history-turing-test-imitation-game'
     sha256: 588aae150c58191b358625edd23d4cc24cfcfa87bc47b6bc161ddc867fe825fc
-  - path: "raw/002_The Turing Test.commentary.md"
+  - path: raw/002_The Turing Test.commentary.md
     role: commentary
-    order_prefix: "002"
+    order_prefix: '002'
     language: ko
     source_type: derivative
     provenance: incomplete
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-turing-test-imitation-game
+    source_url: 'https://mbrenndoerfer.com/writing/history-turing-test-imitation-game'
     sha256: 37925e6a5682e97470ded84e8f1d03bb73677b6506a42120c35caaf314d7d4ee
-  - path: "raw/003_Georgetown-IBM Machine.md"
+  - path: raw/003_Georgetown-IBM Machine.md
     role: translated-essay
-    order_prefix: "003"
+    order_prefix: '003'
     language: ko
     source_type: derivative
     provenance: incomplete
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/georgetown-ibm-machine-translation-demonstration
+    source_url: 'https://mbrenndoerfer.com/writing/georgetown-ibm-machine-translation-demonstration'
     sha256: edcbc580d7ee7c6baaa991153ff44fc8dcdcf13991b6c8e0595cf8103383b45a
-  - path: "raw/003_Georgetown-IBM Machine.commentary.md"
+  - path: raw/003_Georgetown-IBM Machine.commentary.md
     role: commentary
-    order_prefix: "003"
+    order_prefix: '003'
     language: ko
     source_type: derivative
     provenance: incomplete
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/georgetown-ibm-machine-translation-demonstration
+    source_url: 'https://mbrenndoerfer.com/writing/georgetown-ibm-machine-translation-demonstration'
     sha256: 60e980f793e2551f107bcb9246e64d53c964e866263a6941190c2534f0b6234d
-  - path: "raw/004_The Perceptron.md"
+  - path: raw/004_The Perceptron.md
     role: translated-essay
-    order_prefix: "004"
+    order_prefix: '004'
     language: ko
     source_type: derivative
     provenance: incomplete
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-perceptron-neural-network-foundation
+    source_url: 'https://mbrenndoerfer.com/writing/history-perceptron-neural-network-foundation'
     sha256: 7d7c19cbc1a440b30da0ac666eb60b609526544c3792a09b2f07b81ead1c345a
-  - path: "raw/004_The Perceptron.commentary.md"
+  - path: raw/004_The Perceptron.commentary.md
     role: commentary
-    order_prefix: "004"
+    order_prefix: '004'
     language: ko
     source_type: derivative
     provenance: incomplete
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-perceptron-neural-network-foundation
+    source_url: 'https://mbrenndoerfer.com/writing/history-perceptron-neural-network-foundation'
     sha256: 8223f5e4eccf62bc48927d9ed04431418225262c09465ee2539fd9c4f8e3d4c8
-  - path: "raw/005_Chomsky's Syntactic Structures.md"
+  - path: raw/005_Chomsky's Syntactic Structures.md
     role: translated-essay
-    order_prefix: "005"
+    order_prefix: '005'
     language: ko
     source_type: derivative
     provenance: incomplete
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/chomsky-syntactic-structures-transformational-grammar-universal-grammar-computational-linguistics
+    source_url: 'https://mbrenndoerfer.com/writing/chomsky-syntactic-structures-transformational-grammar-universal-grammar-computational-linguistics'
     sha256: 1a4e988b611a6b5bfd2b2953a7376cb12f003c5eeb075f9302e189576d926c06
-  - path: "raw/005_Chomsky's Syntactic Structures.commentary.md"
+  - path: raw/005_Chomsky's Syntactic Structures.commentary.md
     role: commentary
-    order_prefix: "005"
+    order_prefix: '005'
     language: ko
     source_type: derivative
     provenance: incomplete
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/chomsky-syntactic-structures-transformational-grammar-universal-grammar-computational-linguistics
+    source_url: 'https://mbrenndoerfer.com/writing/chomsky-syntactic-structures-transformational-grammar-universal-grammar-computational-linguistics'
     sha256: e0a5b557d5fee254d93661b64e417209dc3f6d481ad9eae2e9ac34d440853107
   - path: raw/006_1962_위드로-호프_MADALINE.md
     role: source-essay
-    order_prefix: "006"
+    order_prefix: '006'
     language: ko
     source_type: derivative
     provenance: incomplete
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-madaline-neural-network-adaptive-learning
+    source_url: 'https://mbrenndoerfer.com/writing/history-madaline-neural-network-adaptive-learning'
     sha256: 747adf93e09a4444a413fd35dbf0902ab3ba226531c2f48ecf5cbf2a2028c98a
   - path: raw/006_1962_위드로-호프_MADALINE_해설.md
     role: commentary
-    order_prefix: "006"
+    order_prefix: '006'
     language: ko
     source_type: derivative
     provenance: incomplete
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-madaline-neural-network-adaptive-learning
+    source_url: 'https://mbrenndoerfer.com/writing/history-madaline-neural-network-adaptive-learning'
     sha256: 0a8b2cebfa46be49dc10d089f8d43252b15f2ebc0ebb5642a01bf048a91e612b
-  - path: "raw/007_ELIZA - The First Conversational AI Program.ko.md"
+  - path: raw/007_ELIZA - The First Conversational AI Program.ko.md
     role: translation
-    order_prefix: "007"
+    order_prefix: '007'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-eliza-conversational-ai
+    source_url: 'https://mbrenndoerfer.com/writing/history-eliza-conversational-ai'
     sha256: c8da25ff5e43e803d23c0aad7df0db0dec22ee8b6905622bf3831a61cb65e68e
-  - path: "raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md"
+  - path: raw/007_ELIZA - The First Conversational AI Program.commentary.ko.md
     role: commentary
-    order_prefix: "007"
+    order_prefix: '007'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-eliza-conversational-ai
+    source_url: 'https://mbrenndoerfer.com/writing/history-eliza-conversational-ai'
     sha256: 14542cc087bb4cf2b2f4dd876627215c734d56979898a0aeb20af81869189459
-  - path: "raw/008_Viterbi Algorithm - Dynamic Programming Foundation for Sequence Decoding in Speech Recognition and NLP.ko.md"
+  - path: raw/008_Viterbi Algorithm - Dynamic Programming Foundation for Sequence Decoding in Speech Recognition and NLP.ko.md
     role: translation
-    order_prefix: "008"
+    order_prefix: 008
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/viterbi-algorithm-dynamic-programming-sequence-decoding-hmm-speech-recognition
+    source_url: 'https://mbrenndoerfer.com/writing/viterbi-algorithm-dynamic-programming-sequence-decoding-hmm-speech-recognition'
     sha256: bcd382aac2c81ae34f6dee7c1dbcf6373ff170ba908770619bb7e147e240622c
-  - path: "raw/008_Viterbi Algorithm - Dynamic Programming Foundation for Sequence Decoding in Speech Recognition and NLP.commentary.ko.md"
+  - path: raw/008_Viterbi Algorithm - Dynamic Programming Foundation for Sequence Decoding in Speech Recognition and NLP.commentary.ko.md
     role: commentary
-    order_prefix: "008"
+    order_prefix: 008
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/viterbi-algorithm-dynamic-programming-sequence-decoding-hmm-speech-recognition
+    source_url: 'https://mbrenndoerfer.com/writing/viterbi-algorithm-dynamic-programming-sequence-decoding-hmm-speech-recognition'
     sha256: e1b4ac987921c9b0987180fd8386a9a529c00e3caedc919b8f9a03428cdf3140
-  - path: "raw/009_SHRDLU - Understanding Language Through Action.ko.md"
+  - path: raw/009_SHRDLU - Understanding Language Through Action.ko.md
     role: translation
-    order_prefix: "009"
+    order_prefix: 009
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-shrdlu-language-understanding-blocks-world
+    source_url: 'https://mbrenndoerfer.com/writing/history-shrdlu-language-understanding-blocks-world'
     sha256: e073b1495cafd7641bf22bd26dfc940728788e0feeef12fe44948cab423bf00b
-  - path: "raw/009_SHRDLU - Understanding Language Through Action.commentary.ko.md"
+  - path: raw/009_SHRDLU - Understanding Language Through Action.commentary.ko.md
     role: commentary
-    order_prefix: "009"
+    order_prefix: 009
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-shrdlu-language-understanding-blocks-world
+    source_url: 'https://mbrenndoerfer.com/writing/history-shrdlu-language-understanding-blocks-world'
     sha256: b0f45d85086b47d821497285eaeca059e0ae283698b531820b27930d661eb1ee
-  - path: "raw/010_Vector Space Model & TF-IDF Foundation of Modern Information Retrieval & Semantic Search.ko.md"
+  - path: raw/010_Vector Space Model & TF-IDF Foundation of Modern Information Retrieval & Semantic Search.ko.md
     role: translation
-    order_prefix: "010"
+    order_prefix: '010'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/vector-space-model-tfidf-information-retrieval-semantic-search-history
+    source_url: 'https://mbrenndoerfer.com/writing/vector-space-model-tfidf-information-retrieval-semantic-search-history'
     sha256: 15414f582e2d5dae3b7923d5320e156047da0fb435b55aad15bb96eb934d7533
-  - path: "raw/010_Vector Space Model & TF-IDF Foundation of Modern Information Retrieval & Semantic Search.commentary.ko.md"
+  - path: raw/010_Vector Space Model & TF-IDF Foundation of Modern Information Retrieval & Semantic Search.commentary.ko.md
     role: commentary
-    order_prefix: "010"
+    order_prefix: '010'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/vector-space-model-tfidf-information-retrieval-semantic-search-history
+    source_url: 'https://mbrenndoerfer.com/writing/vector-space-model-tfidf-information-retrieval-semantic-search-history'
     sha256: 2fd80ff5c0848ad32fe8c85e41494b13d3432471b28127fac723ee5cb596fb83
-  - path: "raw/011_Conceptual Dependency - Canonical Meaning Representation for Natural Language Understanding.ko.md"
+  - path: raw/011_Conceptual Dependency - Canonical Meaning Representation for Natural Language Understanding.ko.md
     role: translation
-    order_prefix: "011"
+    order_prefix: '011'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/conceptual-dependency-canonical-meaning-representation-natural-language-understanding
+    source_url: 'https://mbrenndoerfer.com/writing/conceptual-dependency-canonical-meaning-representation-natural-language-understanding'
     sha256: 1e473aadf06e7a5894fa234aedf51005336cb3eeeecbe074bd3bbe0e8dc1e73c
-  - path: "raw/011_Conceptual Dependency - Canonical Meaning Representation for Natural Language Understanding.commentary.ko.md"
+  - path: raw/011_Conceptual Dependency - Canonical Meaning Representation for Natural Language Understanding.commentary.ko.md
     role: commentary
-    order_prefix: "011"
+    order_prefix: '011'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/conceptual-dependency-canonical-meaning-representation-natural-language-understanding
+    source_url: 'https://mbrenndoerfer.com/writing/conceptual-dependency-canonical-meaning-representation-natural-language-understanding'
     sha256: ba73e109a182cb49038ff4b2f148d45d405089ecef962de7b26f365ece7443fe
-  - path: "raw/012_From Symbolic Rules to Statistical Learning - The Paradigm Shift in NLP.ko.md"
+  - path: raw/012_From Symbolic Rules to Statistical Learning - The Paradigm Shift in NLP.ko.md
     role: translation
-    order_prefix: "012"
+    order_prefix: '012'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-symbolic-to-statistical-nlp-paradigm-shift
+    source_url: 'https://mbrenndoerfer.com/writing/history-symbolic-to-statistical-nlp-paradigm-shift'
     sha256: 81b4fcf5603a7ecf639eb42ee2b0c3ddecf680763191adc30cd0d3ba02072adc
-  - path: "raw/012_From Symbolic Rules to Statistical Learning - The Paradigm Shift in NLP.commentary.ko.md"
+  - path: raw/012_From Symbolic Rules to Statistical Learning - The Paradigm Shift in NLP.commentary.ko.md
     role: commentary
-    order_prefix: "012"
+    order_prefix: '012'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-symbolic-to-statistical-nlp-paradigm-shift
+    source_url: 'https://mbrenndoerfer.com/writing/history-symbolic-to-statistical-nlp-paradigm-shift'
     sha256: 3582c477e39d7c8146df22e1cd23cb17b5f23ced5d20b6552b210a9301541bcf
-  - path: "raw/013_Hidden Markov Models - Statistical Speech Recognition.ko.md"
+  - path: raw/013_Hidden Markov Models - Statistical Speech Recognition.ko.md
     role: translation
-    order_prefix: "013"
+    order_prefix: '013'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-hidden-markov-models-speech-recognition
+    source_url: 'https://mbrenndoerfer.com/writing/history-hidden-markov-models-speech-recognition'
     sha256: d1224e52847bebf92848ff77c12c31e55bef55bc7ff314b0ea34ecaadea1ec80
-  - path: "raw/013_Hidden Markov Models - Statistical Speech Recognition.commentary.ko.md"
+  - path: raw/013_Hidden Markov Models - Statistical Speech Recognition.commentary.ko.md
     role: commentary
-    order_prefix: "013"
+    order_prefix: '013'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-hidden-markov-models-speech-recognition
+    source_url: 'https://mbrenndoerfer.com/writing/history-hidden-markov-models-speech-recognition'
     sha256: de15e36539054e332e0072e6ab5bb3e7ac310a1c1236762aa9b37d4927833a9a
-  - path: "raw/014_Augmented Transition Networks - Procedural Parsing Formalism for Natural Language.ko.md"
+  - path: raw/014_Augmented Transition Networks - Procedural Parsing Formalism for Natural Language.ko.md
     role: translation
-    order_prefix: "014"
+    order_prefix: '014'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/augmented-transition-networks-procedural-parsing-formalism-natural-language
+    source_url: 'https://mbrenndoerfer.com/writing/augmented-transition-networks-procedural-parsing-formalism-natural-language'
     sha256: 26cd760f9f29db0ce66faaadec24f6682a47e8d8bd4ff77f1b7ee8a4cbaa4797
-  - path: "raw/014_Augmented Transition Networks - Procedural Parsing Formalism for Natural Language.commentary.ko.md"
+  - path: raw/014_Augmented Transition Networks - Procedural Parsing Formalism for Natural Language.commentary.ko.md
     role: commentary
-    order_prefix: "014"
+    order_prefix: '014'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/augmented-transition-networks-procedural-parsing-formalism-natural-language
+    source_url: 'https://mbrenndoerfer.com/writing/augmented-transition-networks-procedural-parsing-formalism-natural-language'
     sha256: d92baa9b5668ea18e309722b0a67f2a5cf2ae3508de65781eae60c867973f327
-  - path: "raw/015_Montague Semantics - The Formal Foundation of Compositional Language Understanding.ko.md"
+  - path: raw/015_Montague Semantics - The Formal Foundation of Compositional Language Understanding.ko.md
     role: translation
-    order_prefix: "015"
+    order_prefix: '015'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/montague-semantics-formal-compositional-natural-language-understanding
+    source_url: 'https://mbrenndoerfer.com/writing/montague-semantics-formal-compositional-natural-language-understanding'
     sha256: d8f5ed48226e140ab0ed774422573ae1f0df7459b9bf26e0e05483c584f304e2
-  - path: "raw/015_Montague Semantics - The Formal Foundation of Compositional Language Understanding.commentary.ko.md"
+  - path: raw/015_Montague Semantics - The Formal Foundation of Compositional Language Understanding.commentary.ko.md
     role: commentary
-    order_prefix: "015"
+    order_prefix: '015'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/montague-semantics-formal-compositional-natural-language-understanding
+    source_url: 'https://mbrenndoerfer.com/writing/montague-semantics-formal-compositional-natural-language-understanding'
     sha256: 7959d4693ac3bf8442663e87977de8a7272a709e3e59cfc50ec19c687bc096d7
-  - path: "raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.ko.md"
+  - path: 'raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.ko.md'
     role: translation
-    order_prefix: "016"
+    order_prefix: '016'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/chinese-room-argument-syntax-semantics-limits-computation
+    source_url: 'https://mbrenndoerfer.com/writing/chinese-room-argument-syntax-semantics-limits-computation'
     sha256: b0db62a03a0233e1fc2334e833d7fe2a8c090f868ea85b0a034cc0e1444aad2d
-  - path: "raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.commentary.ko.md"
+  - path: 'raw/016_Chinese Room Argument - Syntax, Semantics, and the Limits of Computation.commentary.ko.md'
     role: commentary
-    order_prefix: "016"
+    order_prefix: '016'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/chinese-room-argument-syntax-semantics-limits-computation
+    source_url: 'https://mbrenndoerfer.com/writing/chinese-room-argument-syntax-semantics-limits-computation'
     sha256: c0d40f9a01c62d1896a5765b87c443e0c3014f6f3f05b1fbb0c60157ac0b80aa
-  - path: "raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.ko.md"
+  - path: raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.ko.md
     role: translation
-    order_prefix: "017"
+    order_prefix: '017'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/lesk-algorithm-word-sense-disambiguation-nlp-history
+    source_url: 'https://mbrenndoerfer.com/writing/lesk-algorithm-word-sense-disambiguation-nlp-history'
     sha256: 971d0d5f1bc9795bda5dab73a8263f79c8923db0168cbc7d2c5550448777ddfe
-  - path: "raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.commentary.ko.md"
+  - path: raw/017_Lesk Algorithm Word Sense Disambiguation & the Birth of Context-Based NLP.commentary.ko.md
     role: commentary
-    order_prefix: "017"
+    order_prefix: '017'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/lesk-algorithm-word-sense-disambiguation-nlp-history
+    source_url: 'https://mbrenndoerfer.com/writing/lesk-algorithm-word-sense-disambiguation-nlp-history'
     sha256: 4c35b6f60bb510a43febd1650f0cac4dde23fca4e2272834a4c777da0a016703
-  - path: "raw/018_Backpropagation - Training Deep Neural Networks.ko.md"
+  - path: raw/018_Backpropagation - Training Deep Neural Networks.ko.md
     role: translation
-    order_prefix: "018"
+    order_prefix: 018
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-backpropagation-deep-learning-training
+    source_url: 'https://mbrenndoerfer.com/writing/history-backpropagation-deep-learning-training'
     sha256: 19aae868c26471354abadcfa8ed37be5c45773879994a513422609b2e47365d8
-  - path: "raw/018_Backpropagation - Training Deep Neural Networks.commentary.ko.md"
+  - path: raw/018_Backpropagation - Training Deep Neural Networks.commentary.ko.md
     role: commentary
-    order_prefix: "018"
+    order_prefix: 018
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-backpropagation-deep-learning-training
+    source_url: 'https://mbrenndoerfer.com/writing/history-backpropagation-deep-learning-training'
     sha256: f10e3d01990c0a1eb99bf89e03745f10f854c441250419b332b7b81f668ebc97
-  - path: "raw/019_Katz Back-off - Handling Sparse Data in Language Models.ko.md"
+  - path: raw/019_Katz Back-off - Handling Sparse Data in Language Models.ko.md
     role: translation
-    order_prefix: "019"
+    order_prefix: 019
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-katz-backoff-sparse-data-language-models
+    source_url: 'https://mbrenndoerfer.com/writing/history-katz-backoff-sparse-data-language-models'
     sha256: 17b8b86a8209f641ad73c4f9eeaeda68499575ae257318d385e4edd338305ec4
-  - path: "raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md"
+  - path: raw/019_Katz Back-off - Handling Sparse Data in Language Models.commentary.ko.md
     role: commentary
-    order_prefix: "019"
+    order_prefix: 019
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-katz-backoff-sparse-data-language-models
+    source_url: 'https://mbrenndoerfer.com/writing/history-katz-backoff-sparse-data-language-models'
     sha256: f25f8db4037d3bc578ef3feb51bcf07c3ddabc49cd583d2ea5d0602daab084c9
-  - path: "raw/020_Time Delay Neural Networks - Processing Sequential Data with Temporal Convolutions.ko.md"
+  - path: raw/020_Time Delay Neural Networks - Processing Sequential Data with Temporal Convolutions.ko.md
     role: translation
-    order_prefix: "020"
+    order_prefix: '020'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-tdnn-time-delay-neural-networks
+    source_url: 'https://mbrenndoerfer.com/writing/history-tdnn-time-delay-neural-networks'
     sha256: fa6534a82bd93f9e9179c753b0ee1b203d46b2751e921be605ef0664234420af
-  - path: "raw/020_Time Delay Neural Networks - Processing Sequential Data with Temporal Convolutions.commentary.ko.md"
+  - path: raw/020_Time Delay Neural Networks - Processing Sequential Data with Temporal Convolutions.commentary.ko.md
     role: commentary
-    order_prefix: "020"
+    order_prefix: '020'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-tdnn-time-delay-neural-networks
+    source_url: 'https://mbrenndoerfer.com/writing/history-tdnn-time-delay-neural-networks'
     sha256: 9cc6f53a0af510ee9641bc999bb6e085c06055dd6bc32196d3fb35531eaebf8c
-  - path: "raw/021_Convolutional Neural Networks - Revolutionizing Feature Learning.ko.md"
+  - path: raw/021_Convolutional Neural Networks - Revolutionizing Feature Learning.ko.md
     role: translation
-    order_prefix: "021"
+    order_prefix: '021'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-cnn-convolutional-neural-networks
+    source_url: 'https://mbrenndoerfer.com/writing/history-cnn-convolutional-neural-networks'
     sha256: 9d9acf31f476d6b1e6b88cf7a3cbcfcbabbc3c50f654a04b85f6c13420acfd89
-  - path: "raw/021_Convolutional Neural Networks - Revolutionizing Feature Learning.commentary.ko.md"
+  - path: raw/021_Convolutional Neural Networks - Revolutionizing Feature Learning.commentary.ko.md
     role: commentary
-    order_prefix: "021"
+    order_prefix: '021'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-cnn-convolutional-neural-networks
+    source_url: 'https://mbrenndoerfer.com/writing/history-cnn-convolutional-neural-networks'
     sha256: 3a28fc0443b755c5522180dd80675222a6f383173acb46561a3d7a76bd555933
-  - path: "raw/022_IBM Statistical Machine Translation - From Rules to Data.ko.md"
+  - path: raw/022_IBM Statistical Machine Translation - From Rules to Data.ko.md
     role: translation
-    order_prefix: "022"
+    order_prefix: '022'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-statistical-mt-ibm-models
+    source_url: 'https://mbrenndoerfer.com/writing/history-statistical-mt-ibm-models'
     sha256: 8e8771a192a961de4d4cb7a39b674fb6cf5885fc42f2e199ab2dadb89b5fe13d
-  - path: "raw/022_IBM Statistical Machine Translation - From Rules to Data.commentary.ko.md"
+  - path: raw/022_IBM Statistical Machine Translation - From Rules to Data.commentary.ko.md
     role: commentary
-    order_prefix: "022"
+    order_prefix: '022'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-statistical-mt-ibm-models
+    source_url: 'https://mbrenndoerfer.com/writing/history-statistical-mt-ibm-models'
     sha256: 2c2092c203b14c8b0972631f2f924862d190881c4b32af57b7004e3c55f702ea
-  - path: "raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.ko.md"
+  - path: raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.ko.md
     role: translation
-    order_prefix: "023"
+    order_prefix: '023'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-penn-treebank-statistical-parsing
+    source_url: 'https://mbrenndoerfer.com/writing/history-penn-treebank-statistical-parsing'
     sha256: 8c7e591a8eb4e900b99908be4e123b5f2bbb852b369840bffafb9454e852edcf
-  - path: "raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.commentary.ko.md"
+  - path: raw/023_1993 Penn Treebank Foundation of Statistical NLP & Syntactic Parsing.commentary.ko.md
     role: commentary
-    order_prefix: "023"
+    order_prefix: '023'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-penn-treebank-statistical-parsing
-    sha256: 24467a278b8caabfb8816e868d03fa2a8e1443a8e45c93a8cd52f82ae7a44b9c
-  - path: "raw/024_BM25 The Probabilistic Ranking Revolution in Information Retrieval.ko.md"
+    source_url: 'https://mbrenndoerfer.com/writing/history-penn-treebank-statistical-parsing'
+    sha256: 559c01c93c77b2cc09f0bbe3cf2da2c4c4f5cde605552696f2287bdf5abbffdc
+  - path: raw/024_BM25 The Probabilistic Ranking Revolution in Information Retrieval.ko.md
     role: translation
-    order_prefix: "024"
+    order_prefix: '024'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/bm25-probabilistic-ranking-information-retrieval
+    source_url: 'https://mbrenndoerfer.com/writing/bm25-probabilistic-ranking-information-retrieval'
     sha256: c07fb756ee3d3e7f84c04d9bb9a00c43b96f4277ce7e3fd7f68e6df6205c9f6e
-  - path: "raw/024_BM25 The Probabilistic Ranking Revolution in Information Retrieval.commentary.ko.md"
+  - path: raw/024_BM25 The Probabilistic Ranking Revolution in Information Retrieval.commentary.ko.md
     role: commentary
-    order_prefix: "024"
+    order_prefix: '024'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/bm25-probabilistic-ranking-information-retrieval
+    source_url: 'https://mbrenndoerfer.com/writing/bm25-probabilistic-ranking-information-retrieval'
     sha256: d61c5df6274785a368fcd3c06e96107a90fbce6a788c30d3091ebb1b47a8a798
-  - path: "raw/025_WordNet - A Semantic Network for Language Understanding.ko.md"
+  - path: raw/025_WordNet - A Semantic Network for Language Understanding.ko.md
     role: translation
-    order_prefix: "025"
+    order_prefix: '025'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-wordnet-semantic-network
-    sha256: b3340263f4080efd7edf9100c9ccc0cb8cf6d7530aec45bf637f2bace21cc355
-  - path: "raw/025_WordNet - A Semantic Network for Language Understanding.commentary.ko.md"
+    source_url: 'https://mbrenndoerfer.com/writing/history-wordnet-semantic-network'
+    sha256: 0ade6df1d2c0bf5729851d4d4706e2ceaf3875fc4e3b7da74543cbd4596486b7
+  - path: raw/025_WordNet - A Semantic Network for Language Understanding.commentary.ko.md
     role: commentary
-    order_prefix: "025"
+    order_prefix: '025'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-wordnet-semantic-network
-    sha256: 177ee65ba62adf6dc3559b00d72b858a95702f7326637f9be09a968407210b9f
-  - path: "raw/026_Recurrent Neural Networks - Machines That Remember.ko.md"
+    source_url: 'https://mbrenndoerfer.com/writing/history-wordnet-semantic-network'
+    sha256: 878831c96f8494b9e9b60cd4b731dfdce7fd432b2ac74a1da6cfd7c1ee0abf06
+  - path: raw/026_Recurrent Neural Networks - Machines That Remember.ko.md
     role: translation
-    order_prefix: "026"
+    order_prefix: '026'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-rnn-recurrent-neural-networks
+    source_url: 'https://mbrenndoerfer.com/writing/history-rnn-recurrent-neural-networks'
     sha256: c38522d4821fa348c7c9f2e072ceb56b5c799b4576e52260cf31ec767d010783
-  - path: "raw/026_Recurrent Neural Networks - Machines That Remember.commentary.ko.md"
+  - path: raw/026_Recurrent Neural Networks - Machines That Remember.commentary.ko.md
     role: commentary
-    order_prefix: "026"
+    order_prefix: '026'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-rnn-recurrent-neural-networks
+    source_url: 'https://mbrenndoerfer.com/writing/history-rnn-recurrent-neural-networks'
     sha256: 89fdef0e7f5fd3ecc54d64b15c8f0195b12aa24eb718e4c41a73dbc70c7093d4
-  - path: "raw/027_Maximum Entropy & Support Vector Machines in NLP Feature-Based Discriminative Learning.ko.md"
+  - path: raw/027_Maximum Entropy & Support Vector Machines in NLP Feature-Based Discriminative Learning.ko.md
     role: translation
-    order_prefix: "027"
+    order_prefix: '027'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-maximum-entropy-svms-nlp
+    source_url: 'https://mbrenndoerfer.com/writing/history-maximum-entropy-svms-nlp'
     sha256: d2fa5624420eebed04da2346d2d96ec9c56be859fa268c85e95ec408d6e25f4e
-  - path: "raw/027_Maximum Entropy & Support Vector Machines in NLP Feature-Based Discriminative Learning.commentary.ko.md"
+  - path: raw/027_Maximum Entropy & Support Vector Machines in NLP Feature-Based Discriminative Learning.commentary.ko.md
     role: commentary
-    order_prefix: "027"
+    order_prefix: '027'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-maximum-entropy-svms-nlp
+    source_url: 'https://mbrenndoerfer.com/writing/history-maximum-entropy-svms-nlp'
     sha256: 8aa0fd72a6036a98d56cc4688f461a06e387be802f890016508f123981f6edb7
-  - path: "raw/028_Long Short-Term Memory - Solving the Memory Problem.ko.md"
+  - path: raw/028_Long Short-Term Memory - Solving the Memory Problem.ko.md
     role: translation
-    order_prefix: "028"
+    order_prefix: 028
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-lstm-long-short-term-memory
+    source_url: 'https://mbrenndoerfer.com/writing/history-lstm-long-short-term-memory'
     sha256: 2492c5f5452210eee241552e69f56f61b8ffc4c753f949ef8d6349be6cb886ce
-  - path: "raw/028_Long Short-Term Memory - Solving the Memory Problem.commentary.ko.md"
+  - path: raw/028_Long Short-Term Memory - Solving the Memory Problem.commentary.ko.md
     role: commentary
-    order_prefix: "028"
+    order_prefix: 028
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-lstm-long-short-term-memory
+    source_url: 'https://mbrenndoerfer.com/writing/history-lstm-long-short-term-memory'
     sha256: a4f49e30cd7328f1e53c2d5f13f55c625460aca6c16aa1f2db376211ccc0e290
-  - path: "raw/029_Statistical Parsers From Rules to Probabilities - Revolution in Natural Language Parsing.ko.md"
+  - path: raw/029_Statistical Parsers From Rules to Probabilities - Revolution in Natural Language Parsing.ko.md
     role: translation
-    order_prefix: "029"
+    order_prefix: 029
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-statistical-parsers-probabilistic-parsing
+    source_url: 'https://mbrenndoerfer.com/writing/history-statistical-parsers-probabilistic-parsing'
     sha256: 300f6ee42e9e18991ad091b6db8218cb2f53ec4ef3ce183d4fbe4d8c14502443
-  - path: "raw/029_Statistical Parsers From Rules to Probabilities - Revolution in Natural Language Parsing.commentary.ko.md"
+  - path: raw/029_Statistical Parsers From Rules to Probabilities - Revolution in Natural Language Parsing.commentary.ko.md
     role: commentary
-    order_prefix: "029"
+    order_prefix: 029
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-statistical-parsers-probabilistic-parsing
+    source_url: 'https://mbrenndoerfer.com/writing/history-statistical-parsers-probabilistic-parsing'
     sha256: 9ad560c80bf01be890ef74c5fd8162057c740710e6b80c737efb35024d831155
-  - path: "raw/030_FrameNet - A Computational Resource for Frame Semantics.ko.md"
+  - path: raw/030_FrameNet - A Computational Resource for Frame Semantics.ko.md
     role: translation
-    order_prefix: "030"
+    order_prefix: '030'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-framenet-frame-semantics
+    source_url: 'https://mbrenndoerfer.com/writing/history-framenet-frame-semantics'
     sha256: 124a42732a2e8488fa9b29303464814f226cef7d484d23b3c959685bac42f0f5
-  - path: "raw/030_FrameNet - A Computational Resource for Frame Semantics.commentary.ko.md"
+  - path: raw/030_FrameNet - A Computational Resource for Frame Semantics.commentary.ko.md
     role: commentary
-    order_prefix: "030"
+    order_prefix: '030'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-framenet-frame-semantics
+    source_url: 'https://mbrenndoerfer.com/writing/history-framenet-frame-semantics'
     sha256: 326f7de3fe99b5b664e4f30cab3800c1b6fde83d271a07960bd20f9577f3b8c7
-  - path: "raw/031_Latent Semantic Analysis and Topic Models Discovering Hidden Structure in Text.ko.md"
+  - path: raw/031_Latent Semantic Analysis and Topic Models Discovering Hidden Structure in Text.ko.md
     role: translation
-    order_prefix: "031"
+    order_prefix: '031'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/latent-semantic-analysis-topic-models-discovery
+    source_url: 'https://mbrenndoerfer.com/writing/latent-semantic-analysis-topic-models-discovery'
     sha256: b6d09e7452b99057196e0931e69c33a9205183cce2cdf794eb30a4014bdee042
-  - path: "raw/031_Latent Semantic Analysis and Topic Models Discovering Hidden Structure in Text.commentary.ko.md"
+  - path: raw/031_Latent Semantic Analysis and Topic Models Discovering Hidden Structure in Text.commentary.ko.md
     role: commentary
-    order_prefix: "031"
+    order_prefix: '031'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/latent-semantic-analysis-topic-models-discovery
+    source_url: 'https://mbrenndoerfer.com/writing/latent-semantic-analysis-topic-models-discovery'
     sha256: 691c6752aa91440d33687bc029a2b21f7b7dd7e3a4544801249c0fe04e272658
-  - path: "raw/032_Conditional Random Fields - Structured Prediction for Sequences.ko.md"
+  - path: raw/032_Conditional Random Fields - Structured Prediction for Sequences.ko.md
     role: translation
-    order_prefix: "032"
+    order_prefix: '032'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-crf-conditional-random-fields
+    source_url: 'https://mbrenndoerfer.com/writing/history-crf-conditional-random-fields'
     sha256: c46d497ce07e99e9d2832f632e9a3607789fba4a925f542ba53cdf43717a93ca
-  - path: "raw/032_Conditional Random Fields - Structured Prediction for Sequences.commentary.ko.md"
+  - path: raw/032_Conditional Random Fields - Structured Prediction for Sequences.commentary.ko.md
     role: commentary
-    order_prefix: "032"
+    order_prefix: '032'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-crf-conditional-random-fields
+    source_url: 'https://mbrenndoerfer.com/writing/history-crf-conditional-random-fields'
     sha256: 712e915a73916eb3fdf2173b626a7d983f0c7dfa1f581572b1a70c04c7936612
-  - path: "raw/033_BLEU Metric - Automatic Evaluation for Machine Translation.ko.md"
+  - path: raw/033_BLEU Metric - Automatic Evaluation for Machine Translation.ko.md
     role: translation
-    order_prefix: "033"
+    order_prefix: '033'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-bleu-metric-evaluation
+    source_url: 'https://mbrenndoerfer.com/writing/history-bleu-metric-evaluation'
     sha256: 498e699517ea29c0c6a71eef46e6df9d144f0fa10813a62a94913230a9996b38
-  - path: "raw/033_BLEU Metric - Automatic Evaluation for Machine Translation.commentary.ko.md"
+  - path: raw/033_BLEU Metric - Automatic Evaluation for Machine Translation.commentary.ko.md
     role: commentary
-    order_prefix: "033"
+    order_prefix: '033'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-bleu-metric-evaluation
+    source_url: 'https://mbrenndoerfer.com/writing/history-bleu-metric-evaluation'
     sha256: e5307fefb63a28f997ac1fa7f30c9e9461cc50bf8e5d26c7a3e523cedb8d8a68
-  - path: "raw/034_Phrase-Based Statistical Machine Translation & Minimum Error Rate Training Phrase-Level Learning and Direct Optimization.ko.md"
+  - path: raw/034_Phrase-Based Statistical Machine Translation & Minimum Error Rate Training Phrase-Level Learning and Direct Optimization.ko.md
     role: translation
-    order_prefix: "034"
+    order_prefix: '034'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-phrase-based-smt-mert
+    source_url: 'https://mbrenndoerfer.com/writing/history-phrase-based-smt-mert'
     sha256: e588cd7f7c9ab92374992046d5c9379a47d5fbeba718d7855e459fb7ed15c770
-  - path: "raw/034_Phrase-Based Statistical Machine Translation & Minimum Error Rate Training Phrase-Level Learning and Direct Optimization.commentary.ko.md"
+  - path: raw/034_Phrase-Based Statistical Machine Translation & Minimum Error Rate Training Phrase-Level Learning and Direct Optimization.commentary.ko.md
     role: commentary
-    order_prefix: "034"
+    order_prefix: '034'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-phrase-based-smt-mert
+    source_url: 'https://mbrenndoerfer.com/writing/history-phrase-based-smt-mert'
     sha256: df887f765d872886f401a02ccfa4b846484a2c4c849b9c94c00797125190b737
-  - path: "raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.ko.md"
+  - path: raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.ko.md
     role: translation
-    order_prefix: "035"
+    order_prefix: '035'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/neural-probabilistic-language-model-distributed-word-representations-neural-language-modeling
+    source_url: 'https://mbrenndoerfer.com/writing/neural-probabilistic-language-model-distributed-word-representations-neural-language-modeling'
     sha256: 25506f08ea2ea984ce640720021be633e175f511bf6ed3abd9c53a82670df8c4
-  - path: "raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.commentary.ko.md"
+  - path: raw/035_Neural Probabilistic Language Model - Distributed Word Representations and Neural Language Modeling.commentary.ko.md
     role: commentary
-    order_prefix: "035"
+    order_prefix: '035'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/neural-probabilistic-language-model-distributed-word-representations-neural-language-modeling
+    source_url: 'https://mbrenndoerfer.com/writing/neural-probabilistic-language-model-distributed-word-representations-neural-language-modeling'
     sha256: a065f1a8e1078943bfa365d9ca317e4a46f96b8ee8ca179fbc877fa214ab97ab
-  - path: "raw/036_Latent Dirichlet Allocation Bayesian Topic Modeling Framework.ko.md"
+  - path: raw/036_Latent Dirichlet Allocation Bayesian Topic Modeling Framework.ko.md
     role: translation
-    order_prefix: "036"
+    order_prefix: '036'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/latent-dirichlet-allocation-bayesian-topic-modeling
+    source_url: 'https://mbrenndoerfer.com/writing/latent-dirichlet-allocation-bayesian-topic-modeling'
     sha256: 4de35e776e431fcd719c11b8324ddd9f9aaca82e3c1e51eecc2250d48ca33317
-  - path: "raw/036_Latent Dirichlet Allocation Bayesian Topic Modeling Framework.commentary.ko.md"
+  - path: raw/036_Latent Dirichlet Allocation Bayesian Topic Modeling Framework.commentary.ko.md
     role: commentary
-    order_prefix: "036"
+    order_prefix: '036'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/latent-dirichlet-allocation-bayesian-topic-modeling
+    source_url: 'https://mbrenndoerfer.com/writing/latent-dirichlet-allocation-bayesian-topic-modeling'
     sha256: de935f246242424cf7619fe0c0aa62569f60a7834d078df42beafd5b49f39d42
-  - path: "raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.ko.md"
+  - path: raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.ko.md
     role: translation
-    order_prefix: "037"
+    order_prefix: '037'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-rouge-meteor-evaluation-metrics
+    source_url: 'https://mbrenndoerfer.com/writing/history-rouge-meteor-evaluation-metrics'
     sha256: 84c9f46b706651d8cc6b3f74512efbe4ebb5f874e4553005c445cb631caf98e6
-  - path: "raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.commentary.ko.md"
+  - path: raw/037_ROUGE and METEOR Task-Specific and Semantically-Aware Evaluation Metrics.commentary.ko.md
     role: commentary
-    order_prefix: "037"
+    order_prefix: '037'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-rouge-meteor-evaluation-metrics
+    source_url: 'https://mbrenndoerfer.com/writing/history-rouge-meteor-evaluation-metrics'
     sha256: c8bbbd2970d80e01616cce636ac48f0a53cfdad1ed443cfd9bd2a67a5d2915ec
-  - path: "raw/038_PropBank - Semantic Role Labeling and Proposition Bank.ko.md"
+  - path: raw/038_PropBank - Semantic Role Labeling and Proposition Bank.ko.md
     role: translation
-    order_prefix: "038"
+    order_prefix: 038
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-propbank-semantic-role-labeling
+    source_url: 'https://mbrenndoerfer.com/writing/history-propbank-semantic-role-labeling'
     sha256: 0d7e03462e8fd231febb9f3ef74984f05a64f8baf4f62aa32a304aba53eab7f8
-  - path: "raw/038_PropBank - Semantic Role Labeling and Proposition Bank.commentary.ko.md"
+  - path: raw/038_PropBank - Semantic Role Labeling and Proposition Bank.commentary.ko.md
     role: commentary
-    order_prefix: "038"
+    order_prefix: 038
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-propbank-semantic-role-labeling
+    source_url: 'https://mbrenndoerfer.com/writing/history-propbank-semantic-role-labeling'
     sha256: c11a7d7f88f10cd71b5df0d6de609889164e2f7c74270042eb935987e280afa6
-  - path: "raw/039_Freebase Collaborative Knowledge Graph for Structured Information.ko.md"
+  - path: raw/039_Freebase Collaborative Knowledge Graph for Structured Information.ko.md
     role: translation
-    order_prefix: "039"
+    order_prefix: 039
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-freebase-knowledge-graph
+    source_url: 'https://mbrenndoerfer.com/writing/history-freebase-knowledge-graph'
     sha256: 0097e3c33ad9201d1f3826a2c2dd2c27f915b7f76e12b12087272ddcdb83bbec
-  - path: "raw/039_Freebase Collaborative Knowledge Graph for Structured Information.commentary.ko.md"
+  - path: raw/039_Freebase Collaborative Knowledge Graph for Structured Information.commentary.ko.md
     role: commentary
-    order_prefix: "039"
+    order_prefix: 039
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/history-freebase-knowledge-graph
+    source_url: 'https://mbrenndoerfer.com/writing/history-freebase-knowledge-graph'
     sha256: 274e45a517884f74ad593129be31d9d51c4d8cfaa342a6cb12dc91726778e0e6
-  - path: "raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.ko.md"
+  - path: raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.ko.md
     role: translation
-    order_prefix: "040"
+    order_prefix: '040'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/ibm-watson-jeopardy-open-domain-question-answering-nlp-information-retrieval
+    source_url: 'https://mbrenndoerfer.com/writing/ibm-watson-jeopardy-open-domain-question-answering-nlp-information-retrieval'
     sha256: b4243b384082e9066a77da67657f14290de21c054e9e34f037a13eb4db39b0e6
-  - path: "raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.commentary.ko.md"
+  - path: raw/040_IBM Watson on Jeopardy! - Historic AI Victory That Demonstrated Open-Domain Question Answering.commentary.ko.md
     role: commentary
-    order_prefix: "040"
+    order_prefix: '040'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/ibm-watson-jeopardy-open-domain-question-answering-nlp-information-retrieval
+    source_url: 'https://mbrenndoerfer.com/writing/ibm-watson-jeopardy-open-domain-question-answering-nlp-information-retrieval'
     sha256: 9953ee2069d141ea4d3aca1192b3d95e6a32a874cec0bc7bffd76d095d1534f1
-  - path: "raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.ko.md"
+  - path: raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.ko.md
     role: translation
-    order_prefix: "041"
+    order_prefix: '041'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/deep-learning-speech-recognition-breakthrough
+    source_url: 'https://mbrenndoerfer.com/writing/deep-learning-speech-recognition-breakthrough'
     sha256: c20283af26a198774b350f15c977f9e42e4f0930ed42c85238416930272a0e1e
-  - path: "raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.commentary.ko.md"
+  - path: raw/041_Deep Learning for Speech Recognition The 2012 Breakthrough.commentary.ko.md
     role: commentary
-    order_prefix: "041"
+    order_prefix: '041'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/deep-learning-speech-recognition-breakthrough
+    source_url: 'https://mbrenndoerfer.com/writing/deep-learning-speech-recognition-breakthrough'
     sha256: cdedb5d31097ee74d9599c4b42ddcf82e41f10bcb357551e5b3cabde68ac786c
-  - path: "raw/042_Wikidata Collaborative Knowledge Base for Language AI.ko.md"
+  - path: raw/042_Wikidata Collaborative Knowledge Base for Language AI.ko.md
     role: translation
-    order_prefix: "042"
+    order_prefix: '042'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/wikidata-collaborative-knowledge-base-language-ai
-    sha256: 82a9fa981015de4f9c0daa3e3d18dc31e5a8411a30c8553019ffb85cd36198ac
-  - path: "raw/042_Wikidata Collaborative Knowledge Base for Language AI.commentary.ko.md"
+    source_url: 'https://mbrenndoerfer.com/writing/wikidata-collaborative-knowledge-base-language-ai'
+    sha256: 13fea1a83084a6e876b1309617e8a744532e5bc9dbecbb327b21a69224c60b8b
+  - path: raw/042_Wikidata Collaborative Knowledge Base for Language AI.commentary.ko.md
     role: commentary
-    order_prefix: "042"
+    order_prefix: '042'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/wikidata-collaborative-knowledge-base-language-ai
+    source_url: 'https://mbrenndoerfer.com/writing/wikidata-collaborative-knowledge-base-language-ai'
     sha256: 35e683c3d681f7f9a4bd47d30a1b45d8d278e8a476e35714c02fa91464c8d02f
-  - path: "raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.ko.md"
+  - path: raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.ko.md
     role: translation
-    order_prefix: "043"
+    order_prefix: '043'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/word2vec-neural-word-embeddings
-    sha256: 2d4b3b5e62a7ce4c120e417751ffc13b2a5ec9c23a3f1245f14dd366f073df80
-  - path: "raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.commentary.ko.md"
+    source_url: 'https://mbrenndoerfer.com/writing/word2vec-neural-word-embeddings'
+    sha256: 88657349e8b627b95d7b98c9a68101ba56eaa62f502d2345dc2f6559b9e7236a
+  - path: raw/043_Word2Vec Dense Word Embeddings and Neural Language Representations.commentary.ko.md
     role: commentary
-    order_prefix: "043"
+    order_prefix: '043'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/word2vec-neural-word-embeddings
+    source_url: 'https://mbrenndoerfer.com/writing/word2vec-neural-word-embeddings'
     sha256: 8b209a7d6ba2fba3a7118ac51bd744f7d1467a9b496a37ac7ab636218ba2a512
-  - path: "raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.ko.md"
+  - path: raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.ko.md
     role: translation
-    order_prefix: "044"
+    order_prefix: '044'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/glove-adam-optimizer-word-embeddings
+    source_url: 'https://mbrenndoerfer.com/writing/glove-adam-optimizer-word-embeddings'
     sha256: e5adfc6af2342ab5f8f71638aaa79ca0c29c81d42956ccc130070ce372735e23
-  - path: "raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.commentary.ko.md"
+  - path: raw/044_GloVe and Adam Optimizer Global Word Embeddings and Adaptive Optimization.commentary.ko.md
     role: commentary
-    order_prefix: "044"
+    order_prefix: '044'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/glove-adam-optimizer-word-embeddings
+    source_url: 'https://mbrenndoerfer.com/writing/glove-adam-optimizer-word-embeddings'
     sha256: cb185e4736e5b01e69f968481e65362d40256b4e3c22a4ba2a1f77dc2a2fe8e6
-  - path: "raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.ko.md"
+  - path: raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.ko.md
     role: translation
-    order_prefix: "045"
+    order_prefix: '045'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/sequence-to-sequence-neural-machine-translation
-    sha256: 245afd4ef2e6db56bb2b14099ab1244eee1f20b4b1b593ac2cb549d6234a86ce
-  - path: "raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.commentary.ko.md"
+    source_url: 'https://mbrenndoerfer.com/writing/sequence-to-sequence-neural-machine-translation'
+    sha256: f43be78f1433f6a515735f4c73fbb7ccb4f5d3cc9c33ec374db39d171a54c926
+  - path: raw/045_Sequence-to-Sequence Neural Machine Translation End-to-End Learning Revolution.commentary.ko.md
     role: commentary
-    order_prefix: "045"
+    order_prefix: '045'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/sequence-to-sequence-neural-machine-translation
+    source_url: 'https://mbrenndoerfer.com/writing/sequence-to-sequence-neural-machine-translation'
     sha256: f6e02e6c06e236617d9d2f7df60a2e644ae8a6e9da20cfdfeb971c02264f8e78
-  - path: "raw/046_Memory Networks External Memory for Neural Question Answering.ko.md"
+  - path: raw/046_Memory Networks External Memory for Neural Question Answering.ko.md
     role: translation
-    order_prefix: "046"
+    order_prefix: '046'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/memory-networks
+    source_url: 'https://mbrenndoerfer.com/writing/memory-networks'
     sha256: 98dab0a05eb8c48d6ed5f9b5118d2e0aef9830a6679a97b009ec2759a6c919b0
-  - path: "raw/046_Memory Networks External Memory for Neural Question Answering.commentary.ko.md"
+  - path: raw/046_Memory Networks External Memory for Neural Question Answering.commentary.ko.md
     role: commentary
-    order_prefix: "046"
+    order_prefix: '046'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/memory-networks
+    source_url: 'https://mbrenndoerfer.com/writing/memory-networks'
     sha256: b457361eb94b9c3f2f633b230cc5adc9262a4042d71dbd43355168ca83af6c68
-  - path: "raw/047_Attention Mechanism Editorial Reconstruction.ko.md"
+  - path: raw/047_Attention Mechanism Editorial Reconstruction.ko.md
     role: editorial-reconstruction
-    order_prefix: "047"
+    order_prefix: '047'
     language: ko
     source_type: derivative
     provenance: editorial-reconstruction-from-primary-sources
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment
+    source_url: 'https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment'
     sha256: 6ea72268b8212638f6ec7d3d0959cebe56f41473dc55c63945c73c1a5db8ce4e
-  - path: "raw/047_Attention Mechanism Editorial Reconstruction.commentary.ko.md"
+  - path: raw/047_Attention Mechanism Editorial Reconstruction.commentary.ko.md
     role: editorial-commentary
-    order_prefix: "047"
+    order_prefix: '047'
     language: ko
     source_type: derivative
     provenance: editorial-reconstruction-from-primary-sources
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment
+    source_url: 'https://mbrenndoerfer.com/writing/attention-mechanism-neural-machine-translation-dynamic-alignment'
     sha256: 7a778e87c94ff4f4e3e470bf5545ec79b463c3a65fb481042e3e8cefe53375a7
-  - path: "raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md"
+  - path: raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.ko.md
     role: translation
-    order_prefix: "048"
+    order_prefix: 048
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/residual-connections-deep-neural-networks-resnet
+    source_url: 'https://mbrenndoerfer.com/writing/residual-connections-deep-neural-networks-resnet'
     sha256: cf1997f9d3e9616eedf3b3a457b9b3ccf50b446499a8255b198d785f9fc1b0b5
-  - path: "raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.commentary.ko.md"
+  - path: raw/048_Residual Connections Enabling Training of Very Deep Neural Networks.commentary.ko.md
     role: commentary
-    order_prefix: "048"
+    order_prefix: 048
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/residual-connections-deep-neural-networks-resnet
+    source_url: 'https://mbrenndoerfer.com/writing/residual-connections-deep-neural-networks-resnet'
     sha256: 187e901b78101a4cd499a81fb750f061e0924eb572c1d42875b13b7a09f3d6d2
-  - path: "raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md"
+  - path: raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.ko.md
     role: translation
-    order_prefix: "049"
+    order_prefix: 049
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/layer-normalization-neural-network-training
+    source_url: 'https://mbrenndoerfer.com/writing/layer-normalization-neural-network-training'
     sha256: 4f29ea51ad1e117ad40e8837ef7ae1fe263f0d792ab4c2dd73dd70411a9afb4b
-  - path: "raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md"
+  - path: raw/049_Layer Normalization Feature-Wise Normalization for Sequence Models.commentary.ko.md
     role: commentary
-    order_prefix: "049"
+    order_prefix: 049
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/layer-normalization-neural-network-training
+    source_url: 'https://mbrenndoerfer.com/writing/layer-normalization-neural-network-training'
     sha256: 6b8d9cc44e786ab67288e44233d918259555cbaa6a8496f612acb25c4449c2d2
-  - path: "raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md"
+  - path: raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.ko.md
     role: translation
-    order_prefix: "050"
+    order_prefix: '050'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/subword-tokenization-fasttext-character-ngram-embeddings-robust-word-representations
+    source_url: 'https://mbrenndoerfer.com/writing/subword-tokenization-fasttext-character-ngram-embeddings-robust-word-representations'
     sha256: 064de3272f563201b7112d715f9d6ee809417b8336627f941b94e5cc554974b1
-  - path: "raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md"
+  - path: raw/050_Subword Tokenization and FastText Character N-gram Embeddings for Robust Word Representations.commentary.ko.md
     role: commentary
-    order_prefix: "050"
+    order_prefix: '050'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/subword-tokenization-fasttext-character-ngram-embeddings-robust-word-representations
+    source_url: 'https://mbrenndoerfer.com/writing/subword-tokenization-fasttext-character-ngram-embeddings-robust-word-representations'
     sha256: 4efa864145ba5cff63f928c4e34fb53b11952a986999808e5895a3fd86200399
-  - path: "raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md"
+  - path: raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.ko.md
     role: translation
-    order_prefix: "051"
+    order_prefix: '051'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/squad-stanford-question-answering-dataset-reading-comprehension-benchmark
+    source_url: 'https://mbrenndoerfer.com/writing/squad-stanford-question-answering-dataset-reading-comprehension-benchmark'
     sha256: 9025808bdfd66c425cba121f69b64b1390fb2406cb33959564940718006b8d04
-  - path: "raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.commentary.ko.md"
+  - path: raw/051_SQuAD The Stanford Question Answering Dataset and Reading Comprehension Benchmark.commentary.ko.md
     role: commentary
-    order_prefix: "051"
+    order_prefix: '051'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/squad-stanford-question-answering-dataset-reading-comprehension-benchmark
+    source_url: 'https://mbrenndoerfer.com/writing/squad-stanford-question-answering-dataset-reading-comprehension-benchmark'
     sha256: a06f4b9ee79b29f28106ff05d6351d639a99a8a433df5cbec88deb3b622c51a6
-  - path: "raw/052_Neural Information Retrieval Semantic Search with Deep Learning.ko.md"
+  - path: raw/052_Neural Information Retrieval Semantic Search with Deep Learning.ko.md
     role: translation
-    order_prefix: "052"
+    order_prefix: '052'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/neural-information-retrieval-semantic-search
+    source_url: 'https://mbrenndoerfer.com/writing/neural-information-retrieval-semantic-search'
     sha256: 1540632683efba69509e6b0990813089a475554430abdcfa0601a10de122b48d
-  - path: "raw/052_Neural Information Retrieval Semantic Search with Deep Learning.commentary.ko.md"
+  - path: raw/052_Neural Information Retrieval Semantic Search with Deep Learning.commentary.ko.md
     role: commentary
-    order_prefix: "052"
+    order_prefix: '052'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/neural-information-retrieval-semantic-search
+    source_url: 'https://mbrenndoerfer.com/writing/neural-information-retrieval-semantic-search'
     sha256: 3daf923fd286658d28d006a2d071b7fce5bac203d7f7f43404891442fe8c0f33
-  - path: "raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md"
+  - path: raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.ko.md
     role: translation
-    order_prefix: "053"
+    order_prefix: '053'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/google-neural-machine-translation-end-to-end-learning-revolutionizes-translation
+    source_url: 'https://mbrenndoerfer.com/writing/google-neural-machine-translation-end-to-end-learning-revolutionizes-translation'
     sha256: 1a995d6349627e6c1c1ec826c5845735c0de87e68ee8f664ab5cb0d83cf89b9a
-  - path: "raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.commentary.ko.md"
+  - path: raw/053_Google Neural Machine Translation End-to-End Learning Revolutionizes Translation.commentary.ko.md
     role: commentary
-    order_prefix: "053"
+    order_prefix: '053'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/google-neural-machine-translation-end-to-end-learning-revolutionizes-translation
+    source_url: 'https://mbrenndoerfer.com/writing/google-neural-machine-translation-end-to-end-learning-revolutionizes-translation'
     sha256: c5f7b10bee9c31fcc05be2fac6cd36617169ff8ed3847e2c5e7202aacc355d2c
-  - path: "raw/054_WaveNet - Neural Audio Generation Revolution.ko.md"
+  - path: raw/054_WaveNet - Neural Audio Generation Revolution.ko.md
     role: translation
-    order_prefix: "054"
+    order_prefix: '054'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/wavenet-neural-audio-generation-speech-synthesis
+    source_url: 'https://mbrenndoerfer.com/writing/wavenet-neural-audio-generation-speech-synthesis'
     sha256: 2927f811d0e6d0bd79e622847aa0cbee393b7877c201210dd0bda080d3d9a316
-  - path: "raw/054_WaveNet - Neural Audio Generation Revolution.commentary.ko.md"
+  - path: raw/054_WaveNet - Neural Audio Generation Revolution.commentary.ko.md
     role: commentary
-    order_prefix: "054"
+    order_prefix: '054'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/wavenet-neural-audio-generation-speech-synthesis
+    source_url: 'https://mbrenndoerfer.com/writing/wavenet-neural-audio-generation-speech-synthesis'
     sha256: 1967a87b08011eb8bf79fea93533c239e10d144f2a72954f4a0dbd0d7601b3bb
-  - path: "raw/055_The Transformer Attention Is All You Need.ko.md"
+  - path: raw/055_The Transformer Attention Is All You Need.ko.md
     role: translation
-    order_prefix: "055"
+    order_prefix: '055'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/transformer-attention-is-all-you-need
+    source_url: 'https://mbrenndoerfer.com/writing/transformer-attention-is-all-you-need'
     sha256: a75c2c0247b007e4899e9bab0c2e128e8aa52f6b39f5e121e044075dbd3b8389
-  - path: "raw/055_The Transformer Attention Is All You Need.commentary.ko.md"
+  - path: raw/055_The Transformer Attention Is All You Need.commentary.ko.md
     role: commentary
-    order_prefix: "055"
+    order_prefix: '055'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/transformer-attention-is-all-you-need
+    source_url: 'https://mbrenndoerfer.com/writing/transformer-attention-is-all-you-need'
     sha256: 0906b10e5cb1661d2653c0defc1be3cd2ae83acea000d849c2d1adc45c62c0b0
-  - path: "raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md"
+  - path: raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.ko.md
     role: translation
-    order_prefix: "056"
+    order_prefix: '056'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/rlhf-foundations-reinforcement-learning-human-preferences
+    source_url: 'https://mbrenndoerfer.com/writing/rlhf-foundations-reinforcement-learning-human-preferences'
     sha256: 91303910a9b5a9f1ddbbd7a4f4503c1949a0297f480e7c1db8f9d55e6a0eb4c4
-  - path: "raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.commentary.ko.md"
+  - path: raw/056_RLHF Foundations Learning from Human Preferences in Reinforcement Learning.commentary.ko.md
     role: commentary
-    order_prefix: "056"
+    order_prefix: '056'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/rlhf-foundations-reinforcement-learning-human-preferences
+    source_url: 'https://mbrenndoerfer.com/writing/rlhf-foundations-reinforcement-learning-human-preferences'
     sha256: 335ba23351b318c889f76072042059de12ff70c536a68f03b1c120f47f45ed3f
-  - path: "raw/057_ELMo and ULMFiT Transfer Learning for Natural Language Processing.ko.md"
+  - path: raw/057_ELMo and ULMFiT Transfer Learning for Natural Language Processing.ko.md
     role: translation
-    order_prefix: "057"
+    order_prefix: '057'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/elmo-ulmfit-transfer-learning-natural-language-processing
+    source_url: 'https://mbrenndoerfer.com/writing/elmo-ulmfit-transfer-learning-natural-language-processing'
     sha256: 14cb8cbc4a0072befbff1ebb9d0e95654ded7c35f69ad183aaa0eeb605d34180
-  - path: "raw/057_ELMo and ULMFiT Transfer Learning for Natural Language Processing.commentary.ko.md"
+  - path: raw/057_ELMo and ULMFiT Transfer Learning for Natural Language Processing.commentary.ko.md
     role: commentary
-    order_prefix: "057"
+    order_prefix: '057'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/elmo-ulmfit-transfer-learning-natural-language-processing
+    source_url: 'https://mbrenndoerfer.com/writing/elmo-ulmfit-transfer-learning-natural-language-processing'
     sha256: 72daac1a1fa9d5936cfcc4b4300dd50911141fef6df9b8155666cbd03c9b4bab
-  - path: "raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md"
+  - path: raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.ko.md
     role: translation
-    order_prefix: "058"
+    order_prefix: 058
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/bert-bidirectional-pretraining-revolutionizes-language-understanding
+    source_url: 'https://mbrenndoerfer.com/writing/bert-bidirectional-pretraining-revolutionizes-language-understanding'
     sha256: 232078a0408e4e1885632de7bbead83c369c66cc17fca873f106f3e036e91e67
-  - path: "raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md"
+  - path: raw/058_BERT Bidirectional Pretraining Revolutionizes Language Understanding.commentary.ko.md
     role: commentary
-    order_prefix: "058"
+    order_prefix: 058
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/bert-bidirectional-pretraining-revolutionizes-language-understanding
+    source_url: 'https://mbrenndoerfer.com/writing/bert-bidirectional-pretraining-revolutionizes-language-understanding'
     sha256: efb263603fd95f7837c43e4537372140ec9783ec94b4e6610235e725953a18a2
-  - path: "raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md"
+  - path: raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.ko.md
     role: translation
-    order_prefix: "059"
+    order_prefix: 059
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/gpt1-gpt2-autoregressive-pretraining-transfer-learning
+    source_url: 'https://mbrenndoerfer.com/writing/gpt1-gpt2-autoregressive-pretraining-transfer-learning'
     sha256: 09b78f7bc81335c273b2c3c24d01e2f440849917708b7b01edfc454089f5a353
-  - path: "raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md"
+  - path: raw/059_GPT-1 & GPT-2 Autoregressive Pretraining and Transfer Learning.commentary.ko.md
     role: commentary
-    order_prefix: "059"
+    order_prefix: 059
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/gpt1-gpt2-autoregressive-pretraining-transfer-learning
+    source_url: 'https://mbrenndoerfer.com/writing/gpt1-gpt2-autoregressive-pretraining-transfer-learning'
     sha256: 04dead39f09202573d53a2701d6425a55e34ce0b96a5796f8f114b13efc1b65c
-  - path: "raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md"
+  - path: raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.ko.md
     role: translation
-    order_prefix: "060"
+    order_prefix: '060'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/glue-superglue-standardized-evaluation-language-understanding
+    source_url: 'https://mbrenndoerfer.com/writing/glue-superglue-standardized-evaluation-language-understanding'
     sha256: 37dbf038f24c45a13b27ee41807fcddb098b5e393e42180c727623f03c3d8a75
-  - path: "raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md"
+  - path: raw/060_GLUE and SuperGLUE Standardized Evaluation for Language Understanding.commentary.ko.md
     role: commentary
-    order_prefix: "060"
+    order_prefix: '060'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/glue-superglue-standardized-evaluation-language-understanding
+    source_url: 'https://mbrenndoerfer.com/writing/glue-superglue-standardized-evaluation-language-understanding'
     sha256: 03baeb442bce5d810d2781402676c3a4d6111df036ab1258dbda3d21b622a9f4
-  - path: "raw/061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.ko.md"
+  - path: 'raw/061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.ko.md'
     role: translation
-    order_prefix: "061"
+    order_prefix: '061'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/xlnet-roberta-albert-bert-refinements
+    source_url: 'https://mbrenndoerfer.com/writing/xlnet-roberta-albert-bert-refinements'
     sha256: 44bf9edaa446bfe93a791b3e5d3a17d01111d027087195705e94eada9433db99
-  - path: "raw/061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.commentary.ko.md"
+  - path: 'raw/061_XLNet, RoBERTa, ALBERT Refining BERT with Permutation Modeling, Training Optimization, and Parameter Efficiency.commentary.ko.md'
     role: commentary
-    order_prefix: "061"
+    order_prefix: '061'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/xlnet-roberta-albert-bert-refinements
+    source_url: 'https://mbrenndoerfer.com/writing/xlnet-roberta-albert-bert-refinements'
     sha256: d1d199a565902634b705dfe985b7143e44428f31c066e341fe92b8d2f5d26982
-  - path: "raw/062_XLM Cross-lingual Language Model for Multilingual NLP.ko.md"
+  - path: raw/062_XLM Cross-lingual Language Model for Multilingual NLP.ko.md
     role: translation
-    order_prefix: "062"
+    order_prefix: '062'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/xlm-cross-lingual-language-model-multilingual-nlp
+    source_url: 'https://mbrenndoerfer.com/writing/xlm-cross-lingual-language-model-multilingual-nlp'
     sha256: 7b2214bd0c0d773761a7cd30987d4a0eacedbee6f2721dc8dbe9d13dec380fcb
-  - path: "raw/062_XLM Cross-lingual Language Model for Multilingual NLP.commentary.ko.md"
+  - path: raw/062_XLM Cross-lingual Language Model for Multilingual NLP.commentary.ko.md
     role: commentary
-    order_prefix: "062"
+    order_prefix: '062'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/xlm-cross-lingual-language-model-multilingual-nlp
+    source_url: 'https://mbrenndoerfer.com/writing/xlm-cross-lingual-language-model-multilingual-nlp'
     sha256: 99e859a36c969bcf6ed8d7c1aa436af0c2490510bddb200fceeda9e9dfe54817
-  - path: "raw/063_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.ko.md"
+  - path: raw/063_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.ko.md
     role: translation
-    order_prefix: "063"
+    order_prefix: '063'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/t5-text-to-text-framework-unified-nlp-through-text-transformations
+    source_url: 'https://mbrenndoerfer.com/writing/t5-text-to-text-framework-unified-nlp-through-text-transformations'
     sha256: 66deb590ec251cb73b75aaef91ceaad9b317dce470cf9a0e352923eb128ff463
-  - path: "raw/063_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.commentary.ko.md"
+  - path: raw/063_T5 and Text-to-Text Framework Unified NLP Through Text Transformations.commentary.ko.md
     role: commentary
-    order_prefix: "063"
+    order_prefix: '063'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/t5-text-to-text-framework-unified-nlp-through-text-transformations
+    source_url: 'https://mbrenndoerfer.com/writing/t5-text-to-text-framework-unified-nlp-through-text-transformations'
     sha256: d2db6cf2e0a3e26a30faed1e21295af8153a3f6cb6975fb05472d7cdd15e1095
-  - path: "raw/064_Transformer-XL Extending Transformers to Long Sequences.ko.md"
+  - path: raw/064_Transformer-XL Extending Transformers to Long Sequences.ko.md
     role: translation
-    order_prefix: "064"
+    order_prefix: '064'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/transformer-xl-long-sequences-segment-recurrence
+    source_url: 'https://mbrenndoerfer.com/writing/transformer-xl-long-sequences-segment-recurrence'
     sha256: 0f0c7e645c8c6f64843a0aa1f38e61e96f312ab474ae66bdf2cd0902200ba738
-  - path: "raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md"
+  - path: raw/064_Transformer-XL Extending Transformers to Long Sequences.commentary.ko.md
     role: commentary
-    order_prefix: "064"
+    order_prefix: '064'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/transformer-xl-long-sequences-segment-recurrence
+    source_url: 'https://mbrenndoerfer.com/writing/transformer-xl-long-sequences-segment-recurrence'
     sha256: 1dea733d6e063bf5059eabac2d7edd27d4272b306da4163ac181be3df28b1a5a
-  - path: "raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.ko.md"
+  - path: raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.ko.md
     role: translation
-    order_prefix: "065"
+    order_prefix: '065'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/bert-information-retrieval-transformer-ranking-semantic-search
+    source_url: 'https://mbrenndoerfer.com/writing/bert-information-retrieval-transformer-ranking-semantic-search'
     sha256: 9655d8366a91a946bbca91f626eabf75a2d02b0cc98006f2d243fbfc18baf8e1
-  - path: "raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.commentary.ko.md"
+  - path: raw/065_BERT for Information Retrieval Transformer-Based Ranking and Semantic Search.commentary.ko.md
     role: commentary
-    order_prefix: "065"
+    order_prefix: '065'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/bert-information-retrieval-transformer-ranking-semantic-search
+    source_url: 'https://mbrenndoerfer.com/writing/bert-information-retrieval-transformer-ranking-semantic-search'
     sha256: c61274340eec160a7f66926453f1188e073cc037bf98ff66bdccb7da04e41f69
-  - path: "raw/066_Scaling Laws for Neural Language Models Predicting Performance from Scale.ko.md"
+  - path: raw/066_Scaling Laws for Neural Language Models Predicting Performance from Scale.ko.md
     role: translation
-    order_prefix: "066"
+    order_prefix: '066'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/scaling-laws-neural-language-models-power-law-predictions
+    source_url: 'https://mbrenndoerfer.com/writing/scaling-laws-neural-language-models-power-law-predictions'
     sha256: cf6bf93b5c31f04454ceacd4f0bbfd379b6ae41830a5680ca0c25085d777b2d0
-  - path: "raw/066_Scaling Laws for Neural Language Models Predicting Performance from Scale.commentary.ko.md"
+  - path: raw/066_Scaling Laws for Neural Language Models Predicting Performance from Scale.commentary.ko.md
     role: commentary
-    order_prefix: "066"
+    order_prefix: '066'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/scaling-laws-neural-language-models-power-law-predictions
+    source_url: 'https://mbrenndoerfer.com/writing/scaling-laws-neural-language-models-power-law-predictions'
     sha256: 759ce51fb834786c629774b76e7ba60bc331404c5d8b56012b9d9c0d87c62117
-  - path: "raw/067_GPT-3 and In-Context Learning Emergent Capabilities from Scale.ko.md"
+  - path: raw/067_GPT-3 and In-Context Learning Emergent Capabilities from Scale.ko.md
     role: translation
-    order_prefix: "067"
+    order_prefix: '067'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/gpt3-in-context-learning-emergent-capabilities-from-scale
+    source_url: 'https://mbrenndoerfer.com/writing/gpt3-in-context-learning-emergent-capabilities-from-scale'
     sha256: 536d73a2b669772fffd84d6447ce6e6cc6aeb47749e8da84f2c8ca9bdbb59b1c
-  - path: "raw/067_GPT-3 and In-Context Learning Emergent Capabilities from Scale.commentary.ko.md"
+  - path: raw/067_GPT-3 and In-Context Learning Emergent Capabilities from Scale.commentary.ko.md
     role: commentary
-    order_prefix: "067"
+    order_prefix: '067'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/gpt3-in-context-learning-emergent-capabilities-from-scale
+    source_url: 'https://mbrenndoerfer.com/writing/gpt3-in-context-learning-emergent-capabilities-from-scale'
     sha256: 1d4b08f6d329a93bb18361108b91e2ad3b754acb7017373a95d18da262d234ae
-  - path: "raw/068_Dense Passage Retrieval and Retrieval-Augmented Generation Integrating Knowledge with Language Models.ko.md"
+  - path: raw/068_Dense Passage Retrieval and Retrieval-Augmented Generation Integrating Knowledge with Language Models.ko.md
     role: translation
-    order_prefix: "068"
+    order_prefix: 068
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/dense-passage-retrieval-retrieval-augmented-generation-rag
+    source_url: 'https://mbrenndoerfer.com/writing/dense-passage-retrieval-retrieval-augmented-generation-rag'
     sha256: 2dd5c6fab19b689b0ed2283a74704c22925f3b950e119aef0a81f17f705cc2d9
-  - path: "raw/068_Dense Passage Retrieval and Retrieval-Augmented Generation Integrating Knowledge with Language Models.commentary.ko.md"
+  - path: raw/068_Dense Passage Retrieval and Retrieval-Augmented Generation Integrating Knowledge with Language Models.commentary.ko.md
     role: commentary
-    order_prefix: "068"
+    order_prefix: 068
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/dense-passage-retrieval-retrieval-augmented-generation-rag
+    source_url: 'https://mbrenndoerfer.com/writing/dense-passage-retrieval-retrieval-augmented-generation-rag'
     sha256: 4548ac4d3c14fe06c8e4bf3e7eae76d381965e3f24100b993869e433d9a97215
-  - path: "raw/069_Mixture of Experts Sparse Activation for Scaling Language Models.ko.md"
+  - path: raw/069_Mixture of Experts Sparse Activation for Scaling Language Models.ko.md
     role: translation
-    order_prefix: "069"
+    order_prefix: 069
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/mixture-of-experts-sparse-activation
+    source_url: 'https://mbrenndoerfer.com/writing/mixture-of-experts-sparse-activation'
     sha256: f2c296224b08b3bb5fdbfa67224a8f5b49eaa5cf3333f40254cb1eec95576609
-  - path: "raw/069_Mixture of Experts Sparse Activation for Scaling Language Models.commentary.ko.md"
+  - path: raw/069_Mixture of Experts Sparse Activation for Scaling Language Models.commentary.ko.md
     role: commentary
-    order_prefix: "069"
+    order_prefix: 069
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/mixture-of-experts-sparse-activation
-    sha256: ef9ba2e6924d192fe1dd75eeaf32f435cce7e712eda4764fa83bcf59c74c6e79
-  - path: "raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md"
+    source_url: 'https://mbrenndoerfer.com/writing/mixture-of-experts-sparse-activation'
+    sha256: 0608a0e6a01441459e585d60d170c84a5153243d5016f0047f239fc0465cd84c
+  - path: raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.ko.md
     role: translation
-    order_prefix: "070"
+    order_prefix: '070'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/clip-contrastive-language-image-pretraining-multimodal
+    source_url: 'https://mbrenndoerfer.com/writing/clip-contrastive-language-image-pretraining-multimodal'
     sha256: 7fedcede1f0c95cdc6663ca558b1561bdea2c46d4bd37f77c4bf12649b1287b7
-  - path: "raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md"
+  - path: raw/070_CLIP Contrastive Language-Image Pre-training for Multimodal Understanding.commentary.ko.md
     role: commentary
-    order_prefix: "070"
+    order_prefix: '070'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/clip-contrastive-language-image-pretraining-multimodal
+    source_url: 'https://mbrenndoerfer.com/writing/clip-contrastive-language-image-pretraining-multimodal'
     sha256: 65a380843dd36736dd61cc8adaf5b22f83ac1c1ae4a24980b7c9d4bffa14f35c
-  - path: "raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.ko.md"
+  - path: raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.ko.md
     role: translation
-    order_prefix: "071"
+    order_prefix: '071'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/codex-ai-assisted-code-generation-transformation-software-development
+    source_url: 'https://mbrenndoerfer.com/writing/codex-ai-assisted-code-generation-transformation-software-development'
     sha256: bf76bf4bc2a529d28809a852944248c23e8d7dc6ecbdad88c7e64416397a201c
-  - path: "raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.commentary.ko.md"
+  - path: raw/071_Codex AI-Assisted Code Generation and the Transformation of Software Development.commentary.ko.md
     role: commentary
-    order_prefix: "071"
+    order_prefix: '071'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/codex-ai-assisted-code-generation-transformation-software-development
+    source_url: 'https://mbrenndoerfer.com/writing/codex-ai-assisted-code-generation-transformation-software-development'
     sha256: 7687c9cebeb41089b0012a8f222f764dfe6f5f7b02297cfc059a816dee0933d5
-  - path: "raw/072_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.ko.md"
+  - path: raw/072_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.ko.md
     role: translation
-    order_prefix: "072"
+    order_prefix: '072'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/instruction-tuning-adapting-language-models-to-follow-explicit-instructions
+    source_url: 'https://mbrenndoerfer.com/writing/instruction-tuning-adapting-language-models-to-follow-explicit-instructions'
     sha256: 7d509726db6f5716e9ec91c580b62d93bcabfb870c99e4994ab29fc3a310c17b
-  - path: "raw/072_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.commentary.ko.md"
+  - path: raw/072_Instruction Tuning Adapting Language Models to Follow Explicit Instructions.commentary.ko.md
     role: commentary
-    order_prefix: "072"
+    order_prefix: '072'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/instruction-tuning-adapting-language-models-to-follow-explicit-instructions
+    source_url: 'https://mbrenndoerfer.com/writing/instruction-tuning-adapting-language-models-to-follow-explicit-instructions'
     sha256: 3e9235956e5eef513607b71a8ce68f30d184655b8e3e88aaa719d4f6326713da
-  - path: "raw/074_The Pile Open-Source Training Dataset for Large Language Models.ko.md"
+  - path: raw/074_The Pile Open-Source Training Dataset for Large Language Models.ko.md
     role: translation
-    order_prefix: "074"
+    order_prefix: '074'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/the-pile-open-source-training-dataset-large-language-models
+    source_url: 'https://mbrenndoerfer.com/writing/the-pile-open-source-training-dataset-large-language-models'
     sha256: 8785ffc1a4c21e33cb5487a33b00b9aeb7a2abfe6f7017a6b7e31382a143fcc4
-  - path: "raw/074_The Pile Open-Source Training Dataset for Large Language Models.commentary.ko.md"
+  - path: raw/074_The Pile Open-Source Training Dataset for Large Language Models.commentary.ko.md
     role: commentary
-    order_prefix: "074"
+    order_prefix: '074'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/the-pile-open-source-training-dataset-large-language-models
+    source_url: 'https://mbrenndoerfer.com/writing/the-pile-open-source-training-dataset-large-language-models'
     sha256: 2833650f8cfb9ae7436b776abcca38087d006f92b97a189ac0390022b7a33559
-  - path: "raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md"
+  - path: raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.ko.md
     role: translation
-    order_prefix: "075"
+    order_prefix: '075'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/dalle-text-to-image-generation-transformer
+    source_url: 'https://mbrenndoerfer.com/writing/dalle-text-to-image-generation-transformer'
     sha256: 6cf3d59e4eee293aa81327d45ed967b8481564ba2d55546d5a8e4b3c662dfae9
-  - path: "raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md"
+  - path: raw/075_DALL·E Text-to-Image Generation with Transformer Architectures.commentary.ko.md
     role: commentary
-    order_prefix: "075"
+    order_prefix: '075'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/dalle-text-to-image-generation-transformer
+    source_url: 'https://mbrenndoerfer.com/writing/dalle-text-to-image-generation-transformer'
     sha256: 2a439e911bbc6750ab9527e9bbde87c717a41f056023b86c4ec13313d01dd21c
-  - path: "raw/076_Foundation Models Report Defining a New Paradigm in AI.ko.md"
+  - path: raw/076_Foundation Models Report Defining a New Paradigm in AI.ko.md
     role: translation
-    order_prefix: "076"
+    order_prefix: '076'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/foundation-models-report-defining-new-paradigm-ai
+    source_url: 'https://mbrenndoerfer.com/writing/foundation-models-report-defining-new-paradigm-ai'
     sha256: 01cc9eb88c6db5e43b92f8e8bc08ab82e9cde3a39dd8ebce9c32e3ef75075f92
-  - path: "raw/076_Foundation Models Report Defining a New Paradigm in AI.commentary.ko.md"
+  - path: raw/076_Foundation Models Report Defining a New Paradigm in AI.commentary.ko.md
     role: commentary
-    order_prefix: "076"
+    order_prefix: '076'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/foundation-models-report-defining-new-paradigm-ai
-    sha256: c3054ad9e34b79830dde3574d636efa929b28e7324e9fdac544dd895a4558169
-  - path: "raw/077_InstructGPT and RLHF Aligning Language Models with Human Preferences.ko.md"
+    source_url: 'https://mbrenndoerfer.com/writing/foundation-models-report-defining-new-paradigm-ai'
+    sha256: 7db850180f82178a478657016eb5efd5269784b9e32b629125a71a608b2ddbc7
+  - path: raw/077_InstructGPT and RLHF Aligning Language Models with Human Preferences.ko.md
     role: translation
-    order_prefix: "077"
+    order_prefix: '077'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/instructgpt-rlhf-aligning-language-models-human-preferences
+    source_url: 'https://mbrenndoerfer.com/writing/instructgpt-rlhf-aligning-language-models-human-preferences'
     sha256: b7d33b09b36ff750a2e1d5e179b80ab384f9eb6eefd153eff3d7121ad3d130cd
-  - path: "raw/077_InstructGPT and RLHF Aligning Language Models with Human Preferences.commentary.ko.md"
+  - path: raw/077_InstructGPT and RLHF Aligning Language Models with Human Preferences.commentary.ko.md
     role: commentary
-    order_prefix: "077"
+    order_prefix: '077'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/instructgpt-rlhf-aligning-language-models-human-preferences
+    source_url: 'https://mbrenndoerfer.com/writing/instructgpt-rlhf-aligning-language-models-human-preferences'
     sha256: 923274478068d0319d65fd33908f0a039f3460c46eb43dbaf29a9a5a30f0bf8f
-  - path: "raw/073_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval.ko.md"
+  - path: raw/073_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval.ko.md
     role: translation
-    order_prefix: "073"
+    order_prefix: '073'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/multi-vector-retrievers-fine-grained-token-level-matching-for-neural-information-retrieval
+    source_url: 'https://mbrenndoerfer.com/writing/multi-vector-retrievers-fine-grained-token-level-matching-for-neural-information-retrieval'
     sha256: 320fc9214b8e65e5b9253e82c96eb8ada788413b2c4b933138613801476b0ef1
-  - path: "raw/073_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval.commentary.ko.md"
+  - path: raw/073_Multi-Vector Retrievers Fine-Grained Token-Level Matching for Neural Information Retrieval.commentary.ko.md
     role: commentary
-    order_prefix: "073"
+    order_prefix: '073'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/multi-vector-retrievers-fine-grained-token-level-matching-for-neural-information-retrieval
+    source_url: 'https://mbrenndoerfer.com/writing/multi-vector-retrievers-fine-grained-token-level-matching-for-neural-information-retrieval'
     sha256: f37908699134df9bcd21aad4234e727946f02bf55c154086a26128966b15c376
-  - path: "raw/078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.ko.md"
+  - path: raw/078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.ko.md
     role: translation
-    order_prefix: "078"
+    order_prefix: 078
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/chinchilla-scaling-laws-compute-optimal-training-resource-allocation
+    source_url: 'https://mbrenndoerfer.com/writing/chinchilla-scaling-laws-compute-optimal-training-resource-allocation'
     sha256: 0779668d2ed0bc8f915f355ab2a7b1546c5e20557a524e42f0a504c100d1cfb0
-  - path: "raw/078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.commentary.ko.md"
+  - path: raw/078_Chinchilla Scaling Laws Compute-Optimal Training and Resource Allocation for Large Language Models.commentary.ko.md
     role: commentary
-    order_prefix: "078"
+    order_prefix: 078
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/chinchilla-scaling-laws-compute-optimal-training-resource-allocation
+    source_url: 'https://mbrenndoerfer.com/writing/chinchilla-scaling-laws-compute-optimal-training-resource-allocation'
     sha256: d4a6c11ac7964371918e30296175a4e0810b2ad9ab7dc1af04c68c8c4e0d2722
-  - path: "raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md"
+  - path: raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.ko.md
     role: translation
-    order_prefix: "103"
+    order_prefix: '103'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/mixture-of-experts-at-scale-sparse-activation-dynamic-routing-efficient-scaling
+    source_url: 'https://mbrenndoerfer.com/writing/mixture-of-experts-at-scale-sparse-activation-dynamic-routing-efficient-scaling'
     sha256: 907ff5cd39441e504b9a41ccb025db417a4dcfddca72e1fb60a0643bcb8aeadf
-  - path: "raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md"
+  - path: raw/103_Mixture of Experts at Scale Efficient Scaling Through Sparse Activation and Dynamic Routing.commentary.ko.md
     role: commentary
-    order_prefix: "103"
+    order_prefix: '103'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/mixture-of-experts-at-scale-sparse-activation-dynamic-routing-efficient-scaling
+    source_url: 'https://mbrenndoerfer.com/writing/mixture-of-experts-at-scale-sparse-activation-dynamic-routing-efficient-scaling'
     sha256: 19fadc80b858feeb86be5daff9aff613facf210af4e0529410e93fb80fc2447f
-  - path: "raw/079_HELM Holistic Evaluation of Language Models Framework.ko.md"
+  - path: raw/079_HELM Holistic Evaluation of Language Models Framework.ko.md
     role: translation
-    order_prefix: "079"
+    order_prefix: 079
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/helm-holistic-evaluation-language-models-framework
+    source_url: 'https://mbrenndoerfer.com/writing/helm-holistic-evaluation-language-models-framework'
     sha256: 3db5975d91976e3e5d3f9fc9f99d9e24b55d57044f8d89c249969be314b23dea
-  - path: "raw/079_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md"
+  - path: raw/079_HELM Holistic Evaluation of Language Models Framework.commentary.ko.md
     role: commentary
-    order_prefix: "079"
+    order_prefix: 079
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/helm-holistic-evaluation-language-models-framework
-    sha256: 5dc84f0962cc0562208b1060626d17428c986edc9e0bea4746ba35f237bf61fb
-  - path: "raw/080_Chain-of-Thought Prompting Unlocking Latent Reasoning in Language Models.ko.md"
+    source_url: 'https://mbrenndoerfer.com/writing/helm-holistic-evaluation-language-models-framework'
+    sha256: 6667b895a7e831b2fc49e9430ef46817854c34d6a76d56a678f954d0a0e2c947
+  - path: raw/080_Chain-of-Thought Prompting Unlocking Latent Reasoning in Language Models.ko.md
     role: translation
-    order_prefix: "080"
+    order_prefix: 080
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/chain-of-thought-prompting-unlocking-latent-reasoning-language-models
+    source_url: 'https://mbrenndoerfer.com/writing/chain-of-thought-prompting-unlocking-latent-reasoning-language-models'
     sha256: 96b84293836c65cfe0a9f90870a770b60e0cd699e0f23cf4e2bbe6228d75ac8d
-  - path: "raw/080_Chain-of-Thought Prompting Unlocking Latent Reasoning in Language Models.commentary.ko.md"
+  - path: raw/080_Chain-of-Thought Prompting Unlocking Latent Reasoning in Language Models.commentary.ko.md
     role: commentary
-    order_prefix: "080"
+    order_prefix: 080
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/chain-of-thought-prompting-unlocking-latent-reasoning-language-models
+    source_url: 'https://mbrenndoerfer.com/writing/chain-of-thought-prompting-unlocking-latent-reasoning-language-models'
     sha256: eaa041cd036a921a445e4e48bd3532abbccf67cbb6d045e52e658f7889a89396
-  - path: "raw/081_ChatGPT Conversational AI Becomes Mainstream.ko.md"
+  - path: raw/081_ChatGPT Conversational AI Becomes Mainstream.ko.md
     role: translation
-    order_prefix: "081"
+    order_prefix: 081
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/chatgpt-conversational-ai-becomes-mainstream
+    source_url: 'https://mbrenndoerfer.com/writing/chatgpt-conversational-ai-becomes-mainstream'
     sha256: 8d77cefacc26c8f62735e5e4e775ccce66255ce2f9721946dd30621140e50aa1
-  - path: "raw/081_ChatGPT Conversational AI Becomes Mainstream.commentary.ko.md"
+  - path: raw/081_ChatGPT Conversational AI Becomes Mainstream.commentary.ko.md
     role: commentary
-    order_prefix: "081"
+    order_prefix: 081
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/chatgpt-conversational-ai-becomes-mainstream
+    source_url: 'https://mbrenndoerfer.com/writing/chatgpt-conversational-ai-becomes-mainstream'
     sha256: 9b570a6b74b8d2a8f0c57e2f78f2ada80ffa6fb247a64e7bd8eb51de94df11a3
-  - path: "raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.ko.md"
+  - path: raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.ko.md
     role: translation
-    order_prefix: "082"
+    order_prefix: 082
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/bloom-open-access-multilingual-language-model-democratization-ai-research
+    source_url: 'https://mbrenndoerfer.com/writing/bloom-open-access-multilingual-language-model-democratization-ai-research'
     sha256: d9c9610ff23ce65d58e635c000a73828acb836399ee66de516ba3e8b654da14b
-  - path: "raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.commentary.ko.md"
+  - path: raw/082_BLOOM Open-Access Multilingual Language Model and the Democratization of AI Research.commentary.ko.md
     role: commentary
-    order_prefix: "082"
+    order_prefix: 082
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/bloom-open-access-multilingual-language-model-democratization-ai-research
+    source_url: 'https://mbrenndoerfer.com/writing/bloom-open-access-multilingual-language-model-democratization-ai-research'
     sha256: 4748c4bb50c45aef5739b28cc8e848d2c1feeba9a754375f9171064521e0c0cf
-  - path: "raw/083_PaLM Pathways Language Model - Large-Scale Training, Reasoning, and Multilingual Capabilities.ko.md"
+  - path: 'raw/083_PaLM Pathways Language Model - Large-Scale Training, Reasoning, and Multilingual Capabilities.ko.md'
     role: translation
-    order_prefix: "083"
+    order_prefix: 083
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/palm-pathways-language-model-large-scale-training-reasoning
+    source_url: 'https://mbrenndoerfer.com/writing/palm-pathways-language-model-large-scale-training-reasoning'
     sha256: 153fca53ac5daa76574330fafc0c982fbcc6abcd08488812be4a4c2fc13de5c1
-  - path: "raw/083_PaLM Pathways Language Model - Large-Scale Training, Reasoning, and Multilingual Capabilities.commentary.ko.md"
+  - path: 'raw/083_PaLM Pathways Language Model - Large-Scale Training, Reasoning, and Multilingual Capabilities.commentary.ko.md'
     role: commentary
-    order_prefix: "083"
+    order_prefix: 083
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/palm-pathways-language-model-large-scale-training-reasoning
+    source_url: 'https://mbrenndoerfer.com/writing/palm-pathways-language-model-large-scale-training-reasoning'
     sha256: 156d5355d2e2f6883db3fe12b275019a3cc3eb250ae4d6eb5147b216f545a75e
-  - path: "raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.ko.md"
+  - path: raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.ko.md
     role: translation
-    order_prefix: "084"
+    order_prefix: 084
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/flamingo-few-shot-vision-language-learning-gated-cross-attention
+    source_url: 'https://mbrenndoerfer.com/writing/flamingo-few-shot-vision-language-learning-gated-cross-attention'
     sha256: ff36a5d2a7a6f065ee4df84d73c7b7da02143bb65fc7d7af9cbb0b330f504e5f
-  - path: "raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.commentary.ko.md"
+  - path: raw/084_Flamingo Few-Shot Vision-Language Learning with Gated Cross-Attention.commentary.ko.md
     role: commentary
-    order_prefix: "084"
+    order_prefix: 084
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/flamingo-few-shot-vision-language-learning-gated-cross-attention
+    source_url: 'https://mbrenndoerfer.com/writing/flamingo-few-shot-vision-language-learning-gated-cross-attention'
     sha256: 0d823245efa401aa6e9533f9fb85b059a6e1c43145a47e203f338ab349acd5e2
-  - path: "raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.ko.md"
+  - path: raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.ko.md
     role: translation
-    order_prefix: "085"
+    order_prefix: 085
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/dalle2-diffusion-text-to-image-generation-clip-guidance
+    source_url: 'https://mbrenndoerfer.com/writing/dalle2-diffusion-text-to-image-generation-clip-guidance'
     sha256: 0cd72f560a6390365593e69af558f50652527b397cd7258d5d3ec73c400815df
-  - path: "raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.commentary.ko.md"
+  - path: raw/085_DALL·E 2 Diffusion-Based Text-to-Image Generation with CLIP Guidance.commentary.ko.md
     role: commentary
-    order_prefix: "085"
+    order_prefix: 085
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/dalle2-diffusion-text-to-image-generation-clip-guidance
-    sha256: d05c3b28a4fd589b3cee2834b32a93d9825a6d80863c6913ac06139f41c0772c
-  - path: "raw/086_Stable Diffusion Latent Diffusion Models for Accessible Text-to-Image Generation.ko.md"
+    source_url: 'https://mbrenndoerfer.com/writing/dalle2-diffusion-text-to-image-generation-clip-guidance'
+    sha256: d851bae56d02b130a0c57113d3de8a6ce05f23e6f2d619c3bc1d3c08c8ac6041
+  - path: raw/086_Stable Diffusion Latent Diffusion Models for Accessible Text-to-Image Generation.ko.md
     role: translation
-    order_prefix: "086"
+    order_prefix: 086
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/stable-diffusion-latent-diffusion-text-to-image-generation
+    source_url: 'https://mbrenndoerfer.com/writing/stable-diffusion-latent-diffusion-text-to-image-generation'
     sha256: 824f2bed00920e3a891414610e553314a3d1682547aa5868bb971bb7b227ee5c
-  - path: "raw/086_Stable Diffusion Latent Diffusion Models for Accessible Text-to-Image Generation.commentary.ko.md"
+  - path: raw/086_Stable Diffusion Latent Diffusion Models for Accessible Text-to-Image Generation.commentary.ko.md
     role: commentary
-    order_prefix: "086"
+    order_prefix: 086
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/stable-diffusion-latent-diffusion-text-to-image-generation
+    source_url: 'https://mbrenndoerfer.com/writing/stable-diffusion-latent-diffusion-text-to-image-generation'
     sha256: 513fa4b0a5a0694bc2d8eb78832372ceeda09ee1119834b3c25ea618b8046496
-  - path: "raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.ko.md"
+  - path: raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.ko.md
     role: translation
-    order_prefix: "087"
+    order_prefix: 087
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/whisper-large-scale-multilingual-speech-recognition-with-transformer-architecture
+    source_url: 'https://mbrenndoerfer.com/writing/whisper-large-scale-multilingual-speech-recognition-with-transformer-architecture'
     sha256: 2be239530d0c7c2b9ea5f96bffa256b342dc7a16d3df8c8f158be174dbb18c6a
-  - path: "raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.commentary.ko.md"
+  - path: raw/087_Whisper Large-Scale Multilingual Speech Recognition with Transformer Architecture.commentary.ko.md
     role: commentary
-    order_prefix: "087"
+    order_prefix: 087
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/whisper-large-scale-multilingual-speech-recognition-with-transformer-architecture
-    sha256: 33c0d53dcbe95ccbf65a3063b35c57c240e60ab580e80cc62386194ffa68f9c3
-  - path: "raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md"
+    source_url: 'https://mbrenndoerfer.com/writing/whisper-large-scale-multilingual-speech-recognition-with-transformer-architecture'
+    sha256: 72a1a3588d301423223cbbb0ac2cdc5b0b0853eec67b46f9ee6519ae5bd5cb28
+  - path: raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.ko.md
     role: translation
-    order_prefix: "088"
+    order_prefix: 088
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/flashattention-io-aware-exact-attention-long-context-language-models
+    source_url: 'https://mbrenndoerfer.com/writing/flashattention-io-aware-exact-attention-long-context-language-models'
     sha256: 4b8c489bb32b228af4acbdd7f1954863f32aa8955d9f7e7eb4051e7a0023b26c
-  - path: "raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md"
+  - path: raw/088_FlashAttention IO-Aware Exact Attention for Long-Context Language Models.commentary.ko.md
     role: commentary
-    order_prefix: "088"
+    order_prefix: 088
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/flashattention-io-aware-exact-attention-long-context-language-models
+    source_url: 'https://mbrenndoerfer.com/writing/flashattention-io-aware-exact-attention-long-context-language-models'
     sha256: 57e21e5977c488e26bc14dc238816c6d4857278eea0c6ff525fe34eb6acfee01
-  - path: "raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.ko.md"
+  - path: raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.ko.md
     role: translation
-    order_prefix: "089"
+    order_prefix: 089
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/llama-meta-open-foundation-models-democratized-language-ai-research
+    source_url: 'https://mbrenndoerfer.com/writing/llama-meta-open-foundation-models-democratized-language-ai-research'
     sha256: 808522470bbdbbeb20e5ab20a4aea390939637ef272dda557e5b2f53922b3823
-  - path: "raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.commentary.ko.md"
+  - path: raw/089_LLaMA Meta's Open Foundation Models That Democratized Language AI Research.commentary.ko.md
     role: commentary
-    order_prefix: "089"
+    order_prefix: 089
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/llama-meta-open-foundation-models-democratized-language-ai-research
+    source_url: 'https://mbrenndoerfer.com/writing/llama-meta-open-foundation-models-democratized-language-ai-research'
     sha256: c7b5f8896fee8c82db023d8bea57bc071e3cc8483d1edb2f4aa8945dd483ba8d
-  - path: "raw/090_Open LLM Wave The Proliferation of High-Quality Open-Source Language Models.ko.md"
+  - path: raw/090_Open LLM Wave The Proliferation of High-Quality Open-Source Language Models.ko.md
     role: translation
-    order_prefix: "090"
+    order_prefix: 090
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/open-llm-wave-proliferation-high-quality-open-source-language-models
+    source_url: 'https://mbrenndoerfer.com/writing/open-llm-wave-proliferation-high-quality-open-source-language-models'
     sha256: 86c4a496926279d69513bb7bce5c51635f63101ad6c32f291d967f53c7e21994
-  - path: "raw/090_Open LLM Wave The Proliferation of High-Quality Open-Source Language Models.commentary.ko.md"
+  - path: raw/090_Open LLM Wave The Proliferation of High-Quality Open-Source Language Models.commentary.ko.md
     role: commentary
-    order_prefix: "090"
+    order_prefix: 090
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/open-llm-wave-proliferation-high-quality-open-source-language-models
-    sha256: fc4efc045e91cfa51a8366d3f49e67e5aa84cac5988848dce06b3054dfd49fe2
-  - path: "raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.ko.md"
+    source_url: 'https://mbrenndoerfer.com/writing/open-llm-wave-proliferation-high-quality-open-source-language-models'
+    sha256: d7185c48e46b20b3f1eb82d6c1dc1e2e5dc7dfb02dda2e3690613b1be4d26d43
+  - path: raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.ko.md
     role: translation
-    order_prefix: "091"
+    order_prefix: 091
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/qlora-efficient-finetuning-quantized-language-models
+    source_url: 'https://mbrenndoerfer.com/writing/qlora-efficient-finetuning-quantized-language-models'
     sha256: 50daec8bce7703536d8d0203751ed01dc876e36982884015ace3f5454838cd82
-  - path: "raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.commentary.ko.md"
+  - path: raw/091_QLoRA Efficient Fine-Tuning of Quantized Language Models.commentary.ko.md
     role: commentary
-    order_prefix: "091"
+    order_prefix: 091
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/qlora-efficient-finetuning-quantized-language-models
-    sha256: 22d554cac4b541d0fde3bdebf35d704a3ef9eb614a6694984ec740067ad45e90
-  - path: "raw/092_Function Calling and Tool Use Enabling Practical AI Agent Systems.ko.md"
+    source_url: 'https://mbrenndoerfer.com/writing/qlora-efficient-finetuning-quantized-language-models'
+    sha256: 1f7fa31391d2a9f826f3412904db6bda8c681f425ee9e996f28f70e28be0b678
+  - path: raw/092_Function Calling and Tool Use Enabling Practical AI Agent Systems.ko.md
     role: translation
-    order_prefix: "092"
+    order_prefix: 092
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/function-calling-tool-use-practical-ai-agents
+    source_url: 'https://mbrenndoerfer.com/writing/function-calling-tool-use-practical-ai-agents'
     sha256: ee0455ee9aa822b87b92d51eaa6666d8d6660c7f89a5b658a451efc4b0cda521
-  - path: "raw/092_Function Calling and Tool Use Enabling Practical AI Agent Systems.commentary.ko.md"
+  - path: raw/092_Function Calling and Tool Use Enabling Practical AI Agent Systems.commentary.ko.md
     role: commentary
-    order_prefix: "092"
+    order_prefix: 092
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/function-calling-tool-use-practical-ai-agents
+    source_url: 'https://mbrenndoerfer.com/writing/function-calling-tool-use-practical-ai-agents'
     sha256: 10e5a846450077b8749933c3ff315f189745196f6a7c6a97a949cc31e8fce753
-  - path: "raw/093_Multimodal Large Language Models - Vision-Language Integration That Transformed AI Capabilities.ko.md"
+  - path: raw/093_Multimodal Large Language Models - Vision-Language Integration That Transformed AI Capabilities.ko.md
     role: translation
-    order_prefix: "093"
+    order_prefix: 093
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/multimodal-large-language-models-vision-language-integration-gpt4-2023
+    source_url: 'https://mbrenndoerfer.com/writing/multimodal-large-language-models-vision-language-integration-gpt4-2023'
     sha256: 3c754e2885efd2f429352f3b24a4c406fee92d91c904d1d8f7a54a6e8c2dfd80
-  - path: "raw/093_Multimodal Large Language Models - Vision-Language Integration That Transformed AI Capabilities.commentary.ko.md"
+  - path: raw/093_Multimodal Large Language Models - Vision-Language Integration That Transformed AI Capabilities.commentary.ko.md
     role: commentary
-    order_prefix: "093"
+    order_prefix: 093
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/multimodal-large-language-models-vision-language-integration-gpt4-2023
+    source_url: 'https://mbrenndoerfer.com/writing/multimodal-large-language-models-vision-language-integration-gpt4-2023'
     sha256: 032951f4fad51b0d899640bf5cf406fcec26da3c8c007f957768fc04f6250b13
-  - path: "raw/094_Constitutional AI Principle-Based Alignment Through Self-Critique.ko.md"
+  - path: raw/094_Constitutional AI Principle-Based Alignment Through Self-Critique.ko.md
     role: translation
-    order_prefix: "094"
+    order_prefix: 094
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/constitutional-ai-principle-based-alignment-through-self-critique
+    source_url: 'https://mbrenndoerfer.com/writing/constitutional-ai-principle-based-alignment-through-self-critique'
     sha256: 306fb525104bb2a888dc2388e20ba1b1490a7aa20b69204a5cb0dbef1f1fd6dd
-  - path: "raw/094_Constitutional AI Principle-Based Alignment Through Self-Critique.commentary.ko.md"
+  - path: raw/094_Constitutional AI Principle-Based Alignment Through Self-Critique.commentary.ko.md
     role: commentary
-    order_prefix: "094"
+    order_prefix: 094
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/constitutional-ai-principle-based-alignment-through-self-critique
+    source_url: 'https://mbrenndoerfer.com/writing/constitutional-ai-principle-based-alignment-through-self-critique'
     sha256: e5c443380f181bdb966958c8e560039facd4ea946ca90af38420f2c8704ae9da
-  - path: "raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.ko.md"
+  - path: raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.ko.md
     role: translation
-    order_prefix: "095"
+    order_prefix: 095
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/big-bench-mmlu-comprehensive-evaluation-benchmarks-large-language-models
+    source_url: 'https://mbrenndoerfer.com/writing/big-bench-mmlu-comprehensive-evaluation-benchmarks-large-language-models'
     sha256: 513f6effec2ecdbb9bd3f76df162d3c22e6aa3efa300de8a19d685c0420793a3
-  - path: "raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.commentary.ko.md"
+  - path: raw/095_BIG-bench and MMLU Comprehensive Evaluation Benchmarks for Large Language Models.commentary.ko.md
     role: commentary
-    order_prefix: "095"
+    order_prefix: 095
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/big-bench-mmlu-comprehensive-evaluation-benchmarks-large-language-models
+    source_url: 'https://mbrenndoerfer.com/writing/big-bench-mmlu-comprehensive-evaluation-benchmarks-large-language-models'
     sha256: 9fe25382150bf4601802b6bf7d06f3effc1262683896718dfb07dbd09d7fa1b6
-  - path: "raw/096_GPT-4 Multimodal Language Models Reach Human-Level Performance.ko.md"
+  - path: raw/096_GPT-4 Multimodal Language Models Reach Human-Level Performance.ko.md
     role: translation
-    order_prefix: "096"
+    order_prefix: 096
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/gpt4-multimodal-language-models-reach-human-level-performance
+    source_url: 'https://mbrenndoerfer.com/writing/gpt4-multimodal-language-models-reach-human-level-performance'
     sha256: f6b085e8558786005eb08d583745fd216a4eb19f0d1c93e1ddcf5ca614efc54b
-  - path: "raw/096_GPT-4 Multimodal Language Models Reach Human-Level Performance.commentary.ko.md"
+  - path: raw/096_GPT-4 Multimodal Language Models Reach Human-Level Performance.commentary.ko.md
     role: commentary
-    order_prefix: "096"
+    order_prefix: 096
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/gpt4-multimodal-language-models-reach-human-level-performance
+    source_url: 'https://mbrenndoerfer.com/writing/gpt4-multimodal-language-models-reach-human-level-performance'
     sha256: 5992e317f138aed1a5c3c9333083d4e4c3d4da230e8b9947f6f6cd87dc29c1b9
-  - path: "raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.ko.md"
+  - path: raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.ko.md
     role: translation
-    order_prefix: "097"
+    order_prefix: 097
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/mixtral-sparse-moe-production-ready-efficient-language-models
+    source_url: 'https://mbrenndoerfer.com/writing/mixtral-sparse-moe-production-ready-efficient-language-models'
     sha256: cd945225700a60f8966e0e715adf0374da191774ce5b59c50ae4436d23ea5eac
-  - path: "raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.commentary.ko.md"
+  - path: raw/097_Mixtral & Sparse MoE Production-Ready Efficient Language Models Through Sparse Mixture of Experts.commentary.ko.md
     role: commentary
-    order_prefix: "097"
+    order_prefix: 097
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/mixtral-sparse-moe-production-ready-efficient-language-models
+    source_url: 'https://mbrenndoerfer.com/writing/mixtral-sparse-moe-production-ready-efficient-language-models'
     sha256: 8bc14457fb8636f5c26d9a246834220db324db50bfe141c6d47b337e7ff0d3de
-  - path: "raw/098_Long Context Models Processing Million-Token Sequences in Language AI.ko.md"
+  - path: raw/098_Long Context Models Processing Million-Token Sequences in Language AI.ko.md
     role: translation
-    order_prefix: "098"
+    order_prefix: 098
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/long-context-models-processing-million-token-sequences-language-ai
+    source_url: 'https://mbrenndoerfer.com/writing/long-context-models-processing-million-token-sequences-language-ai'
     sha256: d10e70eca89fb6376801005a9b2a811ea49e83bb0dbfec44e0e3a05f7427f7c2
-  - path: "raw/098_Long Context Models Processing Million-Token Sequences in Language AI.commentary.ko.md"
+  - path: raw/098_Long Context Models Processing Million-Token Sequences in Language AI.commentary.ko.md
     role: commentary
-    order_prefix: "098"
+    order_prefix: 098
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/long-context-models-processing-million-token-sequences-language-ai
+    source_url: 'https://mbrenndoerfer.com/writing/long-context-models-processing-million-token-sequences-language-ai'
     sha256: 01f823e0d2e066fef0086af1234c33e07052e4da550c14afc58db3534939d9cd
-  - path: "raw/099_Structured Outputs Reliable Schema-Validated Data Extraction from Language Models.ko.md"
+  - path: raw/099_Structured Outputs Reliable Schema-Validated Data Extraction from Language Models.ko.md
     role: translation
-    order_prefix: "099"
+    order_prefix: 099
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/structured-outputs-schema-validated-data-extraction-language-models
+    source_url: 'https://mbrenndoerfer.com/writing/structured-outputs-schema-validated-data-extraction-language-models'
     sha256: e37b2abbf9b0e5dd9d6742b23813cc79043f88ab8157389b33489fd1700f37d2
-  - path: "raw/099_Structured Outputs Reliable Schema-Validated Data Extraction from Language Models.commentary.ko.md"
+  - path: raw/099_Structured Outputs Reliable Schema-Validated Data Extraction from Language Models.commentary.ko.md
     role: commentary
-    order_prefix: "099"
+    order_prefix: 099
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/structured-outputs-schema-validated-data-extraction-language-models
+    source_url: 'https://mbrenndoerfer.com/writing/structured-outputs-schema-validated-data-extraction-language-models'
     sha256: 2146c23c6a4b11aeba4853b0e328da6c3d02abb013ba69b24439daa2307adb91
-  - path: "raw/100_Hybrid Retrieval Combining Sparse and Dense Methods for Effective Information Retrieval.ko.md"
+  - path: raw/100_Hybrid Retrieval Combining Sparse and Dense Methods for Effective Information Retrieval.ko.md
     role: translation
-    order_prefix: "100"
+    order_prefix: '100'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/hybrid-retrieval-combining-sparse-dense-methods-effective-information-retrieval
+    source_url: 'https://mbrenndoerfer.com/writing/hybrid-retrieval-combining-sparse-dense-methods-effective-information-retrieval'
     sha256: c95b6f14733b6e76edeb98ffd7985487131296b572fa7468c90dbe4e8e465374
-  - path: "raw/100_Hybrid Retrieval Combining Sparse and Dense Methods for Effective Information Retrieval.commentary.ko.md"
+  - path: raw/100_Hybrid Retrieval Combining Sparse and Dense Methods for Effective Information Retrieval.commentary.ko.md
     role: commentary
-    order_prefix: "100"
+    order_prefix: '100'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/hybrid-retrieval-combining-sparse-dense-methods-effective-information-retrieval
+    source_url: 'https://mbrenndoerfer.com/writing/hybrid-retrieval-combining-sparse-dense-methods-effective-information-retrieval'
     sha256: 0a431de189efafd68f72825e2333d35877afb0462691fa7ce1a8e006ac18676c
-  - path: "raw/101_PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques.ko.md"
+  - path: raw/101_PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques.ko.md
     role: translation
-    order_prefix: "101"
+    order_prefix: '101'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/peft-beyond-lora-advanced-parameter-efficient-finetuning-techniques
+    source_url: 'https://mbrenndoerfer.com/writing/peft-beyond-lora-advanced-parameter-efficient-finetuning-techniques'
     sha256: 533ca59fab7afc5d55fb4e66539305b78d46cce3740416ef38102094954dada6
-  - path: "raw/101_PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques.commentary.ko.md"
+  - path: raw/101_PEFT Beyond LoRA Advanced Parameter-Efficient Fine-Tuning Techniques.commentary.ko.md
     role: commentary
-    order_prefix: "101"
+    order_prefix: '101'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/peft-beyond-lora-advanced-parameter-efficient-finetuning-techniques
+    source_url: 'https://mbrenndoerfer.com/writing/peft-beyond-lora-advanced-parameter-efficient-finetuning-techniques'
     sha256: df98ebfca8d06594c871a1bc490aa17b2b56cfff7edb597465a42040ec8f05bf
-  - path: "raw/102_Continuous Post-Training Incremental Model Updates for Dynamic Language Models.ko.md"
+  - path: raw/102_Continuous Post-Training Incremental Model Updates for Dynamic Language Models.ko.md
     role: translation
-    order_prefix: "102"
+    order_prefix: '102'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/continuous-post-training-incremental-model-updates-dynamic-language-models
+    source_url: 'https://mbrenndoerfer.com/writing/continuous-post-training-incremental-model-updates-dynamic-language-models'
     sha256: c2a114a3f36b057e95294a50cbbbdf5c8240b4a05b29ab21e47b5cb7706c201d
-  - path: "raw/102_Continuous Post-Training Incremental Model Updates for Dynamic Language Models.commentary.ko.md"
+  - path: raw/102_Continuous Post-Training Incremental Model Updates for Dynamic Language Models.commentary.ko.md
     role: commentary
-    order_prefix: "102"
+    order_prefix: '102'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/continuous-post-training-incremental-model-updates-dynamic-language-models
-    sha256: e5ff19724eb8e1971fed905b3c37aee03dc14a9c44f547a47ec9ce0c954f9fbc
-  - path: "raw/104_Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use.ko.md"
+    source_url: 'https://mbrenndoerfer.com/writing/continuous-post-training-incremental-model-updates-dynamic-language-models'
+    sha256: 3ba80ef5e611165844bac40c5cf02b03f1a494b4abef23f5950cd3eb940b3f06
+  - path: 'raw/104_Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use.ko.md'
     role: translation
-    order_prefix: "104"
+    order_prefix: '104'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/agentic-ai-systems-autonomous-agents-reasoning-planning-tool-use
+    source_url: 'https://mbrenndoerfer.com/writing/agentic-ai-systems-autonomous-agents-reasoning-planning-tool-use'
     sha256: dd95a47a9fa7fb99bde39506e85ef2b052a6d0ce7b4535df6667c37f6c8e1f92
-  - path: "raw/104_Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use.commentary.ko.md"
+  - path: 'raw/104_Agentic AI Systems Autonomous Agents with Reasoning, Planning, and Tool Use.commentary.ko.md'
     role: commentary
-    order_prefix: "104"
+    order_prefix: '104'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/agentic-ai-systems-autonomous-agents-reasoning-planning-tool-use
-    sha256: aac606cff19fb8dec730d610ac8da629859e5bcb27c5e5db6fc2b52d2a30057a
-  - path: "raw/105_Multimodal Integration Unified Architectures for Cross-Modal AI Understanding.ko.md"
+    source_url: 'https://mbrenndoerfer.com/writing/agentic-ai-systems-autonomous-agents-reasoning-planning-tool-use'
+    sha256: 4440d43fffa46a33f748541c29333b613c5fdb9e80cb30dcbbfa59dccf2dc9e5
+  - path: raw/105_Multimodal Integration Unified Architectures for Cross-Modal AI Understanding.ko.md
     role: translation
-    order_prefix: "105"
+    order_prefix: '105'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/multimodal-integration-unified-architectures-cross-modal-ai-understanding
+    source_url: 'https://mbrenndoerfer.com/writing/multimodal-integration-unified-architectures-cross-modal-ai-understanding'
     sha256: 16de8c3bb17d206cbe8126c7a900e82b8fc32d1ecc009e01a300f533ab35dbed
-  - path: "raw/105_Multimodal Integration Unified Architectures for Cross-Modal AI Understanding.commentary.ko.md"
+  - path: raw/105_Multimodal Integration Unified Architectures for Cross-Modal AI Understanding.commentary.ko.md
     role: commentary
-    order_prefix: "105"
+    order_prefix: '105'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/multimodal-integration-unified-architectures-cross-modal-ai-understanding
+    source_url: 'https://mbrenndoerfer.com/writing/multimodal-integration-unified-architectures-cross-modal-ai-understanding'
     sha256: 8f0f548133884dde7c54a89448712b99a632295754c01f66b4af5689694d093f
-  - path: "raw/106_DeepSeek R1 Architectural Innovation in Reasoning Models.ko.md"
+  - path: raw/106_DeepSeek R1 Architectural Innovation in Reasoning Models.ko.md
     role: translation
-    order_prefix: "106"
+    order_prefix: '106'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/deepseek-r1-architectural-innovation-reasoning-models
+    source_url: 'https://mbrenndoerfer.com/writing/deepseek-r1-architectural-innovation-reasoning-models'
     sha256: b930cfab05daa235c7633356749ba18d234dd9d0714793b7c1a256e1663d60b6
-  - path: "raw/106_DeepSeek R1 Architectural Innovation in Reasoning Models.commentary.ko.md"
+  - path: raw/106_DeepSeek R1 Architectural Innovation in Reasoning Models.commentary.ko.md
     role: commentary
-    order_prefix: "106"
+    order_prefix: '106'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/deepseek-r1-architectural-innovation-reasoning-models
+    source_url: 'https://mbrenndoerfer.com/writing/deepseek-r1-architectural-innovation-reasoning-models'
     sha256: 1d6d3803a1669791fdb0803df7d15e7e04e6860f3a49c1476430ebd88ef8c70e
-  - path: "raw/107_GPT-4o Unified Multimodal AI with Real-Time Speech, Vision, and Text.ko.md"
+  - path: 'raw/107_GPT-4o Unified Multimodal AI with Real-Time Speech, Vision, and Text.ko.md'
     role: translation
-    order_prefix: "107"
+    order_prefix: '107'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/gpt4o-unified-multimodal-ai-real-time-speech-vision-text
+    source_url: 'https://mbrenndoerfer.com/writing/gpt4o-unified-multimodal-ai-real-time-speech-vision-text'
     sha256: eb9219cd9f17622684557ffa1851c223b2327e5c950c700b1cf7461e6200112a
-  - path: "raw/107_GPT-4o Unified Multimodal AI with Real-Time Speech, Vision, and Text.commentary.ko.md"
+  - path: 'raw/107_GPT-4o Unified Multimodal AI with Real-Time Speech, Vision, and Text.commentary.ko.md'
     role: commentary
-    order_prefix: "107"
+    order_prefix: '107'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/gpt4o-unified-multimodal-ai-real-time-speech-vision-text
+    source_url: 'https://mbrenndoerfer.com/writing/gpt4o-unified-multimodal-ai-real-time-speech-vision-text'
     sha256: 9f1e05274d9940fee014a0f0d174e1534fd4781dc7a77f1ae402adfeb1440894
-  - path: "raw/108_V-JEPA 2 Vision-Based World Modeling for Embodied AI.ko.md"
+  - path: raw/108_V-JEPA 2 Vision-Based World Modeling for Embodied AI.ko.md
     role: translation
-    order_prefix: "108"
+    order_prefix: '108'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/v-jepa-2-vision-based-world-modeling-embodied-ai
+    source_url: 'https://mbrenndoerfer.com/writing/v-jepa-2-vision-based-world-modeling-embodied-ai'
     sha256: 66a5b140087adfcebc88751bbe548ff8349f4bdd7e80e7c2b263eeec05d578c0
-  - path: "raw/108_V-JEPA 2 Vision-Based World Modeling for Embodied AI.commentary.ko.md"
+  - path: raw/108_V-JEPA 2 Vision-Based World Modeling for Embodied AI.commentary.ko.md
     role: commentary
-    order_prefix: "108"
+    order_prefix: '108'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/v-jepa-2-vision-based-world-modeling-embodied-ai
+    source_url: 'https://mbrenndoerfer.com/writing/v-jepa-2-vision-based-world-modeling-embodied-ai'
     sha256: 660085a7a4c755cd19fb057c38921029d3ce6509825a0137c2c118bc1974fee8
-  - path: "raw/109_AI Co-Scientist Systems Autonomous Research and Scientific Discovery.ko.md"
+  - path: raw/109_AI Co-Scientist Systems Autonomous Research and Scientific Discovery.ko.md
     role: translation
-    order_prefix: "109"
+    order_prefix: '109'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/ai-co-scientist-systems-autonomous-research-scientific-discovery
+    source_url: 'https://mbrenndoerfer.com/writing/ai-co-scientist-systems-autonomous-research-scientific-discovery'
     sha256: 8341b63394a53a0a48cb955b468c80875dc1d7b2dc2c964b1369b224a8f4d310
-  - path: "raw/109_AI Co-Scientist Systems Autonomous Research and Scientific Discovery.commentary.ko.md"
+  - path: raw/109_AI Co-Scientist Systems Autonomous Research and Scientific Discovery.commentary.ko.md
     role: commentary
-    order_prefix: "109"
+    order_prefix: '109'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/ai-co-scientist-systems-autonomous-research-scientific-discovery
+    source_url: 'https://mbrenndoerfer.com/writing/ai-co-scientist-systems-autonomous-research-scientific-discovery'
     sha256: 615238e4a47b1803074513e293bdb64c8923ef9aaf5ab7df2ed12b3115a532bf
-  - path: "raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.ko.md"
+  - path: raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.ko.md
     role: translation
-    order_prefix: "110"
+    order_prefix: '110'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/specialized-llms-low-resource-languages-ai-equity-global-accessibility
+    source_url: 'https://mbrenndoerfer.com/writing/specialized-llms-low-resource-languages-ai-equity-global-accessibility'
     sha256: d93a9989fb8e0025d6a08201025b0c2680b44bb9aeaf3819a9c4d69e226e8173
-  - path: "raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.commentary.ko.md"
+  - path: raw/110_Specialized LLMs for Low-Resource Languages Complete Guide to AI Equity and Global Accessibility.commentary.ko.md
     role: commentary
-    order_prefix: "110"
+    order_prefix: '110'
     language: ko
     source_type: derivative
     provenance: external-original-used
     original_in_repository: false
-    source_url: https://mbrenndoerfer.com/writing/specialized-llms-low-resource-languages-ai-equity-global-accessibility
+    source_url: 'https://mbrenndoerfer.com/writing/specialized-llms-low-resource-languages-ai-equity-global-accessibility'
     sha256: 4fb25081973024867aa2d8f0858494c4728ad4cb1d4ef3a40c9c0e05f6006a26

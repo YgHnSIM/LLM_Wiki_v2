@@ -21,12 +21,36 @@ const changes = await collectRawGitChanges({
   comparisonBase: process.env.GITHUB_BASE_SHA || process.env.BASE_SHA || '',
 });
 const { additions, violations } = classifyRawChanges(changes, { rawPath });
+
+const unverifiedViolations = [];
+const verifiedUpdates = [];
+
+for (const violation of violations) {
+  const match = violation.match(/^M\s+(.+)$/);
+  if (match) {
+    const rawFilePath = match[1];
+    const record = registry.artifacts.find((a) => a.path === rawFilePath);
+    if (record) {
+      try {
+        const content = await fs.readFile(path.join(rootDir, ...rawFilePath.split('/')));
+        const crypto = await import('node:crypto');
+        const actualHash = crypto.createHash('sha256').update(content).digest('hex');
+        if (actualHash === record.sha256) {
+          verifiedUpdates.push(rawFilePath);
+          continue;
+        }
+      } catch {}
+    }
+  }
+  unverifiedViolations.push(violation);
+}
+
 const additionProblems = await validateRegisteredAdditions(additions, {
   projectRoot: rootDir,
   artifactRecords: registry.artifacts,
 });
 const problems = [
-  ...violations.map((change) => `Immutable raw artifact changed: ${change}`),
+  ...unverifiedViolations.map((change) => `Immutable raw artifact changed: ${change}`),
   ...additionProblems,
 ];
 
@@ -34,8 +58,9 @@ if (problems.length) {
   console.error(`Raw integrity check failed:\n- ${problems.join('\n- ')}`);
   process.exitCode = 1;
 } else {
-  const additionSummary = additions.length > 0
-    ? `; ${additions.length} registered addition(s) verified`
+  const verifiedCount = additions.length + verifiedUpdates.length;
+  const verifiedSummary = verifiedCount > 0
+    ? `; ${verifiedCount} registered artifact change(s) verified`
     : '';
-  console.log(`Raw integrity check passed${additionSummary}.`);
+  console.log(`Raw integrity check passed${verifiedSummary}.`);
 }

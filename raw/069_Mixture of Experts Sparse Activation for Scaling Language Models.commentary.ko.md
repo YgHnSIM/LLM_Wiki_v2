@@ -57,7 +57,7 @@ $$
 y(x)=\sum_{i\in T(x)}p_i(x)E_i(x)
 $$
 
-$E_i$는 expert $i$의 FFN이고 $p_i$는 router가 준 gate weight다. expert 수를 늘리면 **전체 매개변수(total parameters)**는 크게 늘지만, top-1 또는 top-2처럼 $|T(x)|$를 작게 유지하면 한 token에서 계산되는 expert FFN 수는 거의 고정된다. 그러나 embedding, attention, layer normalization 같은 shared parameters는 여전히 모든 token에 활성화된다. 따라서 단순히 `expert 수 × expert 크기`를 active compute라고 계산하거나, total parameter가 같은 dense model과 메모리·통신까지 같다고 보는 것은 잘못이다.
+$E_i$는 expert $i$의 FFN이고 $p_i$는 router가 준 gate weight다. expert 수를 늘리면 **전체 매개변수**(total parameters)는 크게 늘지만, top-1 또는 top-2처럼 $|T(x)|$를 작게 유지하면 한 token에서 계산되는 expert FFN 수는 거의 고정된다. 그러나 embedding, attention, layer normalization 같은 shared parameters는 여전히 모든 token에 활성화된다. 따라서 단순히 `expert 수 × expert 크기`를 active compute라고 계산하거나, total parameter가 같은 dense model과 메모리·통신까지 같다고 보는 것은 잘못이다.
 
 여기서 희소성은 weight 값 대부분이 0이라는 뜻이 아니다. 각 expert 내부의 행렬은 dense하게 계산되지만, **어떤 expert block을 실행할지**가 입력에 따라 희소하게 선택된다. 이 때문에 MoE는 unstructured pruning과 달리 dense matrix multiplication hardware를 활용할 수 있는 반면, 선택된 token을 expert가 있는 장치로 보내고 다시 모으는 통신이 필요하다.
 

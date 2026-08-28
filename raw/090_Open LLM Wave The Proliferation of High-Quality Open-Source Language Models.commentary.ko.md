@@ -41,7 +41,7 @@ tags:
 
 성능 비교는 더욱 조심해야 한다. Mistral 7B 공식 논문은 자신들이 평가한 benchmark에서 Llama 2 13B를 앞섰다고 보고하지만, 이것이 모든 과제·언어·prompt·generation setting에서의 우월성을 뜻하지 않는다. Falcon과 MPT의 발표 당시 leaderboard 순위도 evaluation harness, model revision, prompt formatting과 contamination 가능성에 따라 바뀔 수 있다. “proprietary system과 동급”이라는 문장은 비교 대상 version과 metric을 적지 않으면 검증할 수 없다.
 
-마지막으로 공개성은 model family 전체에 한 번에 부여되는 속성이 아니다. MPT-30B base는 Apache-2.0이지만 공식 model card에서 Instruct와 Chat variant의 license는 각각 다르게 표시됐다. LLaMA 1은 신청·승인 기반의 noncommercial research release였고, Llama 2는 별도 시점·별도 license의 후속 세대다. Falcon의 license도 release history를 고정한 자료로 확인해야 한다. 따라서 2023년을 가장 정확히 요약하는 표현은 **“고품질 공개 가중치 model과 permissive checkpoint가 빠르게 다양해진 해”**이지, 모든 구성요소가 동일한 의미로 open source가 된 해라는 문장이 아니다.
+마지막으로 공개성은 model family 전체에 한 번에 부여되는 속성이 아니다. MPT-30B base는 Apache-2.0이지만 공식 model card에서 Instruct와 Chat variant의 license는 각각 다르게 표시됐다. LLaMA 1은 신청·승인 기반의 noncommercial research release였고, Llama 2는 별도 시점·별도 license의 후속 세대다. Falcon의 license도 release history를 고정한 자료로 확인해야 한다. 따라서 2023년을 가장 정확히 요약하는 표현은 “**고품질 공개 가중치 model과 permissive checkpoint가 빠르게 다양해진 해**”이지, 모든 구성요소가 동일한 의미로 open source가 된 해라는 문장이 아니다.
 
 | 원문 표현 | 검증 가능한 형태로 바꾼 설명 |
 |---|---|

@@ -62,7 +62,7 @@ Guanaco의 강한 chat score는 QLoRA algorithm만의 결과가 아니다. Base 
 
 QLoRA는 세 연구 흐름의 결합으로 이해하는 편이 정확하다.
 
-첫째는 **parameter-efficient fine-tuning(PEFT)**이다. 2021년 LoRA는 pretrained weight를 고정하고 각 weight update를 두 개의 low-rank matrix로 표현했다. Trainable parameter와 optimizer state가 줄었지만 base model은 여전히 FP16/BF16 같은 비교적 높은 precision으로 memory에 있어야 했다. Model이 커질수록 이 frozen-weight memory만으로도 single GPU를 넘었다.
+첫째는 **parameter-efficient fine-tuning**(PEFT)이다. 2021년 LoRA는 pretrained weight를 고정하고 각 weight update를 두 개의 low-rank matrix로 표현했다. Trainable parameter와 optimizer state가 줄었지만 base model은 여전히 FP16/BF16 같은 비교적 높은 precision으로 memory에 있어야 했다. Model이 커질수록 이 frozen-weight memory만으로도 single GPU를 넘었다.
 
 둘째는 **post-training quantization**이다. 8-bit와 4-bit inference 연구는 model weight를 압축해 실행 memory를 줄였지만, 낮은 precision을 training 경로에 넣으면 error와 numerical stability 문제가 생길 수 있었다. QLoRA는 base weight를 직접 갱신하지 않고 dequantization을 거쳐 adapter로 gradient를 전달하는 방식으로 이 두 흐름을 결합했다.
 

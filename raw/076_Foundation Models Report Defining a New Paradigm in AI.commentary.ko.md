@@ -136,7 +136,7 @@ Instruction tuning, parameter-efficient tuning, retrieval-augmented generation�
 - **새로움의 범위:** 보고서도 deep learning·self-supervision·transfer learning 자체는 오래된 기술이라고 인정한다. 역사적 새로움은 알고리즘 발명보다 규모·범위·생태계의 결합에 있다.
 - **실험 논문이 아님:** 보고서의 기회·위험 목록은 하나의 통제 실험에서 나온 효과 크기가 아니다. 각 주장은 개별 인용문헌과 응용 조건으로 내려가 검증해야 한다.
 - **능력의 일반화:** GPT-3의 일부 prompt 결과나 BERT benchmark 성능을 모든 foundation model의 broad reasoning·knowledge·robustness로 확대하지 않는다.
-- **‘이해’ 표현:** 학습 data에서 많은 pattern과 fact를 재현한다는 결과와 역사·과학·문화의 의미를 인간처럼 이해한다는 철학적 주장은 다르다. 보고서도 이해의 가능성과 한계를 논쟁적인 문제로 남겼다.
+- ‘**이해’ 표현:**’ 학습 data에서 많은 pattern과 fact를 재현한다는 결과와 역사·과학·문화의 의미를 인간처럼 이해한다는 철학적 주장은 다르다. 보고서도 이해의 가능성과 한계를 논쟁적인 문제로 남겼다.
 - **접근과 권력:** Pretrained model reuse는 일부 adaptation 비용을 낮추지만, training compute·data·release decision이 소수 조직에 집중되는 문제를 해소하지 않는다.
 - **위험 전파:** 기반 결함이 downstream으로 이어질 수 있어도 실제 harm은 adaptation data, domain rule, interface와 deployment context에 좌우된다. 모든 하위 실패를 base model 하나로 환원하지 않는다.
 - **창발의 측정:** 예상 밖 행동이라는 넓은 개념과 특정 benchmark curve의 불연속 판정을 구분한다. 후자는 task·metric·prompt·sample·scale 관측을 명시해야 한다.
